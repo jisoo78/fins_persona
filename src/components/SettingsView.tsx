@@ -195,7 +195,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ settings, setSetting
           </div>
 
           <p className="text-xs text-indigo-200/80 max-w-xl leading-relaxed">
-            무제한 페르소나 생성, AI 5인 가상 이사회 회의 가동(Pro), SOC2 감사 로그 보관 및 Google Stitch 전용 전용 인프라 할당이 포함되어 있습니다.
+            무제한 페르소나 생성, 인터뷰 기반 의사결정 기록, SOC2 감사 로그 보관 및 Google Stitch 전용 인프라 할당이 포함되어 있습니다.
           </p>
 
           <div className="pt-2 flex items-center justify-between border-t border-white/10 text-xs">

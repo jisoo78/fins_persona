@@ -4,7 +4,6 @@ import {
   Users, 
   MessageSquareText, 
   CheckCircle2, 
-  Sparkles, 
   ArrowUpRight, 
   Plus, 
   Clock,
@@ -27,10 +26,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   onOpenNewPersonaModal,
 }) => {
   const stats = [
-    { label: '생성된 페르소나 수', value: `${personas.length}개`, sub: '가상 이사회 구성원', icon: <Users className="w-5 h-5 text-indigo-500" /> },
-    { label: '완료한 인터뷰', value: '14회', sub: '사고 패턴 학습 완료', icon: <MessageSquareText className="w-5 h-5 text-emerald-500" /> },
-    { label: '최근 의사결정 기록', value: `${decisions.length + 22}건`, sub: '이번 달 +6건 증가', icon: <CheckCircle2 className="w-5 h-5 text-blue-500" /> },
-    { label: 'AI 회의 횟수 (Pro)', value: '18회', sub: '평균 합의 도출 12분', icon: <Sparkles className="w-5 h-5 text-amber-500" /> },
+    { label: '생성된 페르소나 수', value: `${personas.length}개`, sub: '페르소나 목록으로 이동', icon: <Users className="w-5 h-5 text-indigo-500" />, targetTab: 'personas' as TabType },
+    { label: '완료한 인터뷰', value: '14회', sub: '인터뷰 화면으로 이동', icon: <MessageSquareText className="w-5 h-5 text-emerald-500" />, targetTab: 'interview' as TabType },
+    { label: '최근 의사결정 기록', value: `${decisions.length + 22}건`, sub: '히스토리로 이동', icon: <CheckCircle2 className="w-5 h-5 text-blue-500" />, targetTab: 'history' as TabType },
   ];
 
   return (
@@ -67,23 +65,18 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             <Plus className="w-4 h-4 text-indigo-500" />
             <span>페르소나 생성</span>
           </button>
-
-          <button
-            onClick={() => setActiveTab('ai-meeting')}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white text-xs font-bold shadow-lg shadow-indigo-500/25 transition-all hover:scale-[1.02] ring-2 ring-indigo-600/30 ring-offset-2 ring-offset-white dark:ring-offset-slate-900"
-          >
-            <Sparkles className="w-4 h-4 text-amber-300" />
-            <span>AI 회의 시작 (Pro)</span>
-          </button>
         </div>
       </div>
 
       {/* Metric Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {stats.map((stat, idx) => (
-          <div
+          <button
+            type="button"
             key={idx}
-            className="bg-white dark:bg-slate-900/60 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group"
+            onClick={() => setActiveTab(stat.targetTab)}
+            aria-label={`${stat.label} 화면으로 이동`}
+            className="text-left bg-white dark:bg-slate-900/60 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-indigo-300 dark:hover:border-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-slate-950 transition-all relative overflow-hidden group"
           >
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">{stat.label}</span>
@@ -98,7 +91,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               <TrendingUp className="w-3.5 h-3.5 text-emerald-500 inline" />
               <span>{stat.sub}</span>
             </div>
-          </div>
+          </button>
         ))}
       </div>
 

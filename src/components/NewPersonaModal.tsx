@@ -5,7 +5,7 @@ import { X, Plus, Sparkles, Shield, Brain, Users } from 'lucide-react';
 interface NewPersonaModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onAddPersona: (newPersona: Persona) => void;
+  onAddPersona: (newPersona: Persona) => void | Promise<void>;
 }
 
 export const NewPersonaModal: React.FC<NewPersonaModalProps> = ({
@@ -21,12 +21,17 @@ export const NewPersonaModal: React.FC<NewPersonaModalProps> = ({
   const [coreValues, setCoreValues] = useState('고객 경험 혁신, 압도적 속도, 원천 기술 사수');
   const [strengths, setStrengths] = useState('빠른 의사결정 추진, 부서 간 얼라인먼트');
   const [weaknesses, setWeaknesses] = useState('초기 마진율 저해 리스크');
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveError, setSaveError] = useState('');
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !description.trim()) return;
+    if (!name.trim() || !description.trim() || isSaving) return;
+
+    setIsSaving(true);
+    setSaveError('');
 
     const valuesList = coreValues.split(',').map(v => v.trim()).filter(Boolean);
     const strList = strengths.split(',').map(v => v.trim()).filter(Boolean);
@@ -54,13 +59,19 @@ export const NewPersonaModal: React.FC<NewPersonaModalProps> = ({
       bgClass: 'bg-violet-50 dark:bg-violet-950/40 border-violet-200 dark:border-violet-800'
     };
 
-    onAddPersona(newP);
-    onClose();
-    // Reset
-    setName('');
-    setDescription('');
-    setBadge('');
-    setDecisionStyle('');
+    try {
+      await onAddPersona(newP);
+      onClose();
+      // Reset
+      setName('');
+      setDescription('');
+      setBadge('');
+      setDecisionStyle('');
+    } catch (error) {
+      setSaveError(error instanceof Error ? error.message : '페르소나 저장 중 오류가 발생했습니다.');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -76,7 +87,7 @@ export const NewPersonaModal: React.FC<NewPersonaModalProps> = ({
               <span className="text-[11px] text-slate-500 font-medium">경영진의 고유한 사고방식을 대변할 가상 이사회 임원을 탄생시킵니다.</span>
             </div>
           </div>
-          <button onClick={onClose} className="p-2 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+            <button onClick={onClose} className="p-2 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -178,19 +189,26 @@ export const NewPersonaModal: React.FC<NewPersonaModalProps> = ({
           </div>
 
           <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex justify-end gap-3">
+            {saveError && (
+              <div className="mr-auto rounded-xl border border-rose-200 dark:border-rose-900 bg-rose-50 dark:bg-rose-950/30 px-3 py-2 text-xs font-semibold text-rose-700 dark:text-rose-300">
+                {saveError}
+              </div>
+            )}
             <button
               type="button"
               onClick={onClose}
+              disabled={isSaving}
               className="px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 text-xs font-bold transition-all"
             >
               취소
             </button>
             <button
               type="submit"
-              className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs shadow-lg shadow-indigo-500/25 transition-all flex items-center gap-1.5"
+              disabled={isSaving}
+              className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-300 dark:disabled:bg-slate-800 text-white font-black text-xs shadow-lg shadow-indigo-500/25 transition-all flex items-center gap-1.5"
             >
               <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-              <span>페르소나 즉시 론칭</span>
+              <span>{isSaving ? 'DB 저장 중...' : '페르소나 즉시 론칭'}</span>
             </button>
           </div>
         </form>

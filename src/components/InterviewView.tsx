@@ -1,27 +1,25 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import mermaid from 'mermaid';
 import { ChatMessage, DecisionRecord, InterviewQuestion, Persona, RoleType } from '../types';
+import preQuestionData from '../../pre_question.json';
 import {
   ArrowRight,
   Bot,
-  Building2,
   CheckCircle2,
   Clock,
-  Code2,
   Database,
-  Globe,
   Play,
   Plus,
   RefreshCw,
   RotateCcw,
   SearchCheck,
   Send,
-  Sparkles,
   UserRound,
   Workflow,
 } from 'lucide-react';
 
 type FlowStep = 'profile' | 'interview';
+type InterviewPhase = 'pre' | 'deep';
 
 interface UserProfile {
   name: string;
@@ -49,6 +47,13 @@ interface PublicDataSnapshot {
   }[];
 }
 
+interface SnsDiscoveryResponse {
+  ok: boolean;
+  warning?: string;
+  message?: string;
+  publicData?: PublicDataSnapshot;
+}
+
 interface FinalInterviewOutput {
   fiveLayerSummary: {
     role: string;
@@ -62,12 +67,51 @@ interface FinalInterviewOutput {
   needsConfirmation: string[];
 }
 
+interface PreInterviewAnswer {
+  category: string;
+  question: string;
+  answer: string;
+}
+
+type PreInterviewContext = Record<string, Record<string, { question: string; answer: string }>>;
+
 interface SavedIntakeIds {
   userId: string;
   userProfileId: string;
   collectionJobId: string;
   interviewSessionId: string | null;
 }
+
+interface AgentQuestionsResponse {
+  ok: boolean;
+  message?: string;
+  questions?: InterviewQuestion[];
+}
+
+interface AgentFinalOutputResponse {
+  ok: boolean;
+  message?: string;
+  finalOutput?: FinalInterviewOutput;
+}
+
+interface PreQuestionOption {
+  option_id: number;
+  option_text: string;
+}
+
+interface PreQuestion {
+  pre_question_id: number;
+  pre_question: string;
+  pre_options: PreQuestionOption[];
+}
+
+interface PreInterviewData {
+  pre_questions: PreQuestion[];
+}
+
+const snsDiscoveryClientTimeoutMs = 65000;
+const profileDraftStorageKey = 'decision-profile-draft';
+const preInterviewData = preQuestionData as PreInterviewData;
 
 const defaultProfile: UserProfile = {
   name: '',
@@ -77,6 +121,23 @@ const defaultProfile: UserProfile = {
   companyName: '',
   snsId: '',
   financeScope: '자본 배치, 투자, 리스크, 자금 운용',
+};
+
+const loadInitialProfile = (): UserProfile => {
+  if (typeof window === 'undefined') return defaultProfile;
+
+  try {
+    const rawDraft = window.sessionStorage.getItem(profileDraftStorageKey);
+    if (!rawDraft) return defaultProfile;
+
+    return {
+      ...defaultProfile,
+      ...JSON.parse(rawDraft),
+    };
+  } catch {
+    window.sessionStorage.removeItem(profileDraftStorageKey);
+    return defaultProfile;
+  }
 };
 
 const roleOptions: RoleType[] = ['전략', '재무', '인사', '운영', '레드팀', '커스텀', '기술 혁신'];
@@ -110,132 +171,73 @@ const financeDemoAnswers = [
 ];
 
 const formatTime = () => new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
-const clampQuestionCount = (value: number) => Math.min(20, Math.max(10, value || 12));
 
-const createFinanceQuestions = (count: number): InterviewQuestion[] => {
-  const questions: InterviewQuestion[] = [
-    {
-      id: 1,
-      type: '객관식',
-      category: '자본 배치 지표',
-      question: '재무 의사결정에서 가장 먼저 보는 기준은 무엇입니까?',
-      options: ['A. 수익성', 'B. 현금흐름/런웨이', 'C. 성장성', 'D. 리스크 회복 가능성', 'E. 이해관계자 영향', 'F. 기타'],
-    },
-    {
-      id: 2,
-      type: '객관식',
-      category: '이익 vs 현금흐름',
-      question: '영업이익과 현금흐름이 충돌할 때 어느 쪽을 우선합니까?',
-      options: ['A. 영업이익', 'B. 현금흐름', 'C. 분기 상황에 따라 다름', 'D. 투자자 커뮤니케이션 영향', 'E. 회복 가능성', 'F. 기타'],
-    },
-    {
-      id: 3,
-      type: '객관식',
-      category: '부채 한계',
-      question: '부채 비율 또는 레버리지의 절대 한계는 어디에 가깝습니까?',
-      options: ['A. 매우 보수적 한계', 'B. 업계 평균 이내', 'C. 순부채/EBITDA 2배 내외', 'D. 성장 단계라면 유연', 'E. 담보/현금흐름에 따라 결정', 'F. 기타'],
-    },
-    {
-      id: 4,
-      type: '객관식',
-      category: 'ROI / IRR',
-      question: '신규 투자 시 최소 ROI/IRR 기준은 무엇에 가깝습니까?',
-      options: ['A. 단기 ROI 10% 이상', 'B. 중기 IRR 15-20% 이상', 'C. 장기 전략 가치가 크면 수치 완화', 'D. 현금 회수 확실성 우선', 'E. 프로젝트별 별도 기준', 'F. 기타'],
-    },
-    {
-      id: 5,
-      type: '객관식',
-      category: '투자 회수 기간',
-      question: '투자 회수 기간 허용치는 어느 정도입니까?',
-      options: ['A. 12개월 이내', 'B. 18개월 이내', 'C. 24개월 이내', 'D. 36개월 이상도 가능', 'E. 전략 투자면 예외', 'F. 기타'],
-    },
-    {
-      id: 6,
-      type: '객관식',
-      category: 'Cash Cushion',
-      question: '비상 자금 보유 기준은 어디에 가깝습니까?',
-      options: ['A. 3개월 운영비', 'B. 6개월 운영비', 'C. 12개월 운영비', 'D. 산업 변동성에 따라 조정', 'E. 차입 가능성 포함', 'F. 기타'],
-    },
-    {
-      id: 7,
-      type: '객관식',
-      category: '비용 절감 vs 성장',
-      question: '비용 절감과 매출 성장 사이에서 어떤 균형을 선호합니까?',
-      options: ['A. 비용 절감 우선', 'B. 성장 투자 우선', 'C. 고정비 절감 + 성장 투자 유지', 'D. 마진 목표 달성 전까지 절제', 'E. 시장 사이클에 따라 전환', 'F. 기타'],
-    },
-    {
-      id: 8,
-      type: '객관식',
-      category: '통화/금리/환 리스크',
-      question: '통화·금리·환 리스크 대응 원칙은 무엇입니까?',
-      options: ['A. 선제 헤지', 'B. 노출 한도 설정', 'C. 자연 헤지 우선', 'D. 비용 대비 효과가 있을 때만', 'E. 전문가 위임', 'F. 기타'],
-    },
-    {
-      id: 9,
-      type: '객관식',
-      category: '자사주/배당',
-      question: '자사주 매입·배당 정책의 우선순위는 무엇입니까?',
-      options: ['A. 배당 안정성', 'B. 자사주 매입', 'C. 부채 상환', 'D. 성장 투자와 현금 안정성', 'E. 주주 구성에 따라 결정', 'F. 기타'],
-    },
-    {
-      id: 10,
-      type: '객관식',
-      category: '외부 자본 조달',
-      question: '외부 자본 조달 시 지분과 부채 중 무엇을 먼저 검토합니까?',
-      options: ['A. 지분 조달', 'B. 부채 조달', 'C. 전환사채/혼합형', 'D. 전략 투자자', 'E. 시장 조건에 따라 결정', 'F. 기타'],
-    },
-    {
-      id: 11,
-      type: '객관식',
-      category: '손실 대응',
-      question: '대규모 손실 발생 시 손절·재투자 결정 기준은 무엇입니까?',
-      options: ['A. 구조적 손실이면 손절', 'B. 단기 손실이면 재투자', 'C. 회수 가능성 기준', 'D. 현금흐름 훼손 기준', 'E. 평판/전략 가치 포함', 'F. 기타'],
-    },
-    {
-      id: 12,
-      type: '객관식',
-      category: 'M&A 레드라인',
-      question: 'M&A 의사결정 시 재무적 레드라인은 무엇입니까?',
-      options: ['A. 인수가격 배수', 'B. 통합 비용', 'C. 현금흐름 훼손', 'D. 부채 증가', 'E. 시너지 불확실성', 'F. 기타'],
-    },
-    {
-      id: 13,
-      type: '객관식',
-      category: '해외법인 자금',
-      question: '자회사·해외법인 자금 운용 원칙은 무엇에 가깝습니까?',
-      options: ['A. 본사 중앙 통제', 'B. 현지 자율성', 'C. 일정 한도 내 자율', 'D. 환 리스크 기준 통제', 'E. 세무 효율 우선', 'F. 기타'],
-    },
-    {
-      id: 14,
-      type: '객관식',
-      category: '임원 보상',
-      question: '임원 보상·인센티브 설계 시 가장 중요한 재무 원칙은 무엇입니까?',
-      options: ['A. 매출 성장', 'B. 영업이익', 'C. 현금흐름', 'D. 장기 기업가치', 'E. 리스크 조정 성과', 'F. 기타'],
-    },
-    {
-      id: 15,
-      type: '객관식',
-      category: '성과 변동',
-      question: '분기별·연간 재무 성과 변동에 어떻게 반응합니까?',
-      options: ['A. 즉시 비용 조정', 'B. 원인 분석 후 조정', 'C. 장기 계획 유지', 'D. 투자자 커뮤니케이션 강화', 'E. 현금흐름 중심 재예측', 'F. 기타'],
-    },
-    {
-      id: 16,
-      type: '객관식',
-      category: '재무 보고',
-      question: '재무 보고에서 절대 빠지면 안 되는 항목은 무엇입니까?',
-      options: ['A. 현금흐름표', 'B. 런웨이/유동성', 'C. 손익 변동 요인', 'D. 리스크 노출', 'E. 다음 액션', 'F. 기타'],
-    },
-    {
-      id: 17,
-      type: '주관식',
-      category: '절대 원칙',
-      question: '재무 의사결정에서 절대 양보할 수 없는 원칙 한 가지를 한 문장으로 적어주세요.',
-    },
-  ];
+const extractCategoryName = (question: string) => question.match(/^\[([^\]]+)\]/)?.[1] ?? '기타';
 
-  return questions.slice(0, clampQuestionCount(count)).map((question, index) => ({ ...question, id: index + 1 }));
-};
+const stripCategoryLabel = (question: string) => question.replace(/^\[[^\]]+\]\s*/, '');
+
+const createPreInterviewQuestions = (): InterviewQuestion[] =>
+  preInterviewData.pre_questions.map((question) => ({
+    id: question.pre_question_id,
+    type: '객관식',
+    category: extractCategoryName(question.pre_question),
+    question: stripCategoryLabel(question.pre_question),
+    options: question.pre_options.map((option) => `${option.option_id}. ${option.option_text}`),
+  }));
+
+const createPreInterviewContext = (answers: PreInterviewAnswer[]): PreInterviewContext =>
+  answers.reduce<PreInterviewContext>((context, answer) => {
+    const categoryAnswers = context[answer.category] ?? {};
+    const nextIndex = Object.keys(categoryAnswers).length + 1;
+
+    return {
+      ...context,
+      [answer.category]: {
+        ...categoryAnswers,
+        [`question_${nextIndex}`]: {
+          question: answer.question,
+          answer: answer.answer,
+        },
+      },
+    };
+  }, {});
+
+const createDeepInterviewQuestions = (context: PreInterviewContext): InterviewQuestion[] =>
+  Object.entries(context).flatMap(([categoryName, answers], categoryIndex) => {
+    const answerEntries = Object.values(answers);
+    const first = answerEntries[0];
+    const second = answerEntries[1] ?? answerEntries[0];
+    const fourth = answerEntries[3] ?? answerEntries[answerEntries.length - 1] ?? first;
+
+    return [
+      {
+        id: categoryIndex * 2 + 1,
+        type: '객관식',
+        category: categoryName,
+        question: `"${first?.answer ?? '확인 필요'}"와 "${second?.answer ?? '확인 필요'}" 응답을 함께 보면, ${categoryName}에서 가장 중요하게 지키는 판단 기준은 무엇에 가깝습니까?`,
+        options: [
+          'A. 단기 재무 안정성과 현금흐름 훼손 방지를 최우선으로 둔다.',
+          'B. 자본 효율과 수익률이 충분히 검증될 때 실행한다.',
+          'C. 장기 성장성과 전략적 필요성이 크면 일정 수준의 불확실성을 감수한다.',
+          'D. 경영진이 선택할 수 있도록 위험, 대안, 중단 조건을 명확히 제시한다.',
+          'E. 기타 — 직접 입력',
+        ],
+      },
+      {
+        id: categoryIndex * 2 + 2,
+        type: '객관식',
+        category: categoryName,
+        question: `"${fourth?.answer ?? '확인 필요'}" 응답까지 고려할 때, 실제 재무 의사결정에서 멈추거나 재검토해야 하는 신호는 무엇입니까?`,
+        options: [
+          'A. 유동성, 지급 능력, 필수 운영자금이 흔들릴 가능성이 보일 때다.',
+          'B. 기대수익보다 손실 상한, 회수 가능성, 자본비용 초과 여부가 불명확할 때다.',
+          'C. 전략적 가치는 있지만 조직, 고객, 핵심 사업의 지속성을 훼손할 때다.',
+          'D. 책임자, 성과 기준, 중단 권한이 합의되지 않아 실행 통제가 어려울 때다.',
+          'E. 기타 — 직접 입력',
+        ],
+      },
+    ];
+  });
 
 const buildPublicDataSnapshot = (profile: UserProfile): PublicDataSnapshot => {
   const handle = profile.snsId || '@sample.cfo';
@@ -268,11 +270,27 @@ const buildPublicDataSnapshot = (profile: UserProfile): PublicDataSnapshot => {
   };
 };
 
+const buildPublicDataFallback = (profile: UserProfile, reason: string): PublicDataSnapshot => {
+  const handle = profile.snsId || '@unknown';
+
+  return {
+    status: 'collected',
+    accounts: [],
+    signals: [
+      `SNS ID ${handle} 공개 계정 탐색이 제한 시간 안에 완료되지 않았습니다.`,
+      `원인: ${reason}`,
+      'Sherlock 결과는 확인 필요 상태로 저장하고, 인터뷰는 사용자 입력 정보 기준으로 계속 진행합니다.',
+    ],
+    posts: [],
+  };
+};
+
 const createBrainstormerPrompt = (
   profile: UserProfile,
   questionCount: number,
   publicData: PublicDataSnapshot,
-) => `너는 C-Level 리더의 재무 의사결정 체계를 인터뷰하는 전문 코치다.
+  preInterviewContext: PreInterviewContext | null = null,
+) => `너는 C-Level 리더의 의사결정 체계를 인터뷰하는 전문 코치다.
 
 [인터뷰 대상자]
 - 이름: ${profile.name || '확인 필요'}
@@ -286,18 +304,30 @@ const createBrainstormerPrompt = (
 [공개 데이터 수집 신호]
 ${publicData.signals.length ? publicData.signals.map((signal) => `- ${signal}`).join('\n') : '- 아직 수집 전'}
 
+[PreInterviewContext]
+${preInterviewContext ? JSON.stringify(preInterviewContext, null, 2) : '아직 사전 질문 응답이 완료되지 않았습니다.'}
+
 [진행 방식]
-- 재무 의사결정 질문 ${questionCount}개를 한 번에 하나씩 진행한다.
-- 객관식이 기본이며 보기에는 항상 F. 기타를 포함한다.
+- 현재 단계의 질문 ${questionCount}개를 한 번에 하나씩 진행한다.
+- 사전 질문은 제공된 객관식 보기만 사용한다.
+- 심층 질문은 사전 질문의 여러 응답 간 관계를 종합해 재무 의사결정 기준을 확인한다.
+- 심층 질문 선택지는 기본 4개와 E. 기타 — 직접 입력으로 구성한다.
 - 기타 또는 주관식 답변은 한 문장만 받고 다음 질문으로 넘어간다.
 - 최종 출력은 의사 결정 기준 요약 + AI 참모 프롬프트 핵심 지침 5~7개다.
 - 답변을 임의로 일반화하지 말고 확인 필요 항목은 명시한다.`;
 
-const buildInitialMessages = (questions: InterviewQuestion[], systemPrompt: string): ChatMessage[] => [
+const buildInitialMessages = (
+  questions: InterviewQuestion[],
+  systemPrompt: string,
+  phase: InterviewPhase,
+): ChatMessage[] => [
   {
     id: 'm-brainstormer-open',
     sender: 'ai',
-    text: `프로필과 공개 데이터 신호를 반영해 재무 의사결정 인터뷰를 시작합니다.\n\n${systemPrompt}`,
+    text:
+      phase === 'pre'
+        ? `프로필과 공개 데이터 신호를 반영해 사전 질문을 시작합니다.\n\n${systemPrompt}`
+        : `PreInterviewContext를 반영해 심층 인터뷰를 시작합니다.\n\n${systemPrompt}`,
     timestamp: formatTime(),
   },
   {
@@ -315,7 +345,7 @@ const createFinalOutput = (profile: UserProfile, answers: string[], publicData: 
   const cashFirst = /현금|런웨이|cash/i.test(joined);
   const riskFirst = /리스크|손실|레드라인|부채|손절/i.test(joined);
   const roiFirst = /roi|irr|수익|이익/i.test(joined);
-  const otherAnswers = answers.filter((answer) => answer.includes('F. 기타'));
+  const otherAnswers = answers.filter((answer) => answer.includes('E. 기타'));
 
   return {
     fiveLayerSummary: {
@@ -377,7 +407,7 @@ interface InterviewViewProps {
   messages: ChatMessage[];
   setMessages: React.Dispatch<React.SetStateAction<ChatMessage[]>>;
   decisions: DecisionRecord[];
-  onCreatePersona: (persona: Persona) => void;
+  onCreatePersona: (persona: Persona) => void | Promise<void>;
   onAddHistoryRecord: (record: DecisionRecord) => void;
   onGoToPersonas: () => void;
 }
@@ -391,9 +421,11 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
   onGoToPersonas,
 }) => {
   const [step, setStep] = useState<FlowStep>('profile');
-  const [profile, setProfile] = useState<UserProfile>(defaultProfile);
-  const [questionCount, setQuestionCount] = useState(12);
-  const [activeQuestions, setActiveQuestions] = useState<InterviewQuestion[]>(() => createFinanceQuestions(12));
+  const [interviewPhase, setInterviewPhase] = useState<InterviewPhase>('pre');
+  const [profile, setProfile] = useState<UserProfile>(() => loadInitialProfile());
+  const [activeQuestions, setActiveQuestions] = useState<InterviewQuestion[]>(() => createPreInterviewQuestions());
+  const [preInterviewAnswers, setPreInterviewAnswers] = useState<PreInterviewAnswer[]>([]);
+  const [preInterviewContext, setPreInterviewContext] = useState<PreInterviewContext | null>(null);
   const [publicData, setPublicData] = useState<PublicDataSnapshot>({ status: 'idle', accounts: [], signals: [], posts: [] });
   const [inputText, setInputText] = useState('');
   const [currentQIndex, setCurrentQIndex] = useState(0);
@@ -420,60 +452,70 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
   const userAnswers = messages.filter((msg) => msg.sender === 'user').map((msg) => msg.text);
   const selectedDecision = decisions.find((decision) => decision.id === selectedDecisionId) ?? decisions[0] ?? null;
   const brainstormerSystemPrompt = useMemo(
-    () => createBrainstormerPrompt(profile, totalQuestions, publicData),
-    [profile, totalQuestions, publicData],
+    () => createBrainstormerPrompt(profile, totalQuestions, publicData, preInterviewContext),
+    [profile, totalQuestions, publicData, preInterviewContext],
   );
   const decisionPrompt = buildDecisionPrompt(algorithmTree, profile, userAnswers, finalOutput);
   const progressPercent = step === 'profile' ? 0 : isComplete ? 100 : Math.round(((currentQIndex + 1) / totalQuestions) * 100);
-  const estimatedTimeLeft = step === 'profile' ? '수집 전' : isComplete ? '완료' : `${Math.max(1, totalQuestions - currentQIndex)}분`;
-
-  const crawlerContract = {
-    feature: '10.2.1 SNS 데이터 수집 크롤러',
-    priority: 'before_interview',
-    input: {
-      name: profile.name,
-      title: profile.title,
-      industry: profile.industry,
-      companySize: profile.companySize,
-      companyName: profile.companyName,
-      snsId: profile.snsId,
-    },
-    targetSNS: ['LinkedIn', 'X', 'Threads', 'YouTube 확인 필요', 'Naver Blog', 'Tstory'],
-    discoveryTool: 'Sherlock',
-    crawlerCandidates: ['FireCrawl', 'Crawl4AI'],
-    currentPrototypeMode: 'mock_public_data_snapshot',
-    output: publicData,
-    nextConsumer: 'Brainstormer system prompt',
-  };
-
-  const outputJson = {
-    feature: 'Finance Decision Interview Prototype',
-    status: step === 'profile' ? 'profile_collection' : isComplete ? 'completed' : 'interview_in_progress',
-    step,
-    profile,
-    publicData,
-    brainstormer: {
-      role: 'C-Level finance decision coach',
-      systemPrompt: brainstormerSystemPrompt,
-      questionCount: totalQuestions,
-    },
-    questions: activeQuestions,
-    answers: userAnswers,
-    finalOutput,
-    savedIntakeIds,
-    advisorPromptPreview: decisionPrompt,
-    crawlerContract,
-  };
+  const estimatedTimeLeft =
+    step === 'profile'
+      ? '수집 전'
+      : isComplete
+        ? '완료'
+        : `${Math.max(1, totalQuestions - currentQIndex)}분`;
 
   const updateProfile = (field: keyof UserProfile, value: string) => {
     setProfile((current) => ({ ...current, [field]: value }));
+  };
+
+  useEffect(() => {
+    window.localStorage.removeItem('decision-interview-draft');
+  }, []);
+
+  useEffect(() => {
+    window.sessionStorage.setItem(profileDraftStorageKey, JSON.stringify(profile));
+  }, [profile]);
+
+  const discoverPublicData = async (): Promise<PublicDataSnapshot> => {
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), snsDiscoveryClientTimeoutMs);
+
+    try {
+      const response = await fetch('/api/sns-discovery', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
+        body: JSON.stringify({
+          snsId: profile.snsId,
+          profile,
+        }),
+      });
+
+      const result = (await response.json()) as SnsDiscoveryResponse;
+
+      if (!response.ok || !result.ok || !result.publicData) {
+        return buildPublicDataFallback(profile, result.message ?? 'SNS 공개 데이터 수집에 실패했습니다.');
+      }
+
+      return result.publicData;
+    } catch (error) {
+      const reason = error instanceof DOMException && error.name === 'AbortError'
+        ? 'Sherlock 탐색 시간 초과'
+        : error instanceof Error
+          ? error.message
+          : '알 수 없는 SNS 탐색 오류';
+
+      return buildPublicDataFallback(profile, reason);
+    } finally {
+      window.clearTimeout(timeoutId);
+    }
   };
 
   const saveProfileIntake = async (
     snapshot: PublicDataSnapshot,
     questions: InterviewQuestion[],
     systemPrompt: string,
-  ) => {
+  ): Promise<SavedIntakeIds> => {
     setSaveStatus('saving');
     setSaveError('');
 
@@ -496,6 +538,60 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
 
     setSavedIntakeIds(result.ids);
     setSaveStatus('saved');
+    return result.ids;
+  };
+
+  const generateAgentDeepQuestions = async (context: PreInterviewContext): Promise<InterviewQuestion[]> => {
+    try {
+      const response = await fetch('/api/agent/deep-questions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          profile,
+          publicData,
+          preInterviewContext: context,
+        }),
+      });
+      const result = (await response.json()) as AgentQuestionsResponse;
+
+      if (!response.ok || !result.ok || !result.questions?.length) {
+        throw new Error(result.message ?? '심층 질문 생성에 실패했습니다.');
+      }
+
+      return result.questions;
+    } catch (error) {
+      console.warn('Falling back to local deep question generation', error);
+      return createDeepInterviewQuestions(context);
+    }
+  };
+
+  const generateAgentFinalOutput = async (
+    answers: string[],
+    snapshot: PublicDataSnapshot,
+    context: PreInterviewContext | null = preInterviewContext,
+  ): Promise<FinalInterviewOutput> => {
+    try {
+      const response = await fetch('/api/agent/final-output', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          profile,
+          answers,
+          publicData: snapshot,
+          preInterviewContext: context,
+        }),
+      });
+      const result = (await response.json()) as AgentFinalOutputResponse;
+
+      if (!response.ok || !result.ok || !result.finalOutput) {
+        throw new Error(result.message ?? '최종 요약 생성에 실패했습니다.');
+      }
+
+      return result.finalOutput;
+    } catch (error) {
+      console.warn('Falling back to local final output generation', error);
+      return createFinalOutput(profile, answers, snapshot);
+    }
   };
 
   const startDataCollection = async () => {
@@ -504,16 +600,19 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
     setSaveError('');
 
     try {
-      const snapshot = buildPublicDataSnapshot(profile);
-      const questions = createFinanceQuestions(questionCount);
+      const snapshot = await discoverPublicData();
+      const questions = createPreInterviewQuestions();
       const prompt = createBrainstormerPrompt(profile, questions.length, snapshot);
 
       await saveProfileIntake(snapshot, questions, prompt);
 
       setPublicData(snapshot);
       setActiveQuestions(questions);
-      setMessages(buildInitialMessages(questions, prompt));
+      setMessages(buildInitialMessages(questions, prompt, 'pre'));
       setCurrentQIndex(0);
+      setInterviewPhase('pre');
+      setPreInterviewAnswers([]);
+      setPreInterviewContext(null);
       setIsComplete(false);
       setFinalOutput(null);
       setStep('interview');
@@ -526,10 +625,14 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
   };
 
   const resetAll = () => {
+    window.localStorage.removeItem('decision-interview-draft');
+    window.sessionStorage.removeItem(profileDraftStorageKey);
     setStep('profile');
     setProfile(defaultProfile);
-    setQuestionCount(12);
-    setActiveQuestions(createFinanceQuestions(12));
+    setActiveQuestions(createPreInterviewQuestions());
+    setInterviewPhase('pre');
+    setPreInterviewAnswers([]);
+    setPreInterviewContext(null);
     setPublicData({ status: 'idle', accounts: [], signals: [], posts: [] });
     setMessages([]);
     setSaveStatus('idle');
@@ -550,7 +653,12 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
     setAlgorithmTree(defaultAlgorithmTree);
   };
 
-  const createInterviewHistoryRecord = (answers: string[], result: FinalInterviewOutput): DecisionRecord => {
+  const createInterviewHistoryRecord = (
+    answers: string[],
+    result: FinalInterviewOutput,
+    snapshot: PublicDataSnapshot,
+    context = preInterviewContext,
+  ): DecisionRecord => {
     const today = new Date().toLocaleDateString('ko-KR').replace(/\.\s*/g, '.').replace(/\.$/, '');
     const timeline = answers.map((answer, index) => {
       const question = activeQuestions[index];
@@ -575,18 +683,20 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
       finalConclusion: result.oneSentenceSystem,
       recommendation: result.coreInstructions.slice(0, 3).join(' / '),
       impactScore: result.needsConfirmation.length > 2 ? 'Medium' : 'High',
+      preInterviewContext: context,
+      publicData: snapshot,
     };
   };
 
-  const saveInterviewHistoryRecord = async (record: DecisionRecord) => {
-    if (!savedIntakeIds?.userProfileId) return;
+  const saveInterviewHistoryRecord = async (record: DecisionRecord, userProfileId = savedIntakeIds?.userProfileId) => {
+    if (!userProfileId) return;
 
     try {
       await fetch('/api/history-records', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          userProfileId: savedIntakeIds.userProfileId,
+          userProfileId,
           record,
         }),
       });
@@ -595,9 +705,14 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
     }
   };
 
-  const completeInterview = (answers: string[], snapshot = publicData) => {
-    const result = createFinalOutput(profile, answers, snapshot);
-    const historyRecord = createInterviewHistoryRecord(answers, result);
+  const completeInterview = async (
+    answers: string[],
+    snapshot = publicData,
+    intakeIds = savedIntakeIds,
+    context = preInterviewContext,
+  ) => {
+    const result = await generateAgentFinalOutput(answers, snapshot, context);
+    const historyRecord = createInterviewHistoryRecord(answers, result, snapshot, context);
 
     setFinalOutput(result);
     setDraftName(`${profile.name || '사용자'}의 재무 의사결정 참모`);
@@ -608,7 +723,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
       `프로필, 공개 데이터 신호 ${snapshot.signals.length}개, 재무 인터뷰 답변 ${answers.length}개를 바탕으로 생성한 1차 초안입니다.`,
     );
     onAddHistoryRecord(historyRecord);
-    void saveInterviewHistoryRecord(historyRecord);
+    void saveInterviewHistoryRecord(historyRecord, intakeIds?.userProfileId);
     setIsComplete(true);
   };
 
@@ -645,6 +760,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
 
   const handleSendAnswer = (answerText: string) => {
     if (!answerText.trim() || isThinking || isDemoRunning || isComplete || step !== 'interview') return;
+    const currentQuestion = activeQuestions[currentQIndex];
 
     const userMsg: ChatMessage = {
       id: `u-${Date.now()}`,
@@ -658,8 +774,51 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
     setInputText('');
     setIsThinking(true);
 
-    window.setTimeout(() => {
+    window.setTimeout(async () => {
       const nextIndex = currentQIndex + 1;
+      if (interviewPhase === 'pre') {
+        const nextPreAnswers = [
+          ...preInterviewAnswers,
+          {
+            category: currentQuestion?.category ?? '기타',
+            question: currentQuestion?.question ?? '질문',
+            answer: answerText,
+          },
+        ];
+
+        if (nextIndex < totalQuestions) {
+          setPreInterviewAnswers(nextPreAnswers);
+          setCurrentQIndex(nextIndex);
+          const nextQ = activeQuestions[nextIndex];
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: `ai-${Date.now()}`,
+              sender: 'ai',
+              text: `답변을 기록했습니다.\n\n${nextQ.question}`,
+              timestamp: formatTime(),
+              questionType: nextQ.type,
+              options: nextQ.options,
+            },
+          ]);
+          setIsThinking(false);
+          return;
+        }
+
+        const context = createPreInterviewContext(nextPreAnswers);
+        const deepQuestions = await generateAgentDeepQuestions(context);
+        const prompt = createBrainstormerPrompt(profile, deepQuestions.length, publicData, context);
+
+        setPreInterviewAnswers(nextPreAnswers);
+        setPreInterviewContext(context);
+        setInterviewPhase('deep');
+        setActiveQuestions(deepQuestions);
+        setCurrentQIndex(0);
+        setMessages(buildInitialMessages(deepQuestions, prompt, 'deep'));
+        setIsThinking(false);
+        return;
+      }
+
       if (nextIndex < totalQuestions) {
         setCurrentQIndex(nextIndex);
         const nextQ = activeQuestions[nextIndex];
@@ -684,85 +843,115 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
             timestamp: formatTime(),
           },
         ]);
-        completeInterview(nextAnswers);
+        void completeInterview(nextAnswers);
       }
       setIsThinking(false);
     }, 500);
   };
 
-  const runDemoFlow = async () => {
-    if (isDemoRunning || isThinking) return;
-    const sleep = (ms: number) => new Promise((resolve) => window.setTimeout(resolve, ms));
-    const demoProfile: UserProfile = {
-      name: '김도현',
-      title: 'CFO',
-      industry: 'B2B SaaS',
-      companySize: '101-300명',
-      companyName: '넥스트스텝 AI Labs',
-      snsId: '@dohyun.finance',
-      financeScope: '자본 배치, 투자, 리스크, 자금 운용',
-    };
-    const demoQuestions = createFinanceQuestions(questionCount);
-    const demoSnapshot = buildPublicDataSnapshot(demoProfile);
-    const prompt = createBrainstormerPrompt(demoProfile, demoQuestions.length, demoSnapshot);
-    const answers = demoQuestions.map((_, index) => financeDemoAnswers[index] ?? 'D. 확인 후 결정한다.');
-
-    setIsDemoRunning(true);
-    setProfile(demoProfile);
-    setPublicData(demoSnapshot);
-    setSaveStatus('idle');
-    setSaveError('');
-    setSavedIntakeIds(null);
-    setActiveQuestions(demoQuestions);
-    setMessages(buildInitialMessages(demoQuestions, prompt));
-    setCurrentQIndex(0);
-    setStep('interview');
-    setIsComplete(false);
-    setFinalOutput(null);
-    await sleep(200);
-
-    for (let index = 0; index < demoQuestions.length; index += 1) {
-      setMessages((prev) => [
-        ...prev,
-        { id: `demo-u-${Date.now()}-${index}`, sender: 'user', text: answers[index], timestamp: formatTime() },
-      ]);
-      setIsThinking(true);
-      await sleep(180);
-
-      const nextIndex = index + 1;
-      if (nextIndex < demoQuestions.length) {
-        setCurrentQIndex(nextIndex);
-        const nextQ = demoQuestions[nextIndex];
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: `demo-ai-${Date.now()}-${index}`,
-            sender: 'ai',
-            text: `답변을 기록했습니다.\n\n${nextQ.question}`,
-            timestamp: formatTime(),
-            questionType: nextQ.type,
-            options: nextQ.options,
-          },
-        ]);
-      } else {
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: `demo-ai-complete-${Date.now()}`,
-            sender: 'ai',
-            text: '데모 인터뷰가 완료되었습니다. 의사 결정 기준 요약과 AI 참모 핵심 지침을 생성했습니다.',
-            timestamp: formatTime(),
-          },
-        ]);
-        completeInterview(answers, demoSnapshot);
-      }
-      setIsThinking(false);
+  const handleOptionAnswer = (answerText: string) => {
+    if (/^\s*E\.\s*기타/.test(answerText) || answerText.includes('E. 기타')) {
+      setInputText('');
+      return;
     }
 
-    setIsDemoRunning(false);
+    handleSendAnswer(answerText);
   };
 
-  const handleCreatePersona = () => {
+  const runDemoFlow = async () => {
+    if (isDemoRunning || isThinking) return;
+    const demoProfileContext: UserProfile = {
+      ...profile,
+      name: profile.name || '사용자',
+      title: profile.title || 'CFO / 재무 리더',
+      industry: profile.industry || 'B2B SaaS',
+      companySize: profile.companySize || '51-200명',
+      companyName: profile.companyName || '회사명 미입력',
+      snsId: profile.snsId || '@unknown',
+      financeScope: profile.financeScope || '자본 배치, 투자, 리스크, 자금 운용',
+    };
+    const preQuestions = createPreInterviewQuestions();
+    const demoPreAnswers: PreInterviewAnswer[] = preQuestions.map((question) => ({
+      category: question.category,
+      question: question.question,
+      answer: question.options?.[0] ?? '1. 확인 필요',
+    }));
+    const demoContext = createPreInterviewContext(demoPreAnswers);
+    const demoQuestions = await generateAgentDeepQuestions(demoContext);
+    const answers = demoQuestions.map((question, index) => question.options?.[index % 4] ?? financeDemoAnswers[index] ?? 'A. 확인 후 결정한다.');
+
+    setIsDemoRunning(true);
+    setIsCollecting(true);
+    setSaveStatus('idle');
+    setSaveError('');
+
+    try {
+      const demoSnapshot = profile.snsId.trim()
+        ? await discoverPublicData()
+        : buildPublicDataSnapshot(demoProfileContext);
+      const prompt = createBrainstormerPrompt(demoProfileContext, demoQuestions.length, demoSnapshot, demoContext);
+      let demoIntakeIds: SavedIntakeIds | null = null;
+
+      try {
+        demoIntakeIds = await saveProfileIntake(demoSnapshot, demoQuestions, prompt);
+      } catch (error) {
+        setSaveStatus('failed');
+        setSaveError(error instanceof Error ? error.message : '데모 데이터 DB 저장에 실패했습니다.');
+      }
+
+      const transcript = buildInitialMessages(demoQuestions, prompt, 'deep');
+
+      demoQuestions.forEach((question, index) => {
+        transcript.push({
+          id: `demo-u-${Date.now()}-${index}`,
+          sender: 'user',
+          text: answers[index],
+          timestamp: formatTime(),
+        });
+
+        if (index + 1 < demoQuestions.length) {
+          const nextQuestion = demoQuestions[index + 1];
+          transcript.push({
+            id: `demo-ai-${Date.now()}-${index}`,
+            sender: 'ai',
+            text: `답변을 기록했습니다.\n\n${nextQuestion.question}`,
+            timestamp: formatTime(),
+            questionType: nextQuestion.type,
+            options: nextQuestion.options,
+          });
+          return;
+        }
+
+        transcript.push({
+          id: `demo-ai-complete-${Date.now()}`,
+          sender: 'ai',
+          text: '데모 인터뷰가 완료되었습니다. 의사 결정 기준 요약과 AI 참모 핵심 지침을 생성했습니다.',
+          timestamp: formatTime(),
+        });
+      });
+
+      setPublicData(demoSnapshot);
+      setActiveQuestions(demoQuestions);
+      setInterviewPhase('deep');
+      setPreInterviewAnswers(demoPreAnswers);
+      setPreInterviewContext(demoContext);
+      setMessages(transcript);
+      setCurrentQIndex(demoQuestions.length - 1);
+      setStep('interview');
+      setIsComplete(false);
+      setFinalOutput(null);
+      void completeInterview(answers, demoSnapshot, demoIntakeIds, demoContext);
+    } catch (error) {
+      setSaveStatus('failed');
+      setSaveError(error instanceof Error ? error.message : '데모 실행 중 알 수 없는 오류가 발생했습니다.');
+    } finally {
+      setIsCollecting(false);
+      setIsThinking(false);
+      setIsDemoRunning(false);
+    }
+  };
+
+  const handleCreatePersona = async () => {
     const newPersona: Persona = {
       id: `p-${Date.now()}`,
       name: draftName || '재무 의사결정 AI 참모',
@@ -793,8 +982,13 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
       bgClass: 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800',
     };
 
-    onCreatePersona(newPersona);
-    onGoToPersonas();
+    try {
+      await onCreatePersona(newPersona);
+      onGoToPersonas();
+    } catch (error) {
+      setSaveStatus('failed');
+      setSaveError(error instanceof Error ? error.message : '페르소나 DB 저장에 실패했습니다.');
+    }
   };
 
   return (
@@ -803,10 +997,10 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
         <div>
           <div className="flex flex-wrap items-center gap-2">
             <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800">
-              Step {step === 'profile' ? '1. 데이터 수집' : '2. 인터뷰'}
+              Step {step === 'profile' ? '1. 데이터 수집' : interviewPhase === 'pre' ? '2. 사전 질문' : '3. 심층 인터뷰'}
             </span>
             <span className="text-xs font-semibold text-slate-500">
-              {step === 'profile' ? '프로필 입력 전' : `질문 ${Math.min(totalQuestions, currentQIndex + 1)} / ${totalQuestions}`}
+              {step === 'profile' ? '프로필 입력 전' : `문항 ${Math.min(totalQuestions, currentQIndex + 1)} / ${totalQuestions}`}
             </span>
             {isComplete && <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">완료</span>}
           </div>
@@ -831,11 +1025,11 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
               <Clock className="w-3.5 h-3.5 text-amber-500" /> {estimatedTimeLeft}
             </span>
           </div>
-          <button onClick={runDemoFlow} disabled={isDemoRunning || isThinking} className="h-10 inline-flex items-center gap-2 px-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-300 dark:disabled:bg-slate-800 text-white text-xs font-bold">
+          <button type="button" onClick={runDemoFlow} disabled={isDemoRunning || isThinking} className="h-10 inline-flex items-center gap-2 px-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-300 dark:disabled:bg-slate-800 text-white text-xs font-bold">
             <Play className="w-3.5 h-3.5" />
             데모
           </button>
-          <button onClick={resetAll} className="h-10 inline-flex items-center justify-center w-10 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200" aria-label="초기화">
+          <button type="button" onClick={resetAll} className="h-10 inline-flex items-center justify-center w-10 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200" aria-label="초기화">
             <RotateCcw className="w-4 h-4" />
           </button>
         </div>
@@ -843,7 +1037,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
 
       <div className="flex-1 overflow-y-auto p-6 px-8 space-y-6">
         {step === 'profile' && (
-          <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_380px] gap-5">
+          <div className="max-w-5xl">
             <section className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-5">
               <div className="flex items-start gap-3">
                 <div className="w-10 h-10 rounded-2xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
@@ -852,7 +1046,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
                 <div>
                   <h3 className="text-lg font-black text-slate-900 dark:text-white">1단계. 사용자 정보와 공개 데이터 수집</h3>
                   <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-                    인터뷰 질문을 던지기 전에 프로필과 SNS 신호를 브레인스토머 컨텍스트에 먼저 제공합니다.
+                    프로필과 Sherlock SNS 탐색 신호를 먼저 수집합니다. 탐색이 오래 걸리면 확인 필요로 저장하고 인터뷰를 계속 진행합니다.
                   </p>
                 </div>
               </div>
@@ -889,26 +1083,22 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
                     className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/40 px-3 py-2.5 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </label>
-                <label className="space-y-1.5">
-                  <span className="text-xs font-bold text-slate-700 dark:text-slate-300">질문 수</span>
-                  <input
-                    type="number"
-                    min={10}
-                    max={20}
-                    value={questionCount}
-                    onChange={(event) => setQuestionCount(clampQuestionCount(Number(event.target.value)))}
-                    className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/40 px-3 py-2.5 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  />
-                </label>
+                <div className="space-y-1.5">
+                  <span className="text-xs font-bold text-slate-700 dark:text-slate-300">인터뷰 문항</span>
+                  <div className="w-full rounded-xl border border-emerald-200 dark:border-emerald-900 bg-emerald-50 dark:bg-emerald-950/30 px-3 py-2.5 text-xs font-black text-emerald-700 dark:text-emerald-300">
+                    {activeQuestions.length}개
+                  </div>
+                </div>
               </div>
 
               <button
+                type="button"
                 onClick={startDataCollection}
                 disabled={isCollecting}
                 className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-300 text-white text-xs font-bold shadow-lg shadow-indigo-500/20 transition-all"
               >
                 {isCollecting || saveStatus === 'saving' ? <RefreshCw className="w-4 h-4 animate-spin" /> : <SearchCheck className="w-4 h-4" />}
-                DB 저장 + 공개 데이터 수집 후 인터뷰 시작
+                DB 저장 + Sherlock SNS 탐색 후 인터뷰 시작
               </button>
 
               {saveStatus === 'saved' && savedIntakeIds && (
@@ -924,45 +1114,12 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
               )}
             </section>
 
-            <aside className="space-y-4">
-              <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4">
-                <div className="flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white">
-                  <Building2 className="w-4 h-4 text-indigo-500" />
-                  입력 JSON
-                </div>
-                <textarea readOnly value={JSON.stringify({ profile, questionCount }, null, 2)} rows={12} className="mt-3 w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-[11px] font-mono text-slate-700 dark:text-slate-200 resize-none" />
-              </div>
-              <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4">
-                <div className="flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white">
-                  <Globe className="w-4 h-4 text-emerald-500" />
-                  크롤러 계약
-                </div>
-                <textarea readOnly value={JSON.stringify(crawlerContract, null, 2)} rows={14} className="mt-3 w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-[11px] font-mono text-slate-700 dark:text-slate-200 resize-none" />
-              </div>
-            </aside>
           </div>
         )}
 
         {step === 'interview' && (
-          <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_380px] gap-5">
+          <div className="max-w-5xl">
             <div className="space-y-5">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4">
-                  <div className="flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white">
-                    <UserRound className="w-4 h-4 text-indigo-500" />
-                    사용자 프로필
-                  </div>
-                  <textarea readOnly value={JSON.stringify(profile, null, 2)} rows={7} className="mt-3 w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-[11px] font-mono text-slate-700 dark:text-slate-200 resize-none" />
-                </div>
-                <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4">
-                  <div className="flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white">
-                    <Globe className="w-4 h-4 text-emerald-500" />
-                    공개 데이터 수집 결과
-                  </div>
-                  <textarea readOnly value={JSON.stringify(publicData, null, 2)} rows={7} className="mt-3 w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-[11px] font-mono text-slate-700 dark:text-slate-200 resize-none" />
-                </div>
-              </div>
-
               {messages.map((msg) => {
                 const isAi = msg.sender === 'ai';
                 return (
@@ -979,7 +1136,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
                         {isAi && msg.options && msg.options.length > 0 && !isComplete && (
                           <div className="mt-5 space-y-2.5 border-t border-slate-100 dark:border-slate-800 pt-4">
                             {msg.options.map((opt) => (
-                              <button key={opt} disabled={isThinking || isDemoRunning} onClick={() => handleSendAnswer(opt)} className="w-full text-left p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 hover:border-indigo-400 dark:hover:border-indigo-500 border border-slate-200 dark:border-slate-700/80 text-xs font-semibold text-slate-700 dark:text-slate-200 transition-all flex items-center justify-between group">
+                              <button key={opt} disabled={isThinking || isDemoRunning} onClick={() => handleOptionAnswer(opt)} className="w-full text-left p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 hover:border-indigo-400 dark:hover:border-indigo-500 border border-slate-200 dark:border-slate-700/80 text-xs font-semibold text-slate-700 dark:text-slate-200 transition-all flex items-center justify-between group">
                                 <span>{opt}</span>
                                 <ArrowRight className="w-4 h-4 text-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity shrink-0 ml-2" />
                               </button>
@@ -995,23 +1152,6 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
               {isThinking && <div className="flex items-center gap-3 text-xs text-slate-500 p-2 pl-12 animate-pulse"><RefreshCw className="w-4 h-4 animate-spin text-indigo-500" />재무 판단 기준 신호를 분석 중입니다...</div>}
               <div ref={chatEndRef} />
             </div>
-
-            <aside className="space-y-4">
-              <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4">
-                <div className="flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white">
-                  <Sparkles className="w-4 h-4 text-indigo-500" />
-                  브레인스토머 시스템 프롬프트
-                </div>
-                <textarea readOnly value={brainstormerSystemPrompt} rows={13} className="mt-3 w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-[11px] font-mono text-slate-700 dark:text-slate-200 resize-none" />
-              </div>
-              <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4">
-                <div className="flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white">
-                  <Code2 className="w-4 h-4 text-emerald-500" />
-                  출력 JSON
-                </div>
-                <textarea readOnly value={JSON.stringify(outputJson, null, 2)} rows={18} className="mt-3 w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-3 py-2 text-[11px] font-mono text-slate-700 dark:text-slate-200 resize-none" />
-              </div>
-            </aside>
           </div>
         )}
 
@@ -1100,7 +1240,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
       {step === 'interview' && (
         <div className="p-4 px-8 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
           <div className="flex items-center gap-3">
-            <input type="text" value={inputText} onChange={(e) => setInputText(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleSendAnswer(inputText)} placeholder="F. 기타 또는 주관식 답변을 한 문장으로 입력" disabled={isComplete} className="flex-1 px-4 py-3 bg-slate-100 dark:bg-slate-800 border border-transparent focus:border-indigo-500 rounded-xl text-xs focus:outline-none text-slate-800 dark:text-slate-100 placeholder:text-slate-400 disabled:opacity-50" />
+            <input type="text" value={inputText} onChange={(e) => setInputText(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleSendAnswer(inputText)} placeholder={interviewPhase === 'deep' ? 'E. 기타를 선택했다면 한 문장으로 직접 입력' : '사전 질문은 보기 중 하나를 선택해주세요'} disabled={isComplete || interviewPhase === 'pre'} className="flex-1 px-4 py-3 bg-slate-100 dark:bg-slate-800 border border-transparent focus:border-indigo-500 rounded-xl text-xs focus:outline-none text-slate-800 dark:text-slate-100 placeholder:text-slate-400 disabled:opacity-50" />
             <button onClick={() => handleSendAnswer(inputText)} disabled={!inputText.trim() || isThinking || isDemoRunning || isComplete} className="p-3 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-300 dark:disabled:bg-slate-800 text-white rounded-xl shadow-md transition-all flex items-center justify-center" aria-label="답변 전송">
               <Send className="w-4 h-4" />
             </button>

@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TabType, Persona, ChatMessage, DecisionRecord, UserSettings } from './types';
 import { 
   initialPersonas, 
@@ -19,13 +19,23 @@ import { DecisionChatView } from './components/DecisionChatView';
 import { InterviewView } from './components/InterviewView';
 import { PersonasView } from './components/PersonasView';
 import { PersonaDetailModal } from './components/PersonaDetailModal';
-import { AIMeetingView } from './components/AIMeetingView';
 import { HistoryView } from './components/HistoryView';
 import { SettingsView } from './components/SettingsView';
 import { NewPersonaModal } from './components/NewPersonaModal';
 
+const activeTabStorageKey = 'decision-active-tab';
+
+const getInitialActiveTab = (): TabType => {
+  if (typeof window === 'undefined') return 'dashboard';
+
+  const savedTab = window.localStorage.getItem(activeTabStorageKey) as TabType | null;
+  const validTabs: TabType[] = ['dashboard', 'decision-chat', 'interview', 'personas', 'persona-detail', 'history', 'settings'];
+
+  return savedTab && validTabs.includes(savedTab) ? savedTab : 'dashboard';
+};
+
 export default function App() {
-  const [activeTab, setActiveTab] = useState<TabType>('dashboard');
+  const [activeTab, setActiveTab] = useState<TabType>(() => getInitialActiveTab());
 
   // Application Global State
   const [personas, setPersonas] = useState<Persona[]>(initialPersonas);
@@ -37,6 +47,61 @@ export default function App() {
   const [detailPersona, setDetailPersona] = useState<Persona | null>(null);
   const [isNewModalOpen, setIsNewModalOpen] = useState(false);
 
+  useEffect(() => {
+    window.localStorage.setItem(activeTabStorageKey, activeTab);
+  }, [activeTab]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadInitialData = async () => {
+      try {
+        const [historyResponse, personasResponse] = await Promise.all([
+          fetch('/api/history-records'),
+          fetch('/api/personas'),
+        ]);
+        const historyResult = await historyResponse.json();
+        const personasResult = await personasResponse.json();
+
+        if (cancelled) return;
+
+        if (historyResponse.ok && historyResult.ok) {
+          setDecisions((current) => {
+            const seenIds = new Set<string>();
+            const merged = [...historyResult.records, ...current].filter((record: DecisionRecord) => {
+              if (seenIds.has(record.id)) return false;
+              seenIds.add(record.id);
+              return true;
+            });
+
+            return merged;
+          });
+        }
+
+        if (personasResponse.ok && personasResult.ok) {
+          setPersonas((current) => {
+            const seenIds = new Set<string>();
+            const merged = [...personasResult.personas, ...current].filter((persona: Persona) => {
+              if (seenIds.has(persona.id)) return false;
+              seenIds.add(persona.id);
+              return true;
+            });
+
+            return merged;
+          });
+        }
+      } catch (error) {
+        console.warn('Failed to load initial database records', error);
+      }
+    };
+
+    void loadInitialData();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   // Handlers
   const handleOpenDetailModal = (persona: Persona) => {
     setDetailPersona(persona);
@@ -46,12 +111,31 @@ export default function App() {
     setDetailPersona(null);
   };
 
-  const handleAddPersona = (newP: Persona) => {
-    setPersonas(prev => [newP, ...prev]);
+  const handleAddPersona = async (newP: Persona) => {
+    const response = await fetch('/api/personas', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newP),
+    });
+    const result = await response.json();
+
+    if (!response.ok || !result.ok) {
+      throw new Error(result.message ?? '페르소나 DB 저장에 실패했습니다.');
+    }
+
+    setPersonas(prev => [result.persona, ...prev.filter((persona) => persona.id !== result.persona.id)]);
   };
 
-  const handleDeletePersona = (id: string) => {
+  const handleDeletePersona = async (id: string) => {
     if (window.confirm('정말 이 AI 페르소나를 이사회 구성에서 삭제하시겠습니까?')) {
+      if (!id.startsWith('p-')) {
+        try {
+          await fetch(`/api/personas/${id}`, { method: 'DELETE' });
+        } catch (error) {
+          console.warn('Failed to delete persona from database', error);
+        }
+      }
+
       setPersonas(prev => prev.filter(p => p.id !== id));
     }
   };
@@ -68,7 +152,7 @@ export default function App() {
       {/* Main Container */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top Header Bar */}
-        <Topbar settings={settings} />
+        <Topbar />
 
         {/* Dynamic Route View Content */}
         <main className="flex-1 overflow-y-auto">
@@ -102,13 +186,6 @@ export default function App() {
               onOpenDetail={handleOpenDetailModal}
               onOpenNewModal={() => setIsNewModalOpen(true)}
               onDeletePersona={handleDeletePersona}
-            />
-          )}
-
-          {activeTab === 'ai-meeting' && (
-            <AIMeetingView
-              personas={personas}
-              onAddDecision={handleAddDecision}
             />
           )}
 

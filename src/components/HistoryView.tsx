@@ -8,7 +8,8 @@ import {
   ShieldAlert, 
   Sparkles,
   MessageSquare,
-  ArrowUpRight
+  ArrowUpRight,
+  Globe2
 } from 'lucide-react';
 
 interface HistoryViewProps {
@@ -115,6 +116,90 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ decisions }) => {
                   💡 권고안: {selectedRecord.recommendation}
                 </p>
               </div>
+
+              {selectedRecord.publicData && (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between gap-3">
+                    <h4 className="text-xs font-bold uppercase text-slate-400 tracking-wider flex items-center gap-2">
+                      <Globe2 className="w-4 h-4 text-indigo-500" />
+                      SNS 공개 데이터 탐색 결과
+                    </h4>
+                    <span className="text-[11px] font-bold text-slate-400">
+                      계정 후보 {selectedRecord.publicData.accounts.length}개
+                    </span>
+                  </div>
+
+                  {selectedRecord.publicData.accounts.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {selectedRecord.publicData.accounts.map((account, idx) => (
+                        <a
+                          key={`${account.platform}-${account.url}-${idx}`}
+                          href={account.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 hover:border-indigo-400 dark:hover:border-indigo-600 transition-colors group"
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <div>
+                              <p className="text-sm font-black text-slate-900 dark:text-white">
+                                {account.platform}
+                              </p>
+                              <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1">
+                                {account.handle}
+                              </p>
+                            </div>
+                            <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-indigo-500 shrink-0" />
+                          </div>
+                          <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-3 break-all">
+                            {account.url}
+                          </p>
+                          <div className="mt-3 h-1.5 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                            <div
+                              className="h-full rounded-full bg-indigo-500"
+                              style={{ width: `${Math.round(account.confidence * 100)}%` }}
+                            />
+                          </div>
+                          <p className="text-[10px] font-bold text-slate-400 mt-1">
+                            Sherlock confidence {Math.round(account.confidence * 100)}%
+                          </p>
+                        </a>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">
+                      저장된 SNS 계정 후보가 없습니다.
+                    </div>
+                  )}
+
+                  {selectedRecord.publicData.signals.length > 0 && (
+                    <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800">
+                      <p className="text-xs font-bold text-slate-900 dark:text-white mb-3">정제된 분석 신호</p>
+                      <div className="space-y-2">
+                        {selectedRecord.publicData.signals.map((signal, idx) => (
+                          <p key={`${signal}-${idx}`} className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                            {signal}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {selectedRecord.publicData.posts.length > 0 && (
+                    <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800">
+                      <p className="text-xs font-bold text-slate-900 dark:text-white mb-3">수집 문서 / 크롤링 예정 항목</p>
+                      <div className="space-y-3">
+                        {selectedRecord.publicData.posts.map((post, idx) => (
+                          <div key={`${post.platform}-${idx}`} className="text-xs">
+                            <span className="font-black text-indigo-600 dark:text-indigo-400">{post.platform}</span>
+                            <p className="text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">{post.text}</p>
+                            <p className="text-[10px] text-slate-400 mt-1">{post.inferredSignal}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
 
               <div className="space-y-4">
                 <h4 className="text-xs font-bold uppercase text-slate-400 tracking-wider">임원진 발언 타임라인 기록</h4>

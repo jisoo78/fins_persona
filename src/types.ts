@@ -1,4 +1,4 @@
-export type TabType = 'dashboard' | 'decision-chat' | 'interview' | 'personas' | 'persona-detail' | 'ai-meeting' | 'history' | 'settings';
+export type TabType = 'dashboard' | 'decision-chat' | 'interview' | 'personas' | 'persona-detail' | 'history' | 'settings';
 
 export type RoleType = '전략' | '재무' | '인사' | '운영' | '레드팀' | '커스텀' | '기술 혁신';
 
@@ -47,16 +47,6 @@ export interface ChatMessage {
   selectedOption?: string;
 }
 
-export interface MeetingOpinion {
-  personaId: string;
-  personaName: string;
-  role: RoleType;
-  avatarColor: string;
-  stance: '찬성' | '신중' | '반대' | '대안 제시';
-  summary: string;
-  detailedPoints: string[];
-}
-
 export interface DecisionRecord {
   id: string;
   date: string;
@@ -74,6 +64,29 @@ export interface DecisionRecord {
   finalConclusion: string;
   recommendation: string;
   impactScore: 'High' | 'Medium' | 'Critical';
+  preInterviewAnswers?: {
+    pre_question_id: number;
+    pre_question: string;
+    option_id: number;
+    option_text: string;
+    custom_text?: string;
+  }[];
+  preInterviewContext?: Record<string, Record<string, { question: string; answer: string }>> | null;
+  publicData?: {
+    status: 'idle' | 'collected';
+    accounts: {
+      platform: string;
+      handle: string;
+      url: string;
+      confidence: number;
+    }[];
+    signals: string[];
+    posts: {
+      platform: string;
+      text: string;
+      inferredSignal: string;
+    }[];
+  };
 }
 
 export interface UserSettings {

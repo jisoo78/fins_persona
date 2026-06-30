@@ -4,7 +4,6 @@ import {
   LayoutDashboard, 
   MessageSquareText, 
   Users, 
-  Sparkles, 
   History, 
   Settings,
   BrainCircuit,
@@ -17,12 +16,11 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
-  const navItems: { id: TabType; label: string; icon: React.ReactNode; isPro?: boolean }[] = [
+  const navItems: { id: TabType; label: string; icon: React.ReactNode }[] = [
     { id: 'dashboard', label: '대시보드', icon: <LayoutDashboard className="w-4 h-4" /> },
     { id: 'decision-chat', label: '의사결정 대화', icon: <MessageSquareText className="w-4 h-4" /> },
     { id: 'interview', label: '인터뷰', icon: <MessageSquareText className="w-4 h-4" /> },
     { id: 'personas', label: '페르소나', icon: <Users className="w-4 h-4" /> },
-    { id: 'ai-meeting', label: 'AI 회의', icon: <Sparkles className="w-4 h-4 text-amber-500" />, isPro: true },
     { id: 'history', label: '히스토리', icon: <History className="w-4 h-4" /> },
     { id: 'settings', label: '설정', icon: <Settings className="w-4 h-4" /> },
   ];
@@ -65,15 +63,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => 
                     </span>
                     <span>{item.label}</span>
                   </div>
-
-                  <div className="flex items-center gap-1.5">
-                    {item.isPro && (
-                      <span className="px-1.5 py-0.5 text-[10px] font-bold rounded bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-400 border border-amber-500/30 uppercase tracking-tighter">
-                        Pro
-                      </span>
-                    )}
-                    {isActive && <ChevronRight className="w-3.5 h-3.5 text-indigo-400" />}
-                  </div>
+                  {isActive && <ChevronRight className="w-3.5 h-3.5 text-indigo-400" />}
                 </button>
               );
             })}
@@ -88,7 +78,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => 
           <span className="font-semibold text-slate-200">AI 사고 엔진 연동됨</span>
         </div>
         <p className="text-slate-400 text-[11px] leading-relaxed">
-          실시간 경영진 맞춤 추론 중. 다음 가상 이사회 준비 완료.
+          실시간 경영진 맞춤 추론 중. 인터뷰와 페르소나 생성 준비 완료.
         </p>
       </div>
     </aside>
