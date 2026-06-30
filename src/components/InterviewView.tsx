@@ -62,6 +62,13 @@ interface FinalInterviewOutput {
   needsConfirmation: string[];
 }
 
+interface SavedIntakeIds {
+  userId: string;
+  userProfileId: string;
+  collectionJobId: string;
+  interviewSessionId: string | null;
+}
+
 const defaultProfile: UserProfile = {
   name: '',
   title: 'CFO / 재무 리더',
@@ -390,6 +397,9 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
   const [currentQIndex, setCurrentQIndex] = useState(0);
   const [isThinking, setIsThinking] = useState(false);
   const [isCollecting, setIsCollecting] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'failed'>('idle');
+  const [saveError, setSaveError] = useState('');
+  const [savedIntakeIds, setSavedIntakeIds] = useState<SavedIntakeIds | null>(null);
   const [isComplete, setIsComplete] = useState(false);
   const [finalOutput, setFinalOutput] = useState<FinalInterviewOutput | null>(null);
   const [draftName, setDraftName] = useState('재무 의사결정 AI 참모');
@@ -448,6 +458,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
     questions: activeQuestions,
     answers: userAnswers,
     finalOutput,
+    savedIntakeIds,
     advisorPromptPreview: decisionPrompt,
     crawlerContract,
   };
@@ -456,12 +467,46 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
     setProfile((current) => ({ ...current, [field]: value }));
   };
 
-  const startDataCollection = () => {
+  const saveProfileIntake = async (
+    snapshot: PublicDataSnapshot,
+    questions: InterviewQuestion[],
+    systemPrompt: string,
+  ) => {
+    setSaveStatus('saving');
+    setSaveError('');
+
+    const response = await fetch('/api/profile-intake', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        profile,
+        publicData: snapshot,
+        questionCount: questions.length,
+        brainstormerSystemPrompt: systemPrompt,
+      }),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.ok) {
+      throw new Error(result.message ?? 'DB 저장에 실패했습니다.');
+    }
+
+    setSavedIntakeIds(result.ids);
+    setSaveStatus('saved');
+  };
+
+  const startDataCollection = async () => {
     setIsCollecting(true);
-    window.setTimeout(() => {
+    setSaveStatus('idle');
+    setSaveError('');
+
+    try {
       const snapshot = buildPublicDataSnapshot(profile);
       const questions = createFinanceQuestions(questionCount);
       const prompt = createBrainstormerPrompt(profile, questions.length, snapshot);
+
+      await saveProfileIntake(snapshot, questions, prompt);
 
       setPublicData(snapshot);
       setActiveQuestions(questions);
@@ -470,8 +515,12 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
       setIsComplete(false);
       setFinalOutput(null);
       setStep('interview');
+    } catch (error) {
+      setSaveStatus('failed');
+      setSaveError(error instanceof Error ? error.message : 'DB 저장 중 알 수 없는 오류가 발생했습니다.');
+    } finally {
       setIsCollecting(false);
-    }, 650);
+    }
   };
 
   const resetAll = () => {
@@ -481,6 +530,9 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
     setActiveQuestions(createFinanceQuestions(12));
     setPublicData({ status: 'idle', accounts: [], signals: [], posts: [] });
     setMessages([]);
+    setSaveStatus('idle');
+    setSaveError('');
+    setSavedIntakeIds(null);
     setCurrentQIndex(0);
     setIsThinking(false);
     setIsCollecting(false);
@@ -607,6 +659,9 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
     setIsDemoRunning(true);
     setProfile(demoProfile);
     setPublicData(demoSnapshot);
+    setSaveStatus('idle');
+    setSaveError('');
+    setSavedIntakeIds(null);
     setActiveQuestions(demoQuestions);
     setMessages(buildInitialMessages(demoQuestions, prompt));
     setCurrentQIndex(0);
@@ -801,9 +856,21 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
                 disabled={isCollecting}
                 className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-300 text-white text-xs font-bold shadow-lg shadow-indigo-500/20 transition-all"
               >
-                {isCollecting ? <RefreshCw className="w-4 h-4 animate-spin" /> : <SearchCheck className="w-4 h-4" />}
-                공개 데이터 수집 후 인터뷰 시작
+                {isCollecting || saveStatus === 'saving' ? <RefreshCw className="w-4 h-4 animate-spin" /> : <SearchCheck className="w-4 h-4" />}
+                DB 저장 + 공개 데이터 수집 후 인터뷰 시작
               </button>
+
+              {saveStatus === 'saved' && savedIntakeIds && (
+                <div className="rounded-2xl border border-emerald-200 dark:border-emerald-900 bg-emerald-50 dark:bg-emerald-950/30 p-3 text-xs text-emerald-700 dark:text-emerald-300">
+                  사용자 정보가 DB에 저장되었습니다. profile_id: {savedIntakeIds.userProfileId}
+                </div>
+              )}
+
+              {saveStatus === 'failed' && (
+                <div className="rounded-2xl border border-rose-200 dark:border-rose-900 bg-rose-50 dark:bg-rose-950/30 p-3 text-xs text-rose-700 dark:text-rose-300">
+                  DB 저장 실패: {saveError}
+                </div>
+              )}
             </section>
 
             <aside className="space-y-4">
