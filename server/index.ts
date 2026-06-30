@@ -39,6 +39,20 @@ interface ProfileIntakeRequest {
   brainstormerSystemPrompt: string;
 }
 
+interface HistoryRecordRequest {
+  userProfileId: string;
+  record: {
+    id: string;
+    date: string;
+    question: string;
+    category: string;
+    finalConclusion: string;
+    recommendation: string;
+    impactScore: string;
+    [key: string]: unknown;
+  };
+}
+
 const app = express();
 const port = Number(process.env.API_PORT ?? 4000);
 
@@ -307,6 +321,59 @@ app.post('/api/profile-intake', async (req, res) => {
     });
   } finally {
     connection.release();
+  }
+});
+
+app.post('/api/history-records', async (req, res) => {
+  const { userProfileId, record } = req.body as HistoryRecordRequest;
+
+  if (!userProfileId || !record?.question) {
+    res.status(400).json({ ok: false, message: 'userProfileId and record.question are required' });
+    return;
+  }
+
+  try {
+    await db.execute(
+      `
+        INSERT INTO past_decision_records (
+          user_profile_id,
+          title,
+          category,
+          decision_date,
+          final_conclusion,
+          recommendation,
+          impact_score,
+          raw_record
+        )
+        VALUES (
+          :userProfileId,
+          :title,
+          :category,
+          :decisionDate,
+          :finalConclusion,
+          :recommendation,
+          :impactScore,
+          CAST(:rawRecord AS JSON)
+        )
+      `,
+      {
+        userProfileId,
+        title: record.question,
+        category: record.category ?? null,
+        decisionDate: record.date?.replace(/\./g, '-') || null,
+        finalConclusion: record.finalConclusion ?? null,
+        recommendation: record.recommendation ?? null,
+        impactScore: record.impactScore ?? null,
+        rawRecord: toJson(record),
+      },
+    );
+
+    res.json({ ok: true });
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      message: error instanceof Error ? error.message : 'Unknown history record error',
+    });
   }
 });
 

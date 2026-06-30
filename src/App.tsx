@@ -91,6 +91,7 @@ export default function App() {
               setMessages={setChatMessages}
               decisions={decisions}
               onCreatePersona={handleAddPersona}
+              onAddHistoryRecord={handleAddDecision}
               onGoToPersonas={() => setActiveTab('personas')}
             />
           )}

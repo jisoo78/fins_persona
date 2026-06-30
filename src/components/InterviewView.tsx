@@ -378,6 +378,7 @@ interface InterviewViewProps {
   setMessages: React.Dispatch<React.SetStateAction<ChatMessage[]>>;
   decisions: DecisionRecord[];
   onCreatePersona: (persona: Persona) => void;
+  onAddHistoryRecord: (record: DecisionRecord) => void;
   onGoToPersonas: () => void;
 }
 
@@ -386,6 +387,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
   setMessages,
   decisions,
   onCreatePersona,
+  onAddHistoryRecord,
   onGoToPersonas,
 }) => {
   const [step, setStep] = useState<FlowStep>('profile');
@@ -548,8 +550,55 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
     setAlgorithmTree(defaultAlgorithmTree);
   };
 
+  const createInterviewHistoryRecord = (answers: string[], result: FinalInterviewOutput): DecisionRecord => {
+    const today = new Date().toLocaleDateString('ko-KR').replace(/\.\s*/g, '.').replace(/\.$/, '');
+    const timeline = answers.map((answer, index) => {
+      const question = activeQuestions[index];
+
+      return {
+        time: `${String(index + 1).padStart(2, '0')}:00`,
+        speaker: profile.name || '사용자',
+        role: profile.title || '재무 리더',
+        content: `${question?.category ?? '인터뷰'} · ${question?.question ?? '질문'}\n답변: ${answer}`,
+      };
+    });
+
+    return {
+      id: `interview-${Date.now()}`,
+      date: today,
+      question: `${profile.name || '사용자'} 재무 의사결정 체계 인터뷰`,
+      category: '인터뷰 / 재무 의사결정',
+      participants: ['브레인스토머', profile.name || '사용자'],
+      timeline,
+      agreementPoints: result.coreInstructions,
+      disagreements: result.needsConfirmation.length ? result.needsConfirmation : ['추가 확인 필요 항목 없음'],
+      finalConclusion: result.oneSentenceSystem,
+      recommendation: result.coreInstructions.slice(0, 3).join(' / '),
+      impactScore: result.needsConfirmation.length > 2 ? 'Medium' : 'High',
+    };
+  };
+
+  const saveInterviewHistoryRecord = async (record: DecisionRecord) => {
+    if (!savedIntakeIds?.userProfileId) return;
+
+    try {
+      await fetch('/api/history-records', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userProfileId: savedIntakeIds.userProfileId,
+          record,
+        }),
+      });
+    } catch (error) {
+      console.error('Failed to save interview history record', error);
+    }
+  };
+
   const completeInterview = (answers: string[], snapshot = publicData) => {
     const result = createFinalOutput(profile, answers, snapshot);
+    const historyRecord = createInterviewHistoryRecord(answers, result);
+
     setFinalOutput(result);
     setDraftName(`${profile.name || '사용자'}의 재무 의사결정 참모`);
     setDraftRole('재무');
@@ -558,6 +607,8 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
     setDraftDescription(
       `프로필, 공개 데이터 신호 ${snapshot.signals.length}개, 재무 인터뷰 답변 ${answers.length}개를 바탕으로 생성한 1차 초안입니다.`,
     );
+    onAddHistoryRecord(historyRecord);
+    void saveInterviewHistoryRecord(historyRecord);
     setIsComplete(true);
   };
 
