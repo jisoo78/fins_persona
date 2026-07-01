@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { TabType, Persona, ChatMessage, DecisionRecord, UserSettings } from './types';
 import { 
   initialPersonas, 
@@ -15,7 +15,6 @@ import {
 import { Sidebar } from './components/Sidebar';
 import { Topbar } from './components/Topbar';
 import { DashboardView } from './components/DashboardView';
-import { DecisionChatView } from './components/DecisionChatView';
 import { InterviewView } from './components/InterviewView';
 import { PersonasView } from './components/PersonasView';
 import { PersonaDetailModal } from './components/PersonaDetailModal';
@@ -29,7 +28,7 @@ const getInitialActiveTab = (): TabType => {
   if (typeof window === 'undefined') return 'dashboard';
 
   const savedTab = window.localStorage.getItem(activeTabStorageKey) as TabType | null;
-  const validTabs: TabType[] = ['dashboard', 'decision-chat', 'interview', 'personas', 'persona-detail', 'history', 'settings'];
+  const validTabs: TabType[] = ['dashboard', 'interview', 'personas', 'persona-detail', 'history', 'settings'];
 
   return savedTab && validTabs.includes(savedTab) ? savedTab : 'dashboard';
 };
@@ -42,6 +41,7 @@ export default function App() {
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>(initialChatMessages);
   const [decisions, setDecisions] = useState<DecisionRecord[]>(initialDecisions);
   const [settings, setSettings] = useState<UserSettings>(initialSettings);
+  const [selectedDecisionId, setSelectedDecisionId] = useState<string | null>(null);
 
   // Modal States
   const [detailPersona, setDetailPersona] = useState<Persona | null>(null);
@@ -51,48 +51,51 @@ export default function App() {
     window.localStorage.setItem(activeTabStorageKey, activeTab);
   }, [activeTab]);
 
+  const loadDatabaseData = useCallback(async () => {
+    try {
+      const [historyResponse, personasResponse] = await Promise.all([
+        fetch('/api/history-records'),
+        fetch('/api/personas'),
+      ]);
+      const historyResult = await historyResponse.json();
+      const personasResult = await personasResponse.json();
+
+      if (historyResponse.ok && historyResult.ok) {
+        setDecisions((current) => {
+          const seenIds = new Set<string>();
+          const merged = [...historyResult.records, ...current].filter((record: DecisionRecord) => {
+            if (seenIds.has(record.id)) return false;
+            seenIds.add(record.id);
+            return true;
+          });
+
+          return merged;
+        });
+      }
+
+      if (personasResponse.ok && personasResult.ok) {
+        setPersonas((current) => {
+          const seenIds = new Set<string>();
+          const merged = [...personasResult.personas, ...current].filter((persona: Persona) => {
+            if (seenIds.has(persona.id)) return false;
+            seenIds.add(persona.id);
+            return true;
+          });
+
+          return merged;
+        });
+      }
+    } catch (error) {
+      console.warn('Failed to load database records', error);
+    }
+  }, []);
+
   useEffect(() => {
     let cancelled = false;
 
     const loadInitialData = async () => {
-      try {
-        const [historyResponse, personasResponse] = await Promise.all([
-          fetch('/api/history-records'),
-          fetch('/api/personas'),
-        ]);
-        const historyResult = await historyResponse.json();
-        const personasResult = await personasResponse.json();
-
-        if (cancelled) return;
-
-        if (historyResponse.ok && historyResult.ok) {
-          setDecisions((current) => {
-            const seenIds = new Set<string>();
-            const merged = [...historyResult.records, ...current].filter((record: DecisionRecord) => {
-              if (seenIds.has(record.id)) return false;
-              seenIds.add(record.id);
-              return true;
-            });
-
-            return merged;
-          });
-        }
-
-        if (personasResponse.ok && personasResult.ok) {
-          setPersonas((current) => {
-            const seenIds = new Set<string>();
-            const merged = [...personasResult.personas, ...current].filter((persona: Persona) => {
-              if (seenIds.has(persona.id)) return false;
-              seenIds.add(persona.id);
-              return true;
-            });
-
-            return merged;
-          });
-        }
-      } catch (error) {
-        console.warn('Failed to load initial database records', error);
-      }
+      if (cancelled) return;
+      await loadDatabaseData();
     };
 
     void loadInitialData();
@@ -100,7 +103,7 @@ export default function App() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [loadDatabaseData]);
 
   // Handlers
   const handleOpenDetailModal = (persona: Persona) => {
@@ -144,6 +147,12 @@ export default function App() {
     setDecisions(prev => [newDec, ...prev]);
   };
 
+  const handleOpenDecisionRecord = (decisionId: string) => {
+    setSelectedDecisionId(decisionId);
+    setActiveTab('history');
+    void loadDatabaseData();
+  };
+
   return (
     <div id="app-root" className="flex min-h-screen bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans antialiased selection:bg-indigo-500 selection:text-white">
       {/* Sidebar Navigation */}
@@ -162,11 +171,8 @@ export default function App() {
               decisions={decisions}
               setActiveTab={setActiveTab}
               onOpenNewPersonaModal={() => setIsNewModalOpen(true)}
+              onOpenDecisionRecord={handleOpenDecisionRecord}
             />
-          )}
-
-          {activeTab === 'decision-chat' && (
-            <DecisionChatView personas={personas} />
           )}
 
           {activeTab === 'interview' && (
@@ -190,7 +196,11 @@ export default function App() {
           )}
 
           {activeTab === 'history' && (
-            <HistoryView decisions={decisions} />
+            <HistoryView
+              decisions={decisions}
+              selectedDecisionId={selectedDecisionId}
+              onClearSelectedDecision={() => setSelectedDecisionId(null)}
+            />
           )}
 
           {activeTab === 'settings' && (

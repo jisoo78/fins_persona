@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DecisionRecord } from '../types';
 import { 
   History, 
@@ -14,10 +14,26 @@ import {
 
 interface HistoryViewProps {
   decisions: DecisionRecord[];
+  selectedDecisionId?: string | null;
+  onClearSelectedDecision?: () => void;
 }
 
-export const HistoryView: React.FC<HistoryViewProps> = ({ decisions }) => {
+export const HistoryView: React.FC<HistoryViewProps> = ({
+  decisions,
+  selectedDecisionId,
+  onClearSelectedDecision,
+}) => {
   const [selectedRecord, setSelectedRecord] = useState<DecisionRecord | null>(null);
+
+  useEffect(() => {
+    if (!selectedDecisionId) return;
+
+    const record = decisions.find((decision) => decision.id === selectedDecisionId);
+    if (!record) return;
+
+    setSelectedRecord(record);
+    onClearSelectedDecision?.();
+  }, [decisions, selectedDecisionId, onClearSelectedDecision]);
 
   return (
     <div className="p-8 max-w-7xl mx-auto space-y-8 animate-fade-in">

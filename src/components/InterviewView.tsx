@@ -19,7 +19,7 @@ import {
 } from 'lucide-react';
 
 type FlowStep = 'profile' | 'interview';
-type InterviewPhase = 'pre' | 'deep';
+type InterviewPhase = 'pre' | 'communication' | 'deep';
 
 interface UserProfile {
   name: string;
@@ -65,15 +65,46 @@ interface FinalInterviewOutput {
   oneSentenceSystem: string;
   coreInstructions: string[];
   needsConfirmation: string[];
+  personaPromptMarkdown?: string;
 }
 
 interface PreInterviewAnswer {
+  source_question_id: number;
   category: string;
+  decision_dimension: string;
+  stage: string;
   question: string;
+  selected_option_id: number;
+  answer: string;
+  rationale: string;
+  response_time_ms: number;
+  response_signal: 'strong_preference' | 'considered_preference' | 'slow_response';
+}
+
+interface CommunicationStyleAnswer {
+  bridge_question_id: 'communication_style';
+  selected_option_id: number;
   answer: string;
 }
 
-type PreInterviewContext = Record<string, Record<string, { question: string; answer: string }>>;
+interface PreInterviewContext {
+  meta: {
+    schema_version: 'pre_interview_context.v2';
+    target_role: 'CFO';
+    completed_at: string;
+  };
+  communication_style: CommunicationStyleAnswer;
+  categories: Record<string, Record<string, {
+    stage: string;
+    source_question_id: number;
+    question: string;
+    selected_option_id: number;
+    answer: string;
+    rationale: string;
+    response_time_ms: number;
+    response_signal: PreInterviewAnswer['response_signal'];
+  }>>;
+}
 
 interface SavedIntakeIds {
   userId: string;
@@ -101,6 +132,9 @@ interface PreQuestionOption {
 
 interface PreQuestion {
   pre_question_id: number;
+  category: string;
+  decision_dimension: string;
+  stage: string;
   pre_question: string;
   pre_options: PreQuestionOption[];
 }
@@ -170,23 +204,48 @@ const financeDemoAnswers = [
   'C. M&A는 현금흐름 훼손 가능성이 있으면 중단한다.',
 ];
 
+const communicationStyleQuestion: InterviewQuestion = {
+  id: 4101,
+  type: '객관식',
+  category: 'Communication Style',
+  question: '심층 인터뷰 결과를 정리할 때 어떤 형식을 가장 선호합니까?',
+  options: [
+    '1. 핵심 결론을 먼저 요약하고 세부 근거를 뒤에 제시한다.',
+    '2. 수치 기준, 임계값, 조건문 중심으로 정리한다.',
+    '3. 기준·낙관·비관 시나리오를 비교해 제시한다.',
+    '4. 리스크, 예외 조건, 중단 기준을 먼저 제시한다.',
+    '5. 실행 체크리스트와 다음 액션 중심으로 정리한다.',
+  ],
+};
+
 const formatTime = () => new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
-
-const extractCategoryName = (question: string) => question.match(/^\[([^\]]+)\]/)?.[1] ?? '기타';
-
-const stripCategoryLabel = (question: string) => question.replace(/^\[[^\]]+\]\s*/, '');
 
 const createPreInterviewQuestions = (): InterviewQuestion[] =>
   preInterviewData.pre_questions.map((question) => ({
     id: question.pre_question_id,
     type: '객관식',
-    category: extractCategoryName(question.pre_question),
-    question: stripCategoryLabel(question.pre_question),
+    category: question.category,
+    subtitle: question.stage,
+    question: question.pre_question,
     options: question.pre_options.map((option) => `${option.option_id}. ${option.option_text}`),
   }));
 
-const createPreInterviewContext = (answers: PreInterviewAnswer[]): PreInterviewContext =>
-  answers.reduce<PreInterviewContext>((context, answer) => {
+const getResponseSignal = (responseTimeMs: number): PreInterviewAnswer['response_signal'] => {
+  if (responseTimeMs < 3000) return 'strong_preference';
+  if (responseTimeMs <= 10000) return 'considered_preference';
+  return 'slow_response';
+};
+
+const parseOptionId = (answerText: string) => Number(answerText.match(/^\s*(\d+)\./)?.[1] ?? 0);
+
+const isComposingKorean = (event: React.KeyboardEvent<HTMLInputElement>) =>
+  event.nativeEvent.isComposing || event.keyCode === 229;
+
+const createPreInterviewContext = (
+  answers: PreInterviewAnswer[],
+  communicationStyle: CommunicationStyleAnswer,
+): PreInterviewContext => {
+  const categories = answers.reduce<PreInterviewContext['categories']>((context, answer) => {
     const categoryAnswers = context[answer.category] ?? {};
     const nextIndex = Object.keys(categoryAnswers).length + 1;
 
@@ -195,15 +254,32 @@ const createPreInterviewContext = (answers: PreInterviewAnswer[]): PreInterviewC
       [answer.category]: {
         ...categoryAnswers,
         [`question_${nextIndex}`]: {
+          stage: answer.stage,
+          source_question_id: answer.source_question_id,
           question: answer.question,
+          selected_option_id: answer.selected_option_id,
           answer: answer.answer,
+          rationale: answer.rationale,
+          response_time_ms: answer.response_time_ms,
+          response_signal: answer.response_signal,
         },
       },
     };
   }, {});
 
+  return {
+    meta: {
+      schema_version: 'pre_interview_context.v2',
+      target_role: 'CFO',
+      completed_at: new Date().toISOString(),
+    },
+    communication_style: communicationStyle,
+    categories,
+  };
+};
+
 const createDeepInterviewQuestions = (context: PreInterviewContext): InterviewQuestion[] =>
-  Object.entries(context).flatMap(([categoryName, answers], categoryIndex) => {
+  Object.entries(context.categories).flatMap(([categoryName, answers], categoryIndex) => {
     const answerEntries = Object.values(answers);
     const first = answerEntries[0];
     const second = answerEntries[1] ?? answerEntries[0];
@@ -347,6 +423,19 @@ const createFinalOutput = (profile: UserProfile, answers: string[], publicData: 
   const roiFirst = /roi|irr|수익|이익/i.test(joined);
   const otherAnswers = answers.filter((answer) => answer.includes('E. 기타'));
 
+  const oneSentenceSystem = cashFirst
+    ? '이 재무 의사결정 체계는 성장 기회를 보되 현금흐름과 회복 가능성을 먼저 잠그는 보수적 실행 시스템이다.'
+    : '이 재무 의사결정 체계는 아직 핵심 우선순위 확인이 더 필요한 초기 초안이다.';
+  const coreInstructions = [
+    '모든 재무 제안은 현금흐름 영향과 런웨이 변화를 먼저 제시한다.',
+    '투자 안건은 ROI/IRR, 회수 기간, 실패 시 손실 한도를 함께 보고한다.',
+    '부채·환율·금리·M&A 리스크는 레드라인 초과 여부를 먼저 판정한다.',
+    '성장 투자와 비용 절감이 충돌할 때는 고정비 구조와 회복 가능성을 비교한다.',
+    '확인되지 않은 공개 SNS 신호는 사실처럼 단정하지 말고 추정 신호로 분리한다.',
+    '기타 답변이나 모순된 답변은 최종 결론 전에 확인 필요로 표시한다.',
+    '보고는 결론, 근거 숫자, 리스크, 다음 액션 순서로 짧게 작성한다.',
+  ].slice(0, otherAnswers.length > 2 ? 7 : 6);
+
   return {
     fiveLayerSummary: {
       role: `${profile.title || '재무 리더'}로서 자본·현금흐름·투자·리스크의 균형을 책임지는 의사결정자`,
@@ -355,18 +444,8 @@ const createFinalOutput = (profile: UserProfile, answers: string[], publicData: 
       priorities: roiFirst ? 'ROI/IRR 등 정량 기준과 투자 회수 가능성을 우선 검토' : '확인 필요',
       communicationFormat: '숫자, 레드라인, 다음 액션이 함께 보이는 간결한 보고 형식을 선호하는 것으로 추정',
     },
-    oneSentenceSystem: cashFirst
-      ? '이 재무 의사결정 체계는 성장 기회를 보되 현금흐름과 회복 가능성을 먼저 잠그는 보수적 실행 시스템이다.'
-      : '이 재무 의사결정 체계는 아직 핵심 우선순위 확인이 더 필요한 초기 초안이다.',
-    coreInstructions: [
-      '모든 재무 제안은 현금흐름 영향과 런웨이 변화를 먼저 제시한다.',
-      '투자 안건은 ROI/IRR, 회수 기간, 실패 시 손실 한도를 함께 보고한다.',
-      '부채·환율·금리·M&A 리스크는 레드라인 초과 여부를 먼저 판정한다.',
-      '성장 투자와 비용 절감이 충돌할 때는 고정비 구조와 회복 가능성을 비교한다.',
-      '확인되지 않은 공개 SNS 신호는 사실처럼 단정하지 말고 추정 신호로 분리한다.',
-      '기타 답변이나 모순된 답변은 최종 결론 전에 확인 필요로 표시한다.',
-      '보고는 결론, 근거 숫자, 리스크, 다음 액션 순서로 짧게 작성한다.',
-    ].slice(0, otherAnswers.length > 2 ? 7 : 6),
+    oneSentenceSystem,
+    coreInstructions,
     needsConfirmation: [
       !profile.name && '사용자 이름',
       !profile.companyName && '회사명',
@@ -374,6 +453,38 @@ const createFinalOutput = (profile: UserProfile, answers: string[], publicData: 
       otherAnswers.length > 0 && `기타 답변 ${otherAnswers.length}개 세부 의미`,
       publicData.status !== 'collected' && '공개 데이터 수집 결과',
     ].filter(Boolean) as string[],
+    personaPromptMarkdown: `# CFO Decision Persona Prompt
+
+## 1. Role
+
+You are a decision-making persona cloned from the user's CFO decision criteria.
+
+## 2. Identity
+
+- ${oneSentenceSystem}
+
+## 3. Decision Principles
+
+| Situation | Rule | Exception | Evidence |
+| --- | --- | --- | --- |
+| 재무 의사결정 검토 | ${coreInstructions[0]} | 확인되지 않은 기준은 "확인 필요"로 표시한다. | 사전 인터뷰 및 심층 인터뷰 응답 |
+
+## 4. Cross-Dimension Rules
+
+${coreInstructions.slice(1, 4).map((instruction) => `- ${instruction}`).join('\n')}
+
+## 5. Red Lines
+
+- ${riskFirst ? '부채, 구조적 손실, 현금흐름 훼손 가능성이 보이면 실행을 보류한다.' : '레드라인은 확인 필요로 표시한다.'}
+
+## 6. Communication Style
+
+- 결론, 근거 숫자, 리스크, 다음 액션 순서로 답한다.
+
+## 7. Evidence
+
+- PreInterviewContext v2와 DeepInterviewResult에서 도출
+- 공개 SNS 신호는 검증 전 추정 신호로 분리`,
   };
 };
 
@@ -383,6 +494,8 @@ const buildDecisionPrompt = (
   answers: string[],
   finalOutput: FinalInterviewOutput | null,
 ) => `You are an AI finance advisor for a C-Level leader.
+
+${finalOutput?.personaPromptMarkdown ? `${finalOutput.personaPromptMarkdown}\n\n---\n` : ''}
 
 User profile:
 ${JSON.stringify(profile, null, 2)}
@@ -426,8 +539,10 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
   const [activeQuestions, setActiveQuestions] = useState<InterviewQuestion[]>(() => createPreInterviewQuestions());
   const [preInterviewAnswers, setPreInterviewAnswers] = useState<PreInterviewAnswer[]>([]);
   const [preInterviewContext, setPreInterviewContext] = useState<PreInterviewContext | null>(null);
+  const [communicationStyle, setCommunicationStyle] = useState<CommunicationStyleAnswer | null>(null);
   const [publicData, setPublicData] = useState<PublicDataSnapshot>({ status: 'idle', accounts: [], signals: [], posts: [] });
   const [inputText, setInputText] = useState('');
+  const [pendingPreAnswer, setPendingPreAnswer] = useState<string | null>(null);
   const [currentQIndex, setCurrentQIndex] = useState(0);
   const [isThinking, setIsThinking] = useState(false);
   const [isCollecting, setIsCollecting] = useState(false);
@@ -447,6 +562,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
   const [algorithmPreviewError, setAlgorithmPreviewError] = useState('');
   const chatEndRef = useRef<HTMLDivElement>(null);
   const algorithmPreviewRef = useRef<HTMLDivElement>(null);
+  const questionStartedAtRef = useRef(Date.now());
 
   const totalQuestions = activeQuestions.length;
   const userAnswers = messages.filter((msg) => msg.sender === 'user').map((msg) => msg.text);
@@ -613,9 +729,11 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
       setInterviewPhase('pre');
       setPreInterviewAnswers([]);
       setPreInterviewContext(null);
+      setCommunicationStyle(null);
       setIsComplete(false);
       setFinalOutput(null);
       setStep('interview');
+      questionStartedAtRef.current = Date.now();
     } catch (error) {
       setSaveStatus('failed');
       setSaveError(error instanceof Error ? error.message : 'DB 저장 중 알 수 없는 오류가 발생했습니다.');
@@ -633,6 +751,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
     setInterviewPhase('pre');
     setPreInterviewAnswers([]);
     setPreInterviewContext(null);
+    setCommunicationStyle(null);
     setPublicData({ status: 'idle', accounts: [], signals: [], posts: [] });
     setMessages([]);
     setSaveStatus('idle');
@@ -644,6 +763,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
     setIsComplete(false);
     setFinalOutput(null);
     setInputText('');
+    setPendingPreAnswer(null);
     setDraftName('재무 의사결정 AI 참모');
     setDraftRole('재무');
     setDraftBadge('CFO Decision Advisor');
@@ -688,7 +808,13 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
     };
   };
 
-  const saveInterviewHistoryRecord = async (record: DecisionRecord, userProfileId = savedIntakeIds?.userProfileId) => {
+  const saveInterviewHistoryRecord = async (
+    record: DecisionRecord,
+    userProfileId = savedIntakeIds?.userProfileId,
+    interviewSessionId = savedIntakeIds?.interviewSessionId,
+    result = finalOutput,
+    deepInterviewAnswers: string[] = [],
+  ) => {
     if (!userProfileId) return;
 
     try {
@@ -697,6 +823,9 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           userProfileId,
+          interviewSessionId,
+          finalOutput: result,
+          deepInterviewAnswers,
           record,
         }),
       });
@@ -723,7 +852,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
       `프로필, 공개 데이터 신호 ${snapshot.signals.length}개, 재무 인터뷰 답변 ${answers.length}개를 바탕으로 생성한 1차 초안입니다.`,
     );
     onAddHistoryRecord(historyRecord);
-    void saveInterviewHistoryRecord(historyRecord, intakeIds?.userProfileId);
+    void saveInterviewHistoryRecord(historyRecord, intakeIds?.userProfileId, intakeIds?.interviewSessionId, result, answers);
     setIsComplete(true);
   };
 
@@ -758,31 +887,72 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
     };
   }, [algorithmTree, isComplete]);
 
+  const transitionToDeepInterview = async (
+    nextPreAnswers: PreInterviewAnswer[],
+    nextCommunicationStyle: CommunicationStyleAnswer,
+  ) => {
+    const context = createPreInterviewContext(nextPreAnswers, nextCommunicationStyle);
+    const deepQuestions = await generateAgentDeepQuestions(context);
+    const prompt = createBrainstormerPrompt(profile, deepQuestions.length, publicData, context);
+
+    setPreInterviewAnswers(nextPreAnswers);
+    setPreInterviewContext(context);
+    setCommunicationStyle(nextCommunicationStyle);
+    setInterviewPhase('deep');
+    setActiveQuestions(deepQuestions);
+    setCurrentQIndex(0);
+    setMessages(buildInitialMessages(deepQuestions, prompt, 'deep'));
+    setPendingPreAnswer(null);
+    setInputText('');
+    questionStartedAtRef.current = Date.now();
+  };
+
   const handleSendAnswer = (answerText: string) => {
     if (!answerText.trim() || isThinking || isDemoRunning || isComplete || step !== 'interview') return;
     const currentQuestion = activeQuestions[currentQIndex];
+    const preAnswerText = interviewPhase === 'pre' ? pendingPreAnswer : null;
+    const responseTimeMs = Date.now() - questionStartedAtRef.current;
+    const displayAnswer = preAnswerText
+      ? `${preAnswerText}\n근거: ${answerText}`
+      : answerText;
 
     const userMsg: ChatMessage = {
       id: `u-${Date.now()}`,
       sender: 'user',
-      text: answerText,
+      text: displayAnswer,
       timestamp: formatTime(),
     };
-    const nextAnswers = [...userAnswers, answerText];
+    const nextAnswers = [...userAnswers, displayAnswer];
 
     setMessages((prev) => [...prev, userMsg]);
     setInputText('');
+    setPendingPreAnswer(null);
     setIsThinking(true);
 
     window.setTimeout(async () => {
       const nextIndex = currentQIndex + 1;
       if (interviewPhase === 'pre') {
+        if (!preAnswerText) {
+          setIsThinking(false);
+          return;
+        }
+
+        const sourceQuestion = preInterviewData.pre_questions.find((question) => question.pre_question_id === currentQuestion?.id);
+        const selectedOptionId = parseOptionId(preAnswerText);
+        const isOtherAnswer = selectedOptionId === 5;
         const nextPreAnswers = [
           ...preInterviewAnswers,
           {
-            category: currentQuestion?.category ?? '기타',
-            question: currentQuestion?.question ?? '질문',
-            answer: answerText,
+            source_question_id: sourceQuestion?.pre_question_id ?? currentQuestion?.id ?? 0,
+            category: sourceQuestion?.category ?? currentQuestion?.category ?? '기타',
+            decision_dimension: sourceQuestion?.decision_dimension ?? 'unknown',
+            stage: sourceQuestion?.stage ?? currentQuestion?.subtitle ?? 'unknown',
+            question: sourceQuestion?.pre_question ?? currentQuestion?.question ?? '질문',
+            selected_option_id: selectedOptionId,
+            answer: isOtherAnswer ? answerText : preAnswerText.replace(/^\s*\d+\.\s*/, ''),
+            rationale: answerText,
+            response_time_ms: responseTimeMs,
+            response_signal: getResponseSignal(responseTimeMs),
           },
         ];
 
@@ -790,6 +960,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
           setPreInterviewAnswers(nextPreAnswers);
           setCurrentQIndex(nextIndex);
           const nextQ = activeQuestions[nextIndex];
+          questionStartedAtRef.current = Date.now();
           setMessages((prev) => [
             ...prev,
             {
@@ -805,16 +976,22 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
           return;
         }
 
-        const context = createPreInterviewContext(nextPreAnswers);
-        const deepQuestions = await generateAgentDeepQuestions(context);
-        const prompt = createBrainstormerPrompt(profile, deepQuestions.length, publicData, context);
-
         setPreInterviewAnswers(nextPreAnswers);
-        setPreInterviewContext(context);
-        setInterviewPhase('deep');
-        setActiveQuestions(deepQuestions);
+        setInterviewPhase('communication');
+        setActiveQuestions([communicationStyleQuestion]);
         setCurrentQIndex(0);
-        setMessages(buildInitialMessages(deepQuestions, prompt, 'deep'));
+        questionStartedAtRef.current = Date.now();
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: `ai-communication-${Date.now()}`,
+            sender: 'ai',
+            text: `사전 질문 40개가 완료되었습니다.\n\n${communicationStyleQuestion.question}`,
+            timestamp: formatTime(),
+            questionType: communicationStyleQuestion.type,
+            options: communicationStyleQuestion.options,
+          },
+        ]);
         setIsThinking(false);
         return;
       }
@@ -822,6 +999,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
       if (nextIndex < totalQuestions) {
         setCurrentQIndex(nextIndex);
         const nextQ = activeQuestions[nextIndex];
+        questionStartedAtRef.current = Date.now();
         setMessages((prev) => [
           ...prev,
           {
@@ -850,7 +1028,32 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
   };
 
   const handleOptionAnswer = (answerText: string) => {
-    if (/^\s*E\.\s*기타/.test(answerText) || answerText.includes('E. 기타')) {
+    if (interviewPhase === 'communication') {
+      const nextCommunicationStyle: CommunicationStyleAnswer = {
+        bridge_question_id: 'communication_style',
+        selected_option_id: parseOptionId(answerText),
+        answer: answerText.replace(/^\s*\d+\.\s*/, ''),
+      };
+
+      const userMsg: ChatMessage = {
+        id: `u-${Date.now()}`,
+        sender: 'user',
+        text: answerText,
+        timestamp: formatTime(),
+      };
+
+      setMessages((prev) => [...prev, userMsg]);
+      setIsThinking(true);
+
+      window.setTimeout(async () => {
+        await transitionToDeepInterview(preInterviewAnswers, nextCommunicationStyle);
+        setIsThinking(false);
+      }, 500);
+      return;
+    }
+
+    if (interviewPhase === 'pre') {
+      setPendingPreAnswer(answerText);
       setInputText('');
       return;
     }
@@ -871,12 +1074,29 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
       financeScope: profile.financeScope || '자본 배치, 투자, 리스크, 자금 운용',
     };
     const preQuestions = createPreInterviewQuestions();
-    const demoPreAnswers: PreInterviewAnswer[] = preQuestions.map((question) => ({
-      category: question.category,
-      question: question.question,
-      answer: question.options?.[0] ?? '1. 확인 필요',
-    }));
-    const demoContext = createPreInterviewContext(demoPreAnswers);
+    const demoPreAnswers: PreInterviewAnswer[] = preQuestions.map((question, index) => {
+      const sourceQuestion = preInterviewData.pre_questions.find((item) => item.pre_question_id === question.id);
+      const selectedOption = question.options?.[index % 4] ?? '1. 확인 필요';
+
+      return {
+        source_question_id: sourceQuestion?.pre_question_id ?? question.id,
+        category: sourceQuestion?.category ?? question.category,
+        decision_dimension: sourceQuestion?.decision_dimension ?? 'unknown',
+        stage: sourceQuestion?.stage ?? question.subtitle ?? 'unknown',
+        question: sourceQuestion?.pre_question ?? question.question,
+        selected_option_id: parseOptionId(selectedOption),
+        answer: selectedOption.replace(/^\s*\d+\.\s*/, ''),
+        rationale: '데모 응답: 해당 선택지가 재무 의사결정 기준을 가장 잘 드러낸다고 가정합니다.',
+        response_time_ms: 2400 + (index % 5) * 1500,
+        response_signal: getResponseSignal(2400 + (index % 5) * 1500),
+      };
+    });
+    const demoCommunicationStyle: CommunicationStyleAnswer = {
+      bridge_question_id: 'communication_style',
+      selected_option_id: 2,
+      answer: '수치 기준, 임계값, 조건문 중심으로 정리한다.',
+    };
+    const demoContext = createPreInterviewContext(demoPreAnswers, demoCommunicationStyle);
     const demoQuestions = await generateAgentDeepQuestions(demoContext);
     const answers = demoQuestions.map((question, index) => question.options?.[index % 4] ?? financeDemoAnswers[index] ?? 'A. 확인 후 결정한다.');
 
@@ -934,6 +1154,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
       setActiveQuestions(demoQuestions);
       setInterviewPhase('deep');
       setPreInterviewAnswers(demoPreAnswers);
+      setCommunicationStyle(demoCommunicationStyle);
       setPreInterviewContext(demoContext);
       setMessages(transcript);
       setCurrentQIndex(demoQuestions.length - 1);
@@ -997,7 +1218,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
         <div>
           <div className="flex flex-wrap items-center gap-2">
             <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800">
-              Step {step === 'profile' ? '1. 데이터 수집' : interviewPhase === 'pre' ? '2. 사전 질문' : '3. 심층 인터뷰'}
+              Step {step === 'profile' ? '1. 데이터 수집' : interviewPhase === 'pre' ? '2. 사전 질문' : interviewPhase === 'communication' ? '3. 보고 형식' : '4. 심층 인터뷰'}
             </span>
             <span className="text-xs font-semibold text-slate-500">
               {step === 'profile' ? '프로필 입력 전' : `문항 ${Math.min(totalQuestions, currentQIndex + 1)} / ${totalQuestions}`}
@@ -1240,7 +1461,26 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
       {step === 'interview' && (
         <div className="p-4 px-8 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
           <div className="flex items-center gap-3">
-            <input type="text" value={inputText} onChange={(e) => setInputText(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleSendAnswer(inputText)} placeholder={interviewPhase === 'deep' ? 'E. 기타를 선택했다면 한 문장으로 직접 입력' : '사전 질문은 보기 중 하나를 선택해주세요'} disabled={isComplete || interviewPhase === 'pre'} className="flex-1 px-4 py-3 bg-slate-100 dark:bg-slate-800 border border-transparent focus:border-indigo-500 rounded-xl text-xs focus:outline-none text-slate-800 dark:text-slate-100 placeholder:text-slate-400 disabled:opacity-50" />
+            <input
+              type="text"
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+              onKeyDown={(e) => {
+                if (isComposingKorean(e)) return;
+                if (e.key === 'Enter') handleSendAnswer(inputText);
+              }}
+              placeholder={
+                interviewPhase === 'pre'
+                  ? pendingPreAnswer
+                    ? '선택한 답변의 판단 근거를 한 문장으로 입력'
+                    : '먼저 보기 하나를 선택해주세요'
+                  : interviewPhase === 'communication'
+                    ? '보고 형식은 보기 중 하나를 선택해주세요'
+                    : 'E. 기타를 선택했다면 한 문장으로 직접 입력'
+              }
+              disabled={isComplete || interviewPhase === 'communication' || (interviewPhase === 'pre' && !pendingPreAnswer)}
+              className="flex-1 px-4 py-3 bg-slate-100 dark:bg-slate-800 border border-transparent focus:border-indigo-500 rounded-xl text-xs focus:outline-none text-slate-800 dark:text-slate-100 placeholder:text-slate-400 disabled:opacity-50"
+            />
             <button onClick={() => handleSendAnswer(inputText)} disabled={!inputText.trim() || isThinking || isDemoRunning || isComplete} className="p-3 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-300 dark:disabled:bg-slate-800 text-white rounded-xl shadow-md transition-all flex items-center justify-center" aria-label="답변 전송">
               <Send className="w-4 h-4" />
             </button>

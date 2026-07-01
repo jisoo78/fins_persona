@@ -8,6 +8,7 @@ import {
   generateAdvisorPrompt,
   generateDeepInterviewQuestions,
   generateFinalOutput,
+  generatePersonaChatReply,
 } from './agentService';
 
 const execFileAsync = promisify(execFile);
@@ -56,6 +57,9 @@ interface ProfileIntakeRequest {
 
 interface HistoryRecordRequest {
   userProfileId: string;
+  interviewSessionId?: string | null;
+  finalOutput?: AgentFinalOutputPayload | null;
+  deepInterviewAnswers?: string[];
   record: {
     id: string;
     date: string;
@@ -66,6 +70,20 @@ interface HistoryRecordRequest {
     impactScore: string;
     [key: string]: unknown;
   };
+}
+
+interface AgentFinalOutputPayload {
+  fiveLayerSummary: {
+    role: string;
+    values: string;
+    redLines: string;
+    priorities: string;
+    communicationFormat: string;
+  };
+  oneSentenceSystem: string;
+  coreInstructions: string[];
+  needsConfirmation: string[];
+  personaPromptMarkdown?: string;
 }
 
 interface HistoryRecordRow extends RowDataPacket {
@@ -179,6 +197,266 @@ Description: ${persona.description || '확인 필요'}
 Core values: ${(persona.coreValues ?? []).join(', ') || '확인 필요'}
 
 Always respond with a clear recommendation, decision criteria, risk, and next action.`;
+
+const buildDeepInterviewResult = (answers: string[], record: HistoryRecordRequest['record']) => {
+  const timeline = Array.isArray(record.timeline) ? record.timeline : [];
+  const entries = answers.map((answer, index) => {
+    const timelineEntry = timeline[index] as { content?: string } | undefined;
+    const content = timelineEntry?.content ?? '';
+    const [questionLine = `심층 인터뷰 질문 ${index + 1}`] = content.split('\n');
+
+    return {
+      question: questionLine.replace(/^.*?·\s*/, '').trim(),
+      answer,
+      derived_rule: 'prototype_unclassified',
+      evidence: {
+        source: 'deep_interview_answer',
+        index: index + 1,
+      },
+    };
+  });
+
+  return {
+    identity: entries.filter((_, index) => index % 2 === 0),
+    cross_dimension: entries.filter((_, index) => index % 2 === 1),
+    status: 'prototype_structured_from_transcript',
+  };
+};
+
+const saveStructuredInterviewArtifacts = async ({
+  interviewSessionId,
+  finalOutput,
+  deepInterviewAnswers,
+  record,
+}: {
+  interviewSessionId: string;
+  finalOutput: AgentFinalOutputPayload;
+  deepInterviewAnswers: string[];
+  record: HistoryRecordRequest['record'];
+}) => {
+  const connection = await db.getConnection();
+
+  try {
+    await connection.beginTransaction();
+
+    await connection.execute(
+      `
+        UPDATE interview_sessions
+        SET status = 'completed',
+            completed_at = COALESCE(completed_at, NOW())
+        WHERE id = :interviewSessionId
+      `,
+      { interviewSessionId },
+    );
+
+    if (record.preInterviewContext) {
+      const context = record.preInterviewContext as {
+        meta?: { schema_version?: string; target_role?: string };
+        communication_style?: unknown;
+      };
+
+      await connection.execute(
+        `
+          INSERT INTO pre_interview_contexts (
+            interview_session_id,
+            schema_version,
+            target_role,
+            communication_style,
+            context_json
+          )
+          VALUES (
+            :interviewSessionId,
+            :schemaVersion,
+            :targetRole,
+            CAST(:communicationStyle AS JSON),
+            CAST(:contextJson AS JSON)
+          )
+          ON DUPLICATE KEY UPDATE
+            schema_version = VALUES(schema_version),
+            target_role = VALUES(target_role),
+            communication_style = VALUES(communication_style),
+            context_json = VALUES(context_json),
+            updated_at = NOW()
+        `,
+        {
+          interviewSessionId,
+          schemaVersion: context.meta?.schema_version ?? 'pre_interview_context.v2',
+          targetRole: context.meta?.target_role ?? 'CFO',
+          communicationStyle: toJson(context.communication_style ?? {}),
+          contextJson: toJson(record.preInterviewContext),
+        },
+      );
+    }
+
+    const deepResult = buildDeepInterviewResult(deepInterviewAnswers, record);
+    await connection.execute(
+      `
+        INSERT INTO deep_interview_results (
+          interview_session_id,
+          question_axes,
+          answers_json,
+          result_json,
+          raw_result
+        )
+        VALUES (
+          :interviewSessionId,
+          CAST(:questionAxes AS JSON),
+          CAST(:answersJson AS JSON),
+          CAST(:resultJson AS JSON),
+          CAST(:rawResult AS JSON)
+        )
+        ON DUPLICATE KEY UPDATE
+          question_axes = VALUES(question_axes),
+          answers_json = VALUES(answers_json),
+          result_json = VALUES(result_json),
+          raw_result = VALUES(raw_result),
+          updated_at = NOW()
+      `,
+      {
+        interviewSessionId,
+        questionAxes: toJson(['identity', 'cross_dimension']),
+        answersJson: toJson(deepInterviewAnswers),
+        resultJson: toJson(deepResult),
+        rawResult: toJson({ answers: deepInterviewAnswers, timeline: record.timeline ?? [] }),
+      },
+    );
+
+    await connection.execute(
+      `
+        INSERT INTO decision_criteria_summaries (
+          interview_session_id,
+          role_summary,
+          value_summary,
+          redline_summary,
+          priority_summary,
+          communication_summary,
+          one_sentence_system,
+          needs_confirmation,
+          raw_summary
+        )
+        VALUES (
+          :interviewSessionId,
+          :roleSummary,
+          :valueSummary,
+          :redlineSummary,
+          :prioritySummary,
+          :communicationSummary,
+          :oneSentenceSystem,
+          CAST(:needsConfirmation AS JSON),
+          CAST(:rawSummary AS JSON)
+        )
+        ON DUPLICATE KEY UPDATE
+          role_summary = VALUES(role_summary),
+          value_summary = VALUES(value_summary),
+          redline_summary = VALUES(redline_summary),
+          priority_summary = VALUES(priority_summary),
+          communication_summary = VALUES(communication_summary),
+          one_sentence_system = VALUES(one_sentence_system),
+          needs_confirmation = VALUES(needs_confirmation),
+          raw_summary = VALUES(raw_summary),
+          updated_at = NOW()
+      `,
+      {
+        interviewSessionId,
+        roleSummary: finalOutput.fiveLayerSummary.role,
+        valueSummary: finalOutput.fiveLayerSummary.values,
+        redlineSummary: finalOutput.fiveLayerSummary.redLines,
+        prioritySummary: finalOutput.fiveLayerSummary.priorities,
+        communicationSummary: finalOutput.fiveLayerSummary.communicationFormat,
+        oneSentenceSystem: finalOutput.oneSentenceSystem,
+        needsConfirmation: toJson(finalOutput.needsConfirmation ?? []),
+        rawSummary: toJson(finalOutput),
+      },
+    );
+
+    const [summaryRows] = await connection.execute<IdRow[]>(
+      `
+        SELECT id
+        FROM decision_criteria_summaries
+        WHERE interview_session_id = :interviewSessionId
+        LIMIT 1
+      `,
+      { interviewSessionId },
+    );
+    const summaryId = summaryRows[0]?.id;
+
+    if (summaryId) {
+      await connection.execute(
+        `
+          DELETE FROM advisor_core_instructions
+          WHERE summary_id = :summaryId
+        `,
+        { summaryId },
+      );
+
+      for (const [index, instruction] of (finalOutput.coreInstructions ?? []).entries()) {
+        await connection.execute(
+          `
+            INSERT INTO advisor_core_instructions (
+              summary_id,
+              instruction_order,
+              instruction_text
+            )
+            VALUES (
+              :summaryId,
+              :instructionOrder,
+              :instructionText
+            )
+          `,
+          {
+            summaryId,
+            instructionOrder: index + 1,
+            instructionText: instruction,
+          },
+        );
+      }
+    }
+
+    if (finalOutput.personaPromptMarkdown?.trim()) {
+      await connection.execute(
+        `
+          INSERT INTO persona_prompts (
+            advisor_persona_id,
+            interview_session_id,
+            role,
+            title,
+            format,
+            markdown_content,
+            raw_wrapper
+          )
+          VALUES (
+            NULL,
+            :interviewSessionId,
+            '재무',
+            'CFO Decision Persona Prompt',
+            'markdown',
+            :markdownContent,
+            CAST(:rawWrapper AS JSON)
+          )
+        `,
+        {
+          interviewSessionId,
+          markdownContent: finalOutput.personaPromptMarkdown,
+          rawWrapper: toJson({
+            title: 'CFO Decision Persona Prompt',
+            format: 'markdown',
+            markdown: finalOutput.personaPromptMarkdown,
+            source: {
+              interview_session_id: interviewSessionId,
+            },
+          }),
+        },
+      );
+    }
+
+    await connection.commit();
+  } catch (error) {
+    await connection.rollback();
+    throw error;
+  } finally {
+    connection.release();
+  }
+};
 
 const personaRowToPayload = (row: PersonaRow): PersonaPayload => ({
   id: row.id,
@@ -567,6 +845,46 @@ app.post('/api/personas', async (req, res) => {
 
     if (!rows[0]) throw new Error('Failed to create persona');
 
+    if (advisorPrompt.trim()) {
+      await db.execute(
+        `
+          INSERT INTO persona_prompts (
+            advisor_persona_id,
+            interview_session_id,
+            role,
+            title,
+            format,
+            markdown_content,
+            raw_wrapper
+          )
+          VALUES (
+            :advisorPersonaId,
+            NULL,
+            :role,
+            :title,
+            'markdown',
+            :markdownContent,
+            CAST(:rawWrapper AS JSON)
+          )
+        `,
+        {
+          advisorPersonaId: rows[0].id,
+          role: persona.role || '재무',
+          title: `${persona.name.trim()} Persona Prompt`,
+          markdownContent: advisorPrompt,
+          rawWrapper: toJson({
+            title: `${persona.name.trim()} Persona Prompt`,
+            format: 'markdown',
+            markdown: advisorPrompt,
+            source: {
+              advisor_persona_id: rows[0].id,
+              origin: 'persona_create_api',
+            },
+          }),
+        },
+      );
+    }
+
     res.status(201).json({
       ok: true,
       persona: personaRowToPayload(rows[0]),
@@ -641,6 +959,124 @@ app.post('/api/agent/final-output', async (req, res) => {
     res.status(500).json({
       ok: false,
       message: error instanceof Error ? error.message : 'Unknown agent final output error',
+    });
+  }
+});
+
+app.post('/api/agent/persona-chat', async (req, res) => {
+  const { persona, message, recentMessages, chatSessionId } = req.body as {
+    persona?: PersonaPayload;
+    message?: string;
+    chatSessionId?: string | null;
+    recentMessages?: {
+      sender: 'ai' | 'user';
+      text: string;
+    }[];
+  };
+
+  if (!persona?.name?.trim() || !message?.trim()) {
+    res.status(400).json({ ok: false, message: 'persona.name and message are required' });
+    return;
+  }
+
+  try {
+    let activeChatSessionId = chatSessionId ?? null;
+
+    if (!activeChatSessionId) {
+      await db.execute(
+        `
+          INSERT INTO persona_chat_sessions (
+            advisor_persona_id,
+            persona_name,
+            status
+          )
+          VALUES (
+            :advisorPersonaId,
+            :personaName,
+            'active'
+          )
+        `,
+        {
+          advisorPersonaId: persona.id && !persona.id.startsWith('p-') ? persona.id : null,
+          personaName: persona.name,
+        },
+      );
+
+      const [sessionRows] = await db.execute<IdRow[]>(
+        `
+          SELECT id
+          FROM persona_chat_sessions
+          WHERE persona_name = :personaName
+          ORDER BY created_at DESC
+          LIMIT 1
+        `,
+        { personaName: persona.name },
+      );
+      activeChatSessionId = sessionRows[0]?.id ?? null;
+    }
+
+    const reply = await generatePersonaChatReply({
+      name: persona.name,
+      role: persona.role,
+      badge: persona.badge,
+      description: persona.description,
+      decisionStyle: persona.decisionStyle,
+      coreValues: persona.coreValues,
+      strengths: persona.strengths,
+      weaknesses: persona.weaknesses,
+      communicationStyle: persona.communicationStyle,
+      decisionPrompt: persona.decisionPrompt,
+      userMessage: message,
+      recentMessages,
+    });
+
+    if (activeChatSessionId) {
+      await db.execute(
+        `
+          INSERT INTO persona_chat_messages (
+            chat_session_id,
+            sender,
+            message_text,
+            raw_message
+          )
+          VALUES
+            (
+              :chatSessionId,
+              'user',
+              :userMessage,
+              CAST(:rawUserMessage AS JSON)
+            ),
+            (
+              :chatSessionId,
+              'ai',
+              :replyMessage,
+              CAST(:rawReplyMessage AS JSON)
+            )
+        `,
+        {
+          chatSessionId: activeChatSessionId,
+          userMessage: message,
+          rawUserMessage: toJson({ sender: 'user', text: message }),
+          replyMessage: reply,
+          rawReplyMessage: toJson({ sender: 'ai', text: reply, personaId: persona.id ?? null }),
+        },
+      );
+
+      await db.execute(
+        `
+          UPDATE persona_chat_sessions
+          SET updated_at = NOW()
+          WHERE id = :chatSessionId
+        `,
+        { chatSessionId: activeChatSessionId },
+      );
+    }
+
+    res.json({ ok: true, reply, chatSessionId: activeChatSessionId });
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      message: error instanceof Error ? error.message : 'Unknown persona chat error',
     });
   }
 });
@@ -1028,7 +1464,7 @@ app.post('/api/profile-intake', async (req, res) => {
 });
 
 app.post('/api/history-records', async (req, res) => {
-  const { userProfileId, record } = req.body as HistoryRecordRequest;
+  const { userProfileId, interviewSessionId, finalOutput, deepInterviewAnswers = [], record } = req.body as HistoryRecordRequest;
 
   if (!userProfileId || !record?.question) {
     res.status(400).json({ ok: false, message: 'userProfileId and record.question are required' });
@@ -1070,6 +1506,15 @@ app.post('/api/history-records', async (req, res) => {
         rawRecord: toJson(record),
       },
     );
+
+    if (interviewSessionId && finalOutput) {
+      await saveStructuredInterviewArtifacts({
+        interviewSessionId,
+        finalOutput,
+        deepInterviewAnswers,
+        record,
+      });
+    }
 
     res.json({ ok: true });
   } catch (error) {

@@ -1,4 +1,4 @@
-export type TabType = 'dashboard' | 'decision-chat' | 'interview' | 'personas' | 'persona-detail' | 'history' | 'settings';
+export type TabType = 'dashboard' | 'interview' | 'personas' | 'persona-detail' | 'history' | 'settings';
 
 export type RoleType = '전략' | '재무' | '인사' | '운영' | '레드팀' | '커스텀' | '기술 혁신';
 
@@ -71,7 +71,7 @@ export interface DecisionRecord {
     option_text: string;
     custom_text?: string;
   }[];
-  preInterviewContext?: Record<string, Record<string, { question: string; answer: string }>> | null;
+  preInterviewContext?: unknown;
   publicData?: {
     status: 'idle' | 'collected';
     accounts: {
