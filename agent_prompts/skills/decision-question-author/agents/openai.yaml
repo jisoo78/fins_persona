@@ -1,0 +1,3 @@
+display_name: Decision Question Author
+short_description: Staged persona question authoring.
+default_prompt: Help me design a 40-question pre-interview set for a decision persona while preserving the 8-category x 5-stage structure.
