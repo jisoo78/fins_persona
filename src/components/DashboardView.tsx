@@ -17,6 +17,7 @@ interface DashboardViewProps {
   decisions: DecisionRecord[];
   setActiveTab: (tab: TabType) => void;
   onOpenNewPersonaModal: () => void;
+  onOpenDecisionRecord: (decisionId: string) => void;
 }
 
 export const DashboardView: React.FC<DashboardViewProps> = ({
@@ -24,11 +25,13 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   decisions,
   setActiveTab,
   onOpenNewPersonaModal,
+  onOpenDecisionRecord,
 }) => {
+  const recentDecisions = decisions.slice(0, 5);
   const stats = [
     { label: '생성된 페르소나 수', value: `${personas.length}개`, sub: '페르소나 목록으로 이동', icon: <Users className="w-5 h-5 text-indigo-500" />, targetTab: 'personas' as TabType },
     { label: '완료한 인터뷰', value: '14회', sub: '인터뷰 화면으로 이동', icon: <MessageSquareText className="w-5 h-5 text-emerald-500" />, targetTab: 'interview' as TabType },
-    { label: '최근 의사결정 기록', value: `${decisions.length + 22}건`, sub: '히스토리로 이동', icon: <CheckCircle2 className="w-5 h-5 text-blue-500" />, targetTab: 'history' as TabType },
+    { label: '최근 의사결정 기록', value: `${decisions.length}건`, sub: '히스토리로 이동', icon: <CheckCircle2 className="w-5 h-5 text-blue-500" />, targetTab: 'history' as TabType },
   ];
 
   return (
@@ -113,10 +116,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           </div>
 
           <div className="space-y-3">
-            {decisions.map((dec) => (
+            {recentDecisions.length === 0 ? (
+              <div className="bg-white dark:bg-slate-900/60 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 text-sm text-slate-500 dark:text-slate-400">
+                아직 저장된 의사결정 기록이 없습니다.
+              </div>
+            ) : recentDecisions.map((dec) => (
               <div
                 key={dec.id}
-                onClick={() => setActiveTab('history')}
+                onClick={() => onOpenDecisionRecord(dec.id)}
                 className="bg-white dark:bg-slate-900/60 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 hover:border-indigo-400 dark:hover:border-indigo-600 shadow-sm cursor-pointer transition-all group"
               >
                 <div className="flex items-start justify-between gap-4">

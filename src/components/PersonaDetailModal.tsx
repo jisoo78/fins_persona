@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { Persona } from '../types';
+import React, { useEffect, useRef, useState } from 'react';
+import { ChatMessage, Persona } from '../types';
 import { 
   X, 
   Brain, 
   ShieldCheck, 
   AlertTriangle, 
-  MessageSquare, 
+  Bot,
+  MessageSquare,
+  RefreshCw,
   Send,
-  Bot
 } from 'lucide-react';
 
 interface PersonaDetailModalProps {
@@ -15,33 +16,117 @@ interface PersonaDetailModalProps {
   onClose: () => void;
 }
 
+interface PersonaChatResponse {
+  ok: boolean;
+  reply?: string;
+  message?: string;
+  chatSessionId?: string | null;
+}
+
+const formatTime = () => new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
+
+const buildStarterMessage = (persona: Persona): ChatMessage => ({
+  id: `persona-modal-starter-${persona.id}`,
+  sender: 'ai',
+  text: `반갑습니다. 저는 ${persona.name}입니다.\n${persona.decisionStyle || '정의된 판단 기준'}을 기준으로 의사결정을 함께 검토하겠습니다.`,
+  timestamp: formatTime(),
+});
+
 export const PersonaDetailModal: React.FC<PersonaDetailModalProps> = ({ persona, onClose }) => {
-  const [activeSubTab, setActiveSubTab] = useState<'overview' | 'chat'>('overview');
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
   const [chatInput, setChatInput] = useState('');
-  const [simulatedChat, setSimulatedChat] = useState<{ sender: 'user' | 'ai'; text: string }[]>([]);
+  const [isSending, setIsSending] = useState(false);
+  const [chatSessionId, setChatSessionId] = useState<string | null>(null);
+  const chatEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!persona) return;
+    setChatMessages([buildStarterMessage(persona)]);
+    setChatInput('');
+    setIsSending(false);
+    setChatSessionId(null);
+  }, [persona]);
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chatMessages, isSending]);
 
   if (!persona) return null;
 
-  const handleSendSimulated = () => {
-    if (!chatInput.trim()) return;
-    const q = chatInput;
-    setSimulatedChat(prev => [...prev, { sender: 'user', text: q }]);
-    setChatInput('');
+  const isComposingKorean = (event: React.KeyboardEvent<HTMLInputElement>) =>
+    event.nativeEvent.isComposing || event.keyCode === 229;
 
-    setTimeout(() => {
-      setSimulatedChat(prev => [
-        ...prev,
+  const buildFallbackReply = (input: string) =>
+    `${persona.name} 관점에서 보면 "${input}" 요청은 먼저 ${persona.coreValues[0] || persona.decisionStyle || '확인 필요'} 기준으로 검토해야 합니다.\n\n결론: 바로 확정하기보다 판단 기준을 먼저 좁히는 편이 좋습니다.\n리스크: 필요한 수치, 손실 한도, 중단 조건이 아직 확인되지 않았습니다.\n다음 액션: 기대효과와 실패 시 손실을 한 문장씩 정리해 주세요.`;
+
+  const requestPersonaReply = async (input: string, recentMessages: ChatMessage[]) => {
+    const response = await fetch('/api/agent/persona-chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        persona,
+        message: input,
+        chatSessionId,
+        recentMessages: recentMessages.slice(-8).map((message) => ({
+          sender: message.sender,
+          text: message.text,
+        })),
+      }),
+    });
+    const result = (await response.json()) as PersonaChatResponse;
+
+    if (!response.ok || !result.ok || !result.reply) {
+      throw new Error(result.message ?? '페르소나 응답 생성에 실패했습니다.');
+    }
+
+    if (result.chatSessionId) setChatSessionId(result.chatSessionId);
+    return result.reply;
+  };
+
+  const handleSend = async () => {
+    if (!chatInput.trim() || isSending) return;
+    const input = chatInput.trim();
+    const userMessage: ChatMessage = {
+      id: `persona-modal-user-${Date.now()}`,
+      sender: 'user',
+      text: input,
+      timestamp: formatTime(),
+    };
+    const nextMessages = [...chatMessages, userMessage];
+
+    setChatMessages(nextMessages);
+    setChatInput('');
+    setIsSending(true);
+
+    try {
+      const reply = await requestPersonaReply(input, nextMessages);
+      setChatMessages((current) => [
+        ...current,
         {
+          id: `persona-modal-ai-${Date.now()}`,
           sender: 'ai',
-          text: `[${persona.name}의 관점 분석]: 대표님의 "${q}" 제안에 대해 제 도메인 원칙(${persona.decisionStyle})을 기준으로 엄격하게 평가해드리겠습니다. 핵심 리스크 관리를 선행하시길 강력히 권고합니다.`
-        }
+          text: reply,
+          timestamp: formatTime(),
+        },
       ]);
-    }, 800);
+    } catch (error) {
+      setChatMessages((current) => [
+        ...current,
+        {
+          id: `persona-modal-ai-fallback-${Date.now()}`,
+          sender: 'ai',
+          text: `${buildFallbackReply(input)}\n\n확인 필요: ${error instanceof Error ? error.message : 'API 응답 오류'}`,
+          timestamp: formatTime(),
+        },
+      ]);
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 backdrop-blur-sm p-4 animate-fade-in">
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl relative">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-6xl w-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl relative">
         
         {/* Header */}
         <div className="p-6 px-8 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-950/40">
@@ -64,29 +149,6 @@ export const PersonaDetailModal: React.FC<PersonaDetailModalProps> = ({ persona,
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="flex bg-slate-200 dark:bg-slate-800 p-1 rounded-xl">
-              <button
-                onClick={() => setActiveSubTab('overview')}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                  activeSubTab === 'overview'
-                    ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm'
-                    : 'text-slate-500 hover:text-slate-800'
-                }`}
-              >
-                페르소나 프로필
-              </button>
-              <button
-                onClick={() => setActiveSubTab('chat')}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
-                  activeSubTab === 'chat'
-                    ? 'bg-indigo-600 text-white shadow-sm'
-                    : 'text-slate-500 hover:text-slate-800'
-                }`}
-              >
-                <MessageSquare className="w-3.5 h-3.5" /> 이 페르소나와 대화
-              </button>
-            </div>
-
             <button
               onClick={onClose}
               className="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
@@ -97,8 +159,8 @@ export const PersonaDetailModal: React.FC<PersonaDetailModalProps> = ({ persona,
         </div>
 
         {/* Content Area */}
-        <div className="flex-1 overflow-y-auto p-8 space-y-8">
-          {activeSubTab === 'overview' ? (
+        <div className="flex-1 overflow-hidden grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="overflow-y-auto p-8 space-y-8 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800">
             <div className="space-y-8 animate-fade-in">
               {/* Summary Description */}
               <div className="bg-slate-50 dark:bg-slate-800/50 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800">
@@ -162,82 +224,83 @@ export const PersonaDetailModal: React.FC<PersonaDetailModalProps> = ({ persona,
                 </div>
               </div>
 
-              {/* Communication Style & Sample Conversation */}
-              <div className="space-y-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400">시뮬레이션 대화 샘플</h3>
-                
-                {persona.sampleConversations.map((conv, idx) => (
-                  <div key={idx} className="bg-slate-50 dark:bg-slate-800/60 p-5 rounded-2xl space-y-3 border border-slate-200 dark:border-slate-800">
-                    <div className="text-xs font-bold text-indigo-600 dark:text-indigo-400">
-                      Q. {conv.question}
-                    </div>
-                    <div className="text-xs text-slate-700 dark:text-slate-300 pl-3 border-l-2 border-indigo-500 leading-relaxed font-normal">
-                      "{conv.answer}"
-                    </div>
-                  </div>
-                ))}
+              <div className="bg-slate-50 dark:bg-slate-800/50 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">응답 스타일</h3>
+                <p className="text-sm text-slate-800 dark:text-slate-200 font-medium leading-relaxed">
+                  {persona.communicationStyle || '결론, 판단 기준, 리스크, 다음 액션 순서로 응답합니다.'}
+                </p>
               </div>
             </div>
-          ) : (
-            /* Chat Interface Inside Modal */
-            <div className="flex flex-col h-[520px] bg-slate-50 dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden animate-fade-in">
-              <div className="flex-1 overflow-y-auto p-6 space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold text-xs shrink-0">
-                    <Bot className="w-4 h-4" />
-                  </div>
-                  <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl text-xs max-w-lg leading-relaxed shadow-sm">
-                    반갑습니다 대표님. 저는 대표님의 딥다이브 인터뷰 가중치를 바탕으로 설계된 <strong>[{persona.name}]</strong>입니다. 경영상의 고민을 말씀해주시면 제 도메인 가치관을 바탕으로 답변 드리겠습니다.
+          </div>
+
+          <div className="flex flex-col min-h-[520px] bg-slate-50/70 dark:bg-slate-950/30">
+            <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/70">
+              <div className="flex items-center gap-2 text-sm font-black text-slate-900 dark:text-white">
+                <MessageSquare className="w-4 h-4 text-indigo-500" />
+                <span>페르소나 대화</span>
+              </div>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                이 페르소나의 프롬프트와 판단 기준을 API에 전달해 응답을 생성합니다.
+              </p>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-5 space-y-4">
+              {chatMessages.map((message) => (
+                <div key={message.id} className={`flex items-end gap-3 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  {message.sender === 'ai' && (
+                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border ${persona.bgClass} ${persona.colorClass}`}>
+                      <Bot className="w-4 h-4" />
+                    </div>
+                  )}
+                  <div
+                    className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap shadow-sm ${
+                      message.sender === 'user'
+                        ? 'bg-indigo-600 text-white rounded-br-md'
+                        : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 rounded-bl-md'
+                    }`}
+                  >
+                    {message.text}
                   </div>
                 </div>
-
-                {simulatedChat.map((c, i) => (
-                  <div key={i} className={`flex items-start gap-3 ${c.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                    {c.sender === 'ai' && (
-                      <div className="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold text-xs shrink-0">
-                        <Bot className="w-4 h-4" />
-                      </div>
-                    )}
-                    <div className={`p-4 rounded-2xl text-xs max-w-lg leading-relaxed shadow-sm ${
-                      c.sender === 'user'
-                        ? 'bg-indigo-600 text-white'
-                        : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200'
-                    }`}>
-                      {c.text}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="p-3 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 flex items-center gap-2">
-                <input
-                  type="text"
-                  value={chatInput}
-                  onChange={(e) => setChatInput(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSendSimulated()}
-                  placeholder={`${persona.name}에게 단독 의견 물어보기...`}
-                  className="flex-1 px-3.5 py-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                />
-                <button
-                  onClick={handleSendSimulated}
-                  className="p-2.5 bg-indigo-600 text-white rounded-xl hover:bg-indigo-500 transition-colors"
-                >
-                  <Send className="w-4 h-4" />
-                </button>
-              </div>
+              ))}
+              {isSending && (
+                <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
+                  <RefreshCw className="w-3.5 h-3.5 animate-spin text-indigo-500" />
+                  페르소나 기준으로 응답을 생성 중입니다...
+                </div>
+              )}
+              <div ref={chatEndRef} />
             </div>
-          )}
+
+            <div className="p-4 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center gap-2">
+              <input
+                type="text"
+                value={chatInput}
+                onChange={(event) => setChatInput(event.target.value)}
+                onKeyDown={(event) => {
+                  if (isComposingKorean(event)) return;
+                  if (event.key === 'Enter') void handleSend();
+                }}
+                placeholder={`${persona.name}에게 질문을 입력하세요...`}
+                className="flex-1 px-4 py-3 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800 dark:text-slate-100"
+              />
+              <button
+                type="button"
+                onClick={() => void handleSend()}
+                disabled={!chatInput.trim() || isSending}
+                className="p-3 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-300 dark:disabled:bg-slate-800 text-white rounded-xl transition-colors"
+                aria-label="페르소나 대화 전송"
+              >
+                {isSending ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Footer actions */}
         <div className="p-4 px-8 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/40 flex justify-between items-center text-xs">
           <span className="text-slate-500">생성일: {persona.createdAt} · 최종 업데이트: {persona.updatedAt}</span>
-          <button
-            onClick={() => setActiveSubTab('chat')}
-            className="px-5 py-2 rounded-xl bg-indigo-600 text-white font-bold hover:bg-indigo-500 transition-colors shadow-sm"
-          >
-            이 페르소나와 대화하기
-          </button>
+          <span className="font-semibold text-slate-500 dark:text-slate-400">API key가 없으면 서버 fallback 응답을 사용합니다.</span>
         </div>
       </div>
     </div>

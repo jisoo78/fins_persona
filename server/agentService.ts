@@ -1,5 +1,7 @@
 import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
 import { PromptTemplate } from '@langchain/core/prompts';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 export interface AgentQuestion {
   id: number;
@@ -9,7 +11,24 @@ export interface AgentQuestion {
   options: string[];
 }
 
-export type PreInterviewContext = Record<string, Record<string, { question: string; answer: string }>>;
+type ContextQuestion = {
+  question: string;
+  answer: string;
+  stage?: string;
+  rationale?: string;
+  response_time_ms?: number;
+  response_signal?: string;
+  selected_option_id?: number;
+  source_question_id?: number;
+};
+
+interface PreInterviewContextV2 {
+  meta?: Record<string, unknown>;
+  communication_style?: Record<string, unknown>;
+  categories: Record<string, Record<string, ContextQuestion>>;
+}
+
+export type PreInterviewContext = Record<string, Record<string, ContextQuestion>> | PreInterviewContextV2;
 
 export interface AgentProfile {
   name?: string;
@@ -48,6 +67,7 @@ export interface AgentFinalOutput {
   oneSentenceSystem: string;
   coreInstructions: string[];
   needsConfirmation: string[];
+  personaPromptMarkdown?: string;
 }
 
 export interface AdvisorPromptInput {
@@ -57,6 +77,18 @@ export interface AdvisorPromptInput {
   description?: string;
   decisionStyle?: string;
   coreValues?: string[];
+  strengths?: string[];
+  weaknesses?: string[];
+  communicationStyle?: string;
+  decisionPrompt?: string;
+}
+
+export interface PersonaChatInput extends AdvisorPromptInput {
+  userMessage: string;
+  recentMessages?: {
+    sender: 'ai' | 'user';
+    text: string;
+  }[];
 }
 
 const getModel = () => {
@@ -68,6 +100,29 @@ const getModel = () => {
     model: process.env.GEMINI_MODEL || 'gemini-1.5-flash',
     temperature: 0.2,
   });
+};
+
+const readPromptFile = (path: string) => {
+  try {
+    return readFileSync(resolve(process.cwd(), path), 'utf8');
+  } catch (error) {
+    console.warn(`Failed to read prompt file: ${path}`, error);
+    return '';
+  }
+};
+
+const deepInterviewPrompt = readPromptFile('agent_prompts/prompts/deep-interview-prompt.md');
+const cfoDecisionSkill = readPromptFile('agent_prompts/skills/cfo-decision/SKILL.md');
+const cfoDomainThresholds = readPromptFile('agent_prompts/skills/cfo-decision/references/cfo-domain-thresholds.md');
+const personaPromptRendererSkill = readPromptFile('agent_prompts/skills/persona-prompt-renderer/SKILL.md');
+const personaPromptTemplate = readPromptFile('agent_prompts/skills/persona-prompt-renderer/references/persona-prompt-template.md');
+
+const isContextV2 = (context: PreInterviewContext): context is PreInterviewContextV2 =>
+  'categories' in context && typeof context.categories === 'object' && context.categories !== null;
+
+const getContextCategories = (context: PreInterviewContext): Record<string, Record<string, ContextQuestion>> => {
+  if (isContextV2(context)) return context.categories;
+  return context as Record<string, Record<string, ContextQuestion>>;
 };
 
 const contentToText = (content: unknown) => {
@@ -107,7 +162,7 @@ const safeInvokeJson = async <T>(template: string, values: Record<string, unknow
 };
 
 export const fallbackDeepInterviewQuestions = (context: PreInterviewContext): AgentQuestion[] =>
-  Object.entries(context).flatMap(([categoryName, answers], categoryIndex) => {
+  Object.entries(getContextCategories(context)).flatMap(([categoryName, answers], categoryIndex) => {
     const answerEntries = Object.values(answers);
     const first = answerEntries[0];
     const second = answerEntries[1] ?? answerEntries[0];
@@ -152,6 +207,17 @@ export const generateDeepInterviewQuestions = async (
     const result = await safeInvokeJson<{ questions: AgentQuestion[] }>(
       `너는 C-Level 재무 의사결정 인터뷰어다.
 
+아래 공통 시스템 프롬프트와 CFO Decision Skill을 반드시 따른다.
+
+[Deep Interview Prompt]
+{deepInterviewPrompt}
+
+[CFO Decision Skill]
+{cfoDecisionSkill}
+
+[CFO Domain Thresholds]
+{cfoDomainThresholds}
+
 사용자 정보:
 {profile}
 
@@ -162,10 +228,11 @@ PreInterviewContext:
 {preInterviewContext}
 
 규칙:
-- 각 카테고리마다 2개의 심층 질문을 만든다.
-- 사전 질문의 개별 답변을 반복하지 말고 여러 답변 간 관계를 종합한다.
+- 각 카테고리마다 identity 또는 cross_dimension 축의 심층 질문 2개를 만든다.
+- 사전 질문의 개별 답변을 반복하지 말고 여러 답변, rationale, response_signal 간 관계를 종합한다.
 - 모든 질문은 객관식이다.
 - 선택지는 A-D 4개와 마지막 "E. 기타 — 직접 입력"이다.
+- slow_response는 참고 메타데이터로만 사용하고 별도 질문 축으로 만들지 않는다.
 - 출력은 반드시 JSON만 반환한다.
 
 JSON 형식:
@@ -180,7 +247,7 @@ JSON 형식:
     }}
   ]
 }}`,
-      { profile, publicData, preInterviewContext },
+      { deepInterviewPrompt, cfoDecisionSkill, cfoDomainThresholds, profile, publicData, preInterviewContext },
     );
 
     if (result?.questions?.length) return result.questions;
@@ -202,6 +269,19 @@ export const fallbackFinalOutput = (
   const roiFirst = /roi|irr|수익|이익/i.test(joined);
   const otherAnswers = answers.filter((answer) => answer.includes('E. 기타'));
 
+  const oneSentenceSystem = cashFirst
+    ? '이 재무 의사결정 체계는 성장 기회를 보되 현금흐름과 회복 가능성을 먼저 잠그는 보수적 실행 시스템이다.'
+    : '이 재무 의사결정 체계는 아직 핵심 우선순위 확인이 더 필요한 초기 초안이다.';
+  const coreInstructions = [
+    '모든 재무 제안은 현금흐름 영향과 런웨이 변화를 먼저 제시한다.',
+    '투자 안건은 ROI/IRR, 회수 기간, 실패 시 손실 한도를 함께 보고한다.',
+    '부채·환율·금리·M&A 리스크는 레드라인 초과 여부를 먼저 판정한다.',
+    '성장 투자와 비용 절감이 충돌할 때는 고정비 구조와 회복 가능성을 비교한다.',
+    '확인되지 않은 공개 SNS 신호는 사실처럼 단정하지 말고 추정 신호로 분리한다.',
+    '기타 답변이나 모순된 답변은 최종 결론 전에 확인 필요로 표시한다.',
+    '보고는 결론, 근거 숫자, 리스크, 다음 액션 순서로 짧게 작성한다.',
+  ].slice(0, otherAnswers.length > 2 ? 7 : 6);
+
   return {
     fiveLayerSummary: {
       role: `${profile.title || '재무 리더'}로서 자본·현금흐름·투자·리스크의 균형을 책임지는 의사결정자`,
@@ -210,18 +290,8 @@ export const fallbackFinalOutput = (
       priorities: roiFirst ? 'ROI/IRR 등 정량 기준과 투자 회수 가능성을 우선 검토' : '확인 필요',
       communicationFormat: '숫자, 레드라인, 다음 액션이 함께 보이는 간결한 보고 형식을 선호하는 것으로 추정',
     },
-    oneSentenceSystem: cashFirst
-      ? '이 재무 의사결정 체계는 성장 기회를 보되 현금흐름과 회복 가능성을 먼저 잠그는 보수적 실행 시스템이다.'
-      : '이 재무 의사결정 체계는 아직 핵심 우선순위 확인이 더 필요한 초기 초안이다.',
-    coreInstructions: [
-      '모든 재무 제안은 현금흐름 영향과 런웨이 변화를 먼저 제시한다.',
-      '투자 안건은 ROI/IRR, 회수 기간, 실패 시 손실 한도를 함께 보고한다.',
-      '부채·환율·금리·M&A 리스크는 레드라인 초과 여부를 먼저 판정한다.',
-      '성장 투자와 비용 절감이 충돌할 때는 고정비 구조와 회복 가능성을 비교한다.',
-      '확인되지 않은 공개 SNS 신호는 사실처럼 단정하지 말고 추정 신호로 분리한다.',
-      '기타 답변이나 모순된 답변은 최종 결론 전에 확인 필요로 표시한다.',
-      '보고는 결론, 근거 숫자, 리스크, 다음 액션 순서로 짧게 작성한다.',
-    ].slice(0, otherAnswers.length > 2 ? 7 : 6),
+    oneSentenceSystem,
+    coreInstructions,
     needsConfirmation: [
       !profile.name && '사용자 이름',
       !profile.companyName && '회사명',
@@ -229,6 +299,38 @@ export const fallbackFinalOutput = (
       !cashFirst && '현금흐름 우선 여부',
       !riskFirst && '레드라인 기준',
     ].filter(Boolean) as string[],
+    personaPromptMarkdown: `# CFO Decision Persona Prompt
+
+## 1. Role
+
+You are a decision-making persona cloned from the user's CFO decision criteria.
+
+## 2. Identity
+
+- ${oneSentenceSystem}
+
+## 3. Decision Principles
+
+| Situation | Rule | Exception | Evidence |
+| --- | --- | --- | --- |
+| 재무 의사결정 검토 | ${coreInstructions[0]} | 확인되지 않은 기준은 "확인 필요"로 표시한다. | PreInterviewContext v2 및 심층 인터뷰 답변 |
+
+## 4. Cross-Dimension Rules
+
+${coreInstructions.slice(1, 4).map((instruction) => `- ${instruction}`).join('\n')}
+
+## 5. Red Lines
+
+- ${riskFirst ? '부채, 구조적 손실, 현금흐름 훼손 가능성이 보이면 실행을 보류한다.' : '레드라인은 확인 필요로 표시한다.'}
+
+## 6. Communication Style
+
+- 결론, 근거 숫자, 리스크, 다음 액션 순서로 답한다.
+
+## 7. Evidence
+
+- PreInterviewContext v2와 DeepInterviewResult에서 도출
+- 공개 SNS 신호는 검증 전 추정 신호로 분리`,
   };
 };
 
@@ -241,6 +343,14 @@ export const generateFinalOutput = async (
   try {
     const result = await safeInvokeJson<AgentFinalOutput>(
       `너는 C-Level 재무 의사결정 체계를 요약하는 전문 분석 AI다.
+
+아래 Persona Prompt Renderer Skill과 Markdown 템플릿을 참고해, JSON 요약뿐 아니라 에이전트에 주입 가능한 Markdown 프롬프트 내용도 생성한다.
+
+[Persona Prompt Renderer Skill]
+{personaPromptRendererSkill}
+
+[Persona Prompt Template]
+{personaPromptTemplate}
 
 사용자 정보:
 {profile}
@@ -270,9 +380,10 @@ JSON 형식:
   }},
   "oneSentenceSystem": "의사결정 체계 한 문장",
   "coreInstructions": ["AI 참모 프롬프트 핵심 지침 5~7개"],
-  "needsConfirmation": ["확인 필요 항목"]
+  "needsConfirmation": ["확인 필요 항목"],
+  "personaPromptMarkdown": "# CFO Decision Persona Prompt\\n\\n..."
 }}`,
-      { profile, publicData, preInterviewContext: preInterviewContext ?? {}, answers },
+      { personaPromptRendererSkill, personaPromptTemplate, profile, publicData, preInterviewContext: preInterviewContext ?? {}, answers },
     );
 
     if (result?.oneSentenceSystem && result?.coreInstructions?.length) return result;
@@ -319,4 +430,73 @@ JSON 형식:
     console.warn('LangChain advisor prompt fallback', error);
     return fallback;
   }
+};
+
+const fallbackPersonaChatReply = (input: PersonaChatInput) => {
+  const primaryValue = input.coreValues?.[0] || input.decisionStyle || '확인 필요';
+  const redLine = input.weaknesses?.[0] || '확인되지 않은 기준은 확정하지 않는다';
+
+  return `${input.name} 관점에서 보면, 이 안건은 먼저 "${primaryValue}" 기준으로 검토해야 합니다.
+
+1. 결론: 지금 바로 확정하기보다 핵심 판단 기준을 먼저 좁히는 것이 좋습니다.
+2. 판단 기준: ${input.decisionStyle || '의사결정 스타일 확인 필요'}
+3. 레드라인: ${redLine}
+4. 리스크: 입력 정보만으로는 비용, 일정, 손실 한도, 책임 범위가 충분히 확인되지 않았습니다.
+5. 다음 액션: "${input.userMessage}"에 대해 기대효과, 실패 시 손실, 중단 조건을 한 문장씩 정리해 주세요.`;
+};
+
+export const generatePersonaChatReply = async (input: PersonaChatInput) => {
+  try {
+    const result = await safeInvokeJson<{ reply: string }>(
+      `너는 사용자가 생성한 AI 의사결정 페르소나다.
+
+아래 페르소나 프롬프트가 있으면 최우선으로 따른다. 없으면 페르소나 속성을 기준으로 답한다.
+
+[Persona Markdown/System Prompt]
+{decisionPrompt}
+
+[Persona Profile]
+{persona}
+
+[Recent Conversation]
+{recentMessages}
+
+[User Message]
+{userMessage}
+
+답변 규칙:
+- 반드시 한국어로 답한다.
+- 페르소나의 의사결정 기준, 강점, 약점, 커뮤니케이션 스타일을 반영한다.
+- 모르는 내용은 "확인 필요"라고 표시한다.
+- 답변은 결론, 판단 기준, 레드라인/리스크, 다음 액션 순서로 간결하게 작성한다.
+- 출력은 반드시 JSON만 반환한다.
+
+JSON 형식:
+{{
+  "reply": "답변"
+}}`,
+      {
+        decisionPrompt: input.decisionPrompt || '',
+        persona: {
+          name: input.name,
+          role: input.role,
+          badge: input.badge,
+          description: input.description,
+          decisionStyle: input.decisionStyle,
+          coreValues: input.coreValues,
+          strengths: input.strengths,
+          weaknesses: input.weaknesses,
+          communicationStyle: input.communicationStyle,
+        },
+        recentMessages: input.recentMessages ?? [],
+        userMessage: input.userMessage,
+      },
+    );
+
+    if (result?.reply?.trim()) return result.reply;
+  } catch (error) {
+    console.warn('LangChain persona chat fallback', error);
+  }
+
+  return fallbackPersonaChatReply(input);
 };
