@@ -7,6 +7,7 @@ import {
   setAnswerAtIndex,
   validatePreQuestionBank,
 } from '../pre-question/preInterview';
+import { communicationStyleQuestion } from '../pre-question/communicationStyle';
 import type {
   CommunicationStyleAnswer,
   PreInterviewAnswer,
@@ -14,6 +15,7 @@ import type {
   PreQuestion,
   PreQuestionBank,
 } from '../pre-question/types';
+import { readJsonResponse } from '../utils/http';
 
 interface PreQuestionViewProps {
   completedContext: PreInterviewContext | null;
@@ -32,6 +34,18 @@ const communicationOptions = [
 ];
 
 const getQuestionLabel = (question: PreQuestion) => `${question.category} · ${question.stage}`;
+
+interface SavePreInterviewContextResponse {
+  ok: boolean;
+  message?: string;
+  context?: {
+    id: string;
+    label: string;
+    createdAt: string;
+    questionCount: number;
+    fileName: string;
+  };
+}
 
 export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
   completedContext,
@@ -54,6 +68,10 @@ export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
   const [directAnswer, setDirectAnswer] = useState('');
   const [communicationStyle, setCommunicationStyle] = useState<CommunicationStyleAnswer | null>(null);
   const [errorMessage, setErrorMessage] = useState('');
+  const [saveWarning, setSaveWarning] = useState('');
+  const [contextLabel, setContextLabel] = useState('');
+  const [savedContextFileName, setSavedContextFileName] = useState('');
+  const [isSavingContext, setIsSavingContext] = useState(false);
   const questionStartedAtRef = useRef(Date.now());
 
   const currentQuestion = questions[currentIndex];
@@ -128,21 +146,57 @@ export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
     }
   };
 
-  const completeBridge = () => {
+  const saveContextFile = async (context: PreInterviewContext) => {
+    const response = await fetch('/api/preinterview-contexts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        context,
+        profileName: contextLabel,
+      }),
+    });
+    const result = await readJsonResponse<SavePreInterviewContextResponse>(
+      response,
+      '사전 질문 응답지 로컬 저장 API 응답을 받지 못했습니다. API 서버가 실행 중인지 확인해주세요.',
+    );
+
+    if (!response.ok || !result.ok || !result.context) {
+      throw new Error(result.message ?? '사전 질문 응답지 로컬 저장에 실패했습니다.');
+    }
+
+    return result.context;
+  };
+
+  const completeBridge = async () => {
     if (!communicationStyle) {
-      setErrorMessage('보고 형식을 선택해주세요.');
+      setErrorMessage('답변 형식과 톤을 선택해주세요.');
       return;
     }
 
+    setIsSavingContext(true);
+    setErrorMessage('');
+    setSaveWarning('');
+
     const context = buildPreInterviewContext(answers, communicationStyle);
     onComplete(context);
-    setErrorMessage('');
+
+    try {
+      const saved = await saveContextFile(context);
+      setSavedContextFileName(saved.fileName);
+    } catch (error) {
+      setSaveWarning(error instanceof Error ? error.message : '사전 질문 응답지 저장에 실패했습니다.');
+    } finally {
+      setIsSavingContext(false);
+    }
   };
 
   const resetAll = () => {
     setCurrentIndex(0);
     setAnswers([]);
     setCommunicationStyle(null);
+    setSaveWarning('');
+    setContextLabel('');
+    setSavedContextFileName('');
     resetInputs();
   };
 
@@ -168,7 +222,7 @@ export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
               <p className="text-xs font-bold text-indigo-600 dark:text-indigo-400">PreInterviewContext v2</p>
               <h2 className="text-lg font-black text-slate-900 dark:text-white">사전 질문</h2>
               <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-                40개 사전 질문과 보고 형식 1개를 완료하면 심층 인터뷰 입력값이 생성됩니다.
+                40개 사전 질문과 답변 형식·톤 1개를 완료하면 심층 인터뷰 입력값이 생성됩니다.
               </p>
             </div>
           </div>
@@ -202,7 +256,13 @@ export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
               </div>
               <p className="text-sm text-emerald-800 dark:text-emerald-200 mt-2">
                 {Object.keys(completedContext.categories).length}개 카테고리의 응답이 PreInterviewContext로 저장되었습니다.
+                {savedContextFileName && <span className="block mt-1 text-xs font-bold">로컬 파일: {savedContextFileName}</span>}
               </p>
+              {saveWarning && (
+                <p className="text-xs text-amber-700 dark:text-amber-300 mt-2">
+                  로컬 파일 저장 경고: {saveWarning}
+                </p>
+              )}
             </div>
             <button
               type="button"
@@ -309,7 +369,7 @@ export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
               <span className="px-2.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800 text-[11px] font-bold">
                 {questions.length + 1} / {questions.length + 1}
               </span>
-              <h3 className="text-base font-black text-slate-900 dark:text-white mt-3">심층 인터뷰 결과를 정리할 때 어떤 형식을 가장 선호합니까?</h3>
+              <h3 className="text-base font-black text-slate-900 dark:text-white mt-3">{communicationStyleQuestion}</h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {communicationOptions.map((option) => (
@@ -334,6 +394,16 @@ export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
                 </button>
               ))}
             </div>
+            <label className="block space-y-1.5 max-w-md">
+              <span className="text-xs font-bold text-slate-700 dark:text-slate-300">응답지 이름</span>
+              <input
+                type="text"
+                value={contextLabel}
+                onChange={(event) => setContextLabel(event.target.value)}
+                placeholder="예: 김도현 CFO"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/40 px-3 py-2.5 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+            </label>
           </div>
         )}
 
@@ -356,9 +426,10 @@ export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
           <button
             type="button"
             onClick={isBridgeStep ? completeBridge : saveCurrentAnswer}
+            disabled={isSavingContext}
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-lg shadow-indigo-500/20"
           >
-            {isBridgeStep ? 'PreInterviewContext 생성' : '다음'}
+            {isSavingContext ? '로컬 저장 중' : isBridgeStep ? 'PreInterviewContext 생성' : '다음'}
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>

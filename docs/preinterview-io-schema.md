@@ -141,12 +141,12 @@ PreQuestionBank
 
 ## 7. CommunicationStyleBridge 스키마
 
-40개 사전 질문 이후 심층 인터뷰 진입 전에 보고 형식을 1개 질문으로 수집한다.
+40개 사전 질문 이후 심층 인터뷰 진입 전에 CFO로서 선호하는 답변 형식과 보고·소통 톤을 1개 질문으로 수집한다.
 
 ```json
 {
   "bridge_question_id": "communication_style",
-  "question": "심층 인터뷰 결과를 정리할 때 어떤 형식을 가장 선호합니까?",
+  "question": "CFO로써 답변형식: 보고·소통에서 선호하는 형식과 톤",
   "options": [
     {
       "option_id": 1,

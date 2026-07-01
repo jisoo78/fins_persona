@@ -812,7 +812,7 @@ export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
 
   const completeBridge = () => {
     if (!communicationStyle) {
-      setErrorMessage('보고 형식을 선택해주세요.');
+      setErrorMessage('답변 형식과 톤을 선택해주세요.');
       return;
     }
 
@@ -850,7 +850,7 @@ export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
               <p className="text-xs font-bold text-indigo-600 dark:text-indigo-400">PreInterviewContext v2</p>
               <h2 className="text-lg font-black text-slate-900 dark:text-white">사전 질문</h2>
               <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-                40개 사전 질문과 보고 형식 1개를 완료하면 심층 인터뷰 입력값이 생성됩니다.
+                40개 사전 질문과 답변 형식·톤 1개를 완료하면 심층 인터뷰 입력값이 생성됩니다.
               </p>
             </div>
           </div>
@@ -998,7 +998,7 @@ export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
               <span className="px-2.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800 text-[11px] font-bold">
                 {questions.length + 1} / {questions.length + 1}
               </span>
-              <h3 className="text-base font-black text-slate-900 dark:text-white mt-3">심층 인터뷰 결과를 정리할 때 어떤 형식을 가장 선호합니까?</h3>
+              <h3 className="text-base font-black text-slate-900 dark:text-white mt-3">CFO로써 답변형식: 보고·소통에서 선호하는 형식과 톤</h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {communicationOptions.map((option) => (

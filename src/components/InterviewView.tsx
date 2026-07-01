@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import mermaid from 'mermaid';
 import { ChatMessage, DecisionRecord, InterviewQuestion, Persona, RoleType, PreInterviewContext } from '../types';
+import { readJsonResponse } from '../utils/http';
 import {
   ArrowRight,
   Bot,
@@ -83,6 +84,28 @@ interface AgentFinalOutputResponse {
   ok: boolean;
   message?: string;
   finalOutput?: FinalInterviewOutput;
+}
+
+interface StoredPreInterviewContextSummary {
+  id: string;
+  label: string;
+  createdAt: string;
+  questionCount: number;
+  fileName: string;
+}
+
+interface StoredPreInterviewContextResponse {
+  ok: boolean;
+  message?: string;
+  context?: StoredPreInterviewContextSummary & {
+    context: PreInterviewContext;
+  };
+}
+
+interface StoredPreInterviewContextListResponse {
+  ok: boolean;
+  message?: string;
+  contexts?: StoredPreInterviewContextSummary[];
 }
 
 const snsDiscoveryClientTimeoutMs = 65000;
@@ -409,6 +432,10 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
   const [profile, setProfile] = useState<UserProfile>(() => loadInitialProfile());
   const [activeQuestions, setActiveQuestions] = useState<InterviewQuestion[]>([]);
   const [preInterviewContext, setPreInterviewContext] = useState<PreInterviewContext | null>(completedPreInterviewContext);
+  const [storedPreInterviewContexts, setStoredPreInterviewContexts] = useState<StoredPreInterviewContextSummary[]>([]);
+  const [selectedPreInterviewContextId, setSelectedPreInterviewContextId] = useState('');
+  const [contextLoadStatus, setContextLoadStatus] = useState<'idle' | 'loading' | 'loaded' | 'failed'>('idle');
+  const [contextLoadError, setContextLoadError] = useState('');
   const [publicData, setPublicData] = useState<PublicDataSnapshot>({ status: 'idle', accounts: [], signals: [], posts: [] });
   const [inputText, setInputText] = useState('');
   const [currentQIndex, setCurrentQIndex] = useState(0);
@@ -452,6 +479,58 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
     setProfile((current) => ({ ...current, [field]: value }));
   };
 
+  const loadStoredPreInterviewContexts = async () => {
+    try {
+      const response = await fetch('/api/preinterview-contexts');
+      const result = await readJsonResponse<StoredPreInterviewContextListResponse>(
+        response,
+        '사전 질문 응답지 목록 API 응답을 받지 못했습니다. API 서버가 실행 중인지 확인해주세요.',
+      );
+
+      if (!result.ok) {
+        throw new Error(result.message ?? '사전 질문 응답지 목록을 불러오지 못했습니다.');
+      }
+
+      setStoredPreInterviewContexts(result.contexts ?? []);
+      setContextLoadError('');
+    } catch (error) {
+      setContextLoadError(error instanceof Error ? error.message : '사전 질문 응답지 목록을 불러오지 못했습니다.');
+    }
+  };
+
+  const selectStoredPreInterviewContext = async (contextId: string) => {
+    setSelectedPreInterviewContextId(contextId);
+
+    if (!contextId) {
+      setPreInterviewContext(completedPreInterviewContext);
+      setContextLoadStatus('idle');
+      setContextLoadError('');
+      return;
+    }
+
+    setContextLoadStatus('loading');
+    setContextLoadError('');
+
+    try {
+      const response = await fetch(`/api/preinterview-contexts/${encodeURIComponent(contextId)}`);
+      const result = await readJsonResponse<StoredPreInterviewContextResponse>(
+        response,
+        '사전 질문 응답지 API 응답을 받지 못했습니다. API 서버가 실행 중인지 확인해주세요.',
+      );
+
+      if (!result.ok || !result.context?.context) {
+        throw new Error(result.message ?? '사전 질문 응답지를 불러오지 못했습니다.');
+      }
+
+      setPreInterviewContext(result.context.context);
+      setContextLoadStatus('loaded');
+    } catch (error) {
+      setPreInterviewContext(null);
+      setContextLoadStatus('failed');
+      setContextLoadError(error instanceof Error ? error.message : '사전 질문 응답지를 불러오지 못했습니다.');
+    }
+  };
+
   useEffect(() => {
     window.localStorage.removeItem('decision-interview-draft');
   }, []);
@@ -462,7 +541,16 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
 
   useEffect(() => {
     setPreInterviewContext(completedPreInterviewContext);
+    if (completedPreInterviewContext) {
+      setSelectedPreInterviewContextId('');
+      setContextLoadStatus('loaded');
+      void loadStoredPreInterviewContexts();
+    }
   }, [completedPreInterviewContext]);
+
+  useEffect(() => {
+    void loadStoredPreInterviewContexts();
+  }, []);
 
   const discoverPublicData = async (): Promise<PublicDataSnapshot> => {
     const controller = new AbortController();
@@ -583,20 +671,21 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
   };
 
   const startDataCollection = async () => {
-    if (!completedPreInterviewContext) {
+    if (!preInterviewContext) {
       setSaveStatus('failed');
-      setSaveError('사전 질문을 먼저 완료해주세요.');
+      setSaveError('사전 질문 응답지를 먼저 선택해주세요.');
       return;
     }
 
+    const selectedContext = preInterviewContext;
     setIsCollecting(true);
     setSaveStatus('idle');
     setSaveError('');
 
     try {
       const snapshot = await discoverPublicData();
-      const questions = await generateAgentDeepQuestions(completedPreInterviewContext);
-      const prompt = createBrainstormerPrompt(profile, questions.length, snapshot, completedPreInterviewContext);
+      const questions = await generateAgentDeepQuestions(selectedContext);
+      const prompt = createBrainstormerPrompt(profile, questions.length, snapshot, selectedContext);
 
       await saveProfileIntake(snapshot, questions, prompt);
 
@@ -604,7 +693,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
       setActiveQuestions(questions);
       setMessages(buildInitialMessages(questions, prompt));
       setCurrentQIndex(0);
-      setPreInterviewContext(completedPreInterviewContext);
+      setPreInterviewContext(selectedContext);
       setIsComplete(false);
       setFinalOutput(null);
       setStep('interview');
@@ -813,9 +902,9 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
 
   const runDemoFlow = async () => {
     if (isDemoRunning || isThinking) return;
-    if (!completedPreInterviewContext) {
+    if (!preInterviewContext) {
       setSaveStatus('failed');
-      setSaveError('데모 실행 전에 사전 질문을 완료해주세요.');
+      setSaveError('데모 실행 전에 사전 질문 응답지를 선택해주세요.');
       return;
     }
 
@@ -829,7 +918,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
       snsId: profile.snsId || '@unknown',
       financeScope: profile.financeScope || '자본 배치, 투자, 리스크, 자금 운용',
     };
-    const demoContext = completedPreInterviewContext;
+    const demoContext = preInterviewContext;
     const demoQuestions = await generateAgentDeepQuestions(demoContext);
     const answers = demoQuestions.map((question, index) => question.options?.[index % 4] ?? financeDemoAnswers[index] ?? 'A. 확인 후 결정한다.');
 
@@ -990,18 +1079,61 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
         {step === 'profile' && (
           <div className="max-w-5xl">
             <section className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-5">
-              {!completedPreInterviewContext && (
-                <div className="rounded-2xl border border-amber-200 dark:border-amber-900 bg-amber-50 dark:bg-amber-950/30 p-4 text-sm text-amber-800 dark:text-amber-200">
-                  심층 인터뷰를 시작하려면 사전 질문을 먼저 완료해야 합니다.
-                  <button
-                    type="button"
-                    onClick={onGoToPreQuestion}
-                    className="ml-3 inline-flex items-center px-3 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold"
-                  >
-                    사전 질문으로 이동
-                  </button>
+              <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/40 p-4 space-y-3">
+                <div className="flex flex-col md:flex-row md:items-end gap-3">
+                  <label className="flex-1 space-y-1.5">
+                    <span className="text-xs font-bold text-slate-700 dark:text-slate-300">사전 질문 응답지</span>
+                    <select
+                      value={selectedPreInterviewContextId}
+                      onChange={(event) => void selectStoredPreInterviewContext(event.target.value)}
+                      className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-2.5 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    >
+                      <option value="">
+                        {completedPreInterviewContext ? '방금 완료한 응답지 사용' : '응답지를 선택하세요'}
+                      </option>
+                      {storedPreInterviewContexts.map((context) => (
+                        <option key={context.id} value={context.id}>
+                          {context.label} · {new Date(context.createdAt).toLocaleString('ko-KR')} · {context.questionCount}문항
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => void loadStoredPreInterviewContexts()}
+                      className="inline-flex items-center gap-2 px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold hover:border-indigo-300"
+                    >
+                      <RefreshCw className="w-3.5 h-3.5" />
+                      새로고침
+                    </button>
+                    <button
+                      type="button"
+                      onClick={onGoToPreQuestion}
+                      className="inline-flex items-center gap-2 px-3 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold"
+                    >
+                      사전 질문으로 이동
+                    </button>
+                  </div>
                 </div>
-              )}
+
+                {!preInterviewContext && (
+                  <p className="text-xs text-amber-700 dark:text-amber-300">
+                    심층 인터뷰를 시작하려면 저장된 사전 질문 응답지를 선택하거나 새 응답지를 생성해야 합니다.
+                  </p>
+                )}
+                {contextLoadStatus === 'loading' && (
+                  <p className="text-xs text-indigo-600 dark:text-indigo-400">응답지를 불러오는 중입니다.</p>
+                )}
+                {contextLoadStatus === 'loaded' && preInterviewContext && (
+                  <p className="text-xs text-emerald-700 dark:text-emerald-300">
+                    PreInterviewContext가 선택되었습니다.
+                  </p>
+                )}
+                {contextLoadError && (
+                  <p className="text-xs text-rose-700 dark:text-rose-300">{contextLoadError}</p>
+                )}
+              </div>
 
               <div className="flex items-start gap-3">
                 <div className="w-10 h-10 rounded-2xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
@@ -1058,7 +1190,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
               <button
                 type="button"
                 onClick={startDataCollection}
-                disabled={isCollecting || !completedPreInterviewContext}
+                disabled={isCollecting || !preInterviewContext}
                 className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-300 text-white text-xs font-bold shadow-lg shadow-indigo-500/20 transition-all"
               >
                 {isCollecting || saveStatus === 'saving' ? <RefreshCw className="w-4 h-4 animate-spin" /> : <SearchCheck className="w-4 h-4" />}

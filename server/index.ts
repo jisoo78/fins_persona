@@ -1,6 +1,7 @@
 import express from 'express';
 import { execFile } from 'node:child_process';
 import { tmpdir } from 'node:os';
+import path from 'node:path';
 import { promisify } from 'node:util';
 import type { ResultSetHeader, RowDataPacket } from 'mysql2';
 import { db, toJson } from './db';
@@ -10,6 +11,11 @@ import {
   generateFinalOutput,
   generatePersonaChatReply,
 } from './agentService';
+import {
+  listPreInterviewContexts,
+  loadPreInterviewContext,
+  savePreInterviewContext,
+} from './preInterviewContextStore';
 
 const execFileAsync = promisify(execFile);
 
@@ -163,6 +169,7 @@ const app = express();
 const port = Number(process.env.API_PORT ?? 4000);
 const sherlockCliTimeoutSeconds = Number(process.env.SHERLOCK_SITE_TIMEOUT_SECONDS ?? 5);
 const sherlockProcessTimeoutMs = Number(process.env.SHERLOCK_PROCESS_TIMEOUT_MS ?? 20000);
+const preInterviewContextStorageDir = path.resolve(process.cwd(), 'local-data/preinterview-contexts');
 
 const referenceTargetPlatformLabels = ['LinkedIn', 'X', 'Threads', 'Naver Blog', 'Tistory'];
 const sherlockSupportedTargetSites = ['LinkedIn', 'Twitter', 'threads', 'Naver'];
@@ -715,6 +722,56 @@ app.get('/api/health', async (_, res) => {
       database: 'disconnected',
       message: error instanceof Error ? error.message : 'Unknown database error',
     });
+  }
+});
+
+app.get('/api/preinterview-contexts', async (_, res) => {
+  try {
+    const contexts = await listPreInterviewContexts(preInterviewContextStorageDir);
+    res.json({ ok: true, contexts });
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      message: error instanceof Error ? error.message : 'Failed to list pre-interview contexts',
+    });
+  }
+});
+
+app.post('/api/preinterview-contexts', async (req, res) => {
+  const { context, profileName } = req.body as {
+    context?: unknown;
+    profileName?: string;
+  };
+
+  if (!context || typeof context !== 'object') {
+    res.status(400).json({ ok: false, message: 'context is required' });
+    return;
+  }
+
+  try {
+    const saved = await savePreInterviewContext({
+      context: context as Parameters<typeof savePreInterviewContext>[0]['context'],
+      profileName,
+      storageDir: preInterviewContextStorageDir,
+    });
+
+    res.status(201).json({ ok: true, context: saved });
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      message: error instanceof Error ? error.message : 'Failed to save pre-interview context',
+    });
+  }
+});
+
+app.get('/api/preinterview-contexts/:id', async (req, res) => {
+  try {
+    const stored = await loadPreInterviewContext(req.params.id, preInterviewContextStorageDir);
+    res.json({ ok: true, context: stored });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Failed to load pre-interview context';
+    const status = message.includes('Invalid pre-interview context id') ? 400 : 404;
+    res.status(status).json({ ok: false, message });
   }
 });
 
