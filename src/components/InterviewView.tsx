@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import mermaid from 'mermaid';
-import { ChatMessage, DecisionRecord, InterviewQuestion, Persona, RoleType } from '../types';
-import preQuestionData from '../data/pre_question.json';
+import { ChatMessage, DecisionRecord, InterviewQuestion, Persona, RoleType, PreInterviewContext } from '../types';
 import {
   ArrowRight,
   Bot,
@@ -19,7 +18,6 @@ import {
 } from 'lucide-react';
 
 type FlowStep = 'profile' | 'interview';
-type InterviewPhase = 'pre' | 'communication' | 'deep';
 
 interface UserProfile {
   name: string;
@@ -68,44 +66,6 @@ interface FinalInterviewOutput {
   personaPromptMarkdown?: string;
 }
 
-interface PreInterviewAnswer {
-  source_question_id: number;
-  category: string;
-  decision_dimension: string;
-  stage: string;
-  question: string;
-  selected_option_id: number;
-  answer: string;
-  rationale: string;
-  response_time_ms: number;
-  response_signal: 'strong_preference' | 'considered_preference' | 'slow_response';
-}
-
-interface CommunicationStyleAnswer {
-  bridge_question_id: 'communication_style';
-  selected_option_id: number;
-  answer: string;
-}
-
-interface PreInterviewContext {
-  meta: {
-    schema_version: 'pre_interview_context.v2';
-    target_role: 'CFO';
-    completed_at: string;
-  };
-  communication_style: CommunicationStyleAnswer;
-  categories: Record<string, Record<string, {
-    stage: string;
-    source_question_id: number;
-    question: string;
-    selected_option_id: number;
-    answer: string;
-    rationale: string;
-    response_time_ms: number;
-    response_signal: PreInterviewAnswer['response_signal'];
-  }>>;
-}
-
 interface SavedIntakeIds {
   userId: string;
   userProfileId: string;
@@ -125,27 +85,8 @@ interface AgentFinalOutputResponse {
   finalOutput?: FinalInterviewOutput;
 }
 
-interface PreQuestionOption {
-  option_id: number;
-  option_text: string;
-}
-
-interface PreQuestion {
-  pre_question_id: number;
-  category: string;
-  decision_dimension: string;
-  stage: string;
-  pre_question: string;
-  pre_options: PreQuestionOption[];
-}
-
-interface PreInterviewData {
-  pre_questions: PreQuestion[];
-}
-
 const snsDiscoveryClientTimeoutMs = 65000;
 const profileDraftStorageKey = 'decision-profile-draft';
-const preInterviewData = preQuestionData as PreInterviewData;
 
 const defaultProfile: UserProfile = {
   name: '',
@@ -204,79 +145,10 @@ const financeDemoAnswers = [
   'C. M&A는 현금흐름 훼손 가능성이 있으면 중단한다.',
 ];
 
-const communicationStyleQuestion: InterviewQuestion = {
-  id: 4101,
-  type: '객관식',
-  category: 'Communication Style',
-  question: '심층 인터뷰 결과를 정리할 때 어떤 형식을 가장 선호합니까?',
-  options: [
-    '1. 핵심 결론을 먼저 요약하고 세부 근거를 뒤에 제시한다.',
-    '2. 수치 기준, 임계값, 조건문 중심으로 정리한다.',
-    '3. 기준·낙관·비관 시나리오를 비교해 제시한다.',
-    '4. 리스크, 예외 조건, 중단 기준을 먼저 제시한다.',
-    '5. 실행 체크리스트와 다음 액션 중심으로 정리한다.',
-  ],
-};
-
 const formatTime = () => new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
-
-const createPreInterviewQuestions = (): InterviewQuestion[] =>
-  preInterviewData.pre_questions.map((question) => ({
-    id: question.pre_question_id,
-    type: '객관식',
-    category: question.category,
-    subtitle: question.stage,
-    question: question.pre_question,
-    options: question.pre_options.map((option) => `${option.option_id}. ${option.option_text}`),
-  }));
-
-const getResponseSignal = (responseTimeMs: number): PreInterviewAnswer['response_signal'] => {
-  if (responseTimeMs < 3000) return 'strong_preference';
-  if (responseTimeMs <= 10000) return 'considered_preference';
-  return 'slow_response';
-};
-
-const parseOptionId = (answerText: string) => Number(answerText.match(/^\s*(\d+)\./)?.[1] ?? 0);
 
 const isComposingKorean = (event: React.KeyboardEvent<HTMLInputElement>) =>
   event.nativeEvent.isComposing || event.keyCode === 229;
-
-const createPreInterviewContext = (
-  answers: PreInterviewAnswer[],
-  communicationStyle: CommunicationStyleAnswer,
-): PreInterviewContext => {
-  const categories = answers.reduce<PreInterviewContext['categories']>((context, answer) => {
-    const categoryAnswers = context[answer.category] ?? {};
-    const nextIndex = Object.keys(categoryAnswers).length + 1;
-
-    return {
-      ...context,
-      [answer.category]: {
-        ...categoryAnswers,
-        [`question_${nextIndex}`]: {
-          stage: answer.stage,
-          source_question_id: answer.source_question_id,
-          question: answer.question,
-          selected_option_id: answer.selected_option_id,
-          answer: answer.answer,
-          rationale: answer.rationale,
-          response_time_ms: answer.response_time_ms,
-          response_signal: answer.response_signal,
-        },
-      },
-    };
-  }, {});
-
-  return {
-    meta: {
-      schema_version: 'pre_interview_context.v2',
-      target_role: 'CFO',
-      completed_at: new Date().toISOString(),
-    },
-    communication_style: communicationStyle,
-    categories,
-  };
-};
 
 const createDeepInterviewQuestions = (context: PreInterviewContext): InterviewQuestion[] =>
   Object.entries(context.categories).flatMap(([categoryName, answers], categoryIndex) => {
@@ -395,15 +267,11 @@ ${preInterviewContext ? JSON.stringify(preInterviewContext, null, 2) : '아직 �
 const buildInitialMessages = (
   questions: InterviewQuestion[],
   systemPrompt: string,
-  phase: InterviewPhase,
 ): ChatMessage[] => [
   {
     id: 'm-brainstormer-open',
     sender: 'ai',
-    text:
-      phase === 'pre'
-        ? `프로필과 공개 데이터 신호를 반영해 사전 질문을 시작합니다.\n\n${systemPrompt}`
-        : `PreInterviewContext를 반영해 심층 인터뷰를 시작합니다.\n\n${systemPrompt}`,
+    text: `PreInterviewContext를 반영해 심층 인터뷰를 시작합니다.\n\n${systemPrompt}`,
     timestamp: formatTime(),
   },
   {
@@ -538,15 +406,11 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
   onGoToPersonas,
 }) => {
   const [step, setStep] = useState<FlowStep>('profile');
-  const [interviewPhase, setInterviewPhase] = useState<InterviewPhase>('deep');
   const [profile, setProfile] = useState<UserProfile>(() => loadInitialProfile());
   const [activeQuestions, setActiveQuestions] = useState<InterviewQuestion[]>([]);
-  const [preInterviewAnswers, setPreInterviewAnswers] = useState<PreInterviewAnswer[]>([]);
   const [preInterviewContext, setPreInterviewContext] = useState<PreInterviewContext | null>(completedPreInterviewContext);
-  const [communicationStyle, setCommunicationStyle] = useState<CommunicationStyleAnswer | null>(null);
   const [publicData, setPublicData] = useState<PublicDataSnapshot>({ status: 'idle', accounts: [], signals: [], posts: [] });
   const [inputText, setInputText] = useState('');
-  const [pendingPreAnswer, setPendingPreAnswer] = useState<string | null>(null);
   const [currentQIndex, setCurrentQIndex] = useState(0);
   const [isThinking, setIsThinking] = useState(false);
   const [isCollecting, setIsCollecting] = useState(false);
@@ -738,12 +602,9 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
 
       setPublicData(snapshot);
       setActiveQuestions(questions);
-      setMessages(buildInitialMessages(questions, prompt, 'deep'));
+      setMessages(buildInitialMessages(questions, prompt));
       setCurrentQIndex(0);
-      setInterviewPhase('deep');
-      setPreInterviewAnswers([]);
       setPreInterviewContext(completedPreInterviewContext);
-      setCommunicationStyle(null);
       setIsComplete(false);
       setFinalOutput(null);
       setStep('interview');
@@ -761,11 +622,8 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
     window.sessionStorage.removeItem(profileDraftStorageKey);
     setStep('profile');
     setProfile(defaultProfile);
-    setActiveQuestions(createPreInterviewQuestions());
-    setInterviewPhase('pre');
-    setPreInterviewAnswers([]);
+    setActiveQuestions([]);
     setPreInterviewContext(null);
-    setCommunicationStyle(null);
     setPublicData({ status: 'idle', accounts: [], signals: [], posts: [] });
     setMessages([]);
     setSaveStatus('idle');
@@ -777,7 +635,6 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
     setIsComplete(false);
     setFinalOutput(null);
     setInputText('');
-    setPendingPreAnswer(null);
     setDraftName('재무 의사결정 AI 참모');
     setDraftRole('재무');
     setDraftBadge('CFO Decision Advisor');
@@ -901,26 +758,6 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
     };
   }, [algorithmTree, isComplete]);
 
-  const transitionToDeepInterview = async (
-    nextPreAnswers: PreInterviewAnswer[],
-    nextCommunicationStyle: CommunicationStyleAnswer,
-  ) => {
-    const context = createPreInterviewContext(nextPreAnswers, nextCommunicationStyle);
-    const deepQuestions = await generateAgentDeepQuestions(context);
-    const prompt = createBrainstormerPrompt(profile, deepQuestions.length, publicData, context);
-
-    setPreInterviewAnswers(nextPreAnswers);
-    setPreInterviewContext(context);
-    setCommunicationStyle(nextCommunicationStyle);
-    setInterviewPhase('deep');
-    setActiveQuestions(deepQuestions);
-    setCurrentQIndex(0);
-    setMessages(buildInitialMessages(deepQuestions, prompt, 'deep'));
-    setPendingPreAnswer(null);
-    setInputText('');
-    questionStartedAtRef.current = Date.now();
-  };
-
   const handleSendAnswer = (answerText: string) => {
     if (!answerText.trim() || isThinking || isDemoRunning || isComplete || step !== 'interview') return;
     const displayAnswer = answerText;
@@ -1015,7 +852,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
         setSaveError(error instanceof Error ? error.message : '데모 데이터 DB 저장에 실패했습니다.');
       }
 
-      const transcript = buildInitialMessages(demoQuestions, prompt, 'deep');
+      const transcript = buildInitialMessages(demoQuestions, prompt);
 
       demoQuestions.forEach((question, index) => {
         transcript.push({
@@ -1048,7 +885,6 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
 
       setPublicData(demoSnapshot);
       setActiveQuestions(demoQuestions);
-      setInterviewPhase('deep');
       setPreInterviewContext(demoContext);
       setMessages(transcript);
       setCurrentQIndex(demoQuestions.length - 1);
@@ -1112,7 +948,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
         <div>
           <div className="flex flex-wrap items-center gap-2">
             <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800">
-              Step {step === 'profile' ? '1. 데이터 수집' : interviewPhase === 'pre' ? '2. 사전 질문' : interviewPhase === 'communication' ? '3. 보고 형식' : '4. 심층 인터뷰'}
+              Step {step === 'profile' ? '1. 데이터 수집' : '2. 심층 인터뷰'}
             </span>
             <span className="text-xs font-semibold text-slate-500">
               {step === 'profile' ? '프로필 입력 전' : `문항 ${Math.min(totalQuestions, currentQIndex + 1)} / ${totalQuestions}`}

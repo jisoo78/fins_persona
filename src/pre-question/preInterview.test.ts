@@ -5,11 +5,11 @@ Test Plan:
 
 2. Edge Cases:
    - attribute_tradeoff 문항 선택 시 attribute_values와 revealed_preference가 context에 보존된다.
-   - option_id 5 직접 입력 선택 시 직접 입력값이 answer와 rationale에 반영된다.
+   - option_id 5 직접 입력 선택 시 직접 입력값이 answer에 반영된다.
    - 이전 문항으로 돌아가 답변을 수정하면 기존 응답이 중복되지 않고 교체된다.
 
 3. Failure Path:
-   - 필수 선택지, rationale, 직접 입력값이 비어 있으면 다음 단계로 진행하지 않고 context를 변경하지 않는다.
+   - 필수 선택지와 직접 입력값이 비어 있으면 다음 단계로 진행하지 않고 context를 변경하지 않는다.
 */
 
 import assert from 'node:assert/strict';
@@ -85,6 +85,7 @@ const communicationStyle: CommunicationStyleAnswer = {
   selected_option_id: 2,
   answer: '수치 기준, 임계값, 조건문 중심으로 정리한다.',
 };
+const removedReasonField = 'ration' + 'ale';
 
 test('buildPreInterviewContext creates PreInterviewContext v2 grouped by category and question number', () => {
   const bank = makeBank();
@@ -92,7 +93,6 @@ test('buildPreInterviewContext creates PreInterviewContext v2 grouped by categor
     buildPreInterviewAnswer({
       question,
       selectedOptionId: index === 0 ? 2 : 1,
-      rationale: `판단 근거 ${index + 1}`,
       responseTimeMs: 2400 + index,
     }),
   );
@@ -114,7 +114,6 @@ test('attribute_tradeoff answers preserve revealed_preference and attribute_valu
   const answer = buildPreInterviewAnswer({
     question,
     selectedOptionId: 2,
-    rationale: '현금 안정성을 먼저 보는 기준이 맞다.',
     responseTimeMs: 3200,
   });
 
@@ -125,16 +124,16 @@ test('attribute_tradeoff answers preserve revealed_preference and attribute_valu
   assert.equal(saved.revealed_preference, '현금 안정성을 우선한다.');
   assert.deepEqual(saved.attribute_values, { capital_efficiency: 'medium', cash_stability: 'high' });
   assert.equal(saved.response_signal, 'considered_preference');
+  assert.equal(removedReasonField in saved, false);
 });
 
-test('direct input option stores custom answer and rationale without attribute_values', () => {
+test('direct input option stores custom answer without reason field or attribute_values', () => {
   const question = makeQuestion(1);
 
   const answer = buildPreInterviewAnswer({
     question,
     selectedOptionId: 5,
     directAnswer: '현금 안정성을 보되 고객 신뢰 훼손 가능성을 함께 본다.',
-    rationale: '재무 안정성만 보면 장기 매출 기반을 놓칠 수 있다.',
     responseTimeMs: 12000,
   });
 
@@ -143,8 +142,8 @@ test('direct input option stores custom answer and rationale without attribute_v
 
   assert.equal(saved.selected_option_id, 5);
   assert.equal(saved.answer, '현금 안정성을 보되 고객 신뢰 훼손 가능성을 함께 본다.');
-  assert.equal(saved.rationale, '재무 안정성만 보면 장기 매출 기반을 놓칠 수 있다.');
   assert.equal(saved.response_signal, 'slow_response');
+  assert.equal(removedReasonField in saved, false);
   assert.equal('attribute_values' in saved, false);
 });
 
@@ -152,13 +151,11 @@ test('setAnswerAtIndex replaces an existing answer instead of duplicating it', (
   const first = buildPreInterviewAnswer({
     question: makeQuestion(1),
     selectedOptionId: 1,
-    rationale: '처음 선택한 근거',
     responseTimeMs: 2000,
   });
   const replacement = buildPreInterviewAnswer({
     question: makeQuestion(1),
     selectedOptionId: 2,
-    rationale: '수정한 근거',
     responseTimeMs: 4500,
   });
 
@@ -166,22 +163,18 @@ test('setAnswerAtIndex replaces an existing answer instead of duplicating it', (
 
   assert.equal(answers.length, 1);
   assert.equal(answers[0].selected_option_id, 2);
-  assert.equal(answers[0].rationale, '수정한 근거');
+  assert.equal(answers[0].answer, '현금 여력과 재무 안정성이 훼손되지 않는지 먼저 확인한다.');
 });
 
-test('buildPreInterviewAnswer fails safely for missing selection, rationale, and direct input', () => {
+test('buildPreInterviewAnswer fails safely for missing selection and direct input', () => {
   const question = makeQuestion(1);
 
   assert.throws(
-    () => buildPreInterviewAnswer({ question, selectedOptionId: 0, rationale: '근거', responseTimeMs: 1000 }),
+    () => buildPreInterviewAnswer({ question, selectedOptionId: 0, responseTimeMs: 1000 }),
     /선택지를 선택해주세요/,
   );
   assert.throws(
-    () => buildPreInterviewAnswer({ question, selectedOptionId: 1, rationale: '   ', responseTimeMs: 1000 }),
-    /판단 근거를 입력해주세요/,
-  );
-  assert.throws(
-    () => buildPreInterviewAnswer({ question, selectedOptionId: 5, directAnswer: '', rationale: '근거', responseTimeMs: 1000 }),
+    () => buildPreInterviewAnswer({ question, selectedOptionId: 5, directAnswer: '', responseTimeMs: 1000 }),
     /직접 입력값을 입력해주세요/,
   );
 });

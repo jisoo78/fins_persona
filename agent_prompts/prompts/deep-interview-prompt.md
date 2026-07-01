@@ -13,7 +13,6 @@ You receive `PreInterviewContext v2`.
 - `stage`: one of `preference`, `context_shift`, `core_value`, `red_line`, `priority_order`
 - `question`: the original pre-interview question
 - `answer`: the user's selected answer
-- `rationale`: the user's direct reason
 - `response_time_ms`: answer response time
 - `response_signal`: `strong_preference`, `considered_preference`, or `slow_response`
 
@@ -28,7 +27,6 @@ Example:
       "stage": "preference",
       "question": "Question text",
       "answer": "User answer",
-      "rationale": "User rationale",
       "response_time_ms": 2400,
       "response_signal": "strong_preference"
     }

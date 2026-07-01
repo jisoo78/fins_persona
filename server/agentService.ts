@@ -15,7 +15,6 @@ type ContextQuestion = {
   question: string;
   answer: string;
   stage?: string;
-  rationale?: string;
   response_time_ms?: number;
   response_signal?: string;
   selected_option_id?: number;
@@ -229,7 +228,7 @@ PreInterviewContext:
 
 규칙:
 - 각 카테고리마다 identity 또는 cross_dimension 축의 심층 질문 2개를 만든다.
-- 사전 질문의 개별 답변을 반복하지 말고 여러 답변, rationale, response_signal 간 관계를 종합한다.
+- 사전 질문의 개별 답변을 반복하지 말고 여러 답변, stage, response_signal 간 관계를 종합한다.
 - 모든 질문은 객관식이다.
 - 선택지는 A-D 4개와 마지막 "E. 기타 — 직접 입력"이다.
 - slow_response는 참고 메타데이터로만 사용하고 별도 질문 축으로 만들지 않는다.

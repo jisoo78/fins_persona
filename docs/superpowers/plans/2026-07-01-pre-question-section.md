@@ -69,11 +69,9 @@ Test Plan:
 
 2. Edge Cases:
    - attribute_tradeoff 문항 선택 시 attribute_values와 revealed_preference가 context에 보존된다.
-   - option_id 5 직접 입력 선택 시 직접 입력값이 answer와 rationale에 반영된다.
    - 이전 문항으로 돌아가 답변을 수정하면 기존 응답이 중복되지 않고 교체된다.
 
 3. Failure Path:
-   - 필수 선택지, rationale, 직접 입력값이 비어 있으면 다음 단계로 진행하지 않고 context를 변경하지 않는다.
 */
 
 import assert from 'node:assert/strict';
@@ -156,7 +154,6 @@ test('buildPreInterviewContext creates PreInterviewContext v2 grouped by categor
     buildPreInterviewAnswer({
       question,
       selectedOptionId: index === 0 ? 2 : 1,
-      rationale: `판단 근거 ${index + 1}`,
       responseTimeMs: 2400 + index,
     }),
   );
@@ -178,7 +175,6 @@ test('attribute_tradeoff answers preserve revealed_preference and attribute_valu
   const answer = buildPreInterviewAnswer({
     question,
     selectedOptionId: 2,
-    rationale: '현금 안정성을 먼저 보는 기준이 맞다.',
     responseTimeMs: 3200,
   });
 
@@ -191,14 +187,12 @@ test('attribute_tradeoff answers preserve revealed_preference and attribute_valu
   assert.equal(saved.response_signal, 'considered_preference');
 });
 
-test('direct input option stores custom answer and rationale without attribute_values', () => {
   const question = makeQuestion(1);
 
   const answer = buildPreInterviewAnswer({
     question,
     selectedOptionId: 5,
     directAnswer: '현금 안정성을 보되 고객 신뢰 훼손 가능성을 함께 본다.',
-    rationale: '재무 안정성만 보면 장기 매출 기반을 놓칠 수 있다.',
     responseTimeMs: 12000,
   });
 
@@ -207,7 +201,6 @@ test('direct input option stores custom answer and rationale without attribute_v
 
   assert.equal(saved.selected_option_id, 5);
   assert.equal(saved.answer, '현금 안정성을 보되 고객 신뢰 훼손 가능성을 함께 본다.');
-  assert.equal(saved.rationale, '재무 안정성만 보면 장기 매출 기반을 놓칠 수 있다.');
   assert.equal(saved.response_signal, 'slow_response');
   assert.equal('attribute_values' in saved, false);
 });
@@ -216,13 +209,11 @@ test('setAnswerAtIndex replaces an existing answer instead of duplicating it', (
   const first = buildPreInterviewAnswer({
     question: makeQuestion(1),
     selectedOptionId: 1,
-    rationale: '처음 선택한 근거',
     responseTimeMs: 2000,
   });
   const replacement = buildPreInterviewAnswer({
     question: makeQuestion(1),
     selectedOptionId: 2,
-    rationale: '수정한 근거',
     responseTimeMs: 4500,
   });
 
@@ -230,22 +221,16 @@ test('setAnswerAtIndex replaces an existing answer instead of duplicating it', (
 
   assert.equal(answers.length, 1);
   assert.equal(answers[0].selected_option_id, 2);
-  assert.equal(answers[0].rationale, '수정한 근거');
 });
 
-test('buildPreInterviewAnswer fails safely for missing selection, rationale, and direct input', () => {
   const question = makeQuestion(1);
 
   assert.throws(
-    () => buildPreInterviewAnswer({ question, selectedOptionId: 0, rationale: '근거', responseTimeMs: 1000 }),
     /선택지를 선택해주세요/,
   );
   assert.throws(
-    () => buildPreInterviewAnswer({ question, selectedOptionId: 1, rationale: '   ', responseTimeMs: 1000 }),
-    /판단 근거를 입력해주세요/,
   );
   assert.throws(
-    () => buildPreInterviewAnswer({ question, selectedOptionId: 5, directAnswer: '', rationale: '근거', responseTimeMs: 1000 }),
     /직접 입력값을 입력해주세요/,
   );
 });
@@ -332,7 +317,6 @@ export interface PreInterviewAnswer {
   question: string;
   selected_option_id: number;
   answer: string;
-  rationale: string;
   response_time_ms: number;
   response_signal: ResponseSignal;
   question_mode?: 'attribute_tradeoff';
@@ -352,7 +336,6 @@ export interface PreInterviewContextQuestion {
   question: string;
   selected_option_id: number;
   answer: string;
-  rationale: string;
   response_time_ms: number;
   response_signal: ResponseSignal;
   question_mode?: 'attribute_tradeoff';
@@ -468,20 +451,17 @@ export const buildPreInterviewAnswer = ({
   question,
   selectedOptionId,
   directAnswer = '',
-  rationale,
   responseTimeMs,
 }: {
   question: PreQuestion;
   selectedOptionId: number;
   directAnswer?: string;
-  rationale: string;
   responseTimeMs: number;
 }): PreInterviewAnswer => {
   if (!selectedOptionId) {
     throw new Error('선택지를 선택해주세요.');
   }
 
-  assertNonEmpty(rationale, '판단 근거를 입력해주세요.');
 
   const selectedOption = question.pre_options.find((option) => option.option_id === selectedOptionId);
   if (!selectedOption) {
@@ -501,7 +481,6 @@ export const buildPreInterviewAnswer = ({
     question: question.pre_question,
     selected_option_id: selectedOptionId,
     answer: isDirectInput ? directAnswer.trim() : selectedOption.option_text,
-    rationale: rationale.trim(),
     response_time_ms: responseTimeMs,
     response_signal: getResponseSignal(responseTimeMs),
   };
@@ -541,7 +520,6 @@ export const buildPreInterviewContext = (
       question: answer.question,
       selected_option_id: answer.selected_option_id,
       answer: answer.answer,
-      rationale: answer.rationale,
       response_time_ms: answer.response_time_ms,
       response_signal: answer.response_signal,
     };
@@ -756,7 +734,6 @@ export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
   const [answers, setAnswers] = useState<PreInterviewAnswer[]>([]);
   const [selectedOptionId, setSelectedOptionId] = useState<number>(0);
   const [directAnswer, setDirectAnswer] = useState('');
-  const [rationale, setRationale] = useState('');
   const [communicationStyle, setCommunicationStyle] = useState<CommunicationStyleAnswer | null>(null);
   const [errorMessage, setErrorMessage] = useState('');
   const questionStartedAtRef = useRef(Date.now());
@@ -768,7 +745,6 @@ export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
   const resetInputs = () => {
     setSelectedOptionId(0);
     setDirectAnswer('');
-    setRationale('');
     setErrorMessage('');
     questionStartedAtRef.current = Date.now();
   };
@@ -782,7 +758,6 @@ export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
 
     setSelectedOptionId(savedAnswer.selected_option_id);
     setDirectAnswer(savedAnswer.selected_option_id === 5 ? savedAnswer.answer : '');
-    setRationale(savedAnswer.rationale);
     setErrorMessage('');
     questionStartedAtRef.current = Date.now();
   };
@@ -808,7 +783,6 @@ export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
         question: currentQuestion,
         selectedOptionId,
         directAnswer,
-        rationale,
         responseTimeMs: Date.now() - questionStartedAtRef.current,
       });
       const nextAnswers = setAnswerAtIndex(answers, currentIndex, nextAnswer);
@@ -826,7 +800,6 @@ export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
       if (savedNextAnswer) {
         setSelectedOptionId(savedNextAnswer.selected_option_id);
         setDirectAnswer(savedNextAnswer.selected_option_id === 5 ? savedNextAnswer.answer : '');
-        setRationale(savedNextAnswer.rationale);
         setErrorMessage('');
         questionStartedAtRef.current = Date.now();
       } else {
@@ -1010,10 +983,7 @@ export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
             )}
 
             <label className="block space-y-1.5">
-              <span className="text-xs font-bold text-slate-700 dark:text-slate-300">판단 근거</span>
               <textarea
-                value={rationale}
-                onChange={(event) => setRationale(event.target.value)}
                 rows={3}
                 className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/40 px-3 py-2.5 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
                 placeholder="이 선택지가 본인의 판단 기준에 맞는 이유를 한 문장 이상 입력하세요."
@@ -1170,7 +1140,6 @@ interface PreInterviewAnswer {
   question: string;
   selected_option_id: number;
   answer: string;
-  rationale: string;
   response_time_ms: number;
   response_signal: 'strong_preference' | 'considered_preference' | 'slow_response';
 }
@@ -1194,7 +1163,6 @@ interface PreInterviewContext {
     question: string;
     selected_option_id: number;
     answer: string;
-    rationale: string;
     response_time_ms: number;
     response_signal: PreInterviewAnswer['response_signal'];
   }>>;
@@ -1260,7 +1228,6 @@ const createPreInterviewContext = (
           question: answer.question,
           selected_option_id: answer.selected_option_id,
           answer: answer.answer,
-          rationale: answer.rationale,
           response_time_ms: answer.response_time_ms,
           response_signal: answer.response_signal,
         },
@@ -1568,7 +1535,6 @@ Open the Vite URL and verify this exact flow:
 1. Sidebar shows `사전 질문` above `인터뷰`.
 2. Click `사전 질문`.
 3. First question renders as a table because its `question_mode` is `attribute_tradeoff`.
-4. Select a table row, enter 판단 근거, and click `다음`.
 5. Click `이전`, change the answer, and click `다음`; the UI should not duplicate the answer.
 6. Choose `E. 기타 (직접입력)` on a question, leave direct input blank, and click `다음`; an error message appears and progress does not advance.
 7. Complete the remaining questions.

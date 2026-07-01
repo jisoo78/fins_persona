@@ -92,20 +92,16 @@ export const buildPreInterviewAnswer = ({
   question,
   selectedOptionId,
   directAnswer = '',
-  rationale,
   responseTimeMs,
 }: {
   question: PreQuestion;
   selectedOptionId: number;
   directAnswer?: string;
-  rationale: string;
   responseTimeMs: number;
 }): PreInterviewAnswer => {
   if (!selectedOptionId) {
     throw new Error('선택지를 선택해주세요.');
   }
-
-  assertNonEmpty(rationale, '판단 근거를 입력해주세요.');
 
   const selectedOption = question.pre_options.find((option) => option.option_id === selectedOptionId);
   if (!selectedOption) {
@@ -125,7 +121,6 @@ export const buildPreInterviewAnswer = ({
     question: question.pre_question,
     selected_option_id: selectedOptionId,
     answer: isDirectInput ? directAnswer.trim() : selectedOption.option_text,
-    rationale: rationale.trim(),
     response_time_ms: responseTimeMs,
     response_signal: getResponseSignal(responseTimeMs),
   };
@@ -165,7 +160,6 @@ export const buildPreInterviewContext = (
       question: answer.question,
       selected_option_id: answer.selected_option_id,
       answer: answer.answer,
-      rationale: answer.rationale,
       response_time_ms: answer.response_time_ms,
       response_signal: answer.response_signal,
     };

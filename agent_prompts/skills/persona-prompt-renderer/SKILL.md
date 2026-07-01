@@ -16,7 +16,7 @@ description: Use when creating a final Markdown persona prompt from PreInterview
 1. `PreInterviewContext v2`
    - 사전 질문 40개 응답
    - `communication_style` 브릿지 질문 1개 응답
-   - `stage`, `answer`, `rationale`, `response_time_ms`, `response_signal`
+   - `stage`, `answer`, `response_time_ms`, `response_signal`
 
 2. `DeepInterviewResult`
    - `identity` 질문/응답/도출 원칙

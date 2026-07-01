@@ -126,7 +126,7 @@ export const interviewQuestions: InterviewQuestion[] = [
     id: 2,
     type: '주관식',
     category: '위기 대응 패턴',
-    question: '최근 회사 운영에서 가장 뼈아팠거나 결정하기 어려웠던 의사결정은 무엇이었나요? 그때의 판단 근거를 적어주세요.',
+    question: '최근 회사 운영에서 가장 뼈아팠거나 결정하기 어려웠던 의사결정은 무엇이었나요? 그때 어떤 기준으로 판단했나요?',
     subtitle: 'AI가 대표님의 고유한 위기 극복 패턴과 후회 포인트를 학습합니다.'
   },
   {

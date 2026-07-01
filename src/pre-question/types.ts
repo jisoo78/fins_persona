@@ -42,7 +42,6 @@ export interface PreInterviewAnswer {
   question: string;
   selected_option_id: number;
   answer: string;
-  rationale: string;
   response_time_ms: number;
   response_signal: ResponseSignal;
   question_mode?: 'attribute_tradeoff';
@@ -62,7 +61,6 @@ export interface PreInterviewContextQuestion {
   question: string;
   selected_option_id: number;
   answer: string;
-  rationale: string;
   response_time_ms: number;
   response_signal: ResponseSignal;
   question_mode?: 'attribute_tradeoff';

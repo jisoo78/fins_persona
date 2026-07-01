@@ -120,13 +120,12 @@ PreQuestionBank
   "question": "질문 내용",
   "selected_option_id": 4,
   "answer": "시장 선점이 중요하다면 초기부터 충분한 규모로 투자하고 빠르게 성과를 판단한다.",
-  "rationale": "초기 시장에서 점유율을 놓치면 이후 자본 효율도 낮아진다고 보기 때문이다.",
   "response_time_ms": 2400,
   "response_signal": "strong_preference"
 }
 ```
 
-`rationale`은 항상 포함한다. 사용자가 A-D 선택지를 고른 경우에도 판단 근거를 입력받는다. `option_id: 5`를 선택하면 직접 입력값을 `answer`에 저장하고, 같은 내용을 `rationale`에도 반영할 수 있다.
+`option_id: 5`를 선택하면 직접 입력값을 `answer`에 저장한다.
 
 ## 6. 응답 시간 신호
 
@@ -206,7 +205,6 @@ PreQuestionBank
         "question": "질문 내용",
         "selected_option_id": 4,
         "answer": "사용자 응답",
-        "rationale": "사용자 판단 근거",
         "response_time_ms": 2400,
         "response_signal": "strong_preference"
       },
@@ -216,7 +214,6 @@ PreQuestionBank
         "question": "질문 내용",
         "selected_option_id": 2,
         "answer": "사용자 응답",
-        "rationale": "사용자 판단 근거",
         "response_time_ms": 11800,
         "response_signal": "slow_response"
       },
@@ -226,7 +223,6 @@ PreQuestionBank
         "question": "질문 내용",
         "selected_option_id": 1,
         "answer": "사용자 응답",
-        "rationale": "사용자 판단 근거",
         "response_time_ms": 5200,
         "response_signal": "considered_preference"
       },
@@ -236,7 +232,6 @@ PreQuestionBank
         "question": "질문 내용",
         "selected_option_id": 3,
         "answer": "사용자 응답",
-        "rationale": "사용자 판단 근거",
         "response_time_ms": 7600,
         "response_signal": "considered_preference"
       },
@@ -246,7 +241,6 @@ PreQuestionBank
         "question": "질문 내용",
         "selected_option_id": 5,
         "answer": "사용자 직접 입력",
-        "rationale": "사용자 직접 입력",
         "response_time_ms": 4100,
         "response_signal": "considered_preference"
       }

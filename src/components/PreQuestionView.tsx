@@ -52,7 +52,6 @@ export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
   const [answers, setAnswers] = useState<PreInterviewAnswer[]>([]);
   const [selectedOptionId, setSelectedOptionId] = useState<number>(0);
   const [directAnswer, setDirectAnswer] = useState('');
-  const [rationale, setRationale] = useState('');
   const [communicationStyle, setCommunicationStyle] = useState<CommunicationStyleAnswer | null>(null);
   const [errorMessage, setErrorMessage] = useState('');
   const questionStartedAtRef = useRef(Date.now());
@@ -64,7 +63,6 @@ export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
   const resetInputs = () => {
     setSelectedOptionId(0);
     setDirectAnswer('');
-    setRationale('');
     setErrorMessage('');
     questionStartedAtRef.current = Date.now();
   };
@@ -78,7 +76,6 @@ export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
 
     setSelectedOptionId(savedAnswer.selected_option_id);
     setDirectAnswer(savedAnswer.selected_option_id === 5 ? savedAnswer.answer : '');
-    setRationale(savedAnswer.rationale);
     setErrorMessage('');
     questionStartedAtRef.current = Date.now();
   };
@@ -104,7 +101,6 @@ export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
         question: currentQuestion,
         selectedOptionId,
         directAnswer,
-        rationale,
         responseTimeMs: Date.now() - questionStartedAtRef.current,
       });
       const nextAnswers = setAnswerAtIndex(answers, currentIndex, nextAnswer);
@@ -122,7 +118,6 @@ export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
       if (savedNextAnswer) {
         setSelectedOptionId(savedNextAnswer.selected_option_id);
         setDirectAnswer(savedNextAnswer.selected_option_id === 5 ? savedNextAnswer.answer : '');
-        setRationale(savedNextAnswer.rationale);
         setErrorMessage('');
         questionStartedAtRef.current = Date.now();
       } else {
@@ -305,16 +300,6 @@ export const PreQuestionView: React.FC<PreQuestionViewProps> = ({
               </label>
             )}
 
-            <label className="block space-y-1.5">
-              <span className="text-xs font-bold text-slate-700 dark:text-slate-300">판단 근거</span>
-              <textarea
-                value={rationale}
-                onChange={(event) => setRationale(event.target.value)}
-                rows={3}
-                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/40 px-3 py-2.5 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
-                placeholder="이 선택지가 본인의 판단 기준에 맞는 이유를 한 문장 이상 입력하세요."
-              />
-            </label>
           </>
         )}
 
