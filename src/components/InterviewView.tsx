@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import mermaid from 'mermaid';
 import { ChatMessage, DecisionRecord, InterviewQuestion, Persona, RoleType } from '../types';
-import preQuestionData from '../../pre_question.json';
+import preQuestionData from '../data/pre_question.json';
 import {
   ArrowRight,
   Bot,
@@ -520,6 +520,8 @@ interface InterviewViewProps {
   messages: ChatMessage[];
   setMessages: React.Dispatch<React.SetStateAction<ChatMessage[]>>;
   decisions: DecisionRecord[];
+  preInterviewContext: PreInterviewContext | null;
+  onGoToPreQuestion: () => void;
   onCreatePersona: (persona: Persona) => void | Promise<void>;
   onAddHistoryRecord: (record: DecisionRecord) => void;
   onGoToPersonas: () => void;
@@ -529,16 +531,18 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
   messages,
   setMessages,
   decisions,
+  preInterviewContext: completedPreInterviewContext,
+  onGoToPreQuestion,
   onCreatePersona,
   onAddHistoryRecord,
   onGoToPersonas,
 }) => {
   const [step, setStep] = useState<FlowStep>('profile');
-  const [interviewPhase, setInterviewPhase] = useState<InterviewPhase>('pre');
+  const [interviewPhase, setInterviewPhase] = useState<InterviewPhase>('deep');
   const [profile, setProfile] = useState<UserProfile>(() => loadInitialProfile());
-  const [activeQuestions, setActiveQuestions] = useState<InterviewQuestion[]>(() => createPreInterviewQuestions());
+  const [activeQuestions, setActiveQuestions] = useState<InterviewQuestion[]>([]);
   const [preInterviewAnswers, setPreInterviewAnswers] = useState<PreInterviewAnswer[]>([]);
-  const [preInterviewContext, setPreInterviewContext] = useState<PreInterviewContext | null>(null);
+  const [preInterviewContext, setPreInterviewContext] = useState<PreInterviewContext | null>(completedPreInterviewContext);
   const [communicationStyle, setCommunicationStyle] = useState<CommunicationStyleAnswer | null>(null);
   const [publicData, setPublicData] = useState<PublicDataSnapshot>({ status: 'idle', accounts: [], signals: [], posts: [] });
   const [inputText, setInputText] = useState('');
@@ -591,6 +595,10 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
   useEffect(() => {
     window.sessionStorage.setItem(profileDraftStorageKey, JSON.stringify(profile));
   }, [profile]);
+
+  useEffect(() => {
+    setPreInterviewContext(completedPreInterviewContext);
+  }, [completedPreInterviewContext]);
 
   const discoverPublicData = async (): Promise<PublicDataSnapshot> => {
     const controller = new AbortController();
@@ -711,24 +719,30 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
   };
 
   const startDataCollection = async () => {
+    if (!completedPreInterviewContext) {
+      setSaveStatus('failed');
+      setSaveError('사전 질문을 먼저 완료해주세요.');
+      return;
+    }
+
     setIsCollecting(true);
     setSaveStatus('idle');
     setSaveError('');
 
     try {
       const snapshot = await discoverPublicData();
-      const questions = createPreInterviewQuestions();
-      const prompt = createBrainstormerPrompt(profile, questions.length, snapshot);
+      const questions = await generateAgentDeepQuestions(completedPreInterviewContext);
+      const prompt = createBrainstormerPrompt(profile, questions.length, snapshot, completedPreInterviewContext);
 
       await saveProfileIntake(snapshot, questions, prompt);
 
       setPublicData(snapshot);
       setActiveQuestions(questions);
-      setMessages(buildInitialMessages(questions, prompt, 'pre'));
+      setMessages(buildInitialMessages(questions, prompt, 'deep'));
       setCurrentQIndex(0);
-      setInterviewPhase('pre');
+      setInterviewPhase('deep');
       setPreInterviewAnswers([]);
-      setPreInterviewContext(null);
+      setPreInterviewContext(completedPreInterviewContext);
       setCommunicationStyle(null);
       setIsComplete(false);
       setFinalOutput(null);
@@ -909,12 +923,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
 
   const handleSendAnswer = (answerText: string) => {
     if (!answerText.trim() || isThinking || isDemoRunning || isComplete || step !== 'interview') return;
-    const currentQuestion = activeQuestions[currentQIndex];
-    const preAnswerText = interviewPhase === 'pre' ? pendingPreAnswer : null;
-    const responseTimeMs = Date.now() - questionStartedAtRef.current;
-    const displayAnswer = preAnswerText
-      ? `${preAnswerText}\n근거: ${answerText}`
-      : answerText;
+    const displayAnswer = answerText;
 
     const userMsg: ChatMessage = {
       id: `u-${Date.now()}`,
@@ -926,76 +935,10 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
 
     setMessages((prev) => [...prev, userMsg]);
     setInputText('');
-    setPendingPreAnswer(null);
     setIsThinking(true);
 
     window.setTimeout(async () => {
       const nextIndex = currentQIndex + 1;
-      if (interviewPhase === 'pre') {
-        if (!preAnswerText) {
-          setIsThinking(false);
-          return;
-        }
-
-        const sourceQuestion = preInterviewData.pre_questions.find((question) => question.pre_question_id === currentQuestion?.id);
-        const selectedOptionId = parseOptionId(preAnswerText);
-        const isOtherAnswer = selectedOptionId === 5;
-        const nextPreAnswers = [
-          ...preInterviewAnswers,
-          {
-            source_question_id: sourceQuestion?.pre_question_id ?? currentQuestion?.id ?? 0,
-            category: sourceQuestion?.category ?? currentQuestion?.category ?? '기타',
-            decision_dimension: sourceQuestion?.decision_dimension ?? 'unknown',
-            stage: sourceQuestion?.stage ?? currentQuestion?.subtitle ?? 'unknown',
-            question: sourceQuestion?.pre_question ?? currentQuestion?.question ?? '질문',
-            selected_option_id: selectedOptionId,
-            answer: isOtherAnswer ? answerText : preAnswerText.replace(/^\s*\d+\.\s*/, ''),
-            rationale: answerText,
-            response_time_ms: responseTimeMs,
-            response_signal: getResponseSignal(responseTimeMs),
-          },
-        ];
-
-        if (nextIndex < totalQuestions) {
-          setPreInterviewAnswers(nextPreAnswers);
-          setCurrentQIndex(nextIndex);
-          const nextQ = activeQuestions[nextIndex];
-          questionStartedAtRef.current = Date.now();
-          setMessages((prev) => [
-            ...prev,
-            {
-              id: `ai-${Date.now()}`,
-              sender: 'ai',
-              text: `답변을 기록했습니다.\n\n${nextQ.question}`,
-              timestamp: formatTime(),
-              questionType: nextQ.type,
-              options: nextQ.options,
-            },
-          ]);
-          setIsThinking(false);
-          return;
-        }
-
-        setPreInterviewAnswers(nextPreAnswers);
-        setInterviewPhase('communication');
-        setActiveQuestions([communicationStyleQuestion]);
-        setCurrentQIndex(0);
-        questionStartedAtRef.current = Date.now();
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: `ai-communication-${Date.now()}`,
-            sender: 'ai',
-            text: `사전 질문 40개가 완료되었습니다.\n\n${communicationStyleQuestion.question}`,
-            timestamp: formatTime(),
-            questionType: communicationStyleQuestion.type,
-            options: communicationStyleQuestion.options,
-          },
-        ]);
-        setIsThinking(false);
-        return;
-      }
-
       if (nextIndex < totalQuestions) {
         setCurrentQIndex(nextIndex);
         const nextQ = activeQuestions[nextIndex];
@@ -1028,41 +971,17 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
   };
 
   const handleOptionAnswer = (answerText: string) => {
-    if (interviewPhase === 'communication') {
-      const nextCommunicationStyle: CommunicationStyleAnswer = {
-        bridge_question_id: 'communication_style',
-        selected_option_id: parseOptionId(answerText),
-        answer: answerText.replace(/^\s*\d+\.\s*/, ''),
-      };
-
-      const userMsg: ChatMessage = {
-        id: `u-${Date.now()}`,
-        sender: 'user',
-        text: answerText,
-        timestamp: formatTime(),
-      };
-
-      setMessages((prev) => [...prev, userMsg]);
-      setIsThinking(true);
-
-      window.setTimeout(async () => {
-        await transitionToDeepInterview(preInterviewAnswers, nextCommunicationStyle);
-        setIsThinking(false);
-      }, 500);
-      return;
-    }
-
-    if (interviewPhase === 'pre') {
-      setPendingPreAnswer(answerText);
-      setInputText('');
-      return;
-    }
-
     handleSendAnswer(answerText);
   };
 
   const runDemoFlow = async () => {
     if (isDemoRunning || isThinking) return;
+    if (!completedPreInterviewContext) {
+      setSaveStatus('failed');
+      setSaveError('데모 실행 전에 사전 질문을 완료해주세요.');
+      return;
+    }
+
     const demoProfileContext: UserProfile = {
       ...profile,
       name: profile.name || '사용자',
@@ -1073,30 +992,7 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
       snsId: profile.snsId || '@unknown',
       financeScope: profile.financeScope || '자본 배치, 투자, 리스크, 자금 운용',
     };
-    const preQuestions = createPreInterviewQuestions();
-    const demoPreAnswers: PreInterviewAnswer[] = preQuestions.map((question, index) => {
-      const sourceQuestion = preInterviewData.pre_questions.find((item) => item.pre_question_id === question.id);
-      const selectedOption = question.options?.[index % 4] ?? '1. 확인 필요';
-
-      return {
-        source_question_id: sourceQuestion?.pre_question_id ?? question.id,
-        category: sourceQuestion?.category ?? question.category,
-        decision_dimension: sourceQuestion?.decision_dimension ?? 'unknown',
-        stage: sourceQuestion?.stage ?? question.subtitle ?? 'unknown',
-        question: sourceQuestion?.pre_question ?? question.question,
-        selected_option_id: parseOptionId(selectedOption),
-        answer: selectedOption.replace(/^\s*\d+\.\s*/, ''),
-        rationale: '데모 응답: 해당 선택지가 재무 의사결정 기준을 가장 잘 드러낸다고 가정합니다.',
-        response_time_ms: 2400 + (index % 5) * 1500,
-        response_signal: getResponseSignal(2400 + (index % 5) * 1500),
-      };
-    });
-    const demoCommunicationStyle: CommunicationStyleAnswer = {
-      bridge_question_id: 'communication_style',
-      selected_option_id: 2,
-      answer: '수치 기준, 임계값, 조건문 중심으로 정리한다.',
-    };
-    const demoContext = createPreInterviewContext(demoPreAnswers, demoCommunicationStyle);
+    const demoContext = completedPreInterviewContext;
     const demoQuestions = await generateAgentDeepQuestions(demoContext);
     const answers = demoQuestions.map((question, index) => question.options?.[index % 4] ?? financeDemoAnswers[index] ?? 'A. 확인 후 결정한다.');
 
@@ -1153,8 +1049,6 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
       setPublicData(demoSnapshot);
       setActiveQuestions(demoQuestions);
       setInterviewPhase('deep');
-      setPreInterviewAnswers(demoPreAnswers);
-      setCommunicationStyle(demoCommunicationStyle);
       setPreInterviewContext(demoContext);
       setMessages(transcript);
       setCurrentQIndex(demoQuestions.length - 1);
@@ -1260,6 +1154,19 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
         {step === 'profile' && (
           <div className="max-w-5xl">
             <section className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-5">
+              {!completedPreInterviewContext && (
+                <div className="rounded-2xl border border-amber-200 dark:border-amber-900 bg-amber-50 dark:bg-amber-950/30 p-4 text-sm text-amber-800 dark:text-amber-200">
+                  심층 인터뷰를 시작하려면 사전 질문을 먼저 완료해야 합니다.
+                  <button
+                    type="button"
+                    onClick={onGoToPreQuestion}
+                    className="ml-3 inline-flex items-center px-3 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold"
+                  >
+                    사전 질문으로 이동
+                  </button>
+                </div>
+              )}
+
               <div className="flex items-start gap-3">
                 <div className="w-10 h-10 rounded-2xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
                   <UserRound className="w-5 h-5" />
@@ -1315,11 +1222,11 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
               <button
                 type="button"
                 onClick={startDataCollection}
-                disabled={isCollecting}
+                disabled={isCollecting || !completedPreInterviewContext}
                 className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-300 text-white text-xs font-bold shadow-lg shadow-indigo-500/20 transition-all"
               >
                 {isCollecting || saveStatus === 'saving' ? <RefreshCw className="w-4 h-4 animate-spin" /> : <SearchCheck className="w-4 h-4" />}
-                DB 저장 + Sherlock SNS 탐색 후 인터뷰 시작
+                DB 저장 + Sherlock SNS 탐색 후 심층 인터뷰 시작
               </button>
 
               {saveStatus === 'saved' && savedIntakeIds && (
@@ -1469,16 +1376,8 @@ export const InterviewView: React.FC<InterviewViewProps> = ({
                 if (isComposingKorean(e)) return;
                 if (e.key === 'Enter') handleSendAnswer(inputText);
               }}
-              placeholder={
-                interviewPhase === 'pre'
-                  ? pendingPreAnswer
-                    ? '선택한 답변의 판단 근거를 한 문장으로 입력'
-                    : '먼저 보기 하나를 선택해주세요'
-                  : interviewPhase === 'communication'
-                    ? '보고 형식은 보기 중 하나를 선택해주세요'
-                    : 'E. 기타를 선택했다면 한 문장으로 직접 입력'
-              }
-              disabled={isComplete || interviewPhase === 'communication' || (interviewPhase === 'pre' && !pendingPreAnswer)}
+              placeholder="E. 기타를 선택했다면 한 문장으로 직접 입력"
+              disabled={isComplete}
               className="flex-1 px-4 py-3 bg-slate-100 dark:bg-slate-800 border border-transparent focus:border-indigo-500 rounded-xl text-xs focus:outline-none text-slate-800 dark:text-slate-100 placeholder:text-slate-400 disabled:opacity-50"
             />
             <button onClick={() => handleSendAnswer(inputText)} disabled={!inputText.trim() || isThinking || isDemoRunning || isComplete} className="p-3 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-300 dark:disabled:bg-slate-800 text-white rounded-xl shadow-md transition-all flex items-center justify-center" aria-label="답변 전송">

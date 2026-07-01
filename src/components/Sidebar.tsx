@@ -1,7 +1,8 @@
 import React from 'react';
 import { TabType } from '../types';
 import { 
-  LayoutDashboard, 
+  LayoutDashboard,
+  ClipboardList,
   MessageSquareText, 
   Users, 
   History, 
@@ -18,6 +19,7 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
   const navItems: { id: TabType; label: string; icon: React.ReactNode }[] = [
     { id: 'dashboard', label: '대시보드', icon: <LayoutDashboard className="w-4 h-4" /> },
+    { id: 'pre-question', label: '사전 질문', icon: <ClipboardList className="w-4 h-4" /> },
     { id: 'interview', label: '인터뷰', icon: <MessageSquareText className="w-4 h-4" /> },
     { id: 'personas', label: '페르소나', icon: <Users className="w-4 h-4" /> },
     { id: 'history', label: '히스토리', icon: <History className="w-4 h-4" /> },

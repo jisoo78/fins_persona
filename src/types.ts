@@ -1,4 +1,8 @@
-export type TabType = 'dashboard' | 'interview' | 'personas' | 'persona-detail' | 'history' | 'settings';
+import type { PreInterviewContext } from './pre-question/types';
+
+export type { PreInterviewContext };
+
+export type TabType = 'dashboard' | 'pre-question' | 'interview' | 'personas' | 'persona-detail' | 'history' | 'settings';
 
 export type RoleType = '전략' | '재무' | '인사' | '운영' | '레드팀' | '커스텀' | '기술 혁신';
 

@@ -4,7 +4,7 @@
  */
 
 import React, { useCallback, useEffect, useState } from 'react';
-import { TabType, Persona, ChatMessage, DecisionRecord, UserSettings } from './types';
+import { TabType, Persona, ChatMessage, DecisionRecord, UserSettings, PreInterviewContext } from './types';
 import { 
   initialPersonas, 
   initialChatMessages, 
@@ -15,6 +15,7 @@ import {
 import { Sidebar } from './components/Sidebar';
 import { Topbar } from './components/Topbar';
 import { DashboardView } from './components/DashboardView';
+import { PreQuestionView } from './components/PreQuestionView';
 import { InterviewView } from './components/InterviewView';
 import { PersonasView } from './components/PersonasView';
 import { PersonaDetailModal } from './components/PersonaDetailModal';
@@ -28,7 +29,7 @@ const getInitialActiveTab = (): TabType => {
   if (typeof window === 'undefined') return 'dashboard';
 
   const savedTab = window.localStorage.getItem(activeTabStorageKey) as TabType | null;
-  const validTabs: TabType[] = ['dashboard', 'interview', 'personas', 'persona-detail', 'history', 'settings'];
+  const validTabs: TabType[] = ['dashboard', 'pre-question', 'interview', 'personas', 'persona-detail', 'history', 'settings'];
 
   return savedTab && validTabs.includes(savedTab) ? savedTab : 'dashboard';
 };
@@ -42,6 +43,7 @@ export default function App() {
   const [decisions, setDecisions] = useState<DecisionRecord[]>(initialDecisions);
   const [settings, setSettings] = useState<UserSettings>(initialSettings);
   const [selectedDecisionId, setSelectedDecisionId] = useState<string | null>(null);
+  const [preInterviewContext, setPreInterviewContext] = useState<PreInterviewContext | null>(null);
 
   // Modal States
   const [detailPersona, setDetailPersona] = useState<Persona | null>(null);
@@ -175,11 +177,21 @@ export default function App() {
             />
           )}
 
+          {activeTab === 'pre-question' && (
+            <PreQuestionView
+              completedContext={preInterviewContext}
+              onComplete={(context) => setPreInterviewContext(context)}
+              onStartDeepInterview={() => setActiveTab('interview')}
+            />
+          )}
+
           {activeTab === 'interview' && (
             <InterviewView
               messages={chatMessages}
               setMessages={setChatMessages}
               decisions={decisions}
+              preInterviewContext={preInterviewContext}
+              onGoToPreQuestion={() => setActiveTab('pre-question')}
               onCreatePersona={handleAddPersona}
               onAddHistoryRecord={handleAddDecision}
               onGoToPersonas={() => setActiveTab('personas')}
