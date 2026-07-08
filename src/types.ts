@@ -1,4 +1,11 @@
-export type TabType = 'dashboard' | 'interview' | 'personas' | 'persona-detail' | 'history' | 'settings';
+export type TabType =
+  | 'dashboard'
+  | 'pre-interview'
+  | 'interview'
+  | 'personas'
+  | 'persona-detail'
+  | 'evaluation'
+  | 'settings';
 
 export type RoleType = '전략' | '재무' | '인사' | '운영' | '레드팀' | '커스텀' | '기술 혁신';
 
@@ -94,16 +101,4 @@ export interface UserSettings {
   role: string;
   company: string;
   email: string;
-  plan: 'Basic' | 'Pro';
-  aiModel: string;
-  creativityLevel: number;
-  riskTolerance: number;
-  connectedSNS: {
-    linkedin: boolean;
-    slack: boolean;
-    notion: boolean;
-    googleWorkspace: boolean;
-  };
-  language: string;
-  autoSaveHistory: boolean;
 }

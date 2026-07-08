@@ -1,37 +1,29 @@
 import React from 'react';
-import { TabType, Persona, DecisionRecord } from '../types';
+import { TabType, Persona } from '../types';
 import { 
   Users, 
   MessageSquareText, 
-  CheckCircle2, 
-  ArrowUpRight, 
+  ClipboardList,
   Plus, 
-  Clock,
-  ChevronRight,
   TrendingUp,
   Brain
 } from 'lucide-react';
 
 interface DashboardViewProps {
   personas: Persona[];
-  decisions: DecisionRecord[];
   setActiveTab: (tab: TabType) => void;
   onOpenNewPersonaModal: () => void;
-  onOpenDecisionRecord: (decisionId: string) => void;
 }
 
 export const DashboardView: React.FC<DashboardViewProps> = ({
   personas,
-  decisions,
   setActiveTab,
   onOpenNewPersonaModal,
-  onOpenDecisionRecord,
 }) => {
-  const recentDecisions = decisions.slice(0, 5);
   const stats = [
     { label: '생성된 페르소나 수', value: `${personas.length}개`, sub: '페르소나 목록으로 이동', icon: <Users className="w-5 h-5 text-indigo-500" />, targetTab: 'personas' as TabType },
-    { label: '완료한 인터뷰', value: '14회', sub: '인터뷰 화면으로 이동', icon: <MessageSquareText className="w-5 h-5 text-emerald-500" />, targetTab: 'interview' as TabType },
-    { label: '최근 의사결정 기록', value: `${decisions.length}건`, sub: '히스토리로 이동', icon: <CheckCircle2 className="w-5 h-5 text-blue-500" />, targetTab: 'history' as TabType },
+    { label: '사전 질문', value: '40문항', sub: '사전 질문 화면으로 이동', icon: <ClipboardList className="w-5 h-5 text-emerald-500" />, targetTab: 'pre-interview' as TabType },
+    { label: '심층 인터뷰', value: '대기', sub: '심층 인터뷰 화면으로 이동', icon: <MessageSquareText className="w-5 h-5 text-blue-500" />, targetTab: 'interview' as TabType },
   ];
 
   return (
@@ -54,11 +46,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* Quick Action Buttons */}
         <div className="flex flex-wrap items-center gap-3">
           <button
-            onClick={() => setActiveTab('interview')}
+            onClick={() => setActiveTab('pre-interview')}
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold border border-slate-200 dark:border-slate-700 shadow-sm transition-all hover:scale-[1.02]"
           >
-            <MessageSquareText className="w-4 h-4 text-emerald-500" />
-            <span>인터뷰 시작</span>
+            <ClipboardList className="w-4 h-4 text-emerald-500" />
+            <span>사전 질문 시작</span>
           </button>
           
           <button
@@ -98,79 +90,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         ))}
       </div>
 
-      {/* Main Grid: Recent Activity & Active Personas preview */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-2">
-        {/* Left 2 Cols: Recent Decisions */}
-        <div className="lg:col-span-2 space-y-4">
-          <div className="flex items-center justify-between px-1">
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <Clock className="w-5 h-5 text-indigo-500" />
-              <span>최근 의사결정 활동</span>
-            </h2>
-            <button
-              onClick={() => setActiveTab('history')}
-              className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:underline inline-flex items-center gap-1"
-            >
-              전체 히스토리 보기 <ChevronRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
-
-          <div className="space-y-3">
-            {recentDecisions.length === 0 ? (
-              <div className="bg-white dark:bg-slate-900/60 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 text-sm text-slate-500 dark:text-slate-400">
-                아직 저장된 의사결정 기록이 없습니다.
-              </div>
-            ) : recentDecisions.map((dec) => (
-              <div
-                key={dec.id}
-                onClick={() => onOpenDecisionRecord(dec.id)}
-                className="bg-white dark:bg-slate-900/60 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 hover:border-indigo-400 dark:hover:border-indigo-600 shadow-sm cursor-pointer transition-all group"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
-                        {dec.category}
-                      </span>
-                      <span className="text-xs text-slate-400">{dec.date}</span>
-                    </div>
-                    <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-1">
-                      {dec.question}
-                    </h3>
-                  </div>
-
-                  <span className="px-2 py-1 rounded-lg text-[10px] font-extrabold bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-800 shrink-0 uppercase">
-                    {dec.impactScore} IMPACT
-                  </span>
-                </div>
-
-                <p className="text-xs text-slate-600 dark:text-slate-400 mt-2.5 line-clamp-2 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-100 dark:border-slate-800 font-normal">
-                  <span className="font-bold text-slate-800 dark:text-slate-200">AI 최종 도출: </span>
-                  {dec.finalConclusion}
-                </p>
-
-                <div className="mt-3 flex items-center justify-between text-[11px] text-slate-500">
-                  <div className="flex items-center gap-1.5">
-                    <span>참여 페르소나:</span>
-                    <span className="font-semibold text-slate-700 dark:text-slate-300">
-                      {dec.participants.join(', ')}
-                    </span>
-                  </div>
-                  <span className="text-indigo-500 font-semibold inline-flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
-                    상세 쟁점 보기 <ArrowUpRight className="w-3.5 h-3.5" />
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Right 1 Col: Active Board Preview */}
+      <div className="pt-2">
         <div className="space-y-4">
           <div className="flex items-center justify-between px-1">
             <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
               <Users className="w-5 h-5 text-emerald-500" />
-              <span>가동 중인 가상 이사회</span>
+              <span>페르소나</span>
             </h2>
             <button
               onClick={() => setActiveTab('personas')}
@@ -182,10 +107,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
           <div className="bg-white dark:bg-slate-900/60 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-3">
             <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
-              대표님의 사고방식을 정량적으로 학습하여 실시간 시뮬레이션을 보조하는 5대 핵심 임원진입니다.
+              DB에 저장된 페르소나만 표시됩니다.
             </p>
 
-            {personas.map((p) => (
+            {personas.length === 0 ? (
+              <div className="rounded-xl border border-dashed border-slate-300 dark:border-slate-700 p-6 text-center text-xs text-slate-500 dark:text-slate-400">
+                아직 생성된 페르소나가 없습니다.
+              </div>
+            ) : personas.slice(0, 5).map((p) => (
               <div
                 key={p.id}
                 onClick={() => setActiveTab('personas')}

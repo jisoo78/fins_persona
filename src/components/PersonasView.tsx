@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Persona } from '../types';
 import { 
   Users, 
@@ -7,7 +7,9 @@ import {
   Trash2, 
   ExternalLink, 
   BrainCircuit,
-  Sparkles
+  Sparkles,
+  FileText,
+  RefreshCw
 } from 'lucide-react';
 
 interface PersonasViewProps {
@@ -15,6 +17,7 @@ interface PersonasViewProps {
   onOpenDetail: (persona: Persona) => void;
   onOpenNewModal: () => void;
   onDeletePersona: (id: string) => void;
+  onCreateAmyHoodPersona: () => Promise<Persona>;
 }
 
 export const PersonasView: React.FC<PersonasViewProps> = ({
@@ -22,7 +25,26 @@ export const PersonasView: React.FC<PersonasViewProps> = ({
   onOpenDetail,
   onOpenNewModal,
   onDeletePersona,
+  onCreateAmyHoodPersona,
 }) => {
+  const [isCreatingReference, setIsCreatingReference] = useState(false);
+  const [referenceError, setReferenceError] = useState('');
+
+  const handleCreateReferencePersona = async () => {
+    if (isCreatingReference) return;
+
+    setIsCreatingReference(true);
+    setReferenceError('');
+
+    try {
+      await onCreateAmyHoodPersona();
+    } catch (error) {
+      setReferenceError(error instanceof Error ? error.message : 'Amy Hood 페르소나 생성 중 오류가 발생했습니다.');
+    } finally {
+      setIsCreatingReference(false);
+    }
+  };
+
   return (
     <div className="p-8 max-w-7xl mx-auto space-y-8 animate-fade-in">
       {/* Title Header */}
@@ -37,14 +59,31 @@ export const PersonasView: React.FC<PersonasViewProps> = ({
           </p>
         </div>
 
-        <button
-          onClick={onOpenNewModal}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-md shadow-indigo-500/20 transition-all shrink-0"
-        >
-          <Plus className="w-4 h-4" />
-          <span>새 페르소나 생성</span>
-        </button>
+        <div className="flex flex-wrap gap-2">
+          <button
+            onClick={handleCreateReferencePersona}
+            disabled={isCreatingReference}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-300 dark:disabled:bg-slate-800 text-white text-xs font-bold shadow-md shadow-emerald-500/20 transition-all shrink-0"
+          >
+            {isCreatingReference ? <RefreshCw className="w-4 h-4 animate-spin" /> : <FileText className="w-4 h-4" />}
+            <span>{isCreatingReference ? 'RAG 분석 중' : 'Amy Hood RAG로 생성'}</span>
+          </button>
+
+          <button
+            onClick={onOpenNewModal}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-md shadow-indigo-500/20 transition-all shrink-0"
+          >
+            <Plus className="w-4 h-4" />
+            <span>새 페르소나 생성</span>
+          </button>
+        </div>
       </div>
+
+      {referenceError && (
+        <div className="rounded-2xl border border-rose-200 dark:border-rose-900 bg-rose-50 dark:bg-rose-950/30 p-3 text-xs font-semibold text-rose-700 dark:text-rose-300">
+          {referenceError}
+        </div>
+      )}
 
       {/* Empty State Check */}
       {personas.length === 0 ? (
@@ -59,10 +98,11 @@ export const PersonasView: React.FC<PersonasViewProps> = ({
             인터뷰 세션을 완료하시거나 직접 파라미터를 입력하여 대표님만의 첫 번째 임원을 탄생시켜보세요.
           </p>
           <button
-            onClick={onOpenNewModal}
+            onClick={handleCreateReferencePersona}
+            disabled={isCreatingReference}
             className="mt-2 px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-lg transition-all"
           >
-            첫 페르소나 생성
+            {isCreatingReference ? 'RAG 분석 중' : 'Amy Hood RAG로 첫 페르소나 생성'}
           </button>
         </div>
       ) : (

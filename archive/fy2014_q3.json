@@ -1,0 +1,584 @@
+{
+  "call": {
+    "call_id": "fy2014_q3",
+    "fiscal_year": 2014,
+    "fiscal_quarter": 3,
+    "call_date": null,
+    "title": "MSFT Earnings Conference Call",
+    "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q3/press-release-webcast",
+    "collected_at": "2026-07-06T23:52:56.758097Z",
+    "parser_version": "0.1.0",
+    "transcript_found": true,
+    "amy_hood_found": true,
+    "parse_status": "parsed",
+    "parse_warnings": [
+      "qna_marker_not_found",
+      "qna_boundary_inferred_from_analyst"
+    ],
+    "review_required": false
+  },
+  "speaker_turns": [
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 0,
+      "speaker_raw": "SATYA NADELLA",
+      "speaker": "Satya Nadella",
+      "text": "Thank you, Chris. It's great to have the opportunity to join today's call. From my first day, I've said I'm committed to an ongoing dialogue with investors. Joining these investor calls going forward is going to be a big part of that, and I'm enthusiastic about today's call. It's been an incredible and busy couple of months. In addition to executing on our plan and announcing new products and services, I've spent a lot of time gathering feedback and exchanging ideas with customers, partners, employees and investors. It was important and valuable to see the company with a fresh perspective, to get grounded both on our current reality and future opportunity. As I've told our employees, our industry does not respect tradition. It only respects innovation. This applies to us and everyone else. When I think about our industry over the next five to ten years, I see a world where computing is more ubiquitous and all experiences are powered by ambient intelligence. Silicon, hardware systems and software will co-evolve together and give birth to a variety of new form factors. Nearly everything we do will become more digitized, our interactions with other people, with machines, and between machines. The ability to reason over and draw insights from everything that's being digitized will improve the fidelity of our daily experiences and interactions. This is the mobile-first and cloud-first world. It's a rich canvas for innovation and a great growth opportunity for Microsoft across all our customer segments. To thrive in this world, we will continue to zero in on the things customers really value and Microsoft can uniquely deliver. We want to build products that people love to use. And, as a result, you will see us increasingly focus on usage as the leading indicator of long-term success. To that end, we are already making progress. Amy will provide additional detail, but I wanted to say a few words about the quarter itself. Today's results demonstrate the breadth and strength of our overall business. We saw strong momentum in cloud services. Our commercial cloud business more than doubled year-over-year with Office 365 and Azure both performing extremely well. Business customers continue to make Windows their overwhelming platform of choice, with solid growth both in Windows OEM Pro and Windows Volume Licensing revenues. We saw continued improvement in search, with our U.S. search share growing to 18.6 percent and search revenue increasing by 38 percent. Bing continues to deliver platform capabilities across our products. One recent example of this is the recently announced Cortana Virtual Assistant for Windows Phone. And very importantly, across all our businesses we continue to have a rigorous focus on execution and cost discipline, resulting in solid revenue and earnings per share. I sum up this quarter in two words, execution and transition. We delivered solid financial results and we took several steps to reorient Microsoft. In recent weeks, we talked about how we are advancing Office, Windows, and our data platform, and how we think holistically about the constituencies we serve – IT, developers, and the people at the center in a mobile-first, cloud-first world. We will continue to invest in our cloud capabilities, including Office 365 and Azure in the fast-growing SaaS and cloud platform markets. We are committed to ensuring that our cloud services are available across all device platforms that people use. We're delivering a cloud for everyone on every device. At the same time, we have bold plans to move Windows forward. We're investing and innovating in every dimension, from form factor to software experiences, to price. Windows platform is unique in how it brings together consistent end user experiences across small to large screens, broadest platform opportunity for developers, and control and assurance for IT. And, with the addition of Nokia's talented people and their depth in mobile technologies, we will enhance our device capabilities. The past two-and-a-half months have been a period of significant change at Microsoft, but also a period of nailing the basics and delivering against our product and financial plans. In the months ahead, we will continue to intensely be focused on two things – rock solid execution and pivoting the company towards the future. We will continue to push hard and move quickly, and you will see the proof of that month after month in the products and services we build for the mobile-first, cloud-first world. What you can expect of Microsoft is courage in the face of reality. We will approach our future with a challenger mindset. We will be bold in our innovation. We will be accountable to our customers, partners, and shareholders. And with that, I'll turn it over to Amy to go further into the details of the quarter and then we'll be happy to take your questions.",
+      "section": "prepared_remarks"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 1,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Thank you, Satya. And good afternoon, everyone. Let me start with a few things I think are notable this quarter. Then, I'll give our outlook before moving on to Q&A. We had a very good third quarter, with solid results across our businesses, and strong momentum in our most strategic areas. At the same time, we remained focused and disciplined in our spending. Total revenue was $20.4 billion, up 8 percent, and earnings per share grew 5 percent. We had outstanding momentum and results in our cloud services. As Satya mentioned, commercial cloud revenue more than doubled again this quarter. Office 365 is now on an annual revenue run rate of $2.5 billion, and Azure revenue grew over 150 percent driven by both new customers and increased usage. In our Office 365 Home service, we added nearly one million new users this quarter, and now have over 4.4 million subscribers. We continue to enhance its value proposition with new features, premium services, and cross-platform functionality. As we cross the one year anniversary since launch, we are pleased with the renewal rates we are experiencing thus far. With Bing, we made clear progress again this quarter. We grew our U.S. share and improved RPS significantly. Display revenue related to portal and e-mail declined, while we saw ad revenue growth in products like Skype and Xbox. Importantly, we are innovating while expanding our cloud gross margins through both improved scale and continuous engineering efforts to drive efficiency. Businesses are clearly expressing their overwhelming preference for Windows. Windows Pro revenue grew 19 percent driven by growth in business PCs, mix shift to developed markets where attach is higher, continued strength in the enterprise, and an increased mix of Pro in small and medium businesses. Windows Volume Licensing also had a solid 11 percent revenue growth. Windows XP end of support contributed in part to this growth we saw this quarter, as did a general hardware refresh. Our Commercial results reflect ongoing strength, and we again outperformed the enterprise IT market. Customer movement from transactional purchasing to subscription and multi-year agreements was better than our expectations. Therefore, our Commercial unearned revenue grew 12 percent this quarter, which was above our expectations, and our contracted not billed balance exceeded $22 billion. We had double-digit growth in SQL Server, System Center, Windows Server Premium, and Lync. Clearly, our value proposition and product roadmap is resonating. Xbox One has sold over five million units since launch, and engagement has been high with users spending nearly five hours per day on their console. We will continue to extend the unique entertainment value proposition of Xbox One, particularly in markets outside of the U.S. where some services aren't as mature. Xbox 360 sales exceeded our expectations this quarter. And, across the platform, Xbox Live members continued to embrace the service, with transactional revenue growing 17 percent. We do expect to work through some inventory in Q4. We continue to enhance the value proposition of Surface through both hardware and software innovation, which makes Surface one of the best high value productivity devices available. This quarter, the mix of sales moved to our second generation and Pro devices, and this change had a positive impact on gross margin. Now, let's turn to operating expenses. As a result of our ongoing prioritization efforts, OPEX was favorable to what we expected in January. Across the company, we are focused on continually aligning our resources to our top priorities, which includes investing in the next wave of innovation for our customers. We are devoting resources to our sales team and partner ecosystem to ensure they are positioned for the migration to cloud services. And, finally, our agility is also improving as planned marketing spend was redeployed from Q3 to Q4 in support of a commercial cloud campaign. With that summary of Q3 results, I'd like to talk about our outlook. Given the Nokia Devices and Services transaction is closing tomorrow, the guidance I will walk through next excludes any related impact. Let's start with Devices and Consumer. In Licensing, we expect revenue to be $4.1 to $4.3 billion. This range reflects an expectation that the benefits of XP end of support will moderate. In Hardware, we expect revenue to be $1.3 to $1.5 billion in what is a seasonally slower hardware quarter. This number also reflects channel inventory draw down for Xbox consoles. In Devices and Consumer Other, we expect revenue to be about $1.9 billion. We expect to see continued growth in Office 365 Home and Bing as we drive additional usage. Moving on to Commercial, we expect revenue across our two segments to be $13.1 to $13.3 billion. Within this, we expect Commercial Other revenue to be about $2.1 billion on the strength of the transition to our cloud. And in corporate, we expect to defer revenue of about $100 million. We expect COGS to be $5.7 to $5.8 billion with variability primarily due to hardware. And, moving on to operating expenses, for the fourth quarter we expect OPEX to be $8.4 to $8.6 billion. When adjusting for the prior year European Commission Fine, this represents full-year operating expense growth of about 4 percent. This is on the low end of our original guidance that we provided a year ago of 4 to 6 percent, as we invest in R&D and sales efforts while rationalizing our marketing spend. As a reminder, other income and expense include dividend and interest income, offset by interest expense and the net cost of hedging. We expect these items to generally offset each other. We expect a higher tax rate in Q4, and the full year tax rate to be between 18 and 20 percent. We expect capital expenditure to be about $1.5 billion. As we build out our cloud infrastructure, we are concentrating on hardware, software, and data center optimization and supply chain efficiencies to maximize the benefits of our cloud scale. The benefits of this work are realized in improving gross margins. We expect unearned revenue to grow in line with normal seasonality. Now, let me share some thoughts regarding Nokia Devices and Services. The acquisition will close tomorrow, which is about four months later than the deal economics we outlined in September assumed. Since then, the Nokia business results have also changed. We are focused on the transition from planning to implementation, which accelerates with the deal closing tomorrow. Given this is a complex body of work that will take time, we do not intend to update our financial guidance for any Nokia impact during the quarter. However, I want to share the following to help as you update your models. Under the existing commercial agreement between Microsoft and Nokia, license sales and platform payments are reported in the D&C Licensing segment. Once the acquisition closes, results for Nokia Devices and Services will be reported in the D&C Hardware segment. For Q4, we will clearly show the impact of the ending of the commercial agreement, Nokia's ongoing operations, and any one-time integration and severance costs. And, we remain committed to achieving annual cost synergy targets of at least $600 million within 18 months of close. Now looking toward Fiscal '15. Satya and I, along with the rest of the senior leadership team, are working together to solidify our plans for the year ahead. Our goals are clear. Get more out of the tremendous resources we have available, drive innovation in products that people love to use, and execute in areas where Microsoft can uniquely succeed in today's mobile-first, cloud-first world. And with that, let me turn it back over to Chris, and we can move to Q&A. CHRIS SUH: Thanks, Amy. And with that we'll move to Q&A. Operator, please go ahead and repeat your instructions. (Operator Direction.)",
+      "section": "prepared_remarks"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 2,
+      "speaker_raw": "BRENT THILL, UBS",
+      "speaker": "BRENT THILL",
+      "text": "Good afternoon. A question for Satya, just if you could reflect on your initial time as CEO, and maybe give everyone a sense of how you prioritize your near-term objectives here in the next several quarters that would be helpful. Thank you.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 3,
+      "speaker_raw": "SATYA NADELLA",
+      "speaker": "Satya Nadella",
+      "text": "Thank you, Brent. The first ten weeks or so have been extremely energizing. And as I said, for me what was important was to recharge, talk to lots of different constituents, and relearn the place, and see it for the first time, and just get a different fresh perspective, even in spite of having spent 22 years here. It's been fascinating to get that fresh perspective. And, the way I look at it, is even from day one I have had the deep conviction that our vision is about going boldly into the this mobile-first, cloud-first world. And, we feel that we are well on our way. If there is anything that I want to do it’s how we make sure we remain focused on it with every device launch, with every service launch, we keep coming back reinforcing that vision, because at the end of the day it's the purpose with which we approach the vision and the execution behind it which is what counts. And, to me, being able to think about that deeply, what does it mean for us culturally, what does it mean for us in terms of our plans, and then just getting behind it, leaning into it as an entire company is what's my priority and that's what I obsess about, that's what I focus about. CHRIS SUH: Thank you, Brent. Next question please. (Operator direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 4,
+      "speaker_raw": "MARK MOERDLER, Sanford Bernstein",
+      "speaker": "MARK MOERDLER",
+      "text": "Thank you very much. Satya, welcome aboard and thanks for joining the call. If you don't mind I'm going to ask an overall question, either of Amy or of Satya. Looking at the Commercial license business, how much of the shrinkage year-over-year in Commercial licenses is driven by the move of traditional license players from license, or license paying customers, from license to the cloud? How much is related to guys moving from Software Assurance, how much from license? Can you give any color in there?",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 5,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Thanks, Mark, for that question. Why don't I take that one? Overall in Commercial Licensing I often talk, as you know, about the commercial business all up, mostly because I think some of the core dynamics really reinforce what we see a bit of what you're talking about, which is that renewal rates have remained high and in line. Our ability to recapture revenue in those contracts remains strong. And, our ability to attach cloud products has grown. So, what we've seen this quarter and what you see even in the Commercial Licensing line itself is that continued switch. In fact, it was faster this quarter than we had thought. Really, when you look at our Commercial unearned revenue, along with the CNB balance that we talked about last quarter, we had so many billings at the end of last quarter, when you really normalize for those end-of-quarter billings bookings, we’re also better than we had expected, in terms of the annuity stream. So, I think both a transition to long-term agreements is encouraging, in addition to premium products, the addition of new products, as well as the transition to cloud is really core to thinking about the health of the segment all-up. MARK MOERDLER: Thank you, I appreciate it.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 6,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Thanks, Mark. CHRIS SUH: Next question please, Operator. (Operator direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 7,
+      "speaker_raw": "KEITH WEISS, Morgan Stanley",
+      "speaker": "KEITH WEISS",
+      "text": "Excellent. Thank you for taking my question, guys. And, Satya, again, thank you for joining the call today, it's great to have your views and input shared. One of the questions I get most often from investors is trying to understand how you're going to approach the role and what you're doing initially in terms of a strategic review going on. Are you reviewing the businesses and should we expect any big changes in the strategy of Microsoft? So, I'm going to pose that question to you, in terms of over the next couple of weeks, months, quarters even, is there anything of a strategic review going on? Is there any big change in the Microsoft strategy that we should be expecting from that review?",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 8,
+      "speaker_raw": "SATYA NADELLA",
+      "speaker": "Satya Nadella",
+      "text": "Thanks, Keith, for the question. The framework I have in terms of how I'm approaching my job and how we, as a leadership team and as a company, are going to execute and plan, because one of the things that I strongly believe in is you're planning on a continuous basis, you're executing on a continuous basis. It's not episodic, if you will. The only way we're going to succeed here is by having this notion that you're planning all the time and you're also making the changes to your plan based on the changed circumstances. And, I think that's the way to run a company like ours in a marketplace that's as dynamic as ours. But, that said, I start with, a vision that's very grounded on what the future opportunity is. This mobile-first, cloud-first thing is a pretty deep thing for us. When we say mobile-first in fact what we mean by that is mobility first. We think about users and their experiences spanning a variety of devices. It's not about any one form factor that may have some share position today. But, as we look to the future what are the set of experiences across devices, some ours and some not ours, that we can power through experiences that we can create uniquely. That notion of having a central focus and a central purpose is what I think we've already signaled and we are well on our way to execute on it. Now, you also need to continuously build some new capability. When you think about mobility-first that means you need to have a really deep understanding of all the mobile scenarios for everything from how communications happen, how meetings occur, and those require us to build new capability. We'll do some of this organically, some of it inorganically. A good example of this is what we've done with Nokia. Obviously, we're looking forward to that team joining us, building on the capability. And, then execution, even in the last three weeks or so we have announced a bunch of things where we talked about this one cloud for everyone and every device. We talked about how our data platform is going to enable this data culture, which is in fact fundamentally changing how Microsoft itself works. We also talked about what it means to think about Windows, especially with the launch of this universal Windows application model. How different it is now to think about Windows as one family, which was not true before, but now we have a very different way to think about it. So, we are well on our way to execute on it. But, to your core question of are we going to review, we are all the time reviewing. One of the things that I feel as a leadership team, we have really picked up the pace on asking the hard questions. What is the believability of any one of our plans and pushing ourselves, because at the end of the day I want to be very accountable to you all, to our customers, to our partners, as a team, by executing on our plans very well, because at the end of the day that's what matters. So, that at least gives you a framework for how we are approaching it. KEITH WEISS: Excellent. Thank you very much for that.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 9,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Thanks, Keith. CHRIS SUH: Next question please, Operator. (Operator direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 10,
+      "speaker_raw": "RICK SHERLUND, Nomura",
+      "speaker": "RICK SHERLUND",
+      "text": "Thanks. First, Satya, on platform as a service, I'm curious how aggressively you plan to maybe change your business model to a subscription model and drive, like Adobe did, less up-front revenue, more encouraging a subscription and cloud-based, and whether we should begin to anticipate what it might look like to Microsoft as you make this transition to more of a subscription business. I'm just not sure what the margins are on your cloud business and as you transition most SaaS companies have 70, 80 percent gross margins. I'm not real sure where you are on your cloud businesses today. Do we think this is going to be a smooth transition, or might we expect it to be a little more disruptive as you gain more and more traction on a subscription and cloud basis?",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 11,
+      "speaker_raw": "SATYA NADELLA",
+      "speaker": "Satya Nadella",
+      "text": "Great, Rick. Thanks for the question. I'll start and maybe, Amy, you'll want to even add. The way I look at it, Rick, we are well on our way to making that transition, in terms of moving from pure licenses to long-term contracts as well as subscription business model. So, when you talk about platform as a service, if you look at our commercial cloud it's made up of the platform itself, which is Azure. We also have a SaaS business in Office 365. Now, one of the things that we want to make sure we look at is each of the constituent parts, because the margin profile on each one of these things is going to be different. The infrastructure elements right now in particular is going to have a different economics versus what some of the per-user applications in a SaaS mode have. It's the blending of all of that that matters and the growth of that matters to us the most in this time where I think there are just a couple of us really playing in this market. I mean this is gold rush time in some sense of being able to capitalize on the opportunity. And, when it comes to that, we have some of the best, the broadest SaaS solution and the broadest platform solution. That combination of those assets doesn't come often. What we are very focused on is how do we make sure we get our customers aggressively into this, having them use our service, be successful with it, and then there will be a blended set of margins across even just our cloud. And, what matters to me in the long run is the magnitude of profit we generate, given that a lot of categories are going to be merged as this transition happens. We have to be able to actively participate in it and drive profit growth.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 12,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Let me add a bit, Rick. I think specifically as you think about the transition and where you'll see it first, I would say year-over-year we had flat to improving gross margins in all segments but hardware, where we had a mix shift to the Xbox console, which from a business model perspective obviously drives a gross margin decline. But, that being said, within the Office 365 business I start from the fact and a principle, which is having a user, whether they be in the consumer or in the enterprise, have access to our most recent, most innovative, most secure product, which is always going to be for us probably the one born in the cloud, will be a driver of satisfaction and a driver of usage. Those two things lead to revenue. You're already seeing that transition in the enterprise where we already sold that way. The transition is quite easy, from an economic standpoint. In the transactional business, you saw the impact of it this quarter. We had a bigger mix shift to annuity, more went on the balance sheet. We still had strong growth, but you do see the impact intra-quarter. And, in the consumer side of the business, which you also referenced with Adobe, I think we've just launched another SKU, in addition to Home called Personal, as we continue to drive consumer usage that way. The launch of Office on the iPad is an example of where we will add the most value, which is in the subscription. CHRIS SUH: Thank you, Rick. Operator, next question please. (Operator Direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 13,
+      "speaker_raw": "HEATHER BELLINI, Goldman Sachs",
+      "speaker": "HEATHER BELLINI",
+      "text": "Great. Thank you. Satya, I'll echo everybody's thoughts that it's great to have you on the call, and to hear your perspective. I was wondering if you could share with us the decision recently to offer Windows for free for sub-9-inch devices, and how you think this impacts your share in that arena. And also, how should we think about Windows pricing given your comment about how Windows is going to kind of play in different market segmentations. How do we see Windows pricing evolving, if at all, for other types of form factors over time?",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 14,
+      "speaker_raw": "SATYA NADELLA",
+      "speaker": "Satya Nadella",
+      "text": "First of all, thanks, Heather, for the question. Overall, the way I want us to look at Windows going forward is what does it mean to have the broadest device family and ecosystem? Because, at the end of the day, it's about the users and developer opportunity we create for the entirety of the family that's going to define the health of the ecosystem. To me, it matters that we approach the various segments that we now participate with Windows, because that's what's has happened. Fundamentally, we participated in the PC market, now we are in a market that's much bigger that the PC market. We continue to have healthy share, healthy pricing and, in fact, growth as we mentioned in the enterprise adoption of Windows. And, we plan to, in fact, add more value, more management, more security, especially as things are changing in those segments given BYOD and software security issues. We want to be able to reinforce that core value. Then, when it comes to new opportunities from wearables to Internet of things, we want to be able to participate in all of this with our Windows offering, with our tools around it, and we want to be able to price by category. And, that's effectively what we did. We looked at what made sense for us to do on tablets and phones below 9-inches, and we felt that the price there needed to be changed. We have modernization ratios on the backend for those. That's how we're going to approach each one of these opportunities, because in a world of ubiquitous computing we want Windows to be ubiquitous. That doesn't mean it's one price, one business model for all of that. And it's actually a market expansion opportunity, and that's the way we're going to go execute on it. CHRIS SUH: Thank you. Operator, next question please. (Operator Direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 15,
+      "speaker_raw": "JOHN DIFUCCI, JP Morgan",
+      "speaker": "JOHN DIFUCCI",
+      "text": "Great. Thank you, and welcome, Satya. I'm going to give Amy a question here for numbers. Amy, we see sales and marketing expense declined 7 percent year-over-year in this quarter. Can you remind us if there's anything unique last year, or is this just better controls? And, along these same lines, free cash flow, excluding acquisitions, grew 2 percent, which is a bit of a surprise given the direction the company is going. And, the first time in seven quarters we've actually seen growth in free cash flow. So can you tell us how we should be thinking about this going forward?",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 16,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Thanks, John. I was getting lonely, I didn't have any questions. So, I appreciate it. Let me start with you first one, which was there any sort of unique thing that resulted in that comparable in sales and marketing. We did have more launch expense going on a year ago, but we also focused on rationalizing and focusing our marketing dollars in quarter. So, I think it's a combination of both, and I would probably say more of the latter, which is really thinking and prioritizing more effectively throughout the year to earn the highest ROI on the dollar from spending. We also did invest in sales year over year. So most of that is specifically around marketing. I want to make sure that you understand that where we see opportunity, we're investing in our selling engine to get it. I would make an important caveat to make sure it's clear when you see year over year sales and marketing decline. The second half of that in terms of cash flow, I think as we remain focused on prioritizing and really thinking about the return on the dollars we spend, you did see, as I talked about earlier margins increase year over year, all of that has had a positive impact on cash flow. Thanks, John. JOHN DIFUCCI: In going forward, how should we be thinking about that? Just continued discipline, I guess, around expenses, but also investment where it's needed?",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 17,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Yes. I think when we talked at the end about how I think about '15, maybe it's better said as how we think about every day, which is what can we do today, this week, this month, to better invest behind places where we feel like we are uniquely capable of success, and not being afraid to make those changes and finding the agility and the empowerment here to do those things is incredibly important. And, I would say culturally, Satya mentioned about being more data-driven, I think in addition to the day-to-day which was more focused on customers, I think really it's a cultural statement about how we are going to operate more internally as well. So, maybe that's the most forward-looking comment I could tell you, which is that being empowered to look weekly, monthly, and see how we can get better, and better, and better. And I think that's actually driven a lot of excitement around here. JOHN DIFUCCI: Okay, great. Thank you. CHRIS SUH: Thanks, John. We'll move to the next question, please. (Operator Direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 18,
+      "speaker_raw": "PHILIP WINSLOW, Credit Suisse",
+      "speaker": "PHILIP WINSLOW",
+      "text": "Hi. Thanks, guys, and congratulations on a great quarter. And, Satya, great to have you on the call as well. I wanted to focus in on Office 365. If you compare it this quarter to last quarter, you've got 1.1 million in Home Premium users, last quarter I think it was 500k. In September you talked about a run rate of I think 1.5 million, now you're at 2-1/2. I wonder if you could just talk about the momentum that you're seeing Office 365, and maybe give us your thoughts on sort of the business versus the home/consumer side. And then, Amy, when you think about Office 365, how do you think about the differences or lifetime value of an Office 365 customer versus a traditional Office user?",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 19,
+      "speaker_raw": "SATYA NADELLA",
+      "speaker": "Satya Nadella",
+      "text": "Let me start, and then, Amy, you should definitely add on to it. Office 365, I'm really, really excited about what's happening there, which is the core engine that's driving a lot of our cloud adoption, and you see it in the numbers and Amy will talk more about the numbers. But, one of the fundamental things, it's actually a SaaS application, and it's also an architecture for enterprise. One of the most salient things we announced when we talked about the cloud for everyone and every device, and we talked about Office 365 having now iPad apps. We also launched something called the Enterprise Mobility Suite, which is perhaps one of the most strategic things during that day that we announced, which was that we now have a consistent and deep platform for identity management, which by the way gets bootstrapped every time Office 365 users sign up, device management, and data protection, which is really what every enterprise customer needs in a mobile-first world, in a world where you have fast application adoption, and you have BYOD or bring your own device happening. So to me, the Office 365 growth is, in fact, driving our enterprise infrastructure growth, which is driving Azure growth, and that cycle to me is most exciting. That's one of the reasons why I want us to keep indexing on the usage of all of this, and the growth numbers you see is a reflection of that.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 20,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Phil, specifically to some of your how do we think about the lifetime value, maybe I will use the consumer SKUs, which you started with, as a good example. First, whenever we launch a new motion, a new SKU in this instance, especially a subscription, I do think it takes some time both for the customer to understand the value proposition as well as for retailers and partners to really hone their motion to pivot selling a new subscription model. I think you're starting to see some acceleration as well as an increasing awareness of the product, which I think is terrific. Maybe more importantly, as we think about the value we're adding, the Office on the iPad announcement certainly brought attention as we continue to drive people to the subscription. I made a comment around renewal rates, and we're happy with them as we've passed the one-year anniversary of the launch. And, I think when you look at the LTV, we will be better off for many reasons including financially when a person moves to the subscription. My deep belief is the most important thing we will do is continue to think about how we can modernize, add features, add innovation so that it's more valuable to them every day they use it. And, that is far easier in a cloud world than it is on prem. So, I think that's probably the most important driver of LTV long term. PHILLIP WINSLOW: Thanks, guys.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 21,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Thanks, Phil. CHRIS SUH: Next question, please. (Operator direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 22,
+      "speaker_raw": "WALTER PRITCHARD, Citi",
+      "speaker": "WALTER PRITCHARD",
+      "text": "Hi, thanks. Amy, just a question for you, I know you're not providing updated guidance for Nokia. I'm just wondering maybe a little bit of thought behind that decision. I know the deal closes tomorrow. You probably could easily move things around here a bit and reported on it early next week and had that benefit. Is the lack of guidance there, is it just simply you haven't been able to get your hands into that business at this point. Is there something else that's changed in that business? I'm just trying to get a sense, because it does sort of open up quite a bit of variability in terms of how people are going to model things over the next three months.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 23,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Thanks, Walter. No, it really wasn't a choice. The reality is we've not had the type of access until close where we could confidently begin to give the type of guidance that I believe we've come, and you've come to expect from us, in terms of the depth and analysis required to get there. They do report in a different accounting system. It needs to be converted to GAAP. We've not had access to forward projections. I haven't had deep access to their systems. So, until we get that, which really starts tomorrow, it's not really a question of whether it was this week or next week. It's really a question of us getting the confidence and access to be able to report at the level of detail I know you all would expect me to do. CHRIS SUH: Thanks, Walter. Next question please. (Operator direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 24,
+      "speaker_raw": "KARL KEIRSTEAD, Deutsche Bank",
+      "speaker": "KARL KEIRSTEAD",
+      "text": "Hi, thanks. I'd like to focus on that server product revenue number of 10 percent and, Satya, I think you know a thing or two about this group, so perhaps I'll direct that to you. But, that growth rate is so far still above what a lot of your mega cap tech vendors, peers I should say, are posting. And, I just wanted to ask you if you could try to outline for us the couple of factors that have enabled Microsoft to continue growing that server business well above your peers, and, secondly, if you think that kind of 10 percentish growth is sustainable over Fiscal '15.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 25,
+      "speaker_raw": "SATYA NADELLA",
+      "speaker": "Satya Nadella",
+      "text": "Thanks, Karl. I'll start, in fact, both Amy and I worked on that business. So, we'll both take a crack at it. You know, it's a pretty exciting change that's happening. Obviously, that part of the business has been performing very well for a while now. But, frankly, it's fundamentally changing. One of the questions I often get asked is, hey, how did Windows Server and the hypervisor underneath it become so good so soon? You've been at it for a long time, but there seems to be something fundamentally changed. We've grown a lot of share recently. The product is more capable than it ever was. The rate of change is different. And, it's for one reason alone, which is we use it to run Azure. So, the fact that we use our servers to run our cloud makes our servers more competitive for other people to build their own clouds. It's the same trend that's accelerating us on both sides. The other thing that's happening is when we sell our server products they, for the most part, are just not isolated anymore. They come with automatic cloud tiering. SQL Server is a great example. We just launched a new version of SQL, which is by far the best release of SQL in terms of its features, like its exploitation of in-memory. It's the first product in the database world that has in-memory for all the three workloads of databases, OLTP, data warehousing, and BI. But, more importantly, it automatically gives you high availability, which means a lot to every CIO, and every enterprise deployment, by actually tiering to the cloud. So those kinds of feature innovations, which is pretty boundary-less for us, is breakthrough work. It's not something that somebody who has been a traditional competitor of ours can do if you're not even a first-class producer of a public cloud service. So, I think that we are in a very unique place. Our ability to deliver this hybrid value proposition and be in a position where we not only run a cloud service at scale, but we also provide the infrastructure underneath it as a server product to others, that's what's driving the growth. The shape of that growth and so on will change over time. But, I feel very, very bullish about our ability to continue this innovation. KARL KEIRSTEAD: Thank you. CHRIS SUH: Next question please. (Operator direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 26,
+      "speaker_raw": "ED MAGUIRE, CLSA",
+      "speaker": "ED MAGUIRE",
+      "text": "Hi, good afternoon, and it's great to hear you, Satya, on the call. I had a question about the device and consumer licensing. First of all, the Windows Pro revenue is very strong and, Amy, I know you had alluded to receding impact of XP upgrades. But, I wanted to get a sense of how sustainable you think that growth can continue. And, also noticing that the particularly Office consumer revenue is improving on attach rates, and there had been a bit of disconnect there, because of the transition to Office 365. I wanted to get your thoughts on how long that might be sustainable, or whether this is related to the broader XP expiration? Thank you.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 27,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Thanks, Ed. Let me take those in reverse, actually. On the Office consumer performance, I will always first and foremost think about the combination of Office 365 Home, as well as our consumer performance and that grew, obviously, at a higher rate than 15 percent that we talked about this quarter, that and increasing attach. There were some dynamics this quarter that I think were important. Some stabilizing that we've seen in the consumer developed world PC market also benefits, as you might imagine, our Office business. We have the highest attach rates in developed markets. So, that tends to be an important driver of Office revenue, whether earned as a license or a subscription. The second thing is related a bit to your first question. It's sort of hard to separate oftentimes many of the dynamics in our market. As we've seen Windows Pro mix increase, for example in small business, when people buy PCs with Windows Pro they're more likely to purchase a form of Office, whether it be a subscription or a license. That's another dynamic you saw this quarter. A final dynamic that I'll talk about relating to Office was around Japan. We did see some pull forward due to the tax increase. So, that did have an impact on Office consumer growth. But, even without that, as we talked about, we still had increasing attach and very good performance for the quarter. Now, backing up, because it's complicated, was the Windows sustainability in the business segment. As we said, it's very hard to separate cleanly the impact of XP from what is an improving business PC refresh cycle, as well as some positive macro economic trends that we're seeing. As I said in my comments, the end of XP does create a bit of a moderation in growth. That being said, the differentiation and value proposition of Pro is clearer than it's been. The investment in that SKU and the value proposition of Pro has had mix increasing within segments of the market, for example in small business and in the enterprise for people who buy a Windows PC. So, I think that's an important dynamic that we'll continue to invest in and we're excited to see. ED MAGUIRE: Thank you. CHRIS SUH: Thanks, Ed. Next question please. (Operator Direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 28,
+      "speaker_raw": "RAIMO LENSCHOW, Barclays",
+      "speaker": "RAIMO LENSCHOW",
+      "text": "Thanks for taking my question. Question for Satya. As we think about the new world in terms of more usage and it's more software driven rather than device driven, can you talk a little bit how you want to re-engage or further engage with the developer community with the big theme of your presentation at BUILD. I noticed at BUILD Xamarin was kind of mentioned by a lot of guys, and saw a lot of attention. But talk a little bit about that, how the developer community is really important for you and what you're doing around that to kind of get the software future of Microsoft going again?",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 29,
+      "speaker_raw": "SATYA NADELLA",
+      "speaker": "Satya Nadella",
+      "text": "Great. Thanks for the question. Developers are very, very important to us. If you're in the platform business, which we are both on the device side as well as on the cloud side, developers and their ability to create new value props and new applications on them is sort of life itself. I would say a couple of things. One is the announcement we made at BUILD on the device side really are breakthrough work for us, which is we're the only device platform today that has this notion of building universal apps with fantastic tooling around them. So, that means you can target multiple of our devices, and have common code across all of them. This notion of having a Windows universal application helps developers leverage their code assets, which is their core assets, across this expanded opportunity is huge. There was this one user experience change that Terry Myerson talked about at BUILD, which expands the ability for anyone who puts up an application in Windows Store to be now discovered across even the billion plus PC install base. And so that's a fantastic opportunity for developers, and we're doing everything to make that opportunity clear, and recruit developers to do more with Windows. And in that context, we'll also support cross-platform. One of the things that we have done as a relationship with Unity, we have tooling that allows you to have this core library that's portable. You can bring your code asset. In fact, we're the only client platform that has the abstractions available for the different languages, and so on. Then, on the cloud side, in fact one of the most strategic APIs is the Office API. If you think about it, you could be building an application for iOS, if you want single sign-on for any enterprise application, it's the Azure AD single sign-on. That's one of the things that we showed at BUILD, which is how to take advantage of list data in SharePoint, contact information in Exchange, Azure Active Directory information for logon, and those are the APIs that are very, very powerful APIs, and unique to us. They expand the opportunity for developers to reach into the enterprise. And then, of course, Azure is a full platform, which is very attractive to developers. So, that gives you a flavor for how important developers are and what the opportunities are. RAIMO LENSCHOW: Thank you. CHRIS SUH: Thanks, Raimo. Operator, we have time for one more question, please. (Operator Direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 30,
+      "speaker_raw": "ROSS MACMILLAN, Jefferies",
+      "speaker": "ROSS MACMILLAN",
+      "text": "Thank you very much for taking my question as well. Amy, I just wanted to go back to D&C Licensing, because I think the guidance for the next quarter suggests a relatively modest decline at the midpoint, certainly more modest than we saw prior to this quarter for the last few quarters. And, I guess I have two questions. One is, are you able to separate the XP end of life impact from the broader improvement in corporate PC refresh, for example? And then, two, Satya, what thought have you given around how you could potentially make what has traditionally a unit model with Windows OEM revenue into something potentially more recurring in nature? Thank you.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 31,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Thanks, Ross. Let me take the first part of that. I think our guidance for the D&C Licensing segment takes into account a moderate decline, as I said, in the benefit of the end of XP as well as some of the impacts of the pull forward and also for Japan. I think in general it's pretty reflective of the trend lines that we discussed. And, I do think it is hard to really separate completely the difference between a generally improving business PC environment and the end of XP. We've tried our best to do that in the guidance, and we'll obviously learn more over the coming weeks.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 32,
+      "speaker_raw": "SATYA NADELLA",
+      "speaker": "Satya Nadella",
+      "text": "The thing I would add is this transition form one time, let's say, licenses or device purchases to what is a recurring stream, you see that in a variety of different ways. You have backend subscriptions. In our case it will be Office 365. There is advertising. There is the app store itself. These are all things that attach to a device. So, we are definitely going to look to make sure that the value prop that we put together is going to be holistic in its nature and the monetization itself will be holistic and it will increase with the usage of the device across these services. That’s the approach we'll take.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 33,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Thanks, Ross. CHRIS SUH: Thank you, Ross. So, thank you all. That wraps up the Q&A portion of today's earnings call. We look forward to seeing many of you in the coming months at various investor conferences. For those unable to attend in person these events are generally webcast and you can follow the event at Microsoft.com/investor. Please contact us if you need additional details. And thanks again for joining us today.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 34,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Thanks everyone.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q3",
+      "turn_index": 35,
+      "speaker_raw": "SATYA NADELLA",
+      "speaker": "Satya Nadella",
+      "text": "Thank you. END",
+      "section": "qna"
+    }
+  ],
+  "qna_records": [
+    {
+      "call_id": "fy2014_q3",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 3,
+      "call_date": null,
+      "question_index": 1,
+      "analyst_name": "MARK MOERDLER",
+      "analyst_firm": "Sanford Bernstein",
+      "question_text": "Thank you very much. Satya, welcome aboard and thanks for joining the call. If you don't mind I'm going to ask an overall question, either of Amy or of Satya. Looking at the Commercial license business, how much of the shrinkage year-over-year in Commercial licenses is driven by the move of traditional license players from license, or license paying customers, from license to the cloud? How much is related to guys moving from Software Assurance, how much from license? Can you give any color in there?",
+      "responses": [
+        {
+          "call_id": "fy2014_q3",
+          "turn_index": 5,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Thanks, Mark, for that question. Why don't I take that one? Overall in Commercial Licensing I often talk, as you know, about the commercial business all up, mostly because I think some of the core dynamics really reinforce what we see a bit of what you're talking about, which is that renewal rates have remained high and in line. Our ability to recapture revenue in those contracts remains strong. And, our ability to attach cloud products has grown. So, what we've seen this quarter and what you see even in the Commercial Licensing line itself is that continued switch. In fact, it was faster this quarter than we had thought. Really, when you look at our Commercial unearned revenue, along with the CNB balance that we talked about last quarter, we had so many billings at the end of last quarter, when you really normalize for those end-of-quarter billings bookings, we’re also better than we had expected, in terms of the annuity stream. So, I think both a transition to long-term agreements is encouraging, in addition to premium products, the addition of new products, as well as the transition to cloud is really core to thinking about the health of the segment all-up. MARK MOERDLER: Thank you, I appreciate it.",
+          "section": "qna"
+        },
+        {
+          "call_id": "fy2014_q3",
+          "turn_index": 6,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Thanks, Mark. CHRIS SUH: Next question please, Operator. (Operator direction.)",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "Thanks, Mark, for that question. Why don't I take that one? Overall in Commercial Licensing I often talk, as you know, about the commercial business all up, mostly because I think some of the core dynamics really reinforce what we see a bit of what you're talking about, which is that renewal rates have remained high and in line. Our ability to recapture revenue in those contracts remains strong. And, our ability to attach cloud products has grown. So, what we've seen this quarter and what you see even in the Commercial Licensing line itself is that continued switch. In fact, it was faster this quarter than we had thought. Really, when you look at our Commercial unearned revenue, along with the CNB balance that we talked about last quarter, we had so many billings at the end of last quarter, when you really normalize for those end-of-quarter billings bookings, we’re also better than we had expected, in terms of the annuity stream. So, I think both a transition to long-term agreements is encouraging, in addition to premium products, the addition of new products, as well as the transition to cloud is really core to thinking about the health of the segment all-up. MARK MOERDLER: Thank you, I appreciate it.\n\nThanks, Mark. CHRIS SUH: Next question please, Operator. (Operator direction.)",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q3/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    },
+    {
+      "call_id": "fy2014_q3",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 3,
+      "call_date": null,
+      "question_index": 2,
+      "analyst_name": "KEITH WEISS",
+      "analyst_firm": "Morgan Stanley",
+      "question_text": "Excellent. Thank you for taking my question, guys. And, Satya, again, thank you for joining the call today, it's great to have your views and input shared. One of the questions I get most often from investors is trying to understand how you're going to approach the role and what you're doing initially in terms of a strategic review going on. Are you reviewing the businesses and should we expect any big changes in the strategy of Microsoft? So, I'm going to pose that question to you, in terms of over the next couple of weeks, months, quarters even, is there anything of a strategic review going on? Is there any big change in the Microsoft strategy that we should be expecting from that review?",
+      "responses": [
+        {
+          "call_id": "fy2014_q3",
+          "turn_index": 8,
+          "speaker_raw": "SATYA NADELLA",
+          "speaker": "Satya Nadella",
+          "text": "Thanks, Keith, for the question. The framework I have in terms of how I'm approaching my job and how we, as a leadership team and as a company, are going to execute and plan, because one of the things that I strongly believe in is you're planning on a continuous basis, you're executing on a continuous basis. It's not episodic, if you will. The only way we're going to succeed here is by having this notion that you're planning all the time and you're also making the changes to your plan based on the changed circumstances. And, I think that's the way to run a company like ours in a marketplace that's as dynamic as ours. But, that said, I start with, a vision that's very grounded on what the future opportunity is. This mobile-first, cloud-first thing is a pretty deep thing for us. When we say mobile-first in fact what we mean by that is mobility first. We think about users and their experiences spanning a variety of devices. It's not about any one form factor that may have some share position today. But, as we look to the future what are the set of experiences across devices, some ours and some not ours, that we can power through experiences that we can create uniquely. That notion of having a central focus and a central purpose is what I think we've already signaled and we are well on our way to execute on it. Now, you also need to continuously build some new capability. When you think about mobility-first that means you need to have a really deep understanding of all the mobile scenarios for everything from how communications happen, how meetings occur, and those require us to build new capability. We'll do some of this organically, some of it inorganically. A good example of this is what we've done with Nokia. Obviously, we're looking forward to that team joining us, building on the capability. And, then execution, even in the last three weeks or so we have announced a bunch of things where we talked about this one cloud for everyone and every device. We talked about how our data platform is going to enable this data culture, which is in fact fundamentally changing how Microsoft itself works. We also talked about what it means to think about Windows, especially with the launch of this universal Windows application model. How different it is now to think about Windows as one family, which was not true before, but now we have a very different way to think about it. So, we are well on our way to execute on it. But, to your core question of are we going to review, we are all the time reviewing. One of the things that I feel as a leadership team, we have really picked up the pace on asking the hard questions. What is the believability of any one of our plans and pushing ourselves, because at the end of the day I want to be very accountable to you all, to our customers, to our partners, as a team, by executing on our plans very well, because at the end of the day that's what matters. So, that at least gives you a framework for how we are approaching it. KEITH WEISS: Excellent. Thank you very much for that.",
+          "section": "qna"
+        },
+        {
+          "call_id": "fy2014_q3",
+          "turn_index": 9,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Thanks, Keith. CHRIS SUH: Next question please, Operator. (Operator direction.)",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "Thanks, Keith. CHRIS SUH: Next question please, Operator. (Operator direction.)",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q3/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    },
+    {
+      "call_id": "fy2014_q3",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 3,
+      "call_date": null,
+      "question_index": 3,
+      "analyst_name": "RICK SHERLUND",
+      "analyst_firm": "Nomura",
+      "question_text": "Thanks. First, Satya, on platform as a service, I'm curious how aggressively you plan to maybe change your business model to a subscription model and drive, like Adobe did, less up-front revenue, more encouraging a subscription and cloud-based, and whether we should begin to anticipate what it might look like to Microsoft as you make this transition to more of a subscription business. I'm just not sure what the margins are on your cloud business and as you transition most SaaS companies have 70, 80 percent gross margins. I'm not real sure where you are on your cloud businesses today. Do we think this is going to be a smooth transition, or might we expect it to be a little more disruptive as you gain more and more traction on a subscription and cloud basis?",
+      "responses": [
+        {
+          "call_id": "fy2014_q3",
+          "turn_index": 11,
+          "speaker_raw": "SATYA NADELLA",
+          "speaker": "Satya Nadella",
+          "text": "Great, Rick. Thanks for the question. I'll start and maybe, Amy, you'll want to even add. The way I look at it, Rick, we are well on our way to making that transition, in terms of moving from pure licenses to long-term contracts as well as subscription business model. So, when you talk about platform as a service, if you look at our commercial cloud it's made up of the platform itself, which is Azure. We also have a SaaS business in Office 365. Now, one of the things that we want to make sure we look at is each of the constituent parts, because the margin profile on each one of these things is going to be different. The infrastructure elements right now in particular is going to have a different economics versus what some of the per-user applications in a SaaS mode have. It's the blending of all of that that matters and the growth of that matters to us the most in this time where I think there are just a couple of us really playing in this market. I mean this is gold rush time in some sense of being able to capitalize on the opportunity. And, when it comes to that, we have some of the best, the broadest SaaS solution and the broadest platform solution. That combination of those assets doesn't come often. What we are very focused on is how do we make sure we get our customers aggressively into this, having them use our service, be successful with it, and then there will be a blended set of margins across even just our cloud. And, what matters to me in the long run is the magnitude of profit we generate, given that a lot of categories are going to be merged as this transition happens. We have to be able to actively participate in it and drive profit growth.",
+          "section": "qna"
+        },
+        {
+          "call_id": "fy2014_q3",
+          "turn_index": 12,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Let me add a bit, Rick. I think specifically as you think about the transition and where you'll see it first, I would say year-over-year we had flat to improving gross margins in all segments but hardware, where we had a mix shift to the Xbox console, which from a business model perspective obviously drives a gross margin decline. But, that being said, within the Office 365 business I start from the fact and a principle, which is having a user, whether they be in the consumer or in the enterprise, have access to our most recent, most innovative, most secure product, which is always going to be for us probably the one born in the cloud, will be a driver of satisfaction and a driver of usage. Those two things lead to revenue. You're already seeing that transition in the enterprise where we already sold that way. The transition is quite easy, from an economic standpoint. In the transactional business, you saw the impact of it this quarter. We had a bigger mix shift to annuity, more went on the balance sheet. We still had strong growth, but you do see the impact intra-quarter. And, in the consumer side of the business, which you also referenced with Adobe, I think we've just launched another SKU, in addition to Home called Personal, as we continue to drive consumer usage that way. The launch of Office on the iPad is an example of where we will add the most value, which is in the subscription. CHRIS SUH: Thank you, Rick. Operator, next question please. (Operator Direction.)",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "Let me add a bit, Rick. I think specifically as you think about the transition and where you'll see it first, I would say year-over-year we had flat to improving gross margins in all segments but hardware, where we had a mix shift to the Xbox console, which from a business model perspective obviously drives a gross margin decline. But, that being said, within the Office 365 business I start from the fact and a principle, which is having a user, whether they be in the consumer or in the enterprise, have access to our most recent, most innovative, most secure product, which is always going to be for us probably the one born in the cloud, will be a driver of satisfaction and a driver of usage. Those two things lead to revenue. You're already seeing that transition in the enterprise where we already sold that way. The transition is quite easy, from an economic standpoint. In the transactional business, you saw the impact of it this quarter. We had a bigger mix shift to annuity, more went on the balance sheet. We still had strong growth, but you do see the impact intra-quarter. And, in the consumer side of the business, which you also referenced with Adobe, I think we've just launched another SKU, in addition to Home called Personal, as we continue to drive consumer usage that way. The launch of Office on the iPad is an example of where we will add the most value, which is in the subscription. CHRIS SUH: Thank you, Rick. Operator, next question please. (Operator Direction.)",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q3/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    },
+    {
+      "call_id": "fy2014_q3",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 3,
+      "call_date": null,
+      "question_index": 4,
+      "analyst_name": "JOHN DIFUCCI",
+      "analyst_firm": "JP Morgan",
+      "question_text": "Great. Thank you, and welcome, Satya. I'm going to give Amy a question here for numbers. Amy, we see sales and marketing expense declined 7 percent year-over-year in this quarter. Can you remind us if there's anything unique last year, or is this just better controls? And, along these same lines, free cash flow, excluding acquisitions, grew 2 percent, which is a bit of a surprise given the direction the company is going. And, the first time in seven quarters we've actually seen growth in free cash flow. So can you tell us how we should be thinking about this going forward?",
+      "responses": [
+        {
+          "call_id": "fy2014_q3",
+          "turn_index": 16,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Thanks, John. I was getting lonely, I didn't have any questions. So, I appreciate it. Let me start with you first one, which was there any sort of unique thing that resulted in that comparable in sales and marketing. We did have more launch expense going on a year ago, but we also focused on rationalizing and focusing our marketing dollars in quarter. So, I think it's a combination of both, and I would probably say more of the latter, which is really thinking and prioritizing more effectively throughout the year to earn the highest ROI on the dollar from spending. We also did invest in sales year over year. So most of that is specifically around marketing. I want to make sure that you understand that where we see opportunity, we're investing in our selling engine to get it. I would make an important caveat to make sure it's clear when you see year over year sales and marketing decline. The second half of that in terms of cash flow, I think as we remain focused on prioritizing and really thinking about the return on the dollars we spend, you did see, as I talked about earlier margins increase year over year, all of that has had a positive impact on cash flow. Thanks, John. JOHN DIFUCCI: In going forward, how should we be thinking about that? Just continued discipline, I guess, around expenses, but also investment where it's needed?",
+          "section": "qna"
+        },
+        {
+          "call_id": "fy2014_q3",
+          "turn_index": 17,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Yes. I think when we talked at the end about how I think about '15, maybe it's better said as how we think about every day, which is what can we do today, this week, this month, to better invest behind places where we feel like we are uniquely capable of success, and not being afraid to make those changes and finding the agility and the empowerment here to do those things is incredibly important. And, I would say culturally, Satya mentioned about being more data-driven, I think in addition to the day-to-day which was more focused on customers, I think really it's a cultural statement about how we are going to operate more internally as well. So, maybe that's the most forward-looking comment I could tell you, which is that being empowered to look weekly, monthly, and see how we can get better, and better, and better. And I think that's actually driven a lot of excitement around here. JOHN DIFUCCI: Okay, great. Thank you. CHRIS SUH: Thanks, John. We'll move to the next question, please. (Operator Direction.)",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "Thanks, John. I was getting lonely, I didn't have any questions. So, I appreciate it. Let me start with you first one, which was there any sort of unique thing that resulted in that comparable in sales and marketing. We did have more launch expense going on a year ago, but we also focused on rationalizing and focusing our marketing dollars in quarter. So, I think it's a combination of both, and I would probably say more of the latter, which is really thinking and prioritizing more effectively throughout the year to earn the highest ROI on the dollar from spending. We also did invest in sales year over year. So most of that is specifically around marketing. I want to make sure that you understand that where we see opportunity, we're investing in our selling engine to get it. I would make an important caveat to make sure it's clear when you see year over year sales and marketing decline. The second half of that in terms of cash flow, I think as we remain focused on prioritizing and really thinking about the return on the dollars we spend, you did see, as I talked about earlier margins increase year over year, all of that has had a positive impact on cash flow. Thanks, John. JOHN DIFUCCI: In going forward, how should we be thinking about that? Just continued discipline, I guess, around expenses, but also investment where it's needed?\n\nYes. I think when we talked at the end about how I think about '15, maybe it's better said as how we think about every day, which is what can we do today, this week, this month, to better invest behind places where we feel like we are uniquely capable of success, and not being afraid to make those changes and finding the agility and the empowerment here to do those things is incredibly important. And, I would say culturally, Satya mentioned about being more data-driven, I think in addition to the day-to-day which was more focused on customers, I think really it's a cultural statement about how we are going to operate more internally as well. So, maybe that's the most forward-looking comment I could tell you, which is that being empowered to look weekly, monthly, and see how we can get better, and better, and better. And I think that's actually driven a lot of excitement around here. JOHN DIFUCCI: Okay, great. Thank you. CHRIS SUH: Thanks, John. We'll move to the next question, please. (Operator Direction.)",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q3/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    },
+    {
+      "call_id": "fy2014_q3",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 3,
+      "call_date": null,
+      "question_index": 5,
+      "analyst_name": "PHILIP WINSLOW",
+      "analyst_firm": "Credit Suisse",
+      "question_text": "Hi. Thanks, guys, and congratulations on a great quarter. And, Satya, great to have you on the call as well. I wanted to focus in on Office 365. If you compare it this quarter to last quarter, you've got 1.1 million in Home Premium users, last quarter I think it was 500k. In September you talked about a run rate of I think 1.5 million, now you're at 2-1/2. I wonder if you could just talk about the momentum that you're seeing Office 365, and maybe give us your thoughts on sort of the business versus the home/consumer side. And then, Amy, when you think about Office 365, how do you think about the differences or lifetime value of an Office 365 customer versus a traditional Office user?",
+      "responses": [
+        {
+          "call_id": "fy2014_q3",
+          "turn_index": 19,
+          "speaker_raw": "SATYA NADELLA",
+          "speaker": "Satya Nadella",
+          "text": "Let me start, and then, Amy, you should definitely add on to it. Office 365, I'm really, really excited about what's happening there, which is the core engine that's driving a lot of our cloud adoption, and you see it in the numbers and Amy will talk more about the numbers. But, one of the fundamental things, it's actually a SaaS application, and it's also an architecture for enterprise. One of the most salient things we announced when we talked about the cloud for everyone and every device, and we talked about Office 365 having now iPad apps. We also launched something called the Enterprise Mobility Suite, which is perhaps one of the most strategic things during that day that we announced, which was that we now have a consistent and deep platform for identity management, which by the way gets bootstrapped every time Office 365 users sign up, device management, and data protection, which is really what every enterprise customer needs in a mobile-first world, in a world where you have fast application adoption, and you have BYOD or bring your own device happening. So to me, the Office 365 growth is, in fact, driving our enterprise infrastructure growth, which is driving Azure growth, and that cycle to me is most exciting. That's one of the reasons why I want us to keep indexing on the usage of all of this, and the growth numbers you see is a reflection of that.",
+          "section": "qna"
+        },
+        {
+          "call_id": "fy2014_q3",
+          "turn_index": 20,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Phil, specifically to some of your how do we think about the lifetime value, maybe I will use the consumer SKUs, which you started with, as a good example. First, whenever we launch a new motion, a new SKU in this instance, especially a subscription, I do think it takes some time both for the customer to understand the value proposition as well as for retailers and partners to really hone their motion to pivot selling a new subscription model. I think you're starting to see some acceleration as well as an increasing awareness of the product, which I think is terrific. Maybe more importantly, as we think about the value we're adding, the Office on the iPad announcement certainly brought attention as we continue to drive people to the subscription. I made a comment around renewal rates, and we're happy with them as we've passed the one-year anniversary of the launch. And, I think when you look at the LTV, we will be better off for many reasons including financially when a person moves to the subscription. My deep belief is the most important thing we will do is continue to think about how we can modernize, add features, add innovation so that it's more valuable to them every day they use it. And, that is far easier in a cloud world than it is on prem. So, I think that's probably the most important driver of LTV long term. PHILLIP WINSLOW: Thanks, guys.",
+          "section": "qna"
+        },
+        {
+          "call_id": "fy2014_q3",
+          "turn_index": 21,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Thanks, Phil. CHRIS SUH: Next question, please. (Operator direction.)",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "Phil, specifically to some of your how do we think about the lifetime value, maybe I will use the consumer SKUs, which you started with, as a good example. First, whenever we launch a new motion, a new SKU in this instance, especially a subscription, I do think it takes some time both for the customer to understand the value proposition as well as for retailers and partners to really hone their motion to pivot selling a new subscription model. I think you're starting to see some acceleration as well as an increasing awareness of the product, which I think is terrific. Maybe more importantly, as we think about the value we're adding, the Office on the iPad announcement certainly brought attention as we continue to drive people to the subscription. I made a comment around renewal rates, and we're happy with them as we've passed the one-year anniversary of the launch. And, I think when you look at the LTV, we will be better off for many reasons including financially when a person moves to the subscription. My deep belief is the most important thing we will do is continue to think about how we can modernize, add features, add innovation so that it's more valuable to them every day they use it. And, that is far easier in a cloud world than it is on prem. So, I think that's probably the most important driver of LTV long term. PHILLIP WINSLOW: Thanks, guys.\n\nThanks, Phil. CHRIS SUH: Next question, please. (Operator direction.)",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q3/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    },
+    {
+      "call_id": "fy2014_q3",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 3,
+      "call_date": null,
+      "question_index": 6,
+      "analyst_name": "WALTER PRITCHARD",
+      "analyst_firm": "Citi",
+      "question_text": "Hi, thanks. Amy, just a question for you, I know you're not providing updated guidance for Nokia. I'm just wondering maybe a little bit of thought behind that decision. I know the deal closes tomorrow. You probably could easily move things around here a bit and reported on it early next week and had that benefit. Is the lack of guidance there, is it just simply you haven't been able to get your hands into that business at this point. Is there something else that's changed in that business? I'm just trying to get a sense, because it does sort of open up quite a bit of variability in terms of how people are going to model things over the next three months.",
+      "responses": [
+        {
+          "call_id": "fy2014_q3",
+          "turn_index": 23,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Thanks, Walter. No, it really wasn't a choice. The reality is we've not had the type of access until close where we could confidently begin to give the type of guidance that I believe we've come, and you've come to expect from us, in terms of the depth and analysis required to get there. They do report in a different accounting system. It needs to be converted to GAAP. We've not had access to forward projections. I haven't had deep access to their systems. So, until we get that, which really starts tomorrow, it's not really a question of whether it was this week or next week. It's really a question of us getting the confidence and access to be able to report at the level of detail I know you all would expect me to do. CHRIS SUH: Thanks, Walter. Next question please. (Operator direction.)",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "Thanks, Walter. No, it really wasn't a choice. The reality is we've not had the type of access until close where we could confidently begin to give the type of guidance that I believe we've come, and you've come to expect from us, in terms of the depth and analysis required to get there. They do report in a different accounting system. It needs to be converted to GAAP. We've not had access to forward projections. I haven't had deep access to their systems. So, until we get that, which really starts tomorrow, it's not really a question of whether it was this week or next week. It's really a question of us getting the confidence and access to be able to report at the level of detail I know you all would expect me to do. CHRIS SUH: Thanks, Walter. Next question please. (Operator direction.)",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q3/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    },
+    {
+      "call_id": "fy2014_q3",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 3,
+      "call_date": null,
+      "question_index": 7,
+      "analyst_name": "ED MAGUIRE",
+      "analyst_firm": "CLSA",
+      "question_text": "Hi, good afternoon, and it's great to hear you, Satya, on the call. I had a question about the device and consumer licensing. First of all, the Windows Pro revenue is very strong and, Amy, I know you had alluded to receding impact of XP upgrades. But, I wanted to get a sense of how sustainable you think that growth can continue. And, also noticing that the particularly Office consumer revenue is improving on attach rates, and there had been a bit of disconnect there, because of the transition to Office 365. I wanted to get your thoughts on how long that might be sustainable, or whether this is related to the broader XP expiration? Thank you.",
+      "responses": [
+        {
+          "call_id": "fy2014_q3",
+          "turn_index": 27,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Thanks, Ed. Let me take those in reverse, actually. On the Office consumer performance, I will always first and foremost think about the combination of Office 365 Home, as well as our consumer performance and that grew, obviously, at a higher rate than 15 percent that we talked about this quarter, that and increasing attach. There were some dynamics this quarter that I think were important. Some stabilizing that we've seen in the consumer developed world PC market also benefits, as you might imagine, our Office business. We have the highest attach rates in developed markets. So, that tends to be an important driver of Office revenue, whether earned as a license or a subscription. The second thing is related a bit to your first question. It's sort of hard to separate oftentimes many of the dynamics in our market. As we've seen Windows Pro mix increase, for example in small business, when people buy PCs with Windows Pro they're more likely to purchase a form of Office, whether it be a subscription or a license. That's another dynamic you saw this quarter. A final dynamic that I'll talk about relating to Office was around Japan. We did see some pull forward due to the tax increase. So, that did have an impact on Office consumer growth. But, even without that, as we talked about, we still had increasing attach and very good performance for the quarter. Now, backing up, because it's complicated, was the Windows sustainability in the business segment. As we said, it's very hard to separate cleanly the impact of XP from what is an improving business PC refresh cycle, as well as some positive macro economic trends that we're seeing. As I said in my comments, the end of XP does create a bit of a moderation in growth. That being said, the differentiation and value proposition of Pro is clearer than it's been. The investment in that SKU and the value proposition of Pro has had mix increasing within segments of the market, for example in small business and in the enterprise for people who buy a Windows PC. So, I think that's an important dynamic that we'll continue to invest in and we're excited to see. ED MAGUIRE: Thank you. CHRIS SUH: Thanks, Ed. Next question please. (Operator Direction.)",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "Thanks, Ed. Let me take those in reverse, actually. On the Office consumer performance, I will always first and foremost think about the combination of Office 365 Home, as well as our consumer performance and that grew, obviously, at a higher rate than 15 percent that we talked about this quarter, that and increasing attach. There were some dynamics this quarter that I think were important. Some stabilizing that we've seen in the consumer developed world PC market also benefits, as you might imagine, our Office business. We have the highest attach rates in developed markets. So, that tends to be an important driver of Office revenue, whether earned as a license or a subscription. The second thing is related a bit to your first question. It's sort of hard to separate oftentimes many of the dynamics in our market. As we've seen Windows Pro mix increase, for example in small business, when people buy PCs with Windows Pro they're more likely to purchase a form of Office, whether it be a subscription or a license. That's another dynamic you saw this quarter. A final dynamic that I'll talk about relating to Office was around Japan. We did see some pull forward due to the tax increase. So, that did have an impact on Office consumer growth. But, even without that, as we talked about, we still had increasing attach and very good performance for the quarter. Now, backing up, because it's complicated, was the Windows sustainability in the business segment. As we said, it's very hard to separate cleanly the impact of XP from what is an improving business PC refresh cycle, as well as some positive macro economic trends that we're seeing. As I said in my comments, the end of XP does create a bit of a moderation in growth. That being said, the differentiation and value proposition of Pro is clearer than it's been. The investment in that SKU and the value proposition of Pro has had mix increasing within segments of the market, for example in small business and in the enterprise for people who buy a Windows PC. So, I think that's an important dynamic that we'll continue to invest in and we're excited to see. ED MAGUIRE: Thank you. CHRIS SUH: Thanks, Ed. Next question please. (Operator Direction.)",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q3/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    },
+    {
+      "call_id": "fy2014_q3",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 3,
+      "call_date": null,
+      "question_index": 8,
+      "analyst_name": "ROSS MACMILLAN",
+      "analyst_firm": "Jefferies",
+      "question_text": "Thank you very much for taking my question as well. Amy, I just wanted to go back to D&C Licensing, because I think the guidance for the next quarter suggests a relatively modest decline at the midpoint, certainly more modest than we saw prior to this quarter for the last few quarters. And, I guess I have two questions. One is, are you able to separate the XP end of life impact from the broader improvement in corporate PC refresh, for example? And then, two, Satya, what thought have you given around how you could potentially make what has traditionally a unit model with Windows OEM revenue into something potentially more recurring in nature? Thank you.",
+      "responses": [
+        {
+          "call_id": "fy2014_q3",
+          "turn_index": 31,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Thanks, Ross. Let me take the first part of that. I think our guidance for the D&C Licensing segment takes into account a moderate decline, as I said, in the benefit of the end of XP as well as some of the impacts of the pull forward and also for Japan. I think in general it's pretty reflective of the trend lines that we discussed. And, I do think it is hard to really separate completely the difference between a generally improving business PC environment and the end of XP. We've tried our best to do that in the guidance, and we'll obviously learn more over the coming weeks.",
+          "section": "qna"
+        },
+        {
+          "call_id": "fy2014_q3",
+          "turn_index": 32,
+          "speaker_raw": "SATYA NADELLA",
+          "speaker": "Satya Nadella",
+          "text": "The thing I would add is this transition form one time, let's say, licenses or device purchases to what is a recurring stream, you see that in a variety of different ways. You have backend subscriptions. In our case it will be Office 365. There is advertising. There is the app store itself. These are all things that attach to a device. So, we are definitely going to look to make sure that the value prop that we put together is going to be holistic in its nature and the monetization itself will be holistic and it will increase with the usage of the device across these services. That’s the approach we'll take.",
+          "section": "qna"
+        },
+        {
+          "call_id": "fy2014_q3",
+          "turn_index": 33,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Thanks, Ross. CHRIS SUH: Thank you, Ross. So, thank you all. That wraps up the Q&A portion of today's earnings call. We look forward to seeing many of you in the coming months at various investor conferences. For those unable to attend in person these events are generally webcast and you can follow the event at Microsoft.com/investor. Please contact us if you need additional details. And thanks again for joining us today.",
+          "section": "qna"
+        },
+        {
+          "call_id": "fy2014_q3",
+          "turn_index": 34,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Thanks everyone.",
+          "section": "qna"
+        },
+        {
+          "call_id": "fy2014_q3",
+          "turn_index": 35,
+          "speaker_raw": "SATYA NADELLA",
+          "speaker": "Satya Nadella",
+          "text": "Thank you. END",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "Thanks, Ross. Let me take the first part of that. I think our guidance for the D&C Licensing segment takes into account a moderate decline, as I said, in the benefit of the end of XP as well as some of the impacts of the pull forward and also for Japan. I think in general it's pretty reflective of the trend lines that we discussed. And, I do think it is hard to really separate completely the difference between a generally improving business PC environment and the end of XP. We've tried our best to do that in the guidance, and we'll obviously learn more over the coming weeks.\n\nThanks, Ross. CHRIS SUH: Thank you, Ross. So, thank you all. That wraps up the Q&A portion of today's earnings call. We look forward to seeing many of you in the coming months at various investor conferences. For those unable to attend in person these events are generally webcast and you can follow the event at Microsoft.com/investor. Please contact us if you need additional details. And thanks again for joining us today.\n\nThanks everyone.",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q3/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    }
+  ]
+}

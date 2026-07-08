@@ -1,4 +1,5 @@
 import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
+import { ChatOpenAI } from '@langchain/openai';
 import { PromptTemplate } from '@langchain/core/prompts';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -91,7 +92,45 @@ export interface PersonaChatInput extends AdvisorPromptInput {
   }[];
 }
 
+export interface ReferencePersonaOutput {
+  name: string;
+  role: string;
+  badge: string;
+  description: string;
+  decisionStyle: string;
+  coreValues: string[];
+  strengths: string[];
+  weaknesses: string[];
+  communicationStyle: string;
+  decisionPrompt: string;
+}
+
+export interface RagEvaluationAnswer {
+  answer: string;
+  evidence: {
+    fileName: string;
+    title: string;
+    speaker?: string;
+    fiscalYear?: number;
+    fiscalQuarter?: number;
+    section?: string;
+    quote_or_summary: string;
+  }[];
+  limitations: string[];
+}
+
 const getModel = () => {
+  if (process.env.LLM_PROVIDER === 'local') {
+    return new ChatOpenAI({
+      apiKey: process.env.LOCAL_LLM_API_KEY || 'local',
+      model: process.env.LOCAL_LLM_MODEL || 'local-model',
+      temperature: 0.2,
+      configuration: {
+        baseURL: process.env.LOCAL_LLM_BASE_URL || 'http://127.0.0.1:8080/v1',
+      },
+    });
+  }
+
   const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
   if (!apiKey) return null;
 
@@ -430,6 +469,200 @@ JSON 형식:
     console.warn('LangChain advisor prompt fallback', error);
     return fallback;
   }
+};
+
+const fallbackReferencePersona = (subjectName: string, documentText: string): ReferencePersonaOutput => {
+  const aiInvestment = /AI|Copilot|Azure|GPU|capacity|CapEx/i.test(documentText);
+
+  return {
+    name: `${subjectName} CFO Advisor`,
+    role: '재무',
+    badge: aiInvestment ? 'AI 투자와 자본 효율' : '재무 운영 기준',
+    description: `${subjectName}의 공개 인터뷰/발언에서 드러난 재무 의사결정 기준을 바탕으로 만든 CFO 참조 페르소나입니다.`,
+    decisionStyle: '대규모 성장 투자와 수익성, 현금흐름, 운영 효율을 동시에 관리하는 균형형 재무 의사결정',
+    coreValues: [
+      '장기 성장 투자',
+      '운영 효율',
+      '현금흐름 관리',
+      '수요 신호 기반 자본 배치',
+      '마진과 투자 균형',
+    ],
+    strengths: [
+      '대규모 CapEx와 성장 기회의 균형 판단',
+      'AI/클라우드 수요와 공급 제약을 함께 고려',
+      '분기 실적과 장기 투자 논리를 함께 설명',
+    ],
+    weaknesses: [
+      '초대형 인프라 투자로 인한 단기 free cash flow 압박',
+      '수요 초과 상황에서 자본 배분 우선순위 충돌 가능성',
+      '외부 투자 및 환율 변수에 따른 손익 변동성',
+    ],
+    communicationStyle: '수치, 성장률, 마진, CapEx, 현금흐름을 먼저 제시하고 투자 근거와 제약 조건을 함께 설명합니다.',
+    decisionPrompt: `# ${subjectName} CFO Advisor Persona
+
+## Role
+You are a CFO advisor persona derived from ${subjectName}'s public interview and earnings-call style remarks.
+
+## Decision Principles
+- Balance AI/cloud growth investment with operating margin and cash flow discipline.
+- Treat customer demand signals, capacity constraints, and ROI priorities as linked variables.
+- Explain tradeoffs with numbers first: revenue growth, margin, CapEx, free cash flow, and operating income.
+- Separate short-lived infrastructure assets from long-lived monetization capacity.
+- Mark uncertain source signals as "확인 필요" instead of over-generalizing.
+
+## Communication Style
+Answer in Korean. Start with the conclusion, then show financial evidence, constraints, risks, and next action.`,
+  };
+};
+
+export const generateReferencePersonaFromDocument = async (
+  subjectName: string,
+  documentText: string,
+): Promise<ReferencePersonaOutput> => {
+  const trimmedDocument = documentText.slice(0, 24000);
+
+  try {
+    const result = await safeInvokeJson<ReferencePersonaOutput>(
+      `너는 CFO 공개 인터뷰/실적발표 텍스트에서 의사결정 페르소나를 추출하는 분석 AI다.
+
+아래 원문에서 엔티티, 관계, 의사결정 기준, 레드라인, 커뮤니케이션 스타일을 추론해 CFO 참조 페르소나를 만든다.
+원문에 없는 내용은 과장하지 말고 "확인 필요"로 표시한다.
+반드시 한국어 JSON만 반환한다.
+
+대상 인물:
+{subjectName}
+
+원문:
+{documentText}
+
+JSON 형식:
+{{
+  "name": "페르소나 이름",
+  "role": "재무",
+  "badge": "핵심 태그",
+  "description": "페르소나 설명",
+  "decisionStyle": "의사결정 스타일",
+  "coreValues": ["핵심 가치 3~6개"],
+  "strengths": ["강점 3~5개"],
+  "weaknesses": ["사각지대/주의점 2~4개"],
+  "communicationStyle": "소통 방식",
+  "decisionPrompt": "외부 LLM에 주입 가능한 Markdown 시스템 프롬프트"
+}}`,
+      { subjectName, documentText: trimmedDocument },
+    );
+
+    if (result?.name && result?.decisionStyle && result?.coreValues?.length) return result;
+  } catch (error) {
+    console.warn('Reference persona generation fallback', error);
+  }
+
+  return fallbackReferencePersona(subjectName, documentText);
+};
+
+export const generateReferencePersonaFromRagEvidence = async (
+  subjectName: string,
+  evidenceText: string,
+): Promise<ReferencePersonaOutput> => {
+  const trimmedEvidence = evidenceText.slice(0, 26000);
+
+  try {
+    const result = await safeInvokeJson<ReferencePersonaOutput>(
+      `너는 RAG 검색 근거를 바탕으로 CFO 의사결정 페르소나를 생성하는 분석 AI다.
+
+아래 Evidence는 공개 인터뷰와 어닝콜에서 검색된 근거 청크다.
+Evidence에 직접 근거가 있는 내용만 사용해 페르소나를 만든다.
+근거가 약하거나 확인되지 않은 내용은 반드시 "확인 필요"로 표시한다.
+특히 자본 배치, CapEx, AI/클라우드 투자, 현금흐름, 마진, 수요 신호, 리스크 대응, 커뮤니케이션 방식을 중심으로 분석한다.
+반드시 한국어 JSON만 반환한다.
+
+대상 인물:
+{subjectName}
+
+RAG Evidence:
+{evidenceText}
+
+JSON 형식:
+{{
+  "name": "페르소나 이름",
+  "role": "재무",
+  "badge": "핵심 태그",
+  "description": "페르소나 설명",
+  "decisionStyle": "근거 기반 의사결정 스타일",
+  "coreValues": ["핵심 가치 3~6개"],
+  "strengths": ["강점 3~5개"],
+  "weaknesses": ["사각지대/주의점 2~4개"],
+  "communicationStyle": "소통 방식",
+  "decisionPrompt": "Evidence 기반으로 외부 LLM에 주입 가능한 Markdown 시스템 프롬프트. 반드시 근거 기반 판단, 확인 필요 표시, 숫자 우선 보고 원칙을 포함한다."
+}}`,
+      { subjectName, evidenceText: trimmedEvidence },
+    );
+
+    if (result?.name && result?.decisionStyle && result?.coreValues?.length) return result;
+  } catch (error) {
+    console.warn('RAG reference persona generation fallback', error);
+  }
+
+  return fallbackReferencePersona(subjectName, evidenceText);
+};
+
+export const generateRagEvaluationAnswer = async ({
+  subjectName,
+  question,
+  evidenceText,
+}: {
+  subjectName: string;
+  question: string;
+  evidenceText: string;
+}): Promise<RagEvaluationAnswer> => {
+  const trimmedEvidence = evidenceText.slice(0, 18000);
+
+  try {
+    const result = await safeInvokeJson<RagEvaluationAnswer>(
+      `너는 RAG 성능 평가용 답변 생성기다.
+
+아래 Evidence에 근거해서 질문에 답하라.
+원문 근거가 없는 내용은 만들지 말고 "확인 필요"로 표시하라.
+답변은 CFO 의사결정 기준을 중심으로 작성하라.
+반드시 한국어 JSON만 반환한다.
+
+대상 인물:
+{subjectName}
+
+질문:
+{question}
+
+Evidence:
+{evidenceText}
+
+JSON 형식:
+{{
+  "answer": "근거 기반 답변",
+  "evidence": [
+    {{
+      "fileName": "근거 파일명",
+      "title": "근거 제목",
+      "speaker": "화자",
+      "fiscalYear": 2025,
+      "fiscalQuarter": 3,
+      "section": "prepared_remarks 또는 qna",
+      "quote_or_summary": "짧은 근거 요약"
+    }}
+  ],
+  "limitations": ["확인 필요 항목"]
+}}`,
+      { subjectName, question, evidenceText: trimmedEvidence },
+    );
+
+    if (result?.answer?.trim()) return result;
+  } catch (error) {
+    console.warn('RAG evaluation answer fallback', error);
+  }
+
+  return {
+    answer: `검색된 근거 기준으로 ${subjectName}의 판단은 수요 신호, CapEx/인프라 제약, 마진 영향, 현금흐름을 함께 검토하는 방향으로 해석됩니다. 세부 기준은 근거 청크 확인이 필요합니다.`,
+    evidence: [],
+    limitations: ['로컬 LLM 응답 실패로 상세 근거 요약은 확인 필요'],
+  };
 };
 
 const fallbackPersonaChatReply = (input: PersonaChatInput) => {

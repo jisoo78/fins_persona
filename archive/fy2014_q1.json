@@ -1,0 +1,816 @@
+{
+  "call": {
+    "call_id": "fy2014_q1",
+    "fiscal_year": 2014,
+    "fiscal_quarter": 1,
+    "call_date": null,
+    "title": "Microsoft First Quarter 2014 Prepared Remarks",
+    "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q1/press-release-webcast",
+    "collected_at": "2026-07-06T23:52:56.740749Z",
+    "parser_version": "0.1.0",
+    "transcript_found": true,
+    "amy_hood_found": true,
+    "parse_status": "parsed",
+    "parse_warnings": [
+      "qna_marker_not_found",
+      "qna_boundary_inferred_from_analyst"
+    ],
+    "review_required": false
+  },
+  "speaker_turns": [
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 0,
+      "speaker_raw": "Operator",
+      "speaker": "Operator",
+      "text": "Welcome to the first-quarter 2014 Microsoft Corporation earnings conference call. At this time, all lines are muted. I would like to turn the call over to Chris Suh, General Manager of Investor Relations. Chris, please proceed.",
+      "section": "prepared_remarks"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 1,
+      "speaker_raw": "CHRIS SUH, GENERAL MANAGER INVESTOR RELATIONS",
+      "speaker": "CHRIS SUH",
+      "text": "Thanks operator. On our website, Microsoft.com/investor is our financial summary slide deck, which is intended to follow our prepared remarks, and provide the reconciliation of differences between GAAP and non-GAAP financial measures. Our website also includes information related to our new financial reporting segments which were announced September 19th, 2013 and discussed with investors in our conference call on September 26th. As a reminder, we will post today's prepared remarks to our website immediately following the call until the complete transcript is available. Today's call is being webcast live and recorded. If you ask a question, it will be included in our live transmission, in the transcript, and any future use of the recording. You can replay the call and view the transcript at the Microsoft Investor Relations website until October 24, 2014. During this call, we will be making forward-looking statements which are predictions, projections, or other statements about future events. These statements are based on current expectations and assumptions that are subject to risks and uncertainties. Actual results could materially differ because of factors discussed in today's earnings press release, in the comments made during this conference call, and in the risk factor section of our Form 10-K, Forms 10-Q, and other reports and filings with the Securities and Exchange Commission. We do not undertake any duty to update any forward-looking statement. Before I hand the call over to Amy, I’d like to remind you that all growth comparisons we make on the call today will relate to the corresponding period of last year. Also, please keep in mind that with our new segment reporting structure, adjustments for items such as upgrade offers, tech guarantees, and Pre-sales are consolidated into Corporate Other to provide better comparison of operating results. Unless specified otherwise, all impacted numbers for the current quarter have been adjusted for the cumulative effect of last year’s revenue deferrals related to the Windows Upgrade Offer, Windows 8 Pre-sales, the Office Offer, and a $113 million revenue deferral in the current quarter, primarily related to Windows 8.1 Pre-sales. You can find details of the adjustments and reconciliations of differences between GAAP and non-GAAP financial measures in our financial summary slide deck. And with that, I'll turn it over Amy.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 2,
+      "speaker_raw": "AMY HOOD, CHIEF FINANCIAL OFFICER",
+      "speaker": "AMY HOOD",
+      "text": "Good afternoon, and thank you for joining us today. By now, you’ve had a chance to look at our press release, earnings slide deck, key performance indicators, and our 10-Q. Our results have been reported using the new reporting framework I first discussed at our financial analyst meeting in September. Since this is a new way to think about our business, I’m sure you will have a lot of questions, so after our prepared remarks, we’ll allow more time than usual for Q&A. And with that, let me dive right in. This quarter we delivered record first-quarter revenue. We did it while working though a significant transformation of our organization, and while making significant moves to implement our new strategy. Our company is focused, and delivering. Our enterprise business remains strong, despite a macro environment that some have characterized as tough. We are driving our business forward with industry-leading solutions in key areas like collaboration, unified communications, and cloud services. And high customer satisfaction is driving high enterprise agreement renewal rates. At the same time, we are making meaningful progress in our consumer business. We saw growing engagement and adoption across our major consumer services including Office 365 Home Premium, Skype, Bing, and SkyDrive. And with the new Windows, we’re building high value experiences for our consumers that allow people to use our devices and services all day long, whether at work or at home. From a geographic perspective, we saw broad-based revenue growth. Overall, both developed and emerging markets showed strength. The U.S. and parts of Western Europe were particularly strong, while China was weak. Now, let me share some quick thoughts on the PC market, which turned out better than we expected. We’re seeing signs of stabilization in the business segment with two consecutive quarters of growth and a relatively stable outlook for the next couple of quarters. While the consumer segment is more volatile with increasing competition for share of wallet, it also performed better than expected, particularly in developed markets. With that backdrop, let’s move on to Windows. We’re seeing favorable reviews and customer enthusiasm for Windows 8.1, which became available last week. Windows 8.1 delivers on Microsoft’s promise of a quick innovation cadence, launching less than one year after Windows 8. Based on extensive customer feedback, we added more customization capabilities, made the UI simpler and easier to use, added new and smart ways to search, improved the power management, and allowed multitasking, even on a tablet. Combined with the progress our OEM partners are making, we are collectively increasing the selection of compelling Windows devices available to meet the dynamic needs of all segments of the market. This holiday, we’ll see competitive opening price points on tablets and laptops, such as the Dell Inspiron 15 for less than $300. We’ll also see exciting mobile devices - from 6 inch phones to 10 inch tablets - many with Microsoft Office. In the six inch category, we’re incredibly excited by the Nokia Lumia 1520 phablet announced just this past Tuesday. For eight inch tablets, Toshiba, Dell, and Lenovo will have devices available for less than $300. And for ten inch tablets, we of course like the new Nokia Lumia 2520 with LTE. In addition to third-party devices, we are also excited about our first-party line up. With Surface, we are making progress with better in-market execution. As a result, we more than doubled the number of units we sold over the prior quarter. In terms of mix, Surface RT did better than expected. With Surface Pro, we saw some customers delay purchase in anticipation of Surface Pro 2, which delivers significantly improved battery and processor performance. Moving on to the enterprise where demand for our solutions continues to be strong. Earlier this month, we announced our Fall wave of enterprise products and services which touches nearly every aspect of IT. We’re seeing solid growth, we’re outperforming our competitors, and we are taking share in areas like virtualization and data platform. Our hybrid infrastructure and management offerings continue to be top choices for CIOs with Window Server Premium and System Center growing double digits again this quarter. The latest versions of Windows Server, System Center, and Windows Intune deliver enhancements in networking, storage, and device management for Windows and alternative platforms. These enhancements will help customers realize the promise of hybrid cloud computing across their datacenters, hosted clouds, and Windows Azure. In the data platform, SQL Server continues to outpace the market. The next version, SQL Server 2014, will offer new in-memory and cloud capabilities that increase performance and unlock new hybrid scenarios. Later this month, we will make Windows Azure HDInsight, our Hadoop-based big data solution, generally available. We continue to bring additional value to the Windows Azure platform. This quarter, we delivered a number of updates that enable faster connectivity, improve security, and integrate access and identity across on premise and cloud applications. With all of the innovation we’re delivering to our enterprise customers, we continue to be uniquely positioned to capture more and more of the addressable market. Before handing it off to Chris, I’d like to say couple of additional things. As part of our new reporting framework, we’ve disclosed segment gross margins. The segment breakout is important in understanding our performance because each of our businesses are impacted by different dynamics, and have different margin profiles. In Devices and Consumer, the sequential change in gross margin dollars reflects the progress we are making towards our strategy of delivering a compelling family of devices and services. While we feel good about the increased traction we saw with Surface this quarter, we know there is more to do. We are intensely focused on improving our capabilities in key areas like demand planning and supply chain management, and on achieving scale as quickly as possible. And in Commercial, we’re already seeing the benefits of the investments we’ve made to transform our business model from perpetual software licensing to services. In our commercial cloud business - which includes Office 365, Azure, and other Microsoft services – we saw year over year gross margin expansion. With regards to our proposed acquisition of substantially all of Nokia’s devices and services business, we still expect the transaction to close in the first quarter of calendar 2014. We will provide an update to the EPS impact, if any, post-closing. So, in summary, we are executing better, getting our customers what they want, and making meaningful progress through the early stages of our transformation. And we’ve accomplished all of this while also working through the One Microsoft realignment and several significant announcements. We’re committed to executing and delivering – and so far, that’s what we’ve done. With that backdrop for the quarter, I’ll hand it over to Chris to give more details about our performance, before I come back and share thoughts on our outlook.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 3,
+      "speaker_raw": "CHRIS SUH, GENERAL MANAGER INVESTOR RELATIONS",
+      "speaker": "CHRIS SUH",
+      "text": "Thanks Amy. First, I'll review our overall results, and then I'll move on to the details by business segment. Total revenue was up 7%, to $18.6 billion, and came in about $700 million better than our expectations. And without the impact for foreign exchange, revenue would have been $200 million, or 1 percentage point better. Annuity revenue was particularly strong and grew 11%, driven by Commercial performance. Cost of goods sold increased 23%, which was in line with our expectation of over 20% growth. This increase was primarily due to higher Surface costs, and also higher depreciation, related to the capex investments we’ve made to support our cloud services strategy. As a result, gross margin grew 3% to $13.5 billion, reflecting the changing mix of our revenue. All up operating expenses grew 8%, which was generally in line with our expectations, with the exception of G&A which declined due to lower legal expenses. We continue to be thoughtful and diligent in how and where we focus our resources. In advertising, the team has embraced One Microsoft, and the benefits are already accruing with improved messaging and results. And in R&D, we are continuing to focus our resources while accelerating our cadence. Operating income and earnings per share both declined 3%, to $6.4 billion and $0.63 cents, respectively. Unearned revenue grew a healthy 14% to $20.1 billion, and our contracted-not-billed balance grew to over $21 billion, driven by Commercial strength. Our inventory balance sequentially increased by $675 million, mostly due to builds of Xbox 360 and Xbox One. Ahead of the holiday selling season, Xbox represents over half of our overall inventory balance. Inventory for Surface products declined sequentially, even as we built levels ahead of this week’s Surface 2 and Surface Pro 2 launches. This quarter we announced a 22% increase in our quarterly dividend, to $0.28 per share, and also announced a $40 billion share repurchase program. We returned $3.8 billion of cash to shareholders, our highest quarterly amount since the second quarter of fiscal year 2011. I am now going to talk about performance in each of our reporting segments. Our Devices and Consumer Licensing segment is comprised principally of Windows OEM, consumer Office, and Windows Phone including related patent licensing. Our Windows OEM business performed better than expected, declining 7% versus our expectation of a mid-teens decline. As Amy noted, we believe we are seeing stabilization in business PCs which grew again this quarter and drove Pro revenue growth of 6%. We also saw better-than-expected performance in the consumer part of our business. Non-Pro revenue declined 22%, but was several points better than expected. Excluding the impact of China, which continues to have different dynamics than other emerging markets, non-Pro revenue declined 17%. Together with our OEM and retail partners, we’ve brought an incredible breadth of Windows devices to market. We’ve also made meaningful improvements to our advertising campaigns which now clearly highlight the value proposition of our devices. As we head into holiday, we’re excited by the opportunities to bring the new Windows experience to even more users around the globe. Consumer Office licensing revenue declined this quarter. The financial impact of the shift to Office 365 Home Premium was generally in line with our expectations. Office 365 subscribers benefit from the natural integration of services such as SkyDrive and Skype, and have the flexibility to access the service from numerous end points. Whether via traditional licensing or subscription, customers continue to see the value in Office, as overall attach of Office increased this quarter. The Windows Phone ecosystem is seeing sustained progress. While we have work to do, our share is growing in many geographies, the device portfolio is expanding, and the number of apps available in the marketplace is increasing. I will now move on to our Devices and Consumer Hardware segment, where revenue grew $401 million, driven almost entirely by Surface. With improved sales and marketing efforts, combined with pricing and promotional activities, we saw Surface units and revenue grow sequentially from Q4, with the mix of sales shifting towards the 32 GB RT device. Demand increased for this device, both in retail and in education. From a gross margin perspective, in addition to product costs which grew as a result of increased Surface sales, we also incurred non-product expenses as we readied inventory lines for the new Surface lineup and the holiday sales cycle. Moving to Devices and Consumer Other. As a reminder, this segment includes our online marketplaces, advertising, Xbox Studios, Office 365 Home Premium, and other consumer products and services. This quarter, revenue growth in this segment was driven by both an increase in advertising revenue and also volumes in our online marketplaces. Search advertising revenue grew 47%, driven by continued revenue per search improvement and query volume growth. Bing has now grown its share of search queries in the US to 18%. Gross margins declined slightly due to higher royalty costs and also infrastructure cost growth as we expand the geographic footprint of our services. Turning now to our Commercial business, where all up Commercial revenue, across both on-prem and cloud services, grew 10% this quarter. Notably, even as we invest for growth, we saw gross margin expansion in our commercial cloud business. Across our commercial portfolio, we saw healthy renewals, a continued shift to premium products, and strong adoption of our cloud services. Our enterprise cloud strategy is resonating with customers, and server product revenue grew 12%. SQL Server revenue grew double-digits, with SQL Server Premium revenue growing over 30%. Our Commercial Office products also remained strong, and grew 11%. Within this, SharePoint, Exchange and Lync collectively grew double-digits, with Lync growing nearly 30%. Helping to drive this demand for our server and Office products, is deployment of hybrid cloud solutions. This quarter, revenue for our Commercial Cloud services grew over 100%, as services such as Office 365 are integrated with Azure services, for comprehensive cloud solutions. Importantly, we are seeing strong customer adoption, with Office 365 seats and Azure customers both growing triple-digits. Dynamics CRM Online is also expanding its base, with two-thirds of new Dynamics CRM customers opting for the cloud. With that overview of our Commercial business, let me share the financial performance in each of our Commercial reporting segments. Revenue in the Commercial Licensing segment grew 7%. And, in our Commercial Other segment, revenue grew 28% to $1.6 billion. As a reminder, Corporate and Other is where we consolidate adjustments for tech guarantees, Pre-sales and the like. In the comparable quarter of last year we had aggregate deferrals of $1.4 billion for Windows and Office, and this quarter we deferred $113 million, primarily related to Windows 8.1 Pre-sales. Having now talked through our results for this past quarter, let me turn it over to Amy to discuss our forward looking guidance.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 4,
+      "speaker_raw": "AMY HOOD, CHIEF FINANCIAL OFFICER",
+      "speaker": "AMY HOOD",
+      "text": "Thanks, Chris. As we look towards the second quarter, we are assuming the macro environment remains generally the same. With this, we expect many of the dynamics we saw in the first quarter to continue, with strong performance in our commercial business and ongoing improvement in our consumer business. Importantly, we’re set up for a terrific holiday season. We’ll have a wide variety of Windows-based devices in market. Earlier this week, we launched Surface 2 and Surface Pro 2. And in November, we’ll launch our next generation console, Xbox One. Building on the performance and unique experiences that gamers love, it will also deliver an innovative entertainment experience by bringing movies, music, sports and live TV together in one place. With that, let’s get into the outlook, starting with Devices and Consumer. In Licensing, we expect revenue to be $5.2 billion to $5.4 billion. This range reflects similar dynamics to what we saw in the first quarter. As I noted earlier, we expect the business PC market to be stable, however, the consumer PC market is subject to more volatility. In Hardware, we expect revenue to grow 35% to 45%, to $3.8 billion to $4.1 billion, reflecting the expanded Surface line up, and the much anticipated Xbox One launch. The 10 percentage point range reflects variability in device unit volumes. In the consumer hardware business, such variability is not uncommon, especially during launches and the holiday season. And in Devices and Consumer Other, we expect revenue to be $1.7 billion to $1.8 billion. Search revenue should continue to grow reflecting improved revenue per search and query volume. As a reminder, in Q2 of the prior year, we launched Halo 4 which contributed $380 million of revenue to this segment. Now, moving on to Commercial. We expect revenue to grow 9% to 11%, in line with the first quarter. As we think about this part of the business, we’re confident in our ability to continue to add value to our products while providing low total-cost-of-ownership for our customers. In Commercial Licensing, we expect revenue to be $10.7 billion to $10.9 billion, with similar dynamics to what we saw in the first quarter. This includes healthy renewals and strong annuity revenue growth from volume licensing with Software Assurance. In Commercial Other, we expect revenue to be $1.7 billion to $1.9 billion, reflecting ongoing momentum in our commercial cloud business and enterprise services. As CIOs increasingly look to capitalize on the opportunities of cloud computing, we’re confident they will continue to look to Microsoft for their IT solutions. Moving on to cost of revenue which we expect to be $7.9 billion to $8.3 billion next quarter. This range primarily relates to the unit variability in hardware revenue. In Surface, we are still in the early stages of the lifecycle. As you know, there are many things that go into bringing hardware to market, including both variable and fixed costs. We are intensely focused on building volumes and achieving scale to cover these costs and get to profitability. As you think about the economic model for Xbox, you should keep in mind that console margins are just one aspect of the overall platform’s financial performance. Attach of games, accessories, and Xbox LIVE services also contribute to the economic model. We expect the launch of Xbox One to be the biggest in Xbox history, and we feel great about our ability to continue our leadership position in the living room. Moving on to operating expenses. We expect opex to grow 6% to 8%, to $8.5 billion to $8.6 billion. We also reaffirm our full year guidance of $31.3 billion to $31.9 billion. We continue to invest in innovative experiences for our customers while remaining focused on expenses. We still expect full year capital expenditures to be about $6.5 billion, even though we only spent $1.2 billion in the first quarter. Given the nature of the investments, there is variability from quarter to quarter due to our success-based approach as well as timing of delivery and completion. We expect our tax rate for the full year to be between 18% and 20% depending on our geographical mix of earnings. When adjusting for tech guarantees and product deferrals, we expect unearned revenue to be roughly in-line with historical trends. So, in summary, I’m really pleased with our results this quarter. It was a great start to the fiscal year as we executed and delivered across all of our businesses. We are on track with implementing the transformation of the company around the one Microsoft strategy, and at the same time are not missing a beat in executing faster. And as we look forward to the second quarter, our enterprise business will remain strong. We’re also set up for a fantastic holiday season with Surface, Xbox One, and a host of devices from our partners, which will allow us to reach new customers and drive increased engagement. With that, I’ll turn it back to Chris and we’ll take your questions. CHRIS SUH: Thanks, Amy. And with that, we're going to move onto the Q&A. Operator, please go ahead and repeat your instructions. (Operator Direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 5,
+      "speaker_raw": "BRENT THILL, UBS",
+      "speaker": "BRENT THILL",
+      "text": "Good afternoon. Amy and Chris, thanks for the additional details. I know everyone appreciates the forward-looking details. My question is on the Commercial revenue. I'm seeing an impressive number in a seasonably soft Q1. Your guidance assumes also a continued good trajectory. Maybe if you can walk though why you think you're outgrowing your peers, and what has led to this double-digit number?",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 6,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Thanks, Brent, for that question. I do think when I think about the Commercial business, and focus on our unearned revenue growth, the 14 percent, plus our bookings growth, which is quite strong as well, 6 percent, I think about the roadmap. The strength of the commitments that customers are making is really for the forward-looking. It's a three-year commitment to the Microsoft platform, both to our cloud and on prem solutions, the breadth and strength of that roadmap and our offerings, and I think in many ways that's what gives us the confidence that we're outperforming our peers. And also I think it speaks a lot to the innovation in the roadmap we've shown, whether it's for Azure, Office 365, or our broader server portfolio, I do feel quite good about both our competitive positions and our ability to execute. I think we did a great job in the field this quarter remaining focused on delivering what we needed to deliver to our customers, and we were quite pleased. CHRIS SUH: Next question, please. (Operator Direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 7,
+      "speaker_raw": "PHILIP WINSLOW, Credit Suisse",
+      "speaker": "PHILIP WINSLOW",
+      "text": "Hi. Thanks, guys, and congrats on a great quarter. I just want to focus in on Xbox and Xbox platform. Amy, I'm wondering if you can give us maybe some color on how it performed this quarter? But in particular as you look into the December quarter here, obviously you gave that gross margin guidance, but I was wondering if you would talk sort of high level about how you're approaching just the Xbox One launch say versus Xbox 360 from a perspective of how you're pricing it relative to COGS, and just sort of how the build of Xbox One looks versus 360?",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 8,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Thanks, Phil. I think it's a great question that gives me the opportunity to talk about the breadth of the portfolio that we'll have to offer at holiday. And then talk a little bit about the gross margin profile as well that we have amongst those products. We are excited that we'll have a great value offer at holiday with Xbox 360, and we'll also have a great choice with our innovative Xbox One platform to really give us a good breadth rolling into holiday of selections across price points. We did with Xbox One make a decision to really enable a first class experience out of the box. There is Kinect, there is a headset, and there is the console, and depending on where you are around the globe there may be a game included as part of bundles for geographic interest. As I said, the best way always to think about the life value of the Xbox plan is over its lifecycle. I'm excited about the increased opportunity that Xbox One allows us to attach more and different services beyond what we historically thought of as simply a gaming platform. And when I think about the opportunity going forward, it is important in Q2 to realize that will impact our gross margin in the short-term. But winning the platform at holiday and our positioning to do that allows us to grow profitability in a far different way over the lifecycle. So hopefully that helps. CHRIS SUH: Thanks, Phil. Thank you. We'll move on to the next question, please. (Operator Direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 9,
+      "speaker_raw": "JOHN DIFUCCI, JP Morgan Chase",
+      "speaker": "JOHN DIFUCCI",
+      "text": "Thanks. Amy, billings were about what we modeled for the quarter, but deferred revenue was about $700 million less than we expected anyway, which was equal to the upside in revenue. So I'm just curious, did you end up recognizing a greater portion of revenue up-front this quarter than you normally would, because I realize given how you recognize revenue, I guess the question could be said was the transactional portion of the revenue in the Commercial segment greater than it is typically this quarter? CHRIS SUH: Hi, John. This is Chris. I'm going to jump in a little bit, and I'll let Amy add on. I think the way to think about it, and the way we think about it is, we did see growth across annuity and non-annuity in the business, but also the changing dynamics is the mix of the dollars that are going into unearned revenue. As we bill more contracts and some of our subscription offerings that changes the nature of the term. If you think about one-year subscription offerings and things like this, that has a little bit of an effect on the unearned revenue.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 10,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Let me add a little bit, I would have said, John, both of the things you said are true, and both are good, which is I do think our unearned balance growing 14 percent year over year was better than we actually had expected from our perspective, and we also saw very good non-annuity performance within the quarter particularly in Office and in SQL, which I think are very good signs, we believe, for both to see the strengths broad-based. As you know, the annuity portion tends to be related to large customers making long-term commitments. Some of the non-annuity is exciting because it tends to be smaller customers who have decided to go ahead and upgrade to the most recent version of Office, which is also encouraging. JOHN DIFUCCI: Okay, thank you. CHRIS SUH: Thanks, John. We'll move to the next question, please, Operator. (Operator Direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 11,
+      "speaker_raw": "KEN LONG, Citigroup",
+      "speaker": "KEN LONG",
+      "text": "Hi, guys. This is Ken Long for Walter. I guess we wanted to focus a bit on Windows. And the OEM business was down to 7 percent this quarter versus 15 last quarter in what seemed like a really you guys had a lot of pressure on ASPs and what-not. I guess what drove some of the quick turnaround from quarter to quarter, maybe if you can just dig in a little bit there?",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 12,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Let me try to break it up a little bit, Ken, to make sure I understand and get a chance to talk about the overall performance. Business was better than we expected, so actually ASPs were probably higher than many people had modeled and that we had expected due to mix, growing 65 percent in the Pro segment was both better than we expected, and probably better than many people had considered. Now in the Consumer segment, you know, the minus 22, taking our China to minus 17. I think it's generally overall when you take those two numbers, probably aligned with most of the device level estimates for PCs we've seen across the industry, and from some of our peers reporting in the system. I do think we were impacted by some inventory levels that did come down a bit actually this quarter as well. So I think overall we do think that things are probably more stable in the business segment and encouraging, and in consumer and developed markets particularly were better than we had seen. CHRIS SUH: Thank you, Ken. Next question, please. Thank you. (Operator Direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 13,
+      "speaker_raw": "KEITH WEISS, Morgan Stanley",
+      "speaker": "KEITH WEISS",
+      "text": "Thank you guys for taking the question. You saw a real market up-tick in the advertising revenue, in the search advertising revenue. Any particular catalyst you could point us to in terms of what really catalyzed that part of the business, and how sustainable that's going to be on a go forward basis?",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 14,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Sure. Thanks, Keith. A couple of things, it was driven as you noted both by RPS improvements and volume improvement, which is encouraging. I also think underlying that are some real technical improvements we've made within the search engine, the algos are better, and the investments we're making are really allowing us to monetize at a higher level. We also saw some strengths in a few other geos, which helped increase the performance there. So I do believe that trend we expect to continue into Q2. KEITH WEISS: Excellent, thank you.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 15,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Thanks, Keith. CHRIS SUH: Next question. (Operator Direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 16,
+      "speaker_raw": "HEATHER BELLINI, Goldman Sachs",
+      "speaker": "HEATHER BELLINI",
+      "text": "Hi, great. Thank you, Amy and Chris. I just was wondering, you talked about the entry of a lot of new SKUs that are coming out for the holiday season. I'm just, as we start thinking about building our OEM models, how do we think about ASPs for this eight-inch and below category that you referenced there's a lot of product coming out with?",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 17,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Good question, Heather. Let me talk about first the importance of the breadth of the offers that we're putting into market. With Windows 8.1, one of the focuses we had was to expand both the opportunity for screen sizes and to reach new price points, and to cover really from the smallest to the largest with touch and non-touch. And I think our ability to work with partners and some of the sales execution we've seen in the field have led to have a broad opportunity at retail for holiday for devices. It is important, I do hope in some ways this is a question that is a bit awkward. You always want to say ASPs, it's good to have ASPs go up. Transparently going forward, as we make more progress, especially in the smaller screen sizes, we should expect units to go up and be very excited about that in terms of share, but ASPs would trend down. I don't think that will have a material our guidance does not assume a material impact to ASPs in Q2. But over the long-term I actually do understand the question it would affect ASPs to be on that trend line assuming we are successful in those lower-end device sizes. HEATHER BELLINI: Thank you very much.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 18,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Thanks, Heather. CHRIS SUH: Thank you. Next question, please. (Operator Direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 19,
+      "speaker_raw": "MARK MOERDLER, Sanford Bernstein",
+      "speaker": "MARK MOERDLER",
+      "text": "Thank you. And, Amy, thank you for giving so much more data and guidance, we appreciate it. A couple of quick attach questions. You said that the Consumer Office last quarter was going to be down roughly 5 percent, lower than the PCs due to the move to subscription. You said the attach was higher this quarter. Should we think that the dip was roughly in line with that? CHRIS SUH: Hi, Mark, this is Chris. Let me try to clarify the number just so we're all on the same page. We did say Consumer Office did decline this quarter. Last quarter, you're right, we said about 5 points of impact. And so the impact, indeed, was about what we expected. But with the increase in attach, they sort of tended to offset each other in the end. And so the numbers came in pretty much as expected. So I think that's the right way to think about it.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 20,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "But, of course, I can't let Chris I'm going to add a little to the answer. Sorry. Mark, I do think it's important for us to continue to reiterate the importance of the success of the Office 365 Home Premium SKU from a strategic standpoint. We have done a very good job, and I would say as a mix percentage of the SKU it continues to do even a little better than we had hoped in terms of execution at the end point and driving value. And while that does have an impact on the initial ASP of the SKU, the long-term lifetime value of that product in my belief, given the always up to date, first to see innovation, use across multi-endpoints, inclusion of Skype, inclusion of SkyDrive, really does allow for a higher lifetime value, and ultimately a happy customer. And so I really am encouraged by our progress and our execution there. MARK MOERDLER: One other quick question, any sense for what commercial licensing would have been if not for the move to cloud subscription? Does it make a material change yet at this point? CHRIS SUH: No. The best way to think about that, Mark, is if you look at it's not an exact offset, but when I talked about the commercial business all up I gave the construct around products like commercial office, commercial server as all up across both on prem and commercial. So we talked about Office growing 11 percent across both commercial licensing and commercial other in aggregate. If you look at the specific segment, you'll see that Office in the commercial licensing segment actually grew 6 percent, so you can see that we're having outsized growth in the commercial other segment, which maybe helps at least dimensionalize the size of the growth in relative terms. MARK MOERDLER: Thank you both. (Operator Direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 21,
+      "speaker_raw": "RICK SHERLUND, Nomura Securities",
+      "speaker": "RICK SHERLUND",
+      "text": "Thanks. Just to follow-up on Mark's question, I believe there was a slide at FAM that showed about $150 million of negative impact in the quarter from the move to the cloud, which in and of itself it's about 1 percent of revenue, so it's kind of not a very big deal. And I think most of that was from Office versus Server and Tools. If you say it's about as expected, I guess I'm just looking for some clarification here. Is really the only impact we're seeing in the Office segment versus Server and Tools, or was there much impact in that part of the business from the move to subscription?",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 22,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Rick, let me clarify, the 150, you're right, was actually just related to the consumer Office segment. It had no broader connotation beyond that. So that $150 million in a quarter on consumer Office actually does have a meaningful impact to the growth of that especially versus PCs. So that being said, obviously we've talked about the momentum in our broad Office 365 revenue. IT is a bigger impact across not just Office, because I think that's actually not the way of thinking about Office 365's impact. There it's really around Exchange, Lync, SharePoint, and the broad server impact there is actually more meaningful than its impact on maybe Office client on the commercial side. CHRIS SUH: Thanks, Rick. Next question, please.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 23,
+      "speaker_raw": "ROSS MACMILLAN, Jeffries",
+      "speaker": "ROSS MACMILLAN",
+      "text": "Thanks a lot. I have two questions. Just first on the device and consumer licensing business, your forecast for Q2 suggests a moderating decline. And I was curious as to whether on the corporate OEM side, if you will, that's just a reflection of the ongoing stabilization trend, or do you also expect to see improvement on the consumer OEM side? And related to that, how do you think about the impact of the end of life of XP on the corporate OEM side? Do you think that the improvement is completely unrelated to that end of life forthcoming, or do you think there could be some impact related to that? Thanks.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 24,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Great. Let me divide up that question. I think, as you said, it's two parts. Our Q2 guidance for devices and consumer licensing really says that the trends we saw in Q1 on both sides continue in Q2. So I think that's an important distinction as you noted and asked for clarification on. So I hope that's helpful in that component. And when it comes to end of life of XP, I tend to think about that more on the VL side as well, and the strength there which will be in the commercial reporting segments. We continue to make progress on the XP install base, and now a little over 75 percent of the PCs are running 7. And so I do think as we continue to get to end of life of XP, you'll see the impact more on the VL side of the business than you would in the device and consumer licensing segment. ROSS MACMILLAN: Thank you very much. That's helpful. And maybe one quick follow-up, just on the Office business overall in the commercial segment, if you think about units, whether licensed or 365, when you just think of the aggregate pool of units, you sort of alluded to it before, but did that perform in line with your expectation, or was it actually slightly better on a unit basis? Thank you.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 25,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "It was slightly better, Ross, is the best way of thinking about that from a unit perspective. ROSS MACMILLAN: Thank you very much. Congratulations. CHRIS SUH: Thanks, Ross. We'll take the next question, please. (Operator Direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 26,
+      "speaker_raw": "ED MAGUIRE, CLSA",
+      "speaker": "ED MAGUIRE",
+      "text": "Hi. Thanks for taking my question. I was wondering if you could address the conditions in China in a little bit more detail, not just on the consumer but also in the commercial as well as what your expectations might be given the lifting of the ban on game consoles for Xbox there? And also if you could just address some of what you're seeing in terms of commercial cloud adoption outside of the U.S.? Thank you. CHRIS SUH: I'll take the first part of the question. As I said on the call, the macro conditions in China, which I think are consistent with what some of the other companies have reported as well, have been challenging. Our total revenue across all of our business, including the PC-related businesses, were down year-over-year, and I think that is overall impacting our results in China all up. I think the second part of your question was related to commercial cloud I'm sorry, can you repeat your second question? ED MAGUIRE: I was wondering about Xbox expectations there, but also the trends of commercial cloud adoption in areas outside of the U.S.?",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 27,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "We haven't really talked specifically about our expectations for China on the Xbox. But let me take the second half of that question. Our performance in both Office 365 and Azure has actually been quite good both in the U.S., to your question, and outside the U.S. Part of the reason that you've seen us investing on the capital expense side is to continue to build out the opportunity set, because we are seeing good demand outside the U.S. and I do think our ability to be competitive there is just as high as it is here. So we've already seen that growth. QUESTION: Thank you. ED MAGUIRE: Thanks, Ed. Next question, please. (Operator direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 28,
+      "speaker_raw": "JASON MAYNARD, Wells Fargo",
+      "speaker": "JASON MAYNARD",
+      "text": "Hey, guys. I wanted to drill a little bit into how you're thinking about holiday on the consumer hardware side, and specifically just expectations around Surface, and then also any insight or color you think in terms of what your expectations are with RT versus Pro. Thank you.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 29,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Thanks, Jason. I think overall for holiday, given our guidance, we clearly do expect a healthy holiday performance across the portfolio. I say that, because we do have offerings that provide great value from having Surface V1 RT still in marketing, Surface 2, Surface 2 Pro, plus Xbox 360, plus Xbox One, really does provide both a value portfolio and those who want the latest and greatest experience have something covered. The guidance does include good performance across all of those product lines. We did see, I think as Chris and I both talked about, a lot of progress in sales execution on Surface in particular this quarter. And that does give us more confidence about our ability to execute again well in Q2. In particular, as you noted, RT did do quite well this quarter and I look forward to seeing that continue with the Surface 2 device, as well, at holiday. CHRIS SUH: Great. Thank you, Jason. We'll move to the next question, please. (Operator direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 30,
+      "speaker_raw": "KASH RANGAN, Bank of America Merrill Lynch",
+      "speaker": "KASH RANGAN",
+      "text": "Hi, thank you very much for all the details, as well. Just maybe my math skills have gotten horribly weak, but I just took the midpoint, Amy, of your revenue guidance for the different line items and also the midpoint of your cost of revenue inputs and the midpoint of your OPEX, I come up with what looks to be about a 10 percent reduction to where I think most sales side models are. Maybe I'm doing I'm hoping that I did something wrong here. But, if that's the case, it’s about 23 percent op margin relative to the 33 or so that you did last year. So can you just walk us through what are the items that you're assuming in your cost structure, which effectively makes the op income flat, although you are getting a good revenue growth rate? I just wonder if there are any one-time items, or if it's emblematic of a shift in your business model to devices and consumer, especially with Nokia going forward. I wonder if we should not be thinking about op margins, but really op income growth rate. Thank you.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 31,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Thanks, Kash. I think the one thing I would urge you to do as you think about the guidance we gave is looking specifically at the D&C hardware guidance, as well as making sure you're mapping the COGS very specifically to whatever assumption you're making in D&C hardware. Given the business model of Xbox, that can and will have an impact in Q2 to the overall gross margin structure. So as you think through that I think that's probably one of the assumptions that it may sound like using the midpoint could lead you a bit off of where I would have expected. KASH RANGAN: Got it. Thank you very much.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 32,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Thanks, Kash. CHRIS SUH: Thanks, Kash. Next question please. (Operator director.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 33,
+      "speaker_raw": "RAIMO LENSCHOW, Barclays",
+      "speaker": "RAIMO LENSCHOW",
+      "text": "Thank you. I just want to follow on from Jason's question earlier on. Can you talk a little bit about where you see the improved success and the sales execution success on the Surface? Is it kind of commercial, is it consumer, and what's driving the improvement there, and how much is kind of the improved revenue run rate also driven by the fact that the channel needed to be ready for the holiday season? Thank you. CHRIS SUH: Hi, Raimo. Thanks for the question. As we talked about, especially for this last quarter of Surface, we saw two things I'll mention, which is popularity of the Surface 32-gigabyte RT device, that one was more successful this last quarter. And we actually saw demand increase in both commercial and in the education customer segment, as well. So we did see some improvement across both those segments.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 34,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Yes, I would say that another way. It was in retail and in education was really our RT performance. CHRIS SUH: Sorry. That's what I meant.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 35,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "I just want to make sure that was clear. It really was better execution at retail, and in EDU, and I still look forward to building a commercial channel, which we are just starting to do as we continue to add resellers to our model. RAIMO LENSCHOW: Perfect, thank you.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 36,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Thanks. (Operator direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 37,
+      "speaker_raw": "BRENDAN BARNICLE, Pacific Crest Securities",
+      "speaker": "BRENDAN BARNICLE",
+      "text": "Thanks so much, guys. I had two quick ones. One was the SQL Server success continues to be very impressive, particularly relative to the field. So I'm wondering where you're seeing kind of the most success there. Is that market share gains, is that pricing is getting into some new markets? If you could add some color there that would be helpful. And then when is your expectation for the next sort of update on Nokia?",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 38,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Great, let me take the second one first, because it's the easiest. We still do expect the transaction to close in the first calendar quarter of 2014. And post-closing if there are any EPS impact changes to what we said before we'll give them post-closing. So now back to your original question on SQL. That's a terrific one to get to talk about. Our growth there is as you said both share growth and revenue growth. It's happened I think generally both in BI, which we've seen a lot of traction with. I don't know if you've had a chance to see some of our PowerView announcements recently. Our ability to sort of span form the end user to the hardest big data problems really has resonated both in the market and with industry analysts who have taken, I think, a strong position that we're the real market leader there. The other thing I would say is a very healthy performance of our premium SKUs, our premium SKUs have continued to provide market growth and I think are competing quite well with the competition. BRENDAN BARNICLE: Great. Thanks, guys. CHRIS SUH: Thanks, Brendan. Next question, please. (Operator direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 39,
+      "speaker_raw": "GREGG MOSKOWITZ, Cowen and Company",
+      "speaker": "GREGG MOSKOWITZ",
+      "text": "Thank you very much and good afternoon, guys, just two questions. First, Amy, if I recall correctly I believe last quarter you had mentioned an expectation for double-digit annuity growth in fiscal '14. Is that still how you're thinking about the annuity part of the business? And secondly the year-over-year cloud revenue growth you reported was certainly impressive. But, I was wondering if you could shed some light perhaps on how much of Azure billings or revenue are incremental versus cannibalistic?",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 40,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Two good questions. I do expect our annuity growth, and the guidance we gave it still does assume double-digit annuity growth going forward. And I think our performance this quarter gives me confidence that the guidance in Q2 is the right one, given our strength and our competitive position. Secondly on cloud revenue, your question gives me an opportunity to talk about the importance of our hybrid cloud. Within especially our server business our ability to power the cloud whether you want to run it, you want a service provider to run it, or you want to use ours is really an incredibly powerful story. And I think in some ways whether or not it's cannibalizing becomes somewhat difficult. What we've generally found right now is that it has been often additive. And if you look at our server growth all-up, which we tried to provide to help give some parameters around that, to give some confidence that we're both growing the base and providing additive opportunity, I think that's the number I would probably look to, to see the impact there. GREGG MOSKOWITZ: Great. Thanks very much. CHRIS SUH: Thanks, Greg. Operator, I think we're down to our last question. (Operator direction.)",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 41,
+      "speaker_raw": "KIRK MATERNE, Evercore",
+      "speaker": "KIRK MATERNE",
+      "text": "Thank you very much for fitting me in. I guess two quick ones for you, Amy, on the commercial cloud offerings. I guess first around Office 365 you mentioned you've seen pretty good uptake even outside the U.S. I was interested in just your ability to monetize Office 365 in some of the emerging markets that have been challenging over time for Office. Then secondly, as a follow up to Gregg's question on server, within Azure how much of the uptake in Azure is coming from sort of existing Microsoft logos, versus bringing on net new logos onto the platform? Thanks.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 42,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Great. Thanks, Kirk. I'm going to talk about two things. I do think it's interesting, maybe the best example of how to think about us moving beyond our traditional markets is the fact that we were the first to commit to a data center in China, a market that we've historically had challenges monetizing at a high level. We went there. We're going there with Office 365 and Azure. We look forward to being able to make progress. We're investing both headcount and capital dollars, because we do believe it provides an interesting opportunity for us to begin monetizing in markets that have been harder for us to grow maybe with our more traditional business model. Secondly, with Azure I think we've seen both, but the thing I would say is what's been really helpful is that as we make it easier to attach Azure services to our normal rhythm in the field, through our enterprise agreements, and through volume licensing, it provides a really helpful way, and a really easy selling motion, to provide customers flexibility. We add it in the normal rhythm of a sales motion. We allow people to try, use and buy. And that has served us well in terms of being able to expose Azure to more and more customers in a normal selling cycle. So I think that's probably one of the better ways. It's the same actual selling rhythm we've used with Office 365 so successfully. And with that, I wanted to say thank you. I know that this quarter we changed reporting segments, and that requires a lot of work. So thank you for all the work put in to understand our transition that we're trying to make as a company. And so let me turn it back to Chris to say his final words. CHRIS SUH: So that wraps up today's earnings call. We look forward to seeing many of you in the coming months, at various investor conferences. For those of you unable to attend in person, these events will generally be webcast and you'll be able to follow our comments at Microsoft.com/investor. Please contact us if you need any additional details and thanks for joining us today.",
+      "section": "qna"
+    },
+    {
+      "call_id": "fy2014_q1",
+      "turn_index": 43,
+      "speaker_raw": "AMY HOOD",
+      "speaker": "Amy Hood",
+      "text": "Thank you.",
+      "section": "qna"
+    }
+  ],
+  "qna_records": [
+    {
+      "call_id": "fy2014_q1",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 1,
+      "call_date": null,
+      "question_index": 1,
+      "analyst_name": "BRENT THILL",
+      "analyst_firm": "UBS",
+      "question_text": "Good afternoon. Amy and Chris, thanks for the additional details. I know everyone appreciates the forward-looking details. My question is on the Commercial revenue. I'm seeing an impressive number in a seasonably soft Q1. Your guidance assumes also a continued good trajectory. Maybe if you can walk though why you think you're outgrowing your peers, and what has led to this double-digit number?",
+      "responses": [
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 6,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Thanks, Brent, for that question. I do think when I think about the Commercial business, and focus on our unearned revenue growth, the 14 percent, plus our bookings growth, which is quite strong as well, 6 percent, I think about the roadmap. The strength of the commitments that customers are making is really for the forward-looking. It's a three-year commitment to the Microsoft platform, both to our cloud and on prem solutions, the breadth and strength of that roadmap and our offerings, and I think in many ways that's what gives us the confidence that we're outperforming our peers. And also I think it speaks a lot to the innovation in the roadmap we've shown, whether it's for Azure, Office 365, or our broader server portfolio, I do feel quite good about both our competitive positions and our ability to execute. I think we did a great job in the field this quarter remaining focused on delivering what we needed to deliver to our customers, and we were quite pleased. CHRIS SUH: Next question, please. (Operator Direction.)",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "Thanks, Brent, for that question. I do think when I think about the Commercial business, and focus on our unearned revenue growth, the 14 percent, plus our bookings growth, which is quite strong as well, 6 percent, I think about the roadmap. The strength of the commitments that customers are making is really for the forward-looking. It's a three-year commitment to the Microsoft platform, both to our cloud and on prem solutions, the breadth and strength of that roadmap and our offerings, and I think in many ways that's what gives us the confidence that we're outperforming our peers. And also I think it speaks a lot to the innovation in the roadmap we've shown, whether it's for Azure, Office 365, or our broader server portfolio, I do feel quite good about both our competitive positions and our ability to execute. I think we did a great job in the field this quarter remaining focused on delivering what we needed to deliver to our customers, and we were quite pleased. CHRIS SUH: Next question, please. (Operator Direction.)",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q1/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    },
+    {
+      "call_id": "fy2014_q1",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 1,
+      "call_date": null,
+      "question_index": 2,
+      "analyst_name": "PHILIP WINSLOW",
+      "analyst_firm": "Credit Suisse",
+      "question_text": "Hi. Thanks, guys, and congrats on a great quarter. I just want to focus in on Xbox and Xbox platform. Amy, I'm wondering if you can give us maybe some color on how it performed this quarter? But in particular as you look into the December quarter here, obviously you gave that gross margin guidance, but I was wondering if you would talk sort of high level about how you're approaching just the Xbox One launch say versus Xbox 360 from a perspective of how you're pricing it relative to COGS, and just sort of how the build of Xbox One looks versus 360?",
+      "responses": [
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 8,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Thanks, Phil. I think it's a great question that gives me the opportunity to talk about the breadth of the portfolio that we'll have to offer at holiday. And then talk a little bit about the gross margin profile as well that we have amongst those products. We are excited that we'll have a great value offer at holiday with Xbox 360, and we'll also have a great choice with our innovative Xbox One platform to really give us a good breadth rolling into holiday of selections across price points. We did with Xbox One make a decision to really enable a first class experience out of the box. There is Kinect, there is a headset, and there is the console, and depending on where you are around the globe there may be a game included as part of bundles for geographic interest. As I said, the best way always to think about the life value of the Xbox plan is over its lifecycle. I'm excited about the increased opportunity that Xbox One allows us to attach more and different services beyond what we historically thought of as simply a gaming platform. And when I think about the opportunity going forward, it is important in Q2 to realize that will impact our gross margin in the short-term. But winning the platform at holiday and our positioning to do that allows us to grow profitability in a far different way over the lifecycle. So hopefully that helps. CHRIS SUH: Thanks, Phil. Thank you. We'll move on to the next question, please. (Operator Direction.)",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "Thanks, Phil. I think it's a great question that gives me the opportunity to talk about the breadth of the portfolio that we'll have to offer at holiday. And then talk a little bit about the gross margin profile as well that we have amongst those products. We are excited that we'll have a great value offer at holiday with Xbox 360, and we'll also have a great choice with our innovative Xbox One platform to really give us a good breadth rolling into holiday of selections across price points. We did with Xbox One make a decision to really enable a first class experience out of the box. There is Kinect, there is a headset, and there is the console, and depending on where you are around the globe there may be a game included as part of bundles for geographic interest. As I said, the best way always to think about the life value of the Xbox plan is over its lifecycle. I'm excited about the increased opportunity that Xbox One allows us to attach more and different services beyond what we historically thought of as simply a gaming platform. And when I think about the opportunity going forward, it is important in Q2 to realize that will impact our gross margin in the short-term. But winning the platform at holiday and our positioning to do that allows us to grow profitability in a far different way over the lifecycle. So hopefully that helps. CHRIS SUH: Thanks, Phil. Thank you. We'll move on to the next question, please. (Operator Direction.)",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q1/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    },
+    {
+      "call_id": "fy2014_q1",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 1,
+      "call_date": null,
+      "question_index": 3,
+      "analyst_name": "JOHN DIFUCCI",
+      "analyst_firm": "JP Morgan Chase",
+      "question_text": "Thanks. Amy, billings were about what we modeled for the quarter, but deferred revenue was about $700 million less than we expected anyway, which was equal to the upside in revenue. So I'm just curious, did you end up recognizing a greater portion of revenue up-front this quarter than you normally would, because I realize given how you recognize revenue, I guess the question could be said was the transactional portion of the revenue in the Commercial segment greater than it is typically this quarter? CHRIS SUH: Hi, John. This is Chris. I'm going to jump in a little bit, and I'll let Amy add on. I think the way to think about it, and the way we think about it is, we did see growth across annuity and non-annuity in the business, but also the changing dynamics is the mix of the dollars that are going into unearned revenue. As we bill more contracts and some of our subscription offerings that changes the nature of the term. If you think about one-year subscription offerings and things like this, that has a little bit of an effect on the unearned revenue.",
+      "responses": [
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 10,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Let me add a little bit, I would have said, John, both of the things you said are true, and both are good, which is I do think our unearned balance growing 14 percent year over year was better than we actually had expected from our perspective, and we also saw very good non-annuity performance within the quarter particularly in Office and in SQL, which I think are very good signs, we believe, for both to see the strengths broad-based. As you know, the annuity portion tends to be related to large customers making long-term commitments. Some of the non-annuity is exciting because it tends to be smaller customers who have decided to go ahead and upgrade to the most recent version of Office, which is also encouraging. JOHN DIFUCCI: Okay, thank you. CHRIS SUH: Thanks, John. We'll move to the next question, please, Operator. (Operator Direction.)",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "Let me add a little bit, I would have said, John, both of the things you said are true, and both are good, which is I do think our unearned balance growing 14 percent year over year was better than we actually had expected from our perspective, and we also saw very good non-annuity performance within the quarter particularly in Office and in SQL, which I think are very good signs, we believe, for both to see the strengths broad-based. As you know, the annuity portion tends to be related to large customers making long-term commitments. Some of the non-annuity is exciting because it tends to be smaller customers who have decided to go ahead and upgrade to the most recent version of Office, which is also encouraging. JOHN DIFUCCI: Okay, thank you. CHRIS SUH: Thanks, John. We'll move to the next question, please, Operator. (Operator Direction.)",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q1/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    },
+    {
+      "call_id": "fy2014_q1",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 1,
+      "call_date": null,
+      "question_index": 4,
+      "analyst_name": "KEN LONG",
+      "analyst_firm": "Citigroup",
+      "question_text": "Hi, guys. This is Ken Long for Walter. I guess we wanted to focus a bit on Windows. And the OEM business was down to 7 percent this quarter versus 15 last quarter in what seemed like a really you guys had a lot of pressure on ASPs and what-not. I guess what drove some of the quick turnaround from quarter to quarter, maybe if you can just dig in a little bit there?",
+      "responses": [
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 12,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Let me try to break it up a little bit, Ken, to make sure I understand and get a chance to talk about the overall performance. Business was better than we expected, so actually ASPs were probably higher than many people had modeled and that we had expected due to mix, growing 65 percent in the Pro segment was both better than we expected, and probably better than many people had considered. Now in the Consumer segment, you know, the minus 22, taking our China to minus 17. I think it's generally overall when you take those two numbers, probably aligned with most of the device level estimates for PCs we've seen across the industry, and from some of our peers reporting in the system. I do think we were impacted by some inventory levels that did come down a bit actually this quarter as well. So I think overall we do think that things are probably more stable in the business segment and encouraging, and in consumer and developed markets particularly were better than we had seen. CHRIS SUH: Thank you, Ken. Next question, please. Thank you. (Operator Direction.)",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "Let me try to break it up a little bit, Ken, to make sure I understand and get a chance to talk about the overall performance. Business was better than we expected, so actually ASPs were probably higher than many people had modeled and that we had expected due to mix, growing 65 percent in the Pro segment was both better than we expected, and probably better than many people had considered. Now in the Consumer segment, you know, the minus 22, taking our China to minus 17. I think it's generally overall when you take those two numbers, probably aligned with most of the device level estimates for PCs we've seen across the industry, and from some of our peers reporting in the system. I do think we were impacted by some inventory levels that did come down a bit actually this quarter as well. So I think overall we do think that things are probably more stable in the business segment and encouraging, and in consumer and developed markets particularly were better than we had seen. CHRIS SUH: Thank you, Ken. Next question, please. Thank you. (Operator Direction.)",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q1/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    },
+    {
+      "call_id": "fy2014_q1",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 1,
+      "call_date": null,
+      "question_index": 5,
+      "analyst_name": "KEITH WEISS",
+      "analyst_firm": "Morgan Stanley",
+      "question_text": "Thank you guys for taking the question. You saw a real market up-tick in the advertising revenue, in the search advertising revenue. Any particular catalyst you could point us to in terms of what really catalyzed that part of the business, and how sustainable that's going to be on a go forward basis?",
+      "responses": [
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 14,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Sure. Thanks, Keith. A couple of things, it was driven as you noted both by RPS improvements and volume improvement, which is encouraging. I also think underlying that are some real technical improvements we've made within the search engine, the algos are better, and the investments we're making are really allowing us to monetize at a higher level. We also saw some strengths in a few other geos, which helped increase the performance there. So I do believe that trend we expect to continue into Q2. KEITH WEISS: Excellent, thank you.",
+          "section": "qna"
+        },
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 15,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Thanks, Keith. CHRIS SUH: Next question. (Operator Direction.)",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "Sure. Thanks, Keith. A couple of things, it was driven as you noted both by RPS improvements and volume improvement, which is encouraging. I also think underlying that are some real technical improvements we've made within the search engine, the algos are better, and the investments we're making are really allowing us to monetize at a higher level. We also saw some strengths in a few other geos, which helped increase the performance there. So I do believe that trend we expect to continue into Q2. KEITH WEISS: Excellent, thank you.\n\nThanks, Keith. CHRIS SUH: Next question. (Operator Direction.)",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q1/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    },
+    {
+      "call_id": "fy2014_q1",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 1,
+      "call_date": null,
+      "question_index": 6,
+      "analyst_name": "HEATHER BELLINI",
+      "analyst_firm": "Goldman Sachs",
+      "question_text": "Hi, great. Thank you, Amy and Chris. I just was wondering, you talked about the entry of a lot of new SKUs that are coming out for the holiday season. I'm just, as we start thinking about building our OEM models, how do we think about ASPs for this eight-inch and below category that you referenced there's a lot of product coming out with?",
+      "responses": [
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 17,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Good question, Heather. Let me talk about first the importance of the breadth of the offers that we're putting into market. With Windows 8.1, one of the focuses we had was to expand both the opportunity for screen sizes and to reach new price points, and to cover really from the smallest to the largest with touch and non-touch. And I think our ability to work with partners and some of the sales execution we've seen in the field have led to have a broad opportunity at retail for holiday for devices. It is important, I do hope in some ways this is a question that is a bit awkward. You always want to say ASPs, it's good to have ASPs go up. Transparently going forward, as we make more progress, especially in the smaller screen sizes, we should expect units to go up and be very excited about that in terms of share, but ASPs would trend down. I don't think that will have a material our guidance does not assume a material impact to ASPs in Q2. But over the long-term I actually do understand the question it would affect ASPs to be on that trend line assuming we are successful in those lower-end device sizes. HEATHER BELLINI: Thank you very much.",
+          "section": "qna"
+        },
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 18,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Thanks, Heather. CHRIS SUH: Thank you. Next question, please. (Operator Direction.)",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "Good question, Heather. Let me talk about first the importance of the breadth of the offers that we're putting into market. With Windows 8.1, one of the focuses we had was to expand both the opportunity for screen sizes and to reach new price points, and to cover really from the smallest to the largest with touch and non-touch. And I think our ability to work with partners and some of the sales execution we've seen in the field have led to have a broad opportunity at retail for holiday for devices. It is important, I do hope in some ways this is a question that is a bit awkward. You always want to say ASPs, it's good to have ASPs go up. Transparently going forward, as we make more progress, especially in the smaller screen sizes, we should expect units to go up and be very excited about that in terms of share, but ASPs would trend down. I don't think that will have a material our guidance does not assume a material impact to ASPs in Q2. But over the long-term I actually do understand the question it would affect ASPs to be on that trend line assuming we are successful in those lower-end device sizes. HEATHER BELLINI: Thank you very much.\n\nThanks, Heather. CHRIS SUH: Thank you. Next question, please. (Operator Direction.)",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q1/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    },
+    {
+      "call_id": "fy2014_q1",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 1,
+      "call_date": null,
+      "question_index": 7,
+      "analyst_name": "MARK MOERDLER",
+      "analyst_firm": "Sanford Bernstein",
+      "question_text": "Thank you. And, Amy, thank you for giving so much more data and guidance, we appreciate it. A couple of quick attach questions. You said that the Consumer Office last quarter was going to be down roughly 5 percent, lower than the PCs due to the move to subscription. You said the attach was higher this quarter. Should we think that the dip was roughly in line with that? CHRIS SUH: Hi, Mark, this is Chris. Let me try to clarify the number just so we're all on the same page. We did say Consumer Office did decline this quarter. Last quarter, you're right, we said about 5 points of impact. And so the impact, indeed, was about what we expected. But with the increase in attach, they sort of tended to offset each other in the end. And so the numbers came in pretty much as expected. So I think that's the right way to think about it.",
+      "responses": [
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 20,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "But, of course, I can't let Chris I'm going to add a little to the answer. Sorry. Mark, I do think it's important for us to continue to reiterate the importance of the success of the Office 365 Home Premium SKU from a strategic standpoint. We have done a very good job, and I would say as a mix percentage of the SKU it continues to do even a little better than we had hoped in terms of execution at the end point and driving value. And while that does have an impact on the initial ASP of the SKU, the long-term lifetime value of that product in my belief, given the always up to date, first to see innovation, use across multi-endpoints, inclusion of Skype, inclusion of SkyDrive, really does allow for a higher lifetime value, and ultimately a happy customer. And so I really am encouraged by our progress and our execution there. MARK MOERDLER: One other quick question, any sense for what commercial licensing would have been if not for the move to cloud subscription? Does it make a material change yet at this point? CHRIS SUH: No. The best way to think about that, Mark, is if you look at it's not an exact offset, but when I talked about the commercial business all up I gave the construct around products like commercial office, commercial server as all up across both on prem and commercial. So we talked about Office growing 11 percent across both commercial licensing and commercial other in aggregate. If you look at the specific segment, you'll see that Office in the commercial licensing segment actually grew 6 percent, so you can see that we're having outsized growth in the commercial other segment, which maybe helps at least dimensionalize the size of the growth in relative terms. MARK MOERDLER: Thank you both. (Operator Direction.)",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "But, of course, I can't let Chris I'm going to add a little to the answer. Sorry. Mark, I do think it's important for us to continue to reiterate the importance of the success of the Office 365 Home Premium SKU from a strategic standpoint. We have done a very good job, and I would say as a mix percentage of the SKU it continues to do even a little better than we had hoped in terms of execution at the end point and driving value. And while that does have an impact on the initial ASP of the SKU, the long-term lifetime value of that product in my belief, given the always up to date, first to see innovation, use across multi-endpoints, inclusion of Skype, inclusion of SkyDrive, really does allow for a higher lifetime value, and ultimately a happy customer. And so I really am encouraged by our progress and our execution there. MARK MOERDLER: One other quick question, any sense for what commercial licensing would have been if not for the move to cloud subscription? Does it make a material change yet at this point? CHRIS SUH: No. The best way to think about that, Mark, is if you look at it's not an exact offset, but when I talked about the commercial business all up I gave the construct around products like commercial office, commercial server as all up across both on prem and commercial. So we talked about Office growing 11 percent across both commercial licensing and commercial other in aggregate. If you look at the specific segment, you'll see that Office in the commercial licensing segment actually grew 6 percent, so you can see that we're having outsized growth in the commercial other segment, which maybe helps at least dimensionalize the size of the growth in relative terms. MARK MOERDLER: Thank you both. (Operator Direction.)",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q1/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    },
+    {
+      "call_id": "fy2014_q1",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 1,
+      "call_date": null,
+      "question_index": 8,
+      "analyst_name": "RICK SHERLUND",
+      "analyst_firm": "Nomura Securities",
+      "question_text": "Thanks. Just to follow-up on Mark's question, I believe there was a slide at FAM that showed about $150 million of negative impact in the quarter from the move to the cloud, which in and of itself it's about 1 percent of revenue, so it's kind of not a very big deal. And I think most of that was from Office versus Server and Tools. If you say it's about as expected, I guess I'm just looking for some clarification here. Is really the only impact we're seeing in the Office segment versus Server and Tools, or was there much impact in that part of the business from the move to subscription?",
+      "responses": [
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 22,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Rick, let me clarify, the 150, you're right, was actually just related to the consumer Office segment. It had no broader connotation beyond that. So that $150 million in a quarter on consumer Office actually does have a meaningful impact to the growth of that especially versus PCs. So that being said, obviously we've talked about the momentum in our broad Office 365 revenue. IT is a bigger impact across not just Office, because I think that's actually not the way of thinking about Office 365's impact. There it's really around Exchange, Lync, SharePoint, and the broad server impact there is actually more meaningful than its impact on maybe Office client on the commercial side. CHRIS SUH: Thanks, Rick. Next question, please.",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "Rick, let me clarify, the 150, you're right, was actually just related to the consumer Office segment. It had no broader connotation beyond that. So that $150 million in a quarter on consumer Office actually does have a meaningful impact to the growth of that especially versus PCs. So that being said, obviously we've talked about the momentum in our broad Office 365 revenue. IT is a bigger impact across not just Office, because I think that's actually not the way of thinking about Office 365's impact. There it's really around Exchange, Lync, SharePoint, and the broad server impact there is actually more meaningful than its impact on maybe Office client on the commercial side. CHRIS SUH: Thanks, Rick. Next question, please.",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q1/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    },
+    {
+      "call_id": "fy2014_q1",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 1,
+      "call_date": null,
+      "question_index": 9,
+      "analyst_name": "ROSS MACMILLAN",
+      "analyst_firm": "Jeffries",
+      "question_text": "Thanks a lot. I have two questions. Just first on the device and consumer licensing business, your forecast for Q2 suggests a moderating decline. And I was curious as to whether on the corporate OEM side, if you will, that's just a reflection of the ongoing stabilization trend, or do you also expect to see improvement on the consumer OEM side? And related to that, how do you think about the impact of the end of life of XP on the corporate OEM side? Do you think that the improvement is completely unrelated to that end of life forthcoming, or do you think there could be some impact related to that? Thanks.",
+      "responses": [
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 24,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Great. Let me divide up that question. I think, as you said, it's two parts. Our Q2 guidance for devices and consumer licensing really says that the trends we saw in Q1 on both sides continue in Q2. So I think that's an important distinction as you noted and asked for clarification on. So I hope that's helpful in that component. And when it comes to end of life of XP, I tend to think about that more on the VL side as well, and the strength there which will be in the commercial reporting segments. We continue to make progress on the XP install base, and now a little over 75 percent of the PCs are running 7. And so I do think as we continue to get to end of life of XP, you'll see the impact more on the VL side of the business than you would in the device and consumer licensing segment. ROSS MACMILLAN: Thank you very much. That's helpful. And maybe one quick follow-up, just on the Office business overall in the commercial segment, if you think about units, whether licensed or 365, when you just think of the aggregate pool of units, you sort of alluded to it before, but did that perform in line with your expectation, or was it actually slightly better on a unit basis? Thank you.",
+          "section": "qna"
+        },
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 25,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "It was slightly better, Ross, is the best way of thinking about that from a unit perspective. ROSS MACMILLAN: Thank you very much. Congratulations. CHRIS SUH: Thanks, Ross. We'll take the next question, please. (Operator Direction.)",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "Great. Let me divide up that question. I think, as you said, it's two parts. Our Q2 guidance for devices and consumer licensing really says that the trends we saw in Q1 on both sides continue in Q2. So I think that's an important distinction as you noted and asked for clarification on. So I hope that's helpful in that component. And when it comes to end of life of XP, I tend to think about that more on the VL side as well, and the strength there which will be in the commercial reporting segments. We continue to make progress on the XP install base, and now a little over 75 percent of the PCs are running 7. And so I do think as we continue to get to end of life of XP, you'll see the impact more on the VL side of the business than you would in the device and consumer licensing segment. ROSS MACMILLAN: Thank you very much. That's helpful. And maybe one quick follow-up, just on the Office business overall in the commercial segment, if you think about units, whether licensed or 365, when you just think of the aggregate pool of units, you sort of alluded to it before, but did that perform in line with your expectation, or was it actually slightly better on a unit basis? Thank you.\n\nIt was slightly better, Ross, is the best way of thinking about that from a unit perspective. ROSS MACMILLAN: Thank you very much. Congratulations. CHRIS SUH: Thanks, Ross. We'll take the next question, please. (Operator Direction.)",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q1/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    },
+    {
+      "call_id": "fy2014_q1",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 1,
+      "call_date": null,
+      "question_index": 10,
+      "analyst_name": "ED MAGUIRE",
+      "analyst_firm": "CLSA",
+      "question_text": "Hi. Thanks for taking my question. I was wondering if you could address the conditions in China in a little bit more detail, not just on the consumer but also in the commercial as well as what your expectations might be given the lifting of the ban on game consoles for Xbox there? And also if you could just address some of what you're seeing in terms of commercial cloud adoption outside of the U.S.? Thank you. CHRIS SUH: I'll take the first part of the question. As I said on the call, the macro conditions in China, which I think are consistent with what some of the other companies have reported as well, have been challenging. Our total revenue across all of our business, including the PC-related businesses, were down year-over-year, and I think that is overall impacting our results in China all up. I think the second part of your question was related to commercial cloud I'm sorry, can you repeat your second question? ED MAGUIRE: I was wondering about Xbox expectations there, but also the trends of commercial cloud adoption in areas outside of the U.S.?",
+      "responses": [
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 27,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "We haven't really talked specifically about our expectations for China on the Xbox. But let me take the second half of that question. Our performance in both Office 365 and Azure has actually been quite good both in the U.S., to your question, and outside the U.S. Part of the reason that you've seen us investing on the capital expense side is to continue to build out the opportunity set, because we are seeing good demand outside the U.S. and I do think our ability to be competitive there is just as high as it is here. So we've already seen that growth. QUESTION: Thank you. ED MAGUIRE: Thanks, Ed. Next question, please. (Operator direction.)",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "We haven't really talked specifically about our expectations for China on the Xbox. But let me take the second half of that question. Our performance in both Office 365 and Azure has actually been quite good both in the U.S., to your question, and outside the U.S. Part of the reason that you've seen us investing on the capital expense side is to continue to build out the opportunity set, because we are seeing good demand outside the U.S. and I do think our ability to be competitive there is just as high as it is here. So we've already seen that growth. QUESTION: Thank you. ED MAGUIRE: Thanks, Ed. Next question, please. (Operator direction.)",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q1/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    },
+    {
+      "call_id": "fy2014_q1",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 1,
+      "call_date": null,
+      "question_index": 11,
+      "analyst_name": "JASON MAYNARD",
+      "analyst_firm": "Wells Fargo",
+      "question_text": "Hey, guys. I wanted to drill a little bit into how you're thinking about holiday on the consumer hardware side, and specifically just expectations around Surface, and then also any insight or color you think in terms of what your expectations are with RT versus Pro. Thank you.",
+      "responses": [
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 29,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Thanks, Jason. I think overall for holiday, given our guidance, we clearly do expect a healthy holiday performance across the portfolio. I say that, because we do have offerings that provide great value from having Surface V1 RT still in marketing, Surface 2, Surface 2 Pro, plus Xbox 360, plus Xbox One, really does provide both a value portfolio and those who want the latest and greatest experience have something covered. The guidance does include good performance across all of those product lines. We did see, I think as Chris and I both talked about, a lot of progress in sales execution on Surface in particular this quarter. And that does give us more confidence about our ability to execute again well in Q2. In particular, as you noted, RT did do quite well this quarter and I look forward to seeing that continue with the Surface 2 device, as well, at holiday. CHRIS SUH: Great. Thank you, Jason. We'll move to the next question, please. (Operator direction.)",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "Thanks, Jason. I think overall for holiday, given our guidance, we clearly do expect a healthy holiday performance across the portfolio. I say that, because we do have offerings that provide great value from having Surface V1 RT still in marketing, Surface 2, Surface 2 Pro, plus Xbox 360, plus Xbox One, really does provide both a value portfolio and those who want the latest and greatest experience have something covered. The guidance does include good performance across all of those product lines. We did see, I think as Chris and I both talked about, a lot of progress in sales execution on Surface in particular this quarter. And that does give us more confidence about our ability to execute again well in Q2. In particular, as you noted, RT did do quite well this quarter and I look forward to seeing that continue with the Surface 2 device, as well, at holiday. CHRIS SUH: Great. Thank you, Jason. We'll move to the next question, please. (Operator direction.)",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q1/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    },
+    {
+      "call_id": "fy2014_q1",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 1,
+      "call_date": null,
+      "question_index": 12,
+      "analyst_name": "KASH RANGAN",
+      "analyst_firm": "Bank of America Merrill Lynch",
+      "question_text": "Hi, thank you very much for all the details, as well. Just maybe my math skills have gotten horribly weak, but I just took the midpoint, Amy, of your revenue guidance for the different line items and also the midpoint of your cost of revenue inputs and the midpoint of your OPEX, I come up with what looks to be about a 10 percent reduction to where I think most sales side models are. Maybe I'm doing I'm hoping that I did something wrong here. But, if that's the case, it’s about 23 percent op margin relative to the 33 or so that you did last year. So can you just walk us through what are the items that you're assuming in your cost structure, which effectively makes the op income flat, although you are getting a good revenue growth rate? I just wonder if there are any one-time items, or if it's emblematic of a shift in your business model to devices and consumer, especially with Nokia going forward. I wonder if we should not be thinking about op margins, but really op income growth rate. Thank you.",
+      "responses": [
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 31,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Thanks, Kash. I think the one thing I would urge you to do as you think about the guidance we gave is looking specifically at the D&C hardware guidance, as well as making sure you're mapping the COGS very specifically to whatever assumption you're making in D&C hardware. Given the business model of Xbox, that can and will have an impact in Q2 to the overall gross margin structure. So as you think through that I think that's probably one of the assumptions that it may sound like using the midpoint could lead you a bit off of where I would have expected. KASH RANGAN: Got it. Thank you very much.",
+          "section": "qna"
+        },
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 32,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Thanks, Kash. CHRIS SUH: Thanks, Kash. Next question please. (Operator director.)",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "Thanks, Kash. I think the one thing I would urge you to do as you think about the guidance we gave is looking specifically at the D&C hardware guidance, as well as making sure you're mapping the COGS very specifically to whatever assumption you're making in D&C hardware. Given the business model of Xbox, that can and will have an impact in Q2 to the overall gross margin structure. So as you think through that I think that's probably one of the assumptions that it may sound like using the midpoint could lead you a bit off of where I would have expected. KASH RANGAN: Got it. Thank you very much.\n\nThanks, Kash. CHRIS SUH: Thanks, Kash. Next question please. (Operator director.)",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q1/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    },
+    {
+      "call_id": "fy2014_q1",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 1,
+      "call_date": null,
+      "question_index": 13,
+      "analyst_name": "RAIMO LENSCHOW",
+      "analyst_firm": "Barclays",
+      "question_text": "Thank you. I just want to follow on from Jason's question earlier on. Can you talk a little bit about where you see the improved success and the sales execution success on the Surface? Is it kind of commercial, is it consumer, and what's driving the improvement there, and how much is kind of the improved revenue run rate also driven by the fact that the channel needed to be ready for the holiday season? Thank you. CHRIS SUH: Hi, Raimo. Thanks for the question. As we talked about, especially for this last quarter of Surface, we saw two things I'll mention, which is popularity of the Surface 32-gigabyte RT device, that one was more successful this last quarter. And we actually saw demand increase in both commercial and in the education customer segment, as well. So we did see some improvement across both those segments.",
+      "responses": [
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 34,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Yes, I would say that another way. It was in retail and in education was really our RT performance. CHRIS SUH: Sorry. That's what I meant.",
+          "section": "qna"
+        },
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 35,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "I just want to make sure that was clear. It really was better execution at retail, and in EDU, and I still look forward to building a commercial channel, which we are just starting to do as we continue to add resellers to our model. RAIMO LENSCHOW: Perfect, thank you.",
+          "section": "qna"
+        },
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 36,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Thanks. (Operator direction.)",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "Yes, I would say that another way. It was in retail and in education was really our RT performance. CHRIS SUH: Sorry. That's what I meant.\n\nI just want to make sure that was clear. It really was better execution at retail, and in EDU, and I still look forward to building a commercial channel, which we are just starting to do as we continue to add resellers to our model. RAIMO LENSCHOW: Perfect, thank you.\n\nThanks. (Operator direction.)",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q1/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    },
+    {
+      "call_id": "fy2014_q1",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 1,
+      "call_date": null,
+      "question_index": 14,
+      "analyst_name": "BRENDAN BARNICLE",
+      "analyst_firm": "Pacific Crest Securities",
+      "question_text": "Thanks so much, guys. I had two quick ones. One was the SQL Server success continues to be very impressive, particularly relative to the field. So I'm wondering where you're seeing kind of the most success there. Is that market share gains, is that pricing is getting into some new markets? If you could add some color there that would be helpful. And then when is your expectation for the next sort of update on Nokia?",
+      "responses": [
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 38,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Great, let me take the second one first, because it's the easiest. We still do expect the transaction to close in the first calendar quarter of 2014. And post-closing if there are any EPS impact changes to what we said before we'll give them post-closing. So now back to your original question on SQL. That's a terrific one to get to talk about. Our growth there is as you said both share growth and revenue growth. It's happened I think generally both in BI, which we've seen a lot of traction with. I don't know if you've had a chance to see some of our PowerView announcements recently. Our ability to sort of span form the end user to the hardest big data problems really has resonated both in the market and with industry analysts who have taken, I think, a strong position that we're the real market leader there. The other thing I would say is a very healthy performance of our premium SKUs, our premium SKUs have continued to provide market growth and I think are competing quite well with the competition. BRENDAN BARNICLE: Great. Thanks, guys. CHRIS SUH: Thanks, Brendan. Next question, please. (Operator direction.)",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "Great, let me take the second one first, because it's the easiest. We still do expect the transaction to close in the first calendar quarter of 2014. And post-closing if there are any EPS impact changes to what we said before we'll give them post-closing. So now back to your original question on SQL. That's a terrific one to get to talk about. Our growth there is as you said both share growth and revenue growth. It's happened I think generally both in BI, which we've seen a lot of traction with. I don't know if you've had a chance to see some of our PowerView announcements recently. Our ability to sort of span form the end user to the hardest big data problems really has resonated both in the market and with industry analysts who have taken, I think, a strong position that we're the real market leader there. The other thing I would say is a very healthy performance of our premium SKUs, our premium SKUs have continued to provide market growth and I think are competing quite well with the competition. BRENDAN BARNICLE: Great. Thanks, guys. CHRIS SUH: Thanks, Brendan. Next question, please. (Operator direction.)",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q1/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    },
+    {
+      "call_id": "fy2014_q1",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 1,
+      "call_date": null,
+      "question_index": 15,
+      "analyst_name": "GREGG MOSKOWITZ",
+      "analyst_firm": "Cowen and Company",
+      "question_text": "Thank you very much and good afternoon, guys, just two questions. First, Amy, if I recall correctly I believe last quarter you had mentioned an expectation for double-digit annuity growth in fiscal '14. Is that still how you're thinking about the annuity part of the business? And secondly the year-over-year cloud revenue growth you reported was certainly impressive. But, I was wondering if you could shed some light perhaps on how much of Azure billings or revenue are incremental versus cannibalistic?",
+      "responses": [
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 40,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Two good questions. I do expect our annuity growth, and the guidance we gave it still does assume double-digit annuity growth going forward. And I think our performance this quarter gives me confidence that the guidance in Q2 is the right one, given our strength and our competitive position. Secondly on cloud revenue, your question gives me an opportunity to talk about the importance of our hybrid cloud. Within especially our server business our ability to power the cloud whether you want to run it, you want a service provider to run it, or you want to use ours is really an incredibly powerful story. And I think in some ways whether or not it's cannibalizing becomes somewhat difficult. What we've generally found right now is that it has been often additive. And if you look at our server growth all-up, which we tried to provide to help give some parameters around that, to give some confidence that we're both growing the base and providing additive opportunity, I think that's the number I would probably look to, to see the impact there. GREGG MOSKOWITZ: Great. Thanks very much. CHRIS SUH: Thanks, Greg. Operator, I think we're down to our last question. (Operator direction.)",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "Two good questions. I do expect our annuity growth, and the guidance we gave it still does assume double-digit annuity growth going forward. And I think our performance this quarter gives me confidence that the guidance in Q2 is the right one, given our strength and our competitive position. Secondly on cloud revenue, your question gives me an opportunity to talk about the importance of our hybrid cloud. Within especially our server business our ability to power the cloud whether you want to run it, you want a service provider to run it, or you want to use ours is really an incredibly powerful story. And I think in some ways whether or not it's cannibalizing becomes somewhat difficult. What we've generally found right now is that it has been often additive. And if you look at our server growth all-up, which we tried to provide to help give some parameters around that, to give some confidence that we're both growing the base and providing additive opportunity, I think that's the number I would probably look to, to see the impact there. GREGG MOSKOWITZ: Great. Thanks very much. CHRIS SUH: Thanks, Greg. Operator, I think we're down to our last question. (Operator direction.)",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q1/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    },
+    {
+      "call_id": "fy2014_q1",
+      "fiscal_year": 2014,
+      "fiscal_quarter": 1,
+      "call_date": null,
+      "question_index": 16,
+      "analyst_name": "KIRK MATERNE",
+      "analyst_firm": "Evercore",
+      "question_text": "Thank you very much for fitting me in. I guess two quick ones for you, Amy, on the commercial cloud offerings. I guess first around Office 365 you mentioned you've seen pretty good uptake even outside the U.S. I was interested in just your ability to monetize Office 365 in some of the emerging markets that have been challenging over time for Office. Then secondly, as a follow up to Gregg's question on server, within Azure how much of the uptake in Azure is coming from sort of existing Microsoft logos, versus bringing on net new logos onto the platform? Thanks.",
+      "responses": [
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 42,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Great. Thanks, Kirk. I'm going to talk about two things. I do think it's interesting, maybe the best example of how to think about us moving beyond our traditional markets is the fact that we were the first to commit to a data center in China, a market that we've historically had challenges monetizing at a high level. We went there. We're going there with Office 365 and Azure. We look forward to being able to make progress. We're investing both headcount and capital dollars, because we do believe it provides an interesting opportunity for us to begin monetizing in markets that have been harder for us to grow maybe with our more traditional business model. Secondly, with Azure I think we've seen both, but the thing I would say is what's been really helpful is that as we make it easier to attach Azure services to our normal rhythm in the field, through our enterprise agreements, and through volume licensing, it provides a really helpful way, and a really easy selling motion, to provide customers flexibility. We add it in the normal rhythm of a sales motion. We allow people to try, use and buy. And that has served us well in terms of being able to expose Azure to more and more customers in a normal selling cycle. So I think that's probably one of the better ways. It's the same actual selling rhythm we've used with Office 365 so successfully. And with that, I wanted to say thank you. I know that this quarter we changed reporting segments, and that requires a lot of work. So thank you for all the work put in to understand our transition that we're trying to make as a company. And so let me turn it back to Chris to say his final words. CHRIS SUH: So that wraps up today's earnings call. We look forward to seeing many of you in the coming months, at various investor conferences. For those of you unable to attend in person, these events will generally be webcast and you'll be able to follow our comments at Microsoft.com/investor. Please contact us if you need any additional details and thanks for joining us today.",
+          "section": "qna"
+        },
+        {
+          "call_id": "fy2014_q1",
+          "turn_index": 43,
+          "speaker_raw": "AMY HOOD",
+          "speaker": "Amy Hood",
+          "text": "Thank you.",
+          "section": "qna"
+        }
+      ],
+      "amy_hood_answer": "Great. Thanks, Kirk. I'm going to talk about two things. I do think it's interesting, maybe the best example of how to think about us moving beyond our traditional markets is the fact that we were the first to commit to a data center in China, a market that we've historically had challenges monetizing at a high level. We went there. We're going there with Office 365 and Azure. We look forward to being able to make progress. We're investing both headcount and capital dollars, because we do believe it provides an interesting opportunity for us to begin monetizing in markets that have been harder for us to grow maybe with our more traditional business model. Secondly, with Azure I think we've seen both, but the thing I would say is what's been really helpful is that as we make it easier to attach Azure services to our normal rhythm in the field, through our enterprise agreements, and through volume licensing, it provides a really helpful way, and a really easy selling motion, to provide customers flexibility. We add it in the normal rhythm of a sales motion. We allow people to try, use and buy. And that has served us well in terms of being able to expose Azure to more and more customers in a normal selling cycle. So I think that's probably one of the better ways. It's the same actual selling rhythm we've used with Office 365 so successfully. And with that, I wanted to say thank you. I know that this quarter we changed reporting segments, and that requires a lot of work. So thank you for all the work put in to understand our transition that we're trying to make as a company. And so let me turn it back to Chris to say his final words. CHRIS SUH: So that wraps up today's earnings call. We look forward to seeing many of you in the coming months, at various investor conferences. For those of you unable to attend in person, these events will generally be webcast and you'll be able to follow our comments at Microsoft.com/investor. Please contact us if you need any additional details and thanks for joining us today.\n\nThank you.",
+      "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q1/press-release-webcast",
+      "review_required": false,
+      "review_reasons": []
+    }
+  ]
+}

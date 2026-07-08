@@ -208,7 +208,7 @@ export const NewPersonaModal: React.FC<NewPersonaModalProps> = ({
               className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-300 dark:disabled:bg-slate-800 text-white font-black text-xs shadow-lg shadow-indigo-500/25 transition-all flex items-center gap-1.5"
             >
               <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-              <span>{isSaving ? 'DB 저장 중...' : '페르소나 즉시 론칭'}</span>
+              <span>{isSaving ? '저장 중...' : '페르소나 즉시 론칭'}</span>
             </button>
           </div>
         </form>

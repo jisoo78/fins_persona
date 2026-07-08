@@ -1,0 +1,47 @@
+{
+  "dataset": "archive_collected_data_20260707",
+  "subject": "Amy Hood",
+  "role": "CFO / finance decision persona",
+  "questions": [
+    {
+      "id": "q1_capital_allocation",
+      "question": "Amy Hood의 자본 배치 기준은 무엇인가?",
+      "expected_focus": ["capital allocation", "CapEx", "ROI", "capacity", "demand signals"]
+    },
+    {
+      "id": "q2_ai_infra_capex",
+      "question": "AI 인프라 CapEx를 판단할 때 어떤 기준을 쓰는가?",
+      "expected_focus": ["AI infrastructure", "CapEx", "GPU/CPU", "capacity constraints", "long-term monetization"]
+    },
+    {
+      "id": "q3_margin_growth_tradeoff",
+      "question": "마진 하락과 장기 성장 투자가 충돌할 때 어떤 결정을 내리는가?",
+      "expected_focus": ["gross margin", "operating margin", "growth investment", "efficiency gains"]
+    },
+    {
+      "id": "q4_supply_demand_priority",
+      "question": "수요가 공급을 초과할 때 CFO 관점에서 어떤 우선순위를 두는가?",
+      "expected_focus": ["demand exceeds supply", "capacity allocation", "Azure", "first-party apps", "R&D"]
+    },
+    {
+      "id": "q5_cashflow_risk",
+      "question": "대규모 투자 상황에서 현금흐름과 리스크를 어떻게 설명하는가?",
+      "expected_focus": ["free cash flow", "cash paid for PPE", "finance leases", "risk disclosure"]
+    },
+    {
+      "id": "q6_investor_communication",
+      "question": "투자자에게 리스크와 가이던스를 설명할 때 어떤 커뮤니케이션 방식을 쓰는가?",
+      "expected_focus": ["guidance", "FX", "segment outlook", "constraints", "numeric evidence"]
+    },
+    {
+      "id": "q7_red_lines",
+      "question": "Amy Hood 페르소나가 투자 판단에서 넘지 말아야 할 레드라인은 무엇인가?",
+      "expected_focus": ["unverified demand", "margin pressure", "capacity timing", "cash flow pressure"]
+    },
+    {
+      "id": "q8_persona_prompt_reusability",
+      "question": "이 데이터를 바탕으로 만든 CFO 참모 프롬프트가 실제 의사결정 대화에 재사용 가능한가?",
+      "expected_focus": ["persona prompt", "decision rules", "evidence grounding", "communication style"]
+    }
+  ]
+}

@@ -9,12 +9,19 @@
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "rag:prepare:holdout": "python3 scripts/prepare_holdout_dataset.py",
+    "rag:index:bge-m3": "python3 scripts/build_bge_m3_index.py",
+    "rag:index:bge-m3:train": "RAG_ARCHIVE_DIR=archive_eval/train python3 scripts/build_bge_m3_index.py",
+    "rag:evaluate:keyword": "tsx server/generateGeneralRagEvaluation.ts",
+    "rag:evaluate:vector": "RAG_RETRIEVAL=vector tsx server/generateGeneralRagEvaluation.ts",
+    "rag:evaluate:vector:train": "RAG_ARCHIVE_DIR=archive_eval/train RAG_RETRIEVAL=vector tsx server/generateGeneralRagEvaluation.ts"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
     "@langchain/core": "^1.2.1",
     "@langchain/google-genai": "^2.2.0",
+    "@langchain/openai": "^1.5.3",
     "@tailwindcss/vite": "^4.1.14",
     "@vitejs/plugin-react": "^5.0.4",
     "dotenv": "^17.2.3",

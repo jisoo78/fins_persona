@@ -1,0 +1,192 @@
+{
+  "요약": {
+    "목적": "Compare Amy Hood ordinary RAG evaluation with 2017-2019 data included vs excluded.",
+    "질문지_파일": "evaluation/amy_hood_decision_eval_questions_15.json",
+    "포함_결과_파일": "evaluation/amy_hood_eval_full_2017_2019_included.lock.json",
+    "제외_결과_파일": "evaluation/amy_hood_eval_holdout_2017_2019_excluded.lock.json",
+    "포함_2017_2019": {
+      "문서_수": 1843,
+      "청크_수": 3009
+    },
+    "제외_2017_2019": {
+      "문서_수": 1448,
+      "청크_수": 2377
+    },
+    "문서_차이": 395,
+    "청크_차이": 632,
+    "문항_수": 15,
+    "근거_변경_문항_수": 3,
+    "해석": "2017-2019 데이터를 제외하면 일부 질문에서 해당 기간 근거가 다른 연도나 Amy Hood 수집 CSV 근거로 대체된다. 따라서 같은 질문지로 full RAG와 holdout RAG의 기억 복원력, 미래 시나리오 판단, 의사결정 유사도 차이를 비교할 수 있다."
+  },
+  "비교": [
+    {
+      "문항_id": "memory_ai_capacity_margin",
+      "평가_기준": "과거 기억 복원",
+      "포함_상위_근거": "fy2024_q4.json",
+      "제외_상위_근거": "fy2024_q4.json",
+      "포함_상위_근거_제목": "Microsoft FY24 Fourth Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY24 Fourth Quarter Earnings Conference Call",
+      "포함_회계연도": 2024,
+      "제외_회계연도": 2024,
+      "상위_근거_변경됨": false
+    },
+    {
+      "문항_id": "memory_cashflow_capex",
+      "평가_기준": "과거 기억 복원",
+      "포함_상위_근거": "fy2025_q1.json",
+      "제외_상위_근거": "fy2025_q1.json",
+      "포함_상위_근거_제목": "Microsoft FY25 First Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY25 First Quarter Earnings Conference Call",
+      "포함_회계연도": 2025,
+      "제외_회계연도": 2025,
+      "상위_근거_변경됨": false
+    },
+    {
+      "문항_id": "memory_segment_guidance",
+      "평가_기준": "과거 기억 복원",
+      "포함_상위_근거": "fy2018_q3.json",
+      "제외_상위_근거": "fy2014_q3.json",
+      "포함_상위_근거_제목": "Microsoft Third Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "MSFT Earnings Conference Call",
+      "포함_회계연도": 2018,
+      "제외_회계연도": 2014,
+      "상위_근거_변경됨": true
+    },
+    {
+      "문항_id": "memory_acquisition_integration",
+      "평가_기준": "과거 기억 복원",
+      "누락_검증_대상": "2017-2019 acquisition memory",
+      "포함_상위_근거": "fy2018_q2.json",
+      "제외_상위_근거": "fy2024_q2.json",
+      "포함_상위_근거_제목": "MSFT Fiscal Year 2018 Second Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY24 Second Quarter Earnings Conference Call",
+      "포함_회계연도": 2018,
+      "제외_회계연도": 2024,
+      "상위_근거_변경됨": true
+    },
+    {
+      "문항_id": "memory_commercial_cloud_transition",
+      "평가_기준": "과거 기억 복원",
+      "포함_상위_근거": "fy2016_q2.json",
+      "제외_상위_근거": "fy2016_q2.json",
+      "포함_상위_근거_제목": "Microsoft Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft Earnings Conference Call",
+      "포함_회계연도": 2016,
+      "제외_회계연도": 2016,
+      "상위_근거_변경됨": false
+    },
+    {
+      "문항_id": "future_ai_infra_margin_pressure",
+      "평가_기준": "미래 예측",
+      "포함_상위_근거": "fy2019_q4.json",
+      "제외_상위_근거": "microsoft_amy_hood.csv",
+      "포함_상위_근거_제목": "Microsoft FY 2019 Fourth Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Amy Hood collected interview CSV",
+      "포함_회계연도": 2019,
+      "제외_회계연도": null,
+      "상위_근거_변경됨": true
+    },
+    {
+      "문항_id": "future_startup_acquisition",
+      "평가_기준": "미래 예측",
+      "누락_검증_대상": "2017-2019 acquisition-style reasoning",
+      "포함_상위_근거": "fy2022_q2.json",
+      "제외_상위_근거": "fy2022_q2.json",
+      "포함_상위_근거_제목": "Microsoft FY22 Second Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY22 Second Quarter Earnings Conference Call",
+      "포함_회계연도": 2022,
+      "제외_회계연도": 2022,
+      "상위_근거_변경됨": false
+    },
+    {
+      "문항_id": "future_cloud_transition_tradeoff",
+      "평가_기준": "미래 예측",
+      "누락_검증_대상": "cloud-transition reasoning",
+      "포함_상위_근거": "fy2013_q4.json",
+      "제외_상위_근거": "fy2013_q4.json",
+      "포함_상위_근거_제목": "Microsoft Fourth Quarter 2013 Prepared Remarks",
+      "제외_상위_근거_제목": "Microsoft Fourth Quarter 2013 Prepared Remarks",
+      "포함_회계연도": 2013,
+      "제외_회계연도": 2013,
+      "상위_근거_변경됨": false
+    },
+    {
+      "문항_id": "future_fx_interest_rate_shock",
+      "평가_기준": "미래 예측",
+      "포함_상위_근거": "microsoft_amy_hood.csv",
+      "제외_상위_근거": "microsoft_amy_hood.csv",
+      "포함_상위_근거_제목": "Amy Hood collected interview CSV",
+      "제외_상위_근거_제목": "Amy Hood collected interview CSV",
+      "포함_회계연도": null,
+      "제외_회계연도": null,
+      "상위_근거_변경됨": false
+    },
+    {
+      "문항_id": "future_margin_recovery_plan",
+      "평가_기준": "미래 예측",
+      "포함_상위_근거": "fy2024_q2.json",
+      "제외_상위_근거": "fy2024_q2.json",
+      "포함_상위_근거_제목": "Microsoft FY24 Second Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY24 Second Quarter Earnings Conference Call",
+      "포함_회계연도": 2024,
+      "제외_회계연도": 2024,
+      "상위_근거_변경됨": false
+    },
+    {
+      "문항_id": "decision_similarity_acquisition_redline",
+      "평가_기준": "의사결정 유사도",
+      "누락_검증_대상": "GitHub-like acquisition governance",
+      "포함_상위_근거": "fy2023_q3.json",
+      "제외_상위_근거": "fy2023_q3.json",
+      "포함_상위_근거_제목": "Microsoft FY23 Third Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY23 Third Quarter Earnings Conference Call",
+      "포함_회계연도": 2023,
+      "제외_회계연도": 2023,
+      "상위_근거_변경됨": false
+    },
+    {
+      "문항_id": "decision_similarity_capacity_allocation",
+      "평가_기준": "의사결정 유사도",
+      "포함_상위_근거": "fy2024_q4.json",
+      "제외_상위_근거": "fy2024_q4.json",
+      "포함_상위_근거_제목": "Microsoft FY24 Fourth Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY24 Fourth Quarter Earnings Conference Call",
+      "포함_회계연도": 2024,
+      "제외_회계연도": 2024,
+      "상위_근거_변경됨": false
+    },
+    {
+      "문항_id": "decision_similarity_prompt_quality",
+      "평가_기준": "의사결정 유사도",
+      "포함_상위_근거": "fy2024_q2.json",
+      "제외_상위_근거": "fy2024_q2.json",
+      "포함_상위_근거_제목": "Microsoft FY24 Second Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY24 Second Quarter Earnings Conference Call",
+      "포함_회계연도": 2024,
+      "제외_회계연도": 2024,
+      "상위_근거_변경됨": false
+    },
+    {
+      "문항_id": "decision_similarity_budget_cut_tradeoff",
+      "평가_기준": "의사결정 유사도",
+      "포함_상위_근거": "fy2024_q1.json",
+      "제외_상위_근거": "fy2024_q1.json",
+      "포함_상위_근거_제목": "Microsoft FY24 First Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY24 First Quarter Earnings Conference Call",
+      "포함_회계연도": 2024,
+      "제외_회계연도": 2024,
+      "상위_근거_변경됨": false
+    },
+    {
+      "문항_id": "decision_similarity_guidance_tone",
+      "평가_기준": "의사결정 유사도",
+      "포함_상위_근거": "fy2024_q4.json",
+      "제외_상위_근거": "fy2024_q4.json",
+      "포함_상위_근거_제목": "Microsoft FY24 Fourth Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY24 Fourth Quarter Earnings Conference Call",
+      "포함_회계연도": 2024,
+      "제외_회계연도": 2024,
+      "상위_근거_변경됨": false
+    }
+  ]
+}

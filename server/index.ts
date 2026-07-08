@@ -1,6 +1,8 @@
 import express from 'express';
 import { execFile } from 'node:child_process';
+import { readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
+import { resolve } from 'node:path';
 import { promisify } from 'node:util';
 import type { ResultSetHeader, RowDataPacket } from 'mysql2';
 import { db, toJson } from './db';
@@ -9,7 +11,11 @@ import {
   generateDeepInterviewQuestions,
   generateFinalOutput,
   generatePersonaChatReply,
+  generateReferencePersonaFromDocument,
+  generateReferencePersonaFromRagEvidence,
 } from './agentService';
+import { retrieveArchiveEvidence } from './ragService';
+import { retrieveVectorArchiveEvidence } from './vectorRagService';
 
 const execFileAsync = promisify(execFile);
 
@@ -119,6 +125,20 @@ interface HistorySnsSignalRow extends RowDataPacket {
   signal_text: string;
 }
 
+interface PreInterviewContextRow extends RowDataPacket {
+  id: string;
+  interview_session_id: string;
+  user_profile_id: string;
+  collection_job_id: string | null;
+  schema_version: string;
+  target_role: string;
+  communication_style: unknown;
+  context_json: unknown;
+  raw_profile: unknown;
+  created_at: string | Date;
+  updated_at: string | Date;
+}
+
 interface PersonaPayload {
   id?: string;
   name: string;
@@ -170,6 +190,8 @@ const sherlockTargetArgs = sherlockSupportedTargetSites.flatMap((site) => ['--si
 const fallbackSherlockCommand = '/Users/choijisoo/.local/bin/sherlock';
 
 const normalizeSnsId = (value: string) => value.trim().replace(/^@+/, '');
+const isDatabaseUuid = (value?: string) =>
+  Boolean(value && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value));
 
 const parseJsonValue = <T>(value: unknown, fallback: T): T => {
   if (value == null) return fallback;
@@ -186,6 +208,55 @@ const parseJsonValue = <T>(value: unknown, fallback: T): T => {
 const formatDateValue = (value: string | Date) => {
   if (value instanceof Date) return value.toISOString().slice(0, 10).replace(/-/g, '.');
   return String(value).slice(0, 10).replace(/-/g, '.');
+};
+
+const parseSingleColumnCsv = (csvText: string) => {
+  const normalized = csvText.replace(/^\uFEFF/, '');
+  const rows: string[] = [];
+  let current = '';
+  let inQuotes = false;
+
+  for (let index = 0; index < normalized.length; index += 1) {
+    const char = normalized[index];
+    const next = normalized[index + 1];
+
+    if (char === '"' && next === '"') {
+      current += '"';
+      index += 1;
+      continue;
+    }
+
+    if (char === '"') {
+      inQuotes = !inQuotes;
+      continue;
+    }
+
+    if ((char === '\n' || char === '\r') && !inQuotes) {
+      if (char === '\r' && next === '\n') index += 1;
+      const value = current.trim();
+      if (value && value !== 'text') rows.push(value);
+      current = '';
+      continue;
+    }
+
+    current += char;
+  }
+
+  const value = current.trim();
+  if (value && value !== 'text') rows.push(value);
+  return rows;
+};
+
+const loadAmyHoodDocument = () => {
+  const csvPath = resolve(process.cwd(), 'microsoft_amy_hood.csv');
+  const csvText = readFileSync(csvPath, 'utf8');
+  const rows = parseSingleColumnCsv(csvText);
+
+  return {
+    fileName: 'microsoft_amy_hood.csv',
+    rowCount: rows.length,
+    text: rows.join('\n\n---\n\n'),
+  };
 };
 
 const buildAdvisorPrompt = (persona: PersonaPayload) => `You are ${persona.name}, an AI advisor persona.
@@ -963,6 +1034,186 @@ app.post('/api/agent/final-output', async (req, res) => {
   }
 });
 
+app.post('/api/pre-interview-contexts', async (req, res) => {
+  const { interviewSessionId, preInterviewContext } = req.body as {
+    interviewSessionId?: string | null;
+    preInterviewContext?: {
+      meta?: { schema_version?: string; target_role?: string };
+      communication_style?: unknown;
+      categories?: unknown;
+    };
+  };
+
+  if (!interviewSessionId || !preInterviewContext) {
+    res.status(400).json({ ok: false, message: 'interviewSessionId and preInterviewContext are required' });
+    return;
+  }
+
+  try {
+    await db.execute(
+      `
+        INSERT INTO pre_interview_contexts (
+          interview_session_id,
+          schema_version,
+          target_role,
+          communication_style,
+          context_json
+        )
+        VALUES (
+          :interviewSessionId,
+          :schemaVersion,
+          :targetRole,
+          CAST(:communicationStyle AS JSON),
+          CAST(:contextJson AS JSON)
+        )
+        ON DUPLICATE KEY UPDATE
+          schema_version = VALUES(schema_version),
+          target_role = VALUES(target_role),
+          communication_style = VALUES(communication_style),
+          context_json = VALUES(context_json),
+          updated_at = NOW()
+      `,
+      {
+        interviewSessionId,
+        schemaVersion: preInterviewContext.meta?.schema_version ?? 'pre_interview_context.v2',
+        targetRole: preInterviewContext.meta?.target_role ?? 'CFO',
+        communicationStyle: toJson(preInterviewContext.communication_style ?? {}),
+        contextJson: toJson(preInterviewContext),
+      },
+    );
+
+    res.json({ ok: true });
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      message: error instanceof Error ? error.message : 'Unknown pre interview context save error',
+    });
+  }
+});
+
+app.get('/api/pre-interview-contexts/latest', async (_, res) => {
+  try {
+    const [rows] = await db.execute<PreInterviewContextRow[]>(
+      `
+        SELECT
+          pic.id,
+          pic.interview_session_id,
+          isess.user_profile_id,
+          isess.collection_job_id,
+          pic.schema_version,
+          pic.target_role,
+          pic.communication_style,
+          pic.context_json,
+          up.raw_profile,
+          pic.created_at,
+          pic.updated_at
+        FROM pre_interview_contexts pic
+        JOIN interview_sessions isess ON isess.id = pic.interview_session_id
+        JOIN user_profiles up ON up.id = isess.user_profile_id
+        ORDER BY pic.updated_at DESC
+        LIMIT 1
+      `,
+    );
+
+    const latest = rows[0];
+    if (!latest) {
+      res.json({ ok: true, context: null });
+      return;
+    }
+
+    const publicData: PublicDataSnapshot = { status: 'collected', accounts: [], signals: [], posts: [] };
+
+    if (latest.collection_job_id) {
+      const [accountRows] = await db.execute<HistorySnsAccountRow[]>(
+        `
+          SELECT
+            '' AS user_profile_id,
+            platform,
+            handle,
+            profile_url,
+            confidence
+          FROM sns_accounts
+          WHERE collection_job_id = :collectionJobId
+          ORDER BY created_at ASC
+        `,
+        { collectionJobId: latest.collection_job_id },
+      );
+
+      publicData.accounts = accountRows.map((account) => ({
+        platform: account.platform,
+        handle: account.handle,
+        url: account.profile_url,
+        confidence: Number(account.confidence),
+      }));
+
+      const [postRows] = await db.execute<HistorySnsPostRow[]>(
+        `
+          SELECT
+            '' AS user_profile_id,
+            account.platform,
+            post.content,
+            post.raw_content
+          FROM sns_posts post
+          JOIN sns_accounts account ON account.id = post.sns_account_id
+          WHERE account.collection_job_id = :collectionJobId
+          ORDER BY post.created_at ASC
+        `,
+        { collectionJobId: latest.collection_job_id },
+      );
+
+      publicData.posts = postRows.map((post) => {
+        const raw = parseJsonValue<{ inferredSignal?: string }>(post.raw_content, {});
+        return {
+          platform: post.platform,
+          text: post.content,
+          inferredSignal: raw.inferredSignal ?? '확인 필요',
+        };
+      });
+
+      const [signalRows] = await db.execute<HistorySnsSignalRow[]>(
+        `
+          SELECT
+            '' AS user_profile_id,
+            signal_text
+          FROM public_data_signals
+          WHERE collection_job_id = :collectionJobId
+          ORDER BY created_at ASC
+        `,
+        { collectionJobId: latest.collection_job_id },
+      );
+
+      publicData.signals = signalRows.map((signal) => signal.signal_text);
+    }
+
+    res.json({
+      ok: true,
+      context: {
+        id: latest.id,
+        interviewSessionId: latest.interview_session_id,
+        userProfileId: latest.user_profile_id,
+        profile: parseJsonValue<UserProfilePayload>(latest.raw_profile, {
+          name: '사용자',
+          title: 'CFO / 재무 리더',
+          industry: '확인 필요',
+          companySize: '확인 필요',
+          companyName: '확인 필요',
+          snsId: '',
+          financeScope: '자본 배치, 투자, 리스크, 자금 운용',
+        }),
+        publicData,
+        preInterviewContext: parseJsonValue(latest.context_json, {}),
+        createdAt: latest.created_at,
+        updatedAt: latest.updated_at,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      message: error instanceof Error ? error.message : 'Unknown latest pre interview context fetch error',
+    });
+  }
+});
+
 app.post('/api/agent/persona-chat', async (req, res) => {
   const { persona, message, recentMessages, chatSessionId } = req.body as {
     persona?: PersonaPayload;
@@ -980,41 +1231,6 @@ app.post('/api/agent/persona-chat', async (req, res) => {
   }
 
   try {
-    let activeChatSessionId = chatSessionId ?? null;
-
-    if (!activeChatSessionId) {
-      await db.execute(
-        `
-          INSERT INTO persona_chat_sessions (
-            advisor_persona_id,
-            persona_name,
-            status
-          )
-          VALUES (
-            :advisorPersonaId,
-            :personaName,
-            'active'
-          )
-        `,
-        {
-          advisorPersonaId: persona.id && !persona.id.startsWith('p-') ? persona.id : null,
-          personaName: persona.name,
-        },
-      );
-
-      const [sessionRows] = await db.execute<IdRow[]>(
-        `
-          SELECT id
-          FROM persona_chat_sessions
-          WHERE persona_name = :personaName
-          ORDER BY created_at DESC
-          LIMIT 1
-        `,
-        { personaName: persona.name },
-      );
-      activeChatSessionId = sessionRows[0]?.id ?? null;
-    }
-
     const reply = await generatePersonaChatReply({
       name: persona.name,
       role: persona.role,
@@ -1030,46 +1246,86 @@ app.post('/api/agent/persona-chat', async (req, res) => {
       recentMessages,
     });
 
-    if (activeChatSessionId) {
-      await db.execute(
-        `
-          INSERT INTO persona_chat_messages (
-            chat_session_id,
-            sender,
-            message_text,
-            raw_message
-          )
-          VALUES
-            (
-              :chatSessionId,
-              'user',
-              :userMessage,
-              CAST(:rawUserMessage AS JSON)
-            ),
-            (
-              :chatSessionId,
-              'ai',
-              :replyMessage,
-              CAST(:rawReplyMessage AS JSON)
-            )
-        `,
-        {
-          chatSessionId: activeChatSessionId,
-          userMessage: message,
-          rawUserMessage: toJson({ sender: 'user', text: message }),
-          replyMessage: reply,
-          rawReplyMessage: toJson({ sender: 'ai', text: reply, personaId: persona.id ?? null }),
-        },
-      );
+    let activeChatSessionId = chatSessionId ?? null;
 
-      await db.execute(
-        `
-          UPDATE persona_chat_sessions
-          SET updated_at = NOW()
-          WHERE id = :chatSessionId
-        `,
-        { chatSessionId: activeChatSessionId },
-      );
+    try {
+      if (!activeChatSessionId) {
+        await db.execute(
+          `
+            INSERT INTO persona_chat_sessions (
+              advisor_persona_id,
+              persona_name,
+              status
+            )
+            VALUES (
+              :advisorPersonaId,
+              :personaName,
+              'active'
+            )
+          `,
+          {
+            advisorPersonaId: isDatabaseUuid(persona.id) ? persona.id : null,
+            personaName: persona.name,
+          },
+        );
+
+        const [sessionRows] = await db.execute<IdRow[]>(
+          `
+            SELECT id
+            FROM persona_chat_sessions
+            WHERE persona_name = :personaName
+            ORDER BY created_at DESC
+            LIMIT 1
+          `,
+          { personaName: persona.name },
+        );
+        activeChatSessionId = sessionRows[0]?.id ?? null;
+      }
+
+      if (activeChatSessionId) {
+        await db.execute(
+          `
+            INSERT INTO persona_chat_messages (
+              chat_session_id,
+              sender,
+              message_text,
+              raw_message
+            )
+            VALUES
+              (
+                :chatSessionId,
+                'user',
+                :userMessage,
+                CAST(:rawUserMessage AS JSON)
+              ),
+              (
+                :chatSessionId,
+                'ai',
+                :replyMessage,
+                CAST(:rawReplyMessage AS JSON)
+              )
+          `,
+          {
+            chatSessionId: activeChatSessionId,
+            userMessage: message,
+            rawUserMessage: toJson({ sender: 'user', text: message }),
+            replyMessage: reply,
+            rawReplyMessage: toJson({ sender: 'ai', text: reply, personaId: persona.id ?? null }),
+          },
+        );
+
+        await db.execute(
+          `
+            UPDATE persona_chat_sessions
+            SET updated_at = NOW()
+            WHERE id = :chatSessionId
+          `,
+          { chatSessionId: activeChatSessionId },
+        );
+      }
+    } catch (persistError) {
+      console.warn('Persona chat persistence skipped', persistError);
+      activeChatSessionId = null;
     }
 
     res.json({ ok: true, reply, chatSessionId: activeChatSessionId });
@@ -1683,6 +1939,129 @@ app.get('/api/history-records', async (_, res) => {
     res.status(500).json({
       ok: false,
       message: error instanceof Error ? error.message : 'Unknown history fetch error',
+    });
+  }
+});
+
+app.post('/api/reference-personas/amy-hood', async (_, res) => {
+  try {
+    const document = loadAmyHoodDocument();
+    const generated = await generateReferencePersonaFromDocument('Amy Hood', document.text);
+    const now = new Date().toLocaleDateString('ko-KR').replace(/\.\s*/g, '.').replace(/\.$/, '');
+
+    res.json({
+      ok: true,
+      source: {
+        fileName: document.fileName,
+        rowCount: document.rowCount,
+        subjectName: 'Amy Hood',
+      },
+      persona: {
+        id: `amy-hood-${Date.now()}`,
+        name: generated.name || 'Amy Hood CFO Advisor',
+        role: generated.role || '재무',
+        iconName: 'Sparkles',
+        badge: generated.badge || 'CFO Reference',
+        description: generated.description,
+        status: 'active',
+        createdAt: now,
+        updatedAt: '방금 전',
+        decisionStyle: generated.decisionStyle,
+        coreValues: generated.coreValues,
+        strengths: generated.strengths,
+        weaknesses: generated.weaknesses,
+        communicationStyle: generated.communicationStyle,
+        sampleConversations: [
+          {
+            question: 'AI 인프라 투자를 계속 확대해도 될까요?',
+            answer: '수요 신호, capacity 제약, CapEx 회수 가능성, free cash flow 압박을 함께 놓고 판단해야 합니다.',
+          },
+        ],
+        decisionPrompt: generated.decisionPrompt,
+        colorClass: 'text-emerald-600 dark:text-emerald-400',
+        bgClass: 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800',
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      message: error instanceof Error ? error.message : 'Unknown Amy Hood persona generation error',
+    });
+  }
+});
+
+app.post('/api/reference-personas/amy-hood-rag', async (_, res) => {
+  try {
+    const query = [
+      'Amy Hood CFO financial decision making',
+      'capital allocation CapEx AI infrastructure Azure capacity',
+      'operating margin gross margin free cash flow RPO bookings demand signals risk',
+      'communication style investor earnings call guidance constraints',
+    ].join(' ');
+    const vectorRetrieval = await retrieveVectorArchiveEvidence(query, 16);
+    const retrieval = vectorRetrieval ?? retrieveArchiveEvidence(query, 16);
+
+    if (!retrieval.selectedChunks.length) {
+      res.status(404).json({
+        ok: false,
+        message: 'archive 폴더에서 RAG 근거 청크를 찾지 못했습니다.',
+      });
+      return;
+    }
+
+    const generated = await generateReferencePersonaFromRagEvidence('Amy Hood', retrieval.evidenceText);
+    const now = new Date().toLocaleDateString('ko-KR').replace(/\.\s*/g, '.').replace(/\.$/, '');
+
+    res.json({
+      ok: true,
+      source: {
+        mode: vectorRetrieval ? 'general-vector-rag-bge-m3' : 'general-keyword-rag-fallback',
+        subjectName: 'Amy Hood',
+        documentCount: retrieval.documents.length,
+        chunkCount: retrieval.chunks.length,
+        evidenceCount: retrieval.selectedChunks.length,
+        embeddingModel: vectorRetrieval?.index.model,
+        embeddingDimension: vectorRetrieval?.index.dimension,
+        evidence: retrieval.selectedChunks.map((chunk) => ({
+          fileName: chunk.fileName,
+          title: chunk.title,
+          speaker: chunk.speaker,
+          fiscalYear: chunk.fiscalYear,
+          fiscalQuarter: chunk.fiscalQuarter,
+          section: chunk.section,
+          score: chunk.score,
+        })),
+      },
+      persona: {
+        id: `amy-hood-rag-${Date.now()}`,
+        name: generated.name || 'Amy Hood RAG CFO Advisor',
+        role: generated.role || '재무',
+        iconName: 'Sparkles',
+        badge: generated.badge || 'RAG CFO Reference',
+        description: generated.description,
+        status: 'active',
+        createdAt: now,
+        updatedAt: '방금 전',
+        decisionStyle: generated.decisionStyle,
+        coreValues: generated.coreValues,
+        strengths: generated.strengths,
+        weaknesses: generated.weaknesses,
+        communicationStyle: generated.communicationStyle,
+        sampleConversations: [
+          {
+            question: 'AI 인프라 투자를 계속 확대해도 될까요?',
+            answer: '먼저 검색 근거에서 확인된 수요 신호, capacity 제약, CapEx 회수 가능성, 마진과 free cash flow 영향을 함께 봅니다.',
+          },
+        ],
+        decisionPrompt: generated.decisionPrompt,
+        colorClass: 'text-emerald-600 dark:text-emerald-400',
+        bgClass: 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800',
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      message: error instanceof Error ? error.message : 'Unknown Amy Hood RAG persona generation error',
     });
   }
 });
