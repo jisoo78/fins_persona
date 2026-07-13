@@ -366,5 +366,10 @@ test('failure: evaluator never leaks holdout text or grading hints to the model'
 });
 
 test('failure: local model output is capped within the 16K context budget', () => {
-  assert.equal(modelRequestSettings('local').maxTokens, 4_000);
+  const settings = modelRequestSettings('local');
+  assert.equal(settings.maxTokens, 4_000);
+  assert.deepEqual(settings.modelKwargs, {
+    reasoning_format: 'none',
+    chat_template_kwargs: { enable_thinking: false },
+  });
 });
