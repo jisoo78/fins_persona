@@ -1,0 +1,125 @@
+{
+  "overrides": [
+    {
+      "source_id": "earnings_fy2013_q4",
+      "decision_domains": [
+        "capital_allocation",
+        "growth_profitability_balance",
+        "strategic_investment_acquisition",
+        "risk_uncertainty"
+      ],
+      "selection_reason": "Surface RT 가격 인하와 9억 달러 재고 조정 비용을 감수하면서 장기 채택을 높이려는 판단을 직접 설명함",
+      "status": "selected"
+    },
+    {
+      "source_id": "earnings_fy2015_q2",
+      "decision_domains": [
+        "capital_allocation",
+        "growth_profitability_balance",
+        "cost_discipline_operating_efficiency",
+        "strategic_investment_acquisition"
+      ],
+      "selection_reason": "클라우드 전환 과정의 성장 투자, 매출 인식 변화와 수익성 영향을 함께 설명한 직접 발언을 포함함",
+      "status": "selected"
+    },
+    {
+      "source_id": "earnings_fy2016_q4",
+      "decision_domains": [
+        "growth_profitability_balance",
+        "cost_discipline_operating_efficiency",
+        "strategic_investment_acquisition"
+      ],
+      "selection_reason": "클라우드 매출 비중 확대에 따른 용량·지원 투자와 단기 gross margin 하락을 장기 성장과 연결해 설명함",
+      "status": "selected"
+    },
+    {
+      "source_id": "earnings_fy2020_q3",
+      "decision_domains": [
+        "capital_allocation",
+        "growth_profitability_balance",
+        "cost_discipline_operating_efficiency",
+        "risk_uncertainty"
+      ],
+      "selection_reason": "COVID-19 충격에서 수요 급증, 산업별 둔화, 공급망 제약과 운영 대응을 함께 판단한 직접 발언을 포함함",
+      "status": "selected"
+    },
+    {
+      "source_id": "earnings_fy2022_q4",
+      "decision_domains": [
+        "growth_profitability_balance",
+        "cost_discipline_operating_efficiency",
+        "strategic_investment_acquisition",
+        "risk_uncertainty"
+      ],
+      "selection_reason": "환율·PC 시장 악화·러시아 사업 축소와 Nuance·Xandr 인수 투자가 비용과 성장에 미친 영향을 함께 설명함",
+      "status": "selected"
+    },
+    {
+      "source_id": "earnings_fy2023_q2",
+      "decision_domains": [
+        "growth_profitability_balance",
+        "cost_discipline_operating_efficiency",
+        "risk_uncertainty"
+      ],
+      "selection_reason": "수요 변화 속에서 인력과 비용 구조를 조정하면서 클라우드 투자를 유지하는 우선순위를 직접 설명함",
+      "status": "selected"
+    },
+    {
+      "source_id": "earnings_fy2024_q4",
+      "decision_domains": [
+        "capital_allocation",
+        "growth_profitability_balance",
+        "cost_discipline_operating_efficiency",
+        "strategic_investment_acquisition"
+      ],
+      "selection_reason": "AI 인프라 확대와 Activision 통합 비용을 감수하면서 운영 레버리지와 비용 규율을 유지하는 판단을 설명함",
+      "status": "selected"
+    },
+    {
+      "source_id": "earnings_fy2025_q2",
+      "decision_domains": [
+        "capital_allocation",
+        "growth_profitability_balance",
+        "cost_discipline_operating_efficiency",
+        "risk_uncertainty"
+      ],
+      "selection_reason": "AI 인프라 확장으로 인한 margin 압력과 전사 효율 개선을 동시에 관리하는 투자 판단을 직접 설명함",
+      "status": "selected"
+    },
+    {
+      "source_id": "interview_dataset_microsoft_amy_hood_json",
+      "decision_domains": [
+        "capital_allocation",
+        "growth_profitability_balance",
+        "cost_discipline_operating_efficiency",
+        "strategic_investment_acquisition",
+        "risk_uncertainty"
+      ],
+      "selection_reason": "프로젝트 인수 과정에서 Amy Hood 인터뷰 자료로 확인된 정식 데이터셋이며 110개의 직접 발언 레코드를 포함함",
+      "status": "selected",
+      "review_notes": [
+        "URL과 공개일 메타데이터 보강 필요",
+        "고유 레코드 110개",
+        "CSV 데이터셋과 정규화 문장 49개 중복"
+      ]
+    },
+    {
+      "source_id": "interview_dataset_microsoft_amy_hood_csv",
+      "decision_domains": [
+        "capital_allocation",
+        "growth_profitability_balance",
+        "cost_discipline_operating_efficiency",
+        "strategic_investment_acquisition",
+        "risk_uncertainty"
+      ],
+      "selection_reason": "프로젝트 인수 과정에서 Amy Hood 인터뷰 자료로 확인된 정식 데이터셋이며 51개의 직접 발언 레코드를 포함함",
+      "status": "selected",
+      "review_notes": [
+        "URL과 공개일 메타데이터 보강 필요",
+        "고유 레코드 51개",
+        "JSON 데이터셋과 정규화 문장 49개 중복"
+      ]
+    }
+  ],
+  "web_sources": []
+}
