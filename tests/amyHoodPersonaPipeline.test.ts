@@ -12,8 +12,8 @@
  *    - holdout 입력, 원문 수집 실패, 컨텍스트 초과, 반복 JSON 오류와 Gemma 게이트 실패는 안전하게 중단한다.
  */
 import assert from 'node:assert/strict';
-import { existsSync } from 'node:fs';
-import { mkdtemp } from 'node:fs/promises';
+import { existsSync, readFileSync } from 'node:fs';
+import { mkdir, mkdtemp, writeFile } from 'node:fs/promises';
 import test from 'node:test';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -27,6 +27,7 @@ import {
 import { analyzeChunks } from '../server/personaPipeline/analyzer';
 import type { ModelClient, ModelResult } from '../server/personaPipeline/modelClient';
 import { buildMasterPrompt, checkGemmaGate } from '../server/personaPipeline/promptBuilder';
+import { runPersonaPipeline } from '../server/runAmyHoodPersonaPipeline';
 import type { RawSource, SourceChunk } from '../server/personaPipeline/types';
 
 const wordCounter = async (text: string) => text.trim().split(/\s+/).filter(Boolean).length;
@@ -70,6 +71,58 @@ const validMarkdown = `# Amy Hood Public-Evidence CFO Persona
 ## Communication Style
 ## Unknown Policy
 ## Response Format`;
+
+const readJsonl = (path: string) =>
+  readFileSync(path, 'utf8')
+    .split('\n')
+    .filter((line) => line.trim())
+    .map((line) => JSON.parse(line) as unknown);
+
+const createSelected18Fixture = async () => {
+  const root = await mkdtemp(join(tmpdir(), 'amy-pipeline-'));
+  await mkdir(join(root, 'archive'), { recursive: true });
+  await mkdir(join(root, 'data/b-track/amy-hood'), { recursive: true });
+  await mkdir(join(root, 'agent_prompts/prompts'), { recursive: true });
+  const entries: InventoryEntry[] = [];
+  for (let index = 0; index < 18; index += 1) {
+    const localPath = `archive/source-${index}.json`;
+    entries.push({
+      source_id: `source_${index}`,
+      title: `Source ${index}`,
+      source_type: 'interview',
+      status: 'selected',
+      local_path: localPath,
+      url: null,
+    });
+    await writeFile(
+      join(root, localPath),
+      JSON.stringify({
+        records: [
+          {
+            text: `Amy Hood statement ${index} about demand, investment, margin and risk.`,
+          },
+        ],
+      }),
+    );
+  }
+  await writeFile(
+    join(root, 'data/b-track/amy-hood/source-inventory.json'),
+    JSON.stringify(entries),
+  );
+  await writeFile(
+    join(root, 'agent_prompts/prompts/amy-hood-source-analysis.md'),
+    'ANALYZE {sourceId} {chunkId}\n{chunk}',
+  );
+  await writeFile(
+    join(root, 'agent_prompts/prompts/amy-hood-master-prompt.md'),
+    'MASTER {analyses}',
+  );
+  return {
+    root,
+    analysisPath: join(root, 'data/b-track/amy-hood/source-analysis.gemma4.jsonl'),
+    promptPath: join(root, 'data/b-track/amy-hood/AMY_HOOD_PERSONA.gemma4.md'),
+  };
+};
 
 const rawSource = (blocks: RawSource['blocks']): RawSource => ({
   sourceId: 'source_selected_1',
@@ -244,4 +297,25 @@ test('failure: incomplete analysis cannot write a persona prompt', async () => {
     existsSync(join(root, 'data/b-track/amy-hood/AMY_HOOD_PERSONA.gemma4.md')),
     false,
   );
+});
+
+test('happy: selected corpus becomes Gemma analyses and a persona prompt', async () => {
+  const fixture = await createSelected18Fixture();
+  const model = fakeModel(async (prompt) =>
+    prompt.startsWith('MASTER')
+      ? { text: validMarkdown, elapsedMs: 1 }
+      : validAnalysisResult(),
+  );
+
+  const result = await runPersonaPipeline({
+    root: fixture.root,
+    provider: 'local',
+    model,
+    tokenCounter: wordCounter,
+  });
+
+  assert.equal(result.sourceCount, 18);
+  assert.equal(result.failedChunks, 0);
+  assert.equal(readJsonl(fixture.analysisPath).length, 18);
+  assert.match(readFileSync(fixture.promptPath, 'utf8'), /## Decision Principles/);
 });

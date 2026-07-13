@@ -240,3 +240,19 @@ export const collectSelectedCorpus = async (options: CollectOptions): Promise<Ra
   }
   return sources;
 };
+
+export const loadCollectedCorpus = async (root: string, entries: InventoryEntry[]) => {
+  const selected = assertSelectedInventory(entries);
+  const sources: RawSource[] = [];
+  for (const entry of selected) {
+    const source = await readRawSource(rawSourcePath(root, entry.source_id)).catch(() => null);
+    if (!source || source.collectionStatus !== 'complete') {
+      throw new Error(`collected raw source is missing: ${entry.source_id}`);
+    }
+    if (source.sourceId !== entry.source_id) {
+      throw new Error(`raw source ID mismatch: ${entry.source_id}`);
+    }
+    sources.push(source);
+  }
+  return sources;
+};
