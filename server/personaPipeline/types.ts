@@ -22,6 +22,7 @@ export interface RawSource {
   collectedAt: string;
   sha256: string;
   format: 'normalized_json';
+  normalizationVersion: number;
   collectionStatus: 'complete';
   blocks: RawBlock[];
 }
@@ -48,6 +49,7 @@ export interface ChunkAnalysis {
   chunkId: string;
   provider: ProviderName;
   model: string;
+  fingerprint: string;
   decisionCriteria: AnalysisSignal[];
   priorities: AnalysisSignal[];
   tradeoffs: AnalysisSignal[];

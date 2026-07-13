@@ -6,6 +6,8 @@ import { load } from 'cheerio';
 
 import type { RawBlock, RawSource } from './types';
 
+export const CORPUS_NORMALIZATION_VERSION = 2;
+
 export interface InventoryEntry {
   source_id: string;
   title: string;
@@ -152,6 +154,27 @@ const blocksFromLocalFile = async (path: string) => {
   throw new Error(`unsupported local source extension: ${extension}`);
 };
 
+const speakerPrefix = /^([A-Za-z][A-Za-z .'-]{1,50}):\s*(.*)$/;
+const isAmyHood = (speaker: string) => /^(amy(?: e\.)? hood|amy)$/i.test(speaker.trim());
+
+export const extractAmyWebBlocks = (paragraphs: string[]): RawBlock[] => {
+  let currentSpeaker = '';
+  const blocks: RawBlock[] = [];
+  for (const [index, paragraph] of paragraphs.entries()) {
+    const match = paragraph.match(speakerPrefix);
+    const text = normalizeText(match?.[2] ?? paragraph);
+    if (match) currentSpeaker = normalizeText(match[1]);
+    if (!text || !isAmyHood(currentSpeaker)) continue;
+    blocks.push({
+      blockId: `paragraph-${index + 1}`,
+      kind: 'speaker_turn',
+      speaker: 'Amy Hood',
+      text,
+    });
+  }
+  return blocks;
+};
+
 const blocksFromWeb = async (url: string, fetchImpl: typeof fetch): Promise<RawBlock[]> => {
   const response = await fetchImpl(url, { headers: { 'user-agent': 'fins-persona-poc/1.0' } });
   if (!response.ok) throw new Error(`web source request failed with ${response.status}: ${url}`);
@@ -171,9 +194,7 @@ const blocksFromWeb = async (url: string, fetchImpl: typeof fetch): Promise<RawB
     .map((element) => normalizeText($(element).text()))
     .filter(Boolean);
   const unique = paragraphs.filter((paragraph, index) => paragraph !== paragraphs[index - 1]);
-  const blocks = (unique.length ? unique : [normalizeText(container.text())])
-    .map((text, index) => ({ blockId: `paragraph-${index + 1}`, kind: 'paragraph' as const, text }))
-    .filter((block) => block.text);
+  const blocks = extractAmyWebBlocks(unique.length ? unique : [normalizeText(container.text())]);
   if (blocks.reduce((total, block) => total + block.text.length, 0) < 500) {
     throw new Error(`web source body is too short: ${url}`);
   }
@@ -195,6 +216,7 @@ const makeRawSource = (
     collectedAt,
     sha256: digest(content),
     format: 'normalized_json',
+    normalizationVersion: CORPUS_NORMALIZATION_VERSION,
     collectionStatus: 'complete',
     blocks,
   };
@@ -210,6 +232,7 @@ export const collectSelectedCorpus = async (options: CollectOptions): Promise<Ra
     if (
       !entry.local_path &&
       existing?.collectionStatus === 'complete' &&
+      existing.normalizationVersion === CORPUS_NORMALIZATION_VERSION &&
       existing.sourceUrl === entry.url &&
       existing.sourcePath === entry.local_path
     ) {

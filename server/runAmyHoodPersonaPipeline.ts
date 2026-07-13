@@ -12,12 +12,20 @@ import {
   loadCollectedCorpus,
   type InventoryEntry,
 } from './personaPipeline/corpus';
-import { createModelClient, type ModelClient } from './personaPipeline/modelClient';
+import {
+  createModelClient,
+  LOCAL_ANALYSIS_PROMPT_RESERVE_TOKENS,
+  LOCAL_CHAT_RESERVE_TOKENS,
+  modelRequestSettings,
+  type ModelClient,
+} from './personaPipeline/modelClient';
 import { evaluatePersona } from './personaPipeline/evaluator';
 import {
   buildMasterPrompt,
   checkGemmaGate,
+  createResumeProof,
   personaPromptPath,
+  resumeProofIsCurrent,
   resumeProofPath,
   sourceAnalysisPath,
 } from './personaPipeline/promptBuilder';
@@ -59,6 +67,17 @@ const readInventory = async (root: string) =>
 const readManifest = async (root: string) =>
   JSON.parse(await readFile(manifestPath(root), 'utf8')) as SourceChunk[];
 
+export const assertLocalContextBudget = (maxSourceTokens: number, contextSize: number) => {
+  const required =
+    maxSourceTokens +
+    LOCAL_ANALYSIS_PROMPT_RESERVE_TOKENS +
+    modelRequestSettings('local').maxTokens +
+    LOCAL_CHAT_RESERVE_TOKENS;
+  if (required > contextSize) {
+    throw new Error(`chunk budget ${required} exceeds local context size ${contextSize}`);
+  }
+};
+
 export const createLocalTokenCounter = (
   baseUrl = process.env.LOCAL_LLM_BASE_URL || 'http://127.0.0.1:8080/v1',
 ): TokenCounter => {
@@ -83,9 +102,7 @@ const buildCommonManifest = async (
 ) => {
   const maxSourceTokens = Number(process.env.LOCAL_LLM_CHUNK_TOKENS || 10_000);
   const contextSize = Number(process.env.LOCAL_LLM_CONTEXT_SIZE || 16_384);
-  if (maxSourceTokens + 2_000 + 3_000 + 1_384 > contextSize) {
-    throw new Error(`chunk budget exceeds local context size ${contextSize}`);
-  }
+  assertLocalContextBudget(maxSourceTokens, contextSize);
   const chunks: SourceChunk[] = [];
   for (const source of sources) {
     chunks.push(
@@ -171,16 +188,28 @@ export const runPersonaPipeline = async (
     outputPath: sourceAnalysisPath(options.root, provider),
   });
 
-  if (!(summary.reusedChunks === summary.chunkCount && (await promptExists(options.root, provider)))) {
+  const promptIsCurrent =
+    provider === 'local' && (await resumeProofIsCurrent(options.root, model));
+  if (
+    summary.reusedChunks !== summary.chunkCount ||
+    !(await promptExists(options.root, provider)) ||
+    !promptIsCurrent
+  ) {
     await buildMasterPrompt({ root: options.root, provider, model });
   }
   if (provider === 'local' && summary.reusedChunks === summary.chunkCount) {
+    const proof = await createResumeProof(
+      options.root,
+      model,
+      summary.chunkCount,
+      summary.reusedChunks,
+    );
     await atomicWrite(
       resumeProofPath(options.root),
-      `${JSON.stringify({ verified: true, chunkCount: summary.chunkCount, reusedChunks: summary.reusedChunks }, null, 2)}\n`,
+      `${JSON.stringify(proof, null, 2)}\n`,
     );
   }
-  const gate = await checkGemmaGate(options.root);
+  const gate = await checkGemmaGate(options.root, provider === 'local' ? model : undefined);
   return { ...summary, elapsedMs: Date.now() - started, gatePassed: gate.passed };
 };
 

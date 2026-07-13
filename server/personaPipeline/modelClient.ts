@@ -1,6 +1,11 @@
 import { ChatOpenAI } from '@langchain/openai';
+import { createHash } from 'node:crypto';
 
 import type { ProviderName } from './types';
+
+export const LOCAL_ANALYSIS_PROMPT_RESERVE_TOKENS = 1_000;
+export const LOCAL_CHAT_RESERVE_TOKENS = 384;
+export const LOCAL_MAX_OUTPUT_TOKENS = 5_000;
 
 export interface ModelResult {
   text: string;
@@ -12,6 +17,7 @@ export interface ModelResult {
 export interface ModelClient {
   provider: ProviderName;
   model: string;
+  cacheKey: string;
   invoke(prompt: string): Promise<ModelResult>;
 }
 
@@ -20,7 +26,7 @@ export const modelRequestSettings = (provider: ProviderName) => ({
     provider === 'local'
       ? process.env.LOCAL_LLM_MODEL || 'local-model'
       : process.env.OPENAI_MODEL || 'gpt-5-mini',
-  maxTokens: 5_000,
+  maxTokens: LOCAL_MAX_OUTPUT_TOKENS,
   modelKwargs:
     provider === 'local'
       ? {
@@ -29,6 +35,11 @@ export const modelRequestSettings = (provider: ProviderName) => ({
         }
       : undefined,
 });
+
+export const modelSettingsFingerprint = (provider: ProviderName) =>
+  createHash('sha256')
+    .update(JSON.stringify({ provider, ...modelRequestSettings(provider) }))
+    .digest('hex');
 
 const contentToText = (content: unknown): string => {
   if (typeof content === 'string') return content;
@@ -81,6 +92,7 @@ export const createModelClient = (provider: ProviderName): ModelClient => {
   return {
     provider,
     model,
+    cacheKey: modelSettingsFingerprint(provider),
     async invoke(prompt) {
       const started = Date.now();
       const result = await chat.invoke(prompt);

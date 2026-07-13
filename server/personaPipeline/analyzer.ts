@@ -40,6 +40,17 @@ type SignalField = (typeof signalFields)[number];
 type ParsedAnalysis = Record<SignalField, AnalysisSignal[]>;
 
 const digest = (value: string) => createHash('sha256').update(value).digest('hex');
+const analysisFingerprint = (chunk: SourceChunk, model: ModelClient, prompt: string) =>
+  digest(
+    JSON.stringify({
+      version: 1,
+      chunkSha256: chunk.sha256,
+      provider: model.provider,
+      model: model.model,
+      modelCacheKey: model.cacheKey,
+      promptSha256: digest(prompt),
+    }),
+  );
 const cachePath = (cacheDir: string, provider: ProviderName, chunkId: string) =>
   resolve(cacheDir, provider, `${digest(chunkId)}.json`);
 
@@ -92,13 +103,19 @@ const parseAnalysis = (text: string, locator: string): ParsedAnalysis => {
   ) as ParsedAnalysis;
 };
 
-const readCompleteCache = async (path: string, chunk: SourceChunk, model: ModelClient) => {
+const readCompleteCache = async (
+  path: string,
+  chunk: SourceChunk,
+  model: ModelClient,
+  fingerprint: string,
+) => {
   try {
     const cached = JSON.parse(await readFile(path, 'utf8')) as ChunkAnalysis;
     return cached.status === 'complete' &&
       cached.chunkId === chunk.chunkId &&
       cached.provider === model.provider &&
-      cached.model === model.model
+      cached.model === model.model &&
+      cached.fingerprint === fingerprint
       ? cached
       : null;
   } catch {
@@ -116,6 +133,7 @@ const analyzeOneChunk = async (
   chunk: SourceChunk,
   model: ModelClient,
   prompt: string,
+  fingerprint: string,
 ): Promise<ChunkAnalysis> => {
   const result = await model.invoke(analysisPrompt(prompt, chunk));
   const parsed = parseAnalysis(result.text, `${chunk.sourceId}/${chunk.chunkId}`);
@@ -124,6 +142,7 @@ const analyzeOneChunk = async (
     chunkId: chunk.chunkId,
     provider: model.provider,
     model: model.model,
+    fingerprint,
     ...parsed,
     status: 'complete',
     elapsedMs: result.elapsedMs,
@@ -139,7 +158,8 @@ export const analyzeChunks = async (options: AnalyzeOptions): Promise<PipelineRu
   let reusedChunks = 0;
   for (const chunk of options.chunks) {
     const path = cachePath(options.cacheDir, options.provider, chunk.chunkId);
-    const cached = await readCompleteCache(path, chunk, options.model);
+    const fingerprint = analysisFingerprint(chunk, options.model, options.prompt);
+    const cached = await readCompleteCache(path, chunk, options.model, fingerprint);
     if (cached) {
       completedChunks += 1;
       reusedChunks += 1;
@@ -150,7 +170,7 @@ export const analyzeChunks = async (options: AnalyzeOptions): Promise<PipelineRu
     let lastError: unknown;
     for (let attempt = 0; attempt < 2; attempt += 1) {
       try {
-        analysis = await analyzeOneChunk(chunk, options.model, options.prompt);
+        analysis = await analyzeOneChunk(chunk, options.model, options.prompt, fingerprint);
         break;
       } catch (error) {
         lastError = error;
@@ -162,6 +182,7 @@ export const analyzeChunks = async (options: AnalyzeOptions): Promise<PipelineRu
         chunkId: chunk.chunkId,
         provider: options.provider,
         model: options.model.model,
+        fingerprint,
         decisionCriteria: [],
         priorities: [],
         tradeoffs: [],

@@ -22,11 +22,14 @@ import { buildChunks } from '../server/personaPipeline/chunker';
 import {
   assertSelectedInventory,
   collectSelectedCorpus,
+  extractAmyWebBlocks,
   type InventoryEntry,
 } from '../server/personaPipeline/corpus';
 import { analyzeChunks } from '../server/personaPipeline/analyzer';
 import { evaluatePersona } from '../server/personaPipeline/evaluator';
 import {
+  LOCAL_ANALYSIS_PROMPT_RESERVE_TOKENS,
+  LOCAL_CHAT_RESERVE_TOKENS,
   modelRequestSettings,
   normalizeModelContent,
   type ModelClient,
@@ -37,7 +40,10 @@ import {
   checkGemmaGate,
   compactAnalysesForPrompt,
 } from '../server/personaPipeline/promptBuilder';
-import { runPersonaPipeline } from '../server/runAmyHoodPersonaPipeline';
+import {
+  assertLocalContextBudget,
+  runPersonaPipeline,
+} from '../server/runAmyHoodPersonaPipeline';
 import type { RawSource, SourceAnalysis, SourceChunk } from '../server/personaPipeline/types';
 
 const wordCounter = async (text: string) => text.trim().split(/\s+/).filter(Boolean).length;
@@ -59,6 +65,7 @@ const fakeModel = (
 ): ModelClient => ({
   provider,
   model: provider === 'local' ? 'gemma4-test' : 'gpt-5-mini',
+  cacheKey: `${provider}-test-settings-v1`,
   invoke: handler,
 });
 
@@ -143,6 +150,7 @@ const rawSource = (blocks: RawSource['blocks']): RawSource => ({
   collectedAt: '2026-07-13T00:00:00.000Z',
   sha256: 'source-hash',
   format: 'normalized_json',
+  normalizationVersion: 2,
   collectionStatus: 'complete',
   blocks,
 });
@@ -256,6 +264,17 @@ test('edge: resume reuses completed chunks and invokes only missing chunks', asy
   assert.equal(summary.reusedChunks, 1);
   assert.equal(summary.completedChunks, 2);
   assert.equal(calls.length, 1);
+
+  calls.length = 0;
+  const changedPrompt = await analyzeChunks({
+    chunks: [sourceChunk('chunk-1'), sourceChunk('chunk-2')],
+    provider: 'local',
+    model,
+    cacheDir,
+    prompt: `${prompt}\nNew schema instruction`,
+  });
+  assert.equal(changedPrompt.reusedChunks, 0);
+  assert.equal(calls.length, 2);
 });
 
 test('failure: invalid JSON retries once and records failed chunk', async () => {
@@ -330,6 +349,35 @@ test('happy: selected corpus becomes Gemma analyses and a persona prompt', async
   assert.match(readFileSync(fixture.promptPath, 'utf8'), /## Decision Principles/);
 });
 
+test('failure: stale resume proof and manifest provenance cannot pass the Gemma gate', async () => {
+  const fixture = await createSelected18Fixture();
+  const model = fakeModel(async (prompt) =>
+    prompt.startsWith('MASTER')
+      ? { text: validMarkdown, elapsedMs: 1 }
+      : validAnalysisResult(),
+  );
+  const options = {
+    root: fixture.root,
+    provider: 'local' as const,
+    model,
+    tokenCounter: wordCounter,
+  };
+  await runPersonaPipeline(options);
+  await runPersonaPipeline(options);
+  assert.equal((await checkGemmaGate(fixture.root, model)).passed, true);
+
+  const manifestPath = join(fixture.root, 'data/b-track/amy-hood/chunks/manifest.json');
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8')) as SourceChunk[];
+  await writeFile(manifestPath, JSON.stringify(manifest.slice(0, -1)));
+
+  const staleGate = await checkGemmaGate(fixture.root, model);
+  assert.equal(staleGate.passed, false);
+  assert.equal(
+    staleGate.failures.some((failure) => /chunk IDs|stale/.test(failure)),
+    true,
+  );
+});
+
 test('failure: evaluator never leaks holdout text or grading hints to the model', async () => {
   const root = await mkdtemp(join(tmpdir(), 'amy-eval-'));
   const secretHoldoutText = 'SECRET HOLDOUT AMY HOOD TRANSCRIPT';
@@ -378,6 +426,15 @@ test('failure: local model output is capped within the 16K context budget', () =
     reasoning_format: 'none',
     chat_template_kwargs: { enable_thinking: false },
   });
+  assert.equal(
+    10_000 +
+      LOCAL_ANALYSIS_PROMPT_RESERVE_TOKENS +
+      settings.maxTokens +
+      LOCAL_CHAT_RESERVE_TOKENS,
+    16_384,
+  );
+  assert.doesNotThrow(() => assertLocalContextBudget(10_000, 16_384));
+  assert.throws(() => assertLocalContextBudget(10_001, 16_384), /context size/);
 });
 
 test('failure: master prompt input keeps every source but caps each signal category', () => {
@@ -416,5 +473,23 @@ test('failure: local chat control markers never leak into persona artifacts', ()
   assert.equal(
     normalizeModelContent('<|channel>thought\n<channel|>## Role\nPersona body'),
     '## Role\nPersona body',
+  );
+});
+
+test('failure: web transcripts retain Amy Hood turns and exclude other speakers', () => {
+  const blocks = extractAmyWebBlocks([
+    'BRETT IVERSEN: My daughter likes this topic.',
+    'This remains Brett context.',
+    'AMY HOOD: I would balance investment with durable demand.',
+    'I would stage capacity against customer commitments.',
+    'SATYA NADELLA: This is Satya context.',
+  ]);
+
+  assert.deepEqual(
+    blocks.map(({ speaker, text }) => ({ speaker, text })),
+    [
+      { speaker: 'Amy Hood', text: 'I would balance investment with durable demand.' },
+      { speaker: 'Amy Hood', text: 'I would stage capacity against customer commitments.' },
+    ],
   );
 });
