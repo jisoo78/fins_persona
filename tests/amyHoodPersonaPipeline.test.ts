@@ -24,9 +24,41 @@ import {
   collectSelectedCorpus,
   type InventoryEntry,
 } from '../server/personaPipeline/corpus';
-import type { RawSource } from '../server/personaPipeline/types';
+import { analyzeChunks } from '../server/personaPipeline/analyzer';
+import type { ModelClient, ModelResult } from '../server/personaPipeline/modelClient';
+import type { RawSource, SourceChunk } from '../server/personaPipeline/types';
 
 const wordCounter = async (text: string) => text.trim().split(/\s+/).filter(Boolean).length;
+
+const validAnalysisResult = (): ModelResult => ({
+  text: JSON.stringify({
+    decisionCriteria: [],
+    priorities: [],
+    tradeoffs: [],
+    riskSignals: [],
+    communicationPatterns: [],
+  }),
+  elapsedMs: 1,
+});
+
+const fakeModel = (
+  handler: (prompt: string) => Promise<ModelResult>,
+  provider: ModelClient['provider'] = 'local',
+): ModelClient => ({
+  provider,
+  model: provider === 'local' ? 'gemma4-test' : 'gpt-5-mini',
+  invoke: handler,
+});
+
+const sourceChunk = (chunkId: string): SourceChunk => ({
+  chunkId,
+  sourceId: 'source-1',
+  index: 0,
+  blockIds: ['b1'],
+  text: 'Amy Hood source text',
+  tokenCount: 4,
+  sha256: `${chunkId}-hash`,
+});
 
 const rawSource = (blocks: RawSource['blocks']): RawSource => ({
   sourceId: 'source_selected_1',
@@ -120,4 +152,54 @@ test('failure: unavailable web source leaves no partial raw file', async () => {
     existsSync(join(root, 'data/b-track/amy-hood/raw-sources/web_1.json')),
     false,
   );
+});
+
+test('edge: resume reuses completed chunks and invokes only missing chunks', async () => {
+  const cacheDir = await mkdtemp(join(tmpdir(), 'amy-cache-'));
+  const calls: string[] = [];
+  const model = fakeModel(async (prompt) => {
+    calls.push(prompt);
+    return validAnalysisResult();
+  });
+  const prompt = 'Analyze this chunk:\n{chunk}';
+
+  await analyzeChunks({
+    chunks: [sourceChunk('chunk-1')],
+    provider: 'local',
+    model,
+    cacheDir,
+    prompt,
+  });
+  calls.length = 0;
+  const summary = await analyzeChunks({
+    chunks: [sourceChunk('chunk-1'), sourceChunk('chunk-2')],
+    provider: 'local',
+    model,
+    cacheDir,
+    prompt,
+  });
+
+  assert.equal(summary.reusedChunks, 1);
+  assert.equal(summary.completedChunks, 2);
+  assert.equal(calls.length, 1);
+});
+
+test('failure: invalid JSON retries once and records failed chunk', async () => {
+  const cacheDir = await mkdtemp(join(tmpdir(), 'amy-cache-'));
+  let calls = 0;
+  const model = fakeModel(async () => {
+    calls += 1;
+    return { text: 'not-json', elapsedMs: 1 };
+  });
+
+  const summary = await analyzeChunks({
+    chunks: [sourceChunk('bad')],
+    provider: 'local',
+    model,
+    cacheDir,
+    prompt: 'Analyze this chunk:\n{chunk}',
+  });
+
+  assert.equal(calls, 2);
+  assert.equal(summary.failedChunks, 1);
 });
