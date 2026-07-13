@@ -28,6 +28,7 @@ import { analyzeChunks } from '../server/personaPipeline/analyzer';
 import { evaluatePersona } from '../server/personaPipeline/evaluator';
 import {
   modelRequestSettings,
+  normalizeModelContent,
   type ModelClient,
   type ModelResult,
 } from '../server/personaPipeline/modelClient';
@@ -408,4 +409,11 @@ test('failure: master prompt input keeps every source but caps each signal categ
   );
   assert.equal(compact.every((analysis) => analysis.decisionCriteria.length === 2), true);
   assert.equal('sourceLocator' in compact[0].decisionCriteria[0], false);
+});
+
+test('failure: local chat control markers never leak into persona artifacts', () => {
+  assert.equal(
+    normalizeModelContent('<|channel>thought\n<channel|>## Role\nPersona body'),
+    '## Role\nPersona body',
+  );
 });

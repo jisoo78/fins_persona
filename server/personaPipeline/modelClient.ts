@@ -44,6 +44,11 @@ const contentToText = (content: unknown): string => {
     .join('');
 };
 
+export const normalizeModelContent = (content: unknown) =>
+  contentToText(content)
+    .replace(/^<\|channel>thought\s*<channel\|>\s*/, '')
+    .trim();
+
 const usageToken = (usage: unknown, key: 'input_tokens' | 'output_tokens') => {
   if (!usage || typeof usage !== 'object') return undefined;
   const value = (usage as Record<string, unknown>)[key];
@@ -79,7 +84,7 @@ export const createModelClient = (provider: ProviderName): ModelClient => {
     async invoke(prompt) {
       const started = Date.now();
       const result = await chat.invoke(prompt);
-      const text = contentToText(result.content).trim();
+      const text = normalizeModelContent(result.content);
       if (!text) throw new Error(`${provider} model returned empty content`);
       return {
         text,
