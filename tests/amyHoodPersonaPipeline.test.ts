@@ -12,9 +12,18 @@
  *    - holdout 입력, 원문 수집 실패, 컨텍스트 초과, 반복 JSON 오류와 Gemma 게이트 실패는 안전하게 중단한다.
  */
 import assert from 'node:assert/strict';
+import { existsSync } from 'node:fs';
+import { mkdtemp } from 'node:fs/promises';
 import test from 'node:test';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 
 import { buildChunks } from '../server/personaPipeline/chunker';
+import {
+  assertSelectedInventory,
+  collectSelectedCorpus,
+  type InventoryEntry,
+} from '../server/personaPipeline/corpus';
 import type { RawSource } from '../server/personaPipeline/types';
 
 const wordCounter = async (text: string) => text.trim().split(/\s+/).filter(Boolean).length;
@@ -55,4 +64,60 @@ test('edge: speaker block stays intact near boundary', async () => {
   );
 
   assert.deepEqual(chunks.map((chunk) => chunk.blockIds), [['b1', 'b2'], ['b3']]);
+});
+
+test('failure: holdout earnings source cannot be selected', () => {
+  const entries: InventoryEntry[] = Array.from({ length: 18 }, (_, index) => ({
+    source_id: `selected_${index}`,
+    title: `Source ${index}`,
+    source_type: 'interview',
+    status: 'selected',
+    local_path: `archive/${index}.json`,
+    url: null,
+  }));
+  entries[0] = {
+    ...entries[0],
+    source_id: 'earnings_fy2017_q1',
+    source_type: 'earnings_call',
+    fiscal_year: 2017,
+  };
+
+  assert.throws(() => assertSelectedInventory(entries), /holdout/);
+});
+
+test('failure: unavailable web source leaves no partial raw file', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'amy-corpus-'));
+  const entries: InventoryEntry[] = [
+    {
+      source_id: 'web_1',
+      title: 'Web source',
+      source_type: 'interview',
+      status: 'selected',
+      local_path: null,
+      url: 'https://example.test/fail',
+    },
+    ...Array.from({ length: 17 }, (_, index) => ({
+      source_id: `local_${index}`,
+      title: `Local source ${index}`,
+      source_type: 'interview',
+      status: 'selected',
+      local_path: `archive/${index}.json`,
+      url: null,
+    })),
+  ];
+
+  await assert.rejects(
+    () =>
+      collectSelectedCorpus({
+        root,
+        entries,
+        fetchImpl: async () => new Response('', { status: 503 }),
+        now: () => '2026-07-13T00:00:00.000Z',
+      }),
+    /503/,
+  );
+  assert.equal(
+    existsSync(join(root, 'data/b-track/amy-hood/raw-sources/web_1.json')),
+    false,
+  );
 });
