@@ -368,6 +368,7 @@ test('failure: evaluator never leaks holdout text or grading hints to the model'
   assert.equal(prompts.some((prompt) => prompt.includes(secretHoldoutText)), false);
   assert.equal(prompts.some((prompt) => prompt.includes('HIDDEN_HINT_')), false);
   assert.equal(prompts.some((prompt) => prompt.includes('HIDDEN_GRADING_')), false);
+  assert.equal(prompts.every((prompt) => prompt.includes('Keep the answer under 500 words.')), true);
 });
 
 test('failure: local model output is capped within the 16K context budget', () => {

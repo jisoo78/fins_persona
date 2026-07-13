@@ -90,7 +90,8 @@ export const evaluatePersona = async (options: EvaluateOptions): Promise<Evaluat
   for (const item of questionsFile.questions) {
     const result = await options.model.invoke(
       `[SYSTEM PERSONA]\n${persona}\n\n[USER QUESTION]\n${item.question}\n\n` +
-        'Answer as Amy Hood in first person. Give the financial advice directly without source citations.',
+        'Answer as Amy Hood in first person. Give the financial advice directly without source citations. ' +
+        'Keep the answer under 500 words.',
     );
     answers.push({
       questionId: item.id,
