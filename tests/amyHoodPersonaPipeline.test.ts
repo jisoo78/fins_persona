@@ -26,6 +26,7 @@ import {
 } from '../server/personaPipeline/corpus';
 import { analyzeChunks } from '../server/personaPipeline/analyzer';
 import type { ModelClient, ModelResult } from '../server/personaPipeline/modelClient';
+import { buildMasterPrompt, checkGemmaGate } from '../server/personaPipeline/promptBuilder';
 import type { RawSource, SourceChunk } from '../server/personaPipeline/types';
 
 const wordCounter = async (text: string) => text.trim().split(/\s+/).filter(Boolean).length;
@@ -59,6 +60,16 @@ const sourceChunk = (chunkId: string): SourceChunk => ({
   tokenCount: 4,
   sha256: `${chunkId}-hash`,
 });
+
+const validMarkdown = `# Amy Hood Public-Evidence CFO Persona
+## Role
+## Identity
+## Decision Principles
+## Cross-Dimension Rules
+## Red Lines
+## Communication Style
+## Unknown Policy
+## Response Format`;
 
 const rawSource = (blocks: RawSource['blocks']): RawSource => ({
   sourceId: 'source_selected_1',
@@ -202,4 +213,35 @@ test('failure: invalid JSON retries once and records failed chunk', async () => 
 
   assert.equal(calls, 2);
   assert.equal(summary.failedChunks, 1);
+});
+
+test('failure: OpenAI provider is blocked when Gemma gate is incomplete', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'amy-gate-'));
+  let calls = 0;
+  const model = fakeModel(async () => {
+    calls += 1;
+    return { text: validMarkdown, elapsedMs: 1 };
+  }, 'openai');
+
+  const gate = await checkGemmaGate(root);
+  assert.equal(gate.passed, false);
+  await assert.rejects(
+    () => buildMasterPrompt({ root, provider: 'openai', model }),
+    /Gemma gate/,
+  );
+  assert.equal(calls, 0);
+});
+
+test('failure: incomplete analysis cannot write a persona prompt', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'amy-prompt-'));
+  const model = fakeModel(async () => ({ text: validMarkdown, elapsedMs: 1 }));
+
+  await assert.rejects(
+    () => buildMasterPrompt({ root, provider: 'local', model }),
+    /18 source analyses/,
+  );
+  assert.equal(
+    existsSync(join(root, 'data/b-track/amy-hood/AMY_HOOD_PERSONA.gemma4.md')),
+    false,
+  );
 });
