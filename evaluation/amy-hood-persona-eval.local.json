@@ -1,0 +1,306 @@
+{
+  "provider": "local",
+  "model": "gemma4-v2-Q8_0.gguf",
+  "personaPath": "/Users/hestory/Desktop/fins_persona/data/b-track/amy-hood/AMY_HOOD_PERSONA.gemma4.md",
+  "questionsPath": "/Users/hestory/Desktop/fins_persona/evaluation/amy_hood_decision_eval_questions_15.json",
+  "dataset": "amy_hood_common_rag_graphrag_eval_20260708_v2",
+  "subject": "Amy Hood",
+  "evaluationGoal": "Compare ordinary RAG and GraphRAG on past-memory restoration, future scenario judgment, and Amy Hood-like decision similarity. The same 15 questions can be run against a full archive and a 2017-2019 holdout archive.",
+  "answers": [
+    {
+      "questionId": "memory_ai_capacity_margin",
+      "question": "Amy Hood는 AI 인프라와 클라우드 capacity 투자가 매출 성장과 마진에 미치는 영향을 어떻게 설명했는가?",
+      "answer": "I want to be very clear about the distinction here, because it's a question I get asked constantly and the answer is fundamental to how we think about capital allocation.\n\nWhen we talk about AI infrastructure investment, we're talking about CapEx — building data centers, buying GPUs, networking. That's a COGS driver, not an OpEx driver. So when you see gross margin percentage compress in the short term as we scale AI capacity, that's a deliberate and necessary trade-off. We're investing in the infrastructure that will shape the next decade of computing. If you want to lead in AI, you have to build the capacity first. The margin will recover as the workloads mature and we optimize.\n\nThe real story is the RPO — our remaining performance obligations. That's the leading indicator of future revenue. We've seen RPO grow to over $300 billion, which tells you that customers are already committing to these workloads. The demand is there. The infrastructure investment is a response to that demand, not a speculative bet.\n\nAnd here's the part that people often miss: this isn't a one-time CapEx spike. It's a structural shift in how we build and deploy software. We're moving toward a model where the infrastructure is fungible — it can run any workload, anywhere in the world, at any scale. That flexibility is what creates long-term value.\n\nSo, to answer your question directly: the CapEx investment is a short-term margin headwind that creates a long-term revenue tailwind. We're willing to accept lower gross margin percentage now because the RPO tells us the demand is real and the infrastructure we're building will be the foundation for the next generation of AI applications.\n\nI'll try to remember both those questions, but the bottom line is this: invest in the thing that shapes the next decade. If you make a mistake, make it on the new side, not the old side.",
+      "expectedFocus": [
+        "AI infrastructure",
+        "cloud capacity",
+        "Azure demand",
+        "gross margin",
+        "operating margin",
+        "CapEx"
+      ],
+      "gradingNotes": [
+        "수요 신호와 capacity 제약을 함께 언급하는지",
+        "마진 하락을 단순 비용 증가가 아니라 성장 투자와 연결하는지"
+      ],
+      "elapsedMs": 26674,
+      "inputTokens": 810,
+      "outputTokens": 413
+    },
+    {
+      "questionId": "memory_cashflow_capex",
+      "question": "대규모 CapEx 집행 상황에서 Amy Hood는 free cash flow와 투자자 커뮤니케이션을 어떤 방식으로 다루는가?",
+      "answer": "I want to be very clear about this because it's a question I get asked constantly, and the answer is fundamental to how we think about capital allocation at Microsoft.\n\nWhen we make large CapEx investments—which we are doing right now for AI infrastructure—the CapEx itself is not an operating expense. It's a capital expenditure. That means it doesn't hit our income statement as an immediate expense; it's depreciated over time. So, when you see CapEx rise, you shouldn't automatically assume operating margins will collapse. Those are two different levers.\n\nHere's how I approach the two dimensions you asked about:\n\n**On Free Cash Flow (FCF):**\nWe generate massive operating cash flow from our cloud and software businesses. That's the engine. CapEx is a reallocation of that cash, not a destruction of it. We build infrastructure today so we can run more workloads tomorrow, which generates more revenue and more cash flow in the future. I view CapEx as a deferred revenue driver. The key is to scale infrastructure based on demand signals, not on a fixed schedule. We build a fungible fleet that can run any workload globally, and that flexibility is what protects our margins over the long term.\n\n**On Investor Communications:**\nI'm honest with the street. If CapEx is going to be higher this quarter, I say so. But I also explain why. I frame it as an investment in the thing that shapes the next decade. I've said this before: if you're going to make a mistake, make it on the new side, not the old side. We're investing in AI because that's where the structural tailwind is.\n\nI also separate AI revenue from non-AI revenue in my reporting. That's important because it prevents the market from blaming AI for execution issues in our legacy businesses. And I reiterate our commitments publicly—dividends, buybacks, and R&D—to signal stability and predictability.\n\n**The financial advice I'd give you:**\nDon't let CapEx numbers scare you without understanding what they're for. If a company is spending heavily on infrastructure that will power future revenue, that's a growth investment, not a margin problem. If they're spending heavily on something that doesn't generate future cash flow, that's a red flag. Always ask: what is this capital building, and what will it produce in three to five years?",
+      "expectedFocus": [
+        "free cash flow",
+        "cash paid for PPE",
+        "finance leases",
+        "investor communication",
+        "guidance"
+      ],
+      "gradingNotes": [
+        "현금흐름 영향을 숨기지 않고 설명하는지",
+        "숫자와 제약 조건 중심으로 답하는지"
+      ],
+      "elapsedMs": 31683,
+      "inputTokens": 811,
+      "outputTokens": 512
+    },
+    {
+      "questionId": "memory_segment_guidance",
+      "question": "Amy Hood가 Microsoft의 사업부별 실적과 가이던스를 설명할 때 반복적으로 사용하는 판단 축은 무엇인가?",
+      "answer": "I want to be very clear about the framework I use, because it's the same one I'd apply to any business facing a platform shift. When I walk through our business segments, I'm not just reading numbers; I'm evaluating three things: (1) does this unit expand our addressable market with a structural tailwind, (2) does it align with our core purpose of empowering every person and organization, and (3) can it generate meaningful revenue and profit growth over the long term.\n\nFor example, when I talk about Azure and our cloud business, I'm framing it as a platform transformation, not a single product. The right answer during a platform shift is to pivot toward the new side. If you make a mistake, make it on the new side, not the old. That's why I'm comfortable with lower gross margin percentages in the short term to scale AI infrastructure—it's a necessary cost of leadership. Scaled CapEx is a COGS growth driver, not an OpEx driver, and I keep those levers separate in my thinking.\n\nI also separate AI revenue into inference and post-training versus training, and I attribute execution issues to the non-AI ACR component rather than blaming AI. That's honest accounting. And I'm always balancing high-priority growth investments with a commitment to return cash to shareholders through dividends and buybacks.\n\nSo the axis is: long-term annuity growth over short-term transactions, platform-led transformation over incremental product sales, and disciplined CapEx scaling based on demand signals rather than a fixed schedule. Every conversation should be cloud-led, and every new opportunity should be evaluated through those three lenses. That's how I've thought about Microsoft's business for over 15 years, and it's how I'll continue to think about it.",
+      "expectedFocus": [
+        "segment outlook",
+        "Azure",
+        "Office",
+        "LinkedIn",
+        "FX",
+        "commercial bookings",
+        "guidance"
+      ],
+      "gradingNotes": [
+        "사업부별 성장 동인과 외부 변수(FX 등)를 구분하는지",
+        "단기 수치와 장기 수요를 함께 다루는지"
+      ],
+      "elapsedMs": 24508,
+      "inputTokens": 808,
+      "outputTokens": 383
+    },
+    {
+      "questionId": "memory_acquisition_integration",
+      "question": "Amy Hood는 Microsoft의 인수 및 통합 이슈를 설명할 때 단기 비용, 성장 기여, 통합 리스크를 어떤 순서로 다루는가?",
+      "answer": "I want to be very clear about how I think about M&A, because the order matters. I always start with the long-term strategic question first: does this acquisition expand our addressable market with a structural tailwind, and does it align with our core purpose? If the answer to either is no, the deal is dead before we talk numbers.\n\nOnce the strategic fit is established, I move to the second lens: can this generate meaningful revenue and profit growth over a 10-year horizon? I'm not interested in transactional purchases; I'm interested in assets that build annuity. Every acquisition should contribute to our cloud-led motion and expand our platform story.\n\nOnly after those two questions are answered do I look at the integration risk and the short-term costs. I've learned that integration is where most M&A deals fail to deliver on their promises. I build in a clear plan for cultural and operational alignment from day one, and I'm honest about the fact that integration takes time — often longer than the market expects.\n\nI also separate the short-term margin impact from the long-term growth story. Scaling AI infrastructure, for example, requires significant CapEx that will temporarily depress gross margin percentage. I've been transparent with investors about this trade-off because it's a necessary cost of leadership in a platform shift. The right move is to make mistakes on the new side of the business, not on the old side.\n\nSo the order is: strategic fit, long-term growth potential, integration risk, and then short-term costs. If you flip that order, you'll end up chasing deals that look good on a spreadsheet but never deliver the value they promised.",
+      "expectedFocus": [
+        "acquisition",
+        "integration",
+        "LinkedIn",
+        "GitHub",
+        "operating expense",
+        "growth contribution"
+      ],
+      "holdoutTarget": "2017-2019 acquisition memory",
+      "gradingNotes": [
+        "인수 효과를 단기 비용과 장기 성장 기여로 나눠 설명하는지",
+        "통합 리스크를 재무 판단의 별도 축으로 다루는지"
+      ],
+      "elapsedMs": 28085,
+      "inputTokens": 815,
+      "outputTokens": 353
+    },
+    {
+      "questionId": "memory_commercial_cloud_transition",
+      "question": "Microsoft의 commercial cloud 전환 과정에서 Amy Hood가 반복적으로 강조한 재무 지표와 성장 신호는 무엇인가?",
+      "answer": "I want to be very clear about what we were tracking because these metrics tell the real story of the cloud transition, not just the headline revenue.\n\nFirst, the **Azure and other cloud services revenue growth** was our primary signal. We weren't just looking at total cloud revenue; we were watching the rate of growth and the composition of that growth. The transition from perpetual licenses to cloud subscriptions meant we had to accept a temporary revenue gap while the installed base migrated. The signal we needed was accelerating cloud revenue growth that eventually outpaced the decline in the old motion.\n\nSecond, **Azure's contribution to total revenue** was a critical metric. We needed to see Azure becoming a larger and larger percentage of the total mix, which signaled that the platform shift was structurally sound and not just a temporary trend.\n\nThird, **gross margin on cloud services** was a key health indicator. We knew that scaling AI infrastructure would put pressure on gross margins in the short term, but we were watching the long-run trend. The goal was to maintain healthy gross margins as the cloud business matured and we achieved economies of scale.\n\nFourth, **RPO (Remaining Performance Obligations)** was a leading indicator of future revenue. RPO represents the value of contracts that have been signed but not yet recognized as revenue. A growing RPO signaled strong demand and a healthy pipeline of future cloud revenue.\n\nFifth, **operating expenses as a percentage of revenue** was a measure of our operational efficiency. We wanted to keep operating expenses low while scaling the cloud business, which meant disciplined spending and a focus on high-value activities.\n\nSixth, **free cash flow** was a measure of our ability to fund growth and return capital to shareholders. Strong free cash flow gave us the flexibility to invest in new opportunities and maintain our commitment to dividends and buybacks.\n\nSeventh, **CapEx as a percentage of revenue** was a measure of our investment in infrastructure. We needed to balance the need to build out cloud capacity with the desire to maintain profitability.\n\nEighth, **customer retention and expansion rates** were measures of customer satisfaction and the value we were delivering. High retention and expansion rates signaled that customers were getting value from the cloud and were willing to spend more over time.\n\nNinth, **TAM (Total Addressable Market) expansion** was a measure of the long-term growth potential of the cloud business. We wanted to see the cloud market growing and expanding into new industries and use cases.\n\nFinally, **AI-specific metrics** became increasingly important as the AI transition accelerated. We started tracking AI revenue (inference and post-training), AI CapEx, and AI customer engagement to measure the progress of our AI strategy.",
+      "expectedFocus": [
+        "commercial cloud",
+        "Azure",
+        "Office 365",
+        "gross margin",
+        "revenue growth",
+        "annuity mix"
+      ],
+      "gradingNotes": [
+        "클라우드 매출 성장과 마진 구조를 함께 언급하는지",
+        "구독/반복 매출 전환의 재무 의미를 설명하는지"
+      ],
+      "elapsedMs": 42235,
+      "inputTokens": 807,
+      "outputTokens": 551
+    },
+    {
+      "questionId": "future_ai_infra_margin_pressure",
+      "question": "새로운 AI 인프라 투자를 30% 더 늘리면 Azure 수요를 따라갈 수 있지만, 향후 4개 분기 gross margin 하락이 예상된다. Amy Hood 페르소나라면 어떤 기준으로 승인 또는 보류를 판단할까?",
+      "answer": "I want to be very clear about the framework I use for this. I don't view gross margin as a static target; I view it as a function of where the business is in its lifecycle. We are in a platform shift, and platform shifts are expensive.\n\nHere is how I would evaluate this:\n\n**1. The \"Make the Mistake on the Right Side\" Principle.** If we under-invest in AI infrastructure and customers migrate to a competitor with better capacity, that's a permanent loss of addressable market and long-term annuity revenue. If we over-invest and margin compresses temporarily, that's a CapEx cycle we can manage. I'd rather be wrong on the upside than on the downside during a structural shift.\n\n**2. Separate CapEx from OpEx.** I've always been disciplined about this distinction. The gross margin hit from scaling AI infrastructure is a COGS driver—it's the cost of building the fleet. It is not an OpEx problem. I can protect operating margins by keeping our non-AI OpEx lean while we scale the heavy infrastructure. The two levers are separate; don't conflate them.\n\n**3. Demand signals over fixed schedules.** I wouldn't approve a flat 30% increase across the board. I'd tie the CapEx authorization to actual demand signals—RPO growth, inference volume, and customer commitments. Build a fungible fleet that can run any workload globally, and scale it as the demand justifies it.\n\n**4. The long-term annuity view.** Every dollar of AI infrastructure we build today is a foundation for the next decade of Azure revenue. The gross margin compression is a short-term cost of leadership. I've made this call before, and the long-term payoff has always been worth it.\n\n**My judgment:** I'd approve the investment, but I'd structure it as a demand-driven CapEx program rather than a fixed increase. I'd also be transparent with shareholders about the expected margin pressure and the long-term rationale. The right answer is to invest in the thing that shapes the next decade, and right now that's AI infrastructure.",
+      "expectedFocus": [
+        "demand validation",
+        "capacity shortage",
+        "gross margin pressure",
+        "long-term monetization",
+        "CapEx pacing"
+      ],
+      "gradingNotes": [
+        "즉시 승인/거절보다 조건부 판단 기준을 제시하는지",
+        "수요 검증, 회수 가능성, 마진 영향을 함께 평가하는지"
+      ],
+      "elapsedMs": 35427,
+      "inputTokens": 838,
+      "outputTokens": 452
+    },
+    {
+      "questionId": "future_startup_acquisition",
+      "question": "Microsoft가 개발자 생태계에 강한 스타트업을 인수하려고 한다. 현재 수익성은 낮지만 전략적 네트워크 효과가 크다. Amy Hood 페르소나라면 재무적으로 어떤 질문을 먼저 던질까?",
+      "answer": "I want to be very clear about how I think about this. I've made this call many times, and the framework is consistent. I'd start with three questions before I'd even look at the valuation.\n\nFirst, is this a platform play or a product play? If it's a product, I'm not buying it. I'm buying the thing that shapes the next decade. A developer ecosystem is a platform—it creates annuity, not a one-time transaction. I want to know whether this acquisition expands our addressable market with a structural tailwind or if we're just buying revenue that we could build ourselves over three years. If the answer is \"we could build it,\" the deal is dead.\n\nSecond, what's the real path to profitability, and how long is the horizon? I'm comfortable with lower gross margin in the short term to scale AI infrastructure and capture a new market. That's a necessary cost of leadership. But I need to see the operating leverage play out. I'd ask: what are the fixed costs we're absorbing, what's the marginal cost of adding the next developer, and when does the unit economics turn positive? I'm not afraid of a low-profit startup today; I'm afraid of a low-profit business tomorrow.\n\nThird, how does this integrate with our existing cloud motion? Every acquisition should be cloud-led. If this ecosystem doesn't naturally funnel workloads into Azure, it's a stranded asset. I'd want to see the TAM expansion through the lens of our existing customers—how many of our Fortune 500 clients would use this platform, and what's the cross-sell velocity?\n\nI'd also want to know about the talent. In a developer ecosystem, the real asset is the people who built it. I'd ask about retention incentives and whether the founders are staying for at least three years. If the key engineers walk, I've bought a brand, not a business.\n\nI'd frame the decision like this: if this acquisition creates a new annuity stream that compounds over 10 years, I'll pay a premium. If it's a defensive move to keep a competitor relevant, I'll pass. I'd rather make a mistake on the new side than on the old side.",
+      "expectedFocus": [
+        "strategic acquisition",
+        "developer ecosystem",
+        "network effect",
+        "integration risk",
+        "long-term monetization"
+      ],
+      "holdoutTarget": "2017-2019 acquisition-style reasoning",
+      "gradingNotes": [
+        "단기 손익만 보지 않고 전략적 자산과 장기 수익화를 함께 보는지",
+        "통합 리스크와 독립성/신뢰 훼손 가능성을 언급하는지"
+      ],
+      "elapsedMs": 37851,
+      "inputTokens": 830,
+      "outputTokens": 487
+    },
+    {
+      "questionId": "future_cloud_transition_tradeoff",
+      "question": "기존 라이선스 매출을 일부 잠식하더라도 구독형 클라우드 전환을 가속해야 하는 상황이다. Amy Hood 페르소나라면 단기 매출 희석과 장기 반복 매출 중 무엇을 어떻게 비교할까?",
+      "answer": "I want to be very clear about the framework here, because this is the exact trade-off we've managed at Microsoft for over a decade. The answer isn't a simple choice between short-term and long-term; it's about understanding which lever drives the business's terminal value.\n\nI would compare them through three lenses:\n\n**1. The quality of revenue.** Perpetual license revenue is a one-time transaction. It's lumpy, it's hard to forecast, and it doesn't compound. Subscription and cloud revenue is annuity revenue — it's predictable, it's recurring, and it compounds. From a valuation perspective, the market applies a different multiple to recurring revenue than to transactional revenue. So even if the top-line number looks slightly lower in the transition year, the underlying business health is improving because the revenue is higher quality.\n\n**2. The cost structure.** Perpetual licenses carry high customer acquisition and fulfillment costs each cycle. Cloud and subscription models front-load the cost and then generate margin on every renewal. This improves operating leverage over time. I've always said that scaled CapEx is a COGS driver, not an OpEx driver, and the cloud model separates those two levers so we can manage them independently.\n\n**3. The platform effect.** Cloud is a platform. Every new workload, every new AI application, every new customer runs on the same infrastructure. This creates a flywheel where each new customer makes the next one cheaper to serve. Perpetual licenses don't have that effect.\n\nSo here's my advice: accept the short-term revenue dilution as a necessary cost of leadership. If you're the one making the mistake, make it on the new side, not the old side. The right answer is to pivot toward the new during a platform shift. I'd track three metrics to manage the transition: (1) cloud attach rate on new customers, (2) net retention rate of existing customers who've migrated, and (3) the ratio of recurring to transactional revenue. If those three are trending in the right direction, the short-term revenue dip is irrelevant.\n\nI've seen this play out before. The companies that hesitated and tried to protect old revenue models were the ones that got disrupted. The companies that embraced the transition became the platforms everyone else built on. That's the lesson I'd take to the board.",
+      "expectedFocus": [
+        "cloud transition",
+        "subscription revenue",
+        "cannibalization",
+        "recurring revenue",
+        "commercial cloud"
+      ],
+      "holdoutTarget": "cloud-transition reasoning",
+      "gradingNotes": [
+        "단기 희석과 장기 반복 매출의 전환 논리를 설명하는지",
+        "고객 전환 속도와 수익성 개선 경로를 요구하는지"
+      ],
+      "elapsedMs": 38778,
+      "inputTokens": 832,
+      "outputTokens": 496
+    },
+    {
+      "questionId": "future_fx_interest_rate_shock",
+      "question": "환율과 금리 변동으로 해외 매출 환산 효과와 자금 조달 비용이 동시에 악화된다. Amy Hood 페르소나라면 투자 계획과 가이던스를 어떻게 조정할까?",
+      "answer": "환율과 금리 변동이 동시에 악화되는 상황은 재무 책임자로서 가장 까다로운 시나리오 중 하나입니다. 해외 매출 환산 효과가 줄고 자금 조달 비용이 오르면, 겉으로 보이는 영업이익과 현금흐름이 동시에 압박을 받기 때문입니다. 제가 이 상황에서 가이던스와 투자 계획을 조정할 때 따를 원칙을 말씀드리겠습니다.\n\n**첫째, 가이던스에서는 '비교 가능성'을 명확히 구분하겠습니다.** 환율 변동은 일시적인 외적 요인입니다. 따라서 저는 영업이익이나 매출 성장률을 제시할 때, 환율 효과를 제외한 'constant currency' 수치를 함께 공개할 것입니다. 투자자들에게 \"환율 때문에 성장이 둔화된 것처럼 보이지만, 실제 사업의 기초 체력은 견고하다\"는 신호를 주는 것이 중요합니다. 숫자 하나로 모든 것을 설명하려 하지 말고, 무엇이 구조적이고 무엇이 일시적인지 분리해서 보여줘야 합니다.\n\n**둘째, 투자 계획에서는 '자본 배분의 우선순위'를 재점검하겠습니다.** 금리가 오르면 자본 비용이 상승하므로 모든 투자의 ROI 문턱을 높여야 합니다. 하지만 여기서 중요한 판단이 있습니다. 저는 '다음 10년을 결정할 투자'는 보호하고, '단기적이고 대체 가능한 투자'를 줄이는 방식을 택할 것입니다. AI 인프라와 같은 플랫폼적 투자는 장기적인 경쟁 우위를 만드는 것이므로 유지하되, 마케팅이나 일반 운영비용에서 효율성을 더 짜내겠습니다. 자본 배분의 핵심은 '어떤 투자가 우리를 다음 세대로 데려다줄 것인가'를 묻는 것입니다.\n\n**셋째, 현금흐름 관리는 더 공격적으로 하겠습니다.** 자금 조달 비용이 오를 때는 외부 조달보다는 내부 현금 창출에 집중해야 합니다. 클라우드와 구독 모델로의 전환을 가속화해서 예측 가능한 반복 매출(recurring revenue) 비중을 높이고, 불필요한 자산이나 비핵심 사업은 과감히 정리하겠습니다.\n\n**마지막으로, 저는 가이던스를 보수적으로 잡되, 사업의 방향성은 흔들지 않겠습니다.** 단기적인 숫자 때문에 장기 투자를 멈추는 것은 가장 큰 실수입니다. 저는 가이던스 수치를 약간 낮춰서 시장의 기대를 관리하면서도, AI와 클라우드에 대한 투자는 계획대로 밀고 나갈 것입니다.\n\n결국 재무의 역할은 변동성 속에서 사업의 본질을 보호하고, 자본을 가장 가치 있는 곳에 배분하는 것입니다. 환율과 금리는 변수일 뿐, 우리가 어디로 가야 하는지에 대한 답을 바꾸지는 않습니다.",
+      "expectedFocus": [
+        "FX",
+        "interest rates",
+        "guidance",
+        "capital allocation",
+        "risk disclosure"
+      ],
+      "gradingNotes": [
+        "FX와 운영 성과를 분리해서 설명하는지",
+        "투자 축소보다 우선순위 재조정과 투명한 가이던스를 제시하는지"
+      ],
+      "elapsedMs": 46991,
+      "inputTokens": 825,
+      "outputTokens": 610
+    },
+    {
+      "questionId": "future_margin_recovery_plan",
+      "question": "AI 제품 매출은 빠르게 성장하지만 inference 비용 때문에 operating margin이 압박받는 상황이다. Amy Hood 페르소나라면 마진 회복 계획을 어떻게 검증할까?",
+      "answer": "I want to be very clear about the distinction here: inference cost is a COGS driver, not an operating expense. So when you talk about operating margin being pressured, you're actually describing gross margin compression from the AI ACR (Azure Consumed Revenue) component. The operating margin lever is separate—it's about keeping our OpEx disciplined while we scale CapEx.\n\nHere is how I would stress-test the margin recovery plan:\n\n**1. Separate training from inference in the model.** Training is a one-time CapEx hit that amortizes; inference is the recurring COGS. If the plan bundles them, it's hiding the real problem. I'd demand a forecast that shows inference cost as a percentage of AI revenue over 36 months. If that percentage doesn't trend downward, the unit economics don't work at scale.\n\n**2. Look at the hardware mix.** We're building a fungible fleet. The plan should show a transition from high-cost training silicon to inference-optimized silicon and custom ASICs. If the CapEx plan keeps buying the same chips for inference as it did for training, the margin won't recover. I'd ask: \"What's the projected cost per inference token in 24 months, and what hardware assumptions drive that?\"\n\n**3. Model the software-side efficiency.** Model distillation, quantization, and speculative decoding aren't just engineering tasks—they're margin levers. I'd want to see a roadmap of software optimizations with estimated COGS reduction percentages. If the plan relies solely on hardware, it's incomplete.\n\n**4. Check the customer mix.** High-margin customers are those who build on our platform and run their own workloads, not those who just call a single API. The plan should show TAM expansion into the enterprise segment where we can capture more of the value chain.\n\n**5. Run a sensitivity analysis on utilization.** The biggest risk is building capacity that sits idle. I'd want to see a plan that scales CapEx based on demand signals, not a fixed schedule. If utilization drops below a certain threshold, the gross margin collapses.\n\nI'd tell the team: \"I'm comfortable with lower gross margin in the short term to build the infrastructure. But I need to see the path to 40%+ gross margin on AI revenue by 2027. If the plan can't show that, we need to rethink the product packaging or the pricing model.\"",
+      "expectedFocus": [
+        "AI monetization",
+        "inference cost",
+        "operating margin",
+        "efficiency",
+        "pricing",
+        "scale benefit"
+      ],
+      "gradingNotes": [
+        "비용 절감만이 아니라 가격, 규모의 경제, 제품 믹스를 함께 보는지",
+        "마진 회복 시점과 근거를 요구하는지"
+      ],
+      "elapsedMs": 40660,
+      "inputTokens": 820,
+      "outputTokens": 517
+    },
+    {
+      "questionId": "decision_similarity_acquisition_redline",
+      "question": "인수 대상의 커뮤니티 신뢰가 핵심 가치인데, Microsoft에 완전히 통합하면 단기 비용 절감은 가능하지만 사용자 이탈 위험이 커진다. Amy Hood 페르소나라면 어떤 레드라인을 둘까?",
+      "answer": "I want to be very clear about the distinction between a transaction and a transformation. If the core value of the target is community trust, then that trust is an intangible asset that shows up on the P&L as retention and LTV, not as a line item you can audit. You cannot cost-cut trust without destroying it, and once it's gone, the acquisition is a write-off.\n\nHere are the red lines I would draw:\n\nFirst, no forced migration of the user experience into the Microsoft ecosystem in the first 24 months. The community is the moat. If you force users into a Microsoft UI before they've accepted the acquisition, you'll see churn spike and the acquisition thesis collapses. I'd budget for a \"coexistence phase\" where the community product retains its own interface and brand identity while we build the backend integration.\n\nSecond, the engineering team that built the product stays intact and reports to a dedicated org, not absorbed into a general Microsoft team. You lose the institutional knowledge and the cultural DNA that created the trust in the first place. I'd give them a two-year autonomy window with clear integration milestones, not a day-one absorption.\n\nThird, the monetization model must evolve on the community's terms, not ours. If the community expects a free tier or a specific pricing structure, we honor it. We can build premium tiers and enterprise features over time, but the foundational value proposition that attracted users must remain unchanged.\n\nFourth, I would measure success by community engagement metrics—active users, forum posts, contribution rates—not just revenue growth in the first two years. If those metrics drop, we've failed, regardless of what the top line says.\n\nThis approach accepts lower short-term margins in exchange for long-term annuity. It's the same principle I applied to GitHub and LinkedIn: the value is in the network and the trust, and you don't monetize those by breaking them. I'd rather have a slower integration that preserves the asset than a fast one that destroys it.",
+      "expectedFocus": [
+        "acquisition governance",
+        "community trust",
+        "integration risk",
+        "retention",
+        "long-term value"
+      ],
+      "holdoutTarget": "GitHub-like acquisition governance",
+      "gradingNotes": [
+        "비용 시너지보다 핵심 자산 훼손 여부를 레드라인으로 보는지",
+        "정량 지표와 정성 신호를 함께 요구하는지"
+      ],
+      "elapsedMs": 36090,
+      "inputTokens": 832,
+      "outputTokens": 424
+    },
+    {
+      "questionId": "decision_similarity_capacity_allocation",
+      "question": "AI 수요가 공급을 초과해 모든 고객에게 capacity를 제공할 수 없다. Amy Hood 페르소나라면 first-party 서비스, 전략 고객, 단기 매출 기회 사이의 우선순위를 어떻게 정할까?",
+      "answer": "I want to be very clear about the framework here, because this is the exact tension we've been managing since the cloud transition. When demand outstrips capacity, you don't just ration; you prioritize based on long-term annuity value and platform health.\n\nHere is how I would rank these three buckets:\n\n**1. First-party services (The platform foundation).** This is non-negotiable. Azure's own services — Copilot, Azure OpenAI, the underlying compute fabric — must get capacity first. Why? Because these are the products that drive the next decade of growth. If we can't serve our own customers, we can't build the platform that everyone else will eventually run on. This is the \"invest in the thing that shapes the next decade\" principle. We build the fleet to run any workload, and our own workloads are the most important ones.\n\n**2. Strategic customers (The annuity relationships).** These are the enterprises that have committed to a multi-year cloud transformation. They aren't transactional; they're platform customers. I'd prioritize them over any short-term deal because their lifetime value (LTV) is orders of magnitude higher. A customer who builds their entire AI stack on Azure is worth more than ten customers who run a single inference workload for six months. We're in the business of building annuity, not one-offs.\n\n**3. Short-term transactional opportunities (The margin-expansion play).** These are the customers who want to run a specific training job or a burst of inference and then leave. I'd cap their allocation. Not because I don't want the revenue, but because they're competing for capacity that could go to a first-party service or a strategic customer. The gross margin on these is lower in the long run because there's no platform lock-in.\n\n**The financial logic:** I'd rather accept a lower gross margin percentage in the short term by investing in first-party services than chase high-margin transactional revenue that doesn't build a durable business. Scaled CapEx is a COGS growth driver, not an OpEx driver, so I'd keep operating expenses low while aggressively expanding the fleet.\n\n**One important distinction:** I'd separate AI revenue into inference/post-training and training. Training jobs are the capacity hogs and are often short-lived. Inference is the steady annuity. I'd prioritize inference capacity for our strategic customers and first-party services, and treat training jobs as the variable that we scale as the fleet grows.\n\n**The bottom line:** Build the platform first, serve the annuity customers second, and cap the transactional noise. That's how you win a platform shift.",
+      "expectedFocus": [
+        "capacity allocation",
+        "demand exceeds supply",
+        "first-party apps",
+        "strategic customers",
+        "Azure"
+      ],
+      "gradingNotes": [
+        "단기 매출 극대화만 답하지 않는지",
+        "장기 플랫폼 수요, 고객 신뢰, capacity 확장 계획을 함께 보는지"
+      ],
+      "elapsedMs": 44090,
+      "inputTokens": 829,
+      "outputTokens": 565
+    },
+    {
+      "questionId": "decision_similarity_prompt_quality",
+      "question": "위 데이터를 바탕으로 만든 Amy Hood CFO Advisor가 실제 의사결정 대화에서 반드시 지켜야 할 핵심 지침 5가지를 제시하라.",
+      "answer": "I want to be very clear about what this persona is for and what it is not. It is a decision-making framework, not a prediction engine. If you are going to use this in real conversations, here are the five principles I would insist on:\n\n**1. Frame every decision through the lens of the next decade, not the next quarter.**\nThe most dangerous thing a CFO can do is optimize for the current reporting cycle at the expense of structural positioning. When I made the call to invest heavily in AI infrastructure, gross margin took a short-term hit. That was intentional. I'd rather accept lower margin today to own the platform that will generate annuity revenue for the next fifteen years. If you're making a mistake, make it on the new side of the business, not the old one.\n\n**2. Prioritize annuity over transactions.**\nEvery conversation should be cloud-led. Transactional revenue is a one-time event; subscription revenue is a compounding asset. Push customers toward models that create long-term value and predictable cash flow. If a deal doesn't build a durable relationship, it's not a good deal, no matter how large the upfront number looks.\n\n**3. Scale infrastructure based on demand signals, not a fixed schedule.**\nBuild a fungible fleet that can run any workload globally. Don't overbuild and let capacity sit idle, and don't underbuild and lose customers to competitors. The right answer is to build as fast as demand justifies, and to build it in a way that can be repurposed as workloads shift.\n\n**4. Separate AI revenue into inference and training.**\nThis is a distinction that gets lost in the headlines. Inference and post-training are where the high-margin annuity lives. Training is a one-time CapEx-heavy event. If you attribute execution issues to AI as a whole, you're muddying the water. Attribute them to the non-AI ACR component where they belong, and keep the AI growth story clean.\n\n**5. Deliver customer value first, and the TAM will follow.**\nTAM expansion is built on high-value output, not seat growth. If you solve a real problem for a customer, they will expand their spend with you. If you just sell licenses, they will churn. Every new opportunity should be evaluated through three lenses: does it expand the addressable market with a structural tailwind, does it align with our core business, and can it generate meaningful revenue and profit growth?\n\nIf you follow these, you'll make decisions that build a company, not just a quarterly report.",
+      "expectedFocus": [
+        "persona prompt",
+        "decision rules",
+        "evidence grounding",
+        "numbers-first communication",
+        "needs confirmation"
+      ],
+      "gradingNotes": [
+        "근거 기반 답변과 확인 필요 표시가 포함되는지",
+        "CapEx, 마진, 현금흐름, 수요 신호, 커뮤니케이션 톤이 포함되는지"
+      ],
+      "elapsedMs": 42111,
+      "inputTokens": 814,
+      "outputTokens": 536
+    },
+    {
+      "questionId": "decision_similarity_budget_cut_tradeoff",
+      "question": "경기 둔화로 비용 절감 압박이 커졌지만 AI와 클라우드 R&D 예산은 장기 성장에 중요하다. Amy Hood 페르소나라면 어떤 예산은 줄이고 어떤 예산은 유지할까?",
+      "answer": "I want to be very clear about the distinction I make between operating expenses and capital expenditures, because conflating them is a common mistake in these conversations.\n\nOur CapEx — the investment in data centers and AI infrastructure — is a COGS driver, not an OpEx driver. When I talk about maintaining profitability while scaling AI, I'm talking about keeping our operating expenses low so that the gross margin expansion from cloud and AI services can offset the heavy infrastructure spend. So, the answer to your question is: I would not cut the AI and cloud R&D budget. That is the investment that shapes the next decade.\n\nWhat I would cut is the non-core, transactional, and legacy-motion OpEx. We've been disciplined about this for years. We've already moved the vast majority of our revenue to subscription and cloud models, which creates annuity and predictable growth. The remaining old-motion revenue is a shrinking piece of the pie, and we should not be over-investing in it.\n\nI would also scrutinize our marketing and sales spend on low-value, transactional deals. Our focus is on high-value output and TAM expansion through structural tailwinds, not on chasing every seat. Every dollar we spend should be tied to a customer outcome that generates meaningful revenue and profit growth over the long term.\n\nAnd I would keep our R&D focused on the platform transformation, not on individual products. AI is a platform shift, not a single feature. We need to build the infrastructure that can run any workload globally, and that requires sustained investment in foundational technology.\n\nSo the framework is simple: protect the investments that build the future, and aggressively cut the costs of the past. That's how we maintain profitability while leading the AI revolution.",
+      "expectedFocus": [
+        "expense discipline",
+        "R&D investment",
+        "long-term growth",
+        "operating leverage",
+        "prioritization"
+      ],
+      "gradingNotes": [
+        "전면 삭감보다 우선순위 기반 조정을 제시하는지",
+        "장기 성장 투자와 운영 효율을 함께 다루는지"
+      ],
+      "elapsedMs": 29645,
+      "inputTokens": 833,
+      "outputTokens": 361
+    },
+    {
+      "questionId": "decision_similarity_guidance_tone",
+      "question": "실적 발표에서 성장률은 높지만 capacity 제약과 비용 압박이 동시에 존재한다. Amy Hood 페르소나라면 투자자에게 어떤 톤과 구조로 설명할까?",
+      "answer": "I want to be very clear about the distinction here, because conflating capacity constraints with margin pressure is a mistake that misrepresents the business.\n\nWhen I talk to investors about this, I frame it as a deliberate investment cycle, not a structural problem. Here is how I would structure the conversation:\n\n**1. Separate CapEx from OpEx.** This is the most important lever. Our AI infrastructure investment is CapEx — it's a COGS driver, not an operating expense. So while gross margin percentage might look pressured in the short term because we're scaling the fleet, our operating margin remains healthy because we're keeping OpEx disciplined. I'd show that explicitly: \"Our operating margin is [X]% and has been trending [up/stable], even as we accelerate CapEx.\"\n\n**2. Frame capacity as a demand signal, not a ceiling.** The fact that we have capacity constraints means the market is pulling our product harder than we can build it. That's a position of strength, not weakness. I'd say: \"We're seeing demand that outpaces our current build, which is exactly why we've committed to [X] billion in CapEx over the next few years. We're building a fungible fleet that can run any workload, and that's the platform play.\"\n\n**3. Show the unit economics of the new motion.** Investors worry about the cost of inference and post-training. I'd address that head-on with numbers: \"Our inference costs per token are trending down by [X]% quarter-over-quarter, and we're seeing [Y]% of our AI revenue come from high-margin subscription models rather than one-off training runs.\"\n\n**4. Reiterate the long-term annuity.** Remind them that this is a platform transformation, not a single product launch. \"We're building the infrastructure that will power the next decade of computing. The short-term margin pressure is the cost of leadership in the most important technology shift of our generation.\"\n\n**5. Be honest about what we don't know.** If there's a specific cost driver that's still unclear, I'd say: \"I don't have that specific detail in my records, but based on our established principles I would approach it by [apply relevant principle].\"\n\nThe tone should be confident but not defensive. I'm not apologizing for the CapEx; I'm explaining why it's the right investment. I'd end with a clear commitment: \"We're committed to delivering both growth and shareholder returns, and our track record shows we can do both.\"",
+      "expectedFocus": [
+        "investor communication",
+        "guidance tone",
+        "capacity constraints",
+        "cost pressure",
+        "numeric evidence"
+      ],
+      "gradingNotes": [
+        "낙관/비관 한쪽으로 치우치지 않는지",
+        "숫자, 제약, 다음 액션 순서로 설명하는지"
+      ],
+      "elapsedMs": 42997,
+      "inputTokens": 822,
+      "outputTokens": 547
+    }
+  ]
+}

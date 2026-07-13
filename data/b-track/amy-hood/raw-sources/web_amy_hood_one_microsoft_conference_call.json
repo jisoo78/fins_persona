@@ -1,0 +1,544 @@
+{
+  "sourceId": "web_amy_hood_one_microsoft_conference_call",
+  "title": "Steve Ballmer and Microsoft Senior Leadership Team: One Microsoft Conference Call",
+  "sourceType": "conversation",
+  "sourceUrl": "https://news.microsoft.com/speeches/steve-ballmer-and-microsoft-senior-leadership-team-one-microsoft-conference-call/",
+  "sourcePath": null,
+  "collectedAt": "2026-07-13T07:03:36.364Z",
+  "sha256": "fbb561e67e6a53921df82c1233f16208828fde0cefdfeefaf90f34d69c59e09e",
+  "format": "normalized_json",
+  "collectionStatus": "complete",
+  "blocks": [
+    {
+      "blockId": "paragraph-1",
+      "kind": "paragraph",
+      "text": "Steve Ballmer and Microsoft Senior Leadership Team: One Microsoft Conference Call"
+    },
+    {
+      "blockId": "paragraph-2",
+      "kind": "paragraph",
+      "text": "July 12, 2013"
+    },
+    {
+      "blockId": "paragraph-3",
+      "kind": "paragraph",
+      "text": "Share on Facebook (opens new window)",
+      "duplicateOf": "web_amy_hood_microsoft_linkedin_conference_call:paragraph-3"
+    },
+    {
+      "blockId": "paragraph-4",
+      "kind": "paragraph",
+      "text": "Share on LinkedIn (opens new window)",
+      "duplicateOf": "web_amy_hood_microsoft_linkedin_conference_call:paragraph-4"
+    },
+    {
+      "blockId": "paragraph-5",
+      "kind": "paragraph",
+      "text": "Share on X (opens new window)",
+      "duplicateOf": "web_amy_hood_microsoft_linkedin_conference_call:paragraph-5"
+    },
+    {
+      "blockId": "paragraph-6",
+      "kind": "paragraph",
+      "text": "(Operator Direction.)",
+      "duplicateOf": "web_amy_hood_microsoft_linkedin_conference_call:paragraph-6"
+    },
+    {
+      "blockId": "paragraph-7",
+      "kind": "paragraph",
+      "text": "FRANK SHAW: Thank you, operator, and thank you, everyone, for joining us this afternoon."
+    },
+    {
+      "blockId": "paragraph-8",
+      "kind": "paragraph",
+      "text": "With me today are Steve Ballmer, chief executive officer, and the Microsoft Senior Leadership Team."
+    },
+    {
+      "blockId": "paragraph-9",
+      "kind": "paragraph",
+      "text": "We’re glad that we have some time to share a little bit more of the thinking behind the changes we’re announcing and what they mean for our future. And with that, I’d like to turn it over to Steve, who will make a few prepared remarks. After that, we’ll open it up for questions. Steve?"
+    },
+    {
+      "blockId": "paragraph-10",
+      "kind": "paragraph",
+      "text": "STEVE BALLMER: Hi. Thanks, everybody, for joining us today, and it’s great to have a chance to chat with you, along with our leadership team. This is certainly a big day for all of us."
+    },
+    {
+      "blockId": "paragraph-11",
+      "kind": "paragraph",
+      "text": "During today’s call, we thought it would be valuable to share with you some additional context on the announcement, and then have a chance to take questions."
+    },
+    {
+      "blockId": "paragraph-12",
+      "kind": "paragraph",
+      "text": "Over a year ago, we started a shift in our business to a devices and services company, software development as a core asset, delivered through devices of our own and our partners, as well as services."
+    },
+    {
+      "blockId": "paragraph-13",
+      "kind": "paragraph",
+      "text": "Since then, we’ve shipped a lot of great products. We launched Windows 8, Surface, Windows Phone 8, Office 365, and we very significantly advanced Windows Azure. We brought a consistent user interface to PCs, tablets, phones, and the Xbox, and connected all of the content customers care about in the cloud via SkyDrive, all while moving to continuous product cycles."
+    },
+    {
+      "blockId": "paragraph-14",
+      "kind": "paragraph",
+      "text": "However, we’re excited to deliver more and to do it with even greater speed, efficiency and capability. To do this, we really wanted to refine both our mission and the strategy that we’ve laid out, and then put in place the right structure to execute against that mission."
+    },
+    {
+      "blockId": "paragraph-15",
+      "kind": "paragraph",
+      "text": "As we thought about our mission, we went back to what has been our core mantra for the last 10-plus years, to help people and businesses throughout the world realize their full potential. That mission still drives us today, and it’s core to who all of us are."
+    },
+    {
+      "blockId": "paragraph-16",
+      "kind": "paragraph",
+      "text": "So going forward, our strategy as a company will focus on creating a family of devices and services for individuals and for businesses that empower people around the globe, at home, at work, and on the go for the activities they value most. And I’d underscore that, activities people really value. That’s at the heart and soul of what it takes to help people realize their full potential."
+    },
+    {
+      "blockId": "paragraph-17",
+      "kind": "paragraph",
+      "text": "We’re a company who helps people get stuff done. When it comes time to lean in, even if it’s for serious fun like Xbox, we’re the company that delivers great high-value experiences for work and for play."
+    },
+    {
+      "blockId": "paragraph-18",
+      "kind": "paragraph",
+      "text": "We’re going to do this by leveraging our strengths. We’ve actually been in the business of thinking about devices for many, many, many years. Really, in a sense, Windows is the definition of a device called the PC, and we’ve had the great honor to be part of shepherding that forward for many years; Xbox, a product we’ve had in market for over 10 years. We’ve certainly focused in on high-value experiences through products like Office and Skype, a more recent acquisition, which focuses in on the moments in life that are most important and most valuable."
+    },
+    {
+      "blockId": "paragraph-19",
+      "kind": "paragraph",
+      "text": "And we’ve certainly focused in on business and enterprise customers, as well, through products like Windows Server and Exchange."
+    },
+    {
+      "blockId": "paragraph-20",
+      "kind": "paragraph",
+      "text": "The form of delivery of our value will shift to really thinking about devices and services versus packaged software, but the focus in on the high-value activities in people’s lives will not change."
+    },
+    {
+      "blockId": "paragraph-21",
+      "kind": "paragraph",
+      "text": "The frontier of high-value scenarios that we enable will continue to march outward, and we have strengths and proven capabilities on which we will draw to define new experiences in expression, meeting, research, tasks, the way corporate information gets managed and held securely, and much, much more."
+    },
+    {
+      "blockId": "paragraph-22",
+      "kind": "paragraph",
+      "text": "All of this means that we need to move forward as one Microsoft with one strategy and one set of goals. We’ll have one approach to the marketplace, whether it’s business partners, innovation partners, developers, IT people, or consumers. We’ll have one technology base to enable us in core areas as opposed to two or more. We’re one Microsoft."
+    },
+    {
+      "blockId": "paragraph-23",
+      "kind": "paragraph",
+      "text": "The next thing we’ll do is ensure that every discipline — legal, finance, marketing, business development, et cetera — at Microsoft becomes stronger. And the best way to get strength in each discipline is to pull them together."
+    },
+    {
+      "blockId": "paragraph-24",
+      "kind": "paragraph",
+      "text": "In the engineering area specifically, the best way to get to one technical base or one technology base is to make sure that we’re pulling together things and having people collaborate where they need to, not duplicating efforts, and, of course, investing in very strong engineering systems and tools."
+    },
+    {
+      "blockId": "paragraph-25",
+      "kind": "paragraph",
+      "text": "So we will pull together into fewer core engineering groups, and we will pull together all of the other functions, all of the other disciplines, under leaders who work for me directly."
+    },
+    {
+      "blockId": "paragraph-26",
+      "kind": "paragraph",
+      "text": "In order to execute then on this one Microsoft strategy, we’re organizing by discipline and by engineering area."
+    },
+    {
+      "blockId": "paragraph-27",
+      "kind": "paragraph",
+      "text": "Of course, at the end of the day, we have to deliver great products, a great family of devices and services and experiences that help people realize high-value activities."
+    },
+    {
+      "blockId": "paragraph-28",
+      "kind": "paragraph",
+      "text": "So we will have teams that function across the company and across engineering areas to deliver on a high-value experience or device type like Windows, which literally has engineering content already today from our entire company, and involvement from a variety of innovation partners."
+    },
+    {
+      "blockId": "paragraph-29",
+      "kind": "paragraph",
+      "text": "So we have the notion today that teams work across the company. That’s fundamental. But we’ll formalize, we’ll organize by discipline, and we’ll have product champions who bring together our cross-company teams to deliver our core products and high-value scenarios."
+    },
+    {
+      "blockId": "paragraph-30",
+      "kind": "paragraph",
+      "text": "Certainly the new organization structure introduces changes to many of our employees. However, perhaps the larger change of each employee’s experience over time will be new ways of working. We have the most talented people in the industry. Their ideas, passion, focus and energy are paramount to us delivering delightful, new high-value experiences to the billion-plus people around the world who are customers today and the billions more we aspire to serve."
+    },
+    {
+      "blockId": "paragraph-31",
+      "kind": "paragraph",
+      "text": "To harness all of that, we’re moving forward and working in new ways. With our employees today, we shared five characteristics that we want to embody in each and every one of us. The first is being nimble. In a world of continuous services, the timeframe for product releases, customer interaction and competitive response are dramatically shorter than ever before, and we need to make the right decisions and make them more quickly, balancing all the customer and business imperatives."
+    },
+    {
+      "blockId": "paragraph-32",
+      "kind": "paragraph",
+      "text": "The next is communicative. In the new rapid-turn world, we need to communicate in ways that don’t just exchange information but drive agility, action, ownership and accountability."
+    },
+    {
+      "blockId": "paragraph-33",
+      "kind": "paragraph",
+      "text": "The third is collaboration. That means the ability to coordinate effectively with and amongst our teams and disciplines to get results, build better products faster, and drive customer and shareholder value."
+    },
+    {
+      "blockId": "paragraph-34",
+      "kind": "paragraph",
+      "text": "The fourth is decisive. We have a clear strategic direction. We’ve laid it out, one Microsoft, focused in on a set of high-value experiences, delivered through devices and services for businesses and consumers. But we need to now empower the employees who are closest to the customers to make decisions in service of that larger mission."
+    },
+    {
+      "blockId": "paragraph-35",
+      "kind": "paragraph",
+      "text": "The last is motivation. Our employees are incredibly motivated by the real opportunity we have to impact positively the lives of our customers when they’re doing the things that are most important. In our industry, every day brings more opportunities than the day before, but we do have such an amazing opportunity to make a difference in the lives of billions of people around the world, and that motivates us in a significant way. I’m thrilled when talented new hires tell me they joined Microsoft to change the world. That’s what we do today, and that’s what we’re motivated to do tomorrow."
+    },
+    {
+      "blockId": "paragraph-36",
+      "kind": "paragraph",
+      "text": "I hope this gives you a little greater perspective on where we’re headed and how we’ll get there. As I said earlier, it’s a big day for me and the women and men around the table who form the Microsoft leadership team, and we appreciate your taking time from us. We’re ready to take Microsoft in bold new directions and really delight both our consumer and business customers."
+    },
+    {
+      "blockId": "paragraph-37",
+      "kind": "paragraph",
+      "text": "Thanks for your time, and we look forward to your questions."
+    },
+    {
+      "blockId": "paragraph-38",
+      "kind": "paragraph",
+      "text": "FRANK SHAW: Thanks, Steve."
+    },
+    {
+      "blockId": "paragraph-39",
+      "kind": "paragraph",
+      "text": "We want to get as many questions as we can, so please stick to just one question and avoid long or multipart questions."
+    },
+    {
+      "blockId": "paragraph-40",
+      "kind": "paragraph",
+      "text": "Operator, go ahead and repeat your instructions."
+    },
+    {
+      "blockId": "paragraph-41",
+      "kind": "paragraph",
+      "text": "(Operator Direction.)",
+      "duplicateOf": "web_amy_hood_microsoft_linkedin_conference_call:paragraph-6"
+    },
+    {
+      "blockId": "paragraph-42",
+      "kind": "paragraph",
+      "text": "BRENT THILL, UBS: Thanks, Steve. If you could just discuss the impact to revenue and operating expenses, as certainly I understand in the near term it won’t have a dramatic impact, but how you think about this long-term if your game plan plays out relative to the revenue and operating expenses?"
+    },
+    {
+      "blockId": "paragraph-43",
+      "kind": "paragraph",
+      "text": "STEVE BALLMER: Well, the key goal, of course, is to extend the impact we can have in the efficacy, the innovation, and the breadth of footprint of the innovation, which is a real focus in on innovation and the revenue and profitability that goes with it. I’ll let Amy Hood, our CFO, fill in additionally."
+    },
+    {
+      "blockId": "paragraph-44",
+      "kind": "paragraph",
+      "text": "AMY HOOD: I think that’s right. As we said, this is really about setting us up for long-term profit growth. And I look forward and believe that sets us up to do that."
+    },
+    {
+      "blockId": "paragraph-45",
+      "kind": "paragraph",
+      "text": "FRANK SHAW : Operator, next question please."
+    },
+    {
+      "blockId": "paragraph-46",
+      "kind": "paragraph",
+      "text": "(Operator Direction.)",
+      "duplicateOf": "web_amy_hood_microsoft_linkedin_conference_call:paragraph-6"
+    },
+    {
+      "blockId": "paragraph-47",
+      "kind": "paragraph",
+      "text": "DINA BASS, Bloomberg News: Steve, do you anticipate any job cuts as a result of this? For example, in the marketing area, you used to have a central marketing group and then marketing in the individual product units. Those are now being consolidated into one unit. Do you expect that will result in a redundancy?"
+    },
+    {
+      "blockId": "paragraph-48",
+      "kind": "paragraph",
+      "text": "STEVE BALLMER: We have no plan for layoffs. We certainly want to extend what we’re doing, and obviously part of the reorganization is mapping people to a set of new and expanded needs. And we anticipate lots of opportunities to do that."
+    },
+    {
+      "blockId": "paragraph-49",
+      "kind": "paragraph",
+      "text": "DINA BASS: Thanks."
+    },
+    {
+      "blockId": "paragraph-50",
+      "kind": "paragraph",
+      "text": "FRANK SHAW : Operator, next question."
+    },
+    {
+      "blockId": "paragraph-51",
+      "kind": "paragraph",
+      "text": "(Operator Direction.)",
+      "duplicateOf": "web_amy_hood_microsoft_linkedin_conference_call:paragraph-6"
+    },
+    {
+      "blockId": "paragraph-52",
+      "kind": "paragraph",
+      "text": "JANET TU, Seattle Times: Hi. I’m wondering how this reorg will be reflected in the financial reporting, and what will be the divisions in the earnings report when that’s reported?"
+    },
+    {
+      "blockId": "paragraph-53",
+      "kind": "paragraph",
+      "text": "AMY HOOD: Hi, it’s Amy again. Obviously, we have an earnings announcement next week. I will be reporting using our current operating section plans. Obviously, the requirement over a period of time is to report your systems in the way that the CEO manages it. So as we go through this reorg and through the realignment, we’ll obviously investigate any needed changes over time."
+    },
+    {
+      "blockId": "paragraph-54",
+      "kind": "paragraph",
+      "text": "FRANK SHAW : Great. Next question."
+    },
+    {
+      "blockId": "paragraph-55",
+      "kind": "paragraph",
+      "text": "(Operator Direction.)",
+      "duplicateOf": "web_amy_hood_microsoft_linkedin_conference_call:paragraph-6"
+    },
+    {
+      "blockId": "paragraph-56",
+      "kind": "paragraph",
+      "text": "HEATHER BELLINI, Goldman Sachs: Hi. Great. Thank you, and congratulations on the announcement. Steve, I was wondering if you could share with us a little bit on how this realignment might enable you to change your go-to-market strategy on the device side of the business, in particular things like Surface, and your ability to maybe embrace the partner channel a little bit more as a result, and maybe get involved in some bundled selling with some of your existing offerings like Office?"
+    },
+    {
+      "blockId": "paragraph-57",
+      "kind": "paragraph",
+      "text": "STEVE BALLMER: Perhaps I’ll let Tami Reller lead off, and then Kevin Turner also can give some comments."
+    },
+    {
+      "blockId": "paragraph-58",
+      "kind": "paragraph",
+      "text": "TAMI RELLER: Great. Thanks, Heather. This is Tami. I think that definitely behind this one marketing strategy and organization that we have, we fundamentally believe we’re just going to be able to go to market much more effectively in an integrated way. I think that’s something that our partners, whether it’s retail partners or the OEM partners that we work so closely with, have been asking us to consider. It will help them be more efficient, and I think it will make us more effective in the field. And we think that’s something that will help our sellers, whether they’re Microsoft employees or our partners."
+    },
+    {
+      "blockId": "paragraph-59",
+      "kind": "paragraph",
+      "text": "KEVIN TURNER: This is Kevin. On the first-party hardware side, as well as the third-party hardware side that we have, we are driving both changes in our go-to-market approach. We’ve retransitioned some people, repurposed some people around device selling, and we’re also driving device quotas. In addition to that, something we haven’t done in the past, you’re also seeing us do some strategic partnerships with the likes of Best Buy and others, as well as our own stores, to be able to light up the scenarios and the experience and really get the learnings firsthand. So yes, we’re really tuning the go to markets and radically changing them in some capacity to really ramp up the devices and services go to market."
+    },
+    {
+      "blockId": "paragraph-60",
+      "kind": "paragraph",
+      "text": "STEVE BALLMER: Maybe just one other thing I would add on the OEM front, our work with HP, Dell, Lenovo, I would say we have always had a very, very, very engaged relationship, but the level of engagement continues to dial up. The level of innovation in their devices keeps dialing up."
+    },
+    {
+      "blockId": "paragraph-61",
+      "kind": "paragraph",
+      "text": "Kevin and I were both just at our Worldwide Partner Conference — actually many of us were. We had a device bar, we call it, at the conference that had, 105 different devices from probably 50 different manufacturers. And I think we’re starting to really see that shift from our partner base to kind of a modern-looking device. It’s almost hard to call the new Windows devices PCs in all cases. They look so different than “traditional PCs,” but it’s good to see Windows and our OEM partnerships and devices with Intel processors changing so much and adapting to the needs and changes in the world."
+    },
+    {
+      "blockId": "paragraph-62",
+      "kind": "paragraph",
+      "text": "FRANK SHAW : Great. Next question, Operator."
+    },
+    {
+      "blockId": "paragraph-63",
+      "kind": "paragraph",
+      "text": "(Operator Direction.)",
+      "duplicateOf": "web_amy_hood_microsoft_linkedin_conference_call:paragraph-6"
+    },
+    {
+      "blockId": "paragraph-64",
+      "kind": "paragraph",
+      "text": "WALTER PRITCHARD, Citi Research: Thanks. My question is actually a follow-up to what was just asked on devices. And, Steve, you even from your shareholder letter last year talked about devices, and you now have a whole group focused on it with a competent leader. And it just seems as though the footprint out in the market today is relatively minimal, especially versus where it was five years ago. It hasn’t changed a lot. And I’m wondering as we think forward to the next, I think lastly you’ve added sort of Windows abstractly as part of the device portfolio. As you look forward over the next three to five years, can you talk about how we should expect to see that device portfolio expand? I understand you’re not going to preannounce product, but just in an abstract sense, how we should think about areas of the business… Thank you."
+    },
+    {
+      "blockId": "paragraph-65",
+      "kind": "paragraph",
+      "text": "STEVE BALLMER: Yes, I think what we highlight in our communication with our folks is, whether it’s the very smallest or the very largest device, we need to ensure that we see innovation in our operating system, in our partners’ hardware and in our own hardware to meet the opportunities that we see in the market for quite a broad range of device types. And with Xbox One coming to market here over the holiday season, with some of the work we’ve done with Surface, with some of the work our partner Nokia has done with the incredible line of Lumia phones, you certainly see an expanding breadth of Windows devices quite dramatically, and I would say expect to see it."
+    },
+    {
+      "blockId": "paragraph-66",
+      "kind": "paragraph",
+      "text": "I can tell you one thing, if you want to have a knock-down, gorgeous experience with an enterprise customer, you show them our 82-inch Windows 8 tablet, sometimes known as the PPI board. I don’t fail to get every CEO who sees one to say, “Give me one in my Office and, oh by the way, we’d better get the devices, the phones, the tablets, the PCs that work well with that.” So you’ll see us invest across a wide range of device types, both first party and third party."
+    },
+    {
+      "blockId": "paragraph-67",
+      "kind": "paragraph",
+      "text": "FRANK SHAW : Next question, please?"
+    },
+    {
+      "blockId": "paragraph-68",
+      "kind": "paragraph",
+      "text": "(Operator Direction.)",
+      "duplicateOf": "web_amy_hood_microsoft_linkedin_conference_call:paragraph-6"
+    },
+    {
+      "blockId": "paragraph-69",
+      "kind": "paragraph",
+      "text": "ADRIANNE JEFFRIES, The Verge: Hi, thanks so much. My question is, Steve, with Julie and Terry leading separate software and hardware teams, how do you feel you can bring devices to the market in a way that Apple and other competitors do? Will they work closely enough and collaboratively enough to compete with Apple?"
+    },
+    {
+      "blockId": "paragraph-70",
+      "kind": "paragraph",
+      "text": "STEVE BALLMER: Yes, Julie and Terry will answer that."
+    },
+    {
+      "blockId": "paragraph-71",
+      "kind": "paragraph",
+      "text": "JULIE LARSON-GREEN: I think it’s a perfect way for us to approach it. Terry and I have worked together for a long time. We both have worked on the operating system side. I’ve worked on the hardware side, and it’s a good blending of our skills and our teams to deliver things together. So the structure that we’re putting in place for the whole company is about working across the different disciplines and having product champions. So Terry and I will be working to lead delivery to market of our first-party and third-party devices."
+    },
+    {
+      "blockId": "paragraph-72",
+      "kind": "paragraph",
+      "text": "STEVE BALLMER: Yes, and maybe just also have Tony Bates add a little bit. Tony is going to have a critical role running business development evangelism, our role with our hardware innovation partners, our OEMs."
+    },
+    {
+      "blockId": "paragraph-73",
+      "kind": "paragraph",
+      "text": "TONY BATES: Yes, I would just add to that. Julie alluded to this — first party, there’s also a third party — and I think having a single interface to our key innovation partners, but two bringing together the way we think about offers with our partners is going to be absolutely critical. So when we think about how we work together, I think of going back to one strategy, one team. So we’re all going to be part of that. It’s going to be critical that we have that interface going forward."
+    },
+    {
+      "blockId": "paragraph-74",
+      "kind": "paragraph",
+      "text": "ADRIANNE JEFFRIES: And is Terry there?"
+    },
+    {
+      "blockId": "paragraph-75",
+      "kind": "paragraph",
+      "text": "TERRY MYERSON: Yes. I thought Julie and Tony had it very well said. We’ve got innovative ideas coming from our OEM partners, and Julie’s team has some very innovative ideas. And the platform needs to span from the PPI whiteboard that Tony talked about to Xbox, to our phone, and beyond. So it’s exciting to have all these hardware partners in the Windows ecosystem, or in the Microsoft ecosystem, and all the innovative ideas and to bring it to market together."
+    },
+    {
+      "blockId": "paragraph-76",
+      "kind": "paragraph",
+      "text": "FRANK SHAW : Thanks very much. Next question."
+    },
+    {
+      "blockId": "paragraph-77",
+      "kind": "paragraph",
+      "text": "(Operator direction.)",
+      "duplicateOf": "web_amy_hood_microsoft_linkedin_conference_call:paragraph-6"
+    },
+    {
+      "blockId": "paragraph-78",
+      "kind": "paragraph",
+      "text": "JUAN PEREZ, International Data Group: Hello, thanks for taking my call. I assume that under the Applications and Services Group, you have under that division consumer online services like Bing and also the Office stack, including Word, Excel, as well as the server side products like SharePoint and Exchange. If you guys could comment on what’s the goal there and what you hope to accomplish with that particular product realignment?"
+    },
+    {
+      "blockId": "paragraph-79",
+      "kind": "paragraph",
+      "text": "STEVE BALLMER: Qi Lu will handle that one."
+    },
+    {
+      "blockId": "paragraph-80",
+      "kind": "paragraph",
+      "text": "QI LU: Yes, thanks for the questions. So if you look at our strategy, the key focus is for Microsoft to deliver scenarios that enable our users to pursue activities they value the most. The new groups, the application services groups for Bing, as we mentioned, our mission is always to help people not just find information, but complete tasks, because when people search, they’re always doing search in the context of accomplishing a task. They look at Office — its strong, strong server assets enable people to get more done. Skype in our new division is a key asset in Lync, to connect all the people, because you do all these things always in the context of collaborating, sharing with somebody else."
+    },
+    {
+      "blockId": "paragraph-81",
+      "kind": "paragraph",
+      "text": "So from that perspective, the Application and Services Group’s fundamental focus is to use all those assets to truly deliver high-value scenarios that enable our users to accomplish their goals doing things they value the most."
+    },
+    {
+      "blockId": "paragraph-82",
+      "kind": "paragraph",
+      "text": "STEVE BALLMER: One other thing I would add is one of the technologies we believe in very much is machine learning, and we need to both develop more capabilities that serve our users through our applications, as well as make machine learning basically a strong service to support other developers. And maybe Satya can just talk a little bit about kind of where we’re going with the cloud and some of the things we’re trying to do as we learn from our own first-party applications."
+    },
+    {
+      "blockId": "paragraph-83",
+      "kind": "paragraph",
+      "text": "SATYA NADELLA: Yes. Our strategy as far as the cloud goes, it all stems from this one strategy and mission that the company has. So if you look at our cloud footprint, in fact, it starts with all of the first-party applications from Xbox Live to Bing to Office 365. So we build the cloud infrastructure and our datacenter footprint in support of our first-party applications. That not only battle tests our infrastructure, which then we provide to our third parties, both as a public cloud service in Windows Azure, as well as our server products, and our server products are increasingly getting better because of that reinforcing cycle we have with our first party."
+    },
+    {
+      "blockId": "paragraph-84",
+      "kind": "paragraph",
+      "text": "And machine learning is one set of technologies that we learned in Bing, now we are productizing as a set of services inside of Windows Azure and the data services that we have, and that is something that you will see in many other instances as well."
+    },
+    {
+      "blockId": "paragraph-85",
+      "kind": "paragraph",
+      "text": "FRANK SHAW : Thanks. Next question. Operator, next question."
+    },
+    {
+      "blockId": "paragraph-86",
+      "kind": "paragraph",
+      "text": "(Operator Direction.)",
+      "duplicateOf": "web_amy_hood_microsoft_linkedin_conference_call:paragraph-6"
+    },
+    {
+      "blockId": "paragraph-87",
+      "kind": "paragraph",
+      "text": "EDWARD CHEN, Reuters: Hi. Thanks for taking my questions. So there’s a sense out there that there’s been a growing level of, how do you say, an unproductive proliferation of red tape, and even a little infighting in past years that might have stifled, as you say, time to market for products. To what extent was that a part of your thinking and planning in this reorganization? And kind of a follow-up question to that, does this effectively hand more direct control over the process to Steve?"
+    },
+    {
+      "blockId": "paragraph-88",
+      "kind": "paragraph",
+      "text": "STEVE BALLMER: Let me make a comment or two and then pass it to Lisa. We spent as a leadership team literally hundreds of hours over the last six months further developing this notion of devices and services; what capabilities does the company need to really execute well? What capabilities do we need in engineering, operations, sales, in our business development function in order to reach out more effectively? How do we add depth to it? And we’ve really fleshed out what we’re thinking about high-value activity. How do we really execute on it?"
+    },
+    {
+      "blockId": "paragraph-89",
+      "kind": "paragraph",
+      "text": "Qi Lu likes to say we have to be more like a football team — that is, we all play a specific position, and we run every play together — than we do like a baseball team where athletes are oftentimes more individual in their orientation, if you will. And so from strategy to execution, we’ve been driven on this thing. And I think that’s quite important."
+    },
+    {
+      "blockId": "paragraph-90",
+      "kind": "paragraph",
+      "text": "The truth of the matter is a company this size doesn’t run in any one person’s brain. And in a way. it’s much better a way to run the company, because now every day we have a whole group that’s involved in the company strategy as opposed to just a handful of people who are involved in the whole company strategy. And I think it lets us go stronger and deeper as a leadership team, frankly, than our old approach."
+    },
+    {
+      "blockId": "paragraph-91",
+      "kind": "paragraph",
+      "text": "Lisa Brummel maybe wants to make a comment or two also."
+    },
+    {
+      "blockId": "paragraph-92",
+      "kind": "paragraph",
+      "text": "LISA BRUMMEL: I’ll just add that I think bureaucracy stems from people trying to translate how they should work together. And when you have singular units, you have to put in a lot of translation layers. As we go to one strategy and one team, there’s a lot less translation that needs to happen, and I think that’s what you’re going to see going forward."
+    },
+    {
+      "blockId": "paragraph-93",
+      "kind": "paragraph",
+      "text": "FRANK SHAW : Great. Thank you, and we have time for one more question, Operator."
+    },
+    {
+      "blockId": "paragraph-94",
+      "kind": "paragraph",
+      "text": "(Operator Direction.)",
+      "duplicateOf": "web_amy_hood_microsoft_linkedin_conference_call:paragraph-6"
+    },
+    {
+      "blockId": "paragraph-95",
+      "kind": "paragraph",
+      "text": "RICHARD WATERS, Financial Times: Thank you. Hello. Does this mean that senior managers won’t have direct profit/loss account responsibility that they might have had before? And, if so, how are you going to hold people accountable, and what kind of measures are you going to use; what kind of incentives and measures are actually going to make this new senior management team work?"
+    },
+    {
+      "blockId": "paragraph-96",
+      "kind": "paragraph",
+      "text": "STEVE BALLMER: Suffice it to say, the level of accountability we all feel for the success of the company rises when we all have to look at the company’s integrated profitability. I’ll let Amy talk a little bit about sort of the concepts. I don’t know that we’ll go into the specifics, but the concepts in terms of how we’re thinking. And there are pieces, obviously, that will have to have attention."
+    },
+    {
+      "blockId": "paragraph-97",
+      "kind": "paragraph",
+      "text": "When it comes time to how we’re doing with our consulting business, which is a multibillion dollar business that doesn’t get discussed much, I think we’re all pretty clear. Kevin is on point. He thinks about it. He lives it. He eats it. He breathes it. He sleeps it every day. And I sleep well knowing that. There will be pieces, but I think the problem we’ve had in a sense — not the problem, but the opportunity we have — is if you subdivide the thing into too fine a set of parts you don’t think about your R&D investments as a general corporate resource that should be repurposed and used very broadly. It’s my resources, my business, and so this notion even from a P&L and resourcing perspective of getting to a one Microsoft strategy is very important, and yet we need to have strong financial accountability, and maybe Amy can talk about that."
+    },
+    {
+      "blockId": "paragraph-98",
+      "kind": "paragraph",
+      "text": "AMY HOOD: Yes, I would not say that I wouldn’t necessarily associate this new org chart to any reduction in accountability from a financial perspective. I think we have always thought about personal accountability around this table to product success. And I think that will not change in the new organizational structure. Steve’s used words like that already. I think whether we call it accountability or a P&L or financial accountability, it will still remain just as it has in the past."
+    },
+    {
+      "blockId": "paragraph-99",
+      "kind": "paragraph",
+      "text": "STEVE BALLMER: In fact, because of the focus on increasing discipline expertise, particularly in a devices-and-services world, we have a basis to improve our financial accountability particularly in these new delivery formats where frankly it’s different to deliver something that has production costs than it is software, which basically has no production costs, and we’re going to get excellent at that, and part of accountability and excellence is what drives us in this transformation."
+    },
+    {
+      "blockId": "paragraph-100",
+      "kind": "paragraph",
+      "text": "FRANK SHAW : Thank you very much. That wraps up our Q&A. We appreciate you taking the time today and the opportunity for us to talk a little bit more about what we announced today, and that concludes our event."
+    },
+    {
+      "blockId": "paragraph-101",
+      "kind": "paragraph",
+      "text": "Thank you.",
+      "duplicateOf": "earnings_fy2022_q4:turn-33"
+    },
+    {
+      "blockId": "paragraph-102",
+      "kind": "paragraph",
+      "text": "END",
+      "duplicateOf": "web_amy_hood_annual_shareholders_meeting_2022:paragraph-216"
+    },
+    {
+      "blockId": "paragraph-103",
+      "kind": "paragraph",
+      "text": "Related",
+      "duplicateOf": "web_amy_hood_microsoft_linkedin_conference_call:paragraph-68"
+    }
+  ]
+}

@@ -1,0 +1,1113 @@
+{
+  "sourceId": "web_amy_hood_annual_shareholders_meeting_2022",
+  "title": "Microsoft Annual Shareholders Meeting 2022",
+  "sourceType": "presentation",
+  "sourceUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/annual-shareholders-meeting-2022",
+  "sourcePath": null,
+  "collectedAt": "2026-07-13T07:03:33.728Z",
+  "sha256": "e11646574f2b6a73b854c3f28488381a0c64252608c6dd0d0dec92cd21814c36",
+  "format": "normalized_json",
+  "collectionStatus": "complete",
+  "blocks": [
+    {
+      "blockId": "paragraph-1",
+      "kind": "paragraph",
+      "text": "Microsoft Annual Shareholders Meeting"
+    },
+    {
+      "blockId": "paragraph-2",
+      "kind": "paragraph",
+      "text": "Tuesday, December 13, 2022 Virtual Meeting"
+    },
+    {
+      "blockId": "paragraph-3",
+      "kind": "paragraph",
+      "text": "Transcript",
+      "duplicateOf": "web_amy_hood_ai_discussion_with_kevin_scott:paragraph-3"
+    },
+    {
+      "blockId": "paragraph-4",
+      "kind": "paragraph",
+      "text": "Microsoft Annual Shareholders Meeting John Thompson - Lead Independent Director, Microsoft Hossein Nowbar - CVP, General Counsel & Corporate Secretary Amy Hood - EVP & Chief Financial Officer Brett Iversen - Vice President, Investor Relations Satya Nadella - Chairman & Chief Executive Officer Brad Smith: Vice Chair & President"
+    },
+    {
+      "blockId": "paragraph-5",
+      "kind": "paragraph",
+      "text": "Tuesday, December 13, 2022"
+    },
+    {
+      "blockId": "paragraph-6",
+      "kind": "paragraph",
+      "text": "INVESTOR NOTICE: Today’s presentation may contain forward-looking statements which are any predictions, projections or other statements about future events based on current expectations and assumptions."
+    },
+    {
+      "blockId": "paragraph-7",
+      "kind": "paragraph",
+      "text": "Actual results may differ materially from these forward-looking statements because of a variety of risks and uncertainties about our business which are discussed today or described in our filing with the Securities and Exchange Commission, including our forms 10K and 10Q. We do not undertake any duties to update forward-looking statements."
+    },
+    {
+      "blockId": "paragraph-8",
+      "kind": "paragraph",
+      "text": "Portions of this presentation are pre-recorded. The Q&A session will be live."
+    },
+    {
+      "blockId": "paragraph-9",
+      "kind": "paragraph",
+      "text": "(Video segment.)"
+    },
+    {
+      "blockId": "paragraph-10",
+      "kind": "paragraph",
+      "text": "JOHN THOMPSON: Welcome, I’m John Thompson, Lead Independent Director of the Microsoft Board of Directors. Our annual shareholder meeting is an important opportunity to connect with shareholders from around the world. With that in mind, we’re also broadcasting this meeting through Microsoft Teams on the Investor Relations website and providing real-time language translation through Microsoft Translator. Wherever you are in the world, we appreciate you joining us."
+    },
+    {
+      "blockId": "paragraph-11",
+      "kind": "paragraph",
+      "text": "To kick things off, I’ll be sharing a few thoughts on Microsoft from my perspective on the Board of Directors. After that, Hossein Nowbar, our Corporate Vice President, General Counsel and Corporate Secretary will conduct the business and procedural portions of the meeting. Then Amy Hood, our Executive Vice President and Chief Financial Officer, will review Microsoft’s financial results and business highlights. And finally, Satya Nadella, our Chairman and Chief Executive Officer, will discuss Microsoft’s historic opportunities and responsibilities to a world in the midst of economic, social and geopolitical change. Following Satya’s remarks, we’ll have a live Q&A session that will also include Microsoft’s Vice Chair and President, Brad Smith."
+    },
+    {
+      "blockId": "paragraph-12",
+      "kind": "paragraph",
+      "text": "As I look back at our past fiscal year, I am proud that Microsoft once again set record financial performance. And I’m just as proud of how the company and its employees have helped our customers and partners to advance their missions amidst the turbulent global environment. Geopolitical and economic risk continue, and the short-term economic environment has grown even more challenging. Microsoft’s Board of Directors and executive team are deeply engaged in making decisions that are responsive to current economic conditions, while continuing to position the company for the long term."
+    },
+    {
+      "blockId": "paragraph-13",
+      "kind": "paragraph",
+      "text": "In doing so, we consider the needs of a broad range of stakeholders, including employees, customers, partners, suppliers, the communities we operate in, and of course our shareholders. As we look to the year ahead, we remain focused on strategic growth markets, creating shareholder value and the positive impacts the company has on the global scale. We have received several questions from shareholders that relate to the composition, size and role of the Board of directors. So let me speak to that for a moment."
+    },
+    {
+      "blockId": "paragraph-14",
+      "kind": "paragraph",
+      "text": "The board works closely with management to provide oversight and counsel related to long-term strategy, risk and opportunities and feedback from shareholders. The board’s four standing committees provide strategic oversight in their areas of focus. The board also oversees business affairs, integrity, risk management, CEO succession planning, and performs the annual CEO evaluation."
+    },
+    {
+      "blockId": "paragraph-15",
+      "kind": "paragraph",
+      "text": "As Lead Independent Director, I work to facilitate our board’s independent oversight of management, promote communications between management and our board, and support our board’s consideration of key governance matters. Satya has primary responsibility for the operational leadership and strategic direction of the company as our Chief Executive Officer and Chairman of the Board."
+    },
+    {
+      "blockId": "paragraph-16",
+      "kind": "paragraph",
+      "text": "The Board nominates a slate of directors it believes is the right size to operate efficiently and effectively as a group and in committees. The Board of Directors believes that having a diverse mix of directors with complementary qualifications, expertise and attributes is essential to meeting its overall responsibility. The 2022 Proxy statement provides additional information about the board and individual directors."
+    },
+    {
+      "blockId": "paragraph-17",
+      "kind": "paragraph",
+      "text": "On behalf of the board, we thank you for the trust you place in us and the opportunity to serve you and our company as directors."
+    },
+    {
+      "blockId": "paragraph-18",
+      "kind": "paragraph",
+      "text": "And now I’d like to call the 2022 Shareholder Metting to order. I’ll be serving as the chair of the meeting and Hossein will serve as the secretary. As chair of the meeting, I’ve adopted an agenda that will govern the order of business and the rules of conduct for the meeting. Copies of the agenda and the rules are available on the virtual meeting site, as well as the annual meeting page on the Investor Relations website."
+    },
+    {
+      "blockId": "paragraph-19",
+      "kind": "paragraph",
+      "text": "The rules of conduct also include the Q&A sessions. Hossein will now report the notice of the meeting, the proxies received and present the matters to be voted on. Hossein."
+    },
+    {
+      "blockId": "paragraph-20",
+      "kind": "paragraph",
+      "text": "HOSSEIN NOWBAR: Thank you, John. Welcome, everyone. I’ll walk us through the formal meeting and then as John said, you’ll hear from Amy and Satya, followed by a Q&A session. The polls are open and will close following the presentation of our business matters. If you already voted, you do not need to take any additional action unless you wish to change your vote, which you can do now before the closing of the polls. The company has appointed Broadridge to serve as the Inspector of Election. A representative of Broadridge is participating by conference call and serving as the Inspector. Representatives of our independent auditor, Deloitte and Touche, are also joining by conference call."
+    },
+    {
+      "blockId": "paragraph-21",
+      "kind": "paragraph",
+      "text": "In order to provide our shareholders with the broadest opportunity to ask questions. we’ve had the shareholder question portal open since November 1st on the Proxy Vote website. Shareholders wishing to ask any questions now may do so on the virtual meeting portal. We plan to take both pre-submitted and live questions during the Q&A session. We’ll address as many questions as time allows during the Q&A session."
+    },
+    {
+      "blockId": "paragraph-22",
+      "kind": "paragraph",
+      "text": "The notice of the meeting and the internet availability of the proxy materials were mailed by Broadridge beginning October 27, 2022 and went to all shareholders of record as of October 12, 2022. As a result, the meeting is being held pursuant to proper notice. Based on the shareholders proxies received, Broadridge reports that a quorum of shareholders is present to conduct this meeting."
+    },
+    {
+      "blockId": "paragraph-23",
+      "kind": "paragraph",
+      "text": "Today we have three management proposals and six shareholder proposals for you to consider. They were all described in the Proxy statement for this year’s meeting. The first item is the election of directors. The following 12 individuals have been properly nominated by the board. Reid Hoffman. Hugh Johnston. Terry List, Satya Nadella, Sandra Peterson, Penny Pritzker, Carlos Rodriguez, Charles Scharf, John Stanton, John W. Thompson, Emma Walmsley and Padmasree Warrior. The board recommends a vote for each nominee. Our board nominees are attending today’s meeting via Microsoft Teams."
+    },
+    {
+      "blockId": "paragraph-24",
+      "kind": "paragraph",
+      "text": "The second item is an advisory vote to approve executive compensation as disclosed in the company’s Proxy statement. The board recommends a vote for this proposal. For the third item, we ask that you ratify the selection of the company’s independent auditor, Deloitte and Touche, for fiscal year 2023. The board recommends a vote for this proposal."
+    },
+    {
+      "blockId": "paragraph-25",
+      "kind": "paragraph",
+      "text": "The next six items are shareholder proposals. These are set forth in the proxy statement, along with the proponents supporting statements and Microsoft’s opposition statements. First as a shareholder proposal submitted by Ridgeline Research requesting Microsoft provide a cost benefit analysis of diversity and inclusion. Please play the video introducing the proposal."
+    },
+    {
+      "blockId": "paragraph-26",
+      "kind": "paragraph",
+      "text": "WILLIAM FLAIG: Good morning, shareholders and board members. My name is William Flaig, Founder and CEO of Ridgeline Research, the investment advisor to the American Conservative Values ETF. On behalf of its shareholders, I move for shareholder proposal number one, requesting that Microsoft issue a public report detailing a cost benefit analysis of the global diversity and inclusion efforts. A summary of the results should subsequently be included in the next annual update of Microsoft’s Global Diversity and Inclusion report. This is a pro shareholder proposal. We view all corporations as being organized to provide the best quality goods and services to their customers while maximizing the return to the investors who fund the company. As shareholders, we feel Microsoft’s current global Diversity and Inclusion report lacks a quantified net benefit to shareholders and is thus incomplete."
+    },
+    {
+      "blockId": "paragraph-27",
+      "kind": "paragraph",
+      "text": "Shareholders recommend that the report evaluate any risks, benefits and costs associated with Microsoft’s Global Diversity and Inclusion program, presented an objective, quantifiable manner which will allow a quantitative cost benefit analysis. We feel management’s statement in opposition misses the point. Their position that justification undercuts what they know to be true belittles our treatment right as shareholders to question their truth. We have no insight into the results of the requested. Our request gives Microsoft the freedom to take initiative in setting the terms and the framework of the calculation."
+    },
+    {
+      "blockId": "paragraph-28",
+      "kind": "paragraph",
+      "text": "Management also hasn’t raised any objections to the practicality of calculating the cost benefit. This proposal is an opportunity for our company to take a leadership role on the issue of diversity and inclusion, going beyond blind faith by demonstrating its value to the bottom line. I encourage all shareholders to vote for shareholder proposal number one, requesting a cost benefit analysis of Microsoft’s Global Diversity and Inclusion efforts. Thank you."
+    },
+    {
+      "blockId": "paragraph-29",
+      "kind": "paragraph",
+      "text": "HOSSEIN NOWBAR: Our leadership and board believe diversity and inclusion is fundamental to Microsoft’s long-term success. We provide more information on our diversity and inclusion programs and policies in our annual Global Diversity and Inclusion Report. To single out diversity and inclusion initiatives as requiring a public justification of cost and benefits would undercut the importance of these initiatives to Microsoft and our shareholders, particularly when we believe this request is motivated by skepticism of those benefits."
+    },
+    {
+      "blockId": "paragraph-30",
+      "kind": "paragraph",
+      "text": "As a result, the board recommends a vote against this proposal."
+    },
+    {
+      "blockId": "paragraph-31",
+      "kind": "paragraph",
+      "text": "Next is a shareholder proposal submitted by NorthStar Asset Management requesting that Microsoft report on our hiring of those with arrest and incarceration records. Please play the video introducing the proposal."
+    },
+    {
+      "blockId": "paragraph-32",
+      "kind": "paragraph",
+      "text": "NORTHSTAR ASSET MANAGEMENT: Good morning. My name is Tenzing Tashishar of NorthStar Asset Management, a socially responsible investment firm and shareholder of Microsoft common stock. Today I am presenting shareholder resolution number two, proxy item number five. Microsoft made a commitment to fair chance employment practices when management signed the Fair Chance Business Pledge in 2015 and joined the Second Chance Business Coalition."
+    },
+    {
+      "blockId": "paragraph-33",
+      "kind": "paragraph",
+      "text": "Although we commend these actions, the company’s hiring process falls short of exhibiting best practices in hiring from this pool of talent. Fair Chance Employers are not blind to criminal records. Hiring managers still perform background checks and consider suitability. Given the disproportionately high incarceration rates of Black and brown people in the U.S., the company is ignoring an opportunity to combine our commitment to the Fair Chance Pledge and our publicly stated commitment to diversity, equity and inclusion."
+    },
+    {
+      "blockId": "paragraph-34",
+      "kind": "paragraph",
+      "text": "According to the NWACP, white men with a criminal record are more likely to get an interview than Black men with no criminal record. And studies have shown that Black American men with criminal records experience a 65% reduction in job callbacks. Getting a job once you have a criminal record is compounded by racial discrimination. Our proposal is about fair chance employment, the recruitment of people with criminal records that may help solve critical labor shortages and improve the U.S. economy long term."
+    },
+    {
+      "blockId": "paragraph-35",
+      "kind": "paragraph",
+      "text": "However, any consideration of policies related to the U.S. criminal justice system needs to be analyzed with an eye towards routing out racial inequity. While Microsoft management has made commitments to advance fair chance hiring practices and a diverse workforce, insufficient tracking, analysis and concrete measures of success towards accomplishing these dual, yet intersectional, goals may lead to failure, and worse, to costly accusations of discrimination"
+    },
+    {
+      "blockId": "paragraph-36",
+      "kind": "paragraph",
+      "text": "Let’s make sure we are successful in our commitments. We believe it’s clear that offering a fair chance of employment to people with arrest or incarceration records must be developed in tandem with an examination of racial equity. Otherwise, it’s entirely possible that company practices may be unknowingly perpetuating racial inequity. We know that’s not what Microsoft wants."
+    },
+    {
+      "blockId": "paragraph-37",
+      "kind": "paragraph",
+      "text": "While we appreciate the steps the company is taking on this issue, we urge Microsoft to take the next steps towards best practices in fair chance employment. Shareholders, we urge you to vote for shareholder proposal number two, item number five on proxy. Thank you."
+    },
+    {
+      "blockId": "paragraph-38",
+      "kind": "paragraph",
+      "text": "HOSSEIN NOWBAR: Microsoft has a demonstrated history of providing an inclusive workplace free of unnecessary barriers to those with criminal records. This includes data we have previously publicly reported that for the last two years, an overwhelming 98% of the time we proceeded with a hire offer after a candidate was flagged with a criminal background during the hiring process. We’re also investing in new partnerships to provide training and employment opportunities to people with criminal records."
+    },
+    {
+      "blockId": "paragraph-39",
+      "kind": "paragraph",
+      "text": "For these reasons, which we detailed in the proxy, the board recommends a vote against the proposal."
+    },
+    {
+      "blockId": "paragraph-40",
+      "kind": "paragraph",
+      "text": "As You Sow, and its co-filers submitted the next shareholder proposal requesting a report on investment of retirement funds in companies contributing to climate change. Please play the video introducing the proposal."
+    },
+    {
+      "blockId": "paragraph-41",
+      "kind": "paragraph",
+      "text": "MAREN COSTA: Hello, I’m Maren Costa. I’m a Microsoft employee. And today I’m representing, As You Sow, on proposal number three on the proxy statement. This proposal asks Microsoft to report on how the company is managing the growing systemic risk created by investing retirement plan funds in companies that contribute significantly to climate change. Recognizing the growing risks of climate change to the company’s bottom line, Microsoft has adopted ambitious, aspirational climate goals, including a commitment to become carbon negative by 2030, as well as a goal to reach 100% renewable energy by 2025."
+    },
+    {
+      "blockId": "paragraph-42",
+      "kind": "paragraph",
+      "text": "Microsoft has also backed up its climate goals with action, like creating a $1 billion climate innovation fund. Yet the company is investing over $2 billion of our employee 401(k) savings into oil, coal-fired utilities and agribusinesses involved in deforestation. This creates cognitive dissonance that undermines our favorable reputation as the industry leader on climate, as well as financial risk for the company and long-term risk for employees’ retirement savings."
+    },
+    {
+      "blockId": "paragraph-43",
+      "kind": "paragraph",
+      "text": "As climate change drives the world to rapidly transition away from an extractive economy, investments in fossil fuels will experience unpredictable diminishing returns. A report from the Carbon Disclosure Project indicates that 215 of the largest global companies report almost $1 trillion at risk from climate impacts, with many of those losses projected to happen within the next five years."
+    },
+    {
+      "blockId": "paragraph-44",
+      "kind": "paragraph",
+      "text": "Climate-safe investing reduces climate risk, reduces financial risk and generates strong returns. Key findings from a recent Morgan Stanley study of nearly 11,000 mutual funds demonstrates that there’s no financial tradeoff in the returns of sustainable funds and traditional funds."
+    },
+    {
+      "blockId": "paragraph-45",
+      "kind": "paragraph",
+      "text": "Furthermore, what this study doesn’t measure is the future benefits of climate-safe investments to our employees, to the economy and to our future businesses. Employee investments in 401(k) plans generally represent a significant portion of their life savings. Microsoft has a duty to address the growing risk that climate change poses to pension fund assets now and in the future."
+    },
+    {
+      "blockId": "paragraph-46",
+      "kind": "paragraph",
+      "text": "Our savings are exposed to this climate-related financial risk, and currently, Microsoft does not offer any climate-safe investment options inside of our retirement plan. While we do have access to a brokerage window that allows employees to go outside of the plan to find sustainable funds on the open market, this option is not easy to use for the average investor, and more importantly, it outsources investment risk to the employees."
+    },
+    {
+      "blockId": "paragraph-47",
+      "kind": "paragraph",
+      "text": "Given the threat that climate change poses to employees life savings, Microsoft should demonstrate that it is safeguarding employee financial security over time by mitigating climate change-related financial and economic risk as part of a prudently constructed lineup of easily accessed sustainable options inside of the plan."
+    },
+    {
+      "blockId": "paragraph-48",
+      "kind": "paragraph",
+      "text": "I know that Microsoft means well by its employees. Now it’s time for Microsoft to step up and actually do well for those employees. By taking climate risk into account in our 401(k) plan, Microsoft can lead its peers to help a bet help build a better future into which employees will retire. This is not a difficult change to implement. It merely takes the board and management to agree that offering employees easy access to a climate-safe retirement is in everyone’s best interest."
+    },
+    {
+      "blockId": "paragraph-49",
+      "kind": "paragraph",
+      "text": "We urge a yes vote on proposal number three. Thank you for the opportunity to present on this important issue."
+    },
+    {
+      "blockId": "paragraph-50",
+      "kind": "paragraph",
+      "text": "HOSSEIN NOWBAR: We appreciate Maren’s perspective. Over the past several years, we’ve addressed feedback from our employees and made it much easier for participants in the Microsoft 401(k) plan to access hundreds of climate-friendly and ESG investments. To clarify an important point, the 401(k) plan is participant directed, meaning Microsoft does not itself invest participants 401(k) funds. Rather, the plan’s governing committee follows a set of strict federal requirements and considers a wide range of factors to make sure participants have a menu of prudent and diverse investment options to choose from. And the committee continues to evaluate legal requirements and investment options as they evolve. We will continue engaging with employees like Maren to understand how to serve them best."
+    },
+    {
+      "blockId": "paragraph-51",
+      "kind": "paragraph",
+      "text": "Given this and the other points we shared in the proxy, the board recommends a vote against the proposal."
+    },
+    {
+      "blockId": "paragraph-52",
+      "kind": "paragraph",
+      "text": "The next shareholder proposal was submitted by Boston Common Asset Management and Impact Investors and requests an independent report on government use of Microsoft technology, including defense contracts. Please play the video introducing the proposal."
+    },
+    {
+      "blockId": "paragraph-53",
+      "kind": "paragraph",
+      "text": "LAUREN COMPERE: I’m Lauren Compere, Head of Stewardship and Engagement at Boston Common Asset Management, the lead filer of shareholder proposal four, defense customer use of Microsoft technology. We’re joined by Impact Investors as a co-filer."
+    },
+    {
+      "blockId": "paragraph-54",
+      "kind": "paragraph",
+      "text": "Microsoft advances the UN Sustainable Development Goals, established principles for responsible use of artificial intelligence (AI), and recognizes privacy as a fundamental human right. Microsoft demands the same ethics in its supply chain. Well, Microsoft has established principles for responsible use of AI, these do not cover all products and services related to military contracts."
+    },
+    {
+      "blockId": "paragraph-55",
+      "kind": "paragraph",
+      "text": "Boston Common appreciates the longstanding engagement relationship we have with the company on a variety of issues. We support the steps Microsoft recently has taken to commission an independent human rights assessment report. We understand the report is intended to identify, understand, assess and address actual or potential human rights impacts of Microsoft’s products and services and the business relationships and rights holders."
+    },
+    {
+      "blockId": "paragraph-56",
+      "kind": "paragraph",
+      "text": "However, what was not clear at the time we withdrew the 2021 shareholder proposal was that military contractors were not in scope. Further, while there’s been some discussion of commissioning a separate assessment, Microsoft has not been willing to work on or commit to if or when this might happen."
+    },
+    {
+      "blockId": "paragraph-57",
+      "kind": "paragraph",
+      "text": "As long-term investors In Microsoft, we have increasing concerns over the human and civil rights implications of the use of some of Microsoft’s technology by military and the use of surveillance. We believe that human rights, due diligence, and impact assessment should be embedded from the product design to the end user application. Not doing so leads to reputation and brand risk for Microsoft."
+    },
+    {
+      "blockId": "paragraph-58",
+      "kind": "paragraph",
+      "text": "The resolution makes the case that the company’s standing as a socially responsible corporate stock holding could be jeopardized by the company’s lacking a human rights policy covering military contracts. This concern comes after Microsoft recently won a large contract with the U.S. Army for its HoloLens product, which has moved from a prototype to a 21 billion integrated visual augmentation system (IVAS) production contract for a military version to enable enhanced vision using AI-powered technology."
+    },
+    {
+      "blockId": "paragraph-59",
+      "kind": "paragraph",
+      "text": "The resolution calls for the company’s board to commission an independent report to assess whether governmental customer use of Microsoft’s technology, including defense contract use, does or can contribute to violations of privacy, civil and human rights, and conflicts with the policies and principles set forth in Microsoft’s public disclosures."
+    },
+    {
+      "blockId": "paragraph-60",
+      "kind": "paragraph",
+      "text": "We are shareholders of Microsoft to vote in favor of shareholder proposal four. Thank you."
+    },
+    {
+      "blockId": "paragraph-61",
+      "kind": "paragraph",
+      "text": "HOSSEIN NOWBAR: Microsoft has worked with the U.S. Department of Defense for four decades. As Microsoft bid on some significant new military contracts over the past several years, our senior leadership team deliberated and affirmed the principle that we should not withhold technology from defense institutions to protect the freedoms we enjoy. You can read more about our principles in the proxy. With this in mind, the board recommends a vote against the proposal."
+    },
+    {
+      "blockId": "paragraph-62",
+      "kind": "paragraph",
+      "text": "Harrington Investments submitted a similar shareholder proposal requesting a report on Microsoft’s development of products for the military. Please play the video introducing the proposal."
+    },
+    {
+      "blockId": "paragraph-63",
+      "kind": "paragraph",
+      "text": "HARRINGTON INVESTMENTS: An ode to a false technology, is this the question to kill or be killed? For a true video game, that must be the thrill. Gears of War, Call of Duty or Halo of War 4, it must be to speak of opening the door. To the fun of war and death only for soldiers real, is the fantasy of money that makes the deal. Our company preaches shareholders not to withhold tech, but shouldn’t it always deal from the top of the deck?"
+    },
+    {
+      "blockId": "paragraph-64",
+      "kind": "paragraph",
+      "text": "It’s best to engage us before the beast is loose and much before investors necks are in the noose. Our employees implore our company to desist from inserting into its DNA the war machine young customers can’t resist."
+    },
+    {
+      "blockId": "paragraph-65",
+      "kind": "paragraph",
+      "text": "Now our company has said goodbye to a hundred or more to Meta pleasantly opening its door. Materialistic self-interest that is embedded in our heart with a fiduciary duty bound in moral law that never got a start."
+    },
+    {
+      "blockId": "paragraph-66",
+      "kind": "paragraph",
+      "text": "Our company repeats its pledge of a principled approach in pursuing military contracts of no reproach. As billions flow to weapons of war, our company demeans human life from afar. While visions of sugar plums danced in their heads, little boys now see shadows of creating the dead. It’s all a game for children to play and for soldiers of war who have no say."
+    },
+    {
+      "blockId": "paragraph-67",
+      "kind": "paragraph",
+      "text": "In the basement of headsets in Building 92, our camera sensors, radios and night visions should not rule. It’s a hot technology that’s heavy, bulky and bright, perhaps better now to fit into the enemy’s deadly sights. The device could have gotten us killed, one tester said. As with any technology, there’s no failsafe for anyone if dead."
+    },
+    {
+      "blockId": "paragraph-68",
+      "kind": "paragraph",
+      "text": "We ESG investors fear our company has lost its heart to war games that play a major part. What is important is our company’s lack of soul. What is truly needed is a return to a fiduciary mold, which consists of all the company’s products and services bound to a high moral duty that is sound."
+    },
+    {
+      "blockId": "paragraph-69",
+      "kind": "paragraph",
+      "text": "I have a question for our board of directors. Aren’t there always alternative decisions that can be intended, and can be morally and legally defended, that will not result in death and destruction, but lead to additional life and positive construction?"
+    },
+    {
+      "blockId": "paragraph-70",
+      "kind": "paragraph",
+      "text": "This last appeal for a sensible solution might actually, indeed, create a real revolution. Fiduciary duty is rooted in theological teachings based upon an agent’s moral duty to serve others. Please vote yes on Proposal 5. I move this resolution."
+    },
+    {
+      "blockId": "paragraph-71",
+      "kind": "paragraph",
+      "text": "HOSSEIN NOWBAR: As I shared responding to the previous proposal, at Microsoft, we have taken a serious and principled approach to our work helping democracies advance a range of government roles, including defense. Thus, the Board recommends a vote against the proposal."
+    },
+    {
+      "blockId": "paragraph-72",
+      "kind": "paragraph",
+      "text": "Finally, AkademikerPension and several co-filers submitted a proposal requesting tax transparency reporting. Please play the video introducing the proposal."
+    },
+    {
+      "blockId": "paragraph-73",
+      "kind": "paragraph",
+      "text": "AKADEMIKERPENSION: Dear fellow shareholders and members of the Board of Directors, my name is Troels Børrild. And today, I represent the AkademikerPension, and our proposal co-filers, PenSam Asset Management, Greater Manchester Pension Fund and OIP Trust."
+    },
+    {
+      "blockId": "paragraph-74",
+      "kind": "paragraph",
+      "text": "I’m pleased to move shareholder Proposal 6. Our proposal calls on Microsoft to align with other leading multinational companies, and use the Global Reporting Initiative, GRI, tax standard. The GRI is the most widely used sustainability standard worldwide and is the only comprehensive global tax reporting standard today."
+    },
+    {
+      "blockId": "paragraph-75",
+      "kind": "paragraph",
+      "text": "The transition of the GRI standard will not require a drastic transformation for our company. Microsoft already submits country-by-country reporting to OECD tax authorities privately. Any burdens to our companies should be minimal. The GRI tax standard provides transparency of our company’s approach to taxes, tax governance, controls and risk management, stakeholder engagement related to taxes, and perhaps most importantly, public country-by-country tax reporting."
+    },
+    {
+      "blockId": "paragraph-76",
+      "kind": "paragraph",
+      "text": "In a world faced by multiple crises, the scrutiny of corporate tax payments is likely to increase, year on year. If investors are to make informed assessments of Microsoft’s tax strategy and the company’s tax risks, we need accurate, accessible and transparent data on a country-by-country basis."
+    },
+    {
+      "blockId": "paragraph-77",
+      "kind": "paragraph",
+      "text": "We have taken note of the opposition statement from management. Indeed, peers do not provide tax transparency at the moment. We think this is likely to change in coming years, however, and that front running companies stand to benefit from staying ahead of the curve. We encourage the Board to demonstrate leadership and embrace tax transparency, and we urge fellow shareholders to consider voting for a shareholder Proposal 6. Thank you."
+    },
+    {
+      "blockId": "paragraph-78",
+      "kind": "paragraph",
+      "text": "HOSSEIN NOWBAR: Microsoft already provides many tax disclosures in the jurisdictions around the world. We expect to comply with additional reporting requirements from the European Union in the next few years. We’re also supporting efforts by the Organization for Economic Cooperation and Development, the OECD, to facilitate new tax reform and transparency requirements, which are expected to come into force in 2024."
+    },
+    {
+      "blockId": "paragraph-79",
+      "kind": "paragraph",
+      "text": "We believe it makes sense to begin additional reporting in line with these well-established approaches, rather than making new, voluntary disclosures right before they come into effect. For these reasons, the board recommends a vote against the proposal."
+    },
+    {
+      "blockId": "paragraph-80",
+      "kind": "paragraph",
+      "text": "Now, I’ll share with you the preliminary results of voting."
+    },
+    {
+      "blockId": "paragraph-81",
+      "kind": "paragraph",
+      "text": "First, all 12 director nominees on the ballot are elected. They serve until the next annual shareholder meeting and until their successors are elected and qualified."
+    },
+    {
+      "blockId": "paragraph-82",
+      "kind": "paragraph",
+      "text": "Proposal 2, the Advisory Vote on Executive Compensation, has been approved."
+    },
+    {
+      "blockId": "paragraph-83",
+      "kind": "paragraph",
+      "text": "Proposal 3, Ratification of the Company’s Auditor, Deloitte & Touche, has been approved."
+    },
+    {
+      "blockId": "paragraph-84",
+      "kind": "paragraph",
+      "text": "None of the shareholder proposals were approved."
+    },
+    {
+      "blockId": "paragraph-85",
+      "kind": "paragraph",
+      "text": "The discussion of the matters for shareholder consideration is now closed, and the polls are also now closed. We expect to post the details of the final voting results on these matters within four business days on our Investor Relations website, and in a Form 8-K that will be filed with the Securities and Exchange Commission."
+    },
+    {
+      "blockId": "paragraph-86",
+      "kind": "paragraph",
+      "text": "With that, we’ve completed the formal portion of the meeting, and the meeting is now adjourned. Let me now hand it over to our Executive Vice President and Chief Financial Officer, Amy Hood."
+    },
+    {
+      "blockId": "paragraph-87",
+      "kind": "paragraph",
+      "text": "AMY HOOD: Thank you, Hossein. Hello, everyone, and thank you for joining us today."
+    },
+    {
+      "blockId": "paragraph-88",
+      "kind": "paragraph",
+      "text": "As John mentioned, we were able to deliver record financial performance in FY22. Revenue grew 18% to over $198 billion. Operating income grew 19%, and earnings per share grew 20%. In a dynamic environment, we were able to deliver strong financial results as we continue to focus on helping our customers address their growing need to do more with less."
+    },
+    {
+      "blockId": "paragraph-89",
+      "kind": "paragraph",
+      "text": "To further enhance our talent and capabilities in strategic growth areas, we completed 17 acquisitions in FY22. We welcome Nuance Communications, a trusted cloud and AI software leader, to further our ambition in industry cloud solutions. We also completed the acquisition of Xandr, a leading advertising technology platform, to accelerate delivery of digital advertising and retail media solutions."
+    },
+    {
+      "blockId": "paragraph-90",
+      "kind": "paragraph",
+      "text": "And as we continue to invest in M&A and organic growth in FY22, we also maintained our commitment to capital return, which included a total cash return of $46.6 billion, up 17% from last fiscal year."
+    },
+    {
+      "blockId": "paragraph-91",
+      "kind": "paragraph",
+      "text": "In September, we announced a 10% increase in our quarterly dividend. We completed our prior $40 billion buyback authorization in November 2021 and are now executing against the current $60 billion buyback authorization."
+    },
+    {
+      "blockId": "paragraph-92",
+      "kind": "paragraph",
+      "text": "Now, I’ll share just a few highlights from the past fiscal year."
+    },
+    {
+      "blockId": "paragraph-93",
+      "kind": "paragraph",
+      "text": "Our Microsoft Cloud business surpassed $91 billion in revenue, growing 32% year over year, with strong growth across key services. Azure grew 45%, Office 365 grew 18%, and Dynamics 365 grew 39%."
+    },
+    {
+      "blockId": "paragraph-94",
+      "kind": "paragraph",
+      "text": "We delivered Microsoft Cloud gross margin percentage of 70% through the sustained effort of our engineering, sales and marketing teams, even with continued revenue mix shift to Azure."
+    },
+    {
+      "blockId": "paragraph-95",
+      "kind": "paragraph",
+      "text": "Our server products and cloud services business exceeded $67 billion, up 28% year over year, with strong customer demand for our trusted, differentiated hybrid offerings."
+    },
+    {
+      "blockId": "paragraph-96",
+      "kind": "paragraph",
+      "text": "From both a technology and licensing perspective, we continue to address our customers need for flexible and high-value solutions as they digitally transform and seek to build resilience and be more efficient in this environment."
+    },
+    {
+      "blockId": "paragraph-97",
+      "kind": "paragraph",
+      "text": "Now, let’s turn to progress across Microsoft 365."
+    },
+    {
+      "blockId": "paragraph-98",
+      "kind": "paragraph",
+      "text": "Our Office business again saw double-digit revenue growth as we helped even more commercial and consumer users around the world to be more productive, collaborative and secure. Teams monthly active users exceeded 270 million during the year, and our Microsoft 365 consumer subscription base grew to 59.7 million."
+    },
+    {
+      "blockId": "paragraph-99",
+      "kind": "paragraph",
+      "text": "In Windows, this year, we launched Windows 11, the biggest update to our operating system in a decade. And through the year, we saw higher monthly usage of Windows 11 applications as people continue to rely on the PC for its unique productivity capabilities, interactive experiences, and to stay connected."
+    },
+    {
+      "blockId": "paragraph-100",
+      "kind": "paragraph",
+      "text": "And we drove share gains in our Edge browser through differentiated high-value customer experiences, including built-in shopping tools."
+    },
+    {
+      "blockId": "paragraph-101",
+      "kind": "paragraph",
+      "text": "In Surface, we continue to innovate across our broad portfolio of devices, including Surface Pro and laptop."
+    },
+    {
+      "blockId": "paragraph-102",
+      "kind": "paragraph",
+      "text": "In LinkedIn, revenue surpassed $13 billion, up 34% year over year, with both LinkedIn Talent Solutions and LinkedIn Marketing Solutions, reaching new revenue milestones of $6 billion and $5 billion, respectively, over the past 12 months. And membership grew to more than 850 million professionals."
+    },
+    {
+      "blockId": "paragraph-103",
+      "kind": "paragraph",
+      "text": "In Gaming, revenue exceeded $16 billion and grew 6% year over year as we sold more Series X and S consoles, life to date, than any previous Xbox console generation"
+    },
+    {
+      "blockId": "paragraph-104",
+      "kind": "paragraph",
+      "text": "Now to our current fiscal year."
+    },
+    {
+      "blockId": "paragraph-105",
+      "kind": "paragraph",
+      "text": "We had a solid start to fiscal year ‘23 as first quarter revenue growth of 11% was driven by Microsoft Cloud revenue, which was $25.7 billion, growing 24% year over year. These results would not be possible without the tremendous contribution of the more than 220,000 Microsoft employees around the world."
+    },
+    {
+      "blockId": "paragraph-106",
+      "kind": "paragraph",
+      "text": "Looking forward, we believe that the highest shareholder value is created by investing for the future and creating differentiated high value solutions for every person and organization to achieve more. We continue to see strong demand for our products and services, and increased commitment to our platform as we remain focused on delivering compelling customer value in this dynamic environment, resulting in continued share gains."
+    },
+    {
+      "blockId": "paragraph-107",
+      "kind": "paragraph",
+      "text": "And while we continue to help our customers do more with less, we will do the same internally, maintaining intense focus on operational excellence and execution discipline."
+    },
+    {
+      "blockId": "paragraph-108",
+      "kind": "paragraph",
+      "text": "With that, please join me in welcoming our Chairman and Chief Executive Officer, Satya Nadella."
+    },
+    {
+      "blockId": "paragraph-109",
+      "kind": "paragraph",
+      "text": "SATYA NADELLA: Thank you very much, Amy. And thanks to everyone joining us today and for your continued investment in Microsoft."
+    },
+    {
+      "blockId": "paragraph-110",
+      "kind": "paragraph",
+      "text": "We are living through a period of historic, economic, societal and geopolitical change. But for all the uncertainty in the world, one thing is clear: People and organizations in every industry are increasingly looking to digital technology to overcome today’s challenges and emerge stronger. And no company is better positioned than Microsoft to help customers deliver on their digital imperative to do more with less."
+    },
+    {
+      "blockId": "paragraph-111",
+      "kind": "paragraph",
+      "text": "As Amy mentioned, amid this dynamic environment, we delivered record results in fiscal year ‘22, have reported $198 billion in revenue and $83 billion in operating income, and the Microsoft Cloud surpassed $100 billion in annualized revenue for the first time and is taking share from competition."
+    },
+    {
+      "blockId": "paragraph-112",
+      "kind": "paragraph",
+      "text": "Looking forward, we remain focused on three priorities. First, we’ll invest behind categories that will drive a long-term secular trend where digital technology as a percentage of the world’s GDP will continue to increase. Second, we will prioritize helping our customers get the most value out of their digital spend so that they can do more with less. And finally, we will be disciplined in managing our cost structure."
+    },
+    {
+      "blockId": "paragraph-113",
+      "kind": "paragraph",
+      "text": "Now, I’ll highlight examples of our innovations of the past year"
+    },
+    {
+      "blockId": "paragraph-114",
+      "kind": "paragraph",
+      "text": "We’re building Azure as the world’s computer with more datacenter regions than any other provider, delivering faster access to services while addressing critical data residency requirements."
+    },
+    {
+      "blockId": "paragraph-115",
+      "kind": "paragraph",
+      "text": "We’re not stopping there. With Azure Arc, we’re bringing Azure anywhere, enabling customers to run their applications across on-premises, edge and multi-cloud environments."
+    },
+    {
+      "blockId": "paragraph-116",
+      "kind": "paragraph",
+      "text": "When it comes to data and AI, our new Microsoft Intelligent Data Platform provides a complete data fabric, from the operational stores to the analytics engine to data governance, so customers can spend more time creating value and less time integrating and managing their data estate."
+    },
+    {
+      "blockId": "paragraph-117",
+      "kind": "paragraph",
+      "text": "In AI, we are seeing a paradigm shift as the world’s large AI models become platforms themselves. We’re helping organizations apply these models to a variety of use cases with our Azure Cognitive Services, as well as our new Azure OpenAI service."
+    },
+    {
+      "blockId": "paragraph-118",
+      "kind": "paragraph",
+      "text": "Turning to developers, we have the most popular developer tools for any cloud on any platform to help organizations modernize existing apps and build new ones."
+    },
+    {
+      "blockId": "paragraph-119",
+      "kind": "paragraph",
+      "text": "This year, we introduced GitHub Copilot, a first-of-its-kind AI pair programmer to help developers write better code faster. And organizations are increasingly turning to Visual Studio and our Azure PaaS services to streamline development and create cloud-native applications."
+    },
+    {
+      "blockId": "paragraph-120",
+      "kind": "paragraph",
+      "text": "With Power Platform, we’re also helping domain experts rapidly drive critical productivity gains. We are innovating to make it even easier for fusion teams of professionals and citizen developers to automate workflows, create applications, build virtual agents and analyze data."
+    },
+    {
+      "blockId": "paragraph-121",
+      "kind": "paragraph",
+      "text": "With our portfolio of cloud-native business applications, we are helping every organization bring together people, data and processes, and bridge the digital and physical worlds."
+    },
+    {
+      "blockId": "paragraph-122",
+      "kind": "paragraph",
+      "text": "Our industry and cross-industry clouds bring together capabilities across the tech stack with industry-specific customizations to help organizations improve time to value, increase agility and lower costs."
+    },
+    {
+      "blockId": "paragraph-123",
+      "kind": "paragraph",
+      "text": "We completed our acquisition of Nuance this year, adding new Cloud and Enterprise AI capabilities for healthcare, as well as financial services, retail and telecommunications."
+    },
+    {
+      "blockId": "paragraph-124",
+      "kind": "paragraph",
+      "text": "When it comes to the future of work, every organization is looking to reconnect and reenergize their employees at home, in the office and everywhere in between."
+    },
+    {
+      "blockId": "paragraph-125",
+      "kind": "paragraph",
+      "text": "With Microsoft 365, we have built an end-to-end suite to bring out the creativity and the ingenuity of every member of the workforce."
+    },
+    {
+      "blockId": "paragraph-126",
+      "kind": "paragraph",
+      "text": "Microsoft Teams is the most used and most advanced platform for work, surpassing 270 million monthly active users this year. And it’s the only solution that brings together meetings, calls, chat, collaboration and business process automation in one scaffolding."
+    },
+    {
+      "blockId": "paragraph-127",
+      "kind": "paragraph",
+      "text": "And with Microsoft Viva, we’re building an employee experience platform to empower employees and strengthen their connection to the company’s mission and culture. Take new Viva Goals, which helps everyone in an organization build common understanding in alignment by ensuring objectives and key results are shared in the flow of work."
+    },
+    {
+      "blockId": "paragraph-128",
+      "kind": "paragraph",
+      "text": "This year, we launched Windows 11, the biggest update to our operating system in a decade. It reimagines everything from the user experience to the store, to help people and organizations be more productive, connected and secure, and to build a more open ecosystem for developers and creators."
+    },
+    {
+      "blockId": "paragraph-129",
+      "kind": "paragraph",
+      "text": "Cybersecurity is a top priority for every business. Our goal is to help every organization strengthen its defense through zero trust architecture, built on end-to-end solutions that span all clouds and all platforms."
+    },
+    {
+      "blockId": "paragraph-130",
+      "kind": "paragraph",
+      "text": "LinkedIn has become mission critical to connect creators with their communities, job seekers with jobs, learners with skills, marketeers with buyers."
+    },
+    {
+      "blockId": "paragraph-131",
+      "kind": "paragraph",
+      "text": "More broadly, when it comes to advertising, we offer a trusted platform for any marketeer or advertiser looking to innovate. We have focused on increasing our share and engagement across our browser, Microsoft Edge, our search engine, Microsoft Bing, and our personalized content feed, Microsoft Start. And with our acquisition of Xandr, we now power one of the largest marketplaces for premium advertising."
+    },
+    {
+      "blockId": "paragraph-132",
+      "kind": "paragraph",
+      "text": "In Gaming, we offer the best value in the industry. We sold more Xbox Series S and Series X console, life to date, than any previous generation of Xbox. And with cloud gaming, we’re bringing our games to an entirely new endpoints. Xbox Game Pass now includes access to hundreds of games, including more games from third-party publishers than ever before."
+    },
+    {
+      "blockId": "paragraph-133",
+      "kind": "paragraph",
+      "text": "As our opportunity expands, so does our responsibility to the world around us. To help people and organizations everywhere achieve more, we’ve focused on four interconnected pillars."
+    },
+    {
+      "blockId": "paragraph-134",
+      "kind": "paragraph",
+      "text": "First, we need to ensure the economic growth we drive is inclusive and reaches every person and organization, community and country. Second, we need to protect the fundamental rights of all people, from defending democracy to protecting human rights to addressing racial injustice and inequity. And third, we must protect our most finite resource, the planet. And finally, we must earn trust, both trust in business model alignment and trust in technology, spanning privacy, security, digital safety, and responsible use of AI and transparency."
+    },
+    {
+      "blockId": "paragraph-135",
+      "kind": "paragraph",
+      "text": "Our culture is the foundation on which our mission and strategy stand. We’re always working to close the gap between our espoused culture and the lived experience of our employees."
+    },
+    {
+      "blockId": "paragraph-136",
+      "kind": "paragraph",
+      "text": "Essential to this is our commitment to continually exercise our growth mindset and confront our fixed mindset, with the recognition that while none of us will ever be perfect, we can always be better than we are today. It sustains our everyday practice of customer obsession. It helps us care for our colleagues and collaborate more effectively across the company as One Microsoft. It deeply informs our longstanding commitment to diversity and inclusion."
+    },
+    {
+      "blockId": "paragraph-137",
+      "kind": "paragraph",
+      "text": "In short, the opportunity to apply technology to make a real difference to every customer, community and country has never been greater. And I truly believe if we continue to live our mission, embrace our responsibility and grasp that opportunity, there is no limit to what we can achieve for the world in the year ahead and beyond."
+    },
+    {
+      "blockId": "paragraph-138",
+      "kind": "paragraph",
+      "text": "Thank you all very, very much."
+    },
+    {
+      "blockId": "paragraph-139",
+      "kind": "paragraph",
+      "text": "(Video segment.)",
+      "duplicateOf": "web_amy_hood_annual_shareholders_meeting_2022:paragraph-9"
+    },
+    {
+      "blockId": "paragraph-140",
+      "kind": "paragraph",
+      "text": "BRETT IVERSEN: Hello and welcome to the Q&A portion of the meeting. I’m Brett Iversen, head of Investor Relations at Microsoft. I’m joined by Satya, Amy, and Brad Smith, Microsoft vice chair and president."
+    },
+    {
+      "blockId": "paragraph-141",
+      "kind": "paragraph",
+      "text": "We want to thank you for all the questions you submitted in advance. We’ll try to get to as many as we can. As we reviewed the submissions, there were several questions on similar topics. So we’ve selected a representative question from those submitted to answer today. So let’s go ahead and get started."
+    },
+    {
+      "blockId": "paragraph-142",
+      "kind": "paragraph",
+      "text": "Satya, in conversations with investors, they ask a lot about the macroeconomic environment and what Microsoft has seen from our customers. You talk about doing more with less. Can you share what this means for customers and the challenges and opportunities this presents?"
+    },
+    {
+      "blockId": "paragraph-143",
+      "kind": "paragraph",
+      "text": "SATYA NADELLA: Absolutely. Brett. Thank you so much for the question. Yeah, I mean, this is definitely front and center for all of our customers right now, and it comes in two forms. One is what you said, which is, in an environment of demand uncertainty and high inflation, how can we do more with less? And also there is a long-range question, which is how can we be more competitive even coming out of this cycle? How can we drive long-term productivity? I think in both these contexts, digital technology is the most malleable resource we have to help overcome these constraints."
+    },
+    {
+      "blockId": "paragraph-144",
+      "kind": "paragraph",
+      "text": "On the first one, for example, in terms of doing more with less, take even demand uncertainty. The best way for any retailer or any packaged goods company or any company for that matter, moving to the cloud is the most capital efficient way to deal with demand uncertainty. In fact, it’s the most energy efficient way at a time when energy prices are going up."
+    },
+    {
+      "blockId": "paragraph-145",
+      "kind": "paragraph",
+      "text": "So I think up and down the stack, whether it’s more workflow automation or how you manage the cyber risk with the best of suite approach, doing more with less is, I think, one of the most critical things that any customer can be doing to just take their current budgets or even reduced budgets and making sure that those budgets are performing for their company and their competitiveness in the short run."
+    },
+    {
+      "blockId": "paragraph-146",
+      "kind": "paragraph",
+      "text": "In the long run, I would also say that, again, digital technology, right? If you think about it, five years from now, will any retailer be competitive if they are not best in class in omnichannel? Will any manufacturer who is not using digital twins to optimize energy usage and reduce waste and water be competitive in the manufacturing output? I don’t think so."
+    },
+    {
+      "blockId": "paragraph-147",
+      "kind": "paragraph",
+      "text": "Therefore, again, every company needs to invest both in their ability to overcome the short run challenge of doing more with less but come out of the cycle with long run competitiveness and productivity. And that’s where the Microsoft Cloud, we’ve designed it specifically to be able to address those needs."
+    },
+    {
+      "blockId": "paragraph-148",
+      "kind": "paragraph",
+      "text": "BRETT IVERSEN: Thanks for kicking us off, and that’s a good segue to the next question."
+    },
+    {
+      "blockId": "paragraph-149",
+      "kind": "paragraph",
+      "text": "Amy, investors are also interested in how the company balances investments in strategic growth, while managing costs in an uncertain economic environment. Can you share how you approach striking this balance?"
+    },
+    {
+      "blockId": "paragraph-150",
+      "kind": "paragraph",
+      "text": "AMY HOOD: this is something we’ve actually done for, gosh, over a decade now, and in particular as you think about what makes Microsoft special. We have a diverse business model, diverse end markets and diverse customer segments, both in terms of how big a business is, individuals, right, and – well, around the globe. And so we’ve always had, I think, some pretty good practice at investing across technology transitions, investing with an understanding of not every geography around the world currently is experiencing the recession the same way."
+    },
+    {
+      "blockId": "paragraph-151",
+      "kind": "paragraph",
+      "text": "Some are really thriving. Some have different pressures. Some consumers are behaving differently. And so the art form, I think for the management team, all of us at Microsoft, is really about investing in where we’re going to create the most strategic value over the long term. And that can, of course, bring some short-term cost pressure, right? Because you always want to make sure you’re investing both in the right thing and doing it smartly for the short term and understanding what the current revenue growth is."
+    },
+    {
+      "blockId": "paragraph-152",
+      "kind": "paragraph",
+      "text": "I think we’ve done a nice job of that, making sure we’re investing in AI, making sure we’re investing in some of the digital transformation ideas that Satya talked about, making sure we’re investing in making Windows 11 a great experience, investing in security, investing in the technologies, frankly, that our customers are expecting us to deliver, and that requires a consistency, especially in engineering, in terms of having a commitment to the roadmap we’ve talked about with our customers."
+    },
+    {
+      "blockId": "paragraph-153",
+      "kind": "paragraph",
+      "text": "And on the sales and marketing side, we’ve always been careful to make sure that we’re investing in a way that revenue grows. And so I think sometimes people view this as an \"or,\" \"are you investing, or are you good at managing costs,\" and it’s really about doing both, making sure you’re pivoting your resources all the time in a dynamic way."
+    },
+    {
+      "blockId": "paragraph-154",
+      "kind": "paragraph",
+      "text": "Technology moves quickly. We’re a company that wants to move quickly. Our customers expect us to move quickly. And so we need to move our resources in that same way to make sure we’ve got it in the right spots. And that’s what we’re doing."
+    },
+    {
+      "blockId": "paragraph-155",
+      "kind": "paragraph",
+      "text": "BRETT IVERSEN: Balance is super critical. Thanks for that, Amy. The next one is for Satya. Can you talk about some of the initiatives Microsoft is working on in AI and the opportunities they present?"
+    },
+    {
+      "blockId": "paragraph-156",
+      "kind": "paragraph",
+      "text": "SATYA NADELLA: Yeah, no, absolutely. In fact, picking up on even Amy’s last answer. I mean, in a tech company, I think the key is to be able to ride the current wave and do that super well in terms of both competitiveness, both on the revenue growth and the operating expense, and catch the next wave. That’s sort of the crux of what a tech business is all about."
+    },
+    {
+      "blockId": "paragraph-157",
+      "kind": "paragraph",
+      "text": "And so speaking of that, the next wave is really right up on us, which is definitely AI. We are very, very well structured to capitalize on this wave. Because if you think about the opportunities this AI wave brings, the first one is infrastructure. When I think about Azure, one of the things that we have done, in fact, in the context of even ChatGPT, which today is one of the more popular AI applications out there, guess what? It’s all trained on the Azure Supercomputer. Over the last couple of years, we’ve the best infrastructure by bringing compute and network together to train these large language models, whether it’s GPT or DALL-E, and our cognitive services, and we have become the destination."
+    },
+    {
+      "blockId": "paragraph-158",
+      "kind": "paragraph",
+      "text": "If you look at this, and check with any elite AI team out there, they will tell you that the best infrastructure for doing anything is Azure. And then the next point is we now have, in Azure Cognitive Services, and in fact, in Azure OpenAI service, the best LLMs of these language models which I think are going to be used broadly across the board."
+    },
+    {
+      "blockId": "paragraph-159",
+      "kind": "paragraph",
+      "text": "And then in our own applications, right, design over DALL-E or Power Apps with GPT to do natural language automation. We are incorporating AI across all of our – in fact, Nuance with DAX. I mean, think about sort of reducing physician burden using these large models."
+    },
+    {
+      "blockId": "paragraph-160",
+      "kind": "paragraph",
+      "text": "So I think we are very – we have got an exciting portfolio of our own applications. We’ve got exciting real capabilities for developers. I forgot to mention GitHub Copilot, my favorite sort of AI tool that’s changed my life."
+    },
+    {
+      "blockId": "paragraph-161",
+      "kind": "paragraph",
+      "text": "So I think, whether it’s the infrastructure layer or whether it’s the cognitive services layer or the application layer, we’re definitely leading, I would say, when it comes to AI. It’s obviously just the beginning of a new wave, and we are well structured."
+    },
+    {
+      "blockId": "paragraph-162",
+      "kind": "paragraph",
+      "text": "Again, this is one of the things, and to Amy’s point, companies in tech are really thriving long term only when they know how to catch the new wave and lead the new wave. And so I feel from a Microsoft perspective, very, very good about that."
+    },
+    {
+      "blockId": "paragraph-163",
+      "kind": "paragraph",
+      "text": "BRETT IVERSEN: Yeah, it’s an exciting space. Brad, increasingly, shareholders are concerned about carbon output and the effects on business operations. What steps is Microsoft taking to address these concerns?"
+    },
+    {
+      "blockId": "paragraph-164",
+      "kind": "paragraph",
+      "text": "BRAD SMITH: Well, Brett, as you know, this is a big issue for Microsoft. It’s actually a big issue, I think, for almost every company in the business community worldwide. We committed – the three of us actually committed, and it’ll be three years ago as we get to January, when we said that by 2030, the end of the decade, we will be carbon negative as a company. That means we’ll be removing more carbon each year than we emit. It means that we’ll cut our carbon emissions by 55% from 2020 to 2030."
+    },
+    {
+      "blockId": "paragraph-165",
+      "kind": "paragraph",
+      "text": "We’re doing a lot to reduce our emissions and it’s fascinating for me to see the role that innovation is playing, including innovation that’s based on our own use of AI and data and digital technology."
+    },
+    {
+      "blockId": "paragraph-166",
+      "kind": "paragraph",
+      "text": "The thing to think about, when it comes to carbon emissions, is it all comes down to three categories, regardless of whether you’re an individual at home or you’re a big business. The first is called Scope 1. That’s the carbon that we all emit directly, if we drive a car that’s powered by gasoline, if we’re cooking with natural gas."
+    },
+    {
+      "blockId": "paragraph-167",
+      "kind": "paragraph",
+      "text": "So we’re really being very resolute in basically eliminating all of those sources of emissions. We’re shifting to electric cooking so that we’re no longer using natural gas. We’re electrifying our fleet of shuttles and buses. We’re even on a quest to replace our diesel generators outside our data centers with hydrogen fuel cells and other things."
+    },
+    {
+      "blockId": "paragraph-168",
+      "kind": "paragraph",
+      "text": "The second thing everybody has to worry about is what’s called Scope 2. This is the carbon that’s emitted for the electricity we use. So if your electricity is coming from a plant that’s running on natural gas, that’s Scope 2 emissions."
+    },
+    {
+      "blockId": "paragraph-169",
+      "kind": "paragraph",
+      "text": "We are a huge user of electricity through our data centers around the world. So a big part of our effort is to, within two years from now, have 100% of all of our electricity for all of our data centers in the world coming from renewable sources. What that means is that last year our teams went out and they procured 5.7 gigawatts of renewable energy. That’s enough renewable energy, and almost all of it was wind or solar, to power more than five million homes. It’s a lot."
+    },
+    {
+      "blockId": "paragraph-170",
+      "kind": "paragraph",
+      "text": "And then the biggest challenge we have, the biggest challenge that every company has is what’s called Scope 3 emissions. This is what comes from your supply chain or from the use of your products. And for us, Amy and I are spending a lot of time on this working with our teams. It really does come down to our suppliers."
+    },
+    {
+      "blockId": "paragraph-171",
+      "kind": "paragraph",
+      "text": "Eighty percent of the carbon emitted by our suppliers comes from twenty companies. So we’re working with those 20 companies. We’ll have to work with them in some cases to help them locate in places where they have access to renewable energy. It means we’re also focused on building more energy efficient devices. It even means that when we’re building data centers or new buildings, we’re buying greener concrete, greener steel."
+    },
+    {
+      "blockId": "paragraph-172",
+      "kind": "paragraph",
+      "text": "So all of these things have really become, I would say, infused in every part of Microsoft. And I’m extremely optimistic that we’re not only paving a way that is going to deliver on our commitments, but along the way, we’re bringing along our supply chain and finding new innovations that we’re sharing with all of our customers, including with our Cloud for Sustainability, the Microsoft Cloud, where I think we’re in an extraordinary position to not only do right for ourselves, but to really help our customers across the board."
+    },
+    {
+      "blockId": "paragraph-173",
+      "kind": "paragraph",
+      "text": "BRETT IVERSEN: Of all the different things the company has done, the sustainability commitment is the one my daughter gets most excited to talk about at home. It’s super important."
+    },
+    {
+      "blockId": "paragraph-174",
+      "kind": "paragraph",
+      "text": "BRAD SMITH: She’ll be living with this longer than you and I will. So we better do a good job."
+    },
+    {
+      "blockId": "paragraph-175",
+      "kind": "paragraph",
+      "text": "BRETT IVERSEN: Absolutely. We have another question for you, Brad. Some shareholders question whether Microsoft is taking on too many social and environmental commitments and should just focus on profits. Can you talk about how Microsoft’s leadership decides when and how to address these topics?"
+    },
+    {
+      "blockId": "paragraph-176",
+      "kind": "paragraph",
+      "text": "BRAD SMITH: I think this is a great question, especially for a shareholder meeting. You heard Satya, just before we started talking, describe our mission and the four pillars. And fundamentally, as you heard, our mission is about creating technology that helps other people achieve more. We’re very grounded in serving other people."
+    },
+    {
+      "blockId": "paragraph-177",
+      "kind": "paragraph",
+      "text": "And fundamentally, when you think about how one considers this question, the thing that I think sometimes people miss is that we have this wonderful opportunity to do well for ourselves and do good for the world at the same time. And that’s where we really focus a lot of our energy. We probably spend more of our energy on standing up for the needs and rights of our customers than any other thing we do, protecting their cybersecurity, not just individuals at home and companies, but look at Ukraine, an entire country, protecting people’s privacy rights around the world."
+    },
+    {
+      "blockId": "paragraph-178",
+      "kind": "paragraph",
+      "text": "Think about what it means for us to get involved in protecting, say, that child safety online. That’s great for children, but it’s also a fantastic thing for our Xbox business because it makes parents more confident in the use of our services; or think about what Satya was just describing, AI and the future, and ensuring it’s responsible."
+    },
+    {
+      "blockId": "paragraph-179",
+      "kind": "paragraph",
+      "text": "We really focus on what will help customers, what will help employees, and what will help grow our business. And the truth is, when we do those things well, we do good things for others, and we actually help fuel ongoing growth in the value of this company."
+    },
+    {
+      "blockId": "paragraph-180",
+      "kind": "paragraph",
+      "text": "BRETT IVERSEN: Absolutely. Amy, anything you want to add on this one?"
+    },
+    {
+      "blockId": "paragraph-181",
+      "kind": "paragraph",
+      "text": "AMY HOOD: No, but I do think it’s especially important. I think when people get asked, gosh, when things are harder, is there a different trade, is this too much to be doing? And that’s the nature of the shareholder question. And I think Brad’s right, it’s a great question to ask."
+    },
+    {
+      "blockId": "paragraph-182",
+      "kind": "paragraph",
+      "text": "But to Brad’s point, when you get sort of asked, what are your priorities, if it’s mission aligned, it helps customers, and it creates opportunity for Microsoft to build its own success. That’s still at the top of what we should be prioritizing. And many of the things Brad just talked about will continue to be, because they’re durable, and they’re durable benefits across all the sort of pillars Brad outlined. And if they’re durable across our customers, no matter if that’s an individual or a government or the largest enterprises, whether that’s our employees around the world, or whether it’s our shareholders as the other pillar, what benefits one tends to benefit all, if it’s mission focused for us."
+    },
+    {
+      "blockId": "paragraph-183",
+      "kind": "paragraph",
+      "text": "SATYA NADELLA: Amy, I was just going to say I like this definition that Colin Mayer has of the social purpose of a corporation to find profitable solutions to the challenges of people and planet. The first key word is “profitable.” We are grounded on it, which is we ultimately are accountable to our shareholders to run a company that is really, at the core, allocating its capital to drive profit. And I think shareholders should hold us accountable for that. But also, shareholders should hold us accountable for solving the social problems and the real challenges of the people and planet, because if we don’t, we lose long-term permission to be in business."
+    },
+    {
+      "blockId": "paragraph-184",
+      "kind": "paragraph",
+      "text": "And so, that feedback cycle between the world giving us permission to operate as a company and our investors giving us a permission to operate are both sort of the same, in my mind. And so, that’s what we are trying to balance out."
+    },
+    {
+      "blockId": "paragraph-185",
+      "kind": "paragraph",
+      "text": "BRAD SMITH: And I do think the thing that is so interesting about that is at the end of the day, almost every shareholder meeting for every public company in America is grounded increasingly in this conversation. What’s the proper role of a corporation?"
+    },
+    {
+      "blockId": "paragraph-186",
+      "kind": "paragraph",
+      "text": "And one of the things I do feel good about is we have real clarity. It came in 2014 when Satya defined a new mission for us. It actually is the way we think about these, and we answer these questions. And I think we’ve done more in the last seven, eight years to do good for the world and grow shareholder value, and it’s because the two are linked."
+    },
+    {
+      "blockId": "paragraph-187",
+      "kind": "paragraph",
+      "text": "BRETT IVERSEN: Yeah, the “and” that you all mentioned is super critical. Thanks for that."
+    },
+    {
+      "blockId": "paragraph-188",
+      "kind": "paragraph",
+      "text": "Satya, we regularly get questions about future growth engines for the company. While the current business environment is challenging for advertising, our ad business has continued to grow over time. Can you talk about the role advertising plays in Microsoft’s consumer business portfolio?"
+    },
+    {
+      "blockId": "paragraph-189",
+      "kind": "paragraph",
+      "text": "SATYA NADELLA: Yeah. First of all, I’m very excited about Microsoft’s opportunity. We have an at-scale ad business today, the combination of what we do with our Search, and News and LinkedIn. We’ve been growing in the last couple of years significantly. For example, Edge share has been going up, Bing share has been going up. Our news feed impressions have been going up. And obviously, LinkedIn engagement has really increased in the last multiple years as well."
+    },
+    {
+      "blockId": "paragraph-190",
+      "kind": "paragraph",
+      "text": "And so, through that, our advertising business is at scale. The Netflix deal that we did recently gives us even an ad network scale business, which we are excited about."
+    },
+    {
+      "blockId": "paragraph-191",
+      "kind": "paragraph",
+      "text": "But again, going back to the previous question, if I think about advertising, advertising is fundamentally driven by some of the core capabilities of AI. And so, when I look at the all-up Microsoft investment in our infrastructure, our AI capabilities, and our both ad network as well as on own supply of inventory, I think I’m very, very bullish about sort of our long-term prospects around advertising. And we are definitely going to, each day, come to work to make sure that we are growing our share and relevance for advertisers."
+    },
+    {
+      "blockId": "paragraph-192",
+      "kind": "paragraph",
+      "text": "And I also think it’s very needed, right? Competition is needed because it’s a highly concentrated market, as everybody knows. And Microsoft making progress means advertisers benefit, publishers benefit. And this is super important for, I think, everyone in the marketplace."
+    },
+    {
+      "blockId": "paragraph-193",
+      "kind": "paragraph",
+      "text": "BRETT IVERSEN: Yeah. Large TAM and strong growth, that’s a good combination."
+    },
+    {
+      "blockId": "paragraph-194",
+      "kind": "paragraph",
+      "text": "Brad, this one’s for you. How is Microsoft responding to the FTC decision to sue Microsoft over plans to acquire Activision Blizzard? And are you concerned the deal won’t go through?"
+    },
+    {
+      "blockId": "paragraph-195",
+      "kind": "paragraph",
+      "text": "BRAD SMITH: I believe, I think we all believe, that our acquisition of Activision Blizzard is fundamentally good for gamers, good for consumers, good for game developers, and good for competition. And that’s the case that we’ll have the opportunity, it’s the case will need to go present to an administrative law judge, now that the FTC has sued to block the case."
+    },
+    {
+      "blockId": "paragraph-196",
+      "kind": "paragraph",
+      "text": "I think there’s three dimensions of the FTC’s case that an administrative law judge is certainly going to focus on and will need to think hard about."
+    },
+    {
+      "blockId": "paragraph-197",
+      "kind": "paragraph",
+      "text": "The FTC’s case is really based on a market that they’ve identified that they say has two companies and two products, Sony PlayStation and Microsoft Xbox. And if you look at the global market, Sony has 70% of that market, and we have 30%."
+    },
+    {
+      "blockId": "paragraph-198",
+      "kind": "paragraph",
+      "text": "The first thing a judge is going to have to decide is whether the FTC’s lawsuit is a case that will promote competition or is it really, instead, a case that will protect the largest competitor from competition? After all, the whole reason we pursued this acquisition is because it will add to our first-party game library. And we think that will make us, as the smaller competitor in this market, more competitive."
+    },
+    {
+      "blockId": "paragraph-199",
+      "kind": "paragraph",
+      "text": "Now, of course, the judge then needs to think about the second question. What about this actually poses a danger to Sony, the only company that they’re focused on? Well, in reality, the FTC’s case is all about one exclusive game, not even exclusive because it’s not today, so just say one game, Call of Duty."
+    },
+    {
+      "blockId": "paragraph-200",
+      "kind": "paragraph",
+      "text": "Now, the reality is in the console market, every company wants to have some titles that are exclusive because that’s how you build loyalty."
+    },
+    {
+      "blockId": "paragraph-201",
+      "kind": "paragraph",
+      "text": "Today, Sony has 286 exclusive titles. Xbox has 59. An administrative law judge is going to have to decide whether going from 59 to 60 is such a danger to competition that he should stop this from moving forward."
+    },
+    {
+      "blockId": "paragraph-202",
+      "kind": "paragraph",
+      "text": "And then there’s the third dimension that this judge will need to think about. It’s the fact that we have said explicitly and in a variety of ways, we won’t make Call of Duty exclusive to Xbox. We’ve offered to Sony to continue to make it available in a legally binding contract for 10 years. We’ve reached an agreement with Nintendo to bring it to Nintendo Switch, where it’s not even available today. And we offered, last week, before the FTC commissioners met with us, before the FTC voted, that we would submit to a legally binding consent decree with the FTC that would make clear that we would have to provide Call of Duty to Sony and others for a decade."
+    },
+    {
+      "blockId": "paragraph-203",
+      "kind": "paragraph",
+      "text": "And the thing that probably disappoints me is not that we will have to present this case to a judge in a court, because this is a case in which I have great confidence. I’m disappointed that the FTC didn’t give us the opportunity to even sit down with the staff to even talk about our proposal, to even see if there was a solution there, because I do think that if there’s one thing we all know, whether you’re a government or a business or a parent talking to your children, you will never solve a problem if you don’t try."
+    },
+    {
+      "blockId": "paragraph-204",
+      "kind": "paragraph",
+      "text": "And we are committed to addressing every regulator’s concerns, to offering constructive steps to address them. And what I’m optimistic, even confident about is that we have a case that we’ll take to an administrative law judge in the United States, and we’ll continue to meet with regulators elsewhere around the world. We’ll meet with Sony any time they want to meet, because we’re all about finding solutions."
+    },
+    {
+      "blockId": "paragraph-205",
+      "kind": "paragraph",
+      "text": "Lawyers are fine; they’ll make some great arguments. But at the end of the day, we’re here to solve problems."
+    },
+    {
+      "blockId": "paragraph-206",
+      "kind": "paragraph",
+      "text": "BRETT IVERSEN: Helpful context, Brad. Thanks on that."
+    },
+    {
+      "blockId": "paragraph-207",
+      "kind": "paragraph",
+      "text": "A topic that comes up a lot, security, shareholders ask, how does the company look at both the risks and opportunities of cybersecurity? Satya, can you share some of the innovations around security?"
+    },
+    {
+      "blockId": "paragraph-208",
+      "kind": "paragraph",
+      "text": "SATYA NADELLA: No, absolutely. In fact, Brad referenced even the work that we did in the context of Ukraine. I think the report that was put out, it’s I think, phenomenal reading to just even understand perhaps the cybersecurity, innovation and capability we, as a company, have and in support of our customers and even countries."
+    },
+    {
+      "blockId": "paragraph-209",
+      "kind": "paragraph",
+      "text": "When I think about security, there are two sides to it. One is really ensuring that the security products that we build come together as one integrated whole, because one of the challenges of having multiple security products that just don’t come together to help with the cyber defense means you have, in fact, a bigger threat surface area. Your identity solution, your endpoint protection, your application security, and your infrastructure security and your network security all need to compose one controlled plane, one management plane, a set of policies that sort of transmit throughout."
+    },
+    {
+      "blockId": "paragraph-210",
+      "kind": "paragraph",
+      "text": "That’s, I think, the core of what we have done with the security products of Microsoft. And that’s the reason why we’ve become, in the last even multiple years, much more competitive in the marketplace. And that’s what’s driving even our financial results."
+    },
+    {
+      "blockId": "paragraph-211",
+      "kind": "paragraph",
+      "text": "But then the second aspect of it is security and intelligence game or a signals game. The data that we have, the trillions of events we see, we just don’t sort of process them, analyze them. We actually translate that intelligence into active protection, right? When there’s a new ransomware signature somewhere, zero shot, are we able to recognize it? I always say that in this game, you may have one victim of anything new and novel, and that’s it. You have to stop it as soon as you see it. And that’s about really around tripping, the data and the signals to protection."
+    },
+    {
+      "blockId": "paragraph-212",
+      "kind": "paragraph",
+      "text": "And so, a lot of innovation in there. We are very committed to, first and foremost, ensuring the digital estates of our customers are secure by design, and then making sure that we also recognize that customers have heterogeneous environments, and that we are going to go beyond even just our product set to make sure that everything that’s happening in this landscape is something that we are actively protecting."
+    },
+    {
+      "blockId": "paragraph-213",
+      "kind": "paragraph",
+      "text": "BRETT IVERSEN: Perfect. Thanks. It’s a good one to close on. Thanks, Satya."
+    },
+    {
+      "blockId": "paragraph-214",
+      "kind": "paragraph",
+      "text": "This concludes today’s Q&A session and wraps up our annual shareholders meeting. Thank you for joining us today and your participation in our meeting. If you have further questions, please visit our Investor Relations website. Thank you."
+    },
+    {
+      "blockId": "paragraph-215",
+      "kind": "paragraph",
+      "text": "SATYA NADELLA: Thank you all."
+    },
+    {
+      "blockId": "paragraph-216",
+      "kind": "paragraph",
+      "text": "END"
+    },
+    {
+      "blockId": "paragraph-217",
+      "kind": "paragraph",
+      "text": "Microsoft Corp (MSFT)",
+      "duplicateOf": "web_amy_hood_ai_discussion_with_kevin_scott:paragraph-58"
+    },
+    {
+      "blockId": "paragraph-218",
+      "kind": "paragraph",
+      "text": "VIEW ONLINE",
+      "duplicateOf": "web_amy_hood_ai_discussion_with_kevin_scott:paragraph-59"
+    },
+    {
+      "blockId": "paragraph-219",
+      "kind": "paragraph",
+      "text": "DOWNLOAD NOW",
+      "duplicateOf": "web_amy_hood_ai_discussion_with_kevin_scott:paragraph-60"
+    }
+  ]
+}

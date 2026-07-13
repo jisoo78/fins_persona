@@ -1,0 +1,347 @@
+{
+  "sourceId": "web_amy_hood_morgan_stanley_tmt_conference_2025",
+  "title": "Morgan Stanley TMT Conference",
+  "sourceType": "interview",
+  "sourceUrl": "https://www.microsoft.com/en-us/investor/events/fy-2025/morgan-stanley-tmt-conference",
+  "sourcePath": null,
+  "collectedAt": "2026-07-13T07:03:35.932Z",
+  "sha256": "bbffe8074ff703d7b0b097aceef2ddf886e4a9eb14209f46849e6e20f58098a8",
+  "format": "normalized_json",
+  "collectionStatus": "complete",
+  "blocks": [
+    {
+      "blockId": "paragraph-1",
+      "kind": "paragraph",
+      "text": "Morgan Stanley TMT Conference"
+    },
+    {
+      "blockId": "paragraph-2",
+      "kind": "paragraph",
+      "text": "Tuesday, March 04, 2025 Amy Hood, EVP & CFO"
+    },
+    {
+      "blockId": "paragraph-3",
+      "kind": "paragraph",
+      "text": "Transcript",
+      "duplicateOf": "web_amy_hood_ai_discussion_with_kevin_scott:paragraph-3"
+    },
+    {
+      "blockId": "paragraph-4",
+      "kind": "paragraph",
+      "text": "Who: Amy Hood, EVP & CFO Event: Morgan Stanley TMT Conference Date: March 04, 2025"
+    },
+    {
+      "blockId": "paragraph-5",
+      "kind": "paragraph",
+      "text": "Keith Weiss: Excellent. Thank you all for joining us this morning. My name is Keith Weiss. I'm the U.S. software equity research franchise here at Morgan Stanley. And very pleased to have with us from Microsoft, CFO, Amy Hood. Amy, thank you for joining us."
+    },
+    {
+      "blockId": "paragraph-6",
+      "kind": "paragraph",
+      "text": "Amy Hood: Hi Keith, Thank you."
+    },
+    {
+      "blockId": "paragraph-7",
+      "kind": "paragraph",
+      "text": "Keith Weiss: Excellent. So exciting times going on within the software landscape and within Microsoft overall, I thought maybe to start off with, we could talk about the most recent quarter. Very strong Q2 -- fiscal Q2 in terms of bookings growth. You talked about 75% constant currency bookings growth."
+    },
+    {
+      "blockId": "paragraph-8",
+      "kind": "paragraph",
+      "text": "You talked about strong $100 million-plus Azure AI contracts. Can you help us understand what that means about sort of the overall demand environment? What is Microsoft seeing out there when it comes to commercial demand?"
+    },
+    {
+      "blockId": "paragraph-9",
+      "kind": "paragraph",
+      "text": "Amy Hood: Yes. I would maybe take a step back and remind people that our bookings number is not just Azure. We'll spend a lot of time on that, I'm sure in this moment. It's also long-term commitments for I would say, what we would classify as like M365 or any of the per user type logic. When you think about booking strength, what you want to see overall, if you're in my seat, is you want to see customer contracts being renewed you want to see products added and on the per user side. And if that happens, it's a good bookings quarter. So I would say it was a good bookings quarter on the per-user side of the house."
+    },
+    {
+      "blockId": "paragraph-10",
+      "kind": "paragraph",
+      "text": "Then you go to Azure, where we did talk about having certainly better-than-expected performance on the bookings side. And I think some people -- there's a misconception a little bit that these longer-term contracts that we tend to call MACC, but they call different things by different people. It's just about the larger companies that we sell to. It's a pretty broad concept. And those commitments were pretty consistent in terms of execution from the smaller-sized companies doing smaller MACC to large companies doing large MACC. And then, of course, the relationship with OpenAI. So I would say, in general, that execution also felt very consistent. And I tend to think when it comes to the multiyear type of agreements that make up the majority of bookings, I tend to think about that as more long-term platform health-type commitment as opposed to a temporal moment, right? I mean it's a pretty consistent execution engine for us and Q2 did feel good."
+    },
+    {
+      "blockId": "paragraph-11",
+      "kind": "paragraph",
+      "text": "Keith Weiss: Got it. And in terms of duration, CRPO grew 21% on a constant currency basis. So it wasn't just duration. It was just kind of overall contract value improving."
+    },
+    {
+      "blockId": "paragraph-12",
+      "kind": "paragraph",
+      "text": "Amy Hood: Yes. I think what's important when you look at those disclosures on short-term and then longer than 12-month disclosure is what you'll see is obviously per user health tends to show itself on the shorter end of the spectrum and MACC tend to weight things a bit longer. But increasingly, we're also just seeing MACC that aren't as long duration as they used to be. It's a good mix. It's shorter-term things where customers are confident they're going to use that amount in that time period, and then there's obviously longer ones. But I don't know, I think this quarter felt pretty consistent in terms of the balance of duration."
+    },
+    {
+      "blockId": "paragraph-13",
+      "kind": "paragraph",
+      "text": "Keith Weiss: Got it. Got it. So on the ops side of the equation, Azure came in in line with your guidance, but a little bit disappointing for investors. The -- you're no longer talking to Q4, like you were kind of earlier in the year. And you talked about a little bit of the go-to-market mix being off in terms of the core versus the Azure side of the equation. A couple of things to unpack there. One, on the go-to-market side, can you dig in with us kind of what happened in sort of those incentive programs? What kind of pushed it awry a little bit?"
+    },
+    {
+      "blockId": "paragraph-14",
+      "kind": "paragraph",
+      "text": "Amy Hood: Yes. I think we'll cover that in a bit of detail. Any time you see platform shifts or technology shift and especially when you have a lot of product change, a lot of excitement and a lot of products you want to make sure have healthy incentives on go-to-market and customer excitement, there's always a challenge on how you balance selling the new with selling the vast majority of your portfolio."
+    },
+    {
+      "blockId": "paragraph-15",
+      "kind": "paragraph",
+      "text": "Every time we go through one of these transitions, in the moment, it's always better to pivot towards the new, always. Trying to teach new sales motions, you're trying to educate your sellers, you're trying to educate customers, you're trying to educate partners. Pivoting incentives is the right thing to do. And the question is always the balance of that. And when you talk about selling through our scale motions, which is entirely through a vast, vast network of partners, you sometimes don't see the impact of that until a couple of quarters because we have this funny fiscal year end in June. So that means we started those changes in July and August. And ultimately, you don't see impact on close rates and growth for months and months, potentially. And so then when you see the impact of that and you try to find the right balance, you just have to make sure you don't over pivot. I mean the right answer still is the pivot towards the new. If you're going to make a mistake, it's to pivot towards the new. If you're going to have enthusiasm, it should still be to pivot towards the new. And so we're going to continue to do that, but also make sure that our partners and even our sellers continue to understand there's two motions that have to land. And they have to land no matter whether you're selling an AI workload or a non-AI workload, they ultimately come together. You're going to have a workload that has an AI layer and CPUs and storage and compute, it's going to be one motion, and we have to remember and help make sure partners continue to move customers forward, so they're ready. And so we've made some changes. We've changed some incentives. We did that relatively quickly and then we'll continue to monitor and tweak as we see how things go."
+    },
+    {
+      "blockId": "paragraph-16",
+      "kind": "paragraph",
+      "text": "Keith Weiss: Got it. I want to dig into that last point that you made about when you sell the GenAI solution, it pulls through additional because I think that's a concern that's arisen in a lot of my investor conversations is this GenAI instead of selling the core? But it sounds like you guys are seeing both that both get pulled through when people are building out these workloads."
+    },
+    {
+      "blockId": "paragraph-17",
+      "kind": "paragraph",
+      "text": "Amy Hood: Yes. I think what we're seeing in terms of the app patterns when developers, partners, ISVs, build these type of solutions is that it uses the entire stack. I mean, I think Satya tried to mention that numerous times in his earnings comments and I think in lots of his interviews but we see it."
+    },
+    {
+      "blockId": "paragraph-18",
+      "kind": "paragraph",
+      "text": "We see it in terms of how apps are being developed, in terms of how the apps we're developing are developed. They tend to use every layer of the stack, and it's part of the benefit of having a complete stack is that when we sell I guess the AI layer, it does pull through."
+    },
+    {
+      "blockId": "paragraph-19",
+      "kind": "paragraph",
+      "text": "Keith Weiss: Got it."
+    },
+    {
+      "blockId": "paragraph-20",
+      "kind": "paragraph",
+      "text": "Amy Hood: Now we're seeing it."
+    },
+    {
+      "blockId": "paragraph-21",
+      "kind": "paragraph",
+      "text": "Keith Weiss: I think the question that I get most often from investors after we have gone most after over Q2 is, after your June quarter, you talked to us about increasing supply in the back half of the year, giving you confidence in the acceleration in Azure, after this quarter, you pulled away from guiding to Q4. So not saying anything about Q4, what's changed? Why do you have more confidence in June than you do now in terms of what's going to happen in Q4?"
+    },
+    {
+      "blockId": "paragraph-22",
+      "kind": "paragraph",
+      "text": "Amy Hood: Yes, it's a great question. I think it gives me a chance to talk a little bit about connecting the supply with where we saw weakness. AI results were better than we thought in Q2. Every bit of the H2 confidence we had on selling all the incremental capacity is still there. We've said we're still -- and we're impacted by still being short supply. We hope to have that in balance by the end of the fiscal year. So if you take those comments, really, nothing changed about AI supply, AI sales, AI revenue growth, AI momentum and AI revenue expectations through those -- through the fiscal year. And we feel really good about that. And so when you say what's different, which is the right question, it goes back to the non-AI workload execution."
+    },
+    {
+      "blockId": "paragraph-23",
+      "kind": "paragraph",
+      "text": "And so in general, when I look at that and Q3, we've guided to 31, 32, which is improvement over Q2. And I look and say it's really a focus on making sure that execution on the non-AI ACR improves from what we saw. We clearly didn't expect to see that weakness in Q2. We need to fix it as we just talked about. We've made some good changes. We'll watch, and then we'll talk a little bit more about it, I'm sure, in April."
+    },
+    {
+      "blockId": "paragraph-24",
+      "kind": "paragraph",
+      "text": "Keith Weiss: Got it. I mean it would seem like there's a possibility for like part 1 to help fixed part 2. And that if you're seeing good attach of non-AI onto sort of AI workloads as the capacity opens up, as you're able to provision more of those AI workloads that should pull through more of the core?"
+    },
+    {
+      "blockId": "paragraph-25",
+      "kind": "paragraph",
+      "text": "Amy Hood: Well, you have to -- we have a -- it's a big business, Azure. And a lot of it is not AI-related. It's related to the constant migrations of existing workloads and the opportunity that still exists to get that done, and so when we talk about the Q2 execution challenges, it's really about those motions. The motions that drove the past 15 years of Azure growth; it's the fundamental shift from sort of on-prem to cloud. And I know that's not as exciting to talk about, but it is the fundamental pattern that we continue to see and there's tons of opportunity in, and they're continuing to execute on that is super important, super important to customers to make sure they continue to get value, get resiliency, get security, can run better app loads. I mean it's just -- it has to get done. And so being able to do that and so the AI workloads is certainly the opportunity ahead. It's not an “or,” it's not a choice between budgets. It's that both have to happen and customers need both to happen."
+    },
+    {
+      "blockId": "paragraph-26",
+      "kind": "paragraph",
+      "text": "Keith Weiss: Got it. I want to dig into the capacity constraints and sort of the build-out in capacity. You guys have been ramping up CapEx for a couple of years now and spending really big dollar amounts and big growth in those dollar amounts. Can you help us understand sort of the process of solving a capacity constraint like that? Like it's not just buying a bunch of GPUs. I mean you need the data centers. And what's the process in getting that fixed?"
+    },
+    {
+      "blockId": "paragraph-27",
+      "kind": "paragraph",
+      "text": "Amy Hood: It's definitely not just buying GPUs for sure, because that would be a problem that you could solve pretty quickly. Capacity constraints fundamentally start with an inflection point in demand. So the first question isn't about capacity, it's about demand planning. So two years ago-ish, I mean maybe it's longer than that time sort of flies in this era. We saw the work that was coming out of our partnership with OpenAI and said this is going to be an inflection point, way before, I think the market was aware and could see the applications and could see what we thought was so exciting about the work. When that happens, you say, “well, we're going to see in the data inflection point. We're going to see demand change and how quickly can we get capacity online?” And the answer is short term, you can get a decent amount of capacity online because you take every bit of capacity that you'd use for Commercial Cloud and you start jamming GPUs storage into every corner of every data center we had built and powered up."
+    },
+    {
+      "blockId": "paragraph-28",
+      "kind": "paragraph",
+      "text": "There's two things when you do that. We're really excited because we have people be able to use the technology, but the challenge in that is that every bit of room you had built on the Commercial Cloud side, and the -- because right, you build the demand curve, you have standard deviations of outcomes, you make sure you have capacity to be able to grow with a normal surge deviations, if you fill that with a new -- entirely new workload, you suddenly have a challenge that you're running incredibly tight. That happened really very, very quickly. So even if you start the concept of building data centers from that point, it's about land, it's about construction, it's been about power. That process isn't fast -- and so as I think people know, listen, we did what we could in terms of leases to be able to deliver revenue growth. Even leases take a long time to come online, they're going through the same process as we are. What you've seen in that spend over the past few years, and we've talked about this, it is more long-term assets. So think about that as everything I just talked about, right? Land, construction, buildings, 15-year-plus type assets. And when you start about two-ish plus years ago, things start coming online in volume going forward, just timeline-wise."
+    },
+    {
+      "blockId": "paragraph-29",
+      "kind": "paragraph",
+      "text": "And so what we're really doing is replacing not just what I think people consider is like, oh, it's all AI basis, it's not. It's commercial cloud. It's a global footprint, it's the AI footprint and it's building up the room we need and should have always had to make sure that we can adjust to much smaller changes in demand if we need to. And I think what we'll see is as we get to the end of this fiscal year, which I've talked about, I feel good that we've got enough of the long assets coming online to be able to better match. And I feel like we'll be in a good balanced place. Then going forward, when that happens, you shift from these longer-term assets, which we'll still need because we've got $300 billion of RPO to deliver to customers. So we have to keep building and have to keep adding and need capacity and it needs to grow to deliver the revenue we've already sold, much less the revenue we'll continue to sell. And so you'll see it pivot, right, to be a little bit more weighted towards servers. I say servers broadly, CPUs, GPUs, other short-lived assets. And that's more correlated to revenue growth because we're no longer having to build a global footprint."
+    },
+    {
+      "blockId": "paragraph-30",
+      "kind": "paragraph",
+      "text": "The other thing I would say that was somewhat unique and quite different from the commercial cloud transition that I don't know that everybody was in this room when we started that one. I guess I certainly am the one still here is that transition rolled out almost geo by geo, and you heard us like announce Azure regions like, hey, we have a new region, and we still do that. And I'm still excited when we add new regions on a global basis. But when we add the AI workload transition, it will land globally, not in the- all at once. And that's super important if you're going to build workloads for our customers around the world."
+    },
+    {
+      "blockId": "paragraph-31",
+      "kind": "paragraph",
+      "text": "So I think it's a -- it's a long answer, but I think people need to understand the context a little better to why things end up looking the way they look when you need to catch up. And I'm still really glad that we used every bit of space we had. Just to be clear, like I'm super glad we used every bit of space we had around the world to deliver and to be a leader. That's still the absolute right choice. And now we need to make sure we've got the room to grow to stay that way."
+    },
+    {
+      "blockId": "paragraph-32",
+      "kind": "paragraph",
+      "text": "Keith Weiss: Got it. So if I take that answer and think about it in context of the guidance that you gave into the back half of the year, of relatively flat CapEx spending in line what we saw in Q2, there's -- it sounds like there's a level deeper within that, that because the 15-year depreciation asset has been built out, we're going to see a shift in that 50-50 away from the long-term depreciation asset, and you're going to start filling up those data centers with the server kits with a six-year depreciation asset."
+    },
+    {
+      "blockId": "paragraph-33",
+      "kind": "paragraph",
+      "text": "Amy Hood: Yes, that's a good way, Yes, you just have to remember, it's going to be -- it was even more than 50%, just so people are clear when we talked about Q2, so what you'll see is over time, that will start to shift. And the shift will be dependent. It's going to be bumpier in some ways in terms of percentages, leases come online, it shifts it up in terms of long life, but in general, over a multi-period time period, you will see it shift toward kits just because once you get more in balance, that's logically how CapEx would land."
+    },
+    {
+      "blockId": "paragraph-34",
+      "kind": "paragraph",
+      "text": "Keith Weiss: Got it. Got it. I want to talk to some of the tea leaves that investors look at to try to kind of understand what's going on within Microsoft. I think one of the big ones was the announcement of Stargate and the changing in the nature of the relationship between OpenAI and Microsoft, where you guys move from an exclusive relationship to one where you have like right of first refusal, why did that make sense for Microsoft? Like why does Microsoft want to be in maybe not front and center when it comes to Stargate, but sort of a little bit more of a backseat participant, if you will?"
+    },
+    {
+      "blockId": "paragraph-35",
+      "kind": "paragraph",
+      "text": "Amy Hood: Yes. I think it's important to understand, listen, the partnership with OpenAI is important. It has been incredibly beneficial to both of us and it remains so. And I think in a lot of ways, we haven't really disclosed the nature of that partnership. And I think we put out a statement sort of sharing more details so that when Stargate came out, so that people could understand what wasn't changing about the relationship, which is probably more important than what did the nature of our IP relationship, the nature of our go-to-market relationship, the nature of we're both successful when each of us are successful, the nature of our supplying them. And if you think about a right of first refusal, we've already had them use other vendors when we couldn't supply all the demand needed based on our conversation we just had, because the goal is to make sure they grow. Their success is paramount. And so if that requires them going and buying additional compute that we can't supply, that's good for both of us. And I just think it's important to realize it's not like either/or, it's an “and.” I would also say that when you think about -- and we talked about the relationship being through 2030 when we started the relationship, I think, in 2018. And so as you go through that process, I do think everybody is planning for what happens for a decade or two decades. And that's important for both of us to do. And what's great is that we're building a really flexible fleet that can be used for any type of workload on a global basis. And we look forward to continuing to be their primary partner and be able to supply them through that agreement and structure through 2030. It's a good thing for both of us."
+    },
+    {
+      "blockId": "paragraph-36",
+      "kind": "paragraph",
+      "text": "Keith Weiss: Got it. One of the things that both you and Satya talked about a lot on the conference calls is the nature of the AI workloads that are -- we're seeing on Azure tend to bear towards inference. The vast, vast majority are inference and training workloads. And I think Satya even said, he's turned away some training workloads. Can we look at that Stargate announcement through that type of lens of that you guys are more interested in the inference side of the equation versus the pre-training side?"
+    },
+    {
+      "blockId": "paragraph-37",
+      "kind": "paragraph",
+      "text": "Amy Hood: I think it's -- maybe to take a different approach. What we're seeing in terms of- I think- and the question, it conflates two very different concepts, which is, today, when we talk about our $13 billion AI revenue number, it's primarily inference and post-training workloads done in the fleet, right, plus our Copilot revenue. And that's because of the nature of the relationship and how we sell to OpenAI plus every other customer we have. And I think sometimes people take that to mean, wait where is training in that? And the answer is, training revenue that we work with OpenAI is not in that number, right? So that's -- we tried to be very clear on that."
+    },
+    {
+      "blockId": "paragraph-38",
+      "kind": "paragraph",
+      "text": "Now let's talk about a separate thing, which is what are we trying to build for the next two decades and the opportunity we see, which is to build the world's leading AI platform. We happen to call that thing Azure. It has not just the AI platform, but the stack underneath that. It is global. It is distributed. It will be able to serve every type of workload because as we're seeing, especially from some of the post training work, that being able to have that flexible workload is super important. It'll make sure utility utilization remains high. It will make sure it's sellable. It will make sure it has a long life, and those are really important attributes of a global fleet."
+    },
+    {
+      "blockId": "paragraph-39",
+      "kind": "paragraph",
+      "text": "And so our focus on that -- and by the way, it's primarily what is powering our workloads and everybody else's OpenAI's, et cetera, is that, that is a durable asset addressing a giant TAM. And our focus on building that is because the return on invested capital on that investment is well understood, looks much like what we've seen in the commercial cloud, it's run as a single fleet. We know how to optimize it. You'll see software improvement, you'll see hardware improvement, you'll see model improvement, and you'll see efficiency. And building a fleet to do that improves the returns. And so I think that's where our focus is, because you don't want to solve for one or two years, you want to solve for something I think that's durable in terms of execution."
+    },
+    {
+      "blockId": "paragraph-40",
+      "kind": "paragraph",
+      "text": "Keith Weiss: Got it. It makes a ton of sense. So if you think about the comment that you made that exiting FY25, you expect to see supply and demand relatively in balance. It speaks to a comfort that you have with kind of your capacity planning on a go-forward basis. I think investors worry a lot about availability of power, right, ability to build out data center capacity. Do you see constraints in that way? Or do you guys have like a good road map in terms of what gets you comfortable with having the necessary capacity on a go-forward basis?"
+    },
+    {
+      "blockId": "paragraph-41",
+      "kind": "paragraph",
+      "text": "Amy Hood: I laugh, we started by you asking am I spending too much, and I think maybe you're asking if I'm spending too little, but let me try to take a slightly different tactic to the answer."
+    },
+    {
+      "blockId": "paragraph-42",
+      "kind": "paragraph",
+      "text": "You know, over the short term, you have to remember, these- we talked about lead times being quite long, right? And so we have demand plans that cover anywhere from 0 to 10 years given lead times. And really, what we're focused on is making sure we have the right capacity across geos built to that demand plan. And constraints move in those periods. Short term, we feel really good about our availability to get full data centers with power, with chips, ready and functioning on timelines that make a ton of sense to us. Over the long term, you may say, well, do we have enough labor, not for Microsoft, but as an industry to be able to build the capacity that could be needed in a decade. And that's something we've talked about quite publicly, is making sure we as an industry and as a country, have enough ability to do that and make sure that over the long term, we have the skills necessary and the power necessary to make sure we meet the opportunity."
+    },
+    {
+      "blockId": "paragraph-43",
+      "kind": "paragraph",
+      "text": "Keith Weiss: Got it. I want to ask about DeepSeek, and it's definitely a- was an announcement and a sort of a level of innovation that there's ways that went through the investor community when thinking about what that implies for Generative AI on a go-forward basis. Was it as surprising like within Microsoft? Or is this more aligned to kind of the cost curves that you guys are already thinking about when it comes to these large language models, the level of performance improvements? Or said another way, did it change either your capacity planning or how you're thinking about the monetization of these models on a go-forward basis?"
+    },
+    {
+      "blockId": "paragraph-44",
+      "kind": "paragraph",
+      "text": "Amy Hood: No, I think if I go back, I think Satya had actually done a podcast before that, talking about the role distillation would play in model costing. So I don't know that I would say per se- let me separate the concept of DeepSeek from a broader concept that we believe that models would get more efficient, costs would come down, software improvements would change. Like I think we understood that. Now -- what's important to realize, I think, is that as a platform company, what matters the most is making sure you have options for developers to be able to use the model they want to build the thing they want. I think we have, I don't know, over 1,800 models today that run in and on and through our Azure marketplaces. Think about that. I don't know that anybody could name 1,800 models, they think exists because people kind of remember a few. But the important part is that each of those, including open source may be the best model for a use case that you have. And so what's important in that is that you also want to make sure that people can get an improving return on their investments in those applications they're building."
+    },
+    {
+      "blockId": "paragraph-45",
+      "kind": "paragraph",
+      "text": "Lower cost and higher output is a good thing for demand. So if you separate it from DeepSeek, in general, is having a proliferation of models built for single purpose that bring down costs and have high impact, a good thing for demand? The answer is yes. And it's especially good if you think about saying, well, we have -- and we feel great about having the leading models from OpenAI. We're still incredibly proud of that and it's important. But we also have other models, including ones we build, to make sure that there's choice. So if cost comes down, value goes up, demand improves. And so for us, I think we feel good about that."
+    },
+    {
+      "blockId": "paragraph-46",
+      "kind": "paragraph",
+      "text": "Keith Weiss:Got it. And I think Satya talked about that in terms of Jevons paradox, my favorite paradox."
+    },
+    {
+      "blockId": "paragraph-47",
+      "kind": "paragraph",
+      "text": "Amy Hood: Of many paradoxes."
+    },
+    {
+      "blockId": "paragraph-48",
+      "kind": "paragraph",
+      "text": "Keith Weiss: Of all the paradoxes, I think it."
+    },
+    {
+      "blockId": "paragraph-49",
+      "kind": "paragraph",
+      "text": "Amy Hood: I'd like you to name your second favorite paradox."
+    },
+    {
+      "blockId": "paragraph-50",
+      "kind": "paragraph",
+      "text": "Keith Weiss: We'll do that in a different session."
+    },
+    {
+      "blockId": "paragraph-51",
+      "kind": "paragraph",
+      "text": "Amy Hood: That's what I suspected. Sometimes it's too easy."
+    },
+    {
+      "blockId": "paragraph-52",
+      "kind": "paragraph",
+      "text": "Keith Weiss: So that dynamic, is what gives Satya that confidence is that we've seen this dynamic roll through before with sort of the commoditization of underlying compute, underlying storage, like when you're bringing down those input costs, you've seen the result of that. It drives further workload growth."
+    },
+    {
+      "blockId": "paragraph-53",
+      "kind": "paragraph",
+      "text": "Amy Hood: Yes. I think one of the things that I think build confidence is watching this model be the case through the commercial cloud transition, too. And costs came down to build new workloads. And so I think if you try to get away from some of the technical arguments, some- why a model works differently or if the output, is you get more for less, it usually is good for demand, especially consumption demand, because once you deploy workloads, they generally keep running, keep consuming. You add more workloads, you add more workloads, you add more workloads. That's the transition that we saw before. And what we saw was that- and with confidence and with new capabilities, people found new workloads that we didn't know would even exist in some ways, not in the AI wave in the -- I don't know, the old cloud wave. I'm not sure how we're talking about the thing that still is a massive opportunity. This pattern tends to repeat itself and especially if you're a hyperscaler, making sure you can be the most efficient deliverer of that is important to success."
+    },
+    {
+      "blockId": "paragraph-54",
+      "kind": "paragraph",
+      "text": "Keith Weiss: Got it. I want to switch gears a little bit and talk about Microsoft 365 Copilot. The other kind of big AI initiative for Microsoft that investors focus a ton on. I would say from an investor perspective, we've kind of come into the trough of disillusionment, right, in terms of we were expecting a lot out of a new product really quickly. And as often investors we proved to be impatient, kind of hinting that come through. From the Microsoft perspective, how is the Microsoft 365 Copilot rollout going versus your expectations?"
+    },
+    {
+      "blockId": "paragraph-55",
+      "kind": "paragraph",
+      "text": "Amy Hood: As we talked about, even in Q2, it was better than we thought it would be. And so I really feel like this is one where deployment and adoption does take some time. But what we're seeing is- which I think is the most interesting is that customers who initially purchased, they're buying more and using more. That pattern is a good -- I mean if you just simply say, for a per user business, expanding seats and having them used more is incredibly good thing for value. And in many ways, it's running at- it's faster than the other products we've released into the enterprise before in our per-user businesses. I feel really good about that execution. I'm excited by Copilot Chat that we released in January, I think, days sort of rolled together here a little bit. I think that was January. It is incredibly important to have 400 million-plus commercial M365 users, be able to learn the productivity that's possible just through Copilot chat and watching that habit form and usage increase. It will be a really healthy funnel for us to continue to sell the full value SKU. I do think that the early reception to that has been really exciting for us, and so I'm excited to watch and continue to monitor usage growth there in particular."
+    },
+    {
+      "blockId": "paragraph-56",
+      "kind": "paragraph",
+      "text": "Keith Weiss: Got it. Got it. And can you help us think about the product evolution. There's been a debate in the marketplace about Copilot versus agents. And when I hear Microsoft talk about it, to me, it feels more like a continuum. The copilots are going to gain more agency and act more like agents on a go-forward basis. How are we going to see that within the product portfolio?"
+    },
+    {
+      "blockId": "paragraph-57",
+      "kind": "paragraph",
+      "text": "Amy Hood: Yes. I think maybe two things I would give to frame because I think you're asking a question that we'll have some duration to it, which is important. Copilot Studio which you hear us talk a lot about, and I'm not sure people engage in it as much as I would think, is warranted, it's the way customers will build agenetic AI for themselves and using their data and maybe having very specific use cases and our ability to have Copilot Studio be the interface, which they can do that in a low-code environment is super important, and having the UI be the copilot that they're used to, whether that's from Copilot Chat or the full value Copilot that we sell, having that continuity is really important. Because then if you have multiple agents, right, the interface is familiar, the understanding as a worker and as a productivity tool is clear. And I feel like that strategy continuum where you have the Copilot is almost the UI, Copilot Studios, how developers can build and companies can build out their own agents, having that be familiar, having it run on Azure as the back end, is a really thoughtful way for us to make sure that we can cover the continuum. And I think that's worth investors focusing on that logic, if I was to say how to think about where we view agents and where they're going, and the capabilities that already exist today."
+    },
+    {
+      "blockId": "paragraph-58",
+      "kind": "paragraph",
+      "text": "Keith Weiss: Got it. I'm going to sneak in just one last question on margins. What we've seen throughout FY25 thus far is, as more GenAI comes online, we're seeing pressures on gross margin, and I guess, more cloud come online. But you've been able to offset a lot of that with OpEx efficiencies. Is that a paradigm we could see on a go-forward basis? And to what extent is Microsoft utilizing the technologies themselves, utilizing GenAI, enabling you to drive more of that OpEx efficiency?"
+    },
+    {
+      "blockId": "paragraph-59",
+      "kind": "paragraph",
+      "text": "Amy Hood: Yes. You get a lot of questions in 1 question, Keith, I want to compliment you on that. That final question has about six parts. So I'm going to start by talking about margins. You're right, that this AI wave has put pressure on Azure gross margins, as we talked about. What I would say is incredible work by the engineering and platform teams and the architecture we committed to is that our margins very early in the AI process are monumentally better than they were the first time it went through this transition on Azure. And I'm really -- it's thoughtful. It's a fungible architecture. It can be used by any workload, utilization is going to be high. It starts from a much better place. And so even through the surge, we'll start to see and continue to make sure that we get efficiencies on the AI platform part of Azure as we go forward, which is good."
+    },
+    {
+      "blockId": "paragraph-60",
+      "kind": "paragraph",
+      "text": "Then you're right, we have made a concerted effort to also make sure we look at our operating expenses and ask ourselves a couple of things. Are we putting them toward the highest growth, highest propensity growth areas for us. And the answer is you can always do better. And the environment changes every little bit. So we're continuing to move."
+    },
+    {
+      "blockId": "paragraph-61",
+      "kind": "paragraph",
+      "text": "Secondly, tools like GitHub copilot and tools like Microsoft 365 Copilot and tools that we're deploying across customer service, customer support, our sales teams and finance all have provided incremental opportunities for savings. And so as we continue to deploy our own AI workloads to our department as well as see and focus on moving and moving our resources, I feel good, as I've said, I feel better about margins in FY25 than I felt when we started in June, and we've committed to that, and team has done really good work. And I continue to believe there's room for us to keep pushing on that front, whether it's AI productivity or good old fashioned portfolio work. So we'll stay on it."
+    },
+    {
+      "blockId": "paragraph-62",
+      "kind": "paragraph",
+      "text": "Keith Weiss: Outstanding. Amy, thank you so much for joining us as always a fascinating conversation."
+    },
+    {
+      "blockId": "paragraph-63",
+      "kind": "paragraph",
+      "text": "Amy Hood: Thank you, Keith."
+    },
+    {
+      "blockId": "paragraph-64",
+      "kind": "paragraph",
+      "text": "Microsoft Corp (MSFT)",
+      "duplicateOf": "web_amy_hood_ai_discussion_with_kevin_scott:paragraph-58"
+    },
+    {
+      "blockId": "paragraph-65",
+      "kind": "paragraph",
+      "text": "VIEW ONLINE",
+      "duplicateOf": "web_amy_hood_ai_discussion_with_kevin_scott:paragraph-59"
+    },
+    {
+      "blockId": "paragraph-66",
+      "kind": "paragraph",
+      "text": "DOWNLOAD NOW",
+      "duplicateOf": "web_amy_hood_ai_discussion_with_kevin_scott:paragraph-60"
+    }
+  ]
+}
