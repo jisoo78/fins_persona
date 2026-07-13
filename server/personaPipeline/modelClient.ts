@@ -15,6 +15,14 @@ export interface ModelClient {
   invoke(prompt: string): Promise<ModelResult>;
 }
 
+export const modelRequestSettings = (provider: ProviderName) => ({
+  model:
+    provider === 'local'
+      ? process.env.LOCAL_LLM_MODEL || 'local-model'
+      : process.env.OPENAI_MODEL || 'gpt-5-mini',
+  maxTokens: 3_000,
+});
+
 const contentToText = (content: unknown): string => {
   if (typeof content === 'string') return content;
   if (!Array.isArray(content)) return String(content ?? '');
@@ -39,16 +47,14 @@ export const createModelClient = (provider: ProviderName): ModelClient => {
   if (provider === 'openai' && !process.env.OPENAI_API_KEY) {
     throw new Error('OPENAI_API_KEY is required for the openai provider');
   }
-  const model =
-    provider === 'local'
-      ? process.env.LOCAL_LLM_MODEL || 'local-model'
-      : process.env.OPENAI_MODEL || 'gpt-5-mini';
+  const { model, maxTokens } = modelRequestSettings(provider);
   const chat = new ChatOpenAI({
     apiKey:
       provider === 'local'
         ? process.env.LOCAL_LLM_API_KEY || 'local'
         : process.env.OPENAI_API_KEY,
     model,
+    maxTokens,
     ...(provider === 'local'
       ? {
           temperature: 0.2,

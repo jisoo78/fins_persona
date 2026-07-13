@@ -26,7 +26,11 @@ import {
 } from '../server/personaPipeline/corpus';
 import { analyzeChunks } from '../server/personaPipeline/analyzer';
 import { evaluatePersona } from '../server/personaPipeline/evaluator';
-import type { ModelClient, ModelResult } from '../server/personaPipeline/modelClient';
+import {
+  modelRequestSettings,
+  type ModelClient,
+  type ModelResult,
+} from '../server/personaPipeline/modelClient';
 import { buildMasterPrompt, checkGemmaGate } from '../server/personaPipeline/promptBuilder';
 import { runPersonaPipeline } from '../server/runAmyHoodPersonaPipeline';
 import type { RawSource, SourceChunk } from '../server/personaPipeline/types';
@@ -359,4 +363,8 @@ test('failure: evaluator never leaks holdout text or grading hints to the model'
   assert.equal(prompts.some((prompt) => prompt.includes(secretHoldoutText)), false);
   assert.equal(prompts.some((prompt) => prompt.includes('HIDDEN_HINT_')), false);
   assert.equal(prompts.some((prompt) => prompt.includes('HIDDEN_GRADING_')), false);
+});
+
+test('failure: local model output is capped within the 16K context budget', () => {
+  assert.equal(modelRequestSettings('local').maxTokens, 3_000);
 });
