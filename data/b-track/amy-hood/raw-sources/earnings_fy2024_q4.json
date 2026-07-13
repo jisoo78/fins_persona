@@ -4,9 +4,10 @@
   "sourceType": "earnings_call",
   "sourceUrl": "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q4/press-release-webcast",
   "sourcePath": "archive/fy2024_q4.json",
-  "collectedAt": "2026-07-13T08:46:07.083Z",
+  "collectedAt": "2026-07-13T10:09:49.670Z",
   "sha256": "b801aa1001d49c575269829df643409b7cedc8461f40ee3fc789beb852018095",
   "format": "normalized_json",
+  "normalizationVersion": 2,
   "collectionStatus": "complete",
   "blocks": [
     {

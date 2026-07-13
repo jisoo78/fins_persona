@@ -4,9 +4,10 @@
   "sourceType": "earnings_call",
   "sourceUrl": "https://www.microsoft.com/en-us/investor/earnings/FY-2013-Q4/press-release-webcast",
   "sourcePath": "archive/fy2013_q4.json",
-  "collectedAt": "2026-07-13T08:46:07.068Z",
+  "collectedAt": "2026-07-13T10:09:49.658Z",
   "sha256": "787f4479a8da86de25b6e141212c30297f25597b7f58315f6f3cfb00dac00b33",
   "format": "normalized_json",
+  "normalizationVersion": 2,
   "collectionStatus": "complete",
   "blocks": [
     {

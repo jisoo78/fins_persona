@@ -4,9 +4,10 @@
   "sourceType": "earnings_call",
   "sourceUrl": "https://www.microsoft.com/en-us/investor/earnings/FY-2016-Q4/press-release-webcast",
   "sourcePath": "archive/fy2016_q4.json",
-  "collectedAt": "2026-07-13T08:46:07.073Z",
+  "collectedAt": "2026-07-13T10:09:49.662Z",
   "sha256": "c93b58e6357ac95de9449dd1018fe3f3c991b55c11ee9f67095be3bdc01fff1b",
   "format": "normalized_json",
+  "normalizationVersion": 2,
   "collectionStatus": "complete",
   "blocks": [
     {

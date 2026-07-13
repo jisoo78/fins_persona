@@ -4,9 +4,10 @@
   "sourceType": "earnings_call",
   "sourceUrl": "https://www.microsoft.com/en-us/investor/earnings/FY-2020-Q3/press-release-webcast",
   "sourcePath": "archive/fy2020_q3.json",
-  "collectedAt": "2026-07-13T08:46:07.075Z",
+  "collectedAt": "2026-07-13T10:09:49.664Z",
   "sha256": "1c9a867bddf753a0443b1b966dd79f5c13086ea27a96d4f6c01be46fc5151c6a",
   "format": "normalized_json",
+  "normalizationVersion": 2,
   "collectionStatus": "complete",
   "blocks": [
     {

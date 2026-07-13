@@ -4,9 +4,10 @@
   "sourceType": "earnings_call",
   "sourceUrl": "https://www.microsoft.com/en-us/investor/earnings/FY-2015-Q2/press-release-webcast",
   "sourcePath": "archive/fy2015_q2.json",
-  "collectedAt": "2026-07-13T08:46:07.071Z",
+  "collectedAt": "2026-07-13T10:09:49.660Z",
   "sha256": "f193473a0cb968a0e7e888eb6487bfd1cf9948c273e8fba47e4c06b0bffc5b1d",
   "format": "normalized_json",
+  "normalizationVersion": 2,
   "collectionStatus": "complete",
   "blocks": [
     {

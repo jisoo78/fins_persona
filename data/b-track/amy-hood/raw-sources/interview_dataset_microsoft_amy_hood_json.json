@@ -4,9 +4,10 @@
   "sourceType": "interview",
   "sourceUrl": null,
   "sourcePath": "archive/microsoft_amy_hood.json",
-  "collectedAt": "2026-07-13T08:46:07.096Z",
+  "collectedAt": "2026-07-13T10:09:49.683Z",
   "sha256": "49f9f3f4da04452c49197d5f8720eb18b3436c40c08a49593a507dac56b2129c",
   "format": "normalized_json",
+  "normalizationVersion": 2,
   "collectionStatus": "complete",
   "blocks": [
     {

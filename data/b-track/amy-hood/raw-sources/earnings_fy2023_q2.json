@@ -4,9 +4,10 @@
   "sourceType": "earnings_call",
   "sourceUrl": "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q2/press-release-webcast",
   "sourcePath": "archive/fy2023_q2.json",
-  "collectedAt": "2026-07-13T08:46:07.079Z",
+  "collectedAt": "2026-07-13T10:09:49.668Z",
   "sha256": "fb8aea5c161f8b953aea1e6f8449c2cd5a24359dc22958bd750a6fea44d871af",
   "format": "normalized_json",
+  "normalizationVersion": 2,
   "collectionStatus": "complete",
   "blocks": [
     {

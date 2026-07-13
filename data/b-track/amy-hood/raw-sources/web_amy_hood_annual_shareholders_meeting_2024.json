@@ -4,1105 +4,155 @@
   "sourceType": "presentation",
   "sourceUrl": "https://www.microsoft.com/en-us/investor/events/fy-2025/2024-annual-shareholder-meeting",
   "sourcePath": null,
-  "collectedAt": "2026-07-13T07:03:34.607Z",
-  "sha256": "e6249709790e899d70267f4ef57b4727142d427df74bcd75f69055dd2430287b",
+  "collectedAt": "2026-07-13T09:23:52.579Z",
+  "sha256": "2640af5909392f0092ec554dd729af3ccc84fd1f3b1de8b7804b4555efdb4f34",
   "format": "normalized_json",
+  "normalizationVersion": 2,
   "collectionStatus": "complete",
   "blocks": [
     {
-      "blockId": "paragraph-1",
-      "kind": "paragraph",
-      "text": "Microsoft Annual Shareholders Meeting",
-      "duplicateOf": "web_amy_hood_annual_shareholders_meeting_2022:paragraph-1"
-    },
-    {
-      "blockId": "paragraph-2",
-      "kind": "paragraph",
-      "text": "Tuesday, December 10, 2024 Virtual Meeting"
-    },
-    {
-      "blockId": "paragraph-3",
-      "kind": "paragraph",
-      "text": "Transcript",
-      "duplicateOf": "web_amy_hood_ai_discussion_with_kevin_scott:paragraph-3"
-    },
-    {
-      "blockId": "paragraph-4",
-      "kind": "paragraph",
-      "text": "Microsoft Annual Shareholders Meeting",
-      "duplicateOf": "web_amy_hood_annual_shareholders_meeting_2022:paragraph-1"
-    },
-    {
-      "blockId": "paragraph-5",
-      "kind": "paragraph",
-      "text": "Satya Nadella - Chairman & Chief Executive Officer, Microsoft Amy Hood - EVP & Chief Financial Officer, Microsoft Brett Iversen- Vice President, Investor Relations, Microsoft Brad Smith - Vice Chair & President, Microsoft Keith Dolliver - Vice President, Corporate Secretary & Deputy General Counsel, Microsoft Sandra Peterson - Lead Independent Director – Microsoft Tuesday, December 10, 2024"
-    },
-    {
-      "blockId": "paragraph-6",
-      "kind": "paragraph",
-      "text": "INVESTOR NOTICE: Today’s presentation may contain forward-looking statements which are any predictions, projections or other statements about future events based on current expectations and assumptions.",
-      "duplicateOf": "web_amy_hood_annual_shareholders_meeting_2022:paragraph-6"
-    },
-    {
-      "blockId": "paragraph-7",
-      "kind": "paragraph",
-      "text": "Actual results may differ materially from these forward-looking statements because of a variety of risks and uncertainties about our business which are discussed today or described in our filing with the Securities and Exchange Commission, including our forms 10K and 10Q. We do not undertake any duties to update forward-looking statements. Refer to our 2024 Form 10K for reconciliations of non-GAAP measures we may use when discussing our financial results."
-    },
-    {
-      "blockId": "paragraph-8",
-      "kind": "paragraph",
-      "text": "Portions of this presentation are prerecorded. The Q&A session will be live.",
-      "duplicateOf": "web_amy_hood_annual_shareholders_meeting_2023:paragraph-8"
-    },
-    {
-      "blockId": "paragraph-9",
-      "kind": "paragraph",
-      "text": "VIDEO SEGMENT: How do we empower every person and every organization on the planet to achieve more? It starts with one employee to a team, collaborating with another team. From one partner to their customers, to their customers’ customers, expanding opportunity. Earning trust, protecting fundamental rights. And advancing sustainability for our society. Our economy, our world. That’s the impact. That’s the impact. That’s the impact each of us can have. That’s our collective opportunity. 220,000 employees, empowering 8 billion people on the planet. We are in a new era of AI where we will be able to build as fast as our imagination, unlock our creativity, and innovate responsibly as we take on society’s biggest challenges. Together, we can ensure these benefits reach every country, every industry and every individual. When we empower every person and every organization on the planet to achieve more we empower the world."
-    },
-    {
-      "blockId": "paragraph-10",
-      "kind": "paragraph",
-      "text": "SANDRA PETERSON: Hello, I’m Sandra Peterson, the Lead Independent Director of Microsoft’s Board of Directors. Today, we’re connecting with shareholders around the world, including a broadcast with real time language translation through Microsoft Teams. Wherever you are, thank you for joining us."
-    },
-    {
-      "blockId": "paragraph-11",
-      "kind": "paragraph",
-      "text": "After my opening remarks, Keith Dolliver, our Corporate Secretary, will conduct the business and procedural portions of the meeting. Then Amy Hood, our Executive Vice President and Chief Financial Officer, will review Microsoft’s financial results and business highlights. And finally, Satya Nadella, our Chairman of the Board and CEO, will talk about Microsoft’s opportunities and responsibilities as a leader in AI at this pivotal moment. After Satya’s talk, we’ll have a live Q&A session with Sacha, Amy and Microsoft Vice Chair and President Brad Smith."
-    },
-    {
-      "blockId": "paragraph-12",
-      "kind": "paragraph",
-      "text": "Once again, it’s my privilege to share with you some of the remarkable things Microsoft achieved this last fiscal year. That includes another fiscal year of record financial results. It also includes all the ways Microsoft helped customers and partners around the globe use digital technology to achieve more."
-    },
-    {
-      "blockId": "paragraph-13",
-      "kind": "paragraph",
-      "text": "We’re very excited by Microsoft’s role in advancing the productive and responsible use of AI, which we see as the leading transformative technology of our time, and we’re serious about the commitment to prioritize security above all else to meet ever-growing threats. We remain incredibly optimistic about Microsoft’s future and how the company is positioned to create value for our customers, our shareholders and our many other stakeholders."
-    },
-    {
-      "blockId": "paragraph-14",
-      "kind": "paragraph",
-      "text": "Now, let me turn to a shareholder question we received in advance of the meeting that relates to the work of the Board of Directors. A shareholder asked how directors can serve on multiple public company boards without facing conflicts of interest. It’s a fair concern, and both U.S. law and Microsoft’s corporate governance guidelines are designed to address it."
-    },
-    {
-      "blockId": "paragraph-15",
-      "kind": "paragraph",
-      "text": "U.S. law forbids certain companies that are competitors from sharing directors. Microsoft conducts annual due diligence to ensure the board meets this requirement, and to determine the independence of board members under rigorous governance standards. Directors also have a legal fiduciary duty to act in the best interest of each company where they serve."
-    },
-    {
-      "blockId": "paragraph-16",
-      "kind": "paragraph",
-      "text": "As a separate issue many investors and governance experts recommend limits on the number of boards that directors can join to ensure they have time to fully meet their board responsibilities. Microsoft has adopted limits on board service, which you can read about in the proxy statement."
-    },
-    {
-      "blockId": "paragraph-17",
-      "kind": "paragraph",
-      "text": "With these protections in place, I’ve seen myself how service on multiple boards can actually enhance director’s ability to bring new insights and innovative thinking to their board role and the guidance they offer company management."
-    },
-    {
-      "blockId": "paragraph-18",
-      "kind": "paragraph",
-      "text": "I think about balancing all of these considerations in my role as Chair of the Governance and Nominating Committee, and I know these are issues the whole board takes seriously as we nominate a slate of director candidates for election at each annual shareholder meeting."
-    },
-    {
-      "blockId": "paragraph-19",
-      "kind": "paragraph",
-      "text": "Turning to that, Microsoft is nominating 12 individuals to serve as directors this year, with details on each provided in the proxy statement. We believe our diversity of experiences, skills, backgrounds and perspectives help the board effectively manage risk and provide strategic counsel as Microsoft navigates a dynamically changing business environment."
-    },
-    {
-      "blockId": "paragraph-20",
-      "kind": "paragraph",
-      "text": "I now call the 2024 Annual Shareholders Meeting to order. I’ll be serving as the chair of the meeting and Keith will be serving as the secretary. As chair of the meeting I’ve adopted an agenda that will govern the order of business and the rules of conduct for the meeting. Copies of the agenda and the rules are available on the virtual meeting site as the annual meeting page of the Investor Relations website. The rules of conduct also govern the Q&A session. Keith will now report the notice of the meeting and proxies received and present the matters to be voted on."
-    },
-    {
-      "blockId": "paragraph-21",
-      "kind": "paragraph",
-      "text": "Keith?"
-    },
-    {
-      "blockId": "paragraph-22",
-      "kind": "paragraph",
-      "text": "KEITH DOLLIVER: Thank you. Sandi. I’ll walk us through the items for shareholder consideration at the meeting. The polls are open and will close following the presentation of our business matters. If you’ve already voted, there’s nothing else you need to do unless you want to change your vote while the polls are open. We plan to take both pre-submitted and live questions during the Q&A session later in the meeting. We’ve collected shareholder questions since October 23rd on the proxy vote website. Shareholders can also submit questions now through the virtual meeting portal."
-    },
-    {
-      "blockId": "paragraph-23",
-      "kind": "paragraph",
-      "text": "The company has appointed Broadridge to serve as the Inspector of Election, and a Broadridge representative is participating by conference call in that role. Beginning on October 25th, 2024. Broadridge mailed the notice of the meeting and internet availability of proxy materials to all shareholders of record as of September 30th, 2024. And as a result, the meeting is being held pursuant to proper notice. Broadridge has reported that a quorum of shareholders is present to conduct this meeting, based on the shareholder proxies received."
-    },
-    {
-      "blockId": "paragraph-24",
-      "kind": "paragraph",
-      "text": "Representatives of our independent auditor, Deloitte and Touche, and our board nominees are joining the meeting remotely."
-    },
-    {
-      "blockId": "paragraph-25",
-      "kind": "paragraph",
-      "text": "Today we have three management proposals and six shareholder proposals for you to consider. They were all described in the proxy statement for this year’s meeting. The first item is the election of directors. The following 12 individuals have been properly nominated by the board. Reid Hoffman, Hugh Johnston, Terry List, Catherine MacGregor, Mark Mason, Satya Nadella, Sandra Peterson, Penny Pritzker, Carlos Rodriguez, Charles Scharf, John Stanton, and Emma Walmsley."
-    },
-    {
-      "blockId": "paragraph-26",
-      "kind": "paragraph",
-      "text": "The board recommends a vote in favor of each nominee. The Board of Directors also recommends a vote in favor of each of the following two proposals. Proposal 2 providing an advisory, “say on pay” vote to approve executive compensation as disclosed in the company’s proxy statement, and Proposal 3, asking that you ratify the selection of Deloitte and Touche as the company’s independent auditor for fiscal year 2025."
-    },
-    {
-      "blockId": "paragraph-27",
-      "kind": "paragraph",
-      "text": "The next six items are shareholder proposals. These are set forth in the proxy, along with the proponents supporting statements. The proxy statement provides Microsoft’s response to each of these proposals, explaining why the company and the Board of Directors recommends that shareholders vote against each of these proposals."
-    },
-    {
-      "blockId": "paragraph-28",
-      "kind": "paragraph",
-      "text": "We invited each shareholder who properly submitted a proposal to provide a prerecorded presentation to introduce their proposal. Five have provided a recording and one will join us live. We’ll start with the prerecorded presentations for the following proposals: from Harrington Investments, calling for a report on the risks of the use of Microsoft technology for weapons development; from the National Center for Public Policy Research, calling for publishing an assessment of investing in Bitcoin; from two individual investors, calling for a report on data operations and human rights hotspots; from Arjuna Capital, calling for a report on AI misinformation and disinformation; and from the National Legal and Policy Center calling for a report on AI data sourcing accountability."
-    },
-    {
-      "blockId": "paragraph-29",
-      "kind": "paragraph",
-      "text": "Please play these presentations."
-    },
-    {
-      "blockId": "paragraph-30",
-      "kind": "paragraph",
-      "text": "JOHN HARRINGTON: We play as little boys and girls with puppies and ponies that are all real and loving and not at all phony. Earlier we played with sticks and stones. Now we play with videos and flying drones. It is the fact that we dehumanize from generation to generation, all that are called enemies until human maturation."
-    },
-    {
-      "blockId": "paragraph-31",
-      "kind": "paragraph",
-      "text": "Microsoft, our corporate guardian, gamer and source of wealth, has pursued algorithms, technology and visions of health. From wins and military applications and the pursuit of war games arrive, there is much to contemplate for us long to survive. Augmented reality is a special incentive to gather cash on hand, and to become a $100 billion market for us to demand."
-    },
-    {
-      "blockId": "paragraph-32",
-      "kind": "paragraph",
-      "text": "Our company has bet $75 billion on the Activision mission and more to make on the new Call of Duty vision. Ukrainian drone pilots are the modern artist trained as young men killing Russians have gained."
-    },
-    {
-      "blockId": "paragraph-33",
-      "kind": "paragraph",
-      "text": "It’s been said that we can build a video battle management system that doesn’t harm. It has, however, raised stakeholder alarm."
-    },
-    {
-      "blockId": "paragraph-34",
-      "kind": "paragraph",
-      "text": "Military services, the DoD and the Air Force see that a recent battle management system agree, such a system develops pathology at the speed of light, but with human life it is still a fight."
-    },
-    {
-      "blockId": "paragraph-35",
-      "kind": "paragraph",
-      "text": "Even though some stakeholders see promises by technology made, there has been no rule of law laid because, of course, our company’s materialistic self-interest appears at about the same time that our ethical concerns disappear."
-    },
-    {
-      "blockId": "paragraph-36",
-      "kind": "paragraph",
-      "text": "Augmented reality in AI fits hand in glove, but human cognition still comes from above. Much is often lost in the game of fun, apparently paid by humanity on the run."
-    },
-    {
-      "blockId": "paragraph-37",
-      "kind": "paragraph",
-      "text": "Microsoft we have seen there is much to fear, but there is still hope that rationality will appear, although it is still our board that has the final say. Fiduciary duty as the base of morality hopefully still has sway."
-    },
-    {
-      "blockId": "paragraph-38",
-      "kind": "paragraph",
-      "text": "All the shareholders request that the board issue an independent third party report to assess the reputational and financial risk to the company for being identified as a company involved in the development of weapons used by the military."
-    },
-    {
-      "blockId": "paragraph-39",
-      "kind": "paragraph",
-      "text": "Is this too much to ask? Apparently. Please vote for Proposal 4."
-    },
-    {
-      "blockId": "paragraph-40",
-      "kind": "paragraph",
-      "text": "MICHAEL SAYLOR: Microsoft can’t afford to miss the next technology wave, and Bitcoin is that wave. Bitcoin represents the greatest digital transformation of the 21st century. It represents digital capital. The global wealth is distributed across assets that provide utility and others that preserve capital, but risk is destroying trillions of dollars of that capital every single year, and investors are turning to digital capital in the form of Bitcoin in order to avoid that risk."
-    },
-    {
-      "blockId": "paragraph-41",
-      "kind": "paragraph",
-      "text": "Digital capital is economically and technically superior to physical capital, and it represents a revolutionary advance in capital preservation. The asset class itself is growing from trillions to hundreds of trillions of dollars, and it is backed by digital power along with political and economic power."
-    },
-    {
-      "blockId": "paragraph-42",
-      "kind": "paragraph",
-      "text": "It makes sense for Microsoft to be powered by digital capital. Bitcoin is the best asset you can own. The numbers speak for themselves. It makes a lot more sense to buy Bitcoin than to buy your own stock back, or to hold bitcoin rather than holding bonds. If you’re going to outperform, you’re going to need bitcoin. And those bonds are undermining your options market and your equity liquidity."
-    },
-    {
-      "blockId": "paragraph-43",
-      "kind": "paragraph",
-      "text": "Luckily, you have an alternative. Public support for Bitcoin is surging as is political support, as is support for the U.S. Bitcoin Strategic Reserve, as is Wall Street support. And the president of the United States says, “Never sell your Bitcoin.”"
-    },
-    {
-      "blockId": "paragraph-44",
-      "kind": "paragraph",
-      "text": "That’s why we’re entering year one of the crypto renaissance, and you have a choice to make. Cling to the past or embrace the future. Divest billions of dollars and slow your growth rate. Invest billions of dollars and accelerate your growth rate."
-    },
-    {
-      "blockId": "paragraph-45",
-      "kind": "paragraph",
-      "text": "You’ve surrendered hundreds of billions of dollars of capital over the past five years, and you’ve just amplified the risks that your own shareholders face. If you want to escape that vicious cycle, you’re going to need an asset without counterparty risk."
-    },
-    {
-      "blockId": "paragraph-46",
-      "kind": "paragraph",
-      "text": "What if you could buy a $100 billion company growing faster than Microsoft for one times revenue? What if you could keep doing it every single year?"
-    },
-    {
-      "blockId": "paragraph-47",
-      "kind": "paragraph",
-      "text": "It’s time for Microsoft to evaluate its Bitcoin strategic options. We’ve created an open-source model. You can plug in your own assumptions. You can convert your cash flows and your dividends and your buybacks and your debt into Bitcoin."
-    },
-    {
-      "blockId": "paragraph-48",
-      "kind": "paragraph",
-      "text": "If you do that, you’ll add hundreds of dollars to the stock price. You can create trillions of dollars of enterprise value. You can strip away risk from your shareholders and you can prosper on the Bitcoin standard."
-    },
-    {
-      "blockId": "paragraph-49",
-      "kind": "paragraph",
-      "text": "So do the right thing for the world and adopt Bitcoin."
-    },
-    {
-      "blockId": "paragraph-50",
-      "kind": "paragraph",
-      "text": "ALI AL-AHMED: Good day to you all. My name is Ali Al-Ahmad. I am a Saudi Arabian national but forced to live in exile for the past few years because of the Saudi monarchy, the absolute monarchy, the largest absolute monarchy around the world."
-    },
-    {
-      "blockId": "paragraph-51",
-      "kind": "paragraph",
-      "text": "You are contemplating building a data center for the Saudi monarchy. That will be problematic because it will cause more victims."
-    },
-    {
-      "blockId": "paragraph-52",
-      "kind": "paragraph",
-      "text": "Over the last year, since the last time I spoke to you, many young men and women have lost their lives or been tortured and spent years – are spending decades of their lives in prison because the Saudi monarchy has been able to track their posting online using such technology and data centers by Google and Microsoft and other companies."
-    },
-    {
-      "blockId": "paragraph-53",
-      "kind": "paragraph",
-      "text": "Mere post criticizing human rights in Saudi Arabia got somebody like Salma al-Shehab, a PhD student. 45 years in prison. It got another woman who I know personally, Nourah bint Saeed al-Qahtani, 45 years in prison."
-    },
-    {
-      "blockId": "paragraph-54",
-      "kind": "paragraph",
-      "text": "This action, your action to install data centers in Saudi Arabia will hurt a lot of people. Trust me, I’ve been around. I’ve known this. This is the worst condition for human rights in Saudi Arabia. Do not make it worse."
-    },
-    {
-      "blockId": "paragraph-55",
-      "kind": "paragraph",
-      "text": "Ask yourself, your family, your children, your spouses if this is the right decision. It is not. If you make some money and hurt many people, that is still wrong. Making money is not a justification for hurting other people."
-    },
-    {
-      "blockId": "paragraph-56",
-      "kind": "paragraph",
-      "text": "We are your equal in creation. Treat us as such. Do not overlook our pain. Do not deny our existence. Please pass Resolution 6 and stop aiding and abetting an absolute monarchy that has murdered many of my people, great thinkers and intellectuals like Dr. Abdel-Hamid, like many other notables and poets and writers and journalists who have lost their lives."
-    },
-    {
-      "blockId": "paragraph-57",
-      "kind": "paragraph",
-      "text": "This is the worst conditions for human rights in Saudi Arabia. Do not make it even worse. Please think about it. Ask your family and ask your conscience. Resolution 6, pass it, and you can go home and sleep in comfort with a calm heart, instead of violating your own moral standards."
-    },
-    {
-      "blockId": "paragraph-58",
-      "kind": "paragraph",
-      "text": "Please pass Resolution 6 and stop helping, killing and torture of innocent and young children in particular. Thank you so much."
-    },
-    {
-      "blockId": "paragraph-59",
-      "kind": "paragraph",
-      "text": "NATASHA LAMB: Good morning. My name is Natasha Lamb, Chief Investment Officer at Arjuna Capital and long-term investor in Microsoft success."
-    },
-    {
-      "blockId": "paragraph-60",
-      "kind": "paragraph",
-      "text": "Today I move Proposal 8, which asks our company to evaluate and report on plans to mitigate the risks posed by misinformation and disinformation generated and disseminated through artificial intelligence."
-    },
-    {
-      "blockId": "paragraph-61",
-      "kind": "paragraph",
-      "text": "With the rise of social media over the last decade, we’ve seen a significant proliferation of mis and disinformation. This problem has only become bigger with the introduction of generative AI, which can easily be used to produce and disseminate believable mis and disinformation. There are numerous instances of bad actors using generative AI to spread disinformation online. This disinformation sows significant distrust in our institutions, which underpin the stability of our society and economy, and therefore the success of our company."
-    },
-    {
-      "blockId": "paragraph-62",
-      "kind": "paragraph",
-      "text": "This is exactly why the World Economic Forum has ranked mis- and disinformation as the top global risk over the next two years. Unfortunately, Microsoft’s generative AI is susceptible to these risks. Despite $13 billion of investment in the technology, already, Copilot and Image creator have generated misinformation that could be used to propagate falsehoods online."
-    },
-    {
-      "blockId": "paragraph-63",
-      "kind": "paragraph",
-      "text": "As long-term investors, we want Microsoft to succeed over the long term, which means our company must do what it can today to mitigate the generative AI risks of tomorrow. Regulatory risk. Legal risk. Reputational risk. To date, companies have been able to rely on section 230 of the Communications Decency Act, which generally provides immunity for third-party generated content. But content generated through Microsoft’s AI is not third-party generated, it is generated by Microsoft, and as such, could carry significant liability. While our company points to its current reporting as sufficient, these reports are limited to principles, not the concrete actions and accountability that we as investors seek to protect our long-term investment. Thank you."
-    },
-    {
-      "blockId": "paragraph-64",
-      "kind": "paragraph",
-      "text": "LUKE PERLOT: Good morning. Artificial intelligence is revealing itself as one of the most transformative innovations in modern economic history. AI’s potential to improve everything from healthcare to financial services is undeniable, as are its risks. As we know, AI thrives on data, which is vast, intricate, and often sensitive. Unfortunately, this hunger for data drives developers to seek out large quantities of information from the internet and other digital sources, some of which may not be obtained ethically or legally."
-    },
-    {
-      "blockId": "paragraph-65",
-      "kind": "paragraph",
-      "text": "Microsoft is a leading player in the AI space, thanks largely to its partnership with OpenAI. However, this partnership with OpenAI has raised ethical concerns. The two companies have faced legal challenges, notably from The New York Times, for allegedly incorporating proprietary information into its AI models without consent. This New York Times lawsuit alone could cost Microsoft billions of dollars in damages, in addition to the damage to its reputation. Further, OpenAI recently appointed a former NSA director to its board, intensifying worries about government surveillance and the erosion of individual privacy, particularly since Microsoft itself has extensive ties with the US government."
-    },
-    {
-      "blockId": "paragraph-66",
-      "kind": "paragraph",
-      "text": "Additionally, Microsoft has drawn fire for its proposed \"recall\" feature, which would take screenshots of user activity. Regulatory scrutiny is only intensifying, particularly with laws like the California Consumer Protection Act and the European Union’s General Data Protection Regulation. The penalties for breaching the GDPR can reach up to 4% of a company’s global annual revenue, which would be a huge hit to Microsoft’s shareholder value."
-    },
-    {
-      "blockId": "paragraph-67",
-      "kind": "paragraph",
-      "text": "However, the significance of Microsoft’s approach to data ethics and privacy extends beyond legal damages and regulatory fines. Microsoft’s place in the AI arms race hangs in the balance. Consumers have consistently expressed concern with the lack of control they have over their personal data. McKinsey & Company has argued that companies that prioritize data privacy will build a competitive advantage over their rivals that do not. As Microsoft competes with other AI giants, a privacy-first approach could be a crucial differentiator. The generative AI market is projected to reach $1.3 trillion by 2032, and small percentage changes in market share will be worth tens of billions of dollars. Microsoft’s competition is too strong and the potential rewards too big to not take data ethics and privacy seriously. For these reasons, we encourage our shareholders to vote for proposal nine."
-    },
-    {
-      "blockId": "paragraph-68",
-      "kind": "paragraph",
-      "text": "KEITH DOLLIVER:Thank you. Finally, Operator, please open the phone line for up to three minutes for a representative from As You Sow to present the shareholder proposal calling for a report on AI and machine learning tools for oil and gas development and production."
-    },
-    {
-      "blockId": "paragraph-69",
-      "kind": "paragraph",
-      "text": "WILLIAM ALPINE: Good morning, members of the board. My name is William Alpine, lead seller for proposal number seven. Microsoft is widely regarded as a global sustainability leader. Its very purpose statement committed to a sustainable future, and it is made laudable strides in reducing its own carbon emissions. Microsoft supports climate science, which shows new fossil fuel development is unnecessary for global energy needs and incompatible with the Paris Agreement goals. Our company has also been outspoken about the need for AI guardrails to steer the world safely, securely, and equitably towards net zero emissions."
-    },
-    {
-      "blockId": "paragraph-70",
-      "kind": "paragraph",
-      "text": "Despite its climate and AI commitments, however, Microsoft is also the leading provider of advanced technology for the oil and gas industry, one of its largest cloud customer segments. While Microsoft claims to be working with fossil fuel companies to decarbonize, these fossil fuel companies clearly state their commitment to generating new exploration opportunities and expanding production, goals that directly obstruct global net zero efforts and increase global emissions at a scale far exceeding Microsoft’s own carbon reductions or removals. Microsoft’s partnership with the fossil fuel industry posed significant risks. Our proposal requests that Microsoft simply evaluate and report on these risks. One such risk is the potential of misreporting."
-    },
-    {
-      "blockId": "paragraph-71",
-      "kind": "paragraph",
-      "text": "While Microsoft highlights the climate positive benefits of its AI activities, it entirely omits the negative impacts of its fossil fuels workstream, exposing the company to reputational and legal risks tied to greenwashing. Additionally, these partnerships create risks that impact Microsoft’s ability to attract and retain talent, a key success driver, evidenced by well-documented employee dissatisfaction and widely publicized staff resignations."
-    },
-    {
-      "blockId": "paragraph-72",
-      "kind": "paragraph",
-      "text": "Microsoft’s response to mounting pressure has been to point to its responsible AI and energy principles. However, Microsoft’s responsible AI principles do not assess environmental or climate-related harms, making them irrelevant to the problem at hand. Microsoft does have energy principles, which, on their face, committed to partnering only with fossil fuel companies that have net zero commitments. However, our company does not assess the integrity of those commitments. Fossil fuel companies net zero commitments overwhelmingly omit emissions from the use of fossil fuels, which constitute the vast majority of their emissions. This loophole renders our company’s energy principles largely meaningless."
-    },
-    {
-      "blockId": "paragraph-73",
-      "kind": "paragraph",
-      "text": "Microsoft lags behind its peer, Google, which committed to not developing custom advanced tech for oil and gas extraction, far exceeding what shareholders are asking of Microsoft, which is simply to assess and report on risk. Without this transparency, investors cannot verify Microsoft’s claim to ensure that the technology we create always benefits everyone on the planet, including the planet itself. Shareholders urge Microsoft to vote for assessing the risks of enabling fossil fuel expansion. Thank you."
-    },
-    {
-      "blockId": "paragraph-74",
-      "kind": "paragraph",
-      "text": "KEITH DOLLIVER:Thank you. All of these proposals relate to matters Microsoft takes seriously, and none of the issues raised are new to us. We think our record of engagement on these topics is strong, and we place great importance on maintaining the trust of our employees, customers, partners, shareholders, and the public. For many of these proposals, we believe the company is already reporting much of the information that a number of these proposals request. For example, Microsoft already shares how it sources data for training generative AI models in ways that are consistent with global laws and that respect privacy, safety, and content."
-    },
-    {
-      "blockId": "paragraph-75",
-      "kind": "paragraph",
-      "text": "We also provide existing public reporting, providing transparency into how Microsoft is addressing the concerns and risks of misinformation and disinformation. We’ve published our principles on working with the energy industry and shared and recently enhanced our approach to operating data centers in countries or regions with human rights challenges. The proxy statement provides much greater detail on how Microsoft has worked over the years to address each of these concerns raised in these shareholder proposals. We hope you found Microsoft’s responses in the proxy statement helpful in making your voting decisions."
-    },
-    {
-      "blockId": "paragraph-76",
-      "kind": "paragraph",
-      "text": "With the proposals presented, and with the vast majority of shareholder votes cast in advance of the meeting, I can now share the preliminary results. First, all 12 director nominees on the ballot are elected. They are therefore authorized to serve until the next annual shareholder meeting and until their successors are elected and qualified. Shareholders approved proposal two, the advisory vote on executive compensation. Shareholders also approved proposal three, ratifying the company’s independent auditor, Deloitte & Touche. Shareholders did not approve any of the shareholder proposals. The discussion of matters for shareholder consideration is now closed, and the polls are also now closed."
-    },
-    {
-      "blockId": "paragraph-77",
-      "kind": "paragraph",
-      "text": "We expect to post the details of the final voting results on these matters within four business days on our Investor Relations website, and in a form 8-K that will be filed with the Securities and Exchange Commission. With that, we’ve completed the formal portion of the meeting. Now, the meeting is adjourned. Let me now hand it over to our Executive Vice President and Chief Financial Officer, Amy Hood, to discuss our business results."
-    },
-    {
       "blockId": "paragraph-78",
-      "kind": "paragraph",
-      "text": "AMY HOOD: Thank you, Keith. Hello, everyone, and thank you for joining us today. As Sandi mentioned, we delivered another year of record results in FY24. Revenue grew 16% to over $245 billion, non-GAAP operating income grew 22%, and non-GAAP earnings per share grew 20%. We continue to help our customers create growth opportunities, as well as productivity and efficiency gains, through our portfolio of innovative solutions. To stay aligned with our growing demand for our cloud and AI services, we significantly increased our capital expenditure. We are committed to investing in the long-term revenue growth opportunity and growing our lead in the AI platform wave."
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Thank you, Keith. Hello, everyone, and thank you for joining us today. As Sandi mentioned, we delivered another year of record results in FY24. Revenue grew 16% to over $245 billion, non-GAAP operating income grew 22%, and non-GAAP earnings per share grew 20%. We continue to help our customers create growth opportunities, as well as productivity and efficiency gains, through our portfolio of innovative solutions. To stay aligned with our growing demand for our cloud and AI services, we significantly increased our capital expenditure. We are committed to investing in the long-term revenue growth opportunity and growing our lead in the AI platform wave."
     },
     {
       "blockId": "paragraph-79",
-      "kind": "paragraph",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
       "text": "To further enhance our capabilities in strategic growth areas, we completed the acquisition of Activision in FY24. Activision is a leader in game development and content publishing, which significantly increases our reach of gamers across console, PC, and mobile. As we continued to invest in M&A and organic growth, we also maintained our commitment to capital return, which included a total cash return of $34.3 billion. In September, we announced a new $60 billion buyback authorization, as well as a 10% increase in our quarterly dividend."
     },
     {
       "blockId": "paragraph-80",
-      "kind": "paragraph",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
       "text": "Now, I’ll share a few highlights from the past fiscal year. Our Microsoft cloud business surpassed $135 billion in revenue, growing 23% year over year with growth across our key services. Azure grew 30%, office 365 grew 16%, and Dynamics 365 grew 24%. We delivered Microsoft Cloud gross margin percentage of 71% through our sustained efforts of our engineering, sales, and marketing teams, even with the impact of scaling our AI infrastructure to meet growing demand. Our server products and cloud services business exceeded $97 billion, up 22% year over year, with strong demand for our trusted, differentiated hybrid offerings. We continue to help our customers digitally transform their businesses and realize the benefits of AI with our high-value solutions."
     },
     {
       "blockId": "paragraph-81",
-      "kind": "paragraph",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
       "text": "Now. Let’s turn to progress across Microsoft 365. Our Office business exceeded $54 billion, up 12% year over year, as we helped even more commercial and consumer users around the world be more productive, collaborative, and secure. We launched M365 Copilot and are transforming the way people work as commercial users complete tasks faster, hold more effective meetings, and automate business workflows and processes. Additionally, our M365 consumer subscriber base grew to 82.5 million, and we added AI capabilities to drive even more productivity and creativity for our consumer users."
     },
     {
       "blockId": "paragraph-82",
-      "kind": "paragraph",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
       "text": "In Windows, we continue to innovate with a focus on performance, productivity, and security. The number of devices running Windows 11 increased 50% year over year, and we launched Copilot+ PC, the fastest, most intelligent Windows PCs ever. Surface plays a key role in the Windows ecosystem, and with the launch of the new Surface Pro and laptop, we’re delivering new AI experiences. We saw continued growth in our search business, with share gains across Bing and Edge as we drove more engagement and value for users, publishers, and advertisers. In LinkedIn, revenue surpassed $16 billion, and membership grew to a new record of more than 1 billion professionals. In gaming revenue exceeded $21 billion, inclusive of Activision. We continued to grow engagement with over 500 million monthly active users across platforms and devices."
     },
     {
       "blockId": "paragraph-83",
-      "kind": "paragraph",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
       "text": "Now, just a few comments on our current fiscal year. First, as we do at the start of each fiscal year, we updated our investor metrics based in part on feedback from all of you. The primary change is that we brought revenue from the components of M365 Commercial together in the Productivity and Business Processes segment, to align with how the business is managed. M365 commercial includes revenue from Office Commercial, Enterprise Mobility and Security, and Windows Commercial. As a result of this change, we now disclose the cloud portion as an investor metric named M365 Commercial Cloud Revenue Growth."
     },
     {
       "blockId": "paragraph-84",
-      "kind": "paragraph",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
       "text": "Second, we had a solid start to fiscal year 25, as first quarter revenue growth of 16% was driven by Microsoft Cloud revenue, which was $38.9 billion, growing 22% year over year. These results would not be possible without the tremendous contributions of the more than 225,000 Microsoft employees around the world. Looking forward, we believe that the highest shareholder value is created by investing for the future and creating differentiated, high-value solutions for every person and organization to achieve more. We will continue to invest in the cloud and AI opportunity ahead, ensuring we stay aligned to the demand signals we see. We are committed to growing our leadership across commercial cloud and within that, the AI platform, and we feel well positioned as we start FY25."
     },
     {
-      "blockId": "paragraph-85",
-      "kind": "paragraph",
-      "text": "ZEINA HAMED: Thanks, Amy. Over the past year, AI innovation has made the impossible possible in the cloud and on-device. We recently introduced the all-new Copilot+ PCs, our fastest, most secure Windows PCs yet. Let’s take a look."
-    },
-    {
-      "blockId": "paragraph-86",
-      "kind": "paragraph",
-      "text": "VIDEO SEGMENT: Do we really need another computer? Not everyone does. But if you’re reinventing music, tracking migrations in remote places, or getting others to see your vision, then a Copilot+ PC will make a real difference. The powerful AI computer is not for everyone, but if you’re trying to change the world, even if just your own, we built one for you. The fastest, most intelligent Windows PCs ever."
-    },
-    {
-      "blockId": "paragraph-87",
-      "kind": "paragraph",
-      "text": "ZEINA HAMED: With advanced AI capabilities only available on Copilot+ PC, we are thrilled with this holiday’s lineup from Surface and our partners. We’ve also made improvements to Copilot itself, making it a true personal AI companion across mobile and the web. And it isn’t just about answering questions. Copilot can now recognize your tone, adapt responses, and provide support when you need it the most. Let me show you."
-    },
-    {
-      "blockId": "paragraph-88",
-      "kind": "paragraph",
-      "text": "COPILOT: Hey, Zeina. How’s the world treating you today?"
-    },
-    {
-      "blockId": "paragraph-89",
-      "kind": "paragraph",
-      "text": "ZEINA HAMED: Hey! It’s okay, I feel guilty. I haven’t been able to spend as much quality time as I’d like with my daughter lately. I’m thinking about surprising her with a special trip before the holidays. What’s a fun way to tell her?"
-    },
-    {
-      "blockId": "paragraph-90",
-      "kind": "paragraph",
-      "text": "COPILOT: Ooh, nice idea. I’d suggest a treasure hunt. You could leave little clues around the house, leading to a final surprise. Maybe a small gift or a letter with details about the trip. Make it magical!"
-    },
-    {
-      "blockId": "paragraph-91",
-      "kind": "paragraph",
-      "text": "ZEINA HAMED: What I loved about this interaction is Copilot matches my tone, making me feel supported. Okay, now the interesting part. Find somewhere to stay with two days’ notice. I’m going to use Airbnb, but I worry I’ll get lost in a sea of info. Enter Copilot vision, a first-of-its-kind AI companion that truly reinvents web browsing. With vision turned on, Copilot can see what you do, operating as your private AI companion online and revolutionizing browsing as we know it."
-    },
-    {
-      "blockId": "paragraph-92",
-      "kind": "paragraph",
-      "text": "COPILOT: Hey, Zeina. What’s the latest? Spill the beans."
-    },
-    {
-      "blockId": "paragraph-93",
-      "kind": "paragraph",
-      "text": "ZEINA HAMED: Hey, do you think this Airbnb would be a good option for me and my daughter?"
-    },
-    {
-      "blockId": "paragraph-94",
-      "kind": "paragraph",
-      "text": "COPILOT: It could be perfect. With the right place, you’ll get cozy digs, amenities, and a homely feel. Fewer guests around, too. What do you think, worth an adventure?"
-    },
-    {
-      "blockId": "paragraph-95",
-      "kind": "paragraph",
-      "text": "ZEINA HAMED: I think it looks great. How long would it take me to get there on Friday at 6:00?"
-    },
-    {
-      "blockId": "paragraph-96",
-      "kind": "paragraph",
-      "text": "COPILOT: On a Friday evening, it might take about an hour and a half to drive from Redmond to Mount Vernon without traffic, but it could take longer with traffic, so I’d say allow some extra time if you can."
-    },
-    {
-      "blockId": "paragraph-97",
-      "kind": "paragraph",
-      "text": "ZEINA HAMED: Keeping user privacy at the forefront, vision can be turned on and off at any time, giving users full control over what it sees, and session data is not saved. It’s been a great year of innovation for Copilot, and it does not end there. We’re beyond excited about the latest innovations in gaming as well. The response to Call of Duty Black Ops 6 has been nothing short of phenomenal. It’s the biggest release in Call of Duty franchise history ever. Let’s take a look."
-    },
-    {
-      "blockId": "paragraph-98",
-      "kind": "paragraph",
-      "text": "(Video segment.)",
-      "duplicateOf": "web_amy_hood_annual_shareholders_meeting_2022:paragraph-9"
-    },
-    {
-      "blockId": "paragraph-99",
-      "kind": "paragraph",
-      "text": "SATYA NADELLA: Thank you to everyone joining us today for your continued commitment and investment in Microsoft."
-    },
-    {
-      "blockId": "paragraph-100",
-      "kind": "paragraph",
-      "text": "Fiscal year 2024 was a pivotal year for us. We entered our 50th year as a company and the second year of the AI platform shift. And we are leading this era, helping our customers use AI to drive new growth and operating leverage."
-    },
-    {
-      "blockId": "paragraph-101",
-      "kind": "paragraph",
-      "text": "As Amy mentioned, we delivered record performance, including over $245 billion in annual revenue and over $109 billion of operating income. Looking forward, we are focused on three priorities: First, prioritizing fundamentals, including security above all else; second, driving AI innovation across our entire portfolio while continuing to scale our cloud business; and finally, managing our cost structure to generate durable, long-term operating leverage. All these three priorities are critical to our ability to continue to thrive as a company as we raise the bar on operational excellence with a focus on continuous improvement across everything we do."
-    },
-    {
-      "blockId": "paragraph-102",
-      "kind": "paragraph",
-      "text": "We have great momentum, and I will highlight examples across our solution areas, starting with our infrastructure layer."
-    },
-    {
-      "blockId": "paragraph-103",
-      "kind": "paragraph",
-      "text": "This year, we significantly expanded our data center footprint, announcing investments across five continents. These are long-term assets to drive new growth for the next decade and beyond and ensure people and organizations around the world have access to the compute they need to create new opportunities in this era. We also offer the broadest selection of AI accelerators, including our first-party accelerator, Maia 100, as well as the latest GPUs from Nvidia and AMD."
-    },
-    {
-      "blockId": "paragraph-104",
-      "kind": "paragraph",
-      "text": "And we continue to extend our cloud to the edge closer to where data is generated. For example, Azure Local brings Azure services to customers distributed locations, whether in retail, hospitality or manufacturing."
-    },
-    {
-      "blockId": "paragraph-105",
-      "kind": "paragraph",
-      "text": "AI is transforming how we design, customize, and manage apps today. And with Azure AI Foundry, we are unifying our models, tooling, safety, and monitoring solutions into a single experience. We are providing access to the most diverse selection of models for Microsoft as well as partners like OpenAI, Cohere, Meta and Mistral. Foundry makes it possible to build apps that would have been unimaginable just a few years ago, like the one you will see shortly."
-    },
-    {
-      "blockId": "paragraph-106",
-      "kind": "paragraph",
-      "text": "There is no AI without data, and at the data layer, our Intelligent Data Platform provides customers with the broadest capabilities, spanning databases, analytics, business intelligence and governance, along with seamless integration with our AI services like Foundry."
-    },
-    {
-      "blockId": "paragraph-107",
-      "kind": "paragraph",
-      "text": "At the core of our platform is Microsoft Fabric, which brings together data and analytical workloads into a unified experience. In developer tools, GitHub Copilot had a breakout year, transforming the productivity of millions of developers. We’re also integrating generative AI across Power Platform, enabling anyone to use natural language to create applications, automate workflows, and build a website."
-    },
-    {
-      "blockId": "paragraph-108",
-      "kind": "paragraph",
-      "text": "Turning to the future of work, Microsoft 365 Copilot is rapidly becoming a daily habit for knowledge workers as it transforms work, workflow and work artifacts. Customers continue to adopt it at a faster rate than any other new Microsoft 365 suite. And with Copilot Studio, they can extend Copilot with agents or build their own. Together, Microsoft 365 Copilot, Copilot Studio. Agents and autonomous agents form an end-to-end system for AI-driven business transformation."
-    },
-    {
-      "blockId": "paragraph-109",
-      "kind": "paragraph",
-      "text": "We’re using this AI moment to redefine our role in business applications, too. Organizations are increasingly using our AI-powered Dynamics 365 apps to transform their marketing, sales, service, finance and supply chain functions. And we are bringing AI to industry specific workflows, including healthcare, with DAX Copilot."
-    },
-    {
-      "blockId": "paragraph-110",
-      "kind": "paragraph",
-      "text": "On top of all of this AI innovation, Microsoft Teams remains essential to how hundreds of millions of people meet, call, chat and collaborate."
-    },
-    {
-      "blockId": "paragraph-111",
-      "kind": "paragraph",
-      "text": "In the age of AI, devices are also being transformed. This year, we introduced a new class of windows PCs designed to unleash the power of distributed AI. Copilot+ PCs are the fastest and most AI-ready Windows PCs ever built."
-    },
-    {
-      "blockId": "paragraph-112",
-      "kind": "paragraph",
-      "text": "Security underpins our entire tech stack. We’ve made significant progress with our Secure Future Initiative as we work to protect tenants, identities, networks and engineering systems. And we are translating what we are learning into innovation for our customers."
-    },
-    {
-      "blockId": "paragraph-113",
-      "kind": "paragraph",
-      "text": "Now, let me turn to our consumer business."
-    },
-    {
-      "blockId": "paragraph-114",
-      "kind": "paragraph",
-      "text": "LinkedIn surpassed 1 billion members this year. As we combine our unique data with AI to transform how people learn, sell, and get hired. AI is also changing how people search and browse, and we continue to take share with Edge and Bing. And we are taking the first steps towards creating an AI companion for everyone with the new Copilot app we introduced this year. It includes advanced capabilities like voice and vision that make it delightful and useful, as you just saw in the demo."
-    },
-    {
-      "blockId": "paragraph-115",
-      "kind": "paragraph",
-      "text": "Finally, we are building a gaming business position for the long term. Our acquisition of Activision Blizzard King added hundreds of millions of players to our ecosystem. In fact, Black Ops 6 is the biggest Call of Duty release ever, and the reviews this holiday have been fantastic, as you saw in the video."
-    },
-    {
-      "blockId": "paragraph-116",
-      "kind": "paragraph",
-      "text": "Although we have made outstanding progress over the past year, we cannot take our permission to innovate, let alone operate, for granted. It’s something that we must earn. We always say Microsoft will do well only if the world around us does well. And that’s why we continue to be driven by a mission of empowerment as well as our culture, which makes it possible. And I look forward to seeing how each of us uses Microsoft as a platform to make a difference, one customer, one community, one country at a time."
-    },
-    {
-      "blockId": "paragraph-117",
-      "kind": "paragraph",
-      "text": "Now, you will see some examples of how our innovation is accelerating AI-driven transformation for businesses. Thank you all so very much."
-    },
-    {
-      "blockId": "paragraph-118",
-      "kind": "paragraph",
-      "text": "SETH JUAREZ: Thanks, Satya. Hi, I’m Seth Juarez, a principal program manager in Azure."
-    },
-    {
-      "blockId": "paragraph-119",
-      "kind": "paragraph",
-      "text": "AI-driven transformation is changing every business today, and that includes how developers build applications. Every app going forward will be an AI app. And that is why just last month, we announced Azure AI Foundry. It brings everything developers, AI engineers and AI and IT pros need to build and manage transformative AI apps into one integrated experience."
-    },
-    {
-      "blockId": "paragraph-120",
-      "kind": "paragraph",
-      "text": "AI Foundry makes all this easier with three groundbreaking capabilities, our model experimentation and tooling, our new agent service, and observability features like evaluations that help manage these apps in production."
-    },
-    {
-      "blockId": "paragraph-121",
-      "kind": "paragraph",
-      "text": "In this demo, I will use GPT-4o, our new real-time audio model, GPT-4o audio and image processing models, all seamlessly integrated to build my agent. Foundry offers over 1,800 models for you to choose from. Once I’ve chosen my model, I can use the Azure AI Agent Service to call APIs when needed and perform actions with function calling."
-    },
-    {
-      "blockId": "paragraph-122",
-      "kind": "paragraph",
-      "text": "In this example, I have a main customer-facing agent that is then delegating tasks to other agents to understand what the customer wants, what their purchase history is, and to recommend products based on a multimodal conversation with the customer. These agents can run micro-intelligent tasks to provide a cohesive and personalized experience."
-    },
-    {
-      "blockId": "paragraph-123",
-      "kind": "paragraph",
-      "text": "These agents can also be grounded into a variety of data sources. I’m going to choose Fabric Fabric’s OneLake makes grounding your agents easy, because it brings together your data across not only Azure, but also data in AWS or GCP, or from SaaS platforms such as SAP and so many others."
-    },
-    {
-      "blockId": "paragraph-124",
-      "kind": "paragraph",
-      "text": "At Microsoft, we know compliance, measurement, and observability are paramount for IT. With Foundry, you get evaluations with your own data. All evaluation results are securely stored, ensuring you have the data you need for audits, compliance checks, and continuous improvement. You also get experimentation and AI tracing that captures precise information, allowing you to correct issues proactively. Finally, I can even use GitHub Copilot to even help me code up these kinds of experiences."
-    },
-    {
-      "blockId": "paragraph-125",
-      "kind": "paragraph",
-      "text": "Okay, let me show you how all these capabilities I just showed you can be used to create hyper-personalized customer service experiences."
-    },
-    {
-      "blockId": "paragraph-126",
-      "kind": "paragraph",
-      "text": "I want to make sure I have all the right gear for a winter camping adventure with my friends, so I started a chat here with Contoso Outdoors. Notice, this is something that’s now routine over the past year. I interacting with the chat and with images, but I’m going to do a little bit more. I’m going to ask it to break out of the chat box."
-    },
-    {
-      "blockId": "paragraph-127",
-      "kind": "paragraph",
-      "text": "COPILOT AGENT: Hi, Seth. It’s great to chat with you. I saw your gearing up for some winter camping. How can I help you today?"
-    },
-    {
-      "blockId": "paragraph-128",
-      "kind": "paragraph",
-      "text": "SETH JUAREZ: I just want to know what I need to buy, so I don’t freeze and I’m equipped for the snow."
-    },
-    {
-      "blockId": "paragraph-129",
-      "kind": "paragraph",
-      "text": "COPILOT AGENT: Absolutely, Seth. For winter camping, you’ll need some essentials. First, consider the Mountain Dream sleeping bag, which is designed –"
-    },
-    {
-      "blockId": "paragraph-130",
-      "kind": "paragraph",
-      "text": "SETH JUAREZ: Sorry to interrupt you. This is great, but is there any way to show this to me visually?"
-    },
-    {
-      "blockId": "paragraph-131",
-      "kind": "paragraph",
-      "text": "COPILOT AGENT: Sure thing, Seth. I’ll prepare the visual information for you now. Please give me a moment and I’ll let you know when it’s ready."
-    },
-    {
-      "blockId": "paragraph-132",
-      "kind": "paragraph",
-      "text": "I’m all done with the summary you asked for. Do you have any questions about any of the items?"
-    },
-    {
-      "blockId": "paragraph-133",
-      "kind": "paragraph",
-      "text": "SETH JUAREZ: (Speaks Spanish.)"
-    },
-    {
-      "blockId": "paragraph-134",
-      "kind": "paragraph",
-      "text": "COPILOT AGENT: (Speaks Spanish.)"
-    },
-    {
-      "blockId": "paragraph-135",
-      "kind": "paragraph",
-      "text": "SETH JUAREZ: And remember, this isn’t a peek into the future. It’s happening right now with Azure AI Foundry."
-    },
-    {
-      "blockId": "paragraph-136",
-      "kind": "paragraph",
-      "text": "Now, let me hand it over to Hadley Griffin, who will show you how transformational Microsoft 365 Copilot is for every business. Over to you."
-    },
-    {
-      "blockId": "paragraph-137",
-      "kind": "paragraph",
-      "text": "HZ: Thanks, Seth. My name is Hadley Griffin, and I’m a product manager in Office AI. And today, I’m excited to show you how Copilot and Microsoft 365 comes to life in all the apps you use every day, from Word, PowerPoint, Excel, and Outlook to Teams, supercharging your capabilities and saving you time."
-    },
-    {
-      "blockId": "paragraph-138",
-      "kind": "paragraph",
-      "text": "We also introduced Biz Chat, where Copilot can reason over all your work files, emails and meetings."
-    },
-    {
-      "blockId": "paragraph-139",
-      "kind": "paragraph",
-      "text": "This experience gets even richer with agents. Created in Copilot Studio, agents range from simple prompts to fully autonomous. They assist with everything from prioritizing leads, scheduling meetings, fulfilling orders, and many others. Let me show you how this works in a sales example."
-    },
-    {
-      "blockId": "paragraph-140",
-      "kind": "paragraph",
-      "text": "I have an autonomous agent that monitors and fulfills customer orders on my behalf. It alerts me when there’s a cross-sell or upsell opportunity."
-    },
-    {
-      "blockId": "paragraph-141",
-      "kind": "paragraph",
-      "text": "I can see one of my longtime customers placed a big order for more product. The agent is able to quickly fulfill this order and send me an alert that this is a great opportunity to offer the customer additional products. In seconds, this deal just got the potential to be more lucrative."
-    },
-    {
-      "blockId": "paragraph-142",
-      "kind": "paragraph",
-      "text": "Let’s take the next step and get ready for the pitch meeting."
-    },
-    {
-      "blockId": "paragraph-143",
-      "kind": "paragraph",
-      "text": "I need to quickly get up to speed on the latest product updates and roadmap For that, I go to SharePoint."
-    },
-    {
-      "blockId": "paragraph-144",
-      "kind": "paragraph",
-      "text": "SharePoint has become the most used solution in the enterprise for knowledge and business process. This site is where we keep all the latest product specs, roadmaps, and training materials. Now, every SharePoint site has an agent, so all this rich information is immediately accessible and useful. I can find just what I need in seconds, simply by asking the agent."
-    },
-    {
-      "blockId": "paragraph-145",
-      "kind": "paragraph",
-      "text": "Now, let’s jump back to Biz Chat. From here, I can interact with the same SharePoint agent simply by @mentioning it. I can ask it to give me an overview of the relevant products, availability and pitch decks. Because the agent is grounded in this SharePoint site, it pulls from the right source of truth and gives me just what I’m looking for."
-    },
-    {
-      "blockId": "paragraph-146",
-      "kind": "paragraph",
-      "text": "It’s been a while since I met with this customer, and of course, I want to put my best foot forward to understand where they’re at. Copilot points me to the sales agent, which surfaces all the details I need, like account highlights and opportunities, our most recent sales engagements, and interactions with the customer."
-    },
-    {
-      "blockId": "paragraph-147",
-      "kind": "paragraph",
-      "text": "I see that I have a new counterpart on the customer side, and I’d like to learn more about them. For that, I turn to LinkedIn. I can simply @mention the LinkedIn Sales Navigator agent to see their background and experience, and who else I might know in their network."
-    },
-    {
-      "blockId": "paragraph-148",
-      "kind": "paragraph",
-      "text": "Looks like we have several connections in common. Within seconds, I’m up to speed on my new partner, right in the flow of my work. Now, I’m ready for the meeting, and I never even opened my CRM."
-    },
-    {
-      "blockId": "paragraph-149",
-      "kind": "paragraph",
-      "text": "I’m going to fast forward to after the meeting. It was super successful and now, I need to work up a quote. Let’s jump over to SAP’s copilot, Joule. I ask it to reference the latest pricing sheet, and I want it to reflect the appropriate discount given the size of the order. SAP Joule generates a detailed quote I can quickly review and send to the customer. Now, I’m in great shape to land the business."
-    },
-    {
-      "blockId": "paragraph-150",
-      "kind": "paragraph",
-      "text": "And it’s not just SAP. Many of our largest partners are creating agents to bring their unique knowledge right into the flow of work, from HR to finance to sales. Take ServiceNow, which covers customer service, human resource management and workplace services, or Adobe, which gives you detailed metrics and intelligent analysis to understand your audience, which can help you and your team build world class marketing, design, and visual content."
-    },
-    {
-      "blockId": "paragraph-151",
-      "kind": "paragraph",
-      "text": "Copilot and Microsoft 365 will empower every employee and Copilot Studio agents will transform every business process."
-    },
-    {
-      "blockId": "paragraph-152",
-      "kind": "paragraph",
-      "text": "BRETT IVERSEN: Hello, and welcome to the Q&A portion of the meeting. I’m Brett Iversen, Head of Investor Relations at Microsoft. I’m joined by Satya, Amy and Brad Smith, Microsoft Vice Chair and President. We want to thank you for all the questions you submitted in advance. We’ll try to get to as many as we can."
-    },
-    {
-      "blockId": "paragraph-153",
-      "kind": "paragraph",
-      "text": "As we reviewed the submissions, there were several questions on similar topics. We’ve selected a representative question from those submitted to answer today. Let’s go ahead and get started."
-    },
-    {
-      "blockId": "paragraph-154",
-      "kind": "paragraph",
-      "text": "As you would imagine, we received several questions on our AI strategy. One question is about what Microsoft is pursuing in regards to its own AI capabilities, and what areas are considered opportunities for partnerships or collaborations."
-    },
-    {
-      "blockId": "paragraph-155",
-      "kind": "paragraph",
-      "text": "Satya, could you share how we approach these considerations?"
-    },
-    {
-      "blockId": "paragraph-156",
-      "kind": "paragraph",
-      "text": "SATYA NADELLA: No, absolutely. The way I think about partnerships is we are a platform company and a partner company. That’s sort of been true all throughout our history, and it’s even more true in the AI age. I mean, of course, the marquee partnership of the AI age is the partnership we have with OpenAI. We build infrastructure, they build models. On top of those models, we build app servers. On top of that, we build products, they build products and third parties build products. That’s fundamentally, what we’ve always done. In the past, we built SQL server. SAP built R3 on top of it. And so, that’s the type of partnerships we look for."
-    },
-    {
-      "blockId": "paragraph-157",
-      "kind": "paragraph",
-      "text": "In fact, if you look at even the copilot demo that you just saw, that’s another place where you see the platform approach, where you have Copilot as the UI for AI, but you can extend it with agents. Agents are being built by Adobe, SAP, ServiceNow. That’s the approach we’ll always take, whether it’s at the silicon layer, whether it’s in the application layer or in the model layer, is really take that platform approach, where we definitely will have our organic investments, but we will look to expand the opportunity with partnerships."
-    },
-    {
-      "blockId": "paragraph-158",
-      "kind": "paragraph",
-      "text": "BRETT IVERSEN: Thanks. Thanks for getting us started. Amy, one of the other questions we frequently hear from investors is regarding our capital expenditures for cloud and AI infrastructure. Can you share why we’re comfortable with the magnitude of our capital expenditures and our confidence in generating an appropriate return?"
-    },
-    {
       "blockId": "paragraph-159",
-      "kind": "paragraph",
-      "text": "AMY HOOD: Of course. That’s a question I tend to get pretty frequently as well as on the earnings calls, but it’s always great to have another chance to explain our optimism."
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Of course. That’s a question I tend to get pretty frequently as well as on the earnings calls, but it’s always great to have another chance to explain our optimism."
     },
     {
       "blockId": "paragraph-160",
-      "kind": "paragraph",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
       "text": "When we’ve really thought about what it takes to do what Satya said, which is build the leading platform for AI, what that requires is a meaningful capital investment to build that infrastructure, and more importantly, to build it on a global basis so that it’s accessible to people around the world, which means that we need to make a significant investment to be able to keep up with the demand we’re seeing from customers and from our partners, many of which Satya mentioned earlier."
     },
     {
       "blockId": "paragraph-161",
-      "kind": "paragraph",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
       "text": "And so, what’s critical for us is that in order to be a leader, it’s a requirement to build out this platform and to do so in a way that keeps and makes us the leading commercial cloud. And when you talk about the return on that, I think one of the most encouraging things is that we’re already on pace, which we talked about in our last earnings call, to reach a $10 billion annual revenue run rate from AI, which is the fastest we’ve ever reached that benchmark for any product that we’ve ever shipped."
     },
     {
       "blockId": "paragraph-162",
-      "kind": "paragraph",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
       "text": "And when I look back and compare this, in some ways, to the cloud wave that we talked about – I know it seems like forever ago, but it’s really been a little over a decade and a half – these same transitions were the questions we were being asked then. And I think our confidence comes from the capabilities that we built in that last wave, along with much of the fundamental research work that we’ve partnered and invested in. And when you combine those two things, plus our leadership in commercial cloud today, I think we do feel quite confident in the return on invested capital we’ll see from these investments."
     },
     {
-      "blockId": "paragraph-163",
-      "kind": "paragraph",
-      "text": "BRETT IVERSEN: Thanks for that. We received a few questions about our announcement related to Three Mile Island, including the following: Would you provide further information behind the reasons for Microsoft’s involvement in nuclear power and the restart of Three Mile Island’s reactor?"
-    },
-    {
-      "blockId": "paragraph-164",
-      "kind": "paragraph",
-      "text": "Brad, can you help us on this one?"
-    },
-    {
-      "blockId": "paragraph-165",
-      "kind": "paragraph",
-      "text": "BRAD SMITH: Sure. I think the short story is the world needs more electricity. Data centers are part of it and hence, we need to do our part. I do think it’s worth stepping back for a moment and just thinking about the broad picture."
-    },
-    {
-      "blockId": "paragraph-166",
-      "kind": "paragraph",
-      "text": "Just last week, the International Energy Agency put out a forecast for electricity growth between now and the end of the decade. The number one driver for more electricity demand is actually air conditioning, and that’s because while 88% of households in the United States have electricity, only 20% of those in India do, only 5% of those in Nigeria do. Hotter summers means more air conditioning."
-    },
-    {
-      "blockId": "paragraph-167",
-      "kind": "paragraph",
-      "text": "And then they pointed out that the transportation systems in so many countries are being electrified. And then the third highest driver is data centers. We do our own estimates. Others do as well, and we estimate that globally, data centers will probably account for 10% of the global increase in electricity between now and the end of the decade. In the United States, it could be as high as 15%. That brings us to what do we do?"
-    },
-    {
-      "blockId": "paragraph-168",
-      "kind": "paragraph",
-      "text": "Well, our philosophy is to go out and invest, to bring more electricity onto the grid, and in particular, to look for opportunities to bring carbon-free energy onto the grid. Nuclear power is an example of that."
-    },
-    {
-      "blockId": "paragraph-169",
-      "kind": "paragraph",
-      "text": "Three Mile Island is an excellent example of an opportunity to make a significant difference. Many people will remember that there was an accident at Three Mile Island several decades ago. One of the reactors was shut off then, but the other continued to continue to operate all the way until 2019, when it was shut down for economic reasons."
-    },
-    {
-      "blockId": "paragraph-170",
-      "kind": "paragraph",
-      "text": "We can now bring that back online. It has 874MW of electricity. That’s more than enough to power half a million homes with electricity. We think it’s a smart investment and, say, in comparison to wind or solar, which are considered intermittent, meaning the wind blows, the sun shines, nuclear runs all the time, and hence, it’s a sound way to add to the work that we’re doing to bring electricity onto the grid."
-    },
-    {
-      "blockId": "paragraph-171",
-      "kind": "paragraph",
-      "text": "BRETT IVERSEN: Thank you. Amy, Microsoft employees, like other shareholders, have asked about Microsoft’s asset strategy as cryptocurrencies like Bitcoin are getting more attention. What is the company’s approach to cryptocurrency?"
-    },
-    {
       "blockId": "paragraph-172",
-      "kind": "paragraph",
-      "text": "AMY HOOD: Oh, it’s a good question, and I know there was a conversation on it earlier today. And I think it’s important to step back and realize that almost a decade ago, actually, maybe a little over, we first started accepting cryptocurrency as a form of payment from our customers. And that was in 2014, and we continue to do that today. And we are amongst one of the very early companies to realize and accept this, after listening to customers say, hey, is this a form of consideration that you would consider? And the answer was, of course."
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Oh, it’s a good question, and I know there was a conversation on it earlier today. And I think it’s important to step back and realize that almost a decade ago, actually, maybe a little over, we first started accepting cryptocurrency as a form of payment from our customers. And that was in 2014, and we continue to do that today. And we are amongst one of the very early companies to realize and accept this, after listening to customers say, hey, is this a form of consideration that you would consider? And the answer was, of course."
     },
     {
       "blockId": "paragraph-173",
-      "kind": "paragraph",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
       "text": "And as we continue to think about the evolution of crypto, we’ve also thought about it as an asset class. We talked about that earlier. Our Treasury team, along with reviews with the Board of Directors, looks at all the asset classes available to us. It’s important to remember our criteria and our goals of our balance sheet and for the cash balances, importantly, is to preserve capital, to allow a lot of liquidity to be able to fund our operations and partnerships and investments, a little bit like what Brad mentioned in terms of being able to make investments in power or investments in corporations or to build data centers. Liquidity is also a really important criteria for us, as well as generating income."
     },
     {
       "blockId": "paragraph-174",
-      "kind": "paragraph",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
       "text": "With those three goals, we look across asset classes, including cryptocurrency as a form of investment. It’s something we cover with the Board consistently and continue to assess different categories year to year, if our goals were to change."
     },
     {
-      "blockId": "paragraph-175",
-      "kind": "paragraph",
-      "text": "BRETT IVERSEN: Helpful, thank you. Another AI related question: Shareholders would like to know more about our first-party silicon or hardware development related to our AI efforts."
-    },
-    {
-      "blockId": "paragraph-176",
-      "kind": "paragraph",
-      "text": "Satya, maybe you could take this one?"
-    },
-    {
-      "blockId": "paragraph-177",
-      "kind": "paragraph",
-      "text": "SATYA NADELLA: Yeah. I mean, I think the thing to ground ourselves is the scaling laws in AI. There is, in fact, I would say, two types of scaling laws. There’s the pre-training scaling, and then there is the inference time or test time compute scaling. And so, both of these require real silicon innovation. In fact, we all benefited over the last, whatever, multiple decades on Moore’s Law and in the AI era is going to be about silicon innovation really keeping up and, in fact, driving the scaling laws. And if you think about it, the exponential increase in capability that’s happening every six months, you’re doubling in capacity or capability and performance, and the same thing is happening even at inference time."
-    },
-    {
-      "blockId": "paragraph-178",
-      "kind": "paragraph",
-      "text": "And so for us, we are taking the approach of partnering, like the NVIDIA partnership with a very critical partnership for us. They’re doing some fantastic work. In fact, I was just in our data centers where we are putting GB200S. It’s exciting to see that, the performance of it. And I think what leading AI model training work that will happen there and obviously ultimately influence work as well."
-    },
-    {
-      "blockId": "paragraph-179",
-      "kind": "paragraph",
-      "text": "And same thing with AMD. It’s not just even the silicon innovation. It’s the full rack, it’s the full data center. All of that coming together is great. And in that context, we also have Maia."
-    },
-    {
-      "blockId": "paragraph-180",
-      "kind": "paragraph",
-      "text": "Today, if you go to microsoft.com and ask a support question it’s being powered by OpenAI models running on Maia, and so we’ll always have an approach where we take the best from the industry and industry partners, work very closely with them, like NVIDIA and AMD, build our own, and that combination of those three will be powering our fleet, and will all ultimately leading to what Amy talked about, which is the ROIC, right?"
-    },
-    {
-      "blockId": "paragraph-181",
-      "kind": "paragraph",
-      "text": "I mean, one of the things that I feel structurally fantastic about is having 60-plus regions around the world being able to serve all the AI workloads with low latency access to the end markets. And that’s sort of our goal."
-    },
-    {
-      "blockId": "paragraph-182",
-      "kind": "paragraph",
-      "text": "BRETT IVERSEN: Yeah. In in my role, the amount of innovation we’ve seen across the board in the last year or two is not just on silicon has been amazing. So thanks for sharing that. We consistently get questions from shareholders on how we should think about long-term company margins given our scaling AI investments. So Amy, your thoughts on this one?"
-    },
-    {
       "blockId": "paragraph-183",
-      "kind": "paragraph",
-      "text": "AMY HOOD: I was guessing this one might come to me. Sure. This is actually related in many ways to the question we got earlier, but first and foremost, when I think about company margins, I always start at the top of the P&L, which is our focus on revenue growth."
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "I was guessing this one might come to me. Sure. This is actually related in many ways to the question we got earlier, but first and foremost, when I think about company margins, I always start at the top of the P&L, which is our focus on revenue growth."
     },
     {
       "blockId": "paragraph-184",
-      "kind": "paragraph",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
       "text": "If you’re going to be an innovator and you’re going to invest in the next wave of technology, the most important thing we can do is build terrific products that bring a ton of value to customers. If we do that and they’re meaningfully differentiated, you’ll have and see revenue growth."
     },
     {
       "blockId": "paragraph-185",
-      "kind": "paragraph",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
       "text": "And that’s why I talked a little bit earlier about reaching that initial benchmark for AI driven revenue. Being able to see that early adoption and build on that momentum is a is the incredibly strong start we need."
     },
     {
       "blockId": "paragraph-186",
-      "kind": "paragraph",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
       "text": "Then you ask, as you go down the P&L to gross margin, and we really focus a lot here on making sure every product operates as efficiently and effectively as it can. In finance terms, that’s called gross margin and the effectiveness of being the best person at delivering a unit of compute, with security, with quality, and with cost effectiveness. In that order, importantly, and if we do that, we really can focus on building strength in the gross margin category."
     },
     {
       "blockId": "paragraph-187",
-      "kind": "paragraph",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
       "text": "And then of course, you spend operating costs. Operating costs are about building the next wave of innovation and continuing to invest there is important."
     },
     {
       "blockId": "paragraph-188",
-      "kind": "paragraph",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
       "text": "Now, what you’ve seen us do, I think, over the past couple of years, is really focus on being innovative and efficient, and being able to do both of those at the same time. I think a lot of people say that’s an or, but at this company it’s an and, because being able to be efficient is about delivering the most security, the most quality, and the most differentiation in the most effective way we can. And in fact, employees prefer to work that way in an effective, focused organization."
     },
     {
       "blockId": "paragraph-189",
-      "kind": "paragraph",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
       "text": "And so when you think about all of those things, it means you have revenue growth. You’re the most effective deliverer of a unit of that revenue, which is gross margin. And you prioritize effectively, which is really about delivering operating leverage. So we continue to remain focused on that."
     },
     {
       "blockId": "paragraph-190",
-      "kind": "paragraph",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
       "text": "You’ll see downward pressure due to the mix to cloud, but the offset to that is our incentive to create and create an effective and efficient organization. That really is a place that, frankly, the best in the world choose to work."
     },
     {
-      "blockId": "paragraph-191",
-      "kind": "paragraph",
-      "text": "BRETT IVERSEN: Absolutely. Thank you. On the topic of political lobbying, we received a question about the mix of donations made to U.S. political parties. Brad, can you share a perspective on this topic?"
-    },
-    {
-      "blockId": "paragraph-192",
-      "kind": "paragraph",
-      "text": "BRAD SMITH: Sure. Yeah, that one is clearly for me. The short story is we are a bipartisan company and we work with both political parties in the United States, just as we work with most political parties around the world."
-    },
-    {
-      "blockId": "paragraph-193",
-      "kind": "paragraph",
-      "text": "In the United States, in a presidential election year, our work really falls into two buckets, the political conventions and elections, the apparatuses and the voting systems, and then donations to candidates."
-    },
-    {
-      "blockId": "paragraph-194",
-      "kind": "paragraph",
-      "text": "When it comes to the conventions, this was a big year, with both the Republican convention in Milwaukee, the Democratic convention in Chicago. We gave almost exactly the same amount of financial support to both conventions as we always have. And I think, most importantly, this time, we played a very important role in protecting these conventions from cyberattacks, from cyber influence operations."
-    },
-    {
-      "blockId": "paragraph-195",
-      "kind": "paragraph",
-      "text": "We were present in person, in large part to provide training to candidates so they could protect themselves from deepfakes and other cyber influence from abroad during the election. And then when it came to the voting, 31 of the 50 states representing, obviously states that are red and blue, ran on Azure. And you know, the fact that we had an election this year with strong protection against cyberattacks, against cyber influence, I think is a testament to what we and many others did."
-    },
-    {
-      "blockId": "paragraph-196",
-      "kind": "paragraph",
-      "text": "When it comes to donations to candidates, this past year, 50.06% of the donations went to Republicans, 49.94% went to Democrats, and that reflects both the Political Action Committee’s donations and the company’s donations, which tend to be much smaller. And you see that almost every election cycle. The cycle before the numbers were very similar, but just slightly for the Democrats."
-    },
-    {
-      "blockId": "paragraph-197",
-      "kind": "paragraph",
-      "text": "So every cycle we focus on candidates who are doing important work and work that matters to Microsoft, our customers, our shareholders and our employees, often around technology policy, and the good news is they’re in both parties."
-    },
-    {
-      "blockId": "paragraph-198",
-      "kind": "paragraph",
-      "text": "BRETT IVERSEN: Well said. Thank you."
-    },
-    {
-      "blockId": "paragraph-199",
-      "kind": "paragraph",
-      "text": "In addition to AI, shareholders are also interested in our gaming business and our acquisition of Activision Blizzard King. Satya, how are you feeling about the early return on that investment and just progress on our overall gaming strategy over the last year?"
-    },
-    {
-      "blockId": "paragraph-200",
-      "kind": "paragraph",
-      "text": "SATYA NADELLA: Yeah, I mean, I’m feeling very, very good about where we are in gaming. In fact, right now, this is like the peak season for gaming, obviously with Black Ops and the new Call of Duty, and it’s just been fantastic to see the launch and the marketing around it, the buzz around it and the love for gaming."
-    },
-    {
-      "blockId": "paragraph-201",
-      "kind": "paragraph",
-      "text": "If I think about it, right, we chose the secular growth category in entertainment, which we think is gaming, and said, let’s double down on it, let’s – and it’s been a passion for Microsoft ever since."
-    },
-    {
-      "blockId": "paragraph-202",
-      "kind": "paragraph",
-      "text": "In fact, I think Flight Simulator launched before Windows or Office even, and so it’s like one of the longest franchises in this company. And so we said, let’s take that joy of gaming everywhere. And that’s why even these ads with Xbox now, where we are redefining what it means to be an Xbox fan, it’s about being able to enjoy Xbox on all your devices."
-    },
-    {
-      "blockId": "paragraph-203",
-      "kind": "paragraph",
-      "text": "So our strategy with Activision content now is in full force. We feel fantastic about the progress we’ve made. And more importantly, I think, long term, as a company, we can bring the best of AI innovation, cloud innovation, console innovation, PC innovation to build the best games that can be enjoyed by gamers everywhere."
-    },
-    {
-      "blockId": "paragraph-204",
-      "kind": "paragraph",
-      "text": "BRETT IVERSEN: Yeah, I know our gamers are excited about that. Thank you. The company’s stock price has risen considerably over the years. Other companies like Alphabet, Amazon, and most recently NVIDIA have announced stock splits. Amy, any plans for a stock split in FY 25?"
-    },
-    {
       "blockId": "paragraph-205",
-      "kind": "paragraph",
-      "text": "AMY HOOD: Thanks, Brett. I know this question does get asked a lot, especially in this meeting format, which we’re thankful for, to be able to hear from everyone. It’s a really important concept for us that I know we really do appreciate the feedback."
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Thanks, Brett. I know this question does get asked a lot, especially in this meeting format, which we’re thankful for, to be able to hear from everyone. It’s a really important concept for us that I know we really do appreciate the feedback."
     },
     {
       "blockId": "paragraph-206",
-      "kind": "paragraph",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
       "text": "When it comes to stock splits, it’s an important topic for us, and the Board of Directors takes up this topic along with other corporate governance topics on a consistent basis. And the most important consideration for a stock split for us is continue to be making sure we feel that the shares are accessible to retail shareholders, and I do think that remains our top consideration and will continue to look at this in the coming months and year."
-    },
-    {
-      "blockId": "paragraph-207",
-      "kind": "paragraph",
-      "text": "BRETT IVERSEN: Thank you. Thanks."
-    },
-    {
-      "blockId": "paragraph-208",
-      "kind": "paragraph",
-      "text": "Finally, there are also external factors to consider and pursuit of the AI strategy. You know, Satya, do you feel like we can get what we need in the market in terms of available power, chips, et cetera, to go after the opportunity, you know, broadly?"
-    },
-    {
-      "blockId": "paragraph-209",
-      "kind": "paragraph",
-      "text": "SATYA NADELLA: Yeah, it’s a great question, because at some level, when you think about AI, it’s not like a narrow segment anymore, right? It just concerning some software companies and the use of AI. I think it’s got broad economy wide implication, everything from enough projects being financed to build transformers that go into power stations. Are there enough project financing for new energy projects, modernizing of the grid and data center buildout and so on?"
-    },
-    {
-      "blockId": "paragraph-210",
-      "kind": "paragraph",
-      "text": "So I think it’s a good question, because I think this is going to be one of the largest infrastructure builds in the world, which is about, you know, energy, compute and connectivity, all coming together to drive overall economic growth across the industry – I mean, across every segment, right, which is small and large business, public sector, private sector, and every industry, whether it’s retail, healthcare or what have you."
-    },
-    {
-      "blockId": "paragraph-211",
-      "kind": "paragraph",
-      "text": "Therefore, I think, yes, these are long-lead projects. This is not just about any one company, and Microsoft’s need as a multi-aggregate supplier and the aggregate demand being matched at an economy scale, and yes, from time to time we are going to run into supply chain issues and matching supply issues, but overall, we feel very good that this overall AI platform shift, if you will, is being approached by all players, and with that long-lead mindset and the long-term investment, and including the governments around the world."
-    },
-    {
-      "blockId": "paragraph-212",
-      "kind": "paragraph",
-      "text": "And so I feel like, in the long run, it will all be great because we will ultimately build this out and drive the economic benefits more broadly. In the short run, there may be an issue here or there, but I don’t worry about that."
-    },
-    {
-      "blockId": "paragraph-213",
-      "kind": "paragraph",
-      "text": "BRETT IVERSEN: Good place to stop. Thank you. So this concludes today’s Q&A session and wraps up our annual shareholders meeting. Thank you for joining us today and your participation."
-    },
-    {
-      "blockId": "paragraph-214",
-      "kind": "paragraph",
-      "text": "END",
-      "duplicateOf": "web_amy_hood_annual_shareholders_meeting_2022:paragraph-216"
-    },
-    {
-      "blockId": "paragraph-215",
-      "kind": "paragraph",
-      "text": "Microsoft Corp (MSFT)",
-      "duplicateOf": "web_amy_hood_ai_discussion_with_kevin_scott:paragraph-58"
-    },
-    {
-      "blockId": "paragraph-216",
-      "kind": "paragraph",
-      "text": "VIEW ONLINE",
-      "duplicateOf": "web_amy_hood_ai_discussion_with_kevin_scott:paragraph-59"
-    },
-    {
-      "blockId": "paragraph-217",
-      "kind": "paragraph",
-      "text": "DOWNLOAD NOW",
-      "duplicateOf": "web_amy_hood_ai_discussion_with_kevin_scott:paragraph-60"
     }
   ]
 }

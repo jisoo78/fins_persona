@@ -4,9 +4,10 @@
   "sourceType": "earnings_call",
   "sourceUrl": "https://www.microsoft.com/en-us/investor/earnings/FY-2022-Q4/press-release-webcast",
   "sourcePath": "archive/fy2022_q4.json",
-  "collectedAt": "2026-07-13T08:46:07.077Z",
+  "collectedAt": "2026-07-13T10:09:49.666Z",
   "sha256": "82400581c900f2e399e02b21fdca5bfc04468be84d15fcedf0edbbf5ed6f8967",
   "format": "normalized_json",
+  "normalizationVersion": 2,
   "collectionStatus": "complete",
   "blocks": [
     {

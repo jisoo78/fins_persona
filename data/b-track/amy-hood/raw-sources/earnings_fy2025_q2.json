@@ -4,9 +4,10 @@
   "sourceType": "earnings_call",
   "sourceUrl": "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q2/press-release-webcast",
   "sourcePath": "archive/fy2025_q2.json",
-  "collectedAt": "2026-07-13T08:46:07.085Z",
+  "collectedAt": "2026-07-13T10:09:49.673Z",
   "sha256": "3eae4ff98490d25249ade7ee535b991774310cedad5ecfd47fd4e9810b69da86",
   "format": "normalized_json",
+  "normalizationVersion": 2,
   "collectionStatus": "complete",
   "blocks": [
     {
