@@ -31,9 +31,13 @@ import {
   type ModelClient,
   type ModelResult,
 } from '../server/personaPipeline/modelClient';
-import { buildMasterPrompt, checkGemmaGate } from '../server/personaPipeline/promptBuilder';
+import {
+  buildMasterPrompt,
+  checkGemmaGate,
+  compactAnalysesForPrompt,
+} from '../server/personaPipeline/promptBuilder';
 import { runPersonaPipeline } from '../server/runAmyHoodPersonaPipeline';
-import type { RawSource, SourceChunk } from '../server/personaPipeline/types';
+import type { RawSource, SourceAnalysis, SourceChunk } from '../server/personaPipeline/types';
 
 const wordCounter = async (text: string) => text.trim().split(/\s+/).filter(Boolean).length;
 
@@ -372,4 +376,36 @@ test('failure: local model output is capped within the 16K context budget', () =
     reasoning_format: 'none',
     chat_template_kwargs: { enable_thinking: false },
   });
+});
+
+test('failure: master prompt input keeps every source but caps each signal category', () => {
+  const signals = ['one', 'two', 'three'].map((statement) => ({
+    statement,
+    conditions: ['condition'],
+    exceptions: ['exception'],
+    sourceLocator: 'source/chunk',
+  }));
+  const analyses = ['source-a', 'source-b'].map(
+    (sourceId): SourceAnalysis => ({
+      sourceId,
+      chunkIds: [`${sourceId}:0`],
+      provider: 'local',
+      model: 'gemma4-test',
+      decisionCriteria: signals,
+      priorities: signals,
+      tradeoffs: signals,
+      riskSignals: signals,
+      communicationPatterns: signals,
+      status: 'complete',
+    }),
+  );
+
+  const compact = compactAnalysesForPrompt(analyses);
+
+  assert.deepEqual(
+    compact.map((analysis) => analysis.sourceId),
+    ['source-a', 'source-b'],
+  );
+  assert.equal(compact.every((analysis) => analysis.decisionCriteria.length === 2), true);
+  assert.equal('sourceLocator' in compact[0].decisionCriteria[0], false);
 });

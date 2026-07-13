@@ -141,6 +141,23 @@ const requiredHeadings = [
   '## Response Format',
 ];
 
+const compactSignals = (signals: SourceAnalysis['decisionCriteria']) =>
+  signals.slice(0, 2).map(({ statement, conditions, exceptions }) => ({
+    statement,
+    conditions,
+    exceptions,
+  }));
+
+export const compactAnalysesForPrompt = (analyses: SourceAnalysis[]) =>
+  analyses.map((analysis) => ({
+    sourceId: analysis.sourceId,
+    decisionCriteria: compactSignals(analysis.decisionCriteria),
+    priorities: compactSignals(analysis.priorities),
+    tradeoffs: compactSignals(analysis.tradeoffs),
+    riskSignals: compactSignals(analysis.riskSignals),
+    communicationPatterns: compactSignals(analysis.communicationPatterns),
+  }));
+
 export const buildMasterPrompt = async (options: BuildPromptOptions) => {
   if (options.model.provider !== options.provider) {
     throw new Error('model provider does not match requested provider');
@@ -164,8 +181,12 @@ export const buildMasterPrompt = async (options: BuildPromptOptions) => {
     resolve(options.root, 'agent_prompts/prompts/amy-hood-master-prompt.md'),
     'utf8',
   );
+  const promptAnalyses = compactAnalysesForPrompt(analyses);
   const result = await options.model.invoke(
-    template.replace('{analyses}', analyses.map((analysis) => JSON.stringify(analysis)).join('\n')),
+    template.replace(
+      '{analyses}',
+      promptAnalyses.map((analysis) => JSON.stringify(analysis)).join('\n'),
+    ),
   );
   const markdown = result.text.trim();
   const missing = requiredHeadings.filter((heading) => !markdown.includes(heading));
