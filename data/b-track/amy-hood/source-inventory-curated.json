@@ -121,5 +121,167 @@
       ]
     }
   ],
-  "web_sources": []
+  "web_sources": [
+    {
+      "source_id": "web_amy_hood_one_microsoft_conference_call",
+      "title": "Steve Ballmer and Microsoft Senior Leadership Team: One Microsoft Conference Call",
+      "source_type": "conversation",
+      "source_grade": "primary",
+      "url": "https://news.microsoft.com/speeches/steve-ballmer-and-microsoft-senior-leadership-team-one-microsoft-conference-call/",
+      "local_path": null,
+      "published_at": "2013-07-12",
+      "speaker": "Amy Hood",
+      "decision_domains": [
+        "growth_profitability_balance",
+        "cost_discipline_operating_efficiency",
+        "risk_uncertainty"
+      ],
+      "has_full_text": true,
+      "metadata_status": "complete",
+      "selection_reason": "조직개편이 장기 이익 성장과 재무 보고 체계에 미치는 영향을 Amy Hood가 직접 설명한 공식 transcript",
+      "status": "selected"
+    },
+    {
+      "source_id": "web_amy_hood_microsoft_linkedin_conference_call",
+      "title": "Microsoft and LinkedIn Conference Call",
+      "source_type": "conversation",
+      "source_grade": "primary",
+      "url": "https://news.microsoft.com/speeches/microsoft-and-linkedin-conference-call-chris-suh-satya-nadella-jeff-weiner-amy-hood-brad-smith/",
+      "local_path": null,
+      "published_at": "2016-06-13",
+      "speaker": "Amy Hood",
+      "decision_domains": [
+        "capital_allocation",
+        "growth_profitability_balance",
+        "strategic_investment_acquisition",
+        "risk_uncertainty"
+      ],
+      "has_full_text": true,
+      "metadata_status": "complete",
+      "selection_reason": "LinkedIn 인수 가격, 단기 EPS 희석, 장기 성장과 주주환원을 Amy Hood가 직접 연결한 공식 transcript",
+      "status": "selected"
+    },
+    {
+      "source_id": "web_amy_hood_annual_shareholders_meeting_2022",
+      "title": "Microsoft Annual Shareholders Meeting 2022",
+      "source_type": "presentation",
+      "source_grade": "primary",
+      "url": "https://www.microsoft.com/en-us/investor/events/fy-2023/annual-shareholders-meeting-2022",
+      "local_path": null,
+      "published_at": "2022-12-13",
+      "speaker": "Amy Hood",
+      "decision_domains": [
+        "capital_allocation",
+        "growth_profitability_balance",
+        "cost_discipline_operating_efficiency",
+        "strategic_investment_acquisition",
+        "risk_uncertainty"
+      ],
+      "has_full_text": true,
+      "metadata_status": "complete",
+      "selection_reason": "거시 불확실성 속 M&A·유기적 성장 투자와 466억 달러 자본환원을 함께 설명한 공식 주주총회 transcript",
+      "status": "selected"
+    },
+    {
+      "source_id": "web_amy_hood_ai_discussion_with_kevin_scott",
+      "title": "AI Discussion with Amy Hood and Kevin Scott",
+      "source_type": "conversation",
+      "source_grade": "primary",
+      "url": "https://www.microsoft.com/en-us/Investor/events/FY-2023/AI-Discussion-with-Amy-Hood-EVP-and-CFO-and-Kevin-Scott-EVP-of-AI-and-CTO",
+      "local_path": null,
+      "published_at": "2023-06-12",
+      "speaker": "Amy Hood",
+      "decision_domains": [
+        "capital_allocation",
+        "growth_profitability_balance",
+        "strategic_investment_acquisition",
+        "risk_uncertainty"
+      ],
+      "has_full_text": true,
+      "metadata_status": "complete",
+      "selection_reason": "AI가 실제 고객 수요인지 검증하고 플랫폼 전 계층의 성장·수익 기회로 연결하는 판단을 담은 공식 대담 transcript",
+      "status": "selected"
+    },
+    {
+      "source_id": "web_amy_hood_annual_shareholders_meeting_2023",
+      "title": "Microsoft Annual Shareholders Meeting 2023",
+      "source_type": "presentation",
+      "source_grade": "primary",
+      "url": "https://www.microsoft.com/en-us/Investor/events/FY-2024/2023-Annual-Shareholder-Meeting",
+      "local_path": null,
+      "published_at": "2023-12-07",
+      "speaker": "Amy Hood",
+      "decision_domains": [
+        "capital_allocation",
+        "growth_profitability_balance",
+        "cost_discipline_operating_efficiency",
+        "strategic_investment_acquisition",
+        "risk_uncertainty"
+      ],
+      "has_full_text": true,
+      "metadata_status": "complete",
+      "selection_reason": "AI 인프라 확장, OpenAI 파트너십, 유기적 성장·인수와 자본환원의 균형을 설명한 공식 주주총회 transcript",
+      "status": "selected"
+    },
+    {
+      "source_id": "web_amy_hood_annual_shareholders_meeting_2024",
+      "title": "Microsoft Annual Shareholders Meeting 2024",
+      "source_type": "presentation",
+      "source_grade": "primary",
+      "url": "https://www.microsoft.com/en-us/investor/events/fy-2025/2024-annual-shareholder-meeting",
+      "local_path": null,
+      "published_at": "2024-12-10",
+      "speaker": "Amy Hood",
+      "decision_domains": [
+        "capital_allocation",
+        "growth_profitability_balance",
+        "cost_discipline_operating_efficiency",
+        "risk_uncertainty"
+      ],
+      "has_full_text": true,
+      "metadata_status": "complete",
+      "selection_reason": "AI·클라우드 CapEx 규모와 수요 신호, 플랫폼 리더십, 투자자본수익 확신을 직접 설명한 공식 주주총회 transcript",
+      "status": "selected"
+    },
+    {
+      "source_id": "web_amy_hood_morgan_stanley_tmt_conference_2025",
+      "title": "Morgan Stanley TMT Conference",
+      "source_type": "interview",
+      "source_grade": "primary",
+      "url": "https://www.microsoft.com/en-us/investor/events/fy-2025/morgan-stanley-tmt-conference",
+      "local_path": null,
+      "published_at": "2025-03-04",
+      "speaker": "Amy Hood",
+      "decision_domains": [
+        "capital_allocation",
+        "growth_profitability_balance",
+        "cost_discipline_operating_efficiency",
+        "risk_uncertainty"
+      ],
+      "has_full_text": true,
+      "metadata_status": "complete",
+      "selection_reason": "AI 공급·수요, 글로벌 인프라 자산의 수명과 활용률, 투자자본수익을 장기 관점에서 설명한 CFO 인터뷰 transcript",
+      "status": "selected"
+    },
+    {
+      "source_id": "web_amy_hood_annual_shareholders_meeting_2025",
+      "title": "Microsoft Annual Shareholders Meeting 2025",
+      "source_type": "presentation",
+      "source_grade": "primary",
+      "url": "https://www.microsoft.com/en-us/investor/events/fy-2026/2025-annual-shareholder-meeting",
+      "local_path": null,
+      "published_at": "2025-12-05",
+      "speaker": "Amy Hood",
+      "decision_domains": [
+        "capital_allocation",
+        "growth_profitability_balance",
+        "cost_discipline_operating_efficiency",
+        "risk_uncertainty"
+      ],
+      "has_full_text": true,
+      "metadata_status": "complete",
+      "selection_reason": "AI 투자에서 수요 기반 지출과 선행 혁신 투자를 구분하고 재투자·자사주·배당의 우선순위를 설명한 공식 주주총회 transcript",
+      "status": "selected"
+    }
+  ]
 }
