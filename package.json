@@ -10,6 +10,8 @@
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
+    "inventory:test": "python3 -m unittest discover -s tests -p 'test_amy_hood_source_inventory.py' -v",
+    "inventory:build": "python3 scripts/amy_hood_source_inventory.py",
     "rag:prepare:holdout": "python3 scripts/prepare_holdout_dataset.py",
     "rag:index:bge-m3": "python3 scripts/build_bge_m3_index.py",
     "rag:index:bge-m3:train": "RAG_ARCHIVE_DIR=archive_eval/train python3 scripts/build_bge_m3_index.py",

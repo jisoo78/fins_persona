@@ -18,7 +18,12 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.amy_hood_source_inventory import load_local_inventory
+from scripts.amy_hood_source_inventory import (
+    infer_decision_domains,
+    interview_duplicate_stats,
+    load_local_inventory,
+    validate_inventory,
+)
 
 
 class SourceInventoryTests(unittest.TestCase):
@@ -56,6 +61,97 @@ class SourceInventoryTests(unittest.TestCase):
             self.assertEqual(entries[0]["source_grade"], "primary")
             self.assertEqual(entries[0]["metadata_status"], "complete")
             self.assertEqual(entries[0]["status"], "available")
+
+    def test_inherited_interview_keeps_missing_metadata(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            archive = Path(temp_dir)
+            (archive / "microsoft_amy_hood.json").write_text(
+                json.dumps({"records": [{"text": "Capital allocation interview answer"}]}),
+                encoding="utf-8",
+            )
+
+            entries = load_local_inventory(archive)
+
+            self.assertEqual(entries[0]["source_grade"], "primary")
+            self.assertIsNone(entries[0]["url"])
+            self.assertIsNone(entries[0]["published_at"])
+            self.assertEqual(entries[0]["metadata_status"], "needs_enrichment")
+
+    def test_infers_multiple_decision_domains(self) -> None:
+        domains = infer_decision_domains(
+            "We balance CapEx investment, margin efficiency, growth and uncertainty."
+        )
+
+        self.assertIn("capital_allocation", domains)
+        self.assertIn("growth_profitability_balance", domains)
+        self.assertIn("cost_discipline_operating_efficiency", domains)
+        self.assertIn("strategic_investment_acquisition", domains)
+        self.assertIn("risk_uncertainty", domains)
+
+    def test_counts_cross_file_duplicates_without_mutating_sources(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            archive = Path(temp_dir)
+            json_path = archive / "microsoft_amy_hood.json"
+            csv_path = archive / "microsoft_amy_hood.csv"
+            json_path.write_text(
+                json.dumps({"records": [{"text": "Same Amy Hood answer"}]}),
+                encoding="utf-8",
+            )
+            csv_path.write_text('text\n"Same   Amy Hood answer"\n', encoding="utf-8")
+            before_json = json_path.read_bytes()
+            before_csv = csv_path.read_bytes()
+
+            stats = interview_duplicate_stats(archive)
+
+            self.assertEqual(stats["cross_file_duplicate_count"], 1)
+            self.assertEqual(json_path.read_bytes(), before_json)
+            self.assertEqual(csv_path.read_bytes(), before_csv)
+
+    def test_malformed_json_becomes_review_required(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            archive = Path(temp_dir)
+            (archive / "fy2024_q1.json").write_text("{broken", encoding="utf-8")
+
+            entries = load_local_inventory(archive)
+
+            self.assertEqual(entries[0]["status"], "review_required")
+            self.assertTrue(entries[0]["review_notes"])
+
+    def test_malformed_interview_json_becomes_review_required(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            archive = Path(temp_dir)
+            (archive / "microsoft_amy_hood.json").write_text("{broken", encoding="utf-8")
+
+            entries = load_local_inventory(archive)
+
+            self.assertEqual(entries[0]["source_type"], "interview")
+            self.assertEqual(entries[0]["status"], "review_required")
+            self.assertTrue(entries[0]["review_notes"])
+
+    def test_validation_rejects_selected_holdout(self) -> None:
+        errors = validate_inventory(
+            [
+                {
+                    "source_id": "earnings_fy2018_q2",
+                    "source_type": "earnings_call",
+                    "source_grade": "primary",
+                    "url": "https://example.test/fy2018-q2",
+                    "local_path": "archive/fy2018_q2.json",
+                    "published_at": None,
+                    "speaker": "Amy Hood",
+                    "decision_domains": ["capital_allocation"],
+                    "has_full_text": True,
+                    "metadata_status": "complete",
+                    "selection_reason": "invalid fixture",
+                    "status": "selected",
+                    "fiscal_year": 2018,
+                    "fiscal_quarter": 2,
+                    "title": "FY2018 Q2",
+                }
+            ]
+        )
+
+        self.assertIn("holdout earnings call cannot be selected: earnings_fy2018_q2", errors)
 
 
 if __name__ == "__main__":

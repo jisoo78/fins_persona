@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import re
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
@@ -15,6 +17,8 @@ DOMAIN_KEYWORDS = {
     "strategic_investment_acquisition": ("investment", "acquisition", "m&a", "partnership"),
     "risk_uncertainty": ("risk", "uncertainty", "constraint", "demand signal", "foreign exchange"),
 }
+VALID_DOMAINS = set(DOMAIN_KEYWORDS)
+SELECTED_NON_EARNINGS_TYPES = {"interview", "presentation", "conversation"}
 
 
 def normalize_text(value: str) -> str:
@@ -149,3 +153,153 @@ def load_local_inventory(archive_dir: Path) -> list[dict[str, object]]:
                 }
             )
     return entries
+
+
+def _interview_texts(path: Path) -> list[str]:
+    if path.suffix == ".json":
+        parsed = _read_json(path)
+        return [str(row.get("text") or "") for row in parsed.get("records") or []]
+    with path.open(encoding="utf-8-sig", newline="") as handle:
+        return [str(row.get("text") or "") for row in csv.DictReader(handle)]
+
+
+def interview_duplicate_stats(archive_dir: Path) -> dict[str, int]:
+    json_texts = {
+        normalize_text(text)
+        for text in _interview_texts(archive_dir / "microsoft_amy_hood.json")
+        if normalize_text(text)
+    }
+    csv_texts = {
+        normalize_text(text)
+        for text in _interview_texts(archive_dir / "microsoft_amy_hood.csv")
+        if normalize_text(text)
+    }
+    return {
+        "json_unique_count": len(json_texts),
+        "csv_unique_count": len(csv_texts),
+        "cross_file_duplicate_count": len(json_texts & csv_texts),
+    }
+
+
+def merge_curated(
+    entries: list[dict[str, object]],
+    curated: dict[str, object],
+) -> list[dict[str, object]]:
+    by_id = {str(entry["source_id"]): dict(entry) for entry in entries}
+    overrides = curated.get("overrides", [])
+    web_sources = curated.get("web_sources", [])
+    if not isinstance(overrides, list) or not isinstance(web_sources, list):
+        raise ValueError("curated overrides and web_sources must be arrays")
+
+    for override in overrides:
+        if not isinstance(override, dict):
+            raise ValueError("curated override must be an object")
+        source_id = str(override["source_id"])
+        if source_id not in by_id:
+            raise ValueError(f"unknown override source_id: {source_id}")
+        by_id[source_id].update(override)
+    for source in web_sources:
+        if not isinstance(source, dict):
+            raise ValueError("curated web source must be an object")
+        source_id = str(source["source_id"])
+        if source_id in by_id:
+            raise ValueError(f"duplicate source_id: {source_id}")
+        by_id[source_id] = dict(source)
+    return [by_id[source_id] for source_id in sorted(by_id)]
+
+
+def validate_inventory(entries: list[dict[str, object]]) -> list[str]:
+    errors: list[str] = []
+    ids = [str(entry.get("source_id") or "") for entry in entries]
+    for source_id, count in Counter(ids).items():
+        if not source_id:
+            errors.append("source_id is required")
+        elif count > 1:
+            errors.append(f"duplicate source_id: {source_id}")
+
+    required = {
+        "source_id",
+        "title",
+        "source_type",
+        "source_grade",
+        "url",
+        "local_path",
+        "published_at",
+        "speaker",
+        "decision_domains",
+        "has_full_text",
+        "metadata_status",
+        "selection_reason",
+        "status",
+    }
+    for entry in entries:
+        source_id = str(entry.get("source_id") or "missing-source-id")
+        missing = sorted(required - set(entry))
+        if missing:
+            errors.append(f"missing fields for {source_id}: {', '.join(missing)}")
+        domains = set(entry.get("decision_domains") or [])
+        unknown_domains = sorted(domains - VALID_DOMAINS)
+        if unknown_domains:
+            errors.append(f"unknown domains for {source_id}: {', '.join(unknown_domains)}")
+        if (
+            entry.get("source_type") == "earnings_call"
+            and entry.get("fiscal_year") in HOLDOUT_YEARS
+            and entry.get("status") == "selected"
+        ):
+            errors.append(f"holdout earnings call cannot be selected: {source_id}")
+
+    selected = [entry for entry in entries if entry.get("status") == "selected"]
+    selected_earnings = [entry for entry in selected if entry.get("source_type") == "earnings_call"]
+    selected_non_earnings = [
+        entry for entry in selected if entry.get("source_type") in SELECTED_NON_EARNINGS_TYPES
+    ]
+    covered_domains = {
+        str(domain)
+        for entry in selected
+        for domain in entry.get("decision_domains") or []
+    }
+    if entries and not 15 <= len(selected) <= 25:
+        errors.append(f"selected count must be 15..25, got {len(selected)}")
+    if entries and not 5 <= len(selected_earnings) <= 10:
+        errors.append(f"selected earnings count must be 5..10, got {len(selected_earnings)}")
+    if entries and not 10 <= len(selected_non_earnings) <= 15:
+        errors.append(
+            "selected interview/presentation/conversation count must be "
+            f"10..15, got {len(selected_non_earnings)}"
+        )
+    if entries and len(covered_domains) < 4:
+        errors.append(f"selected sources must cover at least 4 domains, got {len(covered_domains)}")
+    return errors
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--project-root", type=Path, default=Path.cwd())
+    parser.add_argument("--check", action="store_true")
+    args = parser.parse_args()
+    root = args.project_root.resolve()
+    archive_dir = root / "archive"
+    curated_path = root / "data/b-track/amy-hood/source-inventory-curated.json"
+    output_path = root / "data/b-track/amy-hood/source-inventory.json"
+
+    curated = _read_json(curated_path)
+    entries = merge_curated(load_local_inventory(archive_dir), curated)
+    errors = validate_inventory(entries)
+    if errors:
+        for error in errors:
+            print(f"ERROR: {error}")
+        return 1
+    if not args.check:
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(
+            json.dumps(entries, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+    print(f"inventory entries: {len(entries)}")
+    print(f"selected: {sum(entry['status'] == 'selected' for entry in entries)}")
+    print(f"holdout: {sum(entry['status'] == 'holdout' for entry in entries)}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
