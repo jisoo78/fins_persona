@@ -15,6 +15,7 @@
     "persona:test": "tsx --test tests/amyHoodPersonaPipeline.test.ts",
     "persona:analyze": "tsx server/runAmyHoodPersonaPipeline.ts analyze",
     "persona:check": "tsx server/runAmyHoodPersonaPipeline.ts check",
+    "persona:evaluate": "tsx server/runAmyHoodPersonaPipeline.ts evaluate",
     "rag:prepare:holdout": "python3 scripts/prepare_holdout_dataset.py",
     "rag:index:bge-m3": "python3 scripts/build_bge_m3_index.py",
     "rag:index:bge-m3:train": "RAG_ARCHIVE_DIR=archive_eval/train python3 scripts/build_bge_m3_index.py",

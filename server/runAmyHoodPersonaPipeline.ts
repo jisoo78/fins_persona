@@ -13,6 +13,7 @@ import {
   type InventoryEntry,
 } from './personaPipeline/corpus';
 import { createModelClient, type ModelClient } from './personaPipeline/modelClient';
+import { evaluatePersona } from './personaPipeline/evaluator';
 import {
   buildMasterPrompt,
   checkGemmaGate,
@@ -198,6 +199,18 @@ const main = async () => {
     const gate = await checkGemmaGate(process.cwd());
     console.log(JSON.stringify(gate, null, 2));
     if (!gate.passed) process.exitCode = 1;
+    return;
+  }
+  if (command === 'evaluate') {
+    const model = createModelClient(provider);
+    const evaluation = await evaluatePersona({ root: process.cwd(), provider, model });
+    console.log(
+      JSON.stringify(
+        { provider, model: model.model, answerCount: evaluation.answers.length },
+        null,
+        2,
+      ),
+    );
     return;
   }
   if (command !== 'analyze') throw new Error(`unknown command: ${command}`);
