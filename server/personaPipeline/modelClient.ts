@@ -20,7 +20,7 @@ export const modelRequestSettings = (provider: ProviderName) => ({
     provider === 'local'
       ? process.env.LOCAL_LLM_MODEL || 'local-model'
       : process.env.OPENAI_MODEL || 'gpt-5-mini',
-  maxTokens: 4_000,
+  maxTokens: 5_000,
   modelKwargs:
     provider === 'local'
       ? {
