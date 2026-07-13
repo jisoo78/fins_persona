@@ -1,6 +1,9 @@
 import React from 'react';
 import { AlertTriangle, CheckCircle2, FileJson, Scale } from 'lucide-react';
 import summaryData from '../../evaluation/amy_hood_eval_full_vs_holdout_summary.json';
+import decisionSimilarityData from '../../evaluation/amy_hood_decision_similarity_scored.json';
+import hardEvalIncludedData from '../../evaluation/amy_hood_hard_eval_full_2017_2019_included.lock.json';
+import hardEvalExcludedData from '../../evaluation/amy_hood_hard_eval_holdout_2017_2019_excluded.lock.json';
 
 type EvaluationSummary = {
   요약: {
@@ -34,6 +37,56 @@ type EvaluationSummary = {
 
 const evaluation = summaryData as EvaluationSummary;
 
+type DecisionSimilarityScore = {
+  summary: {
+    question_count: number;
+    multiple_choice_count: number;
+    subjective_count: number;
+    total_score: number;
+    max_score: number;
+    percentage: number;
+    by_kpi: {
+      kpi: string;
+      score: number;
+      max_score: number;
+      question_count: number;
+      percentage: number;
+    }[];
+  };
+  scoring_note: string;
+};
+
+const decisionSimilarity = decisionSimilarityData as DecisionSimilarityScore;
+
+type HardEvaluationAnswer = {
+  question_id: string;
+  kpi?: string;
+  question: string;
+  answer: string;
+};
+
+type HardEvaluationResult = {
+  answers: HardEvaluationAnswer[];
+};
+
+const hardEvalIncluded = hardEvalIncludedData as HardEvaluationResult;
+const hardEvalExcluded = hardEvalExcludedData as HardEvaluationResult;
+
+const answerComparisons = hardEvalIncluded.answers.map((includedAnswer, index) => {
+  const excludedAnswer =
+    hardEvalExcluded.answers.find((answer) => answer.question_id === includedAnswer.question_id) ??
+    hardEvalExcluded.answers[index];
+
+  return {
+    number: index + 1,
+    questionId: includedAnswer.question_id,
+    kpi: includedAnswer.kpi,
+    question: includedAnswer.question,
+    includedAnswer: includedAnswer.answer,
+    excludedAnswer: excludedAnswer?.answer ?? '미포함 답변 없음',
+  };
+});
+
 export const EvaluationView: React.FC = () => {
   const { 요약, 비교 } = evaluation;
 
@@ -59,6 +112,47 @@ export const EvaluationView: React.FC = () => {
             {요약.질문지_파일}
           </div>
         </header>
+
+        <section className="grid grid-cols-1 gap-4 md:grid-cols-4">
+          <div className="rounded-lg border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">정답 기반 평가</p>
+            <p className="mt-2 text-2xl font-bold text-slate-950 dark:text-white">
+              {decisionSimilarity.summary.percentage}%
+            </p>
+            <p className="mt-1 text-xs text-slate-500">
+              {decisionSimilarity.summary.total_score}/{decisionSimilarity.summary.max_score}점
+            </p>
+          </div>
+
+          <div className="rounded-lg border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">문항 구성</p>
+            <p className="mt-2 text-2xl font-bold text-slate-950 dark:text-white">
+              {decisionSimilarity.summary.question_count}
+            </p>
+            <p className="mt-1 text-xs text-slate-500">
+              객관식 {decisionSimilarity.summary.multiple_choice_count} / 주관식 {decisionSimilarity.summary.subjective_count}
+            </p>
+          </div>
+
+          {decisionSimilarity.summary.by_kpi.slice(0, 2).map((row) => (
+            <div key={row.kpi} className="rounded-lg border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
+              <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{row.kpi}</p>
+              <p className="mt-2 text-2xl font-bold text-slate-950 dark:text-white">
+                {row.percentage}%
+              </p>
+              <p className="mt-1 text-xs text-slate-500">
+                {row.score}/{row.max_score}점 · {row.question_count}문항
+              </p>
+            </div>
+          ))}
+        </section>
+
+        <section className="rounded-lg border border-amber-200 bg-amber-50 p-5 dark:border-amber-400/30 dark:bg-amber-400/10">
+          <h2 className="text-sm font-semibold text-amber-900 dark:text-amber-200">정답 기반 평가 메모</h2>
+          <p className="mt-2 text-sm leading-6 text-amber-800 dark:text-amber-200">
+            {decisionSimilarity.scoring_note}
+          </p>
+        </section>
 
         <section className="grid grid-cols-1 gap-4 md:grid-cols-4">
           <div className="rounded-lg border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
@@ -156,6 +250,58 @@ export const EvaluationView: React.FC = () => {
                 ))}
               </tbody>
             </table>
+          </div>
+        </section>
+
+        <section className="rounded-lg border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
+          <div className="border-b border-slate-200 px-5 py-4 dark:border-slate-800">
+            <h2 className="text-sm font-semibold text-slate-950 dark:text-white">질문별 답변 비교</h2>
+            <p className="mt-1 text-xs text-slate-500">
+              각 질문에 대해 2017~2019년 데이터 미포함 답변과 포함 답변을 함께 확인합니다.
+            </p>
+          </div>
+
+          <div className="divide-y divide-slate-100 dark:divide-slate-800">
+            {answerComparisons.map((row) => (
+              <article key={row.questionId} className="px-5 py-5">
+                <div className="mb-4">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="rounded-md bg-slate-900 px-2 py-1 text-xs font-semibold text-white dark:bg-slate-100 dark:text-slate-950">
+                      {row.number}번 질문
+                    </span>
+                    {row.kpi && (
+                      <span className="rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 dark:bg-indigo-400/10 dark:text-indigo-300">
+                        {row.kpi}
+                      </span>
+                    )}
+                    <span className="font-mono text-xs text-slate-400">{row.questionId}</span>
+                  </div>
+                  <p className="mt-3 text-sm font-semibold leading-6 text-slate-950 dark:text-white">
+                    {row.question}
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                  <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950">
+                    <h3 className="text-xs font-semibold uppercase tracking-wide text-rose-600 dark:text-rose-300">
+                      2017~2019 미포함 대답
+                    </h3>
+                    <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-slate-700 dark:text-slate-300">
+                      {row.excludedAnswer}
+                    </p>
+                  </div>
+
+                  <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950">
+                    <h3 className="text-xs font-semibold uppercase tracking-wide text-emerald-600 dark:text-emerald-300">
+                      2017~2019 포함 대답
+                    </h3>
+                    <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-slate-700 dark:text-slate-300">
+                      {row.includedAnswer}
+                    </p>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         </section>
 

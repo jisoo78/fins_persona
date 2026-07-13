@@ -1,0 +1,27 @@
+{
+  "contract_name": "AmyHoodDecisionSimilarityJudge",
+  "purpose": "일반 RAG와 GraphRAG가 생성한 Amy Hood 페르소나 답변을 같은 정답지로 채점한다.",
+  "input": {
+    "question_id": "string",
+    "question_type": "multiple_choice | subjective",
+    "question": "string",
+    "candidate_answer": "string",
+    "answer_key": "object"
+  },
+  "multiple_choice_rule": {
+    "score_range": "0 or 1",
+    "instruction": "candidate_answer가 명시적으로 선택한 option_id 또는 의미상 동일한 option을 answer_key.correct_option_id와 비교한다."
+  },
+  "subjective_rule": {
+    "score_range": "0 to 5",
+    "rubric": [
+      { "score": 5, "meaning": "reference_answer와 매우 유사하고 must_include 대부분을 정확히 포함한다." },
+      { "score": 4, "meaning": "핵심 판단 기준은 맞고 일부 세부 요소만 부족하다." },
+      { "score": 3, "meaning": "대체로 맞지만 중요한 판단 축 일부가 빠졌다." },
+      { "score": 2, "meaning": "일부 관련 내용은 있으나 Amy Hood식 의사결정 기준과 거리가 있다." },
+      { "score": 1, "meaning": "표면적으로만 관련 있고 핵심 기준을 거의 반영하지 못한다." },
+      { "score": 0, "meaning": "질문에 답하지 않았거나 정답 기준과 반대된다." }
+    ]
+  },
+  "judge_prompt_template": "너는 CFO 페르소나 평가자다. 아래 정답 기준을 사용해 candidate_answer가 Amy Hood의 의사결정 기준과 얼마나 유사한지 채점하라. 객관식은 정답 option 일치 여부로 0 또는 1점을 준다. 주관식은 reference_answer와 must_include를 기준으로 0~5점을 준다. 근거 없는 과장, 원문에 없는 숫자 확정, 확인 필요 항목 누락은 감점한다. 반드시 JSON만 반환한다."
+}

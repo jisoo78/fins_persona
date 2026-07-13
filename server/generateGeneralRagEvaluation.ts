@@ -11,10 +11,18 @@ import { retrieveVectorArchiveEvidence } from './vectorRagService';
 
 interface EvaluationQuestion {
   id: string;
+  question_id?: string;
   type?: string;
+  question_type?: string;
   kpi?: string;
   question: string;
-  expected_focus: string[];
+  expected_focus?: string[];
+  answer_key?: {
+    correct_option_id?: string;
+    rationale?: string;
+    reference_answer?: string;
+    must_include?: string[];
+  };
   holdout_target?: string;
   grading_notes?: string[];
 }
@@ -44,8 +52,21 @@ const buildPersonaQuery = (questions: EvaluationQuestion[]) =>
   [
     questionsFile.subject,
     'CFO financial decision making persona',
-    ...questions.flatMap((question) => [question.question, ...question.expected_focus]),
+    ...questions.flatMap((question) => [question.question, ...getExpectedFocus(question)]),
   ].join(' ');
+
+const getQuestionId = (question: EvaluationQuestion) => question.id ?? question.question_id ?? question.question;
+
+const getQuestionType = (question: EvaluationQuestion) => question.type ?? question.question_type;
+
+const getExpectedFocus = (question: EvaluationQuestion) =>
+  question.expected_focus ??
+  question.answer_key?.must_include ??
+  [question.answer_key?.rationale, question.answer_key?.reference_answer]
+    .filter(Boolean)
+    .flatMap((value) => String(value).split(/[,./\s]+/))
+    .filter((value) => value.length > 2)
+    .slice(0, 12);
 
 const retrieveEvidence = async (query: string, limit: number) => {
   if (retrievalMode === 'vector') {
@@ -111,7 +132,7 @@ Answer in Korean. Use only source-grounded claims when possible.`,
 });
 
 const buildOfflineAnswer = (question: EvaluationQuestion, chunks: RagChunk[]) => {
-  const focus = question.expected_focus.join(', ');
+  const focus = getExpectedFocus(question).join(', ');
   const topEvidence = chunks[0];
   const sourceHint = topEvidence
     ? `${topEvidence.title}${topEvidence.fiscalYear ? ` FY${topEvidence.fiscalYear} Q${topEvidence.fiscalQuarter}` : ''}`
@@ -134,7 +155,7 @@ const main = async () => {
 
   for (const question of questionsFile.questions) {
     const retrieval = await retrieveEvidence(
-      [question.question, ...question.expected_focus, questionsFile.subject].join(' '),
+      [question.question, ...getExpectedFocus(question), questionsFile.subject].join(' '),
       8,
     );
     const generated = useLlm
@@ -146,8 +167,8 @@ const main = async () => {
       : buildOfflineAnswer(question, retrieval.selectedChunks);
 
     answers.push({
-      question_id: question.id,
-      type: question.type,
+      question_id: getQuestionId(question),
+      type: getQuestionType(question),
       kpi: question.kpi,
       holdout_target: question.holdout_target,
       question: question.question,
@@ -156,8 +177,9 @@ const main = async () => {
         ? generated.evidence
         : summarizeEvidence(retrieval.selectedChunks),
       limitations: generated.limitations,
-      expected_focus: question.expected_focus,
+      expected_focus: getExpectedFocus(question),
       grading_notes: question.grading_notes,
+      answer_key: question.answer_key,
     });
   }
 

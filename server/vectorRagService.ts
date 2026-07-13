@@ -3,6 +3,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { promisify } from 'node:util';
 import type { RagChunk } from './ragService';
+import { rerankChunksWithCohere, shouldUseCohereReranker } from './rerankerService';
 
 const execFileAsync = promisify(execFile);
 
@@ -77,6 +78,8 @@ const buildEvidenceText = (chunks: RagChunk[]) =>
         chunk.section ? `section=${chunk.section}` : '',
         `file=${chunk.fileName}`,
         chunk.score != null ? `score=${chunk.score.toFixed(4)}` : '',
+        chunk.vectorScore != null ? `vectorScore=${chunk.vectorScore.toFixed(4)}` : '',
+        chunk.rerankScore != null ? `rerankScore=${chunk.rerankScore.toFixed(4)}` : '',
       ]
         .filter(Boolean)
         .join(' | ');
@@ -108,7 +111,20 @@ export const retrieveVectorArchiveEvidence = async (
     };
   });
 
-  const selectedChunks = scores.sort((a, b) => (b.score ?? 0) - (a.score ?? 0)).slice(0, limit);
+  const sortedChunks = scores.sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
+  const candidateLimit = shouldUseCohereReranker()
+    ? Math.max(limit, Number(process.env.COHERE_RERANK_CANDIDATE_LIMIT ?? Math.max(limit * 5, 40)))
+    : limit;
+  const candidateChunks = sortedChunks.slice(0, candidateLimit);
+  let selectedChunks: RagChunk[] = candidateChunks.slice(0, limit);
+
+  try {
+    const rerankedChunks = await rerankChunksWithCohere(query, candidateChunks, limit);
+    if (rerankedChunks?.length) selectedChunks = rerankedChunks;
+  } catch (error) {
+    console.warn('Cohere rerank fallback to vector ranking', error);
+  }
+
   const uniqueDocumentIds = new Set(metadata.chunks.map((chunk) => `${chunk.fileName}:${chunk.id.split(':chunk-')[0]}`));
 
   return {

@@ -1,0 +1,195 @@
+{
+  "요약": {
+    "목적": "GitHub 인수 판단 중심 어려운 평가셋 15문항 기준 일반 RAG의 2017-2019 포함/제외 답변 및 근거 비교",
+    "질문지_파일": "evaluation/amy_hood_hard_eval_questions_15.json",
+    "포함_답변_파일": "evaluation/amy_hood_hard_eval_full_2017_2019_included.lock.json",
+    "제외_답변_파일": "evaluation/amy_hood_hard_eval_holdout_2017_2019_excluded.lock.json",
+    "포함_2017_2019": {
+      "문서_수": 1843,
+      "청크_수": 3009
+    },
+    "제외_2017_2019": {
+      "문서_수": 1448,
+      "청크_수": 2377
+    },
+    "문서_차이": 395,
+    "청크_차이": 632,
+    "문항_수": 15,
+    "근거_변경_문항_수": 6,
+    "해석": "미래 예측 문항을 GitHub 인수 여부 판단으로 변경한 뒤에도 2017-2019 데이터가 빠지면 일부 문항의 상위 근거가 다른 연도 어닝콜이나 Amy Hood CSV로 대체된다. 이 결과는 GraphRAG 답변과 비교할 일반 RAG 베이스라인으로 사용한다."
+  },
+  "비교": [
+    {
+      "문항_id": "hard_memory_01_cloud_margin_bridge",
+      "평가_기준": "과거 기억 복원",
+      "포함_상위_근거": "fy2024_q1.json",
+      "제외_상위_근거": "fy2024_q1.json",
+      "포함_상위_근거_제목": "Microsoft FY24 First Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY24 First Quarter Earnings Conference Call",
+      "포함_회계연도": 2024,
+      "제외_회계연도": 2024,
+      "상위_근거_변경됨": false
+    },
+    {
+      "문항_id": "hard_memory_02_cashflow_capex_tension",
+      "평가_기준": "과거 기억 복원",
+      "포함_상위_근거": "fy2013_q4.json",
+      "제외_상위_근거": "fy2013_q4.json",
+      "포함_상위_근거_제목": "Microsoft Fourth Quarter 2013 Prepared Remarks",
+      "제외_상위_근거_제목": "Microsoft Fourth Quarter 2013 Prepared Remarks",
+      "포함_회계연도": 2013,
+      "제외_회계연도": 2013,
+      "상위_근거_변경됨": false
+    },
+    {
+      "문항_id": "hard_memory_03_segment_guidance_logic",
+      "평가_기준": "과거 기억 복원",
+      "포함_상위_근거": "fy2017_q3.json",
+      "제외_상위_근거": "fy2024_q3.json",
+      "포함_상위_근거_제목": "MSFT Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY24 Third Quarter Earnings Conference Call",
+      "포함_회계연도": 2017,
+      "제외_회계연도": 2024,
+      "상위_근거_변경됨": true
+    },
+    {
+      "문항_id": "hard_memory_04_acquisition_integration_tradeoff",
+      "평가_기준": "과거 기억 복원",
+      "누락_검증_대상": "2017-2019 acquisition memory",
+      "포함_상위_근거": "fy2018_q4.json",
+      "제외_상위_근거": "fy2024_q4.json",
+      "포함_상위_근거_제목": "Microsoft Fourth Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY24 Fourth Quarter Earnings Conference Call",
+      "포함_회계연도": 2018,
+      "제외_회계연도": 2024,
+      "상위_근거_변경됨": true
+    },
+    {
+      "문항_id": "hard_memory_05_commercial_cloud_transition",
+      "평가_기준": "과거 기억 복원",
+      "포함_상위_근거": "fy2021_q4.json",
+      "제외_상위_근거": "fy2021_q4.json",
+      "포함_상위_근거_제목": "Microsoft FY21 Fourth Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY21 Fourth Quarter Earnings Conference Call",
+      "포함_회계연도": 2021,
+      "제외_회계연도": 2021,
+      "상위_근거_변경됨": false
+    },
+    {
+      "문항_id": "hard_future_01_github_acquisition_go_no_go",
+      "평가_기준": "미래 예측",
+      "누락_검증_대상": "GitHub acquisition decision",
+      "포함_상위_근거": "fy2019_q1.json",
+      "제외_상위_근거": "fy2020_q3.json",
+      "포함_상위_근거_제목": "Microsoft First Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY20 Third Quarter Earnings Conference Call",
+      "포함_회계연도": 2019,
+      "제외_회계연도": 2020,
+      "상위_근거_변경됨": true
+    },
+    {
+      "문항_id": "hard_future_02_github_independence_risk",
+      "평가_기준": "미래 예측",
+      "누락_검증_대상": "GitHub acquisition decision",
+      "포함_상위_근거": "fy2019_q1.json",
+      "제외_상위_근거": "fy2020_q3.json",
+      "포함_상위_근거_제목": "Microsoft First Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY20 Third Quarter Earnings Conference Call",
+      "포함_회계연도": 2019,
+      "제외_회계연도": 2020,
+      "상위_근거_변경됨": true
+    },
+    {
+      "문항_id": "hard_future_03_github_monetization_path",
+      "평가_기준": "미래 예측",
+      "누락_검증_대상": "GitHub acquisition decision",
+      "포함_상위_근거": "fy2020_q2.json",
+      "제외_상위_근거": "fy2020_q2.json",
+      "포함_상위_근거_제목": "Microsoft FY20 Second Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY20 Second Quarter Earnings Conference Call",
+      "포함_회계연도": 2020,
+      "제외_회계연도": 2020,
+      "상위_근거_변경됨": false
+    },
+    {
+      "문항_id": "hard_future_04_github_purchase_price_payback",
+      "평가_기준": "미래 예측",
+      "누락_검증_대상": "GitHub acquisition decision",
+      "포함_상위_근거": "fy2019_q1.json",
+      "제외_상위_근거": "fy2013_q4.json",
+      "포함_상위_근거_제목": "Microsoft First Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft Fourth Quarter 2013 Prepared Remarks",
+      "포함_회계연도": 2019,
+      "제외_회계연도": 2013,
+      "상위_근거_변경됨": true
+    },
+    {
+      "문항_id": "hard_future_05_github_final_recommendation",
+      "평가_기준": "미래 예측",
+      "누락_검증_대상": "GitHub acquisition decision",
+      "포함_상위_근거": "fy2018_q4.json",
+      "제외_상위_근거": "fy2023_q2.json",
+      "포함_상위_근거_제목": "Microsoft Fourth Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY23 Second Quarter Earnings Conference Call",
+      "포함_회계연도": 2018,
+      "제외_회계연도": 2023,
+      "상위_근거_변경됨": true
+    },
+    {
+      "문항_id": "hard_similarity_01_acquisition_redline",
+      "평가_기준": "의사결정 유사도",
+      "누락_검증_대상": "GitHub-like acquisition governance",
+      "포함_상위_근거": "fy2024_q4.json",
+      "제외_상위_근거": "fy2024_q4.json",
+      "포함_상위_근거_제목": "Microsoft FY24 Fourth Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY24 Fourth Quarter Earnings Conference Call",
+      "포함_회계연도": 2024,
+      "제외_회계연도": 2024,
+      "상위_근거_변경됨": false
+    },
+    {
+      "문항_id": "hard_similarity_02_capacity_allocation_rule",
+      "평가_기준": "의사결정 유사도",
+      "포함_상위_근거": "fy2024_q4.json",
+      "제외_상위_근거": "fy2024_q4.json",
+      "포함_상위_근거_제목": "Microsoft FY24 Fourth Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY24 Fourth Quarter Earnings Conference Call",
+      "포함_회계연도": 2024,
+      "제외_회계연도": 2024,
+      "상위_근거_변경됨": false
+    },
+    {
+      "문항_id": "hard_similarity_03_budget_cut_priority",
+      "평가_기준": "의사결정 유사도",
+      "포함_상위_근거": "fy2024_q1.json",
+      "제외_상위_근거": "fy2024_q1.json",
+      "포함_상위_근거_제목": "Microsoft FY24 First Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY24 First Quarter Earnings Conference Call",
+      "포함_회계연도": 2024,
+      "제외_회계연도": 2024,
+      "상위_근거_변경됨": false
+    },
+    {
+      "문항_id": "hard_similarity_04_guidance_tone_under_constraints",
+      "평가_기준": "의사결정 유사도",
+      "포함_상위_근거": "fy2023_q2.json",
+      "제외_상위_근거": "fy2023_q2.json",
+      "포함_상위_근거_제목": "Microsoft FY23 Second Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY23 Second Quarter Earnings Conference Call",
+      "포함_회계연도": 2023,
+      "제외_회계연도": 2023,
+      "상위_근거_변경됨": false
+    },
+    {
+      "문항_id": "hard_similarity_05_cfo_advisor_instruction",
+      "평가_기준": "의사결정 유사도",
+      "포함_상위_근거": "fy2023_q2.json",
+      "제외_상위_근거": "fy2023_q2.json",
+      "포함_상위_근거_제목": "Microsoft FY23 Second Quarter Earnings Conference Call",
+      "제외_상위_근거_제목": "Microsoft FY23 Second Quarter Earnings Conference Call",
+      "포함_회계연도": 2023,
+      "제외_회계연도": 2023,
+      "상위_근거_변경됨": false
+    }
+  ]
+}

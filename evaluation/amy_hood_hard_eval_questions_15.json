@@ -1,0 +1,136 @@
+{
+  "dataset": "amy_hood_hard_rag_graphrag_eval_20260708",
+  "subject": "Amy Hood",
+  "role": "CFO / finance decision persona",
+  "difficulty": "hard",
+  "evaluation_goal": "Evaluate whether RAG and GraphRAG can recover Amy Hood's past decision logic, apply it to unseen future scenarios, and preserve CFO-like decision similarity under missing-data conditions.",
+  "questions": [
+    {
+      "id": "hard_memory_01_cloud_margin_bridge",
+      "type": "subjective",
+      "kpi": "past_memory_restoration",
+      "question": "Amy Hood가 cloud와 AI capacity 투자를 설명할 때, 매출 성장, gross margin, operating margin 사이의 연결 구조를 어떻게 설명했는가?",
+      "expected_focus": ["cloud revenue", "AI capacity", "gross margin", "operating margin", "CapEx", "demand signal"],
+      "grading_notes": ["매출 성장과 capacity 제약을 함께 언급하는지", "마진 하락을 단순 비용이 아니라 성장 투자와 연결하는지", "근거 없는 ROI 수치를 만들지 않는지"]
+    },
+    {
+      "id": "hard_memory_02_cashflow_capex_tension",
+      "type": "subjective",
+      "kpi": "past_memory_restoration",
+      "question": "대규모 CapEx와 free cash flow가 동시에 언급되는 상황에서 Amy Hood는 투자자에게 어떤 재무적 긴장을 설명했는가?",
+      "expected_focus": ["CapEx", "free cash flow", "cash paid for PPE", "finance leases", "investor communication"],
+      "grading_notes": ["CapEx와 FCF 압박을 함께 설명하는지", "투자 필요성과 현금흐름 영향을 분리하지 않고 연결하는지", "정량 근거가 없으면 확인 필요로 남기는지"]
+    },
+    {
+      "id": "hard_memory_03_segment_guidance_logic",
+      "type": "subjective",
+      "kpi": "past_memory_restoration",
+      "question": "사업부별 가이던스를 설명할 때 Amy Hood가 Azure, Office, LinkedIn, FX, commercial bookings를 어떤 판단 축으로 나누어 설명했는가?",
+      "expected_focus": ["segment guidance", "Azure", "Office", "LinkedIn", "FX", "commercial bookings"],
+      "grading_notes": ["사업부별 성장 동인과 외부 변수를 구분하는지", "FX와 실제 운영 성과를 혼동하지 않는지", "여러 사업부를 하나의 성장률로 단순화하지 않는지"]
+    },
+    {
+      "id": "hard_memory_04_acquisition_integration_tradeoff",
+      "type": "subjective",
+      "kpi": "past_memory_restoration",
+      "holdout_target": "2017-2019 acquisition memory",
+      "question": "Microsoft의 인수 관련 설명에서 Amy Hood는 단기 비용 부담, 통합 리스크, 장기 성장 기여를 어떤 순서와 기준으로 판단했는가?",
+      "expected_focus": ["acquisition", "integration risk", "LinkedIn", "GitHub", "operating expense", "long-term growth"],
+      "grading_notes": ["단기 비용과 장기 성장 기여를 함께 보는지", "통합 리스크를 별도 판단 축으로 다루는지", "2017-2019 누락 시 대체 근거를 명확히 표시하는지"]
+    },
+    {
+      "id": "hard_memory_05_commercial_cloud_transition",
+      "type": "subjective",
+      "kpi": "past_memory_restoration",
+      "question": "commercial cloud 전환 과정에서 Amy Hood가 반복적으로 강조한 성장 신호와 수익성 개선 경로는 무엇인가?",
+      "expected_focus": ["commercial cloud", "Office 365", "Azure", "annuity mix", "gross margin", "recurring revenue"],
+      "grading_notes": ["클라우드 전환을 단순 매출 증가가 아니라 반복 매출 구조 변화로 설명하는지", "수익성 개선 경로를 함께 언급하는지", "근거 출처를 분명히 하는지"]
+    },
+    {
+      "id": "hard_future_01_github_acquisition_go_no_go",
+      "type": "scenario",
+      "kpi": "future_prediction",
+      "holdout_target": "GitHub acquisition decision",
+      "question": "Microsoft가 GitHub 인수를 검토하고 있다. GitHub는 개발자 생태계와 네트워크 효과는 강하지만 단기 수익성은 낮고 인수 가격 부담이 크다. Amy Hood 페르소나라면 인수 승인 여부를 어떤 기준으로 결정할까?",
+      "expected_focus": ["GitHub acquisition", "developer ecosystem", "network effect", "purchase price", "long-term monetization", "go no-go decision"],
+      "grading_notes": ["인수 여부를 단기 수익성만으로 판단하지 않는지", "개발자 생태계와 장기 플랫폼 가치를 함께 보는지", "가격 부담과 장기 수익화 가능성을 조건부로 비교하는지"]
+    },
+    {
+      "id": "hard_future_02_github_independence_risk",
+      "type": "scenario",
+      "kpi": "future_prediction",
+      "holdout_target": "GitHub acquisition decision",
+      "question": "GitHub 인수 후 Microsoft가 제품을 빠르게 통합하면 비용 시너지는 생기지만 개발자 커뮤니티 신뢰가 훼손될 수 있다. Amy Hood 페르소나라면 이 리스크가 인수 여부에 어떤 영향을 준다고 판단할까?",
+      "expected_focus": ["GitHub independence", "community trust", "integration risk", "cost synergy", "developer retention", "acquisition red line"],
+      "grading_notes": ["비용 시너지보다 핵심 자산 훼손 리스크를 고려하는지", "커뮤니티 신뢰를 재무적 가치의 선행 지표로 보는지", "독립 운영 조건을 인수 승인 조건으로 제시하는지"]
+    },
+    {
+      "id": "hard_future_03_github_monetization_path",
+      "type": "scenario",
+      "kpi": "future_prediction",
+      "holdout_target": "GitHub acquisition decision",
+      "question": "GitHub는 인수 당시 직접 매출 기여가 제한적이지만 Azure, Visual Studio, DevOps, 보안 제품과 연결될 수 있다. Amy Hood 페르소나라면 인수 찬반 판단을 위해 어떤 수익화 경로를 확인하려 할까?",
+      "expected_focus": ["GitHub monetization", "Azure pull-through", "Visual Studio", "DevOps", "security", "cross-sell"],
+      "grading_notes": ["직접 매출과 간접 플랫폼 효과를 구분하는지", "Azure와 개발자 도구 생태계로 이어지는 수익화 경로를 보는지", "확인되지 않은 시너지는 단정하지 않는지"]
+    },
+    {
+      "id": "hard_future_04_github_purchase_price_payback",
+      "type": "scenario",
+      "kpi": "future_prediction",
+      "holdout_target": "GitHub acquisition decision",
+      "question": "GitHub 인수 가격이 높아 단기 EPS와 operating margin에 부담이 생길 수 있다. Amy Hood 페르소나라면 어느 정도의 단기 희석을 감수하고, 어떤 회수 논리가 있어야 인수를 승인할까?",
+      "expected_focus": ["purchase price", "EPS dilution", "operating margin", "payback logic", "strategic value", "capital allocation"],
+      "grading_notes": ["단기 EPS 희석과 장기 전략 가치를 함께 비교하는지", "회수 기간이나 수익화 근거가 없으면 확인 필요로 남기는지", "가격 부담을 무시하지 않는지"]
+    },
+    {
+      "id": "hard_future_05_github_final_recommendation",
+      "type": "scenario",
+      "kpi": "future_prediction",
+      "holdout_target": "GitHub acquisition decision",
+      "question": "위 조건을 종합했을 때 Amy Hood 페르소나라면 GitHub 인수를 승인할까, 보류할까, 거절할까? 결론과 함께 반드시 확인해야 할 재무 조건과 비재무 조건을 제시하라.",
+      "expected_focus": ["GitHub acquisition decision", "approve hold reject", "financial conditions", "non-financial conditions", "risk control", "strategic fit"],
+      "grading_notes": ["명확한 결론을 내리되 조건부 판단을 제시하는지", "재무 조건과 비재무 조건을 모두 포함하는지", "근거가 부족한 항목은 확인 필요로 표시하는지"]
+    },
+    {
+      "id": "hard_similarity_01_acquisition_redline",
+      "type": "scenario",
+      "kpi": "decision_similarity",
+      "holdout_target": "GitHub-like acquisition governance",
+      "question": "인수 대상의 핵심 자산이 커뮤니티 신뢰인데, 완전 통합하면 비용 절감은 가능하지만 사용자 이탈 위험이 크다. Amy Hood식 의사결정이라면 어떤 레드라인을 둘까?",
+      "expected_focus": ["community trust", "integration risk", "retention", "cost synergy", "long-term value", "red line"],
+      "grading_notes": ["비용 시너지보다 핵심 자산 훼손 여부를 중시하는지", "정량 지표와 정성 신호를 함께 요구하는지", "레드라인을 구체적으로 표현하는지"]
+    },
+    {
+      "id": "hard_similarity_02_capacity_allocation_rule",
+      "type": "scenario",
+      "kpi": "decision_similarity",
+      "question": "AI capacity가 부족해 first-party 서비스, 전략 고객, 단기 매출 기회 중 일부만 지원할 수 있다. Amy Hood식 판단이라면 어떤 배분 원칙을 세울까?",
+      "expected_focus": ["capacity allocation", "first-party services", "strategic customers", "short-term revenue", "Azure", "platform trust"],
+      "grading_notes": ["단기 매출 극대화만 답하지 않는지", "장기 플랫폼 신뢰와 수요 검증을 함께 보는지", "배분 원칙을 명확히 제시하는지"]
+    },
+    {
+      "id": "hard_similarity_03_budget_cut_priority",
+      "type": "scenario",
+      "kpi": "decision_similarity",
+      "question": "경기 둔화로 비용 절감 압박이 커졌지만 AI와 클라우드 R&D는 장기 성장에 중요하다. Amy Hood식 의사결정이라면 어떤 예산은 줄이고 어떤 예산은 유지할까?",
+      "expected_focus": ["expense discipline", "R&D", "long-term growth", "operating leverage", "prioritization", "efficiency"],
+      "grading_notes": ["전면 삭감을 피하는지", "장기 성장 투자와 운영 효율을 함께 고려하는지", "유지할 예산과 줄일 예산의 기준을 구분하는지"]
+    },
+    {
+      "id": "hard_similarity_04_guidance_tone_under_constraints",
+      "type": "subjective",
+      "kpi": "decision_similarity",
+      "question": "성장률은 높지만 capacity 제약, 비용 압박, FX 리스크가 동시에 존재한다. Amy Hood 페르소나라면 투자자에게 어떤 순서와 톤으로 설명할까?",
+      "expected_focus": ["investor communication", "guidance tone", "capacity constraints", "cost pressure", "FX", "numeric evidence"],
+      "grading_notes": ["낙관 또는 비관 한쪽으로 치우치지 않는지", "숫자, 제약, 리스크, 다음 액션 순서로 말하는지", "확인되지 않은 내용을 단정하지 않는지"]
+    },
+    {
+      "id": "hard_similarity_05_cfo_advisor_instruction",
+      "type": "subjective",
+      "kpi": "decision_similarity",
+      "question": "위 데이터로 만든 Amy Hood CFO Advisor가 새로운 재무 의사결정 안건을 검토할 때 반드시 지켜야 할 핵심 지침 7가지를 작성하라.",
+      "expected_focus": ["persona prompt", "decision rules", "evidence grounding", "numbers-first", "CapEx", "margin", "cash flow", "needs confirmation"],
+      "grading_notes": ["근거 기반 답변 원칙이 포함되는지", "CapEx, 마진, 현금흐름, 수요 신호, 리스크 커뮤니케이션이 포함되는지", "확인 필요 항목을 분리하는지"]
+    }
+  ]
+}

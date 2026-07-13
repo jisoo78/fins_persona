@@ -15,7 +15,9 @@
     "rag:index:bge-m3:train": "RAG_ARCHIVE_DIR=archive_eval/train python3 scripts/build_bge_m3_index.py",
     "rag:evaluate:keyword": "tsx server/generateGeneralRagEvaluation.ts",
     "rag:evaluate:vector": "RAG_RETRIEVAL=vector tsx server/generateGeneralRagEvaluation.ts",
-    "rag:evaluate:vector:train": "RAG_ARCHIVE_DIR=archive_eval/train RAG_RETRIEVAL=vector tsx server/generateGeneralRagEvaluation.ts"
+    "rag:evaluate:vector:train": "RAG_ARCHIVE_DIR=archive_eval/train RAG_RETRIEVAL=vector tsx server/generateGeneralRagEvaluation.ts",
+    "rag:evaluate:decision-similarity": "RAG_RETRIEVAL=vector RAG_EVAL_QUESTIONS_PATH=evaluation/amy_hood_decision_similarity_answer_key_15.json RAG_EVAL_OUTPUT_PATH=evaluation/amy_hood_decision_similarity_general_rag_answers.lock.json tsx server/generateGeneralRagEvaluation.ts",
+    "rag:score:decision-similarity": "tsx server/scoreAmyHoodDecisionEvaluation.ts"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
