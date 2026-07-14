@@ -20,6 +20,7 @@ import {
 } from './sourceRegistry';
 import { withSourceFamilyOperation } from './sourceOperationLock';
 import { canonicalizeSourceUrl } from './sourcePolicy';
+import { advisorPaths } from './paths';
 
 export type SpeakerSegment = {
   speaker: string;
@@ -71,6 +72,53 @@ type ReviewedRawSource = {
 };
 
 const MIN_NORMALIZED_CHARACTERS = 200;
+
+type ImportCandidate = {
+  id: string;
+  discoveryUrls: string[];
+  status: string;
+};
+
+const assertRegisteredImport = async (
+  root: string,
+  canonicalUrl: string,
+  eventCandidateIds: string[],
+) => {
+  const candidatePath = path.join(advisorPaths(root).root, 'event-candidates.json');
+  let serialized: string;
+  try {
+    serialized = await readFile(candidatePath, 'utf8');
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') return;
+    throw error;
+  }
+
+  const parsed = JSON.parse(serialized) as unknown;
+  if (!Array.isArray(parsed)) throw new Error('event candidate matrix must be an array');
+  const candidates = parsed as ImportCandidate[];
+  const candidateById = new Map(candidates.map((candidate) => [candidate.id, candidate]));
+  for (const candidateId of eventCandidateIds) {
+    const candidate = candidateById.get(candidateId);
+    if (!candidate) throw new Error(`unknown event candidate: ${candidateId}`);
+    if (candidate.status !== 'approved_for_collection') {
+      throw new Error(`event candidate is not approved for collection: ${candidateId}`);
+    }
+  }
+
+  const registered = loadRegistry(root).sources
+    .filter((source) => source.canonicalUrl === canonicalUrl);
+  if (registered.length === 0) throw new Error(`canonical URL is not registered: ${canonicalUrl}`);
+  const approvedCandidateIds = new Set(registered.flatMap((source) => source.eventCandidateIds));
+  for (const candidateId of eventCandidateIds) {
+    if (!approvedCandidateIds.has(candidateId)) {
+      throw new Error(`canonical URL is not registered for event candidate: ${candidateId}`);
+    }
+    const approvedUrls = candidateById.get(candidateId)!.discoveryUrls.map(canonicalizeSourceUrl);
+    if (!approvedUrls.includes(canonicalUrl)) {
+      throw new Error(`canonical URL is not approved for event candidate: ${candidateId}`);
+    }
+  }
+};
 
 const requireNonblank = (value: unknown, field: string): string => {
   if (typeof value !== 'string' || value.trim() === '') {
@@ -332,6 +380,7 @@ const importReviewedSourceInternal = async (
 ): Promise<AdvisorSourceRecord> => {
   const sha256 = validateReviewedSource(input);
   const canonicalUrl = canonicalizeSourceUrl(input.canonicalUrl);
+  await assertRegisteredImport(root, canonicalUrl, input.eventCandidateIds);
 
   return withSourceFamilyOperation(root, canonicalUrl, async () => {
     const registry = loadRegistry(root);

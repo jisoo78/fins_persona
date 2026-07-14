@@ -19,6 +19,57 @@ export type ArtifactRemoveHooks = {
   afterRemove?: () => Promise<void> | void;
 };
 
+export const readAdvisorArtifactSecure = async (
+  root: string,
+  relativePath: string,
+): Promise<Buffer> => {
+  const destination = await prepareAdvisorArtifactPath(root, relativePath);
+  const parentPath = path.dirname(destination);
+  const parentHandle = await open(
+    parentPath,
+    constants.O_RDONLY | constants.O_DIRECTORY | constants.O_NOFOLLOW,
+  );
+  let fileHandle: Awaited<ReturnType<typeof open>> | undefined;
+  try {
+    const anchor = await parentHandle.stat();
+    const verifyParentAnchor = async () => {
+      const status = await lstat(parentPath);
+      if (status.isSymbolicLink() || status.dev !== anchor.dev || status.ino !== anchor.ino) {
+        throw new Error(`advisor artifact parent inode changed before read: ${relativePath}`);
+      }
+      await prepareAdvisorArtifactPath(root, relativePath);
+    };
+    const descriptorCandidates = [
+      `/dev/fd/${parentHandle.fd}`,
+      `/proc/self/fd/${parentHandle.fd}`,
+    ];
+    let anchoredParent: string | null = null;
+    for (const candidate of descriptorCandidates) {
+      try {
+        if (await realpath(candidate) === await realpath(parentPath)) {
+          anchoredParent = candidate;
+          break;
+        }
+      } catch {
+        // Descriptor paths are platform-dependent; inode checks remain the fallback.
+      }
+    }
+    await verifyParentAnchor();
+    fileHandle = await open(
+      path.join(anchoredParent ?? parentPath, path.basename(destination)),
+      constants.O_RDONLY | constants.O_NOFOLLOW,
+    );
+    const status = await fileHandle.stat();
+    if (!status.isFile()) throw new Error(`advisor artifact is not a regular file: ${relativePath}`);
+    const bytes = await fileHandle.readFile();
+    await verifyParentAnchor();
+    return bytes;
+  } finally {
+    await fileHandle?.close().catch(() => undefined);
+    await parentHandle.close().catch(() => undefined);
+  }
+};
+
 export const writeAdvisorArtifactAtomic = async (
   root: string,
   relativePath: string,

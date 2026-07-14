@@ -74,7 +74,7 @@ const extractDocumentMetadata = (html: string) => {
   return { title, publishedAt, $ };
 };
 
-const normalizeDocument = (contentText: string, mediaType: string): string => {
+export const normalizeDocument = (contentText: string, mediaType: string): string => {
   if (mediaType === 'application/json') {
     let normalized: string;
     try {
@@ -226,9 +226,13 @@ export const defaultPinnedTransport = (
     timeouts.headersMs,
   );
   request.on('socket', (socket) => {
-    socket.once('secureConnect', () => {
-      if (connectTimer) clearTimeout(connectTimer);
-    });
+    if (socket.connecting) {
+      socket.once('secureConnect', () => {
+        if (connectTimer) clearTimeout(connectTimer);
+      });
+    } else if (connectTimer) {
+      clearTimeout(connectTimer);
+    }
   });
   request.once('error', (error) => {
     if (settled) return;

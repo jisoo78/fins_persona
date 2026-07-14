@@ -1,467 +1,435 @@
 [
   {
-    "id": "candidate-fy23-q1-m-and-a",
-    "workingTitle": "FY23 Q1 portfolio and acquisition-integration allocation review",
+    "id": "candidate-nokia-integration-2014",
+    "workingTitle": "Nokia devices integration and restructuring scope",
     "domain": "m_and_a",
-    "decisionWindowStart": "2022-07-01",
-    "decisionWindowEnd": "2022-09-30",
+    "decisionWindowStart": "2014-06-17",
+    "decisionWindowEnd": "2014-08-26",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q1/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q1/income-statements",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q1/balance-sheets",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q1/cash-flows"
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q4/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000119312526258667/d26760d8k.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2013-Q4/press-release-webcast",
+      "https://www.microsoft.com/en-us/investor/events/fy-2023/ai-discussion-with-amy-hood-evp-and-cfo-and-kevin-scott-evp-of-ai-and-cto"
     ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
+    "notes": "Disclosure window proxies the internal integration decision; exact approval boundary is uncertain. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-fy23-q1-ai-cloud-capex",
-    "workingTitle": "FY23 Q1 cloud and AI infrastructure capacity investment review",
+    "id": "candidate-mojang-acquisition-2014",
+    "workingTitle": "Mojang acquisition capital allocation",
+    "domain": "m_and_a",
+    "decisionWindowStart": "2014-09-18",
+    "decisionWindowEnd": "2014-11-27",
+    "discoveryUrls": [
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2015-Q1/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000119312526224155/d125909d8k.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q2/press-release-webcast",
+      "https://www.microsoft.com/en-us/investor/events/fy-2026/2025-annual-shareholder-meeting"
+    ],
+    "notes": "Earnings evidence is contemporaneous context; exact internal approval date remains review-required. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-linkedin-acquisition-2016",
+    "workingTitle": "LinkedIn acquisition price, dilution, and financing",
+    "domain": "m_and_a",
+    "decisionWindowStart": "2016-05-09",
+    "decisionWindowEnd": "2016-07-18",
+    "discoveryUrls": [
+      "https://news.microsoft.com/speeches/microsoft-and-linkedin-conference-call-chris-suh-satya-nadella-jeff-weiner-amy-hood-brad-smith/",
+      "https://www.sec.gov/Archives/edgar/data/789019/000119312526191507/msft-20260331.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q3/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000119312523291720/d636199d8k.htm"
+    ],
+    "notes": "Official acquisition conference call contains Amy Hood remarks. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-github-acquisition-2018",
+    "workingTitle": "GitHub acquisition and developer-platform investment",
+    "domain": "m_and_a",
+    "decisionWindowStart": "2018-06-14",
+    "decisionWindowEnd": "2018-08-23",
+    "discoveryUrls": [
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2018-Q4/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000119312526191457/msft-20260429.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2015-Q2/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000119312523271376/d566386d8k.htm"
+    ],
+    "notes": "Quarterly Amy evidence follows the announced transaction; internal approval boundary is uncertain. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-nuance-acquisition-2021",
+    "workingTitle": "Nuance acquisition and healthcare-cloud expansion",
+    "domain": "m_and_a",
+    "decisionWindowStart": "2021-03-23",
+    "decisionWindowEnd": "2021-06-01",
+    "discoveryUrls": [
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2021-Q3/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000119312526027207/msft-20251231.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2015-Q3/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000119312523265616/d572684d8k.htm"
+    ],
+    "notes": "Contemporaneous earnings evidence; transaction approval date is not inferred. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-activision-acquisition-2022",
+    "workingTitle": "Activision Blizzard acquisition and integration economics",
+    "domain": "m_and_a",
+    "decisionWindowStart": "2021-12-21",
+    "decisionWindowEnd": "2022-03-01",
+    "discoveryUrls": [
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2022-Q2/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000119312526027198/msft-20260128.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2016-Q1/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000095017023054855/msft-20230930.htm"
+    ],
+    "notes": "Contemporaneous Amy remarks after announcement; later closing success is excluded. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-azure-capacity-2017",
+    "workingTitle": "Azure capacity expansion during enterprise cloud acceleration",
     "domain": "ai_cloud_capex",
-    "decisionWindowStart": "2022-07-01",
-    "decisionWindowEnd": "2022-09-30",
+    "decisionWindowStart": "2017-09-21",
+    "decisionWindowEnd": "2017-11-30",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q1/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q1/performance",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q1/metrics",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q1/segment-revenues",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q1/comprehensive-income"
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2018-Q1/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000119312525311196/d34077d8k.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2016-Q2/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000095017023054848/msft-20231024.htm"
     ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
+    "notes": "Disclosure window represents capacity planning evidence, not an invented internal approval date. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-fy23-q2-pricing-monetization",
-    "workingTitle": "FY23 Q2 cloud and product-mix monetization review",
-    "domain": "pricing_monetization",
-    "decisionWindowStart": "2022-10-01",
-    "decisionWindowEnd": "2022-12-31",
+    "id": "candidate-openai-partnership-2019",
+    "workingTitle": "Initial OpenAI partnership and Azure supercomputing investment",
+    "domain": "ai_cloud_capex",
+    "decisionWindowStart": "2019-06-13",
+    "decisionWindowEnd": "2019-08-22",
+    "discoveryUrls": [
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2019-Q4/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000119312525256321/msft-20250930.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2016-Q3/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000110465923109428/tm2328507d1_8k.htm"
+    ],
+    "notes": "Quarterly evidence is contemporaneous with the partnership period. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-cloud-capacity-pandemic-2020",
+    "workingTitle": "Cloud capacity ramp during pandemic demand shock",
+    "domain": "ai_cloud_capex",
+    "decisionWindowStart": "2020-06-17",
+    "decisionWindowEnd": "2020-08-26",
+    "discoveryUrls": [
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2020-Q4/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000119312525256310/msft-20251028.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2016-Q4/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000119312523255762/d537928d8k.htm"
+    ],
+    "notes": "Amy remarks expose demand, capacity, and margin tradeoffs. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-openai-expansion-2023",
+    "workingTitle": "Expanded OpenAI partnership and multiyear infrastructure ramp",
+    "domain": "ai_cloud_capex",
+    "decisionWindowStart": "2022-12-20",
+    "decisionWindowEnd": "2023-02-28",
     "discoveryUrls": [
       "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q2/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q2/income-statements",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q2/balance-sheets",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q2/cash-flows"
+      "https://www.sec.gov/Archives/edgar/data/789019/000119312525225125/d863209d8k.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2017-Q2/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000119312523254151/d530324d8k.htm"
     ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
+    "notes": "Decision-time disclosure only; subsequent AI outcomes are excluded. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-fy23-q2-cost-efficiency",
-    "workingTitle": "FY23 Q2 operating expense and gross-margin efficiency review",
+    "id": "candidate-ai-capacity-ramp-2024",
+    "workingTitle": "FY2025 AI infrastructure capacity ramp and margin tradeoff",
+    "domain": "ai_cloud_capex",
+    "decisionWindowStart": "2024-06-25",
+    "decisionWindowEnd": "2024-09-03",
+    "discoveryUrls": [
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q4/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2017-Q3/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000095017023035122/msft-20230630.htm"
+    ],
+    "notes": "Amy directly discusses investment sequencing and margin pressure. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-ai-fleet-sequencing-2025",
+    "workingTitle": "AI fleet utilization and capacity sequencing",
+    "domain": "ai_cloud_capex",
+    "decisionWindowStart": "2025-01-28",
+    "decisionWindowEnd": "2025-04-08",
+    "discoveryUrls": [
+      "https://www.microsoft.com/en-us/investor/events/fy-2025/morgan-stanley-tmt-conference",
+      "https://www.sec.gov/Archives/edgar/data/789019/000095017025100226/msft-20250730.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2018-Q2/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000095017023034400/msft-20230725.htm"
+    ],
+    "notes": "Direct Amy conference interview. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-office365-pricing-2021",
+    "workingTitle": "Microsoft 365 commercial price increase",
+    "domain": "pricing_monetization",
+    "decisionWindowStart": "2021-09-21",
+    "decisionWindowEnd": "2021-11-30",
+    "discoveryUrls": [
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2022-Q1/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000119312525154103/d84624d8k.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2018-Q3/press-release-webcast"
+    ],
+    "notes": "Earnings evidence tests value realization around the announced pricing change. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-copilot-pricing-2023",
+    "workingTitle": "Microsoft 365 Copilot per-user pricing decision",
+    "domain": "pricing_monetization",
+    "decisionWindowStart": "2023-06-20",
+    "decisionWindowEnd": "2023-08-29",
+    "discoveryUrls": [
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q4/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000095017025061046/msft-20250331.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2019-Q1/press-release-webcast"
+    ],
+    "notes": "Contemporaneous Amy monetization and demand commentary. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-teams-unbundling-2023",
+    "workingTitle": "Teams unbundling and Microsoft 365 packaging response",
+    "domain": "pricing_monetization",
+    "decisionWindowStart": "2023-09-19",
+    "decisionWindowEnd": "2023-11-28",
+    "discoveryUrls": [
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q1/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000095017025061032/msft-20250430.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2019-Q2/press-release-webcast"
+    ],
+    "notes": "Disclosure window follows the packaging change; regulatory causality requires review. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-copilot-pro-pricing-2024",
+    "workingTitle": "Copilot Pro consumer subscription pricing",
+    "domain": "pricing_monetization",
+    "decisionWindowStart": "2023-12-26",
+    "decisionWindowEnd": "2024-03-05",
+    "discoveryUrls": [
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q2/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000095017025010491/msft-20241231.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2019-Q3/press-release-webcast"
+    ],
+    "notes": "Quarterly evidence provides contemporaneous monetization context. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-gaming-monetization-2024",
+    "workingTitle": "Game Pass pricing and post-Activision monetization",
+    "domain": "pricing_monetization",
+    "decisionWindowStart": "2024-09-25",
+    "decisionWindowEnd": "2024-12-04",
+    "discoveryUrls": [
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q1/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000095017025010484/msft-20250129.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2020-Q2/press-release-webcast"
+    ],
+    "notes": "Later outcome claims are excluded; precise pricing approval boundary is uncertain. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-ai-stack-monetization-2025",
+    "workingTitle": "AI stack pull-through and inference monetization",
+    "domain": "pricing_monetization",
+    "decisionWindowStart": "2024-12-25",
+    "decisionWindowEnd": "2025-03-05",
+    "discoveryUrls": [
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q2/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000119312525010492/d929748d8k.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2021-Q1/press-release-webcast"
+    ],
+    "notes": "Amy discusses revenue composition and capacity monetization. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-one-microsoft-reorg-2013",
+    "workingTitle": "One Microsoft operating-model reorganization",
     "domain": "cost_efficiency",
-    "decisionWindowStart": "2022-10-01",
-    "decisionWindowEnd": "2022-12-31",
+    "decisionWindowStart": "2013-06-07",
+    "decisionWindowEnd": "2013-08-16",
+    "discoveryUrls": [
+      "https://news.microsoft.com/speeches/steve-ballmer-and-microsoft-senior-leadership-team-one-microsoft-conference-call/",
+      "https://www.sec.gov/Archives/edgar/data/789019/000119312524275524/d865252d8k.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2021-Q2/press-release-webcast"
+    ],
+    "notes": "Official leadership conference call with Amy Hood. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-hardware-restructuring-2015",
+    "workingTitle": "Phone hardware restructuring and impairment discipline",
+    "domain": "cost_efficiency",
+    "decisionWindowStart": "2015-06-16",
+    "decisionWindowEnd": "2015-08-25",
+    "discoveryUrls": [
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2015-Q4/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000095017024132722/msft-20241203.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2021-Q4/press-release-webcast"
+    ],
+    "notes": "Contemporaneous Amy cost and restructuring evidence. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-sales-reorg-2017",
+    "workingTitle": "Commercial sales reorganization for cloud execution",
+    "domain": "cost_efficiency",
+    "decisionWindowStart": "2017-06-15",
+    "decisionWindowEnd": "2017-08-24",
+    "discoveryUrls": [
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2017-Q4/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000095017024118967/msft-20240930.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2022-Q3/press-release-webcast"
+    ],
+    "notes": "Quarterly disclosure window; exact workforce decision boundary remains uncertain. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-pandemic-cost-flex-2020",
+    "workingTitle": "Pandemic-era operating-cost flexibility",
+    "domain": "cost_efficiency",
+    "decisionWindowStart": "2020-03-25",
+    "decisionWindowEnd": "2020-06-03",
+    "discoveryUrls": [
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2020-Q3/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000095017024118955/msft-20241030.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2022-Q4/press-release-webcast"
+    ],
+    "notes": "Direct Amy tradeoffs between demand support and cost control. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-workforce-reduction-2023",
+    "workingTitle": "FY2023 workforce reduction and cost-base reset",
+    "domain": "cost_efficiency",
+    "decisionWindowStart": "2022-12-20",
+    "decisionWindowEnd": "2023-02-28",
     "discoveryUrls": [
       "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q2/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q2/performance",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q2/metrics",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q2/segment-revenues",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q2/comprehensive-income"
+      "https://www.sec.gov/Archives/edgar/data/789019/000119312524204403/d846847d8k.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q1/press-release-webcast"
     ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
+    "notes": "Contemporaneous restructuring context; no later success inference. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-fy23-q3-shareholder-return-risk",
-    "workingTitle": "FY23 Q3 reinvestment, liquidity, and shareholder-return allocation review",
-    "domain": "shareholder_return_risk",
-    "decisionWindowStart": "2023-01-01",
-    "decisionWindowEnd": "2023-03-31",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q3/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q3/income-statements",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q3/balance-sheets",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q3/cash-flows"
-    ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-fy23-q3-m-and-a",
-    "workingTitle": "FY23 Q3 portfolio and acquisition-integration allocation review",
-    "domain": "m_and_a",
-    "decisionWindowStart": "2023-01-01",
-    "decisionWindowEnd": "2023-03-31",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q3/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q3/performance",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q3/metrics",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q3/segment-revenues",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q3/comprehensive-income"
-    ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-fy23-q4-ai-cloud-capex",
-    "workingTitle": "FY23 Q4 cloud and AI infrastructure capacity investment review",
-    "domain": "ai_cloud_capex",
-    "decisionWindowStart": "2023-04-01",
-    "decisionWindowEnd": "2023-06-30",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q4/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q4/income-statements",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q4/balance-sheets",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q4/cash-flows"
-    ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-fy23-q4-pricing-monetization",
-    "workingTitle": "FY23 Q4 cloud and product-mix monetization review",
-    "domain": "pricing_monetization",
-    "decisionWindowStart": "2023-04-01",
-    "decisionWindowEnd": "2023-06-30",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q4/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q4/performance",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q4/metrics",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q4/segment-revenues",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q4/comprehensive-income"
-    ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-fy24-q1-cost-efficiency",
-    "workingTitle": "FY24 Q1 operating expense and gross-margin efficiency review",
+    "id": "candidate-ai-margin-efficiency-2024",
+    "workingTitle": "AI infrastructure margin pressure and Azure efficiency program",
     "domain": "cost_efficiency",
-    "decisionWindowStart": "2023-07-01",
-    "decisionWindowEnd": "2023-09-30",
+    "decisionWindowStart": "2024-11-05",
+    "decisionWindowEnd": "2025-01-14",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q1/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q1/income-statements",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q1/balance-sheets",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q1/cash-flows"
+      "https://www.microsoft.com/en-us/investor/events/fy-2025/2024-annual-shareholder-meeting",
+      "https://www.sec.gov/Archives/edgar/data/789019/000095017024087843/msft-20240630.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q3/press-release-webcast"
     ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
+    "notes": "Annual shareholder transcript contains direct Amy explanation. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-fy24-q1-shareholder-return-risk",
-    "workingTitle": "FY24 Q1 reinvestment, liquidity, and shareholder-return allocation review",
+    "id": "candidate-buyback-2013",
+    "workingTitle": "2013 forty-billion-dollar share repurchase authorization",
     "domain": "shareholder_return_risk",
-    "decisionWindowStart": "2023-07-01",
-    "decisionWindowEnd": "2023-09-30",
+    "decisionWindowStart": "2013-09-19",
+    "decisionWindowEnd": "2013-11-28",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q1/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q1/performance",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q1/metrics",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q1/segment-revenues",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q1/comprehensive-income"
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q1/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000095017024087835/msft-20240730.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q3/press-release-webcast"
     ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
+    "notes": "Quarterly evidence follows the authorization and preserves contemporaneous allocation context. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-fy24-q2-m-and-a",
-    "workingTitle": "FY24 Q2 portfolio and acquisition-integration allocation review",
-    "domain": "m_and_a",
-    "decisionWindowStart": "2023-10-01",
-    "decisionWindowEnd": "2023-12-31",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q2/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q2/income-statements",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q2/balance-sheets",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q2/cash-flows"
-    ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-fy24-q2-ai-cloud-capex",
-    "workingTitle": "FY24 Q2 cloud and AI infrastructure capacity investment review",
-    "domain": "ai_cloud_capex",
-    "decisionWindowStart": "2023-10-01",
-    "decisionWindowEnd": "2023-12-31",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q2/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q2/performance",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q2/metrics",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q2/segment-revenues",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q2/comprehensive-income"
-    ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-fy24-q3-pricing-monetization",
-    "workingTitle": "FY24 Q3 cloud and product-mix monetization review",
-    "domain": "pricing_monetization",
-    "decisionWindowStart": "2024-01-01",
-    "decisionWindowEnd": "2024-03-31",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q3/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q3/income-statements",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q3/balance-sheets",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q3/cash-flows"
-    ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-fy24-q3-cost-efficiency",
-    "workingTitle": "FY24 Q3 operating expense and gross-margin efficiency review",
-    "domain": "cost_efficiency",
-    "decisionWindowStart": "2024-01-01",
-    "decisionWindowEnd": "2024-03-31",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q3/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q3/performance",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q3/metrics",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q3/segment-revenues",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q3/comprehensive-income"
-    ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-fy24-q4-shareholder-return-risk",
-    "workingTitle": "FY24 Q4 reinvestment, liquidity, and shareholder-return allocation review",
+    "id": "candidate-buyback-2016",
+    "workingTitle": "2016 forty-billion-dollar repurchase authorization",
     "domain": "shareholder_return_risk",
-    "decisionWindowStart": "2024-04-01",
-    "decisionWindowEnd": "2024-06-30",
+    "decisionWindowStart": "2016-09-15",
+    "decisionWindowEnd": "2016-11-24",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q4/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q4/income-statements",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q4/balance-sheets",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q4/cash-flows"
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2017-Q1/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000095017024048288/msft-20240331.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q3/press-release-webcast"
     ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
+    "notes": "Quarterly Amy capital-return context. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-fy24-q4-m-and-a",
-    "workingTitle": "FY24 Q4 portfolio and acquisition-integration allocation review",
-    "domain": "m_and_a",
-    "decisionWindowStart": "2024-04-01",
-    "decisionWindowEnd": "2024-06-30",
+    "id": "candidate-buyback-2019",
+    "workingTitle": "2019 forty-billion-dollar repurchase authorization",
+    "domain": "shareholder_return_risk",
+    "decisionWindowStart": "2019-09-18",
+    "decisionWindowEnd": "2019-11-27",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q4/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q4/performance",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q4/metrics",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q4/segment-revenues",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q4/comprehensive-income"
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2020-Q1/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000095017024048268/msft-20240425.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q4/press-release-webcast"
     ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
+    "notes": "Quarterly Amy capital-allocation context. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-fy25-q1-ai-cloud-capex",
-    "workingTitle": "FY25 Q1 cloud and AI infrastructure capacity investment review",
-    "domain": "ai_cloud_capex",
-    "decisionWindowStart": "2024-07-01",
-    "decisionWindowEnd": "2024-09-30",
+    "id": "candidate-buyback-2021",
+    "workingTitle": "2021 sixty-billion-dollar repurchase authorization",
+    "domain": "shareholder_return_risk",
+    "decisionWindowStart": "2021-09-21",
+    "decisionWindowEnd": "2021-11-30",
+    "discoveryUrls": [
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2022-Q1/press-release-webcast",
+      "https://www.sec.gov/Archives/edgar/data/789019/000095017024008814/msft-20231231.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q1/press-release-webcast"
+    ],
+    "notes": "Quarterly Amy evidence follows the authorization and preserves contemporaneous capital-return context. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-capital-allocation-2023",
+    "workingTitle": "FY2023 reinvestment, acquisitions, dividends, and buybacks balance",
+    "domain": "shareholder_return_risk",
+    "decisionWindowStart": "2023-11-02",
+    "decisionWindowEnd": "2024-01-11",
+    "discoveryUrls": [
+      "https://www.microsoft.com/en-us/investor/events/fy-2024/2023-annual-shareholder-meeting",
+      "https://www.microsoft.com/en-us/investor/events/fy-2023/annual-shareholders-meeting-2022",
+      "https://www.sec.gov/Archives/edgar/data/789019/000095017024008809/msft-20240130.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q2/press-release-webcast"
+    ],
+    "notes": "Direct annual-shareholder evidence. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-buyback-2024",
+    "workingTitle": "2024 sixty-billion-dollar repurchase authorization and dividend increase",
+    "domain": "shareholder_return_risk",
+    "decisionWindowStart": "2024-09-25",
+    "decisionWindowEnd": "2024-12-04",
     "discoveryUrls": [
       "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q1/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q1/income-statements",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q1/balance-sheets",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q1/cash-flows"
+      "https://www.sec.gov/Archives/edgar/data/789019/000119312524011295/d708866d8k.htm",
+      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q3/press-release-webcast"
     ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-fy25-q1-pricing-monetization",
-    "workingTitle": "FY25 Q1 cloud and product-mix monetization review",
-    "domain": "pricing_monetization",
-    "decisionWindowStart": "2024-07-01",
-    "decisionWindowEnd": "2024-09-30",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q1/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q1/performance",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q1/metrics",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q1/segment-revenues",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q1/comprehensive-income"
-    ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-fy25-q2-cost-efficiency",
-    "workingTitle": "FY25 Q2 operating expense and gross-margin efficiency review",
-    "domain": "cost_efficiency",
-    "decisionWindowStart": "2024-10-01",
-    "decisionWindowEnd": "2024-12-31",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q2/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q2/income-statements",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q2/balance-sheets",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q2/cash-flows"
-    ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-fy25-q2-shareholder-return-risk",
-    "workingTitle": "FY25 Q2 reinvestment, liquidity, and shareholder-return allocation review",
-    "domain": "shareholder_return_risk",
-    "decisionWindowStart": "2024-10-01",
-    "decisionWindowEnd": "2024-12-31",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q2/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q2/performance",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q2/metrics",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q2/segment-revenues",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q2/comprehensive-income"
-    ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-fy25-q3-m-and-a",
-    "workingTitle": "FY25 Q3 portfolio and acquisition-integration allocation review",
-    "domain": "m_and_a",
-    "decisionWindowStart": "2025-01-01",
-    "decisionWindowEnd": "2025-03-31",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q3/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q3/income-statements",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q3/balance-sheets",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q3/cash-flows"
-    ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-fy25-q3-ai-cloud-capex",
-    "workingTitle": "FY25 Q3 cloud and AI infrastructure capacity investment review",
-    "domain": "ai_cloud_capex",
-    "decisionWindowStart": "2025-01-01",
-    "decisionWindowEnd": "2025-03-31",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q3/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q3/performance",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q3/metrics",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q3/segment-revenues",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q3/comprehensive-income"
-    ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-fy25-q4-pricing-monetization",
-    "workingTitle": "FY25 Q4 cloud and product-mix monetization review",
-    "domain": "pricing_monetization",
-    "decisionWindowStart": "2025-04-01",
-    "decisionWindowEnd": "2025-06-30",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q4/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q4/income-statements",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q4/balance-sheets",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q4/cash-flows"
-    ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-fy25-q4-cost-efficiency",
-    "workingTitle": "FY25 Q4 operating expense and gross-margin efficiency review",
-    "domain": "cost_efficiency",
-    "decisionWindowStart": "2025-04-01",
-    "decisionWindowEnd": "2025-06-30",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q4/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q4/performance",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q4/metrics",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q4/segment-revenues",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q4/comprehensive-income"
-    ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-fy26-q1-shareholder-return-risk",
-    "workingTitle": "FY26 Q1 reinvestment, liquidity, and shareholder-return allocation review",
-    "domain": "shareholder_return_risk",
-    "decisionWindowStart": "2025-07-01",
-    "decisionWindowEnd": "2025-09-30",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q1/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q1/income-statements",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q1/balance-sheets",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q1/cash-flows"
-    ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-fy26-q1-m-and-a",
-    "workingTitle": "FY26 Q1 portfolio and acquisition-integration allocation review",
-    "domain": "m_and_a",
-    "decisionWindowStart": "2025-07-01",
-    "decisionWindowEnd": "2025-09-30",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q1/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q1/performance",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q1/metrics",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q1/segment-revenues",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q1/comprehensive-income"
-    ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-fy26-q2-ai-cloud-capex",
-    "workingTitle": "FY26 Q2 cloud and AI infrastructure capacity investment review",
-    "domain": "ai_cloud_capex",
-    "decisionWindowStart": "2025-10-01",
-    "decisionWindowEnd": "2025-12-31",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q2/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q2/income-statements",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q2/balance-sheets",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q2/cash-flows"
-    ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-fy26-q2-pricing-monetization",
-    "workingTitle": "FY26 Q2 cloud and product-mix monetization review",
-    "domain": "pricing_monetization",
-    "decisionWindowStart": "2025-10-01",
-    "decisionWindowEnd": "2025-12-31",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q2/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q2/performance",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q2/metrics",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q2/segment-revenues",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q2/comprehensive-income"
-    ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-fy26-q3-cost-efficiency",
-    "workingTitle": "FY26 Q3 operating expense and gross-margin efficiency review",
-    "domain": "cost_efficiency",
-    "decisionWindowStart": "2026-01-01",
-    "decisionWindowEnd": "2026-03-31",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q3/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q3/income-statements",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q3/balance-sheets",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q3/cash-flows"
-    ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-fy26-q3-shareholder-return-risk",
-    "workingTitle": "FY26 Q3 reinvestment, liquidity, and shareholder-return allocation review",
-    "domain": "shareholder_return_risk",
-    "decisionWindowStart": "2026-01-01",
-    "decisionWindowEnd": "2026-03-31",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q3/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q3/performance",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q3/metrics",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q3/segment-revenues",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q3/comprehensive-income"
-    ],
-    "notes": "Discovery framing, not a settled event claim. The Microsoft earnings webcast is the likely direct-Amy lead; the linked financial statement, performance, metric, or segment page is the second official source type. Confirm the precise decision and speaker passage during human review.",
+    "notes": "Quarterly evidence is contemporaneous; later return performance is excluded. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
     "status": "approved_for_collection"
   }
 ]

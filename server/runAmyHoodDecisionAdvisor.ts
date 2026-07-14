@@ -9,12 +9,15 @@ import type {
   DecisionDomain,
   EventCandidate,
 } from '../shared/amyHoodDecisionAdvisor';
+import { readAdvisorArtifactSecure } from './decisionAdvisor/artifactStore';
 import { importReviewedSource, type ReviewedSourceImport } from './decisionAdvisor/manualSourceImporter';
-import { collectOfficialSource } from './decisionAdvisor/officialSourceCollector';
+import {
+  collectOfficialSource,
+  normalizeDocument,
+} from './decisionAdvisor/officialSourceCollector';
 import {
   loadRegistry,
   loadSourceRecord,
-  resolveAdvisorArtifactPath,
 } from './decisionAdvisor/sourceRegistry';
 import { canonicalizeSourceUrl } from './decisionAdvisor/sourcePolicy';
 import {
@@ -137,25 +140,50 @@ const verifySourceArtifact = async (root: string, source: AdvisorSourceRecord) =
     || !source.rawPath
     || !source.normalizedPath
     || !source.sha256
-    || !source.capturedAt) return false;
+    || !source.capturedAt) return null;
 
   try {
-    const rawBytes = await readFile(resolveAdvisorArtifactPath(root, source.rawPath));
+    const rawBytes = await readAdvisorArtifactSecure(root, source.rawPath);
     const raw = JSON.parse(rawBytes.toString('utf8')) as AdvisorRawSource;
     if (raw.sourceId !== source.id
       || raw.canonicalUrl !== source.canonicalUrl
       || raw.metadata?.id !== source.id
       || raw.metadata?.sha256 !== source.sha256
       || raw.metadata?.capturedAt !== source.capturedAt
-      || typeof raw.bodyBase64 !== 'string') return false;
+      || raw.metadata?.publishedAt !== source.publishedAt
+      || raw.metadata?.temporalRole !== source.temporalRole
+      || raw.metadata?.sourceType !== source.sourceType
+      || JSON.stringify(raw.metadata?.eventCandidateIds) !== JSON.stringify(source.eventCandidateIds)
+      || typeof raw.bodyBase64 !== 'string') return null;
     const body = Buffer.from(raw.bodyBase64, 'base64');
-    if (body.toString('base64') !== raw.bodyBase64.replace(/\s+/g, '')) return false;
-    if (createHash('sha256').update(body).digest('hex') !== source.sha256) return false;
-    const normalized = await readFile(resolveAdvisorArtifactPath(root, source.normalizedPath));
-    return normalized.toString('utf8').replace(/\s+/g, ' ').trim().length >= 200;
+    if (body.toString('base64') !== raw.bodyBase64.replace(/\s+/g, '')) return null;
+    if (createHash('sha256').update(body).digest('hex') !== source.sha256) return null;
+    const normalized = await readAdvisorArtifactSecure(root, source.normalizedPath);
+    const normalizedText = normalized.toString('utf8');
+    if (normalizedText.replace(/\s+/g, ' ').trim().length < 200) return null;
+    if (source.collector === 'manual_import' || source.collector === 'transcript_import') {
+      if (createHash('sha256').update(normalized).digest('hex') !== source.sha256) return null;
+    } else if (normalizedText !== normalizeDocument(body.toString('utf8'), raw.mediaType)) {
+      return null;
+    }
+    return { normalizedText, raw: raw as AdvisorRawSource & { speakerSegments?: unknown[] } };
   } catch {
-    return false;
+    return null;
   }
+};
+
+const temporalRoleMatches = (source: AdvisorSourceRecord, candidates: EventCandidate[]) => {
+  if (!source.publishedAt || !/^\d{4}-\d{2}-\d{2}$/.test(source.publishedAt)) return false;
+  return candidates.every((candidate) => {
+    if (source.temporalRole === 'decision_time') {
+      return source.publishedAt! >= candidate.decisionWindowStart
+        && source.publishedAt! <= candidate.decisionWindowEnd;
+    }
+    if (source.temporalRole === 'pre_decision') {
+      return source.publishedAt! < candidate.decisionWindowStart;
+    }
+    return source.publishedAt! > candidate.decisionWindowEnd;
+  });
 };
 
 export const checkSourceInventory = async (
@@ -169,6 +197,7 @@ export const checkSourceInventory = async (
   );
   const canonicalUrls = new Set<string>();
   const sourcesByCandidate = new Map<string, AdvisorSourceRecord[]>();
+  const verifiedArtifacts = new Map<string, Awaited<ReturnType<typeof verifySourceArtifact>>>();
   let validDocumentCount = 0;
 
   for (const source of registry.sources) {
@@ -186,7 +215,11 @@ export const checkSourceInventory = async (
         source,
       ]);
     }
-    if (await verifySourceArtifact(root, source)) validDocumentCount += 1;
+    const linkedCandidates = source.eventCandidateIds.map((id) =>
+      candidates.find((candidate) => candidate.id === id)!);
+    const artifact = await verifySourceArtifact(root, source);
+    verifiedArtifacts.set(source.id, artifact);
+    if (artifact && temporalRoleMatches(source, linkedCandidates)) validDocumentCount += 1;
   }
 
   const result: SourceCheck = {
@@ -200,8 +233,22 @@ export const checkSourceInventory = async (
   const deficits: string[] = [];
   for (const candidate of candidates) {
     const linked = sourcesByCandidate.get(candidate.id) ?? [];
-    const directLead = linked.find((source) => source.tier === 1 && source.speaker === 'Amy Hood');
-    if (!directLead) deficits.push(`${candidate.id} lacks a likely direct Amy lead`);
+    const directLead = linked.find((source) => {
+      const artifact = verifiedArtifacts.get(source.id);
+      if (!artifact
+        || source.tier !== 1
+        || source.speaker !== 'Amy Hood'
+        || !temporalRoleMatches(source, [candidate])) return false;
+      if (source.collector === 'transcript_import') {
+        return Array.isArray(artifact.raw.speakerSegments)
+          && artifact.raw.speakerSegments.some((segment) =>
+            typeof segment === 'object'
+            && segment !== null
+            && (segment as { speaker?: unknown }).speaker === 'Amy Hood');
+      }
+      return /\bAmy Hood\b/i.test(artifact.normalizedText);
+    });
+    if (!directLead) deficits.push(`${candidate.id} lacks a collected direct Amy passage`);
     if (new Set(linked.map(({ sourceType }) => sourceType)).size < 2) {
       deficits.push(`${candidate.id} lacks a second source-type lead`);
     }
@@ -237,6 +284,24 @@ const optionValue = (args: string[], option: string) => {
 
 const hasTranscriptSegments = (input: ReviewedSourceImport): input is TranscriptImport =>
   Object.hasOwn(input, 'speakerSegments');
+
+const assertImportRegistered = (
+  root: string,
+  input: ReviewedSourceImport,
+  candidates: EventCandidate[],
+) => {
+  const canonicalUrl = canonicalizeSourceUrl(input.canonicalUrl);
+  const registrySource = loadRegistry(root).sources.find((source) =>
+    source.canonicalUrl === canonicalUrl);
+  if (!registrySource) throw new Error('import canonical URL is not registered');
+  const candidateIds = new Set(candidates.map(({ id }) => id));
+  if (!Array.isArray(input.eventCandidateIds)
+    || input.eventCandidateIds.length === 0
+    || input.eventCandidateIds.some((id) =>
+      !candidateIds.has(id) || !registrySource.eventCandidateIds.includes(id))) {
+    throw new Error('import contains an unknown or unapproved candidate ID');
+  }
+};
 
 const run = async () => {
   const args = process.argv.slice(2);
@@ -287,6 +352,13 @@ const run = async () => {
     } catch (error) {
       throw new Error(`invalid import JSON: ${error instanceof Error ? error.message : String(error)}`);
     }
+    const candidatePath = path.resolve(
+      root,
+      'data/b-track/amy-hood/advisor/event-candidates.json',
+    );
+    const candidates = JSON.parse(readFileSync(candidatePath, 'utf8')) as EventCandidate[];
+    validateEventCandidates(candidates);
+    assertImportRegistered(root, input, candidates);
     const imported = hasTranscriptSegments(input)
       ? await importTranscript(input, root)
       : await importReviewedSource(input, root);

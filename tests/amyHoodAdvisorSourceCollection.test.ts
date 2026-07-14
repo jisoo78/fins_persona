@@ -563,6 +563,12 @@ test('edge: default pinned HTTPS seam preserves address, SNI, Host, and abort', 
     };
   }) as never;
   const controller = new AbortController();
+  const originalAddEventListener = controller.signal.addEventListener.bind(controller.signal);
+  let abortListenerAdds = 0;
+  controller.signal.addEventListener = ((...args: Parameters<AbortSignal['addEventListener']>) => {
+    if (args[0] === 'abort') abortListenerAdds += 1;
+    return originalAddEventListener(...args);
+  }) as AbortSignal['addEventListener'];
   const pending = defaultPinnedTransport({
     url: new URL('https://www.microsoft.com/Investor/test'),
     validatedAddresses: ['93.184.216.34'],
@@ -581,6 +587,42 @@ test('edge: default pinned HTTPS seam preserves address, SNI, Host, and abort', 
   assert.equal(options.servername, 'www.microsoft.com');
   assert.equal((options.headers as Record<string, string>).Host, 'www.microsoft.com');
   assert.equal(destroyed, true);
+  assert.equal(abortListenerAdds, 1);
+});
+
+test('edge: pooled TLS sockets do not accumulate secureConnect listeners across a batch', async () => {
+  let secureConnectAdds = 0;
+  let errorListener: ((error: Error) => void) | undefined;
+  const pooledSocket = {
+    connecting: false,
+    once: (event: string) => {
+      if (event === 'secureConnect') secureConnectAdds += 1;
+    },
+  };
+  const requestImpl = (() => ({
+    once: (event: string, listener: (error: Error) => void) => {
+      if (event === 'error') errorListener = listener;
+    },
+    on: (event: string, listener: (socket: typeof pooledSocket) => void) => {
+      if (event === 'socket') listener(pooledSocket);
+    },
+    end: () => undefined,
+    destroy: (error: Error) => errorListener?.(error),
+  })) as never;
+
+  for (let index = 0; index < 12; index += 1) {
+    const controller = new AbortController();
+    const pending = defaultPinnedTransport({
+      url: new URL('https://www.microsoft.com/Investor/test'),
+      validatedAddresses: ['93.184.216.34'],
+      init: { signal: controller.signal },
+      timeouts: { connectMs: 100, headersMs: 100, bodyMs: 100 },
+    }, requestImpl);
+    controller.abort();
+    await assert.rejects(() => pending, /aborted/i);
+  }
+
+  assert.equal(secureConnectAdds, 0);
 });
 
 test('edge: a waiting collector reloads a stale collected snapshot after the family lock', async () => {
@@ -1911,7 +1953,12 @@ const writeRegistryFixture = async (
   await mkdir(normalizedDirectory, { recursive: true });
   const sources: AdvisorSourceRecord[] = [];
   const fixtureCandidates = validCandidateMatrix();
-  const discoveryUrls = fixtureCandidates.flatMap((candidate) => candidate.discoveryUrls);
+  const discoveryUrls = fixtureCandidates
+    .flatMap((candidate) => candidate.discoveryUrls)
+    .sort((left, right) => Number(candidateForDirect(right)) - Number(candidateForDirect(left)));
+  function candidateForDirect(sourceUrl: string) {
+    return fixtureCandidates.some((candidate) => candidate.discoveryUrls[0] === sourceUrl);
+  }
   const candidateForUrl = new Map(
     fixtureCandidates.flatMap((candidate) => candidate.discoveryUrls.map((sourceUrl, urlIndex) => [
       sourceUrl,
@@ -1922,6 +1969,7 @@ const writeRegistryFixture = async (
   for (let index = 0; index < options.discoveries; index += 1) {
     const canonicalUrl = discoveryUrls[index];
     const sourceRole = candidateForUrl.get(canonicalUrl)!;
+    const linkedCandidate = fixtureCandidates.find(({ id }) => id === sourceRole.candidateId)!;
     const id = sourceIdForUrl(canonicalUrl);
     const text = `Amy Hood decision evidence ${index + 1}. ${'Public Microsoft source context. '.repeat(12)}`;
     const sha256 = createHash('sha256').update(text).digest('hex');
@@ -1935,7 +1983,7 @@ const writeRegistryFixture = async (
       tier: sourceRole.direct ? 1 : 2,
       title: `Public source ${index + 1}`,
       publisher: 'Microsoft',
-      publishedAt: null,
+      publishedAt: linkedCandidate.decisionWindowStart,
       speaker: sourceRole.direct ? 'Amy Hood' : null,
       sourceType: sourceRole.direct ? 'earnings_webcast' : 'financial_context',
       collector: 'microsoft_ir',
@@ -1957,11 +2005,11 @@ const writeRegistryFixture = async (
         sourceId: id,
         canonicalUrl,
         title: record.title,
-        mediaType: 'text/plain; charset=utf-8',
+        mediaType: 'text/plain',
         bodyBase64: Buffer.from(text).toString('base64'),
         metadata: { ...metadata, collectionStatus: 'collected' },
       }, null, 2)}\n`);
-      await writeFile(path.join(advisorRoot, normalizedPath!), text);
+      await writeFile(path.join(advisorRoot, normalizedPath!), `${text.trim()}\n`);
     }
   }
 
@@ -1986,13 +2034,27 @@ test('happy: source CLI verifies 100 discoveries and 50 artifact-backed document
       path.join(directory, 'data/b-track/amy-hood/advisor/source-registry.json'),
       'utf8',
     )) as { sources: AdvisorSourceRecord[] };
+    const normalizedPath = path.join(
+      directory,
+      'data/b-track/amy-hood/advisor',
+      registry.sources[0].normalizedPath!,
+    );
+    const originalNormalized = await readFile(normalizedPath);
     await writeFile(
-      path.join(directory, 'data/b-track/amy-hood/advisor', registry.sources[0].normalizedPath!),
-      'tampered',
+      normalizedPath,
+      'Long but unrelated tampered normalized content. '.repeat(20),
     );
     const tampered = runAdvisorCli(directory, 'sources:check');
     assert.equal(tampered.status, 1);
     assert.match(tampered.stderr, /49 valid documents/i);
+
+    const externalArtifact = path.join(directory, 'external-normalized.txt');
+    await writeFile(externalArtifact, originalNormalized);
+    await rm(normalizedPath);
+    await symlink(externalArtifact, normalizedPath);
+    const linked = runAdvisorCli(directory, 'sources:check');
+    assert.equal(linked.status, 1);
+    assert.match(linked.stderr, /49 valid documents/i);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
@@ -2002,12 +2064,29 @@ test('failure: source CLI reports exact deficits and rejects unsafe command inpu
   const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-sources-failure-'));
   const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
   const invalidImport = path.join(directory, 'invalid-import.json');
+  const unregisteredImport = path.join(directory, 'unregistered-import.json');
 
   try {
     await mkdir(path.dirname(candidatePath), { recursive: true });
     await writeFile(candidatePath, `${JSON.stringify(validCandidateMatrix(), null, 2)}\n`);
     await writeRegistryFixture(directory, { discoveries: 99, validDocuments: 0 });
     await writeFile(invalidImport, '{ invalid JSON');
+    const importText = `Amy Hood: ${'Reviewed public decision context. '.repeat(12)}`;
+    const unregisteredPayload = {
+      canonicalUrl: 'https://www.microsoft.com/unregistered-decision-source',
+      title: 'Unregistered public source',
+      publisher: 'Microsoft',
+      publishedAt: '2010-01-01',
+      speaker: 'Amy Hood',
+      eventCandidateIds: ['candidate-01'],
+      tier: 1 as const,
+      rightsNote: 'Public source reviewed for lawful project use.',
+      text: importText,
+      expectedSha256: createHash('sha256').update(importText).digest('hex'),
+      reviewer: 'Test Reviewer',
+      reviewedAt: '2026-07-14T00:00:00.000Z',
+    };
+    await writeFile(unregisteredImport, JSON.stringify(unregisteredPayload));
     const registryPath = path.join(directory, 'data/b-track/amy-hood/advisor/source-registry.json');
     const registry = JSON.parse(await readFile(registryPath, 'utf8')) as { sources: AdvisorSourceRecord[] };
     registry.sources = registry.sources.map((source) => source.eventCandidateIds.includes('candidate-01')
@@ -2019,7 +2098,7 @@ test('failure: source CLI reports exact deficits and rejects unsafe command inpu
     assert.equal(check.status, 1);
     assert.match(check.stderr, /1 discovered URL below minimum/i);
     assert.match(check.stderr, /50 valid documents below minimum/i);
-    assert.match(check.stderr, /candidate-01 lacks a likely direct Amy lead/i);
+    assert.match(check.stderr, /candidate-01 lacks a collected direct Amy passage/i);
 
     const collect = runAdvisorCli(directory, 'source:collect', '--id', 'source-missing');
     assert.equal(collect.status, 1);
@@ -2028,6 +2107,20 @@ test('failure: source CLI reports exact deficits and rejects unsafe command inpu
     const importResult = runAdvisorCli(directory, 'source:import', '--file', invalidImport);
     assert.equal(importResult.status, 1);
     assert.match(importResult.stderr, /invalid import JSON/i);
+
+    const beforeRegistry = await readFile(registryPath, 'utf8');
+    const unregistered = runAdvisorCli(directory, 'source:import', '--file', unregisteredImport);
+    assert.equal(unregistered.status, 1);
+    assert.match(unregistered.stderr, /canonical URL is not registered/i);
+    assert.equal(await readFile(registryPath, 'utf8'), beforeRegistry);
+    assert.deepEqual(await readdir(path.join(directory, 'data/b-track/amy-hood/advisor/raw')), []);
+
+    await assert.rejects(
+      () => importReviewedSource(unregisteredPayload, directory),
+      /canonical URL is not registered/i,
+    );
+    assert.equal(await readFile(registryPath, 'utf8'), beforeRegistry);
+    assert.deepEqual(await readdir(path.join(directory, 'data/b-track/amy-hood/advisor/raw')), []);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
