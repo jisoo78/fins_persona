@@ -23,6 +23,7 @@ import {
   summarizeQuestionReviews,
 } from '../src/components/evaluation/evaluationViewModel';
 import {
+  fetchEvaluationQuestions,
   saveEvaluationQuestionReview,
   submitSubjectiveGrades,
   type EvaluationQuestionsResponse,
@@ -200,6 +201,33 @@ test('failure: review API propagates a safe server error', async () => {
       fetchImpl,
     ),
     /revision note is required/,
+  );
+});
+
+test('failure: empty proxy response reports API availability instead of JSON syntax', async () => {
+  const fetchImpl: typeof fetch = async () => new Response('', { status: 500 });
+  await assert.rejects(
+    fetchEvaluationQuestions(fetchImpl),
+    /API request failed with 500 and an empty response/,
+  );
+});
+
+test('edge: non-JSON gateway response keeps status and response text', async () => {
+  const fetchImpl: typeof fetch = async () =>
+    new Response('Bad Gateway', {
+      status: 502,
+      headers: { 'content-type': 'text/plain' },
+    });
+  await assert.rejects(fetchEvaluationQuestions(fetchImpl), /502.*Bad Gateway/);
+});
+
+test('failure: network rejection becomes an API connection error', async () => {
+  const fetchImpl: typeof fetch = async () => {
+    throw new Error('connection refused');
+  };
+  await assert.rejects(
+    fetchEvaluationQuestions(fetchImpl),
+    /API request failed: connection refused/,
   );
 });
 

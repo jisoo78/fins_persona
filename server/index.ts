@@ -20,6 +20,10 @@ import {
   createEvaluationRouteDependencies,
   createEvaluationRouter,
 } from './evaluation/routes';
+import {
+  createPromptVersionRouteDependencies,
+  createPromptVersionRouter,
+} from './promptVersions/routes';
 
 const execFileAsync = promisify(execFile);
 
@@ -783,6 +787,10 @@ app.options('*', (_, res) => {
 app.use(
   '/api/evaluation',
   createEvaluationRouter(createEvaluationRouteDependencies(process.cwd())),
+);
+app.use(
+  '/api/b-track/amy-hood/prompt-versions',
+  createPromptVersionRouter(createPromptVersionRouteDependencies(process.cwd())),
 );
 
 app.get('/api/health', async (_, res) => {

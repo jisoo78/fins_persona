@@ -13,9 +13,11 @@
  */
 import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, readFile, writeFile } from 'node:fs/promises';
+import type { AddressInfo } from 'node:net';
 import test from 'node:test';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import express from 'express';
 
 import {
   activatePromptVersion,
@@ -23,6 +25,10 @@ import {
   ensurePromptVersionStore,
   readActivePromptVersion,
 } from '../server/promptVersions/store';
+import {
+  createPromptVersionRouteDependencies,
+  createPromptVersionRouter,
+} from '../server/promptVersions/routes';
 
 const validPrompt = '# Amy Hood\n## Role\n## Identity\n## Decision Principles\n## Cross-Dimension Rules\n## Red Lines\n## Communication Style\n## Unknown Policy\n## Response Format\n';
 
@@ -111,4 +117,49 @@ test('failure: invalid content and failed writes preserve activeVersionId', asyn
     /disk full/,
   );
   assert.equal((await readActivePromptVersion(root)).versionId, 'v1');
+});
+
+test('happy: prompt version router exposes list, detail, save and activate operations', async () => {
+  const root = await fixture();
+  await ensurePromptVersionStore(root, { createId: () => 'v1' });
+  const app = express();
+  app.use(express.json());
+  app.use(
+    '/api/b-track/amy-hood/prompt-versions',
+    createPromptVersionRouter(createPromptVersionRouteDependencies(root)),
+  );
+  const server = app.listen(0);
+  const address = server.address() as AddressInfo;
+  const baseUrl = `http://127.0.0.1:${address.port}/api/b-track/amy-hood/prompt-versions`;
+  try {
+    const listResponse = await fetch(baseUrl);
+    assert.equal(listResponse.status, 200);
+    const list = await listResponse.json() as {
+      manifest: { activeVersionId: string };
+    };
+    assert.equal(list.manifest.activeVersionId, 'v1');
+
+    assert.equal((await fetch(`${baseUrl}/v1`)).status, 200);
+    const createResponse = await fetch(baseUrl, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ content: `${validPrompt}\nAPI version`, basedOnVersionId: 'v1' }),
+    });
+    assert.equal(createResponse.status, 201);
+    const created = await createResponse.json() as { version: { versionId: string } };
+    assert.equal(
+      (await fetch(`${baseUrl}/${created.version.versionId}/activate`, { method: 'POST' })).status,
+      200,
+    );
+    assert.equal((await fetch(`${baseUrl}/missing`)).status, 404);
+    assert.equal((await fetch(baseUrl, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ content: '' }),
+    })).status, 400);
+  } finally {
+    await new Promise<void>((resolve, reject) =>
+      server.close((error) => error ? reject(error) : resolve()),
+    );
+  }
 });

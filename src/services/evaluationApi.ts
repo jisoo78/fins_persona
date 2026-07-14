@@ -20,8 +20,24 @@ export const request = async <T>(
   init: RequestInit = {},
   fetchImpl: typeof fetch = fetch,
 ): Promise<T> => {
-  const response = await fetchImpl(input, init);
-  const payload = (await response.json()) as T & { message?: string };
+  let response: Response;
+  try {
+    response = await fetchImpl(input, init);
+  } catch (error) {
+    throw new Error(
+      `API request failed: ${error instanceof Error ? error.message : 'network unavailable'}`,
+    );
+  }
+  const text = await response.text();
+  if (!text) {
+    throw new Error(`API request failed with ${response.status} and an empty response`);
+  }
+  let payload: T & { message?: string };
+  try {
+    payload = JSON.parse(text) as T & { message?: string };
+  } catch {
+    throw new Error(`API request failed with ${response.status}: ${text.slice(0, 200)}`);
+  }
   if (!response.ok) {
     throw new Error(payload.message ?? `request failed with ${response.status}`);
   }
