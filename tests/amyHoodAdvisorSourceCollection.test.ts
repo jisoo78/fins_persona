@@ -11,10 +11,11 @@
  * 3. Failure Path:
  *    - non-HTTPS and non-allowlisted sources require safe rejection.
  *    - a non-JSON value cannot overwrite an existing valid file.
- *    - a failed atomic replacement preserves the destination and removes its temporary file.
+ *    - an injected rename failure preserves the destination and removes its temporary file.
+ *    - close and remove cleanup failures are reported with the original operation failure.
  */
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
@@ -83,6 +84,24 @@ test('happy: atomic JSON persistence round-trips data without a temporary file',
       sources: [officialSource.id],
     });
     assert.deepEqual(await readdir(path.dirname(destination)), ['registry.json']);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('happy: concurrent same-process writes use independent temporary files', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-json-concurrent-'));
+  const destination = path.join(directory, 'registry.json');
+
+  try {
+    await Promise.all([
+      writeJsonAtomic(destination, { writer: 'first' }),
+      writeJsonAtomic(destination, { writer: 'second' }),
+    ]);
+
+    const stored = await readJsonFile(destination, { writer: 'missing' });
+    assert.ok(stored.writer === 'first' || stored.writer === 'second');
+    assert.deepEqual(await readdir(directory), ['registry.json']);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
@@ -157,28 +176,59 @@ test('failure: automatic collection rejects unsafe source URLs', () => {
   });
 });
 
-test('failure: failed atomic replacement preserves the destination and removes its temp file', async () => {
+test('failure: injected rename failure preserves existing JSON and removes its temp file', async () => {
   const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-json-failure-'));
   const destination = path.join(directory, 'registry.json');
-  const marker = path.join(destination, 'preserved.json');
+  const original = '{"sources":["preserved"]}\n';
+  const renameError = new Error('injected rename failure');
 
   try {
-    await mkdir(destination);
-    await writeFile(marker, '{"preserved":true}\n', 'utf8');
+    await writeFile(destination, original, 'utf8');
 
     await assert.rejects(
-      () => writeJsonAtomic(destination, { replacement: true }),
-      (error: NodeJS.ErrnoException) => {
-        assert.ok(
-          ['EISDIR', 'EEXIST', 'ENOTDIR'].includes(error.code ?? ''),
-          `expected a filesystem replacement error, received ${error.message}`,
-        );
+      () => writeJsonAtomic(destination, { replacement: true }, {
+        rename: async () => {
+          throw renameError;
+        },
+      }),
+      (error) => error === renameError,
+    );
+
+    assert.equal(await readFile(destination, 'utf8'), original);
+    assert.deepEqual(await readdir(directory), ['registry.json']);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: cleanup errors are reported with the original operation failure', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-json-cleanup-'));
+  const writeError = new Error('injected write failure');
+  const closeError = new Error('injected close failure');
+  const removeError = new Error('injected remove failure');
+
+  try {
+    await assert.rejects(
+      () => writeJsonAtomic(path.join(directory, 'registry.json'), { replacement: true }, {
+        openTemporaryFile: async () => ({
+          writeFile: async () => {
+            throw writeError;
+          },
+          sync: async () => undefined,
+          close: async () => {
+            throw closeError;
+          },
+        }),
+        remove: async () => {
+          throw removeError;
+        },
+      }),
+      (error) => {
+        assert.ok(error instanceof AggregateError);
+        assert.deepEqual(error.errors, [writeError, closeError, removeError]);
         return true;
       },
     );
-
-    assert.equal(await readFile(marker, 'utf8'), '{"preserved":true}\n');
-    assert.deepEqual(await readdir(directory), ['registry.json']);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }

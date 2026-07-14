@@ -6,6 +6,25 @@ import {
   rm,
 } from 'node:fs/promises';
 import path from 'node:path';
+import { randomUUID } from 'node:crypto';
+
+type AtomicWriteHandle = {
+  writeFile(data: string, encoding: BufferEncoding): Promise<void>;
+  sync(): Promise<void>;
+  close(): Promise<void>;
+};
+
+export type AtomicJsonDependencies = {
+  openTemporaryFile(filePath: string): Promise<AtomicWriteHandle>;
+  rename(source: string, destination: string): Promise<void>;
+  remove(filePath: string, options: { force: boolean }): Promise<void>;
+};
+
+const defaultDependencies: AtomicJsonDependencies = {
+  openTemporaryFile: (filePath) => open(filePath, 'wx'),
+  rename,
+  remove: rm,
+};
 
 export const readJsonFile = async <T>(filePath: string, fallback: T): Promise<T> => {
   try {
@@ -19,6 +38,7 @@ export const readJsonFile = async <T>(filePath: string, fallback: T): Promise<T>
 export const writeJsonAtomic = async (
   filePath: string,
   value: unknown,
+  injectedDependencies: Partial<AtomicJsonDependencies> = {},
 ): Promise<void> => {
   let serialized: string;
   try {
@@ -30,19 +50,41 @@ export const writeJsonAtomic = async (
   }
 
   await mkdir(path.dirname(filePath), { recursive: true });
-  const temporaryPath = `${filePath}.${process.pid}.tmp`;
-  let temporaryFile: Awaited<ReturnType<typeof open>> | undefined;
+  const dependencies = { ...defaultDependencies, ...injectedDependencies };
+  const temporaryPath = `${filePath}.${process.pid}.${randomUUID()}.tmp`;
+  let temporaryFile: AtomicWriteHandle | undefined;
 
   try {
-    temporaryFile = await open(temporaryPath, 'w');
+    temporaryFile = await dependencies.openTemporaryFile(temporaryPath);
     await temporaryFile.writeFile(serialized, 'utf8');
     await temporaryFile.sync();
-    await temporaryFile.close();
+    const completedFile = temporaryFile;
     temporaryFile = undefined;
-    await rename(temporaryPath, filePath);
-  } catch (error) {
-    await temporaryFile?.close().catch(() => undefined);
-    await rm(temporaryPath, { force: true }).catch(() => undefined);
-    throw error;
+    await completedFile.close();
+    await dependencies.rename(temporaryPath, filePath);
+  } catch (operationError) {
+    const cleanupErrors: unknown[] = [];
+
+    if (temporaryFile) {
+      try {
+        await temporaryFile.close();
+      } catch (closeError) {
+        cleanupErrors.push(closeError);
+      }
+    }
+
+    try {
+      await dependencies.remove(temporaryPath, { force: true });
+    } catch (removeError) {
+      cleanupErrors.push(removeError);
+    }
+
+    if (cleanupErrors.length > 0) {
+      throw new AggregateError(
+        [operationError, ...cleanupErrors],
+        'atomic JSON write failed and cleanup was incomplete',
+      );
+    }
+    throw operationError;
   }
 };
