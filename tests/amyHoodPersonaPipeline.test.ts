@@ -1,7 +1,7 @@
 /**
  * Test Plan:
  * 1. Happy Path:
- *    - selected 원문을 수집하고 동일 chunk를 Gemma 4 모의 모델로 분석·병합해 시스템 프롬프트와 평가 답변을 생성한다.
+ *    - selected 원문을 수집하고 동일 chunk를 Gemma 4 모의 모델로 분석·병합해 시스템 프롬프트를 생성한다.
  *
  * 2. Edge Cases:
  *    - 10,000 tokens보다 짧은 자료는 하나의 chunk로 유지한다.
@@ -26,7 +26,6 @@ import {
   type InventoryEntry,
 } from '../server/personaPipeline/corpus';
 import { analyzeChunks } from '../server/personaPipeline/analyzer';
-import { evaluatePersona } from '../server/personaPipeline/evaluator';
 import {
   LOCAL_ANALYSIS_PROMPT_RESERVE_TOKENS,
   LOCAL_CHAT_RESERVE_TOKENS,
@@ -376,47 +375,6 @@ test('failure: stale resume proof and manifest provenance cannot pass the Gemma 
     staleGate.failures.some((failure) => /chunk IDs|stale/.test(failure)),
     true,
   );
-});
-
-test('failure: evaluator never leaks holdout text or grading hints to the model', async () => {
-  const root = await mkdtemp(join(tmpdir(), 'amy-eval-'));
-  const secretHoldoutText = 'SECRET HOLDOUT AMY HOOD TRANSCRIPT';
-  await mkdir(join(root, 'data/b-track/amy-hood'), { recursive: true });
-  await mkdir(join(root, 'evaluation'), { recursive: true });
-  await mkdir(join(root, 'archive'), { recursive: true });
-  await writeFile(
-    join(root, 'data/b-track/amy-hood/AMY_HOOD_PERSONA.gemma4.md'),
-    validMarkdown,
-  );
-  await writeFile(
-    join(root, 'evaluation/amy_hood_decision_eval_questions_15.json'),
-    JSON.stringify({
-      questions: Array.from({ length: 15 }, (_, index) => ({
-        id: `q${index}`,
-        question: `Question ${index}`,
-        expected_focus: [`HIDDEN_HINT_${index}`],
-        grading_notes: [`HIDDEN_GRADING_${index}`],
-      })),
-    }),
-  );
-  await writeFile(
-    join(root, 'archive/fy2017_q1.json'),
-    JSON.stringify({ transcript: secretHoldoutText }),
-  );
-  const prompts: string[] = [];
-  const model = fakeModel(async (prompt) => {
-    prompts.push(prompt);
-    return { text: '판단 답변', elapsedMs: 1 };
-  });
-
-  const result = await evaluatePersona({ root, provider: 'local', model });
-
-  assert.equal(result.answers.length, 15);
-  assert.equal(prompts.length, 15);
-  assert.equal(prompts.some((prompt) => prompt.includes(secretHoldoutText)), false);
-  assert.equal(prompts.some((prompt) => prompt.includes('HIDDEN_HINT_')), false);
-  assert.equal(prompts.some((prompt) => prompt.includes('HIDDEN_GRADING_')), false);
-  assert.equal(prompts.every((prompt) => prompt.includes('Keep the answer under 500 words.')), true);
 });
 
 test('failure: local model output is capped within the 16K context budget', () => {

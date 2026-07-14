@@ -16,12 +16,10 @@
     "persona:analyze": "tsx server/runAmyHoodPersonaPipeline.ts analyze",
     "persona:check": "tsx server/runAmyHoodPersonaPipeline.ts check",
     "persona:evaluate": "tsx server/runAmyHoodPersonaPipeline.ts evaluate",
+    "evaluation:test": "tsx --test tests/amyHoodEvaluation.test.ts tests/amyHoodEvaluationUi.test.ts",
     "rag:prepare:holdout": "python3 scripts/prepare_holdout_dataset.py",
     "rag:index:bge-m3": "python3 scripts/build_bge_m3_index.py",
-    "rag:index:bge-m3:train": "RAG_ARCHIVE_DIR=archive_eval/train python3 scripts/build_bge_m3_index.py",
-    "rag:evaluate:keyword": "tsx server/generateGeneralRagEvaluation.ts",
-    "rag:evaluate:vector": "RAG_RETRIEVAL=vector tsx server/generateGeneralRagEvaluation.ts",
-    "rag:evaluate:vector:train": "RAG_ARCHIVE_DIR=archive_eval/train RAG_RETRIEVAL=vector tsx server/generateGeneralRagEvaluation.ts"
+    "rag:index:bge-m3:train": "RAG_ARCHIVE_DIR=archive_eval/train python3 scripts/build_bge_m3_index.py"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

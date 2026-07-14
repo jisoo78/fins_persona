@@ -12,6 +12,7 @@
  *    - 홀드아웃 오염, 질문/정답 ID 불일치, 모델 실패와 원자적 저장 실패는 완료 상태나 부분 덮어쓰기를 만들지 않는다.
  */
 import assert from 'node:assert/strict';
+import { existsSync } from 'node:fs';
 import type { AddressInfo } from 'node:net';
 import { mkdir, mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import test from 'node:test';
@@ -496,4 +497,32 @@ test('happy: router exposes question review and all run operations', async () =>
       server.close((error) => (error ? reject(error) : resolve())),
     );
   }
+});
+
+test('failure: supported evaluation code contains no GraphRAG contract or static summary dependency', async () => {
+  const forbidden = [
+    'server/generateGeneralRagEvaluation.ts',
+    'evaluation/amy_hood_decision_eval_questions_10.json',
+    'evaluation/amy_hood_decision_eval_questions_15.json',
+    'evaluation/amy_hood_eval_full_2017_2019_included.lock.json',
+    'evaluation/amy_hood_eval_full_vs_holdout_summary.json',
+    'evaluation/amy_hood_eval_holdout_2017_2019_excluded.lock.json',
+    'evaluation/general_rag_result.lock.json',
+    'evaluation/keyword_rag_result.lock.json',
+    'evaluation/rag_graphrag_output_contract.json',
+    'evaluation/rag_graphrag_questions.json',
+    'evaluation/rag_graphrag_scorecard.csv',
+    'evaluation/vector_rag_bge_m3_result.lock.json',
+    'evaluation/vector_rag_bge_m3_train_holdout_2017_2019.lock.json',
+    'evaluation/amy-hood-persona-eval.local.json',
+  ];
+
+  assert.deepEqual(
+    forbidden.filter((path) => existsSync(join(process.cwd(), path))),
+    [],
+  );
+  assert.doesNotMatch(
+    await readFile(join(process.cwd(), 'src/components/EvaluationView.tsx'), 'utf8'),
+    /GraphRAG|full_vs_holdout_summary/,
+  );
 });
