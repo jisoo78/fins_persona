@@ -1,0 +1,20 @@
+{
+  "questionSetVersion": "1.0.0",
+  "reviews": [
+    { "questionId": "P1", "status": "unreviewed", "revisionNote": "", "reviewedAt": null },
+    { "questionId": "P2", "status": "unreviewed", "revisionNote": "", "reviewedAt": null },
+    { "questionId": "P3", "status": "unreviewed", "revisionNote": "", "reviewedAt": null },
+    { "questionId": "P4", "status": "unreviewed", "revisionNote": "", "reviewedAt": null },
+    { "questionId": "P5", "status": "unreviewed", "revisionNote": "", "reviewedAt": null },
+    { "questionId": "P6", "status": "unreviewed", "revisionNote": "", "reviewedAt": null },
+    { "questionId": "P7", "status": "unreviewed", "revisionNote": "", "reviewedAt": null },
+    { "questionId": "H1", "status": "unreviewed", "revisionNote": "", "reviewedAt": null },
+    { "questionId": "H2", "status": "unreviewed", "revisionNote": "", "reviewedAt": null },
+    { "questionId": "H3", "status": "unreviewed", "revisionNote": "", "reviewedAt": null },
+    { "questionId": "H4", "status": "unreviewed", "revisionNote": "", "reviewedAt": null },
+    { "questionId": "H5", "status": "unreviewed", "revisionNote": "", "reviewedAt": null },
+    { "questionId": "S1", "status": "unreviewed", "revisionNote": "", "reviewedAt": null },
+    { "questionId": "S2", "status": "unreviewed", "revisionNote": "", "reviewedAt": null },
+    { "questionId": "S3", "status": "unreviewed", "revisionNote": "", "reviewedAt": null }
+  ]
+}
