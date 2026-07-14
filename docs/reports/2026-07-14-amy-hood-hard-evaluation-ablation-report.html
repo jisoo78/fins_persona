@@ -531,6 +531,20 @@ JSON만 출력하세요: {"choice":1,"reason":"1~2문장 이유"}</pre>
     </div>
   </section>
 
+  <section id="final-judgment">
+    <p class="section-kicker">12 · Independent judgment</p>
+    <h2>냉정한 최종 판단: 아직 Amy Hood의 의사결정을 복제했다고 말할 수 없다</h2>
+    <div class="score-grid">
+      <div class="score-card negative"><div class="label">복제 신뢰도</div><div class="value">20 / 100 이하</div><div class="detail">공식 KPI가 아닌 현재 증거 기반의 보수적 종합 판단치</div></div>
+      <div class="score-card negative"><div class="label">Amy Hood + RAG</div><div class="value">7 / 12</div><div class="detail">객관식 58.3%</div></div>
+      <div class="score-card neutral"><div class="label">Amy Hood Prompt</div><div class="value">10 / 12</div><div class="detail">객관식 83.3%</div></div>
+      <div class="score-card positive"><div class="label">일반 CFO Prompt</div><div class="value">12 / 12</div><div class="detail">객관식 100%</div></div>
+    </div>
+    <div class="callout warning"><strong>판정:</strong> Gemma 4가 재무 의사결정 문제에 그럴듯하게 답하는 능력은 확인됐지만, Amy Hood의 판단 스타일 때문에 더 정확해진다는 증거는 확인되지 않았다. 통제 비교에서 RAG lift는 <strong>-3점</strong>, Persona lift는 <strong>-2점</strong>이었고, 일반 CFO Prompt가 객관식과 주관식 모두 가장 높은 점수를 기록했다.</div>
+    <p>따라서 현재 구현은 <strong>“Amy Hood 의사결정 복제체”보다 “그럴듯한 CFO 답변 생성기”에 가깝다.</strong> 복제를 주장하려면 Amy Hood Prompt와 RAG 조건이 일반 CFO 조건보다 반복적으로 우수하고, 그 차이가 Amy Hood 특유의 판단 순서·재무 한도·신뢰 원칙에서 발생한다는 문항별 근거가 필요하다.</p>
+    <p class="footnote">이 판단은 조건별 실행 1회(<code>n=1</code>)에 기반한다. <strong>20/100</strong>은 통계적으로 추정된 확률이나 자동 계산 점수가 아니라, 두 핵심 lift가 모두 음수이고 일반 CFO가 최고점을 기록한 현재 증거를 보수적으로 종합한 평가다.</p>
+  </section>
+
   <footer>
     이 문서는 저장소의 실제 실행 JSON, 질문지 2.0.0, 구현 테스트와 로컬 Gemma 4 실행 결과만을 근거로 작성했다. 점수 변화와 가설 판정은 명시된 비교 범위 안에서만 유효하다.
   </footer>
