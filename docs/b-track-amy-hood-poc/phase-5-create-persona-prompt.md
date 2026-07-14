@@ -72,7 +72,32 @@
 ## 만들어야 할 산출물
 
 - `data/b-track/amy-hood/decision-principles.json`
-- `data/b-track/amy-hood/AMY_HOOD_PERSONA.md`
+- `data/b-track/amy-hood/AMY_HOOD_PERSONA.gemma4.md`: 현재 활성 버전과 동기화되는 호환 파일
+- `data/b-track/amy-hood/prompt-versions.json`: 활성 버전과 불변 버전 목록
+- `data/b-track/amy-hood/prompts/<version-id>.md`: 저장된 버전별 Markdown 본문
+
+## Web UI에서 Main Prompt 운영하기
+
+API 서버와 Web UI를 각각 실행한다.
+
+```bash
+npm run api
+npm run dev
+```
+
+1. 사이드바에서 `B Track`을 열고 내부 메뉴 `Main Prompt`로 이동한다.
+2. 현재 활성 버전 본문을 편집한 뒤 `새 버전 저장`을 누른다.
+3. 저장 결과가 버전 목록에 추가되었는지 확인한다. 저장만으로 활성 버전은 바뀌지 않는다.
+4. 비교할 두 버전을 선택해 좌우 본문을 확인한다.
+5. 평가에 사용할 버전의 `활성화` 버튼을 명시적으로 누른다.
+
+평가 실행은 생성되는 순간의 활성 `promptVersionId`와 해시를 고정하므로, 이후 다른 버전을 활성화해도 기존 실행의 입력 프롬프트는 바뀌지 않는다.
+
+관련 회귀 테스트는 다음 명령으로 실행한다.
+
+```bash
+npm run evaluation:test
+```
 
 ## Codex 요청 예시
 
@@ -86,4 +111,4 @@
 - 근거 없는 성격이나 사적 가치관이 없다.
 - 자료가 없는 경우 추정하지 않는 규칙이 포함되어 있다.
 - 최종 결과가 현재 프로젝트에서 사용할 수 있는 Markdown 문서다.
-
+- Main Prompt 저장과 활성화가 분리되어 있고, 과거 버전을 다시 조회·활성화할 수 있다.
