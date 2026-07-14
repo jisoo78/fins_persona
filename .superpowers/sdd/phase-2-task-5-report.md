@@ -5,7 +5,7 @@ Status: **BLOCKED**
 
 ## Outcome
 
-The prior padded source matrix was removed and replaced with 30 event-based candidates and 30 manually reviewed, event-specific official URLs. Collection produced 29 locator-matched documents. This does not meet the Task 5 minimums, so Phase 3 remains blocked except for the single candidate with verified direct Amy Hood evidence.
+The prior padded source matrix was removed and replaced with 30 event-based candidates and 30 manually reviewed, event-specific official URLs. Collection produced 29 locator-matched documents. This does not meet the Task 5 minimums, and no candidate has a verified event-specific Amy Hood passage, so Phase 3 remains blocked for all candidates.
 
 | Measure | Current | Required | Gap |
 |---|---:|---:|---:|
@@ -13,16 +13,16 @@ The prior padded source matrix was removed and replaced with 30 event-based cand
 | Locator-matched collected documents | 29 | 50–80 | 21 |
 | Post-outcome URLs | 0 | capped at 25 | 0 |
 | Candidates with two collected source types | 0/30 | 30/30 | 30 |
-| Verified direct Amy Hood candidates | 1/30 | candidate-specific | 29 reviewed gaps |
+| Verified direct Amy Hood candidates | 0/30 | candidate-specific | 30 reviewed gaps |
 
 The 2019 OpenAI partnership page returned `invalid_content`; it is retained as an explicit failed registry record rather than counted as evidence.
 
 ## Contract and gate changes
 
-- Every candidate now carries a reviewer-approved event fingerprint with three controlled fields: `primaryEntity`, `decisionAction`, and `eventSpecificIdentifier`. Its cited fingerprint source must also be a reviewed source association and part of the decision-window basis.
+- Every candidate now carries a reviewer-approved event fingerprint with three controlled fields: `primaryEntity`, `decisionAction`, and `eventSpecificIdentifier`. Every cited fingerprint URL must have a reviewed association at that exact canonical URL and must also be part of the decision-window basis.
 - Every structured association must repeat exactly that candidate fingerprint as the immutable discriminator set (`named_entity`, `decision_action`, `event_specific`). An association cannot substitute its own event identity.
 - Event relevance requires one verbatim, bounded `exactRelevancePassage` (20–1,200 characters) containing the primary entity, action, and event-specific identifier together. The same passage must exist in the collected artifact; a broad nearby-text window is not accepted.
-- A direct Amy association is accepted only when the entire exact quote is contained inside an Amy Hood speaker segment. New HTML collection extracts attributed-quote segments, reviewed transcript imports preserve explicit offsets, and legacy artifacts are subjected to the same attribution extractor at read time.
+- A direct Amy association is accepted only when its entire exact quote is contained in the same bounded event-specific relevance passage and that entire passage is contained inside one Amy Hood speaker segment. A generic Amy quote cannot borrow a separate event passage elsewhere in the document.
 - Candidates without that evidence carry a reviewed `directEvidenceGap` and `phase3Status: evidence_gap`.
 - Discovery coverage counts only reviewed, non-rejected, event-specific associations present in the registry. Post-outcome associations are counted separately and capped.
 - Valid-document coverage requires an eligible association whose URL, candidate, source type, publication date, temporal relation, exact quote, and reviewer-approved fingerprint match the same exact relevance passage in the collected artifact.
@@ -62,7 +62,7 @@ All rows below still need a different second collected source type.
 | Workforce reset 2023 | `blogs.microsoft.com/.../focusing-on-our-short-and-long-term-opportunity/` | reviewed gap |
 | Transformation 2026 | `blogs.microsoft.com/.../latest-in-our-company-transformation/` | reviewed gap |
 | Buyback 2008 | `news.microsoft.com/.../share-repurchase-program.../` | reviewed gap |
-| Buyback 2013 | `news.microsoft.com/.../share-repurchase-program-3/` | verified direct Amy passage |
+| Buyback 2013 | `news.microsoft.com/.../share-repurchase-program-3/` | reviewed gap; Amy quote is separate from the board authorization passage |
 | Buyback 2016 | `news.microsoft.com/.../share-repurchase-program-2/` | reviewed gap |
 | Buyback 2019 | `news.microsoft.com/.../new-share-repurchase-program/` | reviewed gap |
 | Buyback 2021 | `news.microsoft.com/.../new-share-repurchase-program-2/` | reviewed gap |
@@ -82,10 +82,12 @@ RED tests demonstrated that the previous implementation accepted:
 - a casual GitHub mention beside an unrelated acquisition;
 - ambiguous grammar such as `Amy Hood disagreed with Satya Nadella, who said: ...` as if the quote belonged to Amy Hood;
 - association-level discriminators that replaced the candidate's reviewed fingerprint with another event;
+- an unreviewed fingerprint-source association masked by a reviewed association at another URL;
 - an overly broad passage used in place of a strict event-specific passage;
+- a generic Amy quote that borrowed a distant event-specific passage in the same document;
 - an invented same-host final URL absent from the recorded redirect chain.
 
-After the minimum implementation, `npx tsx --test tests/amyHoodAdvisorSourceCollection.test.ts` passes all 101 tests.
+After the minimum implementation, `npx tsx --test tests/amyHoodAdvisorSourceCollection.test.ts` passes all 103 tests.
 
 ## Gate result
 

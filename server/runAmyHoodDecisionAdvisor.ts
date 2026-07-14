@@ -218,6 +218,10 @@ export const validateEventCandidates = (
         relevancePassage.includes(normalizedSearchText(value)))) {
         throw new Error(`candidate ${candidate.id} exact relevance passage does not contain its event fingerprint`);
       }
+      if (association.role === 'direct_amy'
+        && !relevancePassage.includes(normalizedSearchText(association.evidenceLocator.exactQuote))) {
+        throw new Error(`candidate ${candidate.id} direct Amy exact quote must be contained by its exact relevance passage`);
+      }
       if (association.role === 'direct_amy' && association.evidenceLocator.speaker !== 'Amy Hood') {
         throw new Error(`candidate ${candidate.id} direct Amy association requires an exact speaker locator`);
       }
@@ -243,10 +247,12 @@ export const validateEventCandidates = (
     ));
     for (const fingerprintUrl of candidate.eventFingerprint.sourceUrls) {
       const canonicalFingerprintUrl = canonicalizeSourceUrl(fingerprintUrl);
-      if (!associationUrls.has(canonicalFingerprintUrl)
+      if (!candidate.sourceAssociations.some((association) =>
+        association.reviewStatus === 'reviewed'
+        && canonicalizeSourceUrl(association.canonicalUrl) === canonicalFingerprintUrl)
         || !candidate.decisionWindowBasis.sourceUrls.some((basisUrl) =>
           canonicalizeSourceUrl(basisUrl) === canonicalFingerprintUrl)) {
-        throw new Error(`candidate ${candidate.id} event fingerprint source must be a window-basis association`);
+        throw new Error(`candidate ${candidate.id} fingerprint source requires a reviewed association and window basis at the same URL`);
       }
     }
     for (const basisUrl of candidate.decisionWindowBasis.sourceUrls) {
@@ -471,13 +477,17 @@ export const checkSourceInventory = async (
         const originalQuote = association.evidenceLocator.exactQuote.trim();
         const originalQuoteStart = artifact.normalizedText.toLocaleLowerCase()
           .indexOf(originalQuote.toLocaleLowerCase());
+        const originalRelevancePassage = association.evidenceLocator.exactRelevancePassage.trim();
+        const originalRelevanceStart = artifact.normalizedText.toLocaleLowerCase()
+          .indexOf(originalRelevancePassage.toLocaleLowerCase());
         if (association.evidenceLocator.speaker !== 'Amy Hood'
           || source.speaker !== 'Amy Hood'
           || originalQuoteStart < 0
+          || originalRelevanceStart < 0
           || !artifact.speakerSegments.some((segment) =>
             segment.speaker.toLocaleLowerCase() === 'amy hood'
-            && segment.startChar <= originalQuoteStart
-            && segment.endChar >= originalQuoteStart + originalQuote.length)) continue;
+            && segment.startChar <= originalRelevanceStart
+            && segment.endChar >= originalRelevanceStart + originalRelevancePassage.length)) continue;
       }
       validSourceIds.add(source.id);
       matchedByCandidate.set(candidate.id, [

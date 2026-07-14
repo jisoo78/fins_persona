@@ -30,6 +30,8 @@
  *    - raw provenance rejects an invented same-host final path that was not in the redirect chain.
  *    - ambiguous grammar cannot attribute another person's quote to Amy Hood.
  *    - association discriminators cannot override the reviewed candidate event fingerprint.
+ *    - every fingerprint source URL requires its own reviewed association at that canonical URL.
+ *    - a generic Amy quote cannot borrow a distant event-specific passage.
  *    - corrupt or cross-owned review reuse, post-rename failures, and rollback parent swaps fail without trusting or deleting unsafe paths.
  *
  * Test Plan (Task 5 discovery matrix and CLI gates):
@@ -2118,6 +2120,38 @@ test('failure: association discriminators cannot override a reviewed candidate f
   }
 });
 
+test('failure: every fingerprint source URL requires a reviewed association at that URL', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-fingerprint-review-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+  const candidates = validCandidateMatrix();
+  const candidate = candidates[0];
+  candidate.sourceAssociations[0].reviewStatus = 'unreviewed';
+  candidate.sourceAssociations[1].role = 'direct_amy';
+  candidate.sourceAssociations[1].evidenceLocator.speaker = 'Amy Hood';
+  const replacementUrl = 'https://www.microsoft.com/advisor-source/1/replacement-reviewed';
+  candidate.discoveryUrls.push(replacementUrl);
+  candidate.sourceAssociations.push({
+    ...structuredClone(candidate.sourceAssociations[1]),
+    canonicalUrl: replacementUrl,
+    role: 'contemporaneous_context',
+    evidenceLocator: {
+      ...structuredClone(candidate.sourceAssociations[1].evidenceLocator),
+      speaker: null,
+    },
+  });
+
+  try {
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(candidatePath, `${JSON.stringify(candidates, null, 2)}\n`);
+    const result = runAdvisorCli(directory, 'candidates:check');
+
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /fingerprint source.*reviewed association/i);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
 test('failure: an overly broad relevance passage cannot stand in for a strict event passage', async () => {
   const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-broad-relevance-'));
   const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
@@ -2196,7 +2230,11 @@ test('edge: candidate CLI rejects inverted windows and outcome-only titles', asy
 
 const writeRegistryFixture = async (
   root: string,
-  options: { discoveries: number; validDocuments: number },
+  options: {
+    discoveries: number;
+    validDocuments: number;
+    separateDirectQuoteFromRelevance?: boolean;
+  },
   fixtureCandidates = validCandidateMatrix(),
 ) => {
   const advisorRoot = path.join(root, 'data/b-track/amy-hood/advisor');
@@ -2220,7 +2258,10 @@ const writeRegistryFixture = async (
     const sourceRole = candidateForUrl.get(canonicalUrl)!;
     const linkedCandidate = fixtureCandidates.find(({ id }) => id === sourceRole.candidateId)!;
     const id = sourceIdForUrl(canonicalUrl);
-    const text = `${sourceRole.association.evidenceLocator.exactQuote}. ${sourceRole.association.evidenceLocator.exactRelevancePassage}. ${'Public Microsoft source context. '.repeat(12)}`;
+    const directSeparator = sourceRole.direct && options.separateDirectQuoteFromRelevance
+      ? ` ${'Unrelated public source context. '.repeat(100)}`
+      : ' ';
+    const text = `${sourceRole.association.evidenceLocator.exactQuote}.${directSeparator}${sourceRole.association.evidenceLocator.exactRelevancePassage}. ${'Public Microsoft source context. '.repeat(12)}`;
     const sha256 = createHash('sha256').update(text).digest('hex');
     const valid = index < options.validDocuments;
     const rawPath = valid ? `raw/${id}.json` : null;
@@ -2383,7 +2424,8 @@ test('failure: GitHub cannot be covered by unrelated earnings and SEC artifacts'
     for (const association of candidates[0].sourceAssociations) {
       association.relevanceClaim = 'This artifact is asserted to support the GitHub acquisition economics.';
       association.evidenceLocator.exactQuote = 'Microsoft will acquire GitHub for 7.5 billion dollars in stock';
-      association.evidenceLocator.exactRelevancePassage = 'Microsoft will acquire GitHub for $7.5 billion';
+      association.evidenceLocator.exactRelevancePassage =
+        'Microsoft will acquire GitHub for 7.5 billion dollars in stock in a transaction valued at $7.5 billion';
       association.evidenceLocator.anchorTerms = ['GitHub', '7.5 billion'];
       association.evidenceLocator.eventDiscriminators = [
         { value: 'GitHub', kind: 'named_entity' },
@@ -2459,6 +2501,33 @@ test('failure: another speaker quote near Amy Hood is not direct Amy evidence', 
   }
 });
 
+test('failure: a generic Amy quote cannot borrow a distant event-specific passage', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-distant-direct-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+  const candidates = validCandidateMatrix();
+  candidates[0].sourceAssociations[0].evidenceLocator.exactQuote =
+    'Amy Hood expects disciplined execution and balanced growth';
+
+  try {
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(candidatePath, `${JSON.stringify(candidates, null, 2)}\n`);
+    await writeRegistryFixture(
+      directory,
+      { discoveries: 100, validDocuments: 60, separateDirectQuoteFromRelevance: true },
+      candidates,
+    );
+
+    const result = runAdvisorCli(directory, 'sources:check');
+    assert.equal(result.status, 1);
+    assert.match(
+      result.stderr,
+      /direct Amy exact quote must be contained by its exact relevance passage|candidate-01 lacks a verified candidate-specific direct Amy locator/i,
+    );
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
 test('failure: a casual GitHub mention beside an unrelated acquisition is not event relevance', async () => {
   const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-github-casual-'));
   const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
@@ -2480,7 +2549,8 @@ test('failure: a casual GitHub mention beside an unrelated acquisition is not ev
       const unrelatedQuote = `${associationIndex === 0 ? 'Amy Hood ' : ''}decision evidence for ${artifactCandidates[0].workingTitle}`;
       association.relevanceClaim = 'The reviewed locator must distinguish the GitHub transaction from other acquisition news.';
       association.evidenceLocator.exactQuote = unrelatedQuote;
-      association.evidenceLocator.exactRelevancePassage = 'Microsoft will acquire GitHub for $7.5 billion';
+      association.evidenceLocator.exactRelevancePassage =
+        `${unrelatedQuote}. Microsoft will acquire GitHub for $7.5 billion`;
       association.evidenceLocator.anchorTerms = ['GitHub', 'acquisition'];
       (association.evidenceLocator as typeof association.evidenceLocator & {
         eventDiscriminators: Array<{ value: string; kind: string }>;
