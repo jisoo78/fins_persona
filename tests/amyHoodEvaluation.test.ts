@@ -124,6 +124,7 @@ const createRunnerFixture = async (approved = true) => {
   const root = await createEvaluationFixture();
   const dataDir = join(root, 'data/b-track/amy-hood');
   await mkdir(join(dataDir, 'chunks'), { recursive: true });
+  await mkdir(join(root, 'agent_prompts/prompts'), { recursive: true });
   await Promise.all([
     writeFile(
       join(dataDir, 'source-inventory.json'),
@@ -145,6 +146,10 @@ const createRunnerFixture = async (approved = true) => {
         join(process.cwd(), 'data/b-track/amy-hood/AMY_HOOD_PERSONA.gemma4.md'),
         'utf8',
       ),
+    ),
+    writeFile(
+      join(root, 'agent_prompts/prompts/generic-cfo-control.md'),
+      'You are a general corporate CFO advisor. Use only supplied facts.',
     ),
   ]);
   const reviewPath = join(root, 'evaluation/amy_hood_eval_question_reviews.json');
@@ -354,6 +359,75 @@ test('happy: sequential run calls the model once for each question in order', as
     completed.answers.map((answer) => answer.questionId),
     ['P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'H1', 'H2', 'H3', 'H4', 'H5', 'S1', 'S2', 'S3'],
   );
+});
+
+test('happy: three-arm experiment pins one context and injects evidence only seven times', async () => {
+  const root = await createRunnerFixture();
+  const inputs: ModelInput[] = [];
+  const runner = createEvaluationRunner({
+    root,
+    createModel: () => fakeModel(async (input) => {
+      inputs.push(input);
+      return validModelResult(input);
+    }),
+  });
+
+  const launch = await runner.createEvaluationExperiment({ provider: 'local' });
+  assert.equal(launch.runs.length, 3);
+  assert.deepEqual(
+    launch.runs.map((run) => run.experimentArm),
+    ['persona_rag', 'persona_no_rag', 'generic_cfo_no_rag'],
+  );
+  assert.equal(new Set(launch.runs.map((run) => run.experimentGroupId)).size, 1);
+  assert.equal(new Set(launch.runs.map((run) => run.questionSetVersion)).size, 1);
+  assert.equal(new Set(launch.runs.map((run) => run.model)).size, 1);
+
+  const completed = await runner.executeEvaluationExperiment(
+    launch.runs.map((run) => run.runId),
+  );
+  assert.deepEqual(completed.map((run) => run.status), ['complete', 'complete', 'complete']);
+  assert.equal(inputs.length, 45);
+  assert.equal(
+    inputs.filter((input) => inputText(input).includes('[RAG EVIDENCE]')).length,
+    7,
+  );
+  assert.equal(
+    inputs.slice(0, 7).every((input) => inputText(input).includes('[RAG EVIDENCE]')),
+    true,
+  );
+  assert.equal(
+    inputs.slice(7).every((input) => !inputText(input).includes('[RAG EVIDENCE]')),
+    true,
+  );
+});
+
+test('failure: an incomplete first arm does not block later arms and OpenAI is rejected early', async () => {
+  const root = await createRunnerFixture();
+  let calls = 0;
+  let modelCreations = 0;
+  const runner = createEvaluationRunner({
+    root,
+    createModel: () => {
+      modelCreations += 1;
+      return fakeModel(async (input) => {
+        calls += 1;
+        if (calls === 1) throw new Error('local model unavailable');
+        return validModelResult(input);
+      });
+    },
+  });
+  const launch = await runner.createEvaluationExperiment({ provider: 'local' });
+  const completed = await runner.executeEvaluationExperiment(
+    launch.runs.map((run) => run.runId),
+  );
+  assert.deepEqual(completed.map((run) => run.status), ['incomplete', 'complete', 'complete']);
+
+  const creationsBeforeOpenAi = modelCreations;
+  await assert.rejects(
+    runner.createEvaluationExperiment({ provider: 'openai' }),
+    /local provider/,
+  );
+  assert.equal(modelCreations, creationsBeforeOpenAi);
 });
 
 test('happy: evaluation pins the active prompt version and executes immutable content', async () => {

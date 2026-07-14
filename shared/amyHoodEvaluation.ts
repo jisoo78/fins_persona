@@ -111,3 +111,8 @@ export type EvaluationRun = {
   startedAt: string;
   completedAt: string | null;
 };
+
+export type EvaluationExperimentLaunch = {
+  experimentGroupId: string;
+  runs: EvaluationRun[];
+};

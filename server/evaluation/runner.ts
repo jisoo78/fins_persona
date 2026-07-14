@@ -1,8 +1,12 @@
-import { randomUUID } from 'node:crypto';
+import { createHash, randomUUID } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 
 import type {
   EvaluationAnswerKeyFile,
+  EvaluationBundle,
+  EvaluationExperimentArm,
+  EvaluationExperimentLaunch,
   EvaluationProvider,
   EvaluationQuestion,
   EvaluationRun,
@@ -21,7 +25,11 @@ import {
 } from '../promptVersions/store';
 import { buildEvaluationInput, parseEvaluationResponse } from './prompt';
 import { loadEvaluationBundle, loadQuestionReview } from './questionSet';
-import { loadSafeEvaluationCorpus, retrieveEvaluationEvidence } from './retriever';
+import {
+  loadSafeEvaluationCorpus,
+  retrieveEvaluationEvidence,
+  type EvaluationCorpus,
+} from './retriever';
 import { readRun, writeRun } from './runStore';
 
 type RunnerOptions = {
@@ -105,7 +113,16 @@ const assertGrade = (grade: SubjectiveGrade) => {
   if (!grade.summary.trim()) throw new Error(`subjective grade summary is required: ${grade.questionId}`);
 };
 
-const readRunPersona = async (root: string, run: EvaluationRun) => {
+const readRunSystemPrompt = async (root: string, run: EvaluationRun) => {
+  if (run.experimentArm === 'generic_cfo_no_rag') {
+    const content = await readFile(
+      resolve(root, 'agent_prompts/prompts/generic-cfo-control.md'),
+      'utf8',
+    );
+    const sha256 = createHash('sha256').update(content).digest('hex');
+    if (sha256 !== run.promptHash) throw new Error('generic CFO prompt hash is stale');
+    return content;
+  }
   if (!run.promptVersionId) {
     return readFile(personaPromptPath(root, run.provider), 'utf8');
   }
@@ -116,35 +133,74 @@ const readRunPersona = async (root: string, run: EvaluationRun) => {
   return version.content;
 };
 
+type EvaluationRunContext = {
+  bundle: EvaluationBundle;
+  corpus: EvaluationCorpus;
+  model: ModelClient;
+  activePrompt: Awaited<ReturnType<typeof readActivePromptVersion>>;
+  genericPrompt: { content: string; sha256: string };
+};
+
+type PersistRunInput = {
+  provider: EvaluationProvider;
+  experimentArm?: EvaluationExperimentArm;
+  experimentGroupId?: string;
+};
+
+const experimentArms: EvaluationExperimentArm[] = [
+  'persona_rag',
+  'persona_no_rag',
+  'generic_cfo_no_rag',
+];
+
 export const createEvaluationRunner = (options: RunnerOptions) => {
-  const createEvaluationRun = async (input: { provider: EvaluationProvider }) => {
-    const [bundle, review, corpus, activePrompt] = await Promise.all([
+  const prepareRunContext = async (
+    provider: EvaluationProvider,
+  ): Promise<EvaluationRunContext> => {
+    const [bundle, review, corpus, activePrompt, genericContent] = await Promise.all([
       loadEvaluationBundle(options.root),
       loadQuestionReview(options.root),
       loadSafeEvaluationCorpus(options.root),
       readActivePromptVersion(options.root),
+      readFile(resolve(options.root, 'agent_prompts/prompts/generic-cfo-control.md'), 'utf8'),
     ]);
     if (review.reviews.some((item) => item.status !== 'approved')) {
       throw new Error('all evaluation questions must be approved before creating a run');
     }
-    if (input.provider === 'openai') {
-      const gate = await checkGemmaGate(options.root);
-      if (!gate.passed) throw new Error(`Gemma gate failed: ${gate.failures.join('; ')}`);
-    }
-    const model = options.createModel(input.provider);
-    if (model.provider !== input.provider) {
+    const model = options.createModel(provider);
+    if (model.provider !== provider) {
       throw new Error('model provider does not match evaluation provider');
     }
+    return {
+      bundle,
+      corpus,
+      model,
+      activePrompt,
+      genericPrompt: {
+        content: genericContent,
+        sha256: createHash('sha256').update(genericContent).digest('hex'),
+      },
+    };
+  };
+
+  const persistQueuedRun = async (
+    context: EvaluationRunContext,
+    input: PersistRunInput,
+  ) => {
+    const arm = input.experimentArm ?? 'persona_rag';
+    const generic = arm === 'generic_cfo_no_rag';
     const run: EvaluationRun = {
       runId: randomUUID(),
       status: 'queued',
       gradingStatus: 'pending',
       provider: input.provider,
-      model: model.model,
-      promptVersionId: activePrompt.versionId,
-      promptHash: activePrompt.sha256,
-      ragSnapshotId: corpus.snapshotId,
-      questionSetVersion: bundle.questions.version,
+      model: context.model.model,
+      ...(generic ? {} : { promptVersionId: context.activePrompt.versionId }),
+      promptHash: generic ? context.genericPrompt.sha256 : context.activePrompt.sha256,
+      ragSnapshotId: context.corpus.snapshotId,
+      questionSetVersion: context.bundle.questions.version,
+      ...(input.experimentArm ? { experimentArm: input.experimentArm } : {}),
+      ...(input.experimentGroupId ? { experimentGroupId: input.experimentGroupId } : {}),
       answers: [],
       scores: { pastMemory: 0, githubHoldout: 0, subjective: null },
       startedAt: new Date().toISOString(),
@@ -153,13 +209,41 @@ export const createEvaluationRunner = (options: RunnerOptions) => {
     return writeRun(options.root, run);
   };
 
+  const createEvaluationRun = async (input: { provider: EvaluationProvider }) => {
+    if (input.provider === 'openai') {
+      const gate = await checkGemmaGate(options.root);
+      if (!gate.passed) throw new Error(`Gemma gate failed: ${gate.failures.join('; ')}`);
+    }
+    const context = await prepareRunContext(input.provider);
+    return persistQueuedRun(context, input);
+  };
+
+  const createEvaluationExperiment = async (
+    input: { provider: EvaluationProvider },
+  ): Promise<EvaluationExperimentLaunch> => {
+    if (input.provider !== 'local') {
+      throw new Error('three-arm experiments require the local provider');
+    }
+    const experimentGroupId = randomUUID();
+    const context = await prepareRunContext('local');
+    const runs: EvaluationRun[] = [];
+    for (const experimentArm of experimentArms) {
+      runs.push(await persistQueuedRun(context, {
+        provider: 'local',
+        experimentArm,
+        experimentGroupId,
+      }));
+    }
+    return { experimentGroupId, runs };
+  };
+
   const executeEvaluationRun = async (runId: string) => {
     let run = await readRun(options.root, runId);
     if (run.status === 'complete') return run;
-    const [bundle, corpus, persona] = await Promise.all([
+    const [bundle, corpus, systemPrompt] = await Promise.all([
       loadEvaluationBundle(options.root),
       loadSafeEvaluationCorpus(options.root),
-      readRunPersona(options.root, run),
+      readRunSystemPrompt(options.root, run),
     ]);
     if (run.questionSetVersion !== bundle.questions.version) {
       throw new Error('run question-set version is stale');
@@ -182,7 +266,7 @@ export const createEvaluationRunner = (options: RunnerOptions) => {
       try {
         const arm = run.experimentArm ?? 'persona_rag';
         const chunks = retrieveEvaluationEvidence(corpus, question, arm);
-        const prompt = buildEvaluationInput(persona, question, chunks, arm);
+        const prompt = buildEvaluationInput(systemPrompt, question, chunks, arm);
         const { result, parsed } = await invokeQuestion(model, prompt, question);
         const key = bundle.answerKey.answers.find(
           (answer) => answer.questionId === question.id,
@@ -238,6 +322,35 @@ export const createEvaluationRunner = (options: RunnerOptions) => {
     return writeRun(options.root, run);
   };
 
+  const executeEvaluationExperiment = async (runIds: string[]) => {
+    if (runIds.length !== experimentArms.length || new Set(runIds).size !== runIds.length) {
+      throw new Error('experiment requires three unique run IDs');
+    }
+    const runs = await Promise.all(runIds.map((runId) => readRun(options.root, runId)));
+    const groupIds = new Set(runs.map((run) => run.experimentGroupId));
+    const armSet = new Set(runs.map((run) => run.experimentArm));
+    if (
+      groupIds.size !== 1 ||
+      !runs[0].experimentGroupId ||
+      armSet.size !== experimentArms.length ||
+      experimentArms.some((arm) => !armSet.has(arm))
+    ) {
+      throw new Error('experiment runs must contain one complete three-arm group');
+    }
+    const runByArm = new Map(runs.map((run) => [run.experimentArm, run]));
+    const completed: EvaluationRun[] = [];
+    for (const arm of experimentArms) {
+      const run = runByArm.get(arm)!;
+      try {
+        completed.push(await executeEvaluationRun(run.runId));
+      } catch {
+        const current = await readRun(options.root, run.runId);
+        completed.push(await writeRun(options.root, { ...current, status: 'incomplete' }));
+      }
+    }
+    return completed;
+  };
+
   const resumeEvaluationRun = async (runId: string) => {
     const run = await readRun(options.root, runId);
     if (run.status !== 'incomplete') {
@@ -282,7 +395,9 @@ export const createEvaluationRunner = (options: RunnerOptions) => {
 
   return {
     createEvaluationRun,
+    createEvaluationExperiment,
     executeEvaluationRun,
+    executeEvaluationExperiment,
     resumeEvaluationRun,
     applySubjectiveGrades,
   };
