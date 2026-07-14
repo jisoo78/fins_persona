@@ -169,6 +169,10 @@ export type EventSourceAssociation = {
   evidenceLocator: {
     exactQuote: string;
     anchorTerms: string[];
+    eventDiscriminators: Array<{
+      value: string;
+      kind: 'named_entity' | 'decision_action' | 'quantitative_fact' | 'dated_fact';
+    }>;
     speaker: 'Amy Hood' | null;
   };
   reviewStatus: 'unreviewed' | 'reviewed' | 'rejected';
@@ -178,6 +182,8 @@ export type EventSourceAssociation = {
 export type AdvisorSourceRecord = {
   id: string;
   canonicalUrl: string;
+  finalUrl?: string;
+  redirectChain?: string[];
   eventCandidateIds: string[];
   tier: SourceTier;
   title: string;
@@ -206,6 +212,10 @@ export type AdvisorSourceRecord = {
 export type AdvisorRawSource = {
   sourceId: string;
   canonicalUrl: string;
+  requestedCanonicalUrl?: string;
+  finalUrl?: string;
+  redirectChain?: string[];
+  speakerSegments?: EvidenceSpeakerSegment[];
   title: string;
   mediaType: string;
   bodyBase64: string;
@@ -213,4 +223,10 @@ export type AdvisorRawSource = {
     AdvisorSourceRecord,
     'rawPath' | 'normalizedPath' | 'failureReason'
   >;
+};
+
+export type EvidenceSpeakerSegment = {
+  speaker: string;
+  startChar: number;
+  endChar: number;
 };

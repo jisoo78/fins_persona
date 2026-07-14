@@ -11,6 +11,7 @@ import type {
   AdvisorRawSource,
   AdvisorSourceRecord,
   CollectionFailureReason,
+  EvidenceSpeakerSegment,
 } from '../../shared/amyHoodDecisionAdvisor';
 import { writeAdvisorArtifactAtomic } from './artifactStore';
 import {
@@ -122,6 +123,42 @@ export const normalizeDocument = (contentText: string, mediaType: string): strin
     );
   }
   return `${normalized}\n`;
+};
+
+export const extractSpeakerSegments = (text: string): EvidenceSpeakerSegment[] => {
+  const segments: EvidenceSpeakerSegment[] = [];
+  const attributedQuotePatterns = [
+    /[“"]([^”"]{20,})[”"]\s*,?\s*(?:said|says)\s+Amy Hood\b/giu,
+    /\bAmy Hood\b[^“"]{0,80}(?:said|says|stated)\s*:?[“"]([^”"]{20,})[”"]/giu,
+  ];
+  for (const pattern of attributedQuotePatterns) {
+    for (const match of text.matchAll(pattern)) {
+      const quote = match[1];
+      const relativeStart = match[0].indexOf(quote);
+      const startChar = match.index + relativeStart;
+      segments.push({ speaker: 'Amy Hood', startChar, endChar: startChar + quote.length });
+    }
+  }
+  const transcriptPattern = /(?:^|\n)Amy Hood:\s*([^\n]+(?:\n(?![^:\n]{1,80}:)[^\n]+)*)/giu;
+  for (const match of text.matchAll(transcriptPattern)) {
+    const spoken = match[1];
+    const relativeStart = match[0].indexOf(spoken);
+    const startChar = match.index + relativeStart;
+    segments.push({ speaker: 'Amy Hood', startChar, endChar: startChar + spoken.length });
+  }
+  return segments.sort((left, right) => left.startChar - right.startChar);
+};
+
+export const extractDeclaredCanonicalUrl = (text: string, mediaType: string): string | null => {
+  if (mediaType !== 'text/html' && mediaType !== 'application/xhtml+xml') return null;
+  const href = load(text)('link[rel="canonical"]').first().attr('href');
+  if (!href) return null;
+  try {
+    const url = new URL(href);
+    return url.protocol === 'https:' ? url.toString() : null;
+  } catch {
+    return null;
+  }
 };
 
 const decodeSourceText = (bytes: Buffer, declaredCharset: string | null) => {
@@ -301,6 +338,7 @@ const fetchExactBytes = async (
   const transportImpl = deps.transportImpl ?? defaultPinnedTransport;
   let response: Response;
   let currentUrl = new URL(record.canonicalUrl);
+  const redirectChain = [record.canonicalUrl];
   for (let redirects = 0; ; redirects += 1) {
     const validatedAddresses = await validateNetworkTarget(
       currentUrl,
@@ -350,6 +388,7 @@ const fetchExactBytes = async (
     const location = response.headers.get('location');
     if (!location) throw new CollectionError('redirect response is missing Location', 'invalid_content');
     currentUrl = new URL(location, currentUrl);
+    redirectChain.push(currentUrl.toString());
   }
 
   if (!response.ok) {
@@ -416,7 +455,7 @@ const fetchExactBytes = async (
   }
   const bytes = Buffer.concat(chunks, receivedBytes);
   const charset = contentType.match(/(?:^|;)\s*charset\s*=\s*([^;]+)/i)?.[1] ?? null;
-  return { bytes, mediaType, charset, finalUrl: currentUrl.toString() };
+  return { bytes, mediaType, charset, finalUrl: currentUrl.toString(), redirectChain };
 };
 
 const rawArtifactMatches = async (
@@ -424,6 +463,8 @@ const rawArtifactMatches = async (
   rawPath: string,
   record: AdvisorSourceRecord,
   finalUrl: string,
+  redirectChain: string[],
+  speakerSegments: EvidenceSpeakerSegment[],
   expectedBytes: Buffer,
   expectedSha256: string,
 ) => {
@@ -432,6 +473,10 @@ const rawArtifactMatches = async (
     const parsed = JSON.parse(await readFile(destination, 'utf8')) as AdvisorRawSource;
     if (parsed.sourceId !== record.id
       || parsed.canonicalUrl !== finalUrl
+      || parsed.requestedCanonicalUrl !== record.canonicalUrl
+      || parsed.finalUrl !== finalUrl
+      || JSON.stringify(parsed.redirectChain) !== JSON.stringify(redirectChain)
+      || JSON.stringify(parsed.speakerSegments ?? []) !== JSON.stringify(speakerSegments)
       || parsed.metadata?.id !== record.id
       || parsed.metadata?.sha256 !== expectedSha256
       || typeof parsed.bodyBase64 !== 'string') return false;
@@ -454,7 +499,7 @@ const collectHtmlSourceUnlocked = async (
   if (!collector || !collector.supports(record)) {
     throw new CollectionError(`${record.collector} does not support this source URL`, 'access_denied');
   }
-  const { bytes, mediaType, charset, finalUrl } = await fetchExactBytes(
+  const { bytes, mediaType, charset, finalUrl, redirectChain } = await fetchExactBytes(
     record,
     deps,
     userAgent,
@@ -484,18 +529,7 @@ const collectHtmlSourceUnlocked = async (
     const rawPath = target.sha256 === sha256 && target.rawPath
       ? target.rawPath
       : path.join('raw', `${target.id}-${sha256}.json`);
-    const validExistingRaw = target.sha256 === sha256
-      && target.rawPath !== null
-      && await rawArtifactMatches(
-        deps.root,
-        rawPath,
-        target,
-        finalUrl,
-        bytes,
-        sha256,
-      );
-
-    if (!validExistingRaw) {
+    const rawSourceFor = (speakerSegments: EvidenceSpeakerSegment[]): AdvisorRawSource => {
       const {
         rawPath: excludedRawPath,
         normalizedPath: excludedNormalizedPath,
@@ -503,9 +537,13 @@ const collectHtmlSourceUnlocked = async (
         ...metadata
       } = target;
       void [excludedRawPath, excludedNormalizedPath, excludedFailureReason];
-      const rawSource: AdvisorRawSource = {
+      return {
         sourceId: target.id,
         canonicalUrl: finalUrl,
+        requestedCanonicalUrl: target.canonicalUrl,
+        finalUrl,
+        redirectChain,
+        speakerSegments,
         title,
         mediaType,
         bodyBase64: bytes.toString('base64'),
@@ -514,18 +552,21 @@ const collectHtmlSourceUnlocked = async (
           title,
           publishedAt,
           collectionStatus: 'collected',
+          finalUrl,
+          redirectChain,
           sha256,
           capturedAt,
         },
       };
+    };
+    if (target.sha256 !== sha256 || target.rawPath === null) {
       await writeAdvisorArtifactAtomic(
         deps.root,
         rawPath,
-        `${JSON.stringify(rawSource, null, 2)}\n`,
+        `${JSON.stringify(rawSourceFor([]), null, 2)}\n`,
         deps.artifactHooks,
       );
     }
-
     if (target.collectionStatus === 'queued') {
       target = await transitionSource(deps.root, target.id, 'collected', {
         title,
@@ -533,11 +574,36 @@ const collectHtmlSourceUnlocked = async (
         rawPath,
         sha256,
         capturedAt,
+        finalUrl,
+        redirectChain,
         failureReason: null,
       });
     }
 
     const normalized = normalizeDocument(html, mediaType);
+    const speakerSegments = extractSpeakerSegments(normalized);
+    const validExistingRaw = target.sha256 === sha256
+      && target.rawPath !== null
+      && await rawArtifactMatches(
+        deps.root,
+        rawPath,
+        target,
+        finalUrl,
+        redirectChain,
+        speakerSegments,
+        bytes,
+        sha256,
+      );
+
+    if (!validExistingRaw) {
+      await writeAdvisorArtifactAtomic(
+        deps.root,
+        rawPath,
+        `${JSON.stringify(rawSourceFor(speakerSegments), null, 2)}\n`,
+        deps.artifactHooks,
+      );
+    }
+
     const normalizedPath = target.normalizedPath
       ?? path.join('normalized', `${target.id}-${sha256}.txt`);
     await writeAdvisorArtifactAtomic(

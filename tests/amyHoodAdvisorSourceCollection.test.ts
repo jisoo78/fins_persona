@@ -25,6 +25,9 @@
  *    - concurrent registry discoveries do not lose same-URL candidate links or different URLs.
  *    - invalid manual metadata, blank/short text, hash mismatches, and invalid speaker offsets leave no partial state.
  *    - uncertain transcript attribution remains review_required with speaker_uncertain.
+ *    - direct Amy evidence must be fully contained by an Amy-attributed speaker segment.
+ *    - event relevance requires two reviewed event discriminators in the located passage.
+ *    - raw provenance rejects an invented same-host final path that was not in the redirect chain.
  *    - corrupt or cross-owned review reuse, post-rename failures, and rollback parent swaps fail without trusting or deleting unsafe paths.
  *
  * Test Plan (Task 5 discovery matrix and CLI gates):
@@ -100,6 +103,10 @@ const officialCandidate: EventCandidate = {
     evidenceLocator: {
       exactQuote: 'Amy Hood decision evidence for FY25 Q4 infrastructure investment',
       anchorTerms: ['FY25 Q4', 'infrastructure investment'],
+      eventDiscriminators: [
+        { value: 'FY25 Q4', kind: 'dated_fact' },
+        { value: 'infrastructure investment', kind: 'decision_action' },
+      ],
       speaker: 'Amy Hood',
     },
     reviewStatus: 'reviewed',
@@ -421,6 +428,14 @@ test('edge: a bounded same-policy redirect persists the final URL as raw provena
       'https://investor.microsoft.com/Investor/final',
     ]);
     assert.equal(raw.canonicalUrl, 'https://investor.microsoft.com/Investor/final');
+    assert.equal(raw.requestedCanonicalUrl, 'https://www.microsoft.com/Investor/redirect-start');
+    assert.equal(raw.finalUrl, 'https://investor.microsoft.com/Investor/final');
+    assert.deepEqual(raw.redirectChain, [
+      'https://www.microsoft.com/Investor/redirect-start',
+      'https://investor.microsoft.com/Investor/final',
+    ]);
+    assert.equal(collected.finalUrl, 'https://investor.microsoft.com/Investor/final');
+    assert.deepEqual(collected.redirectChain, raw.redirectChain);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
@@ -1982,6 +1997,10 @@ const validCandidateMatrix = (): EventCandidate[] => Array.from({ length: 30 }, 
       evidenceLocator: {
         exactQuote: `${urlIndex === 0 ? 'Amy Hood ' : ''}decision evidence for Project Falcon ${index + 1} authorization decision`,
         anchorTerms: [`Project Falcon ${index + 1}`, 'authorization'],
+        eventDiscriminators: [
+          { value: `Project Falcon ${index + 1}`, kind: 'named_entity' as const },
+          { value: 'authorization', kind: 'decision_action' as const },
+        ],
         speaker: urlIndex === 0 ? 'Amy Hood' as const : null,
       },
       reviewStatus: 'reviewed' as const,
@@ -2104,6 +2123,7 @@ test('edge: candidate CLI rejects inverted windows and outcome-only titles', asy
 const writeRegistryFixture = async (
   root: string,
   options: { discoveries: number; validDocuments: number },
+  fixtureCandidates = validCandidateMatrix(),
 ) => {
   const advisorRoot = path.join(root, 'data/b-track/amy-hood/advisor');
   const rawDirectory = path.join(advisorRoot, 'raw');
@@ -2111,7 +2131,6 @@ const writeRegistryFixture = async (
   await mkdir(rawDirectory, { recursive: true });
   await mkdir(normalizedDirectory, { recursive: true });
   const sources: AdvisorSourceRecord[] = [];
-  const fixtureCandidates = validCandidateMatrix();
   const discoveryUrls = fixtureCandidates
     .flatMap((candidate) => candidate.discoveryUrls)
     .sort((left, right) => Number(left.split('/').at(-1)) - Number(right.split('/').at(-1)));
@@ -2135,6 +2154,8 @@ const writeRegistryFixture = async (
     const record: AdvisorSourceRecord = {
       id,
       canonicalUrl,
+      finalUrl: canonicalUrl,
+      redirectChain: [canonicalUrl],
       eventCandidateIds: [sourceRole.candidateId],
       tier: sourceRole.direct ? 1 : 2,
       title: `Public source ${index + 1}`,
@@ -2160,6 +2181,14 @@ const writeRegistryFixture = async (
       await writeFile(path.join(advisorRoot, rawPath!), `${JSON.stringify({
         sourceId: id,
         canonicalUrl,
+        requestedCanonicalUrl: canonicalUrl,
+        finalUrl: canonicalUrl,
+        redirectChain: [canonicalUrl],
+        speakerSegments: sourceRole.direct ? [{
+          speaker: 'Amy Hood',
+          startChar: 0,
+          endChar: sourceRole.association.evidenceLocator.exactQuote.length,
+        }] : [],
         title: record.title,
         mediaType: 'text/plain',
         bodyBase64: Buffer.from(text).toString('base64'),
@@ -2196,6 +2225,20 @@ test('happy: source CLI verifies 100 discoveries and 50 artifact-backed document
       registry.sources[0].normalizedPath!,
     );
     const originalNormalized = await readFile(normalizedPath);
+    const rawPath = path.join(
+      directory,
+      'data/b-track/amy-hood/advisor',
+      registry.sources[0].rawPath!,
+    );
+    const originalRaw = await readFile(rawPath, 'utf8');
+    const inventedRedirect = JSON.parse(originalRaw);
+    inventedRedirect.canonicalUrl = 'https://www.microsoft.com/unrelated-same-host-path';
+    await writeFile(rawPath, `${JSON.stringify(inventedRedirect, null, 2)}\n`);
+    const inventedRedirectResult = runAdvisorCli(directory, 'sources:check');
+    assert.equal(inventedRedirectResult.status, 1);
+    assert.match(inventedRedirectResult.stderr, /59 valid documents/i);
+    await writeFile(rawPath, originalRaw);
+
     await writeFile(
       normalizedPath,
       'Long but unrelated tampered normalized content. '.repeat(20),
@@ -2211,6 +2254,38 @@ test('happy: source CLI verifies 100 discoveries and 50 artifact-backed document
     const linked = runAdvisorCli(directory, 'sources:check');
     assert.equal(linked.status, 1);
     assert.match(linked.stderr, /59 valid documents/i);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: legacy raw provenance cannot invent an unobserved same-host redirect', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-legacy-redirect-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+
+  try {
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(candidatePath, `${JSON.stringify(validCandidateMatrix(), null, 2)}\n`);
+    await writeRegistryFixture(directory, { discoveries: 100, validDocuments: 60 });
+    const registryPath = path.join(directory, 'data/b-track/amy-hood/advisor/source-registry.json');
+    const registry = JSON.parse(await readFile(registryPath, 'utf8')) as {
+      sources: AdvisorSourceRecord[];
+    };
+    const source = registry.sources[0];
+    delete source.finalUrl;
+    delete source.redirectChain;
+    await writeFile(registryPath, `${JSON.stringify(registry, null, 2)}\n`);
+    const rawPath = path.join(directory, 'data/b-track/amy-hood/advisor', source.rawPath!);
+    const raw = JSON.parse(await readFile(rawPath, 'utf8'));
+    delete raw.requestedCanonicalUrl;
+    delete raw.finalUrl;
+    delete raw.redirectChain;
+    raw.canonicalUrl = 'https://www.microsoft.com/unobserved-legacy-path';
+    await writeFile(rawPath, `${JSON.stringify(raw, null, 2)}\n`);
+
+    const result = runAdvisorCli(directory, 'sources:check');
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /59 valid documents/i);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
@@ -2258,6 +2333,82 @@ test('failure: a generic Amy Hood mention is not a candidate-specific direct loc
     const result = runAdvisorCli(directory, 'sources:check');
     assert.equal(result.status, 1);
     assert.match(result.stderr, /candidate-specific locator|direct Amy/i);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: another speaker quote near Amy Hood is not direct Amy evidence', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-wrong-speaker-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+
+  try {
+    const candidates = validCandidateMatrix();
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(candidatePath, `${JSON.stringify(candidates, null, 2)}\n`);
+    await writeRegistryFixture(directory, { discoveries: 100, validDocuments: 60 });
+    const registryPath = path.join(directory, 'data/b-track/amy-hood/advisor/source-registry.json');
+    const registry = JSON.parse(await readFile(registryPath, 'utf8')) as {
+      sources: AdvisorSourceRecord[];
+    };
+    const source = registry.sources.find(({ eventCandidateIds }) =>
+      eventCandidateIds.includes('candidate-01'))!;
+    const rawPath = path.join(directory, 'data/b-track/amy-hood/advisor', source.rawPath!);
+    const raw = JSON.parse(await readFile(rawPath, 'utf8'));
+    const text = Buffer.from(raw.bodyBase64, 'base64').toString('utf8');
+    const quote = candidates[0].sourceAssociations[0].evidenceLocator.exactQuote;
+    const quoteStart = text.indexOf(quote);
+    raw.speakerSegments = [
+      { speaker: 'Satya Nadella', startChar: quoteStart, endChar: quoteStart + quote.length },
+      { speaker: 'Amy Hood', startChar: 0, endChar: 'Amy Hood'.length },
+    ];
+    await writeFile(rawPath, `${JSON.stringify(raw, null, 2)}\n`);
+
+    const result = runAdvisorCli(directory, 'sources:check');
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /candidate-specific direct Amy locator/i);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: a casual GitHub mention beside an unrelated acquisition is not event relevance', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-github-casual-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+
+  try {
+    const candidates = validCandidateMatrix();
+    candidates[0].workingTitle = 'GitHub acquisition authorization and transaction economics';
+    const artifactCandidates = structuredClone(candidates);
+    artifactCandidates[0].workingTitle = 'GitHub mention before the Fabrikam acquisition authorization';
+    for (const [associationIndex, association] of candidates[0].sourceAssociations.entries()) {
+      const unrelatedQuote = `${associationIndex === 0 ? 'Amy Hood ' : ''}decision evidence for ${artifactCandidates[0].workingTitle}`;
+      association.relevanceClaim = 'The reviewed locator must distinguish the GitHub transaction from other acquisition news.';
+      association.evidenceLocator.exactQuote = unrelatedQuote;
+      association.evidenceLocator.anchorTerms = ['GitHub', 'acquisition'];
+      (association.evidenceLocator as typeof association.evidenceLocator & {
+        eventDiscriminators: Array<{ value: string; kind: string }>;
+      }).eventDiscriminators = [
+        { value: 'GitHub', kind: 'named_entity' },
+        { value: '$7.5 billion', kind: 'quantitative_fact' },
+      ];
+    }
+    for (const [associationIndex, association] of artifactCandidates[0].sourceAssociations.entries()) {
+      const unrelatedQuote = `${associationIndex === 0 ? 'Amy Hood ' : ''}decision evidence for ${artifactCandidates[0].workingTitle}`;
+      association.evidenceLocator.exactQuote = unrelatedQuote;
+      association.evidenceLocator.anchorTerms = ['GitHub', 'acquisition'];
+    }
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(candidatePath, `${JSON.stringify(candidates, null, 2)}\n`);
+    await writeRegistryFixture(
+      directory,
+      { discoveries: 100, validDocuments: 60 },
+      artifactCandidates,
+    );
+
+    const result = runAdvisorCli(directory, 'sources:check');
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /candidate-01 lacks a reviewed event-relevant artifact/i);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }

@@ -141,6 +141,20 @@ const validateRecord = (value: unknown, root: string): AdvisorSourceRecord => {
     throw new Error(`advisor source ID does not match its canonical hash: ${record.id}`);
   }
   const versionSuffix = record.id === baseId ? null : record.id.slice(-12);
+  const hasStructuredProvenance = record.finalUrl !== undefined
+    || record.redirectChain !== undefined;
+  if (hasStructuredProvenance
+    && (typeof record.finalUrl !== 'string'
+      || !record.finalUrl.startsWith('https://')
+      || !Array.isArray(record.redirectChain)
+      || record.redirectChain.length < 1
+      || record.redirectChain.length > 6
+      || record.redirectChain[0] !== record.canonicalUrl
+      || record.redirectChain.at(-1) !== record.finalUrl
+      || record.redirectChain.some((url) =>
+        typeof url !== 'string' || !url.startsWith('https://')))) {
+    throw new Error(`advisor source ${record.id} has invalid redirect provenance`);
+  }
   if (!Array.isArray(record.eventCandidateIds)
     || !record.eventCandidateIds.every((id) => typeof id === 'string')) {
     throw new Error(`advisor source ${record.id} has invalid candidate IDs`);

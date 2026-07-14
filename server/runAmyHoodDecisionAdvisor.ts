@@ -13,6 +13,8 @@ import { readAdvisorArtifactSecure } from './decisionAdvisor/artifactStore';
 import { importReviewedSource, type ReviewedSourceImport } from './decisionAdvisor/manualSourceImporter';
 import {
   collectOfficialSource,
+  extractDeclaredCanonicalUrl,
+  extractSpeakerSegments,
   normalizeDocument,
 } from './decisionAdvisor/officialSourceCollector';
 import {
@@ -48,6 +50,12 @@ type SourceCheck = {
 };
 
 const normalizedSearchText = (value: string) => value.replace(/\s+/g, ' ').trim().toLowerCase();
+const relevanceDiscriminatorKinds = new Set([
+  'named_entity',
+  'decision_action',
+  'quantitative_fact',
+  'dated_fact',
+]);
 
 const candidateSpecificLocator = (candidate: EventCandidate, anchorTerms: string[]) => {
   const ignored = new Set([
@@ -151,6 +159,15 @@ export const validateEventCandidates = (
         || !Array.isArray(association.evidenceLocator.anchorTerms)
         || association.evidenceLocator.anchorTerms.length < 2
         || association.evidenceLocator.anchorTerms.every((term) => /^amy hood$/i.test(term.trim()))
+        || !Array.isArray(association.evidenceLocator.eventDiscriminators)
+        || association.evidenceLocator.eventDiscriminators.length < 2
+        || association.evidenceLocator.eventDiscriminators.some(({ value, kind }) =>
+          typeof value !== 'string'
+          || value.trim() === ''
+          || !relevanceDiscriminatorKinds.has(kind))
+        || new Set(association.evidenceLocator.eventDiscriminators.map(({ value }) =>
+          normalizedSearchText(value))).size !== association.evidenceLocator.eventDiscriminators.length
+        || new Set(association.evidenceLocator.eventDiscriminators.map(({ kind }) => kind)).size < 2
         || !['unreviewed', 'reviewed', 'rejected'].includes(association.reviewStatus)
         || typeof association.reviewerNote !== 'string'
         || association.reviewerNote.trim().length < 10) {
@@ -251,9 +268,33 @@ const verifySourceArtifact = async (root: string, source: AdvisorSourceRecord) =
   try {
     const rawBytes = await readAdvisorArtifactSecure(root, source.rawPath);
     const raw = JSON.parse(rawBytes.toString('utf8')) as AdvisorRawSource;
+    const structuredProvenance = raw.requestedCanonicalUrl !== undefined
+      || raw.finalUrl !== undefined
+      || raw.redirectChain !== undefined
+      || source.finalUrl !== undefined
+      || source.redirectChain !== undefined;
+    const requestedCanonicalUrl = structuredProvenance
+      ? raw.requestedCanonicalUrl
+      : raw.metadata?.canonicalUrl;
+    const finalUrl = structuredProvenance ? raw.finalUrl : raw.canonicalUrl;
+    const redirectChain = structuredProvenance
+      ? raw.redirectChain
+      : requestedCanonicalUrl === finalUrl
+        ? [requestedCanonicalUrl]
+        : [requestedCanonicalUrl, finalUrl];
     if (raw.sourceId !== source.id
-      || typeof raw.canonicalUrl !== 'string'
-      || new URL(raw.canonicalUrl).hostname !== new URL(source.canonicalUrl).hostname
+      || requestedCanonicalUrl !== source.canonicalUrl
+      || typeof finalUrl !== 'string'
+      || raw.canonicalUrl !== finalUrl
+      || !Array.isArray(redirectChain)
+      || redirectChain.length < 1
+      || redirectChain.length > 6
+      || redirectChain[0] !== source.canonicalUrl
+      || redirectChain.at(-1) !== finalUrl
+      || redirectChain.some((url) => typeof url !== 'string' || !url.startsWith('https://'))
+      || (structuredProvenance
+        && (source.finalUrl !== finalUrl
+          || JSON.stringify(source.redirectChain) !== JSON.stringify(redirectChain)))
       || raw.metadata?.canonicalUrl !== source.canonicalUrl
       || raw.metadata?.id !== source.id
       || raw.metadata?.sha256 !== source.sha256
@@ -266,6 +307,9 @@ const verifySourceArtifact = async (root: string, source: AdvisorSourceRecord) =
     const body = Buffer.from(raw.bodyBase64, 'base64');
     if (body.toString('base64') !== raw.bodyBase64.replace(/\s+/g, '')) return null;
     if (createHash('sha256').update(body).digest('hex') !== source.sha256) return null;
+    if (!structuredProvenance
+      && requestedCanonicalUrl !== finalUrl
+      && extractDeclaredCanonicalUrl(body.toString('utf8'), raw.mediaType) !== finalUrl) return null;
     const normalized = await readAdvisorArtifactSecure(root, source.normalizedPath);
     const normalizedText = normalized.toString('utf8');
     if (normalizedText.replace(/\s+/g, ' ').trim().length < 200) return null;
@@ -274,7 +318,17 @@ const verifySourceArtifact = async (root: string, source: AdvisorSourceRecord) =
     } else if (normalizedText !== normalizeDocument(body.toString('utf8'), raw.mediaType)) {
       return null;
     }
-    return { normalizedText, raw: raw as AdvisorRawSource & { speakerSegments?: unknown[] } };
+    const speakerSegments = Array.isArray(raw.speakerSegments)
+      ? raw.speakerSegments
+      : extractSpeakerSegments(normalizedText);
+    if (speakerSegments.some((segment) =>
+      typeof segment?.speaker !== 'string'
+      || !Number.isInteger(segment.startChar)
+      || !Number.isInteger(segment.endChar)
+      || segment.startChar < 0
+      || segment.endChar <= segment.startChar
+      || segment.endChar > normalizedText.length)) return null;
+    return { normalizedText, speakerSegments };
   } catch {
     return null;
   }
@@ -358,10 +412,19 @@ export const checkSourceInventory = async (
       );
       if (!association.evidenceLocator.anchorTerms.every((term) =>
         locatorWindow.includes(normalizedSearchText(term)))) continue;
+      if (!association.evidenceLocator.eventDiscriminators.every(({ value }) =>
+        locatorWindow.includes(normalizedSearchText(value)))) continue;
       if (association.role === 'direct_amy') {
+        const originalQuote = association.evidenceLocator.exactQuote.trim();
+        const originalQuoteStart = artifact.normalizedText.toLocaleLowerCase()
+          .indexOf(originalQuote.toLocaleLowerCase());
         if (association.evidenceLocator.speaker !== 'Amy Hood'
           || source.speaker !== 'Amy Hood'
-          || !locatorWindow.includes('amy hood')) continue;
+          || originalQuoteStart < 0
+          || !artifact.speakerSegments.some((segment) =>
+            segment.speaker.toLocaleLowerCase() === 'amy hood'
+            && segment.startChar <= originalQuoteStart
+            && segment.endChar >= originalQuoteStart + originalQuote.length)) continue;
       }
       validSourceIds.add(source.id);
       matchedByCandidate.set(candidate.id, [

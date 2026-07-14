@@ -59,6 +59,9 @@ export type ManualImportDependencies = {
 type ReviewedRawSource = {
   sourceId: string;
   canonicalUrl: string;
+  requestedCanonicalUrl: string;
+  finalUrl: string;
+  redirectChain: string[];
   title: string;
   mediaType: 'text/plain; charset=utf-8';
   bodyBase64: string;
@@ -186,6 +189,9 @@ const reviewMatches = (
     && artifact.metadata.sha256 === input.expectedSha256
     && artifact.bodyBase64 === Buffer.from(input.text, 'utf8').toString('base64')
     && artifact.canonicalUrl === canonicalizeSourceUrl(input.canonicalUrl)
+    && artifact.requestedCanonicalUrl === artifact.canonicalUrl
+    && artifact.finalUrl === artifact.canonicalUrl
+    && JSON.stringify(artifact.redirectChain) === JSON.stringify([artifact.canonicalUrl])
     && artifact.title === input.title
     && artifact.reviewer === input.reviewer
     && artifact.reviewedAt === input.reviewedAt
@@ -219,6 +225,9 @@ const validateArtifactChain = async (
   const artifact = JSON.parse(bytes.toString('utf8')) as Partial<ReviewedRawSource>;
   if (typeof artifact.sourceId !== 'string'
     || artifact.canonicalUrl !== canonicalUrl
+    || artifact.requestedCanonicalUrl !== canonicalUrl
+    || artifact.finalUrl !== canonicalUrl
+    || JSON.stringify(artifact.redirectChain) !== JSON.stringify([canonicalUrl])
     || typeof artifact.bodyBase64 !== 'string'
     || typeof artifact.metadata !== 'object'
     || artifact.metadata === null
@@ -431,6 +440,8 @@ const importReviewedSourceInternal = async (
     const baseRecord: AdvisorSourceRecord = {
       id: sourceId,
       canonicalUrl,
+      finalUrl: canonicalUrl,
+      redirectChain: [canonicalUrl],
       eventCandidateIds: effectiveCandidateIds,
       tier: input.tier,
       title: input.title,
@@ -459,6 +470,9 @@ const importReviewedSourceInternal = async (
     const rawSource: ReviewedRawSource = {
       sourceId,
       canonicalUrl,
+      requestedCanonicalUrl: canonicalUrl,
+      finalUrl: canonicalUrl,
+      redirectChain: [canonicalUrl],
       title: input.title,
       mediaType: 'text/plain; charset=utf-8',
       bodyBase64: Buffer.from(input.text, 'utf8').toString('base64'),
