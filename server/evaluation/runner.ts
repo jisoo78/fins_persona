@@ -42,6 +42,12 @@ const scoreRun = (
   questions: EvaluationQuestion[],
 ) => {
   const kpiById = new Map(questions.map((question) => [question.id, question.kpi]));
+  const subjectiveQuestionCount = questions.filter(
+    (question) => question.kpi === 'hypothetical_scenario',
+  ).length;
+  const subjectiveAnswers = run.answers.filter(
+    (answer) => kpiById.get(answer.questionId) === 'hypothetical_scenario',
+  );
   return {
     pastMemory: run.answers
       .filter((answer) => kpiById.get(answer.questionId) === 'past_memory_restoration')
@@ -50,9 +56,9 @@ const scoreRun = (
       .filter((answer) => kpiById.get(answer.questionId) === 'github_holdout')
       .reduce((sum, answer) => sum + (answer.objectiveScore ?? 0), 0),
     subjective:
-      run.answers.filter((answer) => kpiById.get(answer.questionId) === 'hypothetical_scenario')
-        .every((answer) => answer.grade)
-        ? run.answers.reduce((sum, answer) => sum + (answer.grade?.score ?? 0), 0)
+      subjectiveAnswers.length === subjectiveQuestionCount &&
+      subjectiveAnswers.every((answer) => answer.grade)
+        ? subjectiveAnswers.reduce((sum, answer) => sum + (answer.grade?.score ?? 0), 0)
         : null,
   };
 };

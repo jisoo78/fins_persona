@@ -508,6 +508,7 @@ test('edge: resume preserves complete answers and starts at the failed question'
   const queued = await runner.createEvaluationRun({ provider: 'local' });
   const incomplete = await runner.executeEvaluationRun(queued.runId);
   assert.equal(incomplete.status, 'incomplete');
+  assert.equal(incomplete.scores.subjective, null);
   assert.equal(incomplete.answers[0].questionId, 'P1');
   assert.equal(incomplete.answers[0].status, 'complete');
   const completed = await runner.resumeEvaluationRun(queued.runId);
