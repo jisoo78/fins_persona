@@ -3,6 +3,7 @@
  * 1. Happy Path:
  *    - advisor paths are deterministic and atomic JSON persistence round-trips valid data.
  *    - an approved official HTML source persists exact bytes, normalizes useful text, and reaches review.
+ *    - a reviewed transcript import preserves exact text and addressable Amy Hood speaker segments.
  *
  * 2. Edge Cases:
  *    - a LinkedIn URL is classified as discovery-only.
@@ -22,8 +23,11 @@
  *    - invalid state transitions, network refresh failures, oversized/unsupported/short content fail safely.
  *    - redirects, private networks, direct adapter misuse, and tampered registry IDs fail closed.
  *    - concurrent registry discoveries do not lose same-URL candidate links or different URLs.
+ *    - invalid manual metadata, blank/short text, hash mismatches, and invalid speaker offsets leave no partial state.
+ *    - uncertain transcript attribution remains review_required with speaker_uncertain.
  */
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, readFile, readdir, rename, rm, symlink, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
@@ -50,6 +54,8 @@ import {
   collectOfficialSource,
   defaultPinnedTransport,
 } from '../server/decisionAdvisor/officialSourceCollector';
+import { importReviewedSource } from '../server/decisionAdvisor/manualSourceImporter';
+import { importTranscript } from '../server/decisionAdvisor/transcriptImporter';
 import type {
   AdvisorSourceRecord,
   EventCandidate,
@@ -1267,6 +1273,179 @@ test('failure: a non-JSON value cannot overwrite existing valid JSON', async () 
 
     assert.equal(await readFile(destination, 'utf8'), original);
     assert.deepEqual(await readdir(directory), ['registry.json']);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+const reviewedTranscriptText = [
+  'Interviewer: How do you decide when infrastructure investment should accelerate?',
+  'Amy Hood: We start with durable customer demand and utilization, then compare capacity timing with the revenue opportunity. We preserve the ability to adjust the pace when those signals change.',
+  'Interviewer: What protects the downside?',
+  'Amy Hood: Operating leverage and disciplined sequencing matter. We fund the highest-confidence capacity first and revisit commitments as demand, supply, and execution evidence develops.',
+].join('\n');
+
+const sha256Text = (text: string) => createHash('sha256').update(text, 'utf8').digest('hex');
+
+const transcriptImport = (overrides: Record<string, unknown> = {}) => {
+  const firstStart = reviewedTranscriptText.indexOf('Amy Hood:');
+  const firstEnd = reviewedTranscriptText.indexOf('\nInterviewer:', firstStart);
+  const secondStart = reviewedTranscriptText.indexOf('Amy Hood:', firstEnd);
+  return {
+    canonicalUrl: 'https://example.com/public/amy-hood-interview',
+    title: 'Public Amy Hood infrastructure interview',
+    publisher: 'Example Business Review',
+    publishedAt: '2025-03-10',
+    speaker: 'Amy Hood',
+    eventCandidateIds: ['candidate-fy25-q4-capex'],
+    tier: 3 as const,
+    rightsNote: 'Lawfully accessed public transcript; imported for review.',
+    text: reviewedTranscriptText,
+    speakerSegments: [
+      { speaker: 'Amy Hood', startChar: firstStart, endChar: firstEnd },
+      { speaker: 'Amy Hood', startChar: secondStart, endChar: reviewedTranscriptText.length },
+    ],
+    expectedSha256: sha256Text(reviewedTranscriptText),
+    reviewer: 'Evidence Reviewer',
+    reviewedAt: '2026-07-14T04:00:00.000Z',
+    ...overrides,
+  };
+};
+
+test('happy: reviewed transcript import preserves exact text and addressable Amy Hood segments', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-transcript-import-'));
+  const originalFetch = globalThis.fetch;
+  let fetched = false;
+  globalThis.fetch = async () => {
+    fetched = true;
+    throw new Error('manual import must not fetch');
+  };
+
+  try {
+    const imported = await importTranscript(transcriptImport(), directory);
+    const raw = JSON.parse(await readFile(
+      path.resolve(advisorPaths(directory).root, imported.rawPath!),
+      'utf8',
+    ));
+    const normalized = await readFile(
+      path.resolve(advisorPaths(directory).root, imported.normalizedPath!),
+      'utf8',
+    );
+
+    assert.equal(fetched, false);
+    assert.equal(imported.collectionStatus, 'review_required');
+    assert.equal(imported.failureReason, null);
+    assert.equal(imported.collector, 'transcript_import');
+    assert.equal(raw.reviewer, 'Evidence Reviewer');
+    assert.equal(raw.reviewedAt, '2026-07-14T04:00:00.000Z');
+    assert.equal('rawPath' in raw.metadata, false);
+    assert.equal('normalizedPath' in raw.metadata, false);
+    assert.equal('failureReason' in raw.metadata, false);
+    assert.equal(Buffer.from(raw.bodyBase64, 'base64').toString('utf8'), reviewedTranscriptText);
+    assert.equal(normalized, reviewedTranscriptText);
+    for (const segment of raw.speakerSegments) {
+      assert.match(reviewedTranscriptText.slice(segment.startChar, segment.endChar), /^Amy Hood:/);
+    }
+  } finally {
+    globalThis.fetch = originalFetch;
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('edge: reviewed manual import accepts a source without an optional speaker', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-manual-import-'));
+
+  try {
+    const input = transcriptImport({
+      canonicalUrl: 'https://example.com/public/unsupported-document',
+      speaker: null,
+      speakerSegments: undefined,
+    });
+    const imported = await importReviewedSource(input, directory);
+    assert.equal(imported.speaker, null);
+    assert.equal(imported.collector, 'manual_import');
+    assert.equal(imported.collectionStatus, 'review_required');
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: invalid reviewed source inputs leave no registry or raw partial write', async (t) => {
+  const cases = [
+    { name: 'missing reviewer', overrides: { reviewer: '' }, error: /reviewer/i },
+    { name: 'blank text', overrides: { text: '', expectedSha256: sha256Text('') }, error: /200 normalized characters/i },
+    { name: 'hash mismatch', overrides: { expectedSha256: '0'.repeat(64) }, error: /SHA-256 mismatch/i },
+  ];
+
+  for (const testCase of cases) {
+    await t.test(testCase.name, async () => {
+      const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-invalid-import-'));
+      try {
+        await assert.rejects(
+          () => importReviewedSource(transcriptImport(testCase.overrides), directory),
+          testCase.error,
+        );
+        assert.deepEqual(loadRegistry(directory), { sources: [] });
+        await assert.rejects(() => readdir(advisorPaths(directory).raw), /ENOENT/);
+      } finally {
+        await rm(directory, { recursive: true, force: true });
+      }
+    });
+  }
+});
+
+test('failure: transcript offsets must be bounded and nonoverlapping before any write', async (t) => {
+  const first = transcriptImport().speakerSegments[0];
+  const cases = [
+    {
+      name: 'out-of-bounds offset',
+      speakerSegments: [{ ...first, endChar: reviewedTranscriptText.length + 1 }],
+      error: /speaker segment offsets/i,
+    },
+    {
+      name: 'overlapping offsets',
+      speakerSegments: [first, { ...first, startChar: first.startChar + 1 }],
+      error: /overlap/i,
+    },
+  ];
+
+  for (const testCase of cases) {
+    await t.test(testCase.name, async () => {
+      const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-invalid-segments-'));
+      try {
+        await assert.rejects(
+          () => importTranscript(transcriptImport({ speakerSegments: testCase.speakerSegments }), directory),
+          testCase.error,
+        );
+        assert.deepEqual(loadRegistry(directory), { sources: [] });
+        await assert.rejects(() => readdir(advisorPaths(directory).raw), /ENOENT/);
+      } finally {
+        await rm(directory, { recursive: true, force: true });
+      }
+    });
+  }
+});
+
+test('failure: uncertain transcript attribution stays review_required with speaker_uncertain', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-uncertain-transcript-'));
+
+  try {
+    const uncertain = await importTranscript(transcriptImport({
+      speaker: null,
+      speakerSegments: [{
+        speaker: 'Unverified speaker',
+        startChar: 0,
+        endChar: reviewedTranscriptText.length,
+      }],
+    }), directory);
+    assert.equal(uncertain.collectionStatus, 'review_required');
+    assert.equal(uncertain.failureReason, 'speaker_uncertain');
+    assert.equal(uncertain.normalizedPath, null);
+    assert.equal(loadRegistry(directory).sources[0].collectionStatus, 'review_required');
+    await assert.rejects(
+      () => transitionSource(directory, uncertain.id, 'approved'),
+      /normalized state|coherent artifacts/i,
+    );
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
