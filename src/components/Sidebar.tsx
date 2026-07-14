@@ -8,7 +8,8 @@ import {
   Settings,
   BrainCircuit,
   ChevronRight,
-  Scale
+  Scale,
+  ListChecks,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -22,6 +23,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => 
     { id: 'pre-interview', label: '사전 질문', icon: <ClipboardList className="w-4 h-4" /> },
     { id: 'interview', label: '심층 인터뷰', icon: <MessageSquareText className="w-4 h-4" /> },
     { id: 'personas', label: '페르소나', icon: <Users className="w-4 h-4" /> },
+    { id: 'evaluation-review', label: '평가 문항 검토', icon: <ListChecks className="w-4 h-4" /> },
     { id: 'evaluation', label: '평가 비교', icon: <Scale className="w-4 h-4" /> },
     { id: 'settings', label: '설정', icon: <Settings className="w-4 h-4" /> },
   ];

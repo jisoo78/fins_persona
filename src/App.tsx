@@ -20,6 +20,7 @@ import { DeepInterviewView } from './components/DeepInterviewView';
 import { PersonasView } from './components/PersonasView';
 import { PersonaDetailModal } from './components/PersonaDetailModal';
 import { EvaluationView } from './components/EvaluationView';
+import { EvaluationQuestionReviewView } from './components/EvaluationQuestionReviewView';
 import { SettingsView } from './components/SettingsView';
 import { NewPersonaModal } from './components/NewPersonaModal';
 
@@ -36,6 +37,7 @@ const getInitialActiveTab = (): TabType => {
     'interview',
     'personas',
     'persona-detail',
+    'evaluation-review',
     'evaluation',
     'settings',
   ];
@@ -158,6 +160,10 @@ export default function App() {
 
           {activeTab === 'evaluation' && (
             <EvaluationView />
+          )}
+
+          {activeTab === 'evaluation-review' && (
+            <EvaluationQuestionReviewView />
           )}
 
           {activeTab === 'settings' && (

@@ -4,6 +4,7 @@ export type TabType =
   | 'interview'
   | 'personas'
   | 'persona-detail'
+  | 'evaluation-review'
   | 'evaluation'
   | 'settings';
 
