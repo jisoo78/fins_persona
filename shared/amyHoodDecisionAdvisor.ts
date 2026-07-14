@@ -33,6 +33,9 @@ export const EVALUATION_V3_ARMS: EvaluationV3Arm[] = [
   'amy_full_rag',
 ];
 
+export const isEvaluationV3Arm = (value: string): value is EvaluationV3Arm =>
+  EVALUATION_V3_ARMS.includes(value as EvaluationV3Arm);
+
 export const EVALUATION_V3_REPETITIONS = 5;
 
 export type EvaluationV3BlueprintSlot = {
