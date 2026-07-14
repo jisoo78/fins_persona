@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { lstat, mkdir, realpath } from 'node:fs/promises';
 import path from 'node:path';
 
 import type {
@@ -83,6 +84,49 @@ export const resolveAdvisorArtifactPath = (root: string, relativePath: string) =
   return resolved;
 };
 
+const isWithinPath = (root: string, candidate: string) =>
+  candidate === root || candidate.startsWith(`${root}${path.sep}`);
+
+export const prepareAdvisorArtifactPath = async (root: string, relativePath: string) => {
+  const advisorRoot = advisorPaths(root).root;
+  const destination = resolveAdvisorArtifactPath(root, relativePath);
+  await mkdir(advisorRoot, { recursive: true });
+  const realAdvisorRoot = await realpath(advisorRoot);
+  const parentRelative = path.relative(advisorRoot, path.dirname(destination));
+  let current = advisorRoot;
+
+  for (const component of parentRelative.split(path.sep).filter(Boolean)) {
+    current = path.join(current, component);
+    let status;
+    try {
+      status = await lstat(current);
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error;
+      await mkdir(current);
+      status = await lstat(current);
+    }
+    if (status.isSymbolicLink()) {
+      throw new Error(`advisor artifact path contains a symlink: ${relativePath}`);
+    }
+    if (!status.isDirectory()) {
+      throw new Error(`advisor artifact parent is not a directory: ${relativePath}`);
+    }
+    const realCurrent = await realpath(current);
+    if (!isWithinPath(realAdvisorRoot, realCurrent)) {
+      throw new Error(`advisor artifact parent escapes the real advisor root: ${relativePath}`);
+    }
+  }
+
+  try {
+    if ((await lstat(destination)).isSymbolicLink()) {
+      throw new Error(`advisor artifact destination is a symlink: ${relativePath}`);
+    }
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error;
+  }
+  return destination;
+};
+
 const validateRecord = (value: unknown, root: string): AdvisorSourceRecord => {
   if (typeof value !== 'object' || value === null) {
     throw new Error('advisor source registry contains a non-object record');
@@ -123,6 +167,28 @@ const validateRecord = (value: unknown, root: string): AdvisorSourceRecord => {
   }
   if (record.rawPath) resolveAdvisorArtifactPath(root, record.rawPath);
   if (record.normalizedPath) resolveAdvisorArtifactPath(root, record.normalizedPath);
+  const hasRawArtifact = Boolean(record.rawPath && record.sha256 && record.capturedAt);
+  const hasNormalizedArtifact = Boolean(record.normalizedPath && hasRawArtifact);
+  if ((record.rawPath !== null || record.sha256 !== null || record.capturedAt !== null)
+    && !hasRawArtifact) {
+    throw new Error(`advisor source ${record.id} has incoherent raw artifact state`);
+  }
+  if (record.normalizedPath !== null && !hasNormalizedArtifact) {
+    throw new Error(`advisor source ${record.id} has incoherent normalized artifact state`);
+  }
+  if (record.collectionStatus === 'collected' && !hasRawArtifact) {
+    throw new Error(`advisor source ${record.id} collected state requires a raw artifact and SHA`);
+  }
+  if ((record.collectionStatus === 'normalized' || record.collectionStatus === 'approved')
+    && !hasNormalizedArtifact) {
+    throw new Error(`advisor source ${record.id} normalized state requires coherent artifacts`);
+  }
+  return record;
+};
+
+export const loadSourceRecord = (root: string, sourceId: string) => {
+  const record = loadRegistry(root).sources.find(({ id }) => id === sourceId);
+  if (!record) throw new Error(`unknown advisor source: ${sourceId}`);
   return record;
 };
 

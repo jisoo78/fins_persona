@@ -1,15 +1,20 @@
 import type { AdvisorSourceRecord } from '../../../shared/amyHoodDecisionAdvisor';
 
-export type FetchImplementation = (
-  input: string | URL,
-  init?: RequestInit,
-) => Promise<Response>;
-
 export type HostResolver = (hostname: string) => Promise<string[]>;
+
+export type PinnedTransportRequest = {
+  url: URL;
+  init: RequestInit;
+  validatedAddresses: string[];
+};
+
+export type TransportImplementation = (
+  request: PinnedTransportRequest,
+) => Promise<Response>;
 
 export type CollectorDependencies = {
   root: string;
-  fetchImpl?: FetchImplementation;
+  transportImpl?: TransportImplementation;
   resolveHost?: HostResolver;
   now?: () => Date;
   userAgent?: string;

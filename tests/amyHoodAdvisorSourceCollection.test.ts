@@ -24,7 +24,7 @@
  *    - concurrent registry discoveries do not lose same-URL candidate links or different URLs.
  */
 import assert from 'node:assert/strict';
-import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, readdir, rm, symlink, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
@@ -194,7 +194,7 @@ test('happy: official HTML collection preserves exact bytes and writes normalize
       root: directory,
       resolveHost: publicDns,
       now: () => new Date('2026-07-14T01:02:03.000Z'),
-      fetchImpl: async (_input, init) => {
+      transportImpl: async ({ init }) => {
         observedHeaders.push(new Headers(init?.headers));
         return htmlResponse(bytes);
       },
@@ -234,7 +234,7 @@ test('happy: a source-specific adapter collects through the shared public interf
     const collected = await MicrosoftIRCollector.collect(discovered, {
       root: directory,
       resolveHost: publicDns,
-      fetchImpl: async () => htmlResponse(substantialHtml()),
+      transportImpl: async () => htmlResponse(substantialHtml()),
     });
     assert.equal(collected.collectionStatus, 'review_required');
     assert.equal(loadRegistry(directory).sources[0].id, discovered.id);
@@ -260,7 +260,7 @@ test('edge: SEC JSON collection accepts the endpoint media type and sends contac
     const collected = await SecEdgarCollector.collect(discovered, {
       root: directory,
       resolveHost: publicDns,
-      fetchImpl: async (_input, init) => {
+      transportImpl: async ({ init }) => {
         userAgent = new Headers(init?.headers).get('user-agent') ?? '';
         return htmlResponse(json, { contentType: 'application/json' });
       },
@@ -283,8 +283,8 @@ test('edge: a bounded same-policy redirect persists the final URL as raw provena
     }), {
       root: directory,
       resolveHost: publicDns,
-      fetchImpl: async (input) => {
-        const url = input.toString();
+      transportImpl: async ({ url: requestedUrl }) => {
+        const url = requestedUrl.toString();
         requested.push(url);
         if (requested.length === 1) {
           return new Response(null, {
@@ -319,7 +319,7 @@ test('edge: windows-1252 HTML normalizes punctuation without changing raw bytes'
     const collected = await collectOfficialSource(collectionRecord(), {
       root: directory,
       resolveHost: publicDns,
-      fetchImpl: async () => htmlResponse(bytes, {
+      transportImpl: async () => htmlResponse(bytes, {
         contentType: 'text/html; charset=windows-1252',
       }),
     });
@@ -347,11 +347,11 @@ test('edge: canonical-equivalent discoveries merge candidate IDs and collect ide
     const first = await collectOfficialSource(collectionRecord({
       canonicalUrl: 'https://www.microsoft.com/Investor/a?id=7&utm_source=first#quote',
       eventCandidateIds: ['candidate-a'],
-    }), { root: directory, resolveHost: publicDns, fetchImpl: async () => htmlResponse(bytes) });
+    }), { root: directory, resolveHost: publicDns, transportImpl: async () => htmlResponse(bytes) });
     const duplicate = await collectOfficialSource(collectionRecord({
       canonicalUrl: 'https://www.microsoft.com/Investor/a?utm_campaign=repeat&id=7',
       eventCandidateIds: ['candidate-b', 'candidate-a'],
-    }), { root: directory, resolveHost: publicDns, fetchImpl: async () => htmlResponse(bytes) });
+    }), { root: directory, resolveHost: publicDns, transportImpl: async () => htmlResponse(bytes) });
     const registry = loadRegistry(directory);
 
     assert.equal(registry.sources.length, 1);
@@ -369,7 +369,7 @@ test('edge: a changed successful refresh creates an immutable content version', 
     const first = await collectOfficialSource(collectionRecord(), {
       root: directory,
       resolveHost: publicDns,
-      fetchImpl: async () => htmlResponse(substantialHtml('first version')),
+      transportImpl: async () => htmlResponse(substantialHtml('first version')),
     });
     const firstRaw = await readFile(
       path.resolve(advisorPaths(directory).root, first.rawPath!),
@@ -378,7 +378,7 @@ test('edge: a changed successful refresh creates an immutable content version', 
     const refreshed = await collectOfficialSource(first, {
       root: directory,
       resolveHost: publicDns,
-      fetchImpl: async () => htmlResponse(substantialHtml('changed version')),
+      transportImpl: async () => htmlResponse(substantialHtml('changed version')),
     });
     const registry = loadRegistry(directory);
 
@@ -402,7 +402,7 @@ test('edge: collection resumes a realistic normalized checkpoint', async () => {
     const complete = await collectOfficialSource(collectionRecord(), {
       root: directory,
       resolveHost: publicDns,
-      fetchImpl: async () => htmlResponse(bytes),
+      transportImpl: async () => htmlResponse(bytes),
     });
     await writeJsonAtomic(advisorPaths(directory).registry, {
       sources: [{ ...complete, collectionStatus: 'normalized' }],
@@ -414,7 +414,7 @@ test('edge: collection resumes a realistic normalized checkpoint', async () => {
     }, {
       root: directory,
       resolveHost: publicDns,
-      fetchImpl: async () => htmlResponse(bytes),
+      transportImpl: async () => htmlResponse(bytes),
     });
     assert.equal(resumed.collectionStatus, 'review_required');
     assert.equal(loadRegistry(directory).sources.length, 1);
@@ -476,12 +476,12 @@ test('edge: concurrent same-URL collections serialize without corrupting state',
       collectOfficialSource(collectionRecord({ eventCandidateIds: ['candidate-a'] }), {
         root: directory,
         resolveHost: publicDns,
-        fetchImpl: async () => htmlResponse(substantialHtml()),
+        transportImpl: async () => htmlResponse(substantialHtml()),
       }),
       collectOfficialSource(collectionRecord({ eventCandidateIds: ['candidate-b'] }), {
         root: directory,
         resolveHost: publicDns,
-        fetchImpl: async () => htmlResponse(substantialHtml()),
+        transportImpl: async () => htmlResponse(substantialHtml()),
       }),
     ]);
     const registry = loadRegistry(directory);
@@ -489,6 +489,121 @@ test('edge: concurrent same-URL collections serialize without corrupting state',
     assert.deepEqual(registry.sources[0].eventCandidateIds, ['candidate-a', 'candidate-b']);
     assert.equal(registry.sources[0].collectionStatus, 'review_required');
     assert.equal(results[0].id, results[1].id);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('edge: pinned transport consumes the validated address without a second DNS lookup', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-pinned-transport-'));
+  let resolutions = 0;
+  let pinnedAddresses: string[] = [];
+
+  try {
+    await collectOfficialSource(collectionRecord(), {
+      root: directory,
+      resolveHost: async () => {
+        resolutions += 1;
+        return resolutions === 1 ? ['93.184.216.34'] : ['127.0.0.1'];
+      },
+      transportImpl: async ({ validatedAddresses }) => {
+        pinnedAddresses = validatedAddresses;
+        return htmlResponse(substantialHtml());
+      },
+    });
+    assert.equal(resolutions, 1);
+    assert.deepEqual(pinnedAddresses, ['93.184.216.34']);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('edge: a waiting collector reloads a stale collected snapshot after the family lock', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-stale-snapshot-'));
+  const bytes = substantialHtml();
+  let releaseFirst = () => undefined;
+  const firstStarted = new Promise<void>((resolveStarted) => {
+    releaseFirst = resolveStarted;
+  });
+  let signalFirstStarted = () => undefined;
+  const firstEnteredTransport = new Promise<void>((resolve) => {
+    signalFirstStarted = resolve;
+  });
+
+  try {
+    const complete = await collectOfficialSource(collectionRecord(), {
+      root: directory,
+      resolveHost: publicDns,
+      transportImpl: async () => htmlResponse(bytes),
+    });
+    const first = MicrosoftIRCollector.collect(complete, {
+      root: directory,
+      resolveHost: publicDns,
+      transportImpl: async () => {
+        signalFirstStarted();
+        await firstStarted;
+        return htmlResponse(bytes);
+      },
+    });
+    await firstEnteredTransport;
+    const waiting = MicrosoftIRCollector.collect({
+      ...complete,
+      collectionStatus: 'collected',
+    }, {
+      root: directory,
+      resolveHost: publicDns,
+      transportImpl: async () => htmlResponse(bytes),
+    });
+    releaseFirst();
+
+    const [, reloaded] = await Promise.all([first, waiting]);
+    assert.equal(reloaded.collectionStatus, 'review_required');
+    assert.equal(loadRegistry(directory).sources[0].collectionStatus, 'review_required');
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('edge: original and content-version refreshes share one canonical family lock', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-family-lock-'));
+  let inFlight = 0;
+  let maximumInFlight = 0;
+  const transport = (bytes: Buffer) => async () => {
+    inFlight += 1;
+    maximumInFlight = Math.max(maximumInFlight, inFlight);
+    await new Promise<void>((resolve) => setImmediate(resolve));
+    inFlight -= 1;
+    return htmlResponse(bytes);
+  };
+
+  try {
+    const originalBytes = substantialHtml('original family body');
+    const versionBytes = substantialHtml('version family body');
+    const original = await collectOfficialSource(collectionRecord(), {
+      root: directory,
+      resolveHost: publicDns,
+      transportImpl: transport(originalBytes),
+    });
+    const version = await collectOfficialSource(original, {
+      root: directory,
+      resolveHost: publicDns,
+      transportImpl: transport(versionBytes),
+    });
+    maximumInFlight = 0;
+
+    await Promise.all([
+      MicrosoftIRCollector.collect(original, {
+        root: directory,
+        resolveHost: publicDns,
+        transportImpl: transport(originalBytes),
+      }),
+      MicrosoftIRCollector.collect(version, {
+        root: directory,
+        resolveHost: publicDns,
+        transportImpl: transport(versionBytes),
+      }),
+    ]);
+    assert.equal(maximumInFlight, 1);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
@@ -574,13 +689,13 @@ test('failure: refresh failure preserves the last valid artifact', async () => {
     const valid = await collectOfficialSource(collectionRecord(), {
       root: directory,
       resolveHost: publicDns,
-      fetchImpl: async () => htmlResponse(substantialHtml()),
+      transportImpl: async () => htmlResponse(substantialHtml()),
     });
     const validRawPath = path.resolve(advisorPaths(directory).root, valid.rawPath!);
     const before = await readFile(validRawPath, 'utf8');
 
     await assert.rejects(() => collectOfficialSource(valid, {
-      fetchImpl: async () => { throw new Error('network unavailable'); },
+      transportImpl: async () => { throw new Error('network unavailable'); },
       root: directory,
       resolveHost: publicDns,
     }), /network unavailable/);
@@ -603,12 +718,12 @@ test('failure: an invalid changed body is isolated as a failed immutable version
     const valid = await collectOfficialSource(collectionRecord(), {
       root: directory,
       resolveHost: publicDns,
-      fetchImpl: async () => htmlResponse(substantialHtml()),
+      transportImpl: async () => htmlResponse(substantialHtml()),
     });
     await assert.rejects(() => collectOfficialSource(valid, {
       root: directory,
       resolveHost: publicDns,
-      fetchImpl: async () => htmlResponse(Buffer.from('<html><main>changed but short</main></html>')),
+      transportImpl: async () => htmlResponse(Buffer.from('<html><main>changed but short</main></html>')),
     }), /200 characters/i);
 
     const registry = loadRegistry(directory);
@@ -635,7 +750,7 @@ test('failure: public HTML collection requires explicit host approval', async ()
     }), {
       root: directory,
       resolveHost: publicDns,
-      fetchImpl: async () => htmlResponse(substantialHtml()),
+      transportImpl: async () => htmlResponse(substantialHtml()),
     }), /approved public host/i);
     assert.equal(loadRegistry(directory).sources[0].collectionStatus, 'failed');
   } finally {
@@ -649,7 +764,7 @@ test('failure: every adapter direct call enforces its supports boundary', async 
   const dependencies = {
     root: directory,
     resolveHost: publicDns,
-    fetchImpl: async () => {
+    transportImpl: async () => {
       fetched = true;
       return htmlResponse(substantialHtml());
     },
@@ -678,7 +793,7 @@ test('failure: redirects and DNS resolution reject boundary changes and private 
       await assert.rejects(() => collectOfficialSource(collectionRecord(), {
         root: directory,
         resolveHost: publicDns,
-        fetchImpl: async () => new Response(null, {
+        transportImpl: async () => new Response(null, {
           status: 302,
           headers: { location: 'https://example.com/stolen' },
         }),
@@ -694,7 +809,7 @@ test('failure: redirects and DNS resolution reject boundary changes and private 
       await assert.rejects(() => collectOfficialSource(collectionRecord(), {
         root: directory,
         resolveHost: publicDns,
-        fetchImpl: async () => new Response(null, {
+        transportImpl: async () => new Response(null, {
           status: 302,
           headers: { location: 'https://127.0.0.1/private' },
         }),
@@ -710,7 +825,7 @@ test('failure: redirects and DNS resolution reject boundary changes and private 
       await assert.rejects(() => collectOfficialSource(collectionRecord(), {
         root: directory,
         resolveHost: publicDns,
-        fetchImpl: async () => new Response(null, {
+        transportImpl: async () => new Response(null, {
           status: 302,
           headers: { location: 'https://[::ffff:7f00:1]/private' },
         }),
@@ -727,7 +842,7 @@ test('failure: redirects and DNS resolution reject boundary changes and private 
       await assert.rejects(() => collectOfficialSource(collectionRecord(), {
         root: directory,
         resolveHost: async () => ['10.0.0.7'],
-        fetchImpl: async () => {
+        transportImpl: async () => {
           fetched = true;
           return htmlResponse(substantialHtml());
         },
@@ -753,7 +868,7 @@ test('failure: a tampered registry source ID cannot escape the advisor root', as
     await assert.rejects(() => collectOfficialSource(tampered, {
       root: directory,
       resolveHost: publicDns,
-      fetchImpl: async () => htmlResponse(substantialHtml()),
+      transportImpl: async () => htmlResponse(substantialHtml()),
     }), /source ID|canonical hash/i);
     await assert.rejects(() => readFile(outside), { code: 'ENOENT' });
   } finally {
@@ -782,6 +897,73 @@ test('failure: every loaded registry record validates all persisted contract fie
   }
 });
 
+test('failure: a symlinked artifact directory cannot write outside the advisor root', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-symlink-root-'));
+  const outside = await mkdtemp(path.join(os.tmpdir(), 'advisor-symlink-outside-'));
+  const rawDirectory = advisorPaths(directory).raw;
+
+  try {
+    await mkdir(path.dirname(rawDirectory), { recursive: true });
+    await symlink(outside, rawDirectory, 'dir');
+    await assert.rejects(() => collectOfficialSource(collectionRecord(), {
+      root: directory,
+      resolveHost: publicDns,
+      transportImpl: async () => htmlResponse(substantialHtml()),
+    }), /symlink|advisor root/i);
+    assert.deepEqual(await readdir(outside), []);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+    await rm(outside, { recursive: true, force: true });
+  }
+});
+
+test('failure: mismatched normalized evidence is rebuilt instead of silently reused', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-normalized-mismatch-'));
+  const bytes = substantialHtml();
+
+  try {
+    const complete = await collectOfficialSource(collectionRecord(), {
+      root: directory,
+      resolveHost: publicDns,
+      transportImpl: async () => htmlResponse(bytes),
+    });
+    const normalizedPath = path.resolve(
+      advisorPaths(directory).root,
+      complete.normalizedPath!,
+    );
+    await writeFile(normalizedPath, 'tampered normalized evidence\n', 'utf8');
+
+    await collectOfficialSource(complete, {
+      root: directory,
+      resolveHost: publicDns,
+      transportImpl: async () => htmlResponse(bytes),
+    });
+    const rebuilt = await readFile(normalizedPath, 'utf8');
+    assert.match(rebuilt, /Amy Hood described the investment decision/);
+    assert.doesNotMatch(rebuilt, /tampered normalized evidence/);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: normalized registry state requires coherent raw, hash, and normalized paths', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-state-invariant-'));
+  const discovered = await upsertDiscoveredSource(collectionRecord(), directory);
+
+  try {
+    await writeJsonAtomic(advisorPaths(directory).registry, {
+      sources: [{
+        ...discovered,
+        collectionStatus: 'normalized',
+        normalizedPath: 'normalized/missing.txt',
+      }],
+    });
+    assert.throws(() => loadRegistry(directory), /state|artifact|raw|sha/i);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
 test('failure: invalid HTTP content is rejected without a collected artifact', async (t) => {
   const cases = [
     { name: 'non-success response', response: htmlResponse(substantialHtml(), { status: 503 }), error: /503/ },
@@ -798,7 +980,7 @@ test('failure: invalid HTTP content is rejected without a collected artifact', a
         await assert.rejects(() => collectOfficialSource(collectionRecord(), {
           root: directory,
           resolveHost: publicDns,
-          fetchImpl: async () => testCase.response,
+          transportImpl: async () => testCase.response,
         }), testCase.error);
         const failed = loadRegistry(directory).sources[0];
         assert.equal(failed.collectionStatus, 'failed');

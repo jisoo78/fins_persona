@@ -1,8 +1,11 @@
 import { createHash, randomUUID } from 'node:crypto';
 import { lookup } from 'node:dns/promises';
-import { mkdir, open, rename, rm } from 'node:fs/promises';
+import { constants } from 'node:fs';
+import { open, rename, rm } from 'node:fs/promises';
+import { request as httpsRequest } from 'node:https';
 import { BlockList, isIP } from 'node:net';
 import path from 'node:path';
+import { Readable } from 'node:stream';
 import { load } from 'cheerio';
 
 import type {
@@ -10,12 +13,13 @@ import type {
   AdvisorSourceRecord,
   CollectionFailureReason,
 } from '../../shared/amyHoodDecisionAdvisor';
-import { writeJsonAtomic } from './jsonStore';
 import { advisorPaths } from './paths';
 import {
   createContentVersion,
+  loadSourceRecord,
   markCollectionFailure,
-  resolveAdvisorArtifactPath,
+  prepareAdvisorArtifactPath,
+  sourceIdForUrl,
   transitionSource,
   upsertDiscoveredSource,
 } from './sourceRegistry';
@@ -73,16 +77,24 @@ const withCollectionLock = async <T>(key: string, operation: () => Promise<T>) =
   }
 };
 
-const writeTextAtomic = async (destination: string, text: string) => {
-  await mkdir(path.dirname(destination), { recursive: true });
+const writeArtifactAtomic = async (root: string, relativePath: string, text: string) => {
+  const destination = await prepareAdvisorArtifactPath(root, relativePath);
   const temporaryPath = `${destination}.${process.pid}.${randomUUID()}.tmp`;
   let handle: Awaited<ReturnType<typeof open>> | undefined;
   try {
-    handle = await open(temporaryPath, 'wx');
+    handle = await open(
+      temporaryPath,
+      constants.O_CREAT | constants.O_EXCL | constants.O_WRONLY | constants.O_NOFOLLOW,
+      0o600,
+    );
     await handle.writeFile(text, 'utf8');
     await handle.sync();
     await handle.close();
     handle = undefined;
+    const recheckedDestination = await prepareAdvisorArtifactPath(root, relativePath);
+    if (recheckedDestination !== destination) {
+      throw new Error(`advisor artifact destination changed during write: ${relativePath}`);
+    }
     await rename(temporaryPath, destination);
   } catch (error) {
     if (handle) await handle.close().catch(() => undefined);
@@ -200,6 +212,35 @@ const isRestrictedAddress = (rawAddress: string) => {
 const defaultResolveHost = async (hostname: string) =>
   (await lookup(hostname, { all: true, verbatim: true })).map(({ address }) => address);
 
+const defaultPinnedTransport: NonNullable<CollectorDependencies['transportImpl']> = ({
+  url,
+  init,
+  validatedAddresses,
+}) => new Promise<Response>((resolve, reject) => {
+  const address = validatedAddresses[0];
+  const family = isIP(address);
+  const headers = Object.fromEntries(new Headers(init.headers));
+  const request = httpsRequest(url, {
+    method: init.method ?? 'GET',
+    headers: { ...headers, Host: url.host },
+    servername: url.hostname,
+    family,
+    lookup: (_hostname, _options, callback) => callback(null, address, family),
+  }, (incoming) => {
+    const responseHeaders = new Headers();
+    for (let index = 0; index < incoming.rawHeaders.length; index += 2) {
+      responseHeaders.append(incoming.rawHeaders[index], incoming.rawHeaders[index + 1]);
+    }
+    resolve(new Response(Readable.toWeb(incoming) as ReadableStream<Uint8Array>, {
+      status: incoming.statusCode ?? 500,
+      statusText: incoming.statusMessage,
+      headers: responseHeaders,
+    }));
+  });
+  request.once('error', reject);
+  request.end();
+});
+
 const validateNetworkTarget = async (
   url: URL,
   record: AdvisorSourceRecord,
@@ -242,6 +283,7 @@ const validateNetworkTarget = async (
       'access_denied',
     );
   }
+  return addresses;
 };
 
 const fetchExactBytes = async (
@@ -250,18 +292,28 @@ const fetchExactBytes = async (
   userAgent: string,
   collector: SourceCollector,
 ) => {
-  const fetchImpl = deps.fetchImpl ?? globalThis.fetch;
+  const transportImpl = deps.transportImpl ?? defaultPinnedTransport;
   let response: Response;
   let currentUrl = new URL(record.canonicalUrl);
   for (let redirects = 0; ; redirects += 1) {
-    await validateNetworkTarget(currentUrl, record, collector, deps, redirects > 0);
+    const validatedAddresses = await validateNetworkTarget(
+      currentUrl,
+      record,
+      collector,
+      deps,
+      redirects > 0,
+    );
     try {
-      response = await fetchImpl(currentUrl, {
-        headers: {
-          Accept: 'text/html, application/xhtml+xml, application/json, text/plain;q=0.9',
-          'User-Agent': userAgent,
+      response = await transportImpl({
+        url: currentUrl,
+        validatedAddresses,
+        init: {
+          headers: {
+            Accept: 'text/html, application/xhtml+xml, application/json, text/plain;q=0.9',
+            'User-Agent': userAgent,
+          },
+          redirect: 'manual',
         },
-        redirect: 'manual',
       });
     } catch (error) {
       throw new CollectionError(
@@ -384,7 +436,11 @@ const collectHtmlSourceUnlocked = async (
           capturedAt,
         },
       };
-      await writeJsonAtomic(resolveAdvisorArtifactPath(deps.root, rawPath), rawSource);
+      await writeArtifactAtomic(
+        deps.root,
+        rawPath,
+        `${JSON.stringify(rawSource, null, 2)}\n`,
+      );
     }
 
     if (target.collectionStatus === 'queued') {
@@ -401,9 +457,7 @@ const collectHtmlSourceUnlocked = async (
     const normalized = normalizeDocument(html, mediaType);
     const normalizedPath = target.normalizedPath
       ?? path.join('normalized', `${target.id}-${sha256}.txt`);
-    if (!target.normalizedPath) {
-      await writeTextAtomic(resolveAdvisorArtifactPath(deps.root, normalizedPath), normalized);
-    }
+    await writeArtifactAtomic(deps.root, normalizedPath, normalized);
     if (target.collectionStatus !== 'normalized') {
       target = await transitionSource(deps.root, target.id, 'normalized', {
         normalizedPath,
@@ -428,8 +482,8 @@ export const collectHtmlSource = (
   deps: CollectorDependencies,
   userAgent: string,
 ) => withCollectionLock(
-  `${advisorPaths(deps.root).registry}\0${record.id}`,
-  () => collectHtmlSourceUnlocked(record, deps, userAgent),
+  `${advisorPaths(deps.root).registry}\0${sourceIdForUrl(record.canonicalUrl)}`,
+  () => collectHtmlSourceUnlocked(loadSourceRecord(deps.root, record.id), deps, userAgent),
 );
 
 export const collectOfficialSource = async (
@@ -438,19 +492,20 @@ export const collectOfficialSource = async (
 ): Promise<AdvisorSourceRecord> => {
   const record = await upsertDiscoveredSource(candidate, dependencies.root);
   return withCollectionLock(
-    `${advisorPaths(dependencies.root).registry}\0${record.id}`,
+    `${advisorPaths(dependencies.root).registry}\0${sourceIdForUrl(record.canonicalUrl)}`,
     async () => {
+      const currentRecord = loadSourceRecord(dependencies.root, record.id);
       try {
-        const collector = collectors.find(({ name }) => name === record.collector);
-        if (!collector) throw new CollectionError(`unsupported collector: ${record.collector}`, 'invalid_content');
-        if (!collector.supports(record)) {
-          const message = record.collector === 'public_html'
+        const collector = collectors.find(({ name }) => name === currentRecord.collector);
+        if (!collector) throw new CollectionError(`unsupported collector: ${currentRecord.collector}`, 'invalid_content');
+        if (!collector.supports(currentRecord)) {
+          const message = currentRecord.collector === 'public_html'
             ? 'public HTML collection requires an explicitly approved public host'
-            : `${record.collector} does not support source host ${new URL(record.canonicalUrl).hostname}`;
+            : `${currentRecord.collector} does not support source host ${new URL(currentRecord.canonicalUrl).hostname}`;
           throw new CollectionError(message, 'invalid_content');
         }
 
-        return await collector.collect(record, {
+        return await collector.collect(currentRecord, {
           ...dependencies,
           collectHtml: collectHtmlSourceUnlocked,
         });
@@ -458,7 +513,7 @@ export const collectOfficialSource = async (
         const reason = error instanceof CollectionError ? error.failureReason : 'invalid_content';
         const sourceId = error instanceof CollectionError && error.sourceId
           ? error.sourceId
-          : record.id;
+          : currentRecord.id;
         await markCollectionFailure(dependencies.root, sourceId, reason);
         throw error;
       }
