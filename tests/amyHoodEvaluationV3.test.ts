@@ -7,10 +7,12 @@
  *    - counterfactual slots preserve pair IDs and opposite variants.
  *    - all five decision domains remain represented after deterministic ordering.
  *    - advisory slots remain subjective while the other twenty-six slots remain multiple-choice.
+ *    - evaluation scope accepts holdout artifacts needed for temporal evaluation.
  *
  * 3. Failure Path:
  *    - unknown experiment arms are rejected at runtime before experiment setup.
  *    - invalid blueprints reject duplicate IDs, incorrect slot counts, and unpaired counterfactuals.
+ *    - non-evaluation scopes reject holdout artifacts before any downstream write.
  */
 import assert from 'node:assert/strict';
 import test from 'node:test';
@@ -23,6 +25,7 @@ import {
   type EvaluationV3BlueprintSlot,
   type DecisionDomain,
 } from '../shared/amyHoodDecisionAdvisor';
+import { assertAllowedSplits } from '../server/decisionAdvisor/leakageGuard';
 import { assertEvaluationV3Blueprint, loadEvaluationV3Blueprint } from '../server/evaluationV3/blueprint';
 
 const DOMAIN_ORDER: DecisionDomain[] = [
@@ -262,4 +265,17 @@ test('failure: rejects a non-temporal slot that requires a dataset split', () =>
   invalidSplitBlueprint.slots[0].requiredSplit = 'train';
 
   assert.throws(() => assertEvaluationV3Blueprint(invalidSplitBlueprint), /must require none/);
+});
+
+test('edge: evaluation scope accepts holdout artifacts', () => {
+  assert.doesNotThrow(() => assertAllowedSplits('evaluation', [{ id: 'h1', split: 'holdout' }]));
+});
+
+test('failure: build scopes reject holdout before writing', () => {
+  for (const scope of ['policy_build', 'memory_release', 'runtime_index'] as const) {
+    assert.throws(
+      () => assertAllowedSplits(scope, [{ id: 'h1', split: 'holdout' }]),
+      /holdout artifact h1/,
+    );
+  }
 });
