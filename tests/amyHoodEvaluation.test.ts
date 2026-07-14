@@ -12,10 +12,12 @@
  *    - 홀드아웃 오염, 질문/정답 ID 불일치, 모델 실패와 원자적 저장 실패는 완료 상태나 부분 덮어쓰기를 만들지 않는다.
  */
 import assert from 'node:assert/strict';
+import type { AddressInfo } from 'node:net';
 import { mkdir, mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import test from 'node:test';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import express from 'express';
 
 import {
   loadEvaluationBundle,
@@ -30,6 +32,7 @@ import {
   parseEvaluationResponse,
 } from '../server/evaluation/prompt';
 import { createEvaluationRunner } from '../server/evaluation/runner';
+import { createEvaluationRouter } from '../server/evaluation/routes';
 import type {
   EvaluationQuestion,
   SubjectiveGrade,
@@ -403,4 +406,94 @@ test('failure: external grades require exact totals and blind keys', async () =>
   const graded = await runner.applySubjectiveGrades(queued.runId, validGrades());
   assert.equal(graded.gradingStatus, 'complete');
   assert.equal(graded.scores.subjective, 18);
+});
+
+test('happy: router exposes question review and all run operations', async () => {
+  const root = await createRunnerFixture();
+  const bundle = await loadEvaluationBundle(root);
+  const reviews = JSON.parse(
+    await readFile(join(root, 'evaluation/amy_hood_eval_question_reviews.json'), 'utf8'),
+  );
+  const run = {
+    runId: 'run-1',
+    status: 'queued' as const,
+    gradingStatus: 'pending' as const,
+    provider: 'local' as const,
+    model: 'gemma4-test',
+    promptHash: 'prompt-hash',
+    ragSnapshotId: 'rag-hash',
+    questionSetVersion: '1.0.0',
+    answers: [],
+    scores: { pastMemory: 0, githubHoldout: 0, subjective: null },
+    startedAt: '2026-07-14T00:00:00.000Z',
+    completedAt: null,
+  };
+  let executionStarted = false;
+  const router = createEvaluationRouter({
+    loadBundle: async () => bundle,
+    loadReviews: async () => reviews,
+    saveReview: async () => reviews,
+    listRuns: async () => [run],
+    readRun: async () => run,
+    runner: {
+      createEvaluationRun: async () => run,
+      executeEvaluationRun: async () => {
+        executionStarted = true;
+        return run;
+      },
+      resumeEvaluationRun: async () => run,
+      applySubjectiveGrades: async () => run,
+    },
+  });
+  const app = express();
+  app.use(express.json());
+  app.use('/api/evaluation', router);
+  const server = app.listen(0);
+  const address = server.address() as AddressInfo;
+  const baseUrl = `http://127.0.0.1:${address.port}/api/evaluation`;
+  try {
+    const questionsResponse = await fetch(`${baseUrl}/questions`);
+    assert.equal(questionsResponse.status, 200);
+    assert.equal(
+      ((await questionsResponse.json()) as { questions: { questions: unknown[] } })
+        .questions.questions.length,
+      15,
+    );
+    assert.equal(
+      (await fetch(`${baseUrl}/questions/P1/review`, {
+        method: 'PATCH',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ status: 'approved', revisionNote: '' }),
+      })).status,
+      200,
+    );
+    assert.equal((await fetch(`${baseUrl}/runs`)).status, 200);
+    assert.equal((await fetch(`${baseUrl}/runs/run-1`)).status, 200);
+    assert.equal(
+      (await fetch(`${baseUrl}/runs`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ provider: 'local' }),
+      })).status,
+      202,
+    );
+    await new Promise((resolve) => setImmediate(resolve));
+    assert.equal(executionStarted, true);
+    assert.equal(
+      (await fetch(`${baseUrl}/runs/run-1/resume`, { method: 'POST' })).status,
+      202,
+    );
+    assert.equal(
+      (await fetch(`${baseUrl}/runs/run-1/subjective-grades`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ grades: validGrades() }),
+      })).status,
+      200,
+    );
+  } finally {
+    await new Promise<void>((resolve, reject) =>
+      server.close((error) => (error ? reject(error) : resolve())),
+    );
+  }
 });

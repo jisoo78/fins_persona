@@ -19,7 +19,7 @@ import {
   modelRequestSettings,
   type ModelClient,
 } from './personaPipeline/modelClient';
-import { evaluatePersona } from './personaPipeline/evaluator';
+import { createEvaluationRunner } from './evaluation/runner';
 import {
   buildMasterPrompt,
   checkGemmaGate,
@@ -231,11 +231,21 @@ const main = async () => {
     return;
   }
   if (command === 'evaluate') {
-    const model = createModelClient(provider);
-    const evaluation = await evaluatePersona({ root: process.cwd(), provider, model });
+    const runner = createEvaluationRunner({
+      root: process.cwd(),
+      createModel: createModelClient,
+    });
+    const queued = await runner.createEvaluationRun({ provider });
+    const evaluation = await runner.executeEvaluationRun(queued.runId);
     console.log(
       JSON.stringify(
-        { provider, model: model.model, answerCount: evaluation.answers.length },
+        {
+          runId: evaluation.runId,
+          provider: evaluation.provider,
+          model: evaluation.model,
+          status: evaluation.status,
+          answerCount: evaluation.answers.length,
+        },
         null,
         2,
       ),

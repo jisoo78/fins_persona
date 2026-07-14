@@ -16,6 +16,10 @@ import {
 } from './agentService';
 import { retrieveArchiveEvidence } from './ragService';
 import { retrieveVectorArchiveEvidence } from './vectorRagService';
+import {
+  createEvaluationRouteDependencies,
+  createEvaluationRouter,
+} from './evaluation/routes';
 
 const execFileAsync = promisify(execFile);
 
@@ -768,13 +772,18 @@ app.use(express.json({ limit: '2mb' }));
 app.use((_, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PATCH,OPTIONS');
   next();
 });
 
 app.options('*', (_, res) => {
   res.sendStatus(204);
 });
+
+app.use(
+  '/api/evaluation',
+  createEvaluationRouter(createEvaluationRouteDependencies(process.cwd())),
+);
 
 app.get('/api/health', async (_, res) => {
   try {
