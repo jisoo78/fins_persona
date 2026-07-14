@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Amy Hood 페르소나 질문지 2.0.0 및 Gemma 4 3조건 절제 실험 개발자 평가 보고서">
+  <title>Amy Hood 고난도 평가 및 3조건 절제 실험 보고서</title>
+  <style>
+    :root {
+      --ink: #152033;
+      --muted: #657289;
+      --line: #dce3ec;
+      --panel: #f6f8fb;
+      --navy: #16233f;
+      --blue: #2b59d9;
+      --blue-soft: #eaf0ff;
+      --green: #147a52;
+      --green-soft: #e7f6ef;
+      --amber: #9a5a00;
+      --amber-soft: #fff4df;
+      --red: #ad3745;
+      --red-soft: #fff0f2;
+      --violet: #7048bf;
+      --violet-soft: #f1ebff;
+      --shadow: 0 22px 58px rgba(24, 40, 72, .11);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #edf1f7;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+      line-height: 1.64;
+    }
+    a { color: var(--blue); }
+    code, pre, .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    code {
+      padding: 2px 6px;
+      border-radius: 5px;
+      background: #edf1f6;
+      font-size: .88em;
+      overflow-wrap: anywhere;
+    }
+    main {
+      width: min(1180px, calc(100% - 36px));
+      margin: 30px auto 54px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+    header {
+      padding: 56px 62px 48px;
+      color: white;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(98, 132, 255, .45), transparent 30%),
+        linear-gradient(135deg, #101a31 0%, #203c7b 62%, #315ed1 100%);
+    }
+    .eyebrow {
+      margin: 0 0 10px;
+      color: #b9d0ff;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: 900px;
+      margin: 0;
+      font-size: clamp(31px, 5vw, 52px);
+      line-height: 1.14;
+      letter-spacing: -.045em;
+    }
+    header > p:not(.eyebrow) {
+      max-width: 870px;
+      margin: 15px 0 0;
+      color: #dce7ff;
+      font-size: 17px;
+    }
+    .meta-grid, .score-grid, .hypothesis-grid, .action-grid, .flow-grid {
+      display: grid;
+      gap: 14px;
+    }
+    .meta-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: 30px;
+    }
+    .meta-card {
+      min-width: 0;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, .22);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .09);
+    }
+    .meta-card span { display: block; color: #bcd0ff; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .meta-card strong { display: block; margin-top: 6px; font-size: 13px; overflow-wrap: anywhere; }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, .96);
+      backdrop-filter: blur(12px);
+    }
+    nav a {
+      flex: 0 0 auto;
+      padding: 7px 10px;
+      border-radius: 8px;
+      color: #46546d;
+      font-size: 12px;
+      font-weight: 750;
+      text-decoration: none;
+    }
+    nav a:hover { background: var(--blue-soft); color: var(--blue); }
+    section { padding: 42px 62px; border-bottom: 1px solid var(--line); }
+    section:last-of-type { border-bottom: 0; }
+    h2 { margin: 0 0 18px; font-size: 26px; line-height: 1.25; letter-spacing: -.03em; }
+    h3 { margin: 0 0 9px; font-size: 17px; line-height: 1.35; }
+    p { margin: 9px 0; }
+    .section-kicker { margin-bottom: 5px; color: var(--blue); font-size: 12px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+    .lead { max-width: 900px; color: #40506a; font-size: 16px; }
+    .verdict {
+      padding: 22px 24px;
+      border-left: 5px solid var(--amber);
+      border-radius: 12px;
+      background: var(--amber-soft);
+      font-size: 17px;
+    }
+    .verdict strong { color: #774300; }
+    .score-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 20px; }
+    .score-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel);
+    }
+    .score-card .label { color: var(--muted); font-size: 12px; font-weight: 750; }
+    .score-card .value { margin-top: 4px; font-size: 28px; font-weight: 900; letter-spacing: -.035em; }
+    .score-card .detail { margin-top: 4px; color: var(--muted); font-size: 12px; }
+    .negative .value { color: var(--red); }
+    .positive .value { color: var(--green); }
+    .neutral .value { color: var(--violet); }
+    .table-wrap { width: 100%; overflow-x: auto; margin-top: 18px; border: 1px solid var(--line); border-radius: 12px; }
+    table { width: 100%; min-width: 760px; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 13px 14px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { background: #f0f3f8; color: #43516a; font-size: 12px; letter-spacing: .02em; }
+    tbody tr:last-child td { border-bottom: 0; }
+    tbody tr:hover td { background: #fbfcfe; }
+    .num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .delta-down { color: var(--red); font-weight: 850; }
+    .delta-up { color: var(--green); font-weight: 850; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+    .badge.reject { color: var(--red); background: var(--red-soft); }
+    .badge.partial { color: var(--amber); background: var(--amber-soft); }
+    .badge.pass { color: var(--green); background: var(--green-soft); }
+    .callout {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: 11px;
+      background: var(--blue-soft);
+      color: #254584;
+    }
+    .callout.warning { background: var(--red-soft); color: #7f2733; }
+    .callout strong { color: inherit; }
+    .bar-group { display: grid; gap: 14px; margin-top: 21px; }
+    .bar-row { display: grid; grid-template-columns: 210px 1fr 65px; gap: 13px; align-items: center; }
+    .bar-label { font-size: 13px; font-weight: 760; }
+    .bar-track { height: 12px; overflow: hidden; border-radius: 999px; background: #e9edf3; }
+    .bar-fill { height: 100%; border-radius: inherit; background: linear-gradient(90deg, #315ed1, #6f8ef0); }
+    .bar-fill.violet { background: linear-gradient(90deg, #6d48bf, #a078e5); }
+    .bar-fill.green { background: linear-gradient(90deg, #14815a, #51b489); }
+    .bar-value { text-align: right; font-size: 13px; font-weight: 850; }
+    .hypothesis-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 20px; }
+    .hypothesis {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+    .hypothesis p { color: #4b5870; font-size: 14px; }
+    .failure-list { display: grid; gap: 12px; margin-top: 18px; }
+    .failure-item {
+      display: grid;
+      grid-template-columns: 78px 1fr;
+      gap: 14px;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+    }
+    .failure-id { color: var(--red); font-size: 14px; font-weight: 900; }
+    .failure-item p { margin: 0; font-size: 14px; }
+    .flow-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 20px; }
+    .flow-node {
+      position: relative;
+      min-height: 132px;
+      padding: 18px;
+      border: 1px solid #b9c8e7;
+      border-radius: 13px;
+      background: var(--blue-soft);
+    }
+    .flow-node:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      top: 45%;
+      right: -21px;
+      z-index: 2;
+      color: var(--blue);
+      font-size: 24px;
+      font-weight: 900;
+    }
+    pre {
+      margin: 18px 0 0;
+      overflow-x: auto;
+      padding: 20px;
+      border-radius: 13px;
+      color: #dce7ff;
+      background: #121c31;
+      font-size: 12px;
+      line-height: 1.65;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+    .action-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 20px; }
+    .action {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel);
+    }
+    .priority { display: inline-block; margin-bottom: 9px; color: var(--blue); font-size: 11px; font-weight: 900; text-transform: uppercase; }
+    .acceptance { margin-top: 11px; padding: 10px 12px; border-radius: 8px; background: white; color: var(--green); font-size: 13px; font-weight: 800; }
+    .check-list { margin: 14px 0 0; padding: 0; list-style: none; columns: 2; column-gap: 28px; }
+    .check-list li { break-inside: avoid; margin: 0 0 10px; padding-left: 22px; position: relative; }
+    .check-list li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 900; }
+    .limit-list { margin: 14px 0 0; padding-left: 22px; }
+    .limit-list li + li { margin-top: 8px; }
+    .footnote { margin-top: 13px; color: var(--muted); font-size: 12px; }
+    footer { padding: 28px 62px 38px; color: var(--muted); background: #f8fafc; font-size: 12px; }
+    @media (max-width: 900px) {
+      header, section, footer { padding-left: 28px; padding-right: 28px; }
+      .meta-grid, .score-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .flow-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .flow-node::after { display: none; }
+    }
+    @media (max-width: 620px) {
+      main { width: 100%; margin: 0; border: 0; border-radius: 0; }
+      header, section, footer { padding-left: 20px; padding-right: 20px; }
+      .meta-grid, .score-grid, .hypothesis-grid, .action-grid, .flow-grid { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 1fr 54px; }
+      .bar-track { grid-column: 1 / -1; grid-row: 2; }
+      .failure-item { grid-template-columns: 1fr; gap: 5px; }
+      .check-list { columns: 1; }
+      nav { position: static; }
+    }
+    @media print {
+      body { background: white; }
+      main { width: 100%; margin: 0; border: 0; border-radius: 0; box-shadow: none; }
+      nav { display: none; }
+      header { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      section { break-inside: avoid; padding-top: 26px; padding-bottom: 26px; }
+      .table-wrap { overflow: visible; }
+      table { min-width: 0; font-size: 10px; }
+      th, td { padding: 7px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">B Track · Developer Evaluation Report</p>
+    <h1>Amy Hood 고난도 평가 및 3조건 절제 실험</h1>
+    <p>질문지 2.0.0, 실제 system/user 역할 분리, 메타데이터 포함 RAG 주입과 Gemma 4 절제 실험(ablation)을 코드·점수·실행 비용 관점에서 검증한 개발자 보고서</p>
+    <div class="meta-grid">
+      <div class="meta-card"><span>작성 기준일</span><strong>2026-07-14 · Asia/Seoul</strong></div>
+      <div class="meta-card"><span>작업 브랜치</span><strong>codex/harden-amy-hood-evaluation</strong></div>
+      <div class="meta-card"><span>실험 그룹</span><strong>5a65f08e-e4c3-497d-8031-614ad0173ede</strong></div>
+      <div class="meta-card"><span>표본</span><strong>조건별 n=1 · 통계적 유의성 미평가</strong></div>
+    </div>
+  </header>
+
+  <nav aria-label="보고서 목차">
+    <a href="#executive-summary">요약</a>
+    <a href="#evaluation-design">설계</a>
+    <a href="#before-after">Before/After</a>
+    <a href="#ablation">3조건</a>
+    <a href="#hypotheses">가설</a>
+    <a href="#failure-analysis">실패 분석</a>
+    <a href="#implementation">구현</a>
+    <a href="#verification">검증</a>
+    <a href="#limitations">한계</a>
+    <a href="#next-actions">다음 단계</a>
+    <a href="#appendix">부록</a>
+  </nav>
+
+  <section id="executive-summary">
+    <p class="section-kicker">01 · Executive summary</p>
+    <h2>최종 요약</h2>
+    <div class="verdict">
+      질문지 2.0.0은 기존 <strong>객관식 12/12 만점 포화</strong>를 Amy Hood + RAG 조건에서 7/12로 낮췄다. 그러나 통제된 3조건 비교에서는 RAG lift가 <strong>-3점</strong>, Persona lift가 <strong>-2점</strong>이었고, 일반 CFO Prompt가 객관식 <strong>12/12</strong>를 기록했다. 따라서 현재 PoC의 병목은 “모델이 문제를 너무 잘 푼다”보다 <strong>일반 CFO 판단과 Amy Hood 고유 판단을 분리하지 못하는 판별 타당성</strong>, 그리고 <strong>top-1 원문 RAG가 판단을 방해하는 검색·컨텍스트 품질</strong>에 있다.
+    </div>
+    <div class="score-grid">
+      <div class="score-card negative"><div class="label">RAG lift · 과거 복원</div><div class="value">-3</div><div class="detail">4/7 − 7/7</div></div>
+      <div class="score-card negative"><div class="label">Persona lift · 홀드아웃</div><div class="value">-2</div><div class="detail">3/5 − 5/5</div></div>
+      <div class="score-card neutral"><div class="label">일반 CFO 객관식</div><div class="value">12 / 12</div><div class="detail">과거 7/7 + 홀드아웃 5/5</div></div>
+      <div class="score-card positive"><div class="label">구현 검증</div><div class="value">90 / 90</div><div class="detail">inventory 7 + persona 15 + evaluation 68</div></div>
+    </div>
+  </section>
+
+  <section id="evaluation-design">
+    <p class="section-kicker">02 · Evaluation design</p>
+    <h2>평가 설계와 비교 가능성</h2>
+    <p class="lead">두 종류의 비교를 분리한다. 질문지 1.0.0과 2.0.0의 Before/After는 난이도 강화 이후의 <strong>관찰 변화(observed change)</strong>를 보여주지만 질문 자체가 달라 인과 추론에는 사용할 수 없다. RAG와 Main Prompt 효과는 동일한 질문지 2.0.0·모델·스냅샷을 공유한 3조건 절제 실험에서만 판단한다.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>비교</th><th>고정된 요소</th><th>변경된 요소</th><th>허용되는 해석</th><th>금지되는 해석</th></tr></thead>
+        <tbody>
+          <tr><td>Before v1 ↔ After v2</td><td>Gemma 4, Amy Hood Prompt hash, RAG snapshot</td><td>질문·선택지·정답 위치</td><td>난이도 강화 후 관찰 점수 변화</td><td>RAG 또는 Prompt의 단독 인과효과</td></tr>
+          <tr><td>After 3조건 절제 실험</td><td>질문지 2.0.0, 모델, 실행 시점, RAG snapshot</td><td>Persona Prompt, RAG 주입 여부</td><td>현재 구성에서의 RAG/Persona 상대 효과</td><td>통계적 유의성 또는 다른 모델로의 일반화</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout"><strong>평가 단위:</strong> 과거 복원 7문항과 GitHub 홀드아웃 5문항은 4지선다 객관식, 가상 시나리오 3문항은 각 8점의 블라인드 주관식 채점이다. 주관식은 실행 조건을 숨긴 A/B/C 패킷으로 채점한 뒤 조건을 공개했다.</div>
+  </section>
+
+  <section id="before-after">
+    <p class="section-kicker">03 · Before vs After</p>
+    <h2>질문지 강화 전후 관찰 결과</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>지표</th><th class="num">Before · v1</th><th class="num">After · v2</th><th class="num">점수 변화</th><th class="num">정답률 변화</th></tr></thead>
+        <tbody>
+          <tr><td>과거 복원</td><td class="num">7/7 · 100%</td><td class="num">4/7 · 57.1%</td><td class="num delta-down">-3</td><td class="num delta-down">-42.9%p</td></tr>
+          <tr><td>GitHub 홀드아웃</td><td class="num">5/5 · 100%</td><td class="num">3/5 · 60.0%</td><td class="num delta-down">-2</td><td class="num delta-down">-40.0%p</td></tr>
+          <tr><td>객관식 합계</td><td class="num">12/12 · 100%</td><td class="num">7/12 · 58.3%</td><td class="num delta-down">-5</td><td class="num delta-down">-41.7%p</td></tr>
+          <tr><td>주관식</td><td class="num">22/24 · 91.7%</td><td class="num">23/24 · 95.8%</td><td class="num delta-up">+1</td><td class="num delta-up">+4.1%p</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bar-group" aria-label="Before와 After 정답률 비교">
+      <div class="bar-row"><div class="bar-label">Before 객관식 v1</div><div class="bar-track"><div class="bar-fill green" style="width:100%"></div></div><div class="bar-value">100%</div></div>
+      <div class="bar-row"><div class="bar-label">After 객관식 v2</div><div class="bar-track"><div class="bar-fill" style="width:58.3%"></div></div><div class="bar-value">58.3%</div></div>
+      <div class="bar-row"><div class="bar-label">Before 주관식 v1</div><div class="bar-track"><div class="bar-fill violet" style="width:91.7%"></div></div><div class="bar-value">91.7%</div></div>
+      <div class="bar-row"><div class="bar-label">After 주관식 v2</div><div class="bar-track"><div class="bar-fill violet" style="width:95.8%"></div></div><div class="bar-value">95.8%</div></div>
+    </div>
+    <p class="footnote">Before 실행: <code>4eb16444-dc9f-423d-a892-68c1a72fb9c8</code>. After 동일 조건 실행: <code>a472cc65-d6d6-46a4-9098-736588d39d39</code>. 두 실행은 같은 Persona Prompt SHA-256과 RAG snapshot을 사용하지만 질문지 버전이 다르다.</p>
+  </section>
+
+  <section id="ablation">
+    <p class="section-kicker">04 · Controlled ablation</p>
+    <h2>질문지 2.0.0 3조건 절제 실험</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>실험군</th><th>System Prompt</th><th>RAG 정책</th><th class="num">과거 /7</th><th class="num">홀드아웃 /5</th><th class="num">주관식 /24</th><th class="num">평균 입력</th><th class="num">평균 지연</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Amy Hood + RAG</strong></td><td>활성 Main Prompt</td><td>P1-P7 top-1 원문</td><td class="num">4</td><td class="num">3</td><td class="num">23</td><td class="num">5,928 tokens</td><td class="num">31.2s</td></tr>
+          <tr><td><strong>Amy Hood / RAG 없음</strong></td><td>동일 활성 Main Prompt</td><td>모든 문항 없음</td><td class="num">7</td><td class="num">3</td><td class="num">22</td><td class="num">1,389 tokens</td><td class="num">9.6s</td></tr>
+          <tr><td><strong>일반 CFO / RAG 없음</strong></td><td>Generic CFO Control</td><td>모든 문항 없음</td><td class="num">7</td><td class="num">5</td><td class="num">24</td><td class="num">395 tokens</td><td class="num">7.8s</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="score-grid">
+      <div class="score-card negative"><div class="label">통제 RAG lift</div><div class="value">-3</div><div class="detail">과거 복원: 4 − 7</div></div>
+      <div class="score-card negative"><div class="label">통제 Persona lift</div><div class="value">-2</div><div class="detail">홀드아웃: 3 − 5</div></div>
+      <div class="score-card positive"><div class="label">주관식 RAG 차이</div><div class="value">+1</div><div class="detail">23 − 22</div></div>
+      <div class="score-card negative"><div class="label">주관식 Persona 차이</div><div class="value">-2</div><div class="detail">22 − 24</div></div>
+    </div>
+    <div class="callout warning"><strong>비용 대비 결과:</strong> RAG 과거 복원 P1-P7은 평균 11,142 입력토큰(9,169~11,570)을 사용했다. 무RAG Amy Hood 전체 평균 1,389토큰보다 약 8배 큰 입력을 사용하면서 과거 복원 점수는 3점 낮고, 실행 평균 지연도 31.2초 대 9.6초였다.</div>
+  </section>
+
+  <section id="hypotheses">
+    <p class="section-kicker">05 · Hypothesis review</p>
+    <h2>가설, 판정과 근거 논리</h2>
+    <div class="hypothesis-grid">
+      <article class="hypothesis"><span class="badge partial">부분 지지</span><h3>H1. 질문지 2.0.0은 만점 포화를 완화한다</h3><p>Amy Hood + RAG 객관식이 12/12에서 7/12로 하락했다. 다만 질문지가 변경된 Before/After이므로 난이도 상승의 방향은 관찰했지만 효과 크기를 독립적으로 추정할 수 없다.</p></article>
+      <article class="hypothesis"><span class="badge reject">기각</span><h3>H2. top-1 RAG는 과거 복원을 향상한다</h3><p>동일 질문지 2.0.0에서 RAG 포함은 4/7, 미포함은 7/7이었다. 현재 검색·원문 청크·컨텍스트 조합의 RAG lift는 -3이다.</p></article>
+      <article class="hypothesis"><span class="badge reject">기각</span><h3>H3. Main Prompt는 홀드아웃 재현성을 높인다</h3><p>Amy Hood/RAG 없음은 3/5, 일반 CFO는 5/5였다. 현재 Main Prompt의 Persona lift는 -2이며 오히려 H3·H5의 근접 함정에 더 끌렸다.</p></article>
+      <article class="hypothesis"><span class="badge pass">구현 검증 통과</span><h3>H4. 역할 분리와 증거 주입 계약이 동작한다</h3><p>실제 system 역할에는 Persona/Control Prompt만, user 역할에는 질문·선택지·출력 형식과 조건부 RAG 증거(evidence)가 들어간다. 자동 테스트에서 RAG 증거는 첫 실험군 P1-P7의 정확히 7회에만 검출됐다.</p></article>
+    </div>
+  </section>
+
+  <section id="failure-analysis">
+    <p class="section-kicker">06 · Failure analysis</p>
+    <h2>문항별 오답과 함정 선택</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>실험군</th><th>오답</th><th>선택한 함정의 판단 순서</th><th>해석</th></tr></thead>
+        <tbody>
+          <tr><td>Amy Hood + RAG</td><td>P3 · 1번</td><td>네트워크 보호보다 EPS 조건을 먼저 고정</td><td>RAG가 member-first 우선순위를 강화하지 못했다.</td></tr>
+          <tr><td>Amy Hood + RAG</td><td>P4 · 1번</td><td>사업부 가정보다 회사 전체 마진 범위를 먼저 제시</td><td>출력 이유는 실제 정답 판단을 서술했지만 번호는 1이었다. 선택 번호–이유 정합성 실패다.</td></tr>
+          <tr><td>Amy Hood + RAG</td><td>P7 · 1번</td><td>계약 전 가중 파이프라인으로 장기 설비를 먼저 확보</td><td>확인 수요보다 유연한 장기 자산 논리를 과대 가중했다.</td></tr>
+          <tr><td>Amy Hood + RAG</td><td>H3 · 1번</td><td>종결 시 고정 자사주 매입 규모를 약속</td><td>투자 여력에 따른 점진 상쇄보다 초기 희석 신호를 우선했다.</td></tr>
+          <tr><td>Amy Hood + RAG</td><td>H5 · 1번</td><td>개발자 유지보다 Enterprise 전환·좌석당 매출 우선</td><td>플랫폼 신뢰와 생태계 선행지표보다 직접 수익화를 선행했다.</td></tr>
+          <tr><td>Amy Hood / RAG 없음</td><td>H3 · 1번</td><td>종결 시 고정 자사주 매입 규모를 약속</td><td>Main Prompt만으로도 희석 상쇄의 순서를 정확히 구분하지 못했다.</td></tr>
+          <tr><td>Amy Hood / RAG 없음</td><td>H5 · 1번</td><td>Enterprise 전환·좌석당 매출 우선</td><td>Generic CFO는 피한 함정이므로 Main Prompt의 가중치 충돌 가능성이 있다.</td></tr>
+          <tr><td>일반 CFO / RAG 없음</td><td>없음</td><td>객관식 12/12</td><td>모든 정답이 일반적인 우수 CFO 원칙만으로도 식별 가능해 Persona 판별 타당성이 부족하다.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="failure-list">
+      <div class="failure-item"><div class="failure-id">P4</div><p><strong>응답 계약 문제:</strong> 이유는 “사업부별 영향을 분리하고 일시적 사용량을 연율화하지 않는다”는 정답 논리를 그대로 썼지만 <code>choice: 1</code>을 출력했다. 단순 오답과 판단-번호 매핑 실패를 분리해 집계해야 한다.</p></div>
+      <div class="failure-item"><div class="failure-id">RAG</div><p><strong>검색·컨텍스트 문제:</strong> 과거 복원 청크가 문항당 9K~11.6K 입력토큰을 만들었다. 원문이 길수록 정답 근거뿐 아니라 경쟁 신호도 함께 들어가 Main Prompt의 우선순위를 희석할 수 있다.</p></div>
+      <div class="failure-item"><div class="failure-id">Persona</div><p><strong>판별 문제:</strong> 일반 CFO가 객관식을 모두 맞혔고 Amy Hood Prompt는 H3·H5에서 오히려 직접 재무 지표를 먼저 보는 함정에 끌렸다. 프롬프트가 Amy Hood의 “무엇을 본다”보다 “어떤 순서로 본다”를 충분히 강제하지 못한다.</p></div>
+    </div>
+  </section>
+
+  <section id="implementation">
+    <p class="section-kicker">07 · Implementation</p>
+    <h2>구현 구조와 실제 RAG 주입 형식</h2>
+    <div class="flow-grid" aria-label="평가 입력 및 실행 흐름">
+      <div class="flow-node"><h3>1. 실험 컨텍스트 고정</h3><p>질문지 2.0.0, 모델, 활성 Prompt 버전, RAG snapshot을 한 번 읽어 세 실행에 고정한다.</p></div>
+      <div class="flow-node"><h3>2. System 역할</h3><p>Amy Hood 활성 Main Prompt 또는 Generic CFO Control Prompt만 전달한다.</p></div>
+      <div class="flow-node"><h3>3. User 역할</h3><p>질문, 선택지, 출력 계약과 필요한 경우 한 개의 메타데이터 포함 원문 청크를 전달한다.</p></div>
+      <div class="flow-node"><h3>4. 순차 실행·저장</h3><p><code>persona_rag</code> → <code>persona_no_rag</code> → <code>generic_cfo_no_rag</code> 순으로 45회 호출한다.</p></div>
+    </div>
+    <pre aria-label="RAG user 메시지 예시">SYSTEM MESSAGE
+{active Amy Hood persona prompt}
+
+USER MESSAGE
+[RAG EVIDENCE]
+source_id: {sourceId}
+chunk_id: {chunkId}
+chunk_index: {index}
+block_ids: ["{blockId}"]
+
+{raw source chunk text}
+
+[QUESTION]
+{question prompt}
+
+1. {near-neighbor option}
+2. {near-neighbor option}
+3. {near-neighbor option}
+4. {near-neighbor option}
+
+JSON만 출력하세요: {"choice":1,"reason":"1~2문장 이유"}</pre>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>계약</th><th>구현 파일</th><th>검증 내용</th></tr></thead>
+        <tbody>
+          <tr><td>질문 품질</td><td><code>server/evaluation/questionQuality.ts</code></td><td>정답 길이 편차 ≤10%, 유일 최장 정답 ≤3개, 정답 위치별 2~4개. 실제 위치는 각 3개.</td></tr>
+          <tr><td>역할 분리</td><td><code>server/personaPipeline/modelClient.ts</code><br><code>server/evaluation/prompt.ts</code></td><td>LangChain SystemMessage → HumanMessage 순서, system 안에 RAG 없음.</td></tr>
+          <tr><td>RAG 정책</td><td><code>server/evaluation/retriever.ts</code></td><td><code>persona_rag</code>의 과거 복원에만 keyword top-1 원문 청크.</td></tr>
+          <tr><td>3조건 실행</td><td><code>server/evaluation/runner.ts</code></td><td>동일 그룹·모델·질문지·snapshot, 고정된 실험군 순서, 한 실험군 실패가 후속 실행을 막지 않음.</td></tr>
+          <tr><td>API/UI</td><td><code>server/evaluation/routes.ts</code><br><code>src/components/evaluation/ExperimentGroupReport.tsx</code></td><td>로컬 전용 실험 생성, 세 실행 상태·ID·점수·lift 표시.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="verification">
+    <p class="section-kicker">08 · Verification</p>
+    <h2>자동 검증과 빌드 결과</h2>
+    <ul class="check-list">
+      <li>Source inventory: <strong>7/7</strong></li>
+      <li>Persona pipeline: <strong>15/15</strong></li>
+      <li>Evaluation/UI: <strong>68/68</strong></li>
+      <li>전체 검증: <strong>90/90</strong></li>
+      <li><code>tsc --noEmit</code> 통과</li>
+      <li><code>vite build</code> 통과</li>
+      <li><code>git diff --check</code> 통과</li>
+      <li>질문·정답·검토 버전 <strong>2.0.0</strong></li>
+      <li>15문항 모두 <strong>approved</strong></li>
+      <li>RAG 증거 주입 횟수 <strong>7/45</strong></li>
+    </ul>
+    <div class="callout"><strong>함께 수정된 경계 사례:</strong> 객관식 일부만 완료된 실행에서 주관식 답변 배열이 비어 있으면 JavaScript의 <code>every()</code>가 참이 되어 주관식 0점으로 표시되던 문제를 회귀 테스트와 함께 수정했다. 이제 S1-S3이 모두 채점되기 전에는 <code>null</code>, 즉 “채점 대기”를 유지한다.</div>
+  </section>
+
+  <section id="limitations">
+    <p class="section-kicker">09 · Limitations</p>
+    <h2>한계와 위협 요인</h2>
+    <ul class="limit-list">
+      <li><strong>반복성:</strong> 조건별 실행은 1회(<code>n=1</code>)다. temperature 0.2에서 실행 분산과 신뢰구간을 측정하지 않았다.</li>
+      <li><strong>Before/After 혼입:</strong> 1.0.0과 2.0.0은 질문과 선택지가 달라 난이도 변화와 모델 변동을 분리할 수 없다.</li>
+      <li><strong>검색 방식:</strong> RAG는 기존 deterministic keyword top-1을 유지했다. 음수 lift를 다른 검색기나 RAG 구성 전체로 일반화할 수 없으며, 이 결과는 현재 검색·원문 구성에 한정된다.</li>
+      <li><strong>주관식 채점:</strong> 조건은 블라인드 처리했지만 단일 Codex 채점자이며 인간 다중 채점자 간 일치도를 측정하지 않았다.</li>
+      <li><strong>출력 오류:</strong> 선택 번호와 이유가 불일치하는 경우 현재 객관식 점수는 번호만 사용한다. 판단 논리 품질을 별도로 반영하지 않는다.</li>
+      <li><strong>판별 타당성:</strong> 일반 CFO의 12/12는 난이도만의 문제가 아니다. 정답이 일반적 재무 모범답안으로 식별 가능하다는 신호다.</li>
+    </ul>
+  </section>
+
+  <section id="next-actions">
+    <p class="section-kicker">10 · Next actions</p>
+    <h2>개선 우선순위와 다음 실험 합격 기준</h2>
+    <div class="action-grid">
+      <article class="action"><span class="priority">Priority 1</span><h3>선택 번호–이유 정합성 검사</h3><p>모델 이유가 어느 선택지의 판단 순서와 대응하는지 후처리로 비교하고 불일치 시 한 번만 재요청한다. 번호만으로 모델 판단을 오분류하는 오류를 먼저 제거한다.</p><div class="acceptance">합격: 반복 실행에서 번호–이유 불일치 0건</div></article>
+      <article class="action"><span class="priority">Priority 2</span><h3>RAG 검색 적합성 평가</h3><p>P1-P7별 top-1 청크가 정답 판단의 핵심 기준과 우선순위를 포함하는지 사람이 먼저 판정한다. 긴 원문 전체보다 해당 판단 근거가 있는 block 범위를 축소하는 실험을 추가한다.</p><div class="acceptance">합격: 검색 적합성 ≥6/7, RAG lift ≥0</div></article>
+      <article class="action"><span class="priority">Priority 3</span><h3>Persona 판별 문항 재작성</h3><p>일반 CFO도 동의하는 “좋은 답” 대신, 모두 재무적으로 합리적이지만 독립성·고객 신뢰·재무 한도를 적용하는 순서가 다른 선택지를 강화한다.</p><div class="acceptance">합격: Persona lift ≥+2, 일반 CFO 객관식 &lt;80%</div></article>
+      <article class="action"><span class="priority">Priority 4</span><h3>조건별 반복 실행</h3><p>각 조건을 최소 3회 실행하고 평균·최솟값·최댓값·문항별 선택 일치율을 기록한다. 한 번의 샘플에 의존한 lift 방향을 재검증한다.</p><div class="acceptance">합격: 핵심 lift 방향이 모든 반복에서 동일</div></article>
+    </div>
+  </section>
+
+  <section id="appendix">
+    <p class="section-kicker">11 · Reproducibility appendix</p>
+    <h2>재현 정보</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>구분</th><th>값</th></tr></thead>
+        <tbody>
+          <tr><td>Before 실행 ID</td><td class="mono">4eb16444-dc9f-423d-a892-68c1a72fb9c8</td></tr>
+          <tr><td>After · Amy Hood + RAG</td><td class="mono">a472cc65-d6d6-46a4-9098-736588d39d39</td></tr>
+          <tr><td>After · Amy Hood / RAG 없음</td><td class="mono">8fe0e6f1-e2c8-4355-b231-51ba462a9d98</td></tr>
+          <tr><td>After · 일반 CFO / RAG 없음</td><td class="mono">3350df82-c43b-4902-b179-688746ac4dc7</td></tr>
+          <tr><td>실험 그룹 ID</td><td class="mono">5a65f08e-e4c3-497d-8031-614ad0173ede</td></tr>
+          <tr><td>Amy Hood Prompt 버전</td><td class="mono">0503f475-50a3-45ad-a5e8-f5a2d5575861</td></tr>
+          <tr><td>Amy Hood Prompt SHA-256</td><td class="mono">c3cf7538494879188a69dbc2eb5a7579deda19e3a65fb4deea4407029bb56e30</td></tr>
+          <tr><td>Generic CFO Prompt SHA-256</td><td class="mono">d5bb3f1e7f9972c626f8559eb43d5fd68499b14d1d2148a5cb7bd7fbe64a6932</td></tr>
+          <tr><td>RAG snapshot SHA-256</td><td class="mono">ad44c3bbc249f8b445e44bf4a9667d311358d55ece131b9870b881f3656be068</td></tr>
+          <tr><td>모델 런타임</td><td><code>gemma4-v2-Q8_0.gguf</code> · context 16,384 · llama.cpp port 8080</td></tr>
+          <tr><td>질문지</td><td><code>evaluation/amy_hood_eval_questions.json</code> · version 2.0.0</td></tr>
+          <tr><td>설계 명세</td><td><code>docs/superpowers/specs/2026-07-14-amy-hood-hard-evaluation-report-design.md</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    이 문서는 저장소의 실제 실행 JSON, 질문지 2.0.0, 구현 테스트와 로컬 Gemma 4 실행 결과만을 근거로 작성했다. 점수 변화와 가설 판정은 명시된 비교 범위 안에서만 유효하다.
+  </footer>
+</main>
+</body>
+</html>
