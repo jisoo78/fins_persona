@@ -4,6 +4,19 @@ import type {
 } from '../../shared/amyHoodPromptVersion';
 import { request } from './evaluationApi';
 
+export type PromptVersionOption = PromptVersionManifest['versions'][number] & {
+  active: boolean;
+};
+
+export const buildPromptVersionOptions = (
+  manifest: PromptVersionManifest,
+): PromptVersionOption[] => [...manifest.versions]
+  .sort((left, right) => right.createdAt.localeCompare(left.createdAt))
+  .map((version) => ({
+    ...version,
+    active: version.versionId === manifest.activeVersionId,
+  }));
+
 export type PromptVersionListResponse = {
   ok: true;
   manifest: PromptVersionManifest;

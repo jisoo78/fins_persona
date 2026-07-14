@@ -28,6 +28,7 @@ import {
   submitSubjectiveGrades,
   type EvaluationQuestionsResponse,
 } from '../src/services/evaluationApi';
+import { buildPromptVersionOptions } from '../src/services/promptVersionApi';
 import type {
   EvaluationRun,
   SubjectiveGrade,
@@ -142,6 +143,17 @@ const gradeFixture = (): SubjectiveGrade => ({
   personaConsistency: 1,
   score: 6,
   summary: '결정은 명확하고 중단 기준을 보완할 수 있다.',
+});
+
+test('happy: prompt versions keep active marker and newest-first ordering', () => {
+  const options = buildPromptVersionOptions({
+    activeVersionId: 'v1',
+    versions: [
+      { versionId: 'v1', createdAt: '2026-07-14T00:00:00.000Z', sha256: 'a', basedOnVersionId: null },
+      { versionId: 'v2', createdAt: '2026-07-14T01:00:00.000Z', sha256: 'b', basedOnVersionId: 'v1' },
+    ],
+  });
+  assert.deepEqual(options.map((item) => [item.versionId, item.active]), [['v2', false], ['v1', true]]);
 });
 
 test('happy: summarizes the 7/5/3 review queue', () => {
