@@ -18,6 +18,7 @@
  *    - invalid blueprints reject duplicate IDs, incorrect slot counts, and unpaired counterfactuals.
  *    - non-evaluation scopes reject holdout artifacts before any downstream write.
  *    - dimension overflow and a mismatched total are rejected before evaluation output is used.
+ *    - every score dimension rejects exactly one point above its configured ceiling.
  */
 import assert from 'node:assert/strict';
 import test from 'node:test';
@@ -376,4 +377,32 @@ test('failure: score rejects non-finite and negative dimensions', () => {
     actionability: 10,
     total: 79,
   }), /criteriaPriority/);
+});
+
+test('failure: every score dimension rejects exactly one point above its ceiling', () => {
+  const ceilings = {
+    decisionSelection: 40,
+    criteriaPriority: 20,
+    conditionSensitivity: 15,
+    evidenceFaithfulness: 15,
+    actionability: 10,
+  } as const;
+  const validScore: EvaluationV3Score = {
+    ...ceilings,
+    total: 100,
+  };
+
+  for (const [dimension, ceiling] of Object.entries(ceilings) as Array<[
+    keyof typeof ceilings,
+    number,
+  ]>) {
+    assert.throws(
+      () => assertEvaluationV3Score({
+        ...validScore,
+        [dimension]: ceiling + 1,
+        total: validScore.total + 1,
+      }),
+      new RegExp(dimension),
+    );
+  }
 });
