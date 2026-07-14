@@ -71,8 +71,8 @@ import {
   collectOfficialSource,
   defaultPinnedTransport,
 } from '../server/decisionAdvisor/officialSourceCollector';
-import { importReviewedSource } from '../server/decisionAdvisor/manualSourceImporter';
-import { importTranscript } from '../server/decisionAdvisor/transcriptImporter';
+import { importReviewedSource as importReviewedSourceReal } from '../server/decisionAdvisor/manualSourceImporter';
+import { importTranscript as importTranscriptReal } from '../server/decisionAdvisor/transcriptImporter';
 import type {
   AdvisorSourceRecord,
   EventCandidate,
@@ -82,9 +82,31 @@ const officialCandidate: EventCandidate = {
   id: 'candidate-fy25-q4-capex',
   workingTitle: 'FY25 Q4 AI infrastructure investment',
   domain: 'ai_cloud_capex',
-  decisionWindowStart: '2025-04-01',
-  decisionWindowEnd: '2025-06-30',
+  decisionWindowStart: '2025-07-30',
+  decisionWindowEnd: '2025-07-30',
   discoveryUrls: ['https://www.microsoft.com/en-us/Investor/events/FY-2025'],
+  decisionWindowBasis: {
+    summary: 'The official event publication date defines the public decision disclosure date.',
+    sourceUrls: ['https://www.microsoft.com/en-us/Investor/events/FY-2025'],
+    reviewerNote: 'Reviewed against the dated official event page.',
+  },
+  sourceAssociations: [{
+    canonicalUrl: 'https://www.microsoft.com/en-us/Investor/events/FY-2025',
+    role: 'direct_amy',
+    sourceType: 'investor_relations',
+    publishedAt: '2025-07-30',
+    temporalRelation: 'decision_time',
+    relevanceClaim: 'Amy Hood discusses the named FY25 Q4 infrastructure investment decision.',
+    evidenceLocator: {
+      exactQuote: 'Amy Hood decision evidence for FY25 Q4 infrastructure investment',
+      anchorTerms: ['FY25 Q4', 'infrastructure investment'],
+      speaker: 'Amy Hood',
+    },
+    reviewStatus: 'reviewed',
+    reviewerNote: 'Exact passage and event terms were reviewed in the collected page.',
+  }],
+  directEvidenceGap: null,
+  phase3Status: 'eligible',
   notes: 'Official investor-relations discovery URL.',
   status: 'approved_for_collection',
 };
@@ -127,6 +149,74 @@ const collectionRecord = (
   failureReason: null,
   ...overrides,
 });
+
+const registerReviewedImport = async (
+  input: Parameters<typeof importReviewedSourceReal>[0],
+  root: string,
+) => {
+  const candidatePath = path.join(advisorPaths(root).root, 'event-candidates.json');
+  let candidates: Array<{
+    id: string;
+    status: string;
+    discoveryUrls: string[];
+    sourceAssociations: Array<{ canonicalUrl: string; reviewStatus: string }>;
+  }> = [];
+  try {
+    candidates = JSON.parse(await readFile(candidatePath, 'utf8'));
+  } catch {
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+  }
+  for (const candidateId of input.eventCandidateIds) {
+    const existing = candidates.find(({ id }) => id === candidateId);
+    if (existing) {
+      if (!existing.discoveryUrls.includes(input.canonicalUrl)) {
+        existing.discoveryUrls.push(input.canonicalUrl);
+      }
+      if (!existing.sourceAssociations.some(({ canonicalUrl }) =>
+        canonicalUrl === input.canonicalUrl)) {
+        existing.sourceAssociations.push({
+          canonicalUrl: input.canonicalUrl,
+          reviewStatus: 'reviewed',
+        });
+      }
+    } else {
+      candidates.push({
+        id: candidateId,
+        status: 'approved_for_collection',
+        discoveryUrls: [input.canonicalUrl],
+        sourceAssociations: [{
+          canonicalUrl: input.canonicalUrl,
+          reviewStatus: 'reviewed',
+        }],
+      });
+    }
+  }
+  await writeFile(candidatePath, `${JSON.stringify(candidates, null, 2)}\n`);
+  await upsertDiscoveredSource(collectionRecord({
+    id: sourceIdForUrl(input.canonicalUrl),
+    canonicalUrl: input.canonicalUrl,
+    eventCandidateIds: input.eventCandidateIds,
+    title: input.title,
+    publisher: input.publisher,
+    publishedAt: input.publishedAt,
+    speaker: input.speaker,
+    sourceType: 'reviewed_transcript',
+    collector: 'manual_import',
+    temporalRole: 'decision_time',
+    tier: input.tier,
+    approvedPublicHost: true,
+  }), root);
+};
+
+const importReviewedSource: typeof importReviewedSourceReal = async (input, root) => {
+  await registerReviewedImport(input, root);
+  return importReviewedSourceReal(input, root);
+};
+
+const importTranscript: typeof importTranscriptReal = async (input, root, dependencies) => {
+  await registerReviewedImport(input, root);
+  return importTranscriptReal(input, root, dependencies);
+};
 
 const substantialHtml = (suffix = 'stable') => Buffer.from(`<!doctype html>
 <html><head><title>FY25 Q4 earnings materials</title>
@@ -1429,6 +1519,21 @@ test('edge: reviewed manual import accepts a source without an optional speaker'
   }
 });
 
+test('failure: direct reviewed import fails closed when the candidate matrix is missing', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-import-no-matrix-'));
+
+  try {
+    await assert.rejects(
+      () => importReviewedSourceReal(transcriptImport(), directory),
+      /event candidate matrix.*required/i,
+    );
+    assert.deepEqual(loadRegistry(directory), { sources: [] });
+    await assert.rejects(() => readdir(advisorPaths(directory).raw), /ENOENT/);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
 test('failure: invalid reviewed source inputs leave no registry or raw partial write', async (t) => {
   const cases = [
     { name: 'missing reviewer', overrides: { reviewer: '' }, error: /reviewer/i },
@@ -1441,7 +1546,7 @@ test('failure: invalid reviewed source inputs leave no registry or raw partial w
       const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-invalid-import-'));
       try {
         await assert.rejects(
-          () => importReviewedSource(transcriptImport(testCase.overrides), directory),
+          () => importReviewedSourceReal(transcriptImport(testCase.overrides), directory),
           testCase.error,
         );
         assert.deepEqual(loadRegistry(directory), { sources: [] });
@@ -1473,7 +1578,7 @@ test('failure: transcript offsets must be bounded and nonoverlapping before any 
       const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-invalid-segments-'));
       try {
         await assert.rejects(
-          () => importTranscript(transcriptImport({ speakerSegments: testCase.speakerSegments }), directory),
+          () => importTranscriptReal(transcriptImport({ speakerSegments: testCase.speakerSegments }), directory),
           testCase.error,
         );
         assert.deepEqual(loadRegistry(directory), { sources: [] });
@@ -1779,7 +1884,8 @@ test('failure: rollback parent swap never removes outside-root content', async (
 
     assert.equal(swapped, true);
     assert.equal(await readFile(sentinel, 'utf8'), 'must survive rollback');
-    assert.deepEqual(loadRegistry(directory), { sources: [] });
+    assert.equal(loadRegistry(directory).sources.length, 1);
+    assert.equal(loadRegistry(directory).sources[0].collectionStatus, 'discovered');
     assert.equal((await readdir(movedRawDirectory)).some((name) => name.endsWith('.json')), true);
   } finally {
     await rm(directory, { recursive: true, force: true });
@@ -1847,19 +1953,46 @@ const advisorDomains = [
   'shareholder_return_risk',
 ] as const;
 
-const validCandidateMatrix = (): EventCandidate[] => Array.from({ length: 30 }, (_, index) => ({
-  id: `candidate-${String(index + 1).padStart(2, '0')}`,
-  workingTitle: `Decision under review ${index + 1}`,
-  domain: advisorDomains[index % advisorDomains.length],
-  decisionWindowStart: `20${String(10 + Math.floor(index / 4)).padStart(2, '0')}-01-01`,
-  decisionWindowEnd: `20${String(10 + Math.floor(index / 4)).padStart(2, '0')}-03-31`,
-  discoveryUrls: Array.from(
+const validCandidateMatrix = (): EventCandidate[] => Array.from({ length: 30 }, (_, index) => {
+  const id = `candidate-${String(index + 1).padStart(2, '0')}`;
+  const publishedAt = `20${String(10 + Math.floor(index / 4)).padStart(2, '0')}-01-01`;
+  const discoveryUrls = Array.from(
     { length: index < 10 ? 4 : 3 },
     (_, urlIndex) => `https://www.microsoft.com/advisor-source/${index + 1}/${urlIndex + 1}`,
-  ),
-  notes: 'The date and speaker must be confirmed from the linked primary material.',
-  status: 'approved_for_collection',
-}));
+  );
+  return {
+    id,
+    workingTitle: `Project Falcon ${index + 1} authorization decision`,
+    domain: advisorDomains[index % advisorDomains.length],
+    decisionWindowStart: publishedAt,
+    decisionWindowEnd: `20${String(10 + Math.floor(index / 4)).padStart(2, '0')}-03-31`,
+    discoveryUrls,
+    decisionWindowBasis: {
+      summary: `The dated authorization notice for ${id} defines the public decision window.`,
+      sourceUrls: [discoveryUrls[0]],
+      reviewerNote: 'Reviewed against the event-specific authorization date.',
+    },
+    sourceAssociations: discoveryUrls.map((canonicalUrl, urlIndex) => ({
+      canonicalUrl,
+      role: urlIndex === 0 ? 'direct_amy' as const : 'contemporaneous_context' as const,
+      sourceType: urlIndex === 0 ? 'earnings_webcast' : `event_filing_${urlIndex}`,
+      publishedAt,
+      temporalRelation: 'decision_time' as const,
+      relevanceClaim: `This source identifies the authorization and economics of Project Falcon ${index + 1}.`,
+      evidenceLocator: {
+        exactQuote: `${urlIndex === 0 ? 'Amy Hood ' : ''}decision evidence for Project Falcon ${index + 1} authorization decision`,
+        anchorTerms: [`Project Falcon ${index + 1}`, 'authorization'],
+        speaker: urlIndex === 0 ? 'Amy Hood' as const : null,
+      },
+      reviewStatus: 'reviewed' as const,
+      reviewerNote: `Reviewer verified the ${id} locator in this collected source.`,
+    })),
+    directEvidenceGap: null,
+    phase3Status: 'eligible',
+    notes: 'The authorization date and event-specific locator were reviewed in primary material.',
+    status: 'approved_for_collection',
+  };
+});
 
 const runAdvisorCli = (root: string, ...args: string[]) => spawnSync(
   process.execPath,
@@ -1880,6 +2013,32 @@ test('happy: candidate CLI accepts 30 candidates, five domains, and 100 unique d
     assert.equal(result.status, 0, result.stderr);
     assert.match(result.stdout, /30 candidates/i);
     assert.match(result.stdout, /100 unique discovery URLs/i);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: candidate CLI requires reviewed structured associations and a sourced window basis', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-candidates-associations-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+  const candidates = validCandidateMatrix() as Array<EventCandidate & {
+    sourceAssociations?: unknown[];
+    decisionWindowBasis?: unknown;
+  }>;
+  candidates[0].sourceAssociations = [];
+  candidates[0].decisionWindowBasis = {
+    summary: 'same quarter as an earnings call',
+    sourceUrls: [],
+    reviewerNote: '',
+  };
+
+  try {
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(candidatePath, `${JSON.stringify(candidates, null, 2)}\n`);
+    const result = runAdvisorCli(directory, 'candidates:check');
+
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /reviewed source association|decision window basis/i);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
@@ -1955,14 +2114,11 @@ const writeRegistryFixture = async (
   const fixtureCandidates = validCandidateMatrix();
   const discoveryUrls = fixtureCandidates
     .flatMap((candidate) => candidate.discoveryUrls)
-    .sort((left, right) => Number(candidateForDirect(right)) - Number(candidateForDirect(left)));
-  function candidateForDirect(sourceUrl: string) {
-    return fixtureCandidates.some((candidate) => candidate.discoveryUrls[0] === sourceUrl);
-  }
+    .sort((left, right) => Number(left.split('/').at(-1)) - Number(right.split('/').at(-1)));
   const candidateForUrl = new Map(
-    fixtureCandidates.flatMap((candidate) => candidate.discoveryUrls.map((sourceUrl, urlIndex) => [
-      sourceUrl,
-      { candidateId: candidate.id, direct: urlIndex === 0 },
+    fixtureCandidates.flatMap((candidate) => candidate.sourceAssociations.map((association, urlIndex) => [
+      association.canonicalUrl,
+      { candidateId: candidate.id, direct: urlIndex === 0, association },
     ] as const)),
   );
 
@@ -1971,7 +2127,7 @@ const writeRegistryFixture = async (
     const sourceRole = candidateForUrl.get(canonicalUrl)!;
     const linkedCandidate = fixtureCandidates.find(({ id }) => id === sourceRole.candidateId)!;
     const id = sourceIdForUrl(canonicalUrl);
-    const text = `Amy Hood decision evidence ${index + 1}. ${'Public Microsoft source context. '.repeat(12)}`;
+    const text = `${sourceRole.direct ? 'Amy Hood ' : ''}decision evidence for ${linkedCandidate.workingTitle}. The authorization is event-specific. ${'Public Microsoft source context. '.repeat(12)}`;
     const sha256 = createHash('sha256').update(text).digest('hex');
     const valid = index < options.validDocuments;
     const rawPath = valid ? `raw/${id}.json` : null;
@@ -1985,7 +2141,7 @@ const writeRegistryFixture = async (
       publisher: 'Microsoft',
       publishedAt: linkedCandidate.decisionWindowStart,
       speaker: sourceRole.direct ? 'Amy Hood' : null,
-      sourceType: sourceRole.direct ? 'earnings_webcast' : 'financial_context',
+      sourceType: sourceRole.association.sourceType,
       collector: 'microsoft_ir',
       temporalRole: 'decision_time',
       rightsNote: 'Public official source preserved with provenance.',
@@ -2023,12 +2179,12 @@ test('happy: source CLI verifies 100 discoveries and 50 artifact-backed document
   try {
     await mkdir(path.dirname(candidatePath), { recursive: true });
     await writeFile(candidatePath, `${JSON.stringify(validCandidateMatrix(), null, 2)}\n`);
-    await writeRegistryFixture(directory, { discoveries: 100, validDocuments: 50 });
+    await writeRegistryFixture(directory, { discoveries: 100, validDocuments: 60 });
     const result = runAdvisorCli(directory, 'sources:check');
 
     assert.equal(result.status, 0, result.stderr);
     assert.match(result.stdout, /100 discovered URLs/i);
-    assert.match(result.stdout, /50 valid documents/i);
+    assert.match(result.stdout, /60 valid documents/i);
 
     const registry = JSON.parse(await readFile(
       path.join(directory, 'data/b-track/amy-hood/advisor/source-registry.json'),
@@ -2046,7 +2202,7 @@ test('happy: source CLI verifies 100 discoveries and 50 artifact-backed document
     );
     const tampered = runAdvisorCli(directory, 'sources:check');
     assert.equal(tampered.status, 1);
-    assert.match(tampered.stderr, /49 valid documents/i);
+    assert.match(tampered.stderr, /59 valid documents/i);
 
     const externalArtifact = path.join(directory, 'external-normalized.txt');
     await writeFile(externalArtifact, originalNormalized);
@@ -2054,7 +2210,54 @@ test('happy: source CLI verifies 100 discoveries and 50 artifact-backed document
     await symlink(externalArtifact, normalizedPath);
     const linked = runAdvisorCli(directory, 'sources:check');
     assert.equal(linked.status, 1);
-    assert.match(linked.stderr, /49 valid documents/i);
+    assert.match(linked.stderr, /59 valid documents/i);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: GitHub cannot be covered by unrelated earnings and SEC artifacts', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-unrelated-github-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+
+  try {
+    const candidates = validCandidateMatrix();
+    candidates[0].workingTitle = 'GitHub acquisition authorization and transaction economics';
+    for (const association of candidates[0].sourceAssociations.slice(0, 2)) {
+      association.relevanceClaim = 'This artifact is asserted to support the GitHub acquisition economics.';
+      association.evidenceLocator.exactQuote = 'Microsoft will acquire GitHub for 7.5 billion dollars in stock';
+      association.evidenceLocator.anchorTerms = ['GitHub', '7.5 billion'];
+    }
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(candidatePath, `${JSON.stringify(candidates, null, 2)}\n`);
+    await writeRegistryFixture(directory, { discoveries: 100, validDocuments: 60 });
+
+    const result = runAdvisorCli(directory, 'sources:check');
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /candidate-01 lacks a reviewed event-relevant artifact/i);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: a generic Amy Hood mention is not a candidate-specific direct locator', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-generic-amy-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+
+  try {
+    const candidates = validCandidateMatrix();
+    candidates[0].workingTitle = 'GitHub acquisition authorization and transaction economics';
+    const direct = candidates[0].sourceAssociations[0];
+    direct.relevanceClaim = 'Amy Hood is named, without a located GitHub transaction passage.';
+    direct.evidenceLocator.exactQuote = 'Amy Hood decision evidence for Project Falcon 1 authorization decision';
+    direct.evidenceLocator.anchorTerms = ['Amy Hood', 'decision evidence'];
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(candidatePath, `${JSON.stringify(candidates, null, 2)}\n`);
+    await writeRegistryFixture(directory, { discoveries: 100, validDocuments: 60 });
+
+    const result = runAdvisorCli(directory, 'sources:check');
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /candidate-specific locator|direct Amy/i);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
@@ -2098,7 +2301,7 @@ test('failure: source CLI reports exact deficits and rejects unsafe command inpu
     assert.equal(check.status, 1);
     assert.match(check.stderr, /1 discovered URL below minimum/i);
     assert.match(check.stderr, /50 valid documents below minimum/i);
-    assert.match(check.stderr, /candidate-01 lacks a collected direct Amy passage/i);
+    assert.match(check.stderr, /candidate-01 lacks a verified candidate-specific direct Amy locator/i);
 
     const collect = runAdvisorCli(directory, 'source:collect', '--id', 'source-missing');
     assert.equal(collect.status, 1);
@@ -2116,7 +2319,7 @@ test('failure: source CLI reports exact deficits and rejects unsafe command inpu
     assert.deepEqual(await readdir(path.join(directory, 'data/b-track/amy-hood/advisor/raw')), []);
 
     await assert.rejects(
-      () => importReviewedSource(unregisteredPayload, directory),
+      () => importReviewedSourceReal(unregisteredPayload, directory),
       /canonical URL is not registered/i,
     );
     assert.equal(await readFile(registryPath, 'utf8'), beforeRegistry);

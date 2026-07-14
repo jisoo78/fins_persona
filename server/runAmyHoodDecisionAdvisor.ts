@@ -42,8 +42,25 @@ type CandidateCheck = {
 type SourceCheck = {
   discoveredUrlCount: number;
   validDocumentCount: number;
+  postOutcomeUrlCount: number;
   failedCount: number;
   reviewRequiredCount: number;
+};
+
+const normalizedSearchText = (value: string) => value.replace(/\s+/g, ' ').trim().toLowerCase();
+
+const candidateSpecificLocator = (candidate: EventCandidate, anchorTerms: string[]) => {
+  const ignored = new Set([
+    'acquisition', 'authorization', 'decision', 'economics', 'investment', 'microsoft',
+    'pricing', 'program', 'review', 'return', 'risk', 'under', 'with',
+  ]);
+  const titleTerms = candidate.workingTitle.toLowerCase().match(/[a-z0-9]+/g) ?? [];
+  return anchorTerms.some((anchor) => {
+    const normalizedAnchor = anchor.toLowerCase();
+    return titleTerms.some((term) => term.length >= 4
+      && !ignored.has(term)
+      && normalizedAnchor.includes(term));
+  });
 };
 
 const isIsoDate = (value: unknown): value is string => {
@@ -58,7 +75,10 @@ const isOutcomeOnlyTitle = (title: string) => {
   return outcome && !decision;
 };
 
-export const validateEventCandidates = (value: unknown): CandidateCheck => {
+export const validateEventCandidates = (
+  value: unknown,
+  options: { enforceDiscoveryRange?: boolean } = {},
+): CandidateCheck => {
   if (!Array.isArray(value)) throw new Error('event candidates must be a JSON array');
   if (value.length !== 30) throw new Error(`expected exactly 30 candidates; found ${value.length}`);
 
@@ -94,15 +114,101 @@ export const validateEventCandidates = (value: unknown): CandidateCheck => {
     if (candidate.decisionWindowStart > candidate.decisionWindowEnd) {
       throw new Error(`candidate ${candidate.id} has an inverted decision window`);
     }
+    if (!candidate.decisionWindowBasis
+      || typeof candidate.decisionWindowBasis.summary !== 'string'
+      || candidate.decisionWindowBasis.summary.trim().length < 20
+      || !Array.isArray(candidate.decisionWindowBasis.sourceUrls)
+      || candidate.decisionWindowBasis.sourceUrls.length === 0
+      || typeof candidate.decisionWindowBasis.reviewerNote !== 'string'
+      || candidate.decisionWindowBasis.reviewerNote.trim().length < 10) {
+      throw new Error(`candidate ${candidate.id} requires a sourced decision window basis`);
+    }
+    if (!Array.isArray(candidate.sourceAssociations) || candidate.sourceAssociations.length === 0) {
+      throw new Error(`candidate ${candidate.id} requires a reviewed source association`);
+    }
+    const reviewedAssociations = candidate.sourceAssociations.filter(
+      ({ reviewStatus }) => reviewStatus === 'reviewed',
+    );
+    if (reviewedAssociations.length === 0) {
+      throw new Error(`candidate ${candidate.id} requires a reviewed source association`);
+    }
+    for (const association of candidate.sourceAssociations) {
+      const canonicalUrl = canonicalizeSourceUrl(association.canonicalUrl);
+      if (!canonicalUrl.startsWith('https://')) {
+        throw new Error(`candidate ${candidate.id} association URL must use HTTPS`);
+      }
+      if (!['direct_amy', 'contemporaneous_context', 'counterevidence', 'post_outcome']
+        .includes(association.role)
+        || !['pre_decision', 'decision_time', 'post_outcome'].includes(association.temporalRelation)
+        || typeof association.sourceType !== 'string'
+        || association.sourceType.trim() === ''
+        || !isIsoDate(association.publishedAt)
+        || typeof association.relevanceClaim !== 'string'
+        || association.relevanceClaim.trim().length < 20
+        || !association.evidenceLocator
+        || typeof association.evidenceLocator.exactQuote !== 'string'
+        || association.evidenceLocator.exactQuote.trim().length < 20
+        || !Array.isArray(association.evidenceLocator.anchorTerms)
+        || association.evidenceLocator.anchorTerms.length < 2
+        || association.evidenceLocator.anchorTerms.every((term) => /^amy hood$/i.test(term.trim()))
+        || !['unreviewed', 'reviewed', 'rejected'].includes(association.reviewStatus)
+        || typeof association.reviewerNote !== 'string'
+        || association.reviewerNote.trim().length < 10) {
+        throw new Error(`candidate ${candidate.id} has an invalid source association`);
+      }
+      if (association.role === 'direct_amy' && association.evidenceLocator.speaker !== 'Amy Hood') {
+        throw new Error(`candidate ${candidate.id} direct Amy association requires an exact speaker locator`);
+      }
+      if (association.temporalRelation === 'decision_time'
+        && (association.publishedAt < candidate.decisionWindowStart
+          || association.publishedAt > candidate.decisionWindowEnd)) {
+        throw new Error(`candidate ${candidate.id} association contradicts its decision window`);
+      }
+      if (association.temporalRelation === 'pre_decision'
+        && association.publishedAt >= candidate.decisionWindowStart) {
+        throw new Error(`candidate ${candidate.id} association contradicts its pre-decision relation`);
+      }
+      if (association.temporalRelation === 'post_outcome'
+        && association.publishedAt <= candidate.decisionWindowEnd) {
+        throw new Error(`candidate ${candidate.id} association contradicts its post-outcome relation`);
+      }
+      if (association.reviewStatus === 'reviewed' && association.temporalRelation !== 'post_outcome') {
+        urls.add(canonicalUrl);
+      }
+    }
+    const associationUrls = new Set(candidate.sourceAssociations.map(
+      ({ canonicalUrl }) => canonicalizeSourceUrl(canonicalUrl),
+    ));
+    for (const basisUrl of candidate.decisionWindowBasis.sourceUrls) {
+      if (!associationUrls.has(canonicalizeSourceUrl(basisUrl))) {
+        throw new Error(`candidate ${candidate.id} window-basis source lacks an association`);
+      }
+    }
+    const reviewedDirect = reviewedAssociations.some(({ role }) => role === 'direct_amy');
+    if (reviewedDirect === Boolean(candidate.directEvidenceGap)) {
+      throw new Error(`candidate ${candidate.id} must record either direct Amy evidence or a reviewed directEvidenceGap`);
+    }
+    if (candidate.directEvidenceGap) {
+      if (candidate.directEvidenceGap.reviewStatus !== 'reviewed'
+        || candidate.directEvidenceGap.reason.trim().length < 20
+        || candidate.directEvidenceGap.reviewerNote.trim().length < 10
+        || candidate.phase3Status !== 'evidence_gap') {
+        throw new Error(`candidate ${candidate.id} has an invalid directEvidenceGap`);
+      }
+    } else if (candidate.phase3Status !== 'eligible') {
+      throw new Error(`candidate ${candidate.id} with direct evidence must be Phase 3 eligible`);
+    }
     if (!Array.isArray(candidate.discoveryUrls) || candidate.discoveryUrls.length === 0) {
-      throw new Error(`candidate ${candidate.id} must include discovery URLs`);
+      throw new Error(`candidate ${candidate.id} must include compatibility discovery URLs`);
     }
     for (const sourceUrl of candidate.discoveryUrls) {
       const canonicalUrl = canonicalizeSourceUrl(sourceUrl);
       if (!canonicalUrl.startsWith('https://')) {
         throw new Error(`candidate ${candidate.id} discovery URL must use HTTPS`);
       }
-      urls.add(canonicalUrl);
+      if (!associationUrls.has(canonicalUrl)) {
+        throw new Error(`candidate ${candidate.id} discovery URL lacks a source association`);
+      }
     }
     if (typeof candidate.notes !== 'string' || typeof candidate.status !== 'string') {
       throw new Error(`candidate ${candidate.id} has invalid review metadata`);
@@ -114,7 +220,7 @@ export const validateEventCandidates = (value: unknown): CandidateCheck => {
       throw new Error(`domain ${domain} requires at least 4 candidates; found ${domainCounts[domain]}`);
     }
   }
-  if (urls.size < 100 || urls.size > 150) {
+  if (options.enforceDiscoveryRange !== false && (urls.size < 100 || urls.size > 150)) {
     throw new Error(`expected 100-150 unique discovery URLs; found ${urls.size}`);
   }
 
@@ -146,7 +252,9 @@ const verifySourceArtifact = async (root: string, source: AdvisorSourceRecord) =
     const rawBytes = await readAdvisorArtifactSecure(root, source.rawPath);
     const raw = JSON.parse(rawBytes.toString('utf8')) as AdvisorRawSource;
     if (raw.sourceId !== source.id
-      || raw.canonicalUrl !== source.canonicalUrl
+      || typeof raw.canonicalUrl !== 'string'
+      || new URL(raw.canonicalUrl).hostname !== new URL(source.canonicalUrl).hostname
+      || raw.metadata?.canonicalUrl !== source.canonicalUrl
       || raw.metadata?.id !== source.id
       || raw.metadata?.sha256 !== source.sha256
       || raw.metadata?.capturedAt !== source.capturedAt
@@ -192,39 +300,81 @@ export const checkSourceInventory = async (
 ): Promise<SourceCheck> => {
   const registry = loadRegistry(root);
   const candidateIds = new Set(candidates.map(({ id }) => id));
-  const candidateUrls = new Set(
-    candidates.flatMap(({ discoveryUrls }) => discoveryUrls.map(canonicalizeSourceUrl)),
-  );
-  const canonicalUrls = new Set<string>();
-  const sourcesByCandidate = new Map<string, AdvisorSourceRecord[]>();
-  const verifiedArtifacts = new Map<string, Awaited<ReturnType<typeof verifySourceArtifact>>>();
-  let validDocumentCount = 0;
+  const associationsByUrl = new Map<string, Array<{
+    candidate: EventCandidate;
+    association: EventCandidate['sourceAssociations'][number];
+  }>>();
+  for (const candidate of candidates) {
+    for (const association of candidate.sourceAssociations) {
+      const canonicalUrl = canonicalizeSourceUrl(association.canonicalUrl);
+      associationsByUrl.set(canonicalUrl, [
+        ...(associationsByUrl.get(canonicalUrl) ?? []),
+        { candidate, association },
+      ]);
+    }
+  }
+  const reviewedCoreUrls = new Set<string>();
+  const reviewedPostOutcomeUrls = new Set<string>();
+  for (const [canonicalUrl, links] of associationsByUrl) {
+    if (links.some(({ association }) => association.reviewStatus === 'reviewed'
+      && association.temporalRelation !== 'post_outcome')) reviewedCoreUrls.add(canonicalUrl);
+    if (links.some(({ association }) => association.reviewStatus === 'reviewed'
+      && association.temporalRelation === 'post_outcome')) reviewedPostOutcomeUrls.add(canonicalUrl);
+  }
+  const matchedByCandidate = new Map<string, Array<{
+    source: AdvisorSourceRecord;
+    role: EventCandidate['sourceAssociations'][number]['role'];
+  }>>();
+  const validSourceIds = new Set<string>();
+  const registryUrls = new Set(registry.sources.map(({ canonicalUrl }) => canonicalUrl));
 
   for (const source of registry.sources) {
-    canonicalUrls.add(source.canonicalUrl);
-    if (!candidateUrls.has(source.canonicalUrl)) {
+    const associationLinks = associationsByUrl.get(source.canonicalUrl) ?? [];
+    if (associationLinks.length === 0) {
       throw new Error(`registry source is not linked from the candidate matrix: ${source.id}`);
     }
     if (source.eventCandidateIds.length === 0
       || source.eventCandidateIds.some((id) => !candidateIds.has(id))) {
       throw new Error(`registry source has an unknown candidate link: ${source.id}`);
     }
-    for (const candidateId of source.eventCandidateIds) {
-      sourcesByCandidate.set(candidateId, [
-        ...(sourcesByCandidate.get(candidateId) ?? []),
-        source,
+    const artifact = await verifySourceArtifact(root, source);
+    if (!artifact) continue;
+    for (const { candidate, association } of associationLinks) {
+      if (!source.eventCandidateIds.includes(candidate.id)
+        || association.reviewStatus !== 'reviewed'
+        || association.temporalRelation === 'post_outcome'
+        || association.sourceType !== source.sourceType
+        || association.publishedAt !== source.publishedAt
+        || association.temporalRelation !== source.temporalRole
+        || !temporalRoleMatches(source, [candidate])
+        || !candidateSpecificLocator(candidate, association.evidenceLocator.anchorTerms)) continue;
+      const searchable = normalizedSearchText(artifact.normalizedText);
+      const exactQuote = normalizedSearchText(association.evidenceLocator.exactQuote);
+      const quoteIndex = searchable.indexOf(exactQuote);
+      if (quoteIndex < 0) continue;
+      const locatorWindow = searchable.slice(
+        Math.max(0, quoteIndex - 1500),
+        quoteIndex + exactQuote.length + 1500,
+      );
+      if (!association.evidenceLocator.anchorTerms.every((term) =>
+        locatorWindow.includes(normalizedSearchText(term)))) continue;
+      if (association.role === 'direct_amy') {
+        if (association.evidenceLocator.speaker !== 'Amy Hood'
+          || source.speaker !== 'Amy Hood'
+          || !locatorWindow.includes('amy hood')) continue;
+      }
+      validSourceIds.add(source.id);
+      matchedByCandidate.set(candidate.id, [
+        ...(matchedByCandidate.get(candidate.id) ?? []),
+        { source, role: association.role },
       ]);
     }
-    const linkedCandidates = source.eventCandidateIds.map((id) =>
-      candidates.find((candidate) => candidate.id === id)!);
-    const artifact = await verifySourceArtifact(root, source);
-    verifiedArtifacts.set(source.id, artifact);
-    if (artifact && temporalRoleMatches(source, linkedCandidates)) validDocumentCount += 1;
   }
 
   const result: SourceCheck = {
-    discoveredUrlCount: canonicalUrls.size,
-    validDocumentCount,
+    discoveredUrlCount: [...reviewedCoreUrls].filter((url) => registryUrls.has(url)).length,
+    validDocumentCount: validSourceIds.size,
+    postOutcomeUrlCount: [...reviewedPostOutcomeUrls].filter((url) => registryUrls.has(url)).length,
     failedCount: registry.sources.filter(({ collectionStatus }) => collectionStatus === 'failed').length,
     reviewRequiredCount: registry.sources.filter(
       ({ collectionStatus }) => collectionStatus === 'review_required',
@@ -232,25 +382,16 @@ export const checkSourceInventory = async (
   };
   const deficits: string[] = [];
   for (const candidate of candidates) {
-    const linked = sourcesByCandidate.get(candidate.id) ?? [];
-    const directLead = linked.find((source) => {
-      const artifact = verifiedArtifacts.get(source.id);
-      if (!artifact
-        || source.tier !== 1
-        || source.speaker !== 'Amy Hood'
-        || !temporalRoleMatches(source, [candidate])) return false;
-      if (source.collector === 'transcript_import') {
-        return Array.isArray(artifact.raw.speakerSegments)
-          && artifact.raw.speakerSegments.some((segment) =>
-            typeof segment === 'object'
-            && segment !== null
-            && (segment as { speaker?: unknown }).speaker === 'Amy Hood');
-      }
-      return /\bAmy Hood\b/i.test(artifact.normalizedText);
-    });
-    if (!directLead) deficits.push(`${candidate.id} lacks a collected direct Amy passage`);
-    if (new Set(linked.map(({ sourceType }) => sourceType)).size < 2) {
-      deficits.push(`${candidate.id} lacks a second source-type lead`);
+    const matched = matchedByCandidate.get(candidate.id) ?? [];
+    if (matched.length === 0) {
+      deficits.push(`${candidate.id} lacks a reviewed event-relevant artifact`);
+    }
+    if (new Set(matched.map(({ source }) => source.sourceType)).size < 2) {
+      deficits.push(`${candidate.id} lacks a reviewed collected second source type`);
+    }
+    if (!candidate.directEvidenceGap
+      && !matched.some(({ role }) => role === 'direct_amy')) {
+      deficits.push(`${candidate.id} lacks a verified candidate-specific direct Amy locator`);
     }
   }
   if (result.discoveredUrlCount < 100) {
@@ -259,6 +400,9 @@ export const checkSourceInventory = async (
   }
   if (result.discoveredUrlCount > 150) {
     deficits.push(`${result.discoveredUrlCount - 150} discovered URLs above maximum`);
+  }
+  if (result.postOutcomeUrlCount > 25) {
+    deficits.push(`${result.postOutcomeUrlCount - 25} post-outcome URLs above maximum`);
   }
   if (result.validDocumentCount < 50) {
     deficits.push(`${50 - result.validDocumentCount} valid documents below minimum`);
@@ -326,10 +470,10 @@ const run = async () => {
       'data/b-track/amy-hood/advisor/event-candidates.json',
     );
     const candidates = JSON.parse(readFileSync(candidatePath, 'utf8')) as EventCandidate[];
-    validateEventCandidates(candidates);
+    validateEventCandidates(candidates, { enforceDiscoveryRange: false });
     const result = await checkSourceInventory(root, candidates);
     console.log(
-      `Source registry valid: ${result.discoveredUrlCount} discovered URLs, ${result.validDocumentCount} valid documents, ${result.reviewRequiredCount} review required, ${result.failedCount} failed.`,
+      `Source registry valid: ${result.discoveredUrlCount} discovered URLs, ${result.validDocumentCount} valid documents, ${result.postOutcomeUrlCount} post-outcome URLs, ${result.reviewRequiredCount} review required, ${result.failedCount} failed.`,
     );
     return;
   }

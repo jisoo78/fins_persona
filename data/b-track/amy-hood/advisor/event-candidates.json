@@ -1,435 +1,1348 @@
 [
   {
-    "id": "candidate-nokia-integration-2014",
-    "workingTitle": "Nokia devices integration and restructuring scope",
+    "id": "candidate-nokia-acquisition-2013",
+    "workingTitle": "Nokia devices and services acquisition authorization",
     "domain": "m_and_a",
-    "decisionWindowStart": "2014-06-17",
-    "decisionWindowEnd": "2014-08-26",
+    "decisionWindowStart": "2013-09-03",
+    "decisionWindowEnd": "2013-09-03",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q4/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000119312526258667/d26760d8k.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2013-Q4/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/events/fy-2023/ai-discussion-with-amy-hood-evp-and-cfo-and-kevin-scott-evp-of-ai-and-cto"
+      "https://news.microsoft.com/source/2013/09/03/microsoft-to-acquire-nokias-devices-services-business-license-nokias-patents-and-mapping-services/"
     ],
-    "notes": "Disclosure window proxies the internal integration decision; exact approval boundary is uncertain. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2013/09/03/microsoft-to-acquire-nokias-devices-services-business-license-nokias-patents-and-mapping-services/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://news.microsoft.com/source/2013/09/03/microsoft-to-acquire-nokias-devices-services-business-license-nokias-patents-and-mapping-services/",
+        "role": "contemporaneous_context",
+        "sourceType": "official_announcement",
+        "publishedAt": "2013-09-03",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of Nokia devices and services acquisition authorization.",
+        "evidenceLocator": {
+          "exactQuote": "Microsoft Corporation and Nokia Corporation today announced that the Boards of Directors for both companies have decided to enter into a transaction",
+          "anchorTerms": [
+            "Nokia",
+            "Boards of Directors"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
     "id": "candidate-mojang-acquisition-2014",
-    "workingTitle": "Mojang acquisition capital allocation",
+    "workingTitle": "Mojang and Minecraft acquisition for 2.5 billion dollars",
     "domain": "m_and_a",
-    "decisionWindowStart": "2014-09-18",
-    "decisionWindowEnd": "2014-11-27",
+    "decisionWindowStart": "2014-09-15",
+    "decisionWindowEnd": "2014-09-15",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2015-Q1/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000119312526224155/d125909d8k.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q2/press-release-webcast",
-      "https://www.microsoft.com/en-us/investor/events/fy-2026/2025-annual-shareholder-meeting"
+      "https://news.microsoft.com/es-xl/minecraft-se-une-a-microsoft/"
     ],
-    "notes": "Earnings evidence is contemporaneous context; exact internal approval date remains review-required. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://news.microsoft.com/es-xl/minecraft-se-une-a-microsoft/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://news.microsoft.com/es-xl/minecraft-se-une-a-microsoft/",
+        "role": "contemporaneous_context",
+        "sourceType": "official_announcement",
+        "publishedAt": "2014-09-15",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of Mojang and Minecraft acquisition for 2.5 billion dollars.",
+        "evidenceLocator": {
+          "exactQuote": "Microsoft anunció que ha alcanzado un acuerdo para adquirir Mojang",
+          "anchorTerms": [
+            "Mojang",
+            "2 mil quinientos millones"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
     "id": "candidate-linkedin-acquisition-2016",
-    "workingTitle": "LinkedIn acquisition price, dilution, and financing",
+    "workingTitle": "LinkedIn acquisition price financing and dilution",
     "domain": "m_and_a",
-    "decisionWindowStart": "2016-05-09",
-    "decisionWindowEnd": "2016-07-18",
+    "decisionWindowStart": "2016-06-13",
+    "decisionWindowEnd": "2016-06-13",
     "discoveryUrls": [
-      "https://news.microsoft.com/speeches/microsoft-and-linkedin-conference-call-chris-suh-satya-nadella-jeff-weiner-amy-hood-brad-smith/",
-      "https://www.sec.gov/Archives/edgar/data/789019/000119312526191507/msft-20260331.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q3/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000119312523291720/d636199d8k.htm"
+      "https://news.microsoft.com/source/2016/06/13/microsoft-to-acquire-linkedin/"
     ],
-    "notes": "Official acquisition conference call contains Amy Hood remarks. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2016/06/13/microsoft-to-acquire-linkedin/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://news.microsoft.com/source/2016/06/13/microsoft-to-acquire-linkedin/",
+        "role": "contemporaneous_context",
+        "sourceType": "official_announcement",
+        "publishedAt": "2016-06-13",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of LinkedIn acquisition price financing and dilution.",
+        "evidenceLocator": {
+          "exactQuote": "Microsoft will acquire LinkedIn for $196 per share in an all-cash transaction valued at $26.2 billion",
+          "anchorTerms": [
+            "LinkedIn",
+            "$26.2 billion"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
     "id": "candidate-github-acquisition-2018",
-    "workingTitle": "GitHub acquisition and developer-platform investment",
+    "workingTitle": "GitHub acquisition for 7.5 billion dollars in stock",
     "domain": "m_and_a",
-    "decisionWindowStart": "2018-06-14",
-    "decisionWindowEnd": "2018-08-23",
+    "decisionWindowStart": "2018-06-04",
+    "decisionWindowEnd": "2018-06-04",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2018-Q4/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000119312526191457/msft-20260429.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2015-Q2/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000119312523271376/d566386d8k.htm"
+      "https://news.microsoft.com/source/2018/06/04/microsoft-to-acquire-github-for-7-5-billion/"
     ],
-    "notes": "Quarterly Amy evidence follows the announced transaction; internal approval boundary is uncertain. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2018/06/04/microsoft-to-acquire-github-for-7-5-billion/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://news.microsoft.com/source/2018/06/04/microsoft-to-acquire-github-for-7-5-billion/",
+        "role": "contemporaneous_context",
+        "sourceType": "official_announcement",
+        "publishedAt": "2018-06-04",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of GitHub acquisition for 7.5 billion dollars in stock.",
+        "evidenceLocator": {
+          "exactQuote": "Microsoft will acquire GitHub for $7.5 billion in Microsoft stock",
+          "anchorTerms": [
+            "GitHub",
+            "$7.5 billion"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
     "id": "candidate-nuance-acquisition-2021",
-    "workingTitle": "Nuance acquisition and healthcare-cloud expansion",
+    "workingTitle": "Nuance healthcare cloud acquisition for 19.7 billion dollars",
     "domain": "m_and_a",
-    "decisionWindowStart": "2021-03-23",
-    "decisionWindowEnd": "2021-06-01",
+    "decisionWindowStart": "2021-04-12",
+    "decisionWindowEnd": "2021-04-12",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2021-Q3/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000119312526027207/msft-20251231.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2015-Q3/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000119312523265616/d572684d8k.htm"
+      "https://news.microsoft.com/source/2021/04/12/microsoft-accelerates-industry-cloud-strategy-for-healthcare-with-the-acquisition-of-nuance/"
     ],
-    "notes": "Contemporaneous earnings evidence; transaction approval date is not inferred. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2021/04/12/microsoft-accelerates-industry-cloud-strategy-for-healthcare-with-the-acquisition-of-nuance/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://news.microsoft.com/source/2021/04/12/microsoft-accelerates-industry-cloud-strategy-for-healthcare-with-the-acquisition-of-nuance/",
+        "role": "contemporaneous_context",
+        "sourceType": "official_announcement",
+        "publishedAt": "2021-04-12",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of Nuance healthcare cloud acquisition for 19.7 billion dollars.",
+        "evidenceLocator": {
+          "exactQuote": "Microsoft will acquire Nuance for $56.00 per share",
+          "anchorTerms": [
+            "Nuance",
+            "$19.7 billion"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
     "id": "candidate-activision-acquisition-2022",
-    "workingTitle": "Activision Blizzard acquisition and integration economics",
+    "workingTitle": "Activision Blizzard acquisition for 68.7 billion dollars",
     "domain": "m_and_a",
-    "decisionWindowStart": "2021-12-21",
-    "decisionWindowEnd": "2022-03-01",
+    "decisionWindowStart": "2022-01-18",
+    "decisionWindowEnd": "2022-01-18",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2022-Q2/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000119312526027198/msft-20260128.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2016-Q1/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000095017023054855/msft-20230930.htm"
+      "https://news.microsoft.com/source/2022/01/18/microsoft-to-acquire-activision-blizzard-to-bring-the-joy-and-community-of-gaming-to-everyone-across-every-device/"
     ],
-    "notes": "Contemporaneous Amy remarks after announcement; later closing success is excluded. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-azure-capacity-2017",
-    "workingTitle": "Azure capacity expansion during enterprise cloud acceleration",
-    "domain": "ai_cloud_capex",
-    "decisionWindowStart": "2017-09-21",
-    "decisionWindowEnd": "2017-11-30",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2018-Q1/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000119312525311196/d34077d8k.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2016-Q2/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000095017023054848/msft-20231024.htm"
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2022/01/18/microsoft-to-acquire-activision-blizzard-to-bring-the-joy-and-community-of-gaming-to-everyone-across-every-device/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://news.microsoft.com/source/2022/01/18/microsoft-to-acquire-activision-blizzard-to-bring-the-joy-and-community-of-gaming-to-everyone-across-every-device/",
+        "role": "contemporaneous_context",
+        "sourceType": "official_announcement",
+        "publishedAt": "2022-01-18",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of Activision Blizzard acquisition for 68.7 billion dollars.",
+        "evidenceLocator": {
+          "exactQuote": "Microsoft will acquire Activision Blizzard for $95.00 per share",
+          "anchorTerms": [
+            "Activision Blizzard",
+            "$68.7 billion"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
     ],
-    "notes": "Disclosure window represents capacity planning evidence, not an invented internal approval date. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
     "id": "candidate-openai-partnership-2019",
-    "workingTitle": "Initial OpenAI partnership and Azure supercomputing investment",
+    "workingTitle": "OpenAI Azure exclusive computing partnership investment",
     "domain": "ai_cloud_capex",
-    "decisionWindowStart": "2019-06-13",
-    "decisionWindowEnd": "2019-08-22",
+    "decisionWindowStart": "2019-07-22",
+    "decisionWindowEnd": "2019-07-22",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2019-Q4/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000119312525256321/msft-20250930.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2016-Q3/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000110465923109428/tm2328507d1_8k.htm"
+      "https://blogs.microsoft.com/blog/2019/07/22/openai-forms-exclusive-computing-partnership-with-microsoft-to-build-new-azure-ai-supercomputing-technologies/"
     ],
-    "notes": "Quarterly evidence is contemporaneous with the partnership period. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://blogs.microsoft.com/blog/2019/07/22/openai-forms-exclusive-computing-partnership-with-microsoft-to-build-new-azure-ai-supercomputing-technologies/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://blogs.microsoft.com/blog/2019/07/22/openai-forms-exclusive-computing-partnership-with-microsoft-to-build-new-azure-ai-supercomputing-technologies/",
+        "role": "contemporaneous_context",
+        "sourceType": "corporate_blog",
+        "publishedAt": "2019-07-22",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of OpenAI Azure exclusive computing partnership investment.",
+        "evidenceLocator": {
+          "exactQuote": "Microsoft is investing $1 billion in OpenAI",
+          "anchorTerms": [
+            "OpenAI",
+            "$1 billion"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-cloud-capacity-pandemic-2020",
-    "workingTitle": "Cloud capacity ramp during pandemic demand shock",
+    "id": "candidate-gpt3-license-2020",
+    "workingTitle": "OpenAI GPT-3 exclusive license on Azure supercomputer",
     "domain": "ai_cloud_capex",
-    "decisionWindowStart": "2020-06-17",
-    "decisionWindowEnd": "2020-08-26",
+    "decisionWindowStart": "2020-09-22",
+    "decisionWindowEnd": "2020-09-22",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2020-Q4/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000119312525256310/msft-20251028.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2016-Q4/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000119312523255762/d537928d8k.htm"
+      "https://blogs.microsoft.com/blog/2020/09/22/microsoft-teams-up-with-openai-to-exclusively-license-gpt-3-language-model/"
     ],
-    "notes": "Amy remarks expose demand, capacity, and margin tradeoffs. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://blogs.microsoft.com/blog/2020/09/22/microsoft-teams-up-with-openai-to-exclusively-license-gpt-3-language-model/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://blogs.microsoft.com/blog/2020/09/22/microsoft-teams-up-with-openai-to-exclusively-license-gpt-3-language-model/",
+        "role": "contemporaneous_context",
+        "sourceType": "corporate_blog",
+        "publishedAt": "2020-09-22",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of GPT-3 exclusive license on Azure supercomputer.",
+        "evidenceLocator": {
+          "exactQuote": "Microsoft is teaming up with OpenAI to exclusively license GPT-3",
+          "anchorTerms": [
+            "OpenAI",
+            "GPT-3"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
     "id": "candidate-openai-expansion-2023",
-    "workingTitle": "Expanded OpenAI partnership and multiyear infrastructure ramp",
+    "workingTitle": "Expanded OpenAI multiyear multibillion dollar partnership",
     "domain": "ai_cloud_capex",
-    "decisionWindowStart": "2022-12-20",
-    "decisionWindowEnd": "2023-02-28",
+    "decisionWindowStart": "2023-01-23",
+    "decisionWindowEnd": "2023-01-23",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q2/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000119312525225125/d863209d8k.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2017-Q2/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000119312523254151/d530324d8k.htm"
+      "https://blogs.microsoft.com/blog/2023/01/23/microsoftandopenaiextendpartnership/"
     ],
-    "notes": "Decision-time disclosure only; subsequent AI outcomes are excluded. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://blogs.microsoft.com/blog/2023/01/23/microsoftandopenaiextendpartnership/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://blogs.microsoft.com/blog/2023/01/23/microsoftandopenaiextendpartnership/",
+        "role": "contemporaneous_context",
+        "sourceType": "corporate_blog",
+        "publishedAt": "2023-01-23",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of Expanded OpenAI multiyear multibillion dollar partnership.",
+        "evidenceLocator": {
+          "exactQuote": "multiyear, multibillion dollar investment",
+          "anchorTerms": [
+            "OpenAI",
+            "supercomputing systems"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-ai-capacity-ramp-2024",
-    "workingTitle": "FY2025 AI infrastructure capacity ramp and margin tradeoff",
+    "id": "candidate-ai-datacenter-plan-2025",
+    "workingTitle": "Fiscal 2025 eighty billion dollar AI datacenter plan",
     "domain": "ai_cloud_capex",
-    "decisionWindowStart": "2024-06-25",
-    "decisionWindowEnd": "2024-09-03",
+    "decisionWindowStart": "2025-01-03",
+    "decisionWindowEnd": "2025-01-03",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q4/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2017-Q3/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000095017023035122/msft-20230630.htm"
+      "https://blogs.microsoft.com/on-the-issues/2025/01/03/the-golden-opportunity-for-american-ai/"
     ],
-    "notes": "Amy directly discusses investment sequencing and margin pressure. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://blogs.microsoft.com/on-the-issues/2025/01/03/the-golden-opportunity-for-american-ai/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://blogs.microsoft.com/on-the-issues/2025/01/03/the-golden-opportunity-for-american-ai/",
+        "role": "contemporaneous_context",
+        "sourceType": "corporate_blog",
+        "publishedAt": "2025-01-03",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of Fiscal 2025 eighty billion dollar AI datacenter plan.",
+        "evidenceLocator": {
+          "exactQuote": "Microsoft is on track to invest approximately $80 billion to build out AI-enabled datacenters",
+          "anchorTerms": [
+            "AI-enabled datacenters",
+            "$80 billion"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-ai-fleet-sequencing-2025",
-    "workingTitle": "AI fleet utilization and capacity sequencing",
+    "id": "candidate-fairwater-expansion-2025",
+    "workingTitle": "Wisconsin Fairwater AI datacenter expansion investment",
     "domain": "ai_cloud_capex",
-    "decisionWindowStart": "2025-01-28",
-    "decisionWindowEnd": "2025-04-08",
+    "decisionWindowStart": "2025-09-18",
+    "decisionWindowEnd": "2025-09-18",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/events/fy-2025/morgan-stanley-tmt-conference",
-      "https://www.sec.gov/Archives/edgar/data/789019/000095017025100226/msft-20250730.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2018-Q2/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000095017023034400/msft-20230725.htm"
+      "https://blogs.microsoft.com/on-the-issues/2025/09/18/made-in-wisconsin-the-worlds-most-powerful-ai-datacenter/"
     ],
-    "notes": "Direct Amy conference interview. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://blogs.microsoft.com/on-the-issues/2025/09/18/made-in-wisconsin-the-worlds-most-powerful-ai-datacenter/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://blogs.microsoft.com/on-the-issues/2025/09/18/made-in-wisconsin-the-worlds-most-powerful-ai-datacenter/",
+        "role": "contemporaneous_context",
+        "sourceType": "corporate_blog",
+        "publishedAt": "2025-09-18",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of Wisconsin Fairwater AI datacenter expansion investment.",
+        "evidenceLocator": {
+          "exactQuote": "committing an additional $4 billion to be spent in the next three years",
+          "anchorTerms": [
+            "Wisconsin",
+            "$4 billion"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-office365-pricing-2021",
-    "workingTitle": "Microsoft 365 commercial price increase",
+    "id": "candidate-pecos-datacenter-2026",
+    "workingTitle": "Pecos two gigawatt AI datacenter capacity investment",
+    "domain": "ai_cloud_capex",
+    "decisionWindowStart": "2026-06-22",
+    "decisionWindowEnd": "2026-06-22",
+    "discoveryUrls": [
+      "https://blogs.microsoft.com/blog/2026/06/22/powering-the-next-wave-of-ai-expanding-capacity-with-our-new-datacenter-in-pecos/"
+    ],
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://blogs.microsoft.com/blog/2026/06/22/powering-the-next-wave-of-ai-expanding-capacity-with-our-new-datacenter-in-pecos/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://blogs.microsoft.com/blog/2026/06/22/powering-the-next-wave-of-ai-expanding-capacity-with-our-new-datacenter-in-pecos/",
+        "role": "contemporaneous_context",
+        "sourceType": "corporate_blog",
+        "publishedAt": "2026-06-22",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of Pecos two gigawatt AI datacenter capacity investment.",
+        "evidenceLocator": {
+          "exactQuote": "expanding our global datacenter capacity by approximately 2 gigawatts",
+          "anchorTerms": [
+            "Pecos",
+            "2 gigawatts"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-m365-price-2021",
+    "workingTitle": "Microsoft 365 precios comerciales price increase",
     "domain": "pricing_monetization",
-    "decisionWindowStart": "2021-09-21",
-    "decisionWindowEnd": "2021-11-30",
+    "decisionWindowStart": "2021-08-19",
+    "decisionWindowEnd": "2021-08-19",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2022-Q1/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000119312525154103/d84624d8k.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2018-Q3/press-release-webcast"
+      "https://news.microsoft.com/es-xl/nuevo-precio-para-microsoft-365/"
     ],
-    "notes": "Earnings evidence tests value realization around the announced pricing change. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://news.microsoft.com/es-xl/nuevo-precio-para-microsoft-365/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://news.microsoft.com/es-xl/nuevo-precio-para-microsoft-365/",
+        "role": "contemporaneous_context",
+        "sourceType": "official_announcement",
+        "publishedAt": "2021-08-19",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of Microsoft 365 first substantive commercial price increase.",
+        "evidenceLocator": {
+          "exactQuote": "el primer ajuste de precios sustancial desde que lanzamos Office 365",
+          "anchorTerms": [
+            "Microsoft 365",
+            "precios comerciales"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-copilot-pricing-2023",
-    "workingTitle": "Microsoft 365 Copilot per-user pricing decision",
+    "id": "candidate-office2021-price-2021",
+    "workingTitle": "Office 2021 perpetual license pricing decision",
     "domain": "pricing_monetization",
-    "decisionWindowStart": "2023-06-20",
-    "decisionWindowEnd": "2023-08-29",
+    "decisionWindowStart": "2021-10-01",
+    "decisionWindowEnd": "2021-10-01",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q4/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000095017025061046/msft-20250331.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2019-Q1/press-release-webcast"
+      "https://www.microsoft.com/en-us/microsoft-365/blog/2021/10/01/its-easier-to-create-together-with-microsoft-365-and-office-2021/"
     ],
-    "notes": "Contemporaneous Amy monetization and demand commentary. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://www.microsoft.com/en-us/microsoft-365/blog/2021/10/01/its-easier-to-create-together-with-microsoft-365-and-office-2021/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://www.microsoft.com/en-us/microsoft-365/blog/2021/10/01/its-easier-to-create-together-with-microsoft-365-and-office-2021/",
+        "role": "contemporaneous_context",
+        "sourceType": "product_announcement",
+        "publishedAt": "2021-10-01",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of Office 2021 perpetual license pricing decision.",
+        "evidenceLocator": {
+          "exactQuote": "Office Home and Student 2021 is $149.99 USD",
+          "anchorTerms": [
+            "Office Home and Student 2021",
+            "$149.99"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-teams-unbundling-2023",
-    "workingTitle": "Teams unbundling and Microsoft 365 packaging response",
+    "id": "candidate-copilot-price-2023",
+    "workingTitle": "Microsoft 365 Copilot thirty dollar pricing",
     "domain": "pricing_monetization",
-    "decisionWindowStart": "2023-09-19",
-    "decisionWindowEnd": "2023-11-28",
+    "decisionWindowStart": "2023-07-18",
+    "decisionWindowEnd": "2023-07-18",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q1/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000095017025061032/msft-20250430.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2019-Q2/press-release-webcast"
+      "https://www.microsoft.com/en-us/microsoft-365/blog/2023/07/18/introducing-bing-chat-enterprise-microsoft-365-copilot-pricing-and-microsoft-sales-copilot/"
     ],
-    "notes": "Disclosure window follows the packaging change; regulatory causality requires review. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://www.microsoft.com/en-us/microsoft-365/blog/2023/07/18/introducing-bing-chat-enterprise-microsoft-365-copilot-pricing-and-microsoft-sales-copilot/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://www.microsoft.com/en-us/microsoft-365/blog/2023/07/18/introducing-bing-chat-enterprise-microsoft-365-copilot-pricing-and-microsoft-sales-copilot/",
+        "role": "contemporaneous_context",
+        "sourceType": "product_announcement",
+        "publishedAt": "2023-07-18",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of Microsoft 365 Copilot thirty dollar pricing.",
+        "evidenceLocator": {
+          "exactQuote": "USD30 per user per month",
+          "anchorTerms": [
+            "Copilot for Microsoft 365",
+            "USD30"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-copilot-pro-pricing-2024",
-    "workingTitle": "Copilot Pro consumer subscription pricing",
+    "id": "candidate-teams-unbundle-2023",
+    "workingTitle": "Teams unbundling and EEA suite price reduction",
     "domain": "pricing_monetization",
-    "decisionWindowStart": "2023-12-26",
-    "decisionWindowEnd": "2024-03-05",
+    "decisionWindowStart": "2023-08-31",
+    "decisionWindowEnd": "2023-08-31",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q2/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000095017025010491/msft-20241231.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2019-Q3/press-release-webcast"
+      "https://blogs.microsoft.com/eupolicy/2023/08/31/european-competition-teams-office-microsoft-365/"
     ],
-    "notes": "Quarterly evidence provides contemporaneous monetization context. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://blogs.microsoft.com/eupolicy/2023/08/31/european-competition-teams-office-microsoft-365/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://blogs.microsoft.com/eupolicy/2023/08/31/european-competition-teams-office-microsoft-365/",
+        "role": "contemporaneous_context",
+        "sourceType": "corporate_blog",
+        "publishedAt": "2023-08-31",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of Teams unbundling and EEA suite price reduction.",
+        "evidenceLocator": {
+          "exactQuote": "we will unbundle Teams from our Microsoft 365 and Office 365 suites",
+          "anchorTerms": [
+            "Teams",
+            "€2 less per month"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-gaming-monetization-2024",
-    "workingTitle": "Game Pass pricing and post-Activision monetization",
+    "id": "candidate-copilot-ga-price-2023",
+    "workingTitle": "Copilot general availability at thirty dollars",
     "domain": "pricing_monetization",
-    "decisionWindowStart": "2024-09-25",
-    "decisionWindowEnd": "2024-12-04",
+    "decisionWindowStart": "2023-09-21",
+    "decisionWindowEnd": "2023-09-21",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q1/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000095017025010484/msft-20250129.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2020-Q2/press-release-webcast"
+      "https://www.microsoft.com/en-us/microsoft-365/blog/2023/09/21/announcing-microsoft-365-copilot-general-availability-and-microsoft-365-chat/"
     ],
-    "notes": "Later outcome claims are excluded; precise pricing approval boundary is uncertain. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://www.microsoft.com/en-us/microsoft-365/blog/2023/09/21/announcing-microsoft-365-copilot-general-availability-and-microsoft-365-chat/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://www.microsoft.com/en-us/microsoft-365/blog/2023/09/21/announcing-microsoft-365-copilot-general-availability-and-microsoft-365-chat/",
+        "role": "contemporaneous_context",
+        "sourceType": "product_announcement",
+        "publishedAt": "2023-09-21",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of Copilot general availability at thirty dollars.",
+        "evidenceLocator": {
+          "exactQuote": "generally available for enterprise customers for $30 per user per month",
+          "anchorTerms": [
+            "Copilot for Microsoft 365",
+            "$30 per user per month"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-ai-stack-monetization-2025",
-    "workingTitle": "AI stack pull-through and inference monetization",
+    "id": "candidate-copilot-pro-price-2024",
+    "workingTitle": "Copilot Pro twenty dollar consumer subscription",
     "domain": "pricing_monetization",
-    "decisionWindowStart": "2024-12-25",
-    "decisionWindowEnd": "2025-03-05",
+    "decisionWindowStart": "2024-01-15",
+    "decisionWindowEnd": "2024-01-15",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q2/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000119312525010492/d929748d8k.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2021-Q1/press-release-webcast"
+      "https://blogs.microsoft.com/blog/2024/01/15/bringing-the-full-power-of-copilot-to-more-people-and-businesses/"
     ],
-    "notes": "Amy discusses revenue composition and capacity monetization. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://blogs.microsoft.com/blog/2024/01/15/bringing-the-full-power-of-copilot-to-more-people-and-businesses/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://blogs.microsoft.com/blog/2024/01/15/bringing-the-full-power-of-copilot-to-more-people-and-businesses/",
+        "role": "contemporaneous_context",
+        "sourceType": "corporate_blog",
+        "publishedAt": "2024-01-15",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of Copilot Pro twenty dollar consumer subscription.",
+        "evidenceLocator": {
+          "exactQuote": "subscribe to Copilot Pro today for $20 per month/per user",
+          "anchorTerms": [
+            "Copilot Pro",
+            "$20 per month"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-one-microsoft-reorg-2013",
-    "workingTitle": "One Microsoft operating-model reorganization",
+    "id": "candidate-one-microsoft-2013",
+    "workingTitle": "One Microsoft far-reaching realignment operating model",
     "domain": "cost_efficiency",
-    "decisionWindowStart": "2013-06-07",
-    "decisionWindowEnd": "2013-08-16",
+    "decisionWindowStart": "2013-07-11",
+    "decisionWindowEnd": "2013-07-11",
     "discoveryUrls": [
-      "https://news.microsoft.com/speeches/steve-ballmer-and-microsoft-senior-leadership-team-one-microsoft-conference-call/",
-      "https://www.sec.gov/Archives/edgar/data/789019/000119312524275524/d865252d8k.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2021-Q2/press-release-webcast"
+      "https://news.microsoft.com/source/2013/07/11/one-microsoft-company-realigns-to-enable-innovation-at-greater-speed-efficiency-2/"
     ],
-    "notes": "Official leadership conference call with Amy Hood. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2013/07/11/one-microsoft-company-realigns-to-enable-innovation-at-greater-speed-efficiency-2/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://news.microsoft.com/source/2013/07/11/one-microsoft-company-realigns-to-enable-innovation-at-greater-speed-efficiency-2/",
+        "role": "contemporaneous_context",
+        "sourceType": "official_announcement",
+        "publishedAt": "2013-07-11",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of One Microsoft functional operating model reorganization.",
+        "evidenceLocator": {
+          "exactQuote": "announcing a far-reaching realignment of the company",
+          "anchorTerms": [
+            "One Microsoft",
+            "far-reaching realignment"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-hardware-restructuring-2015",
-    "workingTitle": "Phone hardware restructuring and impairment discipline",
+    "id": "candidate-nokia-workforce-2014",
+    "workingTitle": "Nokia integration workforce reduction and simplification",
     "domain": "cost_efficiency",
-    "decisionWindowStart": "2015-06-16",
-    "decisionWindowEnd": "2015-08-25",
+    "decisionWindowStart": "2014-07-17",
+    "decisionWindowEnd": "2014-07-17",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2015-Q4/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000095017024132722/msft-20241203.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2021-Q4/press-release-webcast"
+      "https://news.microsoft.com/source/2014/07/17/starting-to-evolve-our-organization-and-culture/"
     ],
-    "notes": "Contemporaneous Amy cost and restructuring evidence. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2014/07/17/starting-to-evolve-our-organization-and-culture/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://news.microsoft.com/source/2014/07/17/starting-to-evolve-our-organization-and-culture/",
+        "role": "contemporaneous_context",
+        "sourceType": "official_announcement",
+        "publishedAt": "2014-07-17",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of Nokia integration workforce reduction and simplification.",
+        "evidenceLocator": {
+          "exactQuote": "reduce the size of our overall workforce by up to 18,000 jobs",
+          "anchorTerms": [
+            "Nokia Devices and Services",
+            "18,000 jobs"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-sales-reorg-2017",
-    "workingTitle": "Commercial sales reorganization for cloud execution",
+    "id": "candidate-phone-restructure-2015",
+    "workingTitle": "Phone hardware impairment and 7800 position restructuring",
     "domain": "cost_efficiency",
-    "decisionWindowStart": "2017-06-15",
-    "decisionWindowEnd": "2017-08-24",
+    "decisionWindowStart": "2015-07-08",
+    "decisionWindowEnd": "2015-07-08",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2017-Q4/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000095017024118967/msft-20240930.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2022-Q3/press-release-webcast"
+      "https://news.microsoft.com/source/2015/07/08/microsoft-announces-restructuring-of-phone-hardware-business/"
     ],
-    "notes": "Quarterly disclosure window; exact workforce decision boundary remains uncertain. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2015/07/08/microsoft-announces-restructuring-of-phone-hardware-business/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://news.microsoft.com/source/2015/07/08/microsoft-announces-restructuring-of-phone-hardware-business/",
+        "role": "contemporaneous_context",
+        "sourceType": "official_announcement",
+        "publishedAt": "2015-07-08",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of Phone hardware impairment and 7800 position restructuring.",
+        "evidenceLocator": {
+          "exactQuote": "reduction of up to 7,800 positions",
+          "anchorTerms": [
+            "Phone Hardware",
+            "$7.6 billion"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-pandemic-cost-flex-2020",
-    "workingTitle": "Pandemic-era operating-cost flexibility",
+    "id": "candidate-phone-streamline-2016",
+    "workingTitle": "Smartphone hardware streamlining and 1850 role reduction",
     "domain": "cost_efficiency",
-    "decisionWindowStart": "2020-03-25",
-    "decisionWindowEnd": "2020-06-03",
+    "decisionWindowStart": "2016-05-25",
+    "decisionWindowEnd": "2016-05-25",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2020-Q3/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000095017024118955/msft-20241030.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2022-Q4/press-release-webcast"
+      "https://news.microsoft.com/ru-ru/microsoft-announces-streamlining-of-smartphone-hardware-business/"
     ],
-    "notes": "Direct Amy tradeoffs between demand support and cost control. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://news.microsoft.com/ru-ru/microsoft-announces-streamlining-of-smartphone-hardware-business/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://news.microsoft.com/ru-ru/microsoft-announces-streamlining-of-smartphone-hardware-business/",
+        "role": "contemporaneous_context",
+        "sourceType": "official_announcement",
+        "publishedAt": "2016-05-25",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of Smartphone hardware streamlining and 1850 role reduction.",
+        "evidenceLocator": {
+          "exactQuote": "коснется до 1850 рабочих мест",
+          "anchorTerms": [
+            "смартфонов",
+            "1850"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-workforce-reduction-2023",
-    "workingTitle": "FY2023 workforce reduction and cost-base reset",
+    "id": "candidate-workforce-reset-2023",
+    "workingTitle": "Ten thousand role workforce and cost structure reset",
     "domain": "cost_efficiency",
-    "decisionWindowStart": "2022-12-20",
-    "decisionWindowEnd": "2023-02-28",
+    "decisionWindowStart": "2023-01-18",
+    "decisionWindowEnd": "2023-01-18",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q2/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000119312524204403/d846847d8k.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q1/press-release-webcast"
+      "https://blogs.microsoft.com/blog/2023/01/18/subject-focusing-on-our-short-and-long-term-opportunity/"
     ],
-    "notes": "Contemporaneous restructuring context; no later success inference. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://blogs.microsoft.com/blog/2023/01/18/subject-focusing-on-our-short-and-long-term-opportunity/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://blogs.microsoft.com/blog/2023/01/18/subject-focusing-on-our-short-and-long-term-opportunity/",
+        "role": "contemporaneous_context",
+        "sourceType": "corporate_blog",
+        "publishedAt": "2023-01-18",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of Ten thousand role workforce and cost structure reset.",
+        "evidenceLocator": {
+          "exactQuote": "reduction of our overall workforce by 10,000 jobs",
+          "anchorTerms": [
+            "cost structure",
+            "10,000 jobs"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
-    "id": "candidate-ai-margin-efficiency-2024",
-    "workingTitle": "AI infrastructure margin pressure and Azure efficiency program",
+    "id": "candidate-transformation-2026",
+    "workingTitle": "Eliminating 4800 roles in Commercial and Xbox transformation",
     "domain": "cost_efficiency",
-    "decisionWindowStart": "2024-11-05",
-    "decisionWindowEnd": "2025-01-14",
+    "decisionWindowStart": "2026-07-06",
+    "decisionWindowEnd": "2026-07-06",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/events/fy-2025/2024-annual-shareholder-meeting",
-      "https://www.sec.gov/Archives/edgar/data/789019/000095017024087843/msft-20240630.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2023-Q3/press-release-webcast"
+      "https://blogs.microsoft.com/blog/2026/07/06/the-latest-in-our-company-transformation/"
     ],
-    "notes": "Annual shareholder transcript contains direct Amy explanation. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://blogs.microsoft.com/blog/2026/07/06/the-latest-in-our-company-transformation/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://blogs.microsoft.com/blog/2026/07/06/the-latest-in-our-company-transformation/",
+        "role": "contemporaneous_context",
+        "sourceType": "corporate_blog",
+        "publishedAt": "2026-07-06",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of Commercial and Xbox organization transformation.",
+        "evidenceLocator": {
+          "exactQuote": "eliminating around 4,800 roles",
+          "anchorTerms": [
+            "eliminating",
+            "4,800 roles"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-buyback-2008",
+    "workingTitle": "2008 forty billion dollar share repurchase authorization",
+    "domain": "shareholder_return_risk",
+    "decisionWindowStart": "2008-09-22",
+    "decisionWindowEnd": "2008-09-22",
+    "discoveryUrls": [
+      "https://news.microsoft.com/source/2008/09/22/microsoft-announces-share-repurchase-program-and-increases-quarterly-dividend/"
+    ],
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2008/09/22/microsoft-announces-share-repurchase-program-and-increases-quarterly-dividend/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://news.microsoft.com/source/2008/09/22/microsoft-announces-share-repurchase-program-and-increases-quarterly-dividend/",
+        "role": "contemporaneous_context",
+        "sourceType": "official_announcement",
+        "publishedAt": "2008-09-22",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of 2008 forty billion dollar share repurchase authorization.",
+        "evidenceLocator": {
+          "exactQuote": "approved a new share repurchase program authorizing up to an additional $40 billion",
+          "anchorTerms": [
+            "share repurchase",
+            "$40 billion"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
     "id": "candidate-buyback-2013",
-    "workingTitle": "2013 forty-billion-dollar share repurchase authorization",
+    "workingTitle": "2013 forty billion dollar repurchase authorization",
     "domain": "shareholder_return_risk",
-    "decisionWindowStart": "2013-09-19",
-    "decisionWindowEnd": "2013-11-28",
+    "decisionWindowStart": "2013-09-17",
+    "decisionWindowEnd": "2013-09-17",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2014-Q1/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000095017024087835/msft-20240730.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2024-Q3/press-release-webcast"
+      "https://news.microsoft.com/source/2013/09/17/microsoft-announces-quarterly-dividend-increase-and-share-repurchase-program-3/"
     ],
-    "notes": "Quarterly evidence follows the authorization and preserves contemporaneous allocation context. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2013/09/17/microsoft-announces-quarterly-dividend-increase-and-share-repurchase-program-3/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://news.microsoft.com/source/2013/09/17/microsoft-announces-quarterly-dividend-increase-and-share-repurchase-program-3/",
+        "role": "direct_amy",
+        "sourceType": "official_announcement",
+        "publishedAt": "2013-09-17",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of 2013 forty billion dollar repurchase authorization.",
+        "evidenceLocator": {
+          "exactQuote": "These actions reflect a continued commitment to returning cash to our shareholders",
+          "anchorTerms": [
+            "returning cash",
+            "$40 billion"
+          ],
+          "speaker": "Amy Hood"
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": null,
+    "phase3Status": "eligible",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
     "id": "candidate-buyback-2016",
-    "workingTitle": "2016 forty-billion-dollar repurchase authorization",
+    "workingTitle": "2016 forty billion dollar repurchase authorization",
     "domain": "shareholder_return_risk",
-    "decisionWindowStart": "2016-09-15",
-    "decisionWindowEnd": "2016-11-24",
+    "decisionWindowStart": "2016-09-20",
+    "decisionWindowEnd": "2016-09-20",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2017-Q1/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000095017024048288/msft-20240331.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q3/press-release-webcast"
+      "https://news.microsoft.com/source/2016/09/20/microsoft-announces-quarterly-dividend-increase-and-share-repurchase-program-2/"
     ],
-    "notes": "Quarterly Amy capital-return context. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2016/09/20/microsoft-announces-quarterly-dividend-increase-and-share-repurchase-program-2/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://news.microsoft.com/source/2016/09/20/microsoft-announces-quarterly-dividend-increase-and-share-repurchase-program-2/",
+        "role": "contemporaneous_context",
+        "sourceType": "official_announcement",
+        "publishedAt": "2016-09-20",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of 2016 forty billion dollar repurchase authorization.",
+        "evidenceLocator": {
+          "exactQuote": "approved a new share repurchase program authorizing up to $40 billion",
+          "anchorTerms": [
+            "share repurchase",
+            "$40 billion"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
     "id": "candidate-buyback-2019",
-    "workingTitle": "2019 forty-billion-dollar repurchase authorization",
+    "workingTitle": "2019 forty billion dollar repurchase authorization",
     "domain": "shareholder_return_risk",
     "decisionWindowStart": "2019-09-18",
-    "decisionWindowEnd": "2019-11-27",
+    "decisionWindowEnd": "2019-09-18",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2020-Q1/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000095017024048268/msft-20240425.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q4/press-release-webcast"
+      "https://news.microsoft.com/source/2019/09/18/microsoft-announces-quarterly-dividend-increase-and-new-share-repurchase-program/"
     ],
-    "notes": "Quarterly Amy capital-allocation context. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2019/09/18/microsoft-announces-quarterly-dividend-increase-and-new-share-repurchase-program/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://news.microsoft.com/source/2019/09/18/microsoft-announces-quarterly-dividend-increase-and-new-share-repurchase-program/",
+        "role": "contemporaneous_context",
+        "sourceType": "official_announcement",
+        "publishedAt": "2019-09-18",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of 2019 forty billion dollar repurchase authorization.",
+        "evidenceLocator": {
+          "exactQuote": "approved a new share repurchase program authorizing up to $40 billion",
+          "anchorTerms": [
+            "share repurchase",
+            "$40 billion"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
     "id": "candidate-buyback-2021",
-    "workingTitle": "2021 sixty-billion-dollar repurchase authorization",
+    "workingTitle": "2021 sixty billion dollar repurchase authorization",
     "domain": "shareholder_return_risk",
-    "decisionWindowStart": "2021-09-21",
-    "decisionWindowEnd": "2021-11-30",
+    "decisionWindowStart": "2021-09-14",
+    "decisionWindowEnd": "2021-09-14",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2022-Q1/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000095017024008814/msft-20231231.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q1/press-release-webcast"
+      "https://news.microsoft.com/source/2021/09/14/microsoft-announces-quarterly-dividend-increase-and-new-share-repurchase-program-2/"
     ],
-    "notes": "Quarterly Amy evidence follows the authorization and preserves contemporaneous capital-return context. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
-    "status": "approved_for_collection"
-  },
-  {
-    "id": "candidate-capital-allocation-2023",
-    "workingTitle": "FY2023 reinvestment, acquisitions, dividends, and buybacks balance",
-    "domain": "shareholder_return_risk",
-    "decisionWindowStart": "2023-11-02",
-    "decisionWindowEnd": "2024-01-11",
-    "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/events/fy-2024/2023-annual-shareholder-meeting",
-      "https://www.microsoft.com/en-us/investor/events/fy-2023/annual-shareholders-meeting-2022",
-      "https://www.sec.gov/Archives/edgar/data/789019/000095017024008809/msft-20240130.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q2/press-release-webcast"
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2021/09/14/microsoft-announces-quarterly-dividend-increase-and-new-share-repurchase-program-2/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://news.microsoft.com/source/2021/09/14/microsoft-announces-quarterly-dividend-increase-and-new-share-repurchase-program-2/",
+        "role": "contemporaneous_context",
+        "sourceType": "official_announcement",
+        "publishedAt": "2021-09-14",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of 2021 sixty billion dollar repurchase authorization.",
+        "evidenceLocator": {
+          "exactQuote": "approved a new share repurchase program authorizing up to $60 billion",
+          "anchorTerms": [
+            "share repurchase",
+            "$60 billion"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
     ],
-    "notes": "Direct annual-shareholder evidence. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   },
   {
     "id": "candidate-buyback-2024",
-    "workingTitle": "2024 sixty-billion-dollar repurchase authorization and dividend increase",
+    "workingTitle": "2024 sixty billion dollar repurchase authorization",
     "domain": "shareholder_return_risk",
-    "decisionWindowStart": "2024-09-25",
-    "decisionWindowEnd": "2024-12-04",
+    "decisionWindowStart": "2024-09-16",
+    "decisionWindowEnd": "2024-09-16",
     "discoveryUrls": [
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2025-Q1/press-release-webcast",
-      "https://www.sec.gov/Archives/edgar/data/789019/000119312524011295/d708866d8k.htm",
-      "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q3/press-release-webcast"
+      "https://news.microsoft.com/2024/09/16/microsoft-announces-quarterly-dividend-increase-and-new-share-repurchase-program-3/"
     ],
-    "notes": "Quarterly evidence is contemporaneous; later return performance is excluded. Window is a public-evidence/disclosure window, not an asserted confidential decision date.",
+    "decisionWindowBasis": {
+      "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
+      "sourceUrls": [
+        "https://news.microsoft.com/2024/09/16/microsoft-announces-quarterly-dividend-increase-and-new-share-repurchase-program-3/"
+      ],
+      "reviewerNote": "The publication date and announcement language were reviewed on the official source."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://news.microsoft.com/2024/09/16/microsoft-announces-quarterly-dividend-increase-and-new-share-repurchase-program-3/",
+        "role": "contemporaneous_context",
+        "sourceType": "official_announcement",
+        "publishedAt": "2024-09-16",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The dated official announcement states the concrete terms of 2024 sixty billion dollar repurchase authorization.",
+        "evidenceLocator": {
+          "exactQuote": "approved a new share repurchase program authorizing up to $60 billion",
+          "anchorTerms": [
+            "share repurchase",
+            "$60 billion"
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
+      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection"
   }
 ]

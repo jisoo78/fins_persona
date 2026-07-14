@@ -75,7 +75,10 @@ const MIN_NORMALIZED_CHARACTERS = 200;
 
 type ImportCandidate = {
   id: string;
-  discoveryUrls: string[];
+  sourceAssociations: Array<{
+    canonicalUrl: string;
+    reviewStatus: string;
+  }>;
   status: string;
 };
 
@@ -89,7 +92,9 @@ const assertRegisteredImport = async (
   try {
     serialized = await readFile(candidatePath, 'utf8');
   } catch (error) {
-    if ((error as NodeJS.ErrnoException).code === 'ENOENT') return;
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+      throw new Error('event candidate matrix is required before reviewed import');
+    }
     throw error;
   }
 
@@ -113,7 +118,9 @@ const assertRegisteredImport = async (
     if (!approvedCandidateIds.has(candidateId)) {
       throw new Error(`canonical URL is not registered for event candidate: ${candidateId}`);
     }
-    const approvedUrls = candidateById.get(candidateId)!.discoveryUrls.map(canonicalizeSourceUrl);
+    const approvedUrls = candidateById.get(candidateId)!.sourceAssociations
+      .filter(({ reviewStatus }) => reviewStatus === 'reviewed')
+      .map(({ canonicalUrl: approvedUrl }) => canonicalizeSourceUrl(approvedUrl));
     if (!approvedUrls.includes(canonicalUrl)) {
       throw new Error(`canonical URL is not approved for event candidate: ${candidateId}`);
     }
@@ -387,8 +394,11 @@ const importReviewedSourceInternal = async (
     const family = registry.sources.filter((source) => source.canonicalUrl === canonicalUrl);
     const latest = family.at(-1) ?? null;
     const baseId = sourceIdForUrl(canonicalUrl);
-    const sourceId = latest?.sha256 === sha256
-      ? latest.id
+    const matchingVersion = family.find((source) => source.sha256 === sha256);
+    const sourceId = matchingVersion
+      ? matchingVersion.id
+      : latest?.sha256 === null
+        ? latest.id
       : `${baseId}-${sha256.slice(0, 12)}`;
     const previous = family.find(({ id }) => id === sourceId) ?? null;
     const effectiveCandidateIds = [...new Set([

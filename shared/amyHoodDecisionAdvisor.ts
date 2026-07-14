@@ -143,8 +143,36 @@ export type EventCandidate = {
   decisionWindowStart: string;
   decisionWindowEnd: string;
   discoveryUrls: string[];
+  decisionWindowBasis: {
+    summary: string;
+    sourceUrls: string[];
+    reviewerNote: string;
+  };
+  sourceAssociations: EventSourceAssociation[];
+  directEvidenceGap: {
+    reviewStatus: 'reviewed';
+    reason: string;
+    reviewerNote: string;
+  } | null;
+  phase3Status: 'eligible' | 'evidence_gap';
   notes: string;
   status: 'candidate' | 'approved_for_collection' | 'rejected';
+};
+
+export type EventSourceAssociation = {
+  canonicalUrl: string;
+  role: 'direct_amy' | 'contemporaneous_context' | 'counterevidence' | 'post_outcome';
+  sourceType: string;
+  publishedAt: string;
+  temporalRelation: 'pre_decision' | 'decision_time' | 'post_outcome';
+  relevanceClaim: string;
+  evidenceLocator: {
+    exactQuote: string;
+    anchorTerms: string[];
+    speaker: 'Amy Hood' | null;
+  };
+  reviewStatus: 'unreviewed' | 'reviewed' | 'rejected';
+  reviewerNote: string;
 };
 
 export type AdvisorSourceRecord = {
