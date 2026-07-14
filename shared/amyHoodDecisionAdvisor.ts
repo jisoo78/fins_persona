@@ -113,3 +113,76 @@ export type EvaluationV3Score = {
   actionability: number;
   total: number;
 };
+
+export type SourceTier = 1 | 2 | 3 | 'discovery_only';
+
+export type CollectionStatus =
+  | 'discovered'
+  | 'queued'
+  | 'collected'
+  | 'normalized'
+  | 'review_required'
+  | 'approved'
+  | 'failed';
+
+export type CollectionFailureReason =
+  | 'access_denied'
+  | 'paywalled'
+  | 'transcript_missing'
+  | 'speaker_uncertain'
+  | 'duplicate'
+  | 'insufficient_decision_context'
+  | 'post_outcome_only'
+  | 'network_error'
+  | 'invalid_content';
+
+export type EventCandidate = {
+  id: string;
+  workingTitle: string;
+  domain: DecisionDomain;
+  decisionWindowStart: string;
+  decisionWindowEnd: string;
+  discoveryUrls: string[];
+  notes: string;
+  status: 'candidate' | 'approved_for_collection' | 'rejected';
+};
+
+export type AdvisorSourceRecord = {
+  id: string;
+  canonicalUrl: string;
+  eventCandidateIds: string[];
+  tier: SourceTier;
+  title: string;
+  publisher: string;
+  publishedAt: string | null;
+  speaker: string | null;
+  sourceType: string;
+  collector:
+    | 'microsoft_ir'
+    | 'microsoft_source'
+    | 'sec_edgar'
+    | 'public_html'
+    | 'transcript_import'
+    | 'manual_import';
+  temporalRole: 'pre_decision' | 'decision_time' | 'post_outcome';
+  rightsNote: string;
+  approvedPublicHost: boolean;
+  collectionStatus: CollectionStatus;
+  rawPath: string | null;
+  normalizedPath: string | null;
+  sha256: string | null;
+  capturedAt: string | null;
+  failureReason: CollectionFailureReason | null;
+};
+
+export type AdvisorRawSource = {
+  sourceId: string;
+  canonicalUrl: string;
+  title: string;
+  mediaType: string;
+  bodyBase64: string;
+  metadata: Omit<
+    AdvisorSourceRecord,
+    'rawPath' | 'normalizedPath' | 'failureReason'
+  >;
+};
