@@ -59,6 +59,10 @@ const outputPath = resolve(
 const questionsFile = JSON.parse(readFileSync(questionsPath, 'utf8')) as EvaluationQuestionsFile;
 const useLlm = process.env.RAG_EVAL_USE_LLM === 'true';
 const retrievalMode = process.env.RAG_RETRIEVAL === 'vector' ? 'vector' : 'keyword';
+const systemPromptPath = process.env.RAG_EVAL_SYSTEM_PROMPT_PATH
+  ? resolve(process.cwd(), process.env.RAG_EVAL_SYSTEM_PROMPT_PATH)
+  : null;
+const injectedSystemPrompt = systemPromptPath ? readFileSync(systemPromptPath, 'utf8') : '';
 
 const buildPersonaQuery = (questions: EvaluationQuestion[]) =>
   [
@@ -246,13 +250,14 @@ const main = async () => {
       8,
     );
     const generated = useLlm
-      ? await generateRagEvaluationAnswer({
-          subjectName: questionsFile.subject,
-          question: question.question,
-          questionType: getQuestionType(question),
-          options: question.options,
-          evidenceText: retrieval.evidenceText,
-        })
+	        ? await generateRagEvaluationAnswer({
+	          subjectName: questionsFile.subject,
+	          question: question.question,
+	          questionType: getQuestionType(question),
+	          options: question.options,
+	          evidenceText: retrieval.evidenceText,
+	          systemPrompt: injectedSystemPrompt,
+	        })
       : buildOfflineAnswer(question, retrieval.selectedChunks);
 
     answers.push({
@@ -285,8 +290,9 @@ const main = async () => {
     retrieval: {
       method: retrievalMode === 'vector' ? 'local_bge_m3_vector_retrieval' : 'local_keyword_chunk_retrieval',
       reranker: process.env.RAG_RERANKER === 'cohere' ? 'cohere' : 'none',
-      generation_mode: useLlm ? 'local_llm' : 'offline_fixed_baseline',
-      document_count: personaRetrieval.documents.length,
+	      generation_mode: useLlm ? 'local_llm' : 'offline_fixed_baseline',
+	      system_prompt_path: systemPromptPath,
+	      document_count: personaRetrieval.documents.length,
       chunk_count: personaRetrieval.chunks.length,
       persona_evidence_count: personaRetrieval.selectedChunks.length,
     },

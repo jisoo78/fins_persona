@@ -1,0 +1,327 @@
+{
+  "evaluation_name": "Amy Hood decision similarity evaluation",
+  "subject": "Amy Hood",
+  "dataset": "amy_hood_decision_similarity_answer_key_20260708",
+  "answer_key_path": "/Users/choijisoo/Downloads/decision/evaluation/amy_hood_decision_similarity_answer_key_15.json",
+  "rag_answer_path": "/Users/choijisoo/Downloads/decision/evaluation/amy_hood_decision_similarity_main_prompt_answers.lock.json",
+  "method": "general_rag",
+  "retrieval": {
+    "method": "local_bge_m3_vector_retrieval",
+    "reranker": "cohere",
+    "generation_mode": "local_llm",
+    "system_prompt_path": "/Users/choijisoo/Downloads/decision/agent_prompts/prompts/amy-hood-main-system-prompt.md",
+    "document_count": 1448,
+    "chunk_count": 2377,
+    "persona_evidence_count": 18
+  },
+  "generated_at": "2026-07-14T02:32:49.273Z",
+  "judge": {
+    "mode": "fallback",
+    "provider": "none",
+    "model": "none"
+  },
+  "summary": {
+    "question_count": 15,
+    "multiple_choice_count": 9,
+    "subjective_count": 6,
+    "total_score": 12.3,
+    "max_score": 39,
+    "percentage": 31.5,
+    "by_kpi": [
+      {
+        "kpi": "past_memory_restoration",
+        "score": 4.4,
+        "max_score": 8,
+        "question_count": 4,
+        "percentage": 55
+      },
+      {
+        "kpi": "future_prediction",
+        "score": 3,
+        "max_score": 8,
+        "question_count": 4,
+        "percentage": 37.5
+      },
+      {
+        "kpi": "decision_similarity",
+        "score": 4.9,
+        "max_score": 23,
+        "question_count": 7,
+        "percentage": 21.3
+      }
+    ]
+  },
+  "scoring_note": "현재 파일은 로컬에서 빠르게 확인하기 위한 rubric keyword fallback 채점이다. 최종 비교에서는 AMY_HOOD_JUDGE_USE_LLM=true로 LLM-as-Judge 채점을 실행하면 된다.",
+  "results": [
+    {
+      "question_id": "mc_01_cloud_capex_margin",
+      "question_type": "multiple_choice",
+      "kpi": "past_memory_restoration",
+      "question": "Amy Hood가 클라우드/AI 인프라 CapEx 확대를 설명할 때 가장 Amy Hood식 판단에 가까운 설명은 무엇인가?",
+      "candidate_answer": "선택: B. 고객 수요와 capacity 제약이 확인되면 장기 성장을 위해 투자하되 gross margin, operating margin, free cash flow 영향을 함께 설명한다.",
+      "predicted_option_id": "B",
+      "correct_option_id": "B",
+      "score": 1,
+      "max_score": 1,
+      "matched_terms": [],
+      "missing_terms": [],
+      "judge_mode": "exact_option_match_with_heuristic_inference",
+      "judge_comment": "정답 option과 일치한다."
+    },
+    {
+      "question_id": "mc_02_free_cash_flow",
+      "question_type": "multiple_choice",
+      "kpi": "past_memory_restoration",
+      "question": "CapEx 증가로 free cash flow가 압박받는 상황에서 Amy Hood식 커뮤니케이션에 가장 가까운 것은?",
+      "candidate_answer": "선택: C. 투자 필요성과 현금흐름 영향을 함께 설명하고, cash paid for PPE나 finance leases 같은 구성 요인을 분리해 설명한다.",
+      "predicted_option_id": "C",
+      "correct_option_id": "C",
+      "score": 1,
+      "max_score": 1,
+      "matched_terms": [],
+      "missing_terms": [],
+      "judge_mode": "exact_option_match_with_heuristic_inference",
+      "judge_comment": "정답 option과 일치한다."
+    },
+    {
+      "question_id": "mc_03_guidance_variables",
+      "question_type": "multiple_choice",
+      "kpi": "past_memory_restoration",
+      "question": "사업부별 가이던스를 설명할 때 Amy Hood가 구분해야 할 판단 축으로 가장 적절한 것은?",
+      "candidate_answer": "선택: A. Azure, Office, LinkedIn 같은 사업부 성장 동인과 FX, commercial bookings 같은 외부/선행 변수를 나누어 설명한다.",
+      "predicted_option_id": "A",
+      "correct_option_id": "A",
+      "score": 1,
+      "max_score": 1,
+      "matched_terms": [],
+      "missing_terms": [],
+      "judge_mode": "exact_option_match_with_heuristic_inference",
+      "judge_comment": "정답 option과 일치한다."
+    },
+    {
+      "question_id": "mc_04_github_go_no_go",
+      "question_type": "multiple_choice",
+      "kpi": "future_prediction",
+      "question": "Microsoft가 GitHub 인수를 검토한다면 Amy Hood 페르소나의 승인 기준에 가장 가까운 것은?",
+      "candidate_answer": "선택: B. 개발자 생태계, Azure/DevOps 연결성, 장기 수익화 가능성이 충분하고 가격 부담과 통합 리스크가 관리 가능할 때 조건부 승인한다.",
+      "predicted_option_id": "B",
+      "correct_option_id": "B",
+      "score": 1,
+      "max_score": 1,
+      "matched_terms": [],
+      "missing_terms": [],
+      "judge_mode": "exact_option_match_with_heuristic_inference",
+      "judge_comment": "정답 option과 일치한다."
+    },
+    {
+      "question_id": "mc_05_github_independence",
+      "question_type": "multiple_choice",
+      "kpi": "future_prediction",
+      "question": "GitHub 인수 후 빠른 통합은 비용 시너지를 만들 수 있지만 개발자 신뢰를 훼손할 수 있다. Amy Hood식 판단에 가장 가까운 것은?",
+      "candidate_answer": "선택: B. 개발자 커뮤니티 신뢰를 핵심 자산으로 보고, 독립성 유지와 이탈 리스크 관리가 인수 조건이 되어야 한다.",
+      "predicted_option_id": "B",
+      "correct_option_id": "B",
+      "score": 1,
+      "max_score": 1,
+      "matched_terms": [],
+      "missing_terms": [],
+      "judge_mode": "exact_option_match_with_heuristic_inference",
+      "judge_comment": "정답 option과 일치한다."
+    },
+    {
+      "question_id": "mc_06_monetization_path",
+      "question_type": "multiple_choice",
+      "kpi": "future_prediction",
+      "question": "GitHub 인수 판단에서 Amy Hood가 확인해야 할 수익화 경로로 가장 적절한 것은?",
+      "candidate_answer": "선택: B. Azure pull-through, Visual Studio, DevOps, 보안 제품 연결, 개발자 생태계 확대 같은 직접/간접 수익화 경로를 분리해 확인한다.",
+      "predicted_option_id": "B",
+      "correct_option_id": "B",
+      "score": 1,
+      "max_score": 1,
+      "matched_terms": [],
+      "missing_terms": [],
+      "judge_mode": "exact_option_match_with_heuristic_inference",
+      "judge_comment": "정답 option과 일치한다."
+    },
+    {
+      "question_id": "mc_07_expense_discipline",
+      "question_type": "multiple_choice",
+      "kpi": "decision_similarity",
+      "question": "경기 둔화로 비용 절감 압박이 커졌지만 AI와 클라우드 R&D는 중요하다. Amy Hood식 예산 판단에 가장 가까운 것은?",
+      "candidate_answer": "선택: C. 장기 성장과 고객 수요가 확인된 투자는 유지하고, 우선순위가 낮은 운영비와 중복 비용을 줄인다.",
+      "predicted_option_id": "C",
+      "correct_option_id": "C",
+      "score": 1,
+      "max_score": 1,
+      "matched_terms": [],
+      "missing_terms": [],
+      "judge_mode": "exact_option_match_with_heuristic_inference",
+      "judge_comment": "정답 option과 일치한다."
+    },
+    {
+      "question_id": "mc_08_investor_tone",
+      "question_type": "multiple_choice",
+      "kpi": "decision_similarity",
+      "question": "성장률은 높지만 capacity 제약, 비용 압박, FX 리스크가 동시에 있다. Amy Hood식 투자자 커뮤니케이션에 가장 가까운 것은?",
+      "candidate_answer": "선택: B. 숫자 기반 성장 동인, 제약 조건, 리스크, 다음 액션을 순서대로 설명한다.",
+      "predicted_option_id": "B",
+      "correct_option_id": "B",
+      "score": 1,
+      "max_score": 1,
+      "matched_terms": [],
+      "missing_terms": [],
+      "judge_mode": "exact_option_match_with_heuristic_inference",
+      "judge_comment": "정답 option과 일치한다."
+    },
+    {
+      "question_id": "mc_09_unknown_threshold",
+      "question_type": "multiple_choice",
+      "kpi": "decision_similarity",
+      "question": "원문 데이터에 ROI, IRR, 회수 기간 같은 명시적 기준이 없을 때 Amy Hood 페르소나 답변은 어떻게 처리해야 하는가?",
+      "candidate_answer": "선택: C. 원문 근거가 없는 수치는 만들지 않고 확인 필요로 표시하되, 수요 신호, 마진, 현금흐름, 전략 가치 기준으로 조건부 판단한다.",
+      "predicted_option_id": "C",
+      "correct_option_id": "C",
+      "score": 1,
+      "max_score": 1,
+      "matched_terms": [],
+      "missing_terms": [],
+      "judge_mode": "exact_option_match_with_heuristic_inference",
+      "judge_comment": "정답 option과 일치한다."
+    },
+    {
+      "question_id": "subj_01_cloud_margin_bridge",
+      "question_type": "subjective",
+      "kpi": "past_memory_restoration",
+      "question": "Amy Hood의 클라우드/AI 투자 설명 방식을 한 문단으로 요약하라.",
+      "candidate_answer": "Amy Hood frames cloud and AI investment as demand-driven rather than speculative, explicitly acknowledging that while AI capital investment drives COGS growth and lowers gross margin percentage, she expects operating margins to expand by 1-2 points through efficiency gains and the Activision acquisition. She consistently ties these investments to customer outcomes — specifically Copilot productivity gains and hybrid solutions — and argues that short-term margin pressure from infrastructure buildout is a necessary trade-off for long-term platform leadership and operating leverage.",
+      "reference_answer": "Amy Hood는 클라우드와 AI capacity 투자를 단순 비용이 아니라 고객 수요와 장기 성장 기회에 대응하기 위한 자본 배치로 설명한다. 동시에 gross margin, operating margin, free cash flow에 미치는 압박을 숨기지 않고, capacity 제약과 투자 회수 가능성을 숫자 중심으로 설명한다.",
+      "score": 1.4,
+      "max_score": 5,
+      "matched_terms": [
+        "gross margin",
+        "operating margin"
+      ],
+      "missing_terms": [
+        "고객 수요",
+        "capacity",
+        "CapEx",
+        "free cash flow",
+        "장기 성장"
+      ],
+      "judge_mode": "rubric_keyword_fallback",
+      "judge_comment": "Amy Hood식 판단 기준을 충분히 복원하지 못했다."
+    },
+    {
+      "question_id": "subj_02_github_recommendation",
+      "question_type": "subjective",
+      "kpi": "future_prediction",
+      "question": "Amy Hood 페르소나라면 GitHub 인수에 대해 어떤 결론과 조건을 제시할지 작성하라.",
+      "candidate_answer": "GitHub은 개발자 SaaS 영역에서 성장 기회로 보고 계속 투자할 영역입니다. 다만 저는 투자 결정 시 두 가지를 따집니다. 첫째, 인프라가 높은 활용도를 내는지, 그리고 둘째, 운영 비용이 가장 성장성이 높은 곳에 배치됐는지입니다. GitHub Copilot은 가치 있는 제품이니 리스트 가격을 책정할 것이고, 내부적으로도 Copilot을 배포해 비용을 절감할 겁니다. 결국은 플랫폼 리더십과 운영 효율성을 동시에 확보해야 한다는 뜻입니다.",
+      "reference_answer": "Amy Hood 페르소나는 GitHub 인수를 무조건 승인하거나 거절하기보다 조건부 승인에 가깝게 판단한다. 개발자 생태계와 Azure/DevOps 연결성, 장기 수익화 가능성을 긍정적으로 보되, 인수 가격 부담, EPS 또는 operating margin 희석, 커뮤니티 신뢰 훼손, 독립 운영 조건을 확인해야 한다.",
+      "score": 0,
+      "max_score": 5,
+      "matched_terms": [],
+      "missing_terms": [
+        "조건부 승인",
+        "개발자 생태계",
+        "Azure 또는 DevOps",
+        "장기 수익화",
+        "가격 부담",
+        "마진 또는 EPS",
+        "커뮤니티 신뢰"
+      ],
+      "judge_mode": "rubric_keyword_fallback",
+      "judge_comment": "Amy Hood식 판단 기준을 충분히 복원하지 못했다."
+    },
+    {
+      "question_id": "subj_03_acquisition_redline",
+      "question_type": "subjective",
+      "kpi": "decision_similarity",
+      "question": "커뮤니티 기반 회사를 인수할 때 Amy Hood식 레드라인을 작성하라.",
+      "candidate_answer": "I'd start with mission alignment — if the community's values don't match ours, the acquisition is dead on arrival. Second, we need broad perpetual rights to their IP and data, not just a license, so we're not held hostage by the deal structure. Third, the community's governance and culture must be respected and integrated, not erased. And finally, don't buy for a quarterly win; acquire for long-term platform value and customer impact.",
+      "reference_answer": "핵심 레드라인은 비용 시너지를 얻기 위해 커뮤니티 신뢰와 사용자 유지율을 훼손하는 것이다. 통합으로 핵심 자산이 약해지거나 장기 플랫폼 가치가 감소한다면 인수 조건을 재검토해야 하며, 독립성 유지, 이탈률, 제품 신뢰, 수익화 경로를 함께 확인해야 한다.",
+      "score": 0,
+      "max_score": 5,
+      "matched_terms": [],
+      "missing_terms": [
+        "커뮤니티 신뢰",
+        "사용자 유지 또는 이탈",
+        "비용 시너지",
+        "장기 플랫폼 가치",
+        "독립성",
+        "재검토 또는 중단 조건"
+      ],
+      "judge_mode": "rubric_keyword_fallback",
+      "judge_comment": "Amy Hood식 판단 기준을 충분히 복원하지 못했다."
+    },
+    {
+      "question_id": "subj_04_guidance_tone",
+      "question_type": "subjective",
+      "kpi": "decision_similarity",
+      "question": "성장률, capacity 제약, 비용 압박, FX 리스크가 동시에 있을 때 Amy Hood식 설명 순서를 작성하라.",
+      "candidate_answer": "FX부터 짚고 넘어가야 합니다. 달러 강세로 인한 매출 하락분(약 10억 달러)을 먼저 명시하고, 그 다음이 진짜 성장 이야기입니다. 클라우드와 AI 수요가 견인하는 성장 동력, 인프라 투자를 통한 용량 확보, 그리고 운영 레버리지를 통한 비용 효율화 순으로 설명합니다. 단기 마진 압박은 장기적 플랫폼 리더십으로 돌파하는 것이 제 방식입니다.",
+      "reference_answer": "먼저 매출 성장과 수요 신호를 숫자로 설명하고, 이어서 capacity 제약과 CapEx 필요성을 제시한다. 그 다음 gross margin, operating margin, free cash flow, FX 영향을 구분해 리스크를 설명하고, 마지막으로 다음 분기 또는 연간 가이던스에서 확인해야 할 변수를 제시한다.",
+      "score": 0.6,
+      "max_score": 5,
+      "matched_terms": [
+        "FX"
+      ],
+      "missing_terms": [
+        "매출 성장",
+        "수요 신호",
+        "capacity",
+        "CapEx",
+        "margin",
+        "free cash flow",
+        "가이던스"
+      ],
+      "judge_mode": "rubric_keyword_fallback",
+      "judge_comment": "Amy Hood식 판단 기준을 충분히 복원하지 못했다."
+    },
+    {
+      "question_id": "subj_05_persona_rules",
+      "question_type": "subjective",
+      "kpi": "decision_similarity",
+      "question": "Amy Hood CFO Advisor가 새로운 재무 안건을 검토할 때 지켜야 할 핵심 지침 7가지를 작성하라.",
+      "candidate_answer": "I review every case through these seven lenses: first, I look ten years out, not at the next quarter — if a decision doesn't build long-term value, it's not worth it. Second, CapEx must be driven by actual customer usage and contract delivery, not by optimistic projections. Third, I build for platform leadership; revenue follows when the product creates real value for customers. Fourth, I demand operational discipline — cost structures must align with revenue growth, and I hold teams personally accountable for their product's success. Fifth, I practice strategic patience; major transitions like cloud and AI take time to show up in the numbers, so I don't judge a pivot by one quarter. Sixth, I'm comfortable with lower gross margins during infrastructure buildouts because I know they'll be offset by operating leverage later. And seventh, I proactively align incentives — when we shift to new technology, I move the sales force, partners, and customers toward it, while being careful not to over-pivot and disrupt the core business.",
+      "reference_answer": "수요 신호와 capacity 제약을 먼저 확인한다. CapEx는 gross margin, operating margin, free cash flow와 함께 평가한다. 근거 없는 ROI, IRR, 회수 기간은 만들지 않고 확인 필요로 표시한다. 장기 성장성과 단기 비용 압박을 동시에 비교한다. 사업부별 성장 동인과 FX 같은 외부 변수를 구분한다. 인수 판단에서는 가격, 통합 리스크, 핵심 자산 훼손 여부를 확인한다. 투자자 커뮤니케이션은 숫자, 제약, 리스크, 다음 액션 순서로 말한다.",
+      "score": 1.3,
+      "max_score": 5,
+      "matched_terms": [
+        "CapEx",
+        "margin"
+      ],
+      "missing_terms": [
+        "수요 신호",
+        "capacity",
+        "free cash flow",
+        "확인 필요",
+        "인수 리스크",
+        "숫자 중심 커뮤니케이션"
+      ],
+      "judge_mode": "rubric_keyword_fallback",
+      "judge_comment": "Amy Hood식 판단 기준을 충분히 복원하지 못했다."
+    },
+    {
+      "question_id": "subj_06_missing_data_behavior",
+      "question_type": "subjective",
+      "kpi": "decision_similarity",
+      "question": "2017~2019년 GitHub 인수 관련 데이터가 누락된 상태에서 Amy Hood 페르소나는 어떻게 답해야 하는가?",
+      "candidate_answer": "I don't have the 2017-2019 GitHub acquisition data in my records. I can, however, speak to our broader investment philosophy: we prioritize long-term infrastructure and platform leadership over short-term margin optics, and we've consistently allocated capital toward technology transitions that create value over decades.",
+      "reference_answer": "GitHub 인수와 직접 연결되는 2017~2019 근거가 누락되었다면 이를 명시하고, 다른 시기의 클라우드, Azure, 인수, CapEx, 마진 관련 근거를 보조적으로 사용해야 한다. 단, GitHub의 실제 인수 가격, 통합 조건, 수익화 결과처럼 누락 데이터에 의존하는 내용은 확인 필요로 분리해야 한다.",
+      "score": 0,
+      "max_score": 5,
+      "matched_terms": [],
+      "missing_terms": [
+        "누락 명시",
+        "보조 근거",
+        "GitHub 직접 근거 부족",
+        "확인 필요",
+        "클라우드 또는 Azure",
+        "CapEx 또는 마진"
+      ],
+      "judge_mode": "rubric_keyword_fallback",
+      "judge_comment": "Amy Hood식 판단 기준을 충분히 복원하지 못했다."
+    }
+  ]
+}

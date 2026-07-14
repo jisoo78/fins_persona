@@ -616,6 +616,7 @@ export const generateRagEvaluationAnswer = async ({
   questionType,
   options,
   evidenceText,
+  systemPrompt,
 }: {
   subjectName: string;
   question: string;
@@ -625,6 +626,7 @@ export const generateRagEvaluationAnswer = async ({
     option_text: string;
   }[];
   evidenceText: string;
+  systemPrompt?: string;
 }): Promise<RagEvaluationAnswer> => {
   const trimmedEvidence = evidenceText.slice(0, Number(process.env.RAG_EVAL_EVIDENCE_CHAR_LIMIT ?? 8000));
 
@@ -632,10 +634,12 @@ export const generateRagEvaluationAnswer = async ({
     const result = await safeInvokeJson<RagEvaluationAnswer>(
       `너는 RAG 기반 CFO 페르소나 평가 답변 생성기다.
 
-아래 Evidence에 근거해서 질문에 답하라.
-질문에 직접 답하라.
-절대 "RAG 검색 기준으로 보면" 같은 메타 설명을 하지 마라.
-원문 근거가 없는 숫자, ROI, IRR, 회수 기간은 만들지 말고 "확인 필요"로 표시하라.
+	아래 Evidence에 근거해서 질문에 답하라.
+	아래 Main System Prompt가 있으면 페르소나 정체성, 판단 원칙, 말투는 해당 프롬프트를 우선 따른다.
+	단, Main System Prompt와 Evidence가 충돌하면 Evidence에 없는 사실은 만들지 말고 확인 필요로 표시한다.
+	질문에 직접 답하라.
+	절대 "RAG 검색 기준으로 보면" 같은 메타 설명을 하지 마라.
+	원문 근거가 없는 숫자, ROI, IRR, 회수 기간은 만들지 말고 "확인 필요"로 표시하라.
 
 객관식 질문이면:
 - 보기 A-D 중 하나를 반드시 선택한다.
@@ -651,11 +655,14 @@ export const generateRagEvaluationAnswer = async ({
 evidence는 빈 배열 []로 둔다. 근거 목록은 시스템이 별도로 붙인다.
 limitations는 확인 필요 항목만 짧게 작성한다.
 
-대상 인물:
-{subjectName}
+	대상 인물:
+	{subjectName}
 
-질문:
-{question}
+	Main System Prompt:
+	{systemPrompt}
+
+	질문:
+	{question}
 
 질문 유형:
 {questionType}
@@ -675,10 +682,11 @@ JSON 형식:
   "limitations": ["확인 필요 항목"]
 }}`,
       {
-        subjectName,
-        question,
-        questionType: questionType ?? 'subjective',
-        options: JSON.stringify(options ?? [], null, 2),
+	        subjectName,
+	        systemPrompt: systemPrompt ?? '',
+	        question,
+	        questionType: questionType ?? 'subjective',
+	        options: JSON.stringify(options ?? [], null, 2),
         evidenceText: trimmedEvidence,
       },
     );
