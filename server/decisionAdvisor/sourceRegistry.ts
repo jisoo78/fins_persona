@@ -282,6 +282,9 @@ export const transitionSource = async (
       `invalid source transition: ${current.collectionStatus} -> ${nextStatus}`,
     );
   }
+  if (nextStatus === 'approved' && current.failureReason === 'speaker_uncertain') {
+    throw new Error(`advisor source ${current.id} with uncertain speaker cannot be approved`);
+  }
 
   const updated: AdvisorSourceRecord = {
     ...current,
@@ -293,6 +296,30 @@ export const transitionSource = async (
   registry.sources[index] = validateRecord(updated, root);
   await saveRegistry(root, registry);
   return updated;
+});
+
+export const persistReviewedSource = async (
+  root: string,
+  source: AdvisorSourceRecord,
+  expectedPreviousRawPath: string | null,
+): Promise<AdvisorSourceRecord> => withRegistryMutation(root, async () => {
+  const registry = loadRegistry(root);
+  const index = registry.sources.findIndex(({ id }) => id === source.id);
+  const previous = index < 0 ? null : registry.sources[index];
+  if ((previous?.rawPath ?? null) !== expectedPreviousRawPath) {
+    throw new Error(`advisor source ${source.id} changed during reviewed import`);
+  }
+  const persisted = validateRecord({
+    ...source,
+    eventCandidateIds: mergedCandidateIds(
+      previous?.eventCandidateIds ?? [],
+      source.eventCandidateIds,
+    ),
+  }, root);
+  if (index < 0) registry.sources.push(persisted);
+  else registry.sources[index] = persisted;
+  await saveRegistry(root, registry);
+  return persisted;
 });
 
 export const createContentVersion = async (

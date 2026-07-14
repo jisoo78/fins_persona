@@ -1,20 +1,24 @@
-import { createHash, randomUUID } from 'node:crypto';
-import { open, rename, rm } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import type {
   AdvisorSourceRecord,
   CollectionFailureReason,
 } from '../../shared/amyHoodDecisionAdvisor';
-import { writeJsonAtomic } from './jsonStore';
-import { advisorPaths } from './paths';
 import {
-  createContentVersion,
+  removeAdvisorArtifact,
+  writeAdvisorArtifactAtomic,
+  type ArtifactWriteHooks,
+} from './artifactStore';
+import {
+  loadRegistry,
+  persistReviewedSource,
   prepareAdvisorArtifactPath,
   sourceIdForUrl,
-  transitionSource,
-  upsertDiscoveredSource,
 } from './sourceRegistry';
+import { withSourceFamilyOperation } from './sourceOperationLock';
+import { canonicalizeSourceUrl } from './sourcePolicy';
 
 export type SpeakerSegment = {
   speaker: string;
@@ -44,6 +48,11 @@ type ImportOptions = {
   failureReason: CollectionFailureReason | null;
 };
 
+export type ManualImportDependencies = {
+  artifactHooks?: ArtifactWriteHooks;
+  commitRegistry?: typeof persistReviewedSource;
+};
+
 type ReviewedRawSource = {
   sourceId: string;
   canonicalUrl: string;
@@ -53,26 +62,12 @@ type ReviewedRawSource = {
   speakerSegments: SpeakerSegment[];
   reviewer: string;
   reviewedAt: string;
+  supersedesRawPath: string | null;
+  supersedesNormalizedPath: string | null;
   metadata: Omit<AdvisorSourceRecord, 'rawPath' | 'normalizedPath' | 'failureReason'>;
 };
 
 const MIN_NORMALIZED_CHARACTERS = 200;
-const importLocks = new Map<string, Promise<void>>();
-
-const withImportLock = async <T>(key: string, operation: () => Promise<T>) => {
-  const previous = importLocks.get(key) ?? Promise.resolve();
-  let release = () => undefined;
-  const current = new Promise<void>((resolve) => { release = resolve; });
-  const queued = previous.then(() => current);
-  importLocks.set(key, queued);
-  await previous;
-  try {
-    return await operation();
-  } finally {
-    release();
-    if (importLocks.get(key) === queued) importLocks.delete(key);
-  }
-};
 
 const requireNonblank = (value: unknown, field: string): string => {
   if (typeof value !== 'string' || value.trim() === '') {
@@ -122,42 +117,118 @@ const validateReviewedSource = (input: ReviewedSourceImport) => {
   return actualSha256;
 };
 
-const writeTextAtomic = async (root: string, relativePath: string, text: string) => {
-  const destination = await prepareAdvisorArtifactPath(root, relativePath);
-  const temporaryRelativePath = path.join(
-    '.artifact-staging',
-    `${path.basename(destination)}.${process.pid}.${randomUUID()}.tmp`,
-  );
-  const temporaryPath = await prepareAdvisorArtifactPath(root, temporaryRelativePath);
-  let handle: Awaited<ReturnType<typeof open>> | undefined;
+const reviewMatches = (
+  raw: unknown,
+  input: ReviewedSourceImport,
+  options: ImportOptions,
+) => {
+  if (typeof raw !== 'object' || raw === null) return false;
+  const artifact = raw as Partial<ReviewedRawSource>;
+  return artifact.bodyBase64 === Buffer.from(input.text, 'utf8').toString('base64')
+    && artifact.canonicalUrl === canonicalizeSourceUrl(input.canonicalUrl)
+    && artifact.title === input.title
+    && artifact.reviewer === input.reviewer
+    && artifact.reviewedAt === input.reviewedAt
+    && JSON.stringify(artifact.speakerSegments ?? [])
+      === JSON.stringify(input.speakerSegments ?? [])
+    && artifact.metadata?.collector === options.collector
+    && artifact.metadata?.sourceType === options.sourceType
+    && artifact.metadata?.publisher === input.publisher
+    && artifact.metadata?.publishedAt === input.publishedAt
+    && artifact.metadata?.speaker === input.speaker
+    && artifact.metadata?.tier === input.tier
+    && artifact.metadata?.rightsNote === input.rightsNote
+    && JSON.stringify(artifact.metadata?.eventCandidateIds ?? [])
+      === JSON.stringify(input.eventCandidateIds);
+};
+
+const readExistingReview = async (
+  root: string,
+  relativePath: string | null,
+  input: ReviewedSourceImport,
+  options: ImportOptions,
+) => {
+  if (!relativePath) return false;
   try {
-    handle = await open(temporaryPath, 'wx', 0o600);
-    await handle.writeFile(text, 'utf8');
-    await handle.sync();
-    await handle.close();
-    handle = undefined;
-    await prepareAdvisorArtifactPath(root, relativePath);
-    await rename(temporaryPath, destination);
-  } catch (error) {
-    if (handle) await handle.close().catch(() => undefined);
-    await rm(temporaryPath, { force: true }).catch(() => undefined);
-    throw error;
+    const artifactPath = await prepareAdvisorArtifactPath(root, relativePath);
+    return reviewMatches(JSON.parse(await readFile(artifactPath, 'utf8')), input, options);
+  } catch {
+    return false;
   }
+};
+
+const writeImmutableArtifact = async (
+  root: string,
+  relativePath: string,
+  text: string,
+  hooks?: ArtifactWriteHooks,
+) => {
+  const artifactPath = await prepareAdvisorArtifactPath(root, relativePath);
+  try {
+    const existing = await readFile(artifactPath, 'utf8');
+    if (existing !== text) throw new Error(`immutable advisor artifact collision: ${relativePath}`);
+    return false;
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error;
+  }
+  await writeAdvisorArtifactAtomic(root, relativePath, text, hooks);
+  return true;
+};
+
+const rollbackArtifacts = async (root: string, createdPaths: string[], cause: unknown) => {
+  const cleanupErrors: unknown[] = [];
+  for (const relativePath of [...createdPaths].reverse()) {
+    try {
+      await removeAdvisorArtifact(root, relativePath);
+    } catch (error) {
+      cleanupErrors.push(error);
+    }
+  }
+  if (cleanupErrors.length > 0) {
+    throw new AggregateError(
+      [cause, ...cleanupErrors],
+      'reviewed import failed and artifact rollback was incomplete',
+    );
+  }
+  throw cause;
 };
 
 const importReviewedSourceInternal = async (
   input: ReviewedSourceImport,
   root: string,
   options: ImportOptions,
+  dependencies: ManualImportDependencies = {},
 ): Promise<AdvisorSourceRecord> => {
   const sha256 = validateReviewedSource(input);
-  const lockKey = `${advisorPaths(root).registry}\0${sourceIdForUrl(input.canonicalUrl)}`;
+  const canonicalUrl = canonicalizeSourceUrl(input.canonicalUrl);
 
-  return withImportLock(lockKey, async () => {
-    const candidate: AdvisorSourceRecord = {
-      id: sourceIdForUrl(input.canonicalUrl),
-      canonicalUrl: input.canonicalUrl,
-      eventCandidateIds: input.eventCandidateIds,
+  return withSourceFamilyOperation(root, canonicalUrl, async () => {
+    const registry = loadRegistry(root);
+    const family = registry.sources.filter((source) => source.canonicalUrl === canonicalUrl);
+    const latest = family.at(-1) ?? null;
+    const baseId = sourceIdForUrl(canonicalUrl);
+    const sourceId = latest?.sha256 === sha256
+      ? latest.id
+      : `${baseId}-${sha256.slice(0, 12)}`;
+    const previous = family.find(({ id }) => id === sourceId) ?? null;
+    const effectiveCandidateIds = [...new Set([
+      ...(previous?.eventCandidateIds ?? []),
+      ...input.eventCandidateIds,
+    ])];
+    const effectiveInput = { ...input, eventCandidateIds: effectiveCandidateIds };
+    const sameReview = await readExistingReview(
+      root,
+      previous?.rawPath ?? null,
+      effectiveInput,
+      options,
+    );
+    const normalizedPath = options.failureReason === null
+      ? path.join('normalized', `${sourceId}-${sha256}.txt`)
+      : null;
+    const baseRecord: AdvisorSourceRecord = {
+      id: sourceId,
+      canonicalUrl,
+      eventCandidateIds: effectiveCandidateIds,
       tier: input.tier,
       title: input.title,
       publisher: input.publisher,
@@ -168,116 +239,78 @@ const importReviewedSourceInternal = async (
       temporalRole: 'decision_time',
       rightsNote: input.rightsNote,
       approvedPublicHost: false,
-      collectionStatus: 'discovered',
+      collectionStatus: 'review_required',
       rawPath: null,
-      normalizedPath: null,
-      sha256: null,
-      capturedAt: null,
-      failureReason: null,
+      normalizedPath,
+      sha256,
+      capturedAt: input.reviewedAt,
+      failureReason: options.failureReason,
     };
-    let target = await upsertDiscoveredSource(candidate, root);
-    if (target.sha256 && target.sha256 !== sha256) {
-      target = await createContentVersion(root, target, sha256);
-    }
-
-    const capturedAt = input.reviewedAt;
-    const rawPath = path.join('raw', `${target.id}-${sha256}.json`);
-    const normalizedPath = path.join('normalized', `${target.id}-${sha256}.txt`);
-
-    if (target.collectionStatus === 'discovered'
-      || target.collectionStatus === 'review_required'
-      || target.collectionStatus === 'approved'
-      || target.collectionStatus === 'failed') {
-      target = await transitionSource(root, target.id, 'queued', {
-        title: input.title,
-        publisher: input.publisher,
-        publishedAt: input.publishedAt,
-        speaker: input.speaker,
-        rightsNote: input.rightsNote,
-        collector: options.collector,
-        sourceType: options.sourceType,
-        failureReason: null,
-      });
-    }
-
     const {
       rawPath: excludedRawPath,
       normalizedPath: excludedNormalizedPath,
       failureReason: excludedFailureReason,
-      ...persistedMetadata
-    } = target;
+      ...metadata
+    } = baseRecord;
     void [excludedRawPath, excludedNormalizedPath, excludedFailureReason];
-    const metadata: ReviewedRawSource['metadata'] = {
-      ...persistedMetadata,
-      title: input.title,
-      publisher: input.publisher,
-      publishedAt: input.publishedAt,
-      speaker: input.speaker,
-      rightsNote: input.rightsNote,
-      collector: options.collector,
-      sourceType: options.sourceType,
-      collectionStatus: 'collected',
-      sha256,
-      capturedAt,
-    };
     const rawSource: ReviewedRawSource = {
-      sourceId: target.id,
-      canonicalUrl: target.canonicalUrl,
+      sourceId,
+      canonicalUrl,
       title: input.title,
       mediaType: 'text/plain; charset=utf-8',
       bodyBase64: Buffer.from(input.text, 'utf8').toString('base64'),
       speakerSegments: input.speakerSegments ?? [],
       reviewer: input.reviewer,
       reviewedAt: input.reviewedAt,
-      metadata,
+      supersedesRawPath: sameReview ? null : previous?.rawPath ?? latest?.rawPath ?? null,
+      supersedesNormalizedPath: sameReview
+        ? null
+        : previous?.normalizedPath ?? latest?.normalizedPath ?? null,
+      metadata: {
+        ...metadata,
+        collectionStatus: 'collected',
+      },
     };
+    const rawText = `${JSON.stringify(rawSource, null, 2)}\n`;
+    const reviewSha256 = createHash('sha256').update(rawText, 'utf8').digest('hex');
+    const rawPath = sameReview && previous?.rawPath
+      ? previous.rawPath
+      : path.join('raw', `${sourceId}-${sha256}-${reviewSha256.slice(0, 16)}.json`);
+    const finalRecord: AdvisorSourceRecord = { ...baseRecord, rawPath };
+    const createdPaths: string[] = [];
 
-    await writeJsonAtomic(
-      await prepareAdvisorArtifactPath(root, rawPath),
-      rawSource,
-    );
-    if (options.failureReason === null) {
-      await writeTextAtomic(root, normalizedPath, input.text);
-    }
-
-    if (target.collectionStatus === 'queued') {
-      target = await transitionSource(root, target.id, 'collected', {
-        title: input.title,
-        publisher: input.publisher,
-        publishedAt: input.publishedAt,
-        speaker: input.speaker,
-        rightsNote: input.rightsNote,
-        collector: options.collector,
-        sourceType: options.sourceType,
+    try {
+      if (!sameReview && await writeImmutableArtifact(
+        root,
         rawPath,
-        sha256,
-        capturedAt,
-        failureReason: null,
-      });
+        rawText,
+        dependencies.artifactHooks,
+      )) createdPaths.push(rawPath);
+      if (normalizedPath && await writeImmutableArtifact(
+        root,
+        normalizedPath,
+        input.text,
+        dependencies.artifactHooks,
+      )) createdPaths.push(normalizedPath);
+      return await (dependencies.commitRegistry ?? persistReviewedSource)(
+        root,
+        finalRecord,
+        previous?.rawPath ?? null,
+      );
+    } catch (error) {
+      return rollbackArtifacts(root, createdPaths, error);
     }
-    if (target.collectionStatus === 'collected' && options.failureReason !== null) {
-      target = await transitionSource(root, target.id, 'review_required', {
-        failureReason: options.failureReason,
-      });
-    } else if (target.collectionStatus === 'collected') {
-      target = await transitionSource(root, target.id, 'normalized', { normalizedPath });
-    }
-    if (target.collectionStatus === 'normalized') {
-      target = await transitionSource(root, target.id, 'review_required', {
-        failureReason: options.failureReason,
-      });
-    }
-    return target;
   });
 };
 
 export const importReviewedSource = (
   input: ReviewedSourceImport,
   root: string,
+  dependencies: ManualImportDependencies = {},
 ): Promise<AdvisorSourceRecord> => importReviewedSourceInternal(input, root, {
   collector: 'manual_import',
   sourceType: 'manual_import',
   failureReason: null,
-});
+}, dependencies);
 
 export const importReviewedSourceWithOptions = importReviewedSourceInternal;

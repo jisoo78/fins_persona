@@ -1444,9 +1444,163 @@ test('failure: uncertain transcript attribution stays review_required with speak
     assert.equal(loadRegistry(directory).sources[0].collectionStatus, 'review_required');
     await assert.rejects(
       () => transitionSource(directory, uncertain.id, 'approved'),
-      /normalized state|coherent artifacts/i,
+      /uncertain speaker|normalized state|coherent artifacts/i,
     );
   } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: same-SHA uncertain reimport preserves prior review bytes and invalidates approval evidence', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-same-sha-uncertain-'));
+
+  try {
+    const verified = await importTranscript(transcriptImport(), directory);
+    const priorRawPath = path.resolve(advisorPaths(directory).root, verified.rawPath!);
+    const priorRawBytes = await readFile(priorRawPath);
+    const approved = await transitionSource(directory, verified.id, 'approved');
+
+    const uncertain = await importTranscript(transcriptImport({
+      reviewer: 'Second Evidence Reviewer',
+      reviewedAt: '2026-07-14T05:00:00.000Z',
+      speaker: null,
+      speakerSegments: [{
+        speaker: 'Unverified speaker',
+        startChar: 0,
+        endChar: reviewedTranscriptText.length,
+      }],
+    }), directory);
+
+    assert.equal(approved.collectionStatus, 'approved');
+    assert.equal(uncertain.sha256, verified.sha256);
+    assert.equal(uncertain.collectionStatus, 'review_required');
+    assert.equal(uncertain.failureReason, 'speaker_uncertain');
+    assert.equal(uncertain.normalizedPath, null);
+    assert.notEqual(uncertain.rawPath, verified.rawPath);
+    assert.deepEqual(await readFile(priorRawPath), priorRawBytes);
+    const uncertainRaw = JSON.parse(await readFile(
+      path.resolve(advisorPaths(directory).root, uncertain.rawPath!),
+      'utf8',
+    ));
+    assert.equal(uncertainRaw.supersedesRawPath, verified.rawPath);
+    assert.equal(uncertainRaw.supersedesNormalizedPath, verified.normalizedPath);
+    await assert.rejects(
+      () => transitionSource(directory, uncertain.id, 'approved'),
+      /uncertain speaker|normalized state|coherent artifacts/i,
+    );
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: manual import write and registry failures preserve prior approved state and artifacts', async (t) => {
+  for (const failurePoint of ['raw', 'normalized', 'registry'] as const) {
+    await t.test(failurePoint, async () => {
+      const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-import-rollback-'));
+      try {
+        const verified = await importTranscript(transcriptImport(), directory);
+        await transitionSource(directory, verified.id, 'approved');
+        const beforeRegistry = await readFile(advisorPaths(directory).registry);
+        const beforeRawFiles = await readdir(advisorPaths(directory).raw);
+        const normalizedDirectory = path.resolve(advisorPaths(directory).root, 'normalized');
+        const beforeNormalizedFiles = await readdir(normalizedDirectory);
+        const beforeRaw = await Promise.all(beforeRawFiles.map((name) =>
+          readFile(path.join(advisorPaths(directory).raw, name))));
+        const beforeNormalized = await Promise.all(beforeNormalizedFiles.map((name) =>
+          readFile(path.join(normalizedDirectory, name))));
+        const changedText = `${reviewedTranscriptText}\nAdditional reviewed context changes the exact source bytes.`;
+        let writeCount = 0;
+
+        await assert.rejects(() => importTranscript(transcriptImport({
+          text: changedText,
+          expectedSha256: sha256Text(changedText),
+        }), directory, {
+          artifactHooks: failurePoint === 'registry' ? undefined : {
+            beforeTemporaryOpen: async () => {
+              writeCount += 1;
+              if ((failurePoint === 'raw' && writeCount === 1)
+                || (failurePoint === 'normalized' && writeCount === 2)) {
+                throw new Error(`injected ${failurePoint} write failure`);
+              }
+            },
+          },
+          commitRegistry: failurePoint === 'registry'
+            ? async () => { throw new Error('injected registry transition failure'); }
+            : undefined,
+        }), new RegExp(`injected ${failurePoint}`));
+
+        assert.deepEqual(await readFile(advisorPaths(directory).registry), beforeRegistry);
+        assert.deepEqual(await readdir(advisorPaths(directory).raw), beforeRawFiles);
+        assert.deepEqual(await readdir(normalizedDirectory), beforeNormalizedFiles);
+        for (const [index, name] of beforeRawFiles.entries()) {
+          assert.deepEqual(
+            await readFile(path.join(advisorPaths(directory).raw, name)),
+            beforeRaw[index],
+          );
+        }
+        for (const [index, name] of beforeNormalizedFiles.entries()) {
+          assert.deepEqual(
+            await readFile(path.join(normalizedDirectory, name)),
+            beforeNormalized[index],
+          );
+        }
+        const preserved = loadRegistry(directory).sources[0];
+        assert.equal(preserved.collectionStatus, 'approved');
+        assert.notEqual(preserved.collectionStatus, 'queued');
+      } finally {
+        await rm(directory, { recursive: true, force: true });
+      }
+    });
+  }
+});
+
+test('edge: official collection and manual import share one canonical-family operation lock', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-shared-family-lock-'));
+  let releaseTransport = () => undefined;
+  const transportGate = new Promise<void>((resolve) => { releaseTransport = resolve; });
+  let signalTransport = () => undefined;
+  const transportEntered = new Promise<void>((resolve) => { signalTransport = resolve; });
+  let manualEnteredWriter = false;
+  const canonicalUrl = collectionRecord().canonicalUrl;
+
+  try {
+    const official = collectOfficialSource(collectionRecord({
+      eventCandidateIds: ['official-candidate'],
+    }), {
+      root: directory,
+      resolveHost: publicDns,
+      transportImpl: async () => {
+        signalTransport();
+        await transportGate;
+        return htmlResponse(substantialHtml('shared-family-lock'));
+      },
+    });
+    await transportEntered;
+
+    const manual = importTranscript(transcriptImport({
+      canonicalUrl,
+      eventCandidateIds: ['manual-candidate'],
+    }), directory, {
+      artifactHooks: {
+        beforeTemporaryOpen: () => { manualEnteredWriter = true; },
+      },
+    });
+    await new Promise<void>((resolve) => setImmediate(resolve));
+    assert.equal(manualEnteredWriter, false);
+    releaseTransport();
+
+    const [officialResult, manualResult] = await Promise.all([official, manual]);
+    const registry = loadRegistry(directory);
+    assert.equal(manualEnteredWriter, true);
+    assert.equal(registry.sources.length, 2);
+    assert.equal(officialResult.collectionStatus, 'review_required');
+    assert.equal(manualResult.collectionStatus, 'review_required');
+    assert.equal(registry.sources.some(({ collector, collectionStatus }) =>
+      collector === 'microsoft_ir' && collectionStatus === 'review_required'), true);
+    assert.equal(registry.sources.some(({ collector, collectionStatus }) =>
+      collector === 'transcript_import' && collectionStatus === 'review_required'), true);
+  } finally {
+    releaseTransport();
     await rm(directory, { recursive: true, force: true });
   }
 });

@@ -1,6 +1,7 @@
 import type { AdvisorSourceRecord } from '../../shared/amyHoodDecisionAdvisor';
 import {
   importReviewedSourceWithOptions,
+  type ManualImportDependencies,
   type ReviewedSourceImport,
   type SpeakerSegment,
 } from './manualSourceImporter';
@@ -38,11 +39,12 @@ const validateSpeakerSegments = (input: TranscriptImport) => {
 export const importTranscript = async (
   input: TranscriptImport,
   root: string,
+  dependencies: ManualImportDependencies = {},
 ): Promise<AdvisorSourceRecord> => {
   const hasVerifiedAmyHoodSegment = validateSpeakerSegments(input);
   return importReviewedSourceWithOptions(input, root, {
     collector: 'transcript_import',
     sourceType: 'transcript',
     failureReason: hasVerifiedAmyHoodSegment ? null : 'speaker_uncertain',
-  });
+  }, dependencies);
 };

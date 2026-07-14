@@ -1,4 +1,5 @@
 import type { AdvisorSourceRecord } from '../../../shared/amyHoodDecisionAdvisor';
+import type { ArtifactWriteHooks } from '../artifactStore';
 
 export type HostResolver = (hostname: string) => Promise<string[]>;
 
@@ -6,12 +7,6 @@ export type CollectorTimeouts = {
   connectMs: number;
   headersMs: number;
   bodyMs: number;
-};
-
-export type ArtifactWriteHooks = {
-  afterParentOpen?: (handle: { stat(): Promise<unknown> }) => Promise<void> | void;
-  beforeTemporaryOpen?: () => Promise<void> | void;
-  beforeRename?: () => Promise<void> | void;
 };
 
 export type PinnedTransportRequest = {

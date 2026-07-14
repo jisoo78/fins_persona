@@ -1,7 +1,6 @@
-import { createHash, randomUUID } from 'node:crypto';
+import { createHash } from 'node:crypto';
 import { lookup } from 'node:dns/promises';
-import { constants } from 'node:fs';
-import { lstat, open, readFile, realpath, rename, rm } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import { request as httpsRequest } from 'node:https';
 import { BlockList, isIP } from 'node:net';
 import path from 'node:path';
@@ -13,16 +12,16 @@ import type {
   AdvisorSourceRecord,
   CollectionFailureReason,
 } from '../../shared/amyHoodDecisionAdvisor';
-import { advisorPaths } from './paths';
+import { writeAdvisorArtifactAtomic } from './artifactStore';
 import {
   createContentVersion,
   loadSourceRecord,
   markCollectionFailure,
   prepareAdvisorArtifactPath,
-  sourceIdForUrl,
   transitionSource,
   upsertDiscoveredSource,
 } from './sourceRegistry';
+import { withSourceFamilyOperation } from './sourceOperationLock';
 import { MicrosoftIRCollector, MicrosoftSourceCollector } from './collectors/microsoftCollectors';
 import { PublicHtmlCollector } from './collectors/publicHtmlCollector';
 import { SecEdgarCollector } from './collectors/secEdgarCollector';
@@ -64,109 +63,6 @@ const collectors: SourceCollector[] = [
   SecEdgarCollector,
   PublicHtmlCollector,
 ];
-
-const collectionLocks = new Map<string, Promise<void>>();
-
-const withCollectionLock = async <T>(key: string, operation: () => Promise<T>) => {
-  const previous = collectionLocks.get(key) ?? Promise.resolve();
-  let release = () => undefined;
-  const current = new Promise<void>((resolve) => { release = resolve; });
-  const queued = previous.then(() => current);
-  collectionLocks.set(key, queued);
-  await previous;
-  try {
-    return await operation();
-  } finally {
-    release();
-    if (collectionLocks.get(key) === queued) collectionLocks.delete(key);
-  }
-};
-
-const writeArtifactAtomic = async (
-  root: string,
-  relativePath: string,
-  text: string,
-  hooks: CollectorDependencies['artifactHooks'],
-) => {
-  const destination = await prepareAdvisorArtifactPath(root, relativePath);
-  const parentPath = path.dirname(destination);
-  const parentHandle = await open(
-    parentPath,
-    constants.O_RDONLY | constants.O_DIRECTORY | constants.O_NOFOLLOW,
-  );
-  let temporaryPath: string | undefined;
-  let handle: Awaited<ReturnType<typeof open>> | undefined;
-  try {
-    await hooks?.afterParentOpen?.(parentHandle);
-    const anchor = await parentHandle.stat();
-    const verifyParentAnchor = async () => {
-      const pathnameStatus = await lstat(parentPath);
-      if (pathnameStatus.isSymbolicLink()
-        || pathnameStatus.dev !== anchor.dev
-        || pathnameStatus.ino !== anchor.ino) {
-        throw new Error(`advisor artifact parent inode changed: ${relativePath}`);
-      }
-      await prepareAdvisorArtifactPath(root, relativePath);
-    };
-    const descriptorCandidates = [
-      `/dev/fd/${parentHandle.fd}`,
-      `/proc/self/fd/${parentHandle.fd}`,
-    ];
-    let anchoredParent: string | null = null;
-    for (const candidate of descriptorCandidates) {
-      try {
-        const candidateRealpath = await realpath(candidate);
-        const parentRealpath = await realpath(parentPath);
-        if (candidateRealpath === parentRealpath) {
-          anchoredParent = candidate;
-          break;
-        }
-      } catch {
-        // This platform has no descriptor filesystem for directory-relative operations.
-      }
-    }
-    // Node exposes no portable openat/renameat. Descriptor paths close that gap on
-    // Linux/macOS; the fallback retains inode checks but trusts same-user local code
-    // not to swap the parent in the final syscall-sized interval.
-    const temporaryName = `${path.basename(destination)}.${process.pid}.${randomUUID()}.tmp`;
-    temporaryPath = await prepareAdvisorArtifactPath(
-      root,
-      path.join('.artifact-staging', temporaryName),
-    );
-    const anchoredDestination = path.join(
-      anchoredParent ?? parentPath,
-      path.basename(destination),
-    );
-    await hooks?.beforeTemporaryOpen?.();
-    await verifyParentAnchor();
-    handle = await open(
-      temporaryPath,
-      constants.O_CREAT | constants.O_EXCL | constants.O_WRONLY | constants.O_NOFOLLOW,
-      0o600,
-    );
-    await verifyParentAnchor();
-    await handle.writeFile(text, 'utf8');
-    await handle.sync();
-    await handle.close();
-    handle = undefined;
-    await hooks?.beforeRename?.();
-    await verifyParentAnchor();
-    await rename(temporaryPath, anchoredDestination);
-    try {
-      await verifyParentAnchor();
-    } catch (error) {
-      await rm(anchoredDestination, { force: true }).catch(() => undefined);
-      throw error;
-    }
-    await parentHandle.sync();
-  } catch (error) {
-    if (handle) await handle.close().catch(() => undefined);
-    if (temporaryPath) await rm(temporaryPath, { force: true }).catch(() => undefined);
-    throw error;
-  } finally {
-    await parentHandle.close().catch(() => undefined);
-  }
-};
 
 const extractDocumentMetadata = (html: string) => {
   const $ = load(html);
@@ -618,7 +514,7 @@ const collectHtmlSourceUnlocked = async (
           capturedAt,
         },
       };
-      await writeArtifactAtomic(
+      await writeAdvisorArtifactAtomic(
         deps.root,
         rawPath,
         `${JSON.stringify(rawSource, null, 2)}\n`,
@@ -640,7 +536,7 @@ const collectHtmlSourceUnlocked = async (
     const normalized = normalizeDocument(html, mediaType);
     const normalizedPath = target.normalizedPath
       ?? path.join('normalized', `${target.id}-${sha256}.txt`);
-    await writeArtifactAtomic(
+    await writeAdvisorArtifactAtomic(
       deps.root,
       normalizedPath,
       normalized,
@@ -669,19 +565,20 @@ export const collectHtmlSource = (
   record: AdvisorSourceRecord,
   deps: CollectorDependencies,
   userAgent: string,
-) => withCollectionLock(
-  `${advisorPaths(deps.root).registry}\0${sourceIdForUrl(record.canonicalUrl)}`,
+) => withSourceFamilyOperation(
+  deps.root,
+  record.canonicalUrl,
   () => collectHtmlSourceUnlocked(loadSourceRecord(deps.root, record.id), deps, userAgent),
 );
 
-export const collectOfficialSource = async (
+export const collectOfficialSource = (
   candidate: AdvisorSourceRecord,
   dependencies: CollectorDependencies,
-): Promise<AdvisorSourceRecord> => {
-  const record = await upsertDiscoveredSource(candidate, dependencies.root);
-  return withCollectionLock(
-    `${advisorPaths(dependencies.root).registry}\0${sourceIdForUrl(record.canonicalUrl)}`,
+): Promise<AdvisorSourceRecord> => withSourceFamilyOperation(
+    dependencies.root,
+    candidate.canonicalUrl,
     async () => {
+      const record = await upsertDiscoveredSource(candidate, dependencies.root);
       const currentRecord = loadSourceRecord(dependencies.root, record.id);
       try {
         const collector = collectors.find(({ name }) => name === currentRecord.collector);
@@ -705,6 +602,5 @@ export const collectOfficialSource = async (
         await markCollectionFailure(dependencies.root, sourceId, reason);
         throw error;
       }
-    }
+    },
   );
-};
