@@ -26,8 +26,22 @@
  *    - invalid manual metadata, blank/short text, hash mismatches, and invalid speaker offsets leave no partial state.
  *    - uncertain transcript attribution remains review_required with speaker_uncertain.
  *    - corrupt or cross-owned review reuse, post-rename failures, and rollback parent swaps fail without trusting or deleting unsafe paths.
+ *
+ * Test Plan (Task 5 discovery matrix and CLI gates):
+ * 1. Happy Path:
+ *    - exactly 30 candidates spanning all five domains and 100 unique HTTPS discoveries pass.
+ *
+ * 2. Edge Cases:
+ *    - duplicate candidate IDs fail with the exact duplicate identified.
+ *    - a domain with fewer than four candidates reports its exact count.
+ *    - inverted decision windows and outcome-only working titles are rejected.
+ *
+ * 3. Failure Path:
+ *    - partial source registries report exact URL/document deficits and missing artifacts do not count.
+ *    - unknown collection IDs and malformed local import files exit nonzero without network access.
  */
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, readFile, readdir, rename, rm, symlink, writeFile } from 'node:fs/promises';
 import os from 'node:os';
@@ -43,6 +57,7 @@ import {
 } from '../server/decisionAdvisor/sourcePolicy';
 import {
   loadRegistry,
+  sourceIdForUrl,
   transitionSource,
   upsertDiscoveredSource,
 } from '../server/decisionAdvisor/sourceRegistry';
@@ -1777,6 +1792,242 @@ test('failure: cross-version raw pointer is not trusted as an owned audit predec
       await readFile(path.resolve(advisorPaths(directory).root, versionB.rawPath!)),
       versionBRawBytes,
     );
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+const advisorDomains = [
+  'm_and_a',
+  'ai_cloud_capex',
+  'pricing_monetization',
+  'cost_efficiency',
+  'shareholder_return_risk',
+] as const;
+
+const validCandidateMatrix = (): EventCandidate[] => Array.from({ length: 30 }, (_, index) => ({
+  id: `candidate-${String(index + 1).padStart(2, '0')}`,
+  workingTitle: `Decision under review ${index + 1}`,
+  domain: advisorDomains[index % advisorDomains.length],
+  decisionWindowStart: `20${String(10 + Math.floor(index / 4)).padStart(2, '0')}-01-01`,
+  decisionWindowEnd: `20${String(10 + Math.floor(index / 4)).padStart(2, '0')}-03-31`,
+  discoveryUrls: Array.from(
+    { length: index < 10 ? 4 : 3 },
+    (_, urlIndex) => `https://www.microsoft.com/advisor-source/${index + 1}/${urlIndex + 1}`,
+  ),
+  notes: 'The date and speaker must be confirmed from the linked primary material.',
+  status: 'approved_for_collection',
+}));
+
+const runAdvisorCli = (root: string, ...args: string[]) => spawnSync(
+  process.execPath,
+  ['--import', 'tsx', 'server/runAmyHoodDecisionAdvisor.ts', ...args, '--root', root],
+  { cwd: path.resolve(import.meta.dirname, '..'), encoding: 'utf8' },
+);
+
+test('happy: candidate CLI accepts 30 candidates, five domains, and 100 unique discoveries', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-candidates-happy-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+
+  try {
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(candidatePath, `${JSON.stringify(validCandidateMatrix(), null, 2)}\n`);
+
+    const result = runAdvisorCli(directory, 'candidates:check');
+
+    assert.equal(result.status, 0, result.stderr);
+    assert.match(result.stdout, /30 candidates/i);
+    assert.match(result.stdout, /100 unique discovery URLs/i);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('edge: candidate CLI identifies a duplicate candidate ID', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-candidates-duplicate-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+  const candidates = validCandidateMatrix();
+  candidates[1].id = candidates[0].id;
+
+  try {
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(candidatePath, `${JSON.stringify(candidates, null, 2)}\n`);
+    const result = runAdvisorCli(directory, 'candidates:check');
+
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /duplicate candidate ID: candidate-01/i);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('edge: candidate CLI reports a domain below the four-candidate floor', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-candidates-domain-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+  const candidates = validCandidateMatrix();
+  for (const index of [0, 5, 10]) candidates[index].domain = 'ai_cloud_capex';
+
+  try {
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(candidatePath, `${JSON.stringify(candidates, null, 2)}\n`);
+    const result = runAdvisorCli(directory, 'candidates:check');
+
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /domain m_and_a requires at least 4 candidates; found 3/i);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('edge: candidate CLI rejects inverted windows and outcome-only titles', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-candidates-window-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+
+  try {
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    const inverted = validCandidateMatrix();
+    inverted[0].decisionWindowStart = '2020-04-01';
+    inverted[0].decisionWindowEnd = '2020-03-31';
+    await writeFile(candidatePath, `${JSON.stringify(inverted, null, 2)}\n`);
+    assert.match(runAdvisorCli(directory, 'candidates:check').stderr, /inverted decision window/i);
+
+    const outcomeOnly = validCandidateMatrix();
+    outcomeOnly[0].workingTitle = 'Completed successfully';
+    await writeFile(candidatePath, `${JSON.stringify(outcomeOnly, null, 2)}\n`);
+    assert.match(runAdvisorCli(directory, 'candidates:check').stderr, /outcome-only working title/i);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+const writeRegistryFixture = async (
+  root: string,
+  options: { discoveries: number; validDocuments: number },
+) => {
+  const advisorRoot = path.join(root, 'data/b-track/amy-hood/advisor');
+  const rawDirectory = path.join(advisorRoot, 'raw');
+  const normalizedDirectory = path.join(advisorRoot, 'normalized');
+  await mkdir(rawDirectory, { recursive: true });
+  await mkdir(normalizedDirectory, { recursive: true });
+  const sources: AdvisorSourceRecord[] = [];
+  const fixtureCandidates = validCandidateMatrix();
+  const discoveryUrls = fixtureCandidates.flatMap((candidate) => candidate.discoveryUrls);
+  const candidateForUrl = new Map(
+    fixtureCandidates.flatMap((candidate) => candidate.discoveryUrls.map((sourceUrl, urlIndex) => [
+      sourceUrl,
+      { candidateId: candidate.id, direct: urlIndex === 0 },
+    ] as const)),
+  );
+
+  for (let index = 0; index < options.discoveries; index += 1) {
+    const canonicalUrl = discoveryUrls[index];
+    const sourceRole = candidateForUrl.get(canonicalUrl)!;
+    const id = sourceIdForUrl(canonicalUrl);
+    const text = `Amy Hood decision evidence ${index + 1}. ${'Public Microsoft source context. '.repeat(12)}`;
+    const sha256 = createHash('sha256').update(text).digest('hex');
+    const valid = index < options.validDocuments;
+    const rawPath = valid ? `raw/${id}.json` : null;
+    const normalizedPath = valid ? `normalized/${id}.txt` : null;
+    const record: AdvisorSourceRecord = {
+      id,
+      canonicalUrl,
+      eventCandidateIds: [sourceRole.candidateId],
+      tier: sourceRole.direct ? 1 : 2,
+      title: `Public source ${index + 1}`,
+      publisher: 'Microsoft',
+      publishedAt: null,
+      speaker: sourceRole.direct ? 'Amy Hood' : null,
+      sourceType: sourceRole.direct ? 'earnings_webcast' : 'financial_context',
+      collector: 'microsoft_ir',
+      temporalRole: 'decision_time',
+      rightsNote: 'Public official source preserved with provenance.',
+      approvedPublicHost: true,
+      collectionStatus: valid ? 'review_required' : 'discovered',
+      rawPath,
+      normalizedPath,
+      sha256: valid ? sha256 : null,
+      capturedAt: valid ? '2026-07-14T00:00:00.000Z' : null,
+      failureReason: null,
+    };
+    sources.push(record);
+    if (valid) {
+      const { rawPath: ignoredRaw, normalizedPath: ignoredNormalized, failureReason, ...metadata } = record;
+      void [ignoredRaw, ignoredNormalized, failureReason];
+      await writeFile(path.join(advisorRoot, rawPath!), `${JSON.stringify({
+        sourceId: id,
+        canonicalUrl,
+        title: record.title,
+        mediaType: 'text/plain; charset=utf-8',
+        bodyBase64: Buffer.from(text).toString('base64'),
+        metadata: { ...metadata, collectionStatus: 'collected' },
+      }, null, 2)}\n`);
+      await writeFile(path.join(advisorRoot, normalizedPath!), text);
+    }
+  }
+
+  await writeFile(path.join(advisorRoot, 'source-registry.json'), `${JSON.stringify({ sources }, null, 2)}\n`);
+};
+
+test('happy: source CLI verifies 100 discoveries and 50 artifact-backed documents', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-sources-happy-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+
+  try {
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(candidatePath, `${JSON.stringify(validCandidateMatrix(), null, 2)}\n`);
+    await writeRegistryFixture(directory, { discoveries: 100, validDocuments: 50 });
+    const result = runAdvisorCli(directory, 'sources:check');
+
+    assert.equal(result.status, 0, result.stderr);
+    assert.match(result.stdout, /100 discovered URLs/i);
+    assert.match(result.stdout, /50 valid documents/i);
+
+    const registry = JSON.parse(await readFile(
+      path.join(directory, 'data/b-track/amy-hood/advisor/source-registry.json'),
+      'utf8',
+    )) as { sources: AdvisorSourceRecord[] };
+    await writeFile(
+      path.join(directory, 'data/b-track/amy-hood/advisor', registry.sources[0].normalizedPath!),
+      'tampered',
+    );
+    const tampered = runAdvisorCli(directory, 'sources:check');
+    assert.equal(tampered.status, 1);
+    assert.match(tampered.stderr, /49 valid documents/i);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: source CLI reports exact deficits and rejects unsafe command inputs', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-sources-failure-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+  const invalidImport = path.join(directory, 'invalid-import.json');
+
+  try {
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(candidatePath, `${JSON.stringify(validCandidateMatrix(), null, 2)}\n`);
+    await writeRegistryFixture(directory, { discoveries: 99, validDocuments: 0 });
+    await writeFile(invalidImport, '{ invalid JSON');
+    const registryPath = path.join(directory, 'data/b-track/amy-hood/advisor/source-registry.json');
+    const registry = JSON.parse(await readFile(registryPath, 'utf8')) as { sources: AdvisorSourceRecord[] };
+    registry.sources = registry.sources.map((source) => source.eventCandidateIds.includes('candidate-01')
+      ? { ...source, speaker: null }
+      : source);
+    await writeFile(registryPath, `${JSON.stringify(registry, null, 2)}\n`);
+
+    const check = runAdvisorCli(directory, 'sources:check');
+    assert.equal(check.status, 1);
+    assert.match(check.stderr, /1 discovered URL below minimum/i);
+    assert.match(check.stderr, /50 valid documents below minimum/i);
+    assert.match(check.stderr, /candidate-01 lacks a likely direct Amy lead/i);
+
+    const collect = runAdvisorCli(directory, 'source:collect', '--id', 'source-missing');
+    assert.equal(collect.status, 1);
+    assert.match(collect.stderr, /unknown advisor source: source-missing/i);
+
+    const importResult = runAdvisorCli(directory, 'source:import', '--file', invalidImport);
+    assert.equal(importResult.status, 1);
+    assert.match(importResult.stderr, /invalid import JSON/i);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
