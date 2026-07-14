@@ -25,7 +25,7 @@
  *    - concurrent registry discoveries do not lose same-URL candidate links or different URLs.
  *    - invalid manual metadata, blank/short text, hash mismatches, and invalid speaker offsets leave no partial state.
  *    - uncertain transcript attribution remains review_required with speaker_uncertain.
- *    - corrupt review reuse, post-rename failures, and rollback parent swaps fail without trusting or deleting unsafe paths.
+ *    - corrupt or cross-owned review reuse, post-rename failures, and rollback parent swaps fail without trusting or deleting unsafe paths.
  */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -1727,5 +1727,57 @@ test('failure: rollback parent swap never removes outside-root content', async (
   } finally {
     await rm(directory, { recursive: true, force: true });
     await rm(outside, { recursive: true, force: true });
+  }
+});
+
+test('failure: cross-version raw pointer is not trusted as an owned audit predecessor', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-cross-version-owner-'));
+  const changedText = `${reviewedTranscriptText}\nVersion B adds distinct reviewed source content.`;
+
+  try {
+    const versionAInput = transcriptImport();
+    const versionA = await importTranscript(versionAInput, directory);
+    const versionB = await importTranscript(transcriptImport({
+      text: changedText,
+      expectedSha256: sha256Text(changedText),
+      reviewer: 'Version B Reviewer',
+      reviewedAt: '2026-07-14T06:00:00.000Z',
+    }), directory);
+    const versionBRawBytes = await readFile(
+      path.resolve(advisorPaths(directory).root, versionB.rawPath!),
+    );
+    const registry = loadRegistry(directory);
+    await writeJsonAtomic(advisorPaths(directory).registry, {
+      sources: registry.sources.map((source) => source.id === versionA.id
+        ? {
+          ...source,
+          rawPath: versionB.rawPath,
+          normalizedPath: versionB.normalizedPath,
+        }
+        : source),
+    });
+
+    const rebuiltA = await importTranscript(versionAInput, directory);
+    const rebuiltRaw = JSON.parse(await readFile(
+      path.resolve(advisorPaths(directory).root, rebuiltA.rawPath!),
+      'utf8',
+    ));
+
+    assert.equal(rebuiltA.id, versionA.id);
+    assert.equal(rebuiltA.sha256, versionA.sha256);
+    assert.notEqual(rebuiltA.rawPath, versionB.rawPath);
+    assert.notEqual(rebuiltA.normalizedPath, versionB.normalizedPath);
+    assert.equal(rebuiltRaw.metadata.id, versionA.id);
+    assert.equal(rebuiltRaw.metadata.sha256, versionA.sha256);
+    assert.equal(rebuiltRaw.metadata.capturedAt, versionA.capturedAt);
+    assert.equal(rebuiltRaw.supersedesRawPath, null);
+    assert.equal(rebuiltRaw.supersedesNormalizedPath, null);
+    assert.equal(rebuiltRaw.invalidatedRawPath, versionB.rawPath);
+    assert.deepEqual(
+      await readFile(path.resolve(advisorPaths(directory).root, versionB.rawPath!)),
+      versionBRawBytes,
+    );
+  } finally {
+    await rm(directory, { recursive: true, force: true });
   }
 });

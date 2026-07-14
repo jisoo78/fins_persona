@@ -155,6 +155,7 @@ const validateArtifactChain = async (
   relativePath: string,
   canonicalUrl: string,
   visited: Set<string> = new Set(),
+  expectedOwner?: AdvisorSourceRecord,
 ): Promise<ReviewedRawSource | null> => {
   if (visited.has(relativePath)) throw new Error('review artifact supersedes chain contains a cycle');
   visited.add(relativePath);
@@ -176,6 +177,24 @@ const validateArtifactChain = async (
   const contentSha256 = createHash('sha256').update(body).digest('hex');
   if (artifact.metadata.sha256 !== contentSha256) {
     throw new Error(`review artifact content hash is invalid: ${relativePath}`);
+  }
+  if (expectedOwner
+    && (expectedOwner.rawPath !== relativePath
+      || artifact.sourceId !== expectedOwner.id
+      || artifact.metadata.id !== expectedOwner.id
+      || artifact.metadata.sha256 !== expectedOwner.sha256
+      || artifact.metadata.capturedAt !== expectedOwner.capturedAt
+      || artifact.canonicalUrl !== expectedOwner.canonicalUrl)) {
+    throw new Error(`review artifact is not owned by registry source ${expectedOwner.id}`);
+  }
+  if (expectedOwner?.normalizedPath) {
+    const normalizedPath = await prepareAdvisorArtifactPath(root, expectedOwner.normalizedPath);
+    const normalizedBytes = await readFile(normalizedPath);
+    if ((expectedOwner.collector === 'manual_import'
+      || expectedOwner.collector === 'transcript_import')
+      && createHash('sha256').update(normalizedBytes).digest('hex') !== expectedOwner.sha256) {
+      throw new Error(`normalized artifact is not owned by registry source ${expectedOwner.id}`);
+    }
   }
 
   const reviewHashSuffix = path.basename(relativePath).match(/-([a-f0-9]{16})\.json$/)?.[1];
@@ -208,14 +227,25 @@ const validateArtifactChain = async (
     if (artifact.supersedesRawPath === relativePath) {
       throw new Error('review artifact cannot supersede itself');
     }
-    await validateArtifactChain(root, artifact.supersedesRawPath, canonicalUrl, visited);
-  }
-  if (artifact.supersedesNormalizedPath) {
-    const normalizedPath = await prepareAdvisorArtifactPath(
+    const superseded = await validateArtifactChain(
       root,
-      artifact.supersedesNormalizedPath,
+      artifact.supersedesRawPath,
+      canonicalUrl,
+      visited,
     );
-    await readFile(normalizedPath);
+    if (superseded && artifact.supersedesNormalizedPath) {
+      const normalizedPath = await prepareAdvisorArtifactPath(
+        root,
+        artifact.supersedesNormalizedPath,
+      );
+      const normalizedBytes = await readFile(normalizedPath);
+      if (createHash('sha256').update(normalizedBytes).digest('hex')
+        !== superseded.metadata.sha256) {
+        throw new Error('review artifact supersedes raw/normalized ownership is mismatched');
+      }
+    }
+  } else if (artifact.supersedesNormalizedPath) {
+    throw new Error('review artifact cannot supersede normalized evidence without raw evidence');
   }
   if (artifact.invalidatedRawPath) {
     if (artifact.invalidatedRawPath === relativePath) {
@@ -230,17 +260,23 @@ const inspectExistingReview = async (
   root: string,
   relativePath: string | null,
   canonicalUrl: string,
-  expectedSourceId: string,
+  expectedOwner: AdvisorSourceRecord,
   input: ReviewedSourceImport,
   options: ImportOptions,
 ) => {
   if (!relativePath) return { valid: false, matches: false };
   try {
-    const artifact = await validateArtifactChain(root, relativePath, canonicalUrl);
+    const artifact = await validateArtifactChain(
+      root,
+      relativePath,
+      canonicalUrl,
+      new Set(),
+      expectedOwner,
+    );
     return {
       valid: true,
       matches: artifact !== null
-        && reviewMatches(artifact, expectedSourceId, input, options),
+        && reviewMatches(artifact, expectedOwner.id, input, options),
     };
   } catch {
     return { valid: false, matches: false };
@@ -315,7 +351,7 @@ const importReviewedSourceInternal = async (
       root,
       previous?.rawPath ?? null,
       canonicalUrl,
-      sourceId,
+      previous!,
       effectiveInput,
       options,
     );
@@ -324,7 +360,7 @@ const importReviewedSourceInternal = async (
     let predecessorValid = inspection.valid;
     if (!previous && latest?.rawPath) {
       try {
-        await validateArtifactChain(root, latest.rawPath, canonicalUrl);
+        await validateArtifactChain(root, latest.rawPath, canonicalUrl, new Set(), latest);
         predecessorValid = true;
       } catch {
         predecessorValid = false;
