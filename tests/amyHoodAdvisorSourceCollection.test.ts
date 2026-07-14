@@ -25,6 +25,7 @@
  *    - concurrent registry discoveries do not lose same-URL candidate links or different URLs.
  *    - invalid manual metadata, blank/short text, hash mismatches, and invalid speaker offsets leave no partial state.
  *    - uncertain transcript attribution remains review_required with speaker_uncertain.
+ *    - corrupt review reuse, post-rename failures, and rollback parent swaps fail without trusting or deleting unsafe paths.
  */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -34,6 +35,7 @@ import path from 'node:path';
 import test from 'node:test';
 
 import { readJsonFile, writeJsonAtomic } from '../server/decisionAdvisor/jsonStore';
+import { writeAdvisorArtifactAtomic } from '../server/decisionAdvisor/artifactStore';
 import { advisorPaths } from '../server/decisionAdvisor/paths';
 import {
   canonicalizeSourceUrl,
@@ -1602,5 +1604,128 @@ test('edge: official collection and manual import share one canonical-family ope
   } finally {
     releaseTransport();
     await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: idempotent reviewed import rebuilds missing or corrupted raw review artifacts', async (t) => {
+  const cases = [
+    {
+      name: 'missing',
+      corrupt: async (rawPath: string) => rm(rawPath),
+    },
+    {
+      name: 'truncated',
+      corrupt: async (rawPath: string) => writeFile(rawPath, '{"sourceId":', 'utf8'),
+    },
+    {
+      name: 'wrong metadata',
+      corrupt: async (rawPath: string) => {
+        const raw = JSON.parse(await readFile(rawPath, 'utf8'));
+        raw.metadata.id = 'source-wrong';
+        await writeFile(rawPath, `${JSON.stringify(raw, null, 2)}\n`, 'utf8');
+      },
+    },
+    {
+      name: 'wrong review hash bytes',
+      corrupt: async (rawPath: string) => {
+        await writeFile(rawPath, `${await readFile(rawPath, 'utf8')} `, 'utf8');
+      },
+    },
+  ];
+
+  for (const testCase of cases) {
+    await t.test(testCase.name, async () => {
+      const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-review-rebuild-'));
+      try {
+        const original = await importTranscript(transcriptImport(), directory);
+        const originalRawPath = path.resolve(advisorPaths(directory).root, original.rawPath!);
+        await testCase.corrupt(originalRawPath);
+
+        const rebuilt = await importTranscript(transcriptImport(), directory);
+        const rebuiltRawPath = path.resolve(advisorPaths(directory).root, rebuilt.rawPath!);
+        const rebuiltBytes = await readFile(rebuiltRawPath);
+        const rebuiltRaw = JSON.parse(rebuiltBytes.toString('utf8'));
+        const reviewHashSuffix = path.basename(rebuiltRawPath).match(/-([a-f0-9]{16})\.json$/)?.[1];
+
+        assert.ok(reviewHashSuffix);
+        assert.equal(
+          createHash('sha256').update(rebuiltBytes).digest('hex').startsWith(reviewHashSuffix),
+          true,
+        );
+        assert.equal(rebuiltRaw.sourceId, rebuilt.id);
+        assert.equal(rebuiltRaw.metadata.id, rebuilt.id);
+        assert.equal(rebuiltRaw.metadata.sha256, rebuilt.sha256);
+        assert.equal(rebuiltRaw.metadata.capturedAt, rebuilt.capturedAt);
+        assert.equal(rebuiltRaw.canonicalUrl, rebuilt.canonicalUrl);
+        assert.equal(rebuiltRaw.reviewer, transcriptImport().reviewer);
+        assert.deepEqual(rebuiltRaw.speakerSegments, transcriptImport().speakerSegments);
+        assert.equal(rebuiltRaw.supersedesRawPath, null);
+        assert.equal(rebuiltRaw.invalidatedRawPath, original.rawPath);
+      } finally {
+        await rm(directory, { recursive: true, force: true });
+      }
+    });
+  }
+});
+
+test('failure: post-rename artifact failures compensate the promoted destination', async (t) => {
+  for (const hookName of ['afterRename', 'beforeDirectorySync'] as const) {
+    await t.test(hookName, async () => {
+      const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-post-rename-'));
+      const relativePath = 'raw/post-rename.json';
+      try {
+        await assert.rejects(() => writeAdvisorArtifactAtomic(
+          directory,
+          relativePath,
+          '{"complete":true}\n',
+          { [hookName]: async () => { throw new Error(`injected ${hookName} failure`); } },
+        ), new RegExp(`injected ${hookName}`));
+        assert.deepEqual(await readdir(advisorPaths(directory).raw), []);
+      } finally {
+        await rm(directory, { recursive: true, force: true });
+      }
+    });
+  }
+});
+
+test('failure: rollback parent swap never removes outside-root content', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-remove-race-'));
+  const outside = await mkdtemp(path.join(os.tmpdir(), 'advisor-remove-race-outside-'));
+  const rawDirectory = advisorPaths(directory).raw;
+  const movedRawDirectory = path.join(outside, 'moved-raw');
+  const sentinel = path.join(outside, 'outside-sentinel.txt');
+  let writeCount = 0;
+  let swapped = false;
+
+  try {
+    await writeFile(sentinel, 'must survive rollback', 'utf8');
+    await assert.rejects(() => importTranscript(transcriptImport(), directory, {
+      artifactHooks: {
+        beforeTemporaryOpen: async () => {
+          writeCount += 1;
+          if (writeCount === 2) throw new Error('injected normalized write failure');
+        },
+      },
+      artifactRemoveHooks: {
+        beforeRemove: async () => {
+          if (swapped) return;
+          swapped = true;
+          await rename(rawDirectory, movedRawDirectory);
+          await symlink(outside, rawDirectory, 'dir');
+        },
+      },
+    }), (error) => {
+      assert.ok(error instanceof AggregateError);
+      assert.match(error.message, /rollback was incomplete/i);
+      return true;
+    });
+
+    assert.equal(swapped, true);
+    assert.equal(await readFile(sentinel, 'utf8'), 'must survive rollback');
+    assert.deepEqual(loadRegistry(directory), { sources: [] });
+    assert.equal((await readdir(movedRawDirectory)).some((name) => name.endsWith('.json')), true);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+    await rm(outside, { recursive: true, force: true });
   }
 });

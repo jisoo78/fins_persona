@@ -9,6 +9,14 @@ export type ArtifactWriteHooks = {
   afterParentOpen?: (handle: { stat(): Promise<unknown> }) => Promise<void> | void;
   beforeTemporaryOpen?: () => Promise<void> | void;
   beforeRename?: () => Promise<void> | void;
+  afterRename?: () => Promise<void> | void;
+  beforeDirectorySync?: () => Promise<void> | void;
+};
+
+export type ArtifactRemoveHooks = {
+  afterParentOpen?: (handle: { stat(): Promise<unknown> }) => Promise<void> | void;
+  beforeRemove?: () => Promise<void> | void;
+  afterRemove?: () => Promise<void> | void;
 };
 
 export const writeAdvisorArtifactAtomic = async (
@@ -25,10 +33,13 @@ export const writeAdvisorArtifactAtomic = async (
   );
   let temporaryPath: string | undefined;
   let handle: Awaited<ReturnType<typeof open>> | undefined;
+  let anchoredDestination: string | undefined;
+  let promoted = false;
+  let verifyParentAnchor: (() => Promise<void>) | undefined;
   try {
     await hooks?.afterParentOpen?.(parentHandle);
     const anchor = await parentHandle.stat();
-    const verifyParentAnchor = async () => {
+    verifyParentAnchor = async () => {
       const pathnameStatus = await lstat(parentPath);
       if (pathnameStatus.isSymbolicLink()
         || pathnameStatus.dev !== anchor.dev
@@ -62,7 +73,7 @@ export const writeAdvisorArtifactAtomic = async (
       root,
       path.join('.artifact-staging', temporaryName),
     );
-    const anchoredDestination = path.join(
+    anchoredDestination = path.join(
       anchoredParent ?? parentPath,
       path.basename(destination),
     );
@@ -81,23 +92,100 @@ export const writeAdvisorArtifactAtomic = async (
     await hooks?.beforeRename?.();
     await verifyParentAnchor();
     await rename(temporaryPath, anchoredDestination);
-    try {
-      await verifyParentAnchor();
-    } catch (error) {
-      await rm(anchoredDestination, { force: true }).catch(() => undefined);
-      throw error;
-    }
+    promoted = true;
+    temporaryPath = undefined;
+    await hooks?.afterRename?.();
+    await verifyParentAnchor();
+    await hooks?.beforeDirectorySync?.();
     await parentHandle.sync();
-  } catch (error) {
-    if (handle) await handle.close().catch(() => undefined);
-    if (temporaryPath) await rm(temporaryPath, { force: true }).catch(() => undefined);
-    throw error;
+  } catch (operationError) {
+    const cleanupErrors: unknown[] = [];
+    if (handle) {
+      try {
+        await handle.close();
+      } catch (error) {
+        cleanupErrors.push(error);
+      }
+    }
+    if (temporaryPath) {
+      try {
+        await rm(temporaryPath, { force: true });
+      } catch (error) {
+        cleanupErrors.push(error);
+      }
+    }
+    if (promoted && anchoredDestination && verifyParentAnchor) {
+      try {
+        await verifyParentAnchor();
+        await rm(anchoredDestination, { force: true });
+        await parentHandle.sync();
+      } catch (error) {
+        cleanupErrors.push(error);
+      }
+    }
+    if (cleanupErrors.length > 0) {
+      throw new AggregateError(
+        [operationError, ...cleanupErrors],
+        'atomic advisor artifact write failed and cleanup was incomplete',
+      );
+    }
+    throw operationError;
   } finally {
     await parentHandle.close().catch(() => undefined);
   }
 };
 
-export const removeAdvisorArtifact = async (root: string, relativePath: string) => {
+export const removeAdvisorArtifact = async (
+  root: string,
+  relativePath: string,
+  hooks?: ArtifactRemoveHooks,
+) => {
   const destination = await prepareAdvisorArtifactPath(root, relativePath);
-  await rm(destination, { force: true });
+  const parentPath = path.dirname(destination);
+  const parentHandle = await open(
+    parentPath,
+    constants.O_RDONLY | constants.O_DIRECTORY | constants.O_NOFOLLOW,
+  );
+  try {
+    const anchor = await parentHandle.stat();
+    await hooks?.afterParentOpen?.(parentHandle);
+    const verifyParentAnchor = async () => {
+      const pathnameStatus = await lstat(parentPath);
+      if (pathnameStatus.isSymbolicLink()
+        || pathnameStatus.dev !== anchor.dev
+        || pathnameStatus.ino !== anchor.ino) {
+        throw new Error(`advisor artifact parent inode changed before removal: ${relativePath}`);
+      }
+      await prepareAdvisorArtifactPath(root, relativePath);
+    };
+    const descriptorCandidates = [
+      `/dev/fd/${parentHandle.fd}`,
+      `/proc/self/fd/${parentHandle.fd}`,
+    ];
+    let anchoredParent: string | null = null;
+    for (const candidate of descriptorCandidates) {
+      try {
+        const candidateRealpath = await realpath(candidate);
+        const parentRealpath = await realpath(parentPath);
+        if (candidateRealpath === parentRealpath) {
+          anchoredParent = candidate;
+          break;
+        }
+      } catch {
+        // This platform has no descriptor filesystem for directory-relative operations.
+      }
+    }
+    const anchoredDestination = path.join(
+      anchoredParent ?? parentPath,
+      path.basename(destination),
+    );
+    await hooks?.beforeRemove?.();
+    await verifyParentAnchor();
+    await rm(anchoredDestination, { force: true });
+    await hooks?.afterRemove?.();
+    await verifyParentAnchor();
+    await parentHandle.sync();
+  } finally {
+    await parentHandle.close().catch(() => undefined);
+  }
 };

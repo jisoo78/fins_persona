@@ -9,6 +9,7 @@ import type {
 import {
   removeAdvisorArtifact,
   writeAdvisorArtifactAtomic,
+  type ArtifactRemoveHooks,
   type ArtifactWriteHooks,
 } from './artifactStore';
 import {
@@ -50,6 +51,7 @@ type ImportOptions = {
 
 export type ManualImportDependencies = {
   artifactHooks?: ArtifactWriteHooks;
+  artifactRemoveHooks?: ArtifactRemoveHooks;
   commitRegistry?: typeof persistReviewedSource;
 };
 
@@ -64,6 +66,7 @@ type ReviewedRawSource = {
   reviewedAt: string;
   supersedesRawPath: string | null;
   supersedesNormalizedPath: string | null;
+  invalidatedRawPath: string | null;
   metadata: Omit<AdvisorSourceRecord, 'rawPath' | 'normalizedPath' | 'failureReason'>;
 };
 
@@ -118,13 +121,15 @@ const validateReviewedSource = (input: ReviewedSourceImport) => {
 };
 
 const reviewMatches = (
-  raw: unknown,
+  artifact: ReviewedRawSource,
+  expectedSourceId: string,
   input: ReviewedSourceImport,
   options: ImportOptions,
 ) => {
-  if (typeof raw !== 'object' || raw === null) return false;
-  const artifact = raw as Partial<ReviewedRawSource>;
-  return artifact.bodyBase64 === Buffer.from(input.text, 'utf8').toString('base64')
+  return artifact.sourceId === expectedSourceId
+    && artifact.metadata.id === expectedSourceId
+    && artifact.metadata.sha256 === input.expectedSha256
+    && artifact.bodyBase64 === Buffer.from(input.text, 'utf8').toString('base64')
     && artifact.canonicalUrl === canonicalizeSourceUrl(input.canonicalUrl)
     && artifact.title === input.title
     && artifact.reviewer === input.reviewer
@@ -142,18 +147,103 @@ const reviewMatches = (
       === JSON.stringify(input.eventCandidateIds);
 };
 
-const readExistingReview = async (
+const nullableArtifactPath = (value: unknown): value is string | null =>
+  value === null || typeof value === 'string';
+
+const validateArtifactChain = async (
+  root: string,
+  relativePath: string,
+  canonicalUrl: string,
+  visited: Set<string> = new Set(),
+): Promise<ReviewedRawSource | null> => {
+  if (visited.has(relativePath)) throw new Error('review artifact supersedes chain contains a cycle');
+  visited.add(relativePath);
+  const artifactPath = await prepareAdvisorArtifactPath(root, relativePath);
+  const bytes = await readFile(artifactPath);
+  const artifact = JSON.parse(bytes.toString('utf8')) as Partial<ReviewedRawSource>;
+  if (typeof artifact.sourceId !== 'string'
+    || artifact.canonicalUrl !== canonicalUrl
+    || typeof artifact.bodyBase64 !== 'string'
+    || typeof artifact.metadata !== 'object'
+    || artifact.metadata === null
+    || artifact.metadata.id !== artifact.sourceId) {
+    throw new Error(`review artifact has invalid source provenance: ${relativePath}`);
+  }
+  const body = Buffer.from(artifact.bodyBase64, 'base64');
+  if (body.toString('base64') !== artifact.bodyBase64.replace(/\s+/g, '')) {
+    throw new Error(`review artifact body is not canonical base64: ${relativePath}`);
+  }
+  const contentSha256 = createHash('sha256').update(body).digest('hex');
+  if (artifact.metadata.sha256 !== contentSha256) {
+    throw new Error(`review artifact content hash is invalid: ${relativePath}`);
+  }
+
+  const reviewHashSuffix = path.basename(relativePath).match(/-([a-f0-9]{16})\.json$/)?.[1];
+  if (!reviewHashSuffix) {
+    // Official collector artifacts may terminate an otherwise valid manual audit chain.
+    return null;
+  }
+  if (!createHash('sha256').update(bytes).digest('hex').startsWith(reviewHashSuffix)
+    || typeof artifact.reviewer !== 'string'
+    || artifact.reviewer.trim() === ''
+    || typeof artifact.reviewedAt !== 'string'
+    || artifact.metadata.capturedAt !== artifact.reviewedAt
+    || !Array.isArray(artifact.speakerSegments)
+    || !nullableArtifactPath(artifact.supersedesRawPath)
+    || !nullableArtifactPath(artifact.supersedesNormalizedPath)
+    || !nullableArtifactPath(artifact.invalidatedRawPath)) {
+    throw new Error(`review artifact metadata or byte hash is invalid: ${relativePath}`);
+  }
+  for (const segment of artifact.speakerSegments) {
+    if (typeof segment?.speaker !== 'string'
+      || !Number.isInteger(segment.startChar)
+      || !Number.isInteger(segment.endChar)
+      || segment.startChar < 0
+      || segment.endChar <= segment.startChar
+      || segment.endChar > body.toString('utf8').length) {
+      throw new Error(`review artifact speaker segment is invalid: ${relativePath}`);
+    }
+  }
+  if (artifact.supersedesRawPath) {
+    if (artifact.supersedesRawPath === relativePath) {
+      throw new Error('review artifact cannot supersede itself');
+    }
+    await validateArtifactChain(root, artifact.supersedesRawPath, canonicalUrl, visited);
+  }
+  if (artifact.supersedesNormalizedPath) {
+    const normalizedPath = await prepareAdvisorArtifactPath(
+      root,
+      artifact.supersedesNormalizedPath,
+    );
+    await readFile(normalizedPath);
+  }
+  if (artifact.invalidatedRawPath) {
+    if (artifact.invalidatedRawPath === relativePath) {
+      throw new Error('review artifact cannot invalidate itself');
+    }
+    await prepareAdvisorArtifactPath(root, artifact.invalidatedRawPath);
+  }
+  return artifact as ReviewedRawSource;
+};
+
+const inspectExistingReview = async (
   root: string,
   relativePath: string | null,
+  canonicalUrl: string,
+  expectedSourceId: string,
   input: ReviewedSourceImport,
   options: ImportOptions,
 ) => {
-  if (!relativePath) return false;
+  if (!relativePath) return { valid: false, matches: false };
   try {
-    const artifactPath = await prepareAdvisorArtifactPath(root, relativePath);
-    return reviewMatches(JSON.parse(await readFile(artifactPath, 'utf8')), input, options);
+    const artifact = await validateArtifactChain(root, relativePath, canonicalUrl);
+    return {
+      valid: true,
+      matches: artifact !== null
+        && reviewMatches(artifact, expectedSourceId, input, options),
+    };
   } catch {
-    return false;
+    return { valid: false, matches: false };
   }
 };
 
@@ -175,11 +265,16 @@ const writeImmutableArtifact = async (
   return true;
 };
 
-const rollbackArtifacts = async (root: string, createdPaths: string[], cause: unknown) => {
+const rollbackArtifacts = async (
+  root: string,
+  createdPaths: string[],
+  cause: unknown,
+  hooks?: ArtifactRemoveHooks,
+) => {
   const cleanupErrors: unknown[] = [];
   for (const relativePath of [...createdPaths].reverse()) {
     try {
-      await removeAdvisorArtifact(root, relativePath);
+      await removeAdvisorArtifact(root, relativePath, hooks);
     } catch (error) {
       cleanupErrors.push(error);
     }
@@ -216,12 +311,25 @@ const importReviewedSourceInternal = async (
       ...input.eventCandidateIds,
     ])];
     const effectiveInput = { ...input, eventCandidateIds: effectiveCandidateIds };
-    const sameReview = await readExistingReview(
+    const inspection = await inspectExistingReview(
       root,
       previous?.rawPath ?? null,
+      canonicalUrl,
+      sourceId,
       effectiveInput,
       options,
     );
+    const sameReview = inspection.matches;
+    const predecessor = previous ?? latest;
+    let predecessorValid = inspection.valid;
+    if (!previous && latest?.rawPath) {
+      try {
+        await validateArtifactChain(root, latest.rawPath, canonicalUrl);
+        predecessorValid = true;
+      } catch {
+        predecessorValid = false;
+      }
+    }
     const normalizedPath = options.failureReason === null
       ? path.join('normalized', `${sourceId}-${sha256}.txt`)
       : null;
@@ -262,10 +370,13 @@ const importReviewedSourceInternal = async (
       speakerSegments: input.speakerSegments ?? [],
       reviewer: input.reviewer,
       reviewedAt: input.reviewedAt,
-      supersedesRawPath: sameReview ? null : previous?.rawPath ?? latest?.rawPath ?? null,
+      supersedesRawPath: sameReview || !predecessorValid ? null : predecessor?.rawPath ?? null,
       supersedesNormalizedPath: sameReview
         ? null
-        : previous?.normalizedPath ?? latest?.normalizedPath ?? null,
+        : predecessorValid ? predecessor?.normalizedPath ?? null : null,
+      invalidatedRawPath: !sameReview && predecessor?.rawPath && !predecessorValid
+        ? predecessor.rawPath
+        : null,
       metadata: {
         ...metadata,
         collectionStatus: 'collected',
@@ -298,7 +409,7 @@ const importReviewedSourceInternal = async (
         previous?.rawPath ?? null,
       );
     } catch (error) {
-      return rollbackArtifacts(root, createdPaths, error);
+      return rollbackArtifacts(root, createdPaths, error, dependencies.artifactRemoveHooks);
     }
   });
 };
