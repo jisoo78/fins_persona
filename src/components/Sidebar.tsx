@@ -2,14 +2,11 @@ import React from 'react';
 import { TabType } from '../types';
 import { 
   LayoutDashboard, 
-  ClipboardList,
-  MessageSquareText, 
-  Users, 
   Settings,
   BrainCircuit,
   ChevronRight,
   Scale,
-  ListChecks,
+  Workflow,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -20,11 +17,8 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
   const navItems: { id: TabType; label: string; icon: React.ReactNode }[] = [
     { id: 'dashboard', label: '대시보드', icon: <LayoutDashboard className="w-4 h-4" /> },
-    { id: 'pre-interview', label: '사전 질문', icon: <ClipboardList className="w-4 h-4" /> },
-    { id: 'interview', label: '심층 인터뷰', icon: <MessageSquareText className="w-4 h-4" /> },
-    { id: 'personas', label: '페르소나', icon: <Users className="w-4 h-4" /> },
-    { id: 'evaluation-review', label: '평가 문항 검토', icon: <ListChecks className="w-4 h-4" /> },
-    { id: 'evaluation', label: '평가 비교', icon: <Scale className="w-4 h-4" /> },
+    { id: 'a-track', label: 'A Track', icon: <Workflow className="w-4 h-4" /> },
+    { id: 'b-track', label: 'B Track', icon: <Scale className="w-4 h-4" /> },
     { id: 'settings', label: '설정', icon: <Settings className="w-4 h-4" /> },
   ];
 
@@ -49,7 +43,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => 
           </div>
           <nav className="space-y-1">
             {navItems.map((item) => {
-              const isActive = activeTab === item.id || (activeTab === 'persona-detail' && item.id === 'personas');
+              const isActive = activeTab === item.id;
               return (
                 <button
                   key={item.id}

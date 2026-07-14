@@ -1,5 +1,5 @@
 import React from 'react';
-import { TabType, Persona } from '../types';
+import { ATrackSection, Persona } from '../types';
 import { 
   Users, 
   MessageSquareText, 
@@ -11,19 +11,19 @@ import {
 
 interface DashboardViewProps {
   personas: Persona[];
-  setActiveTab: (tab: TabType) => void;
+  onOpenATrack: (section: ATrackSection) => void;
   onOpenNewPersonaModal: () => void;
 }
 
 export const DashboardView: React.FC<DashboardViewProps> = ({
   personas,
-  setActiveTab,
+  onOpenATrack,
   onOpenNewPersonaModal,
 }) => {
   const stats = [
-    { label: '생성된 페르소나 수', value: `${personas.length}개`, sub: '페르소나 목록으로 이동', icon: <Users className="w-5 h-5 text-indigo-500" />, targetTab: 'personas' as TabType },
-    { label: '사전 질문', value: '40문항', sub: '사전 질문 화면으로 이동', icon: <ClipboardList className="w-5 h-5 text-emerald-500" />, targetTab: 'pre-interview' as TabType },
-    { label: '심층 인터뷰', value: '대기', sub: '심층 인터뷰 화면으로 이동', icon: <MessageSquareText className="w-5 h-5 text-blue-500" />, targetTab: 'interview' as TabType },
+    { label: '생성된 페르소나 수', value: `${personas.length}개`, sub: '페르소나 목록으로 이동', icon: <Users className="w-5 h-5 text-indigo-500" />, section: 'personas' as ATrackSection },
+    { label: '사전 질문', value: '40문항', sub: '사전 질문 화면으로 이동', icon: <ClipboardList className="w-5 h-5 text-emerald-500" />, section: 'pre-interview' as ATrackSection },
+    { label: '심층 인터뷰', value: '대기', sub: '심층 인터뷰 화면으로 이동', icon: <MessageSquareText className="w-5 h-5 text-blue-500" />, section: 'deep-interview' as ATrackSection },
   ];
 
   return (
@@ -46,7 +46,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* Quick Action Buttons */}
         <div className="flex flex-wrap items-center gap-3">
           <button
-            onClick={() => setActiveTab('pre-interview')}
+            onClick={() => onOpenATrack('pre-interview')}
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold border border-slate-200 dark:border-slate-700 shadow-sm transition-all hover:scale-[1.02]"
           >
             <ClipboardList className="w-4 h-4 text-emerald-500" />
@@ -69,7 +69,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           <button
             type="button"
             key={idx}
-            onClick={() => setActiveTab(stat.targetTab)}
+            onClick={() => onOpenATrack(stat.section)}
             aria-label={`${stat.label} 화면으로 이동`}
             className="text-left bg-white dark:bg-slate-900/60 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-indigo-300 dark:hover:border-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-slate-950 transition-all relative overflow-hidden group"
           >
@@ -98,7 +98,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               <span>페르소나</span>
             </h2>
             <button
-              onClick={() => setActiveTab('personas')}
+              onClick={() => onOpenATrack('personas')}
               className="text-xs font-semibold text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
             >
               관리
@@ -117,7 +117,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             ) : personas.slice(0, 5).map((p) => (
               <div
                 key={p.id}
-                onClick={() => setActiveTab('personas')}
+                onClick={() => onOpenATrack('personas')}
                 className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
               >
                 <div className="flex items-center gap-3">

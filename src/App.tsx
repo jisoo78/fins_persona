@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { TabType, Persona, ChatMessage, DecisionRecord, UserSettings } from './types';
+import { TabType, Persona, ChatMessage, DecisionRecord, UserSettings, ATrackSection, BTrackSection } from './types';
 import { 
   initialPersonas, 
   initialChatMessages, 
@@ -15,34 +15,35 @@ import {
 import { Sidebar } from './components/Sidebar';
 import { Topbar } from './components/Topbar';
 import { DashboardView } from './components/DashboardView';
-import { InterviewView } from './components/InterviewView';
-import { DeepInterviewView } from './components/DeepInterviewView';
-import { PersonasView } from './components/PersonasView';
 import { PersonaDetailModal } from './components/PersonaDetailModal';
-import { EvaluationView } from './components/EvaluationView';
-import { EvaluationQuestionReviewView } from './components/EvaluationQuestionReviewView';
 import { SettingsView } from './components/SettingsView';
 import { NewPersonaModal } from './components/NewPersonaModal';
+import { ATrackView } from './components/tracks/ATrackView';
+import { BTrackView } from './components/tracks/BTrackView';
+import {
+  defaultTrackNavigation,
+  migrateLegacyTab,
+  normalizeTrackNavigation,
+} from './navigation/trackNavigation';
 
 const activeTabStorageKey = 'decision-active-tab';
+const trackNavigationStorageKey = 'decision-track-navigation';
 const personasStorageKey = 'decision-personas';
 
-const getInitialActiveTab = (): TabType => {
-  if (typeof window === 'undefined') return 'dashboard';
+const getInitialNavigation = () => {
+  if (typeof window === 'undefined') return defaultTrackNavigation;
 
-  const savedTab = window.localStorage.getItem(activeTabStorageKey) as TabType | null;
-  const validTabs: TabType[] = [
-    'dashboard',
-    'pre-interview',
-    'interview',
-    'personas',
-    'persona-detail',
-    'evaluation-review',
-    'evaluation',
-    'settings',
-  ];
+  try {
+    const saved = window.localStorage.getItem(trackNavigationStorageKey);
+    if (saved) return normalizeTrackNavigation(JSON.parse(saved));
+  } catch {
+    window.localStorage.removeItem(trackNavigationStorageKey);
+  }
 
-  return savedTab && validTabs.includes(savedTab) ? savedTab : 'dashboard';
+  return normalizeTrackNavigation({
+    ...defaultTrackNavigation,
+    ...migrateLegacyTab(window.localStorage.getItem(activeTabStorageKey)),
+  });
 };
 
 const loadStoredPersonas = (): Persona[] => {
@@ -58,7 +59,10 @@ const loadStoredPersonas = (): Persona[] => {
 };
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<TabType>(() => getInitialActiveTab());
+  const [initialNavigation] = useState(() => getInitialNavigation());
+  const [activeTab, setActiveTab] = useState<TabType>(initialNavigation.activeTab);
+  const [aTrackSection, setATrackSection] = useState<ATrackSection>(initialNavigation.aTrack);
+  const [bTrackSection, setBTrackSection] = useState<BTrackSection>(initialNavigation.bTrack);
 
   // Application Global State
   const [personas, setPersonas] = useState<Persona[]>(() => loadStoredPersonas());
@@ -71,8 +75,12 @@ export default function App() {
   const [isNewModalOpen, setIsNewModalOpen] = useState(false);
 
   useEffect(() => {
-    window.localStorage.setItem(activeTabStorageKey, activeTab);
-  }, [activeTab]);
+    window.localStorage.setItem(trackNavigationStorageKey, JSON.stringify({
+      activeTab,
+      aTrack: aTrackSection,
+      bTrack: bTrackSection,
+    }));
+  }, [activeTab, aTrackSection, bTrackSection]);
 
   useEffect(() => {
     window.localStorage.setItem(personasStorageKey, JSON.stringify(personas));
@@ -113,6 +121,11 @@ export default function App() {
     setDecisions(prev => [newDec, ...prev]);
   };
 
+  const handleOpenATrack = (section: ATrackSection) => {
+    setATrackSection(section);
+    setActiveTab('a-track');
+  };
+
   return (
     <div id="app-root" className="flex min-h-screen bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans antialiased selection:bg-indigo-500 selection:text-white">
       {/* Sidebar Navigation */}
@@ -128,29 +141,21 @@ export default function App() {
           {activeTab === 'dashboard' && (
             <DashboardView
               personas={personas}
-              setActiveTab={setActiveTab}
+              onOpenATrack={handleOpenATrack}
               onOpenNewPersonaModal={() => setIsNewModalOpen(true)}
             />
           )}
 
-          {activeTab === 'pre-interview' && (
-            <InterviewView
+          {activeTab === 'a-track' && (
+            <ATrackView
+              section={aTrackSection}
+              onSectionChange={setATrackSection}
               messages={chatMessages}
               setMessages={setChatMessages}
               decisions={decisions}
+              personas={personas}
               onCreatePersona={handleAddPersona}
               onAddHistoryRecord={handleAddDecision}
-              onGoToPersonas={() => setActiveTab('personas')}
-            />
-          )}
-
-          {activeTab === 'interview' && (
-            <DeepInterviewView setActiveTab={setActiveTab} />
-          )}
-
-          {activeTab === 'personas' && (
-            <PersonasView
-              personas={personas}
               onOpenDetail={handleOpenDetailModal}
               onOpenNewModal={() => setIsNewModalOpen(true)}
               onDeletePersona={handleDeletePersona}
@@ -158,12 +163,8 @@ export default function App() {
             />
           )}
 
-          {activeTab === 'evaluation' && (
-            <EvaluationView />
-          )}
-
-          {activeTab === 'evaluation-review' && (
-            <EvaluationQuestionReviewView />
+          {activeTab === 'b-track' && (
+            <BTrackView section={bTrackSection} onSectionChange={setBTrackSection} />
           )}
 
           {activeTab === 'settings' && (

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Bot, CheckCircle2, ClipboardList, MessageSquareText, RefreshCw, Send } from 'lucide-react';
-import { ChatMessage, InterviewQuestion, TabType } from '../types';
+import { ChatMessage, InterviewQuestion } from '../types';
 
 interface UserProfile {
   name: string;
@@ -71,7 +71,7 @@ interface AgentFinalOutputResponse {
 }
 
 interface DeepInterviewViewProps {
-  setActiveTab: (tab: TabType) => void;
+  onBackToPreInterview: () => void;
 }
 
 const formatTime = () =>
@@ -106,7 +106,7 @@ const buildRecord = (
   publicData: latestContext.publicData,
 });
 
-export const DeepInterviewView: React.FC<DeepInterviewViewProps> = ({ setActiveTab }) => {
+export const DeepInterviewView: React.FC<DeepInterviewViewProps> = ({ onBackToPreInterview }) => {
   const [latestContext, setLatestContext] = useState<LatestContextPayload | null>(null);
   const [questions, setQuestions] = useState<InterviewQuestion[]>([]);
   const [answers, setAnswers] = useState<string[]>([]);
@@ -303,7 +303,7 @@ export const DeepInterviewView: React.FC<DeepInterviewViewProps> = ({ setActiveT
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
-            onClick={() => setActiveTab('pre-interview')}
+            onClick={onBackToPreInterview}
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200"
           >
             <ClipboardList className="w-4 h-4" />
@@ -336,7 +336,7 @@ export const DeepInterviewView: React.FC<DeepInterviewViewProps> = ({ setActiveT
           </p>
           <button
             type="button"
-            onClick={() => setActiveTab('pre-interview')}
+            onClick={onBackToPreInterview}
             className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold"
           >
             사전 질문 시작
