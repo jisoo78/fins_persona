@@ -2,6 +2,7 @@ import React from 'react';
 import { AlertTriangle, RotateCcw } from 'lucide-react';
 
 import type { EvaluationRun } from '../../../shared/amyHoodEvaluation';
+import { CopyRunIdButton } from './CopyRunIdButton';
 import { summarizeRun } from './evaluationViewModel';
 
 type Props = {
@@ -17,7 +18,10 @@ export const EvaluationRunSummary: React.FC<Props> = ({ run, onResume }) => {
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-indigo-500">현재 실행</p>
           <h2 className="mt-1 text-lg font-bold text-slate-950 dark:text-white">{run.model}</h2>
-          <p className="mt-1 font-mono text-xs text-slate-500">{run.runId}</p>
+          <div className="mt-2 flex flex-wrap items-center gap-2">
+            <p className="font-mono text-xs text-slate-500">{run.runId}</p>
+            <CopyRunIdButton runId={run.runId} />
+          </div>
         </div>
         <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700 dark:bg-slate-800 dark:text-slate-200">{run.status}</span>
       </div>

@@ -6,6 +6,7 @@ import type {
   SubjectiveGrade,
 } from '../../../shared/amyHoodEvaluation';
 import { compareEvaluationRuns } from './evaluationViewModel';
+import { CopyRunIdButton } from './CopyRunIdButton';
 
 type GradeDraft = Omit<SubjectiveGrade, 'questionId' | 'score'>;
 
@@ -86,10 +87,13 @@ export const EvaluationRunHistory: React.FC<Props> = ({ runs, questions, onGrade
         <h2 className="text-sm font-semibold">평가 이력 비교</h2>
         <div className="mt-3 grid gap-3 md:grid-cols-2">
           {[{ value: leftId, set: setLeftId }, { value: rightId, set: setRightId }].map((field, index) => (
-            <select key={index} value={field.value} onChange={(event) => field.set(event.target.value)} className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-950">
-              <option value="">{index === 0 ? '왼쪽 실행 선택' : '오른쪽 실행 선택'}</option>
-              {complete.map((run) => <option key={run.runId} value={run.runId}>{run.model} · {run.runId.slice(0, 8)} · {run.questionSetVersion}</option>)}
-            </select>
+            <div key={index} className="space-y-2">
+              <select value={field.value} onChange={(event) => field.set(event.target.value)} className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-950">
+                <option value="">{index === 0 ? '왼쪽 실행 선택' : '오른쪽 실행 선택'}</option>
+                {complete.map((run) => <option key={run.runId} value={run.runId}>{run.model} · {run.runId.slice(0, 8)} · {run.questionSetVersion}</option>)}
+              </select>
+              <CopyRunIdButton runId={field.value} disabled={!field.value} />
+            </div>
           ))}
         </div>
         {rows.length > 0 && (
