@@ -94,47 +94,49 @@ const writeArtifactAtomic = async (
     parentPath,
     constants.O_RDONLY | constants.O_DIRECTORY | constants.O_NOFOLLOW,
   );
-  const anchor = await parentHandle.stat();
-  const verifyParentAnchor = async () => {
-    const pathnameStatus = await lstat(parentPath);
-    if (pathnameStatus.isSymbolicLink()
-      || pathnameStatus.dev !== anchor.dev
-      || pathnameStatus.ino !== anchor.ino) {
-      throw new Error(`advisor artifact parent inode changed: ${relativePath}`);
-    }
-    await prepareAdvisorArtifactPath(root, relativePath);
-  };
-  const descriptorCandidates = [
-    `/dev/fd/${parentHandle.fd}`,
-    `/proc/self/fd/${parentHandle.fd}`,
-  ];
-  let anchoredParent: string | null = null;
-  for (const candidate of descriptorCandidates) {
-    try {
-      const candidateRealpath = await realpath(candidate);
-      const parentRealpath = await realpath(parentPath);
-      if (candidateRealpath === parentRealpath) {
-        anchoredParent = candidate;
-        break;
-      }
-    } catch {
-      // This platform has no descriptor filesystem for directory-relative operations.
-    }
-  }
-  // Node exposes no portable openat/renameat. Descriptor paths close that gap on
-  // Linux/macOS; the fallback retains inode checks but trusts same-user local code
-  // not to swap the parent in the final syscall-sized interval.
-  const temporaryName = `${path.basename(destination)}.${process.pid}.${randomUUID()}.tmp`;
-  const temporaryPath = await prepareAdvisorArtifactPath(
-    root,
-    path.join('.artifact-staging', temporaryName),
-  );
-  const anchoredDestination = path.join(
-    anchoredParent ?? parentPath,
-    path.basename(destination),
-  );
+  let temporaryPath: string | undefined;
   let handle: Awaited<ReturnType<typeof open>> | undefined;
   try {
+    await hooks?.afterParentOpen?.(parentHandle);
+    const anchor = await parentHandle.stat();
+    const verifyParentAnchor = async () => {
+      const pathnameStatus = await lstat(parentPath);
+      if (pathnameStatus.isSymbolicLink()
+        || pathnameStatus.dev !== anchor.dev
+        || pathnameStatus.ino !== anchor.ino) {
+        throw new Error(`advisor artifact parent inode changed: ${relativePath}`);
+      }
+      await prepareAdvisorArtifactPath(root, relativePath);
+    };
+    const descriptorCandidates = [
+      `/dev/fd/${parentHandle.fd}`,
+      `/proc/self/fd/${parentHandle.fd}`,
+    ];
+    let anchoredParent: string | null = null;
+    for (const candidate of descriptorCandidates) {
+      try {
+        const candidateRealpath = await realpath(candidate);
+        const parentRealpath = await realpath(parentPath);
+        if (candidateRealpath === parentRealpath) {
+          anchoredParent = candidate;
+          break;
+        }
+      } catch {
+        // This platform has no descriptor filesystem for directory-relative operations.
+      }
+    }
+    // Node exposes no portable openat/renameat. Descriptor paths close that gap on
+    // Linux/macOS; the fallback retains inode checks but trusts same-user local code
+    // not to swap the parent in the final syscall-sized interval.
+    const temporaryName = `${path.basename(destination)}.${process.pid}.${randomUUID()}.tmp`;
+    temporaryPath = await prepareAdvisorArtifactPath(
+      root,
+      path.join('.artifact-staging', temporaryName),
+    );
+    const anchoredDestination = path.join(
+      anchoredParent ?? parentPath,
+      path.basename(destination),
+    );
     await hooks?.beforeTemporaryOpen?.();
     await verifyParentAnchor();
     handle = await open(
@@ -159,7 +161,7 @@ const writeArtifactAtomic = async (
     await parentHandle.sync();
   } catch (error) {
     if (handle) await handle.close().catch(() => undefined);
-    await rm(temporaryPath, { force: true }).catch(() => undefined);
+    if (temporaryPath) await rm(temporaryPath, { force: true }).catch(() => undefined);
     throw error;
   } finally {
     await parentHandle.close().catch(() => undefined);

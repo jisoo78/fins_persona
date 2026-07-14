@@ -9,6 +9,7 @@ export type CollectorTimeouts = {
 };
 
 export type ArtifactWriteHooks = {
+  afterParentOpen?: (handle: { stat(): Promise<unknown> }) => Promise<void> | void;
   beforeTemporaryOpen?: () => Promise<void> | void;
   beforeRename?: () => Promise<void> | void;
 };

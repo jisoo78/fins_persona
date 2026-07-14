@@ -994,6 +994,29 @@ test('failure: parent swaps around open and rename abort without an outside fina
   }
 });
 
+test('failure: staging preparation failure closes the anchored parent handle', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-staging-failure-'));
+  const stagingPath = path.join(advisorPaths(directory).root, '.artifact-staging');
+  let parentHandle: { stat(): Promise<unknown> } | undefined;
+
+  try {
+    await mkdir(advisorPaths(directory).root, { recursive: true });
+    await writeFile(stagingPath, 'blocks staging directory creation', 'utf8');
+    await assert.rejects(() => collectOfficialSource(collectionRecord(), {
+      root: directory,
+      resolveHost: publicDns,
+      transportImpl: async () => htmlResponse(substantialHtml()),
+      artifactHooks: {
+        afterParentOpen: (handle) => { parentHandle = handle; },
+      },
+    }), /not a directory|artifact parent/i);
+    assert.ok(parentHandle);
+    await assert.rejects(() => parentHandle!.stat(), { code: 'EBADF' });
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
 test('failure: same-SHA refresh rebuilds missing, truncated, and wrong-body raw artifacts', async (t) => {
   for (const corruption of ['missing', 'truncated', 'wrong-body'] as const) {
     await t.test(corruption, async () => {
