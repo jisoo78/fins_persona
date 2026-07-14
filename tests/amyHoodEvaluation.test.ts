@@ -574,7 +574,19 @@ test('happy: router exposes question review and all run operations', async () =>
     startedAt: '2026-07-14T00:00:00.000Z',
     completedAt: null,
   };
+  const experimentRuns = [
+    'persona_rag',
+    'persona_no_rag',
+    'generic_cfo_no_rag',
+  ].map((experimentArm, index) => ({
+    ...run,
+    runId: `experiment-run-${index + 1}`,
+    experimentGroupId: 'experiment-group-1',
+    experimentArm: experimentArm as 'persona_rag' | 'persona_no_rag' | 'generic_cfo_no_rag',
+  }));
   let executionStarted = false;
+  let experimentCreationCalls = 0;
+  let experimentExecutionCalls = 0;
   const router = createEvaluationRouter({
     loadBundle: async () => bundle,
     loadReviews: async () => reviews,
@@ -583,9 +595,20 @@ test('happy: router exposes question review and all run operations', async () =>
     readRun: async () => run,
     runner: {
       createEvaluationRun: async () => run,
+      createEvaluationExperiment: async () => {
+        experimentCreationCalls += 1;
+        return {
+          experimentGroupId: 'experiment-group-1',
+          runs: experimentRuns,
+        };
+      },
       executeEvaluationRun: async () => {
         executionStarted = true;
         return run;
+      },
+      executeEvaluationExperiment: async () => {
+        experimentExecutionCalls += 1;
+        return experimentRuns;
       },
       resumeEvaluationRun: async () => run,
       applySubjectiveGrades: async () => run,
@@ -625,6 +648,29 @@ test('happy: router exposes question review and all run operations', async () =>
     );
     await new Promise((resolve) => setImmediate(resolve));
     assert.equal(executionStarted, true);
+    const experimentResponse = await fetch(`${baseUrl}/experiments`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ provider: 'local' }),
+    });
+    assert.equal(experimentResponse.status, 202);
+    const experimentPayload = await experimentResponse.json() as {
+      experimentGroupId: string;
+      runs: EvaluationRun[];
+    };
+    assert.equal(experimentPayload.experimentGroupId, 'experiment-group-1');
+    assert.equal(experimentPayload.runs.length, 3);
+    await new Promise((resolve) => setImmediate(resolve));
+    assert.equal(experimentCreationCalls, 1);
+    assert.equal(experimentExecutionCalls, 1);
+    const invalidExperiment = await fetch(`${baseUrl}/experiments`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ provider: 'openai' }),
+    });
+    assert.equal(invalidExperiment.status, 400);
+    assert.equal(experimentCreationCalls, 1);
+    assert.equal(experimentExecutionCalls, 1);
     assert.equal(
       (await fetch(`${baseUrl}/runs/run-1/resume`, { method: 'POST' })).status,
       202,

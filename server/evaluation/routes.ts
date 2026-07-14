@@ -2,6 +2,7 @@ import { Router, type NextFunction, type Request, type Response } from 'express'
 
 import type {
   EvaluationBundle,
+  EvaluationExperimentLaunch,
   EvaluationProvider,
   EvaluationRun,
   QuestionReview,
@@ -15,7 +16,11 @@ import { listRuns, readRun } from './runStore';
 
 type EvaluationRunnerContract = {
   createEvaluationRun(input: { provider: EvaluationProvider }): Promise<EvaluationRun>;
+  createEvaluationExperiment(input: {
+    provider: EvaluationProvider;
+  }): Promise<EvaluationExperimentLaunch>;
   executeEvaluationRun(runId: string): Promise<EvaluationRun>;
+  executeEvaluationExperiment(runIds: string[]): Promise<EvaluationRun[]>;
   resumeEvaluationRun(runId: string): Promise<EvaluationRun>;
   applySubjectiveGrades(
     runId: string,
@@ -85,6 +90,22 @@ export const createEvaluationRouter = (
     '/runs/:id',
     asyncHandler(async (request, response) => {
       response.json({ ok: true, run: await dependencies.readRun(request.params.id) });
+    }),
+  );
+
+  router.post(
+    '/experiments',
+    asyncHandler(async (request, response) => {
+      if (request.body?.provider !== 'local') {
+        throw new Error('three-arm experiments require the local provider');
+      }
+      const launch = await dependencies.runner.createEvaluationExperiment({
+        provider: 'local',
+      });
+      response.status(202).json({ ok: true, ...launch });
+      void dependencies.runner
+        .executeEvaluationExperiment(launch.runs.map((run) => run.runId))
+        .catch((error) => console.error('evaluation experiment failed', error));
     }),
   );
 

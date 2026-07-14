@@ -1,5 +1,6 @@
 import type {
   EvaluationAnswerKeyFile,
+  EvaluationExperimentLaunch,
   EvaluationProvider,
   EvaluationQuestionFile,
   EvaluationRun,
@@ -93,6 +94,17 @@ export const createEvaluationRun = (
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ provider }),
+    },
+    fetchImpl,
+  );
+
+export const createEvaluationExperiment = (fetchImpl: typeof fetch = fetch) =>
+  request<{ ok: true } & EvaluationExperimentLaunch>(
+    '/api/evaluation/experiments',
+    {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ provider: 'local' }),
     },
     fetchImpl,
   );

@@ -4,10 +4,9 @@
  *    - 질문·정답·검토 응답을 KPI별 검토 카드와 15문항 요약으로 변환한다.
  *
  * 2. Edge Cases:
- *    - 필터가 없는 경우 15문항을 유지한다.
- *    - 승인 메모가 비어 있어도 승인 상태를 표시한다.
- *    - 한국어 수정 메모를 API 요청에서 보존한다.
- *    - 미완료 실행은 생성된 점수를 유지하되 비교 가능 상태가 되지 않는다.
+ *    - experiment 필드 없는 legacy 실행을 일반 단일 실행으로 표시한다.
+ *    - 진행 중인 세 실행의 부분 점수를 유지한다.
+ *    - 한국어 검토 메모와 외부 채점 합계를 원형 보존한다.
  *
  * 3. Failure Path:
  *    - 비정상 HTTP 응답은 서버 메시지를 포함한 오류로 변환하고 성공 상태를 만들지 않는다.
@@ -23,6 +22,7 @@ import {
   summarizeQuestionReviews,
 } from '../src/components/evaluation/evaluationViewModel';
 import {
+  createEvaluationExperiment,
   fetchEvaluationQuestions,
   saveEvaluationQuestionReview,
   submitSubjectiveGrades,
@@ -166,6 +166,35 @@ test('happy: summarizes the 7/5/3 review queue', () => {
   });
   assert.equal(summary.total, 15);
   assert.equal(summary.statuses.approved, 1);
+});
+
+test('happy: experiment client starts the fixed local three-arm endpoint', async () => {
+  let requestUrl = '';
+  let requestMethod = '';
+  let requestBody = '';
+  const runs = ['persona_rag', 'persona_no_rag', 'generic_cfo_no_rag'].map(
+    (experimentArm, index) => ({
+      ...runFixture('gemma-4'),
+      runId: `run-${index + 1}`,
+      experimentGroupId: 'group-1',
+      experimentArm,
+    }),
+  );
+  const fetchImpl: typeof fetch = async (input, init) => {
+    requestUrl = String(input);
+    requestMethod = init?.method ?? 'GET';
+    requestBody = String(init?.body ?? '');
+    return new Response(
+      JSON.stringify({ ok: true, experimentGroupId: 'group-1', runs }),
+      { status: 202, headers: { 'content-type': 'application/json' } },
+    );
+  };
+
+  const launch = await createEvaluationExperiment(fetchImpl);
+  assert.equal(requestUrl, '/api/evaluation/experiments');
+  assert.equal(requestMethod, 'POST');
+  assert.deepEqual(JSON.parse(requestBody), { provider: 'local' });
+  assert.equal(launch.runs.length, 3);
 });
 
 test('edge: no filters keeps every question', () => {
