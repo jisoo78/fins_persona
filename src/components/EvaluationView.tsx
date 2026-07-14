@@ -8,6 +8,7 @@ import type {
   SubjectiveGrade,
 } from '../../shared/amyHoodEvaluation';
 import {
+  createEvaluationExperiment,
   createEvaluationRun,
   fetchEvaluationQuestions,
   getEvaluationRun,
@@ -18,17 +19,30 @@ import {
 import { EvaluationRunForm } from './evaluation/EvaluationRunForm';
 import { EvaluationRunHistory } from './evaluation/EvaluationRunHistory';
 import { EvaluationRunSummary } from './evaluation/EvaluationRunSummary';
+import { ExperimentGroupReport } from './evaluation/ExperimentGroupReport';
+
+const latestExperimentGroupId = (runs: EvaluationRun[]) =>
+  [...runs]
+    .filter((run) => run.experimentGroupId)
+    .sort((left, right) => right.startedAt.localeCompare(left.startedAt))[0]
+    ?.experimentGroupId ?? null;
 
 export const EvaluationView: React.FC = () => {
   const [runs, setRuns] = useState<EvaluationRun[]>([]);
   const [questions, setQuestions] = useState<EvaluationQuestion[]>([]);
   const [active, setActive] = useState<EvaluationRun | null>(null);
+  const [activeExperimentGroupId, setActiveExperimentGroupId] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const refreshRuns = useCallback(async () => {
     const response = await listEvaluationRuns();
     setRuns(response.runs);
+    setActive((current) =>
+      current
+        ? response.runs.find((run) => run.runId === current.runId) ?? current
+        : current,
+    );
     return response.runs;
   }, []);
 
@@ -39,6 +53,7 @@ export const EvaluationView: React.FC = () => {
         if (cancelled) return;
         setQuestions(questionResponse.questions.questions);
         setActive(nextRuns[0] ?? null);
+        setActiveExperimentGroupId(latestExperimentGroupId(nextRuns));
       })
       .catch((caught) => {
         if (!cancelled) setError(caught instanceof Error ? caught.message : '평가 정보를 불러오지 못했습니다.');
@@ -71,6 +86,33 @@ export const EvaluationView: React.FC = () => {
     };
   }, [active?.runId, active?.status, refreshRuns]);
 
+  const experimentRuns = runs.filter(
+    (run) => run.experimentGroupId === activeExperimentGroupId,
+  );
+  const experimentRunning = experimentRuns.some((run) =>
+    ['queued', 'running'].includes(run.status),
+  );
+
+  useEffect(() => {
+    if (!activeExperimentGroupId || !experimentRunning) return;
+    let cancelled = false;
+    const poll = async () => {
+      try {
+        if (!cancelled) await refreshRuns();
+      } catch (caught) {
+        if (!cancelled) {
+          setError(caught instanceof Error ? caught.message : '실험 상태 조회에 실패했습니다.');
+        }
+      }
+    };
+    const timer = window.setInterval(() => void poll(), 2000);
+    void poll();
+    return () => {
+      cancelled = true;
+      window.clearInterval(timer);
+    };
+  }, [activeExperimentGroupId, experimentRunning, refreshRuns]);
+
   const start = async (provider: EvaluationProvider) => {
     setBusy(true);
     setError(null);
@@ -80,6 +122,21 @@ export const EvaluationView: React.FC = () => {
       setRuns((current) => [response.run, ...current]);
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : '평가 실행을 시작하지 못했습니다.');
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const startExperiment = async () => {
+    setBusy(true);
+    setError(null);
+    try {
+      const launch = await createEvaluationExperiment();
+      setRuns((current) => [...launch.runs, ...current]);
+      setActive(launch.runs[0] ?? null);
+      setActiveExperimentGroupId(launch.experimentGroupId);
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : '3조건 실험을 시작하지 못했습니다.');
     } finally {
       setBusy(false);
     }
@@ -115,8 +172,9 @@ export const EvaluationView: React.FC = () => {
           <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">과거 복원 7점, GitHub 홀드아웃 5점, 가상 시나리오 24점의 실행 기록을 만들고 주관식을 채점합니다. 상세 비교는 평가 리포트에서 확인합니다.</p>
         </header>
         {error && <div className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900 dark:bg-red-950/40 dark:text-red-300"><AlertCircle className="h-4 w-4" />{error}</div>}
-        <EvaluationRunForm disabled={busy || Boolean(active && ['queued', 'running'].includes(active.status))} onStart={start} />
+        <EvaluationRunForm disabled={busy || experimentRunning || Boolean(active && ['queued', 'running'].includes(active.status))} onStart={start} onStartExperiment={startExperiment} />
         {active && <EvaluationRunSummary run={active} onResume={resume} />}
+        <ExperimentGroupReport runs={experimentRuns} />
         <EvaluationRunHistory runs={runs} questions={questions} onGrade={grade} />
       </div>
     </div>

@@ -3,6 +3,7 @@ import type {
   EvaluationRun,
   EvaluationRunAnswer,
 } from '../../../shared/amyHoodEvaluation';
+import { experimentArmLabel } from './evaluationViewModel';
 
 export type SingleRunReportModel = {
   runId: string;
@@ -11,6 +12,7 @@ export type SingleRunReportModel = {
   provider: EvaluationRun['provider'];
   model: string;
   promptLabel: string;
+  experimentLabel?: string;
   questionSetVersion: string;
   scores: EvaluationRun['scores'];
   rows: Array<{ question: EvaluationQuestion; answer: EvaluationRunAnswer | null }>;
@@ -45,6 +47,9 @@ export const buildSingleRunReport = (
     promptLabel: run.promptVersionId
       ? `프롬프트 버전 · ${run.promptVersionId}`
       : `레거시 프롬프트 · ${run.promptHash}`,
+    ...(run.experimentArm
+      ? { experimentLabel: experimentArmLabel(run.experimentArm) }
+      : {}),
     questionSetVersion: run.questionSetVersion,
     scores: { ...run.scores },
     rows: questions.map((question) => ({

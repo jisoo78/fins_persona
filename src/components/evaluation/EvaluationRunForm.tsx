@@ -6,9 +6,10 @@ import type { EvaluationProvider } from '../../../shared/amyHoodEvaluation';
 type Props = {
   disabled?: boolean;
   onStart(provider: EvaluationProvider): Promise<void>;
+  onStartExperiment(): Promise<void>;
 };
 
-export const EvaluationRunForm: React.FC<Props> = ({ disabled, onStart }) => {
+export const EvaluationRunForm: React.FC<Props> = ({ disabled, onStart, onStartExperiment }) => {
   const [provider, setProvider] = useState<EvaluationProvider>('local');
   return (
     <section className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
@@ -27,6 +28,9 @@ export const EvaluationRunForm: React.FC<Props> = ({ disabled, onStart }) => {
           </label>
           <button type="button" disabled={disabled} onClick={() => void onStart(provider)} className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50">
             <Play className="h-4 w-4" /> 평가 실행
+          </button>
+          <button type="button" disabled={disabled} onClick={() => void onStartExperiment()} className="inline-flex items-center gap-2 rounded-lg bg-violet-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50">
+            <Play className="h-4 w-4" /> 3조건 실험 실행 · Gemma 4
           </button>
         </div>
       </div>

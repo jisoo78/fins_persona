@@ -55,6 +55,15 @@ test('happy: builds single and comparison reports with score deltas', () => {
   assert.equal(comparison.scoreDeltas.pastMemory, -1);
 });
 
+test('happy: experiment report identifies the Amy Hood plus RAG arm', () => {
+  const experiment = gradedRun('experiment');
+  experiment.experimentArm = 'persona_rag';
+  assert.equal(
+    buildSingleRunReport(experiment, questions).experimentLabel,
+    'Amy Hood + RAG',
+  );
+});
+
 test('edge: legacy run shows prompt hash label', () => {
   const legacy = gradedRun('legacy');
   delete legacy.promptVersionId;

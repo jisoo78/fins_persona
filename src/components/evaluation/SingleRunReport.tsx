@@ -24,7 +24,7 @@ export const SingleRunReport: React.FC<Props> = ({ run, questions, onResume }) =
       <section className="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <p className="text-xs font-bold uppercase tracking-wide text-indigo-500">{report.provider} · {report.model}</p>
+            <p className="text-xs font-bold uppercase tracking-wide text-indigo-500">{report.experimentLabel ? `${report.experimentLabel} · ` : ''}{report.provider} · {report.model}</p>
             <div className="mt-2 flex flex-wrap items-center gap-2">
               <p className="font-mono text-xs text-slate-500">{report.runId}</p>
               <CopyRunIdButton runId={report.runId} />

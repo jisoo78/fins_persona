@@ -1,5 +1,6 @@
 import type {
   EvaluationAnswerKey,
+  EvaluationExperimentArm,
   EvaluationKpi,
   EvaluationQuestion,
   EvaluationRun,
@@ -82,6 +83,58 @@ export const summarizeRun = (run: EvaluationRun) => {
     elapsedMs: ended === null ? null : Math.max(0, ended - started),
     comparisonReady: run.status === 'complete',
   };
+};
+
+export const experimentArmLabel = (arm?: EvaluationExperimentArm) => {
+  if (!arm) return '일반 평가';
+  return {
+    persona_rag: 'Amy Hood + RAG',
+    persona_no_rag: 'Amy Hood / RAG 없음',
+    generic_cfo_no_rag: '일반 CFO / RAG 없음',
+  }[arm];
+};
+
+export const buildExperimentGroups = (runs: EvaluationRun[]) => {
+  const order: EvaluationExperimentArm[] = [
+    'persona_rag',
+    'persona_no_rag',
+    'generic_cfo_no_rag',
+  ];
+  const grouped = new Map<string, EvaluationRun[]>();
+  for (const run of runs) {
+    if (!run.experimentGroupId || !run.experimentArm) continue;
+    grouped.set(
+      run.experimentGroupId,
+      [...(grouped.get(run.experimentGroupId) ?? []), run],
+    );
+  }
+  return [...grouped.entries()].map(([experimentGroupId, members]) => {
+    const byArm: Partial<Record<EvaluationExperimentArm, EvaluationRun>> = {};
+    for (const run of members) {
+      if (byArm[run.experimentArm!]) {
+        throw new Error(`duplicate experiment arm: ${run.experimentArm}`);
+      }
+      byArm[run.experimentArm!] = run;
+    }
+    const personaRag = byArm.persona_rag;
+    const personaNoRag = byArm.persona_no_rag;
+    const generic = byArm.generic_cfo_no_rag;
+    const objectiveReady = (left?: EvaluationRun, right?: EvaluationRun) =>
+      left?.status === 'complete' && right?.status === 'complete';
+    return {
+      experimentGroupId,
+      runs: order.flatMap((arm) =>
+        byArm[arm] ? [{ arm, run: byArm[arm]! }] : [],
+      ),
+      byArm,
+      ragLift: objectiveReady(personaRag, personaNoRag)
+        ? personaRag!.scores.pastMemory - personaNoRag!.scores.pastMemory
+        : null,
+      personaLift: objectiveReady(personaNoRag, generic)
+        ? personaNoRag!.scores.githubHoldout - generic!.scores.githubHoldout
+        : null,
+    };
+  });
 };
 
 export type EvaluationComparisonSide = {

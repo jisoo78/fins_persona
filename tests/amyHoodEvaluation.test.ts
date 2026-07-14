@@ -42,6 +42,7 @@ import {
 } from '../server/promptVersions/store';
 import type {
   EvaluationQuestion,
+  EvaluationRun,
   SubjectiveGrade,
 } from '../shared/amyHoodEvaluation';
 import type {

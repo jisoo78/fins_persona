@@ -4,9 +4,11 @@ import { AlertCircle, Loader2 } from 'lucide-react';
 import type { EvaluationQuestion, EvaluationRun } from '../../shared/amyHoodEvaluation';
 import { fetchEvaluationQuestions, listEvaluationRuns, resumeEvaluationRun } from '../services/evaluationApi';
 import { ComparisonRunReport } from './evaluation/ComparisonRunReport';
+import { ExperimentGroupReport } from './evaluation/ExperimentGroupReport';
 import { SingleRunReport } from './evaluation/SingleRunReport';
+import { experimentArmLabel } from './evaluation/evaluationViewModel';
 
-type ReportMode = 'single' | 'comparison';
+type ReportMode = 'single' | 'comparison' | 'experiment';
 
 export const EvaluationReportView: React.FC = () => {
   const [mode, setMode] = useState<ReportMode>('single');
@@ -49,13 +51,14 @@ export const EvaluationReportView: React.FC = () => {
       <div className="mx-auto max-w-7xl space-y-5">
         <header>
           <h2 className="text-2xl font-black text-slate-900 dark:text-white">평가 리포트</h2>
-          <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">실행 결과를 한 건씩 검토하거나 같은 질문 세트의 두 실행을 비교합니다.</p>
+          <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">실행 결과를 한 건씩 검토하거나 두 실행 및 3조건 실험의 차이를 비교합니다.</p>
         </header>
         {error && <p role="alert" className="flex items-center gap-2 rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-700 dark:border-rose-900 dark:bg-rose-950/30 dark:text-rose-300"><AlertCircle className="h-4 w-4" />{error}</p>}
         <div className="flex gap-2">
           {([
             ['single', '단일 실행'],
             ['comparison', '두 실행 비교'],
+            ['experiment', '3조건 실험'],
           ] as const).map(([id, label]) => (
             <button key={id} type="button" onClick={() => setMode(id)} className={`rounded-xl px-4 py-2.5 text-xs font-bold ${mode === id ? 'bg-indigo-600 text-white' : 'border border-slate-300 bg-white text-slate-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300'}`}>{label}</button>
           ))}
@@ -66,12 +69,14 @@ export const EvaluationReportView: React.FC = () => {
           <div className="space-y-4">
             <select value={selectedRunId} onChange={(event) => setSelectedRunId(event.target.value)} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-3 text-sm dark:border-slate-700 dark:bg-slate-900">
               <option value="">실행 선택</option>
-              {runs.map((run) => <option key={run.runId} value={run.runId}>{run.model} · {run.runId} · {run.status}</option>)}
+              {runs.map((run) => <option key={run.runId} value={run.runId}>{experimentArmLabel(run.experimentArm)} · {run.model} · {run.runId} · {run.status}</option>)}
             </select>
             {selected && <SingleRunReport run={selected} questions={questions} onResume={resume} />}
           </div>
-        ) : (
+        ) : mode === 'comparison' ? (
           <ComparisonRunReport runs={runs} questions={questions} />
+        ) : (
+          <ExperimentGroupReport runs={runs} />
         )}
       </div>
     </div>

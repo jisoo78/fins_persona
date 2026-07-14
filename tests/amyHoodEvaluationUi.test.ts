@@ -16,7 +16,9 @@ import test from 'node:test';
 
 import {
   buildQuestionCards,
+  buildExperimentGroups,
   compareEvaluationRuns,
+  experimentArmLabel,
   filterQuestionCards,
   summarizeRun,
   summarizeQuestionReviews,
@@ -280,6 +282,70 @@ test('happy: compares two complete runs and keeps model metadata visible to the 
   assert.equal(rows.length, 15);
   assert.equal(rows[0].left.model, 'gemma-4');
   assert.equal(rows[0].right.model, 'gpt-5-mini');
+});
+
+test('happy: groups shuffled experiment arms and calculates RAG and persona lift', () => {
+  const personaRag = {
+    ...runFixture('gemma-4'),
+    runId: 'rag',
+    experimentGroupId: 'group-1',
+    experimentArm: 'persona_rag' as const,
+    scores: { pastMemory: 6, githubHoldout: 5, subjective: 20 },
+  };
+  const personaNoRag = {
+    ...runFixture('gemma-4'),
+    runId: 'persona',
+    experimentGroupId: 'group-1',
+    experimentArm: 'persona_no_rag' as const,
+    scores: { pastMemory: 4, githubHoldout: 4, subjective: 18 },
+  };
+  const generic = {
+    ...runFixture('gemma-4'),
+    runId: 'generic',
+    experimentGroupId: 'group-1',
+    experimentArm: 'generic_cfo_no_rag' as const,
+    scores: { pastMemory: 3, githubHoldout: 2, subjective: 15 },
+  };
+  const [group] = buildExperimentGroups([generic, personaRag, personaNoRag]);
+  assert.deepEqual(group.runs.map((item) => item.arm), [
+    'persona_rag',
+    'persona_no_rag',
+    'generic_cfo_no_rag',
+  ]);
+  assert.equal(
+    group.ragLift,
+    group.byArm.persona_rag!.scores.pastMemory -
+      group.byArm.persona_no_rag!.scores.pastMemory,
+  );
+  assert.equal(
+    group.personaLift,
+    group.byArm.persona_no_rag!.scores.githubHoldout -
+      group.byArm.generic_cfo_no_rag!.scores.githubHoldout,
+  );
+});
+
+test('edge: legacy and partial experiment runs keep explicit labels and pending lifts', () => {
+  assert.equal(experimentArmLabel(undefined), '일반 평가');
+  const partial = {
+    ...runFixture('gemma-4', 'incomplete'),
+    experimentGroupId: 'partial-group',
+    experimentArm: 'persona_rag' as const,
+  };
+  const [group] = buildExperimentGroups([partial]);
+  assert.equal(group.runs[0].run.scores.pastMemory, 3);
+  assert.equal(group.ragLift, null);
+  assert.equal(group.personaLift, null);
+});
+
+test('failure: duplicate experiment arms are rejected', () => {
+  const first = {
+    ...runFixture('gemma-4'),
+    runId: 'first',
+    experimentGroupId: 'duplicate-group',
+    experimentArm: 'persona_rag' as const,
+  };
+  const second = { ...first, runId: 'second' };
+  assert.throws(() => buildExperimentGroups([first, second]), /duplicate experiment arm/);
 });
 
 test('edge: incomplete run keeps generated scores but is not comparison-ready', () => {

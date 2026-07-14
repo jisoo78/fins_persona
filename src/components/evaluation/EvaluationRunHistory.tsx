@@ -6,6 +6,7 @@ import type {
   SubjectiveGrade,
 } from '../../../shared/amyHoodEvaluation';
 import { CopyRunIdButton } from './CopyRunIdButton';
+import { experimentArmLabel } from './evaluationViewModel';
 
 type GradeDraft = Omit<SubjectiveGrade, 'questionId' | 'score'>;
 
@@ -71,7 +72,7 @@ export const EvaluationRunHistory: React.FC<Props> = ({ runs, questions, onGrade
           {runs.slice(0, 8).map((run) => (
             <div key={run.runId} className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-slate-200 p-3 dark:border-slate-800">
               <div>
-                <p className="text-xs font-bold">{run.model} · {run.status}</p>
+                <p className="text-xs font-bold">{experimentArmLabel(run.experimentArm)} · {run.model} · {run.status}</p>
                 <p className="mt-1 font-mono text-xs text-slate-500">{run.runId}</p>
               </div>
               <CopyRunIdButton runId={run.runId} />
@@ -85,7 +86,7 @@ export const EvaluationRunHistory: React.FC<Props> = ({ runs, questions, onGrade
         <p className="mt-1 text-xs text-slate-500">채점 요청에는 생성 provider와 model을 포함하지 않습니다.</p>
         <select value={gradeRunId} onChange={(event) => setGradeRunId(event.target.value)} className="mt-3 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-950">
           <option value="">채점할 실행 선택</option>
-          {complete.filter((run) => run.gradingStatus === 'pending').map((run) => <option key={run.runId} value={run.runId}>{run.runId.slice(0, 8)} · {run.model}</option>)}
+          {complete.filter((run) => run.gradingStatus === 'pending').map((run) => <option key={run.runId} value={run.runId}>{run.runId.slice(0, 8)} · {experimentArmLabel(run.experimentArm)} · {run.model}</option>)}
         </select>
         {gradeRun && (
           <div className="mt-4 space-y-4">
