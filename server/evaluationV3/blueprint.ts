@@ -40,7 +40,8 @@ export const assertEvaluationV3Blueprint = (blueprint: EvaluationV3Blueprint): v
     pairGroups.set(item.pairId, items);
   }
   for (const [pairId, items] of pairGroups) {
-    if (!pairId || items.length !== 2 || new Set(items.map((item) => item.pairVariant)).size !== 2) {
+    const variants = new Set(items.map((item) => item.pairVariant));
+    if (!pairId || items.length !== 2 || variants.size !== 2 || !variants.has('a') || !variants.has('b')) {
       throw new Error(`invalid counterfactual pair: ${pairId ?? 'missing'}`);
     }
   }
@@ -53,6 +54,9 @@ export const assertEvaluationV3Blueprint = (blueprint: EvaluationV3Blueprint): v
     }
     if (slot.category === 'temporal_holdout' && slot.requiredSplit !== 'holdout') {
       throw new Error(`${slot.id} temporal slot must require holdout`);
+    }
+    if (slot.category !== 'temporal_holdout' && slot.requiredSplit !== 'none') {
+      throw new Error(`${slot.id} non-temporal slot must require none`);
     }
   }
 };

@@ -247,3 +247,19 @@ test('failure: rejects an unpaired counterfactual slot', () => {
 
   assert.throws(() => assertEvaluationV3Blueprint(unpairedBlueprint), /counterfactual pair/);
 });
+
+test('failure: rejects a counterfactual pair with runtime variants a and c', () => {
+  const malformedVariantBlueprint = structuredClone(validBlueprint);
+  const secondVariant = malformedVariantBlueprint.slots.find((candidate) => candidate.id === 'C01B');
+  assert.ok(secondVariant);
+  (secondVariant as { pairVariant?: string }).pairVariant = 'c';
+
+  assert.throws(() => assertEvaluationV3Blueprint(malformedVariantBlueprint), /counterfactual pair/);
+});
+
+test('failure: rejects a non-temporal slot that requires a dataset split', () => {
+  const invalidSplitBlueprint = structuredClone(validBlueprint);
+  invalidSplitBlueprint.slots[0].requiredSplit = 'train';
+
+  assert.throws(() => assertEvaluationV3Blueprint(invalidSplitBlueprint), /must require none/);
+});
