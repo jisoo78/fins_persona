@@ -1,5 +1,7 @@
 import { createHash, randomUUID } from 'node:crypto';
+import { lookup } from 'node:dns/promises';
 import { mkdir, open, rename, rm } from 'node:fs/promises';
+import { BlockList, isIP } from 'node:net';
 import path from 'node:path';
 import { load } from 'cheerio';
 
@@ -13,6 +15,7 @@ import { advisorPaths } from './paths';
 import {
   createContentVersion,
   markCollectionFailure,
+  resolveAdvisorArtifactPath,
   transitionSource,
   upsertDiscoveredSource,
 } from './sourceRegistry';
@@ -26,6 +29,7 @@ import type {
 
 const MAX_RESPONSE_BYTES = 5 * 1024 * 1024;
 const MIN_NORMALIZED_CHARACTERS = 200;
+const MAX_REDIRECTS = 5;
 const supportedMediaTypes = new Set([
   'text/html',
   'application/xhtml+xml',
@@ -51,6 +55,23 @@ const collectors: SourceCollector[] = [
   SecEdgarCollector,
   PublicHtmlCollector,
 ];
+
+const collectionLocks = new Map<string, Promise<void>>();
+
+const withCollectionLock = async <T>(key: string, operation: () => Promise<T>) => {
+  const previous = collectionLocks.get(key) ?? Promise.resolve();
+  let release = () => undefined;
+  const current = new Promise<void>((resolve) => { release = resolve; });
+  const queued = previous.then(() => current);
+  collectionLocks.set(key, queued);
+  await previous;
+  try {
+    return await operation();
+  } finally {
+    release();
+    if (collectionLocks.get(key) === queued) collectionLocks.delete(key);
+  }
+};
 
 const writeTextAtomic = async (destination: string, text: string) => {
   await mkdir(path.dirname(destination), { recursive: true });
@@ -130,27 +151,132 @@ const normalizeDocument = (contentText: string, mediaType: string): string => {
   return `${normalized}\n`;
 };
 
+const decodeSourceText = (bytes: Buffer, declaredCharset: string | null) => {
+  let charset = declaredCharset?.trim().replace(/^['"]|['"]$/g, '').toLowerCase()
+    || 'utf-8';
+  if (bytes.subarray(0, 3).equals(Buffer.from([0xef, 0xbb, 0xbf]))) charset = 'utf-8';
+  else if (bytes.subarray(0, 2).equals(Buffer.from([0xff, 0xfe]))) charset = 'utf-16le';
+  else if (bytes.subarray(0, 2).equals(Buffer.from([0xfe, 0xff]))) charset = 'utf-16be';
+  if (charset === 'windows-1252' || charset === 'cp1252') {
+    const replacements = [
+      0x20ac, 0x81, 0x201a, 0x0192, 0x201e, 0x2026, 0x2020, 0x2021,
+      0x02c6, 0x2030, 0x0160, 0x2039, 0x0152, 0x8d, 0x017d, 0x8f,
+      0x90, 0x2018, 0x2019, 0x201c, 0x201d, 0x2022, 0x2013, 0x2014,
+      0x02dc, 0x2122, 0x0161, 0x203a, 0x0153, 0x9d, 0x017e, 0x0178,
+    ];
+    return [...bytes].map((byte) => String.fromCodePoint(
+      byte >= 0x80 && byte <= 0x9f ? replacements[byte - 0x80] : byte,
+    )).join('');
+  }
+  try {
+    return new TextDecoder(charset, { fatal: true }).decode(bytes);
+  } catch (error) {
+    throw new CollectionError(`unsupported or invalid source charset: ${charset}`, 'invalid_content', {
+      cause: error,
+    });
+  }
+};
+
+const restrictedAddresses = new BlockList();
+restrictedAddresses.addSubnet('0.0.0.0', 8, 'ipv4');
+restrictedAddresses.addSubnet('10.0.0.0', 8, 'ipv4');
+restrictedAddresses.addSubnet('100.64.0.0', 10, 'ipv4');
+restrictedAddresses.addSubnet('127.0.0.0', 8, 'ipv4');
+restrictedAddresses.addSubnet('169.254.0.0', 16, 'ipv4');
+restrictedAddresses.addSubnet('172.16.0.0', 12, 'ipv4');
+restrictedAddresses.addSubnet('192.168.0.0', 16, 'ipv4');
+restrictedAddresses.addAddress('::', 'ipv6');
+restrictedAddresses.addAddress('::1', 'ipv6');
+restrictedAddresses.addSubnet('fc00::', 7, 'ipv6');
+restrictedAddresses.addSubnet('fe80::', 10, 'ipv6');
+
+const isRestrictedAddress = (rawAddress: string) => {
+  const address = rawAddress.replace(/^\[|\]$/g, '').toLowerCase();
+  const family = isIP(address);
+  if (family === 0) return true;
+  return restrictedAddresses.check(address, family === 4 ? 'ipv4' : 'ipv6');
+};
+
+const defaultResolveHost = async (hostname: string) =>
+  (await lookup(hostname, { all: true, verbatim: true })).map(({ address }) => address);
+
+const validateNetworkTarget = async (
+  url: URL,
+  record: AdvisorSourceRecord,
+  collector: SourceCollector,
+  deps: CollectorDependencies,
+  redirect: boolean,
+) => {
+  if (url.protocol !== 'https:') {
+    throw new CollectionError('source and redirect URLs must use HTTPS', 'access_denied');
+  }
+  const literal = url.hostname.replace(/^\[|\]$/g, '');
+  if (isIP(literal) && isRestrictedAddress(literal)) {
+    throw new CollectionError(
+      `source destination resolves to a private, loopback, or link-local address: ${url.hostname}`,
+      'access_denied',
+    );
+  }
+  const redirectedRecord = { ...record, canonicalUrl: url.toString() };
+  const originalHost = new URL(record.canonicalUrl).hostname;
+  const publicHostChanged = collector.name === 'public_html' && url.hostname !== originalHost;
+  if (publicHostChanged || !collector.supports(redirectedRecord)) {
+    throw new CollectionError(
+      `${redirect ? 'redirect' : 'source'} destination violates collector policy: ${url.hostname}`,
+      'access_denied',
+    );
+  }
+  let addresses: string[];
+  try {
+    addresses = isIP(literal)
+      ? [literal]
+      : await (deps.resolveHost ?? defaultResolveHost)(url.hostname);
+  } catch (error) {
+    throw new CollectionError(`failed to resolve source host: ${url.hostname}`, 'network_error', {
+      cause: error,
+    });
+  }
+  if (addresses.length === 0 || addresses.some(isRestrictedAddress)) {
+    throw new CollectionError(
+      `source destination resolves to a private, loopback, or link-local address: ${url.hostname}`,
+      'access_denied',
+    );
+  }
+};
+
 const fetchExactBytes = async (
   record: AdvisorSourceRecord,
   deps: CollectorDependencies,
   userAgent: string,
+  collector: SourceCollector,
 ) => {
   const fetchImpl = deps.fetchImpl ?? globalThis.fetch;
   let response: Response;
-  try {
-    response = await fetchImpl(record.canonicalUrl, {
-      headers: {
-        Accept: 'text/html, application/xhtml+xml, application/json, text/plain;q=0.9',
-        'User-Agent': userAgent,
-      },
-      redirect: 'follow',
-    });
-  } catch (error) {
-    throw new CollectionError(
-      error instanceof Error ? error.message : 'source request failed',
-      'network_error',
-      { cause: error },
-    );
+  let currentUrl = new URL(record.canonicalUrl);
+  for (let redirects = 0; ; redirects += 1) {
+    await validateNetworkTarget(currentUrl, record, collector, deps, redirects > 0);
+    try {
+      response = await fetchImpl(currentUrl, {
+        headers: {
+          Accept: 'text/html, application/xhtml+xml, application/json, text/plain;q=0.9',
+          'User-Agent': userAgent,
+        },
+        redirect: 'manual',
+      });
+    } catch (error) {
+      throw new CollectionError(
+        error instanceof Error ? error.message : 'source request failed',
+        'network_error',
+        { cause: error },
+      );
+    }
+    if (![301, 302, 303, 307, 308].includes(response.status)) break;
+    if (redirects >= MAX_REDIRECTS) {
+      throw new CollectionError(`source exceeded ${MAX_REDIRECTS} redirects`, 'access_denied');
+    }
+    const location = response.headers.get('location');
+    if (!location) throw new CollectionError('redirect response is missing Location', 'invalid_content');
+    currentUrl = new URL(location, currentUrl);
   }
 
   if (!response.ok) {
@@ -162,7 +288,8 @@ const fetchExactBytes = async (
     );
   }
 
-  const mediaType = response.headers.get('content-type')?.split(';', 1)[0]
+  const contentType = response.headers.get('content-type') ?? '';
+  const mediaType = contentType.split(';', 1)[0]
     .trim().toLowerCase() ?? '';
   if (!supportedMediaTypes.has(mediaType)) {
     throw new CollectionError(`unsupported source content type: ${mediaType || 'missing'}`, 'invalid_content');
@@ -190,17 +317,27 @@ const fetchExactBytes = async (
     chunks.push(value);
   }
   const bytes = Buffer.concat(chunks, receivedBytes);
-  return { bytes, mediaType };
+  const charset = contentType.match(/(?:^|;)\s*charset\s*=\s*([^;]+)/i)?.[1] ?? null;
+  return { bytes, mediaType, charset, finalUrl: currentUrl.toString() };
 };
 
-export const collectHtmlSource = async (
+const collectHtmlSourceUnlocked = async (
   record: AdvisorSourceRecord,
   deps: CollectorDependencies,
   userAgent: string,
 ): Promise<AdvisorSourceRecord> => {
-  const { bytes, mediaType } = await fetchExactBytes(record, deps, userAgent);
+  const collector = collectors.find(({ name }) => name === record.collector);
+  if (!collector || !collector.supports(record)) {
+    throw new CollectionError(`${record.collector} does not support this source URL`, 'access_denied');
+  }
+  const { bytes, mediaType, charset, finalUrl } = await fetchExactBytes(
+    record,
+    deps,
+    userAgent,
+    collector,
+  );
   const sha256 = createHash('sha256').update(bytes).digest('hex');
-  const html = bytes.toString('utf8');
+  const html = decodeSourceText(bytes, charset);
   const documentMetadata = extractDocumentMetadata(html);
   const capturedAt = (deps.now?.() ?? new Date()).toISOString();
   let target = record;
@@ -220,7 +357,6 @@ export const collectHtmlSource = async (
   try {
     const title = target.title || documentMetadata.title;
     const publishedAt = target.publishedAt ?? documentMetadata.publishedAt;
-    const advisorRoot = advisorPaths(deps.root).root;
     const rawPath = target.sha256 === sha256 && target.rawPath
       ? target.rawPath
       : path.join('raw', `${target.id}-${sha256}.json`);
@@ -235,7 +371,7 @@ export const collectHtmlSource = async (
       void [excludedRawPath, excludedNormalizedPath, excludedFailureReason];
       const rawSource: AdvisorRawSource = {
         sourceId: target.id,
-        canonicalUrl: target.canonicalUrl,
+        canonicalUrl: finalUrl,
         title,
         mediaType,
         bodyBase64: bytes.toString('base64'),
@@ -248,7 +384,7 @@ export const collectHtmlSource = async (
           capturedAt,
         },
       };
-      await writeJsonAtomic(path.resolve(advisorRoot, rawPath), rawSource);
+      await writeJsonAtomic(resolveAdvisorArtifactPath(deps.root, rawPath), rawSource);
     }
 
     if (target.collectionStatus === 'queued') {
@@ -266,7 +402,7 @@ export const collectHtmlSource = async (
     const normalizedPath = target.normalizedPath
       ?? path.join('normalized', `${target.id}-${sha256}.txt`);
     if (!target.normalizedPath) {
-      await writeTextAtomic(path.resolve(advisorRoot, normalizedPath), normalized);
+      await writeTextAtomic(resolveAdvisorArtifactPath(deps.root, normalizedPath), normalized);
     }
     if (target.collectionStatus !== 'normalized') {
       target = await transitionSource(deps.root, target.id, 'normalized', {
@@ -287,31 +423,45 @@ export const collectHtmlSource = async (
   }
 };
 
+export const collectHtmlSource = (
+  record: AdvisorSourceRecord,
+  deps: CollectorDependencies,
+  userAgent: string,
+) => withCollectionLock(
+  `${advisorPaths(deps.root).registry}\0${record.id}`,
+  () => collectHtmlSourceUnlocked(record, deps, userAgent),
+);
+
 export const collectOfficialSource = async (
   candidate: AdvisorSourceRecord,
   dependencies: CollectorDependencies,
 ): Promise<AdvisorSourceRecord> => {
-  let record = await upsertDiscoveredSource(candidate, dependencies.root);
-  try {
-    const collector = collectors.find(({ name }) => name === record.collector);
-    if (!collector) throw new CollectionError(`unsupported collector: ${record.collector}`, 'invalid_content');
-    if (!collector.supports(record)) {
-      const message = record.collector === 'public_html'
-        ? 'public HTML collection requires an explicitly approved public host'
-        : `${record.collector} does not support source host ${new URL(record.canonicalUrl).hostname}`;
-      throw new CollectionError(message, 'invalid_content');
-    }
+  const record = await upsertDiscoveredSource(candidate, dependencies.root);
+  return withCollectionLock(
+    `${advisorPaths(dependencies.root).registry}\0${record.id}`,
+    async () => {
+      try {
+        const collector = collectors.find(({ name }) => name === record.collector);
+        if (!collector) throw new CollectionError(`unsupported collector: ${record.collector}`, 'invalid_content');
+        if (!collector.supports(record)) {
+          const message = record.collector === 'public_html'
+            ? 'public HTML collection requires an explicitly approved public host'
+            : `${record.collector} does not support source host ${new URL(record.canonicalUrl).hostname}`;
+          throw new CollectionError(message, 'invalid_content');
+        }
 
-    return await collector.collect(record, {
-      ...dependencies,
-      collectHtml: collectHtmlSource,
-    });
-  } catch (error) {
-    const reason = error instanceof CollectionError ? error.failureReason : 'invalid_content';
-    const sourceId = error instanceof CollectionError && error.sourceId
-      ? error.sourceId
-      : record.id;
-    await markCollectionFailure(dependencies.root, sourceId, reason);
-    throw error;
-  }
+        return await collector.collect(record, {
+          ...dependencies,
+          collectHtml: collectHtmlSourceUnlocked,
+        });
+      } catch (error) {
+        const reason = error instanceof CollectionError ? error.failureReason : 'invalid_content';
+        const sourceId = error instanceof CollectionError && error.sourceId
+          ? error.sourceId
+          : record.id;
+        await markCollectionFailure(dependencies.root, sourceId, reason);
+        throw error;
+      }
+    }
+  );
 };

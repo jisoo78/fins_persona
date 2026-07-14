@@ -15,11 +15,12 @@ const isInvestorRelations = (record: AdvisorSourceRecord) => {
 export const MicrosoftIRCollector: SourceCollector = {
   name: 'microsoft_ir',
   supports: (record) => record.collector === 'microsoft_ir' && isInvestorRelations(record),
-  collect: (record, deps) => runInjectedHtmlCollector(
-    record,
-    deps,
-    deps.userAgent ?? DEFAULT_USER_AGENT,
-  ),
+  collect(record, deps) {
+    if (!this.supports(record)) {
+      return Promise.reject(new Error('microsoft_ir does not support this source URL'));
+    }
+    return runInjectedHtmlCollector(record, deps, deps.userAgent ?? DEFAULT_USER_AGENT);
+  },
 };
 
 export const MicrosoftSourceCollector: SourceCollector = {
@@ -30,9 +31,10 @@ export const MicrosoftSourceCollector: SourceCollector = {
       && isMicrosoftHost(url.hostname)
       && !isInvestorRelations(record);
   },
-  collect: (record, deps) => runInjectedHtmlCollector(
-    record,
-    deps,
-    deps.userAgent ?? DEFAULT_USER_AGENT,
-  ),
+  collect(record, deps) {
+    if (!this.supports(record)) {
+      return Promise.reject(new Error('microsoft_source does not support this source URL'));
+    }
+    return runInjectedHtmlCollector(record, deps, deps.userAgent ?? DEFAULT_USER_AGENT);
+  },
 };

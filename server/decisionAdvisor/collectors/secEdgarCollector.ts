@@ -10,9 +10,10 @@ export const SecEdgarCollector: SourceCollector = {
   name: 'sec_edgar',
   supports: (record) => record.collector === 'sec_edgar'
     && isSecHost(new URL(record.canonicalUrl).hostname),
-  collect: (record, deps) => runInjectedHtmlCollector(
-    record,
-    deps,
-    deps.userAgent ?? SEC_USER_AGENT,
-  ),
+  collect(record, deps) {
+    if (!this.supports(record)) {
+      return Promise.reject(new Error('sec_edgar does not support this source URL'));
+    }
+    return runInjectedHtmlCollector(record, deps, deps.userAgent ?? SEC_USER_AGENT);
+  },
 };

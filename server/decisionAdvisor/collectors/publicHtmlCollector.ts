@@ -8,9 +8,12 @@ export const PublicHtmlCollector: SourceCollector = {
   supports: (record) => record.collector === 'public_html'
     && record.approvedPublicHost
     && new URL(record.canonicalUrl).protocol === 'https:',
-  collect: (record, deps) => runInjectedHtmlCollector(
-    record,
-    deps,
-    deps.userAgent ?? DEFAULT_USER_AGENT,
-  ),
+  collect(record, deps) {
+    if (!this.supports(record)) {
+      return Promise.reject(new Error(
+        'public_html does not support this source URL; an approved public host is required',
+      ));
+    }
+    return runInjectedHtmlCollector(record, deps, deps.userAgent ?? DEFAULT_USER_AGENT);
+  },
 };

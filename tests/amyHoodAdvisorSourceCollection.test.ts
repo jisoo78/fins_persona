@@ -12,6 +12,7 @@
  *    - changed content creates an immutable source version while identical refreshes stay idempotent.
  *    - collector adapters enforce their exact host and explicit public-host approval boundaries.
  *    - a normalized checkpoint resumes safely, and SEC JSON uses its declared user agent.
+ *    - approved redirects retain final provenance and non-UTF8 source text decodes correctly.
  *
  * 3. Failure Path:
  *    - non-HTTPS and non-allowlisted sources require safe rejection.
@@ -19,6 +20,8 @@
  *    - an injected rename failure preserves the destination and removes its temporary file.
  *    - close and remove cleanup failures are reported with the original operation failure.
  *    - invalid state transitions, network refresh failures, oversized/unsupported/short content fail safely.
+ *    - redirects, private networks, direct adapter misuse, and tampered registry IDs fail closed.
+ *    - concurrent registry discoveries do not lose same-URL candidate links or different URLs.
  */
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
@@ -121,6 +124,8 @@ const htmlResponse = (
   },
 });
 
+const publicDns = async () => ['93.184.216.34'];
+
 test('happy: advisor paths remain isolated from existing B Track data', () => {
   const paths = advisorPaths('/repo');
   assert.equal(paths.root, '/repo/data/b-track/amy-hood/advisor');
@@ -187,6 +192,7 @@ test('happy: official HTML collection preserves exact bytes and writes normalize
   try {
     const collected = await collectOfficialSource(collectionRecord(), {
       root: directory,
+      resolveHost: publicDns,
       now: () => new Date('2026-07-14T01:02:03.000Z'),
       fetchImpl: async (_input, init) => {
         observedHeaders.push(new Headers(init?.headers));
@@ -227,6 +233,7 @@ test('happy: a source-specific adapter collects through the shared public interf
     const discovered = await upsertDiscoveredSource(collectionRecord(), directory);
     const collected = await MicrosoftIRCollector.collect(discovered, {
       root: directory,
+      resolveHost: publicDns,
       fetchImpl: async () => htmlResponse(substantialHtml()),
     });
     assert.equal(collected.collectionStatus, 'review_required');
@@ -252,6 +259,7 @@ test('edge: SEC JSON collection accepts the endpoint media type and sends contac
     const discovered = await upsertDiscoveredSource(record, directory);
     const collected = await SecEdgarCollector.collect(discovered, {
       root: directory,
+      resolveHost: publicDns,
       fetchImpl: async (_input, init) => {
         userAgent = new Headers(init?.headers).get('user-agent') ?? '';
         return htmlResponse(json, { contentType: 'application/json' });
@@ -265,6 +273,72 @@ test('edge: SEC JSON collection accepts the endpoint media type and sends contac
   }
 });
 
+test('edge: a bounded same-policy redirect persists the final URL as raw provenance', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-safe-redirect-'));
+  const requested: string[] = [];
+
+  try {
+    const collected = await collectOfficialSource(collectionRecord({
+      canonicalUrl: 'https://www.microsoft.com/Investor/redirect-start',
+    }), {
+      root: directory,
+      resolveHost: publicDns,
+      fetchImpl: async (input) => {
+        const url = input.toString();
+        requested.push(url);
+        if (requested.length === 1) {
+          return new Response(null, {
+            status: 302,
+            headers: { location: 'https://investor.microsoft.com/Investor/final' },
+          });
+        }
+        return htmlResponse(substantialHtml());
+      },
+    });
+    const raw = JSON.parse(await readFile(
+      path.resolve(advisorPaths(directory).root, collected.rawPath!),
+      'utf8',
+    ));
+
+    assert.deepEqual(requested, [
+      'https://www.microsoft.com/Investor/redirect-start',
+      'https://investor.microsoft.com/Investor/final',
+    ]);
+    assert.equal(raw.canonicalUrl, 'https://investor.microsoft.com/Investor/final');
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('edge: windows-1252 HTML normalizes punctuation without changing raw bytes', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-windows-1252-'));
+  const utf8 = substantialHtml('Microsoft’s financial discipline remains central.');
+  const bytes = Buffer.from(utf8.toString('utf8').replace('’', '\u0092'), 'latin1');
+
+  try {
+    const collected = await collectOfficialSource(collectionRecord(), {
+      root: directory,
+      resolveHost: publicDns,
+      fetchImpl: async () => htmlResponse(bytes, {
+        contentType: 'text/html; charset=windows-1252',
+      }),
+    });
+    const normalized = await readFile(
+      path.resolve(advisorPaths(directory).root, collected.normalizedPath!),
+      'utf8',
+    );
+    const raw = JSON.parse(await readFile(
+      path.resolve(advisorPaths(directory).root, collected.rawPath!),
+      'utf8',
+    ));
+
+    assert.match(normalized, /Microsoft’s financial discipline/);
+    assert.equal(Buffer.from(raw.bodyBase64, 'base64').equals(bytes), true);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
 test('edge: canonical-equivalent discoveries merge candidate IDs and collect idempotently', async () => {
   const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-collector-duplicate-'));
   const bytes = substantialHtml();
@@ -273,11 +347,11 @@ test('edge: canonical-equivalent discoveries merge candidate IDs and collect ide
     const first = await collectOfficialSource(collectionRecord({
       canonicalUrl: 'https://www.microsoft.com/Investor/a?id=7&utm_source=first#quote',
       eventCandidateIds: ['candidate-a'],
-    }), { root: directory, fetchImpl: async () => htmlResponse(bytes) });
+    }), { root: directory, resolveHost: publicDns, fetchImpl: async () => htmlResponse(bytes) });
     const duplicate = await collectOfficialSource(collectionRecord({
       canonicalUrl: 'https://www.microsoft.com/Investor/a?utm_campaign=repeat&id=7',
       eventCandidateIds: ['candidate-b', 'candidate-a'],
-    }), { root: directory, fetchImpl: async () => htmlResponse(bytes) });
+    }), { root: directory, resolveHost: publicDns, fetchImpl: async () => htmlResponse(bytes) });
     const registry = loadRegistry(directory);
 
     assert.equal(registry.sources.length, 1);
@@ -294,6 +368,7 @@ test('edge: a changed successful refresh creates an immutable content version', 
   try {
     const first = await collectOfficialSource(collectionRecord(), {
       root: directory,
+      resolveHost: publicDns,
       fetchImpl: async () => htmlResponse(substantialHtml('first version')),
     });
     const firstRaw = await readFile(
@@ -302,6 +377,7 @@ test('edge: a changed successful refresh creates an immutable content version', 
     );
     const refreshed = await collectOfficialSource(first, {
       root: directory,
+      resolveHost: publicDns,
       fetchImpl: async () => htmlResponse(substantialHtml('changed version')),
     });
     const registry = loadRegistry(directory);
@@ -325,6 +401,7 @@ test('edge: collection resumes a realistic normalized checkpoint', async () => {
   try {
     const complete = await collectOfficialSource(collectionRecord(), {
       root: directory,
+      resolveHost: publicDns,
       fetchImpl: async () => htmlResponse(bytes),
     });
     await writeJsonAtomic(advisorPaths(directory).registry, {
@@ -336,6 +413,7 @@ test('edge: collection resumes a realistic normalized checkpoint', async () => {
       collectionStatus: 'normalized',
     }, {
       root: directory,
+      resolveHost: publicDns,
       fetchImpl: async () => htmlResponse(bytes),
     });
     assert.equal(resumed.collectionStatus, 'review_required');
@@ -361,6 +439,59 @@ test('edge: collector adapters enforce source-specific host boundaries', () => {
     collector: 'public_html',
     approvedPublicHost: false,
   })), false);
+});
+
+test('edge: concurrent registry discoveries preserve same and different URL updates', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-registry-concurrent-'));
+
+  try {
+    await Promise.all(Array.from({ length: 12 }, (_, index) =>
+      upsertDiscoveredSource(collectionRecord({
+        eventCandidateIds: [`same-${index}`],
+      }), directory)));
+    await Promise.all(Array.from({ length: 12 }, (_, index) =>
+      upsertDiscoveredSource(collectionRecord({
+        canonicalUrl: `https://www.microsoft.com/Investor/source-${index}`,
+        eventCandidateIds: [`different-${index}`],
+      }), directory)));
+
+    const registry = loadRegistry(directory);
+    const shared = registry.sources.find(({ canonicalUrl }) =>
+      canonicalUrl.endsWith('/en-us/Investor/events/FY-2025'))!;
+    assert.equal(registry.sources.length, 13);
+    assert.deepEqual(shared.eventCandidateIds, Array.from(
+      { length: 12 },
+      (_, index) => `same-${index}`,
+    ));
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('edge: concurrent same-URL collections serialize without corrupting state', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-collection-concurrent-'));
+
+  try {
+    const results = await Promise.all([
+      collectOfficialSource(collectionRecord({ eventCandidateIds: ['candidate-a'] }), {
+        root: directory,
+        resolveHost: publicDns,
+        fetchImpl: async () => htmlResponse(substantialHtml()),
+      }),
+      collectOfficialSource(collectionRecord({ eventCandidateIds: ['candidate-b'] }), {
+        root: directory,
+        resolveHost: publicDns,
+        fetchImpl: async () => htmlResponse(substantialHtml()),
+      }),
+    ]);
+    const registry = loadRegistry(directory);
+    assert.equal(registry.sources.length, 1);
+    assert.deepEqual(registry.sources[0].eventCandidateIds, ['candidate-a', 'candidate-b']);
+    assert.equal(registry.sources[0].collectionStatus, 'review_required');
+    assert.equal(results[0].id, results[1].id);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
 });
 
 test('edge: LinkedIn remains discovery-only', () => {
@@ -442,6 +573,7 @@ test('failure: refresh failure preserves the last valid artifact', async () => {
   try {
     const valid = await collectOfficialSource(collectionRecord(), {
       root: directory,
+      resolveHost: publicDns,
       fetchImpl: async () => htmlResponse(substantialHtml()),
     });
     const validRawPath = path.resolve(advisorPaths(directory).root, valid.rawPath!);
@@ -450,6 +582,7 @@ test('failure: refresh failure preserves the last valid artifact', async () => {
     await assert.rejects(() => collectOfficialSource(valid, {
       fetchImpl: async () => { throw new Error('network unavailable'); },
       root: directory,
+      resolveHost: publicDns,
     }), /network unavailable/);
     assert.equal(await readFile(validRawPath, 'utf8'), before);
     const failed = loadRegistry(directory).sources.find(({ id }) => id === valid.id)!;
@@ -469,10 +602,12 @@ test('failure: an invalid changed body is isolated as a failed immutable version
   try {
     const valid = await collectOfficialSource(collectionRecord(), {
       root: directory,
+      resolveHost: publicDns,
       fetchImpl: async () => htmlResponse(substantialHtml()),
     });
     await assert.rejects(() => collectOfficialSource(valid, {
       root: directory,
+      resolveHost: publicDns,
       fetchImpl: async () => htmlResponse(Buffer.from('<html><main>changed but short</main></html>')),
     }), /200 characters/i);
 
@@ -499,9 +634,149 @@ test('failure: public HTML collection requires explicit host approval', async ()
       approvedPublicHost: false,
     }), {
       root: directory,
+      resolveHost: publicDns,
       fetchImpl: async () => htmlResponse(substantialHtml()),
     }), /approved public host/i);
     assert.equal(loadRegistry(directory).sources[0].collectionStatus, 'failed');
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: every adapter direct call enforces its supports boundary', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-adapter-boundary-'));
+  let fetched = false;
+  const dependencies = {
+    root: directory,
+    resolveHost: publicDns,
+    fetchImpl: async () => {
+      fetched = true;
+      return htmlResponse(substantialHtml());
+    },
+  };
+
+  try {
+    const cases = [
+      [MicrosoftIRCollector, collectionRecord({ canonicalUrl: 'https://example.com/Investor/x' })],
+      [MicrosoftSourceCollector, collectionRecord({ collector: 'microsoft_source', canonicalUrl: 'https://example.com/x' })],
+      [SecEdgarCollector, collectionRecord({ collector: 'sec_edgar', canonicalUrl: 'https://example.com/x' })],
+      [PublicHtmlCollector, collectionRecord({ collector: 'public_html', canonicalUrl: 'https://reports.example.com/x', approvedPublicHost: false })],
+    ] as const;
+    for (const [collector, record] of cases) {
+      await assert.rejects(() => collector.collect(record, dependencies), /does not support|approved public host/i);
+    }
+    assert.equal(fetched, false);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: redirects and DNS resolution reject boundary changes and private networks', async (t) => {
+  await t.test('cross-policy redirect', async () => {
+    const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-cross-redirect-'));
+    try {
+      await assert.rejects(() => collectOfficialSource(collectionRecord(), {
+        root: directory,
+        resolveHost: publicDns,
+        fetchImpl: async () => new Response(null, {
+          status: 302,
+          headers: { location: 'https://example.com/stolen' },
+        }),
+      }), /redirect.*collector policy/i);
+    } finally {
+      await rm(directory, { recursive: true, force: true });
+    }
+  });
+
+  await t.test('literal loopback redirect', async () => {
+    const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-loopback-redirect-'));
+    try {
+      await assert.rejects(() => collectOfficialSource(collectionRecord(), {
+        root: directory,
+        resolveHost: publicDns,
+        fetchImpl: async () => new Response(null, {
+          status: 302,
+          headers: { location: 'https://127.0.0.1/private' },
+        }),
+      }), /private|loopback|link-local/i);
+    } finally {
+      await rm(directory, { recursive: true, force: true });
+    }
+  });
+
+  await t.test('IPv4-mapped IPv6 loopback redirect', async () => {
+    const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-mapped-loopback-'));
+    try {
+      await assert.rejects(() => collectOfficialSource(collectionRecord(), {
+        root: directory,
+        resolveHost: publicDns,
+        fetchImpl: async () => new Response(null, {
+          status: 302,
+          headers: { location: 'https://[::ffff:7f00:1]/private' },
+        }),
+      }), /private|loopback|link-local/i);
+    } finally {
+      await rm(directory, { recursive: true, force: true });
+    }
+  });
+
+  await t.test('private DNS answer before fetch', async () => {
+    const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-private-dns-'));
+    let fetched = false;
+    try {
+      await assert.rejects(() => collectOfficialSource(collectionRecord(), {
+        root: directory,
+        resolveHost: async () => ['10.0.0.7'],
+        fetchImpl: async () => {
+          fetched = true;
+          return htmlResponse(substantialHtml());
+        },
+      }), /private|loopback|link-local/i);
+      assert.equal(fetched, false);
+    } finally {
+      await rm(directory, { recursive: true, force: true });
+    }
+  });
+});
+
+test('failure: a tampered registry source ID cannot escape the advisor root', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-tampered-id-'));
+  const outside = path.resolve(directory, 'outside.json');
+  const tampered = collectionRecord({
+    id: '../../../../outside',
+    canonicalUrl: canonicalizeSourceUrl(collectionRecord().canonicalUrl),
+  });
+
+  try {
+    await writeJsonAtomic(advisorPaths(directory).registry, { sources: [tampered] });
+    assert.throws(() => loadRegistry(directory), /source ID|canonical hash/i);
+    await assert.rejects(() => collectOfficialSource(tampered, {
+      root: directory,
+      resolveHost: publicDns,
+      fetchImpl: async () => htmlResponse(substantialHtml()),
+    }), /source ID|canonical hash/i);
+    await assert.rejects(() => readFile(outside), { code: 'ENOENT' });
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: every loaded registry record validates all persisted contract fields', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-invalid-record-'));
+  const canonicalUrl = canonicalizeSourceUrl(collectionRecord().canonicalUrl);
+  const valid = await upsertDiscoveredSource(collectionRecord(), directory);
+
+  try {
+    await writeJsonAtomic(advisorPaths(directory).registry, {
+      sources: [{
+        ...valid,
+        tier: 9,
+        sourceType: 42,
+        sha256: 'not-a-sha256',
+      }],
+    });
+    assert.equal(valid.canonicalUrl, canonicalUrl);
+    assert.throws(() => loadRegistry(directory), /invalid persisted fields/i);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
@@ -522,6 +797,7 @@ test('failure: invalid HTTP content is rejected without a collected artifact', a
       try {
         await assert.rejects(() => collectOfficialSource(collectionRecord(), {
           root: directory,
+          resolveHost: publicDns,
           fetchImpl: async () => testCase.response,
         }), testCase.error);
         const failed = loadRegistry(directory).sources[0];

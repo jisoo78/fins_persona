@@ -5,9 +5,12 @@ export type FetchImplementation = (
   init?: RequestInit,
 ) => Promise<Response>;
 
+export type HostResolver = (hostname: string) => Promise<string[]>;
+
 export type CollectorDependencies = {
   root: string;
   fetchImpl?: FetchImplementation;
+  resolveHost?: HostResolver;
   now?: () => Date;
   userAgent?: string;
   collectHtml?: (
