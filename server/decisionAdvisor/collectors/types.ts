@@ -2,10 +2,22 @@ import type { AdvisorSourceRecord } from '../../../shared/amyHoodDecisionAdvisor
 
 export type HostResolver = (hostname: string) => Promise<string[]>;
 
+export type CollectorTimeouts = {
+  connectMs: number;
+  headersMs: number;
+  bodyMs: number;
+};
+
+export type ArtifactWriteHooks = {
+  beforeTemporaryOpen?: () => Promise<void> | void;
+  beforeRename?: () => Promise<void> | void;
+};
+
 export type PinnedTransportRequest = {
   url: URL;
   init: RequestInit;
   validatedAddresses: string[];
+  timeouts: CollectorTimeouts;
 };
 
 export type TransportImplementation = (
@@ -16,6 +28,8 @@ export type CollectorDependencies = {
   root: string;
   transportImpl?: TransportImplementation;
   resolveHost?: HostResolver;
+  timeouts?: Partial<CollectorTimeouts>;
+  artifactHooks?: ArtifactWriteHooks;
   now?: () => Date;
   userAgent?: string;
   collectHtml?: (

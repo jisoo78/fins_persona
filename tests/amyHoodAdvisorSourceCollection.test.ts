@@ -24,7 +24,7 @@
  *    - concurrent registry discoveries do not lose same-URL candidate links or different URLs.
  */
 import assert from 'node:assert/strict';
-import { mkdir, mkdtemp, readFile, readdir, rm, symlink, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, readdir, rename, rm, symlink, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
@@ -46,7 +46,10 @@ import {
 } from '../server/decisionAdvisor/collectors/microsoftCollectors';
 import { PublicHtmlCollector } from '../server/decisionAdvisor/collectors/publicHtmlCollector';
 import { SecEdgarCollector } from '../server/decisionAdvisor/collectors/secEdgarCollector';
-import { collectOfficialSource } from '../server/decisionAdvisor/officialSourceCollector';
+import {
+  collectOfficialSource,
+  defaultPinnedTransport,
+} from '../server/decisionAdvisor/officialSourceCollector';
 import type {
   AdvisorSourceRecord,
   EventCandidate,
@@ -518,6 +521,45 @@ test('edge: pinned transport consumes the validated address without a second DNS
   }
 });
 
+test('edge: default pinned HTTPS seam preserves address, SNI, Host, and abort', async () => {
+  let options: Record<string, unknown> = {};
+  let errorListener: ((error: Error) => void) | undefined;
+  let destroyed = false;
+  const lowLevelRequest = ((_url: URL, requestOptions: Record<string, unknown>) => {
+    options = requestOptions;
+    return {
+      once: (event: string, listener: (error: Error) => void) => {
+        if (event === 'error') errorListener = listener;
+      },
+      on: () => undefined,
+      end: () => undefined,
+      destroy: (error: Error) => {
+        destroyed = true;
+        errorListener?.(error);
+      },
+    };
+  }) as never;
+  const controller = new AbortController();
+  const pending = defaultPinnedTransport({
+    url: new URL('https://www.microsoft.com/Investor/test'),
+    validatedAddresses: ['93.184.216.34'],
+    init: { signal: controller.signal },
+    timeouts: { connectMs: 100, headersMs: 100, bodyMs: 100 },
+  }, lowLevelRequest);
+  let lookupAddress = '';
+  (options.lookup as Function)('www.microsoft.com', {}, (
+    _error: Error | null,
+    address: string,
+  ) => { lookupAddress = address; });
+  controller.abort();
+
+  await assert.rejects(() => pending, /aborted/i);
+  assert.equal(lookupAddress, '93.184.216.34');
+  assert.equal(options.servername, 'www.microsoft.com');
+  assert.equal((options.headers as Record<string, string>).Host, 'www.microsoft.com');
+  assert.equal(destroyed, true);
+});
+
 test('edge: a waiting collector reloads a stale collected snapshot after the family lock', async () => {
   const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-stale-snapshot-'));
   const bytes = substantialHtml();
@@ -915,6 +957,138 @@ test('failure: a symlinked artifact directory cannot write outside the advisor r
     await rm(directory, { recursive: true, force: true });
     await rm(outside, { recursive: true, force: true });
   }
+});
+
+test('failure: parent swaps around open and rename abort without an outside final artifact', async (t) => {
+  for (const hookName of ['beforeTemporaryOpen', 'beforeRename'] as const) {
+    await t.test(hookName, async () => {
+      const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-parent-swap-'));
+      const outside = await mkdtemp(path.join(os.tmpdir(), 'advisor-parent-swap-outside-'));
+      const rawDirectory = advisorPaths(directory).raw;
+      const movedDirectory = path.join(outside, 'moved-raw');
+      let swapped = false;
+
+      try {
+        await assert.rejects(() => collectOfficialSource(collectionRecord(), {
+          root: directory,
+          resolveHost: publicDns,
+          transportImpl: async () => htmlResponse(substantialHtml()),
+          artifactHooks: {
+            [hookName]: async () => {
+              if (swapped) return;
+              swapped = true;
+              await rename(rawDirectory, movedDirectory);
+              await symlink(outside, rawDirectory, 'dir');
+            },
+          },
+        }), /parent.*changed|symlink|inode/i);
+        const outsideFiles = await readdir(outside);
+        assert.equal(outsideFiles.includes('moved-raw'), true);
+        assert.deepEqual(await readdir(movedDirectory), []);
+        assert.equal(outsideFiles.some((name) => name.endsWith('.json')), false);
+      } finally {
+        await rm(directory, { recursive: true, force: true });
+        await rm(outside, { recursive: true, force: true });
+      }
+    });
+  }
+});
+
+test('failure: same-SHA refresh rebuilds missing, truncated, and wrong-body raw artifacts', async (t) => {
+  for (const corruption of ['missing', 'truncated', 'wrong-body'] as const) {
+    await t.test(corruption, async () => {
+      const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-raw-repair-'));
+      const bytes = substantialHtml();
+      try {
+        const complete = await collectOfficialSource(collectionRecord(), {
+          root: directory,
+          resolveHost: publicDns,
+          transportImpl: async () => htmlResponse(bytes),
+        });
+        const rawPath = path.resolve(advisorPaths(directory).root, complete.rawPath!);
+        if (corruption === 'missing') await rm(rawPath);
+        if (corruption === 'truncated') await writeFile(rawPath, '{', 'utf8');
+        if (corruption === 'wrong-body') {
+          const raw = JSON.parse(await readFile(rawPath, 'utf8'));
+          raw.bodyBase64 = Buffer.from('wrong body').toString('base64');
+          await writeFile(rawPath, `${JSON.stringify(raw)}\n`, 'utf8');
+        }
+
+        const repaired = await collectOfficialSource(complete, {
+          root: directory,
+          resolveHost: publicDns,
+          transportImpl: async () => htmlResponse(bytes),
+        });
+        const raw = JSON.parse(await readFile(rawPath, 'utf8'));
+        assert.equal(Buffer.from(raw.bodyBase64, 'base64').equals(bytes), true);
+        assert.equal(repaired.collectionStatus, 'review_required');
+      } finally {
+        await rm(directory, { recursive: true, force: true });
+      }
+    });
+  }
+});
+
+test('failure: stalled and rejected bodies are cancelled and release the family lock', async (t) => {
+  await t.test('stalled body', async () => {
+    const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-stalled-body-'));
+    let cancelled = false;
+    try {
+      await assert.rejects(() => collectOfficialSource(collectionRecord(), {
+        root: directory,
+        resolveHost: publicDns,
+        timeouts: { connectMs: 20, headersMs: 20, bodyMs: 20 },
+        transportImpl: async () => new Response(new ReadableStream({
+          cancel: () => { cancelled = true; },
+        }), { headers: { 'content-type': 'text/html' } }),
+      }), /body.*timeout/i);
+      const recovered = await collectOfficialSource(collectionRecord(), {
+        root: directory,
+        resolveHost: publicDns,
+        transportImpl: async () => htmlResponse(substantialHtml()),
+      });
+      assert.equal(cancelled, true);
+      assert.equal(recovered.collectionStatus, 'review_required');
+    } finally {
+      await rm(directory, { recursive: true, force: true });
+    }
+  });
+
+  await t.test('redirect and error bodies', async () => {
+    const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-cancel-bodies-'));
+    let cancelledBodies = 0;
+    let call = 0;
+    const body = () => new ReadableStream({
+      start(controller) { controller.enqueue(new Uint8Array([1])); },
+      cancel() { cancelledBodies += 1; },
+    });
+    try {
+      await assert.rejects(() => collectOfficialSource(collectionRecord(), {
+        root: directory,
+        resolveHost: publicDns,
+        transportImpl: async () => {
+          call += 1;
+          if (call === 1) return new Response(body(), {
+            status: 302,
+            headers: { location: collectionRecord().canonicalUrl },
+          });
+          return new Response(body(), {
+            status: 503,
+            headers: { 'content-type': 'text/html' },
+          });
+        },
+      }), /503/);
+      const recovered = await collectOfficialSource(collectionRecord(), {
+        root: directory,
+        resolveHost: publicDns,
+        transportImpl: async () => htmlResponse(substantialHtml()),
+      });
+      assert.equal(cancelledBodies, 2);
+      assert.equal(recovered.collectionStatus, 'review_required');
+    } finally {
+      await rm(directory, { recursive: true, force: true });
+    }
+  });
 });
 
 test('failure: mismatched normalized evidence is rebuilt instead of silently reused', async () => {

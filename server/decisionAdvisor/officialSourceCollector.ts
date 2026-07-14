@@ -1,7 +1,7 @@
 import { createHash, randomUUID } from 'node:crypto';
 import { lookup } from 'node:dns/promises';
 import { constants } from 'node:fs';
-import { open, rename, rm } from 'node:fs/promises';
+import { lstat, open, readFile, realpath, rename, rm } from 'node:fs/promises';
 import { request as httpsRequest } from 'node:https';
 import { BlockList, isIP } from 'node:net';
 import path from 'node:path';
@@ -34,6 +34,11 @@ import type {
 const MAX_RESPONSE_BYTES = 5 * 1024 * 1024;
 const MIN_NORMALIZED_CHARACTERS = 200;
 const MAX_REDIRECTS = 5;
+const DEFAULT_TIMEOUTS = {
+  connectMs: 10_000,
+  headersMs: 15_000,
+  bodyMs: 15_000,
+};
 const supportedMediaTypes = new Set([
   'text/html',
   'application/xhtml+xml',
@@ -77,29 +82,87 @@ const withCollectionLock = async <T>(key: string, operation: () => Promise<T>) =
   }
 };
 
-const writeArtifactAtomic = async (root: string, relativePath: string, text: string) => {
+const writeArtifactAtomic = async (
+  root: string,
+  relativePath: string,
+  text: string,
+  hooks: CollectorDependencies['artifactHooks'],
+) => {
   const destination = await prepareAdvisorArtifactPath(root, relativePath);
-  const temporaryPath = `${destination}.${process.pid}.${randomUUID()}.tmp`;
+  const parentPath = path.dirname(destination);
+  const parentHandle = await open(
+    parentPath,
+    constants.O_RDONLY | constants.O_DIRECTORY | constants.O_NOFOLLOW,
+  );
+  const anchor = await parentHandle.stat();
+  const verifyParentAnchor = async () => {
+    const pathnameStatus = await lstat(parentPath);
+    if (pathnameStatus.isSymbolicLink()
+      || pathnameStatus.dev !== anchor.dev
+      || pathnameStatus.ino !== anchor.ino) {
+      throw new Error(`advisor artifact parent inode changed: ${relativePath}`);
+    }
+    await prepareAdvisorArtifactPath(root, relativePath);
+  };
+  const descriptorCandidates = [
+    `/dev/fd/${parentHandle.fd}`,
+    `/proc/self/fd/${parentHandle.fd}`,
+  ];
+  let anchoredParent: string | null = null;
+  for (const candidate of descriptorCandidates) {
+    try {
+      const candidateRealpath = await realpath(candidate);
+      const parentRealpath = await realpath(parentPath);
+      if (candidateRealpath === parentRealpath) {
+        anchoredParent = candidate;
+        break;
+      }
+    } catch {
+      // This platform has no descriptor filesystem for directory-relative operations.
+    }
+  }
+  // Node exposes no portable openat/renameat. Descriptor paths close that gap on
+  // Linux/macOS; the fallback retains inode checks but trusts same-user local code
+  // not to swap the parent in the final syscall-sized interval.
+  const temporaryName = `${path.basename(destination)}.${process.pid}.${randomUUID()}.tmp`;
+  const temporaryPath = await prepareAdvisorArtifactPath(
+    root,
+    path.join('.artifact-staging', temporaryName),
+  );
+  const anchoredDestination = path.join(
+    anchoredParent ?? parentPath,
+    path.basename(destination),
+  );
   let handle: Awaited<ReturnType<typeof open>> | undefined;
   try {
+    await hooks?.beforeTemporaryOpen?.();
+    await verifyParentAnchor();
     handle = await open(
       temporaryPath,
       constants.O_CREAT | constants.O_EXCL | constants.O_WRONLY | constants.O_NOFOLLOW,
       0o600,
     );
+    await verifyParentAnchor();
     await handle.writeFile(text, 'utf8');
     await handle.sync();
     await handle.close();
     handle = undefined;
-    const recheckedDestination = await prepareAdvisorArtifactPath(root, relativePath);
-    if (recheckedDestination !== destination) {
-      throw new Error(`advisor artifact destination changed during write: ${relativePath}`);
+    await hooks?.beforeRename?.();
+    await verifyParentAnchor();
+    await rename(temporaryPath, anchoredDestination);
+    try {
+      await verifyParentAnchor();
+    } catch (error) {
+      await rm(anchoredDestination, { force: true }).catch(() => undefined);
+      throw error;
     }
-    await rename(temporaryPath, destination);
+    await parentHandle.sync();
   } catch (error) {
     if (handle) await handle.close().catch(() => undefined);
     await rm(temporaryPath, { force: true }).catch(() => undefined);
     throw error;
+  } finally {
+    await parentHandle.close().catch(() => undefined);
   }
 };
 
@@ -212,21 +275,39 @@ const isRestrictedAddress = (rawAddress: string) => {
 const defaultResolveHost = async (hostname: string) =>
   (await lookup(hostname, { all: true, verbatim: true })).map(({ address }) => address);
 
-const defaultPinnedTransport: NonNullable<CollectorDependencies['transportImpl']> = ({
-  url,
-  init,
-  validatedAddresses,
-}) => new Promise<Response>((resolve, reject) => {
+export const defaultPinnedTransport = (
+  {
+    url,
+    init,
+    validatedAddresses,
+    timeouts,
+  }: Parameters<NonNullable<CollectorDependencies['transportImpl']>>[0],
+  requestImpl: typeof httpsRequest = httpsRequest,
+) => new Promise<Response>((resolve, reject) => {
   const address = validatedAddresses[0];
   const family = isIP(address);
   const headers = Object.fromEntries(new Headers(init.headers));
-  const request = httpsRequest(url, {
+  let settled = false;
+  let connectTimer: ReturnType<typeof setTimeout> | undefined;
+  let headersTimer: ReturnType<typeof setTimeout> | undefined;
+  const clearTimers = () => {
+    if (connectTimer) clearTimeout(connectTimer);
+    if (headersTimer) clearTimeout(headersTimer);
+  };
+  const request = requestImpl(url, {
     method: init.method ?? 'GET',
     headers: { ...headers, Host: url.host },
     servername: url.hostname,
     family,
     lookup: (_hostname, _options, callback) => callback(null, address, family),
   }, (incoming) => {
+    if (settled) {
+      incoming.destroy();
+      return;
+    }
+    settled = true;
+    clearTimers();
+    init.signal?.removeEventListener('abort', abortRequest);
     const responseHeaders = new Headers();
     for (let index = 0; index < incoming.rawHeaders.length; index += 2) {
       responseHeaders.append(incoming.rawHeaders[index], incoming.rawHeaders[index + 1]);
@@ -237,7 +318,29 @@ const defaultPinnedTransport: NonNullable<CollectorDependencies['transportImpl']
       headers: responseHeaders,
     }));
   });
-  request.once('error', reject);
+  const abortRequest = () => request.destroy(new Error('source request aborted'));
+  connectTimer = setTimeout(
+    () => request.destroy(new Error('source connect timeout')),
+    timeouts.connectMs,
+  );
+  headersTimer = setTimeout(
+    () => request.destroy(new Error('source headers timeout')),
+    timeouts.headersMs,
+  );
+  request.on('socket', (socket) => {
+    socket.once('secureConnect', () => {
+      if (connectTimer) clearTimeout(connectTimer);
+    });
+  });
+  request.once('error', (error) => {
+    if (settled) return;
+    settled = true;
+    clearTimers();
+    init.signal?.removeEventListener('abort', abortRequest);
+    reject(error);
+  });
+  init.signal?.addEventListener('abort', abortRequest, { once: true });
+  if (init.signal?.aborted) abortRequest();
   request.end();
 });
 
@@ -292,6 +395,7 @@ const fetchExactBytes = async (
   userAgent: string,
   collector: SourceCollector,
 ) => {
+  const timeouts = { ...DEFAULT_TIMEOUTS, ...deps.timeouts };
   const transportImpl = deps.transportImpl ?? defaultPinnedTransport;
   let response: Response;
   let currentUrl = new URL(record.canonicalUrl);
@@ -303,26 +407,41 @@ const fetchExactBytes = async (
       deps,
       redirects > 0,
     );
+    const controller = new AbortController();
+    let headersTimer: ReturnType<typeof setTimeout> | undefined;
     try {
-      response = await transportImpl({
-        url: currentUrl,
-        validatedAddresses,
-        init: {
-          headers: {
-            Accept: 'text/html, application/xhtml+xml, application/json, text/plain;q=0.9',
-            'User-Agent': userAgent,
+      response = await Promise.race([
+        transportImpl({
+          url: currentUrl,
+          validatedAddresses,
+          timeouts,
+          init: {
+            signal: controller.signal,
+            headers: {
+              Accept: 'text/html, application/xhtml+xml, application/json, text/plain;q=0.9',
+              'User-Agent': userAgent,
+            },
+            redirect: 'manual',
           },
-          redirect: 'manual',
-        },
-      });
+        }),
+        new Promise<never>((_resolve, reject) => {
+          headersTimer = setTimeout(() => {
+            controller.abort();
+            reject(new Error('source headers timeout'));
+          }, timeouts.connectMs + timeouts.headersMs);
+        }),
+      ]);
     } catch (error) {
       throw new CollectionError(
         error instanceof Error ? error.message : 'source request failed',
         'network_error',
         { cause: error },
       );
+    } finally {
+      if (headersTimer) clearTimeout(headersTimer);
     }
     if (![301, 302, 303, 307, 308].includes(response.status)) break;
+    await response.body?.cancel().catch(() => undefined);
     if (redirects >= MAX_REDIRECTS) {
       throw new CollectionError(`source exceeded ${MAX_REDIRECTS} redirects`, 'access_denied');
     }
@@ -332,6 +451,7 @@ const fetchExactBytes = async (
   }
 
   if (!response.ok) {
+    await response.body?.cancel().catch(() => undefined);
     throw new CollectionError(
       `source request failed with HTTP ${response.status}`,
       response.status === 401 || response.status === 403
@@ -344,11 +464,13 @@ const fetchExactBytes = async (
   const mediaType = contentType.split(';', 1)[0]
     .trim().toLowerCase() ?? '';
   if (!supportedMediaTypes.has(mediaType)) {
+    await response.body?.cancel().catch(() => undefined);
     throw new CollectionError(`unsupported source content type: ${mediaType || 'missing'}`, 'invalid_content');
   }
 
   const declaredLength = Number(response.headers.get('content-length'));
   if (Number.isFinite(declaredLength) && declaredLength > MAX_RESPONSE_BYTES) {
+    await response.body?.cancel().catch(() => undefined);
     throw new CollectionError('source response exceeds the 5 MB limit', 'invalid_content');
   }
 
@@ -359,7 +481,29 @@ const fetchExactBytes = async (
     throw new CollectionError('source response body is unavailable', 'invalid_content');
   }
   while (true) {
-    const { done, value } = await reader.read();
+    let bodyTimer: ReturnType<typeof setTimeout> | undefined;
+    let result: ReadableStreamReadResult<Uint8Array>;
+    try {
+      result = await Promise.race([
+        reader.read(),
+        new Promise<never>((_resolve, reject) => {
+          bodyTimer = setTimeout(
+            () => reject(new Error('source body timeout')),
+            timeouts.bodyMs,
+          );
+        }),
+      ]);
+    } catch (error) {
+      await reader.cancel().catch(() => undefined);
+      throw new CollectionError(
+        error instanceof Error ? error.message : 'source body read failed',
+        'network_error',
+        { cause: error },
+      );
+    } finally {
+      if (bodyTimer) clearTimeout(bodyTimer);
+    }
+    const { done, value } = result;
     if (done) break;
     receivedBytes += value.byteLength;
     if (receivedBytes > MAX_RESPONSE_BYTES) {
@@ -371,6 +515,32 @@ const fetchExactBytes = async (
   const bytes = Buffer.concat(chunks, receivedBytes);
   const charset = contentType.match(/(?:^|;)\s*charset\s*=\s*([^;]+)/i)?.[1] ?? null;
   return { bytes, mediaType, charset, finalUrl: currentUrl.toString() };
+};
+
+const rawArtifactMatches = async (
+  root: string,
+  rawPath: string,
+  record: AdvisorSourceRecord,
+  finalUrl: string,
+  expectedBytes: Buffer,
+  expectedSha256: string,
+) => {
+  try {
+    const destination = await prepareAdvisorArtifactPath(root, rawPath);
+    const parsed = JSON.parse(await readFile(destination, 'utf8')) as AdvisorRawSource;
+    if (parsed.sourceId !== record.id
+      || parsed.canonicalUrl !== finalUrl
+      || parsed.metadata?.id !== record.id
+      || parsed.metadata?.sha256 !== expectedSha256
+      || typeof parsed.bodyBase64 !== 'string') return false;
+    const decoded = Buffer.from(parsed.bodyBase64, 'base64');
+    const canonicalBase64 = decoded.toString('base64');
+    if (canonicalBase64 !== parsed.bodyBase64.replace(/\s+/g, '')) return false;
+    return decoded.equals(expectedBytes)
+      && createHash('sha256').update(decoded).digest('hex') === expectedSha256;
+  } catch {
+    return false;
+  }
 };
 
 const collectHtmlSourceUnlocked = async (
@@ -412,8 +582,18 @@ const collectHtmlSourceUnlocked = async (
     const rawPath = target.sha256 === sha256 && target.rawPath
       ? target.rawPath
       : path.join('raw', `${target.id}-${sha256}.json`);
+    const validExistingRaw = target.sha256 === sha256
+      && target.rawPath !== null
+      && await rawArtifactMatches(
+        deps.root,
+        rawPath,
+        target,
+        finalUrl,
+        bytes,
+        sha256,
+      );
 
-    if (!(target.sha256 === sha256 && target.rawPath)) {
+    if (!validExistingRaw) {
       const {
         rawPath: excludedRawPath,
         normalizedPath: excludedNormalizedPath,
@@ -440,6 +620,7 @@ const collectHtmlSourceUnlocked = async (
         deps.root,
         rawPath,
         `${JSON.stringify(rawSource, null, 2)}\n`,
+        deps.artifactHooks,
       );
     }
 
@@ -457,7 +638,12 @@ const collectHtmlSourceUnlocked = async (
     const normalized = normalizeDocument(html, mediaType);
     const normalizedPath = target.normalizedPath
       ?? path.join('normalized', `${target.id}-${sha256}.txt`);
-    await writeArtifactAtomic(deps.root, normalizedPath, normalized);
+    await writeArtifactAtomic(
+      deps.root,
+      normalizedPath,
+      normalized,
+      deps.artifactHooks,
+    );
     if (target.collectionStatus !== 'normalized') {
       target = await transitionSource(deps.root, target.id, 'normalized', {
         normalizedPath,
