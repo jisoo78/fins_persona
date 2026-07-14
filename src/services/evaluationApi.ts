@@ -1,8 +1,11 @@
 import type {
   EvaluationAnswerKeyFile,
+  EvaluationProvider,
   EvaluationQuestionFile,
+  EvaluationRun,
   QuestionReview,
   QuestionReviewFile,
+  SubjectiveGrade,
 } from '../../shared/amyHoodEvaluation';
 
 export type EvaluationQuestionsResponse = {
@@ -46,3 +49,72 @@ export const saveEvaluationQuestionReview = (
     },
     fetchImpl,
   );
+
+export const listEvaluationRuns = (fetchImpl: typeof fetch = fetch) =>
+  request<{ ok: true; runs: EvaluationRun[] }>(
+    '/api/evaluation/runs',
+    {},
+    fetchImpl,
+  );
+
+export const getEvaluationRun = (
+  runId: string,
+  fetchImpl: typeof fetch = fetch,
+) =>
+  request<{ ok: true; run: EvaluationRun }>(
+    `/api/evaluation/runs/${runId}`,
+    {},
+    fetchImpl,
+  );
+
+export const createEvaluationRun = (
+  provider: EvaluationProvider,
+  fetchImpl: typeof fetch = fetch,
+) =>
+  request<{ ok: true; run: EvaluationRun }>(
+    '/api/evaluation/runs',
+    {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ provider }),
+    },
+    fetchImpl,
+  );
+
+export const resumeEvaluationRun = (
+  runId: string,
+  fetchImpl: typeof fetch = fetch,
+) =>
+  request<{ ok: true; run: EvaluationRun }>(
+    `/api/evaluation/runs/${runId}/resume`,
+    { method: 'POST' },
+    fetchImpl,
+  );
+
+const assertGradeTotal = (grade: SubjectiveGrade) => {
+  const total =
+    grade.decision +
+    grade.reasoning +
+    grade.tradeoff +
+    grade.personaConsistency;
+  if (grade.score !== total) {
+    throw new Error(`grade total does not match dimensions: ${grade.questionId}`);
+  }
+};
+
+export const submitSubjectiveGrades = async (
+  runId: string,
+  grades: SubjectiveGrade[],
+  fetchImpl: typeof fetch = fetch,
+) => {
+  grades.forEach(assertGradeTotal);
+  return request<{ ok: true; run: EvaluationRun }>(
+    `/api/evaluation/runs/${runId}/subjective-grades`,
+    {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ grades }),
+    },
+    fetchImpl,
+  );
+};

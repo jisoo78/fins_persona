@@ -7,6 +7,7 @@
  *    - 필터가 없는 경우 15문항을 유지한다.
  *    - 승인 메모가 비어 있어도 승인 상태를 표시한다.
  *    - 한국어 수정 메모를 API 요청에서 보존한다.
+ *    - 미완료 실행은 생성된 점수를 유지하되 비교 가능 상태가 되지 않는다.
  *
  * 3. Failure Path:
  *    - 비정상 HTTP 응답은 서버 메시지를 포함한 오류로 변환하고 성공 상태를 만들지 않는다.
@@ -16,13 +17,20 @@ import test from 'node:test';
 
 import {
   buildQuestionCards,
+  compareEvaluationRuns,
   filterQuestionCards,
+  summarizeRun,
   summarizeQuestionReviews,
 } from '../src/components/evaluation/evaluationViewModel';
 import {
   saveEvaluationQuestionReview,
+  submitSubjectiveGrades,
   type EvaluationQuestionsResponse,
 } from '../src/services/evaluationApi';
+import type {
+  EvaluationRun,
+  SubjectiveGrade,
+} from '../shared/amyHoodEvaluation';
 
 const questionResponseFixture = (): EvaluationQuestionsResponse => {
   const ids = [
@@ -89,6 +97,52 @@ const questionResponseFixture = (): EvaluationQuestionsResponse => {
   };
 };
 
+const runFixture = (
+  model: string,
+  status: EvaluationRun['status'] = 'complete',
+): EvaluationRun => {
+  const ids = [
+    'P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7',
+    'H1', 'H2', 'H3', 'H4', 'H5',
+    'S1', 'S2', 'S3',
+  ];
+  return {
+    runId: `${model}-run`,
+    status,
+    gradingStatus: 'pending',
+    provider: model === 'gpt-5-mini' ? 'openai' : 'local',
+    model,
+    promptHash: 'prompt-hash',
+    ragSnapshotId: 'rag-hash',
+    questionSetVersion: '1.0.0',
+    answers: ids.slice(0, status === 'incomplete' ? 3 : 15).map((questionId) => ({
+      questionId,
+      status: 'complete',
+      ...(questionId.startsWith('S')
+        ? { text: `${questionId} 주관식 답변` }
+        : { choice: 1 as const, reason: '선택 이유', correct: true, objectiveScore: 1 as const }),
+      elapsedMs: 1,
+    })),
+    scores: {
+      pastMemory: status === 'incomplete' ? 3 : 7,
+      githubHoldout: status === 'incomplete' ? 0 : 5,
+      subjective: null,
+    },
+    startedAt: '2026-07-14T00:00:00.000Z',
+    completedAt: status === 'complete' ? '2026-07-14T00:01:00.000Z' : null,
+  };
+};
+
+const gradeFixture = (): SubjectiveGrade => ({
+  questionId: 'S1',
+  decision: 2,
+  reasoning: 2,
+  tradeoff: 1,
+  personaConsistency: 1,
+  score: 6,
+  summary: '결정은 명확하고 중단 기준을 보완할 수 있다.',
+});
+
 test('happy: summarizes the 7/5/3 review queue', () => {
   const cards = buildQuestionCards(questionResponseFixture());
   const summary = summarizeQuestionReviews(cards);
@@ -147,4 +201,36 @@ test('failure: review API propagates a safe server error', async () => {
     ),
     /revision note is required/,
   );
+});
+
+test('happy: compares two complete runs and keeps model metadata visible to the user', () => {
+  const rows = compareEvaluationRuns(
+    runFixture('gemma-4'),
+    runFixture('gpt-5-mini'),
+  );
+  assert.equal(rows.length, 15);
+  assert.equal(rows[0].left.model, 'gemma-4');
+  assert.equal(rows[0].right.model, 'gpt-5-mini');
+});
+
+test('edge: incomplete run keeps generated scores but is not comparison-ready', () => {
+  const run = runFixture('gemma-4', 'incomplete');
+  const summary = summarizeRun(run);
+  assert.equal(summary.comparisonReady, false);
+  assert.equal(summary.completedQuestions, 3);
+  assert.equal(summary.pastMemory, 3);
+});
+
+test('failure: mismatched subjective total is rejected before fetch', async () => {
+  let called = false;
+  const fetchImpl: typeof fetch = async () => {
+    called = true;
+    throw new Error('fetch must not be called');
+  };
+  const invalid = { ...gradeFixture(), score: 8 };
+  await assert.rejects(
+    submitSubjectiveGrades('run-1', [invalid], fetchImpl),
+    /grade total does not match dimensions/,
+  );
+  assert.equal(called, false);
 });

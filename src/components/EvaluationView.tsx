@@ -1,170 +1,123 @@
-import React from 'react';
-import { AlertTriangle, CheckCircle2, FileJson, Scale } from 'lucide-react';
-import summaryData from '../../evaluation/amy_hood_eval_full_vs_holdout_summary.json';
+import React, { useCallback, useEffect, useState } from 'react';
+import { AlertCircle, Scale } from 'lucide-react';
 
-type EvaluationSummary = {
-  요약: {
-    목적: string;
-    질문지_파일: string;
-    포함_결과_파일: string;
-    제외_결과_파일: string;
-    포함_2017_2019: {
-      문서_수: number;
-      청크_수: number;
-    };
-    제외_2017_2019: {
-      문서_수: number;
-      청크_수: number;
-    };
-    문서_차이: number;
-    청크_차이: number;
-    문항_수: number;
-    근거_변경_문항_수: number;
-    해석: string;
-  };
-  비교: {
-    문항_id: string;
-    평가_기준: string;
-    누락_검증_대상?: string;
-    포함_상위_근거: string;
-    제외_상위_근거: string;
-    상위_근거_변경됨: boolean;
-  }[];
-};
-
-const evaluation = summaryData as EvaluationSummary;
+import type {
+  EvaluationProvider,
+  EvaluationQuestion,
+  EvaluationRun,
+  SubjectiveGrade,
+} from '../../shared/amyHoodEvaluation';
+import {
+  createEvaluationRun,
+  fetchEvaluationQuestions,
+  getEvaluationRun,
+  listEvaluationRuns,
+  resumeEvaluationRun,
+  submitSubjectiveGrades,
+} from '../services/evaluationApi';
+import { EvaluationRunForm } from './evaluation/EvaluationRunForm';
+import { EvaluationRunHistory } from './evaluation/EvaluationRunHistory';
+import { EvaluationRunSummary } from './evaluation/EvaluationRunSummary';
 
 export const EvaluationView: React.FC = () => {
-  const { 요약, 비교 } = evaluation;
+  const [runs, setRuns] = useState<EvaluationRun[]>([]);
+  const [questions, setQuestions] = useState<EvaluationQuestion[]>([]);
+  const [active, setActive] = useState<EvaluationRun | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const refreshRuns = useCallback(async () => {
+    const response = await listEvaluationRuns();
+    setRuns(response.runs);
+    return response.runs;
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    Promise.all([refreshRuns(), fetchEvaluationQuestions()])
+      .then(([nextRuns, questionResponse]) => {
+        if (cancelled) return;
+        setQuestions(questionResponse.questions.questions);
+        setActive(nextRuns[0] ?? null);
+      })
+      .catch((caught) => {
+        if (!cancelled) setError(caught instanceof Error ? caught.message : '평가 정보를 불러오지 못했습니다.');
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [refreshRuns]);
+
+  useEffect(() => {
+    if (!active || !['queued', 'running'].includes(active.status)) return;
+    let cancelled = false;
+    const poll = async () => {
+      try {
+        const response = await getEvaluationRun(active.runId);
+        if (cancelled) return;
+        setActive(response.run);
+        if (!['queued', 'running'].includes(response.run.status)) {
+          await refreshRuns();
+        }
+      } catch (caught) {
+        if (!cancelled) setError(caught instanceof Error ? caught.message : '실행 상태 조회에 실패했습니다.');
+      }
+    };
+    const timer = window.setInterval(() => void poll(), 2000);
+    void poll();
+    return () => {
+      cancelled = true;
+      window.clearInterval(timer);
+    };
+  }, [active?.runId, active?.status, refreshRuns]);
+
+  const start = async (provider: EvaluationProvider) => {
+    setBusy(true);
+    setError(null);
+    try {
+      const response = await createEvaluationRun(provider);
+      setActive(response.run);
+      setRuns((current) => [response.run, ...current]);
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : '평가 실행을 시작하지 못했습니다.');
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const resume = async (runId: string) => {
+    setError(null);
+    try {
+      const response = await resumeEvaluationRun(runId);
+      setActive(response.run);
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : '평가 재개에 실패했습니다.');
+    }
+  };
+
+  const grade = async (runId: string, grades: SubjectiveGrade[]) => {
+    setError(null);
+    try {
+      const response = await submitSubjectiveGrades(runId, grades);
+      setActive((current) => current?.runId === runId ? response.run : current);
+      await refreshRuns();
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : '주관식 채점 저장에 실패했습니다.');
+    }
+  };
 
   return (
     <div className="min-h-full bg-slate-50 dark:bg-slate-950">
-      <div className="max-w-7xl mx-auto px-6 py-8 space-y-8">
-        <header className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <div className="flex items-center gap-2 text-sm font-semibold text-indigo-600 dark:text-indigo-400 mb-2">
-              <Scale className="w-4 h-4" />
-              RAG 평가 비교
-            </div>
-            <h1 className="text-2xl font-bold tracking-tight text-slate-950 dark:text-white">
-              Amy Hood 데이터 포함/제외 비교
-            </h1>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-400">
-              동일한 공통 질문지 15개를 기준으로 2017~2019년 데이터가 포함된 RAG 결과와 제외된 RAG 결과를 비교합니다.
-            </p>
-          </div>
-
-          <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-slate-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400">
-            <FileJson className="w-4 h-4" />
-            {요약.질문지_파일}
-          </div>
+      <div className="mx-auto max-w-7xl space-y-6 px-6 py-8">
+        <header>
+          <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-indigo-600 dark:text-indigo-400"><Scale className="h-4 w-4" /> 평가 비교</div>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-950 dark:text-white">Amy Hood 블라인드 평가 실행과 이력</h1>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">과거 복원 7점, GitHub 홀드아웃 5점, 가상 시나리오 24점을 동일한 질문 세트로 비교합니다.</p>
         </header>
-
-        <section className="grid grid-cols-1 gap-4 md:grid-cols-4">
-          <div className="rounded-lg border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
-            <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">포함 문서</p>
-            <p className="mt-2 text-2xl font-bold text-slate-950 dark:text-white">
-              {요약.포함_2017_2019.문서_수.toLocaleString()}
-            </p>
-            <p className="mt-1 text-xs text-slate-500">
-              청크 {요약.포함_2017_2019.청크_수.toLocaleString()}개
-            </p>
-          </div>
-
-          <div className="rounded-lg border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
-            <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">제외 문서</p>
-            <p className="mt-2 text-2xl font-bold text-slate-950 dark:text-white">
-              {요약.제외_2017_2019.문서_수.toLocaleString()}
-            </p>
-            <p className="mt-1 text-xs text-slate-500">
-              청크 {요약.제외_2017_2019.청크_수.toLocaleString()}개
-            </p>
-          </div>
-
-          <div className="rounded-lg border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
-            <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">누락 차이</p>
-            <p className="mt-2 text-2xl font-bold text-slate-950 dark:text-white">
-              -{요약.문서_차이.toLocaleString()}
-            </p>
-            <p className="mt-1 text-xs text-slate-500">
-              청크 -{요약.청크_차이.toLocaleString()}개
-            </p>
-          </div>
-
-          <div className="rounded-lg border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
-            <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">변경 문항</p>
-            <p className="mt-2 text-2xl font-bold text-slate-950 dark:text-white">
-              {요약.근거_변경_문항_수}/{요약.문항_수}
-            </p>
-            <p className="mt-1 text-xs text-slate-500">
-              top evidence 변경
-            </p>
-          </div>
-        </section>
-
-        <section className="rounded-lg border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
-          <div className="border-b border-slate-200 px-5 py-4 dark:border-slate-800">
-            <h2 className="text-sm font-semibold text-slate-950 dark:text-white">질문별 근거 비교</h2>
-            <p className="mt-1 text-xs text-slate-500">
-              `변경`은 2017~2019 제외 후 가장 먼저 검색된 근거 파일이 바뀐 문항입니다.
-            </p>
-          </div>
-
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-slate-200 text-sm dark:divide-slate-800">
-              <thead className="bg-slate-50 dark:bg-slate-900/60">
-                <tr>
-                  <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">문항</th>
-                  <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">KPI</th>
-                  <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">2017~2019 포함</th>
-                  <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">2017~2019 제외</th>
-                  <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">상태</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                {비교.map((row) => (
-                  <tr key={row.문항_id} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/40">
-                    <td className="px-5 py-4 align-top">
-                      <div className="font-medium text-slate-900 dark:text-slate-100">{row.문항_id}</div>
-                      {row.누락_검증_대상 && (
-                        <div className="mt-1 text-xs text-slate-500">{row.누락_검증_대상}</div>
-                      )}
-                    </td>
-                    <td className="px-5 py-4 align-top text-slate-600 dark:text-slate-300">
-                      {row.평가_기준}
-                    </td>
-                    <td className="px-5 py-4 align-top font-mono text-xs text-slate-700 dark:text-slate-300">
-                      {row.포함_상위_근거}
-                    </td>
-                    <td className="px-5 py-4 align-top font-mono text-xs text-slate-700 dark:text-slate-300">
-                      {row.제외_상위_근거}
-                    </td>
-                    <td className="px-5 py-4 align-top">
-                      {row.상위_근거_변경됨 ? (
-                        <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-800 dark:bg-amber-400/10 dark:text-amber-300">
-                          <AlertTriangle className="w-3.5 h-3.5" />
-                          변경
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-semibold text-emerald-800 dark:bg-emerald-400/10 dark:text-emerald-300">
-                          <CheckCircle2 className="w-3.5 h-3.5" />
-                          유지
-                        </span>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <section className="rounded-lg border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
-          <h2 className="text-sm font-semibold text-slate-950 dark:text-white">해석</h2>
-          <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
-            {요약.해석}
-          </p>
-        </section>
+        {error && <div className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900 dark:bg-red-950/40 dark:text-red-300"><AlertCircle className="h-4 w-4" />{error}</div>}
+        <EvaluationRunForm disabled={busy || Boolean(active && ['queued', 'running'].includes(active.status))} onStart={start} />
+        {active && <EvaluationRunSummary run={active} onResume={resume} />}
+        <EvaluationRunHistory runs={runs} questions={questions} onGrade={grade} />
       </div>
     </div>
   );
