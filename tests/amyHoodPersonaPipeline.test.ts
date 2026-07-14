@@ -1,7 +1,7 @@
 /**
  * Test Plan:
  * 1. Happy Path:
- *    - selected 원문을 수집하고 동일 chunk를 Gemma 4 모의 모델로 분석·병합해 시스템 프롬프트를 생성한다.
+ *    - selected 원문을 수집하고 동일 chunk를 Gemma 4 모의 모델로 분석·병합해 버전 등록된 시스템 프롬프트를 생성한다.
  *
  * 2. Edge Cases:
  *    - 10,000 tokens보다 짧은 자료는 하나의 chunk로 유지한다.
@@ -346,6 +346,14 @@ test('happy: selected corpus becomes Gemma analyses and a persona prompt', async
   assert.equal(result.failedChunks, 0);
   assert.equal(readJsonl(fixture.analysisPath).length, 18);
   assert.match(readFileSync(fixture.promptPath, 'utf8'), /## Decision Principles/);
+  const manifest = JSON.parse(
+    readFileSync(
+      join(fixture.root, 'data/b-track/amy-hood/prompt-versions.json'),
+      'utf8',
+    ),
+  ) as { activeVersionId: string; versions: Array<{ versionId: string }> };
+  assert.equal(manifest.versions.length, 1);
+  assert.equal(manifest.activeVersionId, manifest.versions[0].versionId);
 });
 
 test('failure: stale resume proof and manifest provenance cannot pass the Gemma gate', async () => {

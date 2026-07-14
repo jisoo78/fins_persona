@@ -7,6 +7,13 @@ import type { InventoryEntry } from './corpus';
 import { CORPUS_NORMALIZATION_VERSION } from './corpus';
 import type { ModelClient } from './modelClient';
 import { modelRequestSettings, modelSettingsFingerprint } from './modelClient';
+import { assertValidPersonaPrompt } from './promptValidation';
+import {
+  activatePromptVersion,
+  createPromptVersion,
+  listPromptVersions,
+  ensurePromptVersionStore,
+} from '../promptVersions/store';
 import {
   providerArtifactName,
   type ProviderName,
@@ -238,17 +245,6 @@ const atomicWrite = async (path: string, text: string) => {
   }
 };
 
-const requiredHeadings = [
-  '## Role',
-  '## Identity',
-  '## Decision Principles',
-  '## Cross-Dimension Rules',
-  '## Red Lines',
-  '## Communication Style',
-  '## Unknown Policy',
-  '## Response Format',
-];
-
 const compactSignals = (signals: SourceAnalysis['decisionCriteria']) =>
   signals.slice(0, 2).map(({ statement, conditions, exceptions }) => ({
     statement,
@@ -297,8 +293,25 @@ export const buildMasterPrompt = async (options: BuildPromptOptions) => {
     ),
   );
   const markdown = result.text.trim();
-  const missing = requiredHeadings.filter((heading) => !markdown.includes(heading));
-  if (missing.length) throw new Error(`persona prompt missing headings: ${missing.join(', ')}`);
-  await atomicWrite(personaPromptPath(options.root, options.provider), `${markdown}\n`);
+  assertValidPersonaPrompt(markdown);
+  const content = `${markdown}\n`;
+  if (options.provider === 'local') {
+    try {
+      const manifest = await listPromptVersions(options.root);
+      const saved = await createPromptVersion(options.root, {
+        content,
+        basedOnVersionId: manifest.activeVersionId,
+      });
+      await activatePromptVersion(options.root, saved.versionId);
+    } catch (error) {
+      if (!error || typeof error !== 'object' || !('code' in error) || error.code !== 'ENOENT') {
+        throw error;
+      }
+      await atomicWrite(personaPromptPath(options.root, options.provider), content);
+      await ensurePromptVersionStore(options.root);
+    }
+  } else {
+    await atomicWrite(personaPromptPath(options.root, options.provider), content);
+  }
   return markdown;
 };
