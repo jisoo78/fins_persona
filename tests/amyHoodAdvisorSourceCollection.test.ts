@@ -1,22 +1,31 @@
 /**
  * Test Plan:
  * 1. Happy Path:
- *    - an official Amy Hood source and candidate event resolve to deterministic advisor paths.
+ *    - advisor paths are deterministic and atomic JSON persistence round-trips valid data.
  *
  * 2. Edge Cases:
- *    - a discovery-only LinkedIn URL remains metadata-only.
- *    - a duplicate URL resolves to one canonical registry identity.
- *    - a source without an optional speaker remains valid but reviewable.
+ *    - a LinkedIn URL is classified as discovery-only.
+ *    - canonical-equivalent discoveries resolve to the same URL identity.
+ *    - fragments and tracking parameters are removed while useful query keys are sorted.
  *
  * 3. Failure Path:
- *    - disallowed hosts and failed refreshes produce explicit safe states without overwriting valid raw data.
+ *    - non-HTTPS and non-allowlisted sources require safe rejection.
+ *    - a non-JSON value cannot overwrite an existing valid file.
+ *    - a failed atomic replacement preserves the destination and removes its temporary file.
  */
 import assert from 'node:assert/strict';
+import { mkdtemp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
 import test from 'node:test';
 
+import { readJsonFile, writeJsonAtomic } from '../server/decisionAdvisor/jsonStore';
 import { advisorPaths } from '../server/decisionAdvisor/paths';
+import {
+  canonicalizeSourceUrl,
+  classifySourceUrl,
+} from '../server/decisionAdvisor/sourcePolicy';
 import type {
-  AdvisorRawSource,
   AdvisorSourceRecord,
   EventCandidate,
 } from '../shared/amyHoodDecisionAdvisor';
@@ -63,77 +72,134 @@ test('happy: advisor paths remain isolated from existing B Track data', () => {
   assert.equal(officialSource.tier, 1);
 });
 
-test('edge: discovery-only LinkedIn sources remain metadata-only', () => {
-  const source: AdvisorSourceRecord = {
-    ...officialSource,
-    id: 'source-linkedin-discovery',
-    canonicalUrl: 'https://www.linkedin.com/posts/example',
+test('happy: atomic JSON persistence round-trips data without a temporary file', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-json-store-'));
+  const destination = path.join(directory, 'nested', 'registry.json');
+
+  try {
+    await writeJsonAtomic(destination, { sources: [officialSource.id] });
+
+    assert.deepEqual(await readJsonFile(destination, { sources: [] }), {
+      sources: [officialSource.id],
+    });
+    assert.deepEqual(await readdir(path.dirname(destination)), ['registry.json']);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('happy: exact and suffix official hosts are eligible for Tier 1 collection', () => {
+  assert.deepEqual(classifySourceUrl('https://microsoft.com/interview'), {
+    mode: 'automatic',
+    tier: 1,
+  });
+  assert.deepEqual(classifySourceUrl('https://investor.microsoft.com/interview'), {
+    mode: 'automatic',
+    tier: 1,
+  });
+  assert.deepEqual(classifySourceUrl('https://data.sec.gov/submissions/example.json'), {
+    mode: 'automatic',
+    tier: 1,
+  });
+});
+
+test('edge: LinkedIn remains discovery-only', () => {
+  assert.deepEqual(classifySourceUrl('https://www.linkedin.com/posts/example'), {
+    mode: 'discovery_only',
     tier: 'discovery_only',
-    collector: 'manual_import',
-    approvedPublicHost: false,
-    collectionStatus: 'discovered',
-    rawPath: null,
-    sha256: null,
-    capturedAt: null,
-  };
-
-  assert.equal(source.tier, 'discovery_only');
-  assert.equal(source.rawPath, null);
-  assert.equal(source.approvedPublicHost, false);
+  });
 });
 
-test('edge: one canonical registry identity can reference duplicate discoveries', () => {
-  const source: AdvisorSourceRecord = {
-    ...officialSource,
-    eventCandidateIds: ['candidate-fy25-q4-capex', 'candidate-fy25-q4-margin'],
-    failureReason: 'duplicate',
-  };
+test('edge: canonical-equivalent discoveries resolve to one URL identity', () => {
+  const first = canonicalizeSourceUrl(
+    'https://www.microsoft.com/a?id=7&utm_source=discovery#quote',
+  );
+  const duplicate = canonicalizeSourceUrl(
+    'https://www.microsoft.com/a?utm_campaign=repeat&id=7',
+  );
 
-  assert.equal(source.id, 'source-microsoft-fy25-q4');
-  assert.equal(source.canonicalUrl, officialSource.canonicalUrl);
-  assert.deepEqual(source.eventCandidateIds, [
-    'candidate-fy25-q4-capex',
-    'candidate-fy25-q4-margin',
-  ]);
+  assert.equal(first, duplicate);
 });
 
-test('edge: a source without a speaker remains explicitly reviewable', () => {
-  const source: AdvisorSourceRecord = {
-    ...officialSource,
-    speaker: null,
-    collectionStatus: 'review_required',
-    failureReason: 'speaker_uncertain',
-  };
-
-  assert.equal(source.speaker, null);
-  assert.equal(source.collectionStatus, 'review_required');
-  assert.equal(source.failureReason, 'speaker_uncertain');
+test('edge: canonicalization removes fragments and tracking parameters', () => {
+  assert.equal(
+    canonicalizeSourceUrl(
+      'https://www.microsoft.com/a?z=last&utm_source=x&id=7&fbclid=f&gclid=g#quote',
+    ),
+    'https://www.microsoft.com/a?id=7&z=last',
+  );
 });
 
-test('failure: unsafe collection states preserve the last valid raw artifact', () => {
-  const failedRefresh: AdvisorSourceRecord = {
-    ...officialSource,
-    approvedPublicHost: false,
-    collectionStatus: 'failed',
-    failureReason: 'network_error',
-  };
-  const {
-    rawPath: _rawPath,
-    normalizedPath: _normalizedPath,
-    failureReason: _failureReason,
-    ...metadata
-  } = officialSource;
-  const preservedRaw: AdvisorRawSource = {
-    sourceId: officialSource.id,
-    canonicalUrl: officialSource.canonicalUrl,
-    title: officialSource.title,
-    mediaType: 'text/html',
-    bodyBase64: 'PHNvdXJjZT5wcmVzZXJ2ZWQ8L3NvdXJjZT4=',
-    metadata,
-  };
+test('failure: automatic collection rejects unsafe source URLs', () => {
+  assert.throws(
+    () => classifySourceUrl('http://www.microsoft.com/interview'),
+    /HTTPS/,
+  );
+  assert.throws(
+    () => classifySourceUrl('https://microsoft.com.example.com/interview'),
+    /manual review/,
+  );
+  assert.throws(
+    () => classifySourceUrl('https://example.com/interview', []),
+    /manual review/,
+  );
+  assert.throws(
+    () => classifySourceUrl('https://sub.reports.example.com/interview', [
+      'reports.example.com',
+    ]),
+    /manual review/,
+  );
+  assert.deepEqual(classifySourceUrl('https://reports.example.com/interview', [
+    'reports.example.com',
+  ]), {
+    mode: 'automatic',
+    tier: 3,
+  });
+});
 
-  assert.equal(failedRefresh.approvedPublicHost, false);
-  assert.equal(failedRefresh.collectionStatus, 'failed');
-  assert.equal(failedRefresh.rawPath, officialSource.rawPath);
-  assert.equal(preservedRaw.bodyBase64, 'PHNvdXJjZT5wcmVzZXJ2ZWQ8L3NvdXJjZT4=');
+test('failure: failed atomic replacement preserves the destination and removes its temp file', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-json-failure-'));
+  const destination = path.join(directory, 'registry.json');
+  const marker = path.join(destination, 'preserved.json');
+
+  try {
+    await mkdir(destination);
+    await writeFile(marker, '{"preserved":true}\n', 'utf8');
+
+    await assert.rejects(
+      () => writeJsonAtomic(destination, { replacement: true }),
+      (error: NodeJS.ErrnoException) => {
+        assert.ok(
+          ['EISDIR', 'EEXIST', 'ENOTDIR'].includes(error.code ?? ''),
+          `expected a filesystem replacement error, received ${error.message}`,
+        );
+        return true;
+      },
+    );
+
+    assert.equal(await readFile(marker, 'utf8'), '{"preserved":true}\n');
+    assert.deepEqual(await readdir(directory), ['registry.json']);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: a non-JSON value cannot overwrite existing valid JSON', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-json-invalid-'));
+  const destination = path.join(directory, 'registry.json');
+  const original = '{"sources":["preserved"]}\n';
+
+  try {
+    await writeFile(destination, original, 'utf8');
+
+    await assert.rejects(
+      () => writeJsonAtomic(destination, undefined),
+      /JSON-serializable/,
+    );
+
+    assert.equal(await readFile(destination, 'utf8'), original);
+    assert.deepEqual(await readdir(directory), ['registry.json']);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
 });
