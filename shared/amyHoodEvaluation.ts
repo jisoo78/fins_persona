@@ -59,3 +59,47 @@ export type EvaluationBundle = {
   questions: EvaluationQuestionFile;
   answerKey: EvaluationAnswerKeyFile;
 };
+
+export type SubjectiveGrade = {
+  questionId: string;
+  decision: 0 | 1 | 2;
+  reasoning: 0 | 1 | 2;
+  tradeoff: 0 | 1 | 2;
+  personaConsistency: 0 | 1 | 2;
+  score: number;
+  summary: string;
+};
+
+export type EvaluationRunAnswer = {
+  questionId: string;
+  status: 'complete' | 'failed';
+  choice?: 1 | 2 | 3 | 4;
+  reason?: string;
+  text?: string;
+  correct?: boolean;
+  objectiveScore?: 0 | 1;
+  grade?: SubjectiveGrade;
+  elapsedMs: number;
+  inputTokens?: number;
+  outputTokens?: number;
+  error?: string;
+};
+
+export type EvaluationRun = {
+  runId: string;
+  status: 'queued' | 'running' | 'incomplete' | 'complete';
+  gradingStatus: 'pending' | 'complete';
+  provider: EvaluationProvider;
+  model: string;
+  promptHash: string;
+  ragSnapshotId: string;
+  questionSetVersion: string;
+  answers: EvaluationRunAnswer[];
+  scores: {
+    pastMemory: number;
+    githubHoldout: number;
+    subjective: number | null;
+  };
+  startedAt: string;
+  completedAt: string | null;
+};

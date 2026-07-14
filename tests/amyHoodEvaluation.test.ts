@@ -29,7 +29,15 @@ import {
   buildEvaluationPrompt,
   parseEvaluationResponse,
 } from '../server/evaluation/prompt';
-import type { EvaluationQuestion } from '../shared/amyHoodEvaluation';
+import { createEvaluationRunner } from '../server/evaluation/runner';
+import type {
+  EvaluationQuestion,
+  SubjectiveGrade,
+} from '../shared/amyHoodEvaluation';
+import type {
+  ModelClient,
+  ModelResult,
+} from '../server/personaPipeline/modelClient';
 
 type FixtureOptions = {
   omitAnswerId?: string;
@@ -100,6 +108,75 @@ const createEvaluationFixture = async (options: FixtureOptions = {}) => {
   }
   return root;
 };
+
+const createRunnerFixture = async (approved = true) => {
+  const root = await createEvaluationFixture();
+  const dataDir = join(root, 'data/b-track/amy-hood');
+  await mkdir(join(dataDir, 'chunks'), { recursive: true });
+  await Promise.all([
+    writeFile(
+      join(dataDir, 'source-inventory.json'),
+      await readFile(
+        join(process.cwd(), 'data/b-track/amy-hood/source-inventory.json'),
+        'utf8',
+      ),
+    ),
+    writeFile(
+      join(dataDir, 'chunks/manifest.json'),
+      await readFile(
+        join(process.cwd(), 'data/b-track/amy-hood/chunks/manifest.json'),
+        'utf8',
+      ),
+    ),
+    writeFile(
+      join(dataDir, 'AMY_HOOD_PERSONA.gemma4.md'),
+      await readFile(
+        join(process.cwd(), 'data/b-track/amy-hood/AMY_HOOD_PERSONA.gemma4.md'),
+        'utf8',
+      ),
+    ),
+  ]);
+  if (approved) {
+    const reviewPath = join(root, 'evaluation/amy_hood_eval_question_reviews.json');
+    const reviews = JSON.parse(await readFile(reviewPath, 'utf8')) as {
+      reviews: { status: string; reviewedAt: string | null }[];
+    };
+    reviews.reviews = reviews.reviews.map((review) => ({
+      ...review,
+      status: 'approved',
+      reviewedAt: '2026-07-14T00:00:00.000Z',
+    }));
+    await writeFile(reviewPath, JSON.stringify(reviews));
+  }
+  return root;
+};
+
+const fakeModel = (
+  handler: (prompt: string) => Promise<ModelResult>,
+): ModelClient => ({
+  provider: 'local',
+  model: 'gemma4-test',
+  cacheKey: 'gemma4-test-v1',
+  invoke: handler,
+});
+
+const validModelResult = (prompt: string): ModelResult => ({
+  text: prompt.includes('"choice"')
+    ? '{"choice":1,"reason":"재무 규율과 장기 가치를 함께 봅니다."}'
+    : '저는 투자를 단계화하겠습니다. 확인된 수요를 우선하겠습니다. 마진과 위험도 함께 관리하겠습니다. 조건을 분명히 두겠습니다. 지표를 분기마다 검토하겠습니다.',
+  elapsedMs: 1,
+});
+
+const validGrades = (): SubjectiveGrade[] =>
+  ['S1', 'S2', 'S3'].map((questionId) => ({
+    questionId,
+    decision: 2,
+    reasoning: 2,
+    tradeoff: 1,
+    personaConsistency: 1,
+    score: 6,
+    summary: '결정과 근거는 명확하지만 중단 기준을 더 구체화할 수 있다.',
+  }));
 
 const mcQuestion: EvaluationQuestion = {
   id: 'H1',
@@ -218,4 +295,112 @@ test('failure: holdout and scenario prompts contain no RAG evidence', async () =
       /\[RAG EVIDENCE\]/,
     );
   }
+});
+
+test('happy: sequential run calls the model once for each question in order', async () => {
+  const root = await createRunnerFixture();
+  const prompts: string[] = [];
+  const runner = createEvaluationRunner({
+    root,
+    createModel: () =>
+      fakeModel(async (prompt) => {
+        prompts.push(prompt);
+        return validModelResult(prompt);
+      }),
+  });
+
+  const queued = await runner.createEvaluationRun({ provider: 'local' });
+  const completed = await runner.executeEvaluationRun(queued.runId);
+
+  assert.equal(completed.status, 'complete');
+  assert.equal(completed.answers.length, 15);
+  assert.equal(prompts.length, 15);
+  assert.deepEqual(
+    completed.answers.map((answer) => answer.questionId),
+    ['P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'H1', 'H2', 'H3', 'H4', 'H5', 'S1', 'S2', 'S3'],
+  );
+});
+
+test('failure: malformed MC response is retried exactly once', async () => {
+  const root = await createRunnerFixture();
+  let calls = 0;
+  const runner = createEvaluationRunner({
+    root,
+    createModel: () =>
+      fakeModel(async (prompt) => {
+        calls += 1;
+        if (calls === 1) return { text: '첫 번째가 좋습니다.', elapsedMs: 1 };
+        return validModelResult(prompt);
+      }),
+  });
+  const queued = await runner.createEvaluationRun({ provider: 'local' });
+  const completed = await runner.executeEvaluationRun(queued.runId);
+  assert.equal(completed.status, 'complete');
+  assert.equal(calls, 16);
+});
+
+test('edge: resume preserves complete answers and starts at the failed question', async () => {
+  const root = await createRunnerFixture();
+  const prompts: string[] = [];
+  let failed = false;
+  const runner = createEvaluationRunner({
+    root,
+    createModel: () =>
+      fakeModel(async (prompt) => {
+        prompts.push(prompt);
+        if (!failed && prompts.length === 2) {
+          failed = true;
+          throw new Error('local model unavailable');
+        }
+        return validModelResult(prompt);
+      }),
+  });
+  const queued = await runner.createEvaluationRun({ provider: 'local' });
+  const incomplete = await runner.executeEvaluationRun(queued.runId);
+  assert.equal(incomplete.status, 'incomplete');
+  assert.equal(incomplete.answers[0].questionId, 'P1');
+  assert.equal(incomplete.answers[0].status, 'complete');
+  const completed = await runner.resumeEvaluationRun(queued.runId);
+  assert.equal(completed.status, 'complete');
+  assert.equal(
+    prompts.filter((prompt) => prompt.includes('Office 영구 라이선스')).length,
+    1,
+  );
+});
+
+test('failure: unapproved question set cannot create a run', async () => {
+  const root = await createRunnerFixture(false);
+  const runner = createEvaluationRunner({
+    root,
+    createModel: () => fakeModel(async (prompt) => validModelResult(prompt)),
+  });
+  await assert.rejects(
+    runner.createEvaluationRun({ provider: 'local' }),
+    /all evaluation questions must be approved/,
+  );
+});
+
+test('failure: external grades require exact totals and blind keys', async () => {
+  const root = await createRunnerFixture();
+  const runner = createEvaluationRunner({
+    root,
+    createModel: () => fakeModel(async (prompt) => validModelResult(prompt)),
+  });
+  const queued = await runner.createEvaluationRun({ provider: 'local' });
+  await runner.executeEvaluationRun(queued.runId);
+  const mismatched = validGrades();
+  mismatched[0] = { ...mismatched[0], score: 8 };
+  await assert.rejects(
+    runner.applySubjectiveGrades(queued.runId, mismatched),
+    /grade total does not match dimensions/,
+  );
+  const leaked = validGrades() as Array<SubjectiveGrade & { provider?: string }>;
+  leaked[0].provider = 'gemma-4';
+  await assert.rejects(
+    runner.applySubjectiveGrades(queued.runId, leaked),
+    /unknown subjective grade field: provider/,
+  );
+  const graded = await runner.applySubjectiveGrades(queued.runId, validGrades());
+  assert.equal(graded.gradingStatus, 'complete');
+  assert.equal(graded.scores.subjective, 18);
 });
