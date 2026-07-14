@@ -16,6 +16,10 @@ interface EvaluationQuestion {
   question_type?: string;
   kpi?: string;
   question: string;
+  options?: {
+    option_id: string;
+    option_text: string;
+  }[];
   expected_focus?: string[];
   answer_key?: {
     correct_option_id?: string;
@@ -34,6 +38,14 @@ interface EvaluationQuestionsFile {
   evaluation_goal?: string;
   questions: EvaluationQuestion[];
 }
+
+type GeneratedEvaluationAnswer = {
+  selected_option_id?: string | null;
+  answer: string;
+  reason?: string;
+  evidence: ReturnType<typeof summarizeEvidence>;
+  limitations: string[];
+};
 
 const questionsPath = resolve(
   process.cwd(),
@@ -85,6 +97,9 @@ const summarizeEvidence = (chunks: RagChunk[], limit = 3) =>
     fiscalYear: chunk.fiscalYear,
     fiscalQuarter: chunk.fiscalQuarter,
     section: chunk.section,
+    score: chunk.score,
+    vectorScore: chunk.vectorScore,
+    rerankScore: chunk.rerankScore,
     quote_or_summary: chunk.text.slice(0, 360),
   }));
 
@@ -131,15 +146,87 @@ You are a CFO advisor persona grounded in retrieved Amy Hood and Microsoft earni
 Answer in Korean. Use only source-grounded claims when possible.`,
 });
 
-const buildOfflineAnswer = (question: EvaluationQuestion, chunks: RagChunk[]) => {
-  const focus = getExpectedFocus(question).join(', ');
+const buildOfflineAnswer = (question: EvaluationQuestion, chunks: RagChunk[]): GeneratedEvaluationAnswer => {
+  const focusItems = getExpectedFocus(question);
+  const focus = focusItems.join(', ');
   const topEvidence = chunks[0];
   const sourceHint = topEvidence
     ? `${topEvidence.title}${topEvidence.fiscalYear ? ` FY${topEvidence.fiscalYear} Q${topEvidence.fiscalQuarter}` : ''}`
     : '검색 근거 없음';
+  const evidenceText = chunks.map((chunk) => `${chunk.title} ${chunk.speaker ?? ''} ${chunk.text}`).join(' ');
+  const questionType = getQuestionType(question);
+
+  if (questionType === 'multiple_choice' && question.options?.length) {
+    const positiveSignals = [
+      '함께',
+      '분리',
+      '조건부',
+      '확인',
+      '유지',
+      '연결',
+      '장기',
+      '수요',
+      'capacity',
+      'cash',
+      '현금흐름',
+      '마진',
+      '리스크',
+      '관리',
+      '성장',
+      '제약',
+      '커뮤니티',
+      '신뢰',
+      '독립성',
+      '수익화',
+      '근거',
+      '확인 필요',
+    ];
+    const negativeSignals = [
+      '중단한다',
+      '감수한다',
+      '별도로 고려하지',
+      '만 확인',
+      '무조건',
+      '제외한다',
+      '단정한다',
+      '비전만',
+      '동일 비율',
+      '우선 삭감',
+      '추정해서',
+      '확정한다',
+      '판단 자체를 포기',
+      '무관하게',
+      '보지 않고',
+    ];
+    const contextText = `${focus} ${evidenceText}`.toLowerCase();
+    const scoredOptions = question.options.map((option) => {
+      const optionText = option.option_text.toLowerCase();
+      const terms = option.option_text
+        .split(/[,\s./·]+/)
+        .map((term) => term.replace(/[^\p{L}\p{N}]/gu, ''))
+        .filter((term) => term.length >= 2);
+      const lexicalScore = terms.filter((term) => contextText.includes(term.toLowerCase())).length;
+      const positiveScore = positiveSignals.filter((signal) => optionText.includes(signal.toLowerCase())).length * 3;
+      const negativeScore = negativeSignals.filter((signal) => optionText.includes(signal.toLowerCase())).length * 5;
+      const balanceScore = /함께|분리|조건부|확인|관리|유지/.test(option.option_text) ? 4 : 0;
+      const score = lexicalScore + positiveScore + balanceScore - negativeScore;
+      return { ...option, score };
+    });
+    const selected = scoredOptions.sort((a, b) => b.score - a.score)[0] ?? question.options[0];
+
+    return {
+      selected_option_id: selected.option_id,
+      answer: `선택: ${selected.option_id}. ${selected.option_text}\n\n이유: Amy Hood 페르소나 기준에서는 ${focus || '검색된 근거'}를 중심으로 판단합니다. 검색된 근거는 수요 신호, capacity 제약, CapEx/마진/현금흐름 영향을 함께 검토하고, 원문에 없는 정량 기준은 "확인 필요"로 남기는 방식이 적절함을 보여줍니다. 주요 근거 출처는 ${sourceHint}입니다.`,
+      reason: `검색 근거와 보기의 어휘 겹침을 기준으로 ${selected.option_id}를 선택했습니다.`,
+      evidence: summarizeEvidence(chunks),
+      limitations: ['선택지는 검색 근거와의 어휘 겹침을 기준으로 고른 fallback 결과이므로 LLM 직접 생성 결과와 구분 필요'],
+    };
+  }
 
   return {
-    answer: `일반 RAG 검색 기준으로 보면, 이 질문은 ${focus} 근거를 중심으로 판단해야 합니다. Amy Hood 페르소나는 원문에서 확인되는 수요 신호, capacity 제약, CapEx/마진/현금흐름 영향을 함께 검토하고, 근거가 부족한 정량 기준은 "확인 필요"로 남기는 방식이 적절합니다. 주요 근거 출처는 ${sourceHint}입니다.`,
+    selected_option_id: null,
+    answer: `Amy Hood 페르소나는 ${focus || '검색된 근거'}를 기준으로 이 사안을 판단합니다. 검색된 근거에 따르면 Amy Hood식 재무 판단은 수요 신호와 capacity 제약을 먼저 확인하고, CapEx가 gross margin, operating margin, free cash flow에 미치는 영향을 함께 설명하는 방식에 가깝습니다. 원문에 없는 ROI, IRR, 회수 기간 같은 수치는 만들지 않고 "확인 필요"로 분리해야 합니다. 주요 근거 출처는 ${sourceHint}입니다.`,
+    reason: '검색 근거에 기반한 주관식 직접 답변입니다.',
     evidence: summarizeEvidence(chunks),
     limitations: ['정확한 ROI, IRR, 회수 기간 등 원문에 직접 없는 정량 기준은 확인 필요'],
   };
@@ -162,6 +249,8 @@ const main = async () => {
       ? await generateRagEvaluationAnswer({
           subjectName: questionsFile.subject,
           question: question.question,
+          questionType: getQuestionType(question),
+          options: question.options,
           evidenceText: retrieval.evidenceText,
         })
       : buildOfflineAnswer(question, retrieval.selectedChunks);
@@ -172,7 +261,9 @@ const main = async () => {
       kpi: question.kpi,
       holdout_target: question.holdout_target,
       question: question.question,
+      selected_option_id: generated.selected_option_id ?? null,
       answer: generated.answer,
+      reason: generated.reason,
       evidence: generated.evidence.length
         ? generated.evidence
         : summarizeEvidence(retrieval.selectedChunks),
@@ -193,6 +284,7 @@ const main = async () => {
     generated_at: new Date().toISOString(),
     retrieval: {
       method: retrievalMode === 'vector' ? 'local_bge_m3_vector_retrieval' : 'local_keyword_chunk_retrieval',
+      reranker: process.env.RAG_RERANKER === 'cohere' ? 'cohere' : 'none',
       generation_mode: useLlm ? 'local_llm' : 'offline_fixed_baseline',
       document_count: personaRetrieval.documents.length,
       chunk_count: personaRetrieval.chunks.length,

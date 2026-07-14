@@ -20,6 +20,9 @@ COHERE_RERANK_MODEL="rerank-v3.5"
 COHERE_RERANK_CANDIDATE_LIMIT="40"
 COHERE_RERANK_MAX_TOKENS_PER_DOC="1200"
 COHERE_RERANK_TIMEOUT_MS="20000"
+COHERE_RERANK_MIN_INTERVAL_MS="6500"
+COHERE_RERANK_RETRY_ON_429="true"
+COHERE_RERANK_429_RETRY_DELAY_MS="12000"
 ```
 
 ## 실행
@@ -32,4 +35,5 @@ npm run rag:score:decision-similarity
 ## 참고
 
 - 후보 수를 늘리면 품질이 좋아질 수 있지만 Cohere 사용량과 지연 시간이 증가한다.
+- 무료 Trial 키는 분당 호출 수 제한이 있으므로 기본값은 약 6.5초 간격으로 호출한다.
 - 최종 비교에서는 RAG와 GraphRAG가 같은 질문지, 같은 Judge 기준, 같은 reranker 조건을 쓰는 편이 좋다.
