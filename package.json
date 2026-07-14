@@ -17,6 +17,7 @@
     "persona:check": "tsx server/runAmyHoodPersonaPipeline.ts check",
     "persona:evaluate": "tsx server/runAmyHoodPersonaPipeline.ts evaluate",
     "evaluation:test": "tsx --test tests/amyHoodPromptVersions.test.ts tests/amyHoodEvaluation.test.ts tests/amyHoodEvaluationQuestionQuality.test.ts tests/amyHoodEvaluationUi.test.ts tests/decisionSimilarityPrompt.test.ts tests/trackNavigation.test.ts tests/clipboard.test.ts tests/evaluationReport.test.ts",
+    "advisor:evaluation-v3:test": "tsx --test tests/amyHoodEvaluationV3.test.ts",
     "rag:prepare:holdout": "python3 scripts/prepare_holdout_dataset.py",
     "rag:index:bge-m3": "python3 scripts/build_bge_m3_index.py",
     "rag:index:bge-m3:train": "RAG_ARCHIVE_DIR=archive_eval/train python3 scripts/build_bge_m3_index.py",

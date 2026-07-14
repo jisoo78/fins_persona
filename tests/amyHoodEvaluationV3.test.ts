@@ -2,17 +2,22 @@
  * Test Plan:
  * 1. Happy Path:
  *    - thirty evaluation slots and four experiment arms form one valid v3 blueprint.
+ *    - the maximum dimension scores total one hundred and produce twenty experiment runs.
  *
  * 2. Edge Cases:
  *    - counterfactual slots preserve pair IDs and opposite variants.
  *    - all five decision domains remain represented after deterministic ordering.
  *    - advisory slots remain subjective while the other twenty-six slots remain multiple-choice.
  *    - evaluation scope accepts holdout artifacts needed for temporal evaluation.
+ *    - a zero score is accepted at every lower boundary.
+ *    - finite fractional dimension scores are accepted when their total matches.
+ *    - every experiment arm receives repetitions one through five in deterministic order.
  *
  * 3. Failure Path:
  *    - unknown experiment arms are rejected at runtime before experiment setup.
  *    - invalid blueprints reject duplicate IDs, incorrect slot counts, and unpaired counterfactuals.
  *    - non-evaluation scopes reject holdout artifacts before any downstream write.
+ *    - dimension overflow and a mismatched total are rejected before evaluation output is used.
  */
 import assert from 'node:assert/strict';
 import test from 'node:test';
@@ -23,10 +28,13 @@ import {
   isEvaluationV3Arm,
   type EvaluationV3Blueprint,
   type EvaluationV3BlueprintSlot,
+  type EvaluationV3Score,
   type DecisionDomain,
 } from '../shared/amyHoodDecisionAdvisor';
 import { assertAllowedSplits } from '../server/decisionAdvisor/leakageGuard';
 import { assertEvaluationV3Blueprint, loadEvaluationV3Blueprint } from '../server/evaluationV3/blueprint';
+import { createEvaluationV3ExperimentPlan } from '../server/evaluationV3/experimentPlan';
+import { assertEvaluationV3Score } from '../server/evaluationV3/scoring';
 
 const DOMAIN_ORDER: DecisionDomain[] = [
   'm_and_a',
@@ -278,4 +286,94 @@ test('failure: build scopes reject holdout before writing', () => {
       /holdout artifact h1/,
     );
   }
+});
+
+test('happy: v3 score totals one hundred and experiment creates twenty runs', () => {
+  const score: EvaluationV3Score = {
+    decisionSelection: 40,
+    criteriaPriority: 20,
+    conditionSensitivity: 15,
+    evidenceFaithfulness: 15,
+    actionability: 10,
+    total: 100,
+  };
+
+  assert.doesNotThrow(() => assertEvaluationV3Score(score));
+  const plan = createEvaluationV3ExperimentPlan();
+  assert.equal(plan.length, 20);
+  assert.equal(new Set(plan.map((item) => `${item.arm}:${item.repetition}`)).size, 20);
+});
+
+test('edge: accepts a zero score at every lower boundary', () => {
+  assert.doesNotThrow(() => assertEvaluationV3Score({
+    decisionSelection: 0,
+    criteriaPriority: 0,
+    conditionSensitivity: 0,
+    evidenceFaithfulness: 0,
+    actionability: 0,
+    total: 0,
+  }));
+});
+
+test('edge: accepts finite fractional dimension scores with a matching total', () => {
+  assert.doesNotThrow(() => assertEvaluationV3Score({
+    decisionSelection: 20.5,
+    criteriaPriority: 10.25,
+    conditionSensitivity: 7.5,
+    evidenceFaithfulness: 7.5,
+    actionability: 4.25,
+    total: 50,
+  }));
+});
+
+test('edge: assigns repetitions one through five to every arm in deterministic order', () => {
+  const plan = createEvaluationV3ExperimentPlan();
+
+  assert.deepEqual(
+    plan,
+    EVALUATION_V3_ARMS.flatMap((arm) =>
+      Array.from({ length: EVALUATION_V3_REPETITIONS }, (_, index) => ({ arm, repetition: index + 1 })),
+    ),
+  );
+});
+
+test('failure: score rejects dimension overflow and mismatched total', () => {
+  assert.throws(() => assertEvaluationV3Score({
+    decisionSelection: 41,
+    criteriaPriority: 20,
+    conditionSensitivity: 15,
+    evidenceFaithfulness: 15,
+    actionability: 10,
+    total: 101,
+  }), /decisionSelection/);
+});
+
+test('failure: score rejects a mismatched total when dimensions are within ceilings', () => {
+  assert.throws(() => assertEvaluationV3Score({
+    decisionSelection: 39,
+    criteriaPriority: 20,
+    conditionSensitivity: 15,
+    evidenceFaithfulness: 15,
+    actionability: 10,
+    total: 100,
+  }), /total must equal 99/);
+});
+
+test('failure: score rejects non-finite and negative dimensions', () => {
+  assert.throws(() => assertEvaluationV3Score({
+    decisionSelection: Number.NaN,
+    criteriaPriority: 20,
+    conditionSensitivity: 15,
+    evidenceFaithfulness: 15,
+    actionability: 10,
+    total: 60,
+  }), /decisionSelection/);
+  assert.throws(() => assertEvaluationV3Score({
+    decisionSelection: 40,
+    criteriaPriority: -1,
+    conditionSensitivity: 15,
+    evidenceFaithfulness: 15,
+    actionability: 10,
+    total: 79,
+  }), /criteriaPriority/);
 });
