@@ -110,9 +110,9 @@ export const EvaluationView: React.FC = () => {
     <div className="min-h-full bg-slate-50 dark:bg-slate-950">
       <div className="mx-auto max-w-7xl space-y-6 px-6 py-8">
         <header>
-          <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-indigo-600 dark:text-indigo-400"><Scale className="h-4 w-4" /> 평가 비교</div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-950 dark:text-white">Amy Hood 블라인드 평가 실행과 이력</h1>
-          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">과거 복원 7점, GitHub 홀드아웃 5점, 가상 시나리오 24점을 동일한 질문 세트로 비교합니다.</p>
+          <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-indigo-600 dark:text-indigo-400"><Scale className="h-4 w-4" /> 평가 실행</div>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-950 dark:text-white">Amy Hood 블라인드 평가 실행과 채점</h1>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">과거 복원 7점, GitHub 홀드아웃 5점, 가상 시나리오 24점의 실행 기록을 만들고 주관식을 채점합니다. 상세 비교는 평가 리포트에서 확인합니다.</p>
         </header>
         {error && <div className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900 dark:bg-red-950/40 dark:text-red-300"><AlertCircle className="h-4 w-4" />{error}</div>}
         <EvaluationRunForm disabled={busy || Boolean(active && ['queued', 'running'].includes(active.status))} onStart={start} />

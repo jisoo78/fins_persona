@@ -5,7 +5,6 @@ import type {
   EvaluationRun,
   SubjectiveGrade,
 } from '../../../shared/amyHoodEvaluation';
-import { compareEvaluationRuns } from './evaluationViewModel';
 import { CopyRunIdButton } from './CopyRunIdButton';
 
 type GradeDraft = Omit<SubjectiveGrade, 'questionId' | 'score'>;
@@ -36,36 +35,18 @@ export const EvaluationRunHistory: React.FC<Props> = ({ runs, questions, onGrade
     () => runs.filter((run) => run.status === 'complete'),
     [runs],
   );
-  const [leftId, setLeftId] = useState('');
-  const [rightId, setRightId] = useState('');
   const [gradeRunId, setGradeRunId] = useState('');
   const [drafts, setDrafts] = useState<Record<string, GradeDraft>>({});
 
   useEffect(() => {
-    if (!leftId && complete[0]) setLeftId(complete[0].runId);
-    if (!rightId && complete[1]) setRightId(complete[1].runId);
     const pending = complete.find((run) => run.gradingStatus === 'pending');
     if (!gradeRunId && pending) setGradeRunId(pending.runId);
-  }, [complete, gradeRunId, leftId, rightId]);
+  }, [complete, gradeRunId]);
 
   useEffect(() => {
     setDrafts(Object.fromEntries(['S1', 'S2', 'S3'].map((id) => [id, emptyDraft()])));
   }, [gradeRunId]);
 
-  const left = complete.find((run) => run.runId === leftId);
-  const right = complete.find((run) => run.runId === rightId);
-  const rows = useMemo(() => {
-    if (!left || !right || left.runId === right.runId) return [];
-    try {
-      return compareEvaluationRuns(left, right);
-    } catch {
-      return [];
-    }
-  }, [left, right]);
-  const questionMap = useMemo(
-    () => new Map(questions.map((question) => [question.id, question])),
-    [questions],
-  );
   const gradeRun = complete.find((run) => run.runId === gradeRunId);
 
   const submitGrades = async () => {
@@ -84,38 +65,19 @@ export const EvaluationRunHistory: React.FC<Props> = ({ runs, questions, onGrade
   return (
     <div className="space-y-6">
       <section className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
-        <h2 className="text-sm font-semibold">평가 이력 비교</h2>
-        <div className="mt-3 grid gap-3 md:grid-cols-2">
-          {[{ value: leftId, set: setLeftId }, { value: rightId, set: setRightId }].map((field, index) => (
-            <div key={index} className="space-y-2">
-              <select value={field.value} onChange={(event) => field.set(event.target.value)} className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-950">
-                <option value="">{index === 0 ? '왼쪽 실행 선택' : '오른쪽 실행 선택'}</option>
-                {complete.map((run) => <option key={run.runId} value={run.runId}>{run.model} · {run.runId.slice(0, 8)} · {run.questionSetVersion}</option>)}
-              </select>
-              <CopyRunIdButton runId={field.value} disabled={!field.value} />
+        <h2 className="text-sm font-semibold">최근 평가 실행</h2>
+        <p className="mt-1 text-xs text-slate-500">상세 결과와 두 실행 비교는 B Track의 평가 리포트 메뉴에서 확인합니다.</p>
+        <div className="mt-3 space-y-2">
+          {runs.slice(0, 8).map((run) => (
+            <div key={run.runId} className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-slate-200 p-3 dark:border-slate-800">
+              <div>
+                <p className="text-xs font-bold">{run.model} · {run.status}</p>
+                <p className="mt-1 font-mono text-xs text-slate-500">{run.runId}</p>
+              </div>
+              <CopyRunIdButton runId={run.runId} />
             </div>
           ))}
         </div>
-        {rows.length > 0 && (
-          <div className="mt-5 space-y-4">
-            {rows.map((row) => (
-              <div key={row.questionId} className="rounded-lg border border-slate-200 p-4 dark:border-slate-800">
-                <p className="text-xs font-bold text-indigo-500">{row.questionId}</p>
-                <p className="mt-1 text-sm font-medium">{questionMap.get(row.questionId)?.prompt}</p>
-                <div className="mt-3 grid gap-3 md:grid-cols-2">
-                  {[row.left, row.right].map((side) => (
-                    <div key={`${row.questionId}-${side.model}`} className="rounded-lg bg-slate-50 p-3 dark:bg-slate-950/60">
-                      <p className="text-xs font-bold">{side.model} · {side.provider}</p>
-                      <p className="mt-2 whitespace-pre-wrap text-sm leading-6">{side.answer.text ?? `${side.answer.choice ?? '-'}번 · ${side.answer.reason ?? ''}`}</p>
-                      {side.answer.objectiveScore !== undefined && <p className="mt-2 text-xs text-slate-500">객관식 점수 {side.answer.objectiveScore}</p>}
-                      {side.answer.grade && <p className="mt-2 text-xs text-slate-500">주관식 점수 {side.answer.grade.score}/8 · {side.answer.grade.summary}</p>}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
       </section>
 
       <section className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
