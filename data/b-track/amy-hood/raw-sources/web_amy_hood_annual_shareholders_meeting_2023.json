@@ -1,0 +1,154 @@
+{
+  "sourceId": "web_amy_hood_annual_shareholders_meeting_2023",
+  "title": "Microsoft Annual Shareholders Meeting 2023",
+  "sourceType": "presentation",
+  "sourceUrl": "https://www.microsoft.com/en-us/Investor/events/FY-2024/2023-Annual-Shareholder-Meeting",
+  "sourcePath": null,
+  "collectedAt": "2026-07-13T09:23:52.137Z",
+  "sha256": "fa9e0899bfdead1462408d154727c660ea1772262e09db24ecf97993ab1a4dc1",
+  "format": "normalized_json",
+  "normalizationVersion": 2,
+  "collectionStatus": "complete",
+  "blocks": [
+    {
+      "blockId": "paragraph-104",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Thank you, Keith. Hello everyone and thank you for joining us today."
+    },
+    {
+      "blockId": "paragraph-105",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "As Sandi mentioned, we were able to deliver record results in FY23. Revenue grew 7% to over $211 billion. Non-GAAP operating income grew 8%, and non-GAAP earnings per share grew 7%. We saw strong execution as we delivered differentiated customer value and announced new AI capabilities across our products."
+    },
+    {
+      "blockId": "paragraph-106",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "To further enhance our talent and capabilities in strategic growth areas we completed four acquisitions in FY23 while continuing to invest in organic growth. We also maintained our commitment to capital return, which included a total cash return of $38.6 billion."
+    },
+    {
+      "blockId": "paragraph-107",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "In September, we announced a 10% increase in our quarterly dividend, and we continue to execute against our current $60 billion buyback authorization."
+    },
+    {
+      "blockId": "paragraph-108",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Now, I’ll share a few highlights from the past fiscal year."
+    },
+    {
+      "blockId": "paragraph-109",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Our Microsoft Cloud business surpassed $110 billion in revenue, growing 22% year over year, with strong growth across our key services. Azure grew 29%. Office 365 grew 13% and Dynamics 365 grew 24%. We delivered Microsoft Cloud gross margin percentage of 72% through the sustained efforts of our Engineering, Sales and Marketing teams, even with the impact of scaling our infrastructure to meet growing demand and continued revenue mix shift to Azure."
+    },
+    {
+      "blockId": "paragraph-110",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Our server products and cloud services business exceeded $79 billion, up 19% year over year, with strong demand for our trusted, differentiated hybrid offerings. We continue to help our customers get the most value out of their spend with our high value solutions, as they digitally transform their businesses."
+    },
+    {
+      "blockId": "paragraph-111",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Now, let’s turn to progress across Microsoft 365.",
+      "duplicateOf": "web_amy_hood_annual_shareholders_meeting_2022:paragraph-97"
+    },
+    {
+      "blockId": "paragraph-112",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Our Office business exceeded $48 billion, up 9% year over year, as we helped even more commercial and consumer users around the world be more productive, collaborative, and secure. We introduced Copilot for Microsoft 365 and look forward to helping employees unlock more productivity, starting with our enterprise customers."
+    },
+    {
+      "blockId": "paragraph-113",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Teams monthly active users exceeded 300 million during the year, and our Microsoft 365 consumer subscriber base grew to 74.9 million. Windows 11 adoption continues to grow because of its differentiated security and productivity value proposition. The number of devices running Windows 11 more than doubled in the past year, and we introduced AI-powered features with Copilot in Windows."
+    },
+    {
+      "blockId": "paragraph-114",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "We saw continued growth in our Search business as we are reshaping daily search and web habits with Copilot. We are also bringing these new AI-powered capabilities to businesses with commercial data protection. In Surface, we continue to innovate across our broad portfolio of devices, including Surface Pro, Laptop and Studio."
+    },
+    {
+      "blockId": "paragraph-115",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "In LinkedIn, revenue surpassed $15 billion in fiscal year 23, up 10% year over year, with LinkedIn Talent Solutions reaching a new revenue milestone of $7 billion, and membership grew to more than 950 million professionals during the year. And in Gaming, revenue exceeded $15 billion as we continued to grow engagement on the platform and saw more hours played on Xbox Game Pass, which is redefining how games are distributed, played and discovered."
+    },
+    {
+      "blockId": "paragraph-116",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Now, a few comments on our current fiscal year."
+    },
+    {
+      "blockId": "paragraph-117",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "First, we closed the Activision acquisition, a leader in game development and content publishing, which significantly increases our reach of gamers across console, PC and mobile. Second, we had a solid start to the fiscal year 24 as first quarter revenue growth of 13% was driven by Microsoft Cloud revenue, which was $31.8 billion, growing 24% year over year."
+    },
+    {
+      "blockId": "paragraph-118",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "These results would not be possible without the tremendous contribution of the more than 220,000 Microsoft employees around the world."
+    },
+    {
+      "blockId": "paragraph-119",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Looking forward, we believe that the highest shareholder value is created by investing for the future and creating differentiated, high-value solutions for every person and organization to achieve more."
+    },
+    {
+      "blockId": "paragraph-120",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "We remain focused on delivering three key priorities."
+    },
+    {
+      "blockId": "paragraph-121",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "First, maintaining our lead as the top commercial cloud by helping customers use the breadth and depth of the Microsoft Cloud to get the most out of their digital spend. Second investing to lead the AI platform wave across our solution areas, and finally, driving operating leverage by aligning our cost structure with our revenue growth."
+    },
+    {
+      "blockId": "paragraph-122",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "With that, please join me in welcoming our Chairman and Chief Executive Officer, Satya Nadella.",
+      "duplicateOf": "web_amy_hood_annual_shareholders_meeting_2022:paragraph-108"
+    },
+    {
+      "blockId": "paragraph-159",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And in fact, already over the past couple of quarters, we’ve talked about the percentage of our revenue in AI that’s been driven by AI across Azure. And we’re excited to be able to continue to share that growth across Microsoft 365 Copilot, which really just went into general availability less than a month ago. And so I think we’ll see both that revenue growth show across every product and I think we can expect that to build as we head to the second half of our fiscal year 24."
+    },
+    {
+      "blockId": "paragraph-171",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And I think maybe just to extend a little bit, not just to OpenAI, but to where we do have a partnership that we’ve had dating back to, I think maybe 2018. And so we’ve been working together for a long time. And I think with all of that, it helps us to push each other to always be better and innovate at a fast pace. But I would also say we’re working with lots of other companies and partners in the AI space, enabling us really to have the broadest portfolio of models available."
+    },
+    {
+      "blockId": "paragraph-172",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "To Satya’s point, we want developers to be able to come to our platform and be able to experience the best that the partners of the world have to offer. And I think that’s one of the principles we have, and I think it’s terrific for developers, and for companies of all sizes, to be able to come to us and have the confidence that they’re going to the platform that always has the most innovative choices."
+    },
+    {
+      "blockId": "paragraph-209",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And maybe, just to add, optimization has been a great topic over the last few months. But even more than that, it’s doing all the things Satya said, but also having high quality, incredible reliability, focus on serviceability, and I think being able to do all of those things. The price at which we deliver, the performance end to end, the quality at which that is done, the reliability, I think is really what I’m so proud of our own engineering teams for focusing on, because it makes a huge difference at our customers."
+    }
+  ]
+}

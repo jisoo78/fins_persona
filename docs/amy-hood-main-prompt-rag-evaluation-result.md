@@ -9,13 +9,17 @@
 
 ## 사용한 프롬프트
 
-- 파일: `agent_prompts/prompts/amy-hood-main-system-prompt.md`
+- 당시 실험 파일: `agent_prompts/prompts/amy-hood-main-system-prompt.md`
+- 현재 런타임 원본: `data/b-track/amy-hood/prompt-versions.json`이 가리키는 활성 불변 버전
+- 현재 평가기는 정적 경로 대신 활성 `prompt_version_id`와 `prompt_hash`를 결과에 기록함
 - 핵심 변화:
   - Amy Hood 1인칭 페르소나
   - 장기 관점, 플랫폼 리더십, 고객 가치 강조
   - 성장 vs 마진, 단기 vs 장기 판단 규칙 포함
   - 모르는 정보는 추측하지 않는 Unknown Policy 포함
   - RAG 근거 충실도는 명시적으로 강하게 요구하지 않음
+
+이 문서와 당시 실험 파일은 기준선 재현 자료로 보존한다. 새 실행에서 별도 정적 Prompt 파일을 런타임 원본으로 사용하지 않는다.
 
 ## 생성/채점 파일
 

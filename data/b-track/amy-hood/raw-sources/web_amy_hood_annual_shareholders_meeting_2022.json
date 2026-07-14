@@ -1,0 +1,188 @@
+{
+  "sourceId": "web_amy_hood_annual_shareholders_meeting_2022",
+  "title": "Microsoft Annual Shareholders Meeting 2022",
+  "sourceType": "presentation",
+  "sourceUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/annual-shareholders-meeting-2022",
+  "sourcePath": null,
+  "collectedAt": "2026-07-13T09:23:51.636Z",
+  "sha256": "c1e83aa57293186397ea3a30f8af527848b1d13b92312c2af69ca63e94c1729e",
+  "format": "normalized_json",
+  "normalizationVersion": 2,
+  "collectionStatus": "complete",
+  "blocks": [
+    {
+      "blockId": "paragraph-87",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Thank you, Hossein. Hello, everyone, and thank you for joining us today."
+    },
+    {
+      "blockId": "paragraph-88",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "As John mentioned, we were able to deliver record financial performance in FY22. Revenue grew 18% to over $198 billion. Operating income grew 19%, and earnings per share grew 20%. In a dynamic environment, we were able to deliver strong financial results as we continue to focus on helping our customers address their growing need to do more with less."
+    },
+    {
+      "blockId": "paragraph-89",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "To further enhance our talent and capabilities in strategic growth areas, we completed 17 acquisitions in FY22. We welcome Nuance Communications, a trusted cloud and AI software leader, to further our ambition in industry cloud solutions. We also completed the acquisition of Xandr, a leading advertising technology platform, to accelerate delivery of digital advertising and retail media solutions."
+    },
+    {
+      "blockId": "paragraph-90",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And as we continue to invest in M&A and organic growth in FY22, we also maintained our commitment to capital return, which included a total cash return of $46.6 billion, up 17% from last fiscal year."
+    },
+    {
+      "blockId": "paragraph-91",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "In September, we announced a 10% increase in our quarterly dividend. We completed our prior $40 billion buyback authorization in November 2021 and are now executing against the current $60 billion buyback authorization."
+    },
+    {
+      "blockId": "paragraph-92",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Now, I’ll share just a few highlights from the past fiscal year."
+    },
+    {
+      "blockId": "paragraph-93",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Our Microsoft Cloud business surpassed $91 billion in revenue, growing 32% year over year, with strong growth across key services. Azure grew 45%, Office 365 grew 18%, and Dynamics 365 grew 39%."
+    },
+    {
+      "blockId": "paragraph-94",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "We delivered Microsoft Cloud gross margin percentage of 70% through the sustained effort of our engineering, sales and marketing teams, even with continued revenue mix shift to Azure."
+    },
+    {
+      "blockId": "paragraph-95",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Our server products and cloud services business exceeded $67 billion, up 28% year over year, with strong customer demand for our trusted, differentiated hybrid offerings."
+    },
+    {
+      "blockId": "paragraph-96",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "From both a technology and licensing perspective, we continue to address our customers need for flexible and high-value solutions as they digitally transform and seek to build resilience and be more efficient in this environment."
+    },
+    {
+      "blockId": "paragraph-97",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Now, let’s turn to progress across Microsoft 365."
+    },
+    {
+      "blockId": "paragraph-98",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Our Office business again saw double-digit revenue growth as we helped even more commercial and consumer users around the world to be more productive, collaborative and secure. Teams monthly active users exceeded 270 million during the year, and our Microsoft 365 consumer subscription base grew to 59.7 million."
+    },
+    {
+      "blockId": "paragraph-99",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "In Windows, this year, we launched Windows 11, the biggest update to our operating system in a decade. And through the year, we saw higher monthly usage of Windows 11 applications as people continue to rely on the PC for its unique productivity capabilities, interactive experiences, and to stay connected."
+    },
+    {
+      "blockId": "paragraph-100",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And we drove share gains in our Edge browser through differentiated high-value customer experiences, including built-in shopping tools."
+    },
+    {
+      "blockId": "paragraph-101",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "In Surface, we continue to innovate across our broad portfolio of devices, including Surface Pro and laptop."
+    },
+    {
+      "blockId": "paragraph-102",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "In LinkedIn, revenue surpassed $13 billion, up 34% year over year, with both LinkedIn Talent Solutions and LinkedIn Marketing Solutions, reaching new revenue milestones of $6 billion and $5 billion, respectively, over the past 12 months. And membership grew to more than 850 million professionals."
+    },
+    {
+      "blockId": "paragraph-103",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "In Gaming, revenue exceeded $16 billion and grew 6% year over year as we sold more Series X and S consoles, life to date, than any previous Xbox console generation"
+    },
+    {
+      "blockId": "paragraph-104",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Now to our current fiscal year."
+    },
+    {
+      "blockId": "paragraph-105",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "We had a solid start to fiscal year ‘23 as first quarter revenue growth of 11% was driven by Microsoft Cloud revenue, which was $25.7 billion, growing 24% year over year. These results would not be possible without the tremendous contribution of the more than 220,000 Microsoft employees around the world."
+    },
+    {
+      "blockId": "paragraph-106",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Looking forward, we believe that the highest shareholder value is created by investing for the future and creating differentiated high value solutions for every person and organization to achieve more. We continue to see strong demand for our products and services, and increased commitment to our platform as we remain focused on delivering compelling customer value in this dynamic environment, resulting in continued share gains."
+    },
+    {
+      "blockId": "paragraph-107",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And while we continue to help our customers do more with less, we will do the same internally, maintaining intense focus on operational excellence and execution discipline."
+    },
+    {
+      "blockId": "paragraph-108",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "With that, please join me in welcoming our Chairman and Chief Executive Officer, Satya Nadella."
+    },
+    {
+      "blockId": "paragraph-150",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "this is something we’ve actually done for, gosh, over a decade now, and in particular as you think about what makes Microsoft special. We have a diverse business model, diverse end markets and diverse customer segments, both in terms of how big a business is, individuals, right, and – well, around the globe. And so we’ve always had, I think, some pretty good practice at investing across technology transitions, investing with an understanding of not every geography around the world currently is experiencing the recession the same way."
+    },
+    {
+      "blockId": "paragraph-151",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Some are really thriving. Some have different pressures. Some consumers are behaving differently. And so the art form, I think for the management team, all of us at Microsoft, is really about investing in where we’re going to create the most strategic value over the long term. And that can, of course, bring some short-term cost pressure, right? Because you always want to make sure you’re investing both in the right thing and doing it smartly for the short term and understanding what the current revenue growth is."
+    },
+    {
+      "blockId": "paragraph-152",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "I think we’ve done a nice job of that, making sure we’re investing in AI, making sure we’re investing in some of the digital transformation ideas that Satya talked about, making sure we’re investing in making Windows 11 a great experience, investing in security, investing in the technologies, frankly, that our customers are expecting us to deliver, and that requires a consistency, especially in engineering, in terms of having a commitment to the roadmap we’ve talked about with our customers."
+    },
+    {
+      "blockId": "paragraph-153",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And on the sales and marketing side, we’ve always been careful to make sure that we’re investing in a way that revenue grows. And so I think sometimes people view this as an \"or,\" \"are you investing, or are you good at managing costs,\" and it’s really about doing both, making sure you’re pivoting your resources all the time in a dynamic way."
+    },
+    {
+      "blockId": "paragraph-154",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Technology moves quickly. We’re a company that wants to move quickly. Our customers expect us to move quickly. And so we need to move our resources in that same way to make sure we’ve got it in the right spots. And that’s what we’re doing."
+    },
+    {
+      "blockId": "paragraph-181",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "No, but I do think it’s especially important. I think when people get asked, gosh, when things are harder, is there a different trade, is this too much to be doing? And that’s the nature of the shareholder question. And I think Brad’s right, it’s a great question to ask."
+    },
+    {
+      "blockId": "paragraph-182",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "But to Brad’s point, when you get sort of asked, what are your priorities, if it’s mission aligned, it helps customers, and it creates opportunity for Microsoft to build its own success. That’s still at the top of what we should be prioritizing. And many of the things Brad just talked about will continue to be, because they’re durable, and they’re durable benefits across all the sort of pillars Brad outlined. And if they’re durable across our customers, no matter if that’s an individual or a government or the largest enterprises, whether that’s our employees around the world, or whether it’s our shareholders as the other pillar, what benefits one tends to benefit all, if it’s mission focused for us."
+    }
+  ]
+}

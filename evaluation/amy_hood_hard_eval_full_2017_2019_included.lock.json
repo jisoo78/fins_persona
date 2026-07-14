@@ -4,7 +4,7 @@
   "subject": "Amy Hood",
   "role": "CFO / finance decision persona",
   "evaluation_goal": "Evaluate whether RAG and GraphRAG can recover Amy Hood's past decision logic, apply it to unseen future scenarios, and preserve CFO-like decision similarity under missing-data conditions.",
-  "questions_path": "/Users/choijisoo/Downloads/decision/evaluation/amy_hood_hard_eval_questions_15.json",
+  "questions_path": "evaluation/amy_hood_hard_eval_questions_15.json",
   "generated_at": "2026-07-08T06:26:15.886Z",
   "retrieval": {
     "method": "local_bge_m3_vector_retrieval",

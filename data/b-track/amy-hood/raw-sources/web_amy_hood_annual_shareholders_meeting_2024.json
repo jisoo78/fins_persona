@@ -1,0 +1,158 @@
+{
+  "sourceId": "web_amy_hood_annual_shareholders_meeting_2024",
+  "title": "Microsoft Annual Shareholders Meeting 2024",
+  "sourceType": "presentation",
+  "sourceUrl": "https://www.microsoft.com/en-us/investor/events/fy-2025/2024-annual-shareholder-meeting",
+  "sourcePath": null,
+  "collectedAt": "2026-07-13T09:23:52.579Z",
+  "sha256": "2640af5909392f0092ec554dd729af3ccc84fd1f3b1de8b7804b4555efdb4f34",
+  "format": "normalized_json",
+  "normalizationVersion": 2,
+  "collectionStatus": "complete",
+  "blocks": [
+    {
+      "blockId": "paragraph-78",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Thank you, Keith. Hello, everyone, and thank you for joining us today. As Sandi mentioned, we delivered another year of record results in FY24. Revenue grew 16% to over $245 billion, non-GAAP operating income grew 22%, and non-GAAP earnings per share grew 20%. We continue to help our customers create growth opportunities, as well as productivity and efficiency gains, through our portfolio of innovative solutions. To stay aligned with our growing demand for our cloud and AI services, we significantly increased our capital expenditure. We are committed to investing in the long-term revenue growth opportunity and growing our lead in the AI platform wave."
+    },
+    {
+      "blockId": "paragraph-79",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "To further enhance our capabilities in strategic growth areas, we completed the acquisition of Activision in FY24. Activision is a leader in game development and content publishing, which significantly increases our reach of gamers across console, PC, and mobile. As we continued to invest in M&A and organic growth, we also maintained our commitment to capital return, which included a total cash return of $34.3 billion. In September, we announced a new $60 billion buyback authorization, as well as a 10% increase in our quarterly dividend."
+    },
+    {
+      "blockId": "paragraph-80",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Now, I’ll share a few highlights from the past fiscal year. Our Microsoft cloud business surpassed $135 billion in revenue, growing 23% year over year with growth across our key services. Azure grew 30%, office 365 grew 16%, and Dynamics 365 grew 24%. We delivered Microsoft Cloud gross margin percentage of 71% through our sustained efforts of our engineering, sales, and marketing teams, even with the impact of scaling our AI infrastructure to meet growing demand. Our server products and cloud services business exceeded $97 billion, up 22% year over year, with strong demand for our trusted, differentiated hybrid offerings. We continue to help our customers digitally transform their businesses and realize the benefits of AI with our high-value solutions."
+    },
+    {
+      "blockId": "paragraph-81",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Now. Let’s turn to progress across Microsoft 365. Our Office business exceeded $54 billion, up 12% year over year, as we helped even more commercial and consumer users around the world be more productive, collaborative, and secure. We launched M365 Copilot and are transforming the way people work as commercial users complete tasks faster, hold more effective meetings, and automate business workflows and processes. Additionally, our M365 consumer subscriber base grew to 82.5 million, and we added AI capabilities to drive even more productivity and creativity for our consumer users."
+    },
+    {
+      "blockId": "paragraph-82",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "In Windows, we continue to innovate with a focus on performance, productivity, and security. The number of devices running Windows 11 increased 50% year over year, and we launched Copilot+ PC, the fastest, most intelligent Windows PCs ever. Surface plays a key role in the Windows ecosystem, and with the launch of the new Surface Pro and laptop, we’re delivering new AI experiences. We saw continued growth in our search business, with share gains across Bing and Edge as we drove more engagement and value for users, publishers, and advertisers. In LinkedIn, revenue surpassed $16 billion, and membership grew to a new record of more than 1 billion professionals. In gaming revenue exceeded $21 billion, inclusive of Activision. We continued to grow engagement with over 500 million monthly active users across platforms and devices."
+    },
+    {
+      "blockId": "paragraph-83",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Now, just a few comments on our current fiscal year. First, as we do at the start of each fiscal year, we updated our investor metrics based in part on feedback from all of you. The primary change is that we brought revenue from the components of M365 Commercial together in the Productivity and Business Processes segment, to align with how the business is managed. M365 commercial includes revenue from Office Commercial, Enterprise Mobility and Security, and Windows Commercial. As a result of this change, we now disclose the cloud portion as an investor metric named M365 Commercial Cloud Revenue Growth."
+    },
+    {
+      "blockId": "paragraph-84",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Second, we had a solid start to fiscal year 25, as first quarter revenue growth of 16% was driven by Microsoft Cloud revenue, which was $38.9 billion, growing 22% year over year. These results would not be possible without the tremendous contributions of the more than 225,000 Microsoft employees around the world. Looking forward, we believe that the highest shareholder value is created by investing for the future and creating differentiated, high-value solutions for every person and organization to achieve more. We will continue to invest in the cloud and AI opportunity ahead, ensuring we stay aligned to the demand signals we see. We are committed to growing our leadership across commercial cloud and within that, the AI platform, and we feel well positioned as we start FY25."
+    },
+    {
+      "blockId": "paragraph-159",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Of course. That’s a question I tend to get pretty frequently as well as on the earnings calls, but it’s always great to have another chance to explain our optimism."
+    },
+    {
+      "blockId": "paragraph-160",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "When we’ve really thought about what it takes to do what Satya said, which is build the leading platform for AI, what that requires is a meaningful capital investment to build that infrastructure, and more importantly, to build it on a global basis so that it’s accessible to people around the world, which means that we need to make a significant investment to be able to keep up with the demand we’re seeing from customers and from our partners, many of which Satya mentioned earlier."
+    },
+    {
+      "blockId": "paragraph-161",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And so, what’s critical for us is that in order to be a leader, it’s a requirement to build out this platform and to do so in a way that keeps and makes us the leading commercial cloud. And when you talk about the return on that, I think one of the most encouraging things is that we’re already on pace, which we talked about in our last earnings call, to reach a $10 billion annual revenue run rate from AI, which is the fastest we’ve ever reached that benchmark for any product that we’ve ever shipped."
+    },
+    {
+      "blockId": "paragraph-162",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And when I look back and compare this, in some ways, to the cloud wave that we talked about – I know it seems like forever ago, but it’s really been a little over a decade and a half – these same transitions were the questions we were being asked then. And I think our confidence comes from the capabilities that we built in that last wave, along with much of the fundamental research work that we’ve partnered and invested in. And when you combine those two things, plus our leadership in commercial cloud today, I think we do feel quite confident in the return on invested capital we’ll see from these investments."
+    },
+    {
+      "blockId": "paragraph-172",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Oh, it’s a good question, and I know there was a conversation on it earlier today. And I think it’s important to step back and realize that almost a decade ago, actually, maybe a little over, we first started accepting cryptocurrency as a form of payment from our customers. And that was in 2014, and we continue to do that today. And we are amongst one of the very early companies to realize and accept this, after listening to customers say, hey, is this a form of consideration that you would consider? And the answer was, of course."
+    },
+    {
+      "blockId": "paragraph-173",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And as we continue to think about the evolution of crypto, we’ve also thought about it as an asset class. We talked about that earlier. Our Treasury team, along with reviews with the Board of Directors, looks at all the asset classes available to us. It’s important to remember our criteria and our goals of our balance sheet and for the cash balances, importantly, is to preserve capital, to allow a lot of liquidity to be able to fund our operations and partnerships and investments, a little bit like what Brad mentioned in terms of being able to make investments in power or investments in corporations or to build data centers. Liquidity is also a really important criteria for us, as well as generating income."
+    },
+    {
+      "blockId": "paragraph-174",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "With those three goals, we look across asset classes, including cryptocurrency as a form of investment. It’s something we cover with the Board consistently and continue to assess different categories year to year, if our goals were to change."
+    },
+    {
+      "blockId": "paragraph-183",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "I was guessing this one might come to me. Sure. This is actually related in many ways to the question we got earlier, but first and foremost, when I think about company margins, I always start at the top of the P&L, which is our focus on revenue growth."
+    },
+    {
+      "blockId": "paragraph-184",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "If you’re going to be an innovator and you’re going to invest in the next wave of technology, the most important thing we can do is build terrific products that bring a ton of value to customers. If we do that and they’re meaningfully differentiated, you’ll have and see revenue growth."
+    },
+    {
+      "blockId": "paragraph-185",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And that’s why I talked a little bit earlier about reaching that initial benchmark for AI driven revenue. Being able to see that early adoption and build on that momentum is a is the incredibly strong start we need."
+    },
+    {
+      "blockId": "paragraph-186",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Then you ask, as you go down the P&L to gross margin, and we really focus a lot here on making sure every product operates as efficiently and effectively as it can. In finance terms, that’s called gross margin and the effectiveness of being the best person at delivering a unit of compute, with security, with quality, and with cost effectiveness. In that order, importantly, and if we do that, we really can focus on building strength in the gross margin category."
+    },
+    {
+      "blockId": "paragraph-187",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And then of course, you spend operating costs. Operating costs are about building the next wave of innovation and continuing to invest there is important."
+    },
+    {
+      "blockId": "paragraph-188",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Now, what you’ve seen us do, I think, over the past couple of years, is really focus on being innovative and efficient, and being able to do both of those at the same time. I think a lot of people say that’s an or, but at this company it’s an and, because being able to be efficient is about delivering the most security, the most quality, and the most differentiation in the most effective way we can. And in fact, employees prefer to work that way in an effective, focused organization."
+    },
+    {
+      "blockId": "paragraph-189",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And so when you think about all of those things, it means you have revenue growth. You’re the most effective deliverer of a unit of that revenue, which is gross margin. And you prioritize effectively, which is really about delivering operating leverage. So we continue to remain focused on that."
+    },
+    {
+      "blockId": "paragraph-190",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "You’ll see downward pressure due to the mix to cloud, but the offset to that is our incentive to create and create an effective and efficient organization. That really is a place that, frankly, the best in the world choose to work."
+    },
+    {
+      "blockId": "paragraph-205",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Thanks, Brett. I know this question does get asked a lot, especially in this meeting format, which we’re thankful for, to be able to hear from everyone. It’s a really important concept for us that I know we really do appreciate the feedback."
+    },
+    {
+      "blockId": "paragraph-206",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "When it comes to stock splits, it’s an important topic for us, and the Board of Directors takes up this topic along with other corporate governance topics on a consistent basis. And the most important consideration for a stock split for us is continue to be making sure we feel that the shares are accessible to retail shareholders, and I do think that remains our top consideration and will continue to look at this in the coming months and year."
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "sourceId": "web_amy_hood_microsoft_linkedin_conference_call",
+  "title": "Microsoft and LinkedIn Conference Call",
+  "sourceType": "conversation",
+  "sourceUrl": "https://news.microsoft.com/speeches/microsoft-and-linkedin-conference-call-chris-suh-satya-nadella-jeff-weiner-amy-hood-brad-smith/",
+  "sourcePath": null,
+  "collectedAt": "2026-07-13T09:23:53.358Z",
+  "sha256": "13fe065ecb2dbcd23fc560886fb46bb99ed01ad6865f94b9add6ee2a01875919",
+  "format": "normalized_json",
+  "normalizationVersion": 2,
+  "collectionStatus": "complete",
+  "blocks": [
+    {
+      "blockId": "paragraph-54",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Thanks, Brad."
+    },
+    {
+      "blockId": "paragraph-55",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "As you’ve heard from Satya and Jeff, we’re excited about the new scenarios that are only possible as we connect the professional world. And we’re confident that our joint product and go-to-market opportunities accelerate long-term growth and new complementary addressable markets."
+    },
+    {
+      "blockId": "paragraph-56",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Let me first speak to a few details of the transaction. Under the terms of the definitive agreement, we’ve agreed to acquire LinkedIn for $196 per share in an all-cash transaction that is approximately $26 billion inclusive of LinkedIn’s net cash."
+    },
+    {
+      "blockId": "paragraph-57",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "The transaction has been unanimously approved by the boards of directors of both Microsoft and LinkedIn. And Reid Hoffman, the chairman, co-founder, and controlling shareholder of LinkedIn, has stated he will vote all his shares in accordance with their board’s recommendation."
+    },
+    {
+      "blockId": "paragraph-58",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "We expect the transaction to close by the end of the calendar year during the second quarter of our Fiscal ’17 subject to approval by LinkedIn shareholders, and the satisfaction of certain regulatory approvals and other customary closing conditions. We will finance this transaction primarily through new debt issued prior to close, which we intend to raise opportunistically during favorable market windows."
+    },
+    {
+      "blockId": "paragraph-59",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Our primary objective with the combination is to accelerate our top line growth across LinkedIn’s core business as well as Office 365 and Dynamics. Additionally, we expect at least $150 million annually in cost synergies as we naturally combine two public company entities."
+    },
+    {
+      "blockId": "paragraph-60",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Near-term in Microsoft’s Fiscal ’17 and ’18, we anticipate this transaction will be slightly dilutive, about 1 percent, to non-GAAP EPS based on the expected close date. By FY ’19, and less than two years after close, we expect the transaction to be accretive to non-GAAP EPS. In this context, non-GAAP does include stock-based compensation expense consistent with Microsoft’s reporting treatment, but excludes the anticipated impact of purchase accounting adjustments, as well as integration- and transaction-related expenses. We’ll provide an update on the EPS impact after the transaction closes."
+    },
+    {
+      "blockId": "paragraph-61",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Now let me turn to the topic of capital allocation. We will continue with our approach, which is to balance our high-priority investments to drive our long-term growth and to meet our commitment to return cash to our shareholders. We will continue our share repurchase plan, and today reiterate our intention to complete the current $40 billion authorization by the end of the calendar year on the same time frame as previously committed."
+    },
+    {
+      "blockId": "paragraph-62",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "We currently plan our reporting results for LinkedIn post acquisition in our Productivity and Business Processes segment. Additionally, we will introduce relevant key performance indicators nearer to the close consistent with our treatment of other businesses."
+    },
+    {
+      "blockId": "paragraph-63",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "As both Satya and I have said consistently, we evaluate new markets and opportunities through three lenses. First, we ask ourselves whether an opportunity will expand our addressable market, and does that TAM have structural tailwind? Second, does this then align with our core business and overall sense of purpose where we can take a leadership role? And, finally, with our ownership, can we generate meaningful revenue and profit growth? The addition of LinkedIn to Microsoft meets this high bar."
+    },
+    {
+      "blockId": "paragraph-64",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "With that, let me turn it back to Satya."
+    }
+  ]
+}

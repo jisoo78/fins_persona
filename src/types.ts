@@ -1,11 +1,12 @@
 export type TabType =
   | 'dashboard'
-  | 'pre-interview'
-  | 'interview'
-  | 'personas'
-  | 'persona-detail'
-  | 'evaluation'
+  | 'a-track'
+  | 'b-track'
   | 'settings';
+
+export type ATrackSection = 'pre-interview' | 'deep-interview' | 'personas';
+
+export type BTrackSection = 'main-prompt' | 'question-review' | 'evaluation-run' | 'reports';
 
 export type RoleType = '전략' | '재무' | '인사' | '운영' | '레드팀' | '커스텀' | '기술 혁신';
 

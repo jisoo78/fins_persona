@@ -1,0 +1,216 @@
+{
+  "sourceId": "web_amy_hood_annual_shareholders_meeting_2025",
+  "title": "Microsoft Annual Shareholders Meeting 2025",
+  "sourceType": "presentation",
+  "sourceUrl": "https://www.microsoft.com/en-us/investor/events/fy-2026/2025-annual-shareholder-meeting",
+  "sourcePath": null,
+  "collectedAt": "2026-07-13T09:23:52.986Z",
+  "sha256": "54ac40bd6f7f70d367fbf8ef720f17e76abb94f98fb039a138f4938ffeaa8316",
+  "format": "normalized_json",
+  "normalizationVersion": 2,
+  "collectionStatus": "complete",
+  "blocks": [
+    {
+      "blockId": "paragraph-83",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Thank you, Keith. Hello, everyone, and thank you for joining us today."
+    },
+    {
+      "blockId": "paragraph-84",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "As Sandi mentioned, we delivered another year of record results in FY25. Revenue grew 15% to over $281 billion. Operating income grew 17% and earnings per share grew 16%. We continue to innovate in areas that deliver increasing value for our customers, empowering them to achieve more and drive meaningful impact in their organizations."
+    },
+    {
+      "blockId": "paragraph-85",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And we are committed to growing our leadership in AI as we invest in capacity needs across Azure, first-party apps and AI solutions, our own R& D efforts and end-of-life server replacements. We also continue to invest in organic growth and maintain our commitment to capital return, which included a total cash return of $37.7 billion in FY25, up 10% from last fiscal year. In September, we announced a 10% increase in our quarterly dividend, and we continue to execute against our current $60 billion buyback authorization."
+    },
+    {
+      "blockId": "paragraph-86",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Now, I’ll share a few highlights from the past fiscal year.",
+      "duplicateOf": "web_amy_hood_annual_shareholders_meeting_2023:paragraph-108"
+    },
+    {
+      "blockId": "paragraph-87",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Our Microsoft Cloud business surpassed $168 billion in revenue, growing 23% year over year, with growth across key services. Azure grew 34% to over $75 billion. Microsoft 365 Commercial Cloud grew 15%, and Dynamics 365 grew 19%. We delivered Microsoft Cloud gross margin percentage of 69% through the sustained efforts of our engineering, sales and marketing teams, even with the impact of scaling our AI infrastructure to meet growing demand."
+    },
+    {
+      "blockId": "paragraph-88",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Our server products and cloud services business exceeded $98 billion, up 23% year over year, with strong demand for our trusted, differentiated hybrid offerings. We continue to deliver high-value solutions that help customers accelerate their digital transformations and realize the benefits of AI."
+    },
+    {
+      "blockId": "paragraph-89",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Now, let’s turn to progress across Microsoft 365.",
+      "duplicateOf": "web_amy_hood_annual_shareholders_meeting_2022:paragraph-97"
+    },
+    {
+      "blockId": "paragraph-90",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Our Microsoft 365 business across both commercial and consumer exceeded $95 billion, up 14% year over year, as we helped even more users around the world be more productive, collaborative and secure. We rolled out our biggest update to M365 Copilot to date, and continue to see customers adopt Copilot faster than any other new Microsoft 365 suite. Additionally, our M365 consumer subscription base grew to 89 million."
+    },
+    {
+      "blockId": "paragraph-91",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "In Windows, we’re seeing momentum as customers prioritize enhanced security and best-in-class AI capabilities. Commercial deployments of Windows 11 grew more than 75% year over year, and we’re now bringing Copilot to every Windows 11 PC, natively built in as part of the Windows experience."
+    },
+    {
+      "blockId": "paragraph-92",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "We continue to grow our Search business, gaining share across both Bing and Edge. With Copilot Mode now available in Edge, we’re transforming our browser into an AI experience that goes beyond traditional browsing."
+    },
+    {
+      "blockId": "paragraph-93",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "In LinkedIn, revenue surpassed $17 billion and membership grew to 1.2 billion professionals, marking four consecutive years of double-digit member growth. And in Gaming, revenue exceeded $23 billion with Game Pass revenue reaching nearly $5 billion for the first time. We finished the year as the top publisher on both Xbox and PlayStation, driven by strong performance from our first-party portfolio."
+    },
+    {
+      "blockId": "paragraph-94",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Now, a few comments on our current fiscal year.",
+      "duplicateOf": "web_amy_hood_annual_shareholders_meeting_2023:paragraph-116"
+    },
+    {
+      "blockId": "paragraph-95",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "We had a solid start to Fiscal Year ‘26, as 1st quarter revenue growth of 18% was driven by Microsoft Cloud revenue, which was $49 million, growing 26% year over year. Looking forward, we believe that the highest shareholder value is created by investing for the future and created differentiated, high-value solutions for every person and organization to achieve more. We will continue to invest in security, quality and AI innovation aligned to the demand signals we see."
+    },
+    {
+      "blockId": "paragraph-96",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "We are excited about FY26, as we lead in this next frontier of innovation, driving impact at scale for every customer, every partner and every community we serve around the world."
+    },
+    {
+      "blockId": "paragraph-97",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "With that, please join me in welcoming our Chairman and Chief Executive Officer, Satya Nadella,"
+    },
+    {
+      "blockId": "paragraph-159",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Of course. To maybe build on where Satya started, which is that if you think about the opportunity and the addressable market of AI, there’s the expansive layer at the platform, there’s the expansive app server layer where developers will build applications that benefit every industry, and maybe even new industries that get built, and then there’s the application layer and first-party needs that we have to run our Copilot across M365, GitHub, healthcare solutions as Satya talked about, and for consumers and commercial customers of all sizes."
+    },
+    {
+      "blockId": "paragraph-160",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And so, if you think about you’ve got this expanding opportunity at every layer, what it really means is we’ve seen a very large surge in demand, and we’ve been talking about, and I think it’s important to ground that this is a demand-driven spending. We often do spend to ahead of opportunity. That’s what innovation teaches us to do. But you also spend when you see demand, and it’s resonating and growing."
+    },
+    {
+      "blockId": "paragraph-161",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "This is best thought of as the combination of those two. We’re investing for innovation and pushing the frontier. We’re also investing to make sure we can meet the surging demand that we’ve seen."
+    },
+    {
+      "blockId": "paragraph-162",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And I think in some ways, we’ve talked about this over the past couple quarters. Every time we think we’re getting close to meeting demand, demand increases again. And so, what you’re seeing is this capital that we’re spending is being spent to both meet and hopefully, get ahead of the demand growth we’re seeing."
+    },
+    {
+      "blockId": "paragraph-163",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And then the return we expect to earn on that, I feel quite confident on. We’ve been through these transitions before. And in fact, if you think about what makes this AI transition, in many ways, similar to the cloud transition from, I guess it’s almost been a decade and a half, two decades ago at this point, is that you’re seeing margins actually be better at this point in the AI cycle than they were at this point in the cloud transition cycle that we went through."
+    },
+    {
+      "blockId": "paragraph-164",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "We’re also seeing demand happen much faster, and you’re seeing broad based demand. It’s not just from one customer, it’s from a long tail of customers and adoption. And when you see those type of signals, and you see differentiation in our products and services, whether that’s in Azure or M365, that’s where you start to see returns."
+    },
+    {
+      "blockId": "paragraph-165",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And so, I’m encouraged by the early progress. I’m encouraged by the improvements in gross margins we’re already seeing. I’m encouraged by customer demand. We have about $400 billion, as we talked about at the quarter close, of committed contracts that we needed to deliver against. And so, being able to spend these dollars, get it revenue ready, get customers the value they’re seeking from this platform, I feel very good about the return profile."
+    },
+    {
+      "blockId": "paragraph-193",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Sure. I would start by saying that that is right. We have generated and continue to generate significant free cash flow. And one of the most important things, I always think, is our commitment to long-term growth, for our shareholders, for our employees, our partners, our customers. And you start with that, which I think forms the basis of how we approach, the first answer is always to look to invest in yourself, invest in talent, invest in the computing resources they need to be able to invent and grow and create."
+    },
+    {
+      "blockId": "paragraph-194",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And so, as we’ve talked about, I think even as recently as our Q1 earnings call, we talked a lot about the need to make sure we start there, especially when the opportunity is so vast. When you have a vast opportunity, and you have a really strong feeling about your competitive position in the AI platform wave, I think it’s really important that we always start with saying, let’s invest where we can generate the highest long-term shareholder return, and that is in ourselves."
+    },
+    {
+      "blockId": "paragraph-195",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Think about that primarily as being an investment in research and development, in our core engineering culture and technical acumen, to be able to build all the tools and the examples that were just discussed. It’s also an investment in the local resources that are needed, the development of data centers around the world to serve governments and customers. Being able to invest there is critical."
+    },
+    {
+      "blockId": "paragraph-196",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "I put that in one big bucket, which says the first thing is long-term growth. That means invest in yourself, and that remains our number one priority."
+    },
+    {
+      "blockId": "paragraph-197",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "After that, we are lucky to be able, given our growth and our position, and have been very committed to shareholder return as well. We obviously start with the dividend. Dividend is a commitment we make. And every time we make that commitment, it’s viewed as a long-term commitment, and we’ve been able to increase that dividend every year now for a while. That’s maybe the second bucket."
+    },
+    {
+      "blockId": "paragraph-198",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And then finally, because it’s a very flexible tool for us, is buyback. And I think you’ve seen that be more opportunistic, which it always will continue to be. And that’s the right place for the buyback to exist."
+    },
+    {
+      "blockId": "paragraph-218",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Thank you.",
+      "duplicateOf": "earnings_fy2022_q4:turn-33"
+    },
+    {
+      "blockId": "paragraph-219",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "END"
+    },
+    {
+      "blockId": "paragraph-220",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Microsoft Corp (MSFT)"
+    },
+    {
+      "blockId": "paragraph-221",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "VIEW ONLINE"
+    },
+    {
+      "blockId": "paragraph-222",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "DOWNLOAD NOW"
+    }
+  ]
+}

@@ -46,6 +46,8 @@ AMY_HOOD_JUDGE_TEMPERATURE="0"
 
 필요하면 `RAG_EVAL_USE_LLM=true npm run rag:evaluate:decision-similarity`로 LLM 직접 답변 생성을 켤 수 있다.
 
+실행기는 `server/evaluation/decisionSimilarityBaseline.ts`로 격리되어 있으며, B Track Prompt 버전 저장소의 현재 활성 버전을 읽는다. 별도 정적 Prompt 경로 fallback은 사용하지 않는다.
+
 기본 경로에서는 bge-m3와 Cohere reranker가 고른 근거를 바탕으로 Amy Hood식 판단 신호에 가까운 선택지를 고르고 답변을 생성한다.
 
 - 객관식 답변은 `선택: B. ...` 형식으로 시작한다.

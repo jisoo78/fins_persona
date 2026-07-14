@@ -4,13 +4,13 @@
   "subject": "Amy Hood",
   "role": "CFO / finance decision persona",
   "evaluation_goal": "정답지가 있는 질문으로 생성된 Amy Hood 페르소나가 실제 Amy Hood의 재무 의사결정 기준과 얼마나 유사한지 평가한다.",
-  "questions_path": "/Users/choijisoo/Downloads/decision/evaluation/amy_hood_decision_similarity_answer_key_15.json",
+  "questions_path": "evaluation/amy_hood_decision_similarity_answer_key_15.json",
   "generated_at": "2026-07-14T02:30:55.057Z",
   "retrieval": {
     "method": "local_bge_m3_vector_retrieval",
     "reranker": "cohere",
     "generation_mode": "local_llm",
-    "system_prompt_path": "/Users/choijisoo/Downloads/decision/agent_prompts/prompts/amy-hood-main-system-prompt.md",
+    "prompt_source": "legacy_static_artifact:agent_prompts/prompts/amy-hood-main-system-prompt.md",
     "document_count": 1448,
     "chunk_count": 2377,
     "persona_evidence_count": 18

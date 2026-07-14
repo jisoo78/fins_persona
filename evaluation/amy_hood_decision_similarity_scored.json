@@ -2,8 +2,8 @@
   "evaluation_name": "Amy Hood decision similarity evaluation",
   "subject": "Amy Hood",
   "dataset": "amy_hood_decision_similarity_answer_key_20260708",
-  "answer_key_path": "/Users/choijisoo/Downloads/decision/evaluation/amy_hood_decision_similarity_answer_key_15.json",
-  "rag_answer_path": "/Users/choijisoo/Downloads/decision/evaluation/amy_hood_decision_similarity_general_rag_answers.lock.json",
+  "answer_key_path": "evaluation/amy_hood_decision_similarity_answer_key_15.json",
+  "rag_answer_path": "evaluation/amy_hood_decision_similarity_general_rag_answers.lock.json",
   "method": "general_rag",
   "retrieval": {
     "method": "local_bge_m3_vector_retrieval",

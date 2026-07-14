@@ -1,0 +1,166 @@
+{
+  "sourceId": "web_amy_hood_ai_discussion_with_kevin_scott",
+  "title": "AI Discussion with Amy Hood and Kevin Scott",
+  "sourceType": "conversation",
+  "sourceUrl": "https://www.microsoft.com/en-us/Investor/events/FY-2023/AI-Discussion-with-Amy-Hood-EVP-and-CFO-and-Kevin-Scott-EVP-of-AI-and-CTO",
+  "sourcePath": null,
+  "collectedAt": "2026-07-13T09:23:51.058Z",
+  "sha256": "548f88379df34ad29081a4190b50efdddcf2b97eb9eec4191f32427948b62665",
+  "format": "normalized_json",
+  "normalizationVersion": 2,
+  "collectionStatus": "complete",
+  "blocks": [
+    {
+      "blockId": "paragraph-5",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Welcome everyone. I'm Amy Hood, the Chief Financial Officer here at Microsoft, and I'm here with Kevin Scott, our Executive Vice President of AI, and our Chief Technology Officer. And I just wanted to welcome Kevin to talk directly with investors because, given the significance of the next generation AI, and our leadership position in this AI era, we wanted to spend some time talking more about this after the myriad of questions that we've gotten both in meetings and from investors on conference calls."
+    },
+    {
+      "blockId": "paragraph-6",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And I think this can help frame the growth opportunity ahead, really speaking with what I consider to be the person in charge of running the show here."
+    },
+    {
+      "blockId": "paragraph-7",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "So, with that, let's jump right in. So, the first question, and it gets asked this way to me, Kevin, so I'll ask it the same way to you, which is, listen, we've seen multiple hype cycles in tech: crypto, metaverse. So how transformative will next-generation AI really be?"
+    },
+    {
+      "blockId": "paragraph-15",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "This is an interesting one, Kevin, too, because I would say from my perspective in talking to customers, it's showing up in every conversation, and they aren't asking about the hype. It's very different."
+    },
+    {
+      "blockId": "paragraph-16",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "They're asking, \"Hey, listen, how quickly,\" based on really what you just said, is that it makes it so much more approachable for problem-solving, real problems that people in every seat in an organization feel and see opportunity in. And so, I think they're more asking when they can deploy it far more than, \"Gosh, is this a real thing or not?\""
+    },
+    {
+      "blockId": "paragraph-17",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "So yeah, it certainly resonates, and given this broad sort of excitement, what should investors know about our AI strategy, and what differentiates that really? I think the amount of news, sheer news, that's come out in the past, it feels like a very long time, but it's really only been three or four months. Maybe you can help distill that difference of what our plan is and what makes that different."
+    },
+    {
+      "blockId": "paragraph-21",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "I think what's interesting about how you talked about it, Kevin, is that because this platform is really, it's who we are, it's how we approach every problem as a company, people should think about our approach to AI being incredibly similar to that."
+    },
+    {
+      "blockId": "paragraph-22",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And that, I thought, and I would encourage investors to go back and look at the Build keynotes, because this key aspect is that there's every layer of the platform will be built with this in mind. And I think in particular, certain things really resonated. Microsoft Fabric is an example, right? That really resonated and broke through about what's really different."
+    },
+    {
+      "blockId": "paragraph-23",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "I think for me it's also that it's hard sometimes to capture what these large technological transformations happen. I think you and I would say this is sort of a generational moment in terms of watching the innovation that's showing up across the world, across companies of all sizes. I think that's probably what makes it most exciting and in particular for, I think, developers last week. I mean, that's certainly a changing perspective."
+    },
+    {
+      "blockId": "paragraph-24",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And I always tell people you think, oh, about a platform. Well, then this audience always asks me, \"Well, where does revenue show up?\" It really comes from two places, right? There's the tools and services that customers will use, right, to build AI apps and services. They'll run the Azure OpenAI APIs, they'll run on our Azure infrastructure. And then to your point, it's going to be built into every Microsoft Cloud solution. Everyone. So, whether it's announced or not announced, whether it's named Copilot or not, it'll be that same aspect. There'll be something that shows up that's AI enabled. And I think that's the reason this'll be our sort of the next generation AI business will be the fastest growing $10 billion business in our history. I think I have that confidence because of the energy we're seeing."
+    },
+    {
+      "blockId": "paragraph-27",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And that's really been a hallmark of almost any big technology shift is you both have technical transformation, platform transformation, and business model innovation. And I think it is always exciting. Having lived through maybe the first transition to the cloud that you and I were around for, the second one, I think, in some ways, investors ask me, \"Gosh, I'm so worried about all the money it takes to invest in these.\""
+    },
+    {
+      "blockId": "paragraph-28",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And I try to remind people, as a company, we're in a very different spot. We're leading this cycle. We understand how to run at-scale cloud businesses. And you said something really important earlier, which is we've built a single platform from the ground up effectively, that's used consistently under every service. That's not where frankly we were a decade ago in terms of reusability and fungibility. So, I do think, of course, we'll see scaled CapEx, and there'll be COGS growth associated with that, but we'll also be in a far better spot than we started from. And the ability to leverage that and the confidence we're feeling from customers on demand, I feel quite optimistic about that."
+    },
+    {
+      "blockId": "paragraph-30",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Yeah, and I think that for you and I, puts our head in a different spot in terms of talking to customers and what we see from developers too."
+    },
+    {
+      "blockId": "paragraph-31",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Another question I get a lot, from both investors and customers, is our view on, I think really a topic that we read a lot: ethics, regulation, the overall safety when it comes to what AI is really capable of. And what can you share on these topics and the work we've already done with our responsible AI principles. Because I know this is one of the key components that you think about every day in the scene."
+    },
+    {
+      "blockId": "paragraph-36",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And I think important in what you said is that, listen, we're not waiting for regulation to take this proactive approach to responsibility, and, I think, going through the process of that. But I've heard you also mention that the regulation is needed, and we've said that as a company. And how do you talk about that in your conversations?",
+      "duplicateOf": "interview_dataset_microsoft_amy_hood_csv:record-14"
+    },
+    {
+      "blockId": "paragraph-38",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Yeah, I think that's an interesting way of thinking about it. The other thing I get asked a lot of from customers is the focus on privacy. I think this is not a surprise, right, as people learn about the technology, and obviously, just so people are clear, the customer data belongs to the customer just like it does today, that applies in the world of AI as well."
+    },
+    {
+      "blockId": "paragraph-39",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "I can use the Azure OpenAI example, customer data remains within the tenant boundaries. The LLM is fine-tuned on their data, remains with their data, and is not applied to the master LLM. And so, I think that's just important, and we keep reiterating that with customers. Are you hearing the same sort of questions as you talk to people?"
+    },
+    {
+      "blockId": "paragraph-41",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Absolutely, and now I want to move on to, I would say, the second most popular question I get in investor calls at least, is regarding the OpenAI partnership. And why did OpenAI choose us? How did that partnership get started? And people are worried that we don't own the IP that's really required in this area to be considered a leader, and is that a valid concern? So those are the two big questions for you, Kevin, in this one.",
+      "duplicateOf": "interview_dataset_microsoft_amy_hood_csv:record-16"
+    },
+    {
+      "blockId": "paragraph-47",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And I think for a lot of people, this has been a little bit what's hard to capture, is that you can be in this relationship with a company and a partnership, also have your own internal research capabilities, and we can partner with others. It's just a unique partnership, fundamentally, I think built on trust and mission alignment, which is always an important thing."
+    },
+    {
+      "blockId": "paragraph-48",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "But just to reiterate, I think that the two key points you made is, when Kevin talked about having a broad perpetual license to all the OpenAI IP developed through the term of this partnership, that means even if the partnership were to end, we would still have those license rights to all the IP, up until AGI."
+    },
+    {
+      "blockId": "paragraph-49",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And the other thing that's critical is that, I think, and Kevin leads a lot of these conversations, as does our legal team and our OpenAI ethics team, I'm sorry, our AI ethics team here, we share the same values for responsibility and the safe deployment of this IP. And I can't tell you how foundational that is to being able to make progress."
+    },
+    {
+      "blockId": "paragraph-50",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And both of us can independently make this technology available to our respective users and developers. You're seeing that happen. I think that's good for everyone and really keeps the innovative spirit. And this AI capability is built into the Azure foundation. And so, I think it's sort of a long way of Kevin and I of saying that we feel very good about the position we're in both with the partnership and with access to the IP over the long-term."
+    },
+    {
+      "blockId": "paragraph-51",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Now, let's go back to I think what a lot of people always asking me is about, it's like, \"Hey, listen, you're really hearing from customers that they're going to deploy this?\" And, \"What are the use cases we're seeing today?\" And, \"If I was to open my mind up, what are the use cases we'd see tomorrow?\" And I would say, maybe I'll say some of the things I'm hearing, Kevin, and I think you probably hear even more, especially longer term what's possible, but we hosted CEOs on campus not so long ago, Kevin, and you hosted a conversation and I met one-on-one, but it was fascinating. I mean, it was every industry, whether it's healthcare, where we talk about Epic with medical records; whether it was manufacturing and talking about how to detect and describe problems between the plants and headquarters; whether it's education and having personalized tutors, or retail, or developers to your point, I think it's coming almost, I would describe it, it's a global conversation, and it's a by-industry conversation. So, what are you thinking in terms of use cases that are possible, and I think you're closer to some of those industry cases than I am for sure."
+    },
+    {
+      "blockId": "paragraph-55",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And I think that's why, in so many ways, this time period where you can both be and have real concerns about the power of the technology, but far more than that, so much optimism about the possibility. And I think that those two things can coexist, and I think frankly always have in large transitions in history. And so just a few things. First, Kevin, thank you so much for joining us today. In some ways, I think there's no better person to have tell investors what our vision is, why it's different than the person responsible for making sure our vision and strategy gets executed to the very best of our capability."
+    },
+    {
+      "blockId": "paragraph-56",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "And so, thank you both for taking on that large mantle for us and for joining us today. And thanks to everybody for watching and getting a bit more educated in terms of what's different about our approach. I will say, we've waited a long time for me to get more productive here at the company, Kevin. So maybe this is the final secret that gets me there and increases this CFO's productivity at least. And so, thanks everyone, and I look forward to delivering, really, Kevin, both for our customers, for developers, frankly, and for a society that I think is ripe for the adoption of this technology and our leadership position in it. So, thank you, and we certainly remain committed to leading this wave."
+    }
+  ]
+}

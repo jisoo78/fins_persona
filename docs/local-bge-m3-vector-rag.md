@@ -78,23 +78,17 @@ general-keyword-rag-fallback
 
 ## Evaluation
 
-Keyword baseline:
-
-```bash
-npm run rag:evaluate:keyword
-```
-
-Vector baseline:
+The legacy keyword/vector evaluator entrypoints have been retired. Run the isolated decision-similarity baseline with the active B Track Main Prompt:
 
 ```bash
 source .venv/bin/activate
-npm run rag:evaluate:vector
+npm run rag:evaluate:decision-similarity
 ```
 
-Both write:
+It writes:
 
 ```text
-evaluation/general_rag_result.lock.json
+evaluation/amy_hood_decision_similarity_general_rag_answers.lock.json
 ```
 
-Use the `retrieval.method` field to confirm whether the result used keyword or vector retrieval.
+Use `retrieval.method`, `retrieval.prompt_version_id`, and `retrieval.prompt_hash` to confirm the retrieval and immutable Main Prompt inputs.

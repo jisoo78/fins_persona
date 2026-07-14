@@ -1,0 +1,32 @@
+{
+  "sourceId": "web_amy_hood_one_microsoft_conference_call",
+  "title": "Steve Ballmer and Microsoft Senior Leadership Team: One Microsoft Conference Call",
+  "sourceType": "conversation",
+  "sourceUrl": "https://news.microsoft.com/speeches/steve-ballmer-and-microsoft-senior-leadership-team-one-microsoft-conference-call/",
+  "sourcePath": null,
+  "collectedAt": "2026-07-13T09:23:54.190Z",
+  "sha256": "f8f49e0b07393e543bd341807312cbd3d52b37548d85a25b8db95382b5b01cc2",
+  "format": "normalized_json",
+  "normalizationVersion": 2,
+  "collectionStatus": "complete",
+  "blocks": [
+    {
+      "blockId": "paragraph-44",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "I think that’s right. As we said, this is really about setting us up for long-term profit growth. And I look forward and believe that sets us up to do that."
+    },
+    {
+      "blockId": "paragraph-53",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Hi, it’s Amy again. Obviously, we have an earnings announcement next week. I will be reporting using our current operating section plans. Obviously, the requirement over a period of time is to report your systems in the way that the CEO manages it. So as we go through this reorg and through the realignment, we’ll obviously investigate any needed changes over time."
+    },
+    {
+      "blockId": "paragraph-98",
+      "kind": "speaker_turn",
+      "speaker": "Amy Hood",
+      "text": "Yes, I would not say that I wouldn’t necessarily associate this new org chart to any reduction in accountability from a financial perspective. I think we have always thought about personal accountability around this table to product success. And I think that will not change in the new organizational structure. Steve’s used words like that already. I think whether we call it accountability or a P&L or financial accountability, it will still remain just as it has in the past."
+    }
+  ]
+}
