@@ -10,6 +10,7 @@ import type {
   QuestionReview,
   QuestionReviewFile,
 } from '../../shared/amyHoodEvaluation';
+import { assertQuestionDifficulty } from './questionQuality';
 
 const questionsPath = (root: string) =>
   resolve(root, 'evaluation/amy_hood_eval_questions.json');
@@ -102,6 +103,7 @@ export const assertEvaluationBundle = (
     }
     if (!answer.rubric) throw new Error(`${question.id} is missing a subjective rubric`);
   });
+  assertQuestionDifficulty(questions, answerKey);
 };
 
 export const loadEvaluationBundle = async (root: string): Promise<EvaluationBundle> => {

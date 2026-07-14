@@ -196,7 +196,7 @@ const mcQuestion: EvaluationQuestion = {
 
 test('happy: loads one versioned 7/5/3 evaluation bundle without exposing answers', async () => {
   const bundle = await loadEvaluationBundle(process.cwd());
-  assert.equal(bundle.questions.version, '1.0.0');
+  assert.equal(bundle.questions.version, '2.0.0');
   assert.equal(
     bundle.questions.questions.filter(
       (question) => question.kpi === 'past_memory_restoration',
