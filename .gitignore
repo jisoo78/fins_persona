@@ -13,3 +13,4 @@ package-lock.json
 data/vector_index/
 archive_eval/
 data/b-track/amy-hood/.analysis-cache/
+.worktrees/
