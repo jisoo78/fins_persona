@@ -31,6 +31,8 @@ import {
   LOCAL_CHAT_RESERVE_TOKENS,
   modelRequestSettings,
   normalizeModelContent,
+  toLangChainInput,
+  type ModelInput,
   type ModelClient,
   type ModelResult,
 } from '../server/personaPipeline/modelClient';
@@ -59,7 +61,7 @@ const validAnalysisResult = (): ModelResult => ({
 });
 
 const fakeModel = (
-  handler: (prompt: string) => Promise<ModelResult>,
+  handler: (input: ModelInput) => Promise<ModelResult>,
   provider: ModelClient['provider'] = 'local',
 ): ModelClient => ({
   provider,
@@ -67,6 +69,9 @@ const fakeModel = (
   cacheKey: `${provider}-test-settings-v1`,
   invoke: handler,
 });
+
+const inputText = (input: ModelInput) =>
+  typeof input === 'string' ? input : `${input.system}\n${input.user}`;
 
 const sourceChunk = (chunkId: string): SourceChunk => ({
   chunkId,
@@ -165,6 +170,15 @@ test('edge: short source remains one chunk', async () => {
   assert.equal(chunks[0].tokenCount, 3);
 });
 
+test('happy: structured model input becomes system then human messages', () => {
+  const legacy = 'legacy string prompt';
+  assert.equal(toLangChainInput(legacy), legacy);
+  const messages = toLangChainInput({ system: 'SYSTEM', user: 'USER' });
+  assert.ok(Array.isArray(messages));
+  assert.deepEqual(messages.map((message) => message.getType()), ['system', 'human']);
+  assert.deepEqual(messages.map((message) => message.content), ['SYSTEM', 'USER']);
+});
+
 test('edge: speaker block stays intact near boundary', async () => {
   const chunks = await buildChunks(
     rawSource([
@@ -238,8 +252,8 @@ test('failure: unavailable web source leaves no partial raw file', async () => {
 test('edge: resume reuses completed chunks and invokes only missing chunks', async () => {
   const cacheDir = await mkdtemp(join(tmpdir(), 'amy-cache-'));
   const calls: string[] = [];
-  const model = fakeModel(async (prompt) => {
-    calls.push(prompt);
+  const model = fakeModel(async (input) => {
+    calls.push(inputText(input));
     return validAnalysisResult();
   });
   const prompt = 'Analyze this chunk:\n{chunk}';
@@ -329,8 +343,8 @@ test('failure: incomplete analysis cannot write a persona prompt', async () => {
 
 test('happy: selected corpus becomes Gemma analyses and a persona prompt', async () => {
   const fixture = await createSelected18Fixture();
-  const model = fakeModel(async (prompt) =>
-    prompt.startsWith('MASTER')
+  const model = fakeModel(async (input) =>
+    inputText(input).startsWith('MASTER')
       ? { text: validMarkdown, elapsedMs: 1 }
       : validAnalysisResult(),
   );
@@ -358,8 +372,8 @@ test('happy: selected corpus becomes Gemma analyses and a persona prompt', async
 
 test('failure: stale resume proof and manifest provenance cannot pass the Gemma gate', async () => {
   const fixture = await createSelected18Fixture();
-  const model = fakeModel(async (prompt) =>
-    prompt.startsWith('MASTER')
+  const model = fakeModel(async (input) =>
+    inputText(input).startsWith('MASTER')
       ? { text: validMarkdown, elapsedMs: 1 }
       : validAnalysisResult(),
   );

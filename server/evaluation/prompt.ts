@@ -1,29 +1,55 @@
-import type { EvaluationQuestion } from '../../shared/amyHoodEvaluation';
+import type {
+  EvaluationExperimentArm,
+  EvaluationQuestion,
+} from '../../shared/amyHoodEvaluation';
 import type { SourceChunk } from '../personaPipeline/types';
 
 export type ParsedEvaluationResponse =
   | { choice: 1 | 2 | 3 | 4; reason: string }
   | { text: string };
 
-export const buildEvaluationPrompt = (
-  persona: string,
+const evidenceText = (chunk: SourceChunk) => [
+  '[RAG EVIDENCE]',
+  `source_id: ${chunk.sourceId}`,
+  `chunk_id: ${chunk.chunkId}`,
+  `chunk_index: ${chunk.index}`,
+  `block_ids: ${JSON.stringify(chunk.blockIds)}`,
+  '',
+  chunk.text,
+].join('\n');
+
+export const buildEvaluationInput = (
+  systemPrompt: string,
   question: EvaluationQuestion,
   chunks: SourceChunk[],
-) => {
-  if (question.kpi === 'past_memory_restoration' && chunks.length !== 1) {
+  arm: EvaluationExperimentArm,
+): { system: string; user: string } => {
+  const expectsEvidence =
+    arm === 'persona_rag' && question.kpi === 'past_memory_restoration';
+  if (expectsEvidence && chunks.length !== 1) {
     throw new Error(`${question.id} requires exactly one RAG evidence chunk`);
   }
-  const evidence =
-    question.kpi === 'past_memory_restoration'
-      ? `\n\n[RAG EVIDENCE]\n${chunks[0].text}`
-      : '';
+  if (!expectsEvidence && chunks.length !== 0) {
+    throw new Error(`${arm} must not receive RAG evidence for ${question.id}`);
+  }
   const task =
     question.type === 'multiple_choice'
       ? `${question.options!
           .map((option, index) => `${index + 1}. ${option}`)
           .join('\n')}\n\nJSON만 출력하세요: {"choice":1,"reason":"1~2문장 이유"}`
-      : 'Amy Hood의 1인칭으로 5~8문장 안에서 결정, 조건, 상충관계와 위험을 직접 설명하세요.';
-  return `[SYSTEM PERSONA]\n${persona}${evidence}\n\n[QUESTION]\n${question.prompt}\n\n${task}`;
+      : 'CFO 자문가의 1인칭으로 5~8문장 안에서 결정, 조건, 상충관계와 위험을 직접 설명하세요.';
+  return {
+    system: systemPrompt,
+    user: [
+      expectsEvidence ? evidenceText(chunks[0]) : '',
+      '[QUESTION]',
+      question.prompt,
+      '',
+      task,
+    ]
+      .filter(Boolean)
+      .join('\n\n'),
+  };
 };
 
 const stripFence = (text: string) =>

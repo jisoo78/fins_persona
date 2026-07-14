@@ -4,9 +4,9 @@
  *    - 승인된 7/5/3 질문과 활성 Main Prompt 버전을 고정한 평가 실행을 완료한다.
  *
  * 2. Edge Cases:
- *    - 객관식 이유가 설명 문장과 함께 와도 선택 번호와 이유를 보존한다.
- *    - 중단된 실행을 재개하면 완료 문항은 건너뛴다.
- *    - 빈 승인 메모와 한국어 수정 메모를 각각 원형 보존한다.
+ *    - legacy 실행은 experiment 필드 없이도 활성 프롬프트를 읽는다.
+ *    - RAG 없는 두 실험군은 모든 KPI에서 빈 증거를 유지한다.
+ *    - 선택지 응답의 fenced JSON과 한국어 이유를 보존한다.
  *
  * 3. Failure Path:
  *    - 홀드아웃 오염, 질문/정답 ID 불일치, 모델 실패와 원자적 저장 실패는 완료 상태나 부분 덮어쓰기를 만들지 않는다.
@@ -26,10 +26,10 @@ import {
 } from '../server/evaluation/questionSet';
 import {
   loadSafeEvaluationCorpus,
-  retrievePastMemoryEvidence,
+  retrieveEvaluationEvidence,
 } from '../server/evaluation/retriever';
 import {
-  buildEvaluationPrompt,
+  buildEvaluationInput,
   parseEvaluationResponse,
 } from '../server/evaluation/prompt';
 import { createEvaluationRunner } from '../server/evaluation/runner';
@@ -45,6 +45,7 @@ import type {
   SubjectiveGrade,
 } from '../shared/amyHoodEvaluation';
 import type {
+  ModelInput,
   ModelClient,
   ModelResult,
 } from '../server/personaPipeline/modelClient';
@@ -160,7 +161,7 @@ const createRunnerFixture = async (approved = true) => {
 };
 
 const fakeModel = (
-  handler: (prompt: string) => Promise<ModelResult>,
+  handler: (input: ModelInput) => Promise<ModelResult>,
 ): ModelClient => ({
   provider: 'local',
   model: 'gemma4-test',
@@ -168,8 +169,11 @@ const fakeModel = (
   invoke: handler,
 });
 
-const validModelResult = (prompt: string): ModelResult => ({
-  text: prompt.includes('"choice"')
+const inputText = (input: ModelInput) =>
+  typeof input === 'string' ? input : `${input.system}\n${input.user}`;
+
+const validModelResult = (input: ModelInput): ModelResult => ({
+  text: inputText(input).includes('"choice"')
     ? '{"choice":1,"reason":"재무 규율과 장기 가치를 함께 봅니다."}'
     : '저는 투자를 단계화하겠습니다. 확인된 수요를 우선하겠습니다. 마진과 위험도 함께 관리하겠습니다. 조건을 분명히 두겠습니다. 지표를 분기마다 검토하겠습니다.',
   elapsedMs: 1,
@@ -263,13 +267,18 @@ test('happy: past-memory prompt gets one selected chunk and MC instructions', as
   const bundle = await loadEvaluationBundle(process.cwd());
   const question = bundle.questions.questions.find((item) => item.id === 'P7');
   assert.ok(question);
-  const chunks = retrievePastMemoryEvidence(corpus, question);
+  const chunks = retrieveEvaluationEvidence(corpus, question, 'persona_rag');
   assert.equal(chunks.length, 1);
   assert.equal(corpus.selectedSourceIds.has(chunks[0].sourceId), true);
-  const prompt = buildEvaluationPrompt('PERSONA', question, chunks);
-  assert.match(prompt, /"choice"/);
-  assert.match(prompt, /1~2문장/);
-  assert.match(prompt, /\[RAG EVIDENCE\]/);
+  const input = buildEvaluationInput('PERSONA', question, chunks, 'persona_rag');
+  assert.equal(input.system, 'PERSONA');
+  assert.match(input.user, /"choice"/);
+  assert.match(input.user, /1~2문장/);
+  assert.match(input.user, /\[RAG EVIDENCE\]/);
+  assert.match(input.user, new RegExp(`source_id: ${chunks[0].sourceId}`));
+  assert.match(input.user, new RegExp(`chunk_id: ${chunks[0].chunkId}`));
+  assert.match(input.user, /block_ids:/);
+  assert.doesNotMatch(input.system, /RAG EVIDENCE/);
 });
 
 test('edge: fenced JSON with an explanation preserves choice and reason', () => {
@@ -293,21 +302,39 @@ test('failure: holdout source in the manifest rejects before prompt construction
   );
 });
 
-test('failure: holdout and scenario prompts contain no RAG evidence', async () => {
+test('edge: no-RAG arms keep every KPI free of evidence', async () => {
+  const corpus = await loadSafeEvaluationCorpus(process.cwd());
   const bundle = await loadEvaluationBundle(process.cwd());
-  for (const id of ['H1', 'S1']) {
+  for (const arm of ['persona_no_rag', 'generic_cfo_no_rag'] as const) {
+    for (const id of ['P1', 'H1', 'S1']) {
+      const question = bundle.questions.questions.find((item) => item.id === id);
+      assert.ok(question);
+      const chunks = retrieveEvaluationEvidence(corpus, question, arm);
+      assert.deepEqual(chunks, []);
+      assert.doesNotMatch(
+        buildEvaluationInput('SYSTEM', question, chunks, arm).user,
+        /\[RAG EVIDENCE\]/,
+      );
+    }
+  }
+});
+
+test('failure: no-RAG arms reject accidental evidence injection', async () => {
+  const corpus = await loadSafeEvaluationCorpus(process.cwd());
+  const bundle = await loadEvaluationBundle(process.cwd());
+  for (const id of ['P1', 'H1', 'S1']) {
     const question = bundle.questions.questions.find((item) => item.id === id);
     assert.ok(question);
-    assert.doesNotMatch(
-      buildEvaluationPrompt('PERSONA', question, []),
-      /\[RAG EVIDENCE\]/,
+    assert.throws(
+      () => buildEvaluationInput('SYSTEM', question, [corpus.chunks[0]], 'persona_no_rag'),
+      /must not receive RAG evidence/,
     );
   }
 });
 
 test('happy: sequential run calls the model once for each question in order', async () => {
   const root = await createRunnerFixture();
-  const prompts: string[] = [];
+  const prompts: ModelInput[] = [];
   const runner = createEvaluationRunner({
     root,
     createModel: () =>
@@ -332,7 +359,7 @@ test('happy: sequential run calls the model once for each question in order', as
 test('happy: evaluation pins the active prompt version and executes immutable content', async () => {
   const root = await createRunnerFixture();
   const first = await readActivePromptVersion(root);
-  const prompts: string[] = [];
+  const prompts: ModelInput[] = [];
   const runner = createEvaluationRunner({
     root,
     createModel: () => fakeModel(async (prompt) => {
@@ -351,7 +378,7 @@ test('happy: evaluation pins the active prompt version and executes immutable co
 
   assert.equal(completed.promptVersionId, first.versionId);
   assert.equal(
-    prompts.every((prompt) => !prompt.includes('New inactive version')),
+    prompts.every((prompt) => !inputText(prompt).includes('New inactive version')),
     true,
   );
 });
@@ -389,7 +416,7 @@ test('failure: malformed MC response is retried exactly once', async () => {
 
 test('edge: resume preserves complete answers and starts at the failed question', async () => {
   const root = await createRunnerFixture();
-  const prompts: string[] = [];
+  const prompts: ModelInput[] = [];
   let failed = false;
   const runner = createEvaluationRunner({
     root,
@@ -411,7 +438,7 @@ test('edge: resume preserves complete answers and starts at the failed question'
   const completed = await runner.resumeEvaluationRun(queued.runId);
   assert.equal(completed.status, 'complete');
   assert.equal(
-    prompts.filter((prompt) => prompt.includes('Office 영구 라이선스')).length,
+    prompts.filter((prompt) => inputText(prompt).includes('Office 영구 라이선스')).length,
     1,
   );
 });

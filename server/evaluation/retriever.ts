@@ -2,7 +2,10 @@ import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-import type { EvaluationQuestion } from '../../shared/amyHoodEvaluation';
+import type {
+  EvaluationExperimentArm,
+  EvaluationQuestion,
+} from '../../shared/amyHoodEvaluation';
 import type { SourceChunk } from '../personaPipeline/types';
 
 type InventoryEntry = {
@@ -73,11 +76,12 @@ export const loadSafeEvaluationCorpus = async (
   };
 };
 
-export const retrievePastMemoryEvidence = (
+export const retrieveEvaluationEvidence = (
   corpus: EvaluationCorpus,
   question: EvaluationQuestion,
+  arm: EvaluationExperimentArm,
 ): SourceChunk[] => {
-  if (question.kpi !== 'past_memory_restoration') return [];
+  if (arm !== 'persona_rag' || question.kpi !== 'past_memory_restoration') return [];
   const terms = tokenize(question.retrievalQuery ?? question.prompt);
   const selected = corpus.chunks
     .map((chunk) => ({ chunk, score: scoreText(chunk.text, terms) }))

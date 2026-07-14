@@ -1,4 +1,5 @@
 import { ChatOpenAI } from '@langchain/openai';
+import { HumanMessage, SystemMessage } from '@langchain/core/messages';
 import { createHash } from 'node:crypto';
 
 import type { ProviderName } from './types';
@@ -14,11 +15,18 @@ export interface ModelResult {
   outputTokens?: number;
 }
 
+export type ModelInput = string | { system: string; user: string };
+
+export const toLangChainInput = (input: ModelInput) =>
+  typeof input === 'string'
+    ? input
+    : [new SystemMessage(input.system), new HumanMessage(input.user)];
+
 export interface ModelClient {
   provider: ProviderName;
   model: string;
   cacheKey: string;
-  invoke(prompt: string): Promise<ModelResult>;
+  invoke(input: ModelInput): Promise<ModelResult>;
 }
 
 export const modelRequestSettings = (provider: ProviderName) => ({
@@ -93,9 +101,9 @@ export const createModelClient = (provider: ProviderName): ModelClient => {
     provider,
     model,
     cacheKey: modelSettingsFingerprint(provider),
-    async invoke(prompt) {
+    async invoke(input) {
       const started = Date.now();
-      const result = await chat.invoke(prompt);
+      const result = await chat.invoke(toLangChainInput(input));
       const text = normalizeModelContent(result.content);
       if (!text) throw new Error(`${provider} model returned empty content`);
       return {

@@ -9,15 +9,19 @@ import type {
   EvaluationRunAnswer,
   SubjectiveGrade,
 } from '../../shared/amyHoodEvaluation';
-import type { ModelClient, ModelResult } from '../personaPipeline/modelClient';
+import type {
+  ModelClient,
+  ModelInput,
+  ModelResult,
+} from '../personaPipeline/modelClient';
 import { checkGemmaGate, personaPromptPath } from '../personaPipeline/promptBuilder';
 import {
   readActivePromptVersion,
   readPromptVersion,
 } from '../promptVersions/store';
-import { buildEvaluationPrompt, parseEvaluationResponse } from './prompt';
+import { buildEvaluationInput, parseEvaluationResponse } from './prompt';
 import { loadEvaluationBundle, loadQuestionReview } from './questionSet';
-import { loadSafeEvaluationCorpus, retrievePastMemoryEvidence } from './retriever';
+import { loadSafeEvaluationCorpus, retrieveEvaluationEvidence } from './retriever';
 import { readRun, writeRun } from './runStore';
 
 type RunnerOptions = {
@@ -52,7 +56,7 @@ const replaceAnswer = (
 
 const invokeQuestion = async (
   model: ModelClient,
-  prompt: string,
+  prompt: ModelInput,
   question: EvaluationQuestion,
 ) => {
   const first = await model.invoke(prompt);
@@ -176,8 +180,9 @@ export const createEvaluationRunner = (options: RunnerOptions) => {
         continue;
       }
       try {
-        const chunks = retrievePastMemoryEvidence(corpus, question);
-        const prompt = buildEvaluationPrompt(persona, question, chunks);
+        const arm = run.experimentArm ?? 'persona_rag';
+        const chunks = retrieveEvaluationEvidence(corpus, question, arm);
+        const prompt = buildEvaluationInput(persona, question, chunks, arm);
         const { result, parsed } = await invokeQuestion(model, prompt, question);
         const key = bundle.answerKey.answers.find(
           (answer) => answer.questionId === question.id,

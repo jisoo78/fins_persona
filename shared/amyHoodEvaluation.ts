@@ -55,6 +55,11 @@ export type QuestionReviewFile = {
 
 export type EvaluationProvider = 'local' | 'openai';
 
+export type EvaluationExperimentArm =
+  | 'persona_rag'
+  | 'persona_no_rag'
+  | 'generic_cfo_no_rag';
+
 export type EvaluationBundle = {
   questions: EvaluationQuestionFile;
   answerKey: EvaluationAnswerKeyFile;
@@ -95,6 +100,8 @@ export type EvaluationRun = {
   promptHash: string;
   ragSnapshotId: string;
   questionSetVersion: string;
+  experimentGroupId?: string;
+  experimentArm?: EvaluationExperimentArm;
   answers: EvaluationRunAnswer[];
   scores: {
     pastMemory: number;
