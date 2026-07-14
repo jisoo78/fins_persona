@@ -1,7 +1,7 @@
 /**
  * Test Plan:
  * 1. Happy Path:
- *    - 승인된 7/5/3 질문·정답 파일을 읽고 동일 버전의 평가 번들을 만든다.
+ *    - 승인된 7/5/3 질문과 활성 Main Prompt 버전을 고정한 평가 실행을 완료한다.
  *
  * 2. Edge Cases:
  *    - 객관식 이유가 설명 문장과 함께 와도 선택 번호와 이유를 보존한다.
@@ -34,6 +34,12 @@ import {
 } from '../server/evaluation/prompt';
 import { createEvaluationRunner } from '../server/evaluation/runner';
 import { createEvaluationRouter } from '../server/evaluation/routes';
+import { readRun, writeRun } from '../server/evaluation/runStore';
+import {
+  activatePromptVersion,
+  createPromptVersion,
+  readActivePromptVersion,
+} from '../server/promptVersions/store';
 import type {
   EvaluationQuestion,
   SubjectiveGrade,
@@ -140,18 +146,16 @@ const createRunnerFixture = async (approved = true) => {
       ),
     ),
   ]);
-  if (approved) {
-    const reviewPath = join(root, 'evaluation/amy_hood_eval_question_reviews.json');
-    const reviews = JSON.parse(await readFile(reviewPath, 'utf8')) as {
-      reviews: { status: string; reviewedAt: string | null }[];
-    };
-    reviews.reviews = reviews.reviews.map((review) => ({
-      ...review,
-      status: 'approved',
-      reviewedAt: '2026-07-14T00:00:00.000Z',
-    }));
-    await writeFile(reviewPath, JSON.stringify(reviews));
-  }
+  const reviewPath = join(root, 'evaluation/amy_hood_eval_question_reviews.json');
+  const reviews = JSON.parse(await readFile(reviewPath, 'utf8')) as {
+    reviews: { status: string; reviewedAt: string | null }[];
+  };
+  reviews.reviews = reviews.reviews.map((review, index) => ({
+    ...review,
+    status: approved || index > 0 ? 'approved' : 'unreviewed',
+    reviewedAt: approved || index > 0 ? '2026-07-14T00:00:00.000Z' : null,
+  }));
+  await writeFile(reviewPath, JSON.stringify(reviews));
   return root;
 };
 
@@ -323,6 +327,46 @@ test('happy: sequential run calls the model once for each question in order', as
     completed.answers.map((answer) => answer.questionId),
     ['P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'H1', 'H2', 'H3', 'H4', 'H5', 'S1', 'S2', 'S3'],
   );
+});
+
+test('happy: evaluation pins the active prompt version and executes immutable content', async () => {
+  const root = await createRunnerFixture();
+  const first = await readActivePromptVersion(root);
+  const prompts: string[] = [];
+  const runner = createEvaluationRunner({
+    root,
+    createModel: () => fakeModel(async (prompt) => {
+      prompts.push(prompt);
+      return validModelResult(prompt);
+    }),
+  });
+  const queued = await runner.createEvaluationRun({ provider: 'local' });
+  const second = await createPromptVersion(root, {
+    content: `${first.content}\nNew inactive version`,
+    basedOnVersionId: first.versionId,
+  });
+  await activatePromptVersion(root, second.versionId);
+
+  const completed = await runner.executeEvaluationRun(queued.runId);
+
+  assert.equal(completed.promptVersionId, first.versionId);
+  assert.equal(
+    prompts.every((prompt) => !prompt.includes('New inactive version')),
+    true,
+  );
+});
+
+test('edge: legacy run without promptVersionId remains readable', async () => {
+  const root = await createRunnerFixture();
+  const runner = createEvaluationRunner({
+    root,
+    createModel: () => fakeModel(async (prompt) => validModelResult(prompt)),
+  });
+  const queued = await runner.createEvaluationRun({ provider: 'local' });
+  const legacy = { ...queued };
+  delete legacy.promptVersionId;
+  await writeRun(root, legacy);
+  assert.equal((await readRun(root, legacy.runId)).promptVersionId, undefined);
 });
 
 test('failure: malformed MC response is retried exactly once', async () => {

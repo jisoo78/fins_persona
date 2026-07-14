@@ -91,6 +91,7 @@ export type EvaluationRun = {
   gradingStatus: 'pending' | 'complete';
   provider: EvaluationProvider;
   model: string;
+  promptVersionId?: string;
   promptHash: string;
   ragSnapshotId: string;
   questionSetVersion: string;

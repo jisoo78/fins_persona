@@ -1,4 +1,4 @@
-import { createHash, randomUUID } from 'node:crypto';
+import { randomUUID } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 
 import type {
@@ -11,6 +11,10 @@ import type {
 } from '../../shared/amyHoodEvaluation';
 import type { ModelClient, ModelResult } from '../personaPipeline/modelClient';
 import { checkGemmaGate, personaPromptPath } from '../personaPipeline/promptBuilder';
+import {
+  readActivePromptVersion,
+  readPromptVersion,
+} from '../promptVersions/store';
 import { buildEvaluationPrompt, parseEvaluationResponse } from './prompt';
 import { loadEvaluationBundle, loadQuestionReview } from './questionSet';
 import { loadSafeEvaluationCorpus, retrievePastMemoryEvidence } from './retriever';
@@ -97,12 +101,24 @@ const assertGrade = (grade: SubjectiveGrade) => {
   if (!grade.summary.trim()) throw new Error(`subjective grade summary is required: ${grade.questionId}`);
 };
 
+const readRunPersona = async (root: string, run: EvaluationRun) => {
+  if (!run.promptVersionId) {
+    return readFile(personaPromptPath(root, run.provider), 'utf8');
+  }
+  const version = await readPromptVersion(root, run.promptVersionId);
+  if (version.sha256 !== run.promptHash) {
+    throw new Error('run prompt version hash is stale');
+  }
+  return version.content;
+};
+
 export const createEvaluationRunner = (options: RunnerOptions) => {
   const createEvaluationRun = async (input: { provider: EvaluationProvider }) => {
-    const [bundle, review, corpus] = await Promise.all([
+    const [bundle, review, corpus, activePrompt] = await Promise.all([
       loadEvaluationBundle(options.root),
       loadQuestionReview(options.root),
       loadSafeEvaluationCorpus(options.root),
+      readActivePromptVersion(options.root),
     ]);
     if (review.reviews.some((item) => item.status !== 'approved')) {
       throw new Error('all evaluation questions must be approved before creating a run');
@@ -115,14 +131,14 @@ export const createEvaluationRunner = (options: RunnerOptions) => {
     if (model.provider !== input.provider) {
       throw new Error('model provider does not match evaluation provider');
     }
-    const persona = await readFile(personaPromptPath(options.root, input.provider), 'utf8');
     const run: EvaluationRun = {
       runId: randomUUID(),
       status: 'queued',
       gradingStatus: 'pending',
       provider: input.provider,
       model: model.model,
-      promptHash: createHash('sha256').update(persona).digest('hex'),
+      promptVersionId: activePrompt.versionId,
+      promptHash: activePrompt.sha256,
       ragSnapshotId: corpus.snapshotId,
       questionSetVersion: bundle.questions.version,
       answers: [],
@@ -139,7 +155,7 @@ export const createEvaluationRunner = (options: RunnerOptions) => {
     const [bundle, corpus, persona] = await Promise.all([
       loadEvaluationBundle(options.root),
       loadSafeEvaluationCorpus(options.root),
-      readFile(personaPromptPath(options.root, run.provider), 'utf8'),
+      readRunPersona(options.root, run),
     ]);
     if (run.questionSetVersion !== bundle.questions.version) {
       throw new Error('run question-set version is stale');
