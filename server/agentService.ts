@@ -106,7 +106,9 @@ export interface ReferencePersonaOutput {
 }
 
 export interface RagEvaluationAnswer {
+  selected_option_id?: string | null;
   answer: string;
+  reason?: string;
   evidence: {
     fileName: string;
     title: string;
@@ -114,6 +116,9 @@ export interface RagEvaluationAnswer {
     fiscalYear?: number;
     fiscalQuarter?: number;
     section?: string;
+    score?: number;
+    vectorScore?: number;
+    rerankScore?: number;
     quote_or_summary: string;
   }[];
   limitations: string[];
@@ -608,49 +613,82 @@ JSON 형식:
 export const generateRagEvaluationAnswer = async ({
   subjectName,
   question,
+  questionType,
+  options,
   evidenceText,
+  systemPrompt,
 }: {
   subjectName: string;
   question: string;
+  questionType?: string;
+  options?: {
+    option_id: string;
+    option_text: string;
+  }[];
   evidenceText: string;
+  systemPrompt?: string;
 }): Promise<RagEvaluationAnswer> => {
-  const trimmedEvidence = evidenceText.slice(0, 18000);
+  const trimmedEvidence = evidenceText.slice(0, Number(process.env.RAG_EVAL_EVIDENCE_CHAR_LIMIT ?? 8000));
 
   try {
     const result = await safeInvokeJson<RagEvaluationAnswer>(
-      `너는 RAG 성능 평가용 답변 생성기다.
+      `너는 RAG 기반 CFO 페르소나 평가 답변 생성기다.
 
-아래 Evidence에 근거해서 질문에 답하라.
-원문 근거가 없는 내용은 만들지 말고 "확인 필요"로 표시하라.
-답변은 CFO 의사결정 기준을 중심으로 작성하라.
+	아래 Evidence에 근거해서 질문에 답하라.
+	아래 Main System Prompt가 있으면 페르소나 정체성, 판단 원칙, 말투는 해당 프롬프트를 우선 따른다.
+	단, Main System Prompt와 Evidence가 충돌하면 Evidence에 없는 사실은 만들지 말고 확인 필요로 표시한다.
+	질문에 직접 답하라.
+	절대 "RAG 검색 기준으로 보면" 같은 메타 설명을 하지 마라.
+	원문 근거가 없는 숫자, ROI, IRR, 회수 기간은 만들지 말고 "확인 필요"로 표시하라.
+
+객관식 질문이면:
+- 보기 A-D 중 하나를 반드시 선택한다.
+- selected_option_id에는 A, B, C, D 중 하나만 넣는다.
+- answer는 반드시 "선택: B. 보기 내용" 형식으로 시작한다.
+- reason은 Amy Hood 관점의 이유를 1~3문장으로 작성한다.
+
+주관식 질문이면:
+- 질문에 바로 답하는 한 문단을 작성한다.
+- selected_option_id는 null로 둔다.
+
 반드시 한국어 JSON만 반환한다.
+evidence는 빈 배열 []로 둔다. 근거 목록은 시스템이 별도로 붙인다.
+limitations는 확인 필요 항목만 짧게 작성한다.
 
-대상 인물:
-{subjectName}
+	대상 인물:
+	{subjectName}
 
-질문:
-{question}
+	Main System Prompt:
+	{systemPrompt}
+
+	질문:
+	{question}
+
+질문 유형:
+{questionType}
+
+객관식 보기:
+{options}
 
 Evidence:
 {evidenceText}
 
 JSON 형식:
 {{
-  "answer": "근거 기반 답변",
-  "evidence": [
-    {{
-      "fileName": "근거 파일명",
-      "title": "근거 제목",
-      "speaker": "화자",
-      "fiscalYear": 2025,
-      "fiscalQuarter": 3,
-      "section": "prepared_remarks 또는 qna",
-      "quote_or_summary": "짧은 근거 요약"
-    }}
-  ],
+  "selected_option_id": "A | B | C | D | null",
+  "answer": "질문에 대한 직접 답변",
+  "reason": "선택 또는 답변 이유",
+  "evidence": [],
   "limitations": ["확인 필요 항목"]
 }}`,
-      { subjectName, question, evidenceText: trimmedEvidence },
+      {
+	        subjectName,
+	        systemPrompt: systemPrompt ?? '',
+	        question,
+	        questionType: questionType ?? 'subjective',
+	        options: JSON.stringify(options ?? [], null, 2),
+        evidenceText: trimmedEvidence,
+      },
     );
 
     if (result?.answer?.trim()) return result;

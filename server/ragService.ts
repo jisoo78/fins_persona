@@ -39,6 +39,8 @@ export interface RagDocument {
 export interface RagChunk extends RagDocument {
   chunkIndex: number;
   score?: number;
+  vectorScore?: number;
+  rerankScore?: number;
 }
 
 const archiveDir = resolve(process.cwd(), process.env.RAG_ARCHIVE_DIR ?? 'archive');

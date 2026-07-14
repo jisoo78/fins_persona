@@ -94,11 +94,15 @@ Build train-only vector index:
 RAG_ARCHIVE_DIR=archive_eval/train .venv/bin/python scripts/build_bge_m3_index.py
 ```
 
-Generate train-only Vector RAG baseline:
+The legacy train-only static evaluator has been retired. Use the B Track evaluation runner for holdout-safe execution after building the index:
 
 ```bash
-RAG_ARCHIVE_DIR=archive_eval/train npm run rag:evaluate:vector
+npm run evaluation:test
+npm run api
+npm run dev
 ```
+
+In the Web UI, open `B Track → 평가 실행`. H1-H5 and S1-S3 remain RAG-free; only P1-P7 receive one selected evidence chunk.
 
 ## Next Evaluation Direction
 

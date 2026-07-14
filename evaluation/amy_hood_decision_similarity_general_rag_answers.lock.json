@@ -1,0 +1,981 @@
+{
+  "method": "general_rag",
+  "dataset": "amy_hood_decision_similarity_answer_key_20260708",
+  "subject": "Amy Hood",
+  "role": "CFO / finance decision persona",
+  "evaluation_goal": "정답지가 있는 질문으로 생성된 Amy Hood 페르소나가 실제 Amy Hood의 재무 의사결정 기준과 얼마나 유사한지 평가한다.",
+  "questions_path": "evaluation/amy_hood_decision_similarity_answer_key_15.json",
+  "generated_at": "2026-07-14T00:09:34.300Z",
+  "retrieval": {
+    "method": "local_bge_m3_vector_retrieval",
+    "reranker": "cohere",
+    "generation_mode": "offline_fixed_baseline",
+    "document_count": 1448,
+    "chunk_count": 2377,
+    "persona_evidence_count": 18
+  },
+  "persona": {
+    "name": "Amy Hood General RAG CFO Advisor",
+    "role": "재무",
+    "badge": "Evidence-grounded CFO",
+    "description": "archive의 Amy Hood 인터뷰와 Microsoft 어닝콜 근거 청크를 검색해 만든 일반 RAG 기준 CFO 참조 페르소나입니다.",
+    "decisionStyle": "수요 신호, AI/클라우드 capacity, CapEx 회수 가능성, 마진 영향, 현금흐름 제약을 함께 놓고 판단하는 근거 기반 재무 의사결정",
+    "coreValues": [
+      "수요 신호 기반 자본 배치",
+      "AI 인프라 투자와 마진 균형",
+      "현금흐름과 장기 성장의 동시 관리",
+      "capacity 제약의 투명한 설명",
+      "숫자 중심 투자자 커뮤니케이션"
+    ],
+    "strengths": [
+      "CapEx와 Azure/AI 수요를 연결해 설명",
+      "마진 하락 원인과 효율 개선 요인을 함께 제시",
+      "가이던스에서 FX, 세그먼트, capacity 변수를 구분"
+    ],
+    "weaknesses": [
+      "검색 근거에 없는 세부 ROI 기준은 확인 필요",
+      "장기 인프라 투자 회수 기간의 정량 기준은 확인 필요",
+      "GraphRAG 대비 엔티티 간 장기 관계 추적은 제한적"
+    ],
+    "communicationStyle": "결론을 먼저 말한 뒤 매출 성장, gross margin, operating margin, CapEx, free cash flow, capacity 제약을 숫자 중심으로 설명합니다.",
+    "decisionPrompt": "# Amy Hood General RAG CFO Advisor\n\n## Role\nYou are a CFO advisor persona grounded in retrieved Amy Hood and Microsoft earnings-call evidence.\n\n## Decision Rules\n- Start with demand signals and capacity constraints before recommending incremental AI infrastructure investment.\n- Evaluate CapEx with gross margin, operating margin, free cash flow, and long-term monetization evidence.\n- Distinguish short-lived GPU/CPU assets from long-lived datacenter capacity.\n- Mark unsupported ROI, payback, or red-line thresholds as \"확인 필요\".\n- Communicate with numbers first, then constraints, risks, and next action.\n\n## Response Style\nAnswer in Korean. Use only source-grounded claims when possible."
+  },
+  "answers": [
+    {
+      "question_id": "mc_01_cloud_capex_margin",
+      "type": "multiple_choice",
+      "kpi": "past_memory_restoration",
+      "question": "Amy Hood가 클라우드/AI 인프라 CapEx 확대를 설명할 때 가장 Amy Hood식 판단에 가까운 설명은 무엇인가?",
+      "selected_option_id": "B",
+      "answer": "선택: B. 고객 수요와 capacity 제약이 확인되면 장기 성장을 위해 투자하되 gross margin, operating margin, free cash flow 영향을 함께 설명한다.\n\n이유: Amy Hood 페르소나 기준에서는 Amy, Hood는, capacity, CapEx, 현금흐름을, 연결해, 설명하는, 경향이, 강하다를 중심으로 판단합니다. 검색된 근거는 수요 신호, capacity 제약, CapEx/마진/현금흐름 영향을 함께 검토하고, 원문에 없는 정량 기준은 \"확인 필요\"로 남기는 방식이 적절함을 보여줍니다. 주요 근거 출처는 Amy Hood collected interview CSV입니다.",
+      "reason": "검색 근거와 보기의 어휘 겹침을 기준으로 B를 선택했습니다.",
+      "evidence": [
+        {
+          "fileName": "microsoft_amy_hood.csv",
+          "title": "Amy Hood collected interview CSV",
+          "speaker": "Amy Hood",
+          "score": 0.6538572,
+          "vectorScore": 0.6696058477340091,
+          "rerankScore": 0.6538572,
+          "quote_or_summary": " commercial cloud side. And then you’ll see the pivot to more CPU and GPU, and that pivot will more directly correlate to revenue. And it’ll be contracted either with the partnership that you asked about with OpenAI or with others. And so, I do think the way I want everyone to internalize it is that the CapEx growth is going through that cycle pivot, which i"
+        },
+        {
+          "fileName": "microsoft_amy_hood.json",
+          "title": "Amy Hood collected interview JSON",
+          "speaker": "Amy Hood",
+          "score": 0.65173227,
+          "vectorScore": 0.6696058477340091,
+          "rerankScore": 0.65173227,
+          "quote_or_summary": " commercial cloud side. And then you’ll see the pivot to more CPU and GPU, and that pivot will more directly correlate to revenue. And it’ll be contracted either with the partnership that you asked about with OpenAI or with others. And so, I do think the way I want everyone to internalize it is that the CapEx growth is going through that cycle pivot, which i"
+        },
+        {
+          "fileName": "fy2025_q2.json",
+          "title": "Microsoft FY25 Second Quarter Earnings Conference Call",
+          "speaker": "Amy Hood",
+          "fiscalYear": 2025,
+          "fiscalQuarter": 2,
+          "section": "qna",
+          "score": 0.6461259,
+          "vectorScore": 0.6717233040210107,
+          "rerankScore": 0.6461259,
+          "quote_or_summary": " commercial cloud side. And then you’ll see the pivot to more CPU and GPU, and that pivot will more directly correlate to revenue. And it’ll be contracted either with the partnership that you asked about with OpenAI or with others. And so, I do think the way I want everyone to internalize it is that the CapEx growth is going through that cycle pivot, which i"
+        }
+      ],
+      "limitations": [
+        "선택지는 검색 근거와의 어휘 겹침을 기준으로 고른 fallback 결과이므로 LLM 직접 생성 결과와 구분 필요"
+      ],
+      "expected_focus": [
+        "Amy",
+        "Hood는",
+        "capacity",
+        "CapEx",
+        "현금흐름을",
+        "연결해",
+        "설명하는",
+        "경향이",
+        "강하다"
+      ],
+      "answer_key": {
+        "correct_option_id": "B",
+        "rationale": "Amy Hood는 수요 신호, capacity, CapEx, 마진, 현금흐름을 함께 연결해 설명하는 경향이 강하다."
+      }
+    },
+    {
+      "question_id": "mc_02_free_cash_flow",
+      "type": "multiple_choice",
+      "kpi": "past_memory_restoration",
+      "question": "CapEx 증가로 free cash flow가 압박받는 상황에서 Amy Hood식 커뮤니케이션에 가장 가까운 것은?",
+      "selected_option_id": "C",
+      "answer": "선택: C. 투자 필요성과 현금흐름 영향을 함께 설명하고, cash paid for PPE나 finance leases 같은 구성 요인을 분리해 설명한다.\n\n이유: Amy Hood 페르소나 기준에서는 Amy, Hood의, 어닝콜, 답변은, CapEx와, FCF, 영향을, 숨기지, 요소와, 목적을, 설명하는, 방식에를 중심으로 판단합니다. 검색된 근거는 수요 신호, capacity 제약, CapEx/마진/현금흐름 영향을 함께 검토하고, 원문에 없는 정량 기준은 \"확인 필요\"로 남기는 방식이 적절함을 보여줍니다. 주요 근거 출처는 Microsoft FY25 First Quarter Earnings Conference Call FY2025 Q1입니다.",
+      "reason": "검색 근거와 보기의 어휘 겹침을 기준으로 C를 선택했습니다.",
+      "evidence": [
+        {
+          "fileName": "fy2025_q1.json",
+          "title": "Microsoft FY25 First Quarter Earnings Conference Call",
+          "speaker": "Amy Hood",
+          "fiscalYear": 2025,
+          "fiscalQuarter": 1,
+          "section": "qna",
+          "score": 0.53342235,
+          "vectorScore": 0.5596357684681785,
+          "rerankScore": 0.53342235,
+          "quote_or_summary": "Thanks, Mark. I think in some ways, it’s helpful to go back to the cloud transitions that we worked on over a decade ago, I think, in the early stages. And what you did see and you’ll see us do in the same time is you have to build to meet demand. Unlike the cloud transition, we’re doing it on a global basis in parallel, as opposed to sequential, given the n"
+        },
+        {
+          "fileName": "microsoft_amy_hood.json",
+          "title": "Amy Hood collected interview JSON",
+          "speaker": "Amy Hood",
+          "score": 0.47811517,
+          "vectorScore": 0.5751571600621416,
+          "rerankScore": 0.47811517,
+          "quote_or_summary": "getting some insights into our abilities to increasingly put pressure on efficiencies, being able to speed up the deliveries into our data centers and make that what I would call revenue ready as quickly as we can. I would expect the pressure between first-party usage and being able to meet Azure demand will persist, as I said, but we’re doing our best to be"
+        },
+        {
+          "fileName": "microsoft_amy_hood.csv",
+          "title": "Amy Hood collected interview CSV",
+          "speaker": "Amy Hood",
+          "score": 0.47110215,
+          "vectorScore": 0.5751571600621416,
+          "rerankScore": 0.47110215,
+          "quote_or_summary": "getting some insights into our abilities to increasingly put pressure on efficiencies, being able to speed up the deliveries into our data centers and make that what I would call revenue ready as quickly as we can. I would expect the pressure between first-party usage and being able to meet Azure demand will persist, as I said, but we’re doing our best to be"
+        }
+      ],
+      "limitations": [
+        "선택지는 검색 근거와의 어휘 겹침을 기준으로 고른 fallback 결과이므로 LLM 직접 생성 결과와 구분 필요"
+      ],
+      "expected_focus": [
+        "Amy",
+        "Hood의",
+        "어닝콜",
+        "답변은",
+        "CapEx와",
+        "FCF",
+        "영향을",
+        "숨기지",
+        "요소와",
+        "목적을",
+        "설명하는",
+        "방식에"
+      ],
+      "answer_key": {
+        "correct_option_id": "C",
+        "rationale": "Amy Hood의 어닝콜 답변은 CapEx와 FCF 영향을 숨기지 않고 구성 요소와 투자 목적을 함께 설명하는 방식에 가깝다."
+      }
+    },
+    {
+      "question_id": "mc_03_guidance_variables",
+      "type": "multiple_choice",
+      "kpi": "past_memory_restoration",
+      "question": "사업부별 가이던스를 설명할 때 Amy Hood가 구분해야 할 판단 축으로 가장 적절한 것은?",
+      "selected_option_id": "A",
+      "answer": "선택: A. Azure, Office, LinkedIn 같은 사업부 성장 동인과 FX, commercial bookings 같은 외부/선행 변수를 나누어 설명한다.\n\n이유: Amy Hood 페르소나 기준에서는 사업부별, 동인과, bookings, 변수를, 구분하는, Amy, Hood식, 커뮤니케이션에, 가깝다를 중심으로 판단합니다. 검색된 근거는 수요 신호, capacity 제약, CapEx/마진/현금흐름 영향을 함께 검토하고, 원문에 없는 정량 기준은 \"확인 필요\"로 남기는 방식이 적절함을 보여줍니다. 주요 근거 출처는 Amy Hood collected interview CSV입니다.",
+      "reason": "검색 근거와 보기의 어휘 겹침을 기준으로 A를 선택했습니다.",
+      "evidence": [
+        {
+          "fileName": "microsoft_amy_hood.csv",
+          "title": "Amy Hood collected interview CSV",
+          "speaker": "Amy Hood",
+          "score": 0.38477397,
+          "vectorScore": 0.5580289440351947,
+          "rerankScore": 0.38477397,
+          "quote_or_summary": "p using those agents if they’re adding direct value or growth to your business. And so, I think it’s probably healthy to sort of start to think about that transition in a broader way. While you may not see it in the short-term in bookings, I think if I were to frame how to think about the opportunity, I would probably think about it more in that light."
+        },
+        {
+          "fileName": "microsoft_amy_hood.json",
+          "title": "Amy Hood collected interview JSON",
+          "speaker": "Amy Hood",
+          "score": 0.37408215,
+          "vectorScore": 0.5580289440351947,
+          "rerankScore": 0.37408215,
+          "quote_or_summary": "p using those agents if they’re adding direct value or growth to your business. And so, I think it’s probably healthy to sort of start to think about that transition in a broader way. While you may not see it in the short-term in bookings, I think if I were to frame how to think about the opportunity, I would probably think about it more in that light."
+        },
+        {
+          "fileName": "microsoft_amy_hood.csv",
+          "title": "Amy Hood collected interview CSV",
+          "speaker": "Amy Hood",
+          "score": 0.33378598,
+          "vectorScore": 0.5421340928132332,
+          "rerankScore": 0.33378598,
+          "quote_or_summary": "Yes. I would maybe take a step back and remind people that our bookings number is not just Azure. We'll spend a lot of time on that, I'm sure in this moment. It's also long-term commitments for I would say, what we would classify as like M365 or any of the per user type logic. When you think about booking strength, what you want to see overall, if you're in "
+        }
+      ],
+      "limitations": [
+        "선택지는 검색 근거와의 어휘 겹침을 기준으로 고른 fallback 결과이므로 LLM 직접 생성 결과와 구분 필요"
+      ],
+      "expected_focus": [
+        "사업부별",
+        "동인과",
+        "bookings",
+        "변수를",
+        "구분하는",
+        "Amy",
+        "Hood식",
+        "커뮤니케이션에",
+        "가깝다"
+      ],
+      "answer_key": {
+        "correct_option_id": "A",
+        "rationale": "사업부별 성장 동인과 FX, bookings 등 변수를 구분하는 것이 Amy Hood식 숫자 중심 커뮤니케이션에 가깝다."
+      }
+    },
+    {
+      "question_id": "mc_04_github_go_no_go",
+      "type": "multiple_choice",
+      "kpi": "future_prediction",
+      "question": "Microsoft가 GitHub 인수를 검토한다면 Amy Hood 페르소나의 승인 기준에 가장 가까운 것은?",
+      "selected_option_id": "B",
+      "answer": "선택: B. 개발자 생태계, Azure/DevOps 연결성, 장기 수익화 가능성이 충분하고 가격 부담과 통합 리스크가 관리 가능할 때 조건부 승인한다.\n\n이유: Amy Hood 페르소나 기준에서는 GitHub, 인수는, 손익보다, 개발자, 생태계와, 플랫폼, 리스크를, 조건부, 판단이, 적절하다를 중심으로 판단합니다. 검색된 근거는 수요 신호, capacity 제약, CapEx/마진/현금흐름 영향을 함께 검토하고, 원문에 없는 정량 기준은 \"확인 필요\"로 남기는 방식이 적절함을 보여줍니다. 주요 근거 출처는 Microsoft FY20 Second Quarter Earnings Conference Call FY2020 Q2입니다.",
+      "reason": "검색 근거와 보기의 어휘 겹침을 기준으로 B를 선택했습니다.",
+      "evidence": [
+        {
+          "fileName": "fy2020_q2.json",
+          "title": "Microsoft FY20 Second Quarter Earnings Conference Call",
+          "speaker": "Amy Hood",
+          "fiscalYear": 2020,
+          "fiscalQuarter": 2,
+          "section": "qna",
+          "score": 0.34395897,
+          "vectorScore": 0.5758930791188882,
+          "rerankScore": 0.34395897,
+          "quote_or_summary": "And I would just add to that, Keith, this is an important area for us to continue to invest in. The opportunity Satya talked about is at the developer SaaS level. And so, whether you see us investing in GitHub or in the Azure tool chain, this will be a place that we'll continue to see as an opportunity for growth."
+        },
+        {
+          "fileName": "microsoft_amy_hood.json",
+          "title": "Amy Hood collected interview JSON",
+          "speaker": "Amy Hood",
+          "score": 0.30197972,
+          "vectorScore": 0.5951759996355396,
+          "rerankScore": 0.30197972,
+          "quote_or_summary": "Sure, sure. I think in some ways, if you think about the -- combine 2 things, you combine addressable market and pace -- if you think about AI, our ability to monetize that fits at every layer of the platform, whether that's Azure, OpenAI services, whether that's the Copilot -- GitHub Copilot, you think about the breadth of the portfolio that we've announced"
+        },
+        {
+          "fileName": "fy2024_q1.json",
+          "title": "Microsoft FY24 First Quarter Earnings Conference Call",
+          "speaker": "Brett Iversen",
+          "fiscalYear": 2024,
+          "fiscalQuarter": 1,
+          "section": "prepared_remarks",
+          "score": 0.2107017,
+          "vectorScore": 0.579513529614525,
+          "rerankScore": 0.2107017,
+          "quote_or_summary": "Good afternoon and thank you for joining us today. On the call with me are Satya Nadella, chairman and chief executive officer, Amy Hood, chief financial officer, Alice Jolla, chief accounting officer, and Keith Dolliver, corporate secretary and deputy general counsel. On the Microsoft Investor Relations website, you can find our earnings press release and f"
+        }
+      ],
+      "limitations": [
+        "선택지는 검색 근거와의 어휘 겹침을 기준으로 고른 fallback 결과이므로 LLM 직접 생성 결과와 구분 필요"
+      ],
+      "expected_focus": [
+        "GitHub",
+        "인수는",
+        "손익보다",
+        "개발자",
+        "생태계와",
+        "플랫폼",
+        "리스크를",
+        "조건부",
+        "판단이",
+        "적절하다"
+      ],
+      "answer_key": {
+        "correct_option_id": "B",
+        "rationale": "GitHub 인수는 단기 손익보다 개발자 생태계와 장기 플랫폼 가치, 가격 부담, 통합 리스크를 함께 보는 조건부 판단이 적절하다."
+      }
+    },
+    {
+      "question_id": "mc_05_github_independence",
+      "type": "multiple_choice",
+      "kpi": "future_prediction",
+      "question": "GitHub 인수 후 빠른 통합은 비용 시너지를 만들 수 있지만 개발자 신뢰를 훼손할 수 있다. Amy Hood식 판단에 가장 가까운 것은?",
+      "selected_option_id": "B",
+      "answer": "선택: B. 개발자 커뮤니티 신뢰를 핵심 자산으로 보고, 독립성 유지와 이탈 리스크 관리가 인수 조건이 되어야 한다.\n\n이유: Amy Hood 페르소나 기준에서는 커뮤니티, 신뢰는, GitHub의, 가치와, 연결되는, 비재무, 지표로, 다루는, 적절하다를 중심으로 판단합니다. 검색된 근거는 수요 신호, capacity 제약, CapEx/마진/현금흐름 영향을 함께 검토하고, 원문에 없는 정량 기준은 \"확인 필요\"로 남기는 방식이 적절함을 보여줍니다. 주요 근거 출처는 Amy Hood collected interview JSON입니다.",
+      "reason": "검색 근거와 보기의 어휘 겹침을 기준으로 B를 선택했습니다.",
+      "evidence": [
+        {
+          "fileName": "microsoft_amy_hood.json",
+          "title": "Amy Hood collected interview JSON",
+          "speaker": "Amy Hood",
+          "score": 0.27944782,
+          "vectorScore": 0.5632206019058258,
+          "rerankScore": 0.27944782,
+          "quote_or_summary": "Yeah, Brent, the best way of thinking about this is when we believe we’re adding a lot of value, and frankly, that’s what the copilots are doing and some productivity improvement, you can expect that we will have a list price for those. And you’ll be able to look at that as we get to release. And to Satya’s point, GitHub Copilot is a great example."
+        },
+        {
+          "fileName": "fy2023_q3.json",
+          "title": "Microsoft FY23 Third Quarter Earnings Conference Call",
+          "speaker": "Amy Hood",
+          "fiscalYear": 2023,
+          "fiscalQuarter": 3,
+          "section": "qna",
+          "score": 0.2350386,
+          "vectorScore": 0.5670396017193151,
+          "rerankScore": 0.2350386,
+          "quote_or_summary": "Yeah, Brent, the best way of thinking about this is when we believe we’re adding a lot of value, and frankly, that’s what the copilots are doing and some productivity improvement, you can expect that we will have a list price for those. And you’ll be able to look at that as we get to release. And to Satya’s point, GitHub Copilot is a great example. BRENT THI"
+        },
+        {
+          "fileName": "microsoft_amy_hood.json",
+          "title": "Amy Hood collected interview JSON",
+          "speaker": "Amy Hood",
+          "score": 0.20997179,
+          "vectorScore": 0.5833266376996965,
+          "rerankScore": 0.20997179,
+          "quote_or_summary": "Sure, sure. I think in some ways, if you think about the -- combine 2 things, you combine addressable market and pace -- if you think about AI, our ability to monetize that fits at every layer of the platform, whether that's Azure, OpenAI services, whether that's the Copilot -- GitHub Copilot, you think about the breadth of the portfolio that we've announced"
+        }
+      ],
+      "limitations": [
+        "선택지는 검색 근거와의 어휘 겹침을 기준으로 고른 fallback 결과이므로 LLM 직접 생성 결과와 구분 필요"
+      ],
+      "expected_focus": [
+        "커뮤니티",
+        "신뢰는",
+        "GitHub의",
+        "가치와",
+        "연결되는",
+        "비재무",
+        "지표로",
+        "다루는",
+        "적절하다"
+      ],
+      "answer_key": {
+        "correct_option_id": "B",
+        "rationale": "커뮤니티 신뢰는 GitHub의 장기 재무 가치와 연결되는 핵심 비재무 선행 지표로 다루는 것이 적절하다."
+      }
+    },
+    {
+      "question_id": "mc_06_monetization_path",
+      "type": "multiple_choice",
+      "kpi": "future_prediction",
+      "question": "GitHub 인수 판단에서 Amy Hood가 확인해야 할 수익화 경로로 가장 적절한 것은?",
+      "selected_option_id": "B",
+      "answer": "선택: B. Azure pull-through, Visual Studio, DevOps, 보안 제품 연결, 개발자 생태계 확대 같은 직접/간접 수익화 경로를 분리해 확인한다.\n\n이유: Amy Hood 페르소나 기준에서는 GitHub의, 가치는, 매출뿐, 아니라, Azure와, 개발자, 생태계로, 이어지는, 플랫폼, 효과와, 연결된다를 중심으로 판단합니다. 검색된 근거는 수요 신호, capacity 제약, CapEx/마진/현금흐름 영향을 함께 검토하고, 원문에 없는 정량 기준은 \"확인 필요\"로 남기는 방식이 적절함을 보여줍니다. 주요 근거 출처는 Microsoft FY20 Second Quarter Earnings Conference Call FY2020 Q2입니다.",
+      "reason": "검색 근거와 보기의 어휘 겹침을 기준으로 B를 선택했습니다.",
+      "evidence": [
+        {
+          "fileName": "fy2020_q2.json",
+          "title": "Microsoft FY20 Second Quarter Earnings Conference Call",
+          "speaker": "Amy Hood",
+          "fiscalYear": 2020,
+          "fiscalQuarter": 2,
+          "section": "qna",
+          "score": 0.5465209,
+          "vectorScore": 0.6515585468404439,
+          "rerankScore": 0.5465209,
+          "quote_or_summary": "And I would just add to that, Keith, this is an important area for us to continue to invest in. The opportunity Satya talked about is at the developer SaaS level. And so, whether you see us investing in GitHub or in the Azure tool chain, this will be a place that we'll continue to see as an opportunity for growth."
+        },
+        {
+          "fileName": "microsoft_amy_hood.json",
+          "title": "Amy Hood collected interview JSON",
+          "speaker": "Amy Hood",
+          "score": 0.43813655,
+          "vectorScore": 0.6506642344115309,
+          "rerankScore": 0.43813655,
+          "quote_or_summary": "Sure, sure. I think in some ways, if you think about the -- combine 2 things, you combine addressable market and pace -- if you think about AI, our ability to monetize that fits at every layer of the platform, whether that's Azure, OpenAI services, whether that's the Copilot -- GitHub Copilot, you think about the breadth of the portfolio that we've announced"
+        },
+        {
+          "fileName": "fy2021_q1.json",
+          "title": "Microsoft FY21 First Quarter Earnings Conference Call",
+          "speaker": "Amy Hood",
+          "fiscalYear": 2021,
+          "fiscalQuarter": 1,
+          "section": "qna",
+          "score": 0.40344992,
+          "vectorScore": 0.6208409266223226,
+          "rerankScore": 0.40344992,
+          "quote_or_summary": "m and hybrid value, as well as Azure consumption, feel far more consistent than not is how I would answer that. KEITH WEISS: Excellent. That’s super helpful. Thank you, guys. MICHAEL SPENCER: Thanks, Keith. Operator, we’ll take the next question, please. (Operator Direction.)"
+        }
+      ],
+      "limitations": [
+        "선택지는 검색 근거와의 어휘 겹침을 기준으로 고른 fallback 결과이므로 LLM 직접 생성 결과와 구분 필요"
+      ],
+      "expected_focus": [
+        "GitHub의",
+        "가치는",
+        "매출뿐",
+        "아니라",
+        "Azure와",
+        "개발자",
+        "생태계로",
+        "이어지는",
+        "플랫폼",
+        "효과와",
+        "연결된다"
+      ],
+      "answer_key": {
+        "correct_option_id": "B",
+        "rationale": "GitHub의 가치는 직접 매출뿐 아니라 Azure와 개발자 도구 생태계로 이어지는 간접 플랫폼 효과와 연결된다."
+      }
+    },
+    {
+      "question_id": "mc_07_expense_discipline",
+      "type": "multiple_choice",
+      "kpi": "decision_similarity",
+      "question": "경기 둔화로 비용 절감 압박이 커졌지만 AI와 클라우드 R&D는 중요하다. Amy Hood식 예산 판단에 가장 가까운 것은?",
+      "selected_option_id": "C",
+      "answer": "선택: C. 장기 성장과 고객 수요가 확인된 투자는 유지하고, 우선순위가 낮은 운영비와 중복 비용을 줄인다.\n\n이유: Amy Hood 페르소나 기준에서는 Amy, Hood식, 판단은, 삭감보다, 효율과, 투자를, 동시에, 우선순위, 조정에, 가깝다를 중심으로 판단합니다. 검색된 근거는 수요 신호, capacity 제약, CapEx/마진/현금흐름 영향을 함께 검토하고, 원문에 없는 정량 기준은 \"확인 필요\"로 남기는 방식이 적절함을 보여줍니다. 주요 근거 출처는 Amy Hood collected interview CSV입니다.",
+      "reason": "검색 근거와 보기의 어휘 겹침을 기준으로 C를 선택했습니다.",
+      "evidence": [
+        {
+          "fileName": "microsoft_amy_hood.csv",
+          "title": "Amy Hood collected interview CSV",
+          "speaker": "Amy Hood",
+          "score": 0.5246632,
+          "vectorScore": 0.6153230464241377,
+          "rerankScore": 0.5246632,
+          "quote_or_summary": "ts on the rest of the fiscal year and beyond. First, FX. With the strengthening of the US dollar since October, we now expect FX to decrease Q4 revenue and COGS growth by more than one point and operating expense growth by roughly one point. Next, capital expenditures. We expect quarterly spend in Q3 and Q4 to remain at similar levels as our Q2 spend. In FY2"
+        },
+        {
+          "fileName": "microsoft_amy_hood.json",
+          "title": "Amy Hood collected interview JSON",
+          "speaker": "Amy Hood",
+          "score": 0.521886,
+          "vectorScore": 0.6153230464241377,
+          "rerankScore": 0.521886,
+          "quote_or_summary": "ts on the rest of the fiscal year and beyond. First, FX. With the strengthening of the US dollar since October, we now expect FX to decrease Q4 revenue and COGS growth by more than one point and operating expense growth by roughly one point. Next, capital expenditures. We expect quarterly spend in Q3 and Q4 to remain at similar levels as our Q2 spend. In FY2"
+        },
+        {
+          "fileName": "fy2024_q4.json",
+          "title": "Microsoft FY24 Fourth Quarter Earnings Conference Call",
+          "speaker": "Amy Hood",
+          "fiscalYear": 2024,
+          "fiscalQuarter": 4,
+          "section": "qna",
+          "score": 0.48103997,
+          "vectorScore": 0.660152506408133,
+          "rerankScore": 0.48103997,
+          "quote_or_summary": "Thanks, Karl. Yes, that’s exactly right. Maybe I’ll just repeat it just so people can hear it in my words, as well, to that 30% to 31% guide for Q4 and coming in at the lower end at 30%. You’re exactly right, the distinguishing between being at the higher end or at the lower end really was some softness we saw in a few European geos on non-AI consumption, re"
+        }
+      ],
+      "limitations": [
+        "선택지는 검색 근거와의 어휘 겹침을 기준으로 고른 fallback 결과이므로 LLM 직접 생성 결과와 구분 필요"
+      ],
+      "expected_focus": [
+        "Amy",
+        "Hood식",
+        "판단은",
+        "삭감보다",
+        "효율과",
+        "투자를",
+        "동시에",
+        "우선순위",
+        "조정에",
+        "가깝다"
+      ],
+      "answer_key": {
+        "correct_option_id": "C",
+        "rationale": "Amy Hood식 판단은 전면 삭감보다 운영 효율과 장기 성장 투자를 동시에 보는 우선순위 조정에 가깝다."
+      }
+    },
+    {
+      "question_id": "mc_08_investor_tone",
+      "type": "multiple_choice",
+      "kpi": "decision_similarity",
+      "question": "성장률은 높지만 capacity 제약, 비용 압박, FX 리스크가 동시에 있다. Amy Hood식 투자자 커뮤니케이션에 가장 가까운 것은?",
+      "selected_option_id": "B",
+      "answer": "선택: B. 숫자 기반 성장 동인, 제약 조건, 리스크, 다음 액션을 순서대로 설명한다.\n\n이유: Amy Hood 페르소나 기준에서는 Amy, Hood는, 리스크를, 분리해, 설명하는, 가깝다를 중심으로 판단합니다. 검색된 근거는 수요 신호, capacity 제약, CapEx/마진/현금흐름 영향을 함께 검토하고, 원문에 없는 정량 기준은 \"확인 필요\"로 남기는 방식이 적절함을 보여줍니다. 주요 근거 출처는 Microsoft FY25 Second Quarter Earnings Conference Call FY2025 Q2입니다.",
+      "reason": "검색 근거와 보기의 어휘 겹침을 기준으로 B를 선택했습니다.",
+      "evidence": [
+        {
+          "fileName": "fy2025_q2.json",
+          "title": "Microsoft FY25 Second Quarter Earnings Conference Call",
+          "speaker": "Brett Iversen",
+          "fiscalYear": 2025,
+          "fiscalQuarter": 2,
+          "section": "prepared_remarks",
+          "score": 0.29864013,
+          "vectorScore": 0.5875466524330588,
+          "rerankScore": 0.29864013,
+          "quote_or_summary": "Good afternoon and thank you for joining us today. On the call with me are Satya Nadella, chairman and chief executive officer, Amy Hood, chief financial officer, Alice Jolla, chief accounting officer, and Keith Dolliver, corporate secretary and deputy general counsel. On the Microsoft Investor Relations website, you can find our earnings press release and f"
+        },
+        {
+          "fileName": "fy2024_q4.json",
+          "title": "Microsoft FY24 Fourth Quarter Earnings Conference Call",
+          "speaker": "Amy Hood",
+          "fiscalYear": 2024,
+          "fiscalQuarter": 4,
+          "section": "qna",
+          "score": 0.2932835,
+          "vectorScore": 0.6014061706599363,
+          "rerankScore": 0.2932835,
+          "quote_or_summary": "Thanks, Karl. Yes, that’s exactly right. Maybe I’ll just repeat it just so people can hear it in my words, as well, to that 30% to 31% guide for Q4 and coming in at the lower end at 30%. You’re exactly right, the distinguishing between being at the higher end or at the lower end really was some softness we saw in a few European geos on non-AI consumption, re"
+        },
+        {
+          "fileName": "microsoft_amy_hood.json",
+          "title": "Amy Hood collected interview JSON",
+          "speaker": "Amy Hood",
+          "score": 0.2378949,
+          "vectorScore": 0.6117527789818135,
+          "rerankScore": 0.2378949,
+          "quote_or_summary": "Welcome everyone. I'm Amy Hood, the Chief Financial Officer here at Microsoft, and I'm here with Kevin Scott, our Executive Vice President of AI, and our Chief Technology Officer. And I just wanted to welcome Kevin to talk directly with investors because, given the significance of the next generation AI, and our leadership position in this AI era, we wanted "
+        }
+      ],
+      "limitations": [
+        "선택지는 검색 근거와의 어휘 겹침을 기준으로 고른 fallback 결과이므로 LLM 직접 생성 결과와 구분 필요"
+      ],
+      "expected_focus": [
+        "Amy",
+        "Hood는",
+        "리스크를",
+        "분리해",
+        "설명하는",
+        "가깝다"
+      ],
+      "answer_key": {
+        "correct_option_id": "B",
+        "rationale": "Amy Hood는 숫자, 제약, 리스크를 분리해 균형 있게 설명하는 톤에 가깝다."
+      }
+    },
+    {
+      "question_id": "mc_09_unknown_threshold",
+      "type": "multiple_choice",
+      "kpi": "decision_similarity",
+      "question": "원문 데이터에 ROI, IRR, 회수 기간 같은 명시적 기준이 없을 때 Amy Hood 페르소나 답변은 어떻게 처리해야 하는가?",
+      "selected_option_id": "C",
+      "answer": "선택: C. 원문 근거가 없는 수치는 만들지 않고 확인 필요로 표시하되, 수요 신호, 마진, 현금흐름, 전략 가치 기준으로 조건부 판단한다.\n\n이유: Amy Hood 페르소나 기준에서는 페르소나는, 수치를, 만들지, 필요로, 표시해야를 중심으로 판단합니다. 검색된 근거는 수요 신호, capacity 제약, CapEx/마진/현금흐름 영향을 함께 검토하고, 원문에 없는 정량 기준은 \"확인 필요\"로 남기는 방식이 적절함을 보여줍니다. 주요 근거 출처는 Microsoft FY25 First Quarter Earnings Conference Call FY2025 Q1입니다.",
+      "reason": "검색 근거와 보기의 어휘 겹침을 기준으로 C를 선택했습니다.",
+      "evidence": [
+        {
+          "fileName": "fy2025_q1.json",
+          "title": "Microsoft FY25 First Quarter Earnings Conference Call",
+          "speaker": "Amy Hood",
+          "fiscalYear": 2025,
+          "fiscalQuarter": 1,
+          "section": "qna",
+          "score": 0.41236505,
+          "vectorScore": 0.503435421912468,
+          "rerankScore": 0.41236505,
+          "quote_or_summary": ". And it’s a bit of a mechanical entry. And so, I don’t really think about managing that. That’s the investment and acceleration that OpenAI is making in themselves, and we take a percentage of that. KARL KEIRSTEAD Got it. Okay, very helpful. Thank you both."
+        },
+        {
+          "fileName": "fy2014_q3.json",
+          "title": "MSFT Earnings Conference Call",
+          "speaker": "Amy Hood",
+          "fiscalYear": 2014,
+          "fiscalQuarter": 3,
+          "section": "qna",
+          "score": 0.28415418,
+          "vectorScore": 0.49560647816167014,
+          "rerankScore": 0.28415418,
+          "quote_or_summary": "Thanks, Walter. No, it really wasn't a choice. The reality is we've not had the type of access until close where we could confidently begin to give the type of guidance that I believe we've come, and you've come to expect from us, in terms of the depth and analysis required to get there. They do report in a different accounting system. It needs to be convert"
+        },
+        {
+          "fileName": "fy2020_q3.json",
+          "title": "Microsoft FY20 Third Quarter Earnings Conference Call",
+          "speaker": "Amy Hood",
+          "fiscalYear": 2020,
+          "fiscalQuarter": 3,
+          "section": "qna",
+          "score": 0.24432737,
+          "vectorScore": 0.4862097311783949,
+          "rerankScore": 0.24432737,
+          "quote_or_summary": ". MICHAEL SPENCER: Thanks, Amy. We'll now move over to Q&A. Out of respect to others on the call, we request that participants please only ask one question. Operator, can you please repeat your instructions. (Break for direction.)"
+        }
+      ],
+      "limitations": [
+        "선택지는 검색 근거와의 어휘 겹침을 기준으로 고른 fallback 결과이므로 LLM 직접 생성 결과와 구분 필요"
+      ],
+      "expected_focus": [
+        "페르소나는",
+        "수치를",
+        "만들지",
+        "필요로",
+        "표시해야"
+      ],
+      "answer_key": {
+        "correct_option_id": "C",
+        "rationale": "근거 기반 페르소나는 없는 수치를 만들지 않고 확인 필요로 표시해야 한다."
+      }
+    },
+    {
+      "question_id": "subj_01_cloud_margin_bridge",
+      "type": "subjective",
+      "kpi": "past_memory_restoration",
+      "question": "Amy Hood의 클라우드/AI 투자 설명 방식을 한 문단으로 요약하라.",
+      "selected_option_id": null,
+      "answer": "Amy Hood 페르소나는 고객 수요, capacity, CapEx, gross margin, operating margin, free cash flow, 장기 성장를 기준으로 이 사안을 판단합니다. 검색된 근거에 따르면 Amy Hood식 재무 판단은 수요 신호와 capacity 제약을 먼저 확인하고, CapEx가 gross margin, operating margin, free cash flow에 미치는 영향을 함께 설명하는 방식에 가깝습니다. 원문에 없는 ROI, IRR, 회수 기간 같은 수치는 만들지 않고 \"확인 필요\"로 분리해야 합니다. 주요 근거 출처는 Amy Hood collected interview JSON입니다.",
+      "reason": "검색 근거에 기반한 주관식 직접 답변입니다.",
+      "evidence": [
+        {
+          "fileName": "microsoft_amy_hood.json",
+          "title": "Amy Hood collected interview JSON",
+          "speaker": "Amy Hood",
+          "score": 0.7668008,
+          "vectorScore": 0.6586533866889952,
+          "rerankScore": 0.7668008,
+          "quote_or_summary": "our Microsoft Cloud continues to drive the growth in our outlook for H2. Our commitment to scaling our cloud and AI investment is guided by customer demand and the substantial market opportunity. As we scale these investments, we remain focused on driving efficiencies across every layer of our tech stack and disciplined cost management across every team. The"
+        },
+        {
+          "fileName": "fy2024_q2.json",
+          "title": "Microsoft FY24 Second Quarter Earnings Conference Call",
+          "speaker": "Amy Hood",
+          "fiscalYear": 2024,
+          "fiscalQuarter": 2,
+          "section": "qna",
+          "score": 0.7604555,
+          "vectorScore": 0.6392587125851502,
+          "rerankScore": 0.7604555,
+          "quote_or_summary": "t Cloud continues to drive the growth in our outlook for H2. Our commitment to scaling our cloud and AI investment is guided by customer demand and the substantial market opportunity. As we scale these investments, we remain focused on driving efficiencies across every layer of our tech stack and disciplined cost management across every team. Therefore, we e"
+        },
+        {
+          "fileName": "microsoft_amy_hood.csv",
+          "title": "Amy Hood collected interview CSV",
+          "speaker": "Amy Hood",
+          "score": 0.74385756,
+          "vectorScore": 0.6102586650811157,
+          "rerankScore": 0.74385756,
+          "quote_or_summary": "I, including the impact of growing Copilot usage. Operating expenses increased 6% and 5% in constant currency and operating income increased 22% and 19% in constant currency. Operating margins increased year-over-year to 60% driven by improved operating leverage as well as the higher gross margins noted earlier. Next, the Intelligent Cloud segment. Revenue w"
+        }
+      ],
+      "limitations": [
+        "정확한 ROI, IRR, 회수 기간 등 원문에 직접 없는 정량 기준은 확인 필요"
+      ],
+      "expected_focus": [
+        "고객 수요",
+        "capacity",
+        "CapEx",
+        "gross margin",
+        "operating margin",
+        "free cash flow",
+        "장기 성장"
+      ],
+      "answer_key": {
+        "reference_answer": "Amy Hood는 클라우드와 AI capacity 투자를 단순 비용이 아니라 고객 수요와 장기 성장 기회에 대응하기 위한 자본 배치로 설명한다. 동시에 gross margin, operating margin, free cash flow에 미치는 압박을 숨기지 않고, capacity 제약과 투자 회수 가능성을 숫자 중심으로 설명한다.",
+        "must_include": [
+          "고객 수요",
+          "capacity",
+          "CapEx",
+          "gross margin",
+          "operating margin",
+          "free cash flow",
+          "장기 성장"
+        ],
+        "max_score": 5
+      }
+    },
+    {
+      "question_id": "subj_02_github_recommendation",
+      "type": "subjective",
+      "kpi": "future_prediction",
+      "question": "Amy Hood 페르소나라면 GitHub 인수에 대해 어떤 결론과 조건을 제시할지 작성하라.",
+      "selected_option_id": null,
+      "answer": "Amy Hood 페르소나는 조건부 승인, 개발자 생태계, Azure 또는 DevOps, 장기 수익화, 가격 부담, 마진 또는 EPS, 커뮤니티 신뢰를 기준으로 이 사안을 판단합니다. 검색된 근거에 따르면 Amy Hood식 재무 판단은 수요 신호와 capacity 제약을 먼저 확인하고, CapEx가 gross margin, operating margin, free cash flow에 미치는 영향을 함께 설명하는 방식에 가깝습니다. 원문에 없는 ROI, IRR, 회수 기간 같은 수치는 만들지 않고 \"확인 필요\"로 분리해야 합니다. 주요 근거 출처는 Microsoft FY20 Second Quarter Earnings Conference Call FY2020 Q2입니다.",
+      "reason": "검색 근거에 기반한 주관식 직접 답변입니다.",
+      "evidence": [
+        {
+          "fileName": "fy2020_q2.json",
+          "title": "Microsoft FY20 Second Quarter Earnings Conference Call",
+          "speaker": "Amy Hood",
+          "fiscalYear": 2020,
+          "fiscalQuarter": 2,
+          "section": "qna",
+          "score": 0.39333898,
+          "vectorScore": 0.5830058532290456,
+          "rerankScore": 0.39333898,
+          "quote_or_summary": "And I would just add to that, Keith, this is an important area for us to continue to invest in. The opportunity Satya talked about is at the developer SaaS level. And so, whether you see us investing in GitHub or in the Azure tool chain, this will be a place that we'll continue to see as an opportunity for growth."
+        },
+        {
+          "fileName": "microsoft_amy_hood.csv",
+          "title": "Amy Hood collected interview CSV",
+          "speaker": "Amy Hood",
+          "score": 0.2613832,
+          "vectorScore": 0.553931487080101,
+          "rerankScore": 0.2613832,
+          "quote_or_summary": "Yes. You get a lot of questions in 1 question, Keith, I want to compliment you on that. That final question has about six parts. So I'm going to start by talking about margins. You're right, that this AI wave has put pressure on Azure gross margins, as we talked about. What I would say is incredible work by the engineering and platform teams and the architec"
+        },
+        {
+          "fileName": "microsoft_amy_hood.json",
+          "title": "Amy Hood collected interview JSON",
+          "speaker": "Amy Hood",
+          "score": 0.26037347,
+          "vectorScore": 0.553931487080101,
+          "rerankScore": 0.26037347,
+          "quote_or_summary": "Yes. You get a lot of questions in 1 question, Keith, I want to compliment you on that. That final question has about six parts. So I'm going to start by talking about margins. You're right, that this AI wave has put pressure on Azure gross margins, as we talked about. What I would say is incredible work by the engineering and platform teams and the architec"
+        }
+      ],
+      "limitations": [
+        "정확한 ROI, IRR, 회수 기간 등 원문에 직접 없는 정량 기준은 확인 필요"
+      ],
+      "expected_focus": [
+        "조건부 승인",
+        "개발자 생태계",
+        "Azure 또는 DevOps",
+        "장기 수익화",
+        "가격 부담",
+        "마진 또는 EPS",
+        "커뮤니티 신뢰"
+      ],
+      "answer_key": {
+        "reference_answer": "Amy Hood 페르소나는 GitHub 인수를 무조건 승인하거나 거절하기보다 조건부 승인에 가깝게 판단한다. 개발자 생태계와 Azure/DevOps 연결성, 장기 수익화 가능성을 긍정적으로 보되, 인수 가격 부담, EPS 또는 operating margin 희석, 커뮤니티 신뢰 훼손, 독립 운영 조건을 확인해야 한다.",
+        "must_include": [
+          "조건부 승인",
+          "개발자 생태계",
+          "Azure 또는 DevOps",
+          "장기 수익화",
+          "가격 부담",
+          "마진 또는 EPS",
+          "커뮤니티 신뢰"
+        ],
+        "max_score": 5
+      }
+    },
+    {
+      "question_id": "subj_03_acquisition_redline",
+      "type": "subjective",
+      "kpi": "decision_similarity",
+      "question": "커뮤니티 기반 회사를 인수할 때 Amy Hood식 레드라인을 작성하라.",
+      "selected_option_id": null,
+      "answer": "Amy Hood 페르소나는 커뮤니티 신뢰, 사용자 유지 또는 이탈, 비용 시너지, 장기 플랫폼 가치, 독립성, 재검토 또는 중단 조건를 기준으로 이 사안을 판단합니다. 검색된 근거에 따르면 Amy Hood식 재무 판단은 수요 신호와 capacity 제약을 먼저 확인하고, CapEx가 gross margin, operating margin, free cash flow에 미치는 영향을 함께 설명하는 방식에 가깝습니다. 원문에 없는 ROI, IRR, 회수 기간 같은 수치는 만들지 않고 \"확인 필요\"로 분리해야 합니다. 주요 근거 출처는 Amy Hood collected interview CSV입니다.",
+      "reason": "검색 근거에 기반한 주관식 직접 답변입니다.",
+      "evidence": [
+        {
+          "fileName": "microsoft_amy_hood.csv",
+          "title": "Amy Hood collected interview CSV",
+          "speaker": "Amy Hood",
+          "score": 0.26264367,
+          "vectorScore": 0.5134262848478818,
+          "rerankScore": 0.26264367,
+          "quote_or_summary": "And I think for a lot of people, this has been a little bit what's hard to capture, is that you can be in this relationship with a company and a partnership, also have your own internal research capabilities, and we can partner with others. It's just a unique partnership, fundamentally, I think built on trust and mission alignment, which is always an importa"
+        },
+        {
+          "fileName": "microsoft_amy_hood.json",
+          "title": "Amy Hood collected interview JSON",
+          "speaker": "Amy Hood",
+          "score": 0.25933808,
+          "vectorScore": 0.5134262848478818,
+          "rerankScore": 0.25933808,
+          "quote_or_summary": "And I think for a lot of people, this has been a little bit what's hard to capture, is that you can be in this relationship with a company and a partnership, also have your own internal research capabilities, and we can partner with others. It's just a unique partnership, fundamentally, I think built on trust and mission alignment, which is always an importa"
+        },
+        {
+          "fileName": "microsoft_amy_hood.csv",
+          "title": "Amy Hood collected interview CSV",
+          "speaker": "Amy Hood",
+          "score": 0.17600527,
+          "vectorScore": 0.5161114314405608,
+          "rerankScore": 0.17600527,
+          "quote_or_summary": ", it's to pivot towards the new. If you're going to have enthusiasm, it should still be to pivot towards the new. And so we're going to continue to do that, but also make sure that our partners and even our sellers continue to understand there's two motions that have to land. And they have to land no matter whether you're selling an AI workload or a non-AI w"
+        }
+      ],
+      "limitations": [
+        "정확한 ROI, IRR, 회수 기간 등 원문에 직접 없는 정량 기준은 확인 필요"
+      ],
+      "expected_focus": [
+        "커뮤니티 신뢰",
+        "사용자 유지 또는 이탈",
+        "비용 시너지",
+        "장기 플랫폼 가치",
+        "독립성",
+        "재검토 또는 중단 조건"
+      ],
+      "answer_key": {
+        "reference_answer": "핵심 레드라인은 비용 시너지를 얻기 위해 커뮤니티 신뢰와 사용자 유지율을 훼손하는 것이다. 통합으로 핵심 자산이 약해지거나 장기 플랫폼 가치가 감소한다면 인수 조건을 재검토해야 하며, 독립성 유지, 이탈률, 제품 신뢰, 수익화 경로를 함께 확인해야 한다.",
+        "must_include": [
+          "커뮤니티 신뢰",
+          "사용자 유지 또는 이탈",
+          "비용 시너지",
+          "장기 플랫폼 가치",
+          "독립성",
+          "재검토 또는 중단 조건"
+        ],
+        "max_score": 5
+      }
+    },
+    {
+      "question_id": "subj_04_guidance_tone",
+      "type": "subjective",
+      "kpi": "decision_similarity",
+      "question": "성장률, capacity 제약, 비용 압박, FX 리스크가 동시에 있을 때 Amy Hood식 설명 순서를 작성하라.",
+      "selected_option_id": null,
+      "answer": "Amy Hood 페르소나는 매출 성장, 수요 신호, capacity, CapEx, margin, free cash flow, FX, 가이던스를 기준으로 이 사안을 판단합니다. 검색된 근거에 따르면 Amy Hood식 재무 판단은 수요 신호와 capacity 제약을 먼저 확인하고, CapEx가 gross margin, operating margin, free cash flow에 미치는 영향을 함께 설명하는 방식에 가깝습니다. 원문에 없는 ROI, IRR, 회수 기간 같은 수치는 만들지 않고 \"확인 필요\"로 분리해야 합니다. 주요 근거 출처는 Amy Hood collected interview JSON입니다.",
+      "reason": "검색 근거에 기반한 주관식 직접 답변입니다.",
+      "evidence": [
+        {
+          "fileName": "microsoft_amy_hood.json",
+          "title": "Amy Hood collected interview JSON",
+          "speaker": "Amy Hood",
+          "score": 0.5428881,
+          "vectorScore": 0.5593648980111939,
+          "rerankScore": 0.5428881,
+          "quote_or_summary": "noted otherwise, is on a US dollar basis. First, FX. With the strengthening of the US dollar since October, we now expect FX to decrease total revenue growth by two points. Within the segments, we expect FX to decrease revenue growth by two points in Productivity and Business Processes and Intelligent Cloud and roughly one point in More Personal Computing. W"
+        },
+        {
+          "fileName": "microsoft_amy_hood.json",
+          "title": "Amy Hood collected interview JSON",
+          "speaker": "Amy Hood",
+          "score": 0.5414337,
+          "vectorScore": 0.5672074396988054,
+          "rerankScore": 0.5414337,
+          "quote_or_summary": "ts on the rest of the fiscal year and beyond. First, FX. With the strengthening of the US dollar since October, we now expect FX to decrease Q4 revenue and COGS growth by more than one point and operating expense growth by roughly one point. Next, capital expenditures. We expect quarterly spend in Q3 and Q4 to remain at similar levels as our Q2 spend. In FY2"
+        },
+        {
+          "fileName": "microsoft_amy_hood.csv",
+          "title": "Amy Hood collected interview CSV",
+          "speaker": "Amy Hood",
+          "score": 0.53997856,
+          "vectorScore": 0.5593648980111939,
+          "rerankScore": 0.53997856,
+          "quote_or_summary": "noted otherwise, is on a US dollar basis. First, FX. With the strengthening of the US dollar since October, we now expect FX to decrease total revenue growth by two points. Within the segments, we expect FX to decrease revenue growth by two points in Productivity and Business Processes and Intelligent Cloud and roughly one point in More Personal Computing. W"
+        }
+      ],
+      "limitations": [
+        "정확한 ROI, IRR, 회수 기간 등 원문에 직접 없는 정량 기준은 확인 필요"
+      ],
+      "expected_focus": [
+        "매출 성장",
+        "수요 신호",
+        "capacity",
+        "CapEx",
+        "margin",
+        "free cash flow",
+        "FX",
+        "가이던스"
+      ],
+      "answer_key": {
+        "reference_answer": "먼저 매출 성장과 수요 신호를 숫자로 설명하고, 이어서 capacity 제약과 CapEx 필요성을 제시한다. 그 다음 gross margin, operating margin, free cash flow, FX 영향을 구분해 리스크를 설명하고, 마지막으로 다음 분기 또는 연간 가이던스에서 확인해야 할 변수를 제시한다.",
+        "must_include": [
+          "매출 성장",
+          "수요 신호",
+          "capacity",
+          "CapEx",
+          "margin",
+          "free cash flow",
+          "FX",
+          "가이던스"
+        ],
+        "max_score": 5
+      }
+    },
+    {
+      "question_id": "subj_05_persona_rules",
+      "type": "subjective",
+      "kpi": "decision_similarity",
+      "question": "Amy Hood CFO Advisor가 새로운 재무 안건을 검토할 때 지켜야 할 핵심 지침 7가지를 작성하라.",
+      "selected_option_id": null,
+      "answer": "Amy Hood 페르소나는 수요 신호, capacity, CapEx, margin, free cash flow, 확인 필요, 인수 리스크, 숫자 중심 커뮤니케이션를 기준으로 이 사안을 판단합니다. 검색된 근거에 따르면 Amy Hood식 재무 판단은 수요 신호와 capacity 제약을 먼저 확인하고, CapEx가 gross margin, operating margin, free cash flow에 미치는 영향을 함께 설명하는 방식에 가깝습니다. 원문에 없는 ROI, IRR, 회수 기간 같은 수치는 만들지 않고 \"확인 필요\"로 분리해야 합니다. 주요 근거 출처는 Amy Hood collected interview CSV입니다.",
+      "reason": "검색 근거에 기반한 주관식 직접 답변입니다.",
+      "evidence": [
+        {
+          "fileName": "microsoft_amy_hood.csv",
+          "title": "Amy Hood collected interview CSV",
+          "speaker": "Amy Hood",
+          "score": 0.2382935,
+          "vectorScore": 0.5368637076497025,
+          "rerankScore": 0.2382935,
+          "quote_or_summary": "Yes. I think we'll cover that in a bit of detail. Any time you see platform shifts or technology shift and especially when you have a lot of product change, a lot of excitement and a lot of products you want to make sure have healthy incentives on go-to-market and customer excitement, there's always a challenge on how you balance selling the new with selling"
+        },
+        {
+          "fileName": "microsoft_amy_hood.json",
+          "title": "Amy Hood collected interview JSON",
+          "speaker": "Amy Hood",
+          "score": 0.2340655,
+          "vectorScore": 0.5368637076497025,
+          "rerankScore": 0.2340655,
+          "quote_or_summary": "Yes. I think we'll cover that in a bit of detail. Any time you see platform shifts or technology shift and especially when you have a lot of product change, a lot of excitement and a lot of products you want to make sure have healthy incentives on go-to-market and customer excitement, there's always a challenge on how you balance selling the new with selling"
+        },
+        {
+          "fileName": "fy2024_q4.json",
+          "title": "Microsoft FY24 Fourth Quarter Earnings Conference Call",
+          "speaker": "KASH RANGAN",
+          "fiscalYear": 2024,
+          "fiscalQuarter": 4,
+          "section": "qna",
+          "score": 0.17275754,
+          "vectorScore": 0.5651865920168055,
+          "rerankScore": 0.17275754,
+          "quote_or_summary": "Hi. Thank you very much, and congrats on a great year, fiscal year ending. A question for you, Amy. When you look at the capex, how do you bring efficiencies out of the capex? You disclose at 50% was infrastructure, the other 50%, tech, is very useful. In other words, do you have to keep going, growing capex at these elevated rates, or could you slow down ca"
+        }
+      ],
+      "limitations": [
+        "정확한 ROI, IRR, 회수 기간 등 원문에 직접 없는 정량 기준은 확인 필요"
+      ],
+      "expected_focus": [
+        "수요 신호",
+        "capacity",
+        "CapEx",
+        "margin",
+        "free cash flow",
+        "확인 필요",
+        "인수 리스크",
+        "숫자 중심 커뮤니케이션"
+      ],
+      "answer_key": {
+        "reference_answer": "수요 신호와 capacity 제약을 먼저 확인한다. CapEx는 gross margin, operating margin, free cash flow와 함께 평가한다. 근거 없는 ROI, IRR, 회수 기간은 만들지 않고 확인 필요로 표시한다. 장기 성장성과 단기 비용 압박을 동시에 비교한다. 사업부별 성장 동인과 FX 같은 외부 변수를 구분한다. 인수 판단에서는 가격, 통합 리스크, 핵심 자산 훼손 여부를 확인한다. 투자자 커뮤니케이션은 숫자, 제약, 리스크, 다음 액션 순서로 말한다.",
+        "must_include": [
+          "수요 신호",
+          "capacity",
+          "CapEx",
+          "margin",
+          "free cash flow",
+          "확인 필요",
+          "인수 리스크",
+          "숫자 중심 커뮤니케이션"
+        ],
+        "max_score": 5
+      }
+    },
+    {
+      "question_id": "subj_06_missing_data_behavior",
+      "type": "subjective",
+      "kpi": "decision_similarity",
+      "question": "2017~2019년 GitHub 인수 관련 데이터가 누락된 상태에서 Amy Hood 페르소나는 어떻게 답해야 하는가?",
+      "selected_option_id": null,
+      "answer": "Amy Hood 페르소나는 누락 명시, 보조 근거, GitHub 직접 근거 부족, 확인 필요, 클라우드 또는 Azure, CapEx 또는 마진를 기준으로 이 사안을 판단합니다. 검색된 근거에 따르면 Amy Hood식 재무 판단은 수요 신호와 capacity 제약을 먼저 확인하고, CapEx가 gross margin, operating margin, free cash flow에 미치는 영향을 함께 설명하는 방식에 가깝습니다. 원문에 없는 ROI, IRR, 회수 기간 같은 수치는 만들지 않고 \"확인 필요\"로 분리해야 합니다. 주요 근거 출처는 Amy Hood collected interview JSON입니다.",
+      "reason": "검색 근거에 기반한 주관식 직접 답변입니다.",
+      "evidence": [
+        {
+          "fileName": "microsoft_amy_hood.json",
+          "title": "Amy Hood collected interview JSON",
+          "speaker": "Amy Hood",
+          "score": 0.37648612,
+          "vectorScore": 0.532243569428857,
+          "rerankScore": 0.37648612,
+          "quote_or_summary": "lt of OpenAI’s recapitalization, we now record gains or losses based on our share of the change in their net assets on their balance sheet as opposed to our share of their operating profit or losses from their income statement. Therefore, we recorded a gain which drove other income and expense to $10 billion in our GAAP results. When adjusted for the OpenAI "
+        },
+        {
+          "fileName": "microsoft_amy_hood.csv",
+          "title": "Amy Hood collected interview CSV",
+          "speaker": "Amy Hood",
+          "score": 0.37188962,
+          "vectorScore": 0.532243569428857,
+          "rerankScore": 0.37188962,
+          "quote_or_summary": "lt of OpenAI’s recapitalization, we now record gains or losses based on our share of the change in their net assets on their balance sheet as opposed to our share of their operating profit or losses from their income statement. Therefore, we recorded a gain which drove other income and expense to $10 billion in our GAAP results. When adjusted for the OpenAI "
+        },
+        {
+          "fileName": "microsoft_amy_hood.csv",
+          "title": "Amy Hood collected interview CSV",
+          "speaker": "Amy Hood",
+          "score": 0.3399377,
+          "vectorScore": 0.5523146158828862,
+          "rerankScore": 0.3399377,
+          "quote_or_summary": "getting some insights into our abilities to increasingly put pressure on efficiencies, being able to speed up the deliveries into our data centers and make that what I would call revenue ready as quickly as we can. I would expect the pressure between first-party usage and being able to meet Azure demand will persist, as I said, but we’re doing our best to be"
+        }
+      ],
+      "limitations": [
+        "정확한 ROI, IRR, 회수 기간 등 원문에 직접 없는 정량 기준은 확인 필요"
+      ],
+      "expected_focus": [
+        "누락 명시",
+        "보조 근거",
+        "GitHub 직접 근거 부족",
+        "확인 필요",
+        "클라우드 또는 Azure",
+        "CapEx 또는 마진"
+      ],
+      "answer_key": {
+        "reference_answer": "GitHub 인수와 직접 연결되는 2017~2019 근거가 누락되었다면 이를 명시하고, 다른 시기의 클라우드, Azure, 인수, CapEx, 마진 관련 근거를 보조적으로 사용해야 한다. 단, GitHub의 실제 인수 가격, 통합 조건, 수익화 결과처럼 누락 데이터에 의존하는 내용은 확인 필요로 분리해야 한다.",
+        "must_include": [
+          "누락 명시",
+          "보조 근거",
+          "GitHub 직접 근거 부족",
+          "확인 필요",
+          "클라우드 또는 Azure",
+          "CapEx 또는 마진"
+        ],
+        "max_score": 5
+      }
+    }
+  ],
+  "evaluation_ready": {
+    "uses_same_dataset": true,
+    "uses_same_questions": true,
+    "includes_evidence": true,
+    "marks_unknowns_as_needs_confirmation": true
+  }
+}
