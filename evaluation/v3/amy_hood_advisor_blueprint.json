@@ -1,0 +1,258 @@
+{
+  "dataset": "amy_hood_decision_advisor_evaluation_blueprint",
+  "version": "3.0.0",
+  "slots": [
+    {
+      "id": "D01",
+      "category": "amy_specific_discrimination",
+      "type": "multiple_choice",
+      "domain": "m_and_a",
+      "requiredSplit": "none",
+      "scoreDimensions": ["decisionSelection", "criteriaPriority"]
+    },
+    {
+      "id": "D02",
+      "category": "amy_specific_discrimination",
+      "type": "multiple_choice",
+      "domain": "ai_cloud_capex",
+      "requiredSplit": "none",
+      "scoreDimensions": ["decisionSelection", "criteriaPriority"]
+    },
+    {
+      "id": "D03",
+      "category": "amy_specific_discrimination",
+      "type": "multiple_choice",
+      "domain": "pricing_monetization",
+      "requiredSplit": "none",
+      "scoreDimensions": ["decisionSelection", "criteriaPriority"]
+    },
+    {
+      "id": "D04",
+      "category": "amy_specific_discrimination",
+      "type": "multiple_choice",
+      "domain": "cost_efficiency",
+      "requiredSplit": "none",
+      "scoreDimensions": ["decisionSelection", "criteriaPriority"]
+    },
+    {
+      "id": "D05",
+      "category": "amy_specific_discrimination",
+      "type": "multiple_choice",
+      "domain": "shareholder_return_risk",
+      "requiredSplit": "none",
+      "scoreDimensions": ["decisionSelection", "criteriaPriority"]
+    },
+    {
+      "id": "D06",
+      "category": "amy_specific_discrimination",
+      "type": "multiple_choice",
+      "domain": "m_and_a",
+      "requiredSplit": "none",
+      "scoreDimensions": ["decisionSelection", "criteriaPriority"]
+    },
+    {
+      "id": "D07",
+      "category": "amy_specific_discrimination",
+      "type": "multiple_choice",
+      "domain": "ai_cloud_capex",
+      "requiredSplit": "none",
+      "scoreDimensions": ["decisionSelection", "criteriaPriority"]
+    },
+    {
+      "id": "D08",
+      "category": "amy_specific_discrimination",
+      "type": "multiple_choice",
+      "domain": "pricing_monetization",
+      "requiredSplit": "none",
+      "scoreDimensions": ["decisionSelection", "criteriaPriority"]
+    },
+    {
+      "id": "D09",
+      "category": "amy_specific_discrimination",
+      "type": "multiple_choice",
+      "domain": "cost_efficiency",
+      "requiredSplit": "none",
+      "scoreDimensions": ["decisionSelection", "criteriaPriority"]
+    },
+    {
+      "id": "D10",
+      "category": "amy_specific_discrimination",
+      "type": "multiple_choice",
+      "domain": "shareholder_return_risk",
+      "requiredSplit": "none",
+      "scoreDimensions": ["decisionSelection", "criteriaPriority"]
+    },
+    {
+      "id": "H01",
+      "category": "temporal_holdout",
+      "type": "multiple_choice",
+      "domain": "m_and_a",
+      "requiredSplit": "holdout",
+      "scoreDimensions": ["decisionSelection", "evidenceFaithfulness"]
+    },
+    {
+      "id": "H02",
+      "category": "temporal_holdout",
+      "type": "multiple_choice",
+      "domain": "ai_cloud_capex",
+      "requiredSplit": "holdout",
+      "scoreDimensions": ["decisionSelection", "evidenceFaithfulness"]
+    },
+    {
+      "id": "H03",
+      "category": "temporal_holdout",
+      "type": "multiple_choice",
+      "domain": "pricing_monetization",
+      "requiredSplit": "holdout",
+      "scoreDimensions": ["decisionSelection", "evidenceFaithfulness"]
+    },
+    {
+      "id": "H04",
+      "category": "temporal_holdout",
+      "type": "multiple_choice",
+      "domain": "cost_efficiency",
+      "requiredSplit": "holdout",
+      "scoreDimensions": ["decisionSelection", "evidenceFaithfulness"]
+    },
+    {
+      "id": "H05",
+      "category": "temporal_holdout",
+      "type": "multiple_choice",
+      "domain": "shareholder_return_risk",
+      "requiredSplit": "holdout",
+      "scoreDimensions": ["decisionSelection", "evidenceFaithfulness"]
+    },
+    {
+      "id": "H06",
+      "category": "temporal_holdout",
+      "type": "multiple_choice",
+      "domain": "m_and_a",
+      "requiredSplit": "holdout",
+      "scoreDimensions": ["decisionSelection", "evidenceFaithfulness"]
+    },
+    {
+      "id": "H07",
+      "category": "temporal_holdout",
+      "type": "multiple_choice",
+      "domain": "ai_cloud_capex",
+      "requiredSplit": "holdout",
+      "scoreDimensions": ["decisionSelection", "evidenceFaithfulness"]
+    },
+    {
+      "id": "H08",
+      "category": "temporal_holdout",
+      "type": "multiple_choice",
+      "domain": "pricing_monetization",
+      "requiredSplit": "holdout",
+      "scoreDimensions": ["decisionSelection", "evidenceFaithfulness"]
+    },
+    {
+      "id": "H09",
+      "category": "temporal_holdout",
+      "type": "multiple_choice",
+      "domain": "cost_efficiency",
+      "requiredSplit": "holdout",
+      "scoreDimensions": ["decisionSelection", "evidenceFaithfulness"]
+    },
+    {
+      "id": "H10",
+      "category": "temporal_holdout",
+      "type": "multiple_choice",
+      "domain": "shareholder_return_risk",
+      "requiredSplit": "holdout",
+      "scoreDimensions": ["decisionSelection", "evidenceFaithfulness"]
+    },
+    {
+      "id": "C01A",
+      "category": "counterfactual_pair",
+      "type": "multiple_choice",
+      "domain": "m_and_a",
+      "pairId": "C01",
+      "pairVariant": "a",
+      "requiredSplit": "none",
+      "scoreDimensions": ["decisionSelection", "conditionSensitivity"]
+    },
+    {
+      "id": "C01B",
+      "category": "counterfactual_pair",
+      "type": "multiple_choice",
+      "domain": "ai_cloud_capex",
+      "pairId": "C01",
+      "pairVariant": "b",
+      "requiredSplit": "none",
+      "scoreDimensions": ["decisionSelection", "conditionSensitivity"]
+    },
+    {
+      "id": "C02A",
+      "category": "counterfactual_pair",
+      "type": "multiple_choice",
+      "domain": "pricing_monetization",
+      "pairId": "C02",
+      "pairVariant": "a",
+      "requiredSplit": "none",
+      "scoreDimensions": ["decisionSelection", "conditionSensitivity"]
+    },
+    {
+      "id": "C02B",
+      "category": "counterfactual_pair",
+      "type": "multiple_choice",
+      "domain": "cost_efficiency",
+      "pairId": "C02",
+      "pairVariant": "b",
+      "requiredSplit": "none",
+      "scoreDimensions": ["decisionSelection", "conditionSensitivity"]
+    },
+    {
+      "id": "C03A",
+      "category": "counterfactual_pair",
+      "type": "multiple_choice",
+      "domain": "shareholder_return_risk",
+      "pairId": "C03",
+      "pairVariant": "a",
+      "requiredSplit": "none",
+      "scoreDimensions": ["decisionSelection", "conditionSensitivity"]
+    },
+    {
+      "id": "C03B",
+      "category": "counterfactual_pair",
+      "type": "multiple_choice",
+      "domain": "m_and_a",
+      "pairId": "C03",
+      "pairVariant": "b",
+      "requiredSplit": "none",
+      "scoreDimensions": ["decisionSelection", "conditionSensitivity"]
+    },
+    {
+      "id": "S01",
+      "category": "new_advisory_scenario",
+      "type": "subjective",
+      "domain": "m_and_a",
+      "requiredSplit": "none",
+      "scoreDimensions": ["criteriaPriority", "conditionSensitivity", "evidenceFaithfulness", "actionability"]
+    },
+    {
+      "id": "S02",
+      "category": "new_advisory_scenario",
+      "type": "subjective",
+      "domain": "ai_cloud_capex",
+      "requiredSplit": "none",
+      "scoreDimensions": ["criteriaPriority", "conditionSensitivity", "evidenceFaithfulness", "actionability"]
+    },
+    {
+      "id": "S03",
+      "category": "new_advisory_scenario",
+      "type": "subjective",
+      "domain": "pricing_monetization",
+      "requiredSplit": "none",
+      "scoreDimensions": ["criteriaPriority", "conditionSensitivity", "evidenceFaithfulness", "actionability"]
+    },
+    {
+      "id": "S04",
+      "category": "new_advisory_scenario",
+      "type": "subjective",
+      "domain": "cost_efficiency",
+      "requiredSplit": "none",
+      "scoreDimensions": ["criteriaPriority", "conditionSensitivity", "evidenceFaithfulness", "actionability"]
+    }
+  ]
+}

@@ -10,6 +10,7 @@
  *
  * 3. Failure Path:
  *    - unknown experiment arms are rejected at runtime before experiment setup.
+ *    - invalid blueprints reject duplicate IDs, incorrect slot counts, and unpaired counterfactuals.
  */
 import assert from 'node:assert/strict';
 import test from 'node:test';
@@ -22,6 +23,7 @@ import {
   type EvaluationV3BlueprintSlot,
   type DecisionDomain,
 } from '../shared/amyHoodDecisionAdvisor';
+import { assertEvaluationV3Blueprint, loadEvaluationV3Blueprint } from '../server/evaluationV3/blueprint';
 
 const DOMAIN_ORDER: DecisionDomain[] = [
   'm_and_a',
@@ -31,7 +33,7 @@ const DOMAIN_ORDER: DecisionDomain[] = [
   'shareholder_return_risk',
 ];
 
-const slot = (
+const fixtureSlot = (
   id: string,
   values: Omit<EvaluationV3BlueprintSlot, 'id' | 'domain' | 'scoreDimensions'>,
   index: number,
@@ -47,7 +49,7 @@ const blueprint: EvaluationV3Blueprint = {
   version: '3.0.0',
   slots: [
     ...Array.from({ length: 10 }, (_, index) =>
-      slot(
+      fixtureSlot(
         `amy-specific-${index + 1}`,
         {
           category: 'amy_specific_discrimination',
@@ -58,7 +60,7 @@ const blueprint: EvaluationV3Blueprint = {
       ),
     ),
     ...Array.from({ length: 10 }, (_, index) =>
-      slot(
+      fixtureSlot(
         `temporal-holdout-${index + 1}`,
         {
           category: 'temporal_holdout',
@@ -69,7 +71,7 @@ const blueprint: EvaluationV3Blueprint = {
       ),
     ),
     ...Array.from({ length: 6 }, (_, index) =>
-      slot(
+      fixtureSlot(
         `counterfactual-${index + 1}`,
         {
           category: 'counterfactual_pair',
@@ -82,7 +84,7 @@ const blueprint: EvaluationV3Blueprint = {
       ),
     ),
     ...Array.from({ length: 4 }, (_, index) =>
-      slot(
+      fixtureSlot(
         `advisory-${index + 1}`,
         {
           category: 'new_advisory_scenario',
@@ -158,4 +160,90 @@ test('edge: four advisory slots are subjective and the remaining slots are multi
 test('failure: rejects an unknown experiment arm before experiment setup', () => {
   assert.equal(isEvaluationV3Arm('amy_full_rag'), true);
   assert.equal(isEvaluationV3Arm('unknown_arm'), false);
+});
+
+const slot = (
+  id: string,
+  category: EvaluationV3BlueprintSlot['category'],
+  index: number,
+): EvaluationV3BlueprintSlot => ({
+  id,
+  category,
+  type: category === 'new_advisory_scenario' ? 'subjective' : 'multiple_choice',
+  domain: (['m_and_a', 'ai_cloud_capex', 'pricing_monetization', 'cost_efficiency', 'shareholder_return_risk'] as const)[
+    index % 5
+  ],
+  ...(category === 'counterfactual_pair'
+    ? { pairId: `C${Math.floor(index / 2) + 1}`, pairVariant: index % 2 === 0 ? 'a' : 'b' }
+    : {}),
+  requiredSplit: category === 'temporal_holdout' ? 'holdout' : 'none',
+  scoreDimensions: [category === 'new_advisory_scenario' ? 'actionability' : 'decisionSelection'],
+});
+
+const validBlueprint: EvaluationV3Blueprint = {
+  dataset: 'amy_hood_decision_advisor_evaluation_blueprint',
+  version: '3.0.0',
+  slots: [
+    ...Array.from({ length: 10 }, (_, index) =>
+      slot(`D${String(index + 1).padStart(2, '0')}`, 'amy_specific_discrimination', index),
+    ),
+    ...Array.from({ length: 10 }, (_, index) =>
+      slot(`H${String(index + 1).padStart(2, '0')}`, 'temporal_holdout', index),
+    ),
+    ...Array.from({ length: 6 }, (_, index) =>
+      slot(`C${String(Math.floor(index / 2) + 1).padStart(2, '0')}${index % 2 === 0 ? 'A' : 'B'}`, 'counterfactual_pair', index),
+    ),
+    ...Array.from({ length: 4 }, (_, index) =>
+      slot(`S${String(index + 1).padStart(2, '0')}`, 'new_advisory_scenario', index),
+    ),
+  ],
+};
+
+test('happy: accepts a valid evaluation v3 blueprint', () => {
+  assert.doesNotThrow(() => assertEvaluationV3Blueprint(validBlueprint));
+});
+
+test('happy: loads the fixed thirty-slot evaluation v3 blueprint', async () => {
+  const loaded = await loadEvaluationV3Blueprint(process.cwd());
+
+  assert.deepEqual(
+    loaded.slots.map((candidate) => candidate.id),
+    [
+      ...Array.from({ length: 10 }, (_, index) => `D${String(index + 1).padStart(2, '0')}`),
+      ...Array.from({ length: 10 }, (_, index) => `H${String(index + 1).padStart(2, '0')}`),
+      'C01A',
+      'C01B',
+      'C02A',
+      'C02B',
+      'C03A',
+      'C03B',
+      'S01',
+      'S02',
+      'S03',
+      'S04',
+    ],
+  );
+});
+
+test('failure: rejects duplicate evaluation v3 slot IDs', () => {
+  const duplicateBlueprint = structuredClone(validBlueprint);
+  duplicateBlueprint.slots[1].id = duplicateBlueprint.slots[0].id;
+
+  assert.throws(() => assertEvaluationV3Blueprint(duplicateBlueprint), /unique/);
+});
+
+test('failure: rejects an evaluation v3 blueprint with only 29 slots', () => {
+  const shortBlueprint = structuredClone(validBlueprint);
+  shortBlueprint.slots.pop();
+
+  assert.throws(() => assertEvaluationV3Blueprint(shortBlueprint), /30/);
+});
+
+test('failure: rejects an unpaired counterfactual slot', () => {
+  const unpairedBlueprint = structuredClone(validBlueprint);
+  const lastCounterfactual = unpairedBlueprint.slots.find((candidate) => candidate.id === 'C03B');
+  assert.ok(lastCounterfactual);
+  lastCounterfactual.pairId = 'C4';
+
+  assert.throws(() => assertEvaluationV3Blueprint(unpairedBlueprint), /counterfactual pair/);
 });
