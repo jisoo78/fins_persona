@@ -148,6 +148,14 @@ export type EventCandidate = {
     sourceUrls: string[];
     reviewerNote: string;
   };
+  eventFingerprint: {
+    primaryEntity: string;
+    decisionAction: string;
+    eventSpecificIdentifier: string;
+    sourceUrls: string[];
+    reviewStatus: 'reviewed';
+    reviewerNote: string;
+  };
   sourceAssociations: EventSourceAssociation[];
   directEvidenceGap: {
     reviewStatus: 'reviewed';
@@ -168,10 +176,11 @@ export type EventSourceAssociation = {
   relevanceClaim: string;
   evidenceLocator: {
     exactQuote: string;
+    exactRelevancePassage: string;
     anchorTerms: string[];
     eventDiscriminators: Array<{
       value: string;
-      kind: 'named_entity' | 'decision_action' | 'quantitative_fact' | 'dated_fact';
+      kind: 'named_entity' | 'decision_action' | 'event_specific';
     }>;
     speaker: 'Amy Hood' | null;
   };

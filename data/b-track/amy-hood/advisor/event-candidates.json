@@ -30,10 +30,21 @@
             "Boards of Directors"
           ],
           "eventDiscriminators": [
-            { "value": "Nokia", "kind": "named_entity" },
-            { "value": "Boards of Directors", "kind": "decision_action" }
+            {
+              "value": "Nokia",
+              "kind": "named_entity"
+            },
+            {
+              "value": "enter into a transaction",
+              "kind": "decision_action"
+            },
+            {
+              "value": "Boards of Directors",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "Microsoft Corporation and Nokia Corporation today announced that the Boards of Directors for both companies have decided to enter into a transaction"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -46,7 +57,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "Nokia",
+      "decisionAction": "enter into a transaction",
+      "eventSpecificIdentifier": "Boards of Directors",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2013/09/03/microsoft-to-acquire-nokias-devices-services-business-license-nokias-patents-and-mapping-services/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-mojang-acquisition-2014",
@@ -79,10 +100,21 @@
             "2 mil quinientos millones"
           ],
           "eventDiscriminators": [
-            { "value": "Mojang", "kind": "named_entity" },
-            { "value": "2 mil quinientos millones", "kind": "quantitative_fact" }
+            {
+              "value": "Mojang",
+              "kind": "named_entity"
+            },
+            {
+              "value": "adquirirá",
+              "kind": "decision_action"
+            },
+            {
+              "value": "2 mil quinientos millones",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "Bajo los términos del acuerdo, Microsoft adquirirá Mojang por 2 mil quinientos millones de dólares"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -95,7 +127,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "Mojang",
+      "decisionAction": "adquirirá",
+      "eventSpecificIdentifier": "2 mil quinientos millones",
+      "sourceUrls": [
+        "https://news.microsoft.com/es-xl/minecraft-se-une-a-microsoft/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-linkedin-acquisition-2016",
@@ -128,10 +170,21 @@
             "$26.2 billion"
           ],
           "eventDiscriminators": [
-            { "value": "LinkedIn", "kind": "named_entity" },
-            { "value": "$26.2 billion", "kind": "quantitative_fact" }
+            {
+              "value": "LinkedIn",
+              "kind": "named_entity"
+            },
+            {
+              "value": "will acquire",
+              "kind": "decision_action"
+            },
+            {
+              "value": "$26.2 billion",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "Microsoft will acquire LinkedIn for $196 per share in an all-cash transaction valued at $26.2 billion"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -144,7 +197,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "LinkedIn",
+      "decisionAction": "will acquire",
+      "eventSpecificIdentifier": "$26.2 billion",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2016/06/13/microsoft-to-acquire-linkedin/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-github-acquisition-2018",
@@ -177,10 +240,21 @@
             "$7.5 billion"
           ],
           "eventDiscriminators": [
-            { "value": "GitHub", "kind": "named_entity" },
-            { "value": "$7.5 billion", "kind": "quantitative_fact" }
+            {
+              "value": "GitHub",
+              "kind": "named_entity"
+            },
+            {
+              "value": "will acquire",
+              "kind": "decision_action"
+            },
+            {
+              "value": "$7.5 billion",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "Microsoft will acquire GitHub for $7.5 billion in Microsoft stock"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -193,7 +267,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "GitHub",
+      "decisionAction": "will acquire",
+      "eventSpecificIdentifier": "$7.5 billion",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2018/06/04/microsoft-to-acquire-github-for-7-5-billion/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-nuance-acquisition-2021",
@@ -226,10 +310,21 @@
             "$19.7 billion"
           ],
           "eventDiscriminators": [
-            { "value": "Nuance", "kind": "named_entity" },
-            { "value": "$19.7 billion", "kind": "quantitative_fact" }
+            {
+              "value": "Nuance",
+              "kind": "named_entity"
+            },
+            {
+              "value": "will acquire",
+              "kind": "decision_action"
+            },
+            {
+              "value": "$19.7 billion",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9, in an all-cash transaction valued at $19.7 billion"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -242,7 +337,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "Nuance",
+      "decisionAction": "will acquire",
+      "eventSpecificIdentifier": "$19.7 billion",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2021/04/12/microsoft-accelerates-industry-cloud-strategy-for-healthcare-with-the-acquisition-of-nuance/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-activision-acquisition-2022",
@@ -275,10 +380,21 @@
             "$68.7 billion"
           ],
           "eventDiscriminators": [
-            { "value": "Activision Blizzard", "kind": "named_entity" },
-            { "value": "$68.7 billion", "kind": "quantitative_fact" }
+            {
+              "value": "Activision Blizzard",
+              "kind": "named_entity"
+            },
+            {
+              "value": "will acquire",
+              "kind": "decision_action"
+            },
+            {
+              "value": "$68.7 billion",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "Microsoft will acquire Activision Blizzard for $95.00 per share, in an all-cash transaction valued at $68.7 billion"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -291,7 +407,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "Activision Blizzard",
+      "decisionAction": "will acquire",
+      "eventSpecificIdentifier": "$68.7 billion",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2022/01/18/microsoft-to-acquire-activision-blizzard-to-bring-the-joy-and-community-of-gaming-to-everyone-across-every-device/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-openai-partnership-2019",
@@ -324,10 +450,21 @@
             "$1 billion"
           ],
           "eventDiscriminators": [
-            { "value": "OpenAI", "kind": "named_entity" },
-            { "value": "$1 billion", "kind": "quantitative_fact" }
+            {
+              "value": "OpenAI",
+              "kind": "named_entity"
+            },
+            {
+              "value": "investing",
+              "kind": "decision_action"
+            },
+            {
+              "value": "$1 billion",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "Microsoft is investing $1 billion in OpenAI"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -340,7 +477,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "OpenAI",
+      "decisionAction": "investing",
+      "eventSpecificIdentifier": "$1 billion",
+      "sourceUrls": [
+        "https://blogs.microsoft.com/blog/2019/07/22/openai-forms-exclusive-computing-partnership-with-microsoft-to-build-new-azure-ai-supercomputing-technologies/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-gpt3-license-2020",
@@ -373,10 +520,21 @@
             "GPT-3"
           ],
           "eventDiscriminators": [
-            { "value": "OpenAI", "kind": "named_entity" },
-            { "value": "GPT-3", "kind": "decision_action" }
+            {
+              "value": "OpenAI",
+              "kind": "named_entity"
+            },
+            {
+              "value": "exclusively license",
+              "kind": "decision_action"
+            },
+            {
+              "value": "GPT-3",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "Microsoft is teaming up with OpenAI to exclusively license GPT-3"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -389,7 +547,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "OpenAI",
+      "decisionAction": "exclusively license",
+      "eventSpecificIdentifier": "GPT-3",
+      "sourceUrls": [
+        "https://blogs.microsoft.com/blog/2020/09/22/microsoft-teams-up-with-openai-to-exclusively-license-gpt-3-language-model/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-openai-expansion-2023",
@@ -422,10 +590,21 @@
             "supercomputing systems"
           ],
           "eventDiscriminators": [
-            { "value": "OpenAI", "kind": "named_entity" },
-            { "value": "supercomputing systems", "kind": "decision_action" }
+            {
+              "value": "OpenAI",
+              "kind": "named_entity"
+            },
+            {
+              "value": "investment",
+              "kind": "decision_action"
+            },
+            {
+              "value": "multiyear, multibillion dollar",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "Today, we are announcing the third phase of our long-term partnership with OpenAI through a multiyear, multibillion dollar investment"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -438,7 +617,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "OpenAI",
+      "decisionAction": "investment",
+      "eventSpecificIdentifier": "multiyear, multibillion dollar",
+      "sourceUrls": [
+        "https://blogs.microsoft.com/blog/2023/01/23/microsoftandopenaiextendpartnership/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-ai-datacenter-plan-2025",
@@ -471,10 +660,21 @@
             "$80 billion"
           ],
           "eventDiscriminators": [
-            { "value": "AI-enabled datacenters", "kind": "decision_action" },
-            { "value": "$80 billion", "kind": "quantitative_fact" }
+            {
+              "value": "datacenter",
+              "kind": "named_entity"
+            },
+            {
+              "value": "invest",
+              "kind": "decision_action"
+            },
+            {
+              "value": "$80 billion",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "Microsoft is on track to invest approximately $80 billion to build out AI-enabled datacenters"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -487,7 +687,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "datacenter",
+      "decisionAction": "invest",
+      "eventSpecificIdentifier": "$80 billion",
+      "sourceUrls": [
+        "https://blogs.microsoft.com/on-the-issues/2025/01/03/the-golden-opportunity-for-american-ai/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-fairwater-expansion-2025",
@@ -520,10 +730,21 @@
             "$4 billion"
           ],
           "eventDiscriminators": [
-            { "value": "Wisconsin", "kind": "named_entity" },
-            { "value": "$4 billion", "kind": "quantitative_fact" }
+            {
+              "value": "Wisconsin",
+              "kind": "named_entity"
+            },
+            {
+              "value": "committing",
+              "kind": "decision_action"
+            },
+            {
+              "value": "$4 billion",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "Today, we’re committing an additional $4 billion to be spent in the next three years to build our second datacenter of similar size and scale — bringing our total investment in Wisconsin"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -536,7 +757,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "Wisconsin",
+      "decisionAction": "committing",
+      "eventSpecificIdentifier": "$4 billion",
+      "sourceUrls": [
+        "https://blogs.microsoft.com/on-the-issues/2025/09/18/made-in-wisconsin-the-worlds-most-powerful-ai-datacenter/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-pecos-datacenter-2026",
@@ -569,10 +800,21 @@
             "2 gigawatts"
           ],
           "eventDiscriminators": [
-            { "value": "Pecos", "kind": "named_entity" },
-            { "value": "2 gigawatts", "kind": "quantitative_fact" }
+            {
+              "value": "Pecos",
+              "kind": "named_entity"
+            },
+            {
+              "value": "build",
+              "kind": "decision_action"
+            },
+            {
+              "value": "2 gigawatts",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "In Pecos, Texas, we will build a new datacenter campus, expanding our global datacenter capacity by approximately 2 gigawatts"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -585,7 +827,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "Pecos",
+      "decisionAction": "build",
+      "eventSpecificIdentifier": "2 gigawatts",
+      "sourceUrls": [
+        "https://blogs.microsoft.com/blog/2026/06/22/powering-the-next-wave-of-ai-expanding-capacity-with-our-new-datacenter-in-pecos/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-m365-price-2021",
@@ -618,10 +870,21 @@
             "precios comerciales"
           ],
           "eventDiscriminators": [
-            { "value": "Microsoft 365", "kind": "named_entity" },
-            { "value": "precios comerciales", "kind": "decision_action" }
+            {
+              "value": "Microsoft 365",
+              "kind": "named_entity"
+            },
+            {
+              "value": "cambios a los precios",
+              "kind": "decision_action"
+            },
+            {
+              "value": "precios comerciales",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "El día de hoy anunciamos cambios a los precios comerciales de Microsoft 365"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -634,7 +897,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "Microsoft 365",
+      "decisionAction": "cambios a los precios",
+      "eventSpecificIdentifier": "precios comerciales",
+      "sourceUrls": [
+        "https://news.microsoft.com/es-xl/nuevo-precio-para-microsoft-365/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-office2021-price-2021",
@@ -667,10 +940,21 @@
             "$149.99"
           ],
           "eventDiscriminators": [
-            { "value": "Office Home and Student 2021", "kind": "named_entity" },
-            { "value": "$149.99", "kind": "quantitative_fact" }
+            {
+              "value": "Office",
+              "kind": "named_entity"
+            },
+            {
+              "value": "is",
+              "kind": "decision_action"
+            },
+            {
+              "value": "$149.99 USD",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "Office Home and Student 2021 is $149.99 USD"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -683,7 +967,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "Office",
+      "decisionAction": "is",
+      "eventSpecificIdentifier": "$149.99 USD",
+      "sourceUrls": [
+        "https://www.microsoft.com/en-us/microsoft-365/blog/2021/10/01/its-easier-to-create-together-with-microsoft-365-and-office-2021/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-copilot-price-2023",
@@ -716,10 +1010,21 @@
             "USD30"
           ],
           "eventDiscriminators": [
-            { "value": "Copilot for Microsoft 365", "kind": "named_entity" },
-            { "value": "USD30", "kind": "quantitative_fact" }
+            {
+              "value": "Copilot",
+              "kind": "named_entity"
+            },
+            {
+              "value": "will be priced",
+              "kind": "decision_action"
+            },
+            {
+              "value": "USD30",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "Copilot for Microsoft 365 will be priced at USD30 per user, per month"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -732,7 +1037,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "Copilot",
+      "decisionAction": "will be priced",
+      "eventSpecificIdentifier": "USD30",
+      "sourceUrls": [
+        "https://www.microsoft.com/en-us/microsoft-365/blog/2023/07/18/introducing-bing-chat-enterprise-microsoft-365-copilot-pricing-and-microsoft-sales-copilot/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-teams-unbundle-2023",
@@ -765,10 +1080,21 @@
             "€2 less per month"
           ],
           "eventDiscriminators": [
-            { "value": "Teams", "kind": "named_entity" },
-            { "value": "€2 less per month", "kind": "quantitative_fact" }
+            {
+              "value": "Teams",
+              "kind": "named_entity"
+            },
+            {
+              "value": "will unbundle",
+              "kind": "decision_action"
+            },
+            {
+              "value": "€2 less per month",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "we will unbundle Teams from our Microsoft 365 and Office 365 suites in the EEA and Switzerland. We will instead simply sell these offerings without Teams at a lower price (€2 less per month or €24 per year)"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -781,7 +1107,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "Teams",
+      "decisionAction": "will unbundle",
+      "eventSpecificIdentifier": "€2 less per month",
+      "sourceUrls": [
+        "https://blogs.microsoft.com/eupolicy/2023/08/31/european-competition-teams-office-microsoft-365/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-copilot-ga-price-2023",
@@ -814,10 +1150,21 @@
             "$30 per user per month"
           ],
           "eventDiscriminators": [
-            { "value": "Copilot for Microsoft 365", "kind": "named_entity" },
-            { "value": "$30 per user per month", "kind": "quantitative_fact" }
+            {
+              "value": "Copilot",
+              "kind": "named_entity"
+            },
+            {
+              "value": "generally available",
+              "kind": "decision_action"
+            },
+            {
+              "value": "$30 per user per month",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "Copilot for Microsoft 365 will be generally available for enterprise customers for $30 per user per month on November 1"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -830,7 +1177,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "Copilot",
+      "decisionAction": "generally available",
+      "eventSpecificIdentifier": "$30 per user per month",
+      "sourceUrls": [
+        "https://www.microsoft.com/en-us/microsoft-365/blog/2023/09/21/announcing-microsoft-365-copilot-general-availability-and-microsoft-365-chat/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-copilot-pro-price-2024",
@@ -863,10 +1220,21 @@
             "$20 per month"
           ],
           "eventDiscriminators": [
-            { "value": "Copilot Pro", "kind": "named_entity" },
-            { "value": "$20 per month", "kind": "quantitative_fact" }
+            {
+              "value": "Copilot Pro",
+              "kind": "named_entity"
+            },
+            {
+              "value": "subscribe",
+              "kind": "decision_action"
+            },
+            {
+              "value": "$20 per month",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "subscribe to Copilot Pro today for $20 per month/per user"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -879,7 +1247,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "Copilot Pro",
+      "decisionAction": "subscribe",
+      "eventSpecificIdentifier": "$20 per month",
+      "sourceUrls": [
+        "https://blogs.microsoft.com/blog/2024/01/15/bringing-the-full-power-of-copilot-to-more-people-and-businesses/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-one-microsoft-2013",
@@ -912,10 +1290,21 @@
             "far-reaching realignment"
           ],
           "eventDiscriminators": [
-            { "value": "One Microsoft", "kind": "named_entity" },
-            { "value": "far-reaching realignment", "kind": "decision_action" }
+            {
+              "value": "One Microsoft",
+              "kind": "named_entity"
+            },
+            {
+              "value": "realignment",
+              "kind": "decision_action"
+            },
+            {
+              "value": "far-reaching",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "Subject: One Microsoft Today, we are announcing a far-reaching realignment of the company"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -928,7 +1317,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "One Microsoft",
+      "decisionAction": "realignment",
+      "eventSpecificIdentifier": "far-reaching",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2013/07/11/one-microsoft-company-realigns-to-enable-innovation-at-greater-speed-efficiency-2/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-nokia-workforce-2014",
@@ -961,10 +1360,21 @@
             "18,000 jobs"
           ],
           "eventDiscriminators": [
-            { "value": "Nokia Devices and Services", "kind": "named_entity" },
-            { "value": "18,000 jobs", "kind": "quantitative_fact" }
+            {
+              "value": "Nokia",
+              "kind": "named_entity"
+            },
+            {
+              "value": "reduce",
+              "kind": "decision_action"
+            },
+            {
+              "value": "18,000 jobs",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "we will begin to reduce the size of our overall workforce by up to 18,000 jobs in the next year. Of that total, our work toward synergies and strategic alignment on Nokia Devices and Services"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -977,7 +1387,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "Nokia",
+      "decisionAction": "reduce",
+      "eventSpecificIdentifier": "18,000 jobs",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2014/07/17/starting-to-evolve-our-organization-and-culture/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-phone-restructure-2015",
@@ -1010,10 +1430,21 @@
             "$7.6 billion"
           ],
           "eventDiscriminators": [
-            { "value": "Phone Hardware", "kind": "named_entity" },
-            { "value": "$7.6 billion", "kind": "quantitative_fact" }
+            {
+              "value": "phone hardware",
+              "kind": "named_entity"
+            },
+            {
+              "value": "restructure",
+              "kind": "decision_action"
+            },
+            {
+              "value": "$7.6 billion",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "Microsoft Corp. today announced plans to restructure the company’s phone hardware business to better focus and align resources. Microsoft also announced the reduction of up to 7,800 positions, primarily in the phone business. As a result, the company will record an impairment charge of approximately $7.6 billion"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -1026,7 +1457,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "phone hardware",
+      "decisionAction": "restructure",
+      "eventSpecificIdentifier": "$7.6 billion",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2015/07/08/microsoft-announces-restructuring-of-phone-hardware-business/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-phone-streamline-2016",
@@ -1059,10 +1500,21 @@
             "1850"
           ],
           "eventDiscriminators": [
-            { "value": "смартфонов", "kind": "named_entity" },
-            { "value": "1850", "kind": "quantitative_fact" }
+            {
+              "value": "смартфонов",
+              "kind": "named_entity"
+            },
+            {
+              "value": "оптимизации",
+              "kind": "decision_action"
+            },
+            {
+              "value": "1850",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "Microsoft анонсировала планы по оптимизации бизнеса по производству смартфонов, которая коснется до 1850 рабочих мест"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -1075,7 +1527,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "смартфонов",
+      "decisionAction": "оптимизации",
+      "eventSpecificIdentifier": "1850",
+      "sourceUrls": [
+        "https://news.microsoft.com/ru-ru/microsoft-announces-streamlining-of-smartphone-hardware-business/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-workforce-reset-2023",
@@ -1108,10 +1570,21 @@
             "10,000 jobs"
           ],
           "eventDiscriminators": [
-            { "value": "cost structure", "kind": "decision_action" },
-            { "value": "10,000 jobs", "kind": "quantitative_fact" }
+            {
+              "value": "cost structure",
+              "kind": "named_entity"
+            },
+            {
+              "value": "reduction",
+              "kind": "decision_action"
+            },
+            {
+              "value": "10,000 jobs",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "we will align our cost structure with our revenue and where we see customer demand. Today, we are making changes that will result in the reduction of our overall workforce by 10,000 jobs"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -1124,11 +1597,21 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "cost structure",
+      "decisionAction": "reduction",
+      "eventSpecificIdentifier": "10,000 jobs",
+      "sourceUrls": [
+        "https://blogs.microsoft.com/blog/2023/01/18/subject-focusing-on-our-short-and-long-term-opportunity/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-transformation-2026",
-    "workingTitle": "Eliminating 4800 roles in Commercial and Xbox transformation",
+    "workingTitle": "Microsoft eliminating 4800 roles in Commercial and Xbox transformation",
     "domain": "cost_efficiency",
     "decisionWindowStart": "2026-07-06",
     "decisionWindowEnd": "2026-07-06",
@@ -1157,10 +1640,21 @@
             "4,800 roles"
           ],
           "eventDiscriminators": [
-            { "value": "eliminating", "kind": "decision_action" },
-            { "value": "4,800 roles", "kind": "quantitative_fact" }
+            {
+              "value": "Microsoft",
+              "kind": "named_entity"
+            },
+            {
+              "value": "eliminating",
+              "kind": "decision_action"
+            },
+            {
+              "value": "4,800 roles",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "Today we are eliminating around 4,800 roles, about 2.1% of our global workforce, as we focus our people, investments, and energy on the priorities that will keep Microsoft positioned"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -1173,7 +1667,17 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "Microsoft",
+      "decisionAction": "eliminating",
+      "eventSpecificIdentifier": "4,800 roles",
+      "sourceUrls": [
+        "https://blogs.microsoft.com/blog/2026/07/06/the-latest-in-our-company-transformation/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-buyback-2008",
@@ -1206,10 +1710,21 @@
             "$40 billion"
           ],
           "eventDiscriminators": [
-            { "value": "share repurchase", "kind": "decision_action" },
-            { "value": "$40 billion", "kind": "quantitative_fact" }
+            {
+              "value": "share repurchase",
+              "kind": "named_entity"
+            },
+            {
+              "value": "authorizing",
+              "kind": "decision_action"
+            },
+            {
+              "value": "$40 billion",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "approved a new share repurchase program authorizing up to an additional $40 billion"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -1222,11 +1737,21 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "share repurchase",
+      "decisionAction": "authorizing",
+      "eventSpecificIdentifier": "$40 billion",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2008/09/22/microsoft-announces-share-repurchase-program-and-increases-quarterly-dividend/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-buyback-2013",
-    "workingTitle": "2013 forty billion dollar repurchase authorization",
+    "workingTitle": "2013 forty billion dollar share repurchase authorization",
     "domain": "shareholder_return_risk",
     "decisionWindowStart": "2013-09-17",
     "decisionWindowEnd": "2013-09-17",
@@ -1255,10 +1780,21 @@
             "$40 billion"
           ],
           "eventDiscriminators": [
-            { "value": "returning cash", "kind": "decision_action" },
-            { "value": "$40 billion", "kind": "quantitative_fact" }
+            {
+              "value": "share repurchase",
+              "kind": "named_entity"
+            },
+            {
+              "value": "authorizing",
+              "kind": "decision_action"
+            },
+            {
+              "value": "$40 billion",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": "Amy Hood"
+          "speaker": "Amy Hood",
+          "exactRelevancePassage": "approved a new share repurchase program authorizing up to $40 billion in share repurchases"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -1267,11 +1803,21 @@
     "directEvidenceGap": null,
     "phase3Status": "eligible",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "share repurchase",
+      "decisionAction": "authorizing",
+      "eventSpecificIdentifier": "$40 billion",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2013/09/17/microsoft-announces-quarterly-dividend-increase-and-share-repurchase-program-3/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-buyback-2016",
-    "workingTitle": "2016 forty billion dollar repurchase authorization",
+    "workingTitle": "2016 forty billion dollar share repurchase authorization",
     "domain": "shareholder_return_risk",
     "decisionWindowStart": "2016-09-20",
     "decisionWindowEnd": "2016-09-20",
@@ -1300,10 +1846,21 @@
             "$40 billion"
           ],
           "eventDiscriminators": [
-            { "value": "share repurchase", "kind": "decision_action" },
-            { "value": "$40 billion", "kind": "quantitative_fact" }
+            {
+              "value": "share repurchase",
+              "kind": "named_entity"
+            },
+            {
+              "value": "authorizing",
+              "kind": "decision_action"
+            },
+            {
+              "value": "$40 billion",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "approved a new share repurchase program authorizing up to $40 billion"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -1316,11 +1873,21 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "share repurchase",
+      "decisionAction": "authorizing",
+      "eventSpecificIdentifier": "$40 billion",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2016/09/20/microsoft-announces-quarterly-dividend-increase-and-share-repurchase-program-2/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-buyback-2019",
-    "workingTitle": "2019 forty billion dollar repurchase authorization",
+    "workingTitle": "2019 forty billion dollar share repurchase authorization",
     "domain": "shareholder_return_risk",
     "decisionWindowStart": "2019-09-18",
     "decisionWindowEnd": "2019-09-18",
@@ -1349,10 +1916,21 @@
             "$40 billion"
           ],
           "eventDiscriminators": [
-            { "value": "share repurchase", "kind": "decision_action" },
-            { "value": "$40 billion", "kind": "quantitative_fact" }
+            {
+              "value": "share repurchase",
+              "kind": "named_entity"
+            },
+            {
+              "value": "authorizing",
+              "kind": "decision_action"
+            },
+            {
+              "value": "$40 billion",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "approved a new share repurchase program authorizing up to $40 billion"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -1365,11 +1943,21 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "share repurchase",
+      "decisionAction": "authorizing",
+      "eventSpecificIdentifier": "$40 billion",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2019/09/18/microsoft-announces-quarterly-dividend-increase-and-new-share-repurchase-program/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-buyback-2021",
-    "workingTitle": "2021 sixty billion dollar repurchase authorization",
+    "workingTitle": "2021 sixty billion dollar share repurchase authorization",
     "domain": "shareholder_return_risk",
     "decisionWindowStart": "2021-09-14",
     "decisionWindowEnd": "2021-09-14",
@@ -1398,10 +1986,21 @@
             "$60 billion"
           ],
           "eventDiscriminators": [
-            { "value": "share repurchase", "kind": "decision_action" },
-            { "value": "$60 billion", "kind": "quantitative_fact" }
+            {
+              "value": "share repurchase",
+              "kind": "named_entity"
+            },
+            {
+              "value": "authorizing",
+              "kind": "decision_action"
+            },
+            {
+              "value": "$60 billion",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "approved a new share repurchase program authorizing up to $60 billion"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -1414,11 +2013,21 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "share repurchase",
+      "decisionAction": "authorizing",
+      "eventSpecificIdentifier": "$60 billion",
+      "sourceUrls": [
+        "https://news.microsoft.com/source/2021/09/14/microsoft-announces-quarterly-dividend-increase-and-new-share-repurchase-program-2/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   },
   {
     "id": "candidate-buyback-2024",
-    "workingTitle": "2024 sixty billion dollar repurchase authorization",
+    "workingTitle": "2024 sixty billion dollar share repurchase authorization",
     "domain": "shareholder_return_risk",
     "decisionWindowStart": "2024-09-16",
     "decisionWindowEnd": "2024-09-16",
@@ -1447,10 +2056,21 @@
             "$60 billion"
           ],
           "eventDiscriminators": [
-            { "value": "share repurchase", "kind": "decision_action" },
-            { "value": "$60 billion", "kind": "quantitative_fact" }
+            {
+              "value": "share repurchase",
+              "kind": "named_entity"
+            },
+            {
+              "value": "authorizing",
+              "kind": "decision_action"
+            },
+            {
+              "value": "$60 billion",
+              "kind": "event_specific"
+            }
           ],
-          "speaker": null
+          "speaker": null,
+          "exactRelevancePassage": "approved a new share repurchase program authorizing up to $60 billion"
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
@@ -1463,6 +2083,16 @@
     },
     "phase3Status": "evidence_gap",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
-    "status": "approved_for_collection"
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "share repurchase",
+      "decisionAction": "authorizing",
+      "eventSpecificIdentifier": "$60 billion",
+      "sourceUrls": [
+        "https://news.microsoft.com/2024/09/16/microsoft-announces-quarterly-dividend-increase-and-new-share-repurchase-program-3/"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+    }
   }
 ]

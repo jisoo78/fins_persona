@@ -50,12 +50,25 @@ type SourceCheck = {
 };
 
 const normalizedSearchText = (value: string) => value.replace(/\s+/g, ' ').trim().toLowerCase();
+const normalizedFingerprintText = (value: string) => value.normalize('NFKD')
+  .replace(/[^\p{L}\p{N}]+/gu, ' ')
+  .replace(/\s+/g, ' ')
+  .trim()
+  .toLowerCase();
 const relevanceDiscriminatorKinds = new Set([
   'named_entity',
   'decision_action',
-  'quantitative_fact',
-  'dated_fact',
+  'event_specific',
 ]);
+
+const fingerprintDiscriminators = (candidate: EventCandidate) => [
+  { kind: 'named_entity', value: candidate.eventFingerprint.primaryEntity },
+  { kind: 'decision_action', value: candidate.eventFingerprint.decisionAction },
+  { kind: 'event_specific', value: candidate.eventFingerprint.eventSpecificIdentifier },
+] as const;
+
+const discriminatorKey = ({ kind, value }: { kind: string; value: string }) =>
+  `${kind}:${normalizedSearchText(value)}`;
 
 const candidateSpecificLocator = (candidate: EventCandidate, anchorTerms: string[]) => {
   const ignored = new Set([
@@ -131,6 +144,25 @@ export const validateEventCandidates = (
       || candidate.decisionWindowBasis.reviewerNote.trim().length < 10) {
       throw new Error(`candidate ${candidate.id} requires a sourced decision window basis`);
     }
+    if (!candidate.eventFingerprint
+      || typeof candidate.eventFingerprint.primaryEntity !== 'string'
+      || candidate.eventFingerprint.primaryEntity.trim() === ''
+      || typeof candidate.eventFingerprint.decisionAction !== 'string'
+      || candidate.eventFingerprint.decisionAction.trim() === ''
+      || typeof candidate.eventFingerprint.eventSpecificIdentifier !== 'string'
+      || candidate.eventFingerprint.eventSpecificIdentifier.trim() === ''
+      || !Array.isArray(candidate.eventFingerprint.sourceUrls)
+      || candidate.eventFingerprint.sourceUrls.length === 0
+      || candidate.eventFingerprint.reviewStatus !== 'reviewed'
+      || typeof candidate.eventFingerprint.reviewerNote !== 'string'
+      || candidate.eventFingerprint.reviewerNote.trim().length < 10) {
+      throw new Error(`candidate ${candidate.id} requires a reviewed event fingerprint`);
+    }
+    const normalizedTitle = normalizedFingerprintText(candidate.workingTitle);
+    if (![candidate.eventFingerprint.primaryEntity, candidate.eventFingerprint.eventSpecificIdentifier]
+      .some((value) => normalizedTitle.includes(normalizedFingerprintText(value)))) {
+      throw new Error(`candidate ${candidate.id} event fingerprint does not match its working title`);
+    }
     if (!Array.isArray(candidate.sourceAssociations) || candidate.sourceAssociations.length === 0) {
       throw new Error(`candidate ${candidate.id} requires a reviewed source association`);
     }
@@ -156,22 +188,35 @@ export const validateEventCandidates = (
         || !association.evidenceLocator
         || typeof association.evidenceLocator.exactQuote !== 'string'
         || association.evidenceLocator.exactQuote.trim().length < 20
+        || typeof association.evidenceLocator.exactRelevancePassage !== 'string'
+        || association.evidenceLocator.exactRelevancePassage.trim().length < 20
+        || association.evidenceLocator.exactRelevancePassage.length > 1_200
         || !Array.isArray(association.evidenceLocator.anchorTerms)
         || association.evidenceLocator.anchorTerms.length < 2
         || association.evidenceLocator.anchorTerms.every((term) => /^amy hood$/i.test(term.trim()))
         || !Array.isArray(association.evidenceLocator.eventDiscriminators)
-        || association.evidenceLocator.eventDiscriminators.length < 2
+        || association.evidenceLocator.eventDiscriminators.length !== 3
         || association.evidenceLocator.eventDiscriminators.some(({ value, kind }) =>
           typeof value !== 'string'
           || value.trim() === ''
           || !relevanceDiscriminatorKinds.has(kind))
         || new Set(association.evidenceLocator.eventDiscriminators.map(({ value }) =>
           normalizedSearchText(value))).size !== association.evidenceLocator.eventDiscriminators.length
-        || new Set(association.evidenceLocator.eventDiscriminators.map(({ kind }) => kind)).size < 2
+        || new Set(association.evidenceLocator.eventDiscriminators.map(discriminatorKey)).size !== 3
         || !['unreviewed', 'reviewed', 'rejected'].includes(association.reviewStatus)
         || typeof association.reviewerNote !== 'string'
         || association.reviewerNote.trim().length < 10) {
         throw new Error(`candidate ${candidate.id} has an invalid source association`);
+      }
+      const expectedFingerprint = new Set(fingerprintDiscriminators(candidate).map(discriminatorKey));
+      if (association.evidenceLocator.eventDiscriminators.some((item) =>
+        !expectedFingerprint.has(discriminatorKey(item)))) {
+        throw new Error(`candidate ${candidate.id} association discriminators do not match its event fingerprint`);
+      }
+      const relevancePassage = normalizedSearchText(association.evidenceLocator.exactRelevancePassage);
+      if (!fingerprintDiscriminators(candidate).every(({ value }) =>
+        relevancePassage.includes(normalizedSearchText(value)))) {
+        throw new Error(`candidate ${candidate.id} exact relevance passage does not contain its event fingerprint`);
       }
       if (association.role === 'direct_amy' && association.evidenceLocator.speaker !== 'Amy Hood') {
         throw new Error(`candidate ${candidate.id} direct Amy association requires an exact speaker locator`);
@@ -196,6 +241,14 @@ export const validateEventCandidates = (
     const associationUrls = new Set(candidate.sourceAssociations.map(
       ({ canonicalUrl }) => canonicalizeSourceUrl(canonicalUrl),
     ));
+    for (const fingerprintUrl of candidate.eventFingerprint.sourceUrls) {
+      const canonicalFingerprintUrl = canonicalizeSourceUrl(fingerprintUrl);
+      if (!associationUrls.has(canonicalFingerprintUrl)
+        || !candidate.decisionWindowBasis.sourceUrls.some((basisUrl) =>
+          canonicalizeSourceUrl(basisUrl) === canonicalFingerprintUrl)) {
+        throw new Error(`candidate ${candidate.id} event fingerprint source must be a window-basis association`);
+      }
+    }
     for (const basisUrl of candidate.decisionWindowBasis.sourceUrls) {
       if (!associationUrls.has(canonicalizeSourceUrl(basisUrl))) {
         throw new Error(`candidate ${candidate.id} window-basis source lacks an association`);
@@ -406,12 +459,12 @@ export const checkSourceInventory = async (
       const exactQuote = normalizedSearchText(association.evidenceLocator.exactQuote);
       const quoteIndex = searchable.indexOf(exactQuote);
       if (quoteIndex < 0) continue;
-      const locatorWindow = searchable.slice(
-        Math.max(0, quoteIndex - 1500),
-        quoteIndex + exactQuote.length + 1500,
+      const exactRelevancePassage = normalizedSearchText(
+        association.evidenceLocator.exactRelevancePassage,
       );
-      if (!association.evidenceLocator.anchorTerms.every((term) =>
-        locatorWindow.includes(normalizedSearchText(term)))) continue;
+      const relevanceIndex = searchable.indexOf(exactRelevancePassage);
+      if (relevanceIndex < 0) continue;
+      const locatorWindow = exactRelevancePassage;
       if (!association.evidenceLocator.eventDiscriminators.every(({ value }) =>
         locatorWindow.includes(normalizedSearchText(value)))) continue;
       if (association.role === 'direct_amy') {

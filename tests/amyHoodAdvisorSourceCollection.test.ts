@@ -26,8 +26,10 @@
  *    - invalid manual metadata, blank/short text, hash mismatches, and invalid speaker offsets leave no partial state.
  *    - uncertain transcript attribution remains review_required with speaker_uncertain.
  *    - direct Amy evidence must be fully contained by an Amy-attributed speaker segment.
- *    - event relevance requires two reviewed event discriminators in the located passage.
+ *    - event relevance requires all three reviewed fingerprint fields in one bounded exact passage.
  *    - raw provenance rejects an invented same-host final path that was not in the redirect chain.
+ *    - ambiguous grammar cannot attribute another person's quote to Amy Hood.
+ *    - association discriminators cannot override the reviewed candidate event fingerprint.
  *    - corrupt or cross-owned review reuse, post-rename failures, and rollback parent swaps fail without trusting or deleting unsafe paths.
  *
  * Test Plan (Task 5 discovery matrix and CLI gates):
@@ -73,6 +75,7 @@ import { SecEdgarCollector } from '../server/decisionAdvisor/collectors/secEdgar
 import {
   collectOfficialSource,
   defaultPinnedTransport,
+  extractSpeakerSegments,
 } from '../server/decisionAdvisor/officialSourceCollector';
 import { importReviewedSource as importReviewedSourceReal } from '../server/decisionAdvisor/manualSourceImporter';
 import { importTranscript as importTranscriptReal } from '../server/decisionAdvisor/transcriptImporter';
@@ -93,6 +96,14 @@ const officialCandidate: EventCandidate = {
     sourceUrls: ['https://www.microsoft.com/en-us/Investor/events/FY-2025'],
     reviewerNote: 'Reviewed against the dated official event page.',
   },
+  eventFingerprint: {
+    primaryEntity: 'FY25 Q4',
+    decisionAction: 'infrastructure investment',
+    eventSpecificIdentifier: 'decision evidence',
+    sourceUrls: ['https://www.microsoft.com/en-us/Investor/events/FY-2025'],
+    reviewStatus: 'reviewed',
+    reviewerNote: 'Reviewed against the official event announcement.',
+  },
   sourceAssociations: [{
     canonicalUrl: 'https://www.microsoft.com/en-us/Investor/events/FY-2025',
     role: 'direct_amy',
@@ -102,10 +113,12 @@ const officialCandidate: EventCandidate = {
     relevanceClaim: 'Amy Hood discusses the named FY25 Q4 infrastructure investment decision.',
     evidenceLocator: {
       exactQuote: 'Amy Hood decision evidence for FY25 Q4 infrastructure investment',
+      exactRelevancePassage: 'Amy Hood decision evidence for FY25 Q4 infrastructure investment',
       anchorTerms: ['FY25 Q4', 'infrastructure investment'],
       eventDiscriminators: [
-        { value: 'FY25 Q4', kind: 'dated_fact' },
+        { value: 'FY25 Q4', kind: 'named_entity' },
         { value: 'infrastructure investment', kind: 'decision_action' },
+        { value: 'decision evidence', kind: 'event_specific' },
       ],
       speaker: 'Amy Hood',
     },
@@ -439,6 +452,15 @@ test('edge: a bounded same-policy redirect persists the final URL as raw provena
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
+});
+
+test('failure: ambiguous Amy grammar never attributes another speaker quote to Amy', () => {
+  const examples = [
+    'Amy Hood disagreed with Satya Nadella, who said: “We will acquire Fabrikam today.”',
+    'Amy Hood disagreed with Satya Nadella, who said:“We will acquire Fabrikam today.”',
+  ];
+
+  for (const text of examples) assert.deepEqual(extractSpeakerSegments(text), []);
 });
 
 test('edge: windows-1252 HTML normalizes punctuation without changing raw bytes', async () => {
@@ -1987,6 +2009,14 @@ const validCandidateMatrix = (): EventCandidate[] => Array.from({ length: 30 }, 
       sourceUrls: [discoveryUrls[0]],
       reviewerNote: 'Reviewed against the event-specific authorization date.',
     },
+    eventFingerprint: {
+      primaryEntity: `Project Falcon ${index + 1}`,
+      decisionAction: 'authorization',
+      eventSpecificIdentifier: `Falcon-${index + 1} approval`,
+      sourceUrls: [discoveryUrls[0]],
+      reviewStatus: 'reviewed' as const,
+      reviewerNote: 'Reviewed against the official event announcement.',
+    },
     sourceAssociations: discoveryUrls.map((canonicalUrl, urlIndex) => ({
       canonicalUrl,
       role: urlIndex === 0 ? 'direct_amy' as const : 'contemporaneous_context' as const,
@@ -1995,11 +2025,13 @@ const validCandidateMatrix = (): EventCandidate[] => Array.from({ length: 30 }, 
       temporalRelation: 'decision_time' as const,
       relevanceClaim: `This source identifies the authorization and economics of Project Falcon ${index + 1}.`,
       evidenceLocator: {
-        exactQuote: `${urlIndex === 0 ? 'Amy Hood ' : ''}decision evidence for Project Falcon ${index + 1} authorization decision`,
+        exactQuote: `${urlIndex === 0 ? 'Amy Hood ' : ''}decision evidence for Project Falcon ${index + 1} authorization decision and Falcon-${index + 1} approval`,
+        exactRelevancePassage: `${urlIndex === 0 ? 'Amy Hood ' : ''}decision evidence for Project Falcon ${index + 1} authorization decision and Falcon-${index + 1} approval`,
         anchorTerms: [`Project Falcon ${index + 1}`, 'authorization'],
         eventDiscriminators: [
           { value: `Project Falcon ${index + 1}`, kind: 'named_entity' as const },
           { value: 'authorization', kind: 'decision_action' as const },
+          { value: `Falcon-${index + 1} approval`, kind: 'event_specific' as const },
         ],
         speaker: urlIndex === 0 ? 'Amy Hood' as const : null,
       },
@@ -2058,6 +2090,48 @@ test('failure: candidate CLI requires reviewed structured associations and a sou
 
     assert.equal(result.status, 1);
     assert.match(result.stderr, /reviewed source association|decision window basis/i);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: association discriminators cannot override a reviewed candidate fingerprint', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-fingerprint-override-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+  const candidates = validCandidateMatrix();
+  const candidate = candidates[0];
+  candidate.sourceAssociations[0].evidenceLocator.eventDiscriminators = [
+    { value: 'Fabrikam', kind: 'named_entity' },
+    { value: 'acquisition', kind: 'decision_action' },
+    { value: 'Fabrikam transaction', kind: 'event_specific' },
+  ];
+
+  try {
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(candidatePath, `${JSON.stringify(candidates, null, 2)}\n`);
+    const result = runAdvisorCli(directory, 'candidates:check');
+
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /event fingerprint|discriminator/i);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: an overly broad relevance passage cannot stand in for a strict event passage', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-broad-relevance-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+  const candidates = validCandidateMatrix();
+  candidates[0].sourceAssociations[0].evidenceLocator.exactRelevancePassage =
+    `Project Falcon 1 authorization Falcon-1 approval ${'general context '.repeat(100)}`;
+
+  try {
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(candidatePath, `${JSON.stringify(candidates, null, 2)}\n`);
+    const result = runAdvisorCli(directory, 'candidates:check');
+
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /invalid source association|relevance passage/i);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
@@ -2146,7 +2220,7 @@ const writeRegistryFixture = async (
     const sourceRole = candidateForUrl.get(canonicalUrl)!;
     const linkedCandidate = fixtureCandidates.find(({ id }) => id === sourceRole.candidateId)!;
     const id = sourceIdForUrl(canonicalUrl);
-    const text = `${sourceRole.direct ? 'Amy Hood ' : ''}decision evidence for ${linkedCandidate.workingTitle}. The authorization is event-specific. ${'Public Microsoft source context. '.repeat(12)}`;
+    const text = `${sourceRole.association.evidenceLocator.exactQuote}. ${sourceRole.association.evidenceLocator.exactRelevancePassage}. ${'Public Microsoft source context. '.repeat(12)}`;
     const sha256 = createHash('sha256').update(text).digest('hex');
     const valid = index < options.validDocuments;
     const rawPath = valid ? `raw/${id}.json` : null;
@@ -2298,10 +2372,24 @@ test('failure: GitHub cannot be covered by unrelated earnings and SEC artifacts'
   try {
     const candidates = validCandidateMatrix();
     candidates[0].workingTitle = 'GitHub acquisition authorization and transaction economics';
-    for (const association of candidates[0].sourceAssociations.slice(0, 2)) {
+    candidates[0].eventFingerprint = {
+      primaryEntity: 'GitHub',
+      decisionAction: 'will acquire',
+      eventSpecificIdentifier: '$7.5 billion',
+      sourceUrls: [candidates[0].discoveryUrls[0]],
+      reviewStatus: 'reviewed',
+      reviewerNote: 'Reviewed against the official GitHub transaction announcement.',
+    };
+    for (const association of candidates[0].sourceAssociations) {
       association.relevanceClaim = 'This artifact is asserted to support the GitHub acquisition economics.';
       association.evidenceLocator.exactQuote = 'Microsoft will acquire GitHub for 7.5 billion dollars in stock';
+      association.evidenceLocator.exactRelevancePassage = 'Microsoft will acquire GitHub for $7.5 billion';
       association.evidenceLocator.anchorTerms = ['GitHub', '7.5 billion'];
+      association.evidenceLocator.eventDiscriminators = [
+        { value: 'GitHub', kind: 'named_entity' },
+        { value: 'will acquire', kind: 'decision_action' },
+        { value: '$7.5 billion', kind: 'event_specific' },
+      ];
     }
     await mkdir(path.dirname(candidatePath), { recursive: true });
     await writeFile(candidatePath, `${JSON.stringify(candidates, null, 2)}\n`);
@@ -2321,10 +2409,9 @@ test('failure: a generic Amy Hood mention is not a candidate-specific direct loc
 
   try {
     const candidates = validCandidateMatrix();
-    candidates[0].workingTitle = 'GitHub acquisition authorization and transaction economics';
     const direct = candidates[0].sourceAssociations[0];
     direct.relevanceClaim = 'Amy Hood is named, without a located GitHub transaction passage.';
-    direct.evidenceLocator.exactQuote = 'Amy Hood decision evidence for Project Falcon 1 authorization decision';
+    direct.evidenceLocator.exactQuote = 'Amy Hood decision evidence for Project Falcon 1 authorization decision and Falcon-1 approval';
     direct.evidenceLocator.anchorTerms = ['Amy Hood', 'decision evidence'];
     await mkdir(path.dirname(candidatePath), { recursive: true });
     await writeFile(candidatePath, `${JSON.stringify(candidates, null, 2)}\n`);
@@ -2379,23 +2466,34 @@ test('failure: a casual GitHub mention beside an unrelated acquisition is not ev
   try {
     const candidates = validCandidateMatrix();
     candidates[0].workingTitle = 'GitHub acquisition authorization and transaction economics';
+    candidates[0].eventFingerprint = {
+      primaryEntity: 'GitHub',
+      decisionAction: 'will acquire',
+      eventSpecificIdentifier: '$7.5 billion',
+      sourceUrls: [candidates[0].discoveryUrls[0]],
+      reviewStatus: 'reviewed',
+      reviewerNote: 'Reviewed against the official GitHub transaction announcement.',
+    };
     const artifactCandidates = structuredClone(candidates);
     artifactCandidates[0].workingTitle = 'GitHub mention before the Fabrikam acquisition authorization';
     for (const [associationIndex, association] of candidates[0].sourceAssociations.entries()) {
       const unrelatedQuote = `${associationIndex === 0 ? 'Amy Hood ' : ''}decision evidence for ${artifactCandidates[0].workingTitle}`;
       association.relevanceClaim = 'The reviewed locator must distinguish the GitHub transaction from other acquisition news.';
       association.evidenceLocator.exactQuote = unrelatedQuote;
+      association.evidenceLocator.exactRelevancePassage = 'Microsoft will acquire GitHub for $7.5 billion';
       association.evidenceLocator.anchorTerms = ['GitHub', 'acquisition'];
       (association.evidenceLocator as typeof association.evidenceLocator & {
         eventDiscriminators: Array<{ value: string; kind: string }>;
       }).eventDiscriminators = [
         { value: 'GitHub', kind: 'named_entity' },
-        { value: '$7.5 billion', kind: 'quantitative_fact' },
+        { value: 'will acquire', kind: 'decision_action' },
+        { value: '$7.5 billion', kind: 'event_specific' },
       ];
     }
     for (const [associationIndex, association] of artifactCandidates[0].sourceAssociations.entries()) {
       const unrelatedQuote = `${associationIndex === 0 ? 'Amy Hood ' : ''}decision evidence for ${artifactCandidates[0].workingTitle}`;
       association.evidenceLocator.exactQuote = unrelatedQuote;
+      association.evidenceLocator.exactRelevancePassage = unrelatedQuote;
       association.evidenceLocator.anchorTerms = ['GitHub', 'acquisition'];
     }
     await mkdir(path.dirname(candidatePath), { recursive: true });

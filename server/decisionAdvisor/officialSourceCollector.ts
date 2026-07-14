@@ -129,7 +129,6 @@ export const extractSpeakerSegments = (text: string): EvidenceSpeakerSegment[] =
   const segments: EvidenceSpeakerSegment[] = [];
   const attributedQuotePatterns = [
     /[“"]([^”"]{20,})[”"]\s*,?\s*(?:said|says)\s+Amy Hood\b/giu,
-    /\bAmy Hood\b[^“"]{0,80}(?:said|says|stated)\s*:?[“"]([^”"]{20,})[”"]/giu,
   ];
   for (const pattern of attributedQuotePatterns) {
     for (const match of text.matchAll(pattern)) {
