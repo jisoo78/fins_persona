@@ -85,6 +85,16 @@ const reasonChoiceMismatch = (choice: number, reason: string) => {
   return Boolean(explicit && Number(explicit[1]) !== choice);
 };
 
+const runErrorFrom = (error: unknown): NonNullable<EvaluationV3Run['runError']> => {
+  const message = error instanceof Error ? error.message : 'unknown Evaluation v3 error';
+  const artifactStale = /stale|hash|holdout|forbidden/.test(message);
+  return {
+    code: artifactStale ? 'artifact_stale' : 'execution_error',
+    message,
+    retryable: !artifactStale,
+  };
+};
+
 const invokeQuestion = async (
   model: ModelClient,
   input: ReturnType<typeof buildEvaluationV3Input>,
@@ -111,6 +121,8 @@ const loadFileWithHash = async (path: string) => {
 };
 
 export const createEvaluationV3Runner = (options: RunnerOptions) => {
+  const activeRunIds = new Set<string>();
+  const transitionRunIds = new Set<string>();
   const loadPinnedArms = async (): Promise<PinnedArm[]> => {
     const [activePrompt, generic, policy, full] = await Promise.all([
       readActivePromptVersion(options.root),
@@ -163,9 +175,10 @@ export const createEvaluationV3Runner = (options: RunnerOptions) => {
     input: { repetitions: EvaluationV3Repetitions },
   ): Promise<EvaluationV3ExperimentLaunch> => {
     const plan = createEvaluationV3ExperimentPlan(input.repetitions);
-    const [bundle, reviews, holdoutFile, pinnedArms] = await Promise.all([
+    const [bundle, reviews, questionFile, holdoutFile, pinnedArms] = await Promise.all([
       loadEvaluationV3Bundle(options.root),
       loadEvaluationV3Reviews(options.root),
+      loadFileWithHash(resolve(options.root, 'evaluation/v3/public/questions.json')),
       loadFileWithHash(resolve(options.root, 'evaluation/v3/sealed/holdout-manifest.json')),
       loadPinnedArms(),
     ]);
@@ -194,6 +207,7 @@ export const createEvaluationV3Runner = (options: RunnerOptions) => {
         provider: 'local',
         model: model.model,
         questionSetVersion: bundle.questions.version,
+        questionSetHash: questionFile.sha256,
         answerKeyHash: answerKey.sha256,
         promptVersionId: pinned.promptVersionId,
         promptHash: pinned.promptHash,
@@ -212,14 +226,18 @@ export const createEvaluationV3Runner = (options: RunnerOptions) => {
   };
 
   const resolveRunInputs = async (run: EvaluationV3Run) => {
-    const [bundle, answerKey, holdout] = await Promise.all([
+    const [bundle, questionFile, answerKey, holdout] = await Promise.all([
       loadEvaluationV3Bundle(options.root),
+      loadFileWithHash(resolve(options.root, 'evaluation/v3/public/questions.json')),
       loadFileWithHash(resolve(options.root, 'evaluation/v3/sealed/answer-key.json')),
       loadFileWithHash(resolve(options.root, 'evaluation/v3/sealed/holdout-manifest.json')),
     ]);
     await loadEvaluationV3Holdout(options.root);
     if (run.questionSetVersion !== bundle.questions.version) {
       throw new Error('Evaluation v3 question-set version is stale');
+    }
+    if (run.questionSetHash !== questionFile.sha256) {
+      throw new Error('Evaluation v3 question set hash is stale');
     }
     if (run.answerKeyHash !== answerKey.sha256) {
       throw new Error('Evaluation v3 answer key hash is stale');
@@ -253,7 +271,7 @@ export const createEvaluationV3Runner = (options: RunnerOptions) => {
     return { bundle, systemPrompt, context: resolved.context };
   };
 
-  const executeRun = async (runId: string) => {
+  const executeRunInternal = async (runId: string) => {
     let run = await readEvaluationV3Run(options.root, runId);
     if (run.status === 'complete') return run;
     const { bundle, systemPrompt, context } = await resolveRunInputs(run);
@@ -264,7 +282,11 @@ export const createEvaluationV3Runner = (options: RunnerOptions) => {
     const keyById = new Map<string, EvaluationV3Answer>(
       bundle.answerKey.answers.map((answer) => [answer.questionId, answer]),
     );
-    run = await writeEvaluationV3Run(options.root, { ...run, status: 'running' });
+    run = await writeEvaluationV3Run(options.root, {
+      ...run,
+      status: 'running',
+      runError: undefined,
+    });
     for (const question of bundle.questions.questions) {
       if (run.answers.some(({ questionId, status }) =>
         questionId === question.id && status === 'complete')) continue;
@@ -312,6 +334,52 @@ export const createEvaluationV3Runner = (options: RunnerOptions) => {
     return writeEvaluationV3Run(options.root, run);
   };
 
+  const executeRun = async (runId: string) => {
+    if (activeRunIds.has(runId)) {
+      throw new Error(`Evaluation v3 run is already executing: ${runId}`);
+    }
+    activeRunIds.add(runId);
+    try {
+      try {
+        return await executeRunInternal(runId);
+      } catch (error) {
+        try {
+          const current = await readEvaluationV3Run(options.root, runId);
+          await writeEvaluationV3Run(options.root, {
+            ...current,
+            status: 'incomplete',
+            runError: runErrorFrom(error),
+          });
+        } catch {
+          // Preserve the original execution error when the run cannot be read or written.
+        }
+        throw error;
+      }
+    } finally {
+      activeRunIds.delete(runId);
+    }
+  };
+
+  const queueResume = async (runId: string) => {
+    if (activeRunIds.has(runId) || transitionRunIds.has(runId)) {
+      throw new Error(`Evaluation v3 run is already executing: ${runId}`);
+    }
+    transitionRunIds.add(runId);
+    try {
+      const run = await readEvaluationV3Run(options.root, runId);
+      if (run.status !== 'incomplete') {
+        throw new Error(`only incomplete Evaluation v3 runs can resume: ${run.status}`);
+      }
+      return writeEvaluationV3Run(options.root, {
+        ...run,
+        status: 'queued',
+        runError: undefined,
+      });
+    } finally {
+      transitionRunIds.delete(runId);
+    }
+  };
+
   const executeExperiment = async (runIds: string[]) => {
     if ((runIds.length !== 4 && runIds.length !== 20)
       || new Set(runIds).size !== runIds.length) {
@@ -329,11 +397,12 @@ export const createEvaluationV3Runner = (options: RunnerOptions) => {
     for (const run of runs) {
       try {
         completed.push(await executeRun(run.runId));
-      } catch {
+      } catch (error) {
         const current = await readEvaluationV3Run(options.root, run.runId);
         completed.push(await writeEvaluationV3Run(options.root, {
           ...current,
           status: 'incomplete',
+          runError: current.runError ?? runErrorFrom(error),
         }));
       }
     }
@@ -341,13 +410,15 @@ export const createEvaluationV3Runner = (options: RunnerOptions) => {
   };
 
   const resumeRun = async (runId: string) => {
-    const run = await readEvaluationV3Run(options.root, runId);
-    if (run.status !== 'incomplete') {
-      throw new Error(`only incomplete Evaluation v3 runs can resume: ${run.status}`);
-    }
-    await writeEvaluationV3Run(options.root, { ...run, status: 'queued' });
+    await queueResume(runId);
     return executeRun(runId);
   };
 
-  return { createExperiment, executeExperiment, executeRun, resumeRun };
+  return {
+    createExperiment,
+    executeExperiment,
+    executeRun,
+    queueResume,
+    resumeRun,
+  };
 };

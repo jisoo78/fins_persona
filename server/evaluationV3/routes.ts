@@ -21,6 +21,8 @@ type EvaluationV3RunnerContract = {
     repetitions: EvaluationV3Repetitions;
   }): Promise<EvaluationV3ExperimentLaunch>;
   executeExperiment(runIds: string[]): Promise<EvaluationV3Run[]>;
+  executeRun(runId: string): Promise<EvaluationV3Run>;
+  queueResume(runId: string): Promise<EvaluationV3Run>;
   resumeRun(runId: string): Promise<EvaluationV3Run>;
 };
 
@@ -99,10 +101,10 @@ export const createEvaluationV3Router = (
   }));
 
   router.post('/runs/:id/resume', asyncHandler(async (request, response) => {
-    const run = await dependencies.readRun(request.params.id);
-    response.status(202).json({ ok: true, run: { ...run, status: 'queued' } });
+    const run = await dependencies.runner.queueResume(request.params.id);
+    response.status(202).json({ ok: true, run });
     void dependencies.runner
-      .resumeRun(request.params.id)
+      .executeRun(request.params.id)
       .catch((error) => console.error('Evaluation v3 resume failed', error));
   }));
 
@@ -160,12 +162,17 @@ export const createEvaluationV3RouteDependencies = (
     listRuns: () => listEvaluationV3Runs(root),
     readRun: (runId) => readEvaluationV3Run(root, runId),
     loadReport: async (groupId) => {
-      const runs = (await listEvaluationV3Runs(root))
-        .filter(({ experimentGroupId }) => experimentGroupId === groupId);
+      const [allRuns, manifest, bundle] = await Promise.all([
+        listEvaluationV3Runs(root),
+        loadEvaluationV3Holdout(root),
+        loadEvaluationV3Bundle(root),
+      ]);
+      const runs = allRuns.filter(({ experimentGroupId }) => experimentGroupId === groupId);
       if (runs.length === 0) throw new Error(`unknown Evaluation v3 group: ${groupId}`);
       return buildEvaluationV3ExperimentReport(
         runs,
-        await loadEvaluationV3Holdout(root),
+        manifest,
+        bundle.answerKey,
       );
     },
     runner,

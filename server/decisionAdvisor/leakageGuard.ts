@@ -1,4 +1,14 @@
 import type { DatasetSplit } from '../../shared/amyHoodDecisionAdvisor';
+export {
+  assertNoEvaluationV3Holdout,
+  filterEvaluationV3TrainingReferences,
+  loadEvaluationV3Holdout,
+} from '../evaluationV3/holdout';
+export type {
+  EvaluationV3ArtifactReference,
+  EvaluationV3HoldoutManifest,
+  EvaluationV3LeakageScope,
+} from '../evaluationV3/holdout';
 
 export type LeakageScope = 'policy_build' | 'memory_release' | 'runtime_index' | 'evaluation';
 

@@ -286,9 +286,31 @@ export const buildMasterPrompt = async (options: BuildPromptOptions) => {
   }
 
   const holdout = await loadEvaluationV3Holdout(options.root);
+  const analysisText = JSON.stringify(analyses).toLocaleLowerCase('en-US');
+  const inferredReferences = holdout.events.flatMap((event) => [
+    ...(analysisText.includes(event.candidateId.toLocaleLowerCase('en-US'))
+      ? [{ artifactClass: 'candidate' as const, id: event.candidateId }]
+      : []),
+    ...(analysisText.includes(event.eventId.toLocaleLowerCase('en-US'))
+      ? [{ artifactClass: 'event' as const, id: event.eventId }]
+      : []),
+    ...event.evidenceIds
+      .filter((id) => analysisText.includes(id.toLocaleLowerCase('en-US')))
+      .map((id) => ({ artifactClass: 'evidence' as const, id })),
+    ...event.aliases
+      .filter((id) => analysisText.includes(id.toLocaleLowerCase('en-US')))
+      .map((id) => ({ artifactClass: 'alias' as const, id })),
+  ]);
   assertNoEvaluationV3Holdout(
     'main_prompt',
-    analyses.map(({ sourceId }) => ({ artifactClass: 'source', id: sourceId })),
+    [
+      ...analyses.map(({ sourceId }) => ({ artifactClass: 'source' as const, id: sourceId })),
+      ...analyses
+        .filter(({ sourceId }) => holdout.sharedSourceRules.some((rule) =>
+          rule.sourceId === sourceId))
+        .map(({ sourceId }) => ({ artifactClass: 'raw_source' as const, id: sourceId })),
+      ...inferredReferences,
+    ],
     holdout,
   );
 

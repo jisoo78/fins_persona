@@ -42,10 +42,32 @@ export const loadEvaluationV3Holdout = async (
     resolve(root, 'evaluation/v3/sealed/holdout-manifest.json'),
     'utf8',
   )) as EvaluationV3HoldoutManifest;
+  const candidateIds = manifest.events?.map(({ candidateId }) => candidateId) ?? [];
+  const eventIds = manifest.events?.map(({ eventId }) => eventId) ?? [];
+  const sourceIds = manifest.events?.flatMap(({ sourceIds: values }) => values) ?? [];
+  const evidenceIds = manifest.events?.flatMap(({ evidenceIds: values }) => values) ?? [];
   if (manifest.dataset !== 'amy_hood_evaluation_v3_holdout'
     || manifest.version !== '3.0.0'
+    || !Array.isArray(manifest.events)
     || manifest.events.length !== 4
-    || new Set(manifest.events.map(({ candidateId }) => candidateId)).size !== 4) {
+    || new Set(candidateIds).size !== 4
+    || new Set(eventIds).size !== 4
+    || new Set(sourceIds).size !== sourceIds.length
+    || new Set(evidenceIds).size !== evidenceIds.length
+    || manifest.events.some((event) =>
+      !event.eventId || !event.candidateId
+      || !Array.isArray(event.aliases) || event.aliases.length === 0
+      || !Array.isArray(event.sourceIds) || event.sourceIds.length === 0
+      || !Array.isArray(event.evidenceIds) || event.evidenceIds.length === 0
+      || Number.isNaN(Date.parse(event.temporalCutoff))
+      || !['known_prior_exposure', 'repository_observed'].includes(event.exposureStatus))
+    || !Array.isArray(manifest.sharedSourceRules)
+    || manifest.sharedSourceRules.some((rule) =>
+      !rule.sourceId
+      || !Array.isArray(rule.forbiddenCandidateIds)
+      || rule.forbiddenCandidateIds.length === 0
+      || !Array.isArray(rule.allowedEvidenceIds)
+      || rule.allowedEvidenceIds.length === 0)) {
     throw new Error('invalid evaluation v3 holdout manifest');
   }
   return manifest;

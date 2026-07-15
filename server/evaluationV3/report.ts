@@ -1,5 +1,6 @@
 import {
   EVALUATION_V3_ARMS,
+  type EvaluationV3AnswerKeyFile,
   type EvaluationV3Arm,
   type EvaluationV3ArmAggregate,
   type EvaluationV3CategoryResult,
@@ -29,12 +30,20 @@ const categoryResult = (
   total,
 });
 
-const runReport = (run: EvaluationV3Run): EvaluationV3RunReport => {
+const runReport = (
+  run: EvaluationV3Run,
+  pairBehavior: Map<string, 'reverse' | 'stable'>,
+): EvaluationV3RunReport => {
   const totalCorrect = run.answers.filter(({ correct }) => correct).length;
   const choices = new Map(run.answers.map(({ questionId, choice }) => [questionId, choice]));
   const pairs = ['C01', 'C02', 'C03']
-    .map((pair) => [choices.get(`${pair}A`), choices.get(`${pair}B`)] as const)
-    .filter(([left, right]) => left !== undefined && right !== undefined);
+    .map((pair) => ({
+      behavior: pairBehavior.get(pair),
+      left: choices.get(`${pair}A`),
+      right: choices.get(`${pair}B`),
+    }))
+    .filter(({ behavior, left, right }) =>
+      behavior && left !== undefined && right !== undefined);
   return {
     runId: run.runId,
     status: run.status,
@@ -46,7 +55,8 @@ const runReport = (run: EvaluationV3Run): EvaluationV3RunReport => {
       transfer: categoryResult(run, 'T', 4),
     },
     pairConsistency: pairs.length === 3
-      ? pairs.filter(([left, right]) => left !== right).length / 3
+      ? pairs.filter(({ behavior, left, right }) =>
+        behavior === 'stable' ? left === right : left !== right).length / 3
       : null,
   };
 };
@@ -88,16 +98,16 @@ const armAggregate = (
   const complete = armRuns.filter((run) => run.status === 'complete');
   const percents = complete.map((run) =>
     (run.answers.filter(({ correct }) => correct).length / 30) * 100);
-  const choiceAgreement = Object.fromEntries(questionIds.map((questionId) => {
-    const choices = armRuns.flatMap((run) => {
+  const choiceAgreement = Object.fromEntries(questionIds.flatMap((questionId) => {
+    const choices = complete.flatMap((run) => {
       const answer = run.answers.find((item) =>
         item.questionId === questionId && item.status === 'complete');
       return answer?.choice ? [answer.choice] : [];
     });
-    if (choices.length === 0) return [questionId, 0];
+    if (choices.length === 0) return [];
     const counts = new Map<number, number>();
     choices.forEach((choice) => counts.set(choice, (counts.get(choice) ?? 0) + 1));
-    return [questionId, Math.max(...counts.values()) / choices.length];
+    return [[questionId, Math.max(...counts.values()) / choices.length]];
   }));
   const agreements = Object.values(choiceAgreement);
   return {
@@ -152,15 +162,28 @@ const validateRuns = (runs: EvaluationV3Run[]) => {
 export const buildEvaluationV3ExperimentReport = (
   runs: EvaluationV3Run[],
   manifest: EvaluationV3HoldoutManifest,
+  answerKey: EvaluationV3AnswerKeyFile,
 ): EvaluationV3ExperimentReport => {
   validateRuns(runs);
+  const pairBehavior = new Map<string, 'reverse' | 'stable'>();
+  for (const pair of ['C01', 'C02', 'C03']) {
+    const behaviors = answerKey.answers
+      .filter(({ questionId }) => questionId.startsWith(pair))
+      .map(({ expectedPairBehavior }) => expectedPairBehavior);
+    if (behaviors.length !== 2
+      || behaviors.some((behavior) => behavior !== 'reverse' && behavior !== 'stable')
+      || new Set(behaviors).size !== 1) {
+      throw new Error(`invalid counterfactual behavior for ${pair}`);
+    }
+    pairBehavior.set(pair, behaviors[0]!);
+  }
   const repetitions = [...new Set(runs.map(({ repetition }) => repetition))]
     .sort((left, right) => left - right)
     .map((repetition) => {
       const runsForRepetition = runs.filter((run) => run.repetition === repetition);
       const arms = Object.fromEntries(EVALUATION_V3_ARMS.map((arm) => [
         arm,
-        runReport(runsForRepetition.find((run) => run.arm === arm)!),
+        runReport(runsForRepetition.find((run) => run.arm === arm)!, pairBehavior),
       ])) as Record<EvaluationV3Arm, EvaluationV3RunReport>;
       return {
         repetition,

@@ -48,6 +48,9 @@ export const listEvaluationV3Runs = async (root: string) => {
     .filter((name) => name.endsWith('.json'))
     .sort()
     .reverse();
-  return Promise.all(names.map((name) =>
+  const runs = await Promise.all(names.map((name) =>
     readEvaluationV3Run(root, basename(name, '.json'))));
+  return runs.sort((left, right) =>
+    right.startedAt.localeCompare(left.startedAt)
+    || right.runId.localeCompare(left.runId));
 };

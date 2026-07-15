@@ -123,6 +123,7 @@ export type EvaluationV3Run = {
   provider: 'local';
   model: string;
   questionSetVersion: '3.0.0';
+  questionSetHash: string;
   answerKeyHash: string;
   promptVersionId: string | null;
   promptHash: string;
@@ -134,6 +135,11 @@ export type EvaluationV3Run = {
   scores: EvaluationV3RunScores;
   startedAt: string;
   completedAt: string | null;
+  runError?: {
+    code: 'artifact_stale' | 'configuration_error' | 'execution_error';
+    message: string;
+    retryable: boolean;
+  };
 };
 
 export type EvaluationV3ExperimentLaunch = {

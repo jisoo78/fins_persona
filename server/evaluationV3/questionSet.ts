@@ -83,6 +83,9 @@ export const assertEvaluationV3Bundle = (
     if (behaviors.length !== 2 || behaviors.some((value) => value !== 'reverse' && value !== 'stable')) {
       throw new Error(`counterfactual pair ${pairId} requires expected behavior`);
     }
+    if (new Set(behaviors).size !== 1) {
+      throw new Error(`counterfactual pair ${pairId} must use one expected behavior`);
+    }
   }
   assertEvaluationV3QuestionQuality(questions, answerKey);
 };

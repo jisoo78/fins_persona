@@ -24,7 +24,11 @@ import type {
   ModelInput,
 } from '../server/personaPipeline/modelClient';
 import { createEvaluationV3Runner } from '../server/evaluationV3/runner';
-import { readEvaluationV3Run } from '../server/evaluationV3/runStore';
+import {
+  listEvaluationV3Runs,
+  readEvaluationV3Run,
+  writeEvaluationV3Run,
+} from '../server/evaluationV3/runStore';
 
 const validPersonaPrompt = `# Amy Hood Public-Evidence CFO Persona
 ## Role
@@ -112,6 +116,7 @@ const createRunnerFixture = async (approved = true) => {
     JSON.stringify({
       releaseId: 'memory-1.0.0',
       counterexampleStatus: 'reviewed',
+      references: [{ artifactClass: 'candidate', id: 'candidate-openai-expansion-2023' }],
       policy: ['검증된 수요에 맞춰 투자를 단계화한다.'],
       reflections: ['판단 순서와 반전 신호를 함께 본다.'],
       events: ['비홀드아웃 승인 사건'],
@@ -172,6 +177,11 @@ test('edge: five repetitions keep stable order and make exactly 600 calls', asyn
   );
   await runner.executeExperiment(launch.runs.map(({ runId }) => runId));
   assert.equal(calls, 600);
+  await writeEvaluationV3Run(root, {
+    ...launch.runs[0],
+    startedAt: '2030-01-01T00:00:00.000Z',
+  });
+  assert.equal((await listEvaluationV3Runs(root))[0].runId, launch.runs[0].runId);
 });
 
 test('edge: resume preserves completed answers and restarts at the failed question', async () => {
@@ -192,9 +202,17 @@ test('edge: resume preserves completed answers and restarts at the failed questi
   const preserved = incomplete.answers.slice(0, 2);
 
   recover = true;
-  const completed = await runner.resumeRun(target.runId);
-  assert.equal(completed.status, 'complete');
-  assert.deepEqual(completed.answers.slice(0, 2), preserved);
+  const attempts = await Promise.allSettled([
+    runner.resumeRun(target.runId),
+    runner.resumeRun(target.runId),
+  ]);
+  const completed = attempts.find((attempt) => attempt.status === 'fulfilled');
+  const rejected = attempts.find((attempt) => attempt.status === 'rejected');
+  assert.ok(completed && completed.status === 'fulfilled');
+  assert.ok(rejected && rejected.status === 'rejected');
+  assert.match(String(rejected.reason), /already executing|only incomplete/);
+  assert.equal(completed.value.status, 'complete');
+  assert.deepEqual(completed.value.answers.slice(0, 2), preserved);
   assert.equal(calls, 32);
 });
 
@@ -249,7 +267,41 @@ test('failure: preflight and pinned-artifact failures leave safe run state', asy
     () => staleRunner.executeRun(launch.runs[0].runId),
     /generic CFO prompt hash is stale/,
   );
-  assert.equal((await readEvaluationV3Run(staleRoot, launch.runs[0].runId)).status, 'queued');
+  const stalePromptRun = await readEvaluationV3Run(staleRoot, launch.runs[0].runId);
+  assert.equal(stalePromptRun.status, 'incomplete');
+  assert.equal(stalePromptRun.runError?.code, 'artifact_stale');
+  assert.equal(stalePromptRun.runError?.retryable, false);
+
+  const contextPath = join(
+    staleRoot,
+    'data/b-track/amy-hood/advisor/memory-releases/1.0.0/evaluation-context.json',
+  );
+  const context = JSON.parse(readFileSync(contextPath, 'utf8')) as { policy: string[] };
+  context.policy = ['실험 생성 후 변경된 정책'];
+  await writeFile(contextPath, JSON.stringify(context));
+  await assert.rejects(
+    () => staleRunner.executeRun(launch.runs[2].runId),
+    /memory release is stale/,
+  );
+
+  const questionRoot = await createRunnerFixture();
+  const questionRunner = createEvaluationV3Runner({ root: questionRoot, createModel: () => model });
+  const questionLaunch = await questionRunner.createExperiment({ repetitions: 1 });
+  const questionPath = join(questionRoot, 'evaluation/v3/public/questions.json');
+  const questionFile = JSON.parse(readFileSync(questionPath, 'utf8')) as {
+    questions: Array<{ prompt: string }>;
+  };
+  questionFile.questions[0].prompt += ' 변경';
+  await writeFile(questionPath, JSON.stringify(questionFile));
+  await assert.rejects(
+    () => questionRunner.executeRun(questionLaunch.runs[0].runId),
+    /question set hash is stale/,
+  );
+  const invalidated = await questionRunner.executeExperiment(
+    questionLaunch.runs.map(({ runId }) => runId),
+  );
+  assert.equal(invalidated[0].runError?.code, 'artifact_stale');
+  assert.equal(invalidated[0].runError?.retryable, false);
   await assert.rejects(
     () => readEvaluationV3Run(staleRoot, '../unsafe'),
     /invalid Evaluation v3 run ID/,

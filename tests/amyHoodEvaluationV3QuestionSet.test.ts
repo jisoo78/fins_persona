@@ -111,4 +111,12 @@ test('failure: invalid authoring metadata fails before persistence', async () =>
   const malformedPair = structuredClone(bundle.questions) as EvaluationV3QuestionFile;
   malformedPair.questions.find(({ id }) => id === 'C01B')!.pairId = 'C02';
   assert.throws(() => assertEvaluationV3Bundle(malformedPair, bundle.answerKey), /counterfactual pair/);
+
+  const mixedPairBehavior = structuredClone(bundle.answerKey) as EvaluationV3AnswerKeyFile;
+  mixedPairBehavior.answers.find(({ questionId }) => questionId === 'C01B')!
+    .expectedPairBehavior = 'stable';
+  assert.throws(
+    () => assertEvaluationV3Bundle(bundle.questions, mixedPairBehavior),
+    /counterfactual pair C01 must use one expected behavior/,
+  );
 });

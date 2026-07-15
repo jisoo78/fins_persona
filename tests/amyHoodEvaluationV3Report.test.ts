@@ -17,6 +17,7 @@ import test from 'node:test';
 
 import {
   EVALUATION_V3_ARMS,
+  type EvaluationV3AnswerKeyFile,
   type EvaluationV3Arm,
   type EvaluationV3Run,
   type EvaluationV3RunAnswer,
@@ -34,6 +35,9 @@ const questionIds = [
 const manifest = JSON.parse(
   readFileSync('evaluation/v3/sealed/holdout-manifest.json', 'utf8'),
 ) as EvaluationV3HoldoutManifest;
+const answerKey = JSON.parse(
+  readFileSync('evaluation/v3/sealed/answer-key.json', 'utf8'),
+) as EvaluationV3AnswerKeyFile;
 
 const answers = (correctCount: number, choice = 1): EvaluationV3RunAnswer[] =>
   questionIds.map((questionId, index) => ({
@@ -62,6 +66,7 @@ const run = (
   provider: 'local',
   model: 'gemma4-test',
   questionSetVersion: '3.0.0',
+  questionSetHash: 'question-hash',
   answerKeyHash: 'answer-hash',
   promptVersionId: arm === 'generic_cfo' ? null : 'prompt-1',
   promptHash: arm === 'generic_cfo' ? 'generic-hash' : 'amy-hash',
@@ -91,7 +96,7 @@ const completeGroup = () => [
 ];
 
 test('happy: complete group reports objective lifts and diagnostics', () => {
-  const report = buildEvaluationV3ExperimentReport(completeGroup(), manifest);
+  const report = buildEvaluationV3ExperimentReport(completeGroup(), manifest, answerKey);
   assert.equal(report.experimentGroupId, 'group-1');
   assert.deepEqual(report.repetitions[0].lifts, {
     amyPromptLift: 10,
@@ -114,7 +119,7 @@ test('happy: complete group reports objective lifts and diagnostics', () => {
   const easyBundle = completeGroup();
   easyBundle[0] = run('generic_cfo', 1, 25);
   assert.equal(
-    buildEvaluationV3ExperimentReport(easyBundle, manifest).benchmarkRejected,
+    buildEvaluationV3ExperimentReport(easyBundle, manifest, answerKey).benchmarkRejected,
     true,
   );
 });
@@ -126,7 +131,7 @@ test('edge: an incomplete arm nulls only lifts that depend on it', () => {
     answers: answers(5).slice(0, 6),
     completedAt: null,
   });
-  const report = buildEvaluationV3ExperimentReport(runs, manifest);
+  const report = buildEvaluationV3ExperimentReport(runs, manifest, answerKey);
   assert.deepEqual(report.repetitions[0].lifts, {
     amyPromptLift: 10,
     policyRagLift: null,
@@ -138,7 +143,7 @@ test('edge: an incomplete arm nulls only lifts that depend on it', () => {
 });
 
 test('edge: one repetition has zero-variance arm statistics', () => {
-  const report = buildEvaluationV3ExperimentReport(completeGroup(), manifest);
+  const report = buildEvaluationV3ExperimentReport(completeGroup(), manifest, answerKey);
   assert.deepEqual(report.armAggregates.generic_cfo.percent, {
     mean: 60,
     min: 60,
@@ -158,34 +163,43 @@ test('edge: five identical repetitions produce full per-question agreement', () 
         answers: answers(15, ((index % 1) + 1)),
       },
     ))).flat();
-  const report = buildEvaluationV3ExperimentReport(runs, manifest);
+  const report = buildEvaluationV3ExperimentReport(runs, manifest, answerKey);
   assert.equal(report.armAggregates.amy_full_rag.overallChoiceAgreement, 1);
   assert.equal(report.armAggregates.amy_full_rag.choiceAgreement.T04, 1);
+  const stableKey = structuredClone(answerKey);
+  stableKey.answers
+    .filter(({ questionId }) => questionId.startsWith('C01'))
+    .forEach((answer) => { answer.expectedPairBehavior = 'stable'; });
+  assert.equal(
+    buildEvaluationV3ExperimentReport(completeGroup(), manifest, stableKey)
+      .repetitions[0].arms.generic_cfo.pairConsistency,
+    1 / 3,
+  );
 });
 
 test('failure: malformed experiment groups are rejected', () => {
   const duplicate = completeGroup();
   duplicate[1] = { ...duplicate[1], arm: 'generic_cfo' };
   assert.throws(
-    () => buildEvaluationV3ExperimentReport(duplicate, manifest),
+    () => buildEvaluationV3ExperimentReport(duplicate, manifest, answerKey),
     /duplicate arm/,
   );
   const mixedGroup = completeGroup();
   mixedGroup[3] = { ...mixedGroup[3], experimentGroupId: 'group-2' };
   assert.throws(
-    () => buildEvaluationV3ExperimentReport(mixedGroup, manifest),
+    () => buildEvaluationV3ExperimentReport(mixedGroup, manifest, answerKey),
     /one experiment group/,
   );
   const mixedVersion = completeGroup();
   mixedVersion[2] = { ...mixedVersion[2], questionSetVersion: '2.0.0' as '3.0.0' };
   assert.throws(
-    () => buildEvaluationV3ExperimentReport(mixedVersion, manifest),
+    () => buildEvaluationV3ExperimentReport(mixedVersion, manifest, answerKey),
     /version 3.0.0/,
   );
   const missing = completeGroup();
   missing[0] = { ...missing[0], answers: missing[0].answers.slice(0, 29) };
   assert.throws(
-    () => buildEvaluationV3ExperimentReport(missing, manifest),
+    () => buildEvaluationV3ExperimentReport(missing, manifest, answerKey),
     /complete run requires 30 answers/,
   );
 });

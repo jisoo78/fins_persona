@@ -44,6 +44,7 @@ const makeRun = (
   provider: 'local',
   model: 'gemma4-test',
   questionSetVersion: '3.0.0',
+  questionSetHash: 'question-hash',
   answerKeyHash: 'answer-hash',
   promptVersionId: arm === 'generic_cfo' ? null : 'prompt-1',
   promptHash: 'prompt-hash',
@@ -120,6 +121,14 @@ const createFixture = async () => {
         executions.push(runIds);
         return launch(runIds.length === 4 ? 1 : 5).runs;
       },
+      executeRun: async (runId: string) => ({
+        ...(await dependencies.readRun(runId)),
+        status: 'complete' as const,
+      }),
+      queueResume: async (runId: string) => ({
+        ...(await dependencies.readRun(runId)),
+        status: 'queued' as const,
+      }),
       resumeRun: async (runId: string) => ({
         ...(await dependencies.readRun(runId)),
         status: 'complete' as const,

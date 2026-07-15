@@ -1,7 +1,13 @@
+import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 import type { EvaluationV3Arm } from '../../shared/amyHoodEvaluationV3';
+import {
+  assertNoEvaluationV3Holdout,
+  loadEvaluationV3Holdout,
+  type EvaluationV3ArtifactReference,
+} from './holdout';
 
 export type EvaluationV3ContextPackage = {
   memoryReleaseId: string | null;
@@ -21,6 +27,7 @@ export type ActiveMemoryRelease = {
 type EvaluationContextSnapshot = Omit<EvaluationV3ContextPackage, 'memoryReleaseId'> & {
   releaseId: string;
   counterexampleStatus: 'reviewed' | 'no_reviewed_counterexample';
+  references: EvaluationV3ArtifactReference[];
 };
 
 const memoryReleaseRoot = (root: string) =>
@@ -61,10 +68,15 @@ const loadActiveSnapshot = async (root: string) => {
   if (!active.releaseId || !active.version || !active.manifestHash) {
     throw new Error('active memory release pointer is invalid');
   }
-  const snapshot = await readJson<EvaluationContextSnapshot>(
-    resolve(base, active.version, 'evaluation-context.json'),
-    'active memory release evaluation context is required',
-  );
+  const contextPath = resolve(base, active.version, 'evaluation-context.json');
+  let contextText: string;
+  let snapshot: EvaluationContextSnapshot;
+  try {
+    contextText = await readFile(contextPath, 'utf8');
+    snapshot = JSON.parse(contextText) as EvaluationContextSnapshot;
+  } catch {
+    throw new Error('active memory release evaluation context is required');
+  }
   if (snapshot.releaseId !== active.releaseId) {
     throw new Error('active memory release ID does not match evaluation context');
   }
@@ -76,7 +88,57 @@ const loadActiveSnapshot = async (root: string) => {
     && snapshot.counterexampleStatus !== 'no_reviewed_counterexample') {
     throw new Error('memory release counterexample status is invalid');
   }
-  return snapshot;
+  if (!Array.isArray(snapshot.references) || snapshot.references.length === 0) {
+    throw new Error('memory release artifact references are required');
+  }
+  const allowedClasses = new Set([
+    'candidate', 'event', 'source', 'evidence', 'alias', 'raw_source',
+  ]);
+  if (snapshot.references.some((reference) =>
+    !reference || typeof reference.id !== 'string' || !reference.id
+    || !allowedClasses.has(reference.artifactClass))) {
+    throw new Error('memory release artifact reference is invalid');
+  }
+  const manifest = await loadEvaluationV3Holdout(root);
+  const content = [
+    ...snapshot.policy,
+    ...snapshot.reflections,
+    ...snapshot.events,
+    ...snapshot.counterexamples,
+  ].join('\n').toLocaleLowerCase('en-US');
+  const inferred: EvaluationV3ArtifactReference[] = [];
+  for (const event of manifest.events) {
+    if (content.includes(event.candidateId.toLocaleLowerCase('en-US'))) {
+      inferred.push({ artifactClass: 'candidate', id: event.candidateId });
+    }
+    if (content.includes(event.eventId.toLocaleLowerCase('en-US'))) {
+      inferred.push({ artifactClass: 'event', id: event.eventId });
+    }
+    event.sourceIds.forEach((sourceId) => {
+      if (content.includes(sourceId.toLocaleLowerCase('en-US'))) {
+        inferred.push({ artifactClass: 'source', id: sourceId });
+      }
+    });
+    event.evidenceIds.forEach((evidenceId) => {
+      if (content.includes(evidenceId.toLocaleLowerCase('en-US'))) {
+        inferred.push({ artifactClass: 'evidence', id: evidenceId });
+      }
+    });
+    event.aliases.forEach((alias) => {
+      if (content.includes(alias.toLocaleLowerCase('en-US'))) {
+        inferred.push({ artifactClass: 'alias', id: alias });
+      }
+    });
+  }
+  assertNoEvaluationV3Holdout(
+    'runtime_index',
+    [...snapshot.references, ...inferred],
+    manifest,
+  );
+  return {
+    snapshot,
+    contextHash: createHash('sha256').update(contextText).digest('hex'),
+  };
 };
 
 export const resolveEvaluationV3ArmContext = async (
@@ -89,18 +151,13 @@ export const resolveEvaluationV3ArmContext = async (
   if (arm === 'generic_cfo' || arm === 'amy_prompt') {
     return { context: emptyEvaluationV3Context(), memoryReleaseHash: null };
   }
-  const base = memoryReleaseRoot(root);
-  const active = await readJson<ActiveMemoryRelease>(
-    resolve(base, 'active.json'),
-    'active memory release is required for Evaluation v3 RAG arms',
-  );
-  const snapshot = await loadActiveSnapshot(root);
+  const { snapshot, contextHash } = await loadActiveSnapshot(root);
   if (snapshot.policy.length === 0) {
     throw new Error('amy_policy_rag requires at least one policy');
   }
   if (arm === 'amy_policy_rag') {
     return {
-      memoryReleaseHash: active.manifestHash,
+      memoryReleaseHash: contextHash,
       context: {
         memoryReleaseId: snapshot.releaseId,
         policy: snapshot.policy,
@@ -118,7 +175,7 @@ export const resolveEvaluationV3ArmContext = async (
     throw new Error('reviewed counterexample or explicit absence marker is required');
   }
   return {
-    memoryReleaseHash: active.manifestHash,
+    memoryReleaseHash: contextHash,
     context: {
       memoryReleaseId: snapshot.releaseId,
       policy: snapshot.policy,
