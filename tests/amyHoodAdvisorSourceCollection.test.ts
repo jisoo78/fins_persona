@@ -46,6 +46,18 @@
  * 3. Failure Path:
  *    - partial source registries report exact URL/document deficits and missing artifacts do not count.
  *    - unknown collection IDs and malformed local import files exit nonzero without network access.
+ *
+ * Test Plan (M&A supporting evidence family coverage):
+ * 1. Happy Path:
+ *    - two reviewed decision-time artifacts from two document families satisfy source coverage.
+ *
+ * 2. Edge Cases:
+ *    - a press release and its SEC mirror share one family and count once.
+ *    - translated variants of one announcement share one family and count once.
+ *    - a post-outcome artifact is retained but excluded from core family coverage.
+ *
+ * 3. Failure Path:
+ *    - invalid family identifiers and a one-family candidate fail with explicit deficits.
  */
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
@@ -2346,11 +2358,11 @@ const writeRegistryFixture = async (
       tier: sourceRole.direct ? 1 : 2,
       title: `Public source ${index + 1}`,
       publisher: 'Microsoft',
-      publishedAt: linkedCandidate.decisionWindowStart,
+      publishedAt: sourceRole.association.publishedAt,
       speaker: sourceRole.direct ? 'Amy Hood' : null,
       sourceType: sourceRole.association.sourceType,
       collector: 'microsoft_ir',
-      temporalRole: 'decision_time',
+      temporalRole: sourceRole.association.temporalRelation,
       rightsNote: 'Public official source preserved with provenance.',
       approvedPublicHost: true,
       collectionStatus: valid ? 'review_required' : 'discovered',
@@ -2440,6 +2452,116 @@ test('happy: source CLI verifies 100 discoveries and 50 artifact-backed document
     const linked = runAdvisorCli(directory, 'sources:check');
     assert.equal(linked.status, 1);
     assert.match(linked.stderr, /59 valid documents/i);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('happy: two reviewed document families satisfy source coverage', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-source-families-happy-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+  const candidates = validCandidateMatrix();
+  for (const candidate of candidates) {
+    candidate.sourceAssociations.forEach((association, index) => {
+      association.documentFamilyId = `${candidate.id}-family-${index + 1}`;
+    });
+  }
+
+  try {
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(candidatePath, `${JSON.stringify(candidates, null, 2)}\n`);
+    await writeRegistryFixture(directory, { discoveries: 100, validDocuments: 60 }, candidates);
+
+    const result = runAdvisorCli(directory, 'sources:check');
+    assert.equal(result.status, 0, result.stderr);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('edge: an SEC mirror cannot create a second document family', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-source-family-mirror-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+  const candidates = validCandidateMatrix();
+  const candidate = candidates[0];
+  candidate.sourceAssociations[0].documentFamilyId = 'microsoft-nuance-announcement-2021';
+  candidate.sourceAssociations[1].documentFamilyId = 'microsoft-nuance-announcement-2021';
+
+  try {
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(candidatePath, `${JSON.stringify(candidates, null, 2)}\n`);
+    await writeRegistryFixture(directory, { discoveries: 100, validDocuments: 60 }, candidates);
+
+    const result = runAdvisorCli(directory, 'sources:check');
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /candidate-01 lacks a reviewed collected second document family/i);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('edge: translated variants of one announcement count as one family', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-source-family-translation-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+  const candidates = validCandidateMatrix();
+  const candidate = candidates[1];
+  candidate.sourceAssociations[0].sourceType = 'official_announcement_es';
+  candidate.sourceAssociations[1].sourceType = 'official_announcement_en';
+  candidate.sourceAssociations[0].documentFamilyId = 'microsoft-mojang-announcement-2014';
+  candidate.sourceAssociations[1].documentFamilyId = 'microsoft-mojang-announcement-2014';
+
+  try {
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(candidatePath, `${JSON.stringify(candidates, null, 2)}\n`);
+    await writeRegistryFixture(directory, { discoveries: 100, validDocuments: 60 }, candidates);
+
+    const result = runAdvisorCli(directory, 'sources:check');
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /candidate-02 lacks a reviewed collected second document family/i);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('edge: post-outcome evidence is retained but excluded from core families', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-source-family-outcome-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+  const candidates = validCandidateMatrix();
+  const candidate = candidates[2];
+  candidate.sourceAssociations[0].documentFamilyId = 'project-falcon-3-decision';
+  candidate.sourceAssociations[1].documentFamilyId = 'project-falcon-3-outcome';
+  candidate.sourceAssociations[1].role = 'post_outcome';
+  candidate.sourceAssociations[1].temporalRelation = 'post_outcome';
+  candidate.sourceAssociations[1].publishedAt = '2099-01-01';
+
+  try {
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(candidatePath, `${JSON.stringify(candidates, null, 2)}\n`);
+    await writeRegistryFixture(directory, { discoveries: 100, validDocuments: 60 }, candidates);
+
+    const result = runAdvisorCli(directory, 'sources:check');
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /candidate-03 lacks a reviewed collected second document family/i);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: invalid document family identifiers fail candidate validation', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-source-family-invalid-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+  const invalidIds = ['Nuance announcement', '', `a${'b'.repeat(64)}`];
+
+  try {
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    for (const documentFamilyId of invalidIds) {
+      const candidates = validCandidateMatrix();
+      candidates[0].sourceAssociations[0].documentFamilyId = documentFamilyId;
+      await writeFile(candidatePath, `${JSON.stringify(candidates, null, 2)}\n`);
+      const result = runAdvisorCli(directory, 'candidates:check');
+      assert.equal(result.status, 1);
+      assert.match(result.stderr, /invalid document family ID/i);
+    }
   } finally {
     await rm(directory, { recursive: true, force: true });
   }

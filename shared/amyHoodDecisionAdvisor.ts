@@ -186,6 +186,7 @@ export type EventSourceAssociation = {
   canonicalUrl: string;
   role: 'direct_amy' | 'contemporaneous_context' | 'counterevidence' | 'post_outcome';
   sourceType: string;
+  documentFamilyId?: string;
   publishedAt: string | null;
   temporalRelation: 'pre_decision' | 'decision_time' | 'post_outcome';
   relevanceClaim: string;

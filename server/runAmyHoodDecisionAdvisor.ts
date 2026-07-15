@@ -215,6 +215,10 @@ export const validateEventCandidates = (
     }
     for (const association of candidate.sourceAssociations) {
       const canonicalUrl = canonicalizeSourceUrl(association.canonicalUrl);
+      if (association.documentFamilyId !== undefined
+        && !/^[a-z0-9][a-z0-9-]{2,63}$/.test(association.documentFamilyId)) {
+        throw new Error(`candidate ${candidate.id} has an invalid document family ID`);
+      }
       if (!canonicalUrl.startsWith('https://')) {
         throw new Error(`candidate ${candidate.id} association URL must use HTTPS`);
       }
@@ -489,6 +493,7 @@ export const checkSourceInventory = async (
   const matchedByCandidate = new Map<string, Array<{
     source: AdvisorSourceRecord;
     role: EventCandidate['sourceAssociations'][number]['role'];
+    association: EventCandidate['sourceAssociations'][number];
   }>>();
   const validSourceIds = new Set<string>();
   const registryUrls = new Set(registry.sources.map(({ canonicalUrl }) => canonicalUrl));
@@ -545,7 +550,7 @@ export const checkSourceInventory = async (
       validSourceIds.add(source.id);
       matchedByCandidate.set(candidate.id, [
         ...(matchedByCandidate.get(candidate.id) ?? []),
-        { source, role: association.role },
+        { source, role: association.role, association },
       ]);
     }
   }
@@ -565,8 +570,9 @@ export const checkSourceInventory = async (
     if (matched.length === 0) {
       deficits.push(`${candidate.id} lacks a reviewed event-relevant artifact`);
     }
-    if (new Set(matched.map(({ source }) => source.sourceType)).size < 2) {
-      deficits.push(`${candidate.id} lacks a reviewed collected second source type`);
+    if (new Set(matched.map(({ source, association }) =>
+      association.documentFamilyId ?? `source-type:${source.sourceType}`)).size < 2) {
+      deficits.push(`${candidate.id} lacks a reviewed collected second document family`);
     }
     if (!candidate.directEvidenceGap
       && !matched.some(({ role }) => role === 'direct_amy')) {
