@@ -1,7 +1,7 @@
 # Amy Hood Evaluation v3 Design
 
 **Date:** 2026-07-15  
-**Status:** Pending written-spec review  
+**Status:** Approved for implementation planning
 **Track:** B Track — Amy Hood Decision Advisor  
 **Primary runtime:** Gemma 4 local, 16,384-token context  
 **Compatibility rule:** Evaluation v2 data, APIs, runs, and reports remain readable and unchanged
@@ -70,6 +70,10 @@ Existing immutable sources and registries remain in place to avoid a risky migra
 2. Prompt, policy, memory-release, and RAG builders run a final fail-closed scan and reject any sealed identifier before writing an artifact.
 
 The final gate reports the exact leaked identifier and artifact class. A rejected build performs no partial write. Post-outcome sources for the four events are grading-only and are never exposed to the generation model.
+
+### 3.2 Known prior exposure
+
+GitHub acquisition material appeared in the earlier v2 benchmark and prompt-iteration workflow before v3 was frozen. The v3 holdout manifest therefore marks GitHub as `known_prior_exposure`; reports must not describe the four-event set as a pristine never-seen holdout. The gate still blocks every future GitHub event, evidence, and grading reference from v3 prompt, policy, memory, and RAG builds. The other three events are marked according to their verified repository exposure state when the manifest is created.
 
 ## 4. Artifact Layout
 
