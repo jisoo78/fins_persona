@@ -34,7 +34,7 @@ type ProposedSpan = {
   exactQuote: string;
   startChar: number;
   endChar: number;
-  speaker: 'Amy Hood' | null;
+  speaker: string | null;
 };
 
 type ExtractorResponse = { spans: ProposedSpan[] };
@@ -131,7 +131,8 @@ const parseResponse = (value: string): ExtractorResponse => {
       || span.exactQuote.length === 0
       || !Number.isInteger(span.startChar)
       || !Number.isInteger(span.endChar)
-      || !(span.speaker === null || span.speaker === 'Amy Hood')) {
+      || !(span.speaker === null
+        || (typeof span.speaker === 'string' && span.speaker.trim().length > 0))) {
       throw new Error('extractor response contains an invalid span');
     }
   }
@@ -228,7 +229,7 @@ export const extractPilotEvidence = async (
         startChar,
         endChar,
         publishedAt,
-        speaker: proposed.speaker,
+        speaker: proposed.speaker === 'Amy Hood' ? 'Amy Hood' : null,
       };
       try {
         spans.push(validatePilotEvidenceSpan(span, input));

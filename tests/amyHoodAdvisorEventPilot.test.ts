@@ -354,6 +354,29 @@ test('failure: malformed model output retries once and records an incomplete ext
   assert.deepEqual(result.gaps, ['model_response_invalid']);
 });
 
+test('failure: organizational context speaker is normalized without discarding exact evidence', async () => {
+  const quote = 'Microsoft will finance the transaction primarily through new indebtedness.';
+  const input = await extractionFixture(quote, 'contemporaneous_context');
+  const model = fakeModel(async () => ({
+    text: JSON.stringify({
+      spans: [{
+        role: 'decision_context',
+        exactQuote: quote,
+        startChar: 0,
+        endChar: quote.length,
+        speaker: 'Microsoft',
+      }],
+    }),
+    elapsedMs: 1,
+  }));
+
+  const result = await extractPilotEvidence(input, model);
+
+  assert.equal(result.spans.length, 1);
+  assert.equal(result.spans[0].speaker, null);
+  assert.deepEqual(result.gaps, []);
+});
+
 test('happy: a validator-ready proposal becomes approved only after explicit review', async () => {
   const root = await mkdtemp(path.join(os.tmpdir(), 'amy-pilot-event-'));
   const { candidate, spans, model } = await eventCardFixture();
