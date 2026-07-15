@@ -13,6 +13,7 @@
  *      direct-Amy role, and registry failure fail without partial writes.
  */
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import os from 'node:os';
@@ -37,7 +38,10 @@ const canonicalUrl = 'https://www.sec.gov/Archives/example/exhibit-99.htm';
 const sameDocumentUrl = 'https://news.microsoft.com/source/example-acquisition/';
 
 const fixture = async (
-  options: { temporalRelation?: 'decision_time' | 'post_outcome' } = {},
+  options: {
+    temporalRelation?: 'decision_time' | 'post_outcome';
+    fullCandidateMatrix?: boolean;
+  } = {},
 ) => {
   const root = await mkdtemp(path.join(os.tmpdir(), 'advisor-support-review-'));
   const temporalRelation = options.temporalRelation ?? 'decision_time';
@@ -202,14 +206,88 @@ const fixture = async (
   await mkdir(path.join(paths.root, 'raw'), { recursive: true });
   await mkdir(path.join(paths.root, 'normalized'), { recursive: true });
   await writeFile(paths.registry, JSON.stringify({ sources: [source] }, null, 2) + '\n');
+  const candidates = [candidate];
+  if (options.fullCandidateMatrix) {
+    const scopedIds = [
+      'candidate-nokia-acquisition-2013',
+      'candidate-mojang-acquisition-2014',
+      'candidate-github-acquisition-2018',
+    ];
+    const domains = [
+      'm_and_a',
+      'ai_cloud_capex',
+      'pricing_monetization',
+      'cost_efficiency',
+      'shareholder_return_risk',
+    ] as const;
+    for (let index = 1; index < 30; index += 1) {
+      const number = index + 1;
+      const url = `https://news.microsoft.com/source/2020/01/02/project-batch-${number}/`;
+      candidates.push({
+        ...structuredClone(candidate),
+        id: scopedIds[index - 1] ?? `candidate-batch-${number}`,
+        workingTitle: `Project Batch ${number} authorization decision`,
+        domain: domains[index % domains.length],
+        discoveryUrls: [url],
+        decisionWindowStart: '2020-01-02',
+        decisionWindowEnd: '2020-01-02',
+        decisionWindowBasis: {
+          summary: `The Project Batch ${number} announcement defines the public decision date.`,
+          sourceUrls: [url],
+          reviewerNote: 'Reviewed against the dated official announcement.',
+        },
+        eventFingerprint: {
+          primaryEntity: `Project Batch ${number}`,
+          decisionAction: 'authorization',
+          eventSpecificIdentifier: `Batch-${number} approval`,
+          sourceUrls: [url],
+          reviewStatus: 'reviewed',
+          reviewerNote: 'Reviewed against the official authorization announcement.',
+        },
+        sourceAssociations: [{
+          canonicalUrl: url,
+          role: 'contemporaneous_context',
+          sourceType: 'official_announcement',
+          publishedAt: '2020-01-02',
+          temporalRelation: 'decision_time',
+          relevanceClaim: `The source identifies Project Batch ${number} authorization.`,
+          evidenceLocator: {
+            exactQuote: `Project Batch ${number} authorization under Batch-${number} approval.`,
+            exactRelevancePassage: `Project Batch ${number} authorization under Batch-${number} approval.`,
+            anchorTerms: [`Project Batch ${number}`, `Batch-${number} approval`],
+            eventDiscriminators: [
+              { kind: 'named_entity', value: `Project Batch ${number}` },
+              { kind: 'decision_action', value: 'authorization' },
+              { kind: 'event_specific', value: `Batch-${number} approval` },
+            ],
+            speaker: null,
+          },
+          reviewStatus: 'reviewed',
+          reviewerNote: 'The exact official passage was reviewed.',
+        }],
+        directEvidenceGap: {
+          reviewStatus: 'reviewed',
+          reason: 'No event-specific Amy Hood passage has been collected for this candidate.',
+          reviewerNote: 'The candidate remains pending direct evidence review.',
+        },
+        phase3Status: 'evidence_gap',
+      });
+    }
+  }
   await writeFile(
     path.join(paths.root, 'event-candidates.json'),
-    JSON.stringify([candidate], null, 2) + '\n',
+    JSON.stringify(candidates, null, 2) + '\n',
   );
   await writeFile(path.join(paths.root, rawPath), JSON.stringify(raw, null, 2) + '\n');
   await writeFile(path.join(paths.root, normalizedPath), normalized);
   return { root, manifest, candidateId, sourceId };
 };
+
+const runAdvisorCli = (root: string, ...args: string[]) => spawnSync(
+  process.execPath,
+  ['--import', 'tsx', 'server/runAmyHoodDecisionAdvisor.ts', ...args, '--root', root],
+  { cwd: path.resolve(import.meta.dirname, '..'), encoding: 'utf8' },
+);
 
 test('happy: decision-time supporting evidence verifies and applies', async () => {
   const item = await fixture();
@@ -358,3 +436,54 @@ test('failure: invalid review identity and evidence fail before writes', async (
   });
 });
 
+test('happy: support CLI checks and applies one valid manifest', async () => {
+  const item = await fixture({ fullCandidateMatrix: true });
+  try {
+    const manifestPath = path.join(item.root, 'support-review.json');
+    await writeFile(manifestPath, JSON.stringify(item.manifest, null, 2) + '\n');
+
+    const checked = runAdvisorCli(item.root, 'support:check', '--file', manifestPath);
+    assert.equal(checked.status, 0, checked.stderr);
+    assert.match(checked.stdout, /supporting review valid/i);
+
+    const applied = runAdvisorCli(item.root, 'support:apply', '--file', manifestPath);
+    assert.equal(applied.status, 0, applied.stderr);
+    assert.match(applied.stdout, /supporting review applied/i);
+
+    const batch = runAdvisorCli(item.root, 'support:batch');
+    assert.equal(batch.status, 0, batch.stderr);
+    const output = JSON.parse(batch.stdout) as Record<string, { outcome: string }>;
+    assert.deepEqual(Object.keys(output).sort(), [
+      'candidate-github-acquisition-2018',
+      'candidate-mojang-acquisition-2014',
+      'candidate-nokia-acquisition-2013',
+      'candidate-nuance-acquisition-2021',
+    ]);
+    assert.equal(output['candidate-nuance-acquisition-2021'].outcome, 'partial');
+    assert.equal(output['candidate-github-acquisition-2018'].outcome, 'blocked');
+  } finally {
+    await rm(item.root, { recursive: true, force: true });
+  }
+});
+
+test('failure: support CLI rejects missing and malformed manifests', async () => {
+  const item = await fixture({ fullCandidateMatrix: true });
+  try {
+    const missing = runAdvisorCli(item.root, 'support:check');
+    assert.equal(missing.status, 1);
+    assert.match(missing.stderr, /requires --file/i);
+
+    const malformedPath = path.join(item.root, 'malformed-support.json');
+    await writeFile(malformedPath, '{ invalid JSON');
+    const malformed = runAdvisorCli(
+      item.root,
+      'support:check',
+      '--file',
+      malformedPath,
+    );
+    assert.equal(malformed.status, 1);
+    assert.match(malformed.stderr, /invalid supporting evidence review manifest JSON/i);
+  } finally {
+    await rm(item.root, { recursive: true, force: true });
+  }
+});

@@ -17,6 +17,11 @@ import {
   verifyDirectEvidenceReview,
 } from './decisionAdvisor/directEvidenceReview';
 import {
+  applySupportingEvidenceReview,
+  loadSupportingEvidenceReviewManifest,
+  verifySupportingEvidenceReview,
+} from './decisionAdvisor/supportingEvidenceReview';
+import {
   loadPdfUrlInventory,
   mergePdfUrlInventory,
 } from './decisionAdvisor/pdfUrlInventory';
@@ -45,18 +50,39 @@ const DECISION_DOMAINS: DecisionDomain[] = [
   'shareholder_return_risk',
 ];
 
+const SUPPORTING_EVIDENCE_BATCH_IDS = [
+  'candidate-nokia-acquisition-2013',
+  'candidate-mojang-acquisition-2014',
+  'candidate-github-acquisition-2018',
+  'candidate-nuance-acquisition-2021',
+] as const;
+
 type CandidateCheck = {
   candidateCount: number;
   uniqueDiscoveryUrlCount: number;
   domainCounts: Record<DecisionDomain, number>;
 };
 
-type SourceCheck = {
+export type SourceCheck = {
   discoveredUrlCount: number;
   validDocumentCount: number;
   postOutcomeUrlCount: number;
   failedCount: number;
   reviewRequiredCount: number;
+};
+
+export type CandidateEvidenceCoverage = {
+  coreDocumentFamilyCount: number;
+  coreSourceIds: string[];
+  directAmySourceIds: string[];
+  postOutcomeDocumentCount: number;
+  deficits: string[];
+  outcome: 'passed' | 'partial' | 'blocked';
+};
+
+export type SourceInspection = SourceCheck & {
+  candidateCoverage: Record<string, CandidateEvidenceCoverage>;
+  deficits: string[];
 };
 
 const normalizedSearchText = (value: string) => value.replace(/\s+/g, ' ').trim().toLowerCase();
@@ -363,18 +389,17 @@ export const validateEventCandidates = (
   };
 };
 
-const isCountableDocument = (source: AdvisorSourceRecord) => new Set([
+const isArtifactBackedDocument = (source: AdvisorSourceRecord) => new Set([
   'collected',
   'normalized',
   'review_required',
   'approved',
 ]).has(source.collectionStatus)
   && source.tier !== 'discovery_only'
-  && source.temporalRole !== 'post_outcome'
   && source.failureReason === null;
 
 const verifySourceArtifact = async (root: string, source: AdvisorSourceRecord) => {
-  if (!isCountableDocument(source)
+  if (!isArtifactBackedDocument(source)
     || !source.rawPath
     || !source.normalizedPath
     || !source.sha256
@@ -463,10 +488,10 @@ const temporalRoleMatches = (source: AdvisorSourceRecord, candidates: EventCandi
   });
 };
 
-export const checkSourceInventory = async (
+export const inspectSourceInventory = async (
   root: string,
   candidates: EventCandidate[],
-): Promise<SourceCheck> => {
+): Promise<SourceInspection> => {
   const registry = loadRegistry(root);
   const candidateIds = new Set(candidates.map(({ id }) => id));
   const associationsByUrl = new Map<string, Array<{
@@ -495,6 +520,7 @@ export const checkSourceInventory = async (
     role: EventCandidate['sourceAssociations'][number]['role'];
     association: EventCandidate['sourceAssociations'][number];
   }>>();
+  const postOutcomeSourceIdsByCandidate = new Map<string, Set<string>>();
   const validSourceIds = new Set<string>();
   const registryUrls = new Set(registry.sources.map(({ canonicalUrl }) => canonicalUrl));
 
@@ -510,6 +536,17 @@ export const checkSourceInventory = async (
     const artifact = await verifySourceArtifact(root, source);
     if (!artifact) continue;
     for (const { candidate, association } of associationLinks) {
+      if (source.eventCandidateIds.includes(candidate.id)
+        && association.reviewStatus === 'reviewed'
+        && association.temporalRelation === 'post_outcome'
+        && association.sourceType === source.sourceType
+        && association.publishedAt === source.publishedAt
+        && association.temporalRelation === source.temporalRole
+        && temporalRoleMatches(source, [candidate])) {
+        const sourceIds = postOutcomeSourceIdsByCandidate.get(candidate.id) ?? new Set<string>();
+        sourceIds.add(source.id);
+        postOutcomeSourceIdsByCandidate.set(candidate.id, sourceIds);
+      }
       if (!source.eventCandidateIds.includes(candidate.id)
         || association.reviewStatus !== 'reviewed'
         || !association.evidenceLocator
@@ -565,19 +602,46 @@ export const checkSourceInventory = async (
     ).length,
   };
   const deficits: string[] = [];
+  const candidateCoverage: Record<string, CandidateEvidenceCoverage> = {};
   for (const candidate of candidates) {
     const matched = matchedByCandidate.get(candidate.id) ?? [];
+    const familyCount = new Set(matched.map(({ source, association }) =>
+      association.documentFamilyId ?? `source-type:${source.sourceType}`)).size;
+    const directAmySourceIds = matched
+      .filter(({ role }) => role === 'direct_amy')
+      .map(({ source }) => source.id);
+    const candidateDeficits: string[] = [];
     if (matched.length === 0) {
-      deficits.push(`${candidate.id} lacks a reviewed event-relevant artifact`);
+      const message = `${candidate.id} lacks a reviewed event-relevant artifact`;
+      deficits.push(message);
+      candidateDeficits.push(message);
     }
-    if (new Set(matched.map(({ source, association }) =>
-      association.documentFamilyId ?? `source-type:${source.sourceType}`)).size < 2) {
-      deficits.push(`${candidate.id} lacks a reviewed collected second document family`);
+    if (familyCount < 2) {
+      const message = `${candidate.id} lacks a reviewed collected second document family`;
+      deficits.push(message);
+      candidateDeficits.push(message);
     }
     if (!candidate.directEvidenceGap
-      && !matched.some(({ role }) => role === 'direct_amy')) {
-      deficits.push(`${candidate.id} lacks a verified candidate-specific direct Amy locator`);
+      && directAmySourceIds.length === 0) {
+      const message = `${candidate.id} lacks a verified candidate-specific direct Amy locator`;
+      deficits.push(message);
+      candidateDeficits.push(message);
     }
+    if (directAmySourceIds.length === 0) {
+      candidateDeficits.push(`${candidate.id} has no verified direct Amy evidence`);
+    }
+    candidateCoverage[candidate.id] = {
+      coreDocumentFamilyCount: familyCount,
+      coreSourceIds: [...new Set(matched.map(({ source }) => source.id))],
+      directAmySourceIds,
+      postOutcomeDocumentCount: postOutcomeSourceIdsByCandidate.get(candidate.id)?.size ?? 0,
+      deficits: [...new Set(candidateDeficits)],
+      outcome: familyCount >= 2 && directAmySourceIds.length > 0
+        ? 'passed'
+        : matched.length > 0
+          ? 'partial'
+          : 'blocked',
+    };
   }
   if (result.discoveredUrlCount < 100) {
     const deficit = 100 - result.discoveredUrlCount;
@@ -595,12 +659,20 @@ export const checkSourceInventory = async (
   if (result.validDocumentCount > 80) {
     deficits.push(`${result.validDocumentCount - 80} valid documents above maximum`);
   }
-  if (deficits.length > 0) {
+  return { ...result, candidateCoverage, deficits };
+};
+
+export const checkSourceInventory = async (
+  root: string,
+  candidates: EventCandidate[],
+): Promise<SourceInspection> => {
+  const inspection = await inspectSourceInventory(root, candidates);
+  if (inspection.deficits.length > 0) {
     throw new Error(
-      `Source collection incomplete: ${result.discoveredUrlCount} discovered URLs, ${result.validDocumentCount} valid documents; ${deficits.join('; ')}.`,
+      `Source collection incomplete: ${inspection.discoveredUrlCount} discovered URLs, ${inspection.validDocumentCount} valid documents; ${inspection.deficits.join('; ')}.`,
     );
   }
-  return result;
+  return inspection;
 };
 
 const optionValue = (args: string[], option: string) => {
@@ -713,6 +785,53 @@ const run = async () => {
     console.log(
       `Review ${result.changed ? 'applied' : 'unchanged'}: ${result.reviewId}, ${result.candidateId}, ${result.decision}.`,
     );
+    return;
+  }
+
+  if (command === 'support:check' || command === 'support:apply') {
+    const reviewPath = optionValue(args, '--file');
+    if (!reviewPath) throw new Error(`${command} requires --file`);
+    const manifest = await loadSupportingEvidenceReviewManifest(
+      path.resolve(root, reviewPath),
+    );
+    if (command === 'support:check') {
+      await verifySupportingEvidenceReview(root, manifest);
+      console.log(
+        `Supporting review valid: ${manifest.reviewId}, ${manifest.candidateId}, ${manifest.decision}.`,
+      );
+      return;
+    }
+    const result = await applySupportingEvidenceReview(root, manifest, {
+      validateCandidates: (candidates) => {
+        validateEventCandidates(candidates, { enforceDiscoveryRange: false });
+      },
+    });
+    console.log(
+      `Supporting review ${result.changed ? 'applied' : 'unchanged'}: ${result.reviewId}, ${result.candidateId}, ${result.decision}.`,
+    );
+    return;
+  }
+
+  if (command === 'support:batch') {
+    const candidatePath = path.resolve(
+      root,
+      'data/b-track/amy-hood/advisor/event-candidates.json',
+    );
+    const candidates = JSON.parse(readFileSync(candidatePath, 'utf8')) as EventCandidate[];
+    validateEventCandidates(candidates, { enforceDiscoveryRange: false });
+    const inspection = await inspectSourceInventory(root, candidates);
+    const batch = Object.fromEntries(SUPPORTING_EVIDENCE_BATCH_IDS.map((candidateId) => [
+      candidateId,
+      inspection.candidateCoverage[candidateId] ?? {
+        coreDocumentFamilyCount: 0,
+        coreSourceIds: [],
+        directAmySourceIds: [],
+        postOutcomeDocumentCount: 0,
+        deficits: [`${candidateId} is missing from the candidate matrix`],
+        outcome: 'blocked',
+      },
+    ]));
+    console.log(JSON.stringify(batch, null, 2));
     return;
   }
 
