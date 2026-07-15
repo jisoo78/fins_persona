@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Amy Hood Direct Evidence Review Report</title>
+  <style>
+    :root{--ink:#182033;--muted:#667085;--line:#d9deea;--panel:#f6f8fc;--ok:#147a50;--warn:#a15c00}
+    *{box-sizing:border-box}body{margin:0;background:#eef2f8;color:var(--ink);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    main{max-width:1050px;margin:30px auto;padding:38px 44px;background:#fff;box-shadow:0 8px 28px #20314d18}h1,h2{line-height:1.25}h1{margin:0 0 6px;font-size:30px}h2{margin-top:34px;padding-bottom:8px;border-bottom:1px solid var(--line);font-size:21px}
+    .meta,.note{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}.card{padding:15px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}.card strong{display:block;font-size:25px}.ok{color:var(--ok);font-weight:700}.warn{color:var(--warn);font-weight:700}
+    table{width:100%;border-collapse:collapse;margin:14px 0}th,td{padding:10px 12px;border:1px solid var(--line);text-align:left;vertical-align:top}th{background:var(--panel)}code{padding:2px 5px;border-radius:4px;background:#f0f2f7}blockquote{margin:12px 0;padding:10px 15px;border-left:4px solid #8190ad;background:var(--panel)}footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}@media(max-width:760px){main{margin:0;padding:24px 18px}.grid{grid-template-columns:repeat(2,1fr)}}
+  </style>
+</head>
+<body><main>
+  <h1>Amy Hood 직접 증거 검토 보고서</h1>
+  <p class="meta">2026-07-15 · LinkedIn 및 Activision Blizzard 인수 발표 · 엄격 승인 정책</p>
+
+  <div class="grid">
+    <div class="card"><span>검토 원문</span><strong>2</strong><small>공식 Microsoft / SEC</small></div>
+    <div class="card"><span>최종 승인</span><strong>2</strong><small>approved_direct</small></div>
+    <div class="card"><span>Phase 3 eligible</span><strong>2</strong><small>기존 0 → 2</small></div>
+    <div class="card"><span>Valid documents</span><strong>31</strong><small>기존 29 → 31</small></div>
+  </div>
+
+  <h2>1. 최종 판단</h2>
+  <p>두 자료 모두 Amy Hood의 단일 speaker turn 안에서 사건 식별자와 의사결정 시점의 재무 논리가 함께 확인됐다. raw 본문 SHA-256, normalized 재생성 결과, speaker 경계, quote·passage 문자 오프셋을 검증했으며 두 자료를 <span class="ok">최종 승인</span>했다.</p>
+
+  <table>
+    <thead><tr><th>사건</th><th>결정</th><th>검증 범위</th><th>핵심 판단 신호</th></tr></thead>
+    <tbody>
+      <tr><td>LinkedIn 2016</td><td class="ok">approved_direct</td><td>speaker 20122–23466<br>passage 20473–21625<br>quote 21193–21625</td><td>유리한 시장 창구에서의 신규 부채 조달, 제품군 간 매출 성장, 연간 최소 1.5억 달러 비용 시너지</td></tr>
+      <tr><td>Activision Blizzard 2022</td><td class="ok">approved_direct</td><td>speaker 19618–22270<br>passage 20294–21399<br>quote 20294–20712</td><td>콘텐츠 확장에 따른 매출 성장, Xbox 참여·수익화, Game Pass 성장, 종결 즉시 EPS accretion</td></tr>
+    </tbody>
+  </table>
+
+  <h2>2. 원문 확인</h2>
+  <p><strong>LinkedIn:</strong> Amy Hood는 인수 자금을 신규 부채로 조달하고, LinkedIn·Office 365·Dynamics 전반의 성장과 비용 시너지를 기대한다고 설명했다.</p>
+  <blockquote>“We will finance this transaction primarily through new debt issued prior to close...”</blockquote>
+  <p><strong>Activision Blizzard:</strong> 성공 기준을 포트폴리오 매출, 플랫폼 참여와 수익화, Game Pass 가입자 성장으로 명시했다.</p>
+  <blockquote>“Key measures of our success include accelerated revenue growth from Activision Blizzard’s game portfolio...”</blockquote>
+  <p class="note">전체 verbatim passage와 quote는 versioned review manifest에 오프셋·SHA와 함께 저장되어 있다.</p>
+
+  <h2>3. Source-authentic alias</h2>
+  <table>
+    <thead><tr><th>사건</th><th>Canonical</th><th>원문 표현</th><th>판정</th></tr></thead>
+    <tbody>
+      <tr><td>LinkedIn</td><td><code>will acquire</code></td><td><code>agreed to acquire</code></td><td>동일 거래 행동, reviewed alias</td></tr>
+      <tr><td>LinkedIn</td><td><code>$26.2 billion</code></td><td><code>$26 billion</code></td><td>동일 거래의 Amy Hood 반올림 표현</td></tr>
+      <tr><td>Activision</td><td><code>will acquire</code></td><td><code>agreed to acquire</code></td><td>동일 거래 행동, reviewed alias</td></tr>
+    </tbody>
+  </table>
+  <p>Alias는 해당 원문 URL에만 결합된다. locator는 선택한 alias 문자열을 passage 안에서 정확히 찾아야 하며 일반적인 의미 유사도는 사용하지 않는다.</p>
+
+  <h2>4. Before vs After</h2>
+  <table>
+    <thead><tr><th>지표</th><th>Before</th><th>After</th><th>변화</th></tr></thead>
+    <tbody>
+      <tr><td>Reviewed direct candidates</td><td>0</td><td>2</td><td class="ok">+2</td></tr>
+      <tr><td>Phase 3 eligible</td><td>0</td><td>2</td><td class="ok">+2</td></tr>
+      <tr><td>Reviewed discovery URLs</td><td>30</td><td>32</td><td class="ok">+2</td></tr>
+      <tr><td>Valid documents</td><td>29</td><td>31</td><td class="ok">+2</td></tr>
+      <tr><td>직접 증거 gap</td><td>LinkedIn·Activision 모두 존재</td><td>두 후보 모두 제거</td><td class="ok">해소</td></tr>
+    </tbody>
+  </table>
+
+  <h2>5. Phase 2 상태</h2>
+  <p class="warn">전체 Phase 2는 아직 미통과다.</p>
+  <ul>
+    <li>Reviewed discovery URL: 32/100 — 68개 부족</li>
+    <li>Valid document: 31/50 — 19개 부족</li>
+    <li>Nokia, Mojang, GitHub, Nuance를 포함한 다수 후보의 두 번째 source type 검토가 남아 있다.</li>
+    <li>LinkedIn·Activision의 직접 Amy locator 결손은 게이트 출력에서 제거됐다.</li>
+  </ul>
+
+  <h2>6. 파이프라인 경계</h2>
+  <p>이번 변경으로 <strong>수집된 원문 → 직접 발언 검증 → 재현 가능한 최종 승인</strong> 흐름이 완성됐다. 아직 Main Prompt 재생성, 3계층 RAG 구축, 새 페르소나 생성 및 평가는 수행하지 않았다.</p>
+
+  <h2>7. 검증 결과</h2>
+  <ul>
+    <li>직접 증거·소스 수집·PDF inventory 테스트: 134/134 통과</li>
+    <li>평가 v3 테스트: 22/22 통과</li>
+    <li>기존 평가 테스트: 68/68 통과</li>
+    <li>페르소나 파이프라인 테스트: 15/15 통과</li>
+    <li>TypeScript 검사, production build, <code>git diff --check</code> 통과</li>
+  </ul>
+
+  <footer>Review manifests: <code>review-linkedin-direct-2026-07-15-v1</code>, <code>review-activision-direct-2026-07-15-v1</code>. Reapply result: unchanged.</footer>
+</main></body></html>
