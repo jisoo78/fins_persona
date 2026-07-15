@@ -104,6 +104,14 @@ const createSelected18Fixture = async () => {
   await mkdir(join(root, 'archive'), { recursive: true });
   await mkdir(join(root, 'data/b-track/amy-hood'), { recursive: true });
   await mkdir(join(root, 'agent_prompts/prompts'), { recursive: true });
+  await mkdir(join(root, 'evaluation/v3/sealed'), { recursive: true });
+  await writeFile(
+    join(root, 'evaluation/v3/sealed/holdout-manifest.json'),
+    readFileSync(
+      join(process.cwd(), 'evaluation/v3/sealed/holdout-manifest.json'),
+      'utf8',
+    ),
+  );
   const entries: InventoryEntry[] = [];
   for (let index = 0; index < 18; index += 1) {
     const localPath = `archive/source-${index}.json`;
@@ -368,6 +376,39 @@ test('happy: selected corpus becomes Gemma analyses and a persona prompt', async
   ) as { activeVersionId: string; versions: Array<{ versionId: string }> };
   assert.equal(manifest.versions.length, 1);
   assert.equal(manifest.activeVersionId, manifest.versions[0].versionId);
+});
+
+test('failure: sealed v3 holdout source stops prompt generation before model invocation', async () => {
+  const fixture = await createSelected18Fixture();
+  const inventoryPath = join(
+    fixture.root,
+    'data/b-track/amy-hood/source-inventory.json',
+  );
+  const inventory = JSON.parse(readFileSync(inventoryPath, 'utf8')) as InventoryEntry[];
+  inventory[0] = {
+    ...inventory[0],
+    source_id: 'source-7f4b2d38f70ad433',
+  };
+  await writeFile(inventoryPath, JSON.stringify(inventory));
+  let masterPromptCalls = 0;
+  const model = fakeModel(async (input) => {
+    if (inputText(input).startsWith('MASTER')) masterPromptCalls += 1;
+    return inputText(input).startsWith('MASTER')
+      ? { text: validMarkdown, elapsedMs: 1 }
+      : validAnalysisResult();
+  });
+
+  await assert.rejects(
+    () => runPersonaPipeline({
+      root: fixture.root,
+      provider: 'local',
+      model,
+      tokenCounter: wordCounter,
+    }),
+    /holdout source source-7f4b2d38f70ad433/,
+  );
+  assert.equal(masterPromptCalls, 0);
+  assert.equal(existsSync(fixture.promptPath), false);
 });
 
 test('failure: stale resume proof and manifest provenance cannot pass the Gemma gate', async () => {

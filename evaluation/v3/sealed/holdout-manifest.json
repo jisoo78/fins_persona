@@ -1,0 +1,49 @@
+{
+  "dataset": "amy_hood_evaluation_v3_holdout",
+  "version": "3.0.0",
+  "events": [
+    {
+      "eventId": "holdout-github-acquisition-2018",
+      "candidateId": "candidate-github-acquisition-2018",
+      "aliases": ["GitHub acquisition 2018", "GitHub 인수 2018"],
+      "temporalCutoff": "2018-06-04",
+      "exposureStatus": "known_prior_exposure",
+      "sourceIds": ["source-d89c20fc175fe37c", "source-3f83bbdf64a6f397", "source-988d52f913373551", "source-ff654340bdfcc0b6", "source-ad9a23176d9cf21d"],
+      "evidenceIds": ["span-1e6ef32e731cf583", "span-f2913f9fe0b1835a"]
+    },
+    {
+      "eventId": "holdout-ai-datacenter-plan-2025",
+      "candidateId": "candidate-ai-datacenter-plan-2025",
+      "aliases": ["AI datacenter investment 2025", "AI 데이터센터 투자 2025"],
+      "temporalCutoff": "2025-01-03",
+      "exposureStatus": "repository_observed",
+      "sourceIds": ["source-7f4b2d38f70ad433"],
+      "evidenceIds": ["span-f3897f035d66502e", "span-222d45fde411d115", "span-39c79f633c15e8ee"]
+    },
+    {
+      "eventId": "holdout-m365-price-2021",
+      "candidateId": "candidate-m365-price-2021",
+      "aliases": ["Microsoft 365 price increase 2021", "Microsoft 365 가격 인상 2021"],
+      "temporalCutoff": "2021-08-19",
+      "exposureStatus": "repository_observed",
+      "sourceIds": ["source-19bc03d4ebf333f9"],
+      "evidenceIds": ["span-1da6c275337bdf80", "span-722f0c820210903d"]
+    },
+    {
+      "eventId": "holdout-buyback-2021",
+      "candidateId": "candidate-buyback-2021",
+      "aliases": ["Share repurchase authorization 2021", "자사주 매입 승인 2021"],
+      "temporalCutoff": "2021-09-14",
+      "exposureStatus": "repository_observed",
+      "sourceIds": ["source-d25d732db767b7c0"],
+      "evidenceIds": ["span-325495c0e7890c53"]
+    }
+  ],
+  "sharedSourceRules": [
+    {
+      "sourceId": "source-ad9a23176d9cf21d-25fb51a81eef",
+      "forbiddenCandidateIds": ["candidate-github-acquisition-2018"],
+      "allowedEvidenceIds": ["policy-openai-investment-consistency-2022", "policy-workforce-resource-reallocation-2022"]
+    }
+  ]
+}

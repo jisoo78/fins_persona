@@ -15,6 +15,10 @@ import {
   ensurePromptVersionStore,
 } from '../promptVersions/store';
 import {
+  assertNoEvaluationV3Holdout,
+  loadEvaluationV3Holdout,
+} from '../evaluationV3/holdout';
+import {
   providerArtifactName,
   type ProviderName,
   type RawSource,
@@ -280,6 +284,13 @@ export const buildMasterPrompt = async (options: BuildPromptOptions) => {
     const failures = await collectGateFailures(options.root, false);
     if (failures.length) throw new Error(`Gemma pre-prompt gate failed: ${failures.join('; ')}`);
   }
+
+  const holdout = await loadEvaluationV3Holdout(options.root);
+  assertNoEvaluationV3Holdout(
+    'main_prompt',
+    analyses.map(({ sourceId }) => ({ artifactClass: 'source', id: sourceId })),
+    holdout,
+  );
 
   const template = await readFile(
     resolve(options.root, 'agent_prompts/prompts/amy-hood-master-prompt.md'),
