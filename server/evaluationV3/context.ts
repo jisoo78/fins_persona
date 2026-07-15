@@ -11,7 +11,7 @@ export type EvaluationV3ContextPackage = {
   counterexamples: string[];
 };
 
-type ActiveMemoryRelease = {
+export type ActiveMemoryRelease = {
   releaseId: string;
   version: string;
   manifestHash: string;
@@ -79,24 +79,35 @@ const loadActiveSnapshot = async (root: string) => {
   return snapshot;
 };
 
-export const loadEvaluationV3ArmContext = async (
+export const resolveEvaluationV3ArmContext = async (
   root: string,
   arm: EvaluationV3Arm,
-): Promise<EvaluationV3ContextPackage> => {
+): Promise<{
+  context: EvaluationV3ContextPackage;
+  memoryReleaseHash: string | null;
+}> => {
   if (arm === 'generic_cfo' || arm === 'amy_prompt') {
-    return emptyEvaluationV3Context();
+    return { context: emptyEvaluationV3Context(), memoryReleaseHash: null };
   }
+  const base = memoryReleaseRoot(root);
+  const active = await readJson<ActiveMemoryRelease>(
+    resolve(base, 'active.json'),
+    'active memory release is required for Evaluation v3 RAG arms',
+  );
   const snapshot = await loadActiveSnapshot(root);
   if (snapshot.policy.length === 0) {
     throw new Error('amy_policy_rag requires at least one policy');
   }
   if (arm === 'amy_policy_rag') {
     return {
-      memoryReleaseId: snapshot.releaseId,
-      policy: snapshot.policy,
-      reflections: [],
-      events: [],
-      counterexamples: [],
+      memoryReleaseHash: active.manifestHash,
+      context: {
+        memoryReleaseId: snapshot.releaseId,
+        policy: snapshot.policy,
+        reflections: [],
+        events: [],
+        counterexamples: [],
+      },
     };
   }
   if (snapshot.reflections.length === 0 || snapshot.events.length === 0) {
@@ -107,10 +118,19 @@ export const loadEvaluationV3ArmContext = async (
     throw new Error('reviewed counterexample or explicit absence marker is required');
   }
   return {
-    memoryReleaseId: snapshot.releaseId,
-    policy: snapshot.policy,
-    reflections: snapshot.reflections,
-    events: snapshot.events,
-    counterexamples: snapshot.counterexamples,
+    memoryReleaseHash: active.manifestHash,
+    context: {
+      memoryReleaseId: snapshot.releaseId,
+      policy: snapshot.policy,
+      reflections: snapshot.reflections,
+      events: snapshot.events,
+      counterexamples: snapshot.counterexamples,
+    },
   };
 };
+
+export const loadEvaluationV3ArmContext = async (
+  root: string,
+  arm: EvaluationV3Arm,
+): Promise<EvaluationV3ContextPackage> =>
+  (await resolveEvaluationV3ArmContext(root, arm)).context;
