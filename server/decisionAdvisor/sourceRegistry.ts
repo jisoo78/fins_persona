@@ -356,6 +356,20 @@ export const transitionSource = async (
   return updated;
 });
 
+export const approveReviewedSource = async (
+  root: string,
+  sourceId: string,
+): Promise<{ source: AdvisorSourceRecord; changed: boolean }> => {
+  const current = loadSourceRecord(root, sourceId);
+  if (current.collectionStatus === 'approved') {
+    return { source: current, changed: false };
+  }
+  return {
+    source: await transitionSource(root, sourceId, 'approved', { failureReason: null }),
+    changed: true,
+  };
+};
+
 export const persistReviewedSource = async (
   root: string,
   source: AdvisorSourceRecord,

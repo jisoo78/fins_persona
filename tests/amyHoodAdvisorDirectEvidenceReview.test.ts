@@ -21,6 +21,7 @@ import test from 'node:test';
 
 import { advisorPaths } from '../server/decisionAdvisor/paths';
 import {
+  applyDirectEvidenceReview,
   validateDirectEvidenceReviewManifest,
   verifyDirectEvidenceReview,
   type DirectEvidenceReviewManifest,
@@ -269,4 +270,127 @@ test('failure: invalid manifests and evidence boundaries fail before persistence
     () => validateDirectEvidenceReviewManifest({ reviewId: '' }),
     /manifest/i,
   );
+});
+
+test('happy: direct approval persists an exact locator, aliases, and source approval', async () => {
+  const item = await fixture();
+  try {
+    const result = await applyDirectEvidenceReview(item.root, item.manifest, {
+      validateCandidates: () => undefined,
+    });
+    assert.equal(result.changed, true);
+    assert.equal(result.decision, 'approved_direct');
+
+    const candidates = JSON.parse(await readFile(
+      path.join(advisorPaths(item.root).root, 'event-candidates.json'),
+      'utf8',
+    )) as EventCandidate[];
+    const candidate = candidates[0];
+    const association = candidate.sourceAssociations[0];
+    assert.equal(association.reviewStatus, 'reviewed');
+    assert.equal(association.role, 'direct_amy');
+    assert.equal(association.evidenceLocator?.exactQuote, item.manifest.exactQuote);
+    assert.deepEqual(candidate.eventFingerprint.aliases, item.manifest.aliases);
+    assert.equal(candidate.directEvidenceGap, null);
+
+    const registry = JSON.parse(await readFile(advisorPaths(item.root).registry, 'utf8'));
+    assert.equal(registry.sources[0].collectionStatus, 'approved');
+    assert.equal(registry.sources[0].sha256, item.manifest.sha256);
+  } finally {
+    await rm(item.root, { recursive: true, force: true });
+  }
+});
+
+test('edge: identical direct approval is idempotent', async () => {
+  const item = await fixture();
+  try {
+    await applyDirectEvidenceReview(item.root, item.manifest, {
+      validateCandidates: () => undefined,
+    });
+    const candidatesBefore = await readFile(
+      path.join(advisorPaths(item.root).root, 'event-candidates.json'),
+    );
+    const registryBefore = await readFile(advisorPaths(item.root).registry);
+    const result = await applyDirectEvidenceReview(item.root, structuredClone(item.manifest), {
+      validateCandidates: () => undefined,
+    });
+
+    assert.equal(result.changed, false);
+    assert.deepEqual(await readFile(
+      path.join(advisorPaths(item.root).root, 'event-candidates.json'),
+    ), candidatesBefore);
+    assert.deepEqual(await readFile(advisorPaths(item.root).registry), registryBefore);
+  } finally {
+    await rm(item.root, { recursive: true, force: true });
+  }
+});
+
+test('edge: approval leaves an independent review-required source unchanged', async () => {
+  const item = await fixture();
+  try {
+    const registryPath = advisorPaths(item.root).registry;
+    const registry = JSON.parse(await readFile(registryPath, 'utf8'));
+    const independent = {
+      ...registry.sources[0],
+      id: sourceIdForUrl('https://news.microsoft.com/speeches/independent-call/'),
+      canonicalUrl: 'https://news.microsoft.com/speeches/independent-call/',
+      finalUrl: 'https://news.microsoft.com/speeches/independent-call/',
+      redirectChain: ['https://news.microsoft.com/speeches/independent-call/'],
+      eventCandidateIds: ['candidate-independent'],
+      rawPath: null,
+      normalizedPath: null,
+      sha256: null,
+      capturedAt: null,
+    };
+    registry.sources.push(independent);
+    await writeFile(registryPath, `${JSON.stringify(registry, null, 2)}\n`);
+
+    await applyDirectEvidenceReview(item.root, item.manifest, {
+      validateCandidates: () => undefined,
+    });
+    const after = JSON.parse(await readFile(registryPath, 'utf8'));
+    assert.deepEqual(after.sources.find(({ id }: { id: string }) => id === independent.id), independent);
+  } finally {
+    await rm(item.root, { recursive: true, force: true });
+  }
+});
+
+test('failure: registry approval failure compensates the candidate write', async () => {
+  const item = await fixture();
+  try {
+    const candidatePath = path.join(advisorPaths(item.root).root, 'event-candidates.json');
+    const candidatesBefore = await readFile(candidatePath);
+    const registryBefore = await readFile(advisorPaths(item.root).registry);
+
+    await assert.rejects(
+      () => applyDirectEvidenceReview(item.root, item.manifest, {
+        validateCandidates: () => undefined,
+        approveSource: async () => { throw new Error('injected registry failure'); },
+      }),
+      /injected registry failure/i,
+    );
+    assert.deepEqual(await readFile(candidatePath), candidatesBefore);
+    assert.deepEqual(await readFile(advisorPaths(item.root).registry), registryBefore);
+  } finally {
+    await rm(item.root, { recursive: true, force: true });
+  }
+});
+
+test('failure: a different review ID cannot overwrite an applied decision', async () => {
+  const item = await fixture();
+  try {
+    await applyDirectEvidenceReview(item.root, item.manifest, {
+      validateCandidates: () => undefined,
+    });
+    const conflict = structuredClone(item.manifest);
+    conflict.reviewId = 'review-example-direct-v2';
+    await assert.rejects(
+      () => applyDirectEvidenceReview(item.root, conflict, {
+        validateCandidates: () => undefined,
+      }),
+      /conflicting direct evidence review/i,
+    );
+  } finally {
+    await rm(item.root, { recursive: true, force: true });
+  }
 });

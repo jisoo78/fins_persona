@@ -11,9 +11,10 @@ import type {
   EvidenceSpeakerSegment,
 } from '../../shared/amyHoodDecisionAdvisor';
 import { readAdvisorArtifactSecure } from './artifactStore';
+import { writeJsonAtomic } from './jsonStore';
 import { normalizeDocument } from './officialSourceCollector';
 import { advisorPaths } from './paths';
-import { loadRegistry } from './sourceRegistry';
+import { approveReviewedSource, loadRegistry } from './sourceRegistry';
 import { canonicalizeSourceUrl } from './sourcePolicy';
 
 export type DirectEvidenceReviewDecision =
@@ -57,6 +58,20 @@ export type VerifiedDirectEvidenceReview = {
   raw: AdvisorRawSource;
   normalized: string;
   segment: EvidenceSpeakerSegment;
+};
+
+export type DirectEvidenceReviewApplyResult = {
+  reviewId: string;
+  decision: DirectEvidenceReviewDecision;
+  changed: boolean;
+  candidateId: string;
+  sourceId: string;
+};
+
+export type DirectEvidenceReviewDependencies = {
+  validateCandidates(candidates: EventCandidate[]): void;
+  persistCandidates(candidates: EventCandidate[], candidatePath: string): Promise<void>;
+  approveSource(root: string, sourceId: string): Promise<{ source: AdvisorSourceRecord; changed: boolean }>;
 };
 
 const decisions = new Set<DirectEvidenceReviewDecision>([
@@ -277,4 +292,108 @@ export const verifyDirectEvidenceReview = async (
   }
 
   return { manifest, source, candidate, raw, normalized, segment };
+};
+
+const aliasKey = ({ kind, value, sourceUrl }: EventFingerprintAlias) =>
+  `${kind}:${normalizedSearchText(value)}:${sourceUrl}`;
+
+const defaultApplyDependencies: DirectEvidenceReviewDependencies = {
+  validateCandidates: () => undefined,
+  persistCandidates: (candidates, candidatePath) => writeJsonAtomic(candidatePath, candidates),
+  approveSource: approveReviewedSource,
+};
+
+export const applyDirectEvidenceReview = async (
+  root: string,
+  input: DirectEvidenceReviewManifest,
+  injectedDependencies: Partial<DirectEvidenceReviewDependencies> = {},
+): Promise<DirectEvidenceReviewApplyResult> => {
+  const verified = await verifyDirectEvidenceReview(root, input);
+  const { manifest } = verified;
+  const result = (changed: boolean): DirectEvidenceReviewApplyResult => ({
+    reviewId: manifest.reviewId,
+    decision: manifest.decision,
+    changed,
+    candidateId: manifest.candidateId,
+    sourceId: manifest.sourceId,
+  });
+  if (manifest.decision === 'review_required' || manifest.decision === 'rejected') {
+    return result(false);
+  }
+
+  const candidatePath = path.join(advisorPaths(root).root, 'event-candidates.json');
+  const originalCandidateBytes = await readFile(candidatePath, 'utf8');
+  const candidates = JSON.parse(originalCandidateBytes) as EventCandidate[];
+  const candidate = candidates.find(({ id }) => id === manifest.candidateId);
+  if (!candidate) throw new Error(`unknown reviewed candidate: ${manifest.candidateId}`);
+  const associationIndex = candidate.sourceAssociations.findIndex(({ canonicalUrl }) =>
+    canonicalizeSourceUrl(canonicalUrl) === manifest.canonicalUrl);
+  if (associationIndex < 0) {
+    throw new Error(`review manifest does not match candidate association: ${manifest.reviewId}`);
+  }
+  const association = candidate.sourceAssociations[associationIndex];
+  const recordedReview = association.reviewerNote.match(/^review:([^\s]+)/)?.[1];
+  if (recordedReview && recordedReview !== manifest.reviewId) {
+    throw new Error(`conflicting direct evidence review: ${recordedReview}`);
+  }
+
+  const locator = {
+    exactQuote: manifest.exactQuote,
+    exactRelevancePassage: manifest.exactRelevancePassage,
+    anchorTerms: manifest.anchorTerms,
+    eventDiscriminators: manifest.eventDiscriminators,
+    speaker: manifest.speaker,
+  };
+  const expectedAssociation = {
+    ...association,
+    role: manifest.decision === 'approved_direct' ? 'direct_amy' as const : 'contemporaneous_context' as const,
+    relevanceClaim: manifest.reviewerRationale,
+    evidenceLocator: locator,
+    reviewStatus: 'reviewed' as const,
+    reviewerNote: `review:${manifest.reviewId} ${manifest.reviewerRationale}`,
+  };
+  const aliases = [...(candidate.eventFingerprint.aliases ?? [])];
+  const existingAliasKeys = new Set(aliases.map(aliasKey));
+  for (const alias of manifest.aliases) {
+    if (!existingAliasKeys.has(aliasKey(alias))) {
+      aliases.push(alias);
+      existingAliasKeys.add(aliasKey(alias));
+    }
+  }
+
+  const sourceAlreadyApproved = verified.source.collectionStatus === 'approved';
+  const associationAlreadyApplied = JSON.stringify(association) === JSON.stringify(expectedAssociation);
+  const aliasesAlreadyApplied = JSON.stringify(candidate.eventFingerprint.aliases ?? [])
+    === JSON.stringify(aliases);
+  const gapAlreadyApplied = manifest.decision === 'approved_direct'
+    ? candidate.directEvidenceGap === null && candidate.phase3Status === 'eligible'
+    : true;
+  if (sourceAlreadyApproved && associationAlreadyApplied && aliasesAlreadyApplied && gapAlreadyApplied) {
+    return result(false);
+  }
+
+  candidate.sourceAssociations[associationIndex] = expectedAssociation;
+  candidate.eventFingerprint.aliases = aliases;
+  if (manifest.decision === 'approved_direct') {
+    candidate.directEvidenceGap = null;
+    candidate.phase3Status = 'eligible';
+  }
+
+  const dependencies = { ...defaultApplyDependencies, ...injectedDependencies };
+  dependencies.validateCandidates(candidates);
+  await dependencies.persistCandidates(candidates, candidatePath);
+  try {
+    await dependencies.approveSource(root, manifest.sourceId);
+  } catch (error) {
+    try {
+      await writeJsonAtomic(candidatePath, JSON.parse(originalCandidateBytes) as unknown);
+    } catch (rollbackError) {
+      throw new AggregateError(
+        [error, rollbackError],
+        'direct evidence approval failed and candidate compensation was incomplete',
+      );
+    }
+    throw error;
+  }
+  return result(true);
 };
