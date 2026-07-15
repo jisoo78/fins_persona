@@ -6,7 +6,11 @@
     "decisionWindowStart": "2013-09-03",
     "decisionWindowEnd": "2013-09-03",
     "discoveryUrls": [
-      "https://news.microsoft.com/source/2013/09/03/microsoft-to-acquire-nokias-devices-services-business-license-nokias-patents-and-mapping-services/"
+      "https://news.microsoft.com/source/2013/09/03/microsoft-to-acquire-nokias-devices-services-business-license-nokias-patents-and-mapping-services/",
+      "https://news.microsoft.com/videos/audio-slideshow-of-microsoft-nokia-transaction-conference-call/",
+      "https://allthingsd.com/20130904/from-can-we-talk-to-a-coffee-table-mishap-the-inside-story-of-microsofts-nokia-purchase/",
+      "https://www.reuters.com/article/business/microsoft-swallows-nokias-phone-business-for-72-billion-idUSBRE98202W/",
+      "https://www.microsoft.com/en-us/investor/earnings/fy-2015-q4/press-release-webcast"
     ],
     "decisionWindowBasis": {
       "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
@@ -48,6 +52,50 @@
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      },
+      {
+        "canonicalUrl": "https://news.microsoft.com/videos/audio-slideshow-of-microsoft-nokia-transaction-conference-call/",
+        "role": "contemporaneous_context",
+        "sourceType": "official_event_page",
+        "publishedAt": "2013-09-03",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "Discovery metadata from PDF pages [1]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "review_required: Discovery metadata from PDF pages [1]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+      },
+      {
+        "canonicalUrl": "https://allthingsd.com/20130904/from-can-we-talk-to-a-coffee-table-mishap-the-inside-story-of-microsofts-nokia-purchase/",
+        "role": "contemporaneous_context",
+        "sourceType": "deal_history_report",
+        "publishedAt": "2013-09-04",
+        "temporalRelation": "post_outcome",
+        "relevanceClaim": "Discovery metadata from PDF pages [1, 2]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [1, 2]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+      },
+      {
+        "canonicalUrl": "https://www.reuters.com/article/business/microsoft-swallows-nokias-phone-business-for-72-billion-idUSBRE98202W/",
+        "role": "contemporaneous_context",
+        "sourceType": "news_report",
+        "publishedAt": "2013-09-03",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "Discovery metadata from PDF pages [2]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [2]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+      },
+      {
+        "canonicalUrl": "https://www.microsoft.com/en-us/investor/earnings/fy-2015-q4/press-release-webcast",
+        "role": "post_outcome",
+        "sourceType": "earnings_release",
+        "publishedAt": "2015-07-21",
+        "temporalRelation": "post_outcome",
+        "relevanceClaim": "Discovery metadata from PDF pages [2, 3]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [2, 3]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
       }
     ],
     "directEvidenceGap": {
@@ -76,7 +124,12 @@
     "decisionWindowStart": "2014-09-15",
     "decisionWindowEnd": "2014-09-15",
     "discoveryUrls": [
-      "https://news.microsoft.com/es-xl/minecraft-se-une-a-microsoft/"
+      "https://news.microsoft.com/es-xl/minecraft-se-une-a-microsoft/",
+      "https://www.polygon.com/2015/3/3/8144453/minecraft-sale-microsoft-notch-tweet/",
+      "https://news.microsoft.com/source/2014/09/15/minecraft-to-join-microsoft/",
+      "https://www.reuters.com/article/world/europe/microsoft-to-buy-minecraft-maker-mojang-for-25-billion-idUSKBN0HA1CR/",
+      "https://www.wired.com/2014/09/microsoft-minecraft-mobile/",
+      "https://www.microsoft.com/investor/reports/ar16/index.html"
     ],
     "decisionWindowBasis": {
       "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
@@ -118,6 +171,61 @@
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      },
+      {
+        "canonicalUrl": "https://www.polygon.com/2015/3/3/8144453/minecraft-sale-microsoft-notch-tweet/",
+        "role": "post_outcome",
+        "sourceType": "news_report",
+        "publishedAt": "2015-03-03",
+        "temporalRelation": "post_outcome",
+        "relevanceClaim": "Discovery metadata from PDF pages [3]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [3]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+      },
+      {
+        "canonicalUrl": "https://news.microsoft.com/source/2014/09/15/minecraft-to-join-microsoft/",
+        "role": "contemporaneous_context",
+        "sourceType": "official_announcement",
+        "publishedAt": "2014-09-15",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "Discovery metadata from PDF pages [4]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [4]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+      },
+      {
+        "canonicalUrl": "https://www.reuters.com/article/world/europe/microsoft-to-buy-minecraft-maker-mojang-for-25-billion-idUSKBN0HA1CR/",
+        "role": "contemporaneous_context",
+        "sourceType": "news_report",
+        "publishedAt": "2014-09-15",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "Discovery metadata from PDF pages [4]; original artifact review is required before evidence approval. Live recheck: HTTP 401; blocked_by_automation.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [4]; original artifact review is required before evidence approval. Live recheck: HTTP 401; blocked_by_automation."
+      },
+      {
+        "canonicalUrl": "https://www.wired.com/2014/09/microsoft-minecraft-mobile/",
+        "role": "contemporaneous_context",
+        "sourceType": "industry_analysis",
+        "publishedAt": "2014-09-15",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "Discovery metadata from PDF pages [4]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [4]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+      },
+      {
+        "canonicalUrl": "https://www.microsoft.com/investor/reports/ar16/index.html",
+        "role": "post_outcome",
+        "sourceType": "annual_report",
+        "publishedAt": "2016-07-28",
+        "temporalRelation": "post_outcome",
+        "relevanceClaim": "Discovery metadata from PDF pages [5]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [5]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
       }
     ],
     "directEvidenceGap": {
@@ -146,7 +254,11 @@
     "decisionWindowStart": "2016-06-13",
     "decisionWindowEnd": "2016-06-13",
     "discoveryUrls": [
-      "https://news.microsoft.com/source/2016/06/13/microsoft-to-acquire-linkedin/"
+      "https://news.microsoft.com/source/2016/06/13/microsoft-to-acquire-linkedin/",
+      "https://news.microsoft.com/speeches/microsoft-and-linkedin-conference-call-chris-suh-satya-nadella-jeff-weiner-amy-hood-brad-smith/",
+      "https://www.sec.gov/Archives/edgar/data/1271024/000110465916130837/a16-14187_1prem14a.htm",
+      "https://www.reuters.com/article/business/microsoft-to-buy-linkedin-for-262-billion-in-its-largest-deal-idUSKCN0YZ1FO/",
+      "https://www.microsoft.com/investor/reports/ar21/index.html"
     ],
     "decisionWindowBasis": {
       "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
@@ -188,6 +300,50 @@
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      },
+      {
+        "canonicalUrl": "https://news.microsoft.com/speeches/microsoft-and-linkedin-conference-call-chris-suh-satya-nadella-jeff-weiner-amy-hood-brad-smith/",
+        "role": "direct_amy",
+        "sourceType": "official_transcript",
+        "publishedAt": "2016-06-13",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "Discovery metadata from PDF pages [5, 6]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "review_required: Discovery metadata from PDF pages [5, 6]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+      },
+      {
+        "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/1271024/000110465916130837/a16-14187_1prem14a.htm",
+        "role": "contemporaneous_context",
+        "sourceType": "sec_proxy_statement",
+        "publishedAt": "2016-07-01",
+        "temporalRelation": "post_outcome",
+        "relevanceClaim": "Discovery metadata from PDF pages [5, 6]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [5, 6]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+      },
+      {
+        "canonicalUrl": "https://www.reuters.com/article/business/microsoft-to-buy-linkedin-for-262-billion-in-its-largest-deal-idUSKCN0YZ1FO/",
+        "role": "contemporaneous_context",
+        "sourceType": "news_report",
+        "publishedAt": "2016-06-13",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "Discovery metadata from PDF pages [7]; original artifact review is required before evidence approval. Live recheck: HTTP 401; blocked_by_automation.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [7]; original artifact review is required before evidence approval. Live recheck: HTTP 401; blocked_by_automation."
+      },
+      {
+        "canonicalUrl": "https://www.microsoft.com/investor/reports/ar21/index.html",
+        "role": "post_outcome",
+        "sourceType": "annual_report",
+        "publishedAt": "2021-07-29",
+        "temporalRelation": "post_outcome",
+        "relevanceClaim": "Discovery metadata from PDF pages [7]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [7]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
       }
     ],
     "directEvidenceGap": {
@@ -216,7 +372,11 @@
     "decisionWindowStart": "2018-06-04",
     "decisionWindowEnd": "2018-06-04",
     "discoveryUrls": [
-      "https://news.microsoft.com/source/2018/06/04/microsoft-to-acquire-github-for-7-5-billion/"
+      "https://news.microsoft.com/source/2018/06/04/microsoft-to-acquire-github-for-7-5-billion/",
+      "https://www.geekwire.com/2018/microsoft-reportedly-acquire-github-software-development-platform/",
+      "https://stockanalysis.com/stocks/msft/transcripts/62670-m-a-announcement/",
+      "https://www.reuters.com/article/world/microsoft-to-take-on-amazon-with-75-billion-github-deal-idUSKCN1J01N2/",
+      "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q1"
     ],
     "decisionWindowBasis": {
       "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
@@ -258,6 +418,50 @@
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      },
+      {
+        "canonicalUrl": "https://www.geekwire.com/2018/microsoft-reportedly-acquire-github-software-development-platform/",
+        "role": "contemporaneous_context",
+        "sourceType": "news_report",
+        "publishedAt": "2018-06-03",
+        "temporalRelation": "pre_decision",
+        "relevanceClaim": "Discovery metadata from PDF pages [7]; original artifact review is required before evidence approval. Live recheck: HTTP 403; blocked_by_automation.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [7]; original artifact review is required before evidence approval. Live recheck: HTTP 403; blocked_by_automation."
+      },
+      {
+        "canonicalUrl": "https://stockanalysis.com/stocks/msft/transcripts/62670-m-a-announcement/",
+        "role": "direct_amy",
+        "sourceType": "transcript_mirror",
+        "publishedAt": "2018-06-04",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "Discovery metadata from PDF pages [8]; original artifact review is required before evidence approval. Live recheck: HTTP 400; unavailable.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "review_required: Discovery metadata from PDF pages [8]; original artifact review is required before evidence approval. Live recheck: HTTP 400; unavailable."
+      },
+      {
+        "canonicalUrl": "https://www.reuters.com/article/world/microsoft-to-take-on-amazon-with-75-billion-github-deal-idUSKCN1J01N2/",
+        "role": "contemporaneous_context",
+        "sourceType": "news_report",
+        "publishedAt": "2018-06-04",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "Discovery metadata from PDF pages [8, 9]; original artifact review is required before evidence approval. Live recheck: HTTP 401; blocked_by_automation.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [8, 9]; original artifact review is required before evidence approval. Live recheck: HTTP 401; blocked_by_automation."
+      },
+      {
+        "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q1",
+        "role": "post_outcome",
+        "sourceType": "earnings_call",
+        "publishedAt": "2022-10-25",
+        "temporalRelation": "post_outcome",
+        "relevanceClaim": "Discovery metadata from PDF pages [9]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [9]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
       }
     ],
     "directEvidenceGap": {
@@ -286,7 +490,12 @@
     "decisionWindowStart": "2021-04-12",
     "decisionWindowEnd": "2021-04-12",
     "discoveryUrls": [
-      "https://news.microsoft.com/source/2021/04/12/microsoft-accelerates-industry-cloud-strategy-for-healthcare-with-the-acquisition-of-nuance/"
+      "https://news.microsoft.com/source/2021/04/12/microsoft-accelerates-industry-cloud-strategy-for-healthcare-with-the-acquisition-of-nuance/",
+      "https://stockanalysis.com/stocks/msft/transcripts/12504-m-a-announcement/",
+      "https://www.sec.gov/Archives/edgar/data/1002517/000119312521113805/d100489ddefa14a.htm",
+      "https://www.sec.gov/Archives/edgar/data/1002517/000119312521112515/d22854dex991.htm",
+      "https://www.sec.gov/Archives/edgar/data/1002517/000100251720000058/nuan0930202010-k.htm",
+      "https://www.microsoft.com/en-us/investor/events/fy-2022/earnings-fy-2022-q3"
     ],
     "decisionWindowBasis": {
       "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
@@ -328,6 +537,61 @@
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      },
+      {
+        "canonicalUrl": "https://stockanalysis.com/stocks/msft/transcripts/12504-m-a-announcement/",
+        "role": "direct_amy",
+        "sourceType": "transcript_mirror",
+        "publishedAt": "2021-04-12",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "Discovery metadata from PDF pages [9, 10]; original artifact review is required before evidence approval. Live recheck: HTTP 400; unavailable.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "review_required: Discovery metadata from PDF pages [9, 10]; original artifact review is required before evidence approval. Live recheck: HTTP 400; unavailable."
+      },
+      {
+        "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/1002517/000119312521113805/d100489ddefa14a.htm",
+        "role": "contemporaneous_context",
+        "sourceType": "sec_proxy_statement",
+        "publishedAt": "2021-04-13",
+        "temporalRelation": "post_outcome",
+        "relevanceClaim": "Discovery metadata from PDF pages [9, 10, 11]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [9, 10, 11]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+      },
+      {
+        "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/1002517/000119312521112515/d22854dex991.htm",
+        "role": "contemporaneous_context",
+        "sourceType": "sec_press_release",
+        "publishedAt": "2021-04-12",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "Discovery metadata from PDF pages [10]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [10]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+      },
+      {
+        "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/1002517/000100251720000058/nuan0930202010-k.htm",
+        "role": "contemporaneous_context",
+        "sourceType": "annual_report",
+        "publishedAt": "2020-11-19",
+        "temporalRelation": "pre_decision",
+        "relevanceClaim": "Discovery metadata from PDF pages [11]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [11]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+      },
+      {
+        "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2022/earnings-fy-2022-q3",
+        "role": "post_outcome",
+        "sourceType": "earnings_call",
+        "publishedAt": "2022-04-26",
+        "temporalRelation": "post_outcome",
+        "relevanceClaim": "Discovery metadata from PDF pages [11]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [11]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
       }
     ],
     "directEvidenceGap": {
@@ -356,7 +620,12 @@
     "decisionWindowStart": "2022-01-18",
     "decisionWindowEnd": "2022-01-18",
     "discoveryUrls": [
-      "https://news.microsoft.com/source/2022/01/18/microsoft-to-acquire-activision-blizzard-to-bring-the-joy-and-community-of-gaming-to-everyone-across-every-device/"
+      "https://news.microsoft.com/source/2022/01/18/microsoft-to-acquire-activision-blizzard-to-bring-the-joy-and-community-of-gaming-to-everyone-across-every-device/",
+      "https://www.sec.gov/Archives/edgar/data/718877/000110465922005069/tm223212d4_defa14a.htm",
+      "https://www.sec.gov/Archives/edgar/data/718877/000110465922036155/tm225196-4_defm14a.htm",
+      "https://blogs.microsoft.com/blog/2023/10/13/welcoming-the-legendary-teams-at-activision-blizzard-king-to-team-xbox/",
+      "https://www.microsoft.com/en-us/investor/events/fy-2024/earnings-fy-2024-q2",
+      "https://www.sec.gov/Archives/edgar/data/718877/000110465922025210/tm225196-3_prem14a.htm"
     ],
     "decisionWindowBasis": {
       "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
@@ -398,6 +667,61 @@
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      },
+      {
+        "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/718877/000110465922005069/tm223212d4_defa14a.htm",
+        "role": "direct_amy",
+        "sourceType": "sec_transcript",
+        "publishedAt": "2022-01-18",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "Discovery metadata from PDF pages [12]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "review_required: Discovery metadata from PDF pages [12]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+      },
+      {
+        "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/718877/000110465922036155/tm225196-4_defm14a.htm",
+        "role": "contemporaneous_context",
+        "sourceType": "sec_proxy_statement",
+        "publishedAt": "2022-03-21",
+        "temporalRelation": "post_outcome",
+        "relevanceClaim": "Discovery metadata from PDF pages [12, 13]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [12, 13]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+      },
+      {
+        "canonicalUrl": "https://blogs.microsoft.com/blog/2023/10/13/welcoming-the-legendary-teams-at-activision-blizzard-king-to-team-xbox/",
+        "role": "post_outcome",
+        "sourceType": "corporate_blog",
+        "publishedAt": "2023-10-13",
+        "temporalRelation": "post_outcome",
+        "relevanceClaim": "Discovery metadata from PDF pages [13]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [13]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+      },
+      {
+        "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2024/earnings-fy-2024-q2",
+        "role": "post_outcome",
+        "sourceType": "earnings_call",
+        "publishedAt": "2024-01-30",
+        "temporalRelation": "post_outcome",
+        "relevanceClaim": "Discovery metadata from PDF pages [13]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [13]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+      },
+      {
+        "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/718877/000110465922025210/tm225196-3_prem14a.htm",
+        "role": "contemporaneous_context",
+        "sourceType": "sec_proxy_statement",
+        "publishedAt": "2022-02-18",
+        "temporalRelation": "post_outcome",
+        "relevanceClaim": "Discovery metadata from PDF pages [13]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [13]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
       }
     ],
     "directEvidenceGap": {

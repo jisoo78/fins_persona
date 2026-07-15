@@ -1,0 +1,866 @@
+{
+  "inventoryId": "amy-hood-ma-pdf-url-inventory",
+  "sourcePdf": "/Users/hestory/Desktop/fins_persona/data/에이미후드_URL.pdf",
+  "sourcePdfSha256": "36075a25483044b01407e358a86f29af3e4530335fe21ad5c621c58df18becd3",
+  "sourcePageCount": 14,
+  "extractedAt": "2026-07-15T01:24:20.000Z",
+  "purpose": "Discovery inventory only. PDF summaries and quotations are not stored as evidence.",
+  "canonicalization": {
+    "schemeAndHostname": "lowercase",
+    "schemePreference": "https",
+    "fragment": "removed",
+    "trackingParameters": "removed, including utm_*",
+    "meaningfulQueryParameters": "preserved",
+    "trailingSlash": "normalized only for equivalent annotations"
+  },
+  "comparisonFiles": [
+    "data/b-track/amy-hood/advisor/event-candidates.json",
+    "data/b-track/amy-hood/advisor/source-registry.json"
+  ],
+  "accessCheck": {
+    "checkedAt": "2026-07-15T01:24:20.000Z",
+    "method": "Automated HTTP GET with redirects and host-appropriate research user agents, including the SEC contact user agent.",
+    "interpretation": "HTTP 200 is accessible; 401/403 are blocked_by_automation; HTTP 400 is unavailable; statuses do not delete discovery URLs."
+  },
+  "summary": {
+    "canonicalUrlCount": 31,
+    "existingCount": 4,
+    "newCount": 27,
+    "accessibleCount": 24,
+    "blockedByAutomationCount": 5,
+    "unavailableCount": 2,
+    "notCheckedCount": 0
+  },
+  "urls": [
+    {
+      "canonicalUrl": "https://news.microsoft.com/videos/audio-slideshow-of-microsoft-nokia-transaction-conference-call/",
+      "originalUrls": [
+        "https://news.microsoft.com/videos/audio-slideshow-of-microsoft-nokia-transaction-conference-call/"
+      ],
+      "pageNumbers": [
+        1
+      ],
+      "eventId": "candidate-nokia-acquisition-2013",
+      "eventName": "Nokia Devices & Services acquisition",
+      "publisher": "Microsoft",
+      "domain": "news.microsoft.com",
+      "sourceType": "official_event_page",
+      "evidenceRole": "contemporaneous_context",
+      "directEvidenceStatus": "missing",
+      "reviewStatus": "review_required",
+      "publishedAt": "2013-09-03",
+      "temporalRelation": "decision_time",
+      "describedEvidencePeriod": "decision_time",
+      "registryStatus": "new",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://news.microsoft.com/videos/audio-slideshow-of-microsoft-nokia-transaction-conference-call/",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [1]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://allthingsd.com/20130904/from-can-we-talk-to-a-coffee-table-mishap-the-inside-story-of-microsofts-nokia-purchase/",
+      "originalUrls": [
+        "https://allthingsd.com/20130904/from-can-we-talk-to-a-coffee-table-mishap-the-inside-story-of-microsofts-nokia-purchase/"
+      ],
+      "pageNumbers": [
+        1,
+        2
+      ],
+      "eventId": "candidate-nokia-acquisition-2013",
+      "eventName": "Nokia Devices & Services acquisition",
+      "publisher": "AllThingsD",
+      "domain": "allthingsd.com",
+      "sourceType": "deal_history_report",
+      "evidenceRole": "contemporaneous_context",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2013-09-04",
+      "temporalRelation": "post_outcome",
+      "describedEvidencePeriod": "pre_decision",
+      "registryStatus": "new",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://allthingsd.com/20130904/from-can-we-talk-to-a-coffee-table-mishap-the-inside-story-of-microsofts-nokia-purchase/",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [1, 2]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://news.microsoft.com/source/2013/09/03/microsoft-to-acquire-nokias-devices-services-business-license-nokias-patents-and-mapping-services/",
+      "originalUrls": [
+        "https://news.microsoft.com/source/2013/09/03/microsoft-to-acquire-nokias-devices-services-business-license-nokias-patents-and-mapping-services/"
+      ],
+      "pageNumbers": [
+        2
+      ],
+      "eventId": "candidate-nokia-acquisition-2013",
+      "eventName": "Nokia Devices & Services acquisition",
+      "publisher": "Microsoft",
+      "domain": "news.microsoft.com",
+      "sourceType": "official_announcement",
+      "evidenceRole": "contemporaneous_context",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2013-09-03",
+      "temporalRelation": "decision_time",
+      "describedEvidencePeriod": "decision_time",
+      "registryStatus": "existing",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://news.microsoft.com/source/2013/09/03/microsoft-to-acquire-nokias-devices-services-business-license-nokias-patents-and-mapping-services/",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [2]; original artifact review is required before evidence approval. Live recheck: HTTP 401; blocked_by_automation."
+    },
+    {
+      "canonicalUrl": "https://www.reuters.com/article/business/microsoft-swallows-nokias-phone-business-for-72-billion-idUSBRE98202W/",
+      "originalUrls": [
+        "https://www.reuters.com/article/business/microsoft-swallows-nokias-phone-business-for-72-billion-idUSBRE98202W/"
+      ],
+      "pageNumbers": [
+        2
+      ],
+      "eventId": "candidate-nokia-acquisition-2013",
+      "eventName": "Nokia Devices & Services acquisition",
+      "publisher": "Reuters",
+      "domain": "www.reuters.com",
+      "sourceType": "news_report",
+      "evidenceRole": "contemporaneous_context",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2013-09-03",
+      "temporalRelation": "decision_time",
+      "describedEvidencePeriod": "decision_time",
+      "registryStatus": "new",
+      "accessStatus": "blocked_by_automation",
+      "httpStatus": 401,
+      "finalUrl": "https://www.reuters.com/article/business/microsoft-swallows-nokias-phone-business-for-72-billion-idUSBRE98202W/",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [2]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://www.microsoft.com/en-us/investor/earnings/fy-2015-q4/press-release-webcast",
+      "originalUrls": [
+        "https://www.microsoft.com/en-us/investor/earnings/fy-2015-q4/press-release-webcast?utm_source=chatgpt.com",
+        "https://www.microsoft.com/en-us/investor/earnings/fy-2015-q4/press-release-webcast"
+      ],
+      "pageNumbers": [
+        2,
+        3
+      ],
+      "eventId": "candidate-nokia-acquisition-2013",
+      "eventName": "Nokia Devices & Services acquisition",
+      "publisher": "Microsoft",
+      "domain": "www.microsoft.com",
+      "sourceType": "earnings_release",
+      "evidenceRole": "post_outcome",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2015-07-21",
+      "temporalRelation": "post_outcome",
+      "describedEvidencePeriod": "post_outcome",
+      "registryStatus": "new",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://www.microsoft.com/en-us/investor/earnings/fy-2015-q4/press-release-webcast",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [2, 3]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://www.polygon.com/2015/3/3/8144453/minecraft-sale-microsoft-notch-tweet/",
+      "originalUrls": [
+        "https://www.polygon.com/2015/3/3/8144453/minecraft-sale-microsoft-notch-tweet/?utm_source=chatgpt.com"
+      ],
+      "pageNumbers": [
+        3
+      ],
+      "eventId": "candidate-mojang-acquisition-2014",
+      "eventName": "Mojang / Minecraft acquisition",
+      "publisher": "Polygon",
+      "domain": "www.polygon.com",
+      "sourceType": "news_report",
+      "evidenceRole": "post_outcome",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2015-03-03",
+      "temporalRelation": "post_outcome",
+      "describedEvidencePeriod": "pre_decision",
+      "registryStatus": "new",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://www.polygon.com/2015/3/3/8144453/minecraft-sale-microsoft-notch-tweet/",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [3]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://news.microsoft.com/source/2014/09/15/minecraft-to-join-microsoft/",
+      "originalUrls": [
+        "https://news.microsoft.com/source/2014/09/15/minecraft-to-join-microsoft/?utm_source=chatgpt.com",
+        "https://news.microsoft.com/source/2014/09/15/minecraft-to-join-microsoft/"
+      ],
+      "pageNumbers": [
+        4
+      ],
+      "eventId": "candidate-mojang-acquisition-2014",
+      "eventName": "Mojang / Minecraft acquisition",
+      "publisher": "Microsoft",
+      "domain": "news.microsoft.com",
+      "sourceType": "official_announcement",
+      "evidenceRole": "contemporaneous_context",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2014-09-15",
+      "temporalRelation": "decision_time",
+      "describedEvidencePeriod": "decision_time",
+      "registryStatus": "new",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://news.microsoft.com/source/2014/09/15/minecraft-to-join-microsoft/",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [4]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://www.reuters.com/article/world/europe/microsoft-to-buy-minecraft-maker-mojang-for-25-billion-idUSKBN0HA1CR/",
+      "originalUrls": [
+        "https://www.reuters.com/article/world/europe/microsoft-to-buy-minecraft-maker-mojang-for-25-billion-idUSKBN0HA1CR/?utm_source=chatgpt.com",
+        "https://www.reuters.com/article/world/europe/microsoft-to-buy-minecraft-maker-mojang-for-25-billion-idUSKBN0HA1CR/"
+      ],
+      "pageNumbers": [
+        4
+      ],
+      "eventId": "candidate-mojang-acquisition-2014",
+      "eventName": "Mojang / Minecraft acquisition",
+      "publisher": "Reuters",
+      "domain": "www.reuters.com",
+      "sourceType": "news_report",
+      "evidenceRole": "contemporaneous_context",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2014-09-15",
+      "temporalRelation": "decision_time",
+      "describedEvidencePeriod": "decision_time",
+      "registryStatus": "new",
+      "accessStatus": "blocked_by_automation",
+      "httpStatus": 401,
+      "finalUrl": "https://www.reuters.com/article/world/europe/microsoft-to-buy-minecraft-maker-mojang-for-25-billion-idUSKBN0HA1CR/",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [4]; original artifact review is required before evidence approval. Live recheck: HTTP 401; blocked_by_automation."
+    },
+    {
+      "canonicalUrl": "https://www.wired.com/2014/09/microsoft-minecraft-mobile/",
+      "originalUrls": [
+        "https://www.wired.com/2014/09/microsoft-minecraft-mobile/",
+        "https://www.wired.com/2014/09/microsoft-minecraft-mobile"
+      ],
+      "pageNumbers": [
+        4
+      ],
+      "eventId": "candidate-mojang-acquisition-2014",
+      "eventName": "Mojang / Minecraft acquisition",
+      "publisher": "WIRED",
+      "domain": "www.wired.com",
+      "sourceType": "industry_analysis",
+      "evidenceRole": "contemporaneous_context",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2014-09-15",
+      "temporalRelation": "decision_time",
+      "describedEvidencePeriod": "decision_time",
+      "registryStatus": "new",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://www.wired.com/2014/09/microsoft-minecraft-mobile/",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [4]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://www.microsoft.com/investor/reports/ar16/index.html",
+      "originalUrls": [
+        "https://www.microsoft.com/investor/reports/ar16/index.html"
+      ],
+      "pageNumbers": [
+        5
+      ],
+      "eventId": "candidate-mojang-acquisition-2014",
+      "eventName": "Mojang / Minecraft acquisition",
+      "publisher": "Microsoft",
+      "domain": "www.microsoft.com",
+      "sourceType": "annual_report",
+      "evidenceRole": "post_outcome",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2016-07-28",
+      "temporalRelation": "post_outcome",
+      "describedEvidencePeriod": "post_outcome",
+      "registryStatus": "new",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://www.microsoft.com/investor/reports/ar16/index.html",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [5]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://news.microsoft.com/speeches/microsoft-and-linkedin-conference-call-chris-suh-satya-nadella-jeff-weiner-amy-hood-brad-smith/",
+      "originalUrls": [
+        "https://news.microsoft.com/speeches/microsoft-and-linkedin-conference-call-chris-suh-satya-nadella-jeff-weiner-amy-hood-brad-smith/?utm_source=chatgpt.com",
+        "https://news.microsoft.com/speeches/microsoft-and-linkedin-conference-call-chris-suh-satya-nadella-jeff-weiner-amy-hood-brad-smith/"
+      ],
+      "pageNumbers": [
+        5,
+        6
+      ],
+      "eventId": "candidate-linkedin-acquisition-2016",
+      "eventName": "LinkedIn acquisition",
+      "publisher": "Microsoft",
+      "domain": "news.microsoft.com",
+      "sourceType": "official_transcript",
+      "evidenceRole": "direct_amy",
+      "directEvidenceStatus": "verified",
+      "reviewStatus": "review_required",
+      "publishedAt": "2016-06-13",
+      "temporalRelation": "decision_time",
+      "describedEvidencePeriod": "decision_time",
+      "registryStatus": "new",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://news.microsoft.com/speeches/microsoft-and-linkedin-conference-call-chris-suh-satya-nadella-jeff-weiner-amy-hood-brad-smith/",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [5, 6]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/1271024/000110465916130837/a16-14187_1prem14a.htm",
+      "originalUrls": [
+        "https://www.sec.gov/Archives/edgar/data/1271024/000110465916130837/a16-14187_1prem14a.htm"
+      ],
+      "pageNumbers": [
+        5,
+        6
+      ],
+      "eventId": "candidate-linkedin-acquisition-2016",
+      "eventName": "LinkedIn acquisition",
+      "publisher": "LinkedIn / SEC",
+      "domain": "www.sec.gov",
+      "sourceType": "sec_proxy_statement",
+      "evidenceRole": "contemporaneous_context",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2016-07-01",
+      "temporalRelation": "post_outcome",
+      "describedEvidencePeriod": "pre_decision",
+      "registryStatus": "new",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://www.sec.gov/Archives/edgar/data/1271024/000110465916130837/a16-14187_1prem14a.htm",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [5, 6]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://news.microsoft.com/source/2016/06/13/microsoft-to-acquire-linkedin/",
+      "originalUrls": [
+        "https://news.microsoft.com/source/2016/06/13/microsoft-to-acquire-linkedin/"
+      ],
+      "pageNumbers": [
+        6
+      ],
+      "eventId": "candidate-linkedin-acquisition-2016",
+      "eventName": "LinkedIn acquisition",
+      "publisher": "Microsoft",
+      "domain": "news.microsoft.com",
+      "sourceType": "official_announcement",
+      "evidenceRole": "contemporaneous_context",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2016-06-13",
+      "temporalRelation": "decision_time",
+      "describedEvidencePeriod": "decision_time",
+      "registryStatus": "existing",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://news.microsoft.com/source/2016/06/13/microsoft-to-acquire-linkedin/",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [6]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://www.reuters.com/article/business/microsoft-to-buy-linkedin-for-262-billion-in-its-largest-deal-idUSKCN0YZ1FO/",
+      "originalUrls": [
+        "https://www.reuters.com/article/business/microsoft-to-buy-linkedin-for-262-billion-in-its-largest-deal-idUSKCN0YZ1FO/"
+      ],
+      "pageNumbers": [
+        7
+      ],
+      "eventId": "candidate-linkedin-acquisition-2016",
+      "eventName": "LinkedIn acquisition",
+      "publisher": "Reuters",
+      "domain": "www.reuters.com",
+      "sourceType": "news_report",
+      "evidenceRole": "contemporaneous_context",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2016-06-13",
+      "temporalRelation": "decision_time",
+      "describedEvidencePeriod": "decision_time",
+      "registryStatus": "new",
+      "accessStatus": "blocked_by_automation",
+      "httpStatus": 401,
+      "finalUrl": "https://www.reuters.com/article/business/microsoft-to-buy-linkedin-for-262-billion-in-its-largest-deal-idUSKCN0YZ1FO/",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [7]; original artifact review is required before evidence approval. Live recheck: HTTP 401; blocked_by_automation."
+    },
+    {
+      "canonicalUrl": "https://www.microsoft.com/investor/reports/ar21/index.html",
+      "originalUrls": [
+        "https://www.microsoft.com/investor/reports/ar21/index.html"
+      ],
+      "pageNumbers": [
+        7
+      ],
+      "eventId": "candidate-linkedin-acquisition-2016",
+      "eventName": "LinkedIn acquisition",
+      "publisher": "Microsoft",
+      "domain": "www.microsoft.com",
+      "sourceType": "annual_report",
+      "evidenceRole": "post_outcome",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2021-07-29",
+      "temporalRelation": "post_outcome",
+      "describedEvidencePeriod": "post_outcome",
+      "registryStatus": "new",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://www.microsoft.com/investor/reports/ar21/index.html",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [7]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://www.geekwire.com/2018/microsoft-reportedly-acquire-github-software-development-platform/",
+      "originalUrls": [
+        "https://www.geekwire.com/2018/microsoft-reportedly-acquire-github-software-development-platform/?utm_source=chatgpt.com"
+      ],
+      "pageNumbers": [
+        7
+      ],
+      "eventId": "candidate-github-acquisition-2018",
+      "eventName": "GitHub acquisition",
+      "publisher": "GeekWire",
+      "domain": "www.geekwire.com",
+      "sourceType": "news_report",
+      "evidenceRole": "contemporaneous_context",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2018-06-03",
+      "temporalRelation": "pre_decision",
+      "describedEvidencePeriod": "pre_decision",
+      "registryStatus": "new",
+      "accessStatus": "blocked_by_automation",
+      "httpStatus": 403,
+      "finalUrl": "https://www.geekwire.com/2018/microsoft-reportedly-acquire-github-software-development-platform/",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [7]; original artifact review is required before evidence approval. Live recheck: HTTP 403; blocked_by_automation."
+    },
+    {
+      "canonicalUrl": "https://stockanalysis.com/stocks/msft/transcripts/62670-m-a-announcement/",
+      "originalUrls": [
+        "https://stockanalysis.com/stocks/msft/transcripts/62670-m-a-announcement/"
+      ],
+      "pageNumbers": [
+        8
+      ],
+      "eventId": "candidate-github-acquisition-2018",
+      "eventName": "GitHub acquisition",
+      "publisher": "StockAnalysis",
+      "domain": "stockanalysis.com",
+      "sourceType": "transcript_mirror",
+      "evidenceRole": "direct_amy",
+      "directEvidenceStatus": "review_required",
+      "reviewStatus": "review_required",
+      "publishedAt": "2018-06-04",
+      "temporalRelation": "decision_time",
+      "describedEvidencePeriod": "decision_time",
+      "registryStatus": "new",
+      "accessStatus": "unavailable",
+      "httpStatus": 400,
+      "finalUrl": "https://stockanalysis.com/stocks/msft/transcripts/62670-m-a-announcement/",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [8]; original artifact review is required before evidence approval. Live recheck: HTTP 400; unavailable."
+    },
+    {
+      "canonicalUrl": "https://news.microsoft.com/source/2018/06/04/microsoft-to-acquire-github-for-7-5-billion/",
+      "originalUrls": [
+        "https://news.microsoft.com/source/2018/06/04/microsoft-to-acquire-github-for-7-5-billion/?utm_source=chatgpt.com",
+        "https://news.microsoft.com/source/2018/06/04/microsoft-to-acquire-github-for-7-5-billion/"
+      ],
+      "pageNumbers": [
+        8
+      ],
+      "eventId": "candidate-github-acquisition-2018",
+      "eventName": "GitHub acquisition",
+      "publisher": "Microsoft",
+      "domain": "news.microsoft.com",
+      "sourceType": "official_announcement",
+      "evidenceRole": "contemporaneous_context",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2018-06-04",
+      "temporalRelation": "decision_time",
+      "describedEvidencePeriod": "decision_time",
+      "registryStatus": "existing",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://news.microsoft.com/source/2018/06/04/microsoft-to-acquire-github-for-7-5-billion/",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [8]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://www.reuters.com/article/world/microsoft-to-take-on-amazon-with-75-billion-github-deal-idUSKCN1J01N2/",
+      "originalUrls": [
+        "https://www.reuters.com/article/world/microsoft-to-take-on-amazon-with-75-billion-github-deal-idUSKCN1J01N2/?utm_source=chatgpt.com",
+        "https://www.reuters.com/article/world/microsoft-to-take-on-amazon-with-75-billion-github-deal-idUSKCN1J01N2/"
+      ],
+      "pageNumbers": [
+        8,
+        9
+      ],
+      "eventId": "candidate-github-acquisition-2018",
+      "eventName": "GitHub acquisition",
+      "publisher": "Reuters",
+      "domain": "www.reuters.com",
+      "sourceType": "news_report",
+      "evidenceRole": "contemporaneous_context",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2018-06-04",
+      "temporalRelation": "decision_time",
+      "describedEvidencePeriod": "decision_time",
+      "registryStatus": "new",
+      "accessStatus": "blocked_by_automation",
+      "httpStatus": 401,
+      "finalUrl": "https://www.reuters.com/article/world/microsoft-to-take-on-amazon-with-75-billion-github-deal-idUSKCN1J01N2/",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [8, 9]; original artifact review is required before evidence approval. Live recheck: HTTP 401; blocked_by_automation."
+    },
+    {
+      "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q1",
+      "originalUrls": [
+        "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q1"
+      ],
+      "pageNumbers": [
+        9
+      ],
+      "eventId": "candidate-github-acquisition-2018",
+      "eventName": "GitHub acquisition",
+      "publisher": "Microsoft",
+      "domain": "www.microsoft.com",
+      "sourceType": "earnings_call",
+      "evidenceRole": "post_outcome",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2022-10-25",
+      "temporalRelation": "post_outcome",
+      "describedEvidencePeriod": "post_outcome",
+      "registryStatus": "new",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q1",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [9]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://stockanalysis.com/stocks/msft/transcripts/12504-m-a-announcement/",
+      "originalUrls": [
+        "https://stockanalysis.com/stocks/msft/transcripts/12504-m-a-announcement/"
+      ],
+      "pageNumbers": [
+        9,
+        10
+      ],
+      "eventId": "candidate-nuance-acquisition-2021",
+      "eventName": "Nuance Communications acquisition",
+      "publisher": "StockAnalysis",
+      "domain": "stockanalysis.com",
+      "sourceType": "transcript_mirror",
+      "evidenceRole": "direct_amy",
+      "directEvidenceStatus": "review_required",
+      "reviewStatus": "review_required",
+      "publishedAt": "2021-04-12",
+      "temporalRelation": "decision_time",
+      "describedEvidencePeriod": "decision_time",
+      "registryStatus": "new",
+      "accessStatus": "unavailable",
+      "httpStatus": 400,
+      "finalUrl": "https://stockanalysis.com/stocks/msft/transcripts/12504-m-a-announcement/",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [9, 10]; original artifact review is required before evidence approval. Live recheck: HTTP 400; unavailable."
+    },
+    {
+      "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/1002517/000119312521113805/d100489ddefa14a.htm",
+      "originalUrls": [
+        "https://www.sec.gov/Archives/edgar/data/1002517/000119312521113805/d100489ddefa14a.htm?utm_source=chatgpt.com",
+        "https://www.sec.gov/Archives/edgar/data/1002517/000119312521113805/d100489ddefa14a.htm"
+      ],
+      "pageNumbers": [
+        9,
+        10,
+        11
+      ],
+      "eventId": "candidate-nuance-acquisition-2021",
+      "eventName": "Nuance Communications acquisition",
+      "publisher": "Nuance / SEC",
+      "domain": "www.sec.gov",
+      "sourceType": "sec_proxy_statement",
+      "evidenceRole": "contemporaneous_context",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2021-04-13",
+      "temporalRelation": "post_outcome",
+      "describedEvidencePeriod": "pre_decision",
+      "registryStatus": "new",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://www.sec.gov/Archives/edgar/data/1002517/000119312521113805/d100489ddefa14a.htm",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [9, 10, 11]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/1002517/000119312521112515/d22854dex991.htm",
+      "originalUrls": [
+        "https://www.sec.gov/Archives/edgar/data/1002517/000119312521112515/d22854dex991.htm?utm_source=chatgpt.com",
+        "https://www.sec.gov/Archives/edgar/data/1002517/000119312521112515/d22854dex991.htm"
+      ],
+      "pageNumbers": [
+        10
+      ],
+      "eventId": "candidate-nuance-acquisition-2021",
+      "eventName": "Nuance Communications acquisition",
+      "publisher": "Microsoft / Nuance / SEC",
+      "domain": "www.sec.gov",
+      "sourceType": "sec_press_release",
+      "evidenceRole": "contemporaneous_context",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2021-04-12",
+      "temporalRelation": "decision_time",
+      "describedEvidencePeriod": "decision_time",
+      "registryStatus": "new",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://www.sec.gov/Archives/edgar/data/1002517/000119312521112515/d22854dex991.htm",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [10]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/1002517/000100251720000058/nuan0930202010-k.htm",
+      "originalUrls": [
+        "https://www.sec.gov/Archives/edgar/data/1002517/000100251720000058/nuan0930202010-k.htm?utm_source=chatgpt.com",
+        "https://www.sec.gov/Archives/edgar/data/1002517/000100251720000058/nuan0930202010-k.htm"
+      ],
+      "pageNumbers": [
+        11
+      ],
+      "eventId": "candidate-nuance-acquisition-2021",
+      "eventName": "Nuance Communications acquisition",
+      "publisher": "Nuance / SEC",
+      "domain": "www.sec.gov",
+      "sourceType": "annual_report",
+      "evidenceRole": "contemporaneous_context",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2020-11-19",
+      "temporalRelation": "pre_decision",
+      "describedEvidencePeriod": "pre_decision",
+      "registryStatus": "new",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://www.sec.gov/Archives/edgar/data/1002517/000100251720000058/nuan0930202010-k.htm",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [11]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2022/earnings-fy-2022-q3",
+      "originalUrls": [
+        "https://www.microsoft.com/en-us/investor/events/fy-2022/earnings-fy-2022-q3"
+      ],
+      "pageNumbers": [
+        11
+      ],
+      "eventId": "candidate-nuance-acquisition-2021",
+      "eventName": "Nuance Communications acquisition",
+      "publisher": "Microsoft",
+      "domain": "www.microsoft.com",
+      "sourceType": "earnings_call",
+      "evidenceRole": "post_outcome",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2022-04-26",
+      "temporalRelation": "post_outcome",
+      "describedEvidencePeriod": "post_outcome",
+      "registryStatus": "new",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2022/earnings-fy-2022-q3",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [11]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/718877/000110465922005069/tm223212d4_defa14a.htm",
+      "originalUrls": [
+        "https://www.sec.gov/Archives/edgar/data/718877/000110465922005069/tm223212d4_defa14a.htm?utm_source=chatgpt.com",
+        "https://www.sec.gov/Archives/edgar/data/718877/000110465922005069/tm223212d4_defa14a.htm"
+      ],
+      "pageNumbers": [
+        12
+      ],
+      "eventId": "candidate-activision-acquisition-2022",
+      "eventName": "Activision Blizzard acquisition",
+      "publisher": "Microsoft / Activision Blizzard / SEC",
+      "domain": "www.sec.gov",
+      "sourceType": "sec_transcript",
+      "evidenceRole": "direct_amy",
+      "directEvidenceStatus": "verified",
+      "reviewStatus": "review_required",
+      "publishedAt": "2022-01-18",
+      "temporalRelation": "decision_time",
+      "describedEvidencePeriod": "decision_time",
+      "registryStatus": "new",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://www.sec.gov/Archives/edgar/data/718877/000110465922005069/tm223212d4_defa14a.htm",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [12]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://news.microsoft.com/source/2022/01/18/microsoft-to-acquire-activision-blizzard-to-bring-the-joy-and-community-of-gaming-to-everyone-across-every-device/",
+      "originalUrls": [
+        "https://news.microsoft.com/source/2022/01/18/microsoft-to-acquire-activision-blizzard-to-bring-the-joy-and-community-of-gaming-to-everyone-across-every-device/?utm_source=chatgpt.com",
+        "https://news.microsoft.com/source/2022/01/18/microsoft-to-acquire-activision-blizzard-to-bring-the-joy-and-community-of-gaming-to-everyone-across-every-device/"
+      ],
+      "pageNumbers": [
+        12,
+        13
+      ],
+      "eventId": "candidate-activision-acquisition-2022",
+      "eventName": "Activision Blizzard acquisition",
+      "publisher": "Microsoft",
+      "domain": "news.microsoft.com",
+      "sourceType": "official_announcement",
+      "evidenceRole": "contemporaneous_context",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2022-01-18",
+      "temporalRelation": "decision_time",
+      "describedEvidencePeriod": "decision_time",
+      "registryStatus": "existing",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://news.microsoft.com/source/2022/01/18/microsoft-to-acquire-activision-blizzard-to-bring-the-joy-and-community-of-gaming-to-everyone-across-every-device/",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [12, 13]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/718877/000110465922036155/tm225196-4_defm14a.htm",
+      "originalUrls": [
+        "https://www.sec.gov/Archives/edgar/data/718877/000110465922036155/tm225196-4_defm14a.htm",
+        "https://www.sec.gov/Archives/edgar/data/718877/000110465922036155/tm225196-4_defm14a.htm?utm_source=chatgpt.com"
+      ],
+      "pageNumbers": [
+        12,
+        13
+      ],
+      "eventId": "candidate-activision-acquisition-2022",
+      "eventName": "Activision Blizzard acquisition",
+      "publisher": "Activision Blizzard / SEC",
+      "domain": "www.sec.gov",
+      "sourceType": "sec_proxy_statement",
+      "evidenceRole": "contemporaneous_context",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2022-03-21",
+      "temporalRelation": "post_outcome",
+      "describedEvidencePeriod": "pre_decision",
+      "registryStatus": "new",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://www.sec.gov/Archives/edgar/data/718877/000110465922036155/tm225196-4_defm14a.htm",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [12, 13]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://blogs.microsoft.com/blog/2023/10/13/welcoming-the-legendary-teams-at-activision-blizzard-king-to-team-xbox/",
+      "originalUrls": [
+        "https://blogs.microsoft.com/blog/2023/10/13/welcoming-the-legendary-teams-at-activision-blizzard-king-to-team-xbox/",
+        "https://blogs.microsoft.com/blog/2023/10/13/welcoming-the-legendary-teams-at-activision-blizzard-king-to-team-xbox/?utm_source=chatgpt.com"
+      ],
+      "pageNumbers": [
+        13
+      ],
+      "eventId": "candidate-activision-acquisition-2022",
+      "eventName": "Activision Blizzard acquisition",
+      "publisher": "Microsoft",
+      "domain": "blogs.microsoft.com",
+      "sourceType": "corporate_blog",
+      "evidenceRole": "post_outcome",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2023-10-13",
+      "temporalRelation": "post_outcome",
+      "describedEvidencePeriod": "post_outcome",
+      "registryStatus": "new",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://blogs.microsoft.com/blog/2023/10/13/welcoming-the-legendary-teams-at-activision-blizzard-king-to-team-xbox/",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [13]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2024/earnings-fy-2024-q2",
+      "originalUrls": [
+        "https://www.microsoft.com/en-us/investor/events/fy-2024/earnings-fy-2024-q2"
+      ],
+      "pageNumbers": [
+        13
+      ],
+      "eventId": "candidate-activision-acquisition-2022",
+      "eventName": "Activision Blizzard acquisition",
+      "publisher": "Microsoft",
+      "domain": "www.microsoft.com",
+      "sourceType": "earnings_call",
+      "evidenceRole": "post_outcome",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2024-01-30",
+      "temporalRelation": "post_outcome",
+      "describedEvidencePeriod": "post_outcome",
+      "registryStatus": "new",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2024/earnings-fy-2024-q2",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [13]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    },
+    {
+      "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/718877/000110465922025210/tm225196-3_prem14a.htm",
+      "originalUrls": [
+        "https://www.sec.gov/Archives/edgar/data/718877/000110465922025210/tm225196-3_prem14a.htm"
+      ],
+      "pageNumbers": [
+        13
+      ],
+      "eventId": "candidate-activision-acquisition-2022",
+      "eventName": "Activision Blizzard acquisition",
+      "publisher": "Activision Blizzard / SEC",
+      "domain": "www.sec.gov",
+      "sourceType": "sec_proxy_statement",
+      "evidenceRole": "contemporaneous_context",
+      "directEvidenceStatus": "not_applicable",
+      "reviewStatus": "unreviewed",
+      "publishedAt": "2022-02-18",
+      "temporalRelation": "post_outcome",
+      "describedEvidencePeriod": "pre_decision",
+      "registryStatus": "new",
+      "accessStatus": "accessible",
+      "httpStatus": 200,
+      "finalUrl": "https://www.sec.gov/Archives/edgar/data/718877/000110465922025210/tm225196-3_prem14a.htm",
+      "checkedAt": "2026-07-15T01:24:20.000Z",
+      "reviewNote": "Discovery metadata from PDF pages [13]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+    }
+  ]
+}

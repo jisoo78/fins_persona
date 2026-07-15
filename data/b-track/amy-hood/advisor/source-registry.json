@@ -689,6 +689,722 @@
       "sha256": "40cb206d8b0f3b8d7304d139ef49839f75a95a6de3a28065a95f6e87bf25e8a6",
       "capturedAt": "2026-07-14T11:33:56.568Z",
       "failureReason": null
+    },
+    {
+      "id": "source-44ded251a652daf1",
+      "canonicalUrl": "https://news.microsoft.com/videos/audio-slideshow-of-microsoft-nokia-transaction-conference-call/",
+      "eventCandidateIds": [
+        "candidate-nokia-acquisition-2013"
+      ],
+      "tier": 1,
+      "title": "PDF discovery: Nokia Devices & Services acquisition",
+      "publisher": "Microsoft",
+      "publishedAt": "2013-09-03",
+      "speaker": null,
+      "sourceType": "official_event_page",
+      "collector": "microsoft_source",
+      "temporalRole": "decision_time",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "review_required",
+      "rawPath": "raw/source-44ded251a652daf1-00f2cd89ee90c37dcaabd05a7d8f43d714034b55a2c17a8172d6392b7f132edc.json",
+      "normalizedPath": "normalized/source-44ded251a652daf1-00f2cd89ee90c37dcaabd05a7d8f43d714034b55a2c17a8172d6392b7f132edc.txt",
+      "sha256": "00f2cd89ee90c37dcaabd05a7d8f43d714034b55a2c17a8172d6392b7f132edc",
+      "capturedAt": "2026-07-15T01:30:44.208Z",
+      "failureReason": null,
+      "finalUrl": "https://news.microsoft.com/videos/audio-slideshow-of-microsoft-nokia-transaction-conference-call/",
+      "redirectChain": [
+        "https://news.microsoft.com/videos/audio-slideshow-of-microsoft-nokia-transaction-conference-call/"
+      ]
+    },
+    {
+      "id": "source-8c3da42664286531",
+      "canonicalUrl": "https://allthingsd.com/20130904/from-can-we-talk-to-a-coffee-table-mishap-the-inside-story-of-microsofts-nokia-purchase/",
+      "eventCandidateIds": [
+        "candidate-nokia-acquisition-2013"
+      ],
+      "tier": 3,
+      "title": "PDF discovery: Nokia Devices & Services acquisition",
+      "publisher": "AllThingsD",
+      "publishedAt": "2013-09-04",
+      "speaker": null,
+      "sourceType": "deal_history_report",
+      "collector": "manual_import",
+      "temporalRole": "post_outcome",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "discovered",
+      "rawPath": null,
+      "normalizedPath": null,
+      "sha256": null,
+      "capturedAt": null,
+      "failureReason": null
+    },
+    {
+      "id": "source-344b5f212e415c61",
+      "canonicalUrl": "https://www.reuters.com/article/business/microsoft-swallows-nokias-phone-business-for-72-billion-idUSBRE98202W/",
+      "eventCandidateIds": [
+        "candidate-nokia-acquisition-2013"
+      ],
+      "tier": 3,
+      "title": "PDF discovery: Nokia Devices & Services acquisition",
+      "publisher": "Reuters",
+      "publishedAt": "2013-09-03",
+      "speaker": null,
+      "sourceType": "news_report",
+      "collector": "manual_import",
+      "temporalRole": "decision_time",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "discovered",
+      "rawPath": null,
+      "normalizedPath": null,
+      "sha256": null,
+      "capturedAt": null,
+      "failureReason": null
+    },
+    {
+      "id": "source-e6cffdd24e4c04a9",
+      "canonicalUrl": "https://www.microsoft.com/en-us/investor/earnings/fy-2015-q4/press-release-webcast",
+      "eventCandidateIds": [
+        "candidate-nokia-acquisition-2013"
+      ],
+      "tier": 1,
+      "title": "PDF discovery: Nokia Devices & Services acquisition",
+      "publisher": "Microsoft",
+      "publishedAt": "2015-07-21",
+      "speaker": null,
+      "sourceType": "earnings_release",
+      "collector": "microsoft_ir",
+      "temporalRole": "post_outcome",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "review_required",
+      "rawPath": "raw/source-e6cffdd24e4c04a9-364346c2dba77e311c272a070567efbe127819a0a310da47dfd54da14cc5cd32.json",
+      "normalizedPath": "normalized/source-e6cffdd24e4c04a9-364346c2dba77e311c272a070567efbe127819a0a310da47dfd54da14cc5cd32.txt",
+      "sha256": "364346c2dba77e311c272a070567efbe127819a0a310da47dfd54da14cc5cd32",
+      "capturedAt": "2026-07-15T01:30:45.808Z",
+      "failureReason": null,
+      "finalUrl": "https://www.microsoft.com/en-us/investor/earnings/fy-2015-q4/press-release-webcast",
+      "redirectChain": [
+        "https://www.microsoft.com/en-us/investor/earnings/fy-2015-q4/press-release-webcast"
+      ]
+    },
+    {
+      "id": "source-f74d2726241b2c90",
+      "canonicalUrl": "https://www.polygon.com/2015/3/3/8144453/minecraft-sale-microsoft-notch-tweet/",
+      "eventCandidateIds": [
+        "candidate-mojang-acquisition-2014"
+      ],
+      "tier": 3,
+      "title": "PDF discovery: Mojang / Minecraft acquisition",
+      "publisher": "Polygon",
+      "publishedAt": "2015-03-03",
+      "speaker": null,
+      "sourceType": "news_report",
+      "collector": "manual_import",
+      "temporalRole": "post_outcome",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "discovered",
+      "rawPath": null,
+      "normalizedPath": null,
+      "sha256": null,
+      "capturedAt": null,
+      "failureReason": null
+    },
+    {
+      "id": "source-9d580b28f713a039",
+      "canonicalUrl": "https://news.microsoft.com/source/2014/09/15/minecraft-to-join-microsoft/",
+      "eventCandidateIds": [
+        "candidate-mojang-acquisition-2014"
+      ],
+      "tier": 1,
+      "title": "PDF discovery: Mojang / Minecraft acquisition",
+      "publisher": "Microsoft",
+      "publishedAt": "2014-09-15",
+      "speaker": null,
+      "sourceType": "official_announcement",
+      "collector": "microsoft_source",
+      "temporalRole": "decision_time",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "review_required",
+      "rawPath": "raw/source-9d580b28f713a039-de8bcc024193c3764e61ab0bdda7b4e0215ba70608e0162c6775d28f439f225a.json",
+      "normalizedPath": "normalized/source-9d580b28f713a039-de8bcc024193c3764e61ab0bdda7b4e0215ba70608e0162c6775d28f439f225a.txt",
+      "sha256": "de8bcc024193c3764e61ab0bdda7b4e0215ba70608e0162c6775d28f439f225a",
+      "capturedAt": "2026-07-15T01:30:46.533Z",
+      "failureReason": null,
+      "finalUrl": "https://news.microsoft.com/source/2014/09/15/minecraft-to-join-microsoft/",
+      "redirectChain": [
+        "https://news.microsoft.com/source/2014/09/15/minecraft-to-join-microsoft/"
+      ]
+    },
+    {
+      "id": "source-33ff6cc931a617fa",
+      "canonicalUrl": "https://www.reuters.com/article/world/europe/microsoft-to-buy-minecraft-maker-mojang-for-25-billion-idUSKBN0HA1CR/",
+      "eventCandidateIds": [
+        "candidate-mojang-acquisition-2014"
+      ],
+      "tier": 3,
+      "title": "PDF discovery: Mojang / Minecraft acquisition",
+      "publisher": "Reuters",
+      "publishedAt": "2014-09-15",
+      "speaker": null,
+      "sourceType": "news_report",
+      "collector": "manual_import",
+      "temporalRole": "decision_time",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "discovered",
+      "rawPath": null,
+      "normalizedPath": null,
+      "sha256": null,
+      "capturedAt": null,
+      "failureReason": null
+    },
+    {
+      "id": "source-8dfe8681c6f17c40",
+      "canonicalUrl": "https://www.wired.com/2014/09/microsoft-minecraft-mobile/",
+      "eventCandidateIds": [
+        "candidate-mojang-acquisition-2014"
+      ],
+      "tier": 3,
+      "title": "PDF discovery: Mojang / Minecraft acquisition",
+      "publisher": "WIRED",
+      "publishedAt": "2014-09-15",
+      "speaker": null,
+      "sourceType": "industry_analysis",
+      "collector": "manual_import",
+      "temporalRole": "decision_time",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "discovered",
+      "rawPath": null,
+      "normalizedPath": null,
+      "sha256": null,
+      "capturedAt": null,
+      "failureReason": null
+    },
+    {
+      "id": "source-a27a001f509331b9",
+      "canonicalUrl": "https://www.microsoft.com/investor/reports/ar16/index.html",
+      "eventCandidateIds": [
+        "candidate-mojang-acquisition-2014"
+      ],
+      "tier": 1,
+      "title": "PDF discovery: Mojang / Minecraft acquisition",
+      "publisher": "Microsoft",
+      "publishedAt": "2016-07-28",
+      "speaker": null,
+      "sourceType": "annual_report",
+      "collector": "microsoft_ir",
+      "temporalRole": "post_outcome",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "failed",
+      "rawPath": "raw/source-a27a001f509331b9-b88080e109816f78186c8d6eec7034546086d5e14722afe80f9514bf43b1c7a9.json",
+      "normalizedPath": null,
+      "sha256": "b88080e109816f78186c8d6eec7034546086d5e14722afe80f9514bf43b1c7a9",
+      "capturedAt": "2026-07-15T01:30:47.369Z",
+      "failureReason": "invalid_content",
+      "finalUrl": "https://www.microsoft.com/investor/reports/ar16/index.html",
+      "redirectChain": [
+        "https://www.microsoft.com/investor/reports/ar16/index.html"
+      ]
+    },
+    {
+      "id": "source-f14d371fe2c97c5f",
+      "canonicalUrl": "https://news.microsoft.com/speeches/microsoft-and-linkedin-conference-call-chris-suh-satya-nadella-jeff-weiner-amy-hood-brad-smith/",
+      "eventCandidateIds": [
+        "candidate-linkedin-acquisition-2016"
+      ],
+      "tier": 1,
+      "title": "PDF discovery: LinkedIn acquisition",
+      "publisher": "Microsoft",
+      "publishedAt": "2016-06-13",
+      "speaker": null,
+      "sourceType": "official_transcript",
+      "collector": "microsoft_source",
+      "temporalRole": "decision_time",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "review_required",
+      "rawPath": "raw/source-f14d371fe2c97c5f-076e301319286f4350cec443b68777b2ffd23fc2782b7eae4ca24a53889db393.json",
+      "normalizedPath": "normalized/source-f14d371fe2c97c5f-076e301319286f4350cec443b68777b2ffd23fc2782b7eae4ca24a53889db393.txt",
+      "sha256": "076e301319286f4350cec443b68777b2ffd23fc2782b7eae4ca24a53889db393",
+      "capturedAt": "2026-07-15T01:30:48.518Z",
+      "failureReason": null,
+      "finalUrl": "https://news.microsoft.com/speeches/microsoft-and-linkedin-conference-call-chris-suh-satya-nadella-jeff-weiner-amy-hood-brad-smith/",
+      "redirectChain": [
+        "https://news.microsoft.com/speeches/microsoft-and-linkedin-conference-call-chris-suh-satya-nadella-jeff-weiner-amy-hood-brad-smith/"
+      ]
+    },
+    {
+      "id": "source-0f0c21accbeccbaa",
+      "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/1271024/000110465916130837/a16-14187_1prem14a.htm",
+      "eventCandidateIds": [
+        "candidate-linkedin-acquisition-2016"
+      ],
+      "tier": 1,
+      "title": "PDF discovery: LinkedIn acquisition",
+      "publisher": "LinkedIn / SEC",
+      "publishedAt": "2016-07-01",
+      "speaker": null,
+      "sourceType": "sec_proxy_statement",
+      "collector": "sec_edgar",
+      "temporalRole": "post_outcome",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "review_required",
+      "rawPath": "raw/source-0f0c21accbeccbaa-d8f819c7007a922ab7478c83afa12ab10f839b79c85f20ec8c6428e53d8f5b93.json",
+      "normalizedPath": "normalized/source-0f0c21accbeccbaa-d8f819c7007a922ab7478c83afa12ab10f839b79c85f20ec8c6428e53d8f5b93.txt",
+      "sha256": "d8f819c7007a922ab7478c83afa12ab10f839b79c85f20ec8c6428e53d8f5b93",
+      "capturedAt": "2026-07-15T01:30:49.222Z",
+      "failureReason": null,
+      "finalUrl": "https://www.sec.gov/Archives/edgar/data/1271024/000110465916130837/a16-14187_1prem14a.htm",
+      "redirectChain": [
+        "https://www.sec.gov/Archives/edgar/data/1271024/000110465916130837/a16-14187_1prem14a.htm"
+      ]
+    },
+    {
+      "id": "source-37e6ee8113dc7b42",
+      "canonicalUrl": "https://www.reuters.com/article/business/microsoft-to-buy-linkedin-for-262-billion-in-its-largest-deal-idUSKCN0YZ1FO/",
+      "eventCandidateIds": [
+        "candidate-linkedin-acquisition-2016"
+      ],
+      "tier": 3,
+      "title": "PDF discovery: LinkedIn acquisition",
+      "publisher": "Reuters",
+      "publishedAt": "2016-06-13",
+      "speaker": null,
+      "sourceType": "news_report",
+      "collector": "manual_import",
+      "temporalRole": "decision_time",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "discovered",
+      "rawPath": null,
+      "normalizedPath": null,
+      "sha256": null,
+      "capturedAt": null,
+      "failureReason": null
+    },
+    {
+      "id": "source-6fd0870cc2d60759",
+      "canonicalUrl": "https://www.microsoft.com/investor/reports/ar21/index.html",
+      "eventCandidateIds": [
+        "candidate-linkedin-acquisition-2016"
+      ],
+      "tier": 1,
+      "title": "PDF discovery: LinkedIn acquisition",
+      "publisher": "Microsoft",
+      "publishedAt": "2021-07-29",
+      "speaker": null,
+      "sourceType": "annual_report",
+      "collector": "microsoft_ir",
+      "temporalRole": "post_outcome",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "review_required",
+      "rawPath": "raw/source-6fd0870cc2d60759-1b6db1bd35aa5c5f6fb5867fb525a951d04844fa49f726af354b70e02b026e2a.json",
+      "normalizedPath": "normalized/source-6fd0870cc2d60759-1b6db1bd35aa5c5f6fb5867fb525a951d04844fa49f726af354b70e02b026e2a.txt",
+      "sha256": "1b6db1bd35aa5c5f6fb5867fb525a951d04844fa49f726af354b70e02b026e2a",
+      "capturedAt": "2026-07-15T01:30:51.021Z",
+      "failureReason": null,
+      "finalUrl": "https://www.microsoft.com/investor/reports/ar21/index.html",
+      "redirectChain": [
+        "https://www.microsoft.com/investor/reports/ar21/index.html"
+      ]
+    },
+    {
+      "id": "source-3f83bbdf64a6f397",
+      "canonicalUrl": "https://www.geekwire.com/2018/microsoft-reportedly-acquire-github-software-development-platform/",
+      "eventCandidateIds": [
+        "candidate-github-acquisition-2018"
+      ],
+      "tier": 3,
+      "title": "PDF discovery: GitHub acquisition",
+      "publisher": "GeekWire",
+      "publishedAt": "2018-06-03",
+      "speaker": null,
+      "sourceType": "news_report",
+      "collector": "manual_import",
+      "temporalRole": "pre_decision",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "discovered",
+      "rawPath": null,
+      "normalizedPath": null,
+      "sha256": null,
+      "capturedAt": null,
+      "failureReason": null
+    },
+    {
+      "id": "source-988d52f913373551",
+      "canonicalUrl": "https://stockanalysis.com/stocks/msft/transcripts/62670-m-a-announcement/",
+      "eventCandidateIds": [
+        "candidate-github-acquisition-2018"
+      ],
+      "tier": 3,
+      "title": "PDF discovery: GitHub acquisition",
+      "publisher": "StockAnalysis",
+      "publishedAt": "2018-06-04",
+      "speaker": null,
+      "sourceType": "transcript_mirror",
+      "collector": "manual_import",
+      "temporalRole": "decision_time",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "discovered",
+      "rawPath": null,
+      "normalizedPath": null,
+      "sha256": null,
+      "capturedAt": null,
+      "failureReason": null
+    },
+    {
+      "id": "source-ff654340bdfcc0b6",
+      "canonicalUrl": "https://www.reuters.com/article/world/microsoft-to-take-on-amazon-with-75-billion-github-deal-idUSKCN1J01N2/",
+      "eventCandidateIds": [
+        "candidate-github-acquisition-2018"
+      ],
+      "tier": 3,
+      "title": "PDF discovery: GitHub acquisition",
+      "publisher": "Reuters",
+      "publishedAt": "2018-06-04",
+      "speaker": null,
+      "sourceType": "news_report",
+      "collector": "manual_import",
+      "temporalRole": "decision_time",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "discovered",
+      "rawPath": null,
+      "normalizedPath": null,
+      "sha256": null,
+      "capturedAt": null,
+      "failureReason": null
+    },
+    {
+      "id": "source-ad9a23176d9cf21d",
+      "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q1",
+      "eventCandidateIds": [
+        "candidate-github-acquisition-2018"
+      ],
+      "tier": 1,
+      "title": "PDF discovery: GitHub acquisition",
+      "publisher": "Microsoft",
+      "publishedAt": "2022-10-25",
+      "speaker": null,
+      "sourceType": "earnings_call",
+      "collector": "microsoft_ir",
+      "temporalRole": "post_outcome",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "review_required",
+      "rawPath": "raw/source-ad9a23176d9cf21d-6a468c0a8a20d8b2f6827d46c111becfa7c4efc28fe83d9e0771a282f0b32eab.json",
+      "normalizedPath": "normalized/source-ad9a23176d9cf21d-6a468c0a8a20d8b2f6827d46c111becfa7c4efc28fe83d9e0771a282f0b32eab.txt",
+      "sha256": "6a468c0a8a20d8b2f6827d46c111becfa7c4efc28fe83d9e0771a282f0b32eab",
+      "capturedAt": "2026-07-15T01:30:52.017Z",
+      "failureReason": null,
+      "finalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q1",
+      "redirectChain": [
+        "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q1"
+      ]
+    },
+    {
+      "id": "source-af06e755c0777f19",
+      "canonicalUrl": "https://stockanalysis.com/stocks/msft/transcripts/12504-m-a-announcement/",
+      "eventCandidateIds": [
+        "candidate-nuance-acquisition-2021"
+      ],
+      "tier": 3,
+      "title": "PDF discovery: Nuance Communications acquisition",
+      "publisher": "StockAnalysis",
+      "publishedAt": "2021-04-12",
+      "speaker": null,
+      "sourceType": "transcript_mirror",
+      "collector": "manual_import",
+      "temporalRole": "decision_time",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "discovered",
+      "rawPath": null,
+      "normalizedPath": null,
+      "sha256": null,
+      "capturedAt": null,
+      "failureReason": null
+    },
+    {
+      "id": "source-ecf72284cb2478a1",
+      "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/1002517/000119312521113805/d100489ddefa14a.htm",
+      "eventCandidateIds": [
+        "candidate-nuance-acquisition-2021"
+      ],
+      "tier": 1,
+      "title": "PDF discovery: Nuance Communications acquisition",
+      "publisher": "Nuance / SEC",
+      "publishedAt": "2021-04-13",
+      "speaker": null,
+      "sourceType": "sec_proxy_statement",
+      "collector": "sec_edgar",
+      "temporalRole": "post_outcome",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "review_required",
+      "rawPath": "raw/source-ecf72284cb2478a1-f751509ace9ffafba2f47592eeccee3540e5b5bae1ac30c8ffd7dd437ba0c6ce.json",
+      "normalizedPath": "normalized/source-ecf72284cb2478a1-f751509ace9ffafba2f47592eeccee3540e5b5bae1ac30c8ffd7dd437ba0c6ce.txt",
+      "sha256": "f751509ace9ffafba2f47592eeccee3540e5b5bae1ac30c8ffd7dd437ba0c6ce",
+      "capturedAt": "2026-07-15T01:30:52.734Z",
+      "failureReason": null,
+      "finalUrl": "https://www.sec.gov/Archives/edgar/data/1002517/000119312521113805/d100489ddefa14a.htm",
+      "redirectChain": [
+        "https://www.sec.gov/Archives/edgar/data/1002517/000119312521113805/d100489ddefa14a.htm"
+      ]
+    },
+    {
+      "id": "source-f7fd232d93262a85",
+      "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/1002517/000119312521112515/d22854dex991.htm",
+      "eventCandidateIds": [
+        "candidate-nuance-acquisition-2021"
+      ],
+      "tier": 1,
+      "title": "PDF discovery: Nuance Communications acquisition",
+      "publisher": "Microsoft / Nuance / SEC",
+      "publishedAt": "2021-04-12",
+      "speaker": null,
+      "sourceType": "sec_press_release",
+      "collector": "sec_edgar",
+      "temporalRole": "decision_time",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "review_required",
+      "rawPath": "raw/source-f7fd232d93262a85-1c8352a1bd10985adb66dbecd038d5752c50c8fd2a1e80ae752aaf97e759f1c8.json",
+      "normalizedPath": "normalized/source-f7fd232d93262a85-1c8352a1bd10985adb66dbecd038d5752c50c8fd2a1e80ae752aaf97e759f1c8.txt",
+      "sha256": "1c8352a1bd10985adb66dbecd038d5752c50c8fd2a1e80ae752aaf97e759f1c8",
+      "capturedAt": "2026-07-15T01:30:53.347Z",
+      "failureReason": null,
+      "finalUrl": "https://www.sec.gov/Archives/edgar/data/1002517/000119312521112515/d22854dex991.htm",
+      "redirectChain": [
+        "https://www.sec.gov/Archives/edgar/data/1002517/000119312521112515/d22854dex991.htm"
+      ]
+    },
+    {
+      "id": "source-05bf417e5848df52",
+      "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/1002517/000100251720000058/nuan0930202010-k.htm",
+      "eventCandidateIds": [
+        "candidate-nuance-acquisition-2021"
+      ],
+      "tier": 1,
+      "title": "PDF discovery: Nuance Communications acquisition",
+      "publisher": "Nuance / SEC",
+      "publishedAt": "2020-11-19",
+      "speaker": null,
+      "sourceType": "annual_report",
+      "collector": "sec_edgar",
+      "temporalRole": "pre_decision",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "review_required",
+      "rawPath": "raw/source-05bf417e5848df52-0b6ec69f2b76cae4bde99f820acadffb76a689ed609077f15fb7a3cb79fc5231.json",
+      "normalizedPath": "normalized/source-05bf417e5848df52-0b6ec69f2b76cae4bde99f820acadffb76a689ed609077f15fb7a3cb79fc5231.txt",
+      "sha256": "0b6ec69f2b76cae4bde99f820acadffb76a689ed609077f15fb7a3cb79fc5231",
+      "capturedAt": "2026-07-15T01:30:54.032Z",
+      "failureReason": null,
+      "finalUrl": "https://www.sec.gov/Archives/edgar/data/1002517/000100251720000058/nuan0930202010-k.htm",
+      "redirectChain": [
+        "https://www.sec.gov/Archives/edgar/data/1002517/000100251720000058/nuan0930202010-k.htm"
+      ]
+    },
+    {
+      "id": "source-6b843b4b8385078d",
+      "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2022/earnings-fy-2022-q3",
+      "eventCandidateIds": [
+        "candidate-nuance-acquisition-2021"
+      ],
+      "tier": 1,
+      "title": "PDF discovery: Nuance Communications acquisition",
+      "publisher": "Microsoft",
+      "publishedAt": "2022-04-26",
+      "speaker": null,
+      "sourceType": "earnings_call",
+      "collector": "microsoft_ir",
+      "temporalRole": "post_outcome",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "review_required",
+      "rawPath": "raw/source-6b843b4b8385078d-caa66d19b6b2afb7dc23d419d0acec031187ab45003c1d9166a2d6d71e82b1c0.json",
+      "normalizedPath": "normalized/source-6b843b4b8385078d-caa66d19b6b2afb7dc23d419d0acec031187ab45003c1d9166a2d6d71e82b1c0.txt",
+      "sha256": "caa66d19b6b2afb7dc23d419d0acec031187ab45003c1d9166a2d6d71e82b1c0",
+      "capturedAt": "2026-07-15T01:30:54.939Z",
+      "failureReason": null,
+      "finalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2022/earnings-fy-2022-q3",
+      "redirectChain": [
+        "https://www.microsoft.com/en-us/investor/events/fy-2022/earnings-fy-2022-q3"
+      ]
+    },
+    {
+      "id": "source-3d87da3c9879cf67",
+      "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/718877/000110465922005069/tm223212d4_defa14a.htm",
+      "eventCandidateIds": [
+        "candidate-activision-acquisition-2022"
+      ],
+      "tier": 1,
+      "title": "PDF discovery: Activision Blizzard acquisition",
+      "publisher": "Microsoft / Activision Blizzard / SEC",
+      "publishedAt": "2022-01-18",
+      "speaker": null,
+      "sourceType": "sec_transcript",
+      "collector": "sec_edgar",
+      "temporalRole": "decision_time",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "review_required",
+      "rawPath": "raw/source-3d87da3c9879cf67-cdd19251a730ad0a18bb3c9ebebc0e7c513fdd90fa69eb5dc942b027e15453a5.json",
+      "normalizedPath": "normalized/source-3d87da3c9879cf67-cdd19251a730ad0a18bb3c9ebebc0e7c513fdd90fa69eb5dc942b027e15453a5.txt",
+      "sha256": "cdd19251a730ad0a18bb3c9ebebc0e7c513fdd90fa69eb5dc942b027e15453a5",
+      "capturedAt": "2026-07-15T01:32:57.140Z",
+      "failureReason": null,
+      "finalUrl": "https://www.sec.gov/Archives/edgar/data/718877/000110465922005069/tm223212d4_defa14a.htm",
+      "redirectChain": [
+        "https://www.sec.gov/Archives/edgar/data/718877/000110465922005069/tm223212d4_defa14a.htm"
+      ]
+    },
+    {
+      "id": "source-0e6095e7d3f6fee7",
+      "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/718877/000110465922036155/tm225196-4_defm14a.htm",
+      "eventCandidateIds": [
+        "candidate-activision-acquisition-2022"
+      ],
+      "tier": 1,
+      "title": "PDF discovery: Activision Blizzard acquisition",
+      "publisher": "Activision Blizzard / SEC",
+      "publishedAt": "2022-03-21",
+      "speaker": null,
+      "sourceType": "sec_proxy_statement",
+      "collector": "sec_edgar",
+      "temporalRole": "post_outcome",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "review_required",
+      "rawPath": "raw/source-0e6095e7d3f6fee7-0df6356dbda4923851bc9a6f44df08052c74e91fef42c0427b920e4302bc21aa.json",
+      "normalizedPath": "normalized/source-0e6095e7d3f6fee7-0df6356dbda4923851bc9a6f44df08052c74e91fef42c0427b920e4302bc21aa.txt",
+      "sha256": "0df6356dbda4923851bc9a6f44df08052c74e91fef42c0427b920e4302bc21aa",
+      "capturedAt": "2026-07-15T01:30:56.432Z",
+      "failureReason": null,
+      "finalUrl": "https://www.sec.gov/Archives/edgar/data/718877/000110465922036155/tm225196-4_defm14a.htm",
+      "redirectChain": [
+        "https://www.sec.gov/Archives/edgar/data/718877/000110465922036155/tm225196-4_defm14a.htm"
+      ]
+    },
+    {
+      "id": "source-c04340714ba9db68",
+      "canonicalUrl": "https://blogs.microsoft.com/blog/2023/10/13/welcoming-the-legendary-teams-at-activision-blizzard-king-to-team-xbox/",
+      "eventCandidateIds": [
+        "candidate-activision-acquisition-2022"
+      ],
+      "tier": 1,
+      "title": "PDF discovery: Activision Blizzard acquisition",
+      "publisher": "Microsoft",
+      "publishedAt": "2023-10-13",
+      "speaker": null,
+      "sourceType": "corporate_blog",
+      "collector": "microsoft_source",
+      "temporalRole": "post_outcome",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "review_required",
+      "rawPath": "raw/source-c04340714ba9db68-f1ddba23833088c56fa1ffa9ac976b7f40afd6af2815e24a87a26ff1cd6d20cc.json",
+      "normalizedPath": "normalized/source-c04340714ba9db68-f1ddba23833088c56fa1ffa9ac976b7f40afd6af2815e24a87a26ff1cd6d20cc.txt",
+      "sha256": "f1ddba23833088c56fa1ffa9ac976b7f40afd6af2815e24a87a26ff1cd6d20cc",
+      "capturedAt": "2026-07-15T01:30:57.882Z",
+      "failureReason": null,
+      "finalUrl": "https://blogs.microsoft.com/blog/2023/10/13/welcoming-the-legendary-teams-at-activision-blizzard-king-to-team-xbox/",
+      "redirectChain": [
+        "https://blogs.microsoft.com/blog/2023/10/13/welcoming-the-legendary-teams-at-activision-blizzard-king-to-team-xbox/"
+      ]
+    },
+    {
+      "id": "source-4f4085f8344669c4",
+      "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2024/earnings-fy-2024-q2",
+      "eventCandidateIds": [
+        "candidate-activision-acquisition-2022"
+      ],
+      "tier": 1,
+      "title": "PDF discovery: Activision Blizzard acquisition",
+      "publisher": "Microsoft",
+      "publishedAt": "2024-01-30",
+      "speaker": null,
+      "sourceType": "earnings_call",
+      "collector": "microsoft_ir",
+      "temporalRole": "post_outcome",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "review_required",
+      "rawPath": "raw/source-4f4085f8344669c4-d06fe83d53580f8fab27147bb36739c83340fe8a3991983f48f102bf2c0b7cee.json",
+      "normalizedPath": "normalized/source-4f4085f8344669c4-d06fe83d53580f8fab27147bb36739c83340fe8a3991983f48f102bf2c0b7cee.txt",
+      "sha256": "d06fe83d53580f8fab27147bb36739c83340fe8a3991983f48f102bf2c0b7cee",
+      "capturedAt": "2026-07-15T01:30:58.962Z",
+      "failureReason": null,
+      "finalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2024/earnings-fy-2024-q2",
+      "redirectChain": [
+        "https://www.microsoft.com/en-us/investor/events/fy-2024/earnings-fy-2024-q2"
+      ]
+    },
+    {
+      "id": "source-2975e2d1a16a35d3",
+      "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/718877/000110465922025210/tm225196-3_prem14a.htm",
+      "eventCandidateIds": [
+        "candidate-activision-acquisition-2022"
+      ],
+      "tier": 1,
+      "title": "PDF discovery: Activision Blizzard acquisition",
+      "publisher": "Activision Blizzard / SEC",
+      "publishedAt": "2022-02-18",
+      "speaker": null,
+      "sourceType": "sec_proxy_statement",
+      "collector": "sec_edgar",
+      "temporalRole": "post_outcome",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "review_required",
+      "rawPath": "raw/source-2975e2d1a16a35d3-2a7e203b56895135808d605d419428bd44474a875e6564eae6e32ed0fd89090b.json",
+      "normalizedPath": "normalized/source-2975e2d1a16a35d3-2a7e203b56895135808d605d419428bd44474a875e6564eae6e32ed0fd89090b.txt",
+      "sha256": "2a7e203b56895135808d605d419428bd44474a875e6564eae6e32ed0fd89090b",
+      "capturedAt": "2026-07-15T01:30:59.498Z",
+      "failureReason": null,
+      "finalUrl": "https://www.sec.gov/Archives/edgar/data/718877/000110465922025210/tm225196-3_prem14a.htm",
+      "redirectChain": [
+        "https://www.sec.gov/Archives/edgar/data/718877/000110465922025210/tm225196-3_prem14a.htm"
+      ]
+    },
+    {
+      "id": "source-f14d371fe2c97c5f-4ff774501d12",
+      "canonicalUrl": "https://news.microsoft.com/speeches/microsoft-and-linkedin-conference-call-chris-suh-satya-nadella-jeff-weiner-amy-hood-brad-smith/",
+      "eventCandidateIds": [
+        "candidate-linkedin-acquisition-2016"
+      ],
+      "tier": 1,
+      "title": "PDF discovery: LinkedIn acquisition",
+      "publisher": "Microsoft",
+      "publishedAt": "2016-06-13",
+      "speaker": null,
+      "sourceType": "official_transcript",
+      "collector": "microsoft_source",
+      "temporalRole": "decision_time",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "review_required",
+      "rawPath": "raw/source-f14d371fe2c97c5f-4ff774501d12-4ff774501d12e5f91c00f073d6a3610e918ad1c3908c6eea23cf63effe4ff005.json",
+      "normalizedPath": "normalized/source-f14d371fe2c97c5f-4ff774501d12-4ff774501d12e5f91c00f073d6a3610e918ad1c3908c6eea23cf63effe4ff005.txt",
+      "sha256": "4ff774501d12e5f91c00f073d6a3610e918ad1c3908c6eea23cf63effe4ff005",
+      "capturedAt": "2026-07-15T01:32:56.647Z",
+      "failureReason": null,
+      "finalUrl": "https://news.microsoft.com/speeches/microsoft-and-linkedin-conference-call-chris-suh-satya-nadella-jeff-weiner-amy-hood-brad-smith/",
+      "redirectChain": [
+        "https://news.microsoft.com/speeches/microsoft-and-linkedin-conference-call-chris-suh-satya-nadella-jeff-weiner-amy-hood-brad-smith/"
+      ]
     }
   ]
 }

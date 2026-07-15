@@ -465,6 +465,18 @@ test('failure: ambiguous Amy grammar never attributes another speaker quote to A
   for (const text of examples) assert.deepEqual(extractSpeakerSegments(text), []);
 });
 
+test('edge: normalized single-line transcripts retain the bounded Amy Hood speaker turn', () => {
+  const text = 'PHIL SPENCER: I will hand it over to Amy. AMY HOOD: Our approach to mergers and acquisitions is to focus on TAM-expansive opportunities. SATYA NADELLA: Thank you, Amy.';
+
+  const segments = extractSpeakerSegments(text);
+
+  assert.equal(segments.length, 1);
+  assert.equal(
+    text.slice(segments[0].startChar, segments[0].endChar),
+    'Our approach to mergers and acquisitions is to focus on TAM-expansive opportunities.',
+  );
+});
+
 test('edge: windows-1252 HTML normalizes punctuation without changing raw bytes', async () => {
   const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-windows-1252-'));
   const utf8 = substantialHtml('Microsoft’s financial discipline remains central.');

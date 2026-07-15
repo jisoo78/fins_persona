@@ -171,7 +171,7 @@ export type EventSourceAssociation = {
   canonicalUrl: string;
   role: 'direct_amy' | 'contemporaneous_context' | 'counterevidence' | 'post_outcome';
   sourceType: string;
-  publishedAt: string;
+  publishedAt: string | null;
   temporalRelation: 'pre_decision' | 'decision_time' | 'post_outcome';
   relevanceClaim: string;
   evidenceLocator: {
@@ -183,7 +183,7 @@ export type EventSourceAssociation = {
       kind: 'named_entity' | 'decision_action' | 'event_specific';
     }>;
     speaker: 'Amy Hood' | null;
-  };
+  } | null;
   reviewStatus: 'unreviewed' | 'reviewed' | 'rejected';
   reviewerNote: string;
 };

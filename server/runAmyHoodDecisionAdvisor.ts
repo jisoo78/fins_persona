@@ -10,6 +10,10 @@ import type {
   EventCandidate,
 } from '../shared/amyHoodDecisionAdvisor';
 import { readAdvisorArtifactSecure } from './decisionAdvisor/artifactStore';
+import {
+  loadPdfUrlInventory,
+  mergePdfUrlInventory,
+} from './decisionAdvisor/pdfUrlInventory';
 import { importReviewedSource, type ReviewedSourceImport } from './decisionAdvisor/manualSourceImporter';
 import {
   collectOfficialSource,
@@ -182,59 +186,71 @@ export const validateEventCandidates = (
         || !['pre_decision', 'decision_time', 'post_outcome'].includes(association.temporalRelation)
         || typeof association.sourceType !== 'string'
         || association.sourceType.trim() === ''
-        || !isIsoDate(association.publishedAt)
+        || !(association.publishedAt === null || isIsoDate(association.publishedAt))
         || typeof association.relevanceClaim !== 'string'
         || association.relevanceClaim.trim().length < 20
-        || !association.evidenceLocator
-        || typeof association.evidenceLocator.exactQuote !== 'string'
-        || association.evidenceLocator.exactQuote.trim().length < 20
-        || typeof association.evidenceLocator.exactRelevancePassage !== 'string'
-        || association.evidenceLocator.exactRelevancePassage.trim().length < 20
-        || association.evidenceLocator.exactRelevancePassage.length > 1_200
-        || !Array.isArray(association.evidenceLocator.anchorTerms)
-        || association.evidenceLocator.anchorTerms.length < 2
-        || association.evidenceLocator.anchorTerms.every((term) => /^amy hood$/i.test(term.trim()))
-        || !Array.isArray(association.evidenceLocator.eventDiscriminators)
-        || association.evidenceLocator.eventDiscriminators.length !== 3
-        || association.evidenceLocator.eventDiscriminators.some(({ value, kind }) =>
-          typeof value !== 'string'
-          || value.trim() === ''
-          || !relevanceDiscriminatorKinds.has(kind))
-        || new Set(association.evidenceLocator.eventDiscriminators.map(({ value }) =>
-          normalizedSearchText(value))).size !== association.evidenceLocator.eventDiscriminators.length
-        || new Set(association.evidenceLocator.eventDiscriminators.map(discriminatorKey)).size !== 3
         || !['unreviewed', 'reviewed', 'rejected'].includes(association.reviewStatus)
         || typeof association.reviewerNote !== 'string'
         || association.reviewerNote.trim().length < 10) {
         throw new Error(`candidate ${candidate.id} has an invalid source association`);
       }
-      const expectedFingerprint = new Set(fingerprintDiscriminators(candidate).map(discriminatorKey));
-      if (association.evidenceLocator.eventDiscriminators.some((item) =>
-        !expectedFingerprint.has(discriminatorKey(item)))) {
-        throw new Error(`candidate ${candidate.id} association discriminators do not match its event fingerprint`);
+      const locator = association.evidenceLocator;
+      if (association.reviewStatus === 'reviewed'
+        && (!isIsoDate(association.publishedAt) || !locator)) {
+        throw new Error(`candidate ${candidate.id} reviewed association requires a date and evidence locator`);
       }
-      const relevancePassage = normalizedSearchText(association.evidenceLocator.exactRelevancePassage);
-      if (!fingerprintDiscriminators(candidate).every(({ value }) =>
-        relevancePassage.includes(normalizedSearchText(value)))) {
-        throw new Error(`candidate ${candidate.id} exact relevance passage does not contain its event fingerprint`);
+      if (locator
+        && (typeof locator.exactQuote !== 'string'
+          || locator.exactQuote.trim().length < 20
+          || typeof locator.exactRelevancePassage !== 'string'
+          || locator.exactRelevancePassage.trim().length < 20
+          || locator.exactRelevancePassage.length > 1_200
+          || !Array.isArray(locator.anchorTerms)
+          || locator.anchorTerms.length < 2
+          || locator.anchorTerms.every((term) => /^amy hood$/i.test(term.trim()))
+          || !Array.isArray(locator.eventDiscriminators)
+          || locator.eventDiscriminators.length !== 3
+          || locator.eventDiscriminators.some(({ value, kind }) =>
+            typeof value !== 'string'
+            || value.trim() === ''
+            || !relevanceDiscriminatorKinds.has(kind))
+          || new Set(locator.eventDiscriminators.map(({ value }) =>
+            normalizedSearchText(value))).size !== locator.eventDiscriminators.length
+          || new Set(locator.eventDiscriminators.map(discriminatorKey)).size !== 3)) {
+        throw new Error(`candidate ${candidate.id} has an invalid source association evidence locator`);
       }
-      if (association.role === 'direct_amy'
-        && !relevancePassage.includes(normalizedSearchText(association.evidenceLocator.exactQuote))) {
-        throw new Error(`candidate ${candidate.id} direct Amy exact quote must be contained by its exact relevance passage`);
+      if (locator) {
+        const expectedFingerprint = new Set(fingerprintDiscriminators(candidate).map(discriminatorKey));
+        if (locator.eventDiscriminators.some((item) =>
+          !expectedFingerprint.has(discriminatorKey(item)))) {
+          throw new Error(`candidate ${candidate.id} association discriminators do not match its event fingerprint`);
+        }
+        const relevancePassage = normalizedSearchText(locator.exactRelevancePassage);
+        if (!fingerprintDiscriminators(candidate).every(({ value }) =>
+          relevancePassage.includes(normalizedSearchText(value)))) {
+          throw new Error(`candidate ${candidate.id} exact relevance passage does not contain its event fingerprint`);
+        }
+        if (association.role === 'direct_amy'
+          && !relevancePassage.includes(normalizedSearchText(locator.exactQuote))) {
+          throw new Error(`candidate ${candidate.id} direct Amy exact quote must be contained by its exact relevance passage`);
+        }
+        if (association.role === 'direct_amy' && locator.speaker !== 'Amy Hood') {
+          throw new Error(`candidate ${candidate.id} direct Amy association requires an exact speaker locator`);
+        }
       }
-      if (association.role === 'direct_amy' && association.evidenceLocator.speaker !== 'Amy Hood') {
-        throw new Error(`candidate ${candidate.id} direct Amy association requires an exact speaker locator`);
-      }
-      if (association.temporalRelation === 'decision_time'
+      if (association.publishedAt !== null
+        && association.temporalRelation === 'decision_time'
         && (association.publishedAt < candidate.decisionWindowStart
           || association.publishedAt > candidate.decisionWindowEnd)) {
         throw new Error(`candidate ${candidate.id} association contradicts its decision window`);
       }
-      if (association.temporalRelation === 'pre_decision'
+      if (association.publishedAt !== null
+        && association.temporalRelation === 'pre_decision'
         && association.publishedAt >= candidate.decisionWindowStart) {
         throw new Error(`candidate ${candidate.id} association contradicts its pre-decision relation`);
       }
-      if (association.temporalRelation === 'post_outcome'
+      if (association.publishedAt !== null
+        && association.temporalRelation === 'post_outcome'
         && association.publishedAt <= candidate.decisionWindowEnd) {
         throw new Error(`candidate ${candidate.id} association contradicts its post-outcome relation`);
       }
@@ -455,6 +471,7 @@ export const checkSourceInventory = async (
     for (const { candidate, association } of associationLinks) {
       if (!source.eventCandidateIds.includes(candidate.id)
         || association.reviewStatus !== 'reviewed'
+        || !association.evidenceLocator
         || association.temporalRelation === 'post_outcome'
         || association.sourceType !== source.sourceType
         || association.publishedAt !== source.publishedAt
@@ -600,6 +617,37 @@ const run = async () => {
     const result = await checkSourceInventory(root, candidates);
     console.log(
       `Source registry valid: ${result.discoveredUrlCount} discovered URLs, ${result.validDocumentCount} valid documents, ${result.postOutcomeUrlCount} post-outcome URLs, ${result.reviewRequiredCount} review required, ${result.failedCount} failed.`,
+    );
+    return;
+  }
+
+  if (command === 'inventory:check') {
+    const inventoryPath = path.resolve(
+      root,
+      optionValue(args, '--file')
+        ?? 'data/b-track/amy-hood/advisor/imports/amy-hood-ma-pdf-url-inventory.json',
+    );
+    const inventory = await loadPdfUrlInventory(inventoryPath);
+    console.log(
+      `PDF URL inventory valid: ${inventory.summary.canonicalUrlCount} canonical URLs, ${inventory.summary.accessibleCount} accessible, ${inventory.summary.blockedByAutomationCount} blocked, ${inventory.summary.unavailableCount} unavailable.`,
+    );
+    return;
+  }
+
+  if (command === 'inventory:merge') {
+    const inventoryPath = path.resolve(
+      root,
+      optionValue(args, '--file')
+        ?? 'data/b-track/amy-hood/advisor/imports/amy-hood-ma-pdf-url-inventory.json',
+    );
+    const inventory = await loadPdfUrlInventory(inventoryPath);
+    const result = await mergePdfUrlInventory(root, inventory, {
+      validateCandidates: (candidates) => {
+        validateEventCandidates(candidates, { enforceDiscoveryRange: false });
+      },
+    });
+    console.log(
+      `PDF URL inventory merged: ${result.inventoryUrlCount} URLs, ${result.addedCandidateAssociations} candidate associations added, ${result.updatedCandidateAssociations} candidate associations updated, ${result.addedRegistrySources} registry sources added, ${result.updatedRegistrySources} registry sources updated, ${result.preservedReviewedAssociations} reviewed associations preserved.`,
     );
     return;
   }

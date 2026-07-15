@@ -145,7 +145,17 @@ export const extractSpeakerSegments = (text: string): EvidenceSpeakerSegment[] =
     const startChar = match.index + relativeStart;
     segments.push({ speaker: 'Amy Hood', startChar, endChar: startChar + spoken.length });
   }
-  return segments.sort((left, right) => left.startChar - right.startChar);
+  const normalizedTranscriptPattern = /\bAMY HOOD:\s*(.{20,}?)(?=\s+[A-Z][A-Z .'-]{2,60}:|$)/gu;
+  for (const match of text.matchAll(normalizedTranscriptPattern)) {
+    const spoken = match[1].trimEnd();
+    const relativeStart = match[0].indexOf(spoken);
+    const startChar = match.index + relativeStart;
+    segments.push({ speaker: 'Amy Hood', startChar, endChar: startChar + spoken.length });
+  }
+  return segments
+    .filter((segment, index, all) => all.findIndex((candidate) =>
+      candidate.startChar === segment.startChar && candidate.endChar === segment.endChar) === index)
+    .sort((left, right) => left.startChar - right.startChar);
 };
 
 export const extractDeclaredCanonicalUrl = (text: string, mediaType: string): string | null => {

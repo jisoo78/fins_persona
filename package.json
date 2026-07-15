@@ -20,6 +20,8 @@
     "advisor:evaluation-v3:test": "tsx --test tests/amyHoodEvaluationV3.test.ts",
     "advisor:candidates:check": "tsx server/runAmyHoodDecisionAdvisor.ts candidates:check",
     "advisor:sources:check": "tsx server/runAmyHoodDecisionAdvisor.ts sources:check",
+    "advisor:inventory:check": "tsx server/runAmyHoodDecisionAdvisor.ts inventory:check",
+    "advisor:inventory:merge": "tsx server/runAmyHoodDecisionAdvisor.ts inventory:merge",
     "advisor:source:collect": "tsx server/runAmyHoodDecisionAdvisor.ts source:collect",
     "advisor:source:import": "tsx server/runAmyHoodDecisionAdvisor.ts source:import",
     "rag:prepare:holdout": "python3 scripts/prepare_holdout_dataset.py",

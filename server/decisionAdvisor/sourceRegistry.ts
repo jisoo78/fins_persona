@@ -239,11 +239,14 @@ export const sourceIdForUrl = (sourceUrl: string): string => {
 const mergedCandidateIds = (first: string[], second: string[]) =>
   [...new Set([...first, ...second])];
 
-export const upsertDiscoveredSource = async (
+const PDF_DISCOVERY_RIGHTS_NOTE =
+  'Public discovery URL; collect and review the original before evidence use.';
+
+const mergeDiscoveredRecord = (
+  registry: AdvisorSourceRegistry,
   candidate: AdvisorSourceRecord,
   root: string,
-): Promise<AdvisorSourceRecord> => withRegistryMutation(root, async () => {
-  const registry = loadRegistry(root);
+) => {
   const canonicalUrl = canonicalizeSourceUrl(candidate.canonicalUrl);
   const exact = registry.sources.find(({ id }) => id === candidate.id);
   const existing = exact?.canonicalUrl === canonicalUrl
@@ -251,19 +254,32 @@ export const upsertDiscoveredSource = async (
     : [...registry.sources].reverse().find((source) => source.canonicalUrl === canonicalUrl);
 
   if (existing) {
-    const merged = {
+    const inventoryOwned = existing.rightsNote === PDF_DISCOVERY_RIGHTS_NOTE
+      && candidate.rightsNote === PDF_DISCOVERY_RIGHTS_NOTE;
+    const merged = validateRecord({
       ...existing,
+      ...(inventoryOwned ? {
+        title: candidate.title,
+        publisher: candidate.publisher,
+        publishedAt: candidate.publishedAt,
+        sourceType: candidate.sourceType,
+        collector: candidate.collector,
+        temporalRole: candidate.temporalRole,
+        tier: candidate.tier,
+        approvedPublicHost: candidate.approvedPublicHost,
+        rightsNote: candidate.rightsNote,
+      } : {}),
       eventCandidateIds: mergedCandidateIds(
         existing.eventCandidateIds,
         candidate.eventCandidateIds,
       ),
-    };
+    }, root);
+    const updated = JSON.stringify(existing) !== JSON.stringify(merged);
     registry.sources[registry.sources.indexOf(existing)] = merged;
-    await saveRegistry(root, registry);
-    return merged;
+    return { source: merged, added: false, updated };
   }
 
-  const discovered: AdvisorSourceRecord = {
+  const discovered = validateRecord({
     ...candidate,
     id: sourceIdForUrl(canonicalUrl),
     canonicalUrl,
@@ -274,11 +290,39 @@ export const upsertDiscoveredSource = async (
     sha256: null,
     capturedAt: null,
     failureReason: null,
-  };
-  registry.sources.push(validateRecord(discovered, root));
+  }, root);
+  registry.sources.push(discovered);
+  return { source: discovered, added: true, updated: false };
+};
+
+export const upsertDiscoveredSource = async (
+  candidate: AdvisorSourceRecord,
+  root: string,
+): Promise<AdvisorSourceRecord> => withRegistryMutation(root, async () => {
+  const registry = loadRegistry(root);
+  const { source } = mergeDiscoveredRecord(registry, candidate, root);
   await saveRegistry(root, registry);
-  return discovered;
+  return source;
 });
+
+export const upsertDiscoveredSources = async (
+  candidates: AdvisorSourceRecord[],
+  root: string,
+): Promise<{ sources: AdvisorSourceRecord[]; addedCount: number; updatedCount: number }> =>
+  withRegistryMutation(root, async () => {
+    const registry = loadRegistry(root);
+    const sources: AdvisorSourceRecord[] = [];
+    let addedCount = 0;
+    let updatedCount = 0;
+    for (const candidate of candidates) {
+      const merged = mergeDiscoveredRecord(registry, candidate, root);
+      sources.push(merged.source);
+      if (merged.added) addedCount += 1;
+      if (merged.updated) updatedCount += 1;
+    }
+    await saveRegistry(root, registry);
+    return { sources, addedCount, updatedCount };
+  });
 
 export const transitionSource = async (
   root: string,
