@@ -14,6 +14,7 @@
  *      approve or corrupt a card.
  */
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { mkdir, mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
@@ -36,6 +37,10 @@ import {
   loadPilotManifest,
   validatePilotManifest,
 } from '../server/decisionAdvisor/pilotManifest';
+import {
+  buildPilotBatch,
+  buildPilotReport,
+} from '../server/decisionAdvisor/pilotReport';
 import type {
   ModelClient,
   ModelInput,
@@ -192,6 +197,50 @@ const eventCardFixture = async () => {
     model: fakeModel(async () => ({ text: JSON.stringify(response), elapsedMs: 1 })),
   };
 };
+
+const reportCard = (
+  target: PilotManifest['targets'][number],
+  status: 'approved' | 'incomplete',
+): PilotDecisionEvent => ({
+  id: `event-${target.candidateId.slice('candidate-'.length)}`,
+  candidateId: target.candidateId,
+  title: target.candidateId,
+  domain: target.domain,
+  decisionDate: '2023-01-01',
+  decisionQuestion: `What should Microsoft do for ${target.candidateId}?`,
+  situation: 'A bounded public-evidence decision situation.',
+  objectives: ['Allocate capital against observed demand.'],
+  conditions: ['Demand evidence is visible.'],
+  constraints: ['Capital and execution capacity are finite.'],
+  options: [{
+    id: 'act',
+    description: 'Act with bounded investment.',
+    expectedBenefit: 'Capture verified demand.',
+    principalRisk: 'Execution risk.',
+    selected: true,
+  }, {
+    id: 'wait',
+    description: 'Wait for more evidence.',
+    expectedBenefit: 'Preserve capital.',
+    principalRisk: 'Lose timing advantage.',
+    selected: false,
+  }],
+  chosenAction: 'Act with bounded investment.',
+  rejectedBenefit: 'Preserve all capital.',
+  observations: ['Demand evidence is visible.'],
+  inferences: ['The action balances growth and proof.'],
+  directAmyEvidenceIds: [],
+  contextEvidenceIds: [],
+  postOutcomeEvidenceIds: [],
+  sourceIds: [],
+  documentFamilyIds: [],
+  evidenceSpans: [],
+  status,
+  gaps: status === 'approved' ? [] : ['missing_direct_amy'],
+  reviewer: status === 'approved' ? 'Codex evidence review' : null,
+  reviewedAt: status === 'approved' ? '2026-07-15T12:00:00.000Z' : null,
+  updatedAt: '2026-07-15T12:00:00.000Z',
+});
 
 test('happy: pilot manifest fixes ten candidates across all five domains', async () => {
   const root = await mkdtemp(path.join(os.tmpdir(), 'amy-pilot-manifest-'));
@@ -396,4 +445,54 @@ test('failure: invalid option selection and failed persistence preserve the prio
     await readFile(eventCardPath(root, proposed.candidateId), 'utf8'),
     before,
   );
+});
+
+test('happy: pilot report summarizes ten cards and all five domains', async () => {
+  const root = await mkdtemp(path.join(os.tmpdir(), 'amy-pilot-report-'));
+  const cards = validManifest.targets.map((target, index) =>
+    reportCard(target, index < 5 ? 'approved' : 'incomplete'));
+
+  const report = await buildPilotReport(root, validManifest, cards);
+
+  assert.deepEqual(report.counts, { approved: 5, incomplete: 5, total: 10 });
+  assert.equal(Object.keys(report.domainCounts).length, 5);
+  assert.equal(report.rows.length, 10);
+  assert.match(
+    await readFile(
+      path.join(root, 'docs/reports/2026-07-15-amy-hood-phase-3-pilot-review.html'),
+      'utf8',
+    ),
+    /비공식 AI 시뮬레이션/,
+  );
+});
+
+test('failure: pilot batch continues after one event build failure', async () => {
+  const failedId = validManifest.targets[2].candidateId;
+  const result = await buildPilotBatch('/tmp/unused-pilot-root', validManifest, {
+    build: async (candidateId) => {
+      if (candidateId === failedId) throw new Error('model unavailable');
+      const target = validManifest.targets.find((item) => item.candidateId === candidateId);
+      assert(target);
+      return reportCard(target, 'incomplete');
+    },
+  });
+
+  assert.equal(result.results.length, 9);
+  assert.deepEqual(result.failures, [{ candidateId: failedId, message: 'model unavailable' }]);
+});
+
+test('failure: event CLI rejects missing IDs and blank reviewers', () => {
+  const runner = path.resolve('server/runAmyHoodDecisionAdvisor.ts');
+  const missingId = spawnSync(process.execPath, [
+    '--import', 'tsx', runner, 'event:approve', '--reviewer', 'Codex evidence review',
+  ], { encoding: 'utf8' });
+  assert.equal(missingId.status, 1);
+  assert.match(missingId.stderr, /event:approve requires --id/);
+
+  const blankReviewer = spawnSync(process.execPath, [
+    '--import', 'tsx', runner, 'event:approve', '--id',
+    'candidate-linkedin-acquisition-2016', '--reviewer', '   ',
+  ], { encoding: 'utf8' });
+  assert.equal(blankReviewer.status, 1);
+  assert.match(blankReviewer.stderr, /event:approve requires a nonblank --reviewer/);
 });

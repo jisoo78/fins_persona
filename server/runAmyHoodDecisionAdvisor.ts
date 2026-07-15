@@ -41,6 +41,19 @@ import {
   importTranscript,
   type TranscriptImport,
 } from './decisionAdvisor/transcriptImporter';
+import {
+  approvePilotEventCard,
+  eventCardPath,
+} from './decisionAdvisor/eventCard';
+import { loadPilotManifest } from './decisionAdvisor/pilotManifest';
+import {
+  buildPilotBatch,
+  buildPilotEvent,
+  buildPilotReport,
+} from './decisionAdvisor/pilotReport';
+import { readJsonFile } from './decisionAdvisor/jsonStore';
+import { createModelClient } from './personaPipeline/modelClient';
+import type { PilotDecisionEvent } from '../shared/amyHoodDecisionAdvisor';
 
 const DECISION_DOMAINS: DecisionDomain[] = [
   'm_and_a',
@@ -832,6 +845,62 @@ const run = async () => {
       },
     ]));
     console.log(JSON.stringify(batch, null, 2));
+    return;
+  }
+
+  if (command === 'event:build') {
+    const candidateId = optionValue(args, '--id');
+    const pilot = args.includes('--pilot');
+    if (Boolean(candidateId) === pilot) {
+      throw new Error('event:build requires exactly one of --id or --pilot');
+    }
+    const model = createModelClient('local');
+    if (candidateId) {
+      const card = await buildPilotEvent(root, candidateId, model, {
+        refreshApproved: args.includes('--refresh-approved'),
+      });
+      console.log(JSON.stringify(card, null, 2));
+      return;
+    }
+    const candidatePath = path.resolve(
+      root,
+      'data/b-track/amy-hood/advisor/event-candidates.json',
+    );
+    const candidates = JSON.parse(readFileSync(candidatePath, 'utf8')) as EventCandidate[];
+    const manifest = await loadPilotManifest(root, candidates);
+    const batch = await buildPilotBatch(root, manifest, {
+      build: (id) => buildPilotEvent(root, id, model),
+    });
+    console.log(JSON.stringify(batch, null, 2));
+    return;
+  }
+
+  if (command === 'event:approve') {
+    const candidateId = optionValue(args, '--id');
+    if (!candidateId) throw new Error('event:approve requires --id');
+    const reviewer = optionValue(args, '--reviewer');
+    if (!reviewer?.trim()) throw new Error('event:approve requires a nonblank --reviewer');
+    const card = await approvePilotEventCard(root, candidateId, {
+      reviewer,
+      reviewedAt: new Date().toISOString(),
+    });
+    console.log(JSON.stringify(card, null, 2));
+    return;
+  }
+
+  if (command === 'event:report') {
+    if (!args.includes('--pilot')) throw new Error('event:report requires --pilot');
+    const candidatePath = path.resolve(
+      root,
+      'data/b-track/amy-hood/advisor/event-candidates.json',
+    );
+    const candidates = JSON.parse(readFileSync(candidatePath, 'utf8')) as EventCandidate[];
+    const manifest = await loadPilotManifest(root, candidates);
+    const cards = (await Promise.all(manifest.targets.map(({ candidateId }) =>
+      readJsonFile<PilotDecisionEvent | null>(eventCardPath(root, candidateId), null))))
+      .filter((card): card is PilotDecisionEvent => card !== null);
+    const report = await buildPilotReport(root, manifest, cards);
+    console.log(JSON.stringify(report, null, 2));
     return;
   }
 
