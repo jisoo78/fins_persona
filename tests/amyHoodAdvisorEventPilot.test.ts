@@ -20,11 +20,24 @@ import path from 'node:path';
 import test from 'node:test';
 
 import {
+  buildEvidenceChunks,
+  extractPilotEvidence,
+  validatePilotEvidenceSpan,
+  type PilotEvidenceExtractionInput,
+} from '../server/decisionAdvisor/evidenceExtractor';
+import {
   loadPilotManifest,
   validatePilotManifest,
 } from '../server/decisionAdvisor/pilotManifest';
 import type {
+  ModelClient,
+  ModelInput,
+  ModelResult,
+} from '../server/personaPipeline/modelClient';
+import type {
+  AdvisorSourceRecord,
   EventCandidate,
+  EventSourceAssociation,
   PilotManifest,
 } from '../shared/amyHoodDecisionAdvisor';
 
@@ -52,6 +65,64 @@ const validManifest: PilotManifest = {
     { candidateId: 'candidate-m365-price-2021', domain: 'pricing_monetization', priority: 9 },
     { candidateId: 'candidate-buyback-2021', domain: 'shareholder_return_risk', priority: 10 },
   ],
+};
+
+const fakeModel = (
+  handler: (input: ModelInput) => Promise<ModelResult>,
+): ModelClient => ({
+  provider: 'local',
+  model: 'fake-gemma-4',
+  cacheKey: 'fake-gemma-4-v1',
+  invoke: handler,
+});
+
+const extractionFixture = async (
+  normalizedText: string,
+  role: 'direct_amy' | 'contemporaneous_context' = 'direct_amy',
+): Promise<PilotEvidenceExtractionInput> => {
+  const candidate = (await loadRealCandidates()).find(
+    ({ id }) => id === 'candidate-linkedin-acquisition-2016',
+  );
+  assert(candidate);
+  const association: EventSourceAssociation = {
+    canonicalUrl: 'https://example.com/amy-event',
+    role,
+    sourceType: role === 'direct_amy' ? 'official_transcript' : 'official_announcement',
+    publishedAt: '2016-06-13',
+    temporalRelation: 'decision_time',
+    relevanceClaim: 'Fixture association for exact decision evidence extraction.',
+    evidenceLocator: null,
+    reviewStatus: 'reviewed',
+    reviewerNote: 'Fixture reviewed for the Phase 3 extraction test.',
+  };
+  const source: AdvisorSourceRecord = {
+    id: 'source-fixture',
+    canonicalUrl: association.canonicalUrl,
+    eventCandidateIds: [candidate.id],
+    tier: 1,
+    title: 'Fixture Amy Hood transcript',
+    publisher: 'Microsoft',
+    publishedAt: association.publishedAt,
+    speaker: role === 'direct_amy' ? 'Amy Hood' : null,
+    sourceType: association.sourceType,
+    collector: 'manual_import',
+    temporalRole: 'decision_time',
+    rightsNote: 'Test fixture.',
+    approvedPublicHost: true,
+    collectionStatus: 'approved',
+    rawPath: 'raw/source-fixture.json',
+    normalizedPath: 'normalized/source-fixture.txt',
+    sha256: 'a'.repeat(64),
+    capturedAt: '2026-07-15T00:00:00.000Z',
+    failureReason: null,
+  };
+  return {
+    root: await mkdtemp(path.join(os.tmpdir(), 'amy-pilot-extract-')),
+    candidate,
+    source,
+    association,
+    normalizedText,
+  };
 };
 
 test('happy: pilot manifest fixes ten candidates across all five domains', async () => {
@@ -92,4 +163,76 @@ test('failure: pilot manifest rejects duplicate, unknown, and domain-mismatched 
     () => validatePilotManifest(mismatch, candidates),
     /pilot domain mismatch/,
   );
+});
+
+test('edge: a short source remains one chunk', () => {
+  const text = 'Amy Hood decision text.';
+  assert.deepEqual(buildEvidenceChunks(text), [{
+    index: 0,
+    startChar: 0,
+    endChar: text.length,
+    text,
+  }]);
+});
+
+test('edge: a boundary-crossing Amy statement is deduplicated into one span', async () => {
+  const quote = 'Amy Hood chose a bounded investment after demand evidence was visible.';
+  const normalizedText = `${'x'.repeat(11_970)}${quote}${'y'.repeat(900)}`;
+  const input = await extractionFixture(normalizedText);
+  const model = fakeModel(async (modelInput) => {
+    const user = typeof modelInput === 'string' ? modelInput : modelInput.user;
+    const marker = 'SOURCE CHUNK:\n';
+    const chunk = user.slice(user.indexOf(marker) + marker.length);
+    const startChar = chunk.indexOf(quote);
+    return {
+      text: JSON.stringify({
+        spans: startChar < 0 ? [] : [{
+          role: 'direct_amy',
+          exactQuote: quote,
+          startChar,
+          endChar: startChar + quote.length,
+          speaker: 'Amy Hood',
+        }],
+      }),
+      elapsedMs: 1,
+    };
+  });
+
+  const result = await extractPilotEvidence(input, model);
+
+  assert.equal(result.spans.length, 1);
+  assert.equal(result.spans[0].startChar, 11_970);
+});
+
+test('failure: an invented quotation fails exact source validation', async () => {
+  const input = await extractionFixture('The exact source sentence.');
+  assert.throws(
+    () => validatePilotEvidenceSpan({
+      id: 'span-1',
+      sourceId: input.source.id,
+      eventCandidateId: input.candidate.id,
+      role: 'direct_amy',
+      exactQuote: 'An invented sentence.',
+      startChar: 0,
+      endChar: 21,
+      publishedAt: '2016-06-13',
+      speaker: 'Amy Hood',
+    }, input),
+    /quote does not match immutable source/,
+  );
+});
+
+test('failure: malformed model output retries once and records an incomplete extraction', async () => {
+  const input = await extractionFixture('Amy Hood discussed the LinkedIn acquisition financing.');
+  let calls = 0;
+  const model = fakeModel(async () => {
+    calls += 1;
+    return { text: 'not-json', elapsedMs: 1 };
+  });
+
+  const result = await extractPilotEvidence(input, model);
+
+  assert.equal(calls, 2);
+  assert.deepEqual(result.spans, []);
+  assert.deepEqual(result.gaps, ['model_response_invalid']);
 });
