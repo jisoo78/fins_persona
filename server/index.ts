@@ -21,6 +21,10 @@ import {
   createEvaluationRouter,
 } from './evaluation/routes';
 import {
+  createEvaluationV3RouteDependencies,
+  createEvaluationV3Router,
+} from './evaluationV3/routes';
+import {
   createPromptVersionRouteDependencies,
   createPromptVersionRouter,
 } from './promptVersions/routes';
@@ -787,6 +791,10 @@ app.options('*', (_, res) => {
 app.use(
   '/api/evaluation',
   createEvaluationRouter(createEvaluationRouteDependencies(process.cwd())),
+);
+app.use(
+  '/api/evaluation/v3',
+  createEvaluationV3Router(createEvaluationV3RouteDependencies(process.cwd())),
 );
 app.use(
   '/api/b-track/amy-hood/prompt-versions',
