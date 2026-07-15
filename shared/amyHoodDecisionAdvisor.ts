@@ -256,7 +256,35 @@ export type EvidenceSpeakerSegment = {
   endChar: number;
 };
 
-export type PilotEvidenceRole = 'direct_amy' | 'decision_context' | 'post_outcome';
+export type PilotEvidenceRole =
+  | 'direct_amy'
+  | 'amy_policy'
+  | 'decision_context'
+  | 'post_outcome';
+
+export type PilotPolicyTag =
+  | 'value_based_pricing'
+  | 'capital_allocation_return'
+  | 'investment_consistency'
+  | 'cost_revenue_alignment'
+  | 'resource_reallocation'
+  | 'platform_shift_commitment'
+  | 'risk_and_optionality';
+
+export type PilotPolicyEvidenceRecord = {
+  id: string;
+  candidateId: string;
+  sourceId: string;
+  exactQuote: string;
+  startChar: number;
+  endChar: number;
+  publishedAt: string;
+  speaker: 'Amy Hood';
+  policyTags: PilotPolicyTag[];
+  eventLinkRationale: string;
+  reviewer: string;
+  reviewedAt: string;
+};
 
 export type PilotEvidenceSpan = {
   id: string;

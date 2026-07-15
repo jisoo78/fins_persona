@@ -6,7 +6,7 @@
  * 2. Edge Cases:
  *    - a short source remains one chunk.
  *    - a boundary-crossing Amy statement is deduplicated into one span.
- *    - one context document family remains reviewable with a diversity gap.
+ *    - source-level Amy identity is accepted when speaker segments are absent.
  *
  * 3. Failure Path:
  *    - invalid manifests, malformed model JSON, invented quotes, missing direct
@@ -38,6 +38,9 @@ import {
   validatePilotManifest,
 } from '../server/decisionAdvisor/pilotManifest';
 import {
+  validatePilotPolicyEvidenceRecord,
+} from '../server/decisionAdvisor/pilotPolicyEvidence';
+import {
   buildPilotBatch,
   buildPilotReport,
   retainedExtractionGaps,
@@ -55,6 +58,7 @@ import type {
   PilotDecisionEvent,
   PilotEvidenceSpan,
   PilotManifest,
+  PilotPolicyEvidenceRecord,
 } from '../shared/amyHoodDecisionAdvisor';
 
 const candidatePath = new URL(
@@ -245,6 +249,62 @@ const reportCard = (
   updatedAt: '2026-07-15T12:00:00.000Z',
 });
 
+const policyEvidenceFixture = async () => {
+  const candidate = (await loadRealCandidates()).find(
+    ({ id }) => id === 'candidate-copilot-price-2023',
+  );
+  assert(candidate);
+  const quote = 'When we believe we are adding a lot of value, you can expect that we will have a list price for those copilots.';
+  const normalizedText = `Question. AMY HOOD: ${quote} Next question.`;
+  const startChar = normalizedText.indexOf(quote);
+  const source: AdvisorSourceRecord = {
+    id: 'source-policy-fixture',
+    canonicalUrl: 'https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3',
+    eventCandidateIds: [candidate.id],
+    tier: 1,
+    title: 'Microsoft FY23 Q3 earnings call',
+    publisher: 'Microsoft Investor Relations',
+    publishedAt: '2023-04-25',
+    speaker: null,
+    sourceType: 'official_transcript',
+    collector: 'microsoft_ir',
+    temporalRole: 'pre_decision',
+    rightsNote: 'Official public transcript fixture.',
+    approvedPublicHost: true,
+    collectionStatus: 'approved',
+    rawPath: 'raw/source-policy-fixture.json',
+    normalizedPath: 'normalized/source-policy-fixture.txt',
+    sha256: 'b'.repeat(64),
+    capturedAt: '2026-07-15T00:00:00.000Z',
+    failureReason: null,
+  };
+  const record: PilotPolicyEvidenceRecord = {
+    id: 'policy-copilot-value-pricing-2023',
+    candidateId: candidate.id,
+    sourceId: source.id,
+    exactQuote: quote,
+    startChar,
+    endChar: startChar + quote.length,
+    publishedAt: '2023-04-25',
+    speaker: 'Amy Hood',
+    policyTags: ['value_based_pricing'],
+    eventLinkRationale: 'This pre-decision statement defines the value-based list-price rule later applied to commercial Copilot pricing.',
+    reviewer: 'Codex evidence review',
+    reviewedAt: '2026-07-15T12:00:00.000Z',
+  };
+  return {
+    candidate,
+    source,
+    record,
+    normalizedText,
+    speakerSegments: [{
+      speaker: 'Amy Hood',
+      startChar: normalizedText.indexOf('AMY HOOD:'),
+      endChar: normalizedText.length,
+    }],
+  };
+};
+
 test('happy: pilot manifest fixes ten candidates across all five domains', async () => {
   const root = await mkdtemp(path.join(os.tmpdir(), 'amy-pilot-manifest-'));
   const candidates = await loadRealCandidates();
@@ -293,6 +353,73 @@ test('edge: a short source remains one chunk', () => {
     endChar: text.length,
     text,
   }]);
+});
+
+test('happy: reviewed pre-decision Amy policy evidence validates as a distinct role', async () => {
+  const fixture = await policyEvidenceFixture();
+
+  const span = validatePilotPolicyEvidenceRecord(fixture.record, fixture);
+
+  assert.equal(span.role, 'amy_policy');
+  assert.equal(span.speaker, 'Amy Hood');
+  assert.equal(span.exactQuote, fixture.record.exactQuote);
+});
+
+test('edge: source-level Amy identity accepts policy evidence without speaker segments', async () => {
+  const fixture = await policyEvidenceFixture();
+  const source = { ...fixture.source, speaker: 'Amy Hood' };
+
+  const span = validatePilotPolicyEvidenceRecord(fixture.record, {
+    ...fixture,
+    source,
+    speakerSegments: [],
+  });
+
+  assert.equal(span.role, 'amy_policy');
+});
+
+test('failure: policy evidence rejects temporal, quote, tag, and speaker violations', async () => {
+  const fixture = await policyEvidenceFixture();
+
+  assert.throws(
+    () => validatePilotPolicyEvidenceRecord({
+      ...fixture.record,
+      publishedAt: fixture.candidate.decisionWindowStart,
+    }, {
+      ...fixture,
+      source: {
+        ...fixture.source,
+        publishedAt: fixture.candidate.decisionWindowStart,
+      },
+    }),
+    /must predate the decision window/,
+  );
+  assert.throws(
+    () => validatePilotPolicyEvidenceRecord({
+      ...fixture.record,
+      startChar: fixture.record.startChar + 1,
+      endChar: fixture.record.endChar + 1,
+    }, fixture),
+    /quote does not match immutable source/,
+  );
+  assert.throws(
+    () => validatePilotPolicyEvidenceRecord({
+      ...fixture.record,
+      policyTags: ['unknown_policy_tag' as never],
+    }, fixture),
+    /invalid policy tag/,
+  );
+  assert.throws(
+    () => validatePilotPolicyEvidenceRecord(fixture.record, {
+      ...fixture,
+      speakerSegments: [{
+        speaker: 'Satya Nadella',
+        startChar: 0,
+        endChar: fixture.normalizedText.length,
+      }],
+    }),
+    /Amy Hood speaker boundary/,
+  );
 });
 
 test('edge: a boundary-crossing Amy statement is deduplicated into one span', async () => {
@@ -428,7 +555,7 @@ test('happy: a validator-ready proposal becomes approved only after explicit rev
   assert.equal(approved.reviewer, 'Codex evidence review');
 });
 
-test('edge: one document family remains reviewable with a diversity gap', async () => {
+test('happy: one document family remains reviewable with a diversity advisory', async () => {
   const { candidate, spans, model } = await eventCardFixture();
   const proposed = await proposePilotEventCard(candidate, spans, model, {
     documentFamilyIds: ['linkedin-transaction-2016'],

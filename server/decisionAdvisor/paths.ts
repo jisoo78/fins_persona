@@ -9,6 +9,7 @@ export const advisorPaths = (root: string) => {
     raw: path.resolve(advisorRoot, 'raw'),
     eventsPilot: path.resolve(advisorRoot, 'events/pilot'),
     pilotManifest: path.resolve(advisorRoot, 'events/pilot/pilot-manifest.json'),
+    pilotPolicyEvidence: path.resolve(advisorRoot, 'events/pilot/policy-evidence.json'),
     pilotExtractionRuns: path.resolve(advisorRoot, 'events/pilot/extraction-runs'),
   };
 };
