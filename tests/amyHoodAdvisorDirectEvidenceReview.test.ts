@@ -13,6 +13,7 @@
  *      aliases, overlapping offsets, and malformed manifests fail before writes.
  */
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import os from 'node:os';
@@ -33,7 +34,7 @@ import type { AdvisorRawSource, AdvisorSourceRecord, EventCandidate } from '../s
 const canonicalUrl = 'https://news.microsoft.com/speeches/example-transaction-call/';
 const candidateId = 'candidate-example-acquisition-2020';
 
-const fixture = async (canonicalWording = false) => {
+const fixture = async (canonicalWording = false, fullCandidateMatrix = false) => {
   const root = await mkdtemp(path.join(os.tmpdir(), 'advisor-direct-review-'));
   const prefix = 'Transaction call introduction and participant information. ';
   const action = canonicalWording ? 'will acquire' : 'agreed to acquire';
@@ -169,11 +170,78 @@ const fixture = async (canonicalWording = false) => {
   await mkdir(path.join(paths.root, 'raw'), { recursive: true });
   await mkdir(path.join(paths.root, 'normalized'), { recursive: true });
   await writeFile(paths.registry, `${JSON.stringify({ sources: [source] }, null, 2)}\n`);
-  await writeFile(path.join(paths.root, 'event-candidates.json'), `${JSON.stringify([candidate], null, 2)}\n`);
+  const candidates = [candidate];
+  if (fullCandidateMatrix) {
+    const domains = [
+      'm_and_a',
+      'ai_cloud_capex',
+      'pricing_monetization',
+      'cost_efficiency',
+      'shareholder_return_risk',
+    ] as const;
+    for (let index = 1; index < 30; index += 1) {
+      const number = index + 1;
+      const url = `https://news.microsoft.com/source/2020/01/02/project-falcon-${number}/`;
+      candidates.push({
+        ...structuredClone(candidate),
+        id: `candidate-extra-${number}`,
+        workingTitle: `Project Falcon ${number} acquisition decision`,
+        domain: domains[index % domains.length],
+        discoveryUrls: [url],
+        decisionWindowBasis: {
+          summary: `The Project Falcon ${number} announcement defines the public decision date.`,
+          sourceUrls: [url],
+          reviewerNote: 'Reviewed against the dated official transaction announcement.',
+        },
+        eventFingerprint: {
+          primaryEntity: `Project Falcon ${number}`,
+          decisionAction: 'will acquire',
+          eventSpecificIdentifier: `Falcon-${number} transaction`,
+          sourceUrls: [url],
+          reviewStatus: 'reviewed',
+          reviewerNote: 'Reviewed against the official transaction announcement.',
+        },
+        sourceAssociations: [{
+          canonicalUrl: url,
+          role: 'contemporaneous_context',
+          sourceType: 'official_announcement',
+          publishedAt: '2020-01-02',
+          temporalRelation: 'decision_time',
+          relevanceClaim: `The source identifies Project Falcon ${number}, will acquire, and Falcon-${number} transaction.`,
+          evidenceLocator: {
+            exactQuote: `Project Falcon ${number} will acquire under the Falcon-${number} transaction authorization.`,
+            exactRelevancePassage: `Project Falcon ${number} will acquire under the Falcon-${number} transaction authorization.`,
+            anchorTerms: [`Project Falcon ${number}`, `Falcon-${number} transaction`],
+            eventDiscriminators: [
+              { kind: 'named_entity', value: `Project Falcon ${number}` },
+              { kind: 'decision_action', value: 'will acquire' },
+              { kind: 'event_specific', value: `Falcon-${number} transaction` },
+            ],
+            speaker: null,
+          },
+          reviewStatus: 'reviewed',
+          reviewerNote: 'Reviewer verified the exact event passage in the official source.',
+        }],
+        directEvidenceGap: {
+          reviewStatus: 'reviewed',
+          reason: 'No event-specific Amy Hood passage has been collected for this fixture candidate.',
+          reviewerNote: 'The candidate remains blocked pending direct evidence review.',
+        },
+        phase3Status: 'evidence_gap',
+      });
+    }
+  }
+  await writeFile(path.join(paths.root, 'event-candidates.json'), `${JSON.stringify(candidates, null, 2)}\n`);
   await writeFile(path.join(paths.root, rawPath), `${JSON.stringify(raw, null, 2)}\n`);
   await writeFile(path.join(paths.root, normalizedPath), normalized);
   return { root, manifest, rawPath, normalizedPath };
 };
+
+const runAdvisorCli = (root: string, ...args: string[]) => spawnSync(
+  process.execPath,
+  ['--import', 'tsx', 'server/runAmyHoodDecisionAdvisor.ts', ...args, '--root', root],
+  { cwd: path.resolve(import.meta.dirname, '..'), encoding: 'utf8' },
+);
 
 test('happy: exact bounded Amy Hood evidence verifies against immutable artifacts', async () => {
   const item = await fixture();
@@ -393,4 +461,30 @@ test('failure: a different review ID cannot overwrite an applied decision', asyn
   } finally {
     await rm(item.root, { recursive: true, force: true });
   }
+});
+
+test('happy: evidence check and apply CLI report valid, applied, then unchanged', async () => {
+  const item = await fixture(false, true);
+  try {
+    const manifestPath = path.join(item.root, 'review.json');
+    await writeFile(manifestPath, `${JSON.stringify(item.manifest, null, 2)}\n`);
+
+    const checked = runAdvisorCli(item.root, 'evidence:check', '--file', manifestPath);
+    assert.equal(checked.status, 0, checked.stderr);
+    assert.match(checked.stdout, /review valid/i);
+    const applied = runAdvisorCli(item.root, 'evidence:apply', '--file', manifestPath);
+    assert.equal(applied.status, 0, applied.stderr);
+    assert.match(applied.stdout, /applied/i);
+    const unchanged = runAdvisorCli(item.root, 'evidence:apply', '--file', manifestPath);
+    assert.equal(unchanged.status, 0, unchanged.stderr);
+    assert.match(unchanged.stdout, /unchanged/i);
+  } finally {
+    await rm(item.root, { recursive: true, force: true });
+  }
+});
+
+test('failure: evidence CLI requires an explicit manifest file', () => {
+  const result = runAdvisorCli(process.cwd(), 'evidence:check');
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /requires --file/i);
 });

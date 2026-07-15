@@ -1,0 +1,66 @@
+{
+  "reviewId": "review-linkedin-direct-2026-07-15-v1",
+  "reviewer": "Codex evidence review",
+  "reviewedAt": "2026-07-15T12:00:00.000Z",
+  "decision": "approved_direct",
+  "sourceId": "source-f14d371fe2c97c5f-4ff774501d12",
+  "canonicalUrl": "https://news.microsoft.com/speeches/microsoft-and-linkedin-conference-call-chris-suh-satya-nadella-jeff-weiner-amy-hood-brad-smith/",
+  "rawPath": "raw/source-f14d371fe2c97c5f-4ff774501d12-4ff774501d12e5f91c00f073d6a3610e918ad1c3908c6eea23cf63effe4ff005.json",
+  "normalizedPath": "normalized/source-f14d371fe2c97c5f-4ff774501d12-4ff774501d12e5f91c00f073d6a3610e918ad1c3908c6eea23cf63effe4ff005.txt",
+  "sha256": "4ff774501d12e5f91c00f073d6a3610e918ad1c3908c6eea23cf63effe4ff005",
+  "candidateId": "candidate-linkedin-acquisition-2016",
+  "temporalRelation": "decision_time",
+  "speaker": "Amy Hood",
+  "speakerSegmentStart": 20122,
+  "speakerSegmentEnd": 23466,
+  "quoteStart": 21193,
+  "quoteEnd": 21625,
+  "passageStart": 20473,
+  "passageEnd": 21625,
+  "exactQuote": "We will finance this transaction primarily through new debt issued prior to close, which we intend to raise opportunistically during favorable market windows. Our primary objective with the combination is to accelerate our top line growth across LinkedIn’s core business as well as Office 365 and Dynamics. Additionally, we expect at least $150 million annually in cost synergies as we naturally combine two public company entities.",
+  "exactRelevancePassage": "Under the terms of the definitive agreement, we’ve agreed to acquire LinkedIn for $196 per share in an all-cash transaction that is approximately $26 billion inclusive of LinkedIn’s net cash. The transaction has been unanimously approved by the boards of directors of both Microsoft and LinkedIn. And Reid Hoffman, the chairman, co-founder, and controlling shareholder of LinkedIn, has stated he will vote all his shares in accordance with their board’s recommendation. We expect the transaction to close by the end of the calendar year during the second quarter of our Fiscal ’17 subject to approval by LinkedIn shareholders, and the satisfaction of certain regulatory approvals and other customary closing conditions. We will finance this transaction primarily through new debt issued prior to close, which we intend to raise opportunistically during favorable market windows. Our primary objective with the combination is to accelerate our top line growth across LinkedIn’s core business as well as Office 365 and Dynamics. Additionally, we expect at least $150 million annually in cost synergies as we naturally combine two public company entities.",
+  "anchorTerms": [
+    "LinkedIn",
+    "$26 billion",
+    "new debt",
+    "$150 million"
+  ],
+  "eventDiscriminators": [
+    {
+      "kind": "named_entity",
+      "value": "LinkedIn"
+    },
+    {
+      "kind": "decision_action",
+      "value": "agreed to acquire"
+    },
+    {
+      "kind": "event_specific",
+      "value": "$26 billion"
+    }
+  ],
+  "aliases": [
+    {
+      "kind": "decision_action",
+      "canonicalValue": "will acquire",
+      "value": "agreed to acquire",
+      "sourceUrl": "https://news.microsoft.com/speeches/microsoft-and-linkedin-conference-call-chris-suh-satya-nadella-jeff-weiner-amy-hood-brad-smith/",
+      "reviewStatus": "reviewed",
+      "reviewerNote": "Amy Hood used source-authentic completed-agreement wording for the same acquisition action."
+    },
+    {
+      "kind": "event_specific",
+      "canonicalValue": "$26.2 billion",
+      "value": "$26 billion",
+      "sourceUrl": "https://news.microsoft.com/speeches/microsoft-and-linkedin-conference-call-chris-suh-satya-nadella-jeff-weiner-amy-hood-brad-smith/",
+      "reviewStatus": "reviewed",
+      "reviewerNote": "Amy Hood rounded the announced transaction value while identifying the same LinkedIn transaction."
+    }
+  ],
+  "financialSignals": [
+    "opportunistic debt financing",
+    "top-line growth across LinkedIn, Office 365, and Dynamics",
+    "at least $150 million annual cost synergies"
+  ],
+  "reviewerRationale": "The bounded Amy Hood turn identifies the LinkedIn transaction and explains financing timing, growth objectives, and quantified cost synergies using only decision-time information."
+}

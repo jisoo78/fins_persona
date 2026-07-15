@@ -22,6 +22,8 @@
     "advisor:sources:check": "tsx server/runAmyHoodDecisionAdvisor.ts sources:check",
     "advisor:inventory:check": "tsx server/runAmyHoodDecisionAdvisor.ts inventory:check",
     "advisor:inventory:merge": "tsx server/runAmyHoodDecisionAdvisor.ts inventory:merge",
+    "advisor:evidence:check": "tsx server/runAmyHoodDecisionAdvisor.ts evidence:check",
+    "advisor:evidence:apply": "tsx server/runAmyHoodDecisionAdvisor.ts evidence:apply",
     "advisor:source:collect": "tsx server/runAmyHoodDecisionAdvisor.ts source:collect",
     "advisor:source:import": "tsx server/runAmyHoodDecisionAdvisor.ts source:import",
     "rag:prepare:holdout": "python3 scripts/prepare_holdout_dataset.py",

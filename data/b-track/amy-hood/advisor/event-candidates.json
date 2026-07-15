@@ -307,10 +307,34 @@
         "sourceType": "official_transcript",
         "publishedAt": "2016-06-13",
         "temporalRelation": "decision_time",
-        "relevanceClaim": "Discovery metadata from PDF pages [5, 6]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
-        "evidenceLocator": null,
-        "reviewStatus": "unreviewed",
-        "reviewerNote": "review_required: Discovery metadata from PDF pages [5, 6]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+        "relevanceClaim": "The bounded Amy Hood turn identifies the LinkedIn transaction and explains financing timing, growth objectives, and quantified cost synergies using only decision-time information.",
+        "evidenceLocator": {
+          "exactQuote": "We will finance this transaction primarily through new debt issued prior to close, which we intend to raise opportunistically during favorable market windows. Our primary objective with the combination is to accelerate our top line growth across LinkedIn’s core business as well as Office 365 and Dynamics. Additionally, we expect at least $150 million annually in cost synergies as we naturally combine two public company entities.",
+          "exactRelevancePassage": "Under the terms of the definitive agreement, we’ve agreed to acquire LinkedIn for $196 per share in an all-cash transaction that is approximately $26 billion inclusive of LinkedIn’s net cash. The transaction has been unanimously approved by the boards of directors of both Microsoft and LinkedIn. And Reid Hoffman, the chairman, co-founder, and controlling shareholder of LinkedIn, has stated he will vote all his shares in accordance with their board’s recommendation. We expect the transaction to close by the end of the calendar year during the second quarter of our Fiscal ’17 subject to approval by LinkedIn shareholders, and the satisfaction of certain regulatory approvals and other customary closing conditions. We will finance this transaction primarily through new debt issued prior to close, which we intend to raise opportunistically during favorable market windows. Our primary objective with the combination is to accelerate our top line growth across LinkedIn’s core business as well as Office 365 and Dynamics. Additionally, we expect at least $150 million annually in cost synergies as we naturally combine two public company entities.",
+          "anchorTerms": [
+            "LinkedIn",
+            "$26 billion",
+            "new debt",
+            "$150 million"
+          ],
+          "eventDiscriminators": [
+            {
+              "kind": "named_entity",
+              "value": "LinkedIn"
+            },
+            {
+              "kind": "decision_action",
+              "value": "agreed to acquire"
+            },
+            {
+              "kind": "event_specific",
+              "value": "$26 billion"
+            }
+          ],
+          "speaker": "Amy Hood"
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "review:review-linkedin-direct-2026-07-15-v1 The bounded Amy Hood turn identifies the LinkedIn transaction and explains financing timing, growth objectives, and quantified cost synergies using only decision-time information."
       },
       {
         "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/1271024/000110465916130837/a16-14187_1prem14a.htm",
@@ -346,12 +370,8 @@
         "reviewerNote": "unreviewed: Discovery metadata from PDF pages [7]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
       }
     ],
-    "directEvidenceGap": {
-      "reviewStatus": "reviewed",
-      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
-      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
-    },
-    "phase3Status": "evidence_gap",
+    "directEvidenceGap": null,
+    "phase3Status": "eligible",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection",
     "eventFingerprint": {
@@ -362,7 +382,25 @@
         "https://news.microsoft.com/source/2016/06/13/microsoft-to-acquire-linkedin/"
       ],
       "reviewStatus": "reviewed",
-      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source.",
+      "aliases": [
+        {
+          "kind": "decision_action",
+          "canonicalValue": "will acquire",
+          "value": "agreed to acquire",
+          "sourceUrl": "https://news.microsoft.com/speeches/microsoft-and-linkedin-conference-call-chris-suh-satya-nadella-jeff-weiner-amy-hood-brad-smith/",
+          "reviewStatus": "reviewed",
+          "reviewerNote": "Amy Hood used source-authentic completed-agreement wording for the same acquisition action."
+        },
+        {
+          "kind": "event_specific",
+          "canonicalValue": "$26.2 billion",
+          "value": "$26 billion",
+          "sourceUrl": "https://news.microsoft.com/speeches/microsoft-and-linkedin-conference-call-chris-suh-satya-nadella-jeff-weiner-amy-hood-brad-smith/",
+          "reviewStatus": "reviewed",
+          "reviewerNote": "Amy Hood rounded the announced transaction value while identifying the same LinkedIn transaction."
+        }
+      ]
     }
   },
   {
@@ -674,10 +712,34 @@
         "sourceType": "sec_transcript",
         "publishedAt": "2022-01-18",
         "temporalRelation": "decision_time",
-        "relevanceClaim": "Discovery metadata from PDF pages [12]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
-        "evidenceLocator": null,
-        "reviewStatus": "unreviewed",
-        "reviewerNote": "review_required: Discovery metadata from PDF pages [12]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+        "relevanceClaim": "The bounded Amy Hood turn identifies the Activision Blizzard transaction, price, growth mechanisms, monetization outcomes, and expected EPS accretion using decision-time information.",
+        "evidenceLocator": {
+          "exactQuote": "Key measures of our success include accelerated revenue growth from Activision Blizzard’s game portfolio as we extend content to more devices, resulting in increased engagement and monetization across the Xbox platform, as well as additional growth in Game Pass subscribers as we attract new players wherever they play and continue to build one of the most compelling and diverse lineups of triple-A content available.",
+          "exactRelevancePassage": "Key measures of our success include accelerated revenue growth from Activision Blizzard’s game portfolio as we extend content to more devices, resulting in increased engagement and monetization across the Xbox platform, as well as additional growth in Game Pass subscribers as we attract new players wherever they play and continue to build one of the most compelling and diverse lineups of triple-A content available. Now, let’s turn to the transaction details. We’ve agreed to acquire Activision Blizzard for $95 per share in an all-cash transaction valued at $68.7 billion, inclusive of Activision Blizzard’s net cash. The acquisition will not impact our previously announced share buy-back program. The transaction has been approved by the board of directors of both Microsoft and Activision Blizzard. The transaction is expected to close in fiscal year 2023 and is subject to approval by Activision Blizzard shareholders and the satisfaction of certain regulatory approvals and other customary closing conditions. On a non-gap basis, we anticipate the transaction will be accretive to EPS upon close.",
+          "anchorTerms": [
+            "Activision Blizzard",
+            "$68.7 billion",
+            "revenue growth",
+            "accretive to EPS"
+          ],
+          "eventDiscriminators": [
+            {
+              "kind": "named_entity",
+              "value": "Activision Blizzard"
+            },
+            {
+              "kind": "decision_action",
+              "value": "agreed to acquire"
+            },
+            {
+              "kind": "event_specific",
+              "value": "$68.7 billion"
+            }
+          ],
+          "speaker": "Amy Hood"
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "review:review-activision-direct-2026-07-15-v1 The bounded Amy Hood turn identifies the Activision Blizzard transaction, price, growth mechanisms, monetization outcomes, and expected EPS accretion using decision-time information."
       },
       {
         "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/718877/000110465922036155/tm225196-4_defm14a.htm",
@@ -724,12 +786,8 @@
         "reviewerNote": "unreviewed: Discovery metadata from PDF pages [13]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
       }
     ],
-    "directEvidenceGap": {
-      "reviewStatus": "reviewed",
-      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
-      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
-    },
-    "phase3Status": "evidence_gap",
+    "directEvidenceGap": null,
+    "phase3Status": "eligible",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection",
     "eventFingerprint": {
@@ -740,7 +798,17 @@
         "https://news.microsoft.com/source/2022/01/18/microsoft-to-acquire-activision-blizzard-to-bring-the-joy-and-community-of-gaming-to-everyone-across-every-device/"
       ],
       "reviewStatus": "reviewed",
-      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source.",
+      "aliases": [
+        {
+          "kind": "decision_action",
+          "canonicalValue": "will acquire",
+          "value": "agreed to acquire",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/718877/000110465922005069/tm223212d4_defa14a.htm",
+          "reviewStatus": "reviewed",
+          "reviewerNote": "Amy Hood used source-authentic completed-agreement wording for the same acquisition action."
+        }
+      ]
     }
   },
   {

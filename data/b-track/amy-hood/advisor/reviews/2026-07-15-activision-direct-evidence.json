@@ -1,0 +1,59 @@
+{
+  "reviewId": "review-activision-direct-2026-07-15-v1",
+  "reviewer": "Codex evidence review",
+  "reviewedAt": "2026-07-15T12:05:00.000Z",
+  "decision": "approved_direct",
+  "sourceId": "source-3d87da3c9879cf67",
+  "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/718877/000110465922005069/tm223212d4_defa14a.htm",
+  "rawPath": "raw/source-3d87da3c9879cf67-cdd19251a730ad0a18bb3c9ebebc0e7c513fdd90fa69eb5dc942b027e15453a5.json",
+  "normalizedPath": "normalized/source-3d87da3c9879cf67-cdd19251a730ad0a18bb3c9ebebc0e7c513fdd90fa69eb5dc942b027e15453a5.txt",
+  "sha256": "cdd19251a730ad0a18bb3c9ebebc0e7c513fdd90fa69eb5dc942b027e15453a5",
+  "candidateId": "candidate-activision-acquisition-2022",
+  "temporalRelation": "decision_time",
+  "speaker": "Amy Hood",
+  "speakerSegmentStart": 19618,
+  "speakerSegmentEnd": 22270,
+  "quoteStart": 20294,
+  "quoteEnd": 20712,
+  "passageStart": 20294,
+  "passageEnd": 21399,
+  "exactQuote": "Key measures of our success include accelerated revenue growth from Activision Blizzard’s game portfolio as we extend content to more devices, resulting in increased engagement and monetization across the Xbox platform, as well as additional growth in Game Pass subscribers as we attract new players wherever they play and continue to build one of the most compelling and diverse lineups of triple-A content available.",
+  "exactRelevancePassage": "Key measures of our success include accelerated revenue growth from Activision Blizzard’s game portfolio as we extend content to more devices, resulting in increased engagement and monetization across the Xbox platform, as well as additional growth in Game Pass subscribers as we attract new players wherever they play and continue to build one of the most compelling and diverse lineups of triple-A content available. Now, let’s turn to the transaction details. We’ve agreed to acquire Activision Blizzard for $95 per share in an all-cash transaction valued at $68.7 billion, inclusive of Activision Blizzard’s net cash. The acquisition will not impact our previously announced share buy-back program. The transaction has been approved by the board of directors of both Microsoft and Activision Blizzard. The transaction is expected to close in fiscal year 2023 and is subject to approval by Activision Blizzard shareholders and the satisfaction of certain regulatory approvals and other customary closing conditions. On a non-gap basis, we anticipate the transaction will be accretive to EPS upon close.",
+  "anchorTerms": [
+    "Activision Blizzard",
+    "$68.7 billion",
+    "revenue growth",
+    "accretive to EPS"
+  ],
+  "eventDiscriminators": [
+    {
+      "kind": "named_entity",
+      "value": "Activision Blizzard"
+    },
+    {
+      "kind": "decision_action",
+      "value": "agreed to acquire"
+    },
+    {
+      "kind": "event_specific",
+      "value": "$68.7 billion"
+    }
+  ],
+  "aliases": [
+    {
+      "kind": "decision_action",
+      "canonicalValue": "will acquire",
+      "value": "agreed to acquire",
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/718877/000110465922005069/tm223212d4_defa14a.htm",
+      "reviewStatus": "reviewed",
+      "reviewerNote": "Amy Hood used source-authentic completed-agreement wording for the same acquisition action."
+    }
+  ],
+  "financialSignals": [
+    "accelerated portfolio revenue growth",
+    "engagement and monetization across Xbox",
+    "Game Pass subscriber growth",
+    "EPS accretion upon close"
+  ],
+  "reviewerRationale": "The bounded Amy Hood turn identifies the Activision Blizzard transaction, price, growth mechanisms, monetization outcomes, and expected EPS accretion using decision-time information."
+}

@@ -12,6 +12,11 @@ import type {
 } from '../shared/amyHoodDecisionAdvisor';
 import { readAdvisorArtifactSecure } from './decisionAdvisor/artifactStore';
 import {
+  applyDirectEvidenceReview,
+  loadDirectEvidenceReviewManifest,
+  verifyDirectEvidenceReview,
+} from './decisionAdvisor/directEvidenceReview';
+import {
   loadPdfUrlInventory,
   mergePdfUrlInventory,
 } from './decisionAdvisor/pdfUrlInventory';
@@ -257,7 +262,7 @@ export const validateEventCandidates = (
           throw new Error(`candidate ${candidate.id} association discriminators do not match its event fingerprint`);
         }
         const relevancePassage = normalizedSearchText(locator.exactRelevancePassage);
-        if (!fingerprintDiscriminators(candidate).every(({ value }) =>
+        if (!locator.eventDiscriminators.every(({ value }) =>
           relevancePassage.includes(normalizedSearchText(value)))) {
           throw new Error(`candidate ${candidate.id} exact relevance passage does not contain its event fingerprint`);
         }
@@ -679,6 +684,28 @@ const run = async () => {
     });
     console.log(
       `PDF URL inventory merged: ${result.inventoryUrlCount} URLs, ${result.addedCandidateAssociations} candidate associations added, ${result.updatedCandidateAssociations} candidate associations updated, ${result.addedRegistrySources} registry sources added, ${result.updatedRegistrySources} registry sources updated, ${result.preservedReviewedAssociations} reviewed associations preserved.`,
+    );
+    return;
+  }
+
+  if (command === 'evidence:check' || command === 'evidence:apply') {
+    const reviewPath = optionValue(args, '--file');
+    if (!reviewPath) throw new Error(`${command} requires --file`);
+    const manifest = await loadDirectEvidenceReviewManifest(path.resolve(root, reviewPath));
+    if (command === 'evidence:check') {
+      await verifyDirectEvidenceReview(root, manifest);
+      console.log(
+        `Review valid: ${manifest.reviewId}, ${manifest.candidateId}, ${manifest.decision}.`,
+      );
+      return;
+    }
+    const result = await applyDirectEvidenceReview(root, manifest, {
+      validateCandidates: (candidates) => {
+        validateEventCandidates(candidates, { enforceDiscoveryRange: false });
+      },
+    });
+    console.log(
+      `Review ${result.changed ? 'applied' : 'unchanged'}: ${result.reviewId}, ${result.candidateId}, ${result.decision}.`,
     );
     return;
   }
