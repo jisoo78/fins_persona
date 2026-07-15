@@ -136,6 +136,20 @@ export type CollectionFailureReason =
   | 'network_error'
   | 'invalid_content';
 
+export type EventDiscriminatorKind =
+  | 'named_entity'
+  | 'decision_action'
+  | 'event_specific';
+
+export type EventFingerprintAlias = {
+  kind: EventDiscriminatorKind;
+  canonicalValue: string;
+  value: string;
+  sourceUrl: string;
+  reviewStatus: 'reviewed';
+  reviewerNote: string;
+};
+
 export type EventCandidate = {
   id: string;
   workingTitle: string;
@@ -155,6 +169,7 @@ export type EventCandidate = {
     sourceUrls: string[];
     reviewStatus: 'reviewed';
     reviewerNote: string;
+    aliases?: EventFingerprintAlias[];
   };
   sourceAssociations: EventSourceAssociation[];
   directEvidenceGap: {
@@ -180,7 +195,7 @@ export type EventSourceAssociation = {
     anchorTerms: string[];
     eventDiscriminators: Array<{
       value: string;
-      kind: 'named_entity' | 'decision_action' | 'event_specific';
+      kind: EventDiscriminatorKind;
     }>;
     speaker: 'Amy Hood' | null;
   } | null;

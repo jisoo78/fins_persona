@@ -8,6 +8,7 @@ import type {
   AdvisorSourceRecord,
   DecisionDomain,
   EventCandidate,
+  EventDiscriminatorKind,
 } from '../shared/amyHoodDecisionAdvisor';
 import { readAdvisorArtifactSecure } from './decisionAdvisor/artifactStore';
 import {
@@ -73,6 +74,36 @@ const fingerprintDiscriminators = (candidate: EventCandidate) => [
 
 const discriminatorKey = ({ kind, value }: { kind: string; value: string }) =>
   `${kind}:${normalizedSearchText(value)}`;
+
+const canonicalFingerprintValue = (
+  candidate: EventCandidate,
+  kind: EventDiscriminatorKind,
+) => ({
+  named_entity: candidate.eventFingerprint.primaryEntity,
+  decision_action: candidate.eventFingerprint.decisionAction,
+  event_specific: candidate.eventFingerprint.eventSpecificIdentifier,
+})[kind];
+
+const allowedFingerprintKeys = (candidate: EventCandidate) => {
+  const associationUrls = new Set(candidate.sourceAssociations.map(({ canonicalUrl }) =>
+    canonicalizeSourceUrl(canonicalUrl)));
+  const aliases = candidate.eventFingerprint.aliases ?? [];
+  for (const alias of aliases) {
+    if (alias.reviewStatus !== 'reviewed'
+      || !relevanceDiscriminatorKinds.has(alias.kind)
+      || alias.canonicalValue !== canonicalFingerprintValue(candidate, alias.kind)
+      || alias.value.trim().length < 4
+      || normalizedSearchText(alias.value) === normalizedSearchText(alias.canonicalValue)
+      || !associationUrls.has(canonicalizeSourceUrl(alias.sourceUrl))
+      || alias.reviewerNote.trim().length < 20) {
+      throw new Error(`candidate ${candidate.id} has an invalid event fingerprint alias`);
+    }
+  }
+  return new Set([
+    ...fingerprintDiscriminators(candidate).map(discriminatorKey),
+    ...aliases.map(({ kind, value }) => discriminatorKey({ kind, value })),
+  ]);
+};
 
 const candidateSpecificLocator = (candidate: EventCandidate, anchorTerms: string[]) => {
   const ignored = new Set([
@@ -170,6 +201,7 @@ export const validateEventCandidates = (
     if (!Array.isArray(candidate.sourceAssociations) || candidate.sourceAssociations.length === 0) {
       throw new Error(`candidate ${candidate.id} requires a reviewed source association`);
     }
+    const allowedDiscriminatorKeys = allowedFingerprintKeys(candidate);
     const reviewedAssociations = candidate.sourceAssociations.filter(
       ({ reviewStatus }) => reviewStatus === 'reviewed',
     );
@@ -220,9 +252,8 @@ export const validateEventCandidates = (
         throw new Error(`candidate ${candidate.id} has an invalid source association evidence locator`);
       }
       if (locator) {
-        const expectedFingerprint = new Set(fingerprintDiscriminators(candidate).map(discriminatorKey));
         if (locator.eventDiscriminators.some((item) =>
-          !expectedFingerprint.has(discriminatorKey(item)))) {
+          !allowedDiscriminatorKeys.has(discriminatorKey(item)))) {
           throw new Error(`candidate ${candidate.id} association discriminators do not match its event fingerprint`);
         }
         const relevancePassage = normalizedSearchText(locator.exactRelevancePassage);

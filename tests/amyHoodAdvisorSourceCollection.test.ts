@@ -2132,6 +2132,65 @@ test('failure: association discriminators cannot override a reviewed candidate f
   }
 });
 
+test('edge: reviewed source wording can satisfy a locator discriminator', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-fingerprint-alias-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+  const candidates = validCandidateMatrix();
+  const candidate = candidates[0];
+  const sourceUrl = candidate.sourceAssociations[0].canonicalUrl;
+  candidate.eventFingerprint.aliases = [{
+    kind: 'decision_action',
+    canonicalValue: candidate.eventFingerprint.decisionAction,
+    value: 'approved the authorization',
+    sourceUrl,
+    reviewStatus: 'reviewed',
+    reviewerNote: 'The primary-source Amy Hood wording identifies the same authorization action.',
+  }];
+  const locator = candidate.sourceAssociations[0].evidenceLocator!;
+  locator.eventDiscriminators[1].value = 'approved the authorization';
+  locator.exactQuote = locator.exactQuote.replace('authorization', 'approved the authorization');
+  locator.exactRelevancePassage = locator.exactRelevancePassage.replace(
+    'authorization',
+    'approved the authorization',
+  );
+
+  try {
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(candidatePath, `${JSON.stringify(candidates, null, 2)}\n`);
+    const result = runAdvisorCli(directory, 'candidates:check');
+
+    assert.equal(result.status, 0, result.stderr);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: aliases must be reviewed and source-bound', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-fingerprint-alias-invalid-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+  const candidates = validCandidateMatrix();
+  const candidate = candidates[0];
+  candidate.eventFingerprint.aliases = [{
+    kind: 'decision_action',
+    canonicalValue: candidate.eventFingerprint.decisionAction,
+    value: 'did something',
+    sourceUrl: 'https://example.com/unrelated',
+    reviewStatus: 'unreviewed' as 'reviewed',
+    reviewerNote: 'This deliberately violates the reviewed source-bound alias contract.',
+  }];
+
+  try {
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(candidatePath, `${JSON.stringify(candidates, null, 2)}\n`);
+    const result = runAdvisorCli(directory, 'candidates:check');
+
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /invalid event fingerprint alias/i);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
 test('failure: every fingerprint source URL requires a reviewed association at that URL', async () => {
   const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-fingerprint-review-'));
   const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
