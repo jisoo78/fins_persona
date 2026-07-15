@@ -1,0 +1,10 @@
+{
+  "candidateId": "candidate-github-acquisition-2018",
+  "sourceId": "source-d89c20fc175fe37c",
+  "chunkIndex": 0,
+  "attempt": 1,
+  "requestHash": "37113847416031d7ebba02096660abae976664c86f192ce5dccc79c35c8bb8e4",
+  "response": "```json\n{\n  \"spans\": [\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"Microsoft will acquire GitHub for $7.5 billion in Microsoft stock.\",\n      \"startChar\": 538,\n      \"endChar\": 584,\n      \"speaker\": null\n    },\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"Microsoft will use a portion of the remaining ~$30 billion of its current share repurchase authorization for the purchase.\",\n      \"startChar\": 1359,\n      \"endChar\": 1427,\n      \"speaker\": null\n    }\n  ]\n}\n```",
+  "elapsedMs": 23604,
+  "success": true
+}

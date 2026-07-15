@@ -1,0 +1,10 @@
+{
+  "candidateId": "candidate-copilot-price-2023",
+  "sourceId": "source-ff1c981bc6aed7c2",
+  "chunkIndex": 0,
+  "attempt": 1,
+  "requestHash": "288958dcb87556b6d9e89a31cc480fd7cf47a965b4e5d8dc2c9618056c091236",
+  "response": "```json\n{\n  \"spans\": [\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"Copilot for Microsoft 365 will be available for commercial customers for USD30 per user per month for Microsoft 365 E3, E5, Business Standard, and Business Premium customers when broadly available\",\n      \"startChar\": 1049,\n      \"endChar\": 1182,\n      \"speaker\": null\n    },\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"Copilot for Microsoft 365 will be available for commercial customers for USD30 per user per month for Microsoft 365 E3, E5, Business Standard, and Business Premium customers when broadly available\",\n      \"startChar\": 2505,\n      \"endChar\": 2638,\n      \"speaker\": null\n    }\n  ]\n}\n```",
+  "elapsedMs": 33411,
+  "success": true
+}

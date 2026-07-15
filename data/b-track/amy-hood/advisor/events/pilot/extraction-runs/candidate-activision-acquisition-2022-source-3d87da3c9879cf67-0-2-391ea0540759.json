@@ -1,0 +1,10 @@
+{
+  "candidateId": "candidate-activision-acquisition-2022",
+  "sourceId": "source-3d87da3c9879cf67",
+  "chunkIndex": 0,
+  "attempt": 2,
+  "requestHash": "391ea05407599bff5f024fbec2bc55771b416423b2a38ce922181e84bb6a9c53",
+  "response": "```json\n{\n  \"spans\": [\n    {\n      \"role\": \"direct_amy\",\n      \"exactQuote\": \"This morning, we announced that we will acquire Activision Blizzard in an all-cash transaction valued at $68.7 billion.\",\n      \"startChar\": 2462,\n      \"endChar\": 2535,\n      \"speaker\": \"Satya Nadella\"\n    }\n  ]\n}\n```",
+  "elapsedMs": 7541,
+  "success": false
+}

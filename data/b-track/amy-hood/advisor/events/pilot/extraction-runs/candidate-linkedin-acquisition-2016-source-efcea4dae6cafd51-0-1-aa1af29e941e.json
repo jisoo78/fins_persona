@@ -1,0 +1,10 @@
+{
+  "candidateId": "candidate-linkedin-acquisition-2016",
+  "sourceId": "source-efcea4dae6cafd51",
+  "chunkIndex": 0,
+  "attempt": 1,
+  "requestHash": "aa1af29e941ebfb6e1595c097e21d37726224e6c4a26c7020d4f1295894dcf42",
+  "response": "```json\n{\n  \"spans\": [\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"Microsoft will acquire LinkedIn for $196 per share in an all-cash transaction valued at $26.2 billion, inclusive of LinkedIn’s net cash\",\n      \"startChar\": 140,\n      \"endChar\": 221,\n      \"speaker\": null\n    },\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"Microsoft will finance the transaction primarily through the issuance of new indebtedness\",\n      \"startChar\": 1782,\n      \"endChar\": 1853,\n      \"speaker\": null\n    },\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"Microsoft expects the acquisition to have minimal dilution of ~1 percent to non-GAAP earnings per share for the remainder of fiscal year 2017 post-closing and for fiscal year 2018 based on the expected close date, and become accretive to Microsoft’s non-GAAP earnings per share in Microsoft’s fiscal year 2019 or less than two years post-closing\",\n      \"startChar\": 1855,\n      \"endChar\": 2130,\n      \"speaker\": null\n    }\n  ]\n}\n```",
+  "elapsedMs": 36812,
+  "success": true
+}

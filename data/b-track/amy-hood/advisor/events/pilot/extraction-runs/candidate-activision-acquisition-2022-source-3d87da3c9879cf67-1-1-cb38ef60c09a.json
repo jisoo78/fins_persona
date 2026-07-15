@@ -1,0 +1,10 @@
+{
+  "candidateId": "candidate-activision-acquisition-2022",
+  "sourceId": "source-3d87da3c9879cf67",
+  "chunkIndex": 1,
+  "attempt": 1,
+  "requestHash": "cb38ef60c09ae91be23e183c8673370f672fe918fa3445aef47f9aaed0f16089",
+  "response": "```json\n{\n  \"spans\": [\n    {\n      \"role\": \"direct_amy\",\n      \"exactQuote\": \"We’ve agreed to acquire Activision Blizzard for $95 per share in an all-cash transaction valued at $68.7 billion, inclusive of Activision Blizzard’s net cash.\",\n      \"startChar\": 5348,\n      \"endChar\": 5441,\n      \"speaker\": \"Amy Hood\"\n    }\n  ]\n}\n```",
+  "elapsedMs": 23330,
+  "success": true
+}

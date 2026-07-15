@@ -1,0 +1,99 @@
+{
+  "id": "event-ai-datacenter-plan-2025",
+  "candidateId": "candidate-ai-datacenter-plan-2025",
+  "title": "FY2025 AI datacenter investment plan",
+  "domain": "ai_cloud_capex",
+  "decisionDate": "2025-01-03",
+  "decisionQuestion": "How should Microsoft fund and deploy its $80 billion AI datacenter expansion in 2025?",
+  "situation": "Microsoft announced an $80 billion investment in AI-enabled datacenters, with over half in the U.S. and a $35 billion commitment across 14 countries over three years.",
+  "objectives": [
+    "Build global AI infrastructure to train models and deploy cloud applications"
+  ],
+  "conditions": [
+    "Datacenters must be trusted and secure"
+  ],
+  "constraints": [
+    "Investment is split between U.S. and international markets"
+  ],
+  "options": [
+    {
+      "id": "domestic_first",
+      "description": "Concentrate the majority of the $80 billion on U.S. datacenters",
+      "expectedBenefit": "Leverages confidence in the American economy and domestic infrastructure",
+      "principalRisk": "May limit global reach and competitive positioning in international markets",
+      "selected": false
+    },
+    {
+      "id": "global_diversification",
+      "description": "Distribute investment across 40 countries including the Global South",
+      "expectedBenefit": "Expands infrastructure footprint and competes with China's Belt and Road investments",
+      "principalRisk": "Spreads capital thinly across many markets with varying regulatory environments",
+      "selected": true
+    }
+  ],
+  "chosenAction": "global_diversification",
+  "rejectedBenefit": "Concentrated U.S. investment would maximize domestic economic confidence",
+  "observations": [
+    "Microsoft is working with Blackrock and MGX on an international fund adding up to $100 billion"
+  ],
+  "inferences": [
+    "The international fund suggests Microsoft views global infrastructure as a strategic priority over domestic concentration"
+  ],
+  "directAmyEvidenceIds": [],
+  "amyPolicyEvidenceIds": [],
+  "contextEvidenceIds": [
+    "span-f3897f035d66502e",
+    "span-222d45fde411d115",
+    "span-39c79f633c15e8ee"
+  ],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": [
+    "source-7f4b2d38f70ad433"
+  ],
+  "documentFamilyIds": [
+    "source:source-7f4b2d38f70ad433"
+  ],
+  "evidenceSpans": [
+    {
+      "id": "span-f3897f035d66502e",
+      "sourceId": "source-7f4b2d38f70ad433",
+      "eventCandidateId": "candidate-ai-datacenter-plan-2025",
+      "role": "decision_context",
+      "exactQuote": "In FY 2025, Microsoft is on track to invest approximately $80 billion to build out AI-enabled datacenters to train AI models and deploy AI and cloud-based applications around the world. More than half of this total investment will be in the United States, reflecting our commitment to this country and our confidence in the American economy.",
+      "startChar": 4066,
+      "endChar": 4407,
+      "publishedAt": "2025-01-03",
+      "speaker": null
+    },
+    {
+      "id": "span-222d45fde411d115",
+      "sourceId": "source-7f4b2d38f70ad433",
+      "eventCandidateId": "candidate-ai-datacenter-plan-2025",
+      "role": "decision_context",
+      "exactQuote": "Last year, we announced with national leaders that we intend to invest more than $35 billion in 14 countries within three years to build trusted and secure AI and cloud datacenter infrastructure. This is part of a global infrastructure that now reaches 40 countries, including in the Global South, where China has frequently focused so many of its Belt and Road investments.",
+      "startChar": 17476,
+      "endChar": 17850,
+      "publishedAt": "2025-01-03",
+      "speaker": null
+    },
+    {
+      "id": "span-39c79f633c15e8ee",
+      "sourceId": "source-7f4b2d38f70ad433",
+      "eventCandidateId": "candidate-ai-datacenter-plan-2025",
+      "role": "decision_context",
+      "exactQuote": "And we’re working with Blackrock and MGX to create an international investment fund to add up to $100 billion of additional funding for AI infrastructure and the AI supply chain.",
+      "startChar": 17977,
+      "endChar": 18155,
+      "publishedAt": "2025-01-03",
+      "speaker": null
+    }
+  ],
+  "status": "incomplete",
+  "gaps": [
+    "missing_amy_judgment",
+    "single_document_family"
+  ],
+  "reviewer": null,
+  "reviewedAt": null,
+  "updatedAt": "2026-07-15T06:41:48.321Z"
+}

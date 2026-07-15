@@ -1405,6 +1405,62 @@
       "redirectChain": [
         "https://news.microsoft.com/speeches/microsoft-and-linkedin-conference-call-chris-suh-satya-nadella-jeff-weiner-amy-hood-brad-smith/"
       ]
+    },
+    {
+      "id": "source-ad9a23176d9cf21d-25fb51a81eef",
+      "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q1",
+      "eventCandidateIds": [
+        "candidate-github-acquisition-2018",
+        "candidate-openai-expansion-2023",
+        "candidate-workforce-reset-2023"
+      ],
+      "tier": 1,
+      "title": "PDF discovery: GitHub acquisition",
+      "publisher": "Microsoft",
+      "publishedAt": "2022-10-25",
+      "speaker": null,
+      "sourceType": "earnings_call",
+      "collector": "microsoft_ir",
+      "temporalRole": "post_outcome",
+      "rightsNote": "Public discovery URL; collect and review the original before evidence use.",
+      "approvedPublicHost": false,
+      "collectionStatus": "review_required",
+      "rawPath": "raw/source-ad9a23176d9cf21d-25fb51a81eef-25fb51a81eef916a1fac1ff408aba7140b3679b4de870b463da9dff5cb8eb2ec.json",
+      "normalizedPath": "normalized/source-ad9a23176d9cf21d-25fb51a81eef-25fb51a81eef916a1fac1ff408aba7140b3679b4de870b463da9dff5cb8eb2ec.txt",
+      "sha256": "25fb51a81eef916a1fac1ff408aba7140b3679b4de870b463da9dff5cb8eb2ec",
+      "capturedAt": "2026-07-15T06:20:14.384Z",
+      "failureReason": null,
+      "finalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q1",
+      "redirectChain": [
+        "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q1"
+      ]
+    },
+    {
+      "id": "source-fbb900eb7e249591",
+      "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3",
+      "eventCandidateIds": [
+        "candidate-copilot-price-2023"
+      ],
+      "tier": 1,
+      "title": "Microsoft FY23 Q3 earnings conference call",
+      "publisher": "Microsoft Investor Relations",
+      "publishedAt": "2023-04-25",
+      "speaker": null,
+      "sourceType": "earnings_call",
+      "collector": "microsoft_ir",
+      "temporalRole": "pre_decision",
+      "rightsNote": "Official public Microsoft Investor Relations transcript reviewed for Phase 3 policy evidence.",
+      "approvedPublicHost": true,
+      "collectionStatus": "review_required",
+      "rawPath": "raw/source-fbb900eb7e249591-6ec3e05277d2d6608560259468ac0eb9dea0bbff484e19c66f236627eafe002c.json",
+      "normalizedPath": "normalized/source-fbb900eb7e249591-6ec3e05277d2d6608560259468ac0eb9dea0bbff484e19c66f236627eafe002c.txt",
+      "sha256": "6ec3e05277d2d6608560259468ac0eb9dea0bbff484e19c66f236627eafe002c",
+      "capturedAt": "2026-07-15T06:20:52.344Z",
+      "failureReason": null,
+      "finalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3",
+      "redirectChain": [
+        "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3"
+      ]
     }
   ]
 }

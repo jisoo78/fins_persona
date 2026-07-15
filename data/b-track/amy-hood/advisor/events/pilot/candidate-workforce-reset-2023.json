@@ -1,0 +1,120 @@
+{
+  "id": "event-workforce-reset-2023",
+  "candidateId": "candidate-workforce-reset-2023",
+  "title": "Ten thousand role workforce and cost structure reset",
+  "domain": "cost_efficiency",
+  "decisionDate": "2023-01-18",
+  "decisionQuestion": "How should we realign our cost structure and talent allocation in response to customers optimizing digital spend and the emergence of AI computing?",
+  "situation": "Customers are doing more with less and some regions face recession; simultaneously, AI is creating a new computing platform, requiring a shift in where capital and talent are deployed.",
+  "objectives": [
+    "Align cost structure with revenue and customer demand",
+    "Reallocate talent to secular growth and long-term competitiveness areas",
+    "Deliver ongoing results while investing in long-term opportunity"
+  ],
+  "conditions": [
+    "Some parts of the world are in or anticipating recession",
+    "The next major computing wave is being born with advances in AI"
+  ],
+  "constraints": [
+    "Must remain a consequential company in an unforgiving industry",
+    "Need to adapt to platform shifts throughout the company's history"
+  ],
+  "options": [
+    {
+      "id": "reduce_and_reallocate",
+      "description": "Reduce overall workforce by 10,000 roles through FY23 Q3 while continuing to hire in key strategic areas and investing in AI.",
+      "expectedBenefit": "Aligns cost structure with revenue, moves headcount to highest-productivity areas, and positions the company for the AI computing wave.",
+      "principalRisk": "Severance and portfolio changes create a $1.2 billion charge in Q2; potential loss of institutional knowledge in eliminated roles.",
+      "selected": true
+    },
+    {
+      "id": "maintain_and_expand",
+      "description": "Maintain current workforce levels and expand hiring across all departments to capture every possible customer opportunity without role reductions.",
+      "expectedBenefit": "Avoids severance costs and retains all existing talent and institutional knowledge.",
+      "principalRisk": "Cost structure becomes unaligned with revenue; talent is spread thin across low-growth areas instead of focused strategic areas.",
+      "selected": false
+    }
+  ],
+  "chosenAction": "reduce_and_reallocate",
+  "rejectedBenefit": "Avoidance of severance costs and retention of all institutional knowledge",
+  "observations": [
+    "Customers are optimizing digital spend to do more with less",
+    "AI advances are creating a new computing platform",
+    "Some regions are in or anticipating recession",
+    "Amy Hood previously stated the need to move headcount to the most important things"
+  ],
+  "inferences": [
+    "The company views the AI shift as a platform change requiring a reallocation of talent",
+    "The workforce reduction is a targeted reallocation rather than a general downsizing",
+    "The $1.2 billion charge reflects the immediate cost of the reset"
+  ],
+  "directAmyEvidenceIds": [],
+  "amyPolicyEvidenceIds": [
+    "span-f031de15863e849e"
+  ],
+  "contextEvidenceIds": [
+    "span-2cbdcfdf837395b6",
+    "span-ad445ecf5ef4a0ac",
+    "span-7f9dde341a496596"
+  ],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": [
+    "source-d55c44d7c6d97387",
+    "source-ad9a23176d9cf21d-25fb51a81eef"
+  ],
+  "documentFamilyIds": [
+    "source:source-d55c44d7c6d97387",
+    "source:source-ad9a23176d9cf21d-25fb51a81eef"
+  ],
+  "evidenceSpans": [
+    {
+      "id": "span-2cbdcfdf837395b6",
+      "sourceId": "source-d55c44d7c6d97387",
+      "eventCandidateId": "candidate-workforce-reset-2023",
+      "role": "decision_context",
+      "exactQuote": "First, as we saw customers accelerate their digital spend during the pandemic, we’re now seeing them optimize their digital spend to do more with less. We’re also seeing organizations in every industry and geography exercise caution as some parts of the world are in a recession and other parts are anticipating one. At the same time, the next major wave of computing is being born with advances in AI, as we’re turning the world’s most advanced models into a new computing platform. This is the context in which we as a company must strive to deliver results on an ongoing basis, while investing in our long-term opportunity.",
+      "startChar": 194,
+      "endChar": 820,
+      "publishedAt": "2023-01-18",
+      "speaker": null
+    },
+    {
+      "id": "span-ad445ecf5ef4a0ac",
+      "sourceId": "source-d55c44d7c6d97387",
+      "eventCandidateId": "candidate-workforce-reset-2023",
+      "role": "decision_context",
+      "exactQuote": "First, we will align our cost structure with our revenue and where we see customer demand. Today, we are making changes that will result in the reduction of our overall workforce by 10,000 jobs through the end of FY23 Q3. This represents less than 5 percent of our total employee base, with some notifications happening today. It’s important to note that while we are eliminating roles in some areas, we will continue to hire in key strategic areas.",
+      "startChar": 968,
+      "endChar": 1417,
+      "publishedAt": "2023-01-18",
+      "speaker": null
+    },
+    {
+      "id": "span-7f9dde341a496596",
+      "sourceId": "source-d55c44d7c6d97387",
+      "eventCandidateId": "candidate-workforce-reset-2023",
+      "role": "decision_context",
+      "exactQuote": "Second, we will continue to invest in strategic areas for our future, meaning we are allocating both our capital and talent to areas of secular growth and long-term competitiveness for the company, while divesting in other areas. These are the kinds of hard choices we have made throughout our 47-year history to remain a consequential company in this industry that is unforgiving to anyone who doesn’t adapt to platform shifts. As such, we are taking a $1.2 billion charge in Q2 related to severance costs, changes to our hardware portfolio, and the cost of lease consolidation as we create higher density across our workspaces.",
+      "startChar": 1629,
+      "endChar": 2258,
+      "publishedAt": "2023-01-18",
+      "speaker": null
+    },
+    {
+      "id": "span-f031de15863e849e",
+      "sourceId": "source-ad9a23176d9cf21d-25fb51a81eef",
+      "eventCandidateId": "candidate-workforce-reset-2023",
+      "role": "amy_policy",
+      "exactQuote": "It’ll be about investing where we said we would invest, which is in focused areas. It’s about moving headcount to make sure, inside the company, we’ve got it on the highest and most important things. We’ve added a lot of headcount over the past 12 months, and we want to make sure we use those headcount in the most productive way possible.",
+      "startChar": 48294,
+      "endChar": 48634,
+      "publishedAt": "2022-10-25",
+      "speaker": "Amy Hood"
+    }
+  ],
+  "status": "approved",
+  "gaps": [],
+  "reviewer": "Codex evidence review",
+  "reviewedAt": "2026-07-15T06:49:32.268Z",
+  "updatedAt": "2026-07-15T06:49:32.268Z"
+}

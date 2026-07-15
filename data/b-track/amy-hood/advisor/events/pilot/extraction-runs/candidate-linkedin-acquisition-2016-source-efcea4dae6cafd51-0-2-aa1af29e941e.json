@@ -1,0 +1,10 @@
+{
+  "candidateId": "candidate-linkedin-acquisition-2016",
+  "sourceId": "source-efcea4dae6cafd51",
+  "chunkIndex": 0,
+  "attempt": 2,
+  "requestHash": "aa1af29e941ebfb6e1595c097e21d37726224e6c4a26c7020d4f1295894dcf42",
+  "response": "```json\n{\n  \"spans\": [\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"Microsoft will finance the transaction primarily through the issuance of new indebtedness. Upon closing, Microsoft expects LinkedIn’s financials to be reported as part of Microsoft’s Productivity and Business Processes segment. Microsoft expects the acquisition to have minimal dilution of ~1 percent to non-GAAP earnings per share for the remainder of fiscal year 2017 post-closing and for fiscal year 2018 based on the expected close date, and become accretive to Microsoft’s non-GAAP earnings per share in Microsoft’s fiscal year 2019 or less than two years post-closing.\",\n      \"startChar\": 2355,\n      \"endChar\": 2753,\n      \"speaker\": \"Microsoft\"\n    }\n  ]\n}\n```",
+  "elapsedMs": 13772,
+  "success": false
+}

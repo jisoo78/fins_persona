@@ -1,0 +1,75 @@
+{
+  "id": "event-buyback-2021",
+  "candidateId": "candidate-buyback-2021",
+  "title": "2021 sixty billion dollar share repurchase authorization",
+  "domain": "shareholder_return_risk",
+  "decisionDate": "2021-09-14",
+  "decisionQuestion": "Should the board authorize a $60 billion share repurchase program?",
+  "situation": "The board is considering a new share repurchase program alongside other shareholder return initiatives.",
+  "objectives": [
+    "Return capital to shareholders"
+  ],
+  "conditions": [
+    "Board approval required"
+  ],
+  "constraints": [
+    "Authorization capped at $60 billion"
+  ],
+  "options": [
+    {
+      "id": "authorize",
+      "description": "Approve the $60 billion share repurchase program",
+      "expectedBenefit": "Returns capital to shareholders and reduces share count",
+      "principalRisk": "Reduces cash available for other investments or debt reduction",
+      "selected": true
+    },
+    {
+      "id": "reject",
+      "description": "Do not authorize the share repurchase program",
+      "expectedBenefit": "Preserves cash for growth or debt reduction",
+      "principalRisk": "Shareholders may prefer capital return over retained earnings",
+      "selected": false
+    }
+  ],
+  "chosenAction": "authorize",
+  "rejectedBenefit": "Preserving cash for growth or debt reduction",
+  "observations": [
+    "The board approved a new share repurchase program authorizing up to $60 billion"
+  ],
+  "inferences": [
+    "The board prioritizes returning capital to shareholders through share repurchases"
+  ],
+  "directAmyEvidenceIds": [],
+  "amyPolicyEvidenceIds": [],
+  "contextEvidenceIds": [
+    "span-325495c0e7890c53"
+  ],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": [
+    "source-d25d732db767b7c0"
+  ],
+  "documentFamilyIds": [
+    "source:source-d25d732db767b7c0"
+  ],
+  "evidenceSpans": [
+    {
+      "id": "span-325495c0e7890c53",
+      "sourceId": "source-d25d732db767b7c0",
+      "eventCandidateId": "candidate-buyback-2021",
+      "role": "decision_context",
+      "exactQuote": "The board of directors also approved a new share repurchase program authorizing up to $60 billion in share repurchases.",
+      "startChar": 399,
+      "endChar": 518,
+      "publishedAt": "2021-09-14",
+      "speaker": null
+    }
+  ],
+  "status": "incomplete",
+  "gaps": [
+    "missing_amy_judgment",
+    "single_document_family"
+  ],
+  "reviewer": null,
+  "reviewedAt": null,
+  "updatedAt": "2026-07-15T06:43:47.472Z"
+}

@@ -1,0 +1,10 @@
+{
+  "candidateId": "candidate-activision-acquisition-2022",
+  "sourceId": "source-3d87da3c9879cf67",
+  "chunkIndex": 2,
+  "attempt": 1,
+  "requestHash": "d8d283ee998780db20659c13238a9f1985b808aab97ad18e699c5ac62d1b7261",
+  "response": "```json\n{\n  \"spans\": []\n}\n```",
+  "elapsedMs": 9502,
+  "success": true
+}

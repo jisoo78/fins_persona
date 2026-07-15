@@ -1,0 +1,10 @@
+{
+  "candidateId": "candidate-buyback-2021",
+  "sourceId": "source-d25d732db767b7c0",
+  "chunkIndex": 0,
+  "attempt": 1,
+  "requestHash": "34588abcdcd731947c1bb9f1986435393cb2112d704eba4129540b76c0e97eee",
+  "response": "```json\n{\n  \"spans\": [\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"The board of directors also approved a new share repurchase program authorizing up to $60 billion in share repurchases.\",\n      \"startChar\": 330,\n      \"endChar\": 401,\n      \"speaker\": null\n    }\n  ]\n}\n```",
+  "elapsedMs": 12518,
+  "success": true
+}

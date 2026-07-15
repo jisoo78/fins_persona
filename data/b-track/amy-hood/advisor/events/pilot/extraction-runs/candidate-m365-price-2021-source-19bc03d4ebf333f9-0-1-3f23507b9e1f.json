@@ -1,0 +1,10 @@
+{
+  "candidateId": "candidate-m365-price-2021",
+  "sourceId": "source-19bc03d4ebf333f9",
+  "chunkIndex": 0,
+  "attempt": 1,
+  "requestHash": "3f23507b9e1f141f0ee1696752f309b6a34e5df6df38e55d03420abd404d2622",
+  "response": "```json\n{\n  \"spans\": [\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"El día de hoy anunciamos cambios a los precios comerciales de Microsoft 365 —el primer ajuste de precios sustancial desde que lanzamos Office 365 hace una década—. Esta actualización de precios refleja el gran valor que hemos ofrecido a nuestros clientes a lo largo de los últimos diez años.\",\n      \"startChar\": 114,\n      \"endChar\": 345,\n      \"speaker\": null\n    },\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"Los ajustes de precio que anunciamos hoy entrarán en vigor dentro de seis meses. El 1 de marzo de 2022 actualizaremos nuestros precios de lista para los siguientes productos comerciales: Microsoft 365 Business Basic (de USD $5 a $6 por usuario), Microsoft 365 Business Premium (de USD $20 a $22), Office 365 E1 (de USD $8 a $10), Office 365 E3 (de USD $20 a $23), Office 365 E5 (de USD $35 a $38) y Microsoft 365 E3 (de USD $32 a $36). Estos aumentos se aplicarán a nivel mundial con ajustes para los mercados locales de algunas regiones.\",\n      \"startChar\": 3498,\n      \"endChar\": 4164,\n      \"speaker\": null\n    }\n  ]\n}\n```",
+  "elapsedMs": 39517,
+  "success": true
+}

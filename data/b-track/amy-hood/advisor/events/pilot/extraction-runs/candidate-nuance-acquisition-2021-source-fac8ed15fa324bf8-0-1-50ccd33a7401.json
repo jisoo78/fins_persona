@@ -1,0 +1,10 @@
+{
+  "candidateId": "candidate-nuance-acquisition-2021",
+  "sourceId": "source-fac8ed15fa324bf8",
+  "chunkIndex": 0,
+  "attempt": 1,
+  "requestHash": "50ccd33a74016b099ce9d30203ea3db6ca8ece1c6510264d8cf1d7084c989f16",
+  "response": "```json\n{\n  \"spans\": [\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9, in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.\",\n      \"startChar\": 255,\n      \"endChar\": 384,\n      \"speaker\": null\n    },\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"The acquisition will double Microsoft’s total addressable market (TAM) in the healthcare provider space, bringing the company’s TAM in healthcare to nearly $500 billion.\",\n      \"startChar\": 1483,\n      \"endChar\": 1586,\n      \"speaker\": null\n    },\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"Microsoft expects the acquisition to be minimally dilutive (less than 1 percent) in fiscal year 2022 and to be accretive in fiscal year 2023 to non-GAAP earnings per share, based on the expected close timeframe.\",\n      \"startChar\": 2056,\n      \"endChar\": 2236,\n      \"speaker\": null\n    }\n  ]\n}\n```",
+  "elapsedMs": 42391,
+  "success": true
+}

@@ -1,0 +1,10 @@
+{
+  "candidateId": "candidate-nuance-acquisition-2021",
+  "sourceId": "source-f7fd232d93262a85",
+  "chunkIndex": 1,
+  "attempt": 1,
+  "requestHash": "87efad7f2e94d016db5ab7b48de540861489167b7b02d1c6d402f921090290e3",
+  "response": "```json\n{\n  \"spans\": [\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"the ability of Microsoft to successfully integrate Nuance’s operations, product lines, and technology\",\n      \"startChar\": 651,\n      \"endChar\": 731,\n      \"speaker\": null\n    },\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"the ability of Microsoft to implement its plans, forecasts, and other expectations with respect to Nuance’s business after the completion of the proposed merger and realize additional opportunities for growth and innovation\",\n      \"startChar\": 733,\n      \"endChar\": 977,\n      \"speaker\": null\n    }\n  ]\n}\n```",
+  "elapsedMs": 20057,
+  "success": true
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "policy-openai-investment-consistency-2022",
+    "candidateId": "candidate-openai-expansion-2023",
+    "sourceId": "source-ad9a23176d9cf21d-25fb51a81eef",
+    "exactQuote": "I think it’s important in terms of how we think about investment and continuing to invest where we’re seeing substantial opportunity and growth.",
+    "startChar": 46930,
+    "endChar": 47074,
+    "publishedAt": "2022-10-25",
+    "speaker": "Amy Hood",
+    "policyTags": [
+      "investment_consistency",
+      "platform_shift_commitment"
+    ],
+    "eventLinkRationale": "This pre-decision capital-allocation rule links continued investment to substantial opportunity and growth, the governing policy tested by the later OpenAI partnership expansion.",
+    "reviewer": "Codex evidence review",
+    "reviewedAt": "2026-07-15T06:21:32.000Z"
+  },
+  {
+    "id": "policy-copilot-value-pricing-2023",
+    "candidateId": "candidate-copilot-price-2023",
+    "sourceId": "source-fbb900eb7e249591",
+    "exactQuote": "when we believe we’re adding a lot of value, and frankly, that’s what the copilots are doing and some productivity improvement, you can expect that we will have a list price for those.",
+    "startChar": 40339,
+    "endChar": 40523,
+    "publishedAt": "2023-04-25",
+    "speaker": "Amy Hood",
+    "policyTags": [
+      "value_based_pricing"
+    ],
+    "eventLinkRationale": "This pre-decision statement explicitly defines the value and productivity threshold for assigning a separate list price to Copilots before the commercial price announcement.",
+    "reviewer": "Codex evidence review",
+    "reviewedAt": "2026-07-15T06:21:32.000Z"
+  },
+  {
+    "id": "policy-workforce-resource-reallocation-2022",
+    "candidateId": "candidate-workforce-reset-2023",
+    "sourceId": "source-ad9a23176d9cf21d-25fb51a81eef",
+    "exactQuote": "It’ll be about investing where we said we would invest, which is in focused areas. It’s about moving headcount to make sure, inside the company, we’ve got it on the highest and most important things. We’ve added a lot of headcount over the past 12 months, and we want to make sure we use those headcount in the most productive way possible.",
+    "startChar": 48294,
+    "endChar": 48634,
+    "publishedAt": "2022-10-25",
+    "speaker": "Amy Hood",
+    "policyTags": [
+      "resource_reallocation",
+      "cost_revenue_alignment"
+    ],
+    "eventLinkRationale": "This pre-decision statement defines focused investment, internal headcount movement, and productivity as the response to macro pressure before the workforce reset announcement.",
+    "reviewer": "Codex evidence review",
+    "reviewedAt": "2026-07-15T06:21:32.000Z"
+  }
+]

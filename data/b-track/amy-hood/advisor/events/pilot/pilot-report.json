@@ -1,0 +1,151 @@
+{
+  "counts": {
+    "approved": 5,
+    "incomplete": 5,
+    "total": 10
+  },
+  "domainCounts": {
+    "m_and_a": 4,
+    "ai_cloud_capex": 2,
+    "pricing_monetization": 2,
+    "cost_efficiency": 1,
+    "shareholder_return_risk": 1
+  },
+  "rows": [
+    {
+      "priority": 1,
+      "candidateId": "candidate-linkedin-acquisition-2016",
+      "domain": "m_and_a",
+      "status": "approved",
+      "decisionQuestion": "How should Microsoft finance the $26.2 billion all-cash LinkedIn acquisition while minimizing EPS dilution?",
+      "chosenAction": "debt_financing",
+      "directQuote": "we’ve agreed to acquire LinkedIn for $196 per share in an all-cash transaction that is approximately $26 billion inclusive of LinkedIn’s net cash.",
+      "policyQuote": "없음",
+      "contextQuote": "Microsoft will acquire LinkedIn for $196 per share in an all-cash transaction valued at $26.2 billion, inclusive of LinkedIn’s net cash",
+      "gaps": []
+    },
+    {
+      "priority": 2,
+      "candidateId": "candidate-activision-acquisition-2022",
+      "domain": "m_and_a",
+      "status": "approved",
+      "decisionQuestion": "Should Microsoft acquire Activision Blizzard for $95 per share in an all-cash transaction?",
+      "chosenAction": "proceed",
+      "directQuote": "We’ve agreed to acquire Activision Blizzard for $95 per share in an all-cash transaction valued at $68.7 billion, inclusive of Activision Blizzard’s net cash.",
+      "policyQuote": "없음",
+      "contextQuote": "Microsoft will acquire Activision Blizzard for $95.00 per share, in an all-cash transaction valued at $68.7 billion, inclusive of Activision Blizzard’s net cash.",
+      "gaps": []
+    },
+    {
+      "priority": 3,
+      "candidateId": "candidate-openai-expansion-2023",
+      "domain": "ai_cloud_capex",
+      "status": "approved",
+      "decisionQuestion": "Should Microsoft deepen its multiyear investment in OpenAI's supercomputing and research?",
+      "chosenAction": "deepen_partnership",
+      "directQuote": "없음",
+      "policyQuote": "I think it’s important in terms of how we think about investment and continuing to invest where we’re seeing substantial opportunity and growth.",
+      "contextQuote": "Today, we are announcing the third phase of our long-term partnership with OpenAI through a multiyear, multibillion dollar investment to accelerate AI breakthroughs to ensure these benefits are broadly shared with the world.",
+      "gaps": []
+    },
+    {
+      "priority": 4,
+      "candidateId": "candidate-copilot-price-2023",
+      "domain": "pricing_monetization",
+      "status": "approved",
+      "decisionQuestion": "What list price to set for Copilot for Microsoft 365 commercial customers?",
+      "chosenAction": "30_per_user",
+      "directQuote": "없음",
+      "policyQuote": "when we believe we’re adding a lot of value, and frankly, that’s what the copilots are doing and some productivity improvement, you can expect that we will have a list price for those.",
+      "contextQuote": "Copilot for Microsoft 365 will be available for commercial customers for USD30 per user per month for Microsoft 365 E3, E5, Business Standard, and Business Premium customers when broadly available",
+      "gaps": []
+    },
+    {
+      "priority": 5,
+      "candidateId": "candidate-workforce-reset-2023",
+      "domain": "cost_efficiency",
+      "status": "approved",
+      "decisionQuestion": "How should we realign our cost structure and talent allocation in response to customers optimizing digital spend and the emergence of AI computing?",
+      "chosenAction": "reduce_and_reallocate",
+      "directQuote": "없음",
+      "policyQuote": "It’ll be about investing where we said we would invest, which is in focused areas. It’s about moving headcount to make sure, inside the company, we’ve got it on the highest and most important things. We’ve added a lot of headcount over the past 12 months, and we want to make sure we use those headcount in the most productive way possible.",
+      "contextQuote": "First, as we saw customers accelerate their digital spend during the pandemic, we’re now seeing them optimize their digital spend to do more with less. We’re also seeing organizations in every industry and geography exercise caution as some parts of the world are in a recession and other parts are anticipating one. At the same time, the next major wave of computing is being born with advances in AI, as we’re turning the world’s most advanced models into a new computing platform. This is the context in which we as a company must strive to deliver results on an ongoing basis, while investing in our long-term opportunity.",
+      "gaps": []
+    },
+    {
+      "priority": 6,
+      "candidateId": "candidate-github-acquisition-2018",
+      "domain": "m_and_a",
+      "status": "incomplete",
+      "decisionQuestion": "Should Microsoft acquire GitHub for $7.5 billion in stock using existing share repurchase authorization?",
+      "chosenAction": "acquire_github",
+      "directQuote": "없음",
+      "policyQuote": "없음",
+      "contextQuote": "Microsoft will acquire GitHub for $7.5 billion in Microsoft stock.",
+      "gaps": [
+        "missing_amy_judgment",
+        "single_document_family"
+      ]
+    },
+    {
+      "priority": 7,
+      "candidateId": "candidate-nuance-acquisition-2021",
+      "domain": "m_and_a",
+      "status": "incomplete",
+      "decisionQuestion": "Should Microsoft proceed with the all-cash acquisition of Nuance at $56.00 per share?",
+      "chosenAction": "proceed",
+      "directQuote": "없음",
+      "policyQuote": "없음",
+      "contextQuote": "Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9, in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.",
+      "gaps": [
+        "missing_amy_judgment",
+        "single_document_family"
+      ]
+    },
+    {
+      "priority": 8,
+      "candidateId": "candidate-ai-datacenter-plan-2025",
+      "domain": "ai_cloud_capex",
+      "status": "incomplete",
+      "decisionQuestion": "How should Microsoft fund and deploy its $80 billion AI datacenter expansion in 2025?",
+      "chosenAction": "global_diversification",
+      "directQuote": "없음",
+      "policyQuote": "없음",
+      "contextQuote": "In FY 2025, Microsoft is on track to invest approximately $80 billion to build out AI-enabled datacenters to train AI models and deploy AI and cloud-based applications around the world. More than half of this total investment will be in the United States, reflecting our commitment to this country and our confidence in the American economy.",
+      "gaps": [
+        "missing_amy_judgment",
+        "single_document_family"
+      ]
+    },
+    {
+      "priority": 9,
+      "candidateId": "candidate-m365-price-2021",
+      "domain": "pricing_monetization",
+      "status": "incomplete",
+      "decisionQuestion": "Should Microsoft raise commercial M365 and Office 365 list prices globally after ten years of flat pricing?",
+      "chosenAction": "raise_prices",
+      "directQuote": "없음",
+      "policyQuote": "없음",
+      "contextQuote": "El día de hoy anunciamos cambios a los precios comerciales de Microsoft 365 —el primer ajuste de precios sustancial desde que lanzamos Office 365 hace una década—. Esta actualización de precios refleja el gran valor que hemos ofrecido a nuestros clientes a lo largo de los últimos diez años.",
+      "gaps": [
+        "missing_amy_judgment",
+        "single_document_family"
+      ]
+    },
+    {
+      "priority": 10,
+      "candidateId": "candidate-buyback-2021",
+      "domain": "shareholder_return_risk",
+      "status": "incomplete",
+      "decisionQuestion": "Should the board authorize a $60 billion share repurchase program?",
+      "chosenAction": "authorize",
+      "directQuote": "없음",
+      "policyQuote": "없음",
+      "contextQuote": "The board of directors also approved a new share repurchase program authorizing up to $60 billion in share repurchases.",
+      "gaps": [
+        "missing_amy_judgment",
+        "single_document_family"
+      ]
+    }
+  ]
+}

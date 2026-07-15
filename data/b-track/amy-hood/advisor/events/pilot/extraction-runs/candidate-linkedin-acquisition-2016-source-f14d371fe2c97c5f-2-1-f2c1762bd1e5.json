@@ -1,0 +1,10 @@
+{
+  "candidateId": "candidate-linkedin-acquisition-2016",
+  "sourceId": "source-f14d371fe2c97c5f",
+  "chunkIndex": 2,
+  "attempt": 1,
+  "requestHash": "f2c1762bd1e5614ac1b33c88fe686f2dbb117c5f25bbea6dfcba424e22dca366",
+  "response": "```json\n{\n  \"spans\": [\n    {\n      \"role\": \"direct_amy\",\n      \"exactQuote\": \"The addition of LinkedIn to Microsoft meets this high bar.\",\n      \"startChar\": 347,\n      \"endChar\": 386,\n      \"speaker\": \"Amy Hood\"\n    }\n  ]\n}\n```",
+  "elapsedMs": 9923,
+  "success": true
+}

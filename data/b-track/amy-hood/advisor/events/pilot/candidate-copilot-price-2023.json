@@ -1,0 +1,87 @@
+{
+  "id": "event-copilot-price-2023",
+  "candidateId": "candidate-copilot-price-2023",
+  "title": "Microsoft 365 Copilot pricing",
+  "domain": "pricing_monetization",
+  "decisionDate": "2023-07-18",
+  "decisionQuestion": "What list price to set for Copilot for Microsoft 365 commercial customers?",
+  "situation": "Copilot is broadly available for E3, E5, Business Standard, and Business Premium customers; Amy Hood's policy is to list price products adding significant value.",
+  "objectives": [
+    "Capture value from productivity improvements"
+  ],
+  "conditions": [
+    "Broad availability for commercial customers"
+  ],
+  "constraints": [
+    "Must align with Amy's value-based list price policy"
+  ],
+  "options": [
+    {
+      "id": "30_per_user",
+      "description": "USD30 per user per month for E3, E5, Business Standard, and Business Premium customers",
+      "expectedBenefit": "Monetizes productivity improvements at a premium tier",
+      "principalRisk": "Customers may resist the additional monthly cost",
+      "selected": true
+    },
+    {
+      "id": "bundle_with_existing",
+      "description": "Include Copilot at no extra cost with existing E3/E5 licenses",
+      "expectedBenefit": "Increases retention and reduces churn",
+      "principalRisk": "Leaves significant value uncaptured from productivity gains",
+      "selected": false
+    }
+  ],
+  "chosenAction": "30_per_user",
+  "rejectedBenefit": "Increased retention from bundling at no extra cost",
+  "observations": [
+    "Amy stated list pricing applies when adding a lot of value"
+  ],
+  "inferences": [
+    "The $30 price reflects the belief that Copilot delivers substantial productivity value"
+  ],
+  "directAmyEvidenceIds": [],
+  "amyPolicyEvidenceIds": [
+    "span-a932a8deb06fb1c6"
+  ],
+  "contextEvidenceIds": [
+    "span-1baf5181c9f9b527"
+  ],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": [
+    "source-ff1c981bc6aed7c2",
+    "source-fbb900eb7e249591"
+  ],
+  "documentFamilyIds": [
+    "source:source-ff1c981bc6aed7c2",
+    "source:source-fbb900eb7e249591"
+  ],
+  "evidenceSpans": [
+    {
+      "id": "span-1baf5181c9f9b527",
+      "sourceId": "source-ff1c981bc6aed7c2",
+      "eventCandidateId": "candidate-copilot-price-2023",
+      "role": "decision_context",
+      "exactQuote": "Copilot for Microsoft 365 will be available for commercial customers for USD30 per user per month for Microsoft 365 E3, E5, Business Standard, and Business Premium customers when broadly available",
+      "startChar": 3342,
+      "endChar": 3538,
+      "publishedAt": "2023-07-18",
+      "speaker": null
+    },
+    {
+      "id": "span-a932a8deb06fb1c6",
+      "sourceId": "source-fbb900eb7e249591",
+      "eventCandidateId": "candidate-copilot-price-2023",
+      "role": "amy_policy",
+      "exactQuote": "when we believe we’re adding a lot of value, and frankly, that’s what the copilots are doing and some productivity improvement, you can expect that we will have a list price for those.",
+      "startChar": 40339,
+      "endChar": 40523,
+      "publishedAt": "2023-04-25",
+      "speaker": "Amy Hood"
+    }
+  ],
+  "status": "approved",
+  "gaps": [],
+  "reviewer": "Codex evidence review",
+  "reviewedAt": "2026-07-15T06:49:30.444Z",
+  "updatedAt": "2026-07-15T06:49:30.444Z"
+}

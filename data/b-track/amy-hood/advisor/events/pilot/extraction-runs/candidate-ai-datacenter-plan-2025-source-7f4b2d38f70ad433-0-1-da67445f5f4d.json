@@ -1,0 +1,10 @@
+{
+  "candidateId": "candidate-ai-datacenter-plan-2025",
+  "sourceId": "source-7f4b2d38f70ad433",
+  "chunkIndex": 0,
+  "attempt": 1,
+  "requestHash": "da67445f5f4d9e410637710c6ac5951dfa5361c9a95c20e4d49cef405e12880f",
+  "response": "```json\n{\n  \"spans\": [\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"In FY 2025, Microsoft is on track to invest approximately $80 billion to build out AI-enabled datacenters to train AI models and deploy AI and cloud-based applications around the world. More than half of this total investment will be in the United States, reflecting our commitment to this country and our confidence in the American economy.\",\n      \"startChar\": 2452,\n      \"endChar\": 2738,\n      \"speaker\": null\n    }\n  ]\n}\n```",
+  "elapsedMs": 26700,
+  "success": true
+}

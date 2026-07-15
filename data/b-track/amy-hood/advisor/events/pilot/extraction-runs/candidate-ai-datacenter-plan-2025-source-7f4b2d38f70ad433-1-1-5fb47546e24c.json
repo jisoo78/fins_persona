@@ -1,0 +1,10 @@
+{
+  "candidateId": "candidate-ai-datacenter-plan-2025",
+  "sourceId": "source-7f4b2d38f70ad433",
+  "chunkIndex": 1,
+  "attempt": 1,
+  "requestHash": "5fb47546e24ca0b02f8bafe76da588cfe89ddbdec33248f37fa430de78e48dcd",
+  "response": "```json\n{\n  \"spans\": [\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"Last year, we announced with national leaders that we intend to invest more than $35 billion in 14 countries within three years to build trusted and secure AI and cloud datacenter infrastructure. This is part of a global infrastructure that now reaches 40 countries, including in the Global South, where China has frequently focused so many of its Belt and Road investments.\",\n      \"startChar\": 3340,\n      \"endChar\": 3634,\n      \"speaker\": null\n    },\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"And we’re working with Blackrock and MGX to create an international investment fund to add up to $100 billion of additional funding for AI infrastructure and the AI supply chain.\",\n      \"startChar\": 3635,\n      \"endChar\": 3766,\n      \"speaker\": null\n    }\n  ]\n}\n```",
+  "elapsedMs": 31628,
+  "success": true
+}

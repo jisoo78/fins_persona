@@ -1,0 +1,88 @@
+{
+  "id": "event-github-acquisition-2018",
+  "candidateId": "candidate-github-acquisition-2018",
+  "title": "GitHub acquisition for 7.5 billion dollars in stock",
+  "domain": "m_and_a",
+  "decisionDate": "2018-06-04",
+  "decisionQuestion": "Should Microsoft acquire GitHub for $7.5 billion in stock using existing share repurchase authorization?",
+  "situation": "Microsoft is acquiring GitHub for $7.5 billion in stock, funded by a portion of its remaining ~$30 billion share repurchase authorization.",
+  "objectives": [
+    "Acquire GitHub's developer platform and community"
+  ],
+  "conditions": [
+    "Acquisition price is $7.5 billion in Microsoft stock"
+  ],
+  "constraints": [
+    "Funding comes from the ~$30 billion share repurchase authorization"
+  ],
+  "options": [
+    {
+      "id": "acquire_github",
+      "description": "Proceed with the $7.5 billion stock acquisition",
+      "expectedBenefit": "Owns the world's largest code hosting platform",
+      "principalRisk": "Dilution from issuing stock and integration challenges",
+      "selected": true
+    },
+    {
+      "id": "reject_acquisition",
+      "description": "Do not acquire GitHub",
+      "expectedBenefit": "Preserves share repurchase authorization and avoids dilution",
+      "principalRisk": "Competitors gain platform dominance",
+      "selected": false
+    }
+  ],
+  "chosenAction": "acquire_github",
+  "rejectedBenefit": "Preserves share repurchase authorization and avoids dilution",
+  "observations": [
+    "Acquisition price is $7.5 billion in stock",
+    "Remaining share repurchase authorization is ~$30 billion"
+  ],
+  "inferences": [
+    "Stock-for-stock deal links GitHub's value to Microsoft's share price"
+  ],
+  "directAmyEvidenceIds": [],
+  "amyPolicyEvidenceIds": [],
+  "contextEvidenceIds": [
+    "span-1e6ef32e731cf583",
+    "span-f2913f9fe0b1835a"
+  ],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": [
+    "source-d89c20fc175fe37c"
+  ],
+  "documentFamilyIds": [
+    "source:source-d89c20fc175fe37c"
+  ],
+  "evidenceSpans": [
+    {
+      "id": "span-1e6ef32e731cf583",
+      "sourceId": "source-d89c20fc175fe37c",
+      "eventCandidateId": "candidate-github-acquisition-2018",
+      "role": "decision_context",
+      "exactQuote": "Microsoft will acquire GitHub for $7.5 billion in Microsoft stock.",
+      "startChar": 1162,
+      "endChar": 1228,
+      "publishedAt": "2018-06-04",
+      "speaker": null
+    },
+    {
+      "id": "span-f2913f9fe0b1835a",
+      "sourceId": "source-d89c20fc175fe37c",
+      "eventCandidateId": "candidate-github-acquisition-2018",
+      "role": "decision_context",
+      "exactQuote": "Microsoft will use a portion of the remaining ~$30 billion of its current share repurchase authorization for the purchase.",
+      "startChar": 3871,
+      "endChar": 3993,
+      "publishedAt": "2018-06-04",
+      "speaker": null
+    }
+  ],
+  "status": "incomplete",
+  "gaps": [
+    "missing_amy_judgment",
+    "single_document_family"
+  ],
+  "reviewer": null,
+  "reviewedAt": null,
+  "updatedAt": "2026-07-15T06:37:08.082Z"
+}

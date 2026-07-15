@@ -1,0 +1,190 @@
+{
+  "id": "event-nuance-acquisition-2021",
+  "candidateId": "candidate-nuance-acquisition-2021",
+  "title": "Nuance healthcare cloud acquisition for $19.7 billion",
+  "domain": "m_and_a",
+  "decisionDate": "2021-04-12",
+  "decisionQuestion": "Should Microsoft proceed with the all-cash acquisition of Nuance at $56.00 per share?",
+  "situation": "Microsoft announced plans to acquire Nuance for $19.7 billion, paying a 23% premium over the April 9 closing price. The deal doubles Microsoft's healthcare provider TAM to nearly $500 billion and is projected to be minimally dilutive in fiscal 2022 and accretive in fiscal 2023.",
+  "objectives": [
+    "Expand healthcare TAM to $500 billion",
+    "Achieve non-GAAP EPS accretion by fiscal 2023"
+  ],
+  "conditions": [
+    "Close the all-cash transaction",
+    "Integrate Nuance operations and technology successfully"
+  ],
+  "constraints": [
+    "Transaction valued at $19.7 billion inclusive of net debt",
+    "Expected minimal dilution (<1%) in fiscal 2022"
+  ],
+  "options": [
+    {
+      "id": "proceed",
+      "description": "Acquire Nuance at $56.00 per share",
+      "expectedBenefit": "Doubles healthcare provider TAM to nearly $500 billion; accretive to non-GAAP EPS in fiscal 2023",
+      "principalRisk": "Integration of Nuance operations, product lines, and technology",
+      "selected": true
+    },
+    {
+      "id": "reject",
+      "description": "Do not acquire Nuance",
+      "expectedBenefit": "Avoid $19.7 billion cash outlay and integration risk",
+      "principalRisk": "Forgo $500 billion healthcare TAM and future growth opportunities",
+      "selected": false
+    }
+  ],
+  "chosenAction": "proceed",
+  "rejectedBenefit": "Avoidance of $19.7 billion cash outlay and integration risk",
+  "observations": [
+    "Acquisition price is $56.00 per share, a 23% premium over April 9 closing",
+    "Healthcare TAM expected to reach nearly $500 billion post-acquisition",
+    "Non-GAAP EPS expected to be accretive in fiscal 2023"
+  ],
+  "inferences": [
+    "The premium reflects the strategic value of Nuance's healthcare position",
+    "Success depends on operational integration rather than just financial projections"
+  ],
+  "directAmyEvidenceIds": [],
+  "amyPolicyEvidenceIds": [],
+  "contextEvidenceIds": [
+    "span-fa215e8a178d02dc",
+    "span-bfff05635892a01c",
+    "span-4de02813c30e2e5d",
+    "span-409293939b72edd6",
+    "span-15e336cc5b6773ad",
+    "span-5311695e5d56b14b",
+    "span-ea5989742107a3a5",
+    "span-d100058f05386c50",
+    "span-7418090863abcd7f",
+    "span-7d9ccae75cd5ca32"
+  ],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": [
+    "source-fac8ed15fa324bf8",
+    "source-f7fd232d93262a85"
+  ],
+  "documentFamilyIds": [
+    "microsoft-nuance-announcement-2021"
+  ],
+  "evidenceSpans": [
+    {
+      "id": "span-fa215e8a178d02dc",
+      "sourceId": "source-fac8ed15fa324bf8",
+      "eventCandidateId": "candidate-nuance-acquisition-2021",
+      "role": "decision_context",
+      "exactQuote": "Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9, in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.",
+      "startChar": 337,
+      "endChar": 546,
+      "publishedAt": "2021-04-12",
+      "speaker": null
+    },
+    {
+      "id": "span-bfff05635892a01c",
+      "sourceId": "source-fac8ed15fa324bf8",
+      "eventCandidateId": "candidate-nuance-acquisition-2021",
+      "role": "decision_context",
+      "exactQuote": "The acquisition will double Microsoft’s total addressable market (TAM) in the healthcare provider space, bringing the company’s TAM in healthcare to nearly $500 billion.",
+      "startChar": 2616,
+      "endChar": 2785,
+      "publishedAt": "2021-04-12",
+      "speaker": null
+    },
+    {
+      "id": "span-4de02813c30e2e5d",
+      "sourceId": "source-fac8ed15fa324bf8",
+      "eventCandidateId": "candidate-nuance-acquisition-2021",
+      "role": "decision_context",
+      "exactQuote": "Microsoft expects the acquisition to be minimally dilutive (less than 1 percent) in fiscal year 2022 and to be accretive in fiscal year 2023 to non-GAAP earnings per share, based on the expected close timeframe.",
+      "startChar": 5123,
+      "endChar": 5334,
+      "publishedAt": "2021-04-12",
+      "speaker": null
+    },
+    {
+      "id": "span-409293939b72edd6",
+      "sourceId": "source-fac8ed15fa324bf8",
+      "eventCandidateId": "candidate-nuance-acquisition-2021",
+      "role": "decision_context",
+      "exactQuote": "the ability of Microsoft to successfully integrate Nuance’s operations, product lines, and technology",
+      "startChar": 12311,
+      "endChar": 12412,
+      "publishedAt": "2021-04-12",
+      "speaker": null
+    },
+    {
+      "id": "span-15e336cc5b6773ad",
+      "sourceId": "source-fac8ed15fa324bf8",
+      "eventCandidateId": "candidate-nuance-acquisition-2021",
+      "role": "decision_context",
+      "exactQuote": "the ability of Microsoft to implement its plans, forecasts, and other expectations with respect to Nuance’s business after the completion of the proposed merger and realize additional opportunities for growth and innovation",
+      "startChar": 12423,
+      "endChar": 12646,
+      "publishedAt": "2021-04-12",
+      "speaker": null
+    },
+    {
+      "id": "span-5311695e5d56b14b",
+      "sourceId": "source-f7fd232d93262a85",
+      "eventCandidateId": "candidate-nuance-acquisition-2021",
+      "role": "decision_context",
+      "exactQuote": "Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9, in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.",
+      "startChar": 485,
+      "endChar": 694,
+      "publishedAt": "2021-04-12",
+      "speaker": null
+    },
+    {
+      "id": "span-ea5989742107a3a5",
+      "sourceId": "source-f7fd232d93262a85",
+      "eventCandidateId": "candidate-nuance-acquisition-2021",
+      "role": "decision_context",
+      "exactQuote": "The acquisition will double Microsoft’s total addressable market (TAM) in the healthcare provider space, bringing the company’s TAM in healthcare to nearly $500 billion.",
+      "startChar": 2764,
+      "endChar": 2933,
+      "publishedAt": "2021-04-12",
+      "speaker": null
+    },
+    {
+      "id": "span-d100058f05386c50",
+      "sourceId": "source-f7fd232d93262a85",
+      "eventCandidateId": "candidate-nuance-acquisition-2021",
+      "role": "decision_context",
+      "exactQuote": "Microsoft expects the acquisition to be minimally dilutive (less than 1 percent) in fiscal year 2022 and to be accretive in fiscal year 2023 to non-GAAP earnings per share, based on the expected close timeframe.",
+      "startChar": 5270,
+      "endChar": 5481,
+      "publishedAt": "2021-04-12",
+      "speaker": null
+    },
+    {
+      "id": "span-7418090863abcd7f",
+      "sourceId": "source-f7fd232d93262a85",
+      "eventCandidateId": "candidate-nuance-acquisition-2021",
+      "role": "decision_context",
+      "exactQuote": "the ability of Microsoft to successfully integrate Nuance’s operations, product lines, and technology",
+      "startChar": 12461,
+      "endChar": 12562,
+      "publishedAt": "2021-04-12",
+      "speaker": null
+    },
+    {
+      "id": "span-7d9ccae75cd5ca32",
+      "sourceId": "source-f7fd232d93262a85",
+      "eventCandidateId": "candidate-nuance-acquisition-2021",
+      "role": "decision_context",
+      "exactQuote": "the ability of Microsoft to implement its plans, forecasts, and other expectations with respect to Nuance’s business after the completion of the proposed merger and realize additional opportunities for growth and innovation",
+      "startChar": 12573,
+      "endChar": 12796,
+      "publishedAt": "2021-04-12",
+      "speaker": null
+    }
+  ],
+  "status": "incomplete",
+  "gaps": [
+    "missing_amy_judgment",
+    "single_document_family"
+  ],
+  "reviewer": null,
+  "reviewedAt": null,
+  "updatedAt": "2026-07-15T06:40:08.833Z"
+}

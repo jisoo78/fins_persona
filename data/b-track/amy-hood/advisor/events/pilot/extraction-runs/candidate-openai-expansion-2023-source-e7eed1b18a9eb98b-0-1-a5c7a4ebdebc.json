@@ -1,0 +1,10 @@
+{
+  "candidateId": "candidate-openai-expansion-2023",
+  "sourceId": "source-e7eed1b18a9eb98b",
+  "chunkIndex": 0,
+  "attempt": 1,
+  "requestHash": "a5c7a4ebdebc456564f015a97c5bec8049a9a31f947bc7886097096d0481a257",
+  "response": "```json\n{\n  \"spans\": [\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"Today, we are announcing the third phase of our long-term partnership with OpenAI through a multiyear, multibillion dollar investment to accelerate AI breakthroughs to ensure these benefits are broadly shared with the world.\",\n      \"startChar\": 0,\n      \"endChar\": 199,\n      \"speaker\": null\n    },\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"This agreement follows our previous investments in 2019 and 2021. It extends our ongoing collaboration across AI supercomputing and research and enables each of us to independently commercialize the resulting advanced AI technologies.\",\n      \"startChar\": 200,\n      \"endChar\": 397,\n      \"speaker\": null\n    },\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"Supercomputing at scale – Microsoft will increase our investments in the development and deployment of specialized supercomputing systems to accelerate OpenAI’s groundbreaking independent AI research.\",\n      \"startChar\": 400,\n      \"endChar\": 610,\n      \"speaker\": null\n    },\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"New AI-powered experiences – Microsoft will deploy OpenAI’s models across our consumer and enterprise products and introduce new categories of digital experiences built on OpenAI’s technology.\",\n      \"startChar\": 613,\n      \"endChar\": 846,\n      \"speaker\": null\n    },\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"Exclusive cloud provider – As OpenAI’s exclusive cloud provider, Azure will power all OpenAI workloads across research, products and API services.\",\n      \"startChar\": 849,\n      \"endChar\": 1050,\n      \"speaker\": null\n    }\n  ]\n}\n```",
+  "elapsedMs": 39564,
+  "success": true
+}

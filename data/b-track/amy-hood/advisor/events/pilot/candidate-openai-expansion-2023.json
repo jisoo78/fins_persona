@@ -1,0 +1,142 @@
+{
+  "id": "event-openai-expansion-2023",
+  "candidateId": "candidate-openai-expansion-2023",
+  "title": "Expand OpenAI partnership",
+  "domain": "ai_cloud_capex",
+  "decisionDate": "2023-01-23",
+  "decisionQuestion": "Should Microsoft deepen its multiyear investment in OpenAI's supercomputing and research?",
+  "situation": "Microsoft is announcing the third phase of its OpenAI partnership, following 2019 and 2021 investments, to accelerate AI breakthroughs.",
+  "objectives": [
+    "Accelerate AI research breakthroughs",
+    "Deploy OpenAI models across consumer and enterprise products",
+    "Establish Azure as OpenAI's exclusive cloud provider"
+  ],
+  "conditions": [
+    "OpenAI must independently commercialize resulting technologies",
+    "Azure powers all OpenAI workloads across research, products, and API services"
+  ],
+  "constraints": [
+    "Investment must target substantial opportunity and growth areas"
+  ],
+  "options": [
+    {
+      "id": "deepen_partnership",
+      "description": "Commit to a multiyear, multibillion dollar investment in OpenAI supercomputing and research",
+      "expectedBenefit": "Accelerates AI breakthroughs and secures Azure as OpenAI's exclusive cloud provider",
+      "principalRisk": "Large capital commitment to a single partner's research direction",
+      "selected": true
+    },
+    {
+      "id": "maintain_status_quo",
+      "description": "Continue existing collaboration without new multibillion dollar investment",
+      "expectedBenefit": "Avoids large capital outlay and maintains flexibility",
+      "principalRisk": "Loses exclusive cloud position and falls behind in AI model deployment",
+      "selected": false
+    }
+  ],
+  "chosenAction": "deepen_partnership",
+  "rejectedBenefit": "Avoids large capital outlay and maintains flexibility",
+  "observations": [
+    "This is the third phase of a partnership that began in 2019",
+    "Azure will power all OpenAI workloads across research, products, and API services",
+    "Amy Hood stated the importance of investing where there is substantial opportunity and growth"
+  ],
+  "inferences": [
+    "The exclusive cloud provider status creates a long-term lock-in for Azure",
+    "The multibillion dollar scale signals Microsoft's view of AI as a generational technology",
+    "Independent commercialization clauses protect both companies from antitrust and competition concerns"
+  ],
+  "directAmyEvidenceIds": [],
+  "amyPolicyEvidenceIds": [
+    "span-7a8c1662a2c8a94e"
+  ],
+  "contextEvidenceIds": [
+    "span-d2da4ef04c3b6e0c",
+    "span-d7a1fe8155e1f9ca",
+    "span-7d9ac61299798976",
+    "span-9e1cb3d5221eeb1f",
+    "span-55d19fa1cc5e6388"
+  ],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": [
+    "source-e7eed1b18a9eb98b",
+    "source-ad9a23176d9cf21d-25fb51a81eef"
+  ],
+  "documentFamilyIds": [
+    "source:source-e7eed1b18a9eb98b",
+    "source:source-ad9a23176d9cf21d-25fb51a81eef"
+  ],
+  "evidenceSpans": [
+    {
+      "id": "span-d2da4ef04c3b6e0c",
+      "sourceId": "source-e7eed1b18a9eb98b",
+      "eventCandidateId": "candidate-openai-expansion-2023",
+      "role": "decision_context",
+      "exactQuote": "Today, we are announcing the third phase of our long-term partnership with OpenAI through a multiyear, multibillion dollar investment to accelerate AI breakthroughs to ensure these benefits are broadly shared with the world.",
+      "startChar": 0,
+      "endChar": 224,
+      "publishedAt": "2023-01-23",
+      "speaker": null
+    },
+    {
+      "id": "span-d7a1fe8155e1f9ca",
+      "sourceId": "source-e7eed1b18a9eb98b",
+      "eventCandidateId": "candidate-openai-expansion-2023",
+      "role": "decision_context",
+      "exactQuote": "This agreement follows our previous investments in 2019 and 2021. It extends our ongoing collaboration across AI supercomputing and research and enables each of us to independently commercialize the resulting advanced AI technologies.",
+      "startChar": 225,
+      "endChar": 459,
+      "publishedAt": "2023-01-23",
+      "speaker": null
+    },
+    {
+      "id": "span-7d9ac61299798976",
+      "sourceId": "source-e7eed1b18a9eb98b",
+      "eventCandidateId": "candidate-openai-expansion-2023",
+      "role": "decision_context",
+      "exactQuote": "Supercomputing at scale – Microsoft will increase our investments in the development and deployment of specialized supercomputing systems to accelerate OpenAI’s groundbreaking independent AI research.",
+      "startChar": 460,
+      "endChar": 660,
+      "publishedAt": "2023-01-23",
+      "speaker": null
+    },
+    {
+      "id": "span-9e1cb3d5221eeb1f",
+      "sourceId": "source-e7eed1b18a9eb98b",
+      "eventCandidateId": "candidate-openai-expansion-2023",
+      "role": "decision_context",
+      "exactQuote": "New AI-powered experiences – Microsoft will deploy OpenAI’s models across our consumer and enterprise products and introduce new categories of digital experiences built on OpenAI’s technology.",
+      "startChar": 806,
+      "endChar": 998,
+      "publishedAt": "2023-01-23",
+      "speaker": null
+    },
+    {
+      "id": "span-55d19fa1cc5e6388",
+      "sourceId": "source-e7eed1b18a9eb98b",
+      "eventCandidateId": "candidate-openai-expansion-2023",
+      "role": "decision_context",
+      "exactQuote": "Exclusive cloud provider – As OpenAI’s exclusive cloud provider, Azure will power all OpenAI workloads across research, products and API services.",
+      "startChar": 1250,
+      "endChar": 1396,
+      "publishedAt": "2023-01-23",
+      "speaker": null
+    },
+    {
+      "id": "span-7a8c1662a2c8a94e",
+      "sourceId": "source-ad9a23176d9cf21d-25fb51a81eef",
+      "eventCandidateId": "candidate-openai-expansion-2023",
+      "role": "amy_policy",
+      "exactQuote": "I think it’s important in terms of how we think about investment and continuing to invest where we’re seeing substantial opportunity and growth.",
+      "startChar": 46930,
+      "endChar": 47074,
+      "publishedAt": "2022-10-25",
+      "speaker": "Amy Hood"
+    }
+  ],
+  "status": "approved",
+  "gaps": [],
+  "reviewer": "Codex evidence review",
+  "reviewedAt": "2026-07-15T06:49:28.599Z",
+  "updatedAt": "2026-07-15T06:49:28.599Z"
+}

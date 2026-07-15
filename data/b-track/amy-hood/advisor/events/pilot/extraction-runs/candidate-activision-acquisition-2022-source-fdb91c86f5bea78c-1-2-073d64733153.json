@@ -1,0 +1,10 @@
+{
+  "candidateId": "candidate-activision-acquisition-2022",
+  "sourceId": "source-fdb91c86f5bea78c",
+  "chunkIndex": 1,
+  "attempt": 2,
+  "requestHash": "073d647331538960f4c92b6b47aaddee874e66e92b68669d75907c1abc476987",
+  "response": "```json\n{\n  \"spans\": [\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"Shareholder and financial information, as well as today’s 6:00 a.m. Pacific time conference call with investors and analysts, is available at http://www.microsoft.com/en-us/investor.\",\n      \"startChar\": 1379,\n      \"endChar\": 1440,\n      \"speaker\": \"Microsoft\"\n    }\n  ]\n}\n```",
+  "elapsedMs": 11966,
+  "success": false
+}

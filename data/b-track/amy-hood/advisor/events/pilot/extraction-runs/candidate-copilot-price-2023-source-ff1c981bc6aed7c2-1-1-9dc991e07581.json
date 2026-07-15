@@ -1,0 +1,10 @@
+{
+  "candidateId": "candidate-copilot-price-2023",
+  "sourceId": "source-ff1c981bc6aed7c2",
+  "chunkIndex": 1,
+  "attempt": 1,
+  "requestHash": "9dc991e0758126baf88482bdd642034a28c729d0d5d37f8ead1234bc42bc11c3",
+  "response": "```json\n{\n  \"spans\": []\n}\n```",
+  "elapsedMs": 4277,
+  "success": true
+}

@@ -1,0 +1,154 @@
+{
+  "id": "event-linkedin-acquisition-2016",
+  "candidateId": "candidate-linkedin-acquisition-2016",
+  "title": "LinkedIn acquisition price financing and dilution",
+  "domain": "m_and_a",
+  "decisionDate": "2016-06-13",
+  "decisionQuestion": "How should Microsoft finance the $26.2 billion all-cash LinkedIn acquisition while minimizing EPS dilution?",
+  "situation": "Microsoft announced the acquisition of LinkedIn at $196 per share in an all-cash deal. The transaction is expected to be slightly dilutive to non-GAAP EPS in fiscal years 2017 and 2018, becoming accretive in fiscal year 2019 or less than two years post-closing.",
+  "objectives": [
+    "Fund the $26.2 billion all-cash transaction",
+    "Minimize near-term non-GAAP EPS dilution",
+    "Achieve EPS accretion within two years"
+  ],
+  "conditions": [
+    "Transaction is all-cash",
+    "Expected close date influences dilution timeline"
+  ],
+  "constraints": [
+    "Acquisition must meet Microsoft's high bar for new additions"
+  ],
+  "options": [
+    {
+      "id": "debt_financing",
+      "description": "Finance primarily through new debt issued opportunistically during favorable market windows",
+      "expectedBenefit": "Avoids equity issuance and minimizes immediate dilution; debt is accretive once LinkedIn's returns exceed interest",
+      "principalRisk": "Rising interest rates or unfavorable market windows could increase financing costs",
+      "selected": true
+    },
+    {
+      "id": "equity_financing",
+      "description": "Finance through new share issuance",
+      "expectedBenefit": "No interest payments",
+      "principalRisk": "Immediate and permanent dilution of existing shareholders; higher bar to meet",
+      "selected": false
+    }
+  ],
+  "chosenAction": "debt_financing",
+  "rejectedBenefit": "No interest payments from equity financing",
+  "observations": [
+    "Transaction is all-cash valued at $26.2 billion inclusive of net cash",
+    "Expected dilution is about 1 percent to non-GAAP EPS in fiscal years 2017 and 2018",
+    "Accretive to non-GAAP EPS expected in fiscal year 2019 or less than two years post-close"
+  ],
+  "inferences": [
+    "Debt financing is the preferred lever because it defers dilution and allows the acquisition to become accretive faster than equity issuance",
+    "The 1 percent dilution is a calculated near-term cost accepted to achieve long-term accretion",
+    "Opportunistic debt issuance suggests management will time the raise to minimize interest expense"
+  ],
+  "directAmyEvidenceIds": [
+    "span-0b8c7fcb7c5c77af",
+    "span-9f190c9d1c5b03bb",
+    "span-9335840b833b9436",
+    "span-a56102ae9dc1b872"
+  ],
+  "amyPolicyEvidenceIds": [],
+  "contextEvidenceIds": [
+    "span-b8f600f2ed547dff",
+    "span-3b790581f5848009",
+    "span-c67e1e8c5dde7e12"
+  ],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": [
+    "source-efcea4dae6cafd51",
+    "source-f14d371fe2c97c5f"
+  ],
+  "documentFamilyIds": [
+    "source:source-efcea4dae6cafd51",
+    "source:source-f14d371fe2c97c5f"
+  ],
+  "evidenceSpans": [
+    {
+      "id": "span-b8f600f2ed547dff",
+      "sourceId": "source-efcea4dae6cafd51",
+      "eventCandidateId": "candidate-linkedin-acquisition-2016",
+      "role": "decision_context",
+      "exactQuote": "Microsoft will acquire LinkedIn for $196 per share in an all-cash transaction valued at $26.2 billion, inclusive of LinkedIn’s net cash",
+      "startChar": 207,
+      "endChar": 342,
+      "publishedAt": "2016-06-13",
+      "speaker": null
+    },
+    {
+      "id": "span-3b790581f5848009",
+      "sourceId": "source-efcea4dae6cafd51",
+      "eventCandidateId": "candidate-linkedin-acquisition-2016",
+      "role": "decision_context",
+      "exactQuote": "Microsoft will finance the transaction primarily through the issuance of new indebtedness",
+      "startChar": 3006,
+      "endChar": 3095,
+      "publishedAt": "2016-06-13",
+      "speaker": null
+    },
+    {
+      "id": "span-c67e1e8c5dde7e12",
+      "sourceId": "source-efcea4dae6cafd51",
+      "eventCandidateId": "candidate-linkedin-acquisition-2016",
+      "role": "decision_context",
+      "exactQuote": "Microsoft expects the acquisition to have minimal dilution of ~1 percent to non-GAAP earnings per share for the remainder of fiscal year 2017 post-closing and for fiscal year 2018 based on the expected close date, and become accretive to Microsoft’s non-GAAP earnings per share in Microsoft’s fiscal year 2019 or less than two years post-closing",
+      "startChar": 3234,
+      "endChar": 3579,
+      "publishedAt": "2016-06-13",
+      "speaker": null
+    },
+    {
+      "id": "span-0b8c7fcb7c5c77af",
+      "sourceId": "source-f14d371fe2c97c5f",
+      "eventCandidateId": "candidate-linkedin-acquisition-2016",
+      "role": "direct_amy",
+      "exactQuote": "we’ve agreed to acquire LinkedIn for $196 per share in an all-cash transaction that is approximately $26 billion inclusive of LinkedIn’s net cash.",
+      "startChar": 20518,
+      "endChar": 20664,
+      "publishedAt": "2016-06-13",
+      "speaker": "Amy Hood"
+    },
+    {
+      "id": "span-9f190c9d1c5b03bb",
+      "sourceId": "source-f14d371fe2c97c5f",
+      "eventCandidateId": "candidate-linkedin-acquisition-2016",
+      "role": "direct_amy",
+      "exactQuote": "We will finance this transaction primarily through new debt issued prior to close, which we intend to raise opportunistically during favorable market windows.",
+      "startChar": 21193,
+      "endChar": 21351,
+      "publishedAt": "2016-06-13",
+      "speaker": "Amy Hood"
+    },
+    {
+      "id": "span-9335840b833b9436",
+      "sourceId": "source-f14d371fe2c97c5f",
+      "eventCandidateId": "candidate-linkedin-acquisition-2016",
+      "role": "direct_amy",
+      "exactQuote": "Near-term in Microsoft’s Fiscal ’17 and ’18, we anticipate this transaction will be slightly dilutive, about 1 percent, to non-GAAP EPS based on the expected close date. By FY ’19, and less than two years after close, we expect the transaction to be accretive to non-GAAP EPS.",
+      "startChar": 21626,
+      "endChar": 21902,
+      "publishedAt": "2016-06-13",
+      "speaker": "Amy Hood"
+    },
+    {
+      "id": "span-a56102ae9dc1b872",
+      "sourceId": "source-f14d371fe2c97c5f",
+      "eventCandidateId": "candidate-linkedin-acquisition-2016",
+      "role": "direct_amy",
+      "exactQuote": "The addition of LinkedIn to Microsoft meets this high bar.",
+      "startChar": 23367,
+      "endChar": 23425,
+      "publishedAt": "2016-06-13",
+      "speaker": "Amy Hood"
+    }
+  ],
+  "status": "approved",
+  "gaps": [],
+  "reviewer": "Codex evidence review",
+  "reviewedAt": "2026-07-15T06:49:24.885Z",
+  "updatedAt": "2026-07-15T06:49:24.885Z"
+}
