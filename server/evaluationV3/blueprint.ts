@@ -25,7 +25,7 @@ export const assertEvaluationV3Blueprint = (blueprint: EvaluationV3Blueprint): v
     ['amy_specific_discrimination', 10],
     ['temporal_holdout', 10],
     ['counterfactual_pair', 6],
-    ['new_advisory_scenario', 4],
+    ['new_advisory_transfer', 4],
   ]);
   for (const [category, count] of expected) {
     const actual = blueprint.slots.filter((item) => item.category === category).length;
@@ -46,10 +46,7 @@ export const assertEvaluationV3Blueprint = (blueprint: EvaluationV3Blueprint): v
     }
   }
   for (const slot of blueprint.slots) {
-    if (slot.category === 'new_advisory_scenario' && slot.type !== 'subjective') {
-      throw new Error(`${slot.id} advisory slot must be subjective`);
-    }
-    if (slot.category !== 'new_advisory_scenario' && slot.type !== 'multiple_choice') {
+    if (slot.type !== 'multiple_choice') {
       throw new Error(`${slot.id} must be multiple-choice`);
     }
     if (slot.category === 'temporal_holdout' && slot.requiredSplit !== 'holdout') {
@@ -58,6 +55,15 @@ export const assertEvaluationV3Blueprint = (blueprint: EvaluationV3Blueprint): v
     if (slot.category !== 'temporal_holdout' && slot.requiredSplit !== 'none') {
       throw new Error(`${slot.id} non-temporal slot must require none`);
     }
+  }
+  const expectedIds = [
+    ...Array.from({ length: 10 }, (_, index) => `D${String(index + 1).padStart(2, '0')}`),
+    ...Array.from({ length: 10 }, (_, index) => `H${String(index + 1).padStart(2, '0')}`),
+    'C01A', 'C01B', 'C02A', 'C02B', 'C03A', 'C03B',
+    'T01', 'T02', 'T03', 'T04',
+  ];
+  if (ids.join('\n') !== expectedIds.join('\n')) {
+    throw new Error('evaluation v3 slot IDs must match the fixed D10/H10/C6/T4 order');
   }
 };
 

@@ -223,33 +223,33 @@
       "scoreDimensions": ["decisionSelection", "conditionSensitivity"]
     },
     {
-      "id": "S01",
-      "category": "new_advisory_scenario",
-      "type": "subjective",
+      "id": "T01",
+      "category": "new_advisory_transfer",
+      "type": "multiple_choice",
       "domain": "m_and_a",
       "requiredSplit": "none",
       "scoreDimensions": ["criteriaPriority", "conditionSensitivity", "evidenceFaithfulness", "actionability"]
     },
     {
-      "id": "S02",
-      "category": "new_advisory_scenario",
-      "type": "subjective",
+      "id": "T02",
+      "category": "new_advisory_transfer",
+      "type": "multiple_choice",
       "domain": "ai_cloud_capex",
       "requiredSplit": "none",
       "scoreDimensions": ["criteriaPriority", "conditionSensitivity", "evidenceFaithfulness", "actionability"]
     },
     {
-      "id": "S03",
-      "category": "new_advisory_scenario",
-      "type": "subjective",
+      "id": "T03",
+      "category": "new_advisory_transfer",
+      "type": "multiple_choice",
       "domain": "pricing_monetization",
       "requiredSplit": "none",
       "scoreDimensions": ["criteriaPriority", "conditionSensitivity", "evidenceFaithfulness", "actionability"]
     },
     {
-      "id": "S04",
-      "category": "new_advisory_scenario",
-      "type": "subjective",
+      "id": "T04",
+      "category": "new_advisory_transfer",
+      "type": "multiple_choice",
       "domain": "cost_efficiency",
       "requiredSplit": "none",
       "scoreDimensions": ["criteriaPriority", "conditionSensitivity", "evidenceFaithfulness", "actionability"]
