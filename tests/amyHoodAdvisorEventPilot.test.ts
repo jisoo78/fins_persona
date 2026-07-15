@@ -523,5 +523,15 @@ test('failure: event CLI rejects missing IDs and blank reviewers', () => {
 
 test('failure: pilot model settings cap output without changing the persona default', () => {
   assert.equal(modelRequestSettings('local').maxTokens, 5_000);
-  assert.equal(modelRequestSettings('local', { maxTokens: 1_200 }).maxTokens, 1_200);
+  assert.equal(modelRequestSettings('local', { maxTokens: 700 }).maxTokens, 700);
+});
+
+test('failure: event-card prompt requests the exact compact option contract', async () => {
+  const prompt = await readFile(
+    new URL('../agent_prompts/prompts/amy-hood-event-card-builder.md', import.meta.url),
+    'utf8',
+  );
+  assert.match(prompt, /exactly two options/i);
+  assert.match(prompt, /id, description,\s*expectedBenefit, principalRisk, and selected/);
+  assert.match(prompt, /one concise item/i);
 });

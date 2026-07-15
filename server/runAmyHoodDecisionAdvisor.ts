@@ -854,7 +854,7 @@ const run = async () => {
     if (Boolean(candidateId) === pilot) {
       throw new Error('event:build requires exactly one of --id or --pilot');
     }
-    const model = createModelClient('local', { maxTokens: 1_200 });
+    const model = createModelClient('local', { maxTokens: 700 });
     if (candidateId) {
       const card = await buildPilotEvent(root, candidateId, model, {
         refreshApproved: args.includes('--refresh-approved'),
