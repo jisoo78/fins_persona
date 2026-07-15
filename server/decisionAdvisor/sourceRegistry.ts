@@ -359,16 +359,33 @@ export const transitionSource = async (
 export const approveReviewedSource = async (
   root: string,
   sourceId: string,
-): Promise<{ source: AdvisorSourceRecord; changed: boolean }> => {
-  const current = loadSourceRecord(root, sourceId);
-  if (current.collectionStatus === 'approved') {
-    return { source: current, changed: false };
-  }
-  return {
-    source: await transitionSource(root, sourceId, 'approved', { failureReason: null }),
-    changed: true,
-  };
-};
+  speaker: string | null = null,
+): Promise<{ source: AdvisorSourceRecord; changed: boolean }> =>
+  withRegistryMutation(root, async () => {
+    const registry = loadRegistry(root);
+    const index = registry.sources.findIndex(({ id }) => id === sourceId);
+    if (index < 0) throw new Error(`unknown advisor source: ${sourceId}`);
+    const current = registry.sources[index];
+    if (current.collectionStatus === 'approved' && current.speaker === speaker) {
+      return { source: current, changed: false };
+    }
+    if (current.collectionStatus !== 'review_required'
+      && current.collectionStatus !== 'approved') {
+      throw new Error(`invalid source transition: ${current.collectionStatus} -> approved`);
+    }
+    if (current.failureReason === 'speaker_uncertain') {
+      throw new Error(`advisor source ${current.id} with uncertain speaker cannot be approved`);
+    }
+    const source = validateRecord({
+      ...current,
+      speaker,
+      collectionStatus: 'approved',
+      failureReason: null,
+    }, root);
+    registry.sources[index] = source;
+    await saveRegistry(root, registry);
+    return { source, changed: true };
+  });
 
 export const persistReviewedSource = async (
   root: string,

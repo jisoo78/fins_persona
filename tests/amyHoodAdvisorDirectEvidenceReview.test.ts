@@ -475,6 +475,12 @@ test('happy: evidence check and apply CLI report valid, applied, then unchanged'
     const applied = runAdvisorCli(item.root, 'evidence:apply', '--file', manifestPath);
     assert.equal(applied.status, 0, applied.stderr);
     assert.match(applied.stdout, /applied/i);
+    const sourceGate = runAdvisorCli(item.root, 'sources:check');
+    assert.equal(sourceGate.status, 1);
+    assert.doesNotMatch(
+      sourceGate.stderr,
+      new RegExp(`${item.manifest.candidateId} lacks a verified candidate-specific direct Amy locator`, 'i'),
+    );
     const unchanged = runAdvisorCli(item.root, 'evidence:apply', '--file', manifestPath);
     assert.equal(unchanged.status, 0, unchanged.stderr);
     assert.match(unchanged.stdout, /unchanged/i);

@@ -71,7 +71,11 @@ export type DirectEvidenceReviewApplyResult = {
 export type DirectEvidenceReviewDependencies = {
   validateCandidates(candidates: EventCandidate[]): void;
   persistCandidates(candidates: EventCandidate[], candidatePath: string): Promise<void>;
-  approveSource(root: string, sourceId: string): Promise<{ source: AdvisorSourceRecord; changed: boolean }>;
+  approveSource(
+    root: string,
+    sourceId: string,
+    speaker: string | null,
+  ): Promise<{ source: AdvisorSourceRecord; changed: boolean }>;
 };
 
 const decisions = new Set<DirectEvidenceReviewDecision>([
@@ -361,7 +365,9 @@ export const applyDirectEvidenceReview = async (
     }
   }
 
-  const sourceAlreadyApproved = verified.source.collectionStatus === 'approved';
+  const expectedSourceSpeaker = manifest.decision === 'approved_direct' ? manifest.speaker : null;
+  const sourceAlreadyApproved = verified.source.collectionStatus === 'approved'
+    && verified.source.speaker === expectedSourceSpeaker;
   const associationAlreadyApplied = JSON.stringify(association) === JSON.stringify(expectedAssociation);
   const aliasesAlreadyApplied = JSON.stringify(candidate.eventFingerprint.aliases ?? [])
     === JSON.stringify(aliases);
@@ -383,7 +389,7 @@ export const applyDirectEvidenceReview = async (
   dependencies.validateCandidates(candidates);
   await dependencies.persistCandidates(candidates, candidatePath);
   try {
-    await dependencies.approveSource(root, manifest.sourceId);
+    await dependencies.approveSource(root, manifest.sourceId, expectedSourceSpeaker);
   } catch (error) {
     try {
       await writeJsonAtomic(candidatePath, JSON.parse(originalCandidateBytes) as unknown);
