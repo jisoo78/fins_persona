@@ -7,5 +7,8 @@ export const advisorPaths = (root: string) => {
     root: advisorRoot,
     registry: path.resolve(advisorRoot, 'source-registry.json'),
     raw: path.resolve(advisorRoot, 'raw'),
+    eventsPilot: path.resolve(advisorRoot, 'events/pilot'),
+    pilotManifest: path.resolve(advisorRoot, 'events/pilot/pilot-manifest.json'),
+    pilotExtractionRuns: path.resolve(advisorRoot, 'events/pilot/extraction-runs'),
   };
 };
