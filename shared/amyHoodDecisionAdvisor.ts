@@ -307,7 +307,7 @@ export type PilotDecisionOption = {
 };
 
 export type PilotEvidenceGap =
-  | 'missing_direct_amy'
+  | 'missing_amy_judgment'
   | 'missing_decision_context'
   | 'missing_immutable_artifact'
   | 'invalid_quote_offsets'
@@ -332,6 +332,7 @@ export type PilotDecisionEvent = {
   observations: string[];
   inferences: string[];
   directAmyEvidenceIds: string[];
+  amyPolicyEvidenceIds: string[];
   contextEvidenceIds: string[];
   postOutcomeEvidenceIds: string[];
   sourceIds: string[];

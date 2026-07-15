@@ -122,25 +122,35 @@ export const validatePilotEventCard = (
   }
   if (!Array.isArray(card.evidenceSpans)
     || !Array.isArray(card.directAmyEvidenceIds)
+    || !Array.isArray(card.amyPolicyEvidenceIds)
     || !Array.isArray(card.contextEvidenceIds)
     || !Array.isArray(card.postOutcomeEvidenceIds)) {
     throw new Error('event card evidence references are invalid');
   }
 
-  const blockingGaps = card.gaps.filter((gap) => gap !== 'single_document_family');
+  const blockingGaps = card.gaps.filter((gap) =>
+    gap !== 'single_document_family'
+    && (gap as string) !== 'missing_direct_amy'
+    && gap !== 'missing_amy_judgment');
   const spanById = new Map(card.evidenceSpans.map((span) => [span.id, span]));
   const direct = card.directAmyEvidenceIds
     .map((id) => spanById.get(id))
     .filter((span): span is PilotEvidenceSpan => span?.role === 'direct_amy');
+  const policy = card.amyPolicyEvidenceIds
+    .map((id) => spanById.get(id))
+    .filter((span): span is PilotEvidenceSpan => span?.role === 'amy_policy');
   const context = card.contextEvidenceIds
     .map((id) => spanById.get(id))
     .filter((span): span is PilotEvidenceSpan => span?.role === 'decision_context');
 
-  if (direct.length === 0) blockingGaps.push('missing_direct_amy');
+  if (direct.length === 0 && policy.length === 0) {
+    blockingGaps.push('missing_amy_judgment');
+  }
   if (context.length === 0) blockingGaps.push('missing_decision_context');
 
   const coreIds = new Set([
     ...card.directAmyEvidenceIds,
+    ...card.amyPolicyEvidenceIds,
     ...card.contextEvidenceIds,
   ]);
   const postOutcomeIds = new Set(card.postOutcomeEvidenceIds);
@@ -201,6 +211,9 @@ export const proposePilotEventCard = async (
   const directAmyEvidenceIds = spans
     .filter(({ role }) => role === 'direct_amy')
     .map(({ id }) => id);
+  const amyPolicyEvidenceIds = spans
+    .filter(({ role }) => role === 'amy_policy')
+    .map(({ id }) => id);
   const contextEvidenceIds = spans
     .filter(({ role }) => role === 'decision_context')
     .map(({ id }) => id);
@@ -225,6 +238,7 @@ export const proposePilotEventCard = async (
     observations: proposal.observations,
     inferences: proposal.inferences,
     directAmyEvidenceIds,
+    amyPolicyEvidenceIds,
     contextEvidenceIds,
     postOutcomeEvidenceIds,
     sourceIds: unique(spans.map(({ sourceId }) => sourceId)),

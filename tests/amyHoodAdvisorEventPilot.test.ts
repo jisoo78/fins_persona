@@ -9,8 +9,8 @@
  *    - source-level Amy identity is accepted when speaker segments are absent.
  *
  * 3. Failure Path:
- *    - invalid manifests, malformed model JSON, invented quotes, missing direct
- *      Amy evidence, post-outcome leakage, and persistence failures cannot
+ *    - invalid manifests, malformed model JSON, invented quotes, missing Amy
+ *      judgment evidence, post-outcome leakage, and persistence failures cannot
  *      approve or corrupt a card.
  */
 import assert from 'node:assert/strict';
@@ -237,13 +237,14 @@ const reportCard = (
   observations: ['Demand evidence is visible.'],
   inferences: ['The action balances growth and proof.'],
   directAmyEvidenceIds: [],
+  amyPolicyEvidenceIds: [],
   contextEvidenceIds: [],
   postOutcomeEvidenceIds: [],
   sourceIds: [],
   documentFamilyIds: [],
   evidenceSpans: [],
   status,
-  gaps: status === 'approved' ? [] : ['missing_direct_amy'],
+  gaps: status === 'approved' ? [] : ['missing_amy_judgment'],
   reviewer: status === 'approved' ? 'Codex evidence review' : null,
   reviewedAt: status === 'approved' ? '2026-07-15T12:00:00.000Z' : null,
   updatedAt: '2026-07-15T12:00:00.000Z',
@@ -555,6 +556,59 @@ test('happy: a validator-ready proposal becomes approved only after explicit rev
   assert.equal(approved.reviewer, 'Codex evidence review');
 });
 
+test('happy: Amy policy evidence plus decision context is validator-ready', async () => {
+  const { candidate, spans, model } = await eventCardFixture();
+  const policy: PilotEvidenceSpan = {
+    ...spans[0],
+    id: 'span-policy',
+    role: 'amy_policy',
+    publishedAt: '2016-05-10',
+    exactQuote: 'We invest consistently when customer value and long-term return are visible.',
+    endChar: 93,
+  };
+
+  const proposed = await proposePilotEventCard(candidate, [policy, spans[1]], model, {
+    documentFamilyIds: ['amy-policy-2016', 'linkedin-announcement-2016'],
+    now: '2026-07-15T10:00:00.000Z',
+  });
+
+  assert.deepEqual(proposed.directAmyEvidenceIds, []);
+  assert.deepEqual(proposed.amyPolicyEvidenceIds, ['span-policy']);
+  assert.deepEqual(validatePilotEventCard(proposed).blockingGaps, []);
+});
+
+test('failure: decision context without Amy judgment uses the explicit gap', async () => {
+  const { candidate, spans, model } = await eventCardFixture();
+  const proposed = await proposePilotEventCard(candidate, spans.slice(1), model, {
+    documentFamilyIds: ['linkedin-announcement-2016'],
+    now: '2026-07-15T10:00:00.000Z',
+  });
+
+  assert.deepEqual(
+    validatePilotEventCard(proposed).blockingGaps,
+    ['missing_amy_judgment'],
+  );
+});
+
+test('failure: post-decision Amy policy evidence is outcome leakage', async () => {
+  const { candidate, spans, model } = await eventCardFixture();
+  const policy: PilotEvidenceSpan = {
+    ...spans[0],
+    id: 'span-policy-late',
+    role: 'amy_policy',
+    publishedAt: '2016-06-14',
+  };
+  const proposed = await proposePilotEventCard(candidate, [policy, spans[1]], model, {
+    documentFamilyIds: ['amy-policy-2016', 'linkedin-announcement-2016'],
+    now: '2026-07-15T10:00:00.000Z',
+  });
+
+  assert.deepEqual(
+    validatePilotEventCard(proposed).blockingGaps,
+    ['post_outcome_leakage'],
+  );
+});
+
 test('happy: one document family remains reviewable with a diversity advisory', async () => {
   const { candidate, spans, model } = await eventCardFixture();
   const proposed = await proposePilotEventCard(candidate, spans, model, {
@@ -568,7 +622,7 @@ test('happy: one document family remains reviewable with a diversity advisory', 
   assert.deepEqual(validation.advisoryGaps, ['single_document_family']);
 });
 
-test('failure: missing direct evidence and outcome leakage cannot be approved', async () => {
+test('failure: missing Amy judgment and outcome leakage cannot be approved', async () => {
   const root = await mkdtemp(path.join(os.tmpdir(), 'amy-pilot-invalid-event-'));
   const { candidate, spans, model } = await eventCardFixture();
   const proposed = await proposePilotEventCard(candidate, spans.slice(1), model, {
@@ -581,7 +635,7 @@ test('failure: missing direct evidence and outcome leakage cannot be approved', 
       reviewer: 'Codex evidence review',
       reviewedAt: '2026-07-15T12:00:00.000Z',
     }),
-    /missing_direct_amy/,
+    /missing_amy_judgment/,
   );
 
   const leaked: PilotDecisionEvent = {
@@ -593,11 +647,12 @@ test('failure: missing direct evidence and outcome leakage cannot be approved', 
       publishedAt: '2021-01-01',
     }, spans[1]],
     directAmyEvidenceIds: ['span-outcome'],
+    amyPolicyEvidenceIds: [],
     postOutcomeEvidenceIds: ['span-outcome'],
   };
   assert.deepEqual(
     validatePilotEventCard(leaked).blockingGaps,
-    ['missing_direct_amy', 'post_outcome_leakage'],
+    ['missing_amy_judgment', 'post_outcome_leakage'],
   );
 });
 
@@ -644,6 +699,39 @@ test('happy: pilot report summarizes ten cards and all five domains', async () =
       'utf8',
     ),
     /비공식 AI 시뮬레이션/,
+  );
+});
+
+test('happy: pilot report separates an Amy policy quote from direct event evidence', async () => {
+  const root = await mkdtemp(path.join(os.tmpdir(), 'amy-pilot-policy-report-'));
+  const target = validManifest.targets[3];
+  const card = reportCard(target, 'incomplete');
+  const policy: PilotEvidenceSpan = {
+    id: 'span-policy-report',
+    sourceId: 'source-policy-report',
+    eventCandidateId: target.candidateId,
+    role: 'amy_policy',
+    exactQuote: 'When we add substantial customer value, we establish a separate list price.',
+    startChar: 10,
+    endChar: 84,
+    publishedAt: '2023-04-25',
+    speaker: 'Amy Hood',
+  };
+  card.evidenceSpans = [policy];
+  card.amyPolicyEvidenceIds = [policy.id];
+  card.sourceIds = [policy.sourceId];
+
+  const report = await buildPilotReport(root, validManifest, [card]);
+  const row = report.rows.find(({ candidateId }) => candidateId === target.candidateId);
+  assert(row);
+  assert.equal(row.directQuote, '없음');
+  assert.equal(row.policyQuote, policy.exactQuote);
+  assert.match(
+    await readFile(
+      path.join(root, 'docs/reports/2026-07-15-amy-hood-phase-3-pilot-review.html'),
+      'utf8',
+    ),
+    /Amy policy:/,
   );
 });
 

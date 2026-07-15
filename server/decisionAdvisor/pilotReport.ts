@@ -18,6 +18,7 @@ import {
 } from './eventCard';
 import { readJsonFile, writeJsonAtomic } from './jsonStore';
 import { loadPilotManifest } from './pilotManifest';
+import { loadValidatedPilotPolicyEvidence } from './pilotPolicyEvidence';
 import { advisorPaths } from './paths';
 import { loadPilotSourceInputs } from './pilotSourceLoader';
 
@@ -34,6 +35,7 @@ export type PilotReportRow = {
   decisionQuestion: string;
   chosenAction: string;
   directQuote: string;
+  policyQuote: string;
   contextQuote: string;
   gaps: PilotEvidenceGap[];
 };
@@ -89,6 +91,7 @@ export const buildPilotEvent = async (
   if (current?.status === 'approved' && !options.refreshApproved) return current;
 
   const loaded = await loadPilotSourceInputs(root, candidate);
+  const policyByCandidate = await loadValidatedPilotPolicyEvidence(root, candidates);
   const spans = [];
   const extractionGaps: PilotEvidenceGap[] = [];
   for (const input of loaded.core) {
@@ -96,11 +99,16 @@ export const buildPilotEvent = async (
     spans.push(...result.spans);
     extractionGaps.push(...result.gaps);
   }
+  spans.push(...(policyByCandidate.get(candidate.id) ?? []));
   if (spans.length === 0) {
     throw new Error(`no validated decision-time evidence spans: ${candidateId}`);
   }
   const card = await proposePilotEventCard(candidate, spans, model, {
-    documentFamilyIds: documentFamilies(loaded.core),
+    documentFamilyIds: unique([
+      ...documentFamilies(loaded.core),
+      ...(policyByCandidate.get(candidate.id) ?? []).map(({ sourceId }) =>
+        `source:${sourceId}`),
+    ]),
   });
   card.gaps = unique([
     ...card.gaps,
@@ -178,14 +186,14 @@ const reportHtml = (report: PilotReport) => `<!doctype html>
     <div class="metric">미완성 <strong>${report.counts.incomplete}</strong></div>
     <div class="metric">전체 <strong>${report.counts.total}</strong></div>
   </div>
-  <table><thead><tr><th>#</th><th>사건</th><th>도메인</th><th>상태</th><th>판단 질문·행동</th><th>직접 발언·맥락</th><th>부족 자료</th></tr></thead><tbody>
+  <table><thead><tr><th>#</th><th>사건</th><th>도메인</th><th>상태</th><th>판단 질문·행동</th><th>Amy 판단·사건 맥락</th><th>부족 자료</th></tr></thead><tbody>
   ${report.rows.map((row) => `<tr>
     <td>${row.priority}</td>
     <td>${escapeHtml(row.candidateId)}</td>
     <td>${escapeHtml(row.domain)}</td>
     <td class="${row.status}">${row.status}</td>
     <td><strong>${escapeHtml(row.decisionQuestion)}</strong><br>${escapeHtml(row.chosenAction)}</td>
-    <td><strong>Amy:</strong> ${escapeHtml(row.directQuote)}<br><strong>Context:</strong> ${escapeHtml(row.contextQuote)}</td>
+    <td><strong>Amy direct:</strong> ${escapeHtml(row.directQuote)}<br><strong>Amy policy:</strong> ${escapeHtml(row.policyQuote)}<br><strong>Context:</strong> ${escapeHtml(row.contextQuote)}</td>
     <td>${escapeHtml(row.gaps.join(', ') || 'none')}</td>
   </tr>`).join('\n')}
   </tbody></table>
@@ -203,6 +211,8 @@ export const buildPilotReport = async (
       const card = cardByCandidate.get(target.candidateId);
       const direct = card?.evidenceSpans.find(({ id }) =>
         card.directAmyEvidenceIds.includes(id));
+      const policy = card?.evidenceSpans.find(({ id }) =>
+        card.amyPolicyEvidenceIds?.includes(id));
       const context = card?.evidenceSpans.find(({ id }) =>
         card.contextEvidenceIds.includes(id));
       return {
@@ -213,6 +223,7 @@ export const buildPilotReport = async (
         decisionQuestion: card?.decisionQuestion ?? '사건 카드 생성 실패',
         chosenAction: card?.chosenAction ?? '검증 가능한 증거가 더 필요함',
         directQuote: direct?.exactQuote ?? '없음',
+        policyQuote: policy?.exactQuote ?? '없음',
         contextQuote: context?.exactQuote ?? '없음',
         gaps: card?.gaps ?? ['model_response_invalid'],
       };
