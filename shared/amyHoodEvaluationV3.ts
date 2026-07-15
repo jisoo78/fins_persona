@@ -141,3 +141,64 @@ export type EvaluationV3ExperimentLaunch = {
   repetitions: EvaluationV3Repetitions;
   runs: EvaluationV3Run[];
 };
+
+export type EvaluationV3Statistic = {
+  mean: number;
+  min: number;
+  max: number;
+  populationStdDev: number;
+};
+
+export type EvaluationV3CategoryResult = {
+  correct: number;
+  total: number;
+};
+
+export type EvaluationV3RunReport = {
+  runId: string;
+  status: EvaluationV3Run['status'];
+  percent: number | null;
+  categories: {
+    discrimination: EvaluationV3CategoryResult;
+    holdout: EvaluationV3CategoryResult;
+    counterfactual: EvaluationV3CategoryResult;
+    transfer: EvaluationV3CategoryResult;
+  };
+  pairConsistency: number | null;
+};
+
+export type EvaluationV3LiftReport = {
+  amyPromptLift: number | null;
+  policyRagLift: number | null;
+  fullRagLift: number | null;
+  fullVsGenericLift: number | null;
+};
+
+export type EvaluationV3ArmAggregate = {
+  arm: EvaluationV3Arm;
+  completedRuns: number;
+  totalRuns: number;
+  percent: EvaluationV3Statistic | null;
+  choiceAgreement: Record<string, number>;
+  overallChoiceAgreement: number | null;
+};
+
+export type EvaluationV3ExperimentReport = {
+  experimentGroupId: string;
+  benchmarkRejected: boolean;
+  warnings: string[];
+  repetitions: Array<{
+    repetition: 1 | 2 | 3 | 4 | 5;
+    arms: Record<EvaluationV3Arm, EvaluationV3RunReport>;
+    lifts: EvaluationV3LiftReport;
+    comparisonReady: boolean;
+  }>;
+  armAggregates: Record<EvaluationV3Arm, EvaluationV3ArmAggregate>;
+  diagnostics: {
+    inputTokens: number;
+    outputTokens: number;
+    elapsedMs: number;
+    mismatchCount: number;
+    failedQuestions: number;
+  };
+};
