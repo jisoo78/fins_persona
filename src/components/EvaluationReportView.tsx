@@ -7,10 +7,13 @@ import { ComparisonRunReport } from './evaluation/ComparisonRunReport';
 import { ExperimentGroupReport } from './evaluation/ExperimentGroupReport';
 import { SingleRunReport } from './evaluation/SingleRunReport';
 import { experimentArmLabel } from './evaluation/evaluationViewModel';
+import { EvaluationV3ReportPanel } from './evaluationV3/EvaluationV3ReportPanel';
+import { EvaluationVersionSelector } from './evaluationV3/EvaluationVersionSelector';
+import type { EvaluationVersion } from './evaluationV3/evaluationV3ViewModel';
 
 type ReportMode = 'single' | 'comparison' | 'experiment';
 
-export const EvaluationReportView: React.FC = () => {
+const EvaluationReportViewV2: React.FC = () => {
   const [mode, setMode] = useState<ReportMode>('single');
   const [runs, setRuns] = useState<EvaluationRun[]>([]);
   const [questions, setQuestions] = useState<EvaluationQuestion[]>([]);
@@ -79,6 +82,16 @@ export const EvaluationReportView: React.FC = () => {
           <ExperimentGroupReport runs={runs} />
         )}
       </div>
+    </div>
+  );
+};
+
+export const EvaluationReportView: React.FC = () => {
+  const [version, setVersion] = useState<EvaluationVersion>('v3');
+  return (
+    <div className="min-h-full">
+      <EvaluationVersionSelector value={version} onChange={setVersion} />
+      {version === 'v3' ? <EvaluationV3ReportPanel /> : <EvaluationReportViewV2 />}
     </div>
   );
 };

@@ -20,6 +20,9 @@ import { EvaluationRunForm } from './evaluation/EvaluationRunForm';
 import { EvaluationRunHistory } from './evaluation/EvaluationRunHistory';
 import { EvaluationRunSummary } from './evaluation/EvaluationRunSummary';
 import { ExperimentGroupReport } from './evaluation/ExperimentGroupReport';
+import { EvaluationV3RunPanel } from './evaluationV3/EvaluationV3RunPanel';
+import { EvaluationVersionSelector } from './evaluationV3/EvaluationVersionSelector';
+import type { EvaluationVersion } from './evaluationV3/evaluationV3ViewModel';
 
 const latestExperimentGroupId = (runs: EvaluationRun[]) =>
   [...runs]
@@ -27,7 +30,7 @@ const latestExperimentGroupId = (runs: EvaluationRun[]) =>
     .sort((left, right) => right.startedAt.localeCompare(left.startedAt))[0]
     ?.experimentGroupId ?? null;
 
-export const EvaluationView: React.FC = () => {
+const EvaluationViewV2: React.FC = () => {
   const [runs, setRuns] = useState<EvaluationRun[]>([]);
   const [questions, setQuestions] = useState<EvaluationQuestion[]>([]);
   const [active, setActive] = useState<EvaluationRun | null>(null);
@@ -177,6 +180,16 @@ export const EvaluationView: React.FC = () => {
         <ExperimentGroupReport runs={experimentRuns} />
         <EvaluationRunHistory runs={runs} questions={questions} onGrade={grade} />
       </div>
+    </div>
+  );
+};
+
+export const EvaluationView: React.FC = () => {
+  const [version, setVersion] = useState<EvaluationVersion>('v3');
+  return (
+    <div className="min-h-full">
+      <EvaluationVersionSelector value={version} onChange={setVersion} />
+      {version === 'v3' ? <EvaluationV3RunPanel /> : <EvaluationViewV2 />}
     </div>
   );
 };

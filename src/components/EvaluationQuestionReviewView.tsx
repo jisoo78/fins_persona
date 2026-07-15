@@ -21,6 +21,9 @@ import {
   summarizeQuestionReviews,
   type EvaluationQuestionCard,
 } from './evaluation/evaluationViewModel';
+import { EvaluationV3QuestionReview } from './evaluationV3/EvaluationV3QuestionReview';
+import { EvaluationVersionSelector } from './evaluationV3/EvaluationVersionSelector';
+import type { EvaluationVersion } from './evaluationV3/evaluationV3ViewModel';
 
 type Draft = Pick<QuestionReview, 'status' | 'revisionNote'>;
 
@@ -36,7 +39,7 @@ const statusLabels: Record<QuestionReview['status'], string> = {
   revision_required: '수정 필요',
 };
 
-export const EvaluationQuestionReviewView: React.FC = () => {
+const EvaluationQuestionReviewV2: React.FC = () => {
   const [cards, setCards] = useState<EvaluationQuestionCard[]>([]);
   const [drafts, setDrafts] = useState<Record<string, Draft>>({});
   const [kpi, setKpi] = useState<EvaluationKpi | 'all'>('all');
@@ -233,6 +236,16 @@ export const EvaluationQuestionReviewView: React.FC = () => {
           })}
         </section>
       </div>
+    </div>
+  );
+};
+
+export const EvaluationQuestionReviewView: React.FC = () => {
+  const [version, setVersion] = useState<EvaluationVersion>('v3');
+  return (
+    <div className="min-h-full">
+      <EvaluationVersionSelector value={version} onChange={setVersion} />
+      {version === 'v3' ? <EvaluationV3QuestionReview /> : <EvaluationQuestionReviewV2 />}
     </div>
   );
 };

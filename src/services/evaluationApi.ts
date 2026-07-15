@@ -162,6 +162,10 @@ export type EvaluationV3QuestionsResponse = {
   questions: EvaluationV3QuestionFile;
   answerKey: EvaluationV3AnswerKeyFile;
   reviews: EvaluationV3ReviewFile;
+  readiness: {
+    allApproved: boolean;
+    structuredMemoryAvailable: boolean;
+  };
 };
 
 export const fetchEvaluationV3Questions = (fetchImpl: typeof fetch = fetch) =>

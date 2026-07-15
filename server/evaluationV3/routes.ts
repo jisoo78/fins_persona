@@ -9,6 +9,7 @@ import type {
   EvaluationV3Run,
 } from '../../shared/amyHoodEvaluationV3';
 import { createModelClient } from '../personaPipeline/modelClient';
+import { resolveEvaluationV3ArmContext } from './context';
 import { loadEvaluationV3Holdout } from './holdout';
 import { loadEvaluationV3Bundle, loadEvaluationV3Reviews, saveEvaluationV3Review } from './questionSet';
 import { buildEvaluationV3ExperimentReport } from './report';
@@ -26,6 +27,10 @@ type EvaluationV3RunnerContract = {
 export type EvaluationV3RouteDependencies = {
   loadBundle(): ReturnType<typeof loadEvaluationV3Bundle>;
   loadReviews(): Promise<EvaluationV3ReviewFile>;
+  loadReadiness(): Promise<{
+    allApproved: boolean;
+    structuredMemoryAvailable: boolean;
+  }>;
   saveReview(
     questionId: string,
     input: Pick<EvaluationV3Review, 'status' | 'revisionNote'>,
@@ -57,11 +62,12 @@ export const createEvaluationV3Router = (
   const router = Router();
 
   router.get('/questions', asyncHandler(async (_request, response) => {
-    const [bundle, reviews] = await Promise.all([
+    const [bundle, reviews, readiness] = await Promise.all([
       dependencies.loadBundle(),
       dependencies.loadReviews(),
+      dependencies.loadReadiness(),
     ]);
-    response.json({ ok: true, ...bundle, reviews });
+    response.json({ ok: true, ...bundle, reviews, readiness });
   }));
 
   router.patch('/questions/:id/review', asyncHandler(async (request, response) => {
@@ -132,6 +138,24 @@ export const createEvaluationV3RouteDependencies = (
   return {
     loadBundle: () => loadEvaluationV3Bundle(root),
     loadReviews: () => loadEvaluationV3Reviews(root),
+    loadReadiness: async () => {
+      const reviews = await loadEvaluationV3Reviews(root);
+      let structuredMemoryAvailable = false;
+      try {
+        await Promise.all([
+          resolveEvaluationV3ArmContext(root, 'amy_policy_rag'),
+          resolveEvaluationV3ArmContext(root, 'amy_full_rag'),
+        ]);
+        structuredMemoryAvailable = true;
+      } catch {
+        structuredMemoryAvailable = false;
+      }
+      return {
+        allApproved: reviews.reviews.length === 30
+          && reviews.reviews.every(({ status }) => status === 'approved'),
+        structuredMemoryAvailable,
+      };
+    },
     saveReview: (questionId, input) => saveEvaluationV3Review(root, questionId, input),
     listRuns: () => listEvaluationV3Runs(root),
     readRun: (runId) => readEvaluationV3Run(root, runId),

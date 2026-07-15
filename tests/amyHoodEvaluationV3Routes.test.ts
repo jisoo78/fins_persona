@@ -87,6 +87,10 @@ const createFixture = async () => {
   const dependencies = {
     loadBundle: async () => bundle,
     loadReviews: async () => reviews,
+    loadReadiness: async () => ({
+      allApproved: true,
+      structuredMemoryAvailable: true,
+    }),
     saveReview: async (
       questionId: string,
       input: { status: 'unreviewed' | 'approved' | 'revision_required'; revisionNote: string },
