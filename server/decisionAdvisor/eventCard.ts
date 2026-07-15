@@ -177,19 +177,27 @@ export const proposePilotEventCard = async (
   options: ProposalOptions = {},
 ): Promise<PilotDecisionEvent> => {
   const system = await readFile(promptPath, 'utf8');
-  const result = await model.invoke({
-    system,
-    user: JSON.stringify({
-      candidate: {
-        id: candidate.id,
-        title: candidate.workingTitle,
-        domain: candidate.domain,
-        decisionDate: candidate.decisionWindowEnd,
-      },
-      evidenceSpans: spans,
-    }),
+  const user = JSON.stringify({
+    candidate: {
+      id: candidate.id,
+      title: candidate.workingTitle,
+      domain: candidate.domain,
+      decisionDate: candidate.decisionWindowEnd,
+    },
+    evidenceSpans: spans,
   });
-  const proposal = parseProposal(result.text);
+  let proposal: ProposedEventFields | null = null;
+  let proposalError: unknown;
+  for (let attempt = 1; attempt <= 2; attempt += 1) {
+    const result = await model.invoke({ system, user });
+    try {
+      proposal = parseProposal(result.text);
+      break;
+    } catch (error) {
+      proposalError = error;
+    }
+  }
+  if (!proposal) throw proposalError;
   const directAmyEvidenceIds = spans
     .filter(({ role }) => role === 'direct_amy')
     .map(({ id }) => id);

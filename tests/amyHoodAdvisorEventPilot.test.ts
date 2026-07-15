@@ -195,6 +195,7 @@ const eventCardFixture = async () => {
   return {
     candidate,
     spans: [direct, context],
+    response,
     model: fakeModel(async () => ({ text: JSON.stringify(response), elapsedMs: 1 })),
   };
 };
@@ -562,4 +563,24 @@ test('failure: event-card prompt requests the exact compact option contract', as
   assert.match(prompt, /exactly two options/i);
   assert.match(prompt, /id, description,\s*expectedBenefit, principalRisk, and selected/);
   assert.match(prompt, /one concise item/i);
+});
+
+test('failure: event-card proposal retries one invalid response and accepts the second', async () => {
+  const { candidate, spans, response } = await eventCardFixture();
+  let calls = 0;
+  const model = fakeModel(async () => {
+    calls += 1;
+    return {
+      text: calls === 1 ? '{"options":[]}' : JSON.stringify(response),
+      elapsedMs: 1,
+    };
+  });
+
+  const card = await proposePilotEventCard(candidate, spans, model, {
+    documentFamilyIds: ['family-a', 'family-b'],
+    now: '2026-07-15T10:00:00.000Z',
+  });
+
+  assert.equal(calls, 2);
+  assert.equal(card.title, response.title);
 });
