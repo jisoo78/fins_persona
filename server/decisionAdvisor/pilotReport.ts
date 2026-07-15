@@ -55,6 +55,14 @@ const loadCandidates = async (root: string) => JSON.parse(
 
 const unique = <T>(values: T[]) => [...new Set(values)];
 
+export const retainedExtractionGaps = (
+  spans: PilotDecisionEvent['evidenceSpans'],
+  gaps: PilotEvidenceGap[],
+) => spans.length === 0
+  ? unique(gaps)
+  : unique(gaps.filter((gap) =>
+    gap !== 'invalid_quote_offsets' && gap !== 'model_response_invalid'));
+
 const documentFamilies = (
   inputs: Awaited<ReturnType<typeof loadPilotSourceInputs>>['core'],
 ) => unique(inputs.map(({ source, association }) =>
@@ -94,7 +102,11 @@ export const buildPilotEvent = async (
   const card = await proposePilotEventCard(candidate, spans, model, {
     documentFamilyIds: documentFamilies(loaded.core),
   });
-  card.gaps = unique([...card.gaps, ...loaded.gaps, ...extractionGaps]);
+  card.gaps = unique([
+    ...card.gaps,
+    ...loaded.gaps,
+    ...retainedExtractionGaps(spans, extractionGaps),
+  ]);
   await savePilotEventCard(root, card);
   return card;
 };

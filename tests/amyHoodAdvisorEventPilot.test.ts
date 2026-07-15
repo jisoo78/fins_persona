@@ -40,6 +40,7 @@ import {
 import {
   buildPilotBatch,
   buildPilotReport,
+  retainedExtractionGaps,
 } from '../server/decisionAdvisor/pilotReport';
 import type {
   ModelClient,
@@ -583,4 +584,29 @@ test('failure: event-card proposal retries one invalid response and accepts the 
 
   assert.equal(calls, 2);
   assert.equal(card.title, response.title);
+});
+
+test('failure: discarded span errors do not block a card with validated evidence', () => {
+  const validSpan: PilotEvidenceSpan = {
+    id: 'valid-span',
+    sourceId: 'source-valid',
+    eventCandidateId: 'candidate-linkedin-acquisition-2016',
+    role: 'direct_amy',
+    exactQuote: 'A validated Amy Hood statement.',
+    startChar: 10,
+    endChar: 42,
+    publishedAt: '2016-06-13',
+    speaker: 'Amy Hood',
+  };
+  assert.deepEqual(
+    retainedExtractionGaps(
+      [validSpan],
+      ['invalid_quote_offsets', 'model_response_invalid'],
+    ),
+    [],
+  );
+  assert.deepEqual(
+    retainedExtractionGaps([], ['invalid_quote_offsets']),
+    ['invalid_quote_offsets'],
+  );
 });
