@@ -46,6 +46,8 @@ import {
   eventCardPath,
 } from './decisionAdvisor/eventCard';
 import { loadPilotManifest } from './decisionAdvisor/pilotManifest';
+import { loadValidatedPilotPolicyEvidence } from './decisionAdvisor/pilotPolicyEvidence';
+import { registrySourceHasEvidenceLink } from './decisionAdvisor/sourceEvidenceLink';
 import {
   buildPilotBatch,
   buildPilotEvent,
@@ -506,6 +508,10 @@ export const inspectSourceInventory = async (
   candidates: EventCandidate[],
 ): Promise<SourceInspection> => {
   const registry = loadRegistry(root);
+  const policyEvidence = await loadValidatedPilotPolicyEvidence(root, candidates);
+  const policySourceIds = new Set(
+    [...policyEvidence.values()].flat().map(({ sourceId }) => sourceId),
+  );
   const candidateIds = new Set(candidates.map(({ id }) => id));
   const associationsByUrl = new Map<string, Array<{
     candidate: EventCandidate;
@@ -536,10 +542,16 @@ export const inspectSourceInventory = async (
   const postOutcomeSourceIdsByCandidate = new Map<string, Set<string>>();
   const validSourceIds = new Set<string>();
   const registryUrls = new Set(registry.sources.map(({ canonicalUrl }) => canonicalUrl));
+  const candidateAssociationUrls = new Set(associationsByUrl.keys());
 
   for (const source of registry.sources) {
     const associationLinks = associationsByUrl.get(source.canonicalUrl) ?? [];
-    if (associationLinks.length === 0) {
+    if (!registrySourceHasEvidenceLink(
+      source.canonicalUrl,
+      source.id,
+      candidateAssociationUrls,
+      policySourceIds,
+    )) {
       throw new Error(`registry source is not linked from the candidate matrix: ${source.id}`);
     }
     if (source.eventCandidateIds.length === 0

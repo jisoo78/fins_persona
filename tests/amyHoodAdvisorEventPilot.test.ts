@@ -40,6 +40,7 @@ import {
 import {
   validatePilotPolicyEvidenceRecord,
 } from '../server/decisionAdvisor/pilotPolicyEvidence';
+import { registrySourceHasEvidenceLink } from '../server/decisionAdvisor/sourceEvidenceLink';
 import {
   buildPilotBatch,
   buildPilotReport,
@@ -421,6 +422,21 @@ test('failure: policy evidence rejects temporal, quote, tag, and speaker violati
     }),
     /Amy Hood speaker boundary/,
   );
+});
+
+test('happy: a Phase 3 policy source is linked without becoming Phase 2 event evidence', () => {
+  assert.equal(registrySourceHasEvidenceLink(
+    'https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3',
+    'source-policy',
+    new Set(),
+    new Set(['source-policy']),
+  ), true);
+  assert.equal(registrySourceHasEvidenceLink(
+    'https://example.com/orphan',
+    'source-orphan',
+    new Set(),
+    new Set(['source-policy']),
+  ), false);
 });
 
 test('edge: a boundary-crossing Amy statement is deduplicated into one span', async () => {

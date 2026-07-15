@@ -111,13 +111,14 @@ export const loadValidatedPilotPolicyEvidence = async (
   root: string,
   candidates: EventCandidate[],
 ): Promise<Map<string, PilotEvidenceSpan[]>> => {
-  const manifest = await loadPilotManifest(root, candidates);
-  const targetIds = new Set(manifest.targets.map(({ candidateId }) => candidateId));
   const records = await readJsonFile<PilotPolicyEvidenceRecord[]>(
     advisorPaths(root).pilotPolicyEvidence,
     [],
   );
   if (!Array.isArray(records)) throw new Error('pilot policy evidence must be an array');
+  if (records.length === 0) return new Map();
+  const manifest = await loadPilotManifest(root, candidates);
+  const targetIds = new Set(manifest.targets.map(({ candidateId }) => candidateId));
   const registry = loadRegistry(root);
   const result = new Map<string, PilotEvidenceSpan[]>();
   const recordIds = new Set<string>();
