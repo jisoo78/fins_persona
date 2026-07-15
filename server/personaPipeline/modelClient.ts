@@ -29,12 +29,19 @@ export interface ModelClient {
   invoke(input: ModelInput): Promise<ModelResult>;
 }
 
-export const modelRequestSettings = (provider: ProviderName) => ({
+export type ModelClientOptions = {
+  maxTokens?: number;
+};
+
+export const modelRequestSettings = (
+  provider: ProviderName,
+  options: ModelClientOptions = {},
+) => ({
   model:
     provider === 'local'
       ? process.env.LOCAL_LLM_MODEL || 'local-model'
       : process.env.OPENAI_MODEL || 'gpt-5-mini',
-  maxTokens: LOCAL_MAX_OUTPUT_TOKENS,
+  maxTokens: options.maxTokens ?? LOCAL_MAX_OUTPUT_TOKENS,
   modelKwargs:
     provider === 'local'
       ? {
@@ -44,9 +51,12 @@ export const modelRequestSettings = (provider: ProviderName) => ({
       : undefined,
 });
 
-export const modelSettingsFingerprint = (provider: ProviderName) =>
+export const modelSettingsFingerprint = (
+  provider: ProviderName,
+  options: ModelClientOptions = {},
+) =>
   createHash('sha256')
-    .update(JSON.stringify({ provider, ...modelRequestSettings(provider) }))
+    .update(JSON.stringify({ provider, ...modelRequestSettings(provider, options) }))
     .digest('hex');
 
 const contentToText = (content: unknown): string => {
@@ -74,11 +84,14 @@ const usageToken = (usage: unknown, key: 'input_tokens' | 'output_tokens') => {
   return typeof value === 'number' ? value : undefined;
 };
 
-export const createModelClient = (provider: ProviderName): ModelClient => {
+export const createModelClient = (
+  provider: ProviderName,
+  options: ModelClientOptions = {},
+): ModelClient => {
   if (provider === 'openai' && !process.env.OPENAI_API_KEY) {
     throw new Error('OPENAI_API_KEY is required for the openai provider');
   }
-  const { model, maxTokens, modelKwargs } = modelRequestSettings(provider);
+  const { model, maxTokens, modelKwargs } = modelRequestSettings(provider, options);
   const chat = new ChatOpenAI({
     apiKey:
       provider === 'local'
@@ -100,7 +113,7 @@ export const createModelClient = (provider: ProviderName): ModelClient => {
   return {
     provider,
     model,
-    cacheKey: modelSettingsFingerprint(provider),
+    cacheKey: modelSettingsFingerprint(provider, options),
     async invoke(input) {
       const started = Date.now();
       const result = await chat.invoke(toLangChainInput(input));

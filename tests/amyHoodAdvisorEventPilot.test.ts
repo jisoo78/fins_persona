@@ -46,6 +46,7 @@ import type {
   ModelInput,
   ModelResult,
 } from '../server/personaPipeline/modelClient';
+import { modelRequestSettings } from '../server/personaPipeline/modelClient';
 import type {
   AdvisorSourceRecord,
   EventCandidate,
@@ -518,4 +519,9 @@ test('failure: event CLI rejects missing IDs and blank reviewers', () => {
   ], { encoding: 'utf8' });
   assert.equal(blankReviewer.status, 1);
   assert.match(blankReviewer.stderr, /event:approve requires a nonblank --reviewer/);
+});
+
+test('failure: pilot model settings cap output without changing the persona default', () => {
+  assert.equal(modelRequestSettings('local').maxTokens, 5_000);
+  assert.equal(modelRequestSettings('local', { maxTokens: 1_200 }).maxTokens, 1_200);
 });
