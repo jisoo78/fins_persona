@@ -1,0 +1,66 @@
+{
+  "reviewId": "review-mojang-english-announcement-v1",
+  "reviewer": "Codex evidence review",
+  "reviewedAt": "2026-07-15T12:31:00.000Z",
+  "decision": "approved_context",
+  "reasonCode": "duplicate_document_family",
+  "sourceId": "source-9d580b28f713a039",
+  "canonicalUrl": "https://news.microsoft.com/source/2014/09/15/minecraft-to-join-microsoft/",
+  "rawPath": "raw/source-9d580b28f713a039-de8bcc024193c3764e61ab0bdda7b4e0215ba70608e0162c6775d28f439f225a.json",
+  "normalizedPath": "normalized/source-9d580b28f713a039-de8bcc024193c3764e61ab0bdda7b4e0215ba70608e0162c6775d28f439f225a.txt",
+  "sha256": "de8bcc024193c3764e61ab0bdda7b4e0215ba70608e0162c6775d28f439f225a",
+  "candidateId": "candidate-mojang-acquisition-2014",
+  "sourceType": "official_announcement",
+  "documentFamilyId": "microsoft-mojang-announcement-2014",
+  "sameDocumentCanonicalUrls": [
+    "https://news.microsoft.com/es-xl/minecraft-se-une-a-microsoft/",
+    "https://news.microsoft.com/source/2014/09/15/minecraft-to-join-microsoft/"
+  ],
+  "temporalRelation": "decision_time",
+  "role": "contemporaneous_context",
+  "quoteStart": 584,
+  "quoteEnd": 741,
+  "passageStart": 584,
+  "passageEnd": 741,
+  "exactQuote": "Under the terms of the agreement, Microsoft will acquire Mojang for $2.5 billion. Microsoft expects the acquisition to be break-even in FY15 on a GAAP basis.",
+  "exactRelevancePassage": "Under the terms of the agreement, Microsoft will acquire Mojang for $2.5 billion. Microsoft expects the acquisition to be break-even in FY15 on a GAAP basis.",
+  "anchorTerms": [
+    "Mojang",
+    "$2.5 billion",
+    "break-even in FY15"
+  ],
+  "eventDiscriminators": [
+    {
+      "kind": "named_entity",
+      "value": "Mojang"
+    },
+    {
+      "kind": "decision_action",
+      "value": "will acquire"
+    },
+    {
+      "kind": "event_specific",
+      "value": "$2.5 billion"
+    }
+  ],
+  "aliases": [
+    {
+      "kind": "decision_action",
+      "canonicalValue": "adquirirá",
+      "value": "will acquire",
+      "sourceUrl": "https://news.microsoft.com/source/2014/09/15/minecraft-to-join-microsoft/",
+      "reviewStatus": "reviewed",
+      "reviewerNote": "The English announcement expresses the same acquisition action as the Spanish canonical source."
+    },
+    {
+      "kind": "event_specific",
+      "canonicalValue": "2 mil quinientos millones",
+      "value": "$2.5 billion",
+      "sourceUrl": "https://news.microsoft.com/source/2014/09/15/minecraft-to-join-microsoft/",
+      "reviewStatus": "reviewed",
+      "reviewerNote": "The English announcement expresses the same transaction value as the Spanish canonical source."
+    }
+  ],
+  "reviewerRationale": "The exact passage verifies the Mojang acquisition value and expected FY15 break-even economics, while remaining the same underlying Microsoft announcement family."
+}
+

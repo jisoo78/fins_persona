@@ -1,0 +1,49 @@
+{
+  "reviewId": "review-nuance-sec-announcement-v1",
+  "reviewer": "Codex evidence review",
+  "reviewedAt": "2026-07-15T12:33:00.000Z",
+  "decision": "approved_context",
+  "reasonCode": "duplicate_document_family",
+  "sourceId": "source-f7fd232d93262a85",
+  "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/1002517/000119312521112515/d22854dex991.htm",
+  "rawPath": "raw/source-f7fd232d93262a85-1c8352a1bd10985adb66dbecd038d5752c50c8fd2a1e80ae752aaf97e759f1c8.json",
+  "normalizedPath": "normalized/source-f7fd232d93262a85-1c8352a1bd10985adb66dbecd038d5752c50c8fd2a1e80ae752aaf97e759f1c8.txt",
+  "sha256": "1c8352a1bd10985adb66dbecd038d5752c50c8fd2a1e80ae752aaf97e759f1c8",
+  "candidateId": "candidate-nuance-acquisition-2021",
+  "sourceType": "sec_press_release",
+  "documentFamilyId": "microsoft-nuance-announcement-2021",
+  "sameDocumentCanonicalUrls": [
+    "https://news.microsoft.com/source/2021/04/12/microsoft-accelerates-industry-cloud-strategy-for-healthcare-with-the-acquisition-of-nuance/",
+    "https://www.sec.gov/Archives/edgar/data/1002517/000119312521112515/d22854dex991.htm"
+  ],
+  "temporalRelation": "decision_time",
+  "role": "contemporaneous_context",
+  "quoteStart": 334,
+  "quoteEnd": 694,
+  "passageStart": 334,
+  "passageEnd": 694,
+  "exactQuote": "Microsoft Corp (Nasdaq: MSFT) and Nuance Communications, Inc. (Nasdaq: NUAN) today announced they have entered into a definitive agreement under which Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9, in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.",
+  "exactRelevancePassage": "Microsoft Corp (Nasdaq: MSFT) and Nuance Communications, Inc. (Nasdaq: NUAN) today announced they have entered into a definitive agreement under which Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9, in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.",
+  "anchorTerms": [
+    "Nuance",
+    "$19.7 billion",
+    "all-cash transaction"
+  ],
+  "eventDiscriminators": [
+    {
+      "kind": "named_entity",
+      "value": "Nuance"
+    },
+    {
+      "kind": "decision_action",
+      "value": "will acquire"
+    },
+    {
+      "kind": "event_specific",
+      "value": "$19.7 billion"
+    }
+  ],
+  "aliases": [],
+  "reviewerRationale": "The immutable SEC exhibit verifies the Nuance transaction value, premium, and all-cash structure but duplicates the underlying Microsoft announcement family."
+}
+

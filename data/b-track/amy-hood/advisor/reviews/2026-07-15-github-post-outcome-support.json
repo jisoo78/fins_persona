@@ -1,0 +1,31 @@
+{
+  "reviewId": "review-github-fy23-outcome-v1",
+  "reviewer": "Codex evidence review",
+  "reviewedAt": "2026-07-15T12:32:00.000Z",
+  "decision": "rejected",
+  "reasonCode": "insufficient_decision_context",
+  "sourceId": "source-ad9a23176d9cf21d",
+  "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q1",
+  "rawPath": "raw/source-ad9a23176d9cf21d-6a468c0a8a20d8b2f6827d46c111becfa7c4efc28fe83d9e0771a282f0b32eab.json",
+  "normalizedPath": "normalized/source-ad9a23176d9cf21d-6a468c0a8a20d8b2f6827d46c111becfa7c4efc28fe83d9e0771a282f0b32eab.txt",
+  "sha256": "6a468c0a8a20d8b2f6827d46c111becfa7c4efc28fe83d9e0771a282f0b32eab",
+  "candidateId": "candidate-github-acquisition-2018",
+  "sourceType": "earnings_call",
+  "documentFamilyId": "microsoft-github-outcome-earnings-2022",
+  "sameDocumentCanonicalUrls": [
+    "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q1"
+  ],
+  "temporalRelation": "post_outcome",
+  "role": "post_outcome",
+  "quoteStart": 0,
+  "quoteEnd": 0,
+  "passageStart": 0,
+  "passageEnd": 0,
+  "exactQuote": "",
+  "exactRelevancePassage": "",
+  "anchorTerms": [],
+  "eventDiscriminators": [],
+  "aliases": [],
+  "reviewerRationale": "The FY2023 Q1 transcript contains later GitHub product references but no bounded passage identifying the 2018 acquisition action and $7.5 billion transaction."
+}
+

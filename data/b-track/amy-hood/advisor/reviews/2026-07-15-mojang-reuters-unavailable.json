@@ -1,0 +1,31 @@
+{
+  "reviewId": "review-mojang-reuters-unavailable-v1",
+  "reviewer": "Codex evidence review",
+  "reviewedAt": "2026-07-15T12:42:00.000Z",
+  "decision": "review_required",
+  "reasonCode": "source_unavailable",
+  "sourceId": "source-33ff6cc931a617fa",
+  "canonicalUrl": "https://www.reuters.com/article/world/europe/microsoft-to-buy-minecraft-maker-mojang-for-25-billion-idUSKBN0HA1CR/",
+  "rawPath": null,
+  "normalizedPath": null,
+  "sha256": null,
+  "candidateId": "candidate-mojang-acquisition-2014",
+  "sourceType": "news_report",
+  "documentFamilyId": "reuters-mojang-report-2014",
+  "sameDocumentCanonicalUrls": [
+    "https://www.reuters.com/article/world/europe/microsoft-to-buy-minecraft-maker-mojang-for-25-billion-idUSKBN0HA1CR/"
+  ],
+  "temporalRelation": "decision_time",
+  "role": "contemporaneous_context",
+  "quoteStart": 0,
+  "quoteEnd": 0,
+  "passageStart": 0,
+  "passageEnd": 0,
+  "exactQuote": "",
+  "exactRelevancePassage": "",
+  "anchorTerms": [],
+  "eventDiscriminators": [],
+  "aliases": [],
+  "reviewerRationale": "The registered Reuters URL returned HTTP 401, so the complete article body could not be preserved or reviewed as a second document family."
+}
+

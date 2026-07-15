@@ -1,0 +1,31 @@
+{
+  "reviewId": "review-nokia-event-page-support-v1",
+  "reviewer": "Codex evidence review",
+  "reviewedAt": "2026-07-15T12:30:00.000Z",
+  "decision": "rejected",
+  "reasonCode": "insufficient_decision_context",
+  "sourceId": "source-44ded251a652daf1",
+  "canonicalUrl": "https://news.microsoft.com/videos/audio-slideshow-of-microsoft-nokia-transaction-conference-call/",
+  "rawPath": "raw/source-44ded251a652daf1-00f2cd89ee90c37dcaabd05a7d8f43d714034b55a2c17a8172d6392b7f132edc.json",
+  "normalizedPath": "normalized/source-44ded251a652daf1-00f2cd89ee90c37dcaabd05a7d8f43d714034b55a2c17a8172d6392b7f132edc.txt",
+  "sha256": "00f2cd89ee90c37dcaabd05a7d8f43d714034b55a2c17a8172d6392b7f132edc",
+  "candidateId": "candidate-nokia-acquisition-2013",
+  "sourceType": "official_event_page",
+  "documentFamilyId": "microsoft-nokia-transaction-call-event-2013",
+  "sameDocumentCanonicalUrls": [
+    "https://news.microsoft.com/videos/audio-slideshow-of-microsoft-nokia-transaction-conference-call/"
+  ],
+  "temporalRelation": "decision_time",
+  "role": "contemporaneous_context",
+  "quoteStart": 0,
+  "quoteEnd": 0,
+  "passageStart": 0,
+  "passageEnd": 0,
+  "exactQuote": "",
+  "exactRelevancePassage": "",
+  "anchorTerms": [],
+  "eventDiscriminators": [],
+  "aliases": [],
+  "reviewerRationale": "The collected event page identifies participants only and contains no bounded transaction action, board authorization, valuation, or decision reasoning."
+}
+

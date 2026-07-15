@@ -61,8 +61,8 @@
         "temporalRelation": "decision_time",
         "relevanceClaim": "Discovery metadata from PDF pages [1]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
         "evidenceLocator": null,
-        "reviewStatus": "unreviewed",
-        "reviewerNote": "review_required: Discovery metadata from PDF pages [1]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+        "reviewStatus": "rejected",
+        "reviewerNote": "review:review-nokia-event-page-support-v1 The collected event page identifies participants only and contains no bounded transaction action, board authorization, valuation, or decision reasoning."
       },
       {
         "canonicalUrl": "https://allthingsd.com/20130904/from-can-we-talk-to-a-coffee-table-mishap-the-inside-story-of-microsofts-nokia-purchase/",
@@ -170,7 +170,8 @@
           "exactRelevancePassage": "Bajo los términos del acuerdo, Microsoft adquirirá Mojang por 2 mil quinientos millones de dólares"
         },
         "reviewStatus": "reviewed",
-        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14.",
+        "documentFamilyId": "microsoft-mojang-announcement-2014"
       },
       {
         "canonicalUrl": "https://www.polygon.com/2015/3/3/8144453/minecraft-sale-microsoft-notch-tweet/",
@@ -189,10 +190,34 @@
         "sourceType": "official_announcement",
         "publishedAt": "2014-09-15",
         "temporalRelation": "decision_time",
-        "relevanceClaim": "Discovery metadata from PDF pages [4]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
-        "evidenceLocator": null,
-        "reviewStatus": "unreviewed",
-        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [4]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+        "relevanceClaim": "The exact passage verifies the Mojang acquisition value and expected FY15 break-even economics, while remaining the same underlying Microsoft announcement family.",
+        "evidenceLocator": {
+          "exactQuote": "Under the terms of the agreement, Microsoft will acquire Mojang for $2.5 billion. Microsoft expects the acquisition to be break-even in FY15 on a GAAP basis.",
+          "exactRelevancePassage": "Under the terms of the agreement, Microsoft will acquire Mojang for $2.5 billion. Microsoft expects the acquisition to be break-even in FY15 on a GAAP basis.",
+          "anchorTerms": [
+            "Mojang",
+            "$2.5 billion",
+            "break-even in FY15"
+          ],
+          "eventDiscriminators": [
+            {
+              "kind": "named_entity",
+              "value": "Mojang"
+            },
+            {
+              "kind": "decision_action",
+              "value": "will acquire"
+            },
+            {
+              "kind": "event_specific",
+              "value": "$2.5 billion"
+            }
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "review:review-mojang-english-announcement-v1 The exact passage verifies the Mojang acquisition value and expected FY15 break-even economics, while remaining the same underlying Microsoft announcement family.",
+        "documentFamilyId": "microsoft-mojang-announcement-2014"
       },
       {
         "canonicalUrl": "https://www.reuters.com/article/world/europe/microsoft-to-buy-minecraft-maker-mojang-for-25-billion-idUSKBN0HA1CR/",
@@ -244,7 +269,25 @@
         "https://news.microsoft.com/es-xl/minecraft-se-une-a-microsoft/"
       ],
       "reviewStatus": "reviewed",
-      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source.",
+      "aliases": [
+        {
+          "kind": "decision_action",
+          "canonicalValue": "adquirirá",
+          "value": "will acquire",
+          "sourceUrl": "https://news.microsoft.com/source/2014/09/15/minecraft-to-join-microsoft/",
+          "reviewStatus": "reviewed",
+          "reviewerNote": "The English announcement expresses the same acquisition action as the Spanish canonical source."
+        },
+        {
+          "kind": "event_specific",
+          "canonicalValue": "2 mil quinientos millones",
+          "value": "$2.5 billion",
+          "sourceUrl": "https://news.microsoft.com/source/2014/09/15/minecraft-to-join-microsoft/",
+          "reviewStatus": "reviewed",
+          "reviewerNote": "The English announcement expresses the same transaction value as the Spanish canonical source."
+        }
+      ]
     }
   },
   {
@@ -498,8 +541,8 @@
         "temporalRelation": "post_outcome",
         "relevanceClaim": "Discovery metadata from PDF pages [9]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
         "evidenceLocator": null,
-        "reviewStatus": "unreviewed",
-        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [9]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+        "reviewStatus": "rejected",
+        "reviewerNote": "review:review-github-fy23-outcome-v1 The FY2023 Q1 transcript contains later GitHub product references but no bounded passage identifying the 2018 acquisition action and $7.5 billion transaction."
       }
     ],
     "directEvidenceGap": {
@@ -574,7 +617,8 @@
           "exactRelevancePassage": "Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9, in an all-cash transaction valued at $19.7 billion"
         },
         "reviewStatus": "reviewed",
-        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+        "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14.",
+        "documentFamilyId": "microsoft-nuance-announcement-2021"
       },
       {
         "canonicalUrl": "https://stockanalysis.com/stocks/msft/transcripts/12504-m-a-announcement/",
@@ -604,10 +648,34 @@
         "sourceType": "sec_press_release",
         "publishedAt": "2021-04-12",
         "temporalRelation": "decision_time",
-        "relevanceClaim": "Discovery metadata from PDF pages [10]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible.",
-        "evidenceLocator": null,
-        "reviewStatus": "unreviewed",
-        "reviewerNote": "unreviewed: Discovery metadata from PDF pages [10]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
+        "relevanceClaim": "The immutable SEC exhibit verifies the Nuance transaction value, premium, and all-cash structure but duplicates the underlying Microsoft announcement family.",
+        "evidenceLocator": {
+          "exactQuote": "Microsoft Corp (Nasdaq: MSFT) and Nuance Communications, Inc. (Nasdaq: NUAN) today announced they have entered into a definitive agreement under which Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9, in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.",
+          "exactRelevancePassage": "Microsoft Corp (Nasdaq: MSFT) and Nuance Communications, Inc. (Nasdaq: NUAN) today announced they have entered into a definitive agreement under which Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9, in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.",
+          "anchorTerms": [
+            "Nuance",
+            "$19.7 billion",
+            "all-cash transaction"
+          ],
+          "eventDiscriminators": [
+            {
+              "kind": "named_entity",
+              "value": "Nuance"
+            },
+            {
+              "kind": "decision_action",
+              "value": "will acquire"
+            },
+            {
+              "kind": "event_specific",
+              "value": "$19.7 billion"
+            }
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "review:review-nuance-sec-announcement-v1 The immutable SEC exhibit verifies the Nuance transaction value, premium, and all-cash structure but duplicates the underlying Microsoft announcement family.",
+        "documentFamilyId": "microsoft-nuance-announcement-2021"
       },
       {
         "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/1002517/000100251720000058/nuan0930202010-k.htm",
@@ -648,7 +716,8 @@
         "https://news.microsoft.com/source/2021/04/12/microsoft-accelerates-industry-cloud-strategy-for-healthcare-with-the-acquisition-of-nuance/"
       ],
       "reviewStatus": "reviewed",
-      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
+      "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source.",
+      "aliases": []
     }
   },
   {

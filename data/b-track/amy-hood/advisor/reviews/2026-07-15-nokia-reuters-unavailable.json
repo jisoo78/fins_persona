@@ -1,0 +1,31 @@
+{
+  "reviewId": "review-nokia-reuters-unavailable-v1",
+  "reviewer": "Codex evidence review",
+  "reviewedAt": "2026-07-15T12:44:00.000Z",
+  "decision": "review_required",
+  "reasonCode": "source_unavailable",
+  "sourceId": "source-344b5f212e415c61",
+  "canonicalUrl": "https://www.reuters.com/article/business/microsoft-swallows-nokias-phone-business-for-72-billion-idUSBRE98202W/",
+  "rawPath": null,
+  "normalizedPath": null,
+  "sha256": null,
+  "candidateId": "candidate-nokia-acquisition-2013",
+  "sourceType": "news_report",
+  "documentFamilyId": "reuters-nokia-report-2013",
+  "sameDocumentCanonicalUrls": [
+    "https://www.reuters.com/article/business/microsoft-swallows-nokias-phone-business-for-72-billion-idUSBRE98202W/"
+  ],
+  "temporalRelation": "decision_time",
+  "role": "contemporaneous_context",
+  "quoteStart": 0,
+  "quoteEnd": 0,
+  "passageStart": 0,
+  "passageEnd": 0,
+  "exactQuote": "",
+  "exactRelevancePassage": "",
+  "anchorTerms": [],
+  "eventDiscriminators": [],
+  "aliases": [],
+  "reviewerRationale": "The registered Reuters URL returned HTTP 401, so the complete article body could not be preserved or reviewed as a second document family."
+}
+

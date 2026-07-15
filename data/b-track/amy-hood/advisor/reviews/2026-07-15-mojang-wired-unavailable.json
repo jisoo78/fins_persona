@@ -1,0 +1,31 @@
+{
+  "reviewId": "review-mojang-wired-unavailable-v1",
+  "reviewer": "Codex evidence review",
+  "reviewedAt": "2026-07-15T12:43:00.000Z",
+  "decision": "review_required",
+  "reasonCode": "source_unavailable",
+  "sourceId": "source-8dfe8681c6f17c40",
+  "canonicalUrl": "https://www.wired.com/2014/09/microsoft-minecraft-mobile/",
+  "rawPath": null,
+  "normalizedPath": null,
+  "sha256": null,
+  "candidateId": "candidate-mojang-acquisition-2014",
+  "sourceType": "industry_analysis",
+  "documentFamilyId": "wired-mojang-analysis-2014",
+  "sameDocumentCanonicalUrls": [
+    "https://www.wired.com/2014/09/microsoft-minecraft-mobile/"
+  ],
+  "temporalRelation": "decision_time",
+  "role": "contemporaneous_context",
+  "quoteStart": 0,
+  "quoteEnd": 0,
+  "passageStart": 0,
+  "passageEnd": 0,
+  "exactQuote": "",
+  "exactRelevancePassage": "",
+  "anchorTerms": [],
+  "eventDiscriminators": [],
+  "aliases": [],
+  "reviewerRationale": "The alternative WIRED article was readable for discovery, but no authorized complete artifact was preserved; snippets cannot satisfy the evidence gate."
+}
+

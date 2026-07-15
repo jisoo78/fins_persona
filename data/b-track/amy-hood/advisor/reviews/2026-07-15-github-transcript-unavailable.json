@@ -1,0 +1,31 @@
+{
+  "reviewId": "review-github-transcript-unavailable-v1",
+  "reviewer": "Codex evidence review",
+  "reviewedAt": "2026-07-15T12:40:00.000Z",
+  "decision": "review_required",
+  "reasonCode": "source_unavailable",
+  "sourceId": "source-988d52f913373551",
+  "canonicalUrl": "https://stockanalysis.com/stocks/msft/transcripts/62670-m-a-announcement/",
+  "rawPath": null,
+  "normalizedPath": null,
+  "sha256": null,
+  "candidateId": "candidate-github-acquisition-2018",
+  "sourceType": "transcript_mirror",
+  "documentFamilyId": "github-transaction-call-2018",
+  "sameDocumentCanonicalUrls": [
+    "https://stockanalysis.com/stocks/msft/transcripts/62670-m-a-announcement/"
+  ],
+  "temporalRelation": "decision_time",
+  "role": "contemporaneous_context",
+  "quoteStart": 0,
+  "quoteEnd": 0,
+  "passageStart": 0,
+  "passageEnd": 0,
+  "exactQuote": "",
+  "exactRelevancePassage": "",
+  "anchorTerms": [],
+  "eventDiscriminators": [],
+  "aliases": [],
+  "reviewerRationale": "The registered transcript mirror returned HTTP 400 and no complete source body or verifiable Amy Hood speaker segment could be preserved."
+}
+
