@@ -378,6 +378,34 @@ test('failure: organizational context speaker is normalized without discarding e
   assert.deepEqual(result.gaps, []);
 });
 
+test('failure: exact unique quote uses deterministic offsets while duplicate text stays rejected', async () => {
+  const quote = 'Amy Hood tied investment timing to visible demand.';
+  const input = await extractionFixture(`Prefix. ${quote} Suffix.`);
+  const wrongOffsetsModel = fakeModel(async () => ({
+    text: JSON.stringify({
+      spans: [{
+        role: 'direct_amy',
+        exactQuote: quote,
+        startChar: 1,
+        endChar: 2,
+        speaker: 'Amy Hood',
+      }],
+    }),
+    elapsedMs: 1,
+  }));
+
+  const corrected = await extractPilotEvidence(input, wrongOffsetsModel);
+
+  assert.equal(corrected.spans.length, 1);
+  assert.equal(corrected.spans[0].startChar, 8);
+  assert.equal(corrected.spans[0].endChar, 8 + quote.length);
+
+  const duplicated = await extractionFixture(`${quote} Other text. ${quote}`);
+  const ambiguous = await extractPilotEvidence(duplicated, wrongOffsetsModel);
+  assert.deepEqual(ambiguous.spans, []);
+  assert.deepEqual(ambiguous.gaps, ['invalid_quote_offsets']);
+});
+
 test('happy: a validator-ready proposal becomes approved only after explicit review', async () => {
   const root = await mkdtemp(path.join(os.tmpdir(), 'amy-pilot-event-'));
   const { candidate, spans, model } = await eventCardFixture();

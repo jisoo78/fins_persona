@@ -183,6 +183,20 @@ const buildUserPrompt = (
   chunk.text,
 ].join('\n');
 
+const deterministicLocalStart = (
+  chunk: EvidenceChunk,
+  proposed: ProposedSpan,
+) => {
+  if (proposed.startChar >= 0
+    && proposed.endChar === proposed.startChar + proposed.exactQuote.length
+    && chunk.text.slice(proposed.startChar, proposed.endChar) === proposed.exactQuote) {
+    return proposed.startChar;
+  }
+  const first = chunk.text.indexOf(proposed.exactQuote);
+  if (first < 0) return null;
+  return chunk.text.indexOf(proposed.exactQuote, first + 1) < 0 ? first : null;
+};
+
 export const extractPilotEvidence = async (
   input: PilotEvidenceExtractionInput,
   model: ModelClient,
@@ -218,8 +232,13 @@ export const extractPilotEvidence = async (
         gaps.push('model_response_invalid');
         continue;
       }
-      const startChar = chunk.startChar + proposed.startChar;
-      const endChar = chunk.startChar + proposed.endChar;
+      const localStart = deterministicLocalStart(chunk, proposed);
+      if (localStart === null) {
+        gaps.push('invalid_quote_offsets');
+        continue;
+      }
+      const startChar = chunk.startChar + localStart;
+      const endChar = startChar + proposed.exactQuote.length;
       const span: PilotEvidenceSpan = {
         id: `span-${sha256(`${input.source.id}:${startChar}:${endChar}:${role}`).slice(0, 16)}`,
         sourceId: input.source.id,
