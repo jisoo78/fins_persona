@@ -26,6 +26,13 @@ import {
   type PilotEvidenceExtractionInput,
 } from '../server/decisionAdvisor/evidenceExtractor';
 import {
+  approvePilotEventCard,
+  eventCardPath,
+  proposePilotEventCard,
+  savePilotEventCard,
+  validatePilotEventCard,
+} from '../server/decisionAdvisor/eventCard';
+import {
   loadPilotManifest,
   validatePilotManifest,
 } from '../server/decisionAdvisor/pilotManifest';
@@ -38,6 +45,8 @@ import type {
   AdvisorSourceRecord,
   EventCandidate,
   EventSourceAssociation,
+  PilotDecisionEvent,
+  PilotEvidenceSpan,
   PilotManifest,
 } from '../shared/amyHoodDecisionAdvisor';
 
@@ -122,6 +131,65 @@ const extractionFixture = async (
     source,
     association,
     normalizedText,
+  };
+};
+
+const eventCardFixture = async () => {
+  const candidate = (await loadRealCandidates()).find(
+    ({ id }) => id === 'candidate-linkedin-acquisition-2016',
+  );
+  assert(candidate);
+  const direct: PilotEvidenceSpan = {
+    id: 'span-direct',
+    sourceId: 'source-direct',
+    eventCandidateId: candidate.id,
+    role: 'direct_amy',
+    exactQuote: 'We will finance this transaction primarily through new debt issued prior to close.',
+    startChar: 20,
+    endChar: 101,
+    publishedAt: '2016-06-13',
+    speaker: 'Amy Hood',
+  };
+  const context: PilotEvidenceSpan = {
+    id: 'span-context',
+    sourceId: 'source-context',
+    eventCandidateId: candidate.id,
+    role: 'decision_context',
+    exactQuote: 'Microsoft will acquire LinkedIn for $196 per share in an all-cash transaction.',
+    startChar: 10,
+    endChar: 89,
+    publishedAt: '2016-06-13',
+    speaker: null,
+  };
+  const response = {
+    title: 'LinkedIn acquisition financing and growth decision',
+    decisionQuestion: 'Should Microsoft acquire LinkedIn and finance the transaction with new debt?',
+    situation: 'Microsoft evaluated an all-cash acquisition to accelerate cloud and professional-network growth.',
+    objectives: ['Accelerate revenue growth across LinkedIn, Office 365, and Dynamics.'],
+    conditions: ['Debt markets offered favorable issuance windows.'],
+    constraints: ['The transaction required regulatory and shareholder approvals.'],
+    options: [{
+      id: 'option-acquire',
+      description: 'Acquire LinkedIn and issue debt before close.',
+      expectedBenefit: 'Accelerate growth and capture operating synergies.',
+      principalRisk: 'Assume integration and financing risk.',
+      selected: true,
+    }, {
+      id: 'option-remain-independent',
+      description: 'Do not acquire LinkedIn.',
+      expectedBenefit: 'Preserve capital and avoid integration risk.',
+      principalRisk: 'Forgo cross-product growth and network effects.',
+      selected: false,
+    }],
+    chosenAction: 'Acquire LinkedIn in an all-cash transaction financed primarily with new debt.',
+    rejectedBenefit: 'Preserving capital and avoiding integration execution risk.',
+    observations: ['Amy Hood identified favorable debt-market windows and cross-product growth.'],
+    inferences: ['The financing choice preserved existing cash while acting on a strategic growth opportunity.'],
+  };
+  return {
+    candidate,
+    spans: [direct, context],
+    model: fakeModel(async () => ({ text: JSON.stringify(response), elapsedMs: 1 })),
   };
 };
 
@@ -235,4 +303,97 @@ test('failure: malformed model output retries once and records an incomplete ext
   assert.equal(calls, 2);
   assert.deepEqual(result.spans, []);
   assert.deepEqual(result.gaps, ['model_response_invalid']);
+});
+
+test('happy: a validator-ready proposal becomes approved only after explicit review', async () => {
+  const root = await mkdtemp(path.join(os.tmpdir(), 'amy-pilot-event-'));
+  const { candidate, spans, model } = await eventCardFixture();
+  const proposed = await proposePilotEventCard(candidate, spans, model, {
+    documentFamilyIds: ['linkedin-call-2016', 'linkedin-announcement-2016'],
+    now: '2026-07-15T10:00:00.000Z',
+  });
+  assert.equal(proposed.status, 'incomplete');
+  assert.deepEqual(validatePilotEventCard(proposed).blockingGaps, []);
+  await savePilotEventCard(root, proposed);
+
+  const approved = await approvePilotEventCard(root, proposed.candidateId, {
+    reviewer: 'Codex evidence review',
+    reviewedAt: '2026-07-15T12:00:00.000Z',
+  });
+
+  assert.equal(approved.status, 'approved');
+  assert.equal(approved.reviewer, 'Codex evidence review');
+});
+
+test('edge: one document family remains reviewable with a diversity gap', async () => {
+  const { candidate, spans, model } = await eventCardFixture();
+  const proposed = await proposePilotEventCard(candidate, spans, model, {
+    documentFamilyIds: ['linkedin-transaction-2016'],
+    now: '2026-07-15T10:00:00.000Z',
+  });
+
+  const validation = validatePilotEventCard(proposed);
+
+  assert.deepEqual(validation.blockingGaps, []);
+  assert.deepEqual(validation.advisoryGaps, ['single_document_family']);
+});
+
+test('failure: missing direct evidence and outcome leakage cannot be approved', async () => {
+  const root = await mkdtemp(path.join(os.tmpdir(), 'amy-pilot-invalid-event-'));
+  const { candidate, spans, model } = await eventCardFixture();
+  const proposed = await proposePilotEventCard(candidate, spans.slice(1), model, {
+    documentFamilyIds: ['linkedin-announcement-2016'],
+    now: '2026-07-15T10:00:00.000Z',
+  });
+  await savePilotEventCard(root, proposed);
+  await assert.rejects(
+    () => approvePilotEventCard(root, proposed.candidateId, {
+      reviewer: 'Codex evidence review',
+      reviewedAt: '2026-07-15T12:00:00.000Z',
+    }),
+    /missing_direct_amy/,
+  );
+
+  const leaked: PilotDecisionEvent = {
+    ...proposed,
+    evidenceSpans: [{
+      ...spans[0],
+      id: 'span-outcome',
+      role: 'post_outcome',
+      publishedAt: '2021-01-01',
+    }, spans[1]],
+    directAmyEvidenceIds: ['span-outcome'],
+    postOutcomeEvidenceIds: ['span-outcome'],
+  };
+  assert.deepEqual(
+    validatePilotEventCard(leaked).blockingGaps,
+    ['missing_direct_amy', 'post_outcome_leakage'],
+  );
+});
+
+test('failure: invalid option selection and failed persistence preserve the prior card', async () => {
+  const root = await mkdtemp(path.join(os.tmpdir(), 'amy-pilot-write-failure-'));
+  const { candidate, spans, model } = await eventCardFixture();
+  const proposed = await proposePilotEventCard(candidate, spans, model, {
+    documentFamilyIds: ['family-a', 'family-b'],
+    now: '2026-07-15T10:00:00.000Z',
+  });
+  const invalid = {
+    ...proposed,
+    options: proposed.options.map((option) => ({ ...option, selected: true })),
+  };
+  assert.throws(() => validatePilotEventCard(invalid), /invalid decision options/);
+
+  await savePilotEventCard(root, proposed);
+  const before = await readFile(eventCardPath(root, proposed.candidateId), 'utf8');
+  await assert.rejects(
+    () => savePilotEventCard(root, { ...proposed, title: 'Changed title' }, {
+      write: async () => { throw new Error('injected write failure'); },
+    }),
+    /injected write failure/,
+  );
+  assert.equal(
+    await readFile(eventCardPath(root, proposed.candidateId), 'utf8'),
+    before,
+  );
 });
