@@ -82,6 +82,14 @@ const createRunnerFixture = async (approved = true) => {
       status: 'approved',
       reviewedAt: '2026-07-15T00:00:00.000Z',
     }));
+  } else {
+    reviews.reviews = reviews.reviews.map((review, index) => index === 0
+      ? {
+          ...review,
+          status: 'unreviewed',
+          reviewedAt: null,
+        }
+      : review);
   }
   await mkdir(join(root, 'evaluation/v3/public'), { recursive: true });
   await writeFile(
