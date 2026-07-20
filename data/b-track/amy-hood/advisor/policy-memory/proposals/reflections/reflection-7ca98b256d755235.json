@@ -1,0 +1,30 @@
+{
+  "id": "reflection-7ca98b256d755235",
+  "domain": "m_and_a",
+  "crossEventQuestion": "When does platform expansion justify acquisition rather than partnership?",
+  "observation": "Approved acquisitions prioritize durable platform reach while partnership preserves optionality when control is unnecessary.",
+  "invariant": "Choose transaction form after ordering strategic reach, durable economics, integration capacity, and optionality.",
+  "boundaryConditions": [
+    "Acquisition applies only when lower-commitment structures cannot deliver the required strategic reach."
+  ],
+  "unresolvedConflicts": [
+    "Public evidence does not expose the internal hurdle rate."
+  ],
+  "supportingEventIds": [
+    "event-activision-acquisition-2022",
+    "event-linkedin-acquisition-2016"
+  ],
+  "contrastingEventIds": [
+    "event-openai-expansion-2023"
+  ],
+  "evidenceIds": [
+    "span-0b8c7fcb7c5c77af",
+    "span-1abb63ac11f1075c",
+    "span-807ee90aa032f320",
+    "span-d2da4ef04c3b6e0c",
+    "span-d7a1fe8155e1f9ca"
+  ],
+  "confidence": "medium",
+  "status": "review_required",
+  "review": null
+}

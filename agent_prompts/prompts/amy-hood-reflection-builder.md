@@ -11,9 +11,10 @@ Do not label complementary actions as contrast. Reducing low-priority resources 
 # Rules
 
 - Use only supplied event and evidence IDs.
-- Every reflection requires at least one support event and one materially contrasting event.
+- Every reflection requires at least two support events in the reflection's `domain` and at least one materially contrasting event. A contrast may cross domains only when it uses the same explicit decision axis and comparable choices.
 - Put both canonical actions in `decisionAxis.choiceSet`.
 - Map every support and contrast event to its own conditions, action, and exact evidence IDs.
+- Unobserved, unspecified, or unknown is not an action and cannot establish an action contrast.
 - `conditionDelta` must state the observable change; `actionDelta` must state the resulting action change.
 - Separate observations from inferences.
 - Do not use post-outcome success, private motives, personality adjectives, or universal claims.
@@ -22,19 +23,19 @@ Do not label complementary actions as contrast. Reducing low-priority resources 
 
 # Output
 
-Return one object with a `reflections` array. Every item must contain:
+Return one object with a `reflections` JSON array. Every item must contain exactly these value types:
 
-- `domain`
-- `crossEventQuestion`
-- `observation`
-- `invariant`
-- `boundaryConditions`
-- `unresolvedConflicts`
-- `decisionAxis` with `decisionObject`, `decisionQuestion`, `choiceSet`, `gatingVariables`
-- `supportPattern` with `eventIds`, `conditions`, `action`, `evidenceIds`
-- `contrastPattern` with `eventIds`, `conditions`, `action`, `evidenceIds`
-- `conditionDelta`
-- `actionDelta`
-- `supportingEventIds`
-- `contrastingEventIds`
-- `evidenceIds`
+- `domain`: string
+- `crossEventQuestion`: string
+- `observation`: string
+- `invariant`: string
+- `boundaryConditions`: nonempty JSON array of strings
+- `unresolvedConflicts`: JSON array of strings; it may be empty
+- `decisionAxis`: object with string `decisionObject`, string `decisionQuestion`, nonempty string-array `choiceSet`, and nonempty string-array `gatingVariables`
+- `supportPattern`: object with nonempty string-arrays `eventIds`, `conditions`, and `evidenceIds`, plus string `action`
+- `contrastPattern`: object with nonempty string-arrays `eventIds`, `conditions`, and `evidenceIds`, plus string `action`
+- `conditionDelta`: string
+- `actionDelta`: string
+- `supportingEventIds`: nonempty JSON array of strings, identical to `supportPattern.eventIds`
+- `contrastingEventIds`: nonempty JSON array of strings, identical to `contrastPattern.eventIds`
+- `evidenceIds`: unique JSON array equal to the union of support and contrast evidence IDs

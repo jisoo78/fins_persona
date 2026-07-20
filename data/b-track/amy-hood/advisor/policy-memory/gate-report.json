@@ -1,0 +1,60 @@
+{
+  "generatedAt": "2026-07-20T01:16:51.575Z",
+  "inputEventIds": [
+    "event-activision-acquisition-2022",
+    "event-copilot-price-2023",
+    "event-linkedin-acquisition-2016",
+    "event-openai-expansion-2023",
+    "event-workforce-reset-2023"
+  ],
+  "passing": {
+    "reflections": [],
+    "policies": []
+  },
+  "reviewRequired": [
+    {
+      "kind": "reflection",
+      "id": "reflection-20c9175bbee7effd",
+      "errors": [
+        "reflection requires a valid decision axis",
+        "support pattern requires conditions, action, events, and evidence",
+        "contrast pattern requires conditions, action, events, and evidence",
+        "reflection requires condition delta",
+        "reflection requires action delta"
+      ]
+    },
+    {
+      "kind": "reflection",
+      "id": "reflection-7ca98b256d755235",
+      "errors": [
+        "reflection requires a valid decision axis",
+        "support pattern requires conditions, action, events, and evidence",
+        "contrast pattern requires conditions, action, events, and evidence",
+        "reflection requires condition delta",
+        "reflection requires action delta"
+      ]
+    },
+    {
+      "kind": "reflection",
+      "id": "reflection-ddde3efbe6d4783b",
+      "errors": [
+        "support and contrast actions must belong to the decision-axis choice set"
+      ]
+    },
+    {
+      "kind": "reflection",
+      "id": "reflection-f11de0b94c27058e",
+      "errors": [
+        "reflection requires a valid decision axis",
+        "support pattern requires conditions, action, events, and evidence",
+        "contrast pattern requires conditions, action, events, and evidence",
+        "reflection requires condition delta",
+        "reflection requires action delta"
+      ]
+    }
+  ],
+  "blocked": [
+    "model-run-c59fef7571760664",
+    "review_rejected:reflection-ddde3efbe6d4783b"
+  ]
+}

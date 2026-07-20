@@ -1,0 +1,75 @@
+{
+  "id": "reflection-ddde3efbe6d4783b",
+  "domain": "m_and_a",
+  "crossEventQuestion": "When should Microsoft fund a large all-cash acquisition with debt versus equity?",
+  "observation": "For the $26.2B LinkedIn deal, debt was chosen to defer dilution and achieve accretion in under two years; for the $68.7B Activision deal, the all-cash structure was approved by both boards without explicit debt-vs-equity contrast in the announcement.",
+  "invariant": "Large all-cash acquisitions are funded with debt to minimize near-term EPS dilution and accelerate accretion.",
+  "boundaryConditions": [
+    "Acquisition must meet Microsoft's high bar for new additions",
+    "Expected close date influences dilution timeline",
+    "Transaction is all-cash"
+  ],
+  "unresolvedConflicts": [
+    "Activision deal does not explicitly state debt vs equity choice, only all-cash structure"
+  ],
+  "decisionAxis": {
+    "decisionObject": "acquisition financing",
+    "decisionQuestion": "debt or equity for all-cash M&A",
+    "choiceSet": [
+      "debt_financing",
+      "equity_financing"
+    ],
+    "gatingVariables": [
+      "expected close date",
+      "near-term EPS dilution tolerance",
+      "transaction size"
+    ]
+  },
+  "supportPattern": {
+    "eventIds": [
+      "event-linkedin-acquisition-2016"
+    ],
+    "conditions": [
+      "all-cash transaction",
+      "expected close date influences dilution timeline"
+    ],
+    "evidenceIds": [
+      "span-3b790581f5848009",
+      "span-9335840b833b9436",
+      "span-9f190c9d1c5b03bb"
+    ],
+    "action": "debt_financing"
+  },
+  "contrastPattern": {
+    "eventIds": [
+      "event-activision-acquisition-2022"
+    ],
+    "conditions": [
+      "all-cash structure",
+      "both boards approved"
+    ],
+    "evidenceIds": [
+      "span-1abb63ac11f1075c",
+      "span-e32ab0f2fc36349e"
+    ],
+    "action": "all_cash_financing_unspecified"
+  },
+  "conditionDelta": "LinkedIn: $26.2B all-cash with explicit debt financing; Activision: $68.7B all-cash with board approval but no financing lever stated",
+  "actionDelta": "debt financing vs unspecified all-cash",
+  "supportingEventIds": [
+    "event-linkedin-acquisition-2016"
+  ],
+  "contrastingEventIds": [
+    "event-activision-acquisition-2022"
+  ],
+  "evidenceIds": [
+    "span-1abb63ac11f1075c",
+    "span-3b790581f5848009",
+    "span-9335840b833b9436",
+    "span-9f190c9d1c5b03bb",
+    "span-e32ab0f2fc36349e"
+  ],
+  "confidence": "low",
+  "status": "review_required",
+  "review": null
+}

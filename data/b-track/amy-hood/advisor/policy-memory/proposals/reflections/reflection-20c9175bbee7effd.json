@@ -1,0 +1,28 @@
+{
+  "id": "reflection-20c9175bbee7effd",
+  "domain": "cost_efficiency",
+  "crossEventQuestion": "When is workforce reduction a reallocation rather than a downsizing?",
+  "observation": "Targeted role elimination in non-growth areas paired with continued hiring in strategic areas signals reallocation.",
+  "invariant": "Align headcount with secular growth areas; reduce in areas where customer demand is shrinking or technology is shifting.",
+  "boundaryConditions": [
+    "Reallocation is distinct from general downsizing when hiring continues in key strategic areas."
+  ],
+  "unresolvedConflicts": [
+    "The specific roles eliminated and the specific roles added are not detailed."
+  ],
+  "supportingEventIds": [
+    "event-workforce-reset-2023"
+  ],
+  "contrastingEventIds": [
+    "event-openai-expansion-2023"
+  ],
+  "evidenceIds": [
+    "span-7a8c1662a2c8a94e",
+    "span-7f9dde341a496596",
+    "span-ad445ecf5ef4a0ac",
+    "span-f031de15863e849e"
+  ],
+  "confidence": "low",
+  "status": "review_required",
+  "review": null
+}

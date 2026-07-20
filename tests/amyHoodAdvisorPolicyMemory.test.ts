@@ -329,6 +329,13 @@ test('happy: input graph selects only approved non-holdout decision evidence', a
 
 test('edge: a material contrast narrows the reflection boundary', async () => {
   const graph = await loadPolicyMemoryInput(process.cwd());
+  const builderPrompt = await readFile(join(
+    process.cwd(),
+    'agent_prompts/prompts/amy-hood-reflection-builder.md',
+  ), 'utf8');
+  assert.match(builderPrompt, /at least two support events/i);
+  assert.match(builderPrompt, /Unobserved, unspecified, or unknown is not an action/i);
+  assert.match(builderPrompt, /`boundaryConditions`.*JSON array/i);
   const result = await buildReflectionProposals(
     graph,
     createFixtureModel(reflectionResponse),
