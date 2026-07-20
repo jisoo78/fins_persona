@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "v1-262d69135ca0",
+  "releaseManifestHash": "7a4f56aa31982d99916ee79a2cb5ada8f305875d83fafff776917183d6316240",
+  "holdoutManifestHash": "e9421d0bd8846387bc4f81c6c98bf3c61a603c18d887e1a858c7181ec1e3ec4d",
+  "embeddingModel": "bge-m3-Q8_0.gguf",
+  "embeddingDimension": 1024,
+  "builderVersion": "hybrid-v1",
+  "lexicalVersion": "bm25-v1",
+  "retrievalConfig": {
+    "vectorWeight": 0.7,
+    "lexicalWeight": 0.3,
+    "bm25K": 4,
+    "minimumScore": 0.55
+  },
+  "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+  "calibrationSetHash": "8a67825fbce0ebafbf1ed8acfcf84f98b295f658740d0d5925d3345aa17eca04",
+  "calibration": {
+    "recallAt3": 1,
+    "noMatchFalsePositiveRate": 0
+  },
+  "recordHashes": [
+    "615877bf018ceaa7ac258d7d33be55c52a0552f0d6e5eeca90a8f4a3390248bb",
+    "18a3b41c5becef027556727a76d4345e47d813ba5af27c435274df967122ed2b",
+    "058b210914a264ac123255a7900ec90d4ed9673aba86850f9a2474747f04ac5b",
+    "8eab4ab674ed783ef90772a15a75ef98433b534144904c79eae9f8abb2b2f993"
+  ],
+  "evidenceHash": "ab8736eb1465426da51381cf135def0e6362b42e21346df40d53d9e29b6eff82",
+  "vectorsHash": "5f75a8d9aed88d211809cf713d2e62b22b1e6cf8a188e542412c37d55f77092b",
+  "recordCount": 4,
+  "vectorsFile": "vectors.f32",
+  "indexHash": "8139f1dcda7813c367df7d8fd90a5507e8401e0bb0971e5df51b7c8e03ba96df",
+  "createdAt": "2026-07-20T06:19:05.007Z"
+}

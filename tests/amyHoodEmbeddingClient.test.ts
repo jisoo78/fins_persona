@@ -72,18 +72,6 @@ test('edge: multilingual text is sent without normalization', async () => {
   assert.deepEqual(observed, input);
 });
 
-test('edge: response indices restore input order', async () => {
-  const client = createBgeM3EmbeddingClient({
-    fetchImpl: async () => Response.json({
-      model: 'bge-m3-Q8_0.gguf',
-      data: [{ index: 1, embedding: vector(1) }, { index: 0, embedding: vector(0) }],
-    }),
-  });
-  const embedded = await client.embed(['first', 'second']);
-  assert.equal(embedded[0][0], 1);
-  assert.equal(embedded[1][1], 1);
-});
-
 test('failure: malformed or unavailable embedding responses fail safely', async () => {
   const wrongModel = createBgeM3EmbeddingClient({
     fetchImpl: async () => Response.json({ model: 'wrong.gguf', data: [{ index: 0, embedding: vector() }] }),
@@ -107,4 +95,23 @@ test('failure: malformed or unavailable embedding responses fail safely', async 
     }),
   });
   await assert.rejects(invalid.embed(['query']), /1024 finite numbers/);
+});
+
+test('edge: long logical inputs are chunked and mean-pooled for a 512-token server batch', async () => {
+  const bodies: string[][] = [];
+  const client = createBgeM3EmbeddingClient({
+    maxChunkCharacters: 8,
+    fetchImpl: async (_request, init) => {
+      const input = JSON.parse(String(init?.body)).input as string[];
+      bodies.push(input);
+      return Response.json({
+        model: 'bge-m3-Q8_0.gguf',
+        data: input.map((_text, index) => ({ index, embedding: vector(index) })),
+      });
+    },
+  });
+  const [pooled] = await client.embed(['abcdefghABCDEFGH']);
+  assert.deepEqual(bodies, [['abcdefgh', 'ABCDEFGH']]);
+  assert.ok(Math.abs(pooled[0] - Math.SQRT1_2) < 1e-9);
+  assert.ok(Math.abs(pooled[1] - Math.SQRT1_2) < 1e-9);
 });

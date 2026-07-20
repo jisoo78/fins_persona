@@ -16,6 +16,7 @@ type EmbeddingClientOptions = {
   dimension?: 1024;
   timeoutMs?: number;
   fetchImpl?: typeof fetch;
+  maxChunkCharacters?: number;
 };
 
 const fetchWithTimeout = async (
@@ -69,16 +70,25 @@ export const createBgeM3EmbeddingClient = (
   const model = options.model ?? process.env.BGE_M3_MODEL ?? 'bge-m3-Q8_0.gguf';
   const dimension = options.dimension ?? 1024;
   const timeoutMs = options.timeoutMs ?? 30_000;
+  const maxChunkCharacters = options.maxChunkCharacters ?? 700;
   const fetchImpl = options.fetchImpl ?? fetch;
 
   const embed = async (input: string[]) => {
     if (!input.length || input.some((text) => typeof text !== 'string' || !text.trim())) {
       throw new Error('embedding input must contain non-empty text');
     }
+    const chunks = input.flatMap((text, inputIndex) => {
+      const characters = [...text];
+      const values: Array<{ inputIndex: number; text: string }> = [];
+      for (let offset = 0; offset < characters.length; offset += maxChunkCharacters) {
+        values.push({ inputIndex, text: characters.slice(offset, offset + maxChunkCharacters).join('') });
+      }
+      return values;
+    });
     const response = await fetchWithTimeout(fetchImpl, `${baseUrl}/embeddings`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model, input }),
+      body: JSON.stringify({ model, input: chunks.map(({ text }) => text) }),
     }, timeoutMs);
     const payload = await parseJson(response) as {
       model?: string;
@@ -86,7 +96,7 @@ export const createBgeM3EmbeddingClient = (
     };
     if (!response.ok) throw new Error(`BGE-M3 embedding request failed (${response.status})`);
     if (payload.model !== model) throw new Error(`BGE-M3 model identity mismatch: ${String(payload.model)}`);
-    if (!Array.isArray(payload.data) || payload.data.length !== input.length) {
+    if (!Array.isArray(payload.data) || payload.data.length !== chunks.length) {
       throw new Error('BGE-M3 embedding count does not match request');
     }
     const ordered = [...payload.data].sort((left, right) =>
@@ -94,7 +104,13 @@ export const createBgeM3EmbeddingClient = (
     if (ordered.some((item, index) => item.index !== undefined && item.index !== index)) {
       throw new Error('BGE-M3 embedding response indices are invalid');
     }
-    return ordered.map(({ embedding }) => normalizeEmbedding(embedding, dimension));
+    const chunkVectors = ordered.map(({ embedding }) => normalizeEmbedding(embedding, dimension));
+    return input.map((_text, inputIndex) => {
+      const selected = chunkVectors.filter((_vector, chunkIndex) => chunks[chunkIndex].inputIndex === inputIndex);
+      const mean = Array.from({ length: dimension }, (_, column) =>
+        selected.reduce((sum, vector) => sum + vector[column], 0) / selected.length);
+      return normalizeEmbedding(mean, dimension);
+    });
   };
 
   const preflight = async (): Promise<EmbeddingServiceIdentity> => {

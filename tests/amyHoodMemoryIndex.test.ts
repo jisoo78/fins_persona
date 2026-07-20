@@ -20,6 +20,7 @@ import {
   verifyAmyHoodMemoryIndex,
 } from '../server/decisionAdvisor/memoryIndex';
 import { fakeEmbeddingClient, writeAmyHoodRagFixture } from './helpers/amyHoodRagFixture';
+import { runAmyHoodMemoryIndexCommand } from '../server/runAmyHoodMemoryIndex';
 
 test('happy: builds a source-grounded immutable index', async () => {
   const root = await writeAmyHoodRagFixture();
@@ -68,4 +69,13 @@ test('failure: embedding failure leaves no partial index', async () => {
   await assert.rejects(loadActiveAmyHoodMemoryIndex(root), /active Amy Hood memory index/);
   const entries = await readdir(advisorPaths(root).memoryIndexes).catch(() => []);
   assert.equal(entries.some((name) => name.startsWith('.staging-')), false);
+});
+
+test('happy: index CLI builds then checks without changing the pointer', async () => {
+  const root = await writeAmyHoodRagFixture();
+  const dependencies = { root, embeddingClient: fakeEmbeddingClient() };
+  await runAmyHoodMemoryIndexCommand(['build'], dependencies);
+  const before = await readFile(advisorPaths(root).activeMemoryIndex, 'utf8');
+  await runAmyHoodMemoryIndexCommand(['check'], dependencies);
+  assert.equal(await readFile(advisorPaths(root).activeMemoryIndex, 'utf8'), before);
 });

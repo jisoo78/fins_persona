@@ -1,0 +1,74 @@
+[
+  {
+    "id": "span-capacity-2022-capex",
+    "exactQuote": "Capital expenditures, we expect a sequential increase on a dollar basis as we continue to invest to meet growing global demand for our cloud services.",
+    "speaker": "Amy Hood",
+    "sourceId": "source-6b843b4b8385078d",
+    "sourceType": "earnings_call",
+    "sourceTitle": "PDF discovery: Nuance Communications acquisition",
+    "publishedAt": "2022-04-26",
+    "sourceUrl": "https://www.microsoft.com/en-us/investor/events/fy-2022/earnings-fy-2022-q3",
+    "candidateId": "candidate-cloud-capacity-scale-2022",
+    "temporalRelation": "post_decision"
+  },
+  {
+    "id": "span-capacity-2022-headcount",
+    "exactQuote": "At a total company level, headcount grew 20% year-over-year as we continue to invest in key areas such as cloud engineering, customer deployment, LinkedIn, and sales, and included approximately 4 points of growth from the addition of Nuance.",
+    "speaker": "Amy Hood",
+    "sourceId": "source-6b843b4b8385078d",
+    "sourceType": "earnings_call",
+    "sourceTitle": "PDF discovery: Nuance Communications acquisition",
+    "publishedAt": "2022-04-26",
+    "sourceUrl": "https://www.microsoft.com/en-us/investor/events/fy-2022/earnings-fy-2022-q3",
+    "candidateId": "candidate-cloud-capacity-scale-2022",
+    "temporalRelation": "post_decision"
+  },
+  {
+    "id": "span-capacity-2023-ai-capex",
+    "exactQuote": "We expect capital expenditures to have a material sequential increase on a dollar basis driven by investments in Azure AI infrastructure.",
+    "speaker": "Amy Hood",
+    "sourceId": "source-fbb900eb7e249591",
+    "sourceType": "earnings_call",
+    "sourceTitle": "Microsoft FY23 Q3 earnings conference call",
+    "publishedAt": "2023-04-25",
+    "sourceUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3",
+    "candidateId": "candidate-ai-capacity-opex-pivot-2023",
+    "temporalRelation": "pre_decision"
+  },
+  {
+    "id": "span-capacity-2023-opex",
+    "exactQuote": "As always, we remain committed to aligning costs and revenue growth to deliver disciplined profitability. Therefore, while the scaled capex investments will impact COGS growth, we expect FY24 operating expense growth to remain low.",
+    "speaker": "Amy Hood",
+    "sourceId": "source-fbb900eb7e249591",
+    "sourceType": "earnings_call",
+    "sourceTitle": "Microsoft FY23 Q3 earnings conference call",
+    "publishedAt": "2023-04-25",
+    "sourceUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3",
+    "candidateId": "candidate-ai-capacity-opex-pivot-2023",
+    "temporalRelation": "pre_decision"
+  },
+  {
+    "id": "span-capacity-2024-demand-discipline",
+    "exactQuote": "Our commitment to scaling our cloud and AI investment is guided by customer demand and the substantial market opportunity. As we scale these investments, we remain focused on driving efficiencies across every layer of our tech stack and disciplined cost management across every team.",
+    "speaker": "Amy Hood",
+    "sourceId": "source-4f4085f8344669c4",
+    "sourceType": "earnings_call",
+    "sourceTitle": "PDF discovery: Activision Blizzard acquisition",
+    "publishedAt": "2024-01-30",
+    "sourceUrl": "https://www.microsoft.com/en-us/investor/events/fy-2024/earnings-fy-2024-q2",
+    "candidateId": "candidate-ai-capacity-sourcing-2024",
+    "temporalRelation": "post_decision"
+  },
+  {
+    "id": "span-capacity-2024-external-supply",
+    "exactQuote": "I feel like primarily, obviously, this is being built by us, but we’ve also used third-party capacity to help when we could have that help us, in terms of meeting customer demand. And I tend to think, looking forward, you’ll tend to see, and I guided toward it, accelerating capital expense to continue to be able to add capacity in the coming quarters, given what we see in terms of pipeline.",
+    "speaker": "Amy Hood",
+    "sourceId": "source-4f4085f8344669c4",
+    "sourceType": "earnings_call",
+    "sourceTitle": "PDF discovery: Activision Blizzard acquisition",
+    "publishedAt": "2024-01-30",
+    "sourceUrl": "https://www.microsoft.com/en-us/investor/events/fy-2024/earnings-fy-2024-q2",
+    "candidateId": "candidate-ai-capacity-sourcing-2024",
+    "temporalRelation": "post_decision"
+  }
+]
