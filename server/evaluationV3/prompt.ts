@@ -3,6 +3,7 @@ import type {
   EvaluationV3Question,
 } from '../../shared/amyHoodEvaluationV3';
 import type { EvaluationV3ContextPackage } from './context';
+import type { AmyHoodRenderedContext } from '../../shared/amyHoodRag';
 
 export type EvaluationV3ModelInput = {
   system: string;
@@ -42,14 +43,28 @@ const contextIsEmpty = (context: EvaluationV3ContextPackage) =>
   && context.events.length === 0
   && context.counterexamples.length === 0;
 
+const isRenderedContext = (
+  context: EvaluationV3ContextPackage | AmyHoodRenderedContext,
+): context is AmyHoodRenderedContext => 'text' in context && 'trace' in context;
+
 const assertArmContext = (
   arm: EvaluationV3Arm,
-  context: EvaluationV3ContextPackage,
+  context: EvaluationV3ContextPackage | AmyHoodRenderedContext | null,
 ) => {
   if (arm === 'generic_cfo' || arm === 'amy_prompt') {
-    if (!contextIsEmpty(context)) throw new Error(`${arm} context must be empty`);
+    if (context !== null && (!('memoryReleaseId' in context) || !contextIsEmpty(context))) {
+      throw new Error(`${arm} context must be empty`);
+    }
     return;
   }
+  if (context && isRenderedContext(context)) {
+    if (context.projection !== (arm === 'amy_policy_rag' ? 'policy' : 'full')) {
+      throw new Error(`${arm} requires the matching dynamic projection`);
+    }
+    return;
+  }
+  if (!context) throw new Error(`${arm} requires dynamic memory context`);
+  if (!('memoryReleaseId' in context)) throw new Error(`${arm} requires dynamic memory context`);
   if (!context.memoryReleaseId || context.policy.length === 0) {
     throw new Error(`${arm} requires an active policy memory release`);
   }
@@ -64,7 +79,9 @@ const assertArmContext = (
   }
 };
 
-const contextBlock = (context: EvaluationV3ContextPackage) => {
+const contextBlock = (context: EvaluationV3ContextPackage | AmyHoodRenderedContext | null) => {
+  if (context === null) return '구조화 메모리: 없음';
+  if (isRenderedContext(context)) return context.text;
   if (contextIsEmpty(context)) return '구조화 메모리: 없음';
   return [
     `메모리 릴리스: ${context.memoryReleaseId}`,
@@ -84,7 +101,7 @@ const contextBlock = (context: EvaluationV3ContextPackage) => {
 export const buildEvaluationV3Input = (
   systemPrompt: string,
   question: EvaluationV3Question,
-  context: EvaluationV3ContextPackage,
+  context: EvaluationV3ContextPackage | AmyHoodRenderedContext | null,
   arm: EvaluationV3Arm,
 ): EvaluationV3ModelInput => {
   assertPublicQuestion(question);

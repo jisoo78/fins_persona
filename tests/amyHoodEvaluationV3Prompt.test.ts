@@ -18,6 +18,7 @@ import { join } from 'node:path';
 import test from 'node:test';
 
 import type { EvaluationV3Question } from '../shared/amyHoodEvaluationV3';
+import type { AmyHoodRenderedContext } from '../shared/amyHoodRag';
 import {
   buildEvaluationV3Input,
   parseEvaluationV3Response,
@@ -45,12 +46,15 @@ const question: EvaluationV3Question = {
   ],
 };
 
-const fullContext: EvaluationV3ContextPackage = {
-  memoryReleaseId: 'memory-1.0.0',
-  policy: ['수요 신호에 맞춰 투자를 단계화한다.'],
-  reflections: ['확신보다 검증 가능한 이정표를 먼저 둔다.'],
-  events: ['수요와 용량의 시차를 관리한 비홀드아웃 사건'],
-  counterexamples: ['수요가 약할 때 투자를 늦춘 반례'],
+const fullContext: AmyHoodRenderedContext = {
+  projection: 'full',
+  text: '[Retrieved Policy]\n수요 신호에 맞춰 투자를 단계화한다.\nAmy Hood evidence: customer demand',
+  trace: {
+    queryHash: 'a'.repeat(64), indexHash: 'b'.repeat(64), retrievalConfigHash: 'c'.repeat(64),
+    cacheKey: 'd'.repeat(64), selectedArtifacts: [], expandedArtifactIds: [], evidenceIds: [],
+    sourceIds: [], noMatch: false, noMatchReason: null, contextTokens: 30, requestTokens: 100,
+    tokenCounter: 'conservative_estimator', contextHash: 'e'.repeat(64),
+  },
 };
 
 const createMemoryFixture = async (
@@ -116,7 +120,7 @@ test('failure: private answer fields and no-RAG context are rejected', () => {
     () => buildEvaluationV3Input(
       'SYSTEM',
       { ...question, correctChoice: 2 } as never,
-      emptyEvaluationV3Context(),
+      null,
       'amy_prompt',
     ),
     /unknown public question field: correctChoice/,
