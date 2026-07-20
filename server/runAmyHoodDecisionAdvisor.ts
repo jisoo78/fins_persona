@@ -183,7 +183,9 @@ export const validateEventCandidates = (
   options: { enforceDiscoveryRange?: boolean } = {},
 ): CandidateCheck => {
   if (!Array.isArray(value)) throw new Error('event candidates must be a JSON array');
-  if (value.length !== 30) throw new Error(`expected exactly 30 candidates; found ${value.length}`);
+  if (value.length < 30 || value.length > 50) {
+    throw new Error(`expected 30-50 candidates; found ${value.length}`);
+  }
 
   const candidates = value as EventCandidate[];
   const ids = new Set<string>();

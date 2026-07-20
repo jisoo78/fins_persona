@@ -36,7 +36,7 @@
  *
  * Test Plan (Task 5 discovery matrix and CLI gates):
  * 1. Happy Path:
- *    - exactly 30 candidates spanning all five domains and 100 unique HTTPS discoveries pass.
+ *    - 30–50 candidates spanning all five domains and 100–150 unique HTTPS discoveries pass.
  *
  * 2. Edge Cases:
  *    - duplicate candidate IDs fail with the exact duplicate identified.
@@ -44,6 +44,7 @@
  *    - inverted decision windows and outcome-only working titles are rejected.
  *
  * 3. Failure Path:
+ *    - candidate counts below 30 or above 50 fail before candidate content is accepted.
  *    - partial source registries report exact URL/document deficits and missing artifacts do not count.
  *    - unknown collection IDs and malformed local import files exit nonzero without network access.
  *
@@ -2077,7 +2078,7 @@ const runAdvisorCli = (root: string, ...args: string[]) => spawnSync(
   { cwd: path.resolve(import.meta.dirname, '..'), encoding: 'utf8' },
 );
 
-test('happy: candidate CLI accepts 30 candidates, five domains, and 100 unique discoveries', async () => {
+test('happy: candidate CLI accepts 30 and 33 candidates across five domains', async () => {
   const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-candidates-happy-'));
   const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
 
@@ -2090,6 +2091,48 @@ test('happy: candidate CLI accepts 30 candidates, five domains, and 100 unique d
     assert.equal(result.status, 0, result.stderr);
     assert.match(result.stdout, /30 candidates/i);
     assert.match(result.stdout, /100 unique discovery URLs/i);
+
+    const expanded = validCandidateMatrix();
+    for (const [index, source] of expanded.slice(0, 3).entries()) {
+      expanded.push({
+        ...structuredClone(source),
+        id: `candidate-capacity-resource-${index + 1}`,
+      });
+    }
+    await writeFile(candidatePath, `${JSON.stringify(expanded, null, 2)}\n`);
+
+    const expandedResult = runAdvisorCli(directory, 'candidates:check');
+
+    assert.equal(expandedResult.status, 0, expandedResult.stderr);
+    assert.match(expandedResult.stdout, /33 candidates/i);
+    assert.match(expandedResult.stdout, /100 unique discovery URLs/i);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: candidate CLI rejects counts outside the inclusive 30–50 range', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-candidate-count-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+
+  try {
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(
+      candidatePath,
+      `${JSON.stringify(validCandidateMatrix().slice(0, 29), null, 2)}\n`,
+    );
+    const tooFew = runAdvisorCli(directory, 'candidates:check');
+    assert.equal(tooFew.status, 1);
+    assert.match(tooFew.stderr, /expected 30-50 candidates; found 29/i);
+
+    const excessive = Array.from({ length: 51 }, (_, index) => ({
+      ...structuredClone(validCandidateMatrix()[index % 30]),
+      id: `candidate-excess-${index}`,
+    }));
+    await writeFile(candidatePath, `${JSON.stringify(excessive, null, 2)}\n`);
+    const tooMany = runAdvisorCli(directory, 'candidates:check');
+    assert.equal(tooMany.status, 1);
+    assert.match(tooMany.stderr, /expected 30-50 candidates; found 51/i);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
