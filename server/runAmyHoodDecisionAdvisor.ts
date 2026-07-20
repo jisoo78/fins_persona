@@ -56,6 +56,7 @@ import {
 import { readJsonFile } from './decisionAdvisor/jsonStore';
 import { createModelClient } from './personaPipeline/modelClient';
 import type { PilotDecisionEvent } from '../shared/amyHoodDecisionAdvisor';
+import { runPolicyMemoryCommand } from './decisionAdvisor/policyMemoryCli';
 
 const DECISION_DOMAINS: DecisionDomain[] = [
   'm_and_a',
@@ -733,6 +734,8 @@ const run = async () => {
   const args = process.argv.slice(2);
   const command = args[0];
   const root = path.resolve(optionValue(args, '--root') ?? process.cwd());
+
+  if (await runPolicyMemoryCommand(root, args)) return;
 
   if (command === 'candidates:check') {
     const candidatePath = path.resolve(

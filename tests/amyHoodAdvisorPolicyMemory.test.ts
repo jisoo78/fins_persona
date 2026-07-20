@@ -39,6 +39,7 @@ import {
   buildMemoryRelease,
 } from '../server/decisionAdvisor/memoryReleaseStore';
 import { resolveEvaluationV3ArmContext } from '../server/evaluationV3/context';
+import { runPolicyMemoryCommand } from '../server/decisionAdvisor/policyMemoryCli';
 
 const reflectionResponse = JSON.stringify({
   reflections: [{
@@ -212,6 +213,29 @@ test('happy: input graph selects only approved non-holdout decision evidence', a
   assert.equal(fullContext.context.reflections.length, 1);
   assert.equal(fullContext.context.events.length > 0, true);
   assert.equal(fullContext.context.counterexamples.length > 0, true);
+
+  const logs: string[] = [];
+  const cliDependencies = {
+    createModel: () => createFixtureModel(reflectionResponse),
+    now: () => '2026-07-20T10:00:00.000Z',
+    log: (value: string) => logs.push(value),
+  };
+  assert.equal(await runPolicyMemoryCommand(
+    storeRoot,
+    ['memory:build', '--kind', 'reflection'],
+    cliDependencies,
+  ), true);
+  assert.equal(await runPolicyMemoryCommand(
+    storeRoot,
+    ['memory:check'],
+    cliDependencies,
+  ), true);
+  assert.equal(await runPolicyMemoryCommand(
+    storeRoot,
+    ['not-a-memory-command'],
+    cliDependencies,
+  ), false);
+  assert.equal(logs.length >= 2, true);
 });
 
 test('edge: a material contrast narrows the reflection boundary', async () => {
@@ -555,6 +579,19 @@ test('failure: stale or interrupted approval leaves no partial approved state', 
   const reviewPath = join(advisorPaths(root).policyReviews, `reflection-${id}.json`);
   await assert.rejects(() => readFile(approvedPath), /ENOENT/);
   await assert.rejects(() => readFile(reviewPath), /ENOENT/);
+
+  await assert.rejects(
+    () => runPolicyMemoryCommand(
+      root,
+      ['memory:approve', '--kind', 'reflection', '--all-passing'],
+      {
+        createModel: () => createFixtureModel(reflectionResponse),
+        now: () => '2026-07-20T10:15:00.000Z',
+        log: () => undefined,
+      },
+    ),
+    /review evidence before approving/,
+  );
 });
 
 test('failure: release tampering and activation failure preserve the last active pointer', async (context) => {
