@@ -15,12 +15,16 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
 
-import type { ReflectionMemory } from '../shared/amyHoodDecisionAdvisor';
+import type { PolicyMemory, ReflectionMemory } from '../shared/amyHoodDecisionAdvisor';
 import type { ModelClient } from '../server/personaPipeline/modelClient';
 import {
   buildReflectionProposals,
   validateReflectionMemory,
 } from '../server/decisionAdvisor/reflectionMemory';
+import {
+  buildPolicyProposals,
+  validatePolicyMemory,
+} from '../server/decisionAdvisor/policyMemory';
 import { loadPolicyMemoryInput } from '../server/decisionAdvisor/policyMemoryInput';
 
 const reflectionResponse = JSON.stringify({
@@ -60,6 +64,51 @@ const createFixtureModel = (...responses: string[]): ModelClient => {
   };
 };
 
+const approveReflectionForFixture = (reflection: ReflectionMemory): ReflectionMemory => ({
+  ...reflection,
+  status: 'approved',
+  review: {
+    reviewer: 'Codex',
+    reviewedAt: '2026-07-20T09:10:00.000Z',
+    decision: 'approved',
+    rationale: 'Fixture approval after evidence review.',
+    validationHash: 'a'.repeat(64),
+  },
+});
+
+const repeatedEventPolicyResponse = (reflectionId: string) => JSON.stringify({
+  policies: [{
+    domain: 'm_and_a',
+    applicabilityConditions: [
+      'Strategic platform reach is durable and cannot be obtained with a lower-commitment structure.',
+    ],
+    priorityOrder: [
+      'Strategic reach',
+      'Durable economics',
+      'Integration capacity',
+      'Optionality',
+    ],
+    recommendedAction: 'Use acquisition only after partnership and organic alternatives fail the strategic-reach test.',
+    nonApplicabilityConditions: ['A partnership preserves sufficient access and learning.'],
+    exceptions: ['Delay commitment when integration capacity or durable economics is unverified.'],
+    reversalSignals: [
+      'A partnership reaches the same strategic objective with materially lower irreversible commitment.',
+    ],
+    reflectionIds: [reflectionId],
+    supportingEventIds: [
+      'event-linkedin-acquisition-2016',
+      'event-activision-acquisition-2022',
+    ],
+    contrastingEventIds: ['event-openai-expansion-2023'],
+    evidenceIds: [
+      'span-0b8c7fcb7c5c77af',
+      'span-807ee90aa032f320',
+      'span-7a8c1662a2c8a94e',
+    ],
+    directPolicyEvidenceIds: [],
+  }],
+});
+
 test('happy: input graph selects only approved non-holdout decision evidence', async () => {
   const graph = await loadPolicyMemoryInput(process.cwd());
 
@@ -82,6 +131,21 @@ test('happy: input graph selects only approved non-holdout decision evidence', a
   assert.equal(result.artifacts.length, 1);
   assert.equal(validateReflectionMemory(result.artifacts[0], graph).passed, true);
   assert.equal(result.modelRun.attemptCount, 1);
+
+  const approvedReflection = approveReflectionForFixture(result.artifacts[0]);
+  const policyResult = await buildPolicyProposals(
+    [approvedReflection],
+    graph,
+    createFixtureModel(repeatedEventPolicyResponse(approvedReflection.id)),
+    { now: '2026-07-20T09:20:00.000Z' },
+  );
+  assert.equal(policyResult.artifacts.length, 1);
+  assert.equal(
+    validatePolicyMemory(policyResult.artifacts[0], [approvedReflection], graph).passed,
+    true,
+  );
+  assert.equal(policyResult.artifacts[0].policyKind, 'deployable_policy');
+  assert.equal(policyResult.artifacts[0].confidence, 'medium');
 });
 
 test('edge: a material contrast narrows the reflection boundary', async () => {
@@ -94,6 +158,58 @@ test('edge: a material contrast narrows the reflection boundary', async () => {
 
   assert.deepEqual(result.artifacts[0].contrastingEventIds, ['event-openai-expansion-2023']);
   assert.match(result.artifacts[0].boundaryConditions[0], /lower-commitment structure/);
+
+  const approvedReflection = approveReflectionForFixture(result.artifacts[0]);
+  const policy = (await buildPolicyProposals(
+    [approvedReflection],
+    graph,
+    createFixtureModel(repeatedEventPolicyResponse(approvedReflection.id)),
+  )).artifacts[0];
+  assert.match(policy.reversalSignals[0], /lower irreversible commitment/);
+});
+
+test('edge: direct Amy principle plus independent confirmation qualifies as medium', async () => {
+  const graph = await loadPolicyMemoryInput(process.cwd());
+  const reflection: ReflectionMemory = approveReflectionForFixture({
+    id: 'reflection-investment-priority',
+    domain: 'ai_cloud_capex',
+    crossEventQuestion: 'When should investment continue during an efficiency reset?',
+    observation: 'Long-term opportunity investment can continue while lower-priority resources are reduced.',
+    invariant: 'Protect focused secular-growth investment while reallocating resources from lower priorities.',
+    boundaryConditions: ['Demand and strategic opportunity remain substantial and observable.'],
+    unresolvedConflicts: ['The public record does not disclose a numeric hurdle rate.'],
+    supportingEventIds: ['event-workforce-reset-2023'],
+    contrastingEventIds: ['event-copilot-price-2023'],
+    evidenceIds: ['span-7f9dde341a496596', 'span-1baf5181c9f9b527'],
+    confidence: 'low',
+    status: 'review_required',
+    review: null,
+  });
+  const response = JSON.stringify({
+    policies: [{
+      domain: 'ai_cloud_capex',
+      applicabilityConditions: ['A substantial long-term platform opportunity remains observable.'],
+      priorityOrder: ['Secular growth opportunity', 'Customer demand', 'Resource productivity'],
+      recommendedAction: 'Continue focused investment while reallocating lower-priority resources.',
+      nonApplicabilityConditions: ['Demand evidence no longer supports the platform opportunity.'],
+      exceptions: ['Pause expansion if leading demand signals materially weaken.'],
+      reversalSignals: ['Sustained demand deterioration removes the substantial-growth premise.'],
+      reflectionIds: [reflection.id],
+      supportingEventIds: ['event-workforce-reset-2023'],
+      contrastingEventIds: ['event-copilot-price-2023'],
+      evidenceIds: ['span-7f9dde341a496596', 'span-1baf5181c9f9b527'],
+      directPolicyEvidenceIds: ['policy-openai-investment-consistency-2022'],
+    }],
+  });
+
+  const policy = (await buildPolicyProposals(
+    [reflection],
+    graph,
+    createFixtureModel(response),
+  )).artifacts[0];
+  assert.equal(validatePolicyMemory(policy, [reflection], graph).passed, true);
+  assert.equal(policy.confidence, 'medium');
+  assert.equal(policy.policyKind, 'deployable_policy');
 });
 
 const copyPolicyMemoryData = async () => {
@@ -177,4 +293,89 @@ test('failure: invalid or unsupported reflections never validate as memory', asy
   );
   assert.equal(empty.modelRun.status, 'failed');
   assert.equal(empty.artifacts.length, 0);
+});
+
+test('failure: unsupported or unbounded policies remain nondeployable', async () => {
+  const graph = await loadPolicyMemoryInput(process.cwd());
+  const reflection = approveReflectionForFixture((await buildReflectionProposals(
+    graph,
+    createFixtureModel(reflectionResponse),
+  )).artifacts[0]);
+  const valid = (await buildPolicyProposals(
+    [reflection],
+    graph,
+    createFixtureModel(repeatedEventPolicyResponse(reflection.id)),
+  )).artifacts[0];
+
+  const oneEvent: PolicyMemory = {
+    ...valid,
+    supportingEventIds: ['event-linkedin-acquisition-2016'],
+  };
+  assert.equal(validatePolicyMemory(oneEvent, [reflection], graph).passed, false);
+  const noBoundary: PolicyMemory = {
+    ...valid,
+    exceptions: [],
+    nonApplicabilityConditions: [],
+  };
+  assert.equal(validatePolicyMemory(noBoundary, [reflection], graph).passed, false);
+  const noReversal: PolicyMemory = { ...valid, reversalSignals: [] };
+  assert.equal(validatePolicyMemory(noReversal, [reflection], graph).passed, false);
+  const unknownReflection: PolicyMemory = { ...valid, reflectionIds: ['reflection-unknown'] };
+  assert.equal(validatePolicyMemory(unknownReflection, [reflection], graph).passed, false);
+  const leaked: PolicyMemory = {
+    ...valid,
+    recommendedAction: 'Repeat the GitHub acquisition 2018 decision.',
+  };
+  assert.equal(validatePolicyMemory(leaked, [reflection], graph).passed, false);
+
+  const sameDocumentReflection = approveReflectionForFixture({
+    id: 'reflection-same-document',
+    domain: 'ai_cloud_capex',
+    crossEventQuestion: 'Does one transcript independently confirm its own investment rule?',
+    observation: 'The same transcript cannot count as independent confirmation.',
+    invariant: 'Require another decision context and document family.',
+    boundaryConditions: ['The confirming event must use evidence from a distinct document family.'],
+    unresolvedConflicts: [],
+    supportingEventIds: ['event-workforce-reset-2023'],
+    contrastingEventIds: ['event-copilot-price-2023'],
+    evidenceIds: ['span-f031de15863e849e', 'span-1baf5181c9f9b527'],
+    confidence: 'low',
+    status: 'review_required',
+    review: null,
+  });
+  const sameDocumentPolicy: PolicyMemory = {
+    id: 'policy-same-document',
+    domain: 'ai_cloud_capex',
+    applicabilityConditions: ['A substantial platform opportunity remains visible.'],
+    priorityOrder: ['Opportunity', 'Demand', 'Productivity'],
+    recommendedAction: 'Continue focused investment.',
+    nonApplicabilityConditions: ['Demand weakens materially.'],
+    exceptions: ['Pause when demand is unverified.'],
+    reversalSignals: ['Sustained demand deterioration.'],
+    reflectionIds: [sameDocumentReflection.id],
+    supportingEventIds: ['event-workforce-reset-2023'],
+    contrastingEventIds: ['event-copilot-price-2023'],
+    evidenceIds: ['span-f031de15863e849e', 'span-1baf5181c9f9b527'],
+    directPolicyEvidenceIds: ['policy-openai-investment-consistency-2022'],
+    confidence: 'medium',
+    policyKind: 'deployable_policy',
+    status: 'review_required',
+    review: null,
+  };
+  const sameDocumentValidation = validatePolicyMemory(
+    sameDocumentPolicy,
+    [sameDocumentReflection],
+    graph,
+  );
+  assert.equal(sameDocumentValidation.passed, false);
+  assert.match(sameDocumentValidation.errors.join('\n'), /independent confirmation/);
+
+  const failed = await buildPolicyProposals(
+    [reflection],
+    graph,
+    createFixtureModel('{bad json', '{still bad'),
+  );
+  assert.equal(failed.modelRun.status, 'failed');
+  assert.equal(failed.modelRun.attemptCount, 2);
+  assert.equal(failed.artifacts.length, 0);
 });
