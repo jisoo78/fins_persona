@@ -40,6 +40,53 @@ import {
 } from '../server/decisionAdvisor/memoryReleaseStore';
 import { resolveEvaluationV3ArmContext } from '../server/evaluationV3/context';
 import { runPolicyMemoryCommand } from '../server/decisionAdvisor/policyMemoryCli';
+import { normalizeDecisionAction } from '../server/decisionAdvisor/decisionAction';
+
+const qualifiedContrast = {
+  decisionAxis: {
+    decisionObject: 'strategic_resource_allocation',
+    decisionQuestion: 'When should resources be expanded versus reduced or reallocated?',
+    choiceSet: ['expand', 'reduce_or_reallocate'],
+    gatingVariables: ['observable_growth_opportunity', 'resource_productivity'],
+  },
+  supportPattern: {
+    eventIds: ['event-openai-expansion-2023'],
+    conditions: ['Substantial opportunity and growth remain observable.'],
+    action: 'expand focused investment',
+    evidenceIds: ['span-7a8c1662a2c8a94e'],
+  },
+  contrastPattern: {
+    eventIds: ['event-workforce-reset-2023'],
+    conditions: ['Resources are not aligned to the highest-priority work.'],
+    action: 'reduce or reallocate resources',
+    evidenceIds: ['span-f031de15863e849e'],
+  },
+  conditionDelta: 'Opportunity remains substantial versus resources being below priority.',
+  actionDelta: 'Expand focused investment versus reduce or reallocate lower-priority resources.',
+};
+
+const investmentContrast = (supportEvidenceId: string) => ({
+  decisionAxis: {
+    decisionObject: 'strategic_resource_allocation',
+    decisionQuestion: 'When should resources fund investment rather than monetization?',
+    choiceSet: ['expand', 'price'],
+    gatingVariables: ['growth_opportunity', 'customer_value'],
+  },
+  supportPattern: {
+    eventIds: ['event-workforce-reset-2023'],
+    conditions: ['Focused investment remains a stated priority.'],
+    action: 'expand',
+    evidenceIds: [supportEvidenceId],
+  },
+  contrastPattern: {
+    eventIds: ['event-copilot-price-2023'],
+    conditions: ['The product adds substantial customer value.'],
+    action: 'price',
+    evidenceIds: ['span-1baf5181c9f9b527'],
+  },
+  conditionDelta: 'Focused investment priority versus demonstrated product value.',
+  actionDelta: 'Fund focused investment versus set a list price.',
+});
 
 const reflectionResponse = JSON.stringify({
   reflections: [{
@@ -51,6 +98,29 @@ const reflectionResponse = JSON.stringify({
       'The target supplies durable platform reach that cannot be obtained through a lower-commitment structure.',
     ],
     unresolvedConflicts: ['Public evidence does not expose the internal hurdle rate.'],
+    decisionAxis: {
+      decisionObject: 'strategic_transaction_structure',
+      decisionQuestion: 'When should strategic reach use acquisition rather than partnership?',
+      choiceSet: ['acquire', 'partner'],
+      gatingVariables: ['control_requirement', 'lower_commitment_access'],
+    },
+    supportPattern: {
+      eventIds: [
+        'event-linkedin-acquisition-2016',
+        'event-activision-acquisition-2022',
+      ],
+      conditions: ['The selected structure is a complete all-cash acquisition.'],
+      action: 'acquire',
+      evidenceIds: ['span-0b8c7fcb7c5c77af', 'span-807ee90aa032f320'],
+    },
+    contrastPattern: {
+      eventIds: ['event-openai-expansion-2023'],
+      conditions: ['Independent commercialization remains inside a long-term collaboration.'],
+      action: 'partner',
+      evidenceIds: ['span-d7a1fe8155e1f9ca'],
+    },
+    conditionDelta: 'Complete transaction ownership versus independent commercialization in collaboration.',
+    actionDelta: 'Acquire the company versus deepen a strategic partnership.',
     supportingEventIds: [
       'event-linkedin-acquisition-2016',
       'event-activision-acquisition-2022',
@@ -59,7 +129,7 @@ const reflectionResponse = JSON.stringify({
     evidenceIds: [
       'span-0b8c7fcb7c5c77af',
       'span-807ee90aa032f320',
-      'span-7a8c1662a2c8a94e',
+      'span-d7a1fe8155e1f9ca',
     ],
   }],
 });
@@ -117,7 +187,7 @@ const repeatedEventPolicyResponse = (reflectionId: string) => JSON.stringify({
     evidenceIds: [
       'span-0b8c7fcb7c5c77af',
       'span-807ee90aa032f320',
-      'span-7a8c1662a2c8a94e',
+      'span-d7a1fe8155e1f9ca',
     ],
     directPolicyEvidenceIds: [],
   }],
@@ -145,6 +215,20 @@ test('happy: input graph selects only approved non-holdout decision evidence', a
   assert.equal(result.artifacts.length, 1);
   assert.equal(validateReflectionMemory(result.artifacts[0], graph).passed, true);
   assert.equal(result.modelRun.attemptCount, 1);
+
+  const crossDomain = {
+    ...approveReflectionForFixture(result.artifacts[0]),
+    id: 'reflection-cross-domain-fixture',
+    domain: 'ai_cloud_capex' as const,
+    supportingEventIds: qualifiedContrast.supportPattern.eventIds,
+    contrastingEventIds: qualifiedContrast.contrastPattern.eventIds,
+    evidenceIds: [
+      ...qualifiedContrast.supportPattern.evidenceIds,
+      ...qualifiedContrast.contrastPattern.evidenceIds,
+    ],
+    ...qualifiedContrast,
+  };
+  assert.equal(validateReflectionMemory(crossDomain, graph).passed, true);
 
   const fixtureApprovedReflection = approveReflectionForFixture(result.artifacts[0]);
   const policyResult = await buildPolicyProposals(
@@ -211,6 +295,8 @@ test('happy: input graph selects only approved non-holdout decision evidence', a
   assert.equal(policyContext.context.memoryReleaseId, release.manifest.releaseId);
   assert.equal(policyContext.context.policy.length, 1);
   assert.equal(fullContext.context.reflections.length, 1);
+  assert.match(fullContext.context.reflections[0], /"decisionAxis"/);
+  assert.match(fullContext.context.reflections[0], /"conditionDelta"/);
   assert.equal(fullContext.context.events.length > 0, true);
   assert.equal(fullContext.context.counterexamples.length > 0, true);
 
@@ -248,6 +334,9 @@ test('edge: a material contrast narrows the reflection boundary', async () => {
 
   assert.deepEqual(result.artifacts[0].contrastingEventIds, ['event-openai-expansion-2023']);
   assert.match(result.artifacts[0].boundaryConditions[0], /lower-commitment structure/);
+  assert.equal(validateReflectionMemory(result.artifacts[0], graph).passed, true);
+  assert.equal(result.artifacts[0].supportPattern.action, 'acquire');
+  assert.equal(result.artifacts[0].contrastPattern.action, 'partner');
 
   const approvedReflection = approveReflectionForFixture(result.artifacts[0]);
   const policy = (await buildPolicyProposals(
@@ -260,6 +349,12 @@ test('edge: a material contrast narrows the reflection boundary', async () => {
 
 test('edge: direct Amy principle plus independent confirmation qualifies as medium', async () => {
   const graph = await loadPolicyMemoryInput(process.cwd());
+  assert.equal(normalizeDecisionAction('expand focused investment'), 'expand');
+  assert.equal(normalizeDecisionAction('increase investment'), 'expand');
+  assert.equal(
+    normalizeDecisionAction('reduce or reallocate resources'),
+    'reduce_or_reallocate',
+  );
   const reflection: ReflectionMemory = approveReflectionForFixture({
     id: 'reflection-investment-priority',
     domain: 'ai_cloud_capex',
@@ -268,6 +363,7 @@ test('edge: direct Amy principle plus independent confirmation qualifies as medi
     invariant: 'Protect focused secular-growth investment while reallocating resources from lower priorities.',
     boundaryConditions: ['Demand and strategic opportunity remain substantial and observable.'],
     unresolvedConflicts: ['The public record does not disclose a numeric hurdle rate.'],
+    ...investmentContrast('span-7f9dde341a496596'),
     supportingEventIds: ['event-workforce-reset-2023'],
     contrastingEventIds: ['event-copilot-price-2023'],
     evidenceIds: ['span-7f9dde341a496596', 'span-1baf5181c9f9b527'],
@@ -360,6 +456,26 @@ test('edge: rebuilding identical approved content returns the same release', asy
   const fixture = await createApprovedMemoryFixture();
   context.after(() => rm(fixture.root, { recursive: true, force: true }));
 
+  const reversedPayload = JSON.parse(reflectionResponse) as {
+    reflections: Array<{
+      supportPattern: { eventIds: string[]; evidenceIds: string[] };
+      contrastPattern: { eventIds: string[]; evidenceIds: string[] };
+    }>;
+  };
+  reversedPayload.reflections[0].supportPattern.eventIds.reverse();
+  reversedPayload.reflections[0].supportPattern.evidenceIds.reverse();
+  reversedPayload.reflections[0].contrastPattern.eventIds.reverse();
+  reversedPayload.reflections[0].contrastPattern.evidenceIds.reverse();
+  const reordered = await buildReflectionProposals(
+    fixture.graph,
+    createFixtureModel(JSON.stringify(reversedPayload)),
+  );
+  const original = await buildReflectionProposals(
+    fixture.graph,
+    createFixtureModel(reflectionResponse),
+  );
+  assert.equal(reordered.artifacts[0].id, original.artifacts[0].id);
+
   const first = await buildMemoryRelease(fixture.root, {
     graph: fixture.graph,
     now: '2026-07-20T11:20:00.000Z',
@@ -423,6 +539,62 @@ test('failure: invalid or unsupported reflections never validate as memory', asy
   };
   assert.equal(validateReflectionMemory(leakedText, graph).passed, false);
 
+  const crossDomain = {
+    ...valid,
+    id: 'reflection-cross-domain-fixture',
+    domain: 'ai_cloud_capex' as const,
+    supportingEventIds: qualifiedContrast.supportPattern.eventIds,
+    contrastingEventIds: qualifiedContrast.contrastPattern.eventIds,
+    evidenceIds: [
+      ...qualifiedContrast.supportPattern.evidenceIds,
+      ...qualifiedContrast.contrastPattern.evidenceIds,
+    ],
+    ...qualifiedContrast,
+  };
+  const sameAction = structuredClone(crossDomain);
+  sameAction.contrastPattern.action = 'increase investment';
+  assert.match(
+    validateReflectionMemory(sameAction, graph).errors.join('\n'),
+    /support and contrast actions must differ/,
+  );
+  const wrongOwner = structuredClone(crossDomain);
+  wrongOwner.contrastPattern.evidenceIds = ['span-7a8c1662a2c8a94e'];
+  assert.match(
+    validateReflectionMemory(wrongOwner, graph).errors.join('\n'),
+    /contrast evidence does not belong to its event/,
+  );
+  const missingCondition = structuredClone(crossDomain);
+  missingCondition.supportPattern.conditions = [];
+  assert.match(
+    validateReflectionMemory(missingCondition, graph).errors.join('\n'),
+    /support pattern requires conditions/,
+  );
+  const mismatchedEvidence = structuredClone(crossDomain);
+  mismatchedEvidence.evidenceIds = ['span-7a8c1662a2c8a94e'];
+  assert.match(
+    validateReflectionMemory(mismatchedEvidence, graph).errors.join('\n'),
+    /pattern evidence must equal reflection evidence/,
+  );
+
+  const legacyPayload = JSON.parse(reflectionResponse) as {
+    reflections: Array<Record<string, unknown>>;
+  };
+  for (const reflection of legacyPayload.reflections) {
+    delete reflection.decisionAxis;
+    delete reflection.supportPattern;
+    delete reflection.contrastPattern;
+    delete reflection.conditionDelta;
+    delete reflection.actionDelta;
+  }
+  const legacyResponse = JSON.stringify(legacyPayload);
+  const legacy = await buildReflectionProposals(
+    graph,
+    createFixtureModel(legacyResponse, legacyResponse),
+  );
+  assert.equal(legacy.modelRun.status, 'failed');
+  assert.equal(legacy.modelRun.attemptCount, 2);
+  assert.equal(legacy.artifacts.length, 0);
+
   const failed = await buildReflectionProposals(
     graph,
     createFixtureModel('{bad json', '{still bad'),
@@ -482,6 +654,7 @@ test('failure: unsupported or unbounded policies remain nondeployable', async ()
     invariant: 'Require another decision context and document family.',
     boundaryConditions: ['The confirming event must use evidence from a distinct document family.'],
     unresolvedConflicts: [],
+    ...investmentContrast('span-f031de15863e849e'),
     supportingEventIds: ['event-workforce-reset-2023'],
     contrastingEventIds: ['event-copilot-price-2023'],
     evidenceIds: ['span-f031de15863e849e', 'span-1baf5181c9f9b527'],

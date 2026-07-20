@@ -2,16 +2,19 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import type {
+  DecisionAxis,
   DecisionDomain,
   PilotEvidenceSpan,
   PolicyMemoryModelRun,
   PolicyMemoryValidation,
   ReflectionMemory,
+  ReflectionEvidencePattern,
 } from '../../shared/amyHoodDecisionAdvisor';
 import { assertNoEvaluationV3Holdout, type EvaluationV3ArtifactReference } from '../evaluationV3/holdout';
 import type { ModelClient } from '../personaPipeline/modelClient';
 import { canonicalJson, sha256 } from './canonicalJson';
 import type { PolicyMemoryInputGraph } from './policyMemoryInput';
+import { normalizeDecisionAction } from './decisionAction';
 
 type ReflectionProposal = Omit<
   ReflectionMemory,
@@ -45,6 +48,28 @@ const nonemptyStrings = (value: unknown): value is string[] =>
   && value.length > 0
   && value.every((item) => typeof item === 'string' && item.trim().length > 0);
 
+const nonemptyString = (value: unknown): value is string =>
+  typeof value === 'string' && value.trim().length > 0;
+
+const validAxis = (value: unknown): value is DecisionAxis => {
+  if (!value || typeof value !== 'object') return false;
+  const axis = value as Partial<DecisionAxis>;
+  return nonemptyString(axis.decisionObject)
+    && nonemptyString(axis.decisionQuestion)
+    && nonemptyStrings(axis.choiceSet)
+    && new Set(axis.choiceSet.map(normalizeDecisionAction)).size >= 2
+    && nonemptyStrings(axis.gatingVariables);
+};
+
+const validPattern = (value: unknown): value is ReflectionEvidencePattern => {
+  if (!value || typeof value !== 'object') return false;
+  const pattern = value as Partial<ReflectionEvidencePattern>;
+  return nonemptyStrings(pattern.eventIds)
+    && nonemptyStrings(pattern.conditions)
+    && nonemptyString(pattern.action)
+    && nonemptyStrings(pattern.evidenceIds);
+};
+
 const parseReflectionResponse = (text: string): ReflectionProposal[] => {
   const parsed = JSON.parse(text.trim()) as { reflections?: unknown };
   if (!parsed || typeof parsed !== 'object'
@@ -64,12 +89,37 @@ const parseReflectionResponse = (text: string): ReflectionProposal[] => {
       || !nonemptyStrings(item.boundaryConditions)
       || !Array.isArray(item.unresolvedConflicts)
       || item.unresolvedConflicts.some((entry) => typeof entry !== 'string' || !entry.trim())
+      || !validAxis(item.decisionAxis)
+      || !validPattern(item.supportPattern)
+      || !validPattern(item.contrastPattern)
+      || !nonemptyString(item.conditionDelta)
+      || !nonemptyString(item.actionDelta)
       || !nonemptyStrings(item.supportingEventIds)
       || !nonemptyStrings(item.contrastingEventIds)
       || !nonemptyStrings(item.evidenceIds)) {
       throw new Error(`reflection ${index} has an invalid schema`);
     }
     return item as ReflectionProposal;
+  });
+};
+
+const sameSet = (left: string[], right: string[]) => {
+  const leftSet = new Set(left);
+  const rightSet = new Set(right);
+  return leftSet.size === rightSet.size
+    && [...leftSet].every((value) => rightSet.has(value));
+};
+
+const patternEvidenceBelongsToEvents = (
+  pattern: ReflectionEvidencePattern,
+  graph: PolicyMemoryInputGraph,
+) => {
+  const candidateIds = new Set(graph.events
+    .filter(({ id }) => pattern.eventIds.includes(id))
+    .map(({ candidateId }) => candidateId));
+  return pattern.evidenceIds.every((evidenceId) => {
+    const span = graph.evidenceSpans.find(({ id }) => id === evidenceId);
+    return Boolean(span && candidateIds.has(span.eventCandidateId));
   });
 };
 
@@ -123,6 +173,55 @@ export const validateReflectionMemory = (
   }
   if (!nonemptyStrings(reflection.boundaryConditions)) {
     errors.push('reflection requires a boundary condition');
+  }
+  if (!validAxis(reflection.decisionAxis)) {
+    errors.push('reflection requires a valid decision axis');
+  }
+  if (!validPattern(reflection.supportPattern)) {
+    errors.push('support pattern requires conditions, action, events, and evidence');
+  }
+  if (!validPattern(reflection.contrastPattern)) {
+    errors.push('contrast pattern requires conditions, action, events, and evidence');
+  }
+  if (validPattern(reflection.supportPattern)
+    && !sameSet(reflection.supportPattern.eventIds, reflection.supportingEventIds)) {
+    errors.push('support pattern events must equal supporting events');
+  }
+  if (validPattern(reflection.contrastPattern)
+    && !sameSet(reflection.contrastPattern.eventIds, reflection.contrastingEventIds)) {
+    errors.push('contrast pattern events must equal contrasting events');
+  }
+  if (validAxis(reflection.decisionAxis)
+    && validPattern(reflection.supportPattern)
+    && validPattern(reflection.contrastPattern)) {
+    const supportAction = normalizeDecisionAction(reflection.supportPattern.action);
+    const contrastAction = normalizeDecisionAction(reflection.contrastPattern.action);
+    const choices = new Set(reflection.decisionAxis.choiceSet.map(normalizeDecisionAction));
+    if (!choices.has(supportAction) || !choices.has(contrastAction)) {
+      errors.push('support and contrast actions must belong to the decision-axis choice set');
+    }
+    if (supportAction === contrastAction) {
+      errors.push('support and contrast actions must differ');
+    }
+    if (!patternEvidenceBelongsToEvents(reflection.supportPattern, graph)) {
+      errors.push('support evidence does not belong to its event');
+    }
+    if (!patternEvidenceBelongsToEvents(reflection.contrastPattern, graph)) {
+      errors.push('contrast evidence does not belong to its event');
+    }
+    const patternEvidence = [
+      ...reflection.supportPattern.evidenceIds,
+      ...reflection.contrastPattern.evidenceIds,
+    ];
+    if (!sameSet(patternEvidence, reflection.evidenceIds)) {
+      errors.push('pattern evidence must equal reflection evidence');
+    }
+  }
+  if (!nonemptyString(reflection.conditionDelta)) {
+    errors.push('reflection requires condition delta');
+  }
+  if (!nonemptyString(reflection.actionDelta)) {
+    errors.push('reflection requires action delta');
   }
 
   const eventIds = new Set(graph.events.map(({ id }) => id));
@@ -184,8 +283,27 @@ const toReflectionMemory = (
 ) => {
   const canonical = {
     ...proposal,
-    boundaryConditions: [...new Set(proposal.boundaryConditions)],
-    unresolvedConflicts: [...new Set(proposal.unresolvedConflicts)],
+    decisionAxis: {
+      ...proposal.decisionAxis,
+      choiceSet: [...new Set(proposal.decisionAxis.choiceSet.map(normalizeDecisionAction))].sort(),
+      gatingVariables: [...new Set(proposal.decisionAxis.gatingVariables)].sort(),
+    },
+    supportPattern: {
+      ...proposal.supportPattern,
+      action: normalizeDecisionAction(proposal.supportPattern.action),
+      eventIds: [...new Set(proposal.supportPattern.eventIds)].sort(),
+      conditions: [...new Set(proposal.supportPattern.conditions)].sort(),
+      evidenceIds: [...new Set(proposal.supportPattern.evidenceIds)].sort(),
+    },
+    contrastPattern: {
+      ...proposal.contrastPattern,
+      action: normalizeDecisionAction(proposal.contrastPattern.action),
+      eventIds: [...new Set(proposal.contrastPattern.eventIds)].sort(),
+      conditions: [...new Set(proposal.contrastPattern.conditions)].sort(),
+      evidenceIds: [...new Set(proposal.contrastPattern.evidenceIds)].sort(),
+    },
+    boundaryConditions: [...new Set(proposal.boundaryConditions)].sort(),
+    unresolvedConflicts: [...new Set(proposal.unresolvedConflicts)].sort(),
     supportingEventIds: [...new Set(proposal.supportingEventIds)].sort(),
     contrastingEventIds: [...new Set(proposal.contrastingEventIds)].sort(),
     evidenceIds: [...new Set(proposal.evidenceIds)].sort(),

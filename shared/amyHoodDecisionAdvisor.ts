@@ -271,6 +271,20 @@ export type ArtifactReview = {
   validationHash: string;
 };
 
+export type DecisionAxis = {
+  decisionObject: string;
+  decisionQuestion: string;
+  choiceSet: string[];
+  gatingVariables: string[];
+};
+
+export type ReflectionEvidencePattern = {
+  eventIds: string[];
+  conditions: string[];
+  action: string;
+  evidenceIds: string[];
+};
+
 export type ReflectionMemory = {
   id: string;
   domain: DecisionDomain;
@@ -279,6 +293,11 @@ export type ReflectionMemory = {
   invariant: string;
   boundaryConditions: string[];
   unresolvedConflicts: string[];
+  decisionAxis: DecisionAxis;
+  supportPattern: ReflectionEvidencePattern;
+  contrastPattern: ReflectionEvidencePattern;
+  conditionDelta: string;
+  actionDelta: string;
   supportingEventIds: string[];
   contrastingEventIds: string[];
   evidenceIds: string[];
