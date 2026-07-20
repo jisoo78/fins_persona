@@ -12,8 +12,7 @@
  *    - answer-key fields, invalid responses, context in no-RAG arms, and missing or incomplete memory releases fail safely.
  */
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
-import { mkdir, mkdtemp, writeFile } from 'node:fs/promises';
+import { mkdtemp } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
@@ -28,6 +27,8 @@ import {
   loadEvaluationV3ArmContext,
   type EvaluationV3ContextPackage,
 } from '../server/evaluationV3/context';
+import type { EvaluationV3ArtifactReference } from '../server/evaluationV3/holdout';
+import { writeEvaluationV3MemoryFixture } from './helpers/evaluationV3MemoryFixture';
 
 const question: EvaluationV3Question = {
   id: 'T01',
@@ -55,40 +56,16 @@ const fullContext: EvaluationV3ContextPackage = {
 const createMemoryFixture = async (
   context: Omit<EvaluationV3ContextPackage, 'memoryReleaseId'>,
   counterexampleStatus: 'reviewed' | 'no_reviewed_counterexample' = 'reviewed',
-  references = [{ artifactClass: 'candidate', id: 'candidate-openai-expansion-2023' }],
+  references: EvaluationV3ArtifactReference[] = [
+    { artifactClass: 'candidate', id: 'candidate-openai-expansion-2023' },
+  ],
 ) => {
   const root = await mkdtemp(join(tmpdir(), 'evaluation-v3-memory-'));
-  const releaseRoot = join(
-    root,
-    'data/b-track/amy-hood/advisor/memory-releases/1.0.0',
-  );
-  await mkdir(releaseRoot, { recursive: true });
-  await mkdir(join(root, 'evaluation/v3/sealed'), { recursive: true });
-  await writeFile(
-    join(root, 'evaluation/v3/sealed/holdout-manifest.json'),
-    readFileSync(
-      join(process.cwd(), 'evaluation/v3/sealed/holdout-manifest.json'),
-      'utf8',
-    ),
-  );
-  await writeFile(
-    join(root, 'data/b-track/amy-hood/advisor/memory-releases/active.json'),
-    JSON.stringify({
-      releaseId: 'memory-1.0.0',
-      version: '1.0.0',
-      manifestHash: 'manifest-hash',
-      activatedAt: '2026-07-15T00:00:00.000Z',
-    }),
-  );
-  await writeFile(
-    join(releaseRoot, 'evaluation-context.json'),
-    JSON.stringify({
-      releaseId: 'memory-1.0.0',
-      counterexampleStatus,
-      references,
-      ...context,
-    }),
-  );
+  await writeEvaluationV3MemoryFixture(root, {
+    counterexampleStatus,
+    references,
+    ...context,
+  });
   return root;
 };
 
@@ -186,7 +163,7 @@ test('failure: RAG arms require the correct structured memory layers', async () 
   assert.deepEqual(
     await loadEvaluationV3ArmContext(markedRoot, 'amy_full_rag'),
     {
-      memoryReleaseId: 'memory-1.0.0',
+      memoryReleaseId: 'v1-aaaaaaaaaaaa',
       policy: ['정책'],
       reflections: ['성찰'],
       events: ['사건'],

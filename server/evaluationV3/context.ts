@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 import type { EvaluationV3Arm } from '../../shared/amyHoodEvaluationV3';
+import type { MemoryReleaseManifest } from '../../shared/amyHoodDecisionAdvisor';
 import {
   assertNoEvaluationV3Holdout,
   loadEvaluationV3Holdout,
@@ -68,7 +69,26 @@ const loadActiveSnapshot = async (root: string) => {
   if (!active.releaseId || !active.version || !active.manifestHash) {
     throw new Error('active memory release pointer is invalid');
   }
-  const contextPath = resolve(base, active.version, 'evaluation-context.json');
+  const releaseRoot = resolve(base, active.version);
+  let manifestText: string;
+  let releaseManifest: MemoryReleaseManifest;
+  try {
+    manifestText = await readFile(resolve(releaseRoot, 'manifest.json'), 'utf8');
+    releaseManifest = JSON.parse(manifestText) as MemoryReleaseManifest;
+  } catch {
+    throw new Error('active memory release manifest is required');
+  }
+  const manifestHash = createHash('sha256').update(manifestText).digest('hex');
+  if (manifestHash !== active.manifestHash) {
+    throw new Error('active memory release manifest hash mismatch');
+  }
+  if (releaseManifest.schemaVersion !== 1
+    || releaseManifest.releaseId !== active.releaseId
+    || releaseManifest.version !== active.version
+    || releaseManifest.evaluationContextPath !== 'evaluation-context.json') {
+    throw new Error('active memory release manifest does not match pointer');
+  }
+  const contextPath = resolve(releaseRoot, releaseManifest.evaluationContextPath);
   let contextText: string;
   let snapshot: EvaluationContextSnapshot;
   try {
@@ -76,6 +96,10 @@ const loadActiveSnapshot = async (root: string) => {
     snapshot = JSON.parse(contextText) as EvaluationContextSnapshot;
   } catch {
     throw new Error('active memory release evaluation context is required');
+  }
+  const contextHash = createHash('sha256').update(contextText).digest('hex');
+  if (contextHash !== releaseManifest.evaluationContextHash) {
+    throw new Error('active memory release evaluation context hash mismatch');
   }
   if (snapshot.releaseId !== active.releaseId) {
     throw new Error('active memory release ID does not match evaluation context');
@@ -137,7 +161,7 @@ const loadActiveSnapshot = async (root: string) => {
   );
   return {
     snapshot,
-    contextHash: createHash('sha256').update(contextText).digest('hex'),
+    contextHash,
   };
 };
 

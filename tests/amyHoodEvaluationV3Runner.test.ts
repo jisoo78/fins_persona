@@ -29,6 +29,7 @@ import {
   readEvaluationV3Run,
   writeEvaluationV3Run,
 } from '../server/evaluationV3/runStore';
+import { writeEvaluationV3MemoryFixture } from './helpers/evaluationV3MemoryFixture';
 
 const validPersonaPrompt = `# Amy Hood Public-Evidence CFO Persona
 ## Role
@@ -97,32 +98,14 @@ const createRunnerFixture = async (approved = true) => {
     join(root, 'agent_prompts/prompts/generic-cfo-control.md'),
     'You are a general CFO advisor.',
   );
-  const releaseRoot = join(
-    root,
-    'data/b-track/amy-hood/advisor/memory-releases/1.0.0',
-  );
-  await mkdir(releaseRoot, { recursive: true });
-  await writeFile(
-    join(root, 'data/b-track/amy-hood/advisor/memory-releases/active.json'),
-    JSON.stringify({
-      releaseId: 'memory-1.0.0',
-      version: '1.0.0',
-      manifestHash: 'memory-manifest-hash',
-      activatedAt: '2026-07-15T00:00:00.000Z',
-    }),
-  );
-  await writeFile(
-    join(releaseRoot, 'evaluation-context.json'),
-    JSON.stringify({
-      releaseId: 'memory-1.0.0',
-      counterexampleStatus: 'reviewed',
-      references: [{ artifactClass: 'candidate', id: 'candidate-openai-expansion-2023' }],
-      policy: ['검증된 수요에 맞춰 투자를 단계화한다.'],
-      reflections: ['판단 순서와 반전 신호를 함께 본다.'],
-      events: ['비홀드아웃 승인 사건'],
-      counterexamples: ['수요가 약해 집행을 늦춘 반례'],
-    }),
-  );
+  await writeEvaluationV3MemoryFixture(root, {
+    counterexampleStatus: 'reviewed',
+    references: [{ artifactClass: 'candidate', id: 'candidate-openai-expansion-2023' }],
+    policy: ['검증된 수요에 맞춰 투자를 단계화한다.'],
+    reflections: ['판단 순서와 반전 신호를 함께 본다.'],
+    events: ['비홀드아웃 승인 사건'],
+    counterexamples: ['수요가 약해 집행을 늦춘 반례'],
+  });
   return root;
 };
 
@@ -152,7 +135,7 @@ test('happy: one repetition completes four pinned and objectively scored runs', 
     scores.total === 7 && scores.percent === (7 / 30) * 100), true);
   assert.equal(completed[0].promptVersionId, null);
   assert.equal(completed[1].memoryReleaseId, null);
-  assert.equal(completed[2].memoryReleaseId, 'memory-1.0.0');
+  assert.equal(completed[2].memoryReleaseId, 'v1-aaaaaaaaaaaa');
 });
 
 test('edge: five repetitions keep stable order and make exactly 600 calls', async () => {
@@ -274,14 +257,14 @@ test('failure: preflight and pinned-artifact failures leave safe run state', asy
 
   const contextPath = join(
     staleRoot,
-    'data/b-track/amy-hood/advisor/memory-releases/1.0.0/evaluation-context.json',
+    'data/b-track/amy-hood/advisor/memory-releases/v1-aaaaaaaaaaaa/evaluation-context.json',
   );
   const context = JSON.parse(readFileSync(contextPath, 'utf8')) as { policy: string[] };
   context.policy = ['실험 생성 후 변경된 정책'];
   await writeFile(contextPath, JSON.stringify(context));
   await assert.rejects(
     () => staleRunner.executeRun(launch.runs[2].runId),
-    /memory release is stale/,
+    /evaluation context hash mismatch/,
   );
 
   const questionRoot = await createRunnerFixture();

@@ -34,6 +34,11 @@ import {
 } from '../server/decisionAdvisor/policyMemoryStore';
 import { advisorPaths } from '../server/decisionAdvisor/paths';
 import { writeJsonAtomic } from '../server/decisionAdvisor/jsonStore';
+import {
+  activateMemoryRelease,
+  buildMemoryRelease,
+} from '../server/decisionAdvisor/memoryReleaseStore';
+import { resolveEvaluationV3ArmContext } from '../server/evaluationV3/context';
 
 const reflectionResponse = JSON.stringify({
   reflections: [{
@@ -155,7 +160,7 @@ test('happy: input graph selects only approved non-holdout decision evidence', a
   assert.equal(policyResult.artifacts[0].policyKind, 'deployable_policy');
   assert.equal(policyResult.artifacts[0].confidence, 'medium');
 
-  const storeRoot = await mkdtemp(join(tmpdir(), 'amy-policy-memory-store-'));
+  const storeRoot = await copyPolicyMemoryData();
   context.after(() => rm(storeRoot, { recursive: true, force: true }));
   await saveReflectionBuild(storeRoot, result);
   const reflectionGate = await buildPolicyMemoryGateReport(storeRoot, graph, {
@@ -190,6 +195,23 @@ test('happy: input graph selects only approved non-holdout decision evidence', a
   }, graph) as PolicyMemory;
   assert.equal(approvedPolicy.status, 'approved');
   assert.match(approvedPolicy.review!.validationHash, /^[a-f0-9]{64}$/);
+
+  const release = await buildMemoryRelease(storeRoot, {
+    graph,
+    now: '2026-07-20T09:50:00.000Z',
+  });
+  await activateMemoryRelease(
+    storeRoot,
+    release.manifest.version,
+    '2026-07-20T09:55:00.000Z',
+  );
+  const policyContext = await resolveEvaluationV3ArmContext(storeRoot, 'amy_policy_rag');
+  const fullContext = await resolveEvaluationV3ArmContext(storeRoot, 'amy_full_rag');
+  assert.equal(policyContext.context.memoryReleaseId, release.manifest.releaseId);
+  assert.equal(policyContext.context.policy.length, 1);
+  assert.equal(fullContext.context.reflections.length, 1);
+  assert.equal(fullContext.context.events.length > 0, true);
+  assert.equal(fullContext.context.counterexamples.length > 0, true);
 });
 
 test('edge: a material contrast narrows the reflection boundary', async () => {
@@ -270,6 +292,56 @@ const copyPolicyMemoryData = async () => {
   );
   return root;
 };
+
+const createApprovedMemoryFixture = async () => {
+  const root = await copyPolicyMemoryData();
+  const graph = await loadPolicyMemoryInput(root);
+  const reflectionBuild = await buildReflectionProposals(
+    graph,
+    createFixtureModel(reflectionResponse),
+    { now: '2026-07-20T11:00:00.000Z' },
+  );
+  await saveReflectionBuild(root, reflectionBuild);
+  const reflection = await approvePolicyMemoryArtifact(root, {
+    kind: 'reflection',
+    id: reflectionBuild.artifacts[0].id,
+    reviewer: 'Codex',
+    reviewedAt: '2026-07-20T11:05:00.000Z',
+    rationale: 'Fixture reflection approved after checking evidence and contrast.',
+  }, graph) as ReflectionMemory;
+  const policyBuild = await buildPolicyProposals(
+    [reflection],
+    graph,
+    createFixtureModel(repeatedEventPolicyResponse(reflection.id)),
+    { now: '2026-07-20T11:10:00.000Z' },
+  );
+  await savePolicyBuild(root, policyBuild);
+  await approvePolicyMemoryArtifact(root, {
+    kind: 'policy',
+    id: policyBuild.artifacts[0].id,
+    reviewer: 'Codex',
+    reviewedAt: '2026-07-20T11:15:00.000Z',
+    rationale: 'Fixture policy approved after checking thresholds and reversal conditions.',
+  }, graph);
+  return { root, graph };
+};
+
+test('edge: rebuilding identical approved content returns the same release', async (context) => {
+  const fixture = await createApprovedMemoryFixture();
+  context.after(() => rm(fixture.root, { recursive: true, force: true }));
+
+  const first = await buildMemoryRelease(fixture.root, {
+    graph: fixture.graph,
+    now: '2026-07-20T11:20:00.000Z',
+  });
+  const second = await buildMemoryRelease(fixture.root, {
+    graph: fixture.graph,
+    now: '2026-07-20T11:25:00.000Z',
+  });
+  assert.equal(second.manifest.releaseId, first.manifest.releaseId);
+  assert.equal(second.manifest.version, first.manifest.version);
+  assert.equal(second.created, false);
+});
 
 test('failure: holdout and post-outcome inputs fail before model work', async (context) => {
   const holdoutRoot = await copyPolicyMemoryData();
@@ -483,4 +555,39 @@ test('failure: stale or interrupted approval leaves no partial approved state', 
   const reviewPath = join(advisorPaths(root).policyReviews, `reflection-${id}.json`);
   await assert.rejects(() => readFile(approvedPath), /ENOENT/);
   await assert.rejects(() => readFile(reviewPath), /ENOENT/);
+});
+
+test('failure: release tampering and activation failure preserve the last active pointer', async (context) => {
+  const fixture = await createApprovedMemoryFixture();
+  context.after(() => rm(fixture.root, { recursive: true, force: true }));
+  const release = await buildMemoryRelease(fixture.root, {
+    graph: fixture.graph,
+    now: '2026-07-20T12:00:00.000Z',
+  });
+  await activateMemoryRelease(
+    fixture.root,
+    release.manifest.version,
+    '2026-07-20T12:05:00.000Z',
+  );
+  const activePath = advisorPaths(fixture.root).activeMemoryRelease;
+  const activeBefore = await readFile(activePath);
+
+  await assert.rejects(() => activateMemoryRelease(
+    fixture.root,
+    release.manifest.version,
+    '2026-07-20T12:10:00.000Z',
+    { write: async () => { throw new Error('injected activation failure'); } },
+  ), /injected activation failure/);
+  assert.deepEqual(await readFile(activePath), activeBefore);
+
+  const contextPath = join(
+    advisorPaths(fixture.root).memoryReleases,
+    release.manifest.version,
+    'evaluation-context.json',
+  );
+  await writeFile(contextPath, `${await readFile(contextPath, 'utf8')} `);
+  await assert.rejects(
+    () => resolveEvaluationV3ArmContext(fixture.root, 'amy_full_rag'),
+    /hash mismatch/,
+  );
 });
