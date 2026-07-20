@@ -1,5 +1,5 @@
-import { createHash } from 'node:crypto';
-import { readFile } from 'node:fs/promises';
+import { createHash, randomUUID } from 'node:crypto';
+import { readFile, rename, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import type {
@@ -16,7 +16,7 @@ import {
   type EvaluationV3ArtifactReference,
 } from '../evaluationV3/holdout';
 import { eventCardPath, validatePilotEventCard } from './eventCard';
-import { readJsonFile } from './jsonStore';
+import { readJsonFile, writeJsonAtomic } from './jsonStore';
 import { extractSpeakerSegments } from './officialSourceCollector';
 import { advisorPaths } from './paths';
 import { validatePilotManifest } from './pilotManifest';
@@ -176,8 +176,15 @@ const buildCandidate = (
   spec: CapacityResourceEventSpec,
   source: AdvisorSourceRecord,
 ): EventCandidate => {
-  const direct = spec.evidence.find(({ role }) => role === 'direct_amy');
-  if (!direct) throw new Error(`capacity resource event lacks direct Amy evidence: ${spec.candidate.id}`);
+  const fingerprintValues = Object.values(spec.candidate.fingerprint)
+    .map((value) => value.toLocaleLowerCase('en-US'));
+  const locatorSpan = spec.evidence.find(({ exactQuote }) => {
+    const normalized = exactQuote.toLocaleLowerCase('en-US');
+    return fingerprintValues.every((value) => normalized.includes(value));
+  });
+  if (!locatorSpan || locatorSpan.speaker !== 'Amy Hood') {
+    throw new Error(`capacity resource event lacks a bounded fingerprint passage: ${spec.candidate.id}`);
+  }
   return {
     id: spec.candidate.id,
     workingTitle: spec.candidate.workingTitle,
@@ -205,8 +212,8 @@ const buildCandidate = (
       temporalRelation: 'decision_time',
       relevanceClaim: 'The official earnings transcript contains a bounded Amy Hood statement about this resource-allocation decision.',
       evidenceLocator: {
-        exactQuote: direct.exactQuote,
-        exactRelevancePassage: direct.exactQuote,
+        exactQuote: locatorSpan.exactQuote,
+        exactRelevancePassage: locatorSpan.exactQuote,
         anchorTerms: [
           spec.candidate.fingerprint.primaryEntity,
           spec.candidate.fingerprint.decisionAction,
@@ -300,9 +307,6 @@ export const verifyCapacityResourcePilot = async (
   const additions: EventCandidate[] = [];
 
   for (const spec of manifest.events) {
-    if (candidates.some(({ id }) => id === spec.candidate.id)) {
-      throw new Error(`capacity resource candidate already exists: ${spec.candidate.id}`);
-    }
     const source = registry.sources.find(({ id }) => id === spec.sourceId);
     if (!source || !source.rawPath || !source.normalizedPath || !source.sha256) {
       throw new Error(`capacity resource source is not fully collected: ${spec.sourceId}`);
@@ -353,7 +357,15 @@ export const verifyCapacityResourcePilot = async (
     source.eventCandidateIds = eventCandidateIds;
     artifact.metadata.eventCandidateIds = eventCandidateIds;
     rawSourceUpdates.push({ record: structuredClone(source), artifact });
-    additions.push(buildCandidate(spec, source));
+    const proposedCandidate = buildCandidate(spec, source);
+    const existingCandidate = candidates.find(({ id }) => id === spec.candidate.id);
+    if (existingCandidate) {
+      if (JSON.stringify(existingCandidate) !== JSON.stringify(proposedCandidate)) {
+        throw new Error(`capacity resource candidate conflicts with existing data: ${spec.candidate.id}`);
+      }
+    } else {
+      additions.push(proposedCandidate);
+    }
     cards.push(buildCard(spec, spans));
   }
 
@@ -389,6 +401,99 @@ export const verifyCapacityResourcePilot = async (
     pilotManifest: nextPilot,
     cards,
   };
+};
+
+type CapacityApplyDependencies = {
+  write(filePath: string, value: unknown): Promise<void>;
+};
+
+type Destination = {
+  filePath: string;
+  value: unknown;
+};
+
+type Snapshot = {
+  filePath: string;
+  existed: boolean;
+  bytes: Buffer | null;
+};
+
+const snapshotDestination = async ({ filePath }: Destination): Promise<Snapshot> => {
+  try {
+    return {
+      filePath,
+      existed: true,
+      bytes: await readFile(filePath),
+    };
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+      return { filePath, existed: false, bytes: null };
+    }
+    throw error;
+  }
+};
+
+const restoreSnapshot = async (snapshot: Snapshot) => {
+  if (!snapshot.existed) {
+    await rm(snapshot.filePath, { force: true });
+    return;
+  }
+  const temporaryPath = `${snapshot.filePath}.${process.pid}.${randomUUID()}.rollback`;
+  try {
+    await writeFile(temporaryPath, snapshot.bytes!, { flag: 'wx' });
+    await rename(temporaryPath, snapshot.filePath);
+  } catch (error) {
+    await rm(temporaryPath, { force: true });
+    throw error;
+  }
+};
+
+export const applyCapacityResourcePilot = async (
+  root: string,
+  manifest: CapacityResourcePilotManifest,
+  dependencies: CapacityApplyDependencies = { write: writeJsonAtomic },
+): Promise<VerifiedCapacityResourcePilot> => {
+  const verified = await verifyCapacityResourcePilot(root, manifest);
+  const destinations: Destination[] = [
+    {
+      filePath: path.resolve(advisorPaths(root).root, 'event-candidates.json'),
+      value: verified.candidates,
+    },
+    { filePath: advisorPaths(root).registry, value: verified.registry },
+    { filePath: advisorPaths(root).pilotManifest, value: verified.pilotManifest },
+    ...verified.rawSourceUpdates.map(({ record, artifact }) => ({
+      filePath: path.resolve(advisorPaths(root).root, record.rawPath!),
+      value: artifact,
+    })),
+    ...verified.cards.map((card) => ({
+      filePath: eventCardPath(root, card.candidateId),
+      value: card,
+    })),
+  ];
+  const snapshots = await Promise.all(destinations.map(snapshotDestination));
+
+  try {
+    for (const destination of destinations) {
+      await dependencies.write(destination.filePath, destination.value);
+    }
+  } catch (operationError) {
+    const compensationErrors: unknown[] = [];
+    for (const snapshot of [...snapshots].reverse()) {
+      try {
+        await restoreSnapshot(snapshot);
+      } catch (error) {
+        compensationErrors.push(error);
+      }
+    }
+    if (compensationErrors.length > 0) {
+      throw new AggregateError(
+        [operationError, ...compensationErrors],
+        'capacity resource apply failed and compensation was incomplete',
+      );
+    }
+    throw operationError;
+  }
+  return verified;
 };
 
 export { eventCardPath };

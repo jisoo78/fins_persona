@@ -12,18 +12,28 @@
  *    - malformed offsets, wrong speakers, post-date evidence, holdout references, and mismatched support actions fail safely.
  */
 import assert from 'node:assert/strict';
-import { cp, mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { spawnSync } from 'node:child_process';
+import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 
 import {
+  applyCapacityResourcePilot,
   loadCapacityResourcePilotManifest,
   type CapacityResourcePilotManifest,
   verifyCapacityResourcePilot,
 } from '../server/decisionAdvisor/capacityResourcePilot';
+import { eventCardPath } from '../server/decisionAdvisor/eventCard';
+import { writeJsonAtomic } from '../server/decisionAdvisor/jsonStore';
 
 const repositoryRoot = path.resolve(import.meta.dirname, '..');
+
+const runAdvisorCli = (root: string, ...args: string[]) => spawnSync(
+  process.execPath,
+  ['--import', 'tsx', 'server/runAmyHoodDecisionAdvisor.ts', ...args, '--root', root],
+  { cwd: repositoryRoot, encoding: 'utf8' },
+);
 
 const candidateSpecs = [
   {
@@ -309,6 +319,123 @@ test('failure: invalid provenance or action contrast is rejected before any writ
         /FY23 and FY24 support actions must match/,
       );
     });
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+const snapshotPaths = async (files: string[]) => Promise.all(files.map(async (file) => {
+  try {
+    return [file, await readFile(file)] as const;
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') return [file, null] as const;
+    throw error;
+  }
+}));
+
+test('happy: atomic apply appends events while preserving original candidates and holdout bytes', async () => {
+  const root = await createFixtureRoot();
+  try {
+    const advisorRoot = path.resolve(root, 'data/b-track/amy-hood/advisor');
+    const candidatePath = path.resolve(advisorRoot, 'event-candidates.json');
+    const holdoutPath = path.resolve(root, 'evaluation/v3/sealed/holdout-manifest.json');
+    const originalCandidates = JSON.parse(await readFile(candidatePath, 'utf8')) as unknown[];
+    const originalHoldout = await readFile(holdoutPath);
+    const originalRawBodies = new Map<string, string>();
+    const verified = await verifyCapacityResourcePilot(root, validManifest());
+    for (const { record } of verified.rawSourceUpdates) {
+      const raw = JSON.parse(
+        await readFile(path.resolve(advisorRoot, record.rawPath!), 'utf8'),
+      ) as { bodyBase64: string };
+      originalRawBodies.set(record.id, raw.bodyBase64);
+    }
+
+    const applied = await applyCapacityResourcePilot(root, validManifest());
+
+    const storedCandidates = JSON.parse(await readFile(candidatePath, 'utf8')) as unknown[];
+    assert.equal(storedCandidates.length, 33);
+    assert.deepEqual(storedCandidates.slice(0, originalCandidates.length), originalCandidates);
+    assert.deepEqual(await readFile(holdoutPath), originalHoldout);
+    for (const { record } of applied.rawSourceUpdates) {
+      const raw = JSON.parse(
+        await readFile(path.resolve(advisorRoot, record.rawPath!), 'utf8'),
+      ) as { bodyBase64: string };
+      assert.equal(raw.bodyBase64, originalRawBodies.get(record.id));
+    }
+    for (const card of applied.cards) {
+      const stored = JSON.parse(await readFile(eventCardPath(root, card.candidateId), 'utf8')) as {
+        candidateId: string;
+        status: string;
+      };
+      assert.equal(stored.candidateId, card.candidateId);
+      assert.equal(stored.status, 'incomplete');
+    }
+
+    const destinations = [
+      candidatePath,
+      path.resolve(advisorRoot, 'source-registry.json'),
+      path.resolve(advisorRoot, 'events/pilot/pilot-manifest.json'),
+      ...applied.rawSourceUpdates.map(({ record }) => path.resolve(advisorRoot, record.rawPath!)),
+      ...applied.cards.map(({ candidateId }) => eventCardPath(root, candidateId)),
+    ];
+    const beforeSecondApply = await snapshotPaths(destinations);
+    await applyCapacityResourcePilot(root, validManifest());
+    assert.deepEqual(await snapshotPaths(destinations), beforeSecondApply);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test('failure: injected multi-file write failure restores every prior artifact', async () => {
+  const root = await createFixtureRoot();
+  try {
+    const advisorRoot = path.resolve(root, 'data/b-track/amy-hood/advisor');
+    const verified = await verifyCapacityResourcePilot(root, validManifest());
+    const destinations = [
+      path.resolve(advisorRoot, 'event-candidates.json'),
+      path.resolve(advisorRoot, 'source-registry.json'),
+      path.resolve(advisorRoot, 'events/pilot/pilot-manifest.json'),
+      ...verified.rawSourceUpdates.map(({ record }) => path.resolve(advisorRoot, record.rawPath!)),
+      ...verified.cards.map(({ candidateId }) => eventCardPath(root, candidateId)),
+    ];
+    const before = await snapshotPaths(destinations);
+    let writes = 0;
+
+    await assert.rejects(() => applyCapacityResourcePilot(root, validManifest(), {
+      write: async (filePath, value) => {
+        writes += 1;
+        if (writes === 4) throw new Error('injected capacity apply failure');
+        await writeJsonAtomic(filePath, value);
+      },
+    }), /injected capacity apply failure/);
+
+    assert.deepEqual(await snapshotPaths(destinations), before);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test('happy: capacity CLI verifies and applies a reviewed manifest', async () => {
+  const root = await createFixtureRoot();
+  try {
+    const manifestPath = path.resolve(root, 'capacity-resource.json');
+    await writeFile(manifestPath, `${JSON.stringify(validManifest(), null, 2)}\n`);
+
+    const checked = runAdvisorCli(root, 'capacity:check', '--file', manifestPath);
+    assert.equal(checked.status, 0, checked.stderr);
+    assert.match(checked.stdout, /"candidateCount": 33/);
+    assert.match(checked.stdout, /candidate-cloud-capacity-scale-2022/);
+
+    const applied = runAdvisorCli(root, 'capacity:apply', '--file', manifestPath);
+    assert.equal(applied.status, 0, applied.stderr);
+    assert.match(applied.stdout, /"cardCount": 3/);
+    assert.equal(
+      JSON.parse(await readFile(
+        path.resolve(root, 'data/b-track/amy-hood/advisor/event-candidates.json'),
+        'utf8',
+      )).length,
+      33,
+    );
   } finally {
     await rm(root, { recursive: true, force: true });
   }

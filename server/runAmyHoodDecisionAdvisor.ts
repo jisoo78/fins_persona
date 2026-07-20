@@ -45,6 +45,11 @@ import {
   approvePilotEventCard,
   eventCardPath,
 } from './decisionAdvisor/eventCard';
+import {
+  applyCapacityResourcePilot,
+  loadCapacityResourcePilotManifest,
+  verifyCapacityResourcePilot,
+} from './decisionAdvisor/capacityResourcePilot';
 import { loadPilotManifest } from './decisionAdvisor/pilotManifest';
 import { loadValidatedPilotPolicyEvidence } from './decisionAdvisor/pilotPolicyEvidence';
 import { registrySourceHasEvidenceLink } from './decisionAdvisor/sourceEvidenceLink';
@@ -738,6 +743,25 @@ const run = async () => {
   const root = path.resolve(optionValue(args, '--root') ?? process.cwd());
 
   if (await runPolicyMemoryCommand(root, args)) return;
+
+  if (command === 'capacity:check' || command === 'capacity:apply') {
+    const requestedPath = optionValue(args, '--file');
+    const manifest = await loadCapacityResourcePilotManifest(
+      root,
+      requestedPath ? path.resolve(root, requestedPath) : undefined,
+    );
+    const result = command === 'capacity:apply'
+      ? await applyCapacityResourcePilot(root, manifest)
+      : await verifyCapacityResourcePilot(root, manifest);
+    validateEventCandidates(result.candidates, { enforceDiscoveryRange: false });
+    console.log(JSON.stringify({
+      candidateCount: result.candidates.length,
+      cardCount: result.cards.length,
+      cardIds: result.cards.map(({ id }) => id),
+      pilotTargetIds: result.pilotManifest.targets.map(({ candidateId }) => candidateId),
+    }, null, 2));
+    return;
+  }
 
   if (command === 'candidates:check') {
     const candidatePath = path.resolve(
