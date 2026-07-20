@@ -14,6 +14,7 @@ import { readJsonFile } from './jsonStore';
 import { loadPilotManifest } from './pilotManifest';
 import { advisorPaths } from './paths';
 import { loadRegistry } from './sourceRegistry';
+import { canonicalizeSourceUrl } from './sourcePolicy';
 
 const policyTags = new Set<PilotPolicyTag>([
   'value_based_pricing',
@@ -107,20 +108,26 @@ const loadSpeakerSegments = async (
   return raw.speakerSegments ?? [];
 };
 
-export const loadValidatedPilotPolicyEvidence = async (
+export type ValidatedPilotPolicyEvidence = {
+  record: PilotPolicyEvidenceRecord;
+  span: PilotEvidenceSpan;
+  documentFamilyId: string;
+};
+
+export const loadValidatedPilotPolicyEvidenceGraph = async (
   root: string,
   candidates: EventCandidate[],
-): Promise<Map<string, PilotEvidenceSpan[]>> => {
+): Promise<ValidatedPilotPolicyEvidence[]> => {
   const records = await readJsonFile<PilotPolicyEvidenceRecord[]>(
     advisorPaths(root).pilotPolicyEvidence,
     [],
   );
   if (!Array.isArray(records)) throw new Error('pilot policy evidence must be an array');
-  if (records.length === 0) return new Map();
+  if (records.length === 0) return [];
   const manifest = await loadPilotManifest(root, candidates);
   const targetIds = new Set(manifest.targets.map(({ candidateId }) => candidateId));
   const registry = loadRegistry(root);
-  const result = new Map<string, PilotEvidenceSpan[]>();
+  const result: ValidatedPilotPolicyEvidence[] = [];
   const recordIds = new Set<string>();
 
   for (const record of records) {
@@ -146,7 +153,26 @@ export const loadValidatedPilotPolicyEvidence = async (
       normalizedText,
       speakerSegments: await loadSpeakerSegments(root, source),
     });
-    result.set(candidate.id, [...(result.get(candidate.id) ?? []), span]);
+    const association = candidate.sourceAssociations.find(({ canonicalUrl }) =>
+      canonicalizeSourceUrl(canonicalUrl) === source.canonicalUrl);
+    result.push({
+      record,
+      span,
+      documentFamilyId: association?.documentFamilyId ?? `source:${source.id}`,
+    });
+  }
+
+  return result.sort((left, right) => left.record.id.localeCompare(right.record.id));
+};
+
+export const loadValidatedPilotPolicyEvidence = async (
+  root: string,
+  candidates: EventCandidate[],
+): Promise<Map<string, PilotEvidenceSpan[]>> => {
+  const graph = await loadValidatedPilotPolicyEvidenceGraph(root, candidates);
+  const result = new Map<string, PilotEvidenceSpan[]>();
+  for (const { record, span } of graph) {
+    result.set(record.candidateId, [...(result.get(record.candidateId) ?? []), span]);
   }
   return result;
 };

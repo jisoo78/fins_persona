@@ -259,3 +259,101 @@ export type PilotManifest = {
   version: '1.0.0';
   targets: PilotManifestTarget[];
 };
+
+export type PolicyMemoryStatus = 'review_required' | 'approved' | 'rejected';
+export type PolicyMemoryConfidence = 'high' | 'medium' | 'low';
+
+export type ArtifactReview = {
+  reviewer: 'Codex';
+  reviewedAt: string;
+  decision: 'approved' | 'rejected';
+  rationale: string;
+  validationHash: string;
+};
+
+export type ReflectionMemory = {
+  id: string;
+  domain: DecisionDomain;
+  crossEventQuestion: string;
+  observation: string;
+  invariant: string;
+  boundaryConditions: string[];
+  unresolvedConflicts: string[];
+  supportingEventIds: string[];
+  contrastingEventIds: string[];
+  evidenceIds: string[];
+  confidence: PolicyMemoryConfidence;
+  status: PolicyMemoryStatus;
+  review: ArtifactReview | null;
+};
+
+export type PolicyMemory = {
+  id: string;
+  domain: DecisionDomain;
+  applicabilityConditions: string[];
+  priorityOrder: string[];
+  recommendedAction: string;
+  nonApplicabilityConditions: string[];
+  exceptions: string[];
+  reversalSignals: string[];
+  reflectionIds: string[];
+  supportingEventIds: string[];
+  contrastingEventIds: string[];
+  evidenceIds: string[];
+  directPolicyEvidenceIds: string[];
+  confidence: PolicyMemoryConfidence;
+  policyKind: 'deployable_policy' | 'event_specific_hypothesis';
+  status: PolicyMemoryStatus;
+  review: ArtifactReview | null;
+};
+
+export type PolicyMemoryArtifactReference = {
+  artifactClass: 'candidate' | 'event' | 'source' | 'evidence' | 'alias' | 'raw_source';
+  id: string;
+  sourceId?: string;
+  candidateId?: string;
+};
+
+export type PolicyMemoryValidation = {
+  passed: boolean;
+  errors: string[];
+  warnings: string[];
+  computedConfidence: PolicyMemoryConfidence;
+  references: PolicyMemoryArtifactReference[];
+};
+
+export type PolicyMemoryModelRun = {
+  id: string;
+  kind: 'reflection' | 'policy';
+  promptHash: string;
+  inputHashes: Record<string, string>;
+  model: string;
+  modelCacheKey: string;
+  attemptCount: 1 | 2;
+  rawResponses: string[];
+  parsedArtifactIds: string[];
+  status: 'complete' | 'failed';
+  error: string | null;
+  createdAt: string;
+};
+
+export type MemoryArtifactRef = {
+  id: string;
+  kind: 'event' | 'reflection' | 'policy';
+  relativePath: string;
+  sha256: string;
+};
+
+export type MemoryReleaseManifest = {
+  schemaVersion: 1;
+  releaseId: string;
+  version: string;
+  createdAt: string;
+  sourceRegistryHash: string;
+  pilotManifestHash: string;
+  holdoutManifestHash: string;
+  artifacts: MemoryArtifactRef[];
+  evaluationContextPath: 'evaluation-context.json';
+  evaluationContextHash: string;
+  reviewLedgerHash: string;
+};
