@@ -1,0 +1,99 @@
+[
+  {
+    "id": "event-ai-capacity-opex-pivot-2023",
+    "kind": "event",
+    "domain": "ai_cloud_capex",
+    "title": "Scale Azure AI infrastructure while constraining operating expense",
+    "searchableText": "Scale Azure AI infrastructure while constraining operating expense\nHow should Microsoft scale infrastructure and operating resources as demand and profitability constraints change?\nAzure AI infrastructure required a material capacity increase while Microsoft was aligning costs with revenue growth and protecting profitability.\nLead the AI platform wave\nMaintain healthy profitability while scaling capacity\nAzure AI infrastructure required material sequential investment.\nScaled capital investment would increase COGS.\nFY24 operating-expense growth was expected to remain low.\nCapacity buildout timing varies by quarter.\n{\"description\":\"Scale AI infrastructure and operating resources together.\",\"expectedBenefit\":\"Maximizes organizational capacity around the platform shift.\",\"id\":\"scale_infrastructure_and_people\",\"principalRisk\":\"Weakens operating leverage while infrastructure COGS is rising.\",\"selected\":false}\n{\"description\":\"Increase Azure AI infrastructure capital while keeping operating-expense growth low.\",\"expectedBenefit\":\"Funds urgent capacity while preserving disciplined profitability.\",\"id\":\"scale_infrastructure_constrain_opex\",\"principalRisk\":\"Requires aggressive internal resource prioritization.\",\"selected\":true}\nscale_infrastructure_constrain_opex\nExpanding people with infrastructure could reduce execution bottlenecks.\nWe expect capital expenditures to have a material sequential increase on a dollar basis driven by investments in Azure AI infrastructure.\nAs always, we remain committed to aligning costs and revenue growth to deliver disciplined profitability. Therefore, while the scaled capex investments will impact COGS growth, we expect FY24 operating expense growth to remain low.",
+    "policyId": "policy-c4203c075dbd61d3",
+    "reflectionIds": [
+      "reflection-4b5f7915d30581a4"
+    ],
+    "supportingEventIds": [
+      "event-ai-capacity-opex-pivot-2023"
+    ],
+    "contrastingEventIds": [],
+    "evidenceIds": [
+      "span-capacity-2023-ai-capex",
+      "span-capacity-2023-opex"
+    ],
+    "sourceIds": [
+      "source-fbb900eb7e249591"
+    ]
+  },
+  {
+    "id": "event-ai-capacity-sourcing-2024",
+    "kind": "event",
+    "domain": "ai_cloud_capex",
+    "title": "Accelerate demand-led AI capacity with disciplined cost and mixed supply",
+    "searchableText": "Accelerate demand-led AI capacity with disciplined cost and mixed supply\nHow should Microsoft scale infrastructure and operating resources as demand and profitability constraints change?\nCustomer demand and pipeline required faster cloud and AI capacity additions than owned buildout alone could always deliver.\nAdd capacity in time to serve visible customer demand\nPreserve operating-margin discipline while scaling AI investment\nCustomer demand guided cloud and AI investment.\nThird-party capacity supplemented owned capacity when lead time required it.\nAI capital investment increases COGS.\nEvery team remained subject to disciplined cost management.\n{\"description\":\"Scale owned infrastructure and operating headcount together.\",\"expectedBenefit\":\"Keeps execution resources under direct organizational control.\",\"id\":\"scale_infrastructure_and_people\",\"principalRisk\":\"Adds recurring operating cost while capital intensity is rising.\",\"selected\":false}\n{\"description\":\"Accelerate infrastructure, mix owned and third-party supply, and retain operating-cost discipline.\",\"expectedBenefit\":\"Responds faster to pipeline without matching CapEx growth with broad OpEx growth.\",\"id\":\"scale_infrastructure_constrain_opex\",\"principalRisk\":\"External capacity may have different economics or control characteristics.\",\"selected\":true}\nscale_infrastructure_constrain_opex\nScaling people alongside owned capacity could increase direct control and reduce external dependency.\nOur commitment to scaling our cloud and AI investment is guided by customer demand and the substantial market opportunity. As we scale these investments, we remain focused on driving efficiencies across every layer of our tech stack and disciplined cost management across every team.\nI feel like primarily, obviously, this is being built by us, but we’ve also used third-party capacity to help when we could have that help us, in terms of meeting customer demand. And I tend to think, looking forward, you’ll tend to see, and I guided toward it, accelerating capital expense to continue to be able to add capacity in the coming quarters, given what we see in terms of pipeline.",
+    "policyId": "policy-c4203c075dbd61d3",
+    "reflectionIds": [
+      "reflection-4b5f7915d30581a4"
+    ],
+    "supportingEventIds": [
+      "event-ai-capacity-sourcing-2024"
+    ],
+    "contrastingEventIds": [],
+    "evidenceIds": [
+      "span-capacity-2024-demand-discipline",
+      "span-capacity-2024-external-supply"
+    ],
+    "sourceIds": [
+      "source-4f4085f8344669c4"
+    ]
+  },
+  {
+    "id": "event-cloud-capacity-scale-2022",
+    "kind": "event",
+    "domain": "ai_cloud_capex",
+    "title": "Scale cloud infrastructure and people under broad demand",
+    "searchableText": "Scale cloud infrastructure and people under broad demand\nHow should Microsoft scale infrastructure and operating resources as demand and profitability constraints change?\nGlobal cloud demand was growing and Microsoft was continuing broad investment across cloud engineering, deployment, LinkedIn, and sales.\nMeet growing global cloud demand\nExpand operating capacity across strategic growth areas\nGlobal cloud-services demand was growing.\nInvestment needs spanned infrastructure and multiple operating teams.\nCapital timing varies by quarter.\nBroad headcount growth increases the operating-cost base.\n{\"description\":\"Increase cloud capital expenditure and expand headcount in key operating areas.\",\"expectedBenefit\":\"Adds physical and organizational capacity together.\",\"id\":\"scale_infrastructure_and_people\",\"principalRisk\":\"Raises both capital intensity and recurring operating expense.\",\"selected\":true}\n{\"description\":\"Increase infrastructure while holding operating-resource growth low.\",\"expectedBenefit\":\"Protects profitability and workforce productivity.\",\"id\":\"scale_infrastructure_constrain_opex\",\"principalRisk\":\"Insufficient deployment and sales capacity may constrain broad growth.\",\"selected\":false}\nscale_infrastructure_and_people\nConstraining operating-resource growth would preserve near-term expense leverage.\nCapital expenditures, we expect a sequential increase on a dollar basis as we continue to invest to meet growing global demand for our cloud services.\nAt a total company level, headcount grew 20% year-over-year as we continue to invest in key areas such as cloud engineering, customer deployment, LinkedIn, and sales, and included approximately 4 points of growth from the addition of Nuance.",
+    "policyId": "policy-c4203c075dbd61d3",
+    "reflectionIds": [
+      "reflection-4b5f7915d30581a4"
+    ],
+    "supportingEventIds": [],
+    "contrastingEventIds": [
+      "event-cloud-capacity-scale-2022"
+    ],
+    "evidenceIds": [
+      "span-capacity-2022-capex",
+      "span-capacity-2022-headcount"
+    ],
+    "sourceIds": [
+      "source-6b843b4b8385078d"
+    ]
+  },
+  {
+    "id": "policy-c4203c075dbd61d3",
+    "kind": "policy",
+    "domain": "ai_cloud_capex",
+    "title": "ai_cloud_capex: scale_infrastructure_constrain_opex",
+    "searchableText": "ai_cloud_capex\nAzure AI infrastructure requires material sequential investment\nScaled capital investment would increase COGS\nFY24 operating-expense growth is expected to remain low\nCapacity buildout timing varies by quarter\ncustomer demand\ncapacity urgency\nprofitability or cost constraint\nworkforce productivity\nsupply lead time\nscale_infrastructure_constrain_opex\nglobal cloud-services demand was growing\ninvestment needs spanned infrastructure and multiple operating teams\ncustomer demand guides investment\ndisciplined cost management across every team\nexternal supply supplements owned capacity when lead time requires it\nweakening demand or pipeline\nrelaxed capacity urgency\nchanged infrastructure economics\nHow should Microsoft balance infrastructure investment against operating expense growth during a platform shift?\nIn 2022, Microsoft scaled both infrastructure and headcount (20% YoY) under broad cloud demand; by 2023-2024, it pivoted to scaling AI infrastructure while constraining operating expense growth and reallocating talent from non-strategic areas.\nDuring a platform shift (AI), capital should be concentrated on infrastructure capacity while operating resources are reallocated to growth areas.\ncustomer demand guides investment\ndisciplined cost management across every team\nexternal supply supplements owned capacity when lead time requires\n{\"choiceSet\":[\"scale_infrastructure_and_people\",\"scale_infrastructure_constrain_opex\"],\"decisionObject\":\"resource allocation\",\"decisionQuestion\":\"scale_infrastructure_and_people vs scale_infrastructure_constrain_opex\",\"gatingVariables\":[\"demand type\",\"platform shift\",\"profitability pressure\"]}\n2022 was broad cloud demand across multiple areas; 2023-2024 was a concentrated AI platform shift with profitability pressure.\n2022 expanded both infrastructure and people; 2023-2024 scaled infrastructure while constraining operating expense growth.\nCapital expenditures, we expect a sequential increase on a dollar basis as we continue to invest to meet growing global demand for our cloud services.\nAt a total company level, headcount grew 20% year-over-year as we continue to invest in key areas such as cloud engineering, customer deployment, LinkedIn, and sales, and included approximately 4 points of growth from the addition of Nuance.\nWe expect capital expenditures to have a material sequential increase on a dollar basis driven by investments in Azure AI infrastructure.\nAs always, we remain committed to aligning costs and revenue growth to deliver disciplined profitability. Therefore, while the scaled capex investments will impact COGS growth, we expect FY24 operating expense growth to remain low.\nOur commitment to scaling our cloud and AI investment is guided by customer demand and the substantial market opportunity. As we scale these investments, we remain focused on driving efficiencies across every layer of our tech stack and disciplined cost management across every team.\nI feel like primarily, obviously, this is being built by us, but we’ve also used third-party capacity to help when we could have that help us, in terms of meeting customer demand. And I tend to think, looking forward, you’ll tend to see, and I guided toward it, accelerating capital expense to continue to be able to add capacity in the coming quarters, given what we see in terms of pipeline.",
+    "policyId": "policy-c4203c075dbd61d3",
+    "reflectionIds": [
+      "reflection-4b5f7915d30581a4"
+    ],
+    "supportingEventIds": [
+      "event-ai-capacity-opex-pivot-2023",
+      "event-ai-capacity-sourcing-2024"
+    ],
+    "contrastingEventIds": [
+      "event-cloud-capacity-scale-2022"
+    ],
+    "evidenceIds": [
+      "span-capacity-2022-capex",
+      "span-capacity-2022-headcount",
+      "span-capacity-2023-ai-capex",
+      "span-capacity-2023-opex",
+      "span-capacity-2024-demand-discipline",
+      "span-capacity-2024-external-supply"
+    ],
+    "sourceIds": [
+      "source-4f4085f8344669c4",
+      "source-6b843b4b8385078d",
+      "source-fbb900eb7e249591"
+    ]
+  }
+]

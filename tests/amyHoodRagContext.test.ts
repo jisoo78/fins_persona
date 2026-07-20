@@ -11,14 +11,13 @@
  */
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { buildAmyHoodMemoryIndex } from '../server/decisionAdvisor/memoryIndex';
 import { createAmyHoodHybridRetriever } from '../server/decisionAdvisor/hybridRetriever';
 import { buildAmyHoodRagContext } from '../server/decisionAdvisor/ragContext';
-import { fakeEmbeddingClient, writeAmyHoodRagFixture } from './helpers/amyHoodRagFixture';
+import { buildTestAmyHoodMemoryIndex, fakeEmbeddingClient, writeAmyHoodRagFixture } from './helpers/amyHoodRagFixture';
 
 const fixture = async (query = 'customer demand capacity urgency') => {
   const root = await writeAmyHoodRagFixture();
-  const built = await buildAmyHoodMemoryIndex(root, { embeddingClient: fakeEmbeddingClient() });
+  const built = await buildTestAmyHoodMemoryIndex(root);
   const retriever = await createAmyHoodHybridRetriever({ root, embeddingClient: fakeEmbeddingClient() });
   return { root, retrieval: await retriever.retrieve({ query, indexHash: built.manifest.indexHash }) };
 };

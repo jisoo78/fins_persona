@@ -16,18 +16,16 @@ import test from 'node:test';
 import { advisorPaths } from '../server/decisionAdvisor/paths';
 import {
   buildAmyHoodMemoryIndex,
+  activateAmyHoodMemoryIndex,
   loadActiveAmyHoodMemoryIndex,
   verifyAmyHoodMemoryIndex,
 } from '../server/decisionAdvisor/memoryIndex';
-import { fakeEmbeddingClient, writeAmyHoodRagFixture } from './helpers/amyHoodRagFixture';
+import { buildTestAmyHoodMemoryIndex, fakeEmbeddingClient, passingCalibration, writeAmyHoodRagFixture } from './helpers/amyHoodRagFixture';
 import { runAmyHoodMemoryIndexCommand } from '../server/runAmyHoodMemoryIndex';
 
 test('happy: builds a source-grounded immutable index', async () => {
   const root = await writeAmyHoodRagFixture();
-  const built = await buildAmyHoodMemoryIndex(root, {
-    embeddingClient: fakeEmbeddingClient(),
-    now: '2026-07-20T00:00:00.000Z',
-  });
+  const built = await buildTestAmyHoodMemoryIndex(root);
   assert.equal(built.manifest.recordCount, 4);
   assert.equal(built.evidence.length, 6);
   assert.match(built.records.find(({ kind }) => kind === 'policy')?.searchableText ?? '', /disciplined profitability/);
@@ -37,8 +35,8 @@ test('happy: builds a source-grounded immutable index', async () => {
 
 test('edge: rebuilding identical inputs preserves the index hash', async () => {
   const root = await writeAmyHoodRagFixture();
-  const first = await buildAmyHoodMemoryIndex(root, { embeddingClient: fakeEmbeddingClient() });
-  const second = await buildAmyHoodMemoryIndex(root, { embeddingClient: fakeEmbeddingClient() });
+  const first = await buildTestAmyHoodMemoryIndex(root);
+  const second = await buildTestAmyHoodMemoryIndex(root);
   assert.equal(second.manifest.indexHash, first.manifest.indexHash);
 });
 
@@ -50,20 +48,23 @@ test('edge: source metadata remains available without a URL', async () => {
   for (const source of registry.sources) if (used.has(source.id)) source.canonicalUrl = null;
   await import('node:fs/promises').then(({ writeFile }) =>
     writeFile(registryPath, `${JSON.stringify(registry, null, 2)}\n`));
-  const built = await buildAmyHoodMemoryIndex(root, { embeddingClient: fakeEmbeddingClient() });
+  const built = await buildTestAmyHoodMemoryIndex(root);
   assert.equal(built.evidence.some(({ sourceUrl }) => sourceUrl === null), true);
 });
 
 test('edge: duplicate references resolve to unique evidence objects', async () => {
   const root = await writeAmyHoodRagFixture();
-  const built = await buildAmyHoodMemoryIndex(root, { embeddingClient: fakeEmbeddingClient() });
+  const built = await buildTestAmyHoodMemoryIndex(root);
   assert.equal(new Set(built.evidence.map(({ id }) => id)).size, built.evidence.length);
 });
 
 test('failure: embedding failure leaves no partial index', async () => {
   const root = await writeAmyHoodRagFixture();
   await assert.rejects(
-    buildAmyHoodMemoryIndex(root, { embeddingClient: fakeEmbeddingClient(true) }),
+    buildAmyHoodMemoryIndex(root, {
+      embeddingClient: fakeEmbeddingClient(true),
+      evaluateCalibration: async () => passingCalibration,
+    }),
     /injected embedding failure/,
   );
   await assert.rejects(loadActiveAmyHoodMemoryIndex(root), /active Amy Hood memory index/);
@@ -73,9 +74,37 @@ test('failure: embedding failure leaves no partial index', async () => {
 
 test('happy: index CLI builds then checks without changing the pointer', async () => {
   const root = await writeAmyHoodRagFixture();
-  const dependencies = { root, embeddingClient: fakeEmbeddingClient() };
+  const dependencies = {
+    root,
+    embeddingClient: fakeEmbeddingClient(),
+    evaluateCalibration: async () => passingCalibration,
+  };
   await runAmyHoodMemoryIndexCommand(['build'], dependencies);
   const before = await readFile(advisorPaths(root).activeMemoryIndex, 'utf8');
   await runAmyHoodMemoryIndexCommand(['check'], dependencies);
+  assert.equal(await readFile(advisorPaths(root).activeMemoryIndex, 'utf8'), before);
+});
+
+test('failure: a candidate is not active until measured calibration is verified', async () => {
+  const root = await writeAmyHoodRagFixture();
+  const built = await buildAmyHoodMemoryIndex(root, {
+    embeddingClient: fakeEmbeddingClient(),
+    evaluateCalibration: async () => passingCalibration,
+  });
+  await assert.rejects(loadActiveAmyHoodMemoryIndex(root), /active Amy Hood memory index/);
+  await activateAmyHoodMemoryIndex(root, built.manifest.indexHash);
+  assert.equal((await loadActiveAmyHoodMemoryIndex(root)).manifest.calibration.recallAt3, 1);
+});
+
+test('failure: failed CLI calibration preserves the previous active pointer', async () => {
+  const root = await writeAmyHoodRagFixture();
+  const existing = await buildTestAmyHoodMemoryIndex(root);
+  await activateAmyHoodMemoryIndex(root, existing.manifest.indexHash);
+  const before = await readFile(advisorPaths(root).activeMemoryIndex, 'utf8');
+  await assert.rejects(runAmyHoodMemoryIndexCommand(['build'], {
+    root,
+    embeddingClient: fakeEmbeddingClient(),
+    evaluateCalibration: async () => ({ ...passingCalibration, recallAt3: 0.5 }),
+  }), /Recall@3 gate failed/);
   assert.equal(await readFile(advisorPaths(root).activeMemoryIndex, 'utf8'), before);
 });

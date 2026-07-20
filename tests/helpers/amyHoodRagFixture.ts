@@ -3,16 +3,31 @@ import os from 'node:os';
 import path from 'node:path';
 
 import type { EmbeddingClient } from '../../server/decisionAdvisor/embeddingClient';
+import { buildAmyHoodMemoryIndex } from '../../server/decisionAdvisor/memoryIndex';
+import { activateAmyHoodMemoryIndex } from '../../server/decisionAdvisor/memoryIndex';
+
+export const passingCalibration = {
+  probeCount: 6,
+  positiveProbeCount: 4,
+  noMatchProbeCount: 2,
+  recallAt3: 1,
+  noMatchFalsePositiveRate: 0,
+};
 
 export const writeAmyHoodRagFixture = async () => {
   const root = await mkdtemp(path.join(os.tmpdir(), 'amy-hood-rag-'));
   const source = process.cwd();
   await mkdir(path.join(root, 'data/b-track/amy-hood/advisor'), { recursive: true });
   await mkdir(path.join(root, 'evaluation/v3/sealed'), { recursive: true });
+  await mkdir(path.join(root, 'evaluation/retrieval'), { recursive: true });
   await cp(
     path.join(source, 'data/b-track/amy-hood/advisor/memory-releases'),
     path.join(root, 'data/b-track/amy-hood/advisor/memory-releases'),
     { recursive: true },
+  );
+  await cp(
+    path.join(source, 'evaluation/retrieval/amy-hood-memory-dev-v1.json'),
+    path.join(root, 'evaluation/retrieval/amy-hood-memory-dev-v1.json'),
   );
   await cp(
     path.join(source, 'data/b-track/amy-hood/advisor/source-registry.json'),
@@ -37,4 +52,15 @@ export const fakeEmbeddingClient = (fail = false): EmbeddingClient => ({
       return vector;
     });
   },
+});
+
+export const buildTestAmyHoodMemoryIndex = (
+  root: string,
+  embeddingClient = fakeEmbeddingClient(),
+) => buildAmyHoodMemoryIndex(root, {
+  embeddingClient,
+  evaluateCalibration: async () => passingCalibration,
+}).then(async (built) => {
+  await activateAmyHoodMemoryIndex(root, built.manifest.indexHash);
+  return built;
 });

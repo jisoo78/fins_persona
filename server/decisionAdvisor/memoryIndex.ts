@@ -42,10 +42,14 @@ export type BuiltAmyHoodMemoryIndex = LoadedAmyHoodMemoryIndex & { created: bool
 
 type BuildOptions = {
   embeddingClient: EmbeddingClient;
+  evaluateCalibration?: (candidate: {
+    records: AmyHoodMemorySearchRecord[];
+    evidence: AmyHoodIndexedEvidence[];
+    vectors: number[][];
+    retrievalConfig: AmyHoodRetrievalConfig;
+  }) => Promise<{ recallAt3: number; noMatchFalsePositiveRate: number }>;
   now?: string;
   retrievalConfig?: AmyHoodRetrievalConfig;
-  calibration?: { recallAt3: number; noMatchFalsePositiveRate: number };
-  calibrationSetHash?: string;
 };
 
 type SourceRegistryFile = { sources: AdvisorSourceRecord[] };
@@ -65,7 +69,7 @@ const exists = async (filePath: string) => {
 };
 
 const indexDirectory = (root: string, releaseId: string) =>
-  path.join(advisorPaths(root).memoryIndexes, releaseId, 'hybrid-v1');
+  path.join(advisorPaths(root).memoryIndexes, releaseId, 'hybrid-v1-measured');
 
 const loadJson = async <T>(filePath: string) =>
   JSON.parse(await readFile(filePath, 'utf8')) as T;
@@ -315,15 +319,27 @@ export const buildAmyHoodMemoryIndex = async (
   const holdoutManifestHash = await assertNoHoldoutLeakage(root, records, evidence);
   const retrievalConfig = options.retrievalConfig ?? DEFAULT_AMY_HOOD_RETRIEVAL_CONFIG;
   const retrievalConfigHash = sha256(canonicalJson(retrievalConfig));
+  if (!options.evaluateCalibration) throw new Error('measured retrieval calibration is required');
+  const calibrationSetHash = sha256(await readFile(paths.retrievalCalibration));
   const finalDirectory = indexDirectory(root, releaseManifest.releaseId);
   if (await exists(finalDirectory)) {
     const loaded = await verifyDirectory(root, finalDirectory);
-    await writeJsonAtomic(paths.activeMemoryIndex, {
-      releaseId: loaded.manifest.releaseId,
-      indexHash: loaded.manifest.indexHash,
-      activatedAt: options.now ?? new Date().toISOString(),
+    const measured = await options.evaluateCalibration({
+      records: loaded.records,
+      evidence: loaded.evidence,
+      vectors: loaded.vectors,
+      retrievalConfig: loaded.manifest.retrievalConfig,
     });
-    return { ...loaded, created: false };
+    if (measured.recallAt3 < 0.8) throw new Error('retrieval Recall@3 gate failed');
+    if (measured.noMatchFalsePositiveRate > 0.2) {
+      throw new Error('retrieval no-match false-positive gate failed');
+    }
+    if (loaded.manifest.calibrationSetHash === calibrationSetHash
+      && loaded.manifest.calibration.recallAt3 === measured.recallAt3
+      && loaded.manifest.calibration.noMatchFalsePositiveRate === measured.noMatchFalsePositiveRate) {
+      return { ...loaded, created: false };
+    }
+    throw new Error('existing Amy Hood memory index uses unmeasured calibration');
   }
 
   await mkdir(path.dirname(finalDirectory), { recursive: true });
@@ -332,6 +348,16 @@ export const buildAmyHoodMemoryIndex = async (
     await mkdir(staging, { recursive: false });
     const vectors = (await options.embeddingClient.embed(records.map(({ searchableText }) => searchableText)))
       .map(normalizeVector);
+    const calibration = await options.evaluateCalibration({
+      records,
+      evidence,
+      vectors,
+      retrievalConfig,
+    });
+    if (calibration.recallAt3 < 0.8) throw new Error('retrieval Recall@3 gate failed');
+    if (calibration.noMatchFalsePositiveRate > 0.2) {
+      throw new Error('retrieval no-match false-positive gate failed');
+    }
     const vectorsBuffer = encodeVectors(vectors);
     const recordsText = jsonText(records);
     const evidenceText = jsonText(evidence);
@@ -346,8 +372,8 @@ export const buildAmyHoodMemoryIndex = async (
       lexicalVersion: 'bm25-v1' as const,
       retrievalConfig,
       retrievalConfigHash,
-      calibrationSetHash: options.calibrationSetHash ?? sha256('unconfigured-calibration'),
-      calibration: options.calibration ?? { recallAt3: 1, noMatchFalsePositiveRate: 0 },
+      calibrationSetHash,
+      calibration,
       recordHashes,
       evidenceHash: sha256(evidenceText),
       vectorsHash: sha256(vectorsBuffer),
@@ -368,16 +394,27 @@ export const buildAmyHoodMemoryIndex = async (
     ]);
     await verifyDirectory(root, staging, manifest.indexHash);
     await rename(staging, finalDirectory);
-    await writeJsonAtomic(paths.activeMemoryIndex, {
-      releaseId: manifest.releaseId,
-      indexHash: manifest.indexHash,
-      activatedAt: options.now ?? new Date().toISOString(),
-    });
     return { ...(await verifyDirectory(root, finalDirectory, manifest.indexHash)), created: true };
   } catch (error) {
     await rm(staging, { recursive: true, force: true });
     throw error;
   }
+};
+
+export const activateAmyHoodMemoryIndex = async (
+  root: string,
+  indexHash: string,
+  activatedAt = new Date().toISOString(),
+) => {
+  const activeRelease = await loadJson<ActiveRelease>(advisorPaths(root).activeMemoryRelease);
+  const loaded = await verifyDirectory(root, indexDirectory(root, activeRelease.releaseId), indexHash);
+  if (loaded.manifest.calibration.recallAt3 < 0.8) throw new Error('retrieval Recall@3 gate failed');
+  if (loaded.manifest.calibration.noMatchFalsePositiveRate > 0.2) {
+    throw new Error('retrieval no-match false-positive gate failed');
+  }
+  const pointer: ActiveIndex = { releaseId: loaded.manifest.releaseId, indexHash, activatedAt };
+  await writeJsonAtomic(advisorPaths(root).activeMemoryIndex, pointer);
+  return pointer;
 };
 
 export const loadActiveAmyHoodMemoryIndex = async (
