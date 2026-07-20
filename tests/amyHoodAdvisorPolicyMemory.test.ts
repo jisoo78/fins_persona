@@ -199,6 +199,9 @@ test('happy: input graph selects only approved non-holdout decision evidence', a
 
   assert.deepEqual(graph.events.map(({ id }) => id), [
     'event-activision-acquisition-2022',
+    'event-ai-capacity-opex-pivot-2023',
+    'event-ai-capacity-sourcing-2024',
+    'event-cloud-capacity-scale-2022',
     'event-copilot-price-2023',
     'event-linkedin-acquisition-2016',
     'event-openai-expansion-2023',
@@ -514,6 +517,18 @@ test('failure: holdout and post-outcome inputs fail before model work', async (c
   const holdout = JSON.parse(await readFile(holdoutPath, 'utf8'));
   holdout.status = 'approved';
   await writeFile(holdoutPath, `${JSON.stringify(holdout, null, 2)}\n`);
+  const holdoutPilotPath = join(
+    holdoutRoot,
+    'data/b-track/amy-hood/advisor/events/pilot/pilot-manifest.json',
+  );
+  const holdoutPilot = JSON.parse(await readFile(holdoutPilotPath, 'utf8'));
+  holdoutPilot.targets[5] = {
+    candidateId: 'candidate-github-acquisition-2018',
+    domain: 'm_and_a',
+    priority: 6,
+    replacementReason: 'Deliberately restore a sealed holdout to prove policy-build leakage rejection.',
+  };
+  await writeFile(holdoutPilotPath, `${JSON.stringify(holdoutPilot, null, 2)}\n`);
   await assert.rejects(() => loadPolicyMemoryInput(holdoutRoot), /holdout/);
 
   const outcomePath = join(

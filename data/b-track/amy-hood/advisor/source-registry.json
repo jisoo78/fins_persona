@@ -1221,6 +1221,7 @@
       "id": "source-6b843b4b8385078d",
       "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2022/earnings-fy-2022-q3",
       "eventCandidateIds": [
+        "candidate-cloud-capacity-scale-2022",
         "candidate-nuance-acquisition-2021"
       ],
       "tier": 1,
@@ -1329,7 +1330,8 @@
       "id": "source-4f4085f8344669c4",
       "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2024/earnings-fy-2024-q2",
       "eventCandidateIds": [
-        "candidate-activision-acquisition-2022"
+        "candidate-activision-acquisition-2022",
+        "candidate-ai-capacity-sourcing-2024"
       ],
       "tier": 1,
       "title": "PDF discovery: Activision Blizzard acquisition",
@@ -1439,6 +1441,7 @@
       "id": "source-fbb900eb7e249591",
       "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3",
       "eventCandidateIds": [
+        "candidate-ai-capacity-opex-pivot-2023",
         "candidate-copilot-price-2023"
       ],
       "tier": 1,

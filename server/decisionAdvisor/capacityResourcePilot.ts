@@ -366,7 +366,26 @@ export const verifyCapacityResourcePilot = async (
     } else {
       additions.push(proposedCandidate);
     }
-    cards.push(buildCard(spec, spans));
+    const proposedCard = buildCard(spec, spans);
+    const existingCard = await readJsonFile<PilotDecisionEvent | null>(
+      eventCardPath(root, spec.candidate.id),
+      null,
+    );
+    if (existingCard?.status === 'approved') {
+      const reviewNeutral = {
+        ...existingCard,
+        status: 'incomplete' as const,
+        reviewer: null,
+        reviewedAt: null,
+        updatedAt: proposedCard.updatedAt,
+      };
+      if (JSON.stringify(reviewNeutral) !== JSON.stringify(proposedCard)) {
+        throw new Error(`approved capacity resource card conflicts with manifest: ${spec.candidate.id}`);
+      }
+      cards.push(existingCard);
+    } else {
+      cards.push(proposedCard);
+    }
   }
 
   const nextCandidates = [...candidates, ...additions];

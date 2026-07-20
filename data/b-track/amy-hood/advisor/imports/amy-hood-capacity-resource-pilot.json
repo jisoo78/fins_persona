@@ -1,0 +1,231 @@
+{
+  "dataset": "amy_hood_capacity_resource_pilot",
+  "version": "1.0.0",
+  "events": [
+    {
+      "candidate": {
+        "id": "candidate-cloud-capacity-scale-2022",
+        "workingTitle": "Cloud services sequential increase under global demand decision",
+        "decisionDate": "2022-04-26",
+        "fingerprint": {
+          "primaryEntity": "cloud services",
+          "decisionAction": "sequential increase",
+          "eventSpecificIdentifier": "global demand"
+        }
+      },
+      "sourceId": "source-6b843b4b8385078d",
+      "publishedAt": "2022-04-26",
+      "replacePriority": 6,
+      "card": {
+        "title": "Scale cloud infrastructure and people under broad demand",
+        "decisionQuestion": "How should Microsoft scale infrastructure and operating resources as demand and profitability constraints change?",
+        "situation": "Global cloud demand was growing and Microsoft was continuing broad investment across cloud engineering, deployment, LinkedIn, and sales.",
+        "objectives": [
+          "Meet growing global cloud demand",
+          "Expand operating capacity across strategic growth areas"
+        ],
+        "conditions": [
+          "Global cloud-services demand was growing.",
+          "Investment needs spanned infrastructure and multiple operating teams."
+        ],
+        "constraints": [
+          "Capital timing varies by quarter.",
+          "Broad headcount growth increases the operating-cost base."
+        ],
+        "options": [
+          {
+            "id": "scale_infrastructure_and_people",
+            "description": "Increase cloud capital expenditure and expand headcount in key operating areas.",
+            "expectedBenefit": "Adds physical and organizational capacity together.",
+            "principalRisk": "Raises both capital intensity and recurring operating expense.",
+            "selected": true
+          },
+          {
+            "id": "scale_infrastructure_constrain_opex",
+            "description": "Increase infrastructure while holding operating-resource growth low.",
+            "expectedBenefit": "Protects profitability and workforce productivity.",
+            "principalRisk": "Insufficient deployment and sales capacity may constrain broad growth.",
+            "selected": false
+          }
+        ],
+        "chosenAction": "scale_infrastructure_and_people",
+        "rejectedBenefit": "Constraining operating-resource growth would preserve near-term expense leverage.",
+        "observations": [
+          "Amy Hood expected sequential capital-expenditure growth to meet global cloud demand.",
+          "Company headcount grew 20 percent year over year across several investment areas."
+        ],
+        "inferences": [
+          "The disclosed resource mix expanded both infrastructure and people under broad demand."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "span-capacity-2022-headcount",
+          "role": "decision_context",
+          "startChar": 19999,
+          "endChar": 20240,
+          "speaker": "Amy Hood",
+          "exactQuote": "At a total company level, headcount grew 20% year-over-year as we continue to invest in key areas such as cloud engineering, customer deployment, LinkedIn, and sales, and included approximately 4 points of growth from the addition of Nuance."
+        },
+        {
+          "id": "span-capacity-2022-capex",
+          "role": "direct_amy",
+          "startChar": 29207,
+          "endChar": 29357,
+          "speaker": "Amy Hood",
+          "exactQuote": "Capital expenditures, we expect a sequential increase on a dollar basis as we continue to invest to meet growing global demand for our cloud services."
+        }
+      ]
+    },
+    {
+      "candidate": {
+        "id": "candidate-ai-capacity-opex-pivot-2023",
+        "workingTitle": "Azure AI infrastructure material sequential increase decision",
+        "decisionDate": "2023-04-25",
+        "fingerprint": {
+          "primaryEntity": "Azure AI infrastructure",
+          "decisionAction": "material sequential increase",
+          "eventSpecificIdentifier": "capital expenditures"
+        }
+      },
+      "sourceId": "source-fbb900eb7e249591",
+      "publishedAt": "2023-04-25",
+      "replacePriority": 7,
+      "card": {
+        "title": "Scale Azure AI infrastructure while constraining operating expense",
+        "decisionQuestion": "How should Microsoft scale infrastructure and operating resources as demand and profitability constraints change?",
+        "situation": "Azure AI infrastructure required a material capacity increase while Microsoft was aligning costs with revenue growth and protecting profitability.",
+        "objectives": [
+          "Lead the AI platform wave",
+          "Maintain healthy profitability while scaling capacity"
+        ],
+        "conditions": [
+          "Azure AI infrastructure required material sequential investment.",
+          "Scaled capital investment would increase COGS."
+        ],
+        "constraints": [
+          "FY24 operating-expense growth was expected to remain low.",
+          "Capacity buildout timing varies by quarter."
+        ],
+        "options": [
+          {
+            "id": "scale_infrastructure_and_people",
+            "description": "Scale AI infrastructure and operating resources together.",
+            "expectedBenefit": "Maximizes organizational capacity around the platform shift.",
+            "principalRisk": "Weakens operating leverage while infrastructure COGS is rising.",
+            "selected": false
+          },
+          {
+            "id": "scale_infrastructure_constrain_opex",
+            "description": "Increase Azure AI infrastructure capital while keeping operating-expense growth low.",
+            "expectedBenefit": "Funds urgent capacity while preserving disciplined profitability.",
+            "principalRisk": "Requires aggressive internal resource prioritization.",
+            "selected": true
+          }
+        ],
+        "chosenAction": "scale_infrastructure_constrain_opex",
+        "rejectedBenefit": "Expanding people with infrastructure could reduce execution bottlenecks.",
+        "observations": [
+          "Amy Hood expected a material sequential CapEx increase for Azure AI infrastructure.",
+          "Amy Hood paired scaled CapEx with low expected operating-expense growth."
+        ],
+        "inferences": [
+          "Infrastructure capacity was protected while operating resources were constrained under profitability pressure."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "span-capacity-2023-ai-capex",
+          "role": "decision_context",
+          "startChar": 28256,
+          "endChar": 28393,
+          "speaker": "Amy Hood",
+          "exactQuote": "We expect capital expenditures to have a material sequential increase on a dollar basis driven by investments in Azure AI infrastructure."
+        },
+        {
+          "id": "span-capacity-2023-opex",
+          "role": "direct_amy",
+          "startChar": 33082,
+          "endChar": 33313,
+          "speaker": "Amy Hood",
+          "exactQuote": "As always, we remain committed to aligning costs and revenue growth to deliver disciplined profitability. Therefore, while the scaled capex investments will impact COGS growth, we expect FY24 operating expense growth to remain low."
+        }
+      ]
+    },
+    {
+      "candidate": {
+        "id": "candidate-ai-capacity-sourcing-2024",
+        "workingTitle": "Cloud and AI investment disciplined cost management decision",
+        "decisionDate": "2024-01-30",
+        "fingerprint": {
+          "primaryEntity": "cloud and AI investment",
+          "decisionAction": "scaling",
+          "eventSpecificIdentifier": "disciplined cost management"
+        }
+      },
+      "sourceId": "source-4f4085f8344669c4",
+      "publishedAt": "2024-01-30",
+      "replacePriority": 8,
+      "card": {
+        "title": "Accelerate demand-led AI capacity with disciplined cost and mixed supply",
+        "decisionQuestion": "How should Microsoft scale infrastructure and operating resources as demand and profitability constraints change?",
+        "situation": "Customer demand and pipeline required faster cloud and AI capacity additions than owned buildout alone could always deliver.",
+        "objectives": [
+          "Add capacity in time to serve visible customer demand",
+          "Preserve operating-margin discipline while scaling AI investment"
+        ],
+        "conditions": [
+          "Customer demand guided cloud and AI investment.",
+          "Third-party capacity supplemented owned capacity when lead time required it."
+        ],
+        "constraints": [
+          "AI capital investment increases COGS.",
+          "Every team remained subject to disciplined cost management."
+        ],
+        "options": [
+          {
+            "id": "scale_infrastructure_and_people",
+            "description": "Scale owned infrastructure and operating headcount together.",
+            "expectedBenefit": "Keeps execution resources under direct organizational control.",
+            "principalRisk": "Adds recurring operating cost while capital intensity is rising.",
+            "selected": false
+          },
+          {
+            "id": "scale_infrastructure_constrain_opex",
+            "description": "Accelerate infrastructure, mix owned and third-party supply, and retain operating-cost discipline.",
+            "expectedBenefit": "Responds faster to pipeline without matching CapEx growth with broad OpEx growth.",
+            "principalRisk": "External capacity may have different economics or control characteristics.",
+            "selected": true
+          }
+        ],
+        "chosenAction": "scale_infrastructure_constrain_opex",
+        "rejectedBenefit": "Scaling people alongside owned capacity could increase direct control and reduce external dependency.",
+        "observations": [
+          "Amy Hood said customer demand guided cloud and AI investment.",
+          "Microsoft used both owned and third-party capacity and expected accelerating capital expense."
+        ],
+        "inferences": [
+          "External supply was an execution tactic inside a capital-first, cost-disciplined resource policy."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "span-capacity-2024-demand-discipline",
+          "role": "direct_amy",
+          "startChar": 33141,
+          "endChar": 33424,
+          "speaker": "Amy Hood",
+          "exactQuote": "Our commitment to scaling our cloud and AI investment is guided by customer demand and the substantial market opportunity. As we scale these investments, we remain focused on driving efficiencies across every layer of our tech stack and disciplined cost management across every team."
+        },
+        {
+          "id": "span-capacity-2024-external-supply",
+          "role": "decision_context",
+          "startChar": 43617,
+          "endChar": 44010,
+          "speaker": "Amy Hood",
+          "exactQuote": "I feel like primarily, obviously, this is being built by us, but we’ve also used third-party capacity to help when we could have that help us, in terms of meeting customer demand. And I tend to think, looking forward, you’ll tend to see, and I guided toward it, accelerating capital expense to continue to be able to add capacity in the coming quarters, given what we see in terms of pipeline."
+        }
+      ]
+    }
+  ]
+}

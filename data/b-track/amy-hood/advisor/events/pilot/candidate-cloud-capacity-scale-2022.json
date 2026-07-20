@@ -1,0 +1,91 @@
+{
+  "id": "event-cloud-capacity-scale-2022",
+  "candidateId": "candidate-cloud-capacity-scale-2022",
+  "domain": "ai_cloud_capex",
+  "decisionDate": "2022-04-26",
+  "title": "Scale cloud infrastructure and people under broad demand",
+  "decisionQuestion": "How should Microsoft scale infrastructure and operating resources as demand and profitability constraints change?",
+  "situation": "Global cloud demand was growing and Microsoft was continuing broad investment across cloud engineering, deployment, LinkedIn, and sales.",
+  "objectives": [
+    "Meet growing global cloud demand",
+    "Expand operating capacity across strategic growth areas"
+  ],
+  "conditions": [
+    "Global cloud-services demand was growing.",
+    "Investment needs spanned infrastructure and multiple operating teams."
+  ],
+  "constraints": [
+    "Capital timing varies by quarter.",
+    "Broad headcount growth increases the operating-cost base."
+  ],
+  "options": [
+    {
+      "id": "scale_infrastructure_and_people",
+      "description": "Increase cloud capital expenditure and expand headcount in key operating areas.",
+      "expectedBenefit": "Adds physical and organizational capacity together.",
+      "principalRisk": "Raises both capital intensity and recurring operating expense.",
+      "selected": true
+    },
+    {
+      "id": "scale_infrastructure_constrain_opex",
+      "description": "Increase infrastructure while holding operating-resource growth low.",
+      "expectedBenefit": "Protects profitability and workforce productivity.",
+      "principalRisk": "Insufficient deployment and sales capacity may constrain broad growth.",
+      "selected": false
+    }
+  ],
+  "chosenAction": "scale_infrastructure_and_people",
+  "rejectedBenefit": "Constraining operating-resource growth would preserve near-term expense leverage.",
+  "observations": [
+    "Amy Hood expected sequential capital-expenditure growth to meet global cloud demand.",
+    "Company headcount grew 20 percent year over year across several investment areas."
+  ],
+  "inferences": [
+    "The disclosed resource mix expanded both infrastructure and people under broad demand."
+  ],
+  "directAmyEvidenceIds": [
+    "span-capacity-2022-capex"
+  ],
+  "amyPolicyEvidenceIds": [],
+  "contextEvidenceIds": [
+    "span-capacity-2022-headcount"
+  ],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": [
+    "source-6b843b4b8385078d"
+  ],
+  "documentFamilyIds": [
+    "earnings-call-2022"
+  ],
+  "evidenceSpans": [
+    {
+      "id": "span-capacity-2022-headcount",
+      "role": "decision_context",
+      "startChar": 19999,
+      "endChar": 20240,
+      "speaker": "Amy Hood",
+      "exactQuote": "At a total company level, headcount grew 20% year-over-year as we continue to invest in key areas such as cloud engineering, customer deployment, LinkedIn, and sales, and included approximately 4 points of growth from the addition of Nuance.",
+      "sourceId": "source-6b843b4b8385078d",
+      "eventCandidateId": "candidate-cloud-capacity-scale-2022",
+      "publishedAt": "2022-04-26"
+    },
+    {
+      "id": "span-capacity-2022-capex",
+      "role": "direct_amy",
+      "startChar": 29207,
+      "endChar": 29357,
+      "speaker": "Amy Hood",
+      "exactQuote": "Capital expenditures, we expect a sequential increase on a dollar basis as we continue to invest to meet growing global demand for our cloud services.",
+      "sourceId": "source-6b843b4b8385078d",
+      "eventCandidateId": "candidate-cloud-capacity-scale-2022",
+      "publishedAt": "2022-04-26"
+    }
+  ],
+  "status": "approved",
+  "gaps": [
+    "single_document_family"
+  ],
+  "reviewer": "Codex exact-span review",
+  "reviewedAt": "2026-07-20T02:23:05.940Z",
+  "updatedAt": "2026-07-20T02:23:05.940Z"
+}

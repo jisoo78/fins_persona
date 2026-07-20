@@ -2559,5 +2559,206 @@
       "reviewStatus": "reviewed",
       "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source."
     }
+  },
+  {
+    "id": "candidate-cloud-capacity-scale-2022",
+    "workingTitle": "Cloud services sequential increase under global demand decision",
+    "domain": "ai_cloud_capex",
+    "decisionWindowStart": "2022-04-26",
+    "decisionWindowEnd": "2022-04-26",
+    "discoveryUrls": [
+      "https://www.microsoft.com/en-us/investor/events/fy-2022/earnings-fy-2022-q3"
+    ],
+    "decisionWindowBasis": {
+      "summary": "The official earnings-call publication date defines the public decision disclosure window.",
+      "sourceUrls": [
+        "https://www.microsoft.com/en-us/investor/events/fy-2022/earnings-fy-2022-q3"
+      ],
+      "reviewerNote": "Codex reviewed the dated official transcript and exact Amy Hood spans."
+    },
+    "eventFingerprint": {
+      "primaryEntity": "cloud services",
+      "decisionAction": "sequential increase",
+      "eventSpecificIdentifier": "global demand",
+      "sourceUrls": [
+        "https://www.microsoft.com/en-us/investor/events/fy-2022/earnings-fy-2022-q3"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "Codex matched all fingerprint fields to the bounded direct Amy Hood passage."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2022/earnings-fy-2022-q3",
+        "role": "direct_amy",
+        "sourceType": "earnings_call",
+        "documentFamilyId": "earnings-call-2022",
+        "publishedAt": "2022-04-26",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The official earnings transcript contains a bounded Amy Hood statement about this resource-allocation decision.",
+        "evidenceLocator": {
+          "exactQuote": "Capital expenditures, we expect a sequential increase on a dollar basis as we continue to invest to meet growing global demand for our cloud services.",
+          "exactRelevancePassage": "Capital expenditures, we expect a sequential increase on a dollar basis as we continue to invest to meet growing global demand for our cloud services.",
+          "anchorTerms": [
+            "cloud services",
+            "sequential increase"
+          ],
+          "eventDiscriminators": [
+            {
+              "value": "cloud services",
+              "kind": "named_entity"
+            },
+            {
+              "value": "sequential increase",
+              "kind": "decision_action"
+            },
+            {
+              "value": "global demand",
+              "kind": "event_specific"
+            }
+          ],
+          "speaker": "Amy Hood"
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Codex verified the exact quote, offsets, speaker ownership, and publication date."
+      }
+    ],
+    "directEvidenceGap": null,
+    "phase3Status": "eligible",
+    "notes": "Raw-derived capacity-resource event with exact Amy Hood transcript evidence.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-ai-capacity-opex-pivot-2023",
+    "workingTitle": "Azure AI infrastructure material sequential increase decision",
+    "domain": "ai_cloud_capex",
+    "decisionWindowStart": "2023-04-25",
+    "decisionWindowEnd": "2023-04-25",
+    "discoveryUrls": [
+      "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3"
+    ],
+    "decisionWindowBasis": {
+      "summary": "The official earnings-call publication date defines the public decision disclosure window.",
+      "sourceUrls": [
+        "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3"
+      ],
+      "reviewerNote": "Codex reviewed the dated official transcript and exact Amy Hood spans."
+    },
+    "eventFingerprint": {
+      "primaryEntity": "Azure AI infrastructure",
+      "decisionAction": "material sequential increase",
+      "eventSpecificIdentifier": "capital expenditures",
+      "sourceUrls": [
+        "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "Codex matched all fingerprint fields to the bounded direct Amy Hood passage."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3",
+        "role": "direct_amy",
+        "sourceType": "earnings_call",
+        "documentFamilyId": "earnings-call-2023",
+        "publishedAt": "2023-04-25",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The official earnings transcript contains a bounded Amy Hood statement about this resource-allocation decision.",
+        "evidenceLocator": {
+          "exactQuote": "We expect capital expenditures to have a material sequential increase on a dollar basis driven by investments in Azure AI infrastructure.",
+          "exactRelevancePassage": "We expect capital expenditures to have a material sequential increase on a dollar basis driven by investments in Azure AI infrastructure.",
+          "anchorTerms": [
+            "Azure AI infrastructure",
+            "material sequential increase"
+          ],
+          "eventDiscriminators": [
+            {
+              "value": "Azure AI infrastructure",
+              "kind": "named_entity"
+            },
+            {
+              "value": "material sequential increase",
+              "kind": "decision_action"
+            },
+            {
+              "value": "capital expenditures",
+              "kind": "event_specific"
+            }
+          ],
+          "speaker": "Amy Hood"
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Codex verified the exact quote, offsets, speaker ownership, and publication date."
+      }
+    ],
+    "directEvidenceGap": null,
+    "phase3Status": "eligible",
+    "notes": "Raw-derived capacity-resource event with exact Amy Hood transcript evidence.",
+    "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-ai-capacity-sourcing-2024",
+    "workingTitle": "Cloud and AI investment disciplined cost management decision",
+    "domain": "ai_cloud_capex",
+    "decisionWindowStart": "2024-01-30",
+    "decisionWindowEnd": "2024-01-30",
+    "discoveryUrls": [
+      "https://www.microsoft.com/en-us/investor/events/fy-2024/earnings-fy-2024-q2"
+    ],
+    "decisionWindowBasis": {
+      "summary": "The official earnings-call publication date defines the public decision disclosure window.",
+      "sourceUrls": [
+        "https://www.microsoft.com/en-us/investor/events/fy-2024/earnings-fy-2024-q2"
+      ],
+      "reviewerNote": "Codex reviewed the dated official transcript and exact Amy Hood spans."
+    },
+    "eventFingerprint": {
+      "primaryEntity": "cloud and AI investment",
+      "decisionAction": "scaling",
+      "eventSpecificIdentifier": "disciplined cost management",
+      "sourceUrls": [
+        "https://www.microsoft.com/en-us/investor/events/fy-2024/earnings-fy-2024-q2"
+      ],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "Codex matched all fingerprint fields to the bounded direct Amy Hood passage."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2024/earnings-fy-2024-q2",
+        "role": "direct_amy",
+        "sourceType": "earnings_call",
+        "documentFamilyId": "earnings-call-2024",
+        "publishedAt": "2024-01-30",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The official earnings transcript contains a bounded Amy Hood statement about this resource-allocation decision.",
+        "evidenceLocator": {
+          "exactQuote": "Our commitment to scaling our cloud and AI investment is guided by customer demand and the substantial market opportunity. As we scale these investments, we remain focused on driving efficiencies across every layer of our tech stack and disciplined cost management across every team.",
+          "exactRelevancePassage": "Our commitment to scaling our cloud and AI investment is guided by customer demand and the substantial market opportunity. As we scale these investments, we remain focused on driving efficiencies across every layer of our tech stack and disciplined cost management across every team.",
+          "anchorTerms": [
+            "cloud and AI investment",
+            "scaling"
+          ],
+          "eventDiscriminators": [
+            {
+              "value": "cloud and AI investment",
+              "kind": "named_entity"
+            },
+            {
+              "value": "scaling",
+              "kind": "decision_action"
+            },
+            {
+              "value": "disciplined cost management",
+              "kind": "event_specific"
+            }
+          ],
+          "speaker": "Amy Hood"
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Codex verified the exact quote, offsets, speaker ownership, and publication date."
+      }
+    ],
+    "directEvidenceGap": null,
+    "phase3Status": "eligible",
+    "notes": "Raw-derived capacity-resource event with exact Amy Hood transcript evidence.",
+    "status": "approved_for_collection"
   }
 ]

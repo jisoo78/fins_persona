@@ -24,7 +24,7 @@ import {
   type CapacityResourcePilotManifest,
   verifyCapacityResourcePilot,
 } from '../server/decisionAdvisor/capacityResourcePilot';
-import { eventCardPath } from '../server/decisionAdvisor/eventCard';
+import { approvePilotEventCard, eventCardPath } from '../server/decisionAdvisor/eventCard';
 import { writeJsonAtomic } from '../server/decisionAdvisor/jsonStore';
 
 const repositoryRoot = path.resolve(import.meta.dirname, '..');
@@ -381,6 +381,21 @@ test('happy: atomic apply appends events while preserving original candidates an
     const beforeSecondApply = await snapshotPaths(destinations);
     await applyCapacityResourcePilot(root, validManifest());
     assert.deepEqual(await snapshotPaths(destinations), beforeSecondApply);
+
+    const reviewedCandidateId = applied.cards[0].candidateId;
+    await approvePilotEventCard(root, reviewedCandidateId, {
+      reviewer: 'Codex exact-span review',
+      reviewedAt: '2026-07-20T12:00:00.000Z',
+    });
+    await applyCapacityResourcePilot(root, validManifest());
+    const reviewedCard = JSON.parse(
+      await readFile(eventCardPath(root, reviewedCandidateId), 'utf8'),
+    ) as { status: string; reviewer: string | null };
+    assert.deepEqual(reviewedCard, {
+      ...reviewedCard,
+      status: 'approved',
+      reviewer: 'Codex exact-span review',
+    });
   } finally {
     await rm(root, { recursive: true, force: true });
   }
