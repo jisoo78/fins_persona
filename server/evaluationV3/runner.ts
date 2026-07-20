@@ -14,20 +14,27 @@ import {
   type EvaluationV3RunScores,
 } from '../../shared/amyHoodEvaluationV3';
 import type { ModelClient, ModelResult } from '../personaPipeline/modelClient';
+import type { AmyHoodRetrievalResult } from '../../shared/amyHoodRag';
+import { createBgeM3EmbeddingClient } from '../decisionAdvisor/embeddingClient';
+import { createAmyHoodHybridRetriever } from '../decisionAdvisor/hybridRetriever';
+import { buildAmyHoodRagContext } from '../decisionAdvisor/ragContext';
 import { readActivePromptVersion, readPromptVersion } from '../promptVersions/store';
 import { createEvaluationV3ExperimentPlan } from './experimentPlan';
-import {
-  resolveEvaluationV3ArmContext,
-  type EvaluationV3ContextPackage,
-} from './context';
+import { resolveEvaluationV3RagPin, type EvaluationV3RagPin } from './context';
 import { loadEvaluationV3Holdout } from './holdout';
 import { buildEvaluationV3Input, parseEvaluationV3Response } from './prompt';
+import { readOrCreateEvaluationRetrieval } from './retrievalCache';
 import { loadEvaluationV3Bundle, loadEvaluationV3Reviews } from './questionSet';
 import { readEvaluationV3Run, writeEvaluationV3Run } from './runStore';
 
 type RunnerOptions = {
   root: string;
   createModel: () => ModelClient;
+  loadRagPin?: () => Promise<EvaluationV3RagPin>;
+  createRetriever?: () => Promise<{
+    retrieve(request: { query: string; indexHash: string }): Promise<AmyHoodRetrievalResult>;
+  }>;
+  buildContext?: typeof buildAmyHoodRagContext;
 };
 
 type PinnedArm = {
@@ -35,8 +42,7 @@ type PinnedArm = {
   promptVersionId: string | null;
   promptHash: string;
   systemPrompt: string;
-  context: EvaluationV3ContextPackage;
-  memoryReleaseHash: string | null;
+  ragPin: EvaluationV3RagPin | null;
 };
 
 const digest = (content: string) => createHash('sha256').update(content).digest('hex');
@@ -123,50 +129,49 @@ const loadFileWithHash = async (path: string) => {
 export const createEvaluationV3Runner = (options: RunnerOptions) => {
   const activeRunIds = new Set<string>();
   const transitionRunIds = new Set<string>();
+  const loadRagPin = options.loadRagPin ?? (() => resolveEvaluationV3RagPin(options.root));
+  const createRetriever = options.createRetriever ?? (() => createAmyHoodHybridRetriever({
+    root: options.root,
+    embeddingClient: createBgeM3EmbeddingClient(),
+  }));
+  const buildContext = options.buildContext ?? buildAmyHoodRagContext;
   const loadPinnedArms = async (): Promise<PinnedArm[]> => {
-    const [activePrompt, generic, policy, full] = await Promise.all([
+    const [activePrompt, generic, ragPin] = await Promise.all([
       readActivePromptVersion(options.root),
       loadFileWithHash(resolve(
         options.root,
         'agent_prompts/prompts/generic-cfo-control.md',
       )),
-      resolveEvaluationV3ArmContext(options.root, 'amy_policy_rag'),
-      resolveEvaluationV3ArmContext(options.root, 'amy_full_rag'),
+      loadRagPin(),
     ]);
-    if (policy.context.memoryReleaseId !== full.context.memoryReleaseId
-      || policy.memoryReleaseHash !== full.memoryReleaseHash) {
-      throw new Error('Evaluation v3 RAG arms must pin the same memory release');
-    }
     return [
       {
         arm: 'generic_cfo',
         promptVersionId: null,
         promptHash: generic.sha256,
         systemPrompt: generic.content,
-        context: (await resolveEvaluationV3ArmContext(options.root, 'generic_cfo')).context,
-        memoryReleaseHash: null,
+        ragPin: null,
       },
       {
         arm: 'amy_prompt',
         promptVersionId: activePrompt.versionId,
         promptHash: activePrompt.sha256,
         systemPrompt: activePrompt.content,
-        context: (await resolveEvaluationV3ArmContext(options.root, 'amy_prompt')).context,
-        memoryReleaseHash: null,
+        ragPin: null,
       },
       {
         arm: 'amy_policy_rag',
         promptVersionId: activePrompt.versionId,
         promptHash: activePrompt.sha256,
         systemPrompt: activePrompt.content,
-        ...policy,
+        ragPin,
       },
       {
         arm: 'amy_full_rag',
         promptVersionId: activePrompt.versionId,
         promptHash: activePrompt.sha256,
         systemPrompt: activePrompt.content,
-        ...full,
+        ragPin,
       },
     ];
   };
@@ -211,8 +216,10 @@ export const createEvaluationV3Runner = (options: RunnerOptions) => {
         answerKeyHash: answerKey.sha256,
         promptVersionId: pinned.promptVersionId,
         promptHash: pinned.promptHash,
-        memoryReleaseId: pinned.context.memoryReleaseId,
-        memoryReleaseHash: pinned.memoryReleaseHash,
+        memoryReleaseId: pinned.ragPin?.memoryReleaseId ?? null,
+        memoryReleaseHash: pinned.ragPin?.memoryReleaseHash ?? null,
+        memoryIndexHash: pinned.ragPin?.memoryIndexHash ?? null,
+        retrievalConfigHash: pinned.ragPin?.retrievalConfigHash ?? null,
         holdoutManifestHash: holdoutFile.sha256,
         status: 'queued',
         answers: [],
@@ -263,18 +270,26 @@ export const createEvaluationV3Runner = (options: RunnerOptions) => {
       }
       systemPrompt = version.content;
     }
-    const resolved = await resolveEvaluationV3ArmContext(options.root, run.arm);
-    if (resolved.context.memoryReleaseId !== run.memoryReleaseId
-      || resolved.memoryReleaseHash !== run.memoryReleaseHash) {
-      throw new Error('Evaluation v3 memory release is stale');
+    let ragPin: EvaluationV3RagPin | null = null;
+    if (run.arm === 'amy_policy_rag' || run.arm === 'amy_full_rag') {
+      ragPin = await loadRagPin();
+      if (ragPin.memoryReleaseId !== run.memoryReleaseId
+        || ragPin.memoryReleaseHash !== run.memoryReleaseHash
+        || ragPin.memoryIndexHash !== run.memoryIndexHash
+        || ragPin.retrievalConfigHash !== run.retrievalConfigHash) {
+        throw new Error('Evaluation v3 dynamic memory index is stale');
+      }
+    } else if (run.memoryReleaseId !== null || run.memoryReleaseHash !== null
+      || run.memoryIndexHash !== null || run.retrievalConfigHash !== null) {
+      throw new Error('Evaluation v3 no-RAG arm contains a memory pin');
     }
-    return { bundle, systemPrompt, context: resolved.context };
+    return { bundle, systemPrompt, ragPin };
   };
 
   const executeRunInternal = async (runId: string) => {
     let run = await readEvaluationV3Run(options.root, runId);
     if (run.status === 'complete') return run;
-    const { bundle, systemPrompt, context } = await resolveRunInputs(run);
+    const { bundle, systemPrompt, ragPin } = await resolveRunInputs(run);
     const model = options.createModel();
     if (model.provider !== run.provider || model.model !== run.model) {
       throw new Error('Evaluation v3 model configuration is stale');
@@ -287,10 +302,32 @@ export const createEvaluationV3Runner = (options: RunnerOptions) => {
       status: 'running',
       runError: undefined,
     });
+    const retriever = ragPin ? await createRetriever() : null;
     for (const question of bundle.questions.questions) {
       if (run.answers.some(({ questionId, status }) =>
         questionId === question.id && status === 'complete')) continue;
       try {
+        const publicQuestion = [
+          `질문: ${question.prompt}`,
+          `선택지:\n${question.options.map((option, index) => `${index + 1}. ${option}`).join('\n')}`,
+        ].join('\n\n');
+        let context = null;
+        if (ragPin && retriever) {
+          const retrieval = await readOrCreateEvaluationRetrieval({
+            root: options.root,
+            experimentGroupId: run.experimentGroupId,
+            query: question.prompt,
+            indexHash: ragPin.memoryIndexHash,
+            retriever,
+          });
+          context = await buildContext({
+            root: options.root,
+            retrieval,
+            projection: run.arm === 'amy_policy_rag' ? 'policy' : 'full',
+            systemPrompt,
+            userPrompt: publicQuestion,
+          });
+        }
         const input = buildEvaluationV3Input(systemPrompt, question, context, run.arm);
         const { result, parsed } = await invokeQuestion(model, input, question);
         const key = keyById.get(question.id);
@@ -305,6 +342,7 @@ export const createEvaluationV3Runner = (options: RunnerOptions) => {
           elapsedMs: result.elapsedMs,
           inputTokens: result.inputTokens,
           outputTokens: result.outputTokens,
+          ...(context ? { retrieval: context.trace } : {}),
         };
         run = { ...run, answers: replaceAnswer(run.answers, answer) };
         run.scores = scoreRun(run.answers, bundle.questions.questions);

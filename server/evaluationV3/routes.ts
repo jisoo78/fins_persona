@@ -9,7 +9,8 @@ import type {
   EvaluationV3Run,
 } from '../../shared/amyHoodEvaluationV3';
 import { createModelClient } from '../personaPipeline/modelClient';
-import { resolveEvaluationV3ArmContext } from './context';
+import { createBgeM3EmbeddingClient } from '../decisionAdvisor/embeddingClient';
+import { resolveEvaluationV3RagPin } from './context';
 import { loadEvaluationV3Holdout } from './holdout';
 import { loadEvaluationV3Bundle, loadEvaluationV3Reviews, saveEvaluationV3Review } from './questionSet';
 import { buildEvaluationV3ExperimentReport } from './report';
@@ -145,8 +146,8 @@ export const createEvaluationV3RouteDependencies = (
       let structuredMemoryAvailable = false;
       try {
         await Promise.all([
-          resolveEvaluationV3ArmContext(root, 'amy_policy_rag'),
-          resolveEvaluationV3ArmContext(root, 'amy_full_rag'),
+          resolveEvaluationV3RagPin(root),
+          createBgeM3EmbeddingClient().preflight(),
         ]);
         structuredMemoryAvailable = true;
       } catch {

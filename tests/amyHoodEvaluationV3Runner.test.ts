@@ -12,6 +12,7 @@
  *    - unapproved bundles, stale prompts, missing memory, unsafe IDs, and repeated malformed output fail without corrupting sibling runs.
  */
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -19,6 +20,7 @@ import { join } from 'node:path';
 import test from 'node:test';
 
 import type { EvaluationV3ReviewFile } from '../shared/amyHoodEvaluationV3';
+import type { AmyHoodRetrievalResult } from '../shared/amyHoodRag';
 import type {
   ModelClient,
   ModelInput,
@@ -117,14 +119,94 @@ const createRunnerFixture = async (approved = true) => {
   return root;
 };
 
+const activeIndexHash = 'a'.repeat(64);
+const retrievalConfigHash = 'b'.repeat(64);
+
+const createTestRunner = ({
+  root,
+  model,
+  onQuery = () => undefined,
+  loadRagPin,
+  retrievalError,
+  contextError,
+}: {
+  root: string;
+  model: ModelClient;
+  onQuery?: (query: string) => void;
+  loadRagPin?: () => Promise<{
+    memoryReleaseId: string;
+    memoryReleaseHash: string;
+    memoryIndexHash: string;
+    retrievalConfigHash: string;
+  }>;
+  retrievalError?: string;
+  contextError?: string;
+}) => createEvaluationV3Runner({
+  root,
+  createModel: () => model,
+  loadRagPin: loadRagPin ?? (async () => ({
+    memoryReleaseId: 'v1-aaaaaaaaaaaa',
+    memoryReleaseHash: 'c'.repeat(64),
+    memoryIndexHash: activeIndexHash,
+    retrievalConfigHash,
+  })),
+  createRetriever: async () => ({
+    retrieve: async ({ query, indexHash }) => {
+      onQuery(query);
+      if (retrievalError) throw new Error(retrievalError);
+      const result: AmyHoodRetrievalResult = {
+        query,
+        matches: [{
+          id: 'policy-fixture',
+          kind: 'policy',
+          vectorScore: 0.8,
+          lexicalScore: 0.4,
+          fusedScore: 0.68,
+        }],
+        trace: {
+          queryHash: createHash('sha256').update(query).digest('hex'),
+          indexHash,
+          retrievalConfigHash,
+          cacheKey: `cache-${Buffer.from(query).toString('base64url')}`,
+          selectedArtifacts: [],
+          noMatch: false,
+          noMatchReason: null,
+        },
+      };
+      return result;
+    },
+  }),
+  buildContext: async ({ retrieval, projection }) => ({
+    ...(() => {
+      if (contextError) throw new Error(contextError);
+      return {};
+    })(),
+    projection,
+    text: projection === 'policy'
+      ? '[Retrieved Policy: policy-fixture]\nPriority order: demand > urgency'
+      : '[Retrieved Policy: policy-fixture]\nPriority order: demand > urgency\nDecision axis: capacity',
+    trace: {
+      ...retrieval.trace,
+      expandedArtifactIds: ['policy-fixture'],
+      evidenceIds: ['evidence-fixture'],
+      sourceIds: ['source-fixture'],
+      contextTokens: 120,
+      requestTokens: 800,
+      tokenCounter: 'conservative_estimator',
+      contextHash: 'e'.repeat(64),
+    },
+  }),
+});
+
 test('happy: one repetition completes four pinned and objectively scored runs', async () => {
   const root = await createRunnerFixture();
   let calls = 0;
+  const queries: string[] = [];
   const model = createModel(async () => {
     calls += 1;
     return '{"choice":1,"reason":"1번을 선택하며 검증된 수요를 우선합니다."}';
   });
-  const runner = createEvaluationV3Runner({ root, createModel: () => model });
+  const runner = createTestRunner({ root, model, onQuery: (query) => queries.push(query) });
   const launch = await runner.createExperiment({ repetitions: 1 });
   assert.deepEqual(launch.runs.map(({ arm }) => arm), [
     'generic_cfo',
@@ -137,6 +219,7 @@ test('happy: one repetition completes four pinned and objectively scored runs', 
     launch.runs.map(({ runId }) => runId),
   );
   assert.equal(calls, 120);
+  assert.equal(queries.length, 30);
   assert.equal(completed.every(({ status, answers }) =>
     status === 'complete' && answers.length === 30), true);
   assert.equal(completed.every(({ scores }) =>
@@ -144,6 +227,14 @@ test('happy: one repetition completes four pinned and objectively scored runs', 
   assert.equal(completed[0].promptVersionId, null);
   assert.equal(completed[1].memoryReleaseId, null);
   assert.equal(completed[2].memoryReleaseId, 'v1-aaaaaaaaaaaa');
+  assert.equal(completed[0].memoryIndexHash, null);
+  assert.equal(completed[2].memoryIndexHash, activeIndexHash);
+  assert.equal(completed[2].answers.every(({ retrieval }) => Boolean(retrieval)), true);
+  assert.deepEqual(
+    completed[2].answers.map(({ retrieval }) => retrieval?.cacheKey),
+    completed[3].answers.map(({ retrieval }) => retrieval?.cacheKey),
+  );
+  assert.equal(queries.some((query) => /D01|correctChoice|correctIntent/.test(query)), false);
 });
 
 test('edge: five repetitions keep stable order and make exactly 600 calls', async () => {
@@ -153,7 +244,7 @@ test('edge: five repetitions keep stable order and make exactly 600 calls', asyn
     calls += 1;
     return '{"choice":2,"reason":"판단 기준상 2번을 선택합니다."}';
   });
-  const runner = createEvaluationV3Runner({ root, createModel: () => model });
+  const runner = createTestRunner({ root, model });
   const launch = await runner.createExperiment({ repetitions: 5 });
   assert.equal(launch.runs.length, 20);
   assert.equal(new Set(launch.runs.map(({ runId }) => runId)).size, 20);
@@ -184,7 +275,7 @@ test('edge: resume preserves completed answers and restarts at the failed questi
     if (!recover && calls >= 3) return 'malformed';
     return '{"choice":1,"reason":"완료된 판단"}';
   });
-  const runner = createEvaluationV3Runner({ root, createModel: () => model });
+  const runner = createTestRunner({ root, model });
   const launch = await runner.createExperiment({ repetitions: 1 });
   const target = launch.runs[0];
   const incomplete = await runner.executeRun(target.runId);
@@ -211,10 +302,10 @@ test('edge: one failed arm does not block later arms', async () => {
   const root = await createRunnerFixture();
   const model = createModel(async (input) => {
     const text = inputText(input);
-    if (/판단 정책:/.test(text) && !/성찰:/.test(text)) return 'malformed';
+    if (/\[Retrieved Policy:/.test(text) && !/Decision axis:/.test(text)) return 'malformed';
     return '{"choice":1,"reason":"우선순위에 따라 선택"}';
   });
-  const runner = createEvaluationV3Runner({ root, createModel: () => model });
+  const runner = createTestRunner({ root, model });
   const launch = await runner.createExperiment({ repetitions: 1 });
   const runs = await runner.executeExperiment(launch.runs.map(({ runId }) => runId));
   assert.deepEqual(runs.map(({ status }) => status), [
@@ -228,10 +319,7 @@ test('edge: one failed arm does not block later arms', async () => {
 test('failure: preflight and pinned-artifact failures leave safe run state', async () => {
   const unapprovedRoot = await createRunnerFixture(false);
   const model = createModel(async () => '{"choice":1,"reason":"선택"}');
-  const unapprovedRunner = createEvaluationV3Runner({
-    root: unapprovedRoot,
-    createModel: () => model,
-  });
+  const unapprovedRunner = createTestRunner({ root: unapprovedRoot, model });
   await assert.rejects(
     () => unapprovedRunner.createExperiment({ repetitions: 1 }),
     /all Evaluation v3 questions must be approved/,
@@ -244,11 +332,21 @@ test('failure: preflight and pinned-artifact failures leave safe run state', asy
   await assert.rejects(
     () => createEvaluationV3Runner({ root: missingMemoryRoot, createModel: () => model })
       .createExperiment({ repetitions: 1 }),
-    /active memory release is required/,
+    /active Amy Hood memory index|active memory release/,
   );
 
   const staleRoot = await createRunnerFixture();
-  const staleRunner = createEvaluationV3Runner({ root: staleRoot, createModel: () => model });
+  let staleIndexHash = activeIndexHash;
+  const staleRunner = createTestRunner({
+    root: staleRoot,
+    model,
+    loadRagPin: async () => ({
+      memoryReleaseId: 'v1-aaaaaaaaaaaa',
+      memoryReleaseHash: 'c'.repeat(64),
+      memoryIndexHash: staleIndexHash,
+      retrievalConfigHash,
+    }),
+  });
   const launch = await staleRunner.createExperiment({ repetitions: 1 });
   await writeFile(
     join(staleRoot, 'agent_prompts/prompts/generic-cfo-control.md'),
@@ -263,20 +361,14 @@ test('failure: preflight and pinned-artifact failures leave safe run state', asy
   assert.equal(stalePromptRun.runError?.code, 'artifact_stale');
   assert.equal(stalePromptRun.runError?.retryable, false);
 
-  const contextPath = join(
-    staleRoot,
-    'data/b-track/amy-hood/advisor/memory-releases/v1-aaaaaaaaaaaa/evaluation-context.json',
-  );
-  const context = JSON.parse(readFileSync(contextPath, 'utf8')) as { policy: string[] };
-  context.policy = ['실험 생성 후 변경된 정책'];
-  await writeFile(contextPath, JSON.stringify(context));
+  staleIndexHash = 'f'.repeat(64);
   await assert.rejects(
     () => staleRunner.executeRun(launch.runs[2].runId),
-    /evaluation context hash mismatch/,
+    /dynamic memory index is stale/,
   );
 
   const questionRoot = await createRunnerFixture();
-  const questionRunner = createEvaluationV3Runner({ root: questionRoot, createModel: () => model });
+  const questionRunner = createTestRunner({ root: questionRoot, model });
   const questionLaunch = await questionRunner.createExperiment({ repetitions: 1 });
   const questionPath = join(questionRoot, 'evaluation/v3/public/questions.json');
   const questionFile = JSON.parse(readFileSync(questionPath, 'utf8')) as {
@@ -297,4 +389,25 @@ test('failure: preflight and pinned-artifact failures leave safe run state', asy
     () => readEvaluationV3Run(staleRoot, '../unsafe'),
     /invalid Evaluation v3 run ID/,
   );
+});
+
+test('failure: retrieval and request-budget errors never degrade a RAG arm to prompt-only', async () => {
+  for (const failure of [
+    { retrievalError: 'BGE-M3 request timed out after 30000ms' },
+    { contextError: 'complete model request exceeds 12000 tokens' },
+  ]) {
+    const root = await createRunnerFixture();
+    let modelCalls = 0;
+    const model = createModel(async () => {
+      modelCalls += 1;
+      return '{"choice":1,"reason":"should not run"}';
+    });
+    const runner = createTestRunner({ root, model, ...failure });
+    const launch = await runner.createExperiment({ repetitions: 1 });
+    const run = await runner.executeRun(launch.runs[2].runId);
+    assert.equal(run.status, 'incomplete');
+    assert.equal(run.answers[0].status, 'failed');
+    assert.match(run.answers[0].error ?? '', /timed out|12000 tokens/);
+    assert.equal(modelCalls, 0);
+  }
 });

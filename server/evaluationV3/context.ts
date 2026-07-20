@@ -4,6 +4,7 @@ import { resolve } from 'node:path';
 
 import type { EvaluationV3Arm } from '../../shared/amyHoodEvaluationV3';
 import type { MemoryReleaseManifest } from '../../shared/amyHoodDecisionAdvisor';
+import { loadActiveAmyHoodMemoryIndex } from '../decisionAdvisor/memoryIndex';
 import {
   assertNoEvaluationV3Holdout,
   loadEvaluationV3Holdout,
@@ -23,6 +24,29 @@ export type ActiveMemoryRelease = {
   version: string;
   manifestHash: string;
   activatedAt: string;
+};
+
+export type EvaluationV3RagPin = {
+  memoryReleaseId: string;
+  memoryReleaseHash: string;
+  memoryIndexHash: string;
+  retrievalConfigHash: string;
+};
+
+export const resolveEvaluationV3RagPin = async (
+  root: string,
+): Promise<EvaluationV3RagPin> => {
+  const index = await loadActiveAmyHoodMemoryIndex(root);
+  if (index.manifest.calibration.recallAt3 < 0.8
+    || index.manifest.calibration.noMatchFalsePositiveRate > 0.2) {
+    throw new Error('active Amy Hood memory index calibration is below the Evaluation v3 gate');
+  }
+  return {
+    memoryReleaseId: index.manifest.releaseId,
+    memoryReleaseHash: index.manifest.releaseManifestHash,
+    memoryIndexHash: index.manifest.indexHash,
+    retrievalConfigHash: index.manifest.retrievalConfigHash,
+  };
 };
 
 type EvaluationContextSnapshot = Omit<EvaluationV3ContextPackage, 'memoryReleaseId'> & {
