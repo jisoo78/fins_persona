@@ -1,0 +1,19 @@
+{
+  "query": "규제 불확실성이 큰 대형 인수에서 전략적 가치는 높지만 종결 시점과 구제조치 범위가 불명확하다. 자본 배분 결정을 어떻게 통제할 것인가?",
+  "queryHash": "72f3fb165c971998aa679bed39c11a83ba85bf7aadf1da373ff9c46b47acfcef",
+  "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+  "result": {
+    "query": "규제 불확실성이 큰 대형 인수에서 전략적 가치는 높지만 종결 시점과 구제조치 범위가 불명확하다. 자본 배분 결정을 어떻게 통제할 것인가?",
+    "matches": [],
+    "trace": {
+      "queryHash": "72f3fb165c971998aa679bed39c11a83ba85bf7aadf1da373ff9c46b47acfcef",
+      "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+      "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+      "cacheKey": "09138e6c6c025204979307f36c60d0bc7266109db548920980aa891a0b39fa92",
+      "selectedArtifacts": [],
+      "noMatch": true,
+      "noMatchReason": "below_threshold"
+    }
+  },
+  "payloadHash": "ebedbdffeed908ee148683e785030a4c3e9033b6f6f86179171b55cb08431cfc"
+}

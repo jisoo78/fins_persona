@@ -1,0 +1,35 @@
+{
+  "query": "AI 용량 수요의 35%만 계약과 실제 사용량으로 확인되고 나머지는 영업 전망이다. 마진이 1.5%p 낮아질 같은 투자안의 결론은 무엇인가?",
+  "queryHash": "7e72c3157d31d6c8a8e27ca703b004e3fcd31d55fb69e9e8ac264ce300c22c49",
+  "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+  "result": {
+    "query": "AI 용량 수요의 35%만 계약과 실제 사용량으로 확인되고 나머지는 영업 전망이다. 마진이 1.5%p 낮아질 같은 투자안의 결론은 무엇인가?",
+    "matches": [
+      {
+        "id": "policy-c4203c075dbd61d3",
+        "kind": "policy",
+        "vectorScore": 0.8122765605330446,
+        "lexicalScore": 0.14061792051753522,
+        "fusedScore": 0.6107789685283918
+      }
+    ],
+    "trace": {
+      "queryHash": "7e72c3157d31d6c8a8e27ca703b004e3fcd31d55fb69e9e8ac264ce300c22c49",
+      "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+      "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+      "cacheKey": "fd083ce70693312b26161667b2a02ab578b0ca0054c85764658de5e9e55eb6ab",
+      "selectedArtifacts": [
+        {
+          "id": "policy-c4203c075dbd61d3",
+          "kind": "policy",
+          "vectorScore": 0.8122765605330446,
+          "lexicalScore": 0.14061792051753522,
+          "fusedScore": 0.6107789685283918
+        }
+      ],
+      "noMatch": false,
+      "noMatchReason": null
+    }
+  },
+  "payloadHash": "21642f3763ec58a982d750792b6e102843448ab1b497c7aae4a55b838dc85b07"
+}

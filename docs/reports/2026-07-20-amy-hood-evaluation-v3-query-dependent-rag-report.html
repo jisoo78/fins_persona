@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amy Hood Evaluation v3 — Query-dependent RAG 실평가</title>
+  <style>
+    :root{color-scheme:light;--ink:#182230;--muted:#667085;--line:#d7deea;--panel:#f7f9fc;--blue:#2457d6;--green:#137447;--red:#b42318;--amber:#a15c00;--code:#111827}*{box-sizing:border-box}body{margin:0;background:#eef2f7;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.58}main{max-width:1200px;margin:32px auto;padding:42px;background:#fff;box-shadow:0 10px 36px rgba(20,31,55,.08)}h1{margin:0 0 8px;font-size:30px;letter-spacing:-.03em}h2{margin:38px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--ink);font-size:21px}h3{margin:24px 0 10px;font-size:17px}p{margin:8px 0 14px}code{padding:2px 5px;border-radius:4px;background:#edf1f7;font-size:.92em}pre{overflow:auto;padding:18px;border-radius:8px;background:var(--code);color:#e5e7eb;font-size:12px;line-height:1.55;white-space:pre-wrap}.meta{color:var(--muted);font-size:14px}.banner{margin:24px 0;padding:18px 20px;border-left:5px solid var(--red);background:#fff4f2}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0 24px}.card{padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--panel)}.card .label{color:var(--muted);font-size:13px}.card .value{margin-top:4px;font-size:25px;font-weight:750}.good{color:var(--green)}.bad{color:var(--red)}.warn{color:var(--amber)}table{width:100%;border-collapse:collapse;margin:12px 0 24px;font-size:14px}th,td{padding:10px 9px;border:1px solid var(--line);text-align:left;vertical-align:top}th{background:#edf1f7;font-weight:700}td.num,th.num{text-align:right;white-space:nowrap}.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700}.pass{color:var(--green);background:#e7f6ed}.fail{color:var(--red);background:#fdecea}.hold{color:var(--amber);background:#fff3df}.callout{padding:14px 16px;border:1px solid #b9c9ef;border-radius:8px;background:#f1f5ff}ul{padding-left:22px}.foot{margin-top:38px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}@media(max-width:850px){main{margin:0;padding:22px}.grid{grid-template-columns:1fr 1fr}table{display:block;overflow:auto}}
+  </style>
+</head>
+<body><main>
+  <h1>Amy Hood Evaluation v3 — Query-dependent RAG 실평가</h1>
+  <div class="meta">개발자용 · 2026-07-20 · 실험 그룹 <code>f20df8e3-c6de-41a7-bc01-21081867020b</code></div>
+
+  <div class="banner"><strong>최종 판정: 동적 RAG 파이프라인은 정상 동작했지만 성능 가설은 지지되지 않았고, 현재 벤치마크는 기각한다.</strong><br>120/120 응답과 60개 RAG trace가 실패 없이 완료됐다. 그러나 일반 CFO 기준선이 90%로 사전 상한 80%를 초과했고 Policy RAG 증분은 0%p, Full RAG는 오히려 −6.7%p였다. 승인 정책이 AI·클라우드 CapEx 1개뿐이므로 Amy Hood 전 영역 판단 복제를 주장할 수 없다.</div>
+
+  <div class="grid">
+    <div class="card"><div class="label">완료 응답</div><div class="value good">120 / 120</div><div class="meta">parse·실행 실패 0</div></div>
+    <div class="card"><div class="label">검색 캐시</div><div class="value good">30 / 30</div><div class="meta">두 RAG arm 100% 재사용</div></div>
+    <div class="card"><div class="label">Policy RAG 증분</div><div class="value warn">0.0%p</div><div class="meta">Amy Prompt 대비</div></div>
+    <div class="card"><div class="label">Full RAG 증분</div><div class="value bad">−6.7%p</div><div class="meta">Policy RAG 대비</div></div>
+  </div>
+
+  <h2>1. 실행 계약과 고정값</h2>
+  <table><tbody>
+    <tr><th>모델</th><td><code>Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q4_K_M.gguf</code> · 8080</td></tr>
+    <tr><th>검색 모델</th><td><code>bge-m3-Q8_0.gguf</code> · 8081 · embedding dimension 1024</td></tr>
+    <tr><th>설계</th><td>30문항 × 4실험군 × 1회, 동일 공개 질문과 선택지, 객관식 정답 키 자동 채점</td></tr>
+    <tr><th>질문 / 정답 / 홀드아웃 SHA</th><td><code>59cbdff…4abb4b9</code> / <code>4fc39e…887a7bb</code> / <code>e9421d…e3ec4d</code></td></tr>
+    <tr><th>Master Prompt</th><td><code>amy-hood-master-v3-20260720</code> · <code>9cc894…034eb</code></td></tr>
+    <tr><th>Memory / index</th><td><code>v1-262d69135ca0</code> · release <code>7a4f56…16240</code> · index <code>a5d8d8…e38c</code></td></tr>
+    <tr><th>Retrieval config</th><td><code>1a312d…105a3</code> · vector 0.7 / lexical 0.3 / minimum score 0.55</td></tr>
+  </tbody></table>
+
+  <h2>2. 정량 결과</h2>
+  <table><thead><tr><th>실험군</th><th class="num">판별 /10</th><th class="num">홀드아웃 /10</th><th class="num">반사실 /6</th><th class="num">전이 /4</th><th class="num">총점</th><th class="num">정확도</th><th class="num">입력 토큰</th><th class="num">시간</th></tr></thead><tbody>
+    <tr><td>① 일반 CFO</td><td class="num">9</td><td class="num">10</td><td class="num">4</td><td class="num">4</td><td class="num">27/30</td><td class="num">90.0%</td><td class="num">11,483</td><td class="num">68.854s</td></tr>
+    <tr><td>② Amy Main Prompt</td><td class="num">9</td><td class="num">10</td><td class="num">4</td><td class="num">4</td><td class="num">27/30</td><td class="num">90.0%</td><td class="num">42,233</td><td class="num">80.869s</td></tr>
+    <tr><td>③ Amy + Policy RAG</td><td class="num">9</td><td class="num">10</td><td class="num">4</td><td class="num">4</td><td class="num">27/30</td><td class="num">90.0%</td><td class="num">61,103</td><td class="num">101.809s</td></tr>
+    <tr><td>④ Amy + Full RAG</td><td class="num">9</td><td class="num bad">8</td><td class="num">4</td><td class="num">4</td><td class="num bad">25/30</td><td class="num bad">83.3%</td><td class="num">72,119</td><td class="num">100.733s</td></tr>
+  </tbody></table>
+  <p>Policy RAG는 Amy Prompt와 같은 오답(<code>D01, C01B, C03B</code>)을 냈다. Full RAG는 여기에 <code>H02, H05</code>를 추가로 잃었다. Full 투영의 사건·성찰 정보가 현재 E4B의 홀드아웃 판단을 교정하지 못하고 오히려 간섭한 결과다.</p>
+
+  <h3>가설 판정</h3>
+  <table><thead><tr><th>가설</th><th>관측</th><th>판정</th><th>근거 논리</th></tr></thead><tbody>
+    <tr><td>H1. Amy Prompt &gt; 일반 CFO</td><td>0.0%p</td><td><span class="pill fail">미지지</span></td><td>페르소나 프롬프트가 정확도 차이를 만들지 못했다.</td></tr>
+    <tr><td>H2. Policy RAG &gt; Amy Prompt</td><td>0.0%p</td><td><span class="pill fail">미지지</span></td><td>동적 검색은 작동했지만 정답 선택을 바꾸지 못했다.</td></tr>
+    <tr><td>H3. Full RAG &gt; Policy RAG</td><td>−6.7%p</td><td><span class="pill fail">기각</span></td><td>추가 계층이 홀드아웃 2문항을 악화시켰다.</td></tr>
+    <tr><td>H4. 질문 의존 검색·재사용이 무결하게 동작</td><td>30 cache / 60 traces / key 일치 100%</td><td><span class="pill pass">지지</span></td><td>두 RAG 조건이 질문별 동일 ranked result를 투영만 달리해 사용했다.</td></tr>
+  </tbody></table>
+
+  <h2>3. Before vs After</h2>
+  <table><thead><tr><th>조건</th><th class="num">이전 정적 E4B</th><th class="num">현재 동적 RAG</th><th class="num">변화</th><th>해석</th></tr></thead><tbody>
+    <tr><td>일반 CFO</td><td class="num">90.0%</td><td class="num">90.0%</td><td class="num">0.0%p</td><td>통제군 재현.</td></tr>
+    <tr><td>Amy Prompt</td><td class="num">90.0%</td><td class="num">90.0%</td><td class="num">0.0%p</td><td>통제군 재현.</td></tr>
+    <tr><td>Policy RAG</td><td class="num">90.0%</td><td class="num">90.0%</td><td class="num">0.0%p</td><td>정적 메타데이터를 실제 정책·인용 검색으로 교체했지만 점수 증분 없음.</td></tr>
+    <tr><td>Full RAG</td><td class="num">90.0%</td><td class="num bad">83.3%</td><td class="num bad">−6.7%p</td><td>동적 사건·성찰 확장이 두 홀드아웃 판단에 부정적.</td></tr>
+  </tbody></table>
+  <div class="callout"><strong>구현 의미:</strong> 이전 보고서의 “RAG”는 정적 release-context 주입이었다. 이번 After는 질문별 BGE-M3 검색 → 검증 캐시 → Policy/Full 연결 메모리 확장 → Gemma 4 입력을 실제 수행한다. 따라서 이번부터 RAG 실험으로 해석할 수 있지만, 성능 향상 자체는 확인되지 않았다.</div>
+
+  <h2>4. 검색 품질·비용 진단</h2>
+  <table><tbody>
+    <tr><th>Hit / no-match</th><td>24 / 6 (80% / 20%)</td></tr>
+    <tr><th>Hit score</th><td>min 0.5511 · mean 0.5898 · max 0.6507</td></tr>
+    <tr><th>고유 검색 정책</th><td><strong>1개</strong> — <code>policy-c4203c075dbd61d3</code> (AI·클라우드 CapEx)</td></tr>
+    <tr><th>인용 evidence</th><td>hit 24건 모두 evidence trace 포함(100%); 전체 질문 기준 80%</td></tr>
+    <tr><th>문맥 토큰</th><td>Policy hit 1,018 / Full hit 1,782 / no-match 20</td></tr>
+    <tr><th>최대 전체 요청</th><td>3,987 추정 토큰 / 12,000 한도</td></tr>
+    <tr><th>무결성</th><td>홀드아웃 식별자 누출 0 · 캐시 30 · 캐시 키 재사용 30/30 · RAG trace 60</td></tr>
+  </tbody></table>
+
+  <h3>실제 모델 입력 예시(축약·비밀 필드 제거)</h3>
+  <pre>query: "수요의 55%가 계약과 사용량으로 확인되고 ... 어떤 순서로 집행해야 하는가?"
+
+[Retrieved Policy: policy-c4203c075dbd61d3]
+Priority order: customer demand &gt; capacity urgency &gt; profitability or cost constraint
+Recommended action: scale_infrastructure_constrain_opex
+
+Amy Hood evidence
+Quote: "Our commitment to scaling our cloud and AI investment is guided by customer demand and the substantial market opportunity."
+
+retrieval: fusedScore=0.6312, vector=0.8434, lexical=0.1361
+trace: indexHash=a5d8d8…e38c, cacheKey=b183e7… (정답 키·correctIntent 미포함)</pre>
+
+  <h2>5. 제한과 다음 결정</h2>
+  <ul>
+    <li><strong>가장 큰 제한:</strong> 승인 정책이 1개여서 M&amp;A·가격·비용·주주환원 질문에도 AI CapEx 정책이 임계값을 넘으면 주입된다. 이는 검색기의 기능 오류가 아니라 메모리 커버리지 부족이다.</li>
+    <li><strong>평가 변별력:</strong> 일반 CFO가 90%이므로 현재 문항은 Amy 고유 정책의 인과 효과를 분리하기에 쉽다.</li>
+    <li><strong>통계 제한:</strong> 1회 반복이므로 선택 안정성과 분산을 추정할 수 없다.</li>
+    <li><strong>점수-근거 분리:</strong> 객관식 정확도는 판단 과정의 충실도를 완전히 측정하지 않는다.</li>
+  </ul>
+  <p><strong>Go / No-Go:</strong> <span class="pill pass">파이프라인 Go</span> <span class="pill fail">성능 주장 No-Go</span>. 다음 우선순위는 각 핵심 영역별 승인 정책과 반례를 추가해 최소 5개 정책 커버리지를 만든 뒤, generic CFO 80% 이하가 되도록 문항 판별력을 높이고 5회 반복하는 것이다.</p>
+
+  <div class="foot">산출 근거: 네 run JSON과 30 retrieval-cache JSON을 직접 집계. 표시된 결과는 공개자료 기반 비공식 AI 시뮬레이션이며 Amy Hood 본인 또는 Microsoft의 공식 입장이 아니다.</div>
+</main></body></html>

@@ -1,0 +1,1442 @@
+{
+  "runId": "ce5969fa-bb28-4b48-8f5f-c6bc5b9e2e87",
+  "version": "3.0.0",
+  "experimentGroupId": "f20df8e3-c6de-41a7-bc01-21081867020b",
+  "repetition": 1,
+  "arm": "amy_policy_rag",
+  "provider": "local",
+  "model": "Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q4_K_M.gguf",
+  "questionSetVersion": "3.0.0",
+  "questionSetHash": "59cbdff01cf984c4b6d14def8b7b765b1dde204f4446dd67883f4563c4abb4b9",
+  "answerKeyHash": "4fc39ec1e3f2d1f1548cf494c2f7dd2a2054c5f47cac97dd53e2effbd887a7bb",
+  "promptVersionId": "amy-hood-master-v3-20260720",
+  "promptHash": "9cc89493d6dcd53dc994bafc2406a56c16b71358d5a221060033403cb84034eb",
+  "memoryReleaseId": "v1-262d69135ca0",
+  "memoryReleaseHash": "7a4f56aa31982d99916ee79a2cb5ada8f305875d83fafff776917183d6316240",
+  "memoryIndexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+  "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+  "holdoutManifestHash": "e9421d0bd8846387bc4f81c6c98bf3c61a603c18d887e1a858c7181ec1e3ec4d",
+  "status": "complete",
+  "answers": [
+    {
+      "questionId": "D01",
+      "status": "complete",
+      "choice": 4,
+      "reason": "가장 적절한 선택지는 4번입니다. Amy Hood는 고객 수요와 시장 기회에 맞춰 투자를 확장하는 것을 강조하며, '효율성 및 규율 있는 비용 관리'에 초점을 맞추고 있습니다. 따라서, 초기 통합 시너지를 통해 재무적 성과(수익성/비용)를 빠르게 확보하면서도, 플랫폼 중립성(고객 선택권)을 약속하여 장기적 가치(수요)를 지키는 접근이 가장 부합합니다.",
+      "correct": false,
+      "mismatch": false,
+      "elapsedMs": 4883,
+      "inputTokens": 2198,
+      "outputTokens": 134,
+      "retrieval": {
+        "queryHash": "890b275453ad884cde983c1bbd0a502489e49c0b77361f522339c8c74c6ccdfe",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "27dae9aa3e33397a34b66a12747c4cacacf6b17fe1d5cc244858703c93389ab5",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.8054068688914698,
+            "lexicalScore": 0,
+            "fusedScore": 0.5637848082240289
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3217,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "D02",
+      "status": "complete",
+      "choice": 4,
+      "reason": "가장 적절한 선택지는 4번입니다. 이는 정책에서 제시된 '고객 수요 > 용량 긴급성 > 수익성/비용 제약'의 우선순위를 따르면서, '계약 및 사용량'이라는 구체적인 실적 지표를 활용하여 '전환율'과 '활용률'을 함께 점검하는 가장 운영 지향적인 접근 방식이기 때문입니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 3005,
+      "inputTokens": 2207,
+      "outputTokens": 112,
+      "retrieval": {
+        "queryHash": "31fee80d56e10f9be1aa8b839a85c3f26f889232e1ac52e9de51d0c3e065cc73",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "b183e70e1635c2aea6db04ee59a51ef1cb29c9d8137fef9d09ad843b6f559208",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.8434061030098888,
+            "lexicalScore": 0.13607638263727648,
+            "fusedScore": 0.6312071868981051
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3214,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "D03",
+      "status": "complete",
+      "choice": 1,
+      "reason": "가장 중요한 판단 기준은 '고객 수요(Customer Demand)'이며, 이는 '용량 시급성(Capacity Urgency)'보다 우선합니다. 따라서, 측정된 고객 가치와 사용 강도를 기준으로 세그먼트별 가격을 검증하며, 수요가 확인될 때 점진적으로 확장하는 접근 방식이 가장 적합합니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 2584,
+      "inputTokens": 2197,
+      "outputTokens": 96,
+      "retrieval": {
+        "queryHash": "6089ab78bcf83a601acc4796672043a021a4d562d66f3a3bc27ee8b4788cebaa",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "09a2e4645a7598e009d65299fc550d34e3a0611000dd8d76828342af06ffc58c",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.8137611085618746,
+            "lexicalScore": 0.1476833880947435,
+            "fusedScore": 0.6139377924217352
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3218,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "D04",
+      "status": "complete",
+      "choice": 3,
+      "reason": "가장 적절한 판단 기준은 '고객 수요 > 용량 시급성 > 수익성/비용 제약 > 인력 생산성 > 공급 리드 타임' 순서이며, 이 원칙에 따라 낮은 우선순위/중복 비용을 감축하고 핵심 기술 투자(AI/보안)를 보호하되, 보호된 투자에 즉시 성과 이정표를 부여하여 투자의 정당성을 확보하는 것이 가장 균형 잡힌 접근 방식입니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 3243,
+      "inputTokens": 2201,
+      "outputTokens": 125,
+      "retrieval": {
+        "queryHash": "4f0efe278b1b7459a0393e3976c893fd1b2ed45ae34571c90fc4572317aa3cd5",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "cc69a3850bc99b361fc18b25955a62ecbdd0aa1cda2064fd08aea966165d9545",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.8471599480092064,
+            "lexicalScore": 0.13607638263727648,
+            "fusedScore": 0.6338348783976273
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3208,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "D05",
+      "status": "complete",
+      "choice": 2,
+      "reason": "가장 적절한 선택지는 2번입니다. 이는 전략적 성장(투자)과 재무적 안정성(유동성 확보)을 선행하고, 시장 상황(현금흐름 및 주가)에 따라 주주 가치 제고(희석 상쇄)를 유연하게 관리하는 접근 방식이기 때문입니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 2767,
+      "inputTokens": 1417,
+      "outputTokens": 94,
+      "retrieval": {
+        "queryHash": "d9541ee021c9bca0dc008f51c457da99c708291c283a1c29f08075c1e9d5552a",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "16fcf67552d04ced04ed16f8ece6dca297fa5b76c0d04da5a9e16128b6b5c613",
+        "selectedArtifacts": [],
+        "noMatch": true,
+        "noMatchReason": "below_threshold",
+        "expandedArtifactIds": [],
+        "evidenceIds": [],
+        "sourceIds": [],
+        "contextTokens": 20,
+        "requestTokens": 2203,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "221ad86f35ac51542c01391816741cce4de31a6ac21c9e07f2c3c46030f6ff35"
+      }
+    },
+    {
+      "questionId": "D06",
+      "status": "complete",
+      "choice": 1,
+      "reason": "가장 적절한 선택지는 1번입니다. 규제 불확실성이 높을 때는 재무적 제약(EPS 희석 및 현금 한도)을 선제적으로 통제하고, 계약 단계에서 규제 리스크를 구체화(철회 조건 및 선택권)하여 단계적 투자를 통해 위험을 관리하는 것이 가장 운영적이고 통제 가능한 접근 방식이기 때문입니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 2907,
+      "inputTokens": 1425,
+      "outputTokens": 110,
+      "retrieval": {
+        "queryHash": "72f3fb165c971998aa679bed39c11a83ba85bf7aadf1da373ff9c46b47acfcef",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "09138e6c6c025204979307f36c60d0bc7266109db548920980aa891a0b39fa92",
+        "selectedArtifacts": [],
+        "noMatch": true,
+        "noMatchReason": "below_threshold",
+        "expandedArtifactIds": [],
+        "evidenceIds": [],
+        "sourceIds": [],
+        "contextTokens": 20,
+        "requestTokens": 2214,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "221ad86f35ac51542c01391816741cce4de31a6ac21c9e07f2c3c46030f6ff35"
+      }
+    },
+    {
+      "questionId": "D07",
+      "status": "complete",
+      "choice": 4,
+      "reason": "가장 중요한 판단 기준은 '고객 수요'이며, 그 다음은 '용량 긴급성'입니다. 따라서 수요가 확인된 지역의 병목(전력/설비)을 먼저 해소하고, 계약 전환 및 활용률을 보며 투자를 단계적으로 배치하는 것이 가장 운영적이고 수요 중심적인 접근입니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 4024,
+      "inputTokens": 2192,
+      "outputTokens": 95,
+      "retrieval": {
+        "queryHash": "85fb9b1e772455934bf31deb048e07482676a0d1c2cafda1e3262522a96fb257",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "6fed7a1cff0966a29ca0481b2bc447e15fc0a9b333243f5ea1ebb0c48b996baf",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.8059221223031838,
+            "lexicalScore": 0,
+            "fusedScore": 0.5641454856122287
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3222,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "D08",
+      "status": "complete",
+      "choice": 3,
+      "reason": "가장 적절한 선택지는 3번입니다. 이는 고객군별 절감 가치와 사용 범위를 먼저 검증하여 '전환 부담'이라는 핵심 제약을 해소하고, 이후 유지/확장 지표를 통해 '성장'과 '가치 실현'을 확인하는 단계적 접근이기 때문입니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 2577,
+      "inputTokens": 1413,
+      "outputTokens": 94,
+      "retrieval": {
+        "queryHash": "e35af8e0c83c2848825bb5c34daeefc9299545f6caae4b78903068e94e9b5d02",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "0440d4b62f4d020ca2a7fe57fd73d57d7b87eafcacb3b755abacdf9f85c697e2",
+        "selectedArtifacts": [],
+        "noMatch": true,
+        "noMatchReason": "below_threshold",
+        "expandedArtifactIds": [],
+        "evidenceIds": [],
+        "sourceIds": [],
+        "contextTokens": 20,
+        "requestTokens": 2210,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "221ad86f35ac51542c01391816741cce4de31a6ac21c9e07f2c3c46030f6ff35"
+      }
+    },
+    {
+      "questionId": "D09",
+      "status": "complete",
+      "choice": 2,
+      "reason": "가장 적절한 선택지는 2번입니다. 이는 '고객 수요(성장)'를 최우선으로 보호하면서도, '비용 효율성(운영 레버리지)'을 동시에 추적하고 미달 시 즉시 조치하는, Amy Hood가 강조하는 균형 잡힌 접근 방식(demand > profitability/cost constraint)을 반영합니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 4315,
+      "inputTokens": 2196,
+      "outputTokens": 102,
+      "retrieval": {
+        "queryHash": "32ad46279e79717f2a6a581cf72388bec0008d2c0c806c597a56c147bc3fb3df",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "3ee24d0230cda49505d6b31ab9edc8bf795243f7801a7552ae768a9b13689041",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.8037245432450197,
+            "lexicalScore": 0,
+            "fusedScore": 0.5626071802715138
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3209,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "D10",
+      "status": "complete",
+      "choice": 4,
+      "reason": "가장 적절한 선택지는 4번입니다. Amy Hood의 관점에서, '고객 수요'와 '시장 기회'에 기반한 '장기 전략 투자'를 최우선으로 확보하고, 높은 금리 환경에 대비해 '유동성 선택권'을 유지하는 것이 중요합니다. 이후, '지속 가능한 배당'과 '유연한 매입'을 잉여현금흐름 내에서 조정하는 것이 균형 잡힌 접근입니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 3261,
+      "inputTokens": 2195,
+      "outputTokens": 127,
+      "retrieval": {
+        "queryHash": "56731cf9092248aac206ab89460755ad98889ef4d16149f2055f530c24caa720",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "34f37fa145676950910db1e25d7f9cb5b6b1666b2e51167b7fe34eea55d49b31",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.8371420833230042,
+            "lexicalScore": 0.14061792051753522,
+            "fusedScore": 0.6281848344813634
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3193,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "H01",
+      "status": "complete",
+      "choice": 3,
+      "reason": "가장 적절한 선택지는 3번입니다. 이는 재무적 안정성(희석 한도)과 개발자 우려(플랫폼 중립성 및 선택권)라는 두 가지 핵심 이해관계자의 요구를 거래 조건 자체에 명시적으로 고정하여, 거래 종결 후의 불확실성을 최소화하고 신뢰를 확보하는 데 중점을 두기 때문입니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 2956,
+      "inputTokens": 1423,
+      "outputTokens": 107,
+      "retrieval": {
+        "queryHash": "f8024915c5eee53a22f828b75e83776decc755f664a8cf0b19350dae32a17d7a",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "87ba7e61d285a568b89c7959daef2fdc383c7a085bad91cde3156831956d348d",
+        "selectedArtifacts": [],
+        "noMatch": true,
+        "noMatchReason": "below_threshold",
+        "expandedArtifactIds": [],
+        "evidenceIds": [],
+        "sourceIds": [],
+        "contextTokens": 20,
+        "requestTokens": 2211,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "221ad86f35ac51542c01391816741cce4de31a6ac21c9e07f2c3c46030f6ff35"
+      }
+    },
+    {
+      "questionId": "H02",
+      "status": "complete",
+      "choice": 1,
+      "reason": "가장 중요한 판단 기준은 '고객 수요(Customer Demand)'와 '신뢰 회복(개발자 이탈 방지)'이며, 이는 '수익화(Enterprise 기능 확대)'보다 선행되어야 합니다. 따라서, 먼저 핵심 가치(언어/도구/클라우드 선택권 및 독립 운영)를 보호하여 수요를 확보한 후, 안정화된 수요를 바탕으로 수익화(자발적 기능 및 판매망 확대)를 진행하는 것이 합리적입니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 4868,
+      "inputTokens": 2183,
+      "outputTokens": 129,
+      "retrieval": {
+        "queryHash": "b2879b6a8b943f99f8632e4781e58a843fdc9b15462525bec6d7fa427c1a16d0",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "be7d79a2b96949a7ef1070157d627c417b4e27d367a9b712f848214c1f79be97",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.7872639886535142,
+            "lexicalScore": 0,
+            "fusedScore": 0.5510847920574599
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3198,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "H03",
+      "status": "complete",
+      "choice": 4,
+      "reason": "가장 적절한 선택지는 4번입니다. 이는 '고객 수요 > 용량 시급성 > 수익성/비용 제약 > 인력 생산성 > 공급 리드 타임'이라는 우선순위(정책)와 '수익성 및 비용 규율에 대한 헌신'이라는 Amy Hood의 태도(증거)를 가장 잘 반영하기 때문입니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 2802,
+      "inputTokens": 2190,
+      "outputTokens": 106,
+      "retrieval": {
+        "queryHash": "3938ec8ef75fabded9adc385a1cf183aefb14db55cd12393906b356e3d5aaf96",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "c9854c08b8dd24ae27165f18f32ff148a0b1a6d3612b476488a619dfa5e7d29c",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.7880908134238493,
+            "lexicalScore": 0,
+            "fusedScore": 0.5516635693966945
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3199,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "H04",
+      "status": "complete",
+      "choice": 2,
+      "reason": "가장 적절한 선택지는 2번입니다. 이는 '고객 수요(customer demand)'를 최우선으로 하면서도, '용량 긴급성(capacity urgency)'과 '수익성/비용 제약(profitability or cost constraint)'을 동시에 고려하여 투자 실행 시점과 규모를 정교하게 맞추는 접근 방식이기 때문입니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 2859,
+      "inputTokens": 2194,
+      "outputTokens": 102,
+      "retrieval": {
+        "queryHash": "36b39bba1e9af6141be8d3bcd5c0e2bc0d896866545661c96c6d3e0aee897b96",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "770b59837636d7ec06be0ba8944a077426a91989a2e02e62410f7c2633145965",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.8335229706105833,
+            "lexicalScore": 0.13607638263727648,
+            "fusedScore": 0.6242889942185912
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3197,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "H05",
+      "status": "complete",
+      "choice": 3,
+      "reason": "가장 적절한 선택지는 3번입니다. 이는 '고객 수요(계약 전환/사용량)'와 '용량 제약(Capacity Urgency)'을 핵심으로 삼고, '감가상각 증가(Cost/Margin)'와 '장기 매출 기회(Growth)'를 같은 투자 단위에서 평가하는, 정책의 핵심 우선순위(customer demand > capacity urgency > profitability or cost constraint > ...)를 가장 잘 반영하기 때문입니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 3261,
+      "inputTokens": 2187,
+      "outputTokens": 121,
+      "retrieval": {
+        "queryHash": "58708af89c330b70b33871500b20593a172b0210fc4688456fcbff45e62f3218",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "f7b644c49d7f3c1e95db89c1d8d573a5872be732a277faa622b3e1aa9561ef05",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.7934699860362724,
+            "lexicalScore": 0.3176531587189405,
+            "fusedScore": 0.6507249378410728
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3191,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "H06",
+      "status": "complete",
+      "choice": 1,
+      "reason": "가장 중요한 판단 기준은 '고객 수요(customer demand)'이며, 다음으로 '용량 시급성(capacity urgency)'을 고려해야 합니다. 따라서 이동 가능한 장비는 수요가 강한 곳에 배치하고, 지연 지역의 장기 설비는 고객 전환 및 인허가 일정에 맞춰 유연하게 대응하는 것이 최적입니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 2750,
+      "inputTokens": 2192,
+      "outputTokens": 99,
+      "retrieval": {
+        "queryHash": "bd58c89ff0c88c1f6a6b681c38d5e9f2cb553a864c83e9a58c2ec47b90e9fcdf",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "2508e545d8543933ddb7331683c391476212b6422a4e7d47e326d5bfc137ae58",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.7970301250498444,
+            "lexicalScore": 0,
+            "fusedScore": 0.557921087534891
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3210,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "H07",
+      "status": "complete",
+      "choice": 4,
+      "reason": "가장 적절한 선택지는 4번입니다. 이는 고객별 사용 깊이(가치)를 직접적으로 반영하여 가격 책정의 근거를 마련하고, 유지/사용 지표를 통해 실행 속도를 관리하는 접근 방식이기 때문입니다. 이는 '고객 수요'를 최우선으로 두고, '가치'를 측정하여 '수익성/비용 제약'을 달성하려는 Amy Hood의 운영적 접근 방식과 가장 일치합니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 3268,
+      "inputTokens": 2184,
+      "outputTokens": 124,
+      "retrieval": {
+        "queryHash": "8e3146079019db443954534ea0d8e80f0761e3170d2468f05c89b0a9e7fcb634",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "5cab4da422c15e3a1d2b933a9e9e07e2d71d9eaba8baac9b0412b2b2cc4b8b1b",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.8044206606988524,
+            "lexicalScore": 0.03763746560287244,
+            "fusedScore": 0.5743857021700585
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3200,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "H08",
+      "status": "complete",
+      "choice": 2,
+      "reason": "가장 적절한 선택지는 2번입니다. Amy Hood의 관점에서 볼 때, 단순히 가격 인상률을 유지하거나(선택지 1) 특정 그룹의 가격을 조정하는 것(선택지 3)보다, 고객별 '실제 가치'와 '사용 격차'를 확인하여 맞춤형 대응(전환 경로 및 패키지 조정)을 하는 것이 가장 운영 중심적입니다. 이는 '고객 수요(customer demand)'를 최우선으로 두고, '수익성(profitability)'과 '고객 관계(retention)'를 동시에 관리하려는 접근 방식과 일치합니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 4081,
+      "inputTokens": 2186,
+      "outputTokens": 160,
+      "retrieval": {
+        "queryHash": "ab95c6f601c6c930e5835ee75543ab920cf943bc959503c5f600a8eae1e3779f",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "7b46c7cc3c757ad8c8880222bc6cbcde2d22fad594d9b9c3d71f380d884c5964",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.8082696193236019,
+            "lexicalScore": 0.03763746560287244,
+            "fusedScore": 0.577079973207383
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3184,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "H09",
+      "status": "complete",
+      "choice": 3,
+      "reason": "가장 적절한 선택지는 3번입니다. 이는 '충분한 권한 확보'를 통해 전략적 유연성을 유지하면서도, '전략 투자·유동성·현금흐름을 해치지 않는 속도'로 집행을 조정함으로써 운영적 통제와 재무적 건전성을 동시에 확보하는 접근 방식이기 때문입니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 2800,
+      "inputTokens": 2193,
+      "outputTokens": 102,
+      "retrieval": {
+        "queryHash": "22e6e6d6cfe3dd4f478dbe44777e0ad0656afd240870cd3d180cc285bf431173",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "ba52d7c53f42efbe96ddf88b187b37a12d46abc0de8e4119a76836ad46bded62",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.8090006078256264,
+            "lexicalScore": 0,
+            "fusedScore": 0.5663004254779385
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3192,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "H10",
+      "status": "complete",
+      "choice": 1,
+      "reason": "가장 먼저 전략적 투자(AI/클라우드)의 지속 가능성을 뒷받침할 재무적 기반(현금 여력, 지속 가능한 현금흐름)을 확인해야 하며, 이후 시장 가격 매력도에 따라 집행 속도를 조절하는 것이 중요합니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 2448,
+      "inputTokens": 2191,
+      "outputTokens": 85,
+      "retrieval": {
+        "queryHash": "15657333cdad2ffa682b27d8052a7df022cf2d611383f4ac84f44d91c0bdc0ae",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "84868f0eaeec40cc3880f617b9cb0267e00bbfee6a01f1cee708b31e4dccbf4a",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.8251656041279485,
+            "lexicalScore": 0.13607638263727648,
+            "fusedScore": 0.6184388376807468
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3197,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "C01A",
+      "status": "complete",
+      "choice": 4,
+      "reason": "가장 적절한 선택지는 4번입니다. 판단 기준은 '고객 수요(80% 확인)'와 '공급 제약(매출 제한)'을 최우선으로 하고, '수익성/비용 제약(마진 1.5%p 하락)'을 고려하는 것입니다. 이는 '단계적 투자(sequential investment)'를 통해 수요에 맞춰 투자를 진행하되, '전환/활용률/감가상각'을 재검토 조건으로 두어 비용 부담을 관리하려는 접근 방식입니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 3691,
+      "inputTokens": 2201,
+      "outputTokens": 143,
+      "retrieval": {
+        "queryHash": "08511827c0342293a51df1270e5344b0bda36cc770f0ada64c7fd4ac3c8d25e6",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "5ba84c88af84430270c79ab693faa66901907c81b34508517d2863ec015274fe",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.813908405219631,
+            "lexicalScore": 0.14061792051753522,
+            "fusedScore": 0.6119212598090022
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3185,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "C01B",
+      "status": "complete",
+      "choice": 1,
+      "reason": "가장 중요한 판단 기준은 '고객 수요'이며, 이는 '용량 시급성'보다 우선합니다. 따라서, 35%만 확인된 수요라도 시장 선점(전체 전망 반영)을 위해 설비를 승인하되, 불확실성(계약 전환율)에 따라 향후 투자 시점(다음 연도 가속기 주문)을 조절하는 것이 가장 적절합니다.",
+      "correct": false,
+      "mismatch": false,
+      "elapsedMs": 3026,
+      "inputTokens": 2186,
+      "outputTokens": 113,
+      "retrieval": {
+        "queryHash": "7e72c3157d31d6c8a8e27ca703b004e3fcd31d55fb69e9e8ac264ce300c22c49",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "fd083ce70693312b26161667b2a02ab578b0ca0054c85764658de5e9e55eb6ab",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.8122765605330446,
+            "lexicalScore": 0.14061792051753522,
+            "fusedScore": 0.6107789685283918
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3192,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "C02A",
+      "status": "complete",
+      "choice": 1,
+      "reason": "가장 중요한 판단 기준은 '고객 수요(Customer Demand)'와 '측정된 가치(Usage/Productivity)'이며, 이는 Amy Hood가 강조하는 핵심 동인입니다. 따라서, 측정된 가치와 사용 강도에 맞춘 세그먼트별 가격 확대(가치 기반)를 우선하고, 유지/확장 사용을 가격 재검토 신호(지속적 모니터링)로 두는 것이 가장 적합합니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 3358,
+      "inputTokens": 2181,
+      "outputTokens": 122,
+      "retrieval": {
+        "queryHash": "dac68326e870f0c7fd4ad9fbb4dbb9b36f4cf6f60b8f68ffb770940f85edfa73",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "cbaacbf0ffb44201115326deb1b28535c8881cf129b75dc2995c403b176108e4",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.7918546284341488,
+            "lexicalScore": 0,
+            "fusedScore": 0.5542982399039041
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3177,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "C02B",
+      "status": "complete",
+      "choice": 3,
+      "reason": "가장 적절한 선택지는 3번입니다. 현재 상황은 '낮은 사용률', '약한 갱신 의향', '일부 팀에만 나타나는 생산성 개선'이라는 다면적인 문제이므로, 전면적 조치(1, 2, 4)보다는 가치 검증을 통한 정밀 타겟팅이 우선되어야 합니다. 따라서, '가치/사용/유지'라는 세 가지 핵심 지표를 재검증하는 것이 최우선 판단 기준이며, 이는 단기적인 현상 유지보다 장기적인 수익성 확보(Margin/Value)에 중점을 둔 전략적 접근입니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 4477,
+      "inputTokens": 1407,
+      "outputTokens": 164,
+      "retrieval": {
+        "queryHash": "99b1fe94d936137a3c2682244ea161c6cd0be6bc5e92b2b6b403ed32a2e4e361",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "504a1aa7bf5a61074ec8d136ae0a98483900008e32d9baf4de0da96f2fe61083",
+        "selectedArtifacts": [],
+        "noMatch": true,
+        "noMatchReason": "below_threshold",
+        "expandedArtifactIds": [],
+        "evidenceIds": [],
+        "sourceIds": [],
+        "contextTokens": 20,
+        "requestTokens": 2197,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "221ad86f35ac51542c01391816741cce4de31a6ac21c9e07f2c3c46030f6ff35"
+      }
+    },
+    {
+      "questionId": "C03A",
+      "status": "complete",
+      "choice": 4,
+      "reason": "가장 적절한 선택지는 4번입니다. 현재 주어진 정보(재무 한도 내 희석, 멀티클라우드 중립성, 독립 운영 및 공개 API 보장)가 핵심적인 '보호 장치'를 충족하고 있으므로, 이를 유지하는 것이 최우선입니다. 이후에는 성과(신뢰·유지·기업 채택)를 보면서 점진적인 수익화(Growth)를 추구하는 것이 합리적입니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 3355,
+      "inputTokens": 1407,
+      "outputTokens": 123,
+      "retrieval": {
+        "queryHash": "4fa7e1eed79fdcbb3dfcc70fca6eda805809a0b2a7adc9b1a54916c06e46a4ee",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "cd3ab800b19056977d432db28a1b2109eb5461a1394981eb3a8019cd49c7c5c2",
+        "selectedArtifacts": [],
+        "noMatch": true,
+        "noMatchReason": "below_threshold",
+        "expandedArtifactIds": [],
+        "evidenceIds": [],
+        "sourceIds": [],
+        "contextTokens": 20,
+        "requestTokens": 2192,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "221ad86f35ac51542c01391816741cce4de31a6ac21c9e07f2c3c46030f6ff35"
+      }
+    },
+    {
+      "questionId": "C03B",
+      "status": "complete",
+      "choice": 4,
+      "reason": "가장 적절한 선택지는 4번입니다. Amy Hood의 관점은 '고객 수요'를 최우선으로 하면서도 '체계적인 수익성(disciplined profitability)'과 '효율성(efficiencies)'을 강조하므로, 독점 조건의 기간을 제한하여 위험을 관리하고(장기적 관점), 성과에 따라 유연하게 중립성(멀티클라우드 지원)을 복원하는 것이 가장 균형 잡힌 접근입니다.",
+      "correct": false,
+      "mismatch": false,
+      "elapsedMs": 5089,
+      "inputTokens": 2195,
+      "outputTokens": 127,
+      "retrieval": {
+        "queryHash": "6c3cd53be600588a0990e4ff3ead134532590e3fe6b3df055913ed4fb948baed",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "5ad8c0c0ad0e34aa341cd4c83a1115bab12b5f1f3a6912abcc762c286401c7d7",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.7899618650109743,
+            "lexicalScore": 0.030228011942784978,
+            "fusedScore": 0.5620417090905174
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3206,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "T01",
+      "status": "complete",
+      "choice": 1,
+      "reason": "가장 중요한 판단 기준은 '고객 수요(Customer Demand)'와 '지속적인 투자(Sequential Investment)'를 유지하면서 '수익성/비용 제약(Profitability or Cost Constraint)'을 달성하는 것입니다. 따라서, 핵심인 보안 투자는 보호하되, 비효율적인 부분(중복 도구, 저성과 지역)을 먼저 정리하고, 구체적인 성과 지표(채택/통합/단위비용)를 통해 예산 집행의 정당성을 재검증하는 것이 가장 운영 중심적입니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 3821,
+      "inputTokens": 2205,
+      "outputTokens": 143,
+      "retrieval": {
+        "queryHash": "92a0acc07ac31a79728182ed8f04fb09f69695f2d78f7e23930cfbadfe1c34ac",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "5d6a179615d01f65e6761c1b25f96b97791d2f8ef4af86c71f18142fb945448c",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.8318276429243234,
+            "lexicalScore": 0,
+            "fusedScore": 0.5822793500470264
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3210,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "T02",
+      "status": "complete",
+      "choice": 3,
+      "reason": "Amy Hood의 접근 방식은 '고객 수요'와 '시장 기회'에 기반하여 투자를 확장하되, '규율 있는 수익성(disciplined profitability)'과 '비용 관리'를 유지하는 것입니다. 따라서, 불확실한 요소(통합/규제)를 사전에 고정(Conditioning)하고, 성과(고객 유지/통합 이정표)에 따라 투자를 단계적으로 승인하는 것이 가장 적합합니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 3379,
+      "inputTokens": 2175,
+      "outputTokens": 124,
+      "retrieval": {
+        "queryHash": "7d999f36873333b248aa50a9b11963d831f70eff9521372461b53bc5876687c2",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "9a48a6425de24490c06eda65769909c80d9639ed5bed1cbaddff3198ef0b5ba2",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.7863704752104104,
+            "lexicalScore": 0.14061792051753522,
+            "fusedScore": 0.5926447088025477
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3186,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "T03",
+      "status": "complete",
+      "choice": 2,
+      "reason": "가장 적절한 판단 기준은 '고객 수요(Customer Demand)'와 '수익성/비용 제약(Profitability/Cost Constraint)'의 균형을 맞추는 것입니다. 따라서, 고객 가치와 비용 예측성을 동시에 확보할 수 있는 '선택형 전환 및 한도/가시성 제공'이 최우선입니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 2757,
+      "inputTokens": 2182,
+      "outputTokens": 99,
+      "retrieval": {
+        "queryHash": "a443288f0fa6a1e1944393ab332ad1106fbeceb2e3baf709e004954e3585aadb",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "8e042c62179a740be06626da132a9e7872fdef485a7002741a000c5fe9b14581",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.8154517277804803,
+            "lexicalScore": 0,
+            "fusedScore": 0.5708162094463362
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3196,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    },
+    {
+      "questionId": "T04",
+      "status": "complete",
+      "choice": 4,
+      "reason": "가장 적절한 대응은 핵심 투자(AI)를 보호하면서도 유연성을 유지하는 것입니다. 이는 '고객 수요 > 용량 시급성 > 수익성/비용 제약 > 인력 생산성 > 공급 리드 타임'이라는 우선순위(정책)와 '지속적인 투자(AI)' 및 '엄격한 수익성 관리'에 대한 의지(Amy Hood)를 가장 잘 반영합니다.",
+      "correct": true,
+      "mismatch": false,
+      "elapsedMs": 3197,
+      "inputTokens": 2200,
+      "outputTokens": 116,
+      "retrieval": {
+        "queryHash": "dcb6ce523969fab29a0e8b367b387efe713228c2179b7acdd367d9a0718c579e",
+        "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "9df826528848271f1c9c292850e845bd0d76ebc9108d087449935224a0c9f8d4",
+        "selectedArtifacts": [
+          {
+            "id": "policy-c4203c075dbd61d3",
+            "kind": "policy",
+            "vectorScore": 0.8006796759057984,
+            "lexicalScore": 0.13607638263727648,
+            "fusedScore": 0.6012986879252418
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-c4203c075dbd61d3",
+          "reflection-4b5f7915d30581a4",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "event-cloud-capacity-scale-2022"
+        ],
+        "evidenceIds": [
+          "span-capacity-2022-capex",
+          "span-capacity-2022-headcount",
+          "span-capacity-2023-ai-capex",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-capacity-2024-external-supply"
+        ],
+        "sourceIds": [
+          "source-6b843b4b8385078d",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 1018,
+        "requestTokens": 3197,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d26add3e5385fdc92797c66e6b05ca9c7b84e029262ab49cd54071f52ea36dfd"
+      }
+    }
+  ],
+  "scores": {
+    "discrimination": 9,
+    "holdout": 10,
+    "counterfactual": 4,
+    "transfer": 4,
+    "total": 27,
+    "percent": 90
+  },
+  "startedAt": "2026-07-20T07:01:14.652Z",
+  "completedAt": "2026-07-20T07:05:27.386Z"
+}

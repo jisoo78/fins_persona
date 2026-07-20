@@ -1,0 +1,19 @@
+{
+  "query": "Copilot 시험 고객의 주간 사용률이 낮고 갱신 의향도 약하며 생산성 개선은 일부 팀에만 나타난다. 같은 프리미엄 가격 확대의 결론은 무엇인가?",
+  "queryHash": "99b1fe94d936137a3c2682244ea161c6cd0be6bc5e92b2b6b403ed32a2e4e361",
+  "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+  "result": {
+    "query": "Copilot 시험 고객의 주간 사용률이 낮고 갱신 의향도 약하며 생산성 개선은 일부 팀에만 나타난다. 같은 프리미엄 가격 확대의 결론은 무엇인가?",
+    "matches": [],
+    "trace": {
+      "queryHash": "99b1fe94d936137a3c2682244ea161c6cd0be6bc5e92b2b6b403ed32a2e4e361",
+      "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+      "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+      "cacheKey": "504a1aa7bf5a61074ec8d136ae0a98483900008e32d9baf4de0da96f2fe61083",
+      "selectedArtifacts": [],
+      "noMatch": true,
+      "noMatchReason": "below_threshold"
+    }
+  },
+  "payloadHash": "451b390e17969a357f455e864dc2a66f83725b001526113925ced3e8c40d1dd2"
+}

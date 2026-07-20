@@ -1,0 +1,19 @@
+{
+  "query": "2018년 GitHub 인수 승인 직전, 주식대가 75억 달러와 제한적 EPS 희석이 예상되지만 개발자는 플랫폼 종속을 우려한다. 거래 조건의 우선순위는 무엇인가?",
+  "queryHash": "f8024915c5eee53a22f828b75e83776decc755f664a8cf0b19350dae32a17d7a",
+  "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+  "result": {
+    "query": "2018년 GitHub 인수 승인 직전, 주식대가 75억 달러와 제한적 EPS 희석이 예상되지만 개발자는 플랫폼 종속을 우려한다. 거래 조건의 우선순위는 무엇인가?",
+    "matches": [],
+    "trace": {
+      "queryHash": "f8024915c5eee53a22f828b75e83776decc755f664a8cf0b19350dae32a17d7a",
+      "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+      "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+      "cacheKey": "87ba7e61d285a568b89c7959daef2fdc383c7a085bad91cde3156831956d348d",
+      "selectedArtifacts": [],
+      "noMatch": true,
+      "noMatchReason": "below_threshold"
+    }
+  },
+  "payloadHash": "2a4d7b1e4bd62d3a8eddac6a9cf233c0ef28cfe81ca1fa56f97f9db69c205259"
+}

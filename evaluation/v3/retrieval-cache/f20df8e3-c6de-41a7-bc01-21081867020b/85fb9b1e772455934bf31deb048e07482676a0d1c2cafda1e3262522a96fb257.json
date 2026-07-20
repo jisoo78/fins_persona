@@ -1,0 +1,35 @@
+{
+  "query": "데이터센터 활용률은 높지만 일부 지역의 전력 인허가가 지연되고 고객 수요의 지역 분포도 변한다. 다음 투자 승인 순서는 무엇인가?",
+  "queryHash": "85fb9b1e772455934bf31deb048e07482676a0d1c2cafda1e3262522a96fb257",
+  "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+  "result": {
+    "query": "데이터센터 활용률은 높지만 일부 지역의 전력 인허가가 지연되고 고객 수요의 지역 분포도 변한다. 다음 투자 승인 순서는 무엇인가?",
+    "matches": [
+      {
+        "id": "policy-c4203c075dbd61d3",
+        "kind": "policy",
+        "vectorScore": 0.8059221223031838,
+        "lexicalScore": 0,
+        "fusedScore": 0.5641454856122287
+      }
+    ],
+    "trace": {
+      "queryHash": "85fb9b1e772455934bf31deb048e07482676a0d1c2cafda1e3262522a96fb257",
+      "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+      "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+      "cacheKey": "6fed7a1cff0966a29ca0481b2bc447e15fc0a9b333243f5ea1ebb0c48b996baf",
+      "selectedArtifacts": [
+        {
+          "id": "policy-c4203c075dbd61d3",
+          "kind": "policy",
+          "vectorScore": 0.8059221223031838,
+          "lexicalScore": 0,
+          "fusedScore": 0.5641454856122287
+        }
+      ],
+      "noMatch": false,
+      "noMatchReason": null
+    }
+  },
+  "payloadHash": "68601d389f4079010ef2f02f002aaa60c5e5b7257255cddd732d9d7268eb43c3"
+}

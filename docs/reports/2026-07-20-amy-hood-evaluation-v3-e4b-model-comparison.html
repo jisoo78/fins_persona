@@ -40,6 +40,10 @@
   <div class="meta">개발자용 · 2026-07-20 · E4B 실험 그룹 <code>5c9bbd91-2196-45e9-b3ba-fdea0ed7338e</code></div>
 
   <div class="banner">
+    <strong>Historical implementation note:</strong> 이 보고서의 RAG 표기 조건은 정적 릴리스 컨텍스트를 주입했습니다. 질문별 동적 검색을 수행하지 않았고 Gemma 4에 메모리 도구를 제공하지도 않았습니다. 이 결과는 정적 컨텍스트 ablation 기준선으로만 보존합니다.
+  </div>
+
+  <div class="banner">
     <strong>최종 판정: E4B 교체로 실행 속도와 조건 간 안정성은 개선됐지만, Amy Hood 정책 효과는 관측되지 않았다.</strong><br>
     네 실험군이 모두 27/30(90%)로 수렴했다. 기존 모델에서 보인 정책 RAG의 +13.3%p 증분은 E4B에서 0%p였으며, 일반 CFO 기준선도 여전히 90%여서 벤치마크 기각 상태가 유지된다.
   </div>

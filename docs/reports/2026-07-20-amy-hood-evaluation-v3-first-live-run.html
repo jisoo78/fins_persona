@@ -41,6 +41,10 @@
   <div class="meta">개발자용 · 2026-07-20 · 실험 그룹 <code>26f66525-1a5f-4e39-9d85-d44a05fcdc7d</code></div>
 
   <div class="banner">
+    <strong>Historical implementation note:</strong> 이 보고서의 RAG 표기 조건은 정적 릴리스 컨텍스트를 주입했습니다. 질문별 동적 검색을 수행하지 않았고 Gemma 4에 메모리 도구를 제공하지도 않았습니다. 이 결과는 정적 컨텍스트 ablation 기준선으로만 보존합니다.
+  </div>
+
+  <div class="banner">
     <strong>최종 판정: 파이프라인은 정상, 벤치마크는 기각, 정책 RAG는 유망 신호, Full RAG는 현 상태로 채택 불가.</strong><br>
     120개 응답은 실패 없이 완료됐지만 일반 CFO 기준선이 90%로 사전 상한 80%를 초과했다. 따라서 이번 1회 결과로 Amy Hood 의사결정 복제 성능을 입증할 수 없다.
   </div>

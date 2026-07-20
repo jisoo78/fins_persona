@@ -1,0 +1,35 @@
+{
+  "query": "Microsoft 365 가격 인상 후 일부 고객이 하위 플랜 이동을 검토한다. 수익화와 고객 관계를 함께 지킬 대응은 무엇인가?",
+  "queryHash": "ab95c6f601c6c930e5835ee75543ab920cf943bc959503c5f600a8eae1e3779f",
+  "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+  "result": {
+    "query": "Microsoft 365 가격 인상 후 일부 고객이 하위 플랜 이동을 검토한다. 수익화와 고객 관계를 함께 지킬 대응은 무엇인가?",
+    "matches": [
+      {
+        "id": "policy-c4203c075dbd61d3",
+        "kind": "policy",
+        "vectorScore": 0.8082696193236019,
+        "lexicalScore": 0.03763746560287244,
+        "fusedScore": 0.577079973207383
+      }
+    ],
+    "trace": {
+      "queryHash": "ab95c6f601c6c930e5835ee75543ab920cf943bc959503c5f600a8eae1e3779f",
+      "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+      "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+      "cacheKey": "7b46c7cc3c757ad8c8880222bc6cbcde2d22fad594d9b9c3d71f380d884c5964",
+      "selectedArtifacts": [
+        {
+          "id": "policy-c4203c075dbd61d3",
+          "kind": "policy",
+          "vectorScore": 0.8082696193236019,
+          "lexicalScore": 0.03763746560287244,
+          "fusedScore": 0.577079973207383
+        }
+      ],
+      "noMatch": false,
+      "noMatchReason": null
+    }
+  },
+  "payloadHash": "89a9eb77b23c909267d3f957fe8ef5d2b902412f516b368c943ee934f566206a"
+}

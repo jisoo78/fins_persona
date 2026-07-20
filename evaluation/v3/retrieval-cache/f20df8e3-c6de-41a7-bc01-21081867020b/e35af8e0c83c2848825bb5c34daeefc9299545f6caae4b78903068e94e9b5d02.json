@@ -1,0 +1,19 @@
+{
+  "query": "보안 제품군의 기능 통합으로 고객 운영비가 줄지만 기존 단품 고객의 전환 부담이 크다. 가격 패키지 변경을 어떤 순서로 집행할 것인가?",
+  "queryHash": "e35af8e0c83c2848825bb5c34daeefc9299545f6caae4b78903068e94e9b5d02",
+  "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+  "result": {
+    "query": "보안 제품군의 기능 통합으로 고객 운영비가 줄지만 기존 단품 고객의 전환 부담이 크다. 가격 패키지 변경을 어떤 순서로 집행할 것인가?",
+    "matches": [],
+    "trace": {
+      "queryHash": "e35af8e0c83c2848825bb5c34daeefc9299545f6caae4b78903068e94e9b5d02",
+      "indexHash": "a5d8d824aa9022d514e54fb1d5265d33605bb31db2227b2a577bbd41d378e38c",
+      "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+      "cacheKey": "0440d4b62f4d020ca2a7fe57fd73d57d7b87eafcacb3b755abacdf9f85c697e2",
+      "selectedArtifacts": [],
+      "noMatch": true,
+      "noMatchReason": "below_threshold"
+    }
+  },
+  "payloadHash": "adbc01dc626fbe31e833685f3a4c8916541a6bc6b6a75fb079f4f4a7739c3723"
+}
