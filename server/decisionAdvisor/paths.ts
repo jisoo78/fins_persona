@@ -17,6 +17,8 @@ export const advisorPaths = (root: string) => {
     policyModelRuns: path.resolve(advisorRoot, 'policy-memory/proposals/model-runs'),
     approvedReflections: path.resolve(advisorRoot, 'policy-memory/approved/reflections'),
     approvedPolicies: path.resolve(advisorRoot, 'policy-memory/approved/policies'),
+    rejectedReflections: path.resolve(advisorRoot, 'policy-memory/rejected/reflections'),
+    rejectedPolicies: path.resolve(advisorRoot, 'policy-memory/rejected/policies'),
     policyReviews: path.resolve(advisorRoot, 'policy-memory/reviews'),
     policyGateReport: path.resolve(advisorRoot, 'policy-memory/gate-report.json'),
     memoryReleases: path.resolve(advisorRoot, 'memory-releases'),

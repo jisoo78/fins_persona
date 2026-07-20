@@ -36,6 +36,10 @@ export type PolicyMemoryApprovalInput = {
   rationale: string;
 };
 
+export type PolicyMemoryReviewInput = PolicyMemoryApprovalInput & {
+  decision: 'approved' | 'rejected';
+};
+
 type StoreDependencies = {
   write(filePath: string, value: unknown): Promise<void>;
 };
@@ -65,11 +69,17 @@ const proposalPath = (root: string, kind: 'reflection' | 'policy', id: string) =
   return path.join(directory, `${id}.json`);
 };
 
-const approvedPath = (root: string, kind: 'reflection' | 'policy', id: string) => {
+const reviewedArtifactPath = (
+  root: string,
+  kind: 'reflection' | 'policy',
+  decision: 'approved' | 'rejected',
+  id: string,
+) => {
   assertArtifactId(kind, id);
-  const directory = kind === 'reflection'
-    ? advisorPaths(root).approvedReflections
-    : advisorPaths(root).approvedPolicies;
+  const paths = advisorPaths(root);
+  const directory = decision === 'approved'
+    ? kind === 'reflection' ? paths.approvedReflections : paths.approvedPolicies
+    : kind === 'reflection' ? paths.rejectedReflections : paths.rejectedPolicies;
   return path.join(directory, `${id}.json`);
 };
 
@@ -109,6 +119,12 @@ export const loadApprovedReflections = (root: string) =>
 export const loadApprovedPolicies = (root: string) =>
   readDirectoryJson<PolicyMemory>(advisorPaths(root).approvedPolicies);
 
+export const loadRejectedReflections = (root: string) =>
+  readDirectoryJson<ReflectionMemory>(advisorPaths(root).rejectedReflections);
+
+export const loadRejectedPolicies = (root: string) =>
+  readDirectoryJson<PolicyMemory>(advisorPaths(root).rejectedPolicies);
+
 export const loadPolicyMemoryModelRuns = (root: string) =>
   readDirectoryJson<PolicyMemoryModelRun>(advisorPaths(root).policyModelRuns);
 
@@ -145,12 +161,26 @@ export const buildPolicyMemoryGateReport = async (
   graph: PolicyMemoryInputGraph,
   options: GateOptions = {},
 ): Promise<PolicyMemoryGateReport> => {
-  const [reflections, policies, approvedReflections, modelRuns] = await Promise.all([
+  const [
+    reflections,
+    policies,
+    approvedReflections,
+    modelRuns,
+    rejectedReflections,
+    rejectedPolicies,
+  ] = await Promise.all([
     loadReflectionProposals(root),
     loadPolicyProposals(root),
     loadApprovedReflections(root),
     loadPolicyMemoryModelRuns(root),
+    loadRejectedReflections(root),
+    loadRejectedPolicies(root),
   ]);
+  const rejectedIds = new Set([
+    ...rejectedReflections.map(({ id }) => id),
+    ...rejectedPolicies.map(({ id }) => id),
+  ]);
+  const rejected = [...rejectedIds].sort().map((id) => `review_rejected:${id}`);
   const reflectionResults = reflections.map((artifact) => ({
     artifact,
     validation: validateReflectionMemory(artifact, graph),
@@ -164,14 +194,15 @@ export const buildPolicyMemoryGateReport = async (
     inputEventIds: graph.events.map(({ id }) => id).sort(),
     passing: {
       reflections: reflectionResults
-        .filter(({ validation }) => validation.passed)
+        .filter(({ artifact, validation }) => validation.passed && !rejectedIds.has(artifact.id))
         .map(({ artifact }) => artifact.id)
         .sort(),
       policies: policyResults
         .filter(({ artifact, validation }) =>
           validation.passed
           && validation.computedConfidence !== 'low'
-          && artifact.policyKind === 'deployable_policy')
+          && artifact.policyKind === 'deployable_policy'
+          && !rejectedIds.has(artifact.id))
         .map(({ artifact }) => artifact.id)
         .sort(),
     },
@@ -196,23 +227,23 @@ export const buildPolicyMemoryGateReport = async (
             : ['policy is not deployable'],
         })),
     ].sort((left, right) => `${left.kind}:${left.id}`.localeCompare(`${right.kind}:${right.id}`)),
-    blocked: modelRuns
-      .filter(({ status }) => status === 'failed')
-      .map(({ id }) => id)
-      .sort(),
+    blocked: [
+      ...modelRuns.filter(({ status }) => status === 'failed').map(({ id }) => id),
+      ...rejected,
+    ].sort(),
   };
   await writeJsonAtomic(advisorPaths(root).policyGateReport, report);
   return report;
 };
 
-const assertApprovalInput = (input: PolicyMemoryApprovalInput) => {
+const assertReviewInput = (input: PolicyMemoryReviewInput) => {
   assertArtifactId(input.kind, input.id);
   if (input.reviewer !== 'Codex') throw new Error('policy memory reviewer must be Codex');
   const parsed = new Date(input.reviewedAt);
   if (Number.isNaN(parsed.valueOf()) || parsed.toISOString() !== input.reviewedAt) {
-    throw new Error('policy memory approval timestamp is invalid');
+    throw new Error('policy memory review timestamp is invalid');
   }
-  if (!input.rationale.trim()) throw new Error('policy memory approval rationale is required');
+  if (!input.rationale.trim()) throw new Error('policy memory review rationale is required');
 };
 
 const readPriorJson = async (filePath: string) => {
@@ -272,13 +303,13 @@ const commitApprovalPairWithRollback = async (
   }
 };
 
-export const approvePolicyMemoryArtifact = async (
+export const reviewPolicyMemoryArtifact = async (
   root: string,
-  input: PolicyMemoryApprovalInput,
+  input: PolicyMemoryReviewInput,
   graph: PolicyMemoryInputGraph,
   dependencies: StoreDependencies = defaultDependencies,
 ): Promise<ReflectionMemory | PolicyMemory> => {
-  assertApprovalInput(input);
+  assertReviewInput(input);
   const proposal = await readJsonFile<ReflectionMemory | PolicyMemory | null>(
     proposalPath(root, input.kind, input.id),
     null,
@@ -291,10 +322,10 @@ export const approvePolicyMemoryArtifact = async (
       await loadApprovedReflections(root),
       graph,
     );
-  if (!validation.passed) {
+  if (input.decision === 'approved' && !validation.passed) {
     throw new Error(`cannot approve ${input.id}: ${validation.errors.join('; ')}`);
   }
-  if (input.kind === 'policy') {
+  if (input.decision === 'approved' && input.kind === 'policy') {
     const policy = proposal as PolicyMemory;
     if (policy.policyKind !== 'deployable_policy' || validation.computedConfidence === 'low') {
       throw new Error(`cannot approve nondeployable policy: ${input.id}`);
@@ -303,22 +334,32 @@ export const approvePolicyMemoryArtifact = async (
   const review: ArtifactReview = {
     reviewer: 'Codex',
     reviewedAt: input.reviewedAt,
-    decision: 'approved',
+    decision: input.decision,
     rationale: input.rationale.trim(),
     validationHash: sha256(canonicalJson(validation)),
   };
-  const approved = {
+  const reviewed = {
     ...proposal,
     confidence: validation.computedConfidence,
-    status: 'approved' as const,
+    status: input.decision,
     review,
   };
   await commitApprovalPairWithRollback(
-    approvedPath(root, input.kind, input.id),
-    approved,
+    reviewedArtifactPath(root, input.kind, input.decision, input.id),
+    reviewed,
     reviewPath(root, input.kind, input.id),
     review,
     dependencies,
   );
-  return approved;
+  return reviewed;
 };
+
+export const approvePolicyMemoryArtifact = async (
+  root: string,
+  input: PolicyMemoryApprovalInput,
+  graph: PolicyMemoryInputGraph,
+  dependencies: StoreDependencies = defaultDependencies,
+) => reviewPolicyMemoryArtifact(root, {
+  ...input,
+  decision: 'approved',
+}, graph, dependencies);

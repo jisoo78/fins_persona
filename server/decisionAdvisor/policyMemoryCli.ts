@@ -14,6 +14,7 @@ import {
   approvePolicyMemoryArtifact,
   buildPolicyMemoryGateReport,
   loadApprovedReflections,
+  reviewPolicyMemoryArtifact,
   savePolicyBuild,
   saveReflectionBuild,
 } from './policyMemoryStore';
@@ -113,6 +114,35 @@ const runApprove = async (
   return true;
 };
 
+const runReview = async (
+  root: string,
+  args: string[],
+  dependencies: PolicyMemoryCliDependencies,
+) => {
+  const kind = requiredKind(args);
+  const id = optionValue(args, '--id');
+  const decision = optionValue(args, '--decision');
+  const rationale = optionValue(args, '--rationale');
+  if (!id || (decision !== 'approved' && decision !== 'rejected')
+    || optionValue(args, '--reviewer') !== 'Codex' || !rationale?.trim()) {
+    throw new Error(
+      'memory:review requires --id --decision approved|rejected '
+      + '--reviewer Codex and a nonblank --rationale',
+    );
+  }
+  const graph = await loadPolicyMemoryInput(root);
+  const artifact = await reviewPolicyMemoryArtifact(root, {
+    kind,
+    id,
+    decision,
+    reviewer: 'Codex',
+    reviewedAt: dependencies.now(),
+    rationale,
+  }, graph);
+  dependencies.log(JSON.stringify(artifact, null, 2));
+  return true;
+};
+
 const runRelease = async (
   root: string,
   dependencies: PolicyMemoryCliDependencies,
@@ -168,6 +198,7 @@ export const runPolicyMemoryCommand = async (
   if (!command?.startsWith('memory:')) return false;
   if (command === 'memory:build') return runBuild(root, args, dependencies);
   if (command === 'memory:check') return runCheck(root, dependencies);
+  if (command === 'memory:review') return runReview(root, args, dependencies);
   if (command === 'memory:approve') return runApprove(root, args, dependencies);
   if (command === 'memory:release') return runRelease(root, dependencies);
   if (command === 'memory:activate') return runActivate(root, args, dependencies);

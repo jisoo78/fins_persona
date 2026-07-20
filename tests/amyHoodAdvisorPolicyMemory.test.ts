@@ -29,6 +29,7 @@ import { loadPolicyMemoryInput } from '../server/decisionAdvisor/policyMemoryInp
 import {
   approvePolicyMemoryArtifact,
   buildPolicyMemoryGateReport,
+  reviewPolicyMemoryArtifact,
   savePolicyBuild,
   saveReflectionBuild,
 } from '../server/decisionAdvisor/policyMemoryStore';
@@ -252,13 +253,15 @@ test('happy: input graph selects only approved non-holdout decision evidence', a
     now: '2026-07-20T09:25:00.000Z',
   });
   assert.deepEqual(reflectionGate.passing.reflections, [result.artifacts[0].id]);
-  const approvedReflection = await approvePolicyMemoryArtifact(storeRoot, {
+  const approvedReflection = await reviewPolicyMemoryArtifact(storeRoot, {
     kind: 'reflection',
     id: result.artifacts[0].id,
     reviewer: 'Codex',
     reviewedAt: '2026-07-20T09:30:00.000Z',
-    rationale: 'The cited events support a material transaction-form boundary.',
+    decision: 'approved',
+    rationale: 'The cited conditions, actions, and evidence form one qualified decision axis.',
   }, graph) as ReflectionMemory;
+  assert.equal(approvedReflection.status, 'approved');
 
   const storedPolicyBuild = await buildPolicyProposals(
     [approvedReflection],
@@ -706,7 +709,7 @@ test('failure: stale or interrupted approval leaves no partial approved state', 
     createFixtureModel(reflectionResponse),
     { now: '2026-07-20T10:00:00.000Z' },
   );
-  const root = await mkdtemp(join(tmpdir(), 'amy-policy-approval-failure-'));
+  const root = await copyPolicyMemoryData();
   context.after(() => rm(root, { recursive: true, force: true }));
   await saveReflectionBuild(root, reflectionBuild);
   const id = reflectionBuild.artifacts[0].id;
@@ -758,6 +761,36 @@ test('failure: stale or interrupted approval leaves no partial approved state', 
   const reviewPath = join(advisorPaths(root).policyReviews, `reflection-${id}.json`);
   await assert.rejects(() => readFile(approvedPath), /ENOENT/);
   await assert.rejects(() => readFile(reviewPath), /ENOENT/);
+
+  const rejected = await reviewPolicyMemoryArtifact(root, {
+    kind: 'reflection',
+    id,
+    reviewer: 'Codex',
+    reviewedAt: '2026-07-20T10:06:00.000Z',
+    decision: 'rejected',
+    rationale: 'The cited events are complementary rather than contrastive.',
+  }, graph) as ReflectionMemory;
+  assert.equal(rejected.status, 'rejected');
+  assert.equal(rejected.review?.decision, 'rejected');
+  assert.equal((await buildPolicyMemoryGateReport(root, graph)).passing.reflections.includes(id), false);
+
+  const cliDependencies = {
+    createModel: () => createFixtureModel(reflectionResponse),
+    now: () => '2026-07-20T10:07:00.000Z',
+    log: () => undefined,
+  };
+  assert.equal(await runPolicyMemoryCommand(root, [
+    'memory:review', '--kind', 'reflection', '--id', id,
+    '--decision', 'rejected', '--reviewer', 'Codex',
+    '--rationale', 'The evidence does not establish a qualified contrast.',
+  ], cliDependencies), true);
+  await assert.rejects(
+    () => runPolicyMemoryCommand(root, [
+      'memory:review', '--kind', 'reflection', '--id', id,
+      '--decision', 'approved', '--reviewer', 'Codex', '--rationale', ' ',
+    ], cliDependencies),
+    /nonblank --rationale/,
+  );
 
   await assert.rejects(
     () => runPolicyMemoryCommand(
