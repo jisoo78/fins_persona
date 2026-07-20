@@ -307,7 +307,13 @@ const copyPolicyMemoryData = async () => {
   await cp(
     join(process.cwd(), 'data/b-track/amy-hood/advisor'),
     join(root, 'data/b-track/amy-hood/advisor'),
-    { recursive: true },
+    {
+      recursive: true,
+      filter: (source) => ![
+        advisorPaths(process.cwd()).policyMemory,
+        advisorPaths(process.cwd()).memoryReleases,
+      ].includes(source),
+    },
   );
   await cp(
     join(process.cwd(), 'evaluation/v3/sealed/holdout-manifest.json'),
