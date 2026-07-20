@@ -23,5 +23,8 @@ export const advisorPaths = (root: string) => {
     policyGateReport: path.resolve(advisorRoot, 'policy-memory/gate-report.json'),
     memoryReleases: path.resolve(advisorRoot, 'memory-releases'),
     activeMemoryRelease: path.resolve(advisorRoot, 'memory-releases/active.json'),
+    memoryIndexes: path.resolve(advisorRoot, 'memory-indexes'),
+    activeMemoryIndex: path.resolve(advisorRoot, 'memory-indexes/active.json'),
+    retrievalCalibration: path.resolve(root, 'evaluation/retrieval/amy-hood-memory-dev-v1.json'),
   };
 };

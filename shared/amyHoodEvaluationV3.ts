@@ -1,4 +1,5 @@
 import type { DatasetSplit, DecisionDomain } from './amyHoodDecisionAdvisor';
+import type { AmyHoodRetrievalTrace } from './amyHoodRag';
 
 export type EvaluationV3Category =
   | 'amy_specific_discrimination'
@@ -103,6 +104,7 @@ export type EvaluationV3RunAnswer = {
   inputTokens?: number;
   outputTokens?: number;
   error?: string;
+  retrieval?: AmyHoodRetrievalTrace;
 };
 
 export type EvaluationV3RunScores = {
@@ -129,6 +131,8 @@ export type EvaluationV3Run = {
   promptHash: string;
   memoryReleaseId: string | null;
   memoryReleaseHash: string | null;
+  memoryIndexHash?: string | null;
+  retrievalConfigHash?: string | null;
   holdoutManifestHash: string;
   status: 'queued' | 'running' | 'incomplete' | 'complete';
   answers: EvaluationV3RunAnswer[];
