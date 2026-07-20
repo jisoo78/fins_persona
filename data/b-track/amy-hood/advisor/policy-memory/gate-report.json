@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-20T03:30:53.466Z",
+  "generatedAt": "2026-07-20T04:08:54.529Z",
   "inputEventIds": [
     "event-activision-acquisition-2022",
     "event-ai-capacity-opex-pivot-2023",
@@ -39,7 +39,7 @@
     }
   },
   "safeStop": null,
-  "activeReleaseVersion": null,
+  "activeReleaseVersion": "v1-262d69135ca0",
   "reviewRequired": [
     {
       "kind": "policy",
