@@ -26,6 +26,14 @@ import {
   validatePolicyMemory,
 } from '../server/decisionAdvisor/policyMemory';
 import { loadPolicyMemoryInput } from '../server/decisionAdvisor/policyMemoryInput';
+import {
+  approvePolicyMemoryArtifact,
+  buildPolicyMemoryGateReport,
+  savePolicyBuild,
+  saveReflectionBuild,
+} from '../server/decisionAdvisor/policyMemoryStore';
+import { advisorPaths } from '../server/decisionAdvisor/paths';
+import { writeJsonAtomic } from '../server/decisionAdvisor/jsonStore';
 
 const reflectionResponse = JSON.stringify({
   reflections: [{
@@ -109,7 +117,7 @@ const repeatedEventPolicyResponse = (reflectionId: string) => JSON.stringify({
   }],
 });
 
-test('happy: input graph selects only approved non-holdout decision evidence', async () => {
+test('happy: input graph selects only approved non-holdout decision evidence', async (context) => {
   const graph = await loadPolicyMemoryInput(process.cwd());
 
   assert.deepEqual(graph.events.map(({ id }) => id), [
@@ -132,20 +140,56 @@ test('happy: input graph selects only approved non-holdout decision evidence', a
   assert.equal(validateReflectionMemory(result.artifacts[0], graph).passed, true);
   assert.equal(result.modelRun.attemptCount, 1);
 
-  const approvedReflection = approveReflectionForFixture(result.artifacts[0]);
+  const fixtureApprovedReflection = approveReflectionForFixture(result.artifacts[0]);
   const policyResult = await buildPolicyProposals(
-    [approvedReflection],
+    [fixtureApprovedReflection],
     graph,
-    createFixtureModel(repeatedEventPolicyResponse(approvedReflection.id)),
+    createFixtureModel(repeatedEventPolicyResponse(fixtureApprovedReflection.id)),
     { now: '2026-07-20T09:20:00.000Z' },
   );
   assert.equal(policyResult.artifacts.length, 1);
   assert.equal(
-    validatePolicyMemory(policyResult.artifacts[0], [approvedReflection], graph).passed,
+    validatePolicyMemory(policyResult.artifacts[0], [fixtureApprovedReflection], graph).passed,
     true,
   );
   assert.equal(policyResult.artifacts[0].policyKind, 'deployable_policy');
   assert.equal(policyResult.artifacts[0].confidence, 'medium');
+
+  const storeRoot = await mkdtemp(join(tmpdir(), 'amy-policy-memory-store-'));
+  context.after(() => rm(storeRoot, { recursive: true, force: true }));
+  await saveReflectionBuild(storeRoot, result);
+  const reflectionGate = await buildPolicyMemoryGateReport(storeRoot, graph, {
+    now: '2026-07-20T09:25:00.000Z',
+  });
+  assert.deepEqual(reflectionGate.passing.reflections, [result.artifacts[0].id]);
+  const approvedReflection = await approvePolicyMemoryArtifact(storeRoot, {
+    kind: 'reflection',
+    id: result.artifacts[0].id,
+    reviewer: 'Codex',
+    reviewedAt: '2026-07-20T09:30:00.000Z',
+    rationale: 'The cited events support a material transaction-form boundary.',
+  }, graph) as ReflectionMemory;
+
+  const storedPolicyBuild = await buildPolicyProposals(
+    [approvedReflection],
+    graph,
+    createFixtureModel(repeatedEventPolicyResponse(approvedReflection.id)),
+    { now: '2026-07-20T09:35:00.000Z' },
+  );
+  await savePolicyBuild(storeRoot, storedPolicyBuild);
+  const policyGate = await buildPolicyMemoryGateReport(storeRoot, graph, {
+    now: '2026-07-20T09:40:00.000Z',
+  });
+  assert.deepEqual(policyGate.passing.policies, [storedPolicyBuild.artifacts[0].id]);
+  const approvedPolicy = await approvePolicyMemoryArtifact(storeRoot, {
+    kind: 'policy',
+    id: storedPolicyBuild.artifacts[0].id,
+    reviewer: 'Codex',
+    reviewedAt: '2026-07-20T09:45:00.000Z',
+    rationale: 'The policy preserves the cited ordering, contrast, exception, and reversal signal.',
+  }, graph) as PolicyMemory;
+  assert.equal(approvedPolicy.status, 'approved');
+  assert.match(approvedPolicy.review!.validationHash, /^[a-f0-9]{64}$/);
 });
 
 test('edge: a material contrast narrows the reflection boundary', async () => {
@@ -378,4 +422,65 @@ test('failure: unsupported or unbounded policies remain nondeployable', async ()
   assert.equal(failed.modelRun.status, 'failed');
   assert.equal(failed.modelRun.attemptCount, 2);
   assert.equal(failed.artifacts.length, 0);
+});
+
+test('failure: stale or interrupted approval leaves no partial approved state', async (context) => {
+  const graph = await loadPolicyMemoryInput(process.cwd());
+  const reflectionBuild = await buildReflectionProposals(
+    graph,
+    createFixtureModel(reflectionResponse),
+    { now: '2026-07-20T10:00:00.000Z' },
+  );
+  const root = await mkdtemp(join(tmpdir(), 'amy-policy-approval-failure-'));
+  context.after(() => rm(root, { recursive: true, force: true }));
+  await saveReflectionBuild(root, reflectionBuild);
+  const id = reflectionBuild.artifacts[0].id;
+
+  await assert.rejects(() => approvePolicyMemoryArtifact(root, {
+    kind: 'reflection',
+    id,
+    reviewer: 'Codex',
+    reviewedAt: 'not-a-timestamp',
+    rationale: 'Evidence reviewed.',
+  }, graph), /timestamp/);
+  await assert.rejects(() => approvePolicyMemoryArtifact(root, {
+    kind: 'reflection',
+    id,
+    reviewer: 'Codex',
+    reviewedAt: '2026-07-20T10:05:00.000Z',
+    rationale: '  ',
+  }, graph), /rationale/);
+
+  const staleGraph = {
+    ...graph,
+    events: graph.events.filter(({ id: eventId }) =>
+      eventId !== 'event-activision-acquisition-2022'),
+  };
+  await assert.rejects(() => approvePolicyMemoryArtifact(root, {
+    kind: 'reflection',
+    id,
+    reviewer: 'Codex',
+    reviewedAt: '2026-07-20T10:05:00.000Z',
+    rationale: 'Evidence reviewed against the stale graph.',
+  }, staleGraph), /cannot approve/);
+
+  let writeCount = 0;
+  await assert.rejects(() => approvePolicyMemoryArtifact(root, {
+    kind: 'reflection',
+    id,
+    reviewer: 'Codex',
+    reviewedAt: '2026-07-20T10:10:00.000Z',
+    rationale: 'Evidence reviewed before the injected persistence failure.',
+  }, graph, {
+    write: async (filePath, value) => {
+      writeCount += 1;
+      if (writeCount === 2) throw new Error('injected second write failure');
+      await writeJsonAtomic(filePath, value);
+    },
+  }), /injected second write failure/);
+
+  const approvedPath = join(advisorPaths(root).approvedReflections, `${id}.json`);
+  const reviewPath = join(advisorPaths(root).policyReviews, `reflection-${id}.json`);
+  await assert.rejects(() => readFile(approvedPath), /ENOENT/);
+  await assert.rejects(() => readFile(reviewPath), /ENOENT/);
 });
