@@ -1,0 +1,56 @@
+{
+  "id": "policy-821638d0c6331d3f",
+  "domain": "ai_cloud_capex",
+  "applicabilityConditions": [
+    "Azure AI infrastructure requires material sequential investment",
+    "Scaled capital investment would increase COGS",
+    "FY24 operating-expense growth expected to remain low",
+    "Capacity buildout timing varies by quarter"
+  ],
+  "priorityOrder": [
+    "scale_infrastructure_constrain_opex"
+  ],
+  "recommendedAction": "Scale capital investment for AI infrastructure while capping operating-expense growth to preserve profitability margin",
+  "nonApplicabilityConditions": [
+    "Global cloud-services demand is growing",
+    "Investment needs span infrastructure and multiple operating teams"
+  ],
+  "exceptions": [
+    "Customer demand guides investment",
+    "Disciplined cost management across every team",
+    "External supply supplements owned capacity when lead time requires it"
+  ],
+  "reversalSignals": [
+    "Broad cloud demand without a specific platform shift",
+    "Investment needs spanning multiple operating teams"
+  ],
+  "reflectionIds": [
+    "reflection-4b5f7915d30581a4"
+  ],
+  "supportingEventIds": [
+    "event-ai-capacity-opex-pivot-2023",
+    "event-ai-capacity-sourcing-2024"
+  ],
+  "contrastingEventIds": [
+    "event-cloud-capacity-scale-2022"
+  ],
+  "evidenceIds": [
+    "span-capacity-2022-capex",
+    "span-capacity-2022-headcount",
+    "span-capacity-2023-ai-capex",
+    "span-capacity-2023-opex",
+    "span-capacity-2024-demand-discipline",
+    "span-capacity-2024-external-supply"
+  ],
+  "directPolicyEvidenceIds": [],
+  "confidence": "medium",
+  "policyKind": "deployable_policy",
+  "status": "rejected",
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-07-20T02:42:51.674Z",
+    "decision": "rejected",
+    "rationale": "Rejected: priorityOrder contains an action instead of ordered decision criteria, reversal signals do not test weakening applicability, and recommended action includes uncited talent reallocation.",
+    "validationHash": "4c589e4bf6f3cbfa87ea34820ed1de562b60605ec9d02f27cc9202038abf29d9"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "id": "reflection-a711fce93b3a894d",
+  "domain": "m_and_a",
+  "crossEventQuestion": "When is debt financing the preferred lever for all-cash acquisitions?",
+  "observation": "For the $26.2 billion LinkedIn deal (2016), debt was chosen to defer dilution and achieve EPS accretion within two years; for the $68.7 billion Activision Blizzard deal (2022), the all-cash structure was approved by both boards without debt financing mentioned, despite the larger size.",
+  "invariant": "All-cash deals are financed through debt when the objective is to minimize near-term EPS dilution and accelerate accretion.",
+  "boundaryConditions": [
+    "board approval status",
+    "near-term dilution tolerance",
+    "transaction size ($26.2B vs $68.7B)"
+  ],
+  "unresolvedConflicts": [
+    "Activision deal is all-cash but debt financing is not cited despite the larger size"
+  ],
+  "decisionAxis": {
+    "decisionObject": "financing_lever",
+    "decisionQuestion": "Should an all-cash acquisition be debt-financed or funded otherwise?",
+    "choiceSet": [
+      "all_cash_unspecified_funding",
+      "debt_financing"
+    ],
+    "gatingVariables": [
+      "accretion_timeline",
+      "dilution_tolerance",
+      "transaction_size"
+    ]
+  },
+  "supportPattern": {
+    "eventIds": [
+      "event-linkedin-acquisition-2016"
+    ],
+    "conditions": [
+      "achieve EPS accretion within two years",
+      "all-cash transaction",
+      "minimize near-term EPS dilution"
+    ],
+    "evidenceIds": [
+      "span-3b790581f5848009",
+      "span-9335840b833b9436",
+      "span-9f190c9d1c5b03bb",
+      "span-c67e1e8c5dde7e12"
+    ],
+    "action": "finance_primarily_through_new_debt_issued_opportunistically_during_favorable_market_windows"
+  },
+  "contrastPattern": {
+    "eventIds": [
+      "event-activision-acquisition-2022"
+    ],
+    "conditions": [
+      "all-cash transaction",
+      "board approval by both companies",
+      "larger transaction size ($68.7B)"
+    ],
+    "evidenceIds": [
+      "span-1abb63ac11f1075c",
+      "span-807ee90aa032f320",
+      "span-e32ab0f2fc36349e"
+    ],
+    "action": "proceed_with_all_cash_transaction_without_debt_financing_cited"
+  },
+  "conditionDelta": "from $26.2B deal with explicit dilution/accretion objectives to $68.7B deal with board approval as the stated condition",
+  "actionDelta": "from debt financing to all-cash with no debt financing cited",
+  "supportingEventIds": [
+    "event-linkedin-acquisition-2016"
+  ],
+  "contrastingEventIds": [
+    "event-activision-acquisition-2022"
+  ],
+  "evidenceIds": [
+    "span-1abb63ac11f1075c",
+    "span-3b790581f5848009",
+    "span-807ee90aa032f320",
+    "span-9335840b833b9436",
+    "span-9f190c9d1c5b03bb",
+    "span-c67e1e8c5dde7e12",
+    "span-e32ab0f2fc36349e"
+  ],
+  "confidence": "low",
+  "status": "review_required",
+  "review": null
+}

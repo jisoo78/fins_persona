@@ -1,0 +1,76 @@
+{
+  "id": "reflection-84ac9877435917f5",
+  "domain": "ai_cloud_capex",
+  "crossEventQuestion": "When should capital investment be paired with operating-resource growth versus constrained?",
+  "observation": "In 2022 broad cloud demand drove both sequential CapEx and 20% headcount growth across engineering and sales; by 2023 AI infrastructure demand drove material CapEx while operating-expense growth was explicitly kept low; in 2024 the pattern shifted again with accelerating CapEx paired with third-party capacity to meet pipeline demand.",
+  "invariant": "Capital investment is always demand-led and always paired with a deliberate operating-resource mix (expand/constrain/reallocate) rather than scaled uniformly.",
+  "boundaryConditions": [
+    "Broad demand across multiple growth areas (2022)",
+    "Concentrated AI infrastructure demand under profitability pressure (2023)",
+    "Demand exceeding owned buildout lead times (2024)"
+  ],
+  "unresolvedConflicts": [],
+  "decisionAxis": {
+    "decisionObject": "resource_mix",
+    "decisionQuestion": "Should CapEx growth be paired with operating-resource expansion or constraint?",
+    "choiceSet": [
+      "scale_infrastructure_and_people",
+      "scale_infrastructure_constrain_opex"
+    ],
+    "gatingVariables": [
+      "buildout_lead_times",
+      "demand_breadth",
+      "profitability_pressure"
+    ]
+  },
+  "supportPattern": {
+    "eventIds": [
+      "event-ai-capacity-opex-pivot-2023",
+      "event-cloud-capacity-scale-2022"
+    ],
+    "conditions": [
+      "AI infrastructure demand",
+      "broad cloud demand",
+      "profitability pressure"
+    ],
+    "evidenceIds": [
+      "span-capacity-2022-capex",
+      "span-capacity-2022-headcount",
+      "span-capacity-2023-ai-capex",
+      "span-capacity-2023-opex"
+    ],
+    "action": "pair_capex_with_either_headcount_growth_or_opex_constraint_depending_on_demand_breadth_and_profitability_pressure"
+  },
+  "contrastPattern": {
+    "eventIds": [
+      "event-ai-capacity-sourcing-2024"
+    ],
+    "conditions": [
+      "accelerating capital expense",
+      "demand exceeding owned buildout lead times"
+    ],
+    "evidenceIds": [
+      "span-capacity-2024-external-supply"
+    ],
+    "action": "supplement_owned_buildout_with_third_party_capacity_to_meet_immediate_demand"
+  },
+  "conditionDelta": "from broad demand (2022) and concentrated AI demand (2023) to demand exceeding owned buildout lead times (2024)",
+  "actionDelta": "from scaling/constraining internal resources to supplementing with third-party capacity",
+  "supportingEventIds": [
+    "event-ai-capacity-opex-pivot-2023",
+    "event-cloud-capacity-scale-2022"
+  ],
+  "contrastingEventIds": [
+    "event-ai-capacity-sourcing-2024"
+  ],
+  "evidenceIds": [
+    "span-capacity-2022-capex",
+    "span-capacity-2022-headcount",
+    "span-capacity-2023-ai-capex",
+    "span-capacity-2023-opex",
+    "span-capacity-2024-external-supply"
+  ],
+  "confidence": "medium",
+  "status": "review_required",
+  "review": null
+}

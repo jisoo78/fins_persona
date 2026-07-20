@@ -337,8 +337,19 @@ test('edge: a material contrast narrows the reflection boundary', async () => {
     'agent_prompts/prompts/amy-hood-reflection-builder.md',
   ), 'utf8');
   assert.match(builderPrompt, /at least two support events/i);
+  assert.match(builderPrompt, /support events.*same canonical action/i);
+  assert.match(builderPrompt, /copy.*chosenAction/i);
   assert.match(builderPrompt, /Unobserved, unspecified, or unknown is not an action/i);
   assert.match(builderPrompt, /`boundaryConditions`.*JSON array/i);
+  const policyPrompt = await readFile(join(
+    process.cwd(),
+    'agent_prompts/prompts/amy-hood-policy-inducer.md',
+  ), 'utf8');
+  assert.match(policyPrompt, /recommendedAction.*only.*cited.*action.*tactic/i);
+  assert.match(policyPrompt, /nonApplicabilityConditions.*positive.*contrastPattern/i);
+  assert.match(policyPrompt, /do not negate or invert/i);
+  assert.match(policyPrompt, /priorityOrder.*decision criteria.*not.*action/i);
+  assert.match(policyPrompt, /reversalSignals.*observable changes.*applicability/i);
   const result = await buildReflectionProposals(
     graph,
     createFixtureModel(reflectionResponse),

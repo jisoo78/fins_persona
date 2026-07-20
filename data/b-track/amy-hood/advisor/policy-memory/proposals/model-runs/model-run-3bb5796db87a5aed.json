@@ -1,0 +1,23 @@
+{
+  "id": "model-run-3bb5796db87a5aed",
+  "kind": "policy",
+  "promptHash": "f9b6146c3727378c6651b5dca0deb5893dff2ec4c141b3d19be9f77a1c445392",
+  "inputHashes": {
+    "reflections": "84f4bf5320a4f55079422aa9aba88ad3195de498c1bdcc1273853757b7d59d33",
+    "events": "9844bce926c38e84399d6088e1bbde4a0300dfda5739a1673cf582dd929db21b",
+    "evidence": "14c9b92c855f46277ac8edc19e073321aa0373f62fb5e70289d3eba0ecbcaee3"
+  },
+  "model": "gemma4-v2-Q8_0.gguf",
+  "modelCacheKey": "f3556e36f3a389f68a77d70a1beff16ed13a691b3e4e7c4bd394e7d63793b5f9",
+  "attemptCount": 1,
+  "rawResponses": [
+    "{\n  \"policies\": [\n    {\n      \"domain\": \"ai_cloud_capex\",\n      \"applicabilityConditions\": [\n        \"Azure AI infrastructure requires material sequential investment\",\n        \"Scaled capital investment would increase COGS\",\n        \"FY24 operating-expense growth expected to remain low\",\n        \"Capacity buildout timing varies by quarter\"\n      ],\n      \"priorityOrder\": [\n        \"scale_infrastructure_constrain_opex\"\n      ],\n      \"recommendedAction\": \"Scale capital investment for AI infrastructure while capping operating-expense growth to preserve profitability margin\",\n      \"nonApplicabilityConditions\": [\n        \"Global cloud-services demand is growing\",\n        \"Investment needs span infrastructure and multiple operating teams\"\n      ],\n      \"exceptions\": [\n        \"Customer demand guides investment\",\n        \"Disciplined cost management across every team\",\n        \"External supply supplements owned capacity when lead time requires it\"\n      ],\n      \"reversalSignals\": [\n        \"Broad cloud demand without a specific platform shift\",\n        \"Investment needs spanning multiple operating teams\"\n      ],\n      \"reflectionIds\": [\n        \"reflection-4b5f7915d30581a4\"\n      ],\n      \"supportingEventIds\": [\n        \"event-ai-capacity-opex-pivot-2023\",\n        \"event-ai-capacity-sourcing-2024\"\n      ],\n      \"contrastingEventIds\": [\n        \"event-cloud-capacity-scale-2022\"\n      ],\n      \"evidenceIds\": [\n        \"span-capacity-2022-capex\",\n        \"span-capacity-2022-headcount\",\n        \"span-capacity-2023-ai-capex\",\n        \"span-capacity-2023-opex\",\n        \"span-capacity-2024-demand-discipline\",\n        \"span-capacity-2024-external-supply\"\n      ],\n      \"directPolicyEvidenceIds\": []\n    },\n    {\n      \"domain\": \"cost_efficiency\",\n      \"applicabilityConditions\": [\n        \"Some parts of the world are in or anticipating recession\",\n        \"The next major computing wave is being born with advances in AI\"\n      ],\n      \"priorityOrder\": [\n        \"reduce_and_reallocate\"\n      ],\n      \"recommendedAction\": \"Reduce workforce in non-strategic areas and reallocate capital and talent to growth areas of secular computing\",\n      \"nonApplicabilityConditions\": [\n        \"Some parts of the world are in or anticipating recession\",\n        \"The next major computing wave is being born with advances in AI\"\n      ],\n      \"exceptions\": [\n        \"Must remain a consequential company in an unforgiving industry\",\n        \"Need to adapt to platform shifts throughout the company's history\"\n      ],\n      \"reversalSignals\": [\n        \"Broad cloud demand without a specific platform shift\",\n        \"Investment needs spanning multiple operating teams\"\n      ],\n      \"reflectionIds\": [\n        \"reflection-4b5f7915d30581a4\"\n      ],\n      \"supportingEventIds\": [\n        \"event-workforce-reset-2023\"\n      ],\n      \"contrastingEventIds\": [\n        \"event-cloud-capacity-scale-2022\"\n      ],\n      \"evidenceIds\": [\n        \"span-2cbdcfdf837395b6\",\n        \"span-7f9dde341a496596\",\n        \"span-ad445ecf5ef4a0ac\"\n      ],\n      \"directPolicyEvidenceIds\": [\n        \"policy-workforce-resource-reallocation-2022\"\n      ]\n    }\n  ]\n}"
+  ],
+  "parsedArtifactIds": [
+    "policy-821638d0c6331d3f",
+    "policy-92b1a6bffa7003d9"
+  ],
+  "status": "complete",
+  "error": null,
+  "createdAt": "2026-07-20T02:38:35.630Z"
+}

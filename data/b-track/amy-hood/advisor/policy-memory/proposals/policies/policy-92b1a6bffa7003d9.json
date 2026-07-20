@@ -1,0 +1,45 @@
+{
+  "id": "policy-92b1a6bffa7003d9",
+  "domain": "cost_efficiency",
+  "applicabilityConditions": [
+    "Some parts of the world are in or anticipating recession",
+    "The next major computing wave is being born with advances in AI"
+  ],
+  "priorityOrder": [
+    "reduce_and_reallocate"
+  ],
+  "recommendedAction": "Reduce workforce in non-strategic areas and reallocate capital and talent to growth areas of secular computing",
+  "nonApplicabilityConditions": [
+    "Some parts of the world are in or anticipating recession",
+    "The next major computing wave is being born with advances in AI"
+  ],
+  "exceptions": [
+    "Must remain a consequential company in an unforgiving industry",
+    "Need to adapt to platform shifts throughout the company's history"
+  ],
+  "reversalSignals": [
+    "Broad cloud demand without a specific platform shift",
+    "Investment needs spanning multiple operating teams"
+  ],
+  "reflectionIds": [
+    "reflection-4b5f7915d30581a4"
+  ],
+  "supportingEventIds": [
+    "event-workforce-reset-2023"
+  ],
+  "contrastingEventIds": [
+    "event-cloud-capacity-scale-2022"
+  ],
+  "evidenceIds": [
+    "span-2cbdcfdf837395b6",
+    "span-7f9dde341a496596",
+    "span-ad445ecf5ef4a0ac"
+  ],
+  "directPolicyEvidenceIds": [
+    "policy-workforce-resource-reallocation-2022"
+  ],
+  "confidence": "low",
+  "policyKind": "event_specific_hypothesis",
+  "status": "review_required",
+  "review": null
+}

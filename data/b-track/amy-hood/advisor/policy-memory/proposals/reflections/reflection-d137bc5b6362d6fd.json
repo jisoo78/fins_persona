@@ -1,0 +1,79 @@
+{
+  "id": "reflection-d137bc5b6362d6fd",
+  "domain": "m_and_a",
+  "crossEventQuestion": "When funding a large all-cash acquisition, should Microsoft issue new debt or equity, and what is the trade-off?",
+  "observation": "For the $26.2 billion LinkedIn deal, Microsoft issued new debt and accepted ~1 percent non-GAAP EPS dilution in FY17-18 to achieve accretion by FY19; for the $68.7 billion Activision deal, the all-cash structure was approved by both boards without a stated financing lever in the same call.",
+  "invariant": "Debt financing defers dilution and accelerates the path to accretion compared to equity issuance for all-cash deals.",
+  "boundaryConditions": [
+    "Acquisition must become accretive within a short window (two years)",
+    "Debt issuance should be timed opportunistically during favorable market windows",
+    "Transaction must meet Microsoft's high bar for new additions"
+  ],
+  "unresolvedConflicts": [],
+  "decisionAxis": {
+    "decisionObject": "acquisition financing",
+    "decisionQuestion": "Debt vs equity for all-cash M&A",
+    "choiceSet": [
+      "debt_financing",
+      "equity_financing"
+    ],
+    "gatingVariables": [
+      "dilution tolerance",
+      "market window",
+      "transaction size"
+    ]
+  },
+  "supportPattern": {
+    "eventIds": [
+      "event-linkedin-acquisition-2016"
+    ],
+    "conditions": [
+      "all-cash transaction",
+      "dilution tolerance ~1 percent",
+      "high bar for new additions"
+    ],
+    "evidenceIds": [
+      "span-3b790581f5848009",
+      "span-9335840b833b9436",
+      "span-9f190c9d1c5b03bb",
+      "span-a56102ae9dc1b872"
+    ],
+    "action": "debt_financing"
+  },
+  "contrastPattern": {
+    "eventIds": [
+      "event-activision-acquisition-2022"
+    ],
+    "conditions": [
+      "all-cash transaction",
+      "board approval suggests internal due diligence complete",
+      "both boards approved"
+    ],
+    "evidenceIds": [
+      "span-1abb63ac11f1075c",
+      "span-807ee90aa032f320",
+      "span-e32ab0f2fc36349e"
+    ],
+    "action": "proceed"
+  },
+  "conditionDelta": "LinkedIn was a $26.2B deal with explicit dilution targets; Activision was a $68.7B deal with board approval already in place.",
+  "actionDelta": "LinkedIn used debt to defer dilution; Activision proceeded with all-cash structure without a stated financing lever in the call.",
+  "supportingEventIds": [
+    "event-linkedin-acquisition-2016"
+  ],
+  "contrastingEventIds": [
+    "event-activision-acquisition-2022"
+  ],
+  "evidenceIds": [
+    "span-1abb63ac11f1075c",
+    "span-3b790581f5848009",
+    "span-807ee90aa032f320",
+    "span-9335840b833b9436",
+    "span-9f190c9d1c5b03bb",
+    "span-a56102ae9dc1b872",
+    "span-e32ab0f2fc36349e"
+  ],
+  "confidence": "low",
+  "status": "review_required",
+  "review": null
+}

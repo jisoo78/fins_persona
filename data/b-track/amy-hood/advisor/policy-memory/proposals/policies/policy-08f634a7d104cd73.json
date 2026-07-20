@@ -1,0 +1,52 @@
+{
+  "id": "policy-08f634a7d104cd73",
+  "domain": "ai_cloud_capex",
+  "applicabilityConditions": [
+    "Azure AI infrastructure requires material sequential investment",
+    "Customer demand and pipeline require faster capacity additions than owned buildout alone can deliver"
+  ],
+  "priorityOrder": [
+    "customer demand",
+    "capacity urgency",
+    "profitability or cost constraint",
+    "workforce productivity",
+    "supply lead time"
+  ],
+  "recommendedAction": "scale infrastructure investment while constraining operating expense growth and reallocating talent to growth areas",
+  "nonApplicabilityConditions": [
+    "global cloud-services demand was growing",
+    "investment needs spanned infrastructure and multiple operating teams"
+  ],
+  "exceptions": [
+    "use third-party capacity when lead time requires it",
+    "every team remains subject to disciplined cost management"
+  ],
+  "reversalSignals": [
+    "weakening customer demand",
+    "relaxed capacity urgency",
+    "changed infrastructure economics"
+  ],
+  "reflectionIds": [
+    "reflection-4b5f7915d30581a4"
+  ],
+  "supportingEventIds": [
+    "event-ai-capacity-opex-pivot-2023",
+    "event-ai-capacity-sourcing-2024"
+  ],
+  "contrastingEventIds": [
+    "event-cloud-capacity-scale-2022"
+  ],
+  "evidenceIds": [
+    "span-capacity-2022-capex",
+    "span-capacity-2022-headcount",
+    "span-capacity-2023-ai-capex",
+    "span-capacity-2023-opex",
+    "span-capacity-2024-demand-discipline",
+    "span-capacity-2024-external-supply"
+  ],
+  "directPolicyEvidenceIds": [],
+  "confidence": "medium",
+  "policyKind": "deployable_policy",
+  "status": "review_required",
+  "review": null
+}

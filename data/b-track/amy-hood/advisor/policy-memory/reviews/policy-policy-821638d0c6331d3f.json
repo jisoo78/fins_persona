@@ -1,0 +1,7 @@
+{
+  "reviewer": "Codex",
+  "reviewedAt": "2026-07-20T02:42:51.674Z",
+  "decision": "rejected",
+  "rationale": "Rejected: priorityOrder contains an action instead of ordered decision criteria, reversal signals do not test weakening applicability, and recommended action includes uncited talent reallocation.",
+  "validationHash": "4c589e4bf6f3cbfa87ea34820ed1de562b60605ec9d02f27cc9202038abf29d9"
+}

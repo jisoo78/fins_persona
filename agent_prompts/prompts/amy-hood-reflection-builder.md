@@ -12,6 +12,8 @@ Do not label complementary actions as contrast. Reducing low-priority resources 
 
 - Use only supplied event and evidence IDs.
 - Every reflection requires at least two support events in the reflection's `domain` and at least one materially contrasting event. A contrast may cross domains only when it uses the same explicit decision axis and comparable choices.
+- All support events in one `supportPattern` must share the same canonical action; events with different selected actions belong on opposite sides of the contrast.
+- Copy each pattern `action` exactly from the corresponding event `chosenAction`. Do not summarize, combine, or invent an action label.
 - Put both canonical actions in `decisionAxis.choiceSet`.
 - Map every support and contrast event to its own conditions, action, and exact evidence IDs.
 - Unobserved, unspecified, or unknown is not an action and cannot establish an action contrast.

@@ -1,0 +1,22 @@
+{
+  "id": "model-run-bd94298eb0f3cb1f",
+  "kind": "policy",
+  "promptHash": "5eb1033f71ccf2536f3a26abfbd7081574c922b05abf559954ec092c2939d3d8",
+  "inputHashes": {
+    "reflections": "84f4bf5320a4f55079422aa9aba88ad3195de498c1bdcc1273853757b7d59d33",
+    "events": "9844bce926c38e84399d6088e1bbde4a0300dfda5739a1673cf582dd929db21b",
+    "evidence": "14c9b92c855f46277ac8edc19e073321aa0373f62fb5e70289d3eba0ecbcaee3"
+  },
+  "model": "gemma4-v2-Q8_0.gguf",
+  "modelCacheKey": "f3556e36f3a389f68a77d70a1beff16ed13a691b3e4e7c4bd394e7d63793b5f9",
+  "attemptCount": 1,
+  "rawResponses": [
+    "{\n  \"policies\": [\n    {\n      \"domain\": \"ai_cloud_capex\",\n      \"applicabilityConditions\": [\n        \"Azure AI infrastructure requires material sequential investment\",\n        \"Customer demand and pipeline require faster capacity additions than owned buildout alone can deliver\"\n      ],\n      \"priorityOrder\": [\n        \"customer demand\",\n        \"capacity urgency\",\n        \"profitability or cost constraint\",\n        \"workforce productivity\",\n        \"supply lead time\"\n      ],\n      \"recommendedAction\": \"scale infrastructure investment while constraining operating expense growth and reallocating talent to growth areas\",\n      \"nonApplicabilityConditions\": [\n        \"global cloud-services demand was growing\",\n        \"investment needs spanned infrastructure and multiple operating teams\"\n      ],\n      \"exceptions\": [\n        \"use third-party capacity when lead time requires it\",\n        \"every team remains subject to disciplined cost management\"\n      ],\n      \"reversalSignals\": [\n        \"weakening customer demand\",\n        \"relaxed capacity urgency\",\n        \"changed infrastructure economics\"\n      ],\n      \"reflectionIds\": [\n        \"reflection-4b5f7915d30581a4\"\n      ],\n      \"supportingEventIds\": [\n        \"event-ai-capacity-opex-pivot-2023\",\n        \"event-ai-capacity-sourcing-2024\"\n      ],\n      \"contrastingEventIds\": [\n        \"event-cloud-capacity-scale-2022\"\n      ],\n      \"evidenceIds\": [\n        \"span-capacity-2022-capex\",\n        \"span-capacity-2022-headcount\",\n        \"span-capacity-2023-ai-capex\",\n        \"span-capacity-2023-opex\",\n        \"span-capacity-2024-demand-discipline\",\n        \"span-capacity-2024-external-supply\"\n      ],\n      \"directPolicyEvidenceIds\": []\n    }\n  ]\n}"
+  ],
+  "parsedArtifactIds": [
+    "policy-08f634a7d104cd73"
+  ],
+  "status": "complete",
+  "error": null,
+  "createdAt": "2026-07-20T02:40:56.066Z"
+}

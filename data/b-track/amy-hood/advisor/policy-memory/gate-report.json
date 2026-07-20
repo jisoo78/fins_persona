@@ -1,39 +1,58 @@
 {
-  "generatedAt": "2026-07-20T01:22:30.005Z",
+  "generatedAt": "2026-07-20T02:45:10.123Z",
   "inputEventIds": [
     "event-activision-acquisition-2022",
+    "event-ai-capacity-opex-pivot-2023",
+    "event-ai-capacity-sourcing-2024",
+    "event-cloud-capacity-scale-2022",
     "event-copilot-price-2023",
     "event-linkedin-acquisition-2016",
     "event-openai-expansion-2023",
     "event-workforce-reset-2023"
   ],
   "passing": {
-    "reflections": [],
+    "reflections": [
+      "reflection-4b5f7915d30581a4"
+    ],
     "policies": []
   },
   "reviewed": {
     "approved": {
-      "reflections": [],
+      "reflections": [
+        "reflection-4b5f7915d30581a4"
+      ],
       "policies": []
     },
     "rejected": {
       "reflections": [
         "reflection-ddde3efbe6d4783b"
       ],
-      "policies": []
+      "policies": [
+        "policy-08f634a7d104cd73",
+        "policy-378e62a676e4802a",
+        "policy-821638d0c6331d3f"
+      ]
     }
   },
   "safeStop": {
     "status": "blocked",
-    "reason": "approved reflection count = 0; sealed event evidence lacks a qualified contrast",
+    "reason": "approved policy count = 0; no deployable policy memory is available",
     "downstreamBlocked": [
-      "policy_build",
       "memory_release",
       "evaluation_v3"
     ]
   },
   "activeReleaseVersion": null,
   "reviewRequired": [
+    {
+      "kind": "policy",
+      "id": "policy-92b1a6bffa7003d9",
+      "errors": [
+        "policy and reflection domains must match",
+        "policy support exceeds its reflections",
+        "policy requires two supporting events or direct principle plus independent confirmation"
+      ]
+    },
     {
       "kind": "reflection",
       "id": "reflection-20c9175bbee7effd",
@@ -58,6 +77,27 @@
     },
     {
       "kind": "reflection",
+      "id": "reflection-84ac9877435917f5",
+      "errors": [
+        "support and contrast actions must belong to the decision-axis choice set"
+      ]
+    },
+    {
+      "kind": "reflection",
+      "id": "reflection-a711fce93b3a894d",
+      "errors": [
+        "support and contrast actions must belong to the decision-axis choice set"
+      ]
+    },
+    {
+      "kind": "reflection",
+      "id": "reflection-d137bc5b6362d6fd",
+      "errors": [
+        "support and contrast actions must belong to the decision-axis choice set"
+      ]
+    },
+    {
+      "kind": "reflection",
       "id": "reflection-ddde3efbe6d4783b",
       "errors": [
         "support and contrast actions must belong to the decision-axis choice set"
@@ -77,6 +117,9 @@
   ],
   "blocked": [
     "model-run-c59fef7571760664",
+    "review_rejected:policy-08f634a7d104cd73",
+    "review_rejected:policy-378e62a676e4802a",
+    "review_rejected:policy-821638d0c6331d3f",
     "review_rejected:reflection-ddde3efbe6d4783b"
   ]
 }
