@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "v1-262d69135ca0",
+  "version": "v1-262d69135ca0",
+  "createdAt": "2026-07-20T03:31:39.016Z",
+  "sourceRegistryHash": "de3a4ca4ae62fc76b1f7f84284e06605c714fcb8b9c8a0c5e6bd8935b0d4ec81",
+  "pilotManifestHash": "8aaa513337e0b87e34688f73a37cd12c480a0d2a7ae6a1d09d789e4516dd30b9",
+  "holdoutManifestHash": "e9421d0bd8846387bc4f81c6c98bf3c61a603c18d887e1a858c7181ec1e3ec4d",
+  "artifacts": [
+    {
+      "id": "event-ai-capacity-opex-pivot-2023",
+      "kind": "event",
+      "relativePath": "events/event-ai-capacity-opex-pivot-2023.json",
+      "sha256": "e055fd3b73b45a2175899ed56e6e2aaa2a91ffbdb619d839b35368a48a62ff1e"
+    },
+    {
+      "id": "event-ai-capacity-sourcing-2024",
+      "kind": "event",
+      "relativePath": "events/event-ai-capacity-sourcing-2024.json",
+      "sha256": "160ea8804af7d941e40ff37168350fee3f92231e50b61ec3ff0aca6a9140732b"
+    },
+    {
+      "id": "event-cloud-capacity-scale-2022",
+      "kind": "event",
+      "relativePath": "events/event-cloud-capacity-scale-2022.json",
+      "sha256": "9af8fd2b56ca7a4dba1b3a9f74fbc905b3eb97faf02598e53531a8c67de9a0da"
+    },
+    {
+      "id": "policy-c4203c075dbd61d3",
+      "kind": "policy",
+      "relativePath": "policies/policy-c4203c075dbd61d3.json",
+      "sha256": "0c77ad227736a3c109c4e458692f692e270fca532b67da6725725d65e0c51fa2"
+    },
+    {
+      "id": "reflection-4b5f7915d30581a4",
+      "kind": "reflection",
+      "relativePath": "reflections/reflection-4b5f7915d30581a4.json",
+      "sha256": "5dac1469dd571eb4c2460f90fe0a5c9a949caddeadef63febf240e76377663c9"
+    }
+  ],
+  "evaluationContextPath": "evaluation-context.json",
+  "evaluationContextHash": "a793ae2a55d32c8966b0d9ed40ca0fd8e1bc2332da2915850b03e1c938d89aa2",
+  "reviewLedgerHash": "f152881f4c378d0475c9de3be3c7178b2d94463b9a509b6f915ae3562ac70889"
+}

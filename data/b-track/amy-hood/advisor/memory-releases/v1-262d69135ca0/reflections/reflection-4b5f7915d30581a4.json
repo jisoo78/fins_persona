@@ -1,0 +1,84 @@
+{
+  "id": "reflection-4b5f7915d30581a4",
+  "domain": "ai_cloud_capex",
+  "crossEventQuestion": "How should Microsoft balance infrastructure investment against operating expense growth during a platform shift?",
+  "observation": "In 2022, Microsoft scaled both infrastructure and headcount (20% YoY) under broad cloud demand; by 2023-2024, it pivoted to scaling AI infrastructure while constraining operating expense growth and reallocating talent from non-strategic areas.",
+  "invariant": "During a platform shift (AI), capital should be concentrated on infrastructure capacity while operating resources are reallocated to growth areas.",
+  "boundaryConditions": [
+    "customer demand guides investment",
+    "disciplined cost management across every team",
+    "external supply supplements owned capacity when lead time requires"
+  ],
+  "unresolvedConflicts": [],
+  "decisionAxis": {
+    "decisionObject": "resource allocation",
+    "decisionQuestion": "scale_infrastructure_and_people vs scale_infrastructure_constrain_opex",
+    "choiceSet": [
+      "scale_infrastructure_and_people",
+      "scale_infrastructure_constrain_opex"
+    ],
+    "gatingVariables": [
+      "demand type",
+      "platform shift",
+      "profitability pressure"
+    ]
+  },
+  "supportPattern": {
+    "eventIds": [
+      "event-ai-capacity-opex-pivot-2023",
+      "event-ai-capacity-sourcing-2024"
+    ],
+    "conditions": [
+      "Azure AI infrastructure required material sequential investment",
+      "customer demand guided cloud and AI investment",
+      "third-party capacity supplemented owned capacity"
+    ],
+    "evidenceIds": [
+      "span-capacity-2023-ai-capex",
+      "span-capacity-2023-opex",
+      "span-capacity-2024-demand-discipline",
+      "span-capacity-2024-external-supply"
+    ],
+    "action": "scale_infrastructure_constrain_opex"
+  },
+  "contrastPattern": {
+    "eventIds": [
+      "event-cloud-capacity-scale-2022"
+    ],
+    "conditions": [
+      "global cloud-services demand was growing",
+      "investment needs spanned infrastructure and multiple operating teams"
+    ],
+    "evidenceIds": [
+      "span-capacity-2022-capex",
+      "span-capacity-2022-headcount"
+    ],
+    "action": "scale_infrastructure_and_people"
+  },
+  "conditionDelta": "2022 was broad cloud demand across multiple areas; 2023-2024 was a concentrated AI platform shift with profitability pressure.",
+  "actionDelta": "2022 expanded both infrastructure and people; 2023-2024 scaled infrastructure while constraining operating expense growth.",
+  "supportingEventIds": [
+    "event-ai-capacity-opex-pivot-2023",
+    "event-ai-capacity-sourcing-2024"
+  ],
+  "contrastingEventIds": [
+    "event-cloud-capacity-scale-2022"
+  ],
+  "evidenceIds": [
+    "span-capacity-2022-capex",
+    "span-capacity-2022-headcount",
+    "span-capacity-2023-ai-capex",
+    "span-capacity-2023-opex",
+    "span-capacity-2024-demand-discipline",
+    "span-capacity-2024-external-supply"
+  ],
+  "confidence": "medium",
+  "status": "approved",
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-07-20T02:35:45.923Z",
+    "decision": "approved",
+    "rationale": "Approved after exact-span review: FY23 and FY24 share scale_infrastructure_constrain_opex, FY22 contrasts with scale_infrastructure_and_people, all six evidence spans belong to the cited events, and external supply remains a condition/tactic. The later policy must not elevate talent reallocation beyond the cited cost-discipline evidence.",
+    "validationHash": "4c589e4bf6f3cbfa87ea34820ed1de562b60605ec9d02f27cc9202038abf29d9"
+  }
+}

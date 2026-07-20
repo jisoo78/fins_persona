@@ -1,0 +1,111 @@
+{
+  "releaseId": "v1-262d69135ca0",
+  "policy": [
+    "{\"applicabilityConditions\":[\"Azure AI infrastructure requires material sequential investment\",\"Scaled capital investment would increase COGS\",\"FY24 operating-expense growth is expected to remain low\",\"Capacity buildout timing varies by quarter\"],\"confidence\":\"medium\",\"contrastingEventIds\":[\"event-cloud-capacity-scale-2022\"],\"directPolicyEvidenceIds\":[],\"domain\":\"ai_cloud_capex\",\"evidenceIds\":[\"span-capacity-2022-capex\",\"span-capacity-2022-headcount\",\"span-capacity-2023-ai-capex\",\"span-capacity-2023-opex\",\"span-capacity-2024-demand-discipline\",\"span-capacity-2024-external-supply\"],\"exceptions\":[\"customer demand guides investment\",\"disciplined cost management across every team\",\"external supply supplements owned capacity when lead time requires it\"],\"id\":\"policy-c4203c075dbd61d3\",\"nonApplicabilityConditions\":[\"global cloud-services demand was growing\",\"investment needs spanned infrastructure and multiple operating teams\"],\"priorityOrder\":[\"customer demand\",\"capacity urgency\",\"profitability or cost constraint\",\"workforce productivity\",\"supply lead time\"],\"recommendedAction\":\"scale_infrastructure_constrain_opex\",\"reversalSignals\":[\"weakening demand or pipeline\",\"relaxed capacity urgency\",\"changed infrastructure economics\"],\"supportingEventIds\":[\"event-ai-capacity-opex-pivot-2023\",\"event-ai-capacity-sourcing-2024\"]}"
+  ],
+  "reflections": [
+    "{\"actionDelta\":\"2022 expanded both infrastructure and people; 2023-2024 scaled infrastructure while constraining operating expense growth.\",\"boundaryConditions\":[\"customer demand guides investment\",\"disciplined cost management across every team\",\"external supply supplements owned capacity when lead time requires\"],\"conditionDelta\":\"2022 was broad cloud demand across multiple areas; 2023-2024 was a concentrated AI platform shift with profitability pressure.\",\"confidence\":\"medium\",\"contrastingEventIds\":[\"event-cloud-capacity-scale-2022\"],\"contrastPattern\":{\"action\":\"scale_infrastructure_and_people\",\"conditions\":[\"global cloud-services demand was growing\",\"investment needs spanned infrastructure and multiple operating teams\"],\"eventIds\":[\"event-cloud-capacity-scale-2022\"],\"evidenceIds\":[\"span-capacity-2022-capex\",\"span-capacity-2022-headcount\"]},\"crossEventQuestion\":\"How should Microsoft balance infrastructure investment against operating expense growth during a platform shift?\",\"decisionAxis\":{\"choiceSet\":[\"scale_infrastructure_and_people\",\"scale_infrastructure_constrain_opex\"],\"decisionObject\":\"resource allocation\",\"decisionQuestion\":\"scale_infrastructure_and_people vs scale_infrastructure_constrain_opex\",\"gatingVariables\":[\"demand type\",\"platform shift\",\"profitability pressure\"]},\"domain\":\"ai_cloud_capex\",\"evidenceIds\":[\"span-capacity-2022-capex\",\"span-capacity-2022-headcount\",\"span-capacity-2023-ai-capex\",\"span-capacity-2023-opex\",\"span-capacity-2024-demand-discipline\",\"span-capacity-2024-external-supply\"],\"id\":\"reflection-4b5f7915d30581a4\",\"invariant\":\"During a platform shift (AI), capital should be concentrated on infrastructure capacity while operating resources are reallocated to growth areas.\",\"observation\":\"In 2022, Microsoft scaled both infrastructure and headcount (20% YoY) under broad cloud demand; by 2023-2024, it pivoted to scaling AI infrastructure while constraining operating expense growth and reallocating talent from non-strategic areas.\",\"supportingEventIds\":[\"event-ai-capacity-opex-pivot-2023\",\"event-ai-capacity-sourcing-2024\"],\"supportPattern\":{\"action\":\"scale_infrastructure_constrain_opex\",\"conditions\":[\"Azure AI infrastructure required material sequential investment\",\"customer demand guided cloud and AI investment\",\"third-party capacity supplemented owned capacity\"],\"eventIds\":[\"event-ai-capacity-opex-pivot-2023\",\"event-ai-capacity-sourcing-2024\"],\"evidenceIds\":[\"span-capacity-2023-ai-capex\",\"span-capacity-2023-opex\",\"span-capacity-2024-demand-discipline\",\"span-capacity-2024-external-supply\"]},\"unresolvedConflicts\":[]}"
+  ],
+  "events": [
+    "{\"candidateId\":\"candidate-ai-capacity-opex-pivot-2023\",\"chosenAction\":\"scale_infrastructure_constrain_opex\",\"conditions\":[\"Azure AI infrastructure required material sequential investment.\",\"Scaled capital investment would increase COGS.\"],\"constraints\":[\"FY24 operating-expense growth was expected to remain low.\",\"Capacity buildout timing varies by quarter.\"],\"decisionDate\":\"2023-04-25\",\"domain\":\"ai_cloud_capex\",\"evidenceIds\":[\"span-capacity-2023-ai-capex\",\"span-capacity-2023-opex\"],\"id\":\"event-ai-capacity-opex-pivot-2023\",\"objectives\":[\"Lead the AI platform wave\",\"Maintain healthy profitability while scaling capacity\"],\"rejectedBenefit\":\"Expanding people with infrastructure could reduce execution bottlenecks.\",\"situation\":\"Azure AI infrastructure required a material capacity increase while Microsoft was aligning costs with revenue growth and protecting profitability.\",\"title\":\"Scale Azure AI infrastructure while constraining operating expense\"}",
+    "{\"candidateId\":\"candidate-ai-capacity-sourcing-2024\",\"chosenAction\":\"scale_infrastructure_constrain_opex\",\"conditions\":[\"Customer demand guided cloud and AI investment.\",\"Third-party capacity supplemented owned capacity when lead time required it.\"],\"constraints\":[\"AI capital investment increases COGS.\",\"Every team remained subject to disciplined cost management.\"],\"decisionDate\":\"2024-01-30\",\"domain\":\"ai_cloud_capex\",\"evidenceIds\":[\"span-capacity-2024-demand-discipline\",\"span-capacity-2024-external-supply\"],\"id\":\"event-ai-capacity-sourcing-2024\",\"objectives\":[\"Add capacity in time to serve visible customer demand\",\"Preserve operating-margin discipline while scaling AI investment\"],\"rejectedBenefit\":\"Scaling people alongside owned capacity could increase direct control and reduce external dependency.\",\"situation\":\"Customer demand and pipeline required faster cloud and AI capacity additions than owned buildout alone could always deliver.\",\"title\":\"Accelerate demand-led AI capacity with disciplined cost and mixed supply\"}"
+  ],
+  "counterexamples": [
+    "{\"candidateId\":\"candidate-cloud-capacity-scale-2022\",\"chosenAction\":\"scale_infrastructure_and_people\",\"conditions\":[\"Global cloud-services demand was growing.\",\"Investment needs spanned infrastructure and multiple operating teams.\"],\"constraints\":[\"Capital timing varies by quarter.\",\"Broad headcount growth increases the operating-cost base.\"],\"decisionDate\":\"2022-04-26\",\"domain\":\"ai_cloud_capex\",\"evidenceIds\":[\"span-capacity-2022-capex\",\"span-capacity-2022-headcount\"],\"id\":\"event-cloud-capacity-scale-2022\",\"objectives\":[\"Meet growing global cloud demand\",\"Expand operating capacity across strategic growth areas\"],\"rejectedBenefit\":\"Constraining operating-resource growth would preserve near-term expense leverage.\",\"situation\":\"Global cloud demand was growing and Microsoft was continuing broad investment across cloud engineering, deployment, LinkedIn, and sales.\",\"title\":\"Scale cloud infrastructure and people under broad demand\"}"
+  ],
+  "counterexampleStatus": "reviewed",
+  "references": [
+    {
+      "artifactClass": "candidate",
+      "id": "candidate-ai-capacity-opex-pivot-2023"
+    },
+    {
+      "artifactClass": "candidate",
+      "id": "candidate-ai-capacity-sourcing-2024"
+    },
+    {
+      "artifactClass": "candidate",
+      "id": "candidate-cloud-capacity-scale-2022"
+    },
+    {
+      "artifactClass": "event",
+      "id": "event-ai-capacity-opex-pivot-2023"
+    },
+    {
+      "artifactClass": "event",
+      "id": "event-ai-capacity-sourcing-2024"
+    },
+    {
+      "artifactClass": "event",
+      "id": "event-cloud-capacity-scale-2022"
+    },
+    {
+      "artifactClass": "evidence",
+      "id": "span-capacity-2022-capex",
+      "sourceId": "source-6b843b4b8385078d",
+      "candidateId": "candidate-cloud-capacity-scale-2022"
+    },
+    {
+      "artifactClass": "evidence",
+      "id": "span-capacity-2022-headcount",
+      "sourceId": "source-6b843b4b8385078d",
+      "candidateId": "candidate-cloud-capacity-scale-2022"
+    },
+    {
+      "artifactClass": "evidence",
+      "id": "span-capacity-2023-ai-capex",
+      "sourceId": "source-fbb900eb7e249591",
+      "candidateId": "candidate-ai-capacity-opex-pivot-2023"
+    },
+    {
+      "artifactClass": "evidence",
+      "id": "span-capacity-2023-opex",
+      "sourceId": "source-fbb900eb7e249591",
+      "candidateId": "candidate-ai-capacity-opex-pivot-2023"
+    },
+    {
+      "artifactClass": "evidence",
+      "id": "span-capacity-2024-demand-discipline",
+      "sourceId": "source-4f4085f8344669c4",
+      "candidateId": "candidate-ai-capacity-sourcing-2024"
+    },
+    {
+      "artifactClass": "evidence",
+      "id": "span-capacity-2024-external-supply",
+      "sourceId": "source-4f4085f8344669c4",
+      "candidateId": "candidate-ai-capacity-sourcing-2024"
+    },
+    {
+      "artifactClass": "raw_source",
+      "id": "source-4f4085f8344669c4",
+      "candidateId": "candidate-ai-capacity-sourcing-2024"
+    },
+    {
+      "artifactClass": "raw_source",
+      "id": "source-6b843b4b8385078d",
+      "candidateId": "candidate-cloud-capacity-scale-2022"
+    },
+    {
+      "artifactClass": "raw_source",
+      "id": "source-fbb900eb7e249591",
+      "candidateId": "candidate-copilot-price-2023"
+    },
+    {
+      "artifactClass": "raw_source",
+      "id": "source-fbb900eb7e249591",
+      "candidateId": "candidate-ai-capacity-opex-pivot-2023"
+    },
+    {
+      "artifactClass": "source",
+      "id": "source-4f4085f8344669c4"
+    },
+    {
+      "artifactClass": "source",
+      "id": "source-6b843b4b8385078d"
+    },
+    {
+      "artifactClass": "source",
+      "id": "source-fbb900eb7e249591"
+    }
+  ]
+}

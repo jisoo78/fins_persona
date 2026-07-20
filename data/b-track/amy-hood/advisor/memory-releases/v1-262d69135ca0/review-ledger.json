@@ -1,0 +1,24 @@
+[
+  {
+    "kind": "policy",
+    "id": "policy-c4203c075dbd61d3",
+    "review": {
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-20T03:30:43.745Z",
+      "decision": "approved",
+      "rationale": "Approved after exact-span review: FY23 and FY24 support scaling AI infrastructure while constraining operating-expense growth; FY22 preserves the broad-demand boundary; external supply remains a lead-time tactic; talent reallocation, margin guarantees, and post-outcome claims are excluded.",
+      "validationHash": "4c589e4bf6f3cbfa87ea34820ed1de562b60605ec9d02f27cc9202038abf29d9"
+    }
+  },
+  {
+    "kind": "reflection",
+    "id": "reflection-4b5f7915d30581a4",
+    "review": {
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-20T02:35:45.923Z",
+      "decision": "approved",
+      "rationale": "Approved after exact-span review: FY23 and FY24 share scale_infrastructure_constrain_opex, FY22 contrasts with scale_infrastructure_and_people, all six evidence spans belong to the cited events, and external supply remains a condition/tactic. The later policy must not elevate talent reallocation beyond the cited cost-discipline evidence.",
+      "validationHash": "4c589e4bf6f3cbfa87ea34820ed1de562b60605ec9d02f27cc9202038abf29d9"
+    }
+  }
+]

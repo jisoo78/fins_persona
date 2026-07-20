@@ -1,0 +1,91 @@
+{
+  "id": "event-ai-capacity-opex-pivot-2023",
+  "candidateId": "candidate-ai-capacity-opex-pivot-2023",
+  "domain": "ai_cloud_capex",
+  "decisionDate": "2023-04-25",
+  "title": "Scale Azure AI infrastructure while constraining operating expense",
+  "decisionQuestion": "How should Microsoft scale infrastructure and operating resources as demand and profitability constraints change?",
+  "situation": "Azure AI infrastructure required a material capacity increase while Microsoft was aligning costs with revenue growth and protecting profitability.",
+  "objectives": [
+    "Lead the AI platform wave",
+    "Maintain healthy profitability while scaling capacity"
+  ],
+  "conditions": [
+    "Azure AI infrastructure required material sequential investment.",
+    "Scaled capital investment would increase COGS."
+  ],
+  "constraints": [
+    "FY24 operating-expense growth was expected to remain low.",
+    "Capacity buildout timing varies by quarter."
+  ],
+  "options": [
+    {
+      "id": "scale_infrastructure_and_people",
+      "description": "Scale AI infrastructure and operating resources together.",
+      "expectedBenefit": "Maximizes organizational capacity around the platform shift.",
+      "principalRisk": "Weakens operating leverage while infrastructure COGS is rising.",
+      "selected": false
+    },
+    {
+      "id": "scale_infrastructure_constrain_opex",
+      "description": "Increase Azure AI infrastructure capital while keeping operating-expense growth low.",
+      "expectedBenefit": "Funds urgent capacity while preserving disciplined profitability.",
+      "principalRisk": "Requires aggressive internal resource prioritization.",
+      "selected": true
+    }
+  ],
+  "chosenAction": "scale_infrastructure_constrain_opex",
+  "rejectedBenefit": "Expanding people with infrastructure could reduce execution bottlenecks.",
+  "observations": [
+    "Amy Hood expected a material sequential CapEx increase for Azure AI infrastructure.",
+    "Amy Hood paired scaled CapEx with low expected operating-expense growth."
+  ],
+  "inferences": [
+    "Infrastructure capacity was protected while operating resources were constrained under profitability pressure."
+  ],
+  "directAmyEvidenceIds": [
+    "span-capacity-2023-opex"
+  ],
+  "amyPolicyEvidenceIds": [],
+  "contextEvidenceIds": [
+    "span-capacity-2023-ai-capex"
+  ],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": [
+    "source-fbb900eb7e249591"
+  ],
+  "documentFamilyIds": [
+    "earnings-call-2023"
+  ],
+  "evidenceSpans": [
+    {
+      "id": "span-capacity-2023-ai-capex",
+      "role": "decision_context",
+      "startChar": 28256,
+      "endChar": 28393,
+      "speaker": "Amy Hood",
+      "exactQuote": "We expect capital expenditures to have a material sequential increase on a dollar basis driven by investments in Azure AI infrastructure.",
+      "sourceId": "source-fbb900eb7e249591",
+      "eventCandidateId": "candidate-ai-capacity-opex-pivot-2023",
+      "publishedAt": "2023-04-25"
+    },
+    {
+      "id": "span-capacity-2023-opex",
+      "role": "direct_amy",
+      "startChar": 33082,
+      "endChar": 33313,
+      "speaker": "Amy Hood",
+      "exactQuote": "As always, we remain committed to aligning costs and revenue growth to deliver disciplined profitability. Therefore, while the scaled capex investments will impact COGS growth, we expect FY24 operating expense growth to remain low.",
+      "sourceId": "source-fbb900eb7e249591",
+      "eventCandidateId": "candidate-ai-capacity-opex-pivot-2023",
+      "publishedAt": "2023-04-25"
+    }
+  ],
+  "status": "approved",
+  "gaps": [
+    "single_document_family"
+  ],
+  "reviewer": "Codex exact-span review",
+  "reviewedAt": "2026-07-20T02:23:07.875Z",
+  "updatedAt": "2026-07-20T02:23:07.875Z"
+}

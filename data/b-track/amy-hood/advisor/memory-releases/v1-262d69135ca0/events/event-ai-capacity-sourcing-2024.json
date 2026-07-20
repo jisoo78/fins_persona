@@ -1,0 +1,91 @@
+{
+  "id": "event-ai-capacity-sourcing-2024",
+  "candidateId": "candidate-ai-capacity-sourcing-2024",
+  "domain": "ai_cloud_capex",
+  "decisionDate": "2024-01-30",
+  "title": "Accelerate demand-led AI capacity with disciplined cost and mixed supply",
+  "decisionQuestion": "How should Microsoft scale infrastructure and operating resources as demand and profitability constraints change?",
+  "situation": "Customer demand and pipeline required faster cloud and AI capacity additions than owned buildout alone could always deliver.",
+  "objectives": [
+    "Add capacity in time to serve visible customer demand",
+    "Preserve operating-margin discipline while scaling AI investment"
+  ],
+  "conditions": [
+    "Customer demand guided cloud and AI investment.",
+    "Third-party capacity supplemented owned capacity when lead time required it."
+  ],
+  "constraints": [
+    "AI capital investment increases COGS.",
+    "Every team remained subject to disciplined cost management."
+  ],
+  "options": [
+    {
+      "id": "scale_infrastructure_and_people",
+      "description": "Scale owned infrastructure and operating headcount together.",
+      "expectedBenefit": "Keeps execution resources under direct organizational control.",
+      "principalRisk": "Adds recurring operating cost while capital intensity is rising.",
+      "selected": false
+    },
+    {
+      "id": "scale_infrastructure_constrain_opex",
+      "description": "Accelerate infrastructure, mix owned and third-party supply, and retain operating-cost discipline.",
+      "expectedBenefit": "Responds faster to pipeline without matching CapEx growth with broad OpEx growth.",
+      "principalRisk": "External capacity may have different economics or control characteristics.",
+      "selected": true
+    }
+  ],
+  "chosenAction": "scale_infrastructure_constrain_opex",
+  "rejectedBenefit": "Scaling people alongside owned capacity could increase direct control and reduce external dependency.",
+  "observations": [
+    "Amy Hood said customer demand guided cloud and AI investment.",
+    "Microsoft used both owned and third-party capacity and expected accelerating capital expense."
+  ],
+  "inferences": [
+    "External supply was an execution tactic inside a capital-first, cost-disciplined resource policy."
+  ],
+  "directAmyEvidenceIds": [
+    "span-capacity-2024-demand-discipline"
+  ],
+  "amyPolicyEvidenceIds": [],
+  "contextEvidenceIds": [
+    "span-capacity-2024-external-supply"
+  ],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": [
+    "source-4f4085f8344669c4"
+  ],
+  "documentFamilyIds": [
+    "earnings-call-2024"
+  ],
+  "evidenceSpans": [
+    {
+      "id": "span-capacity-2024-demand-discipline",
+      "role": "direct_amy",
+      "startChar": 33141,
+      "endChar": 33424,
+      "speaker": "Amy Hood",
+      "exactQuote": "Our commitment to scaling our cloud and AI investment is guided by customer demand and the substantial market opportunity. As we scale these investments, we remain focused on driving efficiencies across every layer of our tech stack and disciplined cost management across every team.",
+      "sourceId": "source-4f4085f8344669c4",
+      "eventCandidateId": "candidate-ai-capacity-sourcing-2024",
+      "publishedAt": "2024-01-30"
+    },
+    {
+      "id": "span-capacity-2024-external-supply",
+      "role": "decision_context",
+      "startChar": 43617,
+      "endChar": 44010,
+      "speaker": "Amy Hood",
+      "exactQuote": "I feel like primarily, obviously, this is being built by us, but we’ve also used third-party capacity to help when we could have that help us, in terms of meeting customer demand. And I tend to think, looking forward, you’ll tend to see, and I guided toward it, accelerating capital expense to continue to be able to add capacity in the coming quarters, given what we see in terms of pipeline.",
+      "sourceId": "source-4f4085f8344669c4",
+      "eventCandidateId": "candidate-ai-capacity-sourcing-2024",
+      "publishedAt": "2024-01-30"
+    }
+  ],
+  "status": "approved",
+  "gaps": [
+    "single_document_family"
+  ],
+  "reviewer": "Codex exact-span review",
+  "reviewedAt": "2026-07-20T02:23:09.781Z",
+  "updatedAt": "2026-07-20T02:23:09.781Z"
+}
