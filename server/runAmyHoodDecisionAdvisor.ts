@@ -162,7 +162,7 @@ const candidateSpecificLocator = (candidate: EventCandidate, anchorTerms: string
     'acquisition', 'authorization', 'decision', 'economics', 'investment', 'microsoft',
     'pricing', 'program', 'review', 'return', 'risk', 'under', 'with',
   ]);
-  const titleTerms = candidate.workingTitle.toLowerCase().match(/[a-z0-9]+/g) ?? [];
+  const titleTerms: string[] = candidate.workingTitle.toLowerCase().match(/[a-z0-9]+/g) ?? [];
   return anchorTerms.some((anchor) => {
     const normalizedAnchor = anchor.toLowerCase();
     return titleTerms.some((term) => term.length >= 4
