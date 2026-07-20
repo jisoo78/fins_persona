@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import type { PolicyMemory } from '../../shared/amyHoodDecisionAdvisor';
+import type { PilotDecisionEvent, PolicyMemory, ReflectionMemory } from '../../shared/amyHoodDecisionAdvisor';
 import type { AmyHoodRenderedContext, AmyHoodRetrievalResult } from '../../shared/amyHoodRag';
 import { sha256 } from './canonicalJson';
 import { loadActiveAmyHoodMemoryIndex } from './memoryIndex';
@@ -12,11 +12,17 @@ export const buildAmyHoodRagContext = async ({
   retrieval,
   projection,
   maxContextTokens = 6_000,
+  maxRequestTokens = 12_000,
+  systemPrompt = '',
+  userPrompt = '',
 }: {
   root: string;
   retrieval: AmyHoodRetrievalResult;
   projection: 'policy' | 'full';
   maxContextTokens?: number;
+  maxRequestTokens?: number;
+  systemPrompt?: string;
+  userPrompt?: string;
 }): Promise<AmyHoodRenderedContext> => {
   const index = await loadActiveAmyHoodMemoryIndex(root);
   if (retrieval.trace.indexHash !== index.manifest.indexHash) throw new Error('retrieval index hash mismatch');
@@ -28,7 +34,8 @@ export const buildAmyHoodRagContext = async ({
     blocks.push('[Memory Retrieval]\nNo approved memory matched this question.');
   } else {
     for (const match of retrieval.matches) {
-      const filePath = path.join(index.directory, '..', '..', '..', 'memory-releases', index.manifest.releaseId, 'policies', `${match.id}.json`);
+      const releaseRoot = path.join(index.directory, '..', '..', '..', 'memory-releases', index.manifest.releaseId);
+      const filePath = path.join(releaseRoot, 'policies', `${match.id}.json`);
       const policy = JSON.parse(await readFile(filePath, 'utf8')) as PolicyMemory;
       const header = [
         `[Retrieved Policy: ${policy.id}]`,
@@ -41,6 +48,29 @@ export const buildAmyHoodRagContext = async ({
       if (projection === 'full') {
         header.push(`Exceptions: ${policy.exceptions.join(' | ')}`);
         header.push(`Non-applicability: ${policy.nonApplicabilityConditions.join(' | ')}`);
+        for (const reflectionId of policy.reflectionIds) {
+          const reflection = JSON.parse(await readFile(
+            path.join(releaseRoot, 'reflections', `${reflectionId}.json`),
+            'utf8',
+          )) as ReflectionMemory;
+          header.push(`Decision axis: ${reflection.decisionAxis.decisionQuestion}`);
+          header.push(`Invariant: ${reflection.invariant}`);
+          header.push(`Condition delta: ${reflection.conditionDelta}`);
+          header.push(`Action delta: ${reflection.actionDelta}`);
+        }
+        const renderEvent = async (eventId: string, label: string) => {
+          const event = JSON.parse(await readFile(
+            path.join(releaseRoot, 'events', `${eventId}.json`),
+            'utf8',
+          )) as PilotDecisionEvent;
+          return `${label}: ${event.id}\nSituation: ${event.situation}\nConditions: ${event.conditions.join(' | ')}\nConstraints: ${event.constraints.join(' | ')}\nChosen action: ${event.chosenAction}`;
+        };
+        for (const eventId of policy.supportingEventIds.slice(0, 2)) {
+          header.push(await renderEvent(eventId, 'Supporting event'));
+        }
+        for (const eventId of policy.contrastingEventIds.slice(0, 1)) {
+          header.push(await renderEvent(eventId, 'Contrasting event'));
+        }
       }
       blocks.push(header.join('\n'));
       expandedArtifactIds.push(policy.id, ...policy.reflectionIds, ...policy.supportingEventIds, ...policy.contrastingEventIds);
@@ -67,6 +97,10 @@ export const buildAmyHoodRagContext = async ({
   const text = blocks.join('\n\n');
   const contextTokens = conservativeTokenEstimate(text);
   if (contextTokens > maxContextTokens) throw new Error('RAG context exceeds token budget');
+  const requestTokens = conservativeTokenEstimate(`${systemPrompt}\n${text}\n${userPrompt}`);
+  if (requestTokens > maxRequestTokens) {
+    throw new Error('complete model request exceeds 12000 tokens');
+  }
   return {
     projection,
     text,
@@ -76,6 +110,7 @@ export const buildAmyHoodRagContext = async ({
       evidenceIds: [...new Set(evidenceIds)],
       sourceIds: [...new Set(sourceIds)],
       contextTokens,
+      requestTokens,
       tokenCounter: 'conservative_estimator',
       contextHash: sha256(text),
     },

@@ -72,6 +72,7 @@ test('edge: no-match trace permits empty selected artifacts', () => {
     noMatch: true,
     noMatchReason: 'below_threshold',
     contextTokens: 0,
+    requestTokens: 0,
     tokenCounter: 'conservative_estimator',
     contextHash: 'e'.repeat(64),
   };

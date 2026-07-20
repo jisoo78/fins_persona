@@ -80,6 +80,7 @@ export type AmyHoodRetrievalTrace = {
   noMatch: boolean;
   noMatchReason: 'below_threshold' | null;
   contextTokens: number;
+  requestTokens: number;
   tokenCounter: 'llama_server' | 'conservative_estimator';
   contextHash: string;
 };
@@ -93,6 +94,7 @@ export type AmyHoodRetrievalResult = {
     | 'evidenceIds'
     | 'sourceIds'
     | 'contextTokens'
+    | 'requestTokens'
     | 'tokenCounter'
     | 'contextHash'
   >;

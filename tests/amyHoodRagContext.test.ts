@@ -24,10 +24,19 @@ const fixture = async (query = 'customer demand capacity urgency') => {
 
 test('happy: renders actual evidence text', async () => {
   const input = await fixture();
-  const context = await buildAmyHoodRagContext({ ...input, projection: 'full' });
+  const context = await buildAmyHoodRagContext({
+    ...input,
+    projection: 'full',
+    systemPrompt: 'Amy Hood system prompt',
+    userPrompt: 'AI 인프라와 운영비를 어떤 순서로 관리합니까?',
+  });
   assert.match(context.text, /Recommended action: scale_infrastructure_constrain_opex/);
   assert.match(context.text, /We expect capital expenditures to have a material sequential increase/);
   assert.match(context.text, /Published: 2023-04-25/);
+  assert.match(context.text, /Decision axis:/);
+  assert.match(context.text, /Condition delta:/);
+  assert.match(context.text, /event-cloud-capacity-scale-2022/);
+  assert.ok(context.trace.requestTokens <= 12_000);
 });
 
 test('edge: no-match renders an explicit empty marker', async () => {
@@ -58,4 +67,14 @@ test('failure: stale retrieval hash fails closed', async () => {
   const input = await fixture();
   input.retrieval.trace.indexHash = 'a'.repeat(64);
   await assert.rejects(buildAmyHoodRagContext({ ...input, projection: 'full' }), /hash mismatch/);
+});
+
+test('failure: complete request above 12000 tokens fails closed', async () => {
+  const input = await fixture();
+  await assert.rejects(buildAmyHoodRagContext({
+    ...input,
+    projection: 'full',
+    systemPrompt: 'x'.repeat(40_000),
+    userPrompt: 'question',
+  }), /complete model request exceeds 12000 tokens/);
 });
