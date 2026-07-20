@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-20T01:16:51.575Z",
+  "generatedAt": "2026-07-20T01:22:30.005Z",
   "inputEventIds": [
     "event-activision-acquisition-2022",
     "event-copilot-price-2023",
@@ -11,6 +11,28 @@
     "reflections": [],
     "policies": []
   },
+  "reviewed": {
+    "approved": {
+      "reflections": [],
+      "policies": []
+    },
+    "rejected": {
+      "reflections": [
+        "reflection-ddde3efbe6d4783b"
+      ],
+      "policies": []
+    }
+  },
+  "safeStop": {
+    "status": "blocked",
+    "reason": "approved reflection count = 0; sealed event evidence lacks a qualified contrast",
+    "downstreamBlocked": [
+      "policy_build",
+      "memory_release",
+      "evaluation_v3"
+    ]
+  },
+  "activeReleaseVersion": null,
   "reviewRequired": [
     {
       "kind": "reflection",

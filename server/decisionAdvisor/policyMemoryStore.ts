@@ -20,6 +20,16 @@ export type PolicyMemoryGateReport = {
   generatedAt: string;
   inputEventIds: string[];
   passing: { reflections: string[]; policies: string[] };
+  reviewed: {
+    approved: { reflections: string[]; policies: string[] };
+    rejected: { reflections: string[]; policies: string[] };
+  };
+  safeStop: {
+    status: 'blocked';
+    reason: string;
+    downstreamBlocked: Array<'policy_build' | 'memory_release' | 'evaluation_v3'>;
+  } | null;
+  activeReleaseVersion: string | null;
   reviewRequired: Array<{
     kind: 'reflection' | 'policy';
     id: string;
@@ -165,22 +175,50 @@ export const buildPolicyMemoryGateReport = async (
     reflections,
     policies,
     approvedReflections,
+    approvedPolicies,
     modelRuns,
     rejectedReflections,
     rejectedPolicies,
+    activeRelease,
   ] = await Promise.all([
     loadReflectionProposals(root),
     loadPolicyProposals(root),
     loadApprovedReflections(root),
+    loadApprovedPolicies(root),
     loadPolicyMemoryModelRuns(root),
     loadRejectedReflections(root),
     loadRejectedPolicies(root),
+    readJsonFile<{ version?: unknown } | null>(advisorPaths(root).activeMemoryRelease, null),
   ]);
   const rejectedIds = new Set([
     ...rejectedReflections.map(({ id }) => id),
     ...rejectedPolicies.map(({ id }) => id),
   ]);
   const rejected = [...rejectedIds].sort().map((id) => `review_rejected:${id}`);
+  const approvedReflectionIds = approvedReflections.map(({ id }) => id).sort();
+  const approvedPolicyIds = approvedPolicies.map(({ id }) => id).sort();
+  const rejectedReflectionIds = rejectedReflections.map(({ id }) => id).sort();
+  const rejectedPolicyIds = rejectedPolicies.map(({ id }) => id).sort();
+  const safeStop = approvedReflectionIds.length === 0
+    ? {
+        status: 'blocked' as const,
+        reason: 'approved reflection count = 0; sealed event evidence lacks a qualified contrast',
+        downstreamBlocked: [
+          'policy_build',
+          'memory_release',
+          'evaluation_v3',
+        ] as Array<'policy_build' | 'memory_release' | 'evaluation_v3'>,
+      }
+    : approvedPolicyIds.length === 0
+      ? {
+          status: 'blocked' as const,
+          reason: 'approved policy count = 0; no deployable policy memory is available',
+          downstreamBlocked: [
+            'memory_release',
+            'evaluation_v3',
+          ] as Array<'policy_build' | 'memory_release' | 'evaluation_v3'>,
+        }
+      : null;
   const reflectionResults = reflections.map((artifact) => ({
     artifact,
     validation: validateReflectionMemory(artifact, graph),
@@ -206,6 +244,14 @@ export const buildPolicyMemoryGateReport = async (
         .map(({ artifact }) => artifact.id)
         .sort(),
     },
+    reviewed: {
+      approved: { reflections: approvedReflectionIds, policies: approvedPolicyIds },
+      rejected: { reflections: rejectedReflectionIds, policies: rejectedPolicyIds },
+    },
+    safeStop,
+    activeReleaseVersion: typeof activeRelease?.version === 'string'
+      ? activeRelease.version
+      : null,
     reviewRequired: [
       ...reflectionResults
         .filter(({ validation }) => !validation.passed)
@@ -315,6 +361,25 @@ export const reviewPolicyMemoryArtifact = async (
     null,
   );
   if (!proposal) throw new Error(`unknown ${input.kind} proposal: ${input.id}`);
+  const existingReview = await readJsonFile<ArtifactReview | null>(
+    reviewPath(root, input.kind, input.id),
+    null,
+  );
+  if (existingReview) {
+    if (existingReview.decision !== input.decision) {
+      throw new Error(
+        `${input.kind} ${input.id} is already ${existingReview.decision}; review decisions are terminal`,
+      );
+    }
+    const existingArtifact = await readJsonFile<ReflectionMemory | PolicyMemory | null>(
+      reviewedArtifactPath(root, input.kind, input.decision, input.id),
+      null,
+    );
+    if (!existingArtifact) {
+      throw new Error(`${input.kind} ${input.id} has an inconsistent stored review`);
+    }
+    return existingArtifact;
+  }
   const validation = input.kind === 'reflection'
     ? validateReflectionMemory(proposal as ReflectionMemory, graph)
     : validatePolicyMemory(

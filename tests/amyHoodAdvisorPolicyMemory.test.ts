@@ -721,6 +721,25 @@ test('failure: stale or interrupted approval leaves no partial approved state', 
   await saveReflectionBuild(root, reflectionBuild);
   const id = reflectionBuild.artifacts[0].id;
 
+  const approvedRoot = await copyPolicyMemoryData();
+  context.after(() => rm(approvedRoot, { recursive: true, force: true }));
+  await saveReflectionBuild(approvedRoot, reflectionBuild);
+  await approvePolicyMemoryArtifact(approvedRoot, {
+    kind: 'reflection',
+    id,
+    reviewer: 'Codex',
+    reviewedAt: '2026-07-20T10:01:00.000Z',
+    rationale: 'The evidence supports one qualified decision axis.',
+  }, graph);
+  await assert.rejects(() => reviewPolicyMemoryArtifact(approvedRoot, {
+    kind: 'reflection',
+    id,
+    reviewer: 'Codex',
+    reviewedAt: '2026-07-20T10:02:00.000Z',
+    decision: 'rejected',
+    rationale: 'Attempt to reverse the terminal approval decision.',
+  }, graph), /already approved/);
+
   await assert.rejects(() => approvePolicyMemoryArtifact(root, {
     kind: 'reflection',
     id,
@@ -779,7 +798,19 @@ test('failure: stale or interrupted approval leaves no partial approved state', 
   }, graph) as ReflectionMemory;
   assert.equal(rejected.status, 'rejected');
   assert.equal(rejected.review?.decision, 'rejected');
-  assert.equal((await buildPolicyMemoryGateReport(root, graph)).passing.reflections.includes(id), false);
+  const rejectedReport = await buildPolicyMemoryGateReport(root, graph);
+  assert.equal(rejectedReport.passing.reflections.includes(id), false);
+  assert.deepEqual(rejectedReport.reviewed.rejected.reflections, [id]);
+  assert.match(rejectedReport.safeStop!.reason, /approved reflection count = 0/);
+  assert.equal(rejectedReport.activeReleaseVersion, null);
+  await assert.rejects(() => reviewPolicyMemoryArtifact(root, {
+    kind: 'reflection',
+    id,
+    reviewer: 'Codex',
+    reviewedAt: '2026-07-20T10:06:30.000Z',
+    decision: 'approved',
+    rationale: 'Attempt to reverse the terminal rejection decision.',
+  }, graph), /already rejected/);
 
   const cliDependencies = {
     createModel: () => createFixtureModel(reflectionResponse),
