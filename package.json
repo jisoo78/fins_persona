@@ -23,6 +23,8 @@
     "advisor:capacity:test": "tsx --test tests/amyHoodCapacityResourcePilot.test.ts",
     "advisor:capacity:check": "tsx server/runAmyHoodDecisionAdvisor.ts capacity:check",
     "advisor:capacity:apply": "tsx server/runAmyHoodDecisionAdvisor.ts capacity:apply",
+    "advisor:prompt:promote-reviewed": "tsx server/runReviewedAmyHoodPromptPromotion.ts",
+    "advisor:prompt:reviewed-test": "tsx --test tests/amyHoodReviewedMasterPrompt.test.ts",
     "advisor:memory:build": "tsx server/runAmyHoodDecisionAdvisor.ts memory:build",
     "advisor:memory:check": "tsx server/runAmyHoodDecisionAdvisor.ts memory:check",
     "advisor:memory:approve": "tsx server/runAmyHoodDecisionAdvisor.ts memory:approve",
