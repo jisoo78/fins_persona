@@ -1,8 +1,77 @@
 # Amy Hood Query-Dependent Hybrid RAG Design
 
 **Date:** 2026-07-20  
-**Status:** Approved in conversation; pending written-spec review  
+**Status:** Approved; implementation baseline frozen; remaining scope pending final review
 **Target branch:** `codex/amy-hood-first-policy-release`
+
+## 0. Frozen Implementation Baseline
+
+This document remains the single design authority. Do not create a separate
+"remaining implementation" design and do not reimplement completed units.
+The baseline below was verified against branch
+`codex/amy-hood-first-policy-release` on 2026-07-20.
+
+### 0.1 Completed and protected from reimplementation
+
+| Unit | Implementation | Commit | Verified state |
+|---|---|---|---|
+| Shared contracts and paths | `shared/amyHoodRag.ts`, optional Evaluation v3 retrieval fields, index paths | `562d572` | Contract tests pass |
+| BGE-M3 HTTP client | `server/decisionAdvisor/embeddingClient.ts` | `5cb93cd`, corrected by `b435f93` | Port 8081 model identity and 1024 dimensions verified; inputs above the server's 512-token physical batch are split and mean-pooled |
+| Immutable evidence index | `server/decisionAdvisor/memoryIndex.ts` | `f1290d3` | Active approved release only; four records and six reviewed Amy Hood quotes; atomic staging and hash checks |
+| Hybrid candidate retrieval | `server/decisionAdvisor/lexicalScorer.ts`, `server/decisionAdvisor/hybridRetriever.ts` | `b9eb0d1` | BGE-M3 cosine plus BM25, policy-root collapse, deterministic ordering, no-match threshold, private-field rejection |
+| Bounded evidence rendering | `server/decisionAdvisor/ragContext.ts` | `a3cb95e` | Actual quotes and source metadata, deduplication, conservative token cap, index-hash rejection |
+| Index CLI and first index | `server/runAmyHoodMemoryIndex.ts`, `advisor:index:*`, `memory-indexes/` | `b435f93` | Build/check succeeds against live BGE-M3 on 8081; active index `8139f1dcda7813c367df7d8fd90a5507e8401e0bb0971e5df51b7c8e03ba96df` |
+
+These units may be changed only by a failing regression test that demonstrates
+a requirement gap. Consumer integration must import them instead of creating a
+second retriever, context builder, embedding client, index format, or cache key.
+
+### 0.2 Partially implemented; completion is mandatory
+
+1. **Retrieval calibration:** the six-probe development dataset exists, but no
+   evaluator currently computes Recall@3 or no-match false-positive rate. The
+   active manifest contains provisional metrics supplied by the builder. They
+   are not measured results and must not be used in a report.
+2. **Full projection:** the renderer supplies complete policy fields and real
+   evidence, but it does not yet load and render the linked reflection,
+   supporting events, contrasting event, condition delta, and action delta.
+3. **Request budgeting:** the RAG block is capped, but the consumer must verify
+   the complete system-plus-user request remains at or below 12,000 tokens.
+
+### 0.3 Not implemented
+
+- `server/decisionAdvisor/advisorRuntime.ts` and the dedicated Advisor route/UI
+  routing do not exist.
+- `server/evaluationV3/retrievalCache.ts` does not exist.
+- Evaluation v3 still uses static `EvaluationV3ContextPackage` projection.
+- Evaluation v3 run creation does not pin the active index/config hashes and
+  answers do not yet persist dynamic retrieval traces.
+- `server/runAmyHoodEvaluationV3.ts` does not exist.
+- No 30-question × four-arm E4B run has used this dynamic index, and no dynamic
+  RAG report exists.
+
+### 0.4 Frozen remaining delivery order
+
+Work must continue in this exact order:
+
+1. Replace provisional calibration with measured development-set metrics and
+   refuse index activation when either quality gate fails.
+2. Complete linked reflection/event/contrast expansion and total-request
+   budgeting in the existing context builder.
+3. Connect the actual Amy Hood Advisor chat to the existing retriever and
+   context builder, with explicit prompt-only fallback on dependency failure.
+4. Add one atomic Evaluation v3 retrieval cache and make Policy/Full arms reuse
+   the same ranked roots for each public question prompt.
+5. Replace static context on new Evaluation v3 executions, pin hashes, and
+   persist traces. Preserve historical static-run readers.
+6. Run all non-model gates, then one 30-question × four-arm experiment using
+   E4B on 8080 and BGE-M3 on 8081.
+7. Correctly label earlier reports as static-context baselines and generate a
+   new developer report from the dynamic-run JSON.
+
+No model comparison may start before steps 1–5 pass. A dependency failure in a
+RAG evaluation arm marks the run incomplete; it must never silently become a
+prompt-only run.
 
 ## 1. Objective
 
