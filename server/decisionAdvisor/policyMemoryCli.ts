@@ -145,10 +145,19 @@ const runReview = async (
 
 const runRelease = async (
   root: string,
+  args: string[],
   dependencies: PolicyMemoryCliDependencies,
 ) => {
+  const profile = optionValue(args, '--profile');
+  if (profile && profile !== 'evaluation-v4') {
+    throw new Error(`unsupported memory release profile: ${profile}`);
+  }
   const graph = await loadPolicyMemoryInput(root);
-  const result = await buildMemoryRelease(root, { graph, now: dependencies.now() });
+  const result = await buildMemoryRelease(root, {
+    graph,
+    now: dependencies.now(),
+    minimumPolicySchema: profile === 'evaluation-v4' ? 2 : undefined,
+  });
   dependencies.log(JSON.stringify(result, null, 2));
   return true;
 };
@@ -200,7 +209,7 @@ export const runPolicyMemoryCommand = async (
   if (command === 'memory:check') return runCheck(root, dependencies);
   if (command === 'memory:review') return runReview(root, args, dependencies);
   if (command === 'memory:approve') return runApprove(root, args, dependencies);
-  if (command === 'memory:release') return runRelease(root, dependencies);
+  if (command === 'memory:release') return runRelease(root, args, dependencies);
   if (command === 'memory:activate') return runActivate(root, args, dependencies);
   throw new Error(`unknown policy memory command: ${command}`);
 };

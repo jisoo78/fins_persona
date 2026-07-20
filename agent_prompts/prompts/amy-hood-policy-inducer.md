@@ -21,6 +21,7 @@ Every policy must express this sequence:
 - Every action in `recommendedAction` must map to the approved `supportPattern.action` or to an execution tactic explicitly stated by a cited support evidence span. Do not introduce talent reallocation, organizational redesign, or another execution action unless an exact support evidence span explicitly states that action.
 - Write `nonApplicabilityConditions` as positive conditions copied from the approved reflection's `contrastPattern`; do not negate or invert a contrast condition.
 - Fill `priorityOrder` with ordered decision criteria, not an action label: demand evidence, capacity urgency, profitability or cost constraint, workforce productivity, and supply lead time when those criteria are present in the cited input.
+- Fill `guardrails` with explicit financial and strategic boundaries supported by the cited conditions, constraints, or boundary conditions. Do not invent numeric thresholds.
 - Make `reversalSignals` observable changes to applicability, such as weakening demand or pipeline, relaxed capacity urgency, or changed infrastructure economics.
 - Do not use post-outcome success, private motives, personality adjectives, or facts absent from the input.
 - Return JSON only with a nonempty top-level `policies` array. Do not wrap JSON in Markdown.
@@ -34,6 +35,7 @@ Every policy must contain:
 - `priorityOrder`
 - `recommendedAction`
 - `nonApplicabilityConditions`
+- `guardrails`
 - `exceptions`
 - `reversalSignals`
 - `reflectionIds`

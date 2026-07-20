@@ -68,6 +68,7 @@ const parsePolicyResponse = (text: string): PolicyProposal[] => {
       || !nonemptyStrings(item.priorityOrder)
       || typeof item.recommendedAction !== 'string' || !item.recommendedAction.trim()
       || !optionalStrings(item.nonApplicabilityConditions)
+      || !nonemptyStrings(item.guardrails)
       || !optionalStrings(item.exceptions)
       || !nonemptyStrings(item.reversalSignals)
       || !nonemptyStrings(item.reflectionIds)
@@ -179,6 +180,9 @@ export const validatePolicyMemory = (
   }
   if (!nonemptyStrings(policy.priorityOrder)) errors.push('policy requires a priority order');
   if (!policy.recommendedAction.trim()) errors.push('policy requires a recommended action');
+  if (policy.schemaVersion === 2 && !nonemptyStrings(policy.guardrails)) {
+    errors.push('policy schema v2 requires guardrails');
+  }
   if (policy.exceptions.length + policy.nonApplicabilityConditions.length === 0) {
     errors.push('policy requires an exception or non-applicability condition');
   }
@@ -286,9 +290,11 @@ const toPolicyMemory = (
 ) => {
   const canonical = {
     ...proposal,
+    schemaVersion: 2 as const,
     applicabilityConditions: [...new Set(proposal.applicabilityConditions)],
     priorityOrder: [...new Set(proposal.priorityOrder)],
     nonApplicabilityConditions: [...new Set(proposal.nonApplicabilityConditions)],
+    guardrails: [...new Set(proposal.guardrails ?? [])],
     exceptions: [...new Set(proposal.exceptions)],
     reversalSignals: [...new Set(proposal.reversalSignals)],
     reflectionIds: [...new Set(proposal.reflectionIds)].sort(),

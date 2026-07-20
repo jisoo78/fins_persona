@@ -10,7 +10,8 @@
  *    - embedding failure leaves no partial index or active pointer.
  */
 import assert from 'node:assert/strict';
-import { readdir, readFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile, symlink, unlink, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import test from 'node:test';
 
 import { advisorPaths } from '../server/decisionAdvisor/paths';
@@ -70,6 +71,28 @@ test('failure: embedding failure leaves no partial index', async () => {
   await assert.rejects(loadActiveAmyHoodMemoryIndex(root), /active Amy Hood memory index/);
   const entries = await readdir(advisorPaths(root).memoryIndexes).catch(() => []);
   assert.equal(entries.some((name) => name.startsWith('.staging-')), false);
+});
+
+test('failure: release artifacts cannot escape into Evaluation v4 through a symlink', async () => {
+  const root = await writeAmyHoodRagFixture();
+  const active = JSON.parse(await readFile(advisorPaths(root).activeMemoryRelease, 'utf8'));
+  const releaseDirectory = join(advisorPaths(root).memoryReleases, active.releaseId);
+  const manifest = JSON.parse(await readFile(join(releaseDirectory, 'manifest.json'), 'utf8'));
+  const policyRef = manifest.artifacts.find(({ kind }: { kind: string }) => kind === 'policy');
+  assert.ok(policyRef);
+
+  const policyPath = join(releaseDirectory, policyRef.relativePath);
+  const evaluationDirectory = join(root, 'evaluation/v4/sources/normalized');
+  const evaluationPath = join(evaluationDirectory, 'forbidden-policy.json');
+  await mkdir(evaluationDirectory, { recursive: true });
+  await writeFile(evaluationPath, await readFile(policyPath));
+  await unlink(policyPath);
+  await symlink(evaluationPath, policyPath);
+
+  await assert.rejects(() => buildAmyHoodMemoryIndex(root, {
+    embeddingClient: fakeEmbeddingClient(),
+    evaluateCalibration: async () => passingCalibration,
+  }), /artifact path.*release directory/i);
 });
 
 test('happy: index CLI builds then checks without changing the pointer', async () => {

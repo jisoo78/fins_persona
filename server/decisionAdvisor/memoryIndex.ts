@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import { mkdir, readFile, rename, rm, stat, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, realpath, rename, rm, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import type {
@@ -103,13 +103,22 @@ const artifactMap = async <T extends { id: string }>(
   releaseDirectory: string,
   manifest: MemoryReleaseManifest,
   kind: 'event' | 'reflection' | 'policy',
-) => new Map(await Promise.all(manifest.artifacts
-  .filter((artifact) => artifact.kind === kind)
-  .map(async (artifact) => {
-    const value = await loadJson<T>(path.join(releaseDirectory, artifact.relativePath));
+) => {
+  const trustedReleaseDirectory = await realpath(releaseDirectory);
+  return new Map(await Promise.all(manifest.artifacts
+    .filter((artifact) => artifact.kind === kind)
+    .map(async (artifact) => {
+      const artifactPath = path.join(releaseDirectory, artifact.relativePath);
+      const resolvedArtifactPath = await realpath(artifactPath);
+      const relative = path.relative(trustedReleaseDirectory, resolvedArtifactPath);
+      if (relative.startsWith('..') || path.isAbsolute(relative)) {
+        throw new Error(`memory artifact path escapes release directory: ${artifact.id}`);
+      }
+      const value = await loadJson<T>(resolvedArtifactPath);
     if (value.id !== artifact.id) throw new Error(`memory artifact ID mismatch: ${artifact.id}`);
     return [value.id, value] as const;
-  })));
+    })));
+};
 
 const buildEvidence = (
   events: Map<string, PilotDecisionEvent>,
@@ -174,6 +183,7 @@ const buildRecords = (
         policy.priorityOrder,
         policy.recommendedAction,
         policy.nonApplicabilityConditions,
+        policy.guardrails ?? [],
         policy.exceptions,
         policy.reversalSignals,
         linkedReflections.map((reflection) => reflection && [

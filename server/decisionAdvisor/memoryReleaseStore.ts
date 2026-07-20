@@ -52,6 +52,7 @@ export type BuiltMemoryRelease = {
 type BuildOptions = {
   graph: PolicyMemoryInputGraph;
   now?: string;
+  minimumPolicySchema?: 1 | 2;
 };
 
 type ActivationDependencies = {
@@ -87,12 +88,14 @@ const writeText = async (filePath: string, text: string) => {
 const artifactText = (value: unknown) => jsonText(value);
 
 const policyProjection = (policy: PolicyMemory) => canonicalJson({
+  schemaVersion: policy.schemaVersion,
   id: policy.id,
   domain: policy.domain,
   applicabilityConditions: policy.applicabilityConditions,
   priorityOrder: policy.priorityOrder,
   recommendedAction: policy.recommendedAction,
   nonApplicabilityConditions: policy.nonApplicabilityConditions,
+  guardrails: policy.guardrails ?? [],
   exceptions: policy.exceptions,
   reversalSignals: policy.reversalSignals,
   confidence: policy.confidence,
@@ -204,11 +207,14 @@ const assertNoTextLeakage = (
 const releaseableMemory = async (
   root: string,
   graph: PolicyMemoryInputGraph,
+  minimumPolicySchema: 1 | 2 = 1,
 ) => {
-  const [allReflections, policies] = await Promise.all([
+  const [allReflections, approvedPolicies] = await Promise.all([
     loadApprovedReflections(root),
     loadApprovedPolicies(root),
   ]);
+  const policies = approvedPolicies.filter((policy) =>
+    minimumPolicySchema === 1 || policy.schemaVersion === 2);
   if (policies.length === 0) throw new Error('no deployable policy is approved');
   const reflectionIds = new Set(policies.flatMap(({ reflectionIds }) => reflectionIds));
   const reflections = allReflections.filter(({ id }) => reflectionIds.has(id));
@@ -390,7 +396,11 @@ export const buildMemoryRelease = async (
   root: string,
   input: BuildOptions,
 ): Promise<BuiltMemoryRelease> => {
-  const memory = await releaseableMemory(root, input.graph);
+  const memory = await releaseableMemory(
+    root,
+    input.graph,
+    input.minimumPolicySchema,
+  );
   const holdout = await loadEvaluationV3Holdout(root);
   const inputs = await fixedInputHashes(root);
   const provisionalContext = buildContext('pending', memory, input.graph);
@@ -398,6 +408,7 @@ export const buildMemoryRelease = async (
   assertNoTextLeakage(provisionalContext, holdout);
   const contentHash = sha256(canonicalJson({
     inputs,
+    ...(input.minimumPolicySchema === 2 ? { policySchemaVersion: 2 } : {}),
     artifacts: artifactEntries(memory).map(({ kind, artifact }) => ({ kind, artifact })),
     context: { ...provisionalContext, releaseId: null },
     reviews: [
@@ -426,6 +437,7 @@ export const buildMemoryRelease = async (
       version,
       createdAt: input.now ?? new Date().toISOString(),
       ...inputs,
+      ...(input.minimumPolicySchema === 2 ? { policySchemaVersion: 2 as const } : {}),
       artifacts: payload.artifacts,
       evaluationContextPath: 'evaluation-context.json',
       evaluationContextHash: payload.evaluationContextHash,

@@ -21,12 +21,14 @@ export const validatePilotManifest = (
     throw new Error('pilot manifest must be an object');
   }
   const manifest = value as PilotManifest;
-  if (manifest.dataset !== 'amy_hood_phase_3_pilot' || manifest.version !== '1.0.0') {
+  if (manifest.dataset !== 'amy_hood_phase_3_pilot'
+    || (manifest.version !== '1.0.0' && manifest.version !== '2.0.0')) {
     throw new Error('pilot manifest identity is invalid');
   }
-  if (!Array.isArray(manifest.targets) || manifest.targets.length !== 10) {
+  const expectedCount = manifest.version === '1.0.0' ? 10 : 15;
+  if (!Array.isArray(manifest.targets) || manifest.targets.length !== expectedCount) {
     throw new Error(
-      `pilot manifest requires exactly 10 targets; found ${manifest.targets?.length ?? 0}`,
+      `pilot manifest ${manifest.version} requires exactly ${expectedCount} targets; found ${manifest.targets?.length ?? 0}`,
     );
   }
 
@@ -42,7 +44,9 @@ export const validatePilotManifest = (
     if (priorities.has(target.priority)) {
       throw new Error(`duplicate pilot priority: ${target.priority}`);
     }
-    if (!Number.isInteger(target.priority) || target.priority < 1 || target.priority > 10) {
+    if (!Number.isInteger(target.priority)
+      || target.priority < 1
+      || target.priority > expectedCount) {
       throw new Error(`invalid pilot priority: ${target.priority}`);
     }
     const candidate = candidateById.get(target.candidateId);
@@ -61,6 +65,13 @@ export const validatePilotManifest = (
 
   if (coveredDomains.size !== 5) {
     throw new Error('pilot manifest must cover all five domains');
+  }
+  if (manifest.version === '2.0.0') {
+    for (const domain of domains) {
+      if (manifest.targets.filter((target) => target.domain === domain).length !== 3) {
+        throw new Error(`pilot manifest v2 requires exactly three targets for ${domain}`);
+      }
+    }
   }
   return manifest;
 };

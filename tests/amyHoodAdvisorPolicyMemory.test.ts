@@ -175,6 +175,7 @@ const repeatedEventPolicyResponse = (reflectionId: string) => JSON.stringify({
     ],
     recommendedAction: 'Use acquisition only after partnership and organic alternatives fail the strategic-reach test.',
     nonApplicabilityConditions: ['A partnership preserves sufficient access and learning.'],
+    guardrails: ['Preserve integration capacity and a durable return threshold before commitment.'],
     exceptions: ['Delay commitment when integration capacity or durable economics is unverified.'],
     reversalSignals: [
       'A partnership reaches the same strategic objective with materially lower irreversible commitment.',
@@ -248,6 +249,22 @@ test('happy: input graph selects only approved non-holdout decision evidence', a
   );
   assert.equal(policyResult.artifacts[0].policyKind, 'deployable_policy');
   assert.equal(policyResult.artifacts[0].confidence, 'medium');
+  assert.equal(policyResult.artifacts[0].schemaVersion, 2);
+  assert.deepEqual(policyResult.artifacts[0].guardrails, [
+    'Preserve integration capacity and a durable return threshold before commitment.',
+  ]);
+
+  const missingGuardrails = JSON.parse(
+    repeatedEventPolicyResponse(fixtureApprovedReflection.id),
+  );
+  delete missingGuardrails.policies[0].guardrails;
+  const rejectedMissingGuardrails = await buildPolicyProposals(
+    [fixtureApprovedReflection],
+    graph,
+    createFixtureModel(JSON.stringify(missingGuardrails), JSON.stringify(missingGuardrails)),
+  );
+  assert.equal(rejectedMissingGuardrails.modelRun.status, 'failed');
+  assert.equal(rejectedMissingGuardrails.artifacts.length, 0);
 
   const storeRoot = await copyPolicyMemoryData();
   context.after(() => rm(storeRoot, { recursive: true, force: true }));
@@ -349,6 +366,7 @@ test('edge: a material contrast narrows the reflection boundary', async () => {
   assert.match(policyPrompt, /nonApplicabilityConditions.*positive.*contrastPattern/i);
   assert.match(policyPrompt, /do not negate or invert/i);
   assert.match(policyPrompt, /priorityOrder.*decision criteria.*not.*action/i);
+  assert.match(policyPrompt, /guardrails.*financial.*strategic.*boundar/i);
   assert.match(policyPrompt, /reversalSignals.*observable changes.*applicability/i);
   assert.match(
     policyPrompt,
@@ -414,6 +432,7 @@ test('edge: direct Amy principle plus independent confirmation qualifies as medi
       priorityOrder: ['Secular growth opportunity', 'Customer demand', 'Resource productivity'],
       recommendedAction: 'Continue focused investment while reallocating lower-priority resources.',
       nonApplicabilityConditions: ['Demand evidence no longer supports the platform opportunity.'],
+      guardrails: ['Preserve the funding required for the verified long-term platform opportunity.'],
       exceptions: ['Pause expansion if leading demand signals materially weaken.'],
       reversalSignals: ['Sustained demand deterioration removes the substantial-growth premise.'],
       reflectionIds: [reflection.id],
@@ -523,6 +542,41 @@ test('edge: rebuilding identical approved content returns the same release', asy
   assert.equal(second.manifest.releaseId, first.manifest.releaseId);
   assert.equal(second.manifest.version, first.manifest.version);
   assert.equal(second.created, false);
+});
+
+test('happy: Evaluation v4 release profile emits only schema v2 policies', async (context) => {
+  const fixture = await createApprovedMemoryFixture();
+  context.after(() => rm(fixture.root, { recursive: true, force: true }));
+
+  const release = await buildMemoryRelease(fixture.root, {
+    graph: fixture.graph,
+    now: '2026-07-20T11:30:00.000Z',
+    minimumPolicySchema: 2,
+  });
+  assert.equal(release.manifest.policySchemaVersion, 2);
+
+  const policyRefs = release.manifest.artifacts.filter(({ kind }) => kind === 'policy');
+  assert.ok(policyRefs.length > 0);
+  for (const reference of policyRefs) {
+    const artifact = JSON.parse(await readFile(join(release.directory, reference.relativePath), 'utf8'));
+    assert.equal(artifact.schemaVersion, 2);
+    assert.ok(Array.isArray(artifact.guardrails) && artifact.guardrails.length > 0);
+  }
+});
+
+test('failure: memory release rejects an unknown release profile', async (context) => {
+  const fixture = await createApprovedMemoryFixture();
+  context.after(() => rm(fixture.root, { recursive: true, force: true }));
+
+  await assert.rejects(() => runPolicyMemoryCommand(
+    fixture.root,
+    ['memory:release', '--profile', 'unknown'],
+    {
+      createModel: () => createFixtureModel('{}'),
+      now: () => '2026-07-20T11:30:00.000Z',
+      log: () => undefined,
+    },
+  ), /release profile/i);
 });
 
 test('failure: holdout and post-outcome inputs fail before model work', async (context) => {

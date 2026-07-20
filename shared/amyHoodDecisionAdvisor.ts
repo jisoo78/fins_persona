@@ -250,13 +250,13 @@ export type PilotDecisionEvent = {
 export type PilotManifestTarget = {
   candidateId: string;
   domain: DecisionDomain;
-  priority: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+  priority: number;
   replacementReason?: string;
 };
 
 export type PilotManifest = {
   dataset: 'amy_hood_phase_3_pilot';
-  version: '1.0.0';
+  version: '1.0.0' | '2.0.0';
   targets: PilotManifestTarget[];
 };
 
@@ -307,12 +307,14 @@ export type ReflectionMemory = {
 };
 
 export type PolicyMemory = {
+  schemaVersion?: 1 | 2;
   id: string;
   domain: DecisionDomain;
   applicabilityConditions: string[];
   priorityOrder: string[];
   recommendedAction: string;
   nonApplicabilityConditions: string[];
+  guardrails?: string[];
   exceptions: string[];
   reversalSignals: string[];
   reflectionIds: string[];
@@ -371,6 +373,7 @@ export type MemoryReleaseManifest = {
   sourceRegistryHash: string;
   pilotManifestHash: string;
   holdoutManifestHash: string;
+  policySchemaVersion?: 2;
   artifacts: MemoryArtifactRef[];
   evaluationContextPath: 'evaluation-context.json';
   evaluationContextHash: string;

@@ -43,6 +43,7 @@ export const buildAmyHoodRagContext = async ({
         `Applicability: ${policy.applicabilityConditions.join(' | ')}`,
         `Priority order: ${policy.priorityOrder.join(' > ')}`,
         `Recommended action: ${policy.recommendedAction}`,
+        `Guardrails: ${(policy.guardrails ?? []).join(' | ') || 'not specified in schema v1'}`,
         `Reversal signals: ${policy.reversalSignals.join(' | ')}`,
       ];
       if (projection === 'full') {

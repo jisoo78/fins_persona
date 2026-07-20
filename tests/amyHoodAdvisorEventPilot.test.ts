@@ -338,6 +338,38 @@ test('happy: pilot manifest fixes ten candidates across all five domains', async
   assert.equal(new Set(manifest.targets.map(({ domain }) => domain)).size, 5);
 });
 
+test('edge: pilot manifest v2 accepts exactly three targets per decision domain', async () => {
+  const candidates = await loadRealCandidates();
+  const domains = [
+    'm_and_a',
+    'ai_cloud_capex',
+    'pricing_monetization',
+    'cost_efficiency',
+    'shareholder_return_risk',
+  ] as const;
+  const targets = domains.flatMap((domain) => candidates
+    .filter((candidate) => candidate.domain === domain)
+    .slice(0, 3)
+    .map((candidate, index) => ({
+      candidateId: candidate.id,
+      domain,
+      priority: domains.indexOf(domain) * 3 + index + 1,
+    })));
+
+  const manifest = validatePilotManifest({
+    dataset: 'amy_hood_phase_3_pilot',
+    version: '2.0.0',
+    targets,
+  }, candidates);
+
+  assert.equal(manifest.version, '2.0.0');
+  assert.equal(manifest.targets.length, 15);
+  assert.deepEqual(
+    domains.map((domain) => manifest.targets.filter((target) => target.domain === domain).length),
+    [3, 3, 3, 3, 3],
+  );
+});
+
 test('failure: pilot manifest rejects duplicate, unknown, and domain-mismatched targets', async () => {
   const candidates = await loadRealCandidates();
   const duplicate = structuredClone(validManifest);
