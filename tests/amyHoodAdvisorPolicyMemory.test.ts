@@ -350,6 +350,18 @@ test('edge: a material contrast narrows the reflection boundary', async () => {
   assert.match(policyPrompt, /do not negate or invert/i);
   assert.match(policyPrompt, /priorityOrder.*decision criteria.*not.*action/i);
   assert.match(policyPrompt, /reversalSignals.*observable changes.*applicability/i);
+  assert.match(
+    policyPrompt,
+    /Every action in `recommendedAction` must map to the approved `supportPattern\.action`/,
+  );
+  assert.match(
+    policyPrompt,
+    /talent reallocation, organizational redesign, or another execution action/i,
+  );
+  assert.match(
+    policyPrompt,
+    /exact support evidence span explicitly states that action/i,
+  );
   const result = await buildReflectionProposals(
     graph,
     createFixtureModel(reflectionResponse),
