@@ -1,0 +1,55 @@
+{
+  "id": "policy-c4203c075dbd61d3",
+  "domain": "ai_cloud_capex",
+  "applicabilityConditions": [
+    "Azure AI infrastructure requires material sequential investment",
+    "Scaled capital investment would increase COGS",
+    "FY24 operating-expense growth is expected to remain low",
+    "Capacity buildout timing varies by quarter"
+  ],
+  "priorityOrder": [
+    "customer demand",
+    "capacity urgency",
+    "profitability or cost constraint",
+    "workforce productivity",
+    "supply lead time"
+  ],
+  "recommendedAction": "scale_infrastructure_constrain_opex",
+  "nonApplicabilityConditions": [
+    "global cloud-services demand was growing",
+    "investment needs spanned infrastructure and multiple operating teams"
+  ],
+  "exceptions": [
+    "customer demand guides investment",
+    "disciplined cost management across every team",
+    "external supply supplements owned capacity when lead time requires it"
+  ],
+  "reversalSignals": [
+    "weakening demand or pipeline",
+    "relaxed capacity urgency",
+    "changed infrastructure economics"
+  ],
+  "reflectionIds": [
+    "reflection-4b5f7915d30581a4"
+  ],
+  "supportingEventIds": [
+    "event-ai-capacity-opex-pivot-2023",
+    "event-ai-capacity-sourcing-2024"
+  ],
+  "contrastingEventIds": [
+    "event-cloud-capacity-scale-2022"
+  ],
+  "evidenceIds": [
+    "span-capacity-2022-capex",
+    "span-capacity-2022-headcount",
+    "span-capacity-2023-ai-capex",
+    "span-capacity-2023-opex",
+    "span-capacity-2024-demand-discipline",
+    "span-capacity-2024-external-supply"
+  ],
+  "directPolicyEvidenceIds": [],
+  "confidence": "medium",
+  "policyKind": "deployable_policy",
+  "status": "review_required",
+  "review": null
+}

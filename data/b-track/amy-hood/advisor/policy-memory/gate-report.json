@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-20T02:45:10.123Z",
+  "generatedAt": "2026-07-20T03:30:53.466Z",
   "inputEventIds": [
     "event-activision-acquisition-2022",
     "event-ai-capacity-opex-pivot-2023",
@@ -14,14 +14,18 @@
     "reflections": [
       "reflection-4b5f7915d30581a4"
     ],
-    "policies": []
+    "policies": [
+      "policy-c4203c075dbd61d3"
+    ]
   },
   "reviewed": {
     "approved": {
       "reflections": [
         "reflection-4b5f7915d30581a4"
       ],
-      "policies": []
+      "policies": [
+        "policy-c4203c075dbd61d3"
+      ]
     },
     "rejected": {
       "reflections": [
@@ -34,14 +38,7 @@
       ]
     }
   },
-  "safeStop": {
-    "status": "blocked",
-    "reason": "approved policy count = 0; no deployable policy memory is available",
-    "downstreamBlocked": [
-      "memory_release",
-      "evaluation_v3"
-    ]
-  },
+  "safeStop": null,
   "activeReleaseVersion": null,
   "reviewRequired": [
     {

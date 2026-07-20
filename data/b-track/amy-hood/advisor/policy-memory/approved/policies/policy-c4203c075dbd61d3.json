@@ -1,0 +1,61 @@
+{
+  "id": "policy-c4203c075dbd61d3",
+  "domain": "ai_cloud_capex",
+  "applicabilityConditions": [
+    "Azure AI infrastructure requires material sequential investment",
+    "Scaled capital investment would increase COGS",
+    "FY24 operating-expense growth is expected to remain low",
+    "Capacity buildout timing varies by quarter"
+  ],
+  "priorityOrder": [
+    "customer demand",
+    "capacity urgency",
+    "profitability or cost constraint",
+    "workforce productivity",
+    "supply lead time"
+  ],
+  "recommendedAction": "scale_infrastructure_constrain_opex",
+  "nonApplicabilityConditions": [
+    "global cloud-services demand was growing",
+    "investment needs spanned infrastructure and multiple operating teams"
+  ],
+  "exceptions": [
+    "customer demand guides investment",
+    "disciplined cost management across every team",
+    "external supply supplements owned capacity when lead time requires it"
+  ],
+  "reversalSignals": [
+    "weakening demand or pipeline",
+    "relaxed capacity urgency",
+    "changed infrastructure economics"
+  ],
+  "reflectionIds": [
+    "reflection-4b5f7915d30581a4"
+  ],
+  "supportingEventIds": [
+    "event-ai-capacity-opex-pivot-2023",
+    "event-ai-capacity-sourcing-2024"
+  ],
+  "contrastingEventIds": [
+    "event-cloud-capacity-scale-2022"
+  ],
+  "evidenceIds": [
+    "span-capacity-2022-capex",
+    "span-capacity-2022-headcount",
+    "span-capacity-2023-ai-capex",
+    "span-capacity-2023-opex",
+    "span-capacity-2024-demand-discipline",
+    "span-capacity-2024-external-supply"
+  ],
+  "directPolicyEvidenceIds": [],
+  "confidence": "medium",
+  "policyKind": "deployable_policy",
+  "status": "approved",
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-07-20T03:30:43.745Z",
+    "decision": "approved",
+    "rationale": "Approved after exact-span review: FY23 and FY24 support scaling AI infrastructure while constraining operating-expense growth; FY22 preserves the broad-demand boundary; external supply remains a lead-time tactic; talent reallocation, margin guarantees, and post-outcome claims are excluded.",
+    "validationHash": "4c589e4bf6f3cbfa87ea34820ed1de562b60605ec9d02f27cc9202038abf29d9"
+  }
+}
