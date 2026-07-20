@@ -60,7 +60,10 @@ export const PersonaDetailModal: React.FC<PersonaDetailModalProps> = ({ persona,
     `${persona.name} 관점에서 보면 "${input}" 요청은 먼저 ${persona.coreValues[0] || persona.decisionStyle || '확인 필요'} 기준으로 검토해야 합니다.\n\n결론: 바로 확정하기보다 판단 기준을 먼저 좁히는 편이 좋습니다.\n리스크: 필요한 수치, 손실 한도, 중단 조건이 아직 확인되지 않았습니다.\n다음 액션: 기대효과와 실패 시 손실을 한 문장씩 정리해 주세요.`;
 
   const requestPersonaReply = async (input: string, recentMessages: ChatMessage[]) => {
-    const response = await fetch('/api/agent/persona-chat', {
+    const endpoint = persona.name.trim().toLocaleLowerCase('en-US') === 'amy hood'
+      ? '/api/b-track/amy-hood/advisor/chat'
+      : '/api/agent/persona-chat';
+    const response = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

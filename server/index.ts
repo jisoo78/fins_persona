@@ -28,6 +28,8 @@ import {
   createPromptVersionRouteDependencies,
   createPromptVersionRouter,
 } from './promptVersions/routes';
+import { createAmyHoodAdvisorRuntime } from './decisionAdvisor/advisorRuntime';
+import { createModelClient } from './personaPipeline/modelClient';
 
 const execFileAsync = promisify(execFile);
 
@@ -1235,6 +1237,36 @@ app.get('/api/pre-interview-contexts/latest', async (_, res) => {
     res.status(500).json({
       ok: false,
       message: error instanceof Error ? error.message : 'Unknown latest pre interview context fetch error',
+    });
+  }
+});
+
+app.post('/api/b-track/amy-hood/advisor/chat', async (req, res) => {
+  const { message, recentMessages, chatSessionId } = req.body as {
+    message?: string;
+    chatSessionId?: string | null;
+    recentMessages?: { sender: 'ai' | 'user'; text: string }[];
+  };
+  if (!message?.trim()) {
+    res.status(400).json({ ok: false, message: 'message is required' });
+    return;
+  }
+  try {
+    const result = await createAmyHoodAdvisorRuntime({
+      root: process.cwd(),
+      createModel: () => createModelClient('local', { maxTokens: 1_500 }),
+    }).answer({ message: message.trim(), recentMessages: recentMessages ?? [] });
+    res.json({
+      ok: true,
+      reply: result.reply,
+      chatSessionId: chatSessionId ?? null,
+      ragFallback: result.ragFallback,
+      noMatch: result.noMatch,
+    });
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      message: error instanceof Error ? error.message : 'Unknown Amy Hood advisor error',
     });
   }
 });
