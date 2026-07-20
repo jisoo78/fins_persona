@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amy Hood Evaluation v3 — Gemma 4 E4B 모델 비교 보고서</title>
+  <style>
+    :root { color-scheme:light; --ink:#182230; --muted:#667085; --line:#d7deea; --panel:#f7f9fc; --blue:#2457d6; --green:#137447; --red:#b42318; --amber:#a15c00; --code:#111827; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#eef2f7; color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; line-height:1.58; }
+    main { max-width:1200px; margin:32px auto; padding:42px; background:#fff; box-shadow:0 10px 36px rgba(20,31,55,.08); }
+    h1 { margin:0 0 8px; font-size:30px; letter-spacing:-.03em; }
+    h2 { margin:38px 0 14px; padding-bottom:8px; border-bottom:2px solid var(--ink); font-size:21px; }
+    h3 { margin:24px 0 10px; font-size:17px; }
+    p { margin:8px 0 14px; }
+    code { padding:2px 5px; border-radius:4px; background:#edf1f7; font-size:.92em; }
+    pre { overflow:auto; padding:18px; border-radius:8px; background:var(--code); color:#e5e7eb; font-size:12px; line-height:1.55; white-space:pre-wrap; }
+    .meta { color:var(--muted); font-size:14px; }
+    .banner { margin:24px 0; padding:18px 20px; border-left:5px solid var(--amber); background:#fff8eb; }
+    .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:16px 0 24px; }
+    .card { padding:16px; border:1px solid var(--line); border-radius:8px; background:var(--panel); }
+    .card .label { color:var(--muted); font-size:13px; }
+    .card .value { margin-top:4px; font-size:25px; font-weight:750; }
+    .good { color:var(--green); } .bad { color:var(--red); } .warn { color:var(--amber); }
+    table { width:100%; border-collapse:collapse; margin:12px 0 24px; font-size:14px; }
+    th, td { padding:10px 9px; border:1px solid var(--line); text-align:left; vertical-align:top; }
+    th { background:#edf1f7; font-weight:700; }
+    td.num, th.num { text-align:right; white-space:nowrap; }
+    .pill { display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; font-weight:700; }
+    .pass { color:var(--green); background:#e7f6ed; } .fail { color:var(--red); background:#fdecea; } .hold { color:var(--amber); background:#fff3df; }
+    .callout { padding:14px 16px; border:1px solid #b9c9ef; border-radius:8px; background:#f1f5ff; }
+    ul, ol { padding-left:22px; }
+    .foot { margin-top:38px; padding-top:14px; border-top:1px solid var(--line); color:var(--muted); font-size:13px; }
+    @media (max-width:850px) { main{margin:0;padding:22px}.grid{grid-template-columns:1fr 1fr}table{display:block;overflow:auto} }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Amy Hood Evaluation v3 — Gemma 4 E4B 모델 비교 보고서</h1>
+  <div class="meta">개발자용 · 2026-07-20 · E4B 실험 그룹 <code>5c9bbd91-2196-45e9-b3ba-fdea0ed7338e</code></div>
+
+  <div class="banner">
+    <strong>최종 판정: E4B 교체로 실행 속도와 조건 간 안정성은 개선됐지만, Amy Hood 정책 효과는 관측되지 않았다.</strong><br>
+    네 실험군이 모두 27/30(90%)로 수렴했다. 기존 모델에서 보인 정책 RAG의 +13.3%p 증분은 E4B에서 0%p였으며, 일반 CFO 기준선도 여전히 90%여서 벤치마크 기각 상태가 유지된다.
+  </div>
+
+  <div class="grid">
+    <div class="card"><div class="label">E4B 완료 응답</div><div class="value good">120 / 120</div></div>
+    <div class="card"><div class="label">모든 실험군 정확도</div><div class="value">90.0%</div><div class="meta">조건 간 총점 차이 0</div></div>
+    <div class="card"><div class="label">정책 RAG 증분</div><div class="value warn">0.0%p</div><div class="meta">기존 모델 +13.3%p</div></div>
+    <div class="card"><div class="label">추론시간 감소</div><div class="value good">61.5%</div><div class="meta">846.748s → 325.844s</div></div>
+  </div>
+
+  <h2>1. 통제된 비교 조건</h2>
+  <table>
+    <tbody>
+      <tr><th>변경 변수</th><td>로컬 모델만 변경</td></tr>
+      <tr><th>기존 모델</th><td><code>gemma4-v2-Q8_0.gguf</code> — Fable 5 증류 계열</td></tr>
+      <tr><th>신규 모델</th><td><code>Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q4_K_M.gguf</code></td></tr>
+      <tr><th>고정 조건</th><td>30문항, 정답 키, 홀드아웃, 실험군 순서, Master Prompt, 메모리 릴리스, temperature 및 러너 코드</td></tr>
+      <tr><th>Master Prompt</th><td><code>amy-hood-master-v3-20260720</code> · SHA-256 <code>9cc89493d6dcd53dc994bafc2406a56c16b71358d5a221060033403cb84034eb</code></td></tr>
+      <tr><th>Memory release</th><td><code>v1-262d69135ca0</code> · context hash <code>a793ae2a55d32c8966b0d9ed40ca0fd8e1bc2332da2915850b03e1c938d89aa2</code></td></tr>
+      <tr><th>Question set</th><td>SHA-256 <code>59cbdff01cf984c4b6d14def8b7b765b1dde204f4446dd67883f4563c4abb4b9</code></td></tr>
+    </tbody>
+  </table>
+
+  <h2>2. E4B 내부 4개 실험군 결과</h2>
+  <table>
+    <thead><tr><th>실험군</th><th class="num">판별 /10</th><th class="num">홀드아웃 /10</th><th class="num">반사실 /6</th><th class="num">전이 /4</th><th class="num">총점</th><th class="num">정확도</th><th class="num">직전 대비</th></tr></thead>
+    <tbody>
+      <tr><td>① 일반 CFO Prompt</td><td class="num">9</td><td class="num">10</td><td class="num">4</td><td class="num">4</td><td class="num">27/30</td><td class="num">90.0%</td><td class="num">기준선</td></tr>
+      <tr><td>② Amy Main Prompt</td><td class="num">9</td><td class="num">10</td><td class="num">4</td><td class="num">4</td><td class="num">27/30</td><td class="num">90.0%</td><td class="num">0.0%p</td></tr>
+      <tr><td>③ Amy Main Prompt + 정책 RAG</td><td class="num">9</td><td class="num">10</td><td class="num">4</td><td class="num">4</td><td class="num">27/30</td><td class="num">90.0%</td><td class="num">0.0%p</td></tr>
+      <tr><td>④ Amy Main Prompt + Full RAG</td><td class="num">9</td><td class="num">10</td><td class="num">4</td><td class="num">4</td><td class="num">27/30</td><td class="num">90.0%</td><td class="num">0.0%p</td></tr>
+    </tbody>
+  </table>
+  <p>총점과 영역별 점수가 네 조건에서 완전히 같다. E4B는 컨텍스트가 늘어나도 성능이 하락하지 않았지만, Amy Prompt 또는 정책 메모리로 인해 성능이 상승하지도 않았다. 이 결과만 보면 E4B는 현재 평가에서 <strong>조건 민감도가 0에 가까운 모델</strong>이다.</p>
+
+  <h2>3. 기존 모델 vs E4B — Before/After</h2>
+  <table>
+    <thead><tr><th>실험군</th><th class="num">기존 모델</th><th class="num">E4B</th><th class="num">모델 교체 변화</th><th>해석</th></tr></thead>
+    <tbody>
+      <tr><td>일반 CFO</td><td class="num">90.0%</td><td class="num">90.0%</td><td class="num">0.0%p</td><td>기본 CFO 추론 능력은 동일 점수.</td></tr>
+      <tr><td>Amy Main Prompt</td><td class="num">80.0%</td><td class="num">90.0%</td><td class="num good">+10.0%p</td><td>E4B가 장문 역할 프롬프트의 부정적 영향을 받지 않음.</td></tr>
+      <tr><td>정책 RAG</td><td class="num">93.3%</td><td class="num">90.0%</td><td class="num bad">-3.3%p</td><td>기존 모델의 정책 증분은 E4B에서 재현되지 않음.</td></tr>
+      <tr><td>Full RAG</td><td class="num">80.0%</td><td class="num">90.0%</td><td class="num good">+10.0%p</td><td>E4B는 긴 구조화 컨텍스트의 성능 하락을 피함.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout"><strong>유의미한 변화는 있다.</strong> E4B는 모델 조건에 따른 성능 변동폭을 기존 13.3%p에서 0%p로 줄였고 61.5% 더 빠르게 끝났다. 그러나 이것은 Amy Hood 판단 재현 향상이 아니라, 모든 조건이 같은 점수로 평탄화된 현상이다.</div>
+
+  <h2>4. 정책 RAG의 실제 입력 구조</h2>
+  <p>현재 러너는 OpenAI-compatible 메시지를 <code>system</code>과 <code>user</code>로 분리한다. 정책 RAG에서는 활성 Master Prompt가 system에, 승인 정책과 문제는 user에 들어간다. 정답 키와 채점용 의도는 모델 입력에 포함되지 않는다.</p>
+  <pre>messages = [
+  {
+    role: "system",
+    content: AMY_HOOD_MASTER_PROMPT_V3
+  },
+  {
+    role: "user",
+    content: `
+메모리 릴리스: v1-262d69135ca0
+
+판단 정책:
+- {
+    "domain": "ai_cloud_capex",
+    "priorityOrder": [
+      "customer demand",
+      "capacity urgency",
+      "profitability or cost constraint",
+      "workforce productivity",
+      "supply lead time"
+    ],
+    "recommendedAction": "scale_infrastructure_constrain_opex",
+    "reversalSignals": [
+      "weakening demand or pipeline",
+      "relaxed capacity urgency",
+      "changed infrastructure economics"
+    ],
+    "confidence": "medium"
+  }
+
+질문: {공개 평가 질문}
+
+선택지:
+1. {선택지 1}
+2. {선택지 2}
+3. {선택지 3}
+4. {선택지 4}
+
+가장 적절한 선택지 하나를 고르고 판단 기준과 우선순위를 설명하세요.
+JSON만 출력하세요: {"choice":1,"reason":"..."}
+    `
+  }
+]</pre>
+
+  <h3>현재 구현에서 “RAG”가 의미하는 것</h3>
+  <table>
+    <thead><tr><th>항목</th><th>현재 동작</th><th>평가</th></tr></thead>
+    <tbody>
+      <tr><td>검색 시점</td><td>질문별 검색 없음. 활성 릴리스 스냅샷을 실행 시작 시 로드.</td><td><span class="pill hold">제한적</span></td></tr>
+      <tr><td>정책 선택</td><td>승인 정책 배열 전체를 모든 문항에 동일 주입.</td><td><span class="pill fail">도메인 오염 가능</span></td></tr>
+      <tr><td>현재 정책 수</td><td>1개, 도메인은 <code>ai_cloud_capex</code>.</td><td>M&amp;A·가격·인력·주주환원에는 직접 적용 근거가 약함.</td></tr>
+      <tr><td>정책 표현</td><td>구조화 객체를 JSON 문자열로 직렬화한 뒤 bullet text로 삽입.</td><td>구조는 보존되지만 모델 관점에서는 일반 텍스트.</td></tr>
+      <tr><td>원문·메타데이터</td><td>정책 RAG에는 원문 청크, 출처 URL, evidence 원문을 넣지 않음.</td><td>짧지만 근거 재검증은 불가능.</td></tr>
+      <tr><td>홀드아웃 보호</td><td>릴리스 참조와 문자열을 검사해 봉인 사건 누출 차단.</td><td><span class="pill pass">유지</span></td></tr>
+    </tbody>
+  </table>
+  <p>따라서 현재 조건의 더 정확한 이름은 <strong>“승인 정책 고정 주입(policy-context ablation)”</strong>에 가깝다. 질문 임베딩이나 도메인 필터로 관련 정책을 검색하는 일반적인 의미의 RAG는 아직 아니다.</p>
+
+  <h2>5. 오류 패턴</h2>
+  <table>
+    <thead><tr><th>문항</th><th>정답</th><th>일반 CFO</th><th>Amy Prompt</th><th>정책 RAG</th><th>Full RAG</th><th>판단</th></tr></thead>
+    <tbody>
+      <tr><td>D01 · M&amp;A</td><td>2</td><td class="bad">4</td><td class="bad">4</td><td class="bad">4</td><td class="bad">4</td><td>모든 조건이 플랫폼 신뢰보다 초기 통합 시너지를 선행했다.</td></tr>
+      <tr><td>C01B · AI CapEx</td><td>2</td><td class="bad">1</td><td class="bad">1</td><td class="bad">1</td><td class="bad">1</td><td>35% 확인 수요만 승인하지 않고 전체 전망 선점을 택했다. 정책이 직접 관련된 문항에서도 교정 실패.</td></tr>
+      <tr><td>C03B · M&amp;A</td><td>2</td><td class="bad">1</td><td class="bad">1</td><td class="bad">4</td><td class="bad">1</td><td>독점 조건 제거 대신 독점 유지와 완화책을 선택했다. 정책 RAG도 오답 번호만 달라졌다.</td></tr>
+    </tbody>
+  </table>
+  <p>D01과 C01B는 두 모델의 모든 조건에서 공통 오답이다. 이는 모델 비교보다 문항·정답 키의 판별 가능성 또는 모델 공통 선호를 측정하고 있을 가능성이 크다. C03B는 E4B만 네 조건 모두 틀려, 이 모델이 플랫폼 중립성을 하드 제약보다 조정 가능한 변수로 처리하는 경향을 보였다.</p>
+
+  <h2>6. 비용과 실행 안정성</h2>
+  <table>
+    <thead><tr><th>실험군</th><th class="num">입력 토큰</th><th class="num">출력 토큰</th><th class="num">응답시간</th><th>상태</th></tr></thead>
+    <tbody>
+      <tr><td>일반 CFO</td><td class="num">11,483</td><td class="num">2,837</td><td class="num">70.345s</td><td>30/30 완료</td></tr>
+      <tr><td>Amy Prompt</td><td class="num">42,233</td><td class="num">3,128</td><td class="num">73.051s</td><td>30/30 완료</td></tr>
+      <tr><td>정책 RAG</td><td class="num">52,283</td><td class="num">3,395</td><td class="num">78.760s</td><td>30/30 완료</td></tr>
+      <tr><td>Full RAG</td><td class="num">91,463</td><td class="num">3,468</td><td class="num">103.688s</td><td>30/30 완료</td></tr>
+      <tr><th>E4B 합계</th><th class="num">197,462</th><th class="num">12,828</th><th class="num">325.844s</th><th>실패·mismatch 0</th></tr>
+      <tr><th>기존 모델 합계</th><th class="num">197,942</th><th class="num">8,480</th><th class="num">846.748s</th><th>실패·mismatch 0</th></tr>
+    </tbody>
+  </table>
+  <p>E4B는 모델 응답시간 합계가 14분 6.7초에서 5분 25.8초로 감소했다. 반면 출력 토큰은 51.3% 증가했다. Q4 양자화와 모델 특성의 영향이 함께 있으므로 순수 아키텍처 우위로 일반화하지 않는다.</p>
+
+  <h2>7. 가설, 근거, 최종 판정</h2>
+  <table>
+    <thead><tr><th>가설</th><th>근거</th><th>판정</th></tr></thead>
+    <tbody>
+      <tr><td>E4B가 기존 모델보다 Amy Prompt를 잘 따른다.</td><td>Amy Prompt 80% → 90%, Full RAG 80% → 90%.</td><td><span class="pill hold">방향성 지지</span></td></tr>
+      <tr><td>E4B에서 승인 정책이 추가 가치를 만든다.</td><td>Prompt 90%, 정책 RAG 90%; 증분 0%p.</td><td><span class="pill fail">지지되지 않음</span></td></tr>
+      <tr><td>E4B가 Full RAG 컨텍스트 과부하를 완화한다.</td><td>정책 RAG와 Full RAG가 모두 90%; 기존 모델의 -13.3%p 하락은 사라짐.</td><td><span class="pill hold">방향성 지지</span></td></tr>
+      <tr><td>E4B가 Amy Hood 의사결정 재현을 더 잘한다.</td><td>일반 CFO부터 90%이고 네 조건 점수가 동일함.</td><td><span class="pill fail">판정 불가</span></td></tr>
+    </tbody>
+  </table>
+  <p><strong>결론:</strong> E4B는 PoC 반복 실행용으로 더 빠르고 장문 컨텍스트에 안정적이다. 그러나 현재 평가에서는 일반 CFO, Amy Prompt, 정책 RAG, Full RAG를 구별하지 못했다. 따라서 E4B를 더 나은 Amy Hood 페르소나 모델로 채택할 근거는 없고, 저비용 파이프라인 검증 모델로는 유리하다.</p>
+
+  <h3>다음 권고</h3>
+  <ol>
+    <li>D01·C01B·C03B를 우선 재검토하고 일반 CFO 기준선을 50~70%로 낮춘다.</li>
+    <li>질문의 <code>domain</code>과 정책의 <code>domain</code>을 일치시키는 최소 검색 게이트를 추가한다.</li>
+    <li>비관련 정책은 0개를 반환할 수 있게 하고, 관련 정책만 top-k 1~3개 주입한다.</li>
+    <li>AI CapEx 전용 소규모 문항에서 정책 없음/정책 있음 실험을 먼저 수행해 정책 자체 효과를 격리한다.</li>
+    <li>벤치마크가 상한 기준을 통과한 뒤 두 모델을 각각 5회 반복해 평균·표준편차·선택 일치율을 비교한다.</li>
+  </ol>
+
+  <div class="foot">
+    E4B run IDs: <code>dfffeb50-e957-48f6-892a-d573058e98a2</code>, <code>7f64c3a1-a38b-4e75-a45c-d98c452f8616</code>, <code>a7277b9c-ff40-44bb-8485-29e879f06b28</code>, <code>207e4919-d7b7-4c50-8239-f9322c316ee3</code>. 비교 기준은 이전 실험 그룹 <code>26f66525-1a5f-4e39-9d85-d44a05fcdc7d</code>이다. GitHub 2018 사건은 holdout manifest상 known prior exposure 경고가 유지된다.
+  </div>
+</main>
+</body>
+</html>
