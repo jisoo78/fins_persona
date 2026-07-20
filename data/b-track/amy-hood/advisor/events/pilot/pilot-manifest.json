@@ -1,59 +1,21 @@
 {
   "dataset": "amy_hood_phase_3_pilot",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "targets": [
-    {
-      "candidateId": "candidate-linkedin-acquisition-2016",
-      "domain": "m_and_a",
-      "priority": 1
-    },
-    {
-      "candidateId": "candidate-activision-acquisition-2022",
-      "domain": "m_and_a",
-      "priority": 2
-    },
-    {
-      "candidateId": "candidate-openai-expansion-2023",
-      "domain": "ai_cloud_capex",
-      "priority": 3
-    },
-    {
-      "candidateId": "candidate-copilot-price-2023",
-      "domain": "pricing_monetization",
-      "priority": 4
-    },
-    {
-      "candidateId": "candidate-workforce-reset-2023",
-      "domain": "cost_efficiency",
-      "priority": 5
-    },
-    {
-      "candidateId": "candidate-cloud-capacity-scale-2022",
-      "domain": "ai_cloud_capex",
-      "priority": 6,
-      "replacementReason": "Replace a sealed holdout target with reviewed non-holdout capacity evidence."
-    },
-    {
-      "candidateId": "candidate-ai-capacity-opex-pivot-2023",
-      "domain": "ai_cloud_capex",
-      "priority": 7,
-      "replacementReason": "Replace an incomplete M&A target with direct Amy resource-allocation evidence."
-    },
-    {
-      "candidateId": "candidate-ai-capacity-sourcing-2024",
-      "domain": "ai_cloud_capex",
-      "priority": 8,
-      "replacementReason": "Replace a sealed holdout target with reviewed non-holdout capacity evidence."
-    },
-    {
-      "candidateId": "candidate-m365-price-2021",
-      "domain": "pricing_monetization",
-      "priority": 9
-    },
-    {
-      "candidateId": "candidate-buyback-2021",
-      "domain": "shareholder_return_risk",
-      "priority": 10
-    }
+    { "candidateId": "candidate-linkedin-acquisition-2016", "domain": "m_and_a", "priority": 1 },
+    { "candidateId": "candidate-activision-acquisition-2022", "domain": "m_and_a", "priority": 2 },
+    { "candidateId": "candidate-nuance-acquisition-2021", "domain": "m_and_a", "priority": 3 },
+    { "candidateId": "candidate-cloud-capacity-scale-2022", "domain": "ai_cloud_capex", "priority": 4 },
+    { "candidateId": "candidate-ai-capacity-opex-pivot-2023", "domain": "ai_cloud_capex", "priority": 5 },
+    { "candidateId": "candidate-ai-capacity-sourcing-2024", "domain": "ai_cloud_capex", "priority": 6 },
+    { "candidateId": "candidate-m365-price-2021", "domain": "pricing_monetization", "priority": 7 },
+    { "candidateId": "candidate-copilot-price-2023", "domain": "pricing_monetization", "priority": 8 },
+    { "candidateId": "candidate-teams-unbundle-2023", "domain": "pricing_monetization", "priority": 9 },
+    { "candidateId": "candidate-workforce-reset-2023", "domain": "cost_efficiency", "priority": 10 },
+    { "candidateId": "candidate-phone-restructure-2015", "domain": "cost_efficiency", "priority": 11 },
+    { "candidateId": "candidate-transformation-2026", "domain": "cost_efficiency", "priority": 12 },
+    { "candidateId": "candidate-buyback-2013", "domain": "shareholder_return_risk", "priority": 13 },
+    { "candidateId": "candidate-buyback-2021", "domain": "shareholder_return_risk", "priority": 14 },
+    { "candidateId": "candidate-buyback-2024", "domain": "shareholder_return_risk", "priority": 15 }
   ]
 }

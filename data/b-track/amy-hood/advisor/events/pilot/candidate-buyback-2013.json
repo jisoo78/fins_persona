@@ -1,0 +1,81 @@
+{
+  "id": "event-buyback-2013",
+  "candidateId": "candidate-buyback-2013",
+  "title": "2013 forty billion dollar share repurchase authorization",
+  "domain": "shareholder_return_risk",
+  "decisionDate": "2013-09-17",
+  "decisionQuestion": "Should the company proceed with the approved $40 billion share repurchase program?",
+  "situation": "The board of directors has approved a new share repurchase program.",
+  "objectives": [
+    "Return value to shareholders.",
+    "Optimize capital structure.",
+    "Signal confidence in future performance."
+  ],
+  "conditions": [
+    "The board has formally approved the program.",
+    "The authorization limit is set at $40 billion."
+  ],
+  "constraints": [
+    "The repurchase must adhere to the $40 billion limit.",
+    "The decision must align with shareholder return goals."
+  ],
+  "options": [
+    {
+      "id": "option-buyback-full",
+      "description": "Execute the full $40 billion share repurchase authorization.",
+      "expectedBenefit": "Maximize shareholder return and signal strong confidence.",
+      "principalRisk": "Potential overpayment or market timing risk.",
+      "selected": true
+    },
+    {
+      "id": "option-buyback-partial",
+      "description": "Execute a partial repurchase, utilizing less than $40 billion.",
+      "expectedBenefit": "Maintain flexibility for future strategic investments.",
+      "principalRisk": "Signal weaker confidence or missed opportunity.",
+      "selected": false
+    }
+  ],
+  "chosenAction": "Execute the full $40 billion share repurchase authorization.",
+  "rejectedBenefit": "Maintaining flexibility for future strategic investments.",
+  "observations": [
+    "The board approved a new share repurchase program.",
+    "The authorization limit is up to $40 billion."
+  ],
+  "inferences": [
+    "Executing the full program maximizes the immediate return signal to shareholders.",
+    "A partial repurchase suggests the company may be reserving capital for other uses."
+  ],
+  "directAmyEvidenceIds": [],
+  "amyPolicyEvidenceIds": [],
+  "contextEvidenceIds": [
+    "span-4d34d5136c326275"
+  ],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": [
+    "source-78333f25f047c289"
+  ],
+  "documentFamilyIds": [
+    "source:source-78333f25f047c289"
+  ],
+  "evidenceSpans": [
+    {
+      "id": "span-4d34d5136c326275",
+      "sourceId": "source-78333f25f047c289",
+      "eventCandidateId": "candidate-buyback-2013",
+      "role": "decision_context",
+      "exactQuote": "The board of directors also approved a new share repurchase program authorizing up to $40 billion in share repurchases.",
+      "startChar": 357,
+      "endChar": 476,
+      "publishedAt": "2013-09-17",
+      "speaker": null
+    }
+  ],
+  "status": "incomplete",
+  "gaps": [
+    "missing_amy_judgment",
+    "single_document_family"
+  ],
+  "reviewer": null,
+  "reviewedAt": null,
+  "updatedAt": "2026-07-20T08:17:33.684Z"
+}

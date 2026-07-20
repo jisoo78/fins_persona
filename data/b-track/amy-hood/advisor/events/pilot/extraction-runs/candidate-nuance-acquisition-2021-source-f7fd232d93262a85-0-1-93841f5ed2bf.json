@@ -4,7 +4,7 @@
   "chunkIndex": 0,
   "attempt": 1,
   "requestHash": "93841f5ed2bf8d074dd0becfc27b6ebf7ec87411b1ebde234bf263a92e7cd203",
-  "response": "```json\n{\n  \"spans\": [\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9, in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.\",\n      \"startChar\": 323,\n      \"endChar\": 447,\n      \"speaker\": null\n    },\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"The acquisition will double Microsoft’s total addressable market (TAM) in the healthcare provider space, bringing the company’s TAM in healthcare to nearly $500 billion.\",\n      \"startChar\": 1233,\n      \"endChar\": 1343,\n      \"speaker\": null\n    },\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"Microsoft expects the acquisition to be minimally dilutive (less than 1 percent) in fiscal year 2022 and to be accretive in fiscal year 2023 to non-GAAP earnings per share, based on the expected close timeframe.\",\n      \"startChar\": 1558,\n      \"endChar\": 1725,\n      \"speaker\": null\n    }\n  ]\n}\n```",
-  "elapsedMs": 42340,
+  "response": "```json\n{\n  \"spans\": [\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"Microsoft Corp (Nasdaq: MSFT) and Nuance Communications, Inc. (Nasdaq: NUAN) today announced they have entered into a definitive agreement under which Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9, in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.\",\n      \"startChar\": 126,\n      \"endChar\": 440,\n      \"speaker\": null\n    }\n  ]\n}\n```",
+  "elapsedMs": 6694,
   "success": true
 }

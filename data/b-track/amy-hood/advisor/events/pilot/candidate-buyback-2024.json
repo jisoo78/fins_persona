@@ -1,10 +1,10 @@
 {
-  "id": "event-buyback-2021",
-  "candidateId": "candidate-buyback-2021",
-  "title": "2021 sixty billion dollar share repurchase authorization",
+  "id": "event-buyback-2024",
+  "candidateId": "candidate-buyback-2024",
+  "title": "2024 sixty billion dollar share repurchase authorization",
   "domain": "shareholder_return_risk",
-  "decisionDate": "2021-09-14",
-  "decisionQuestion": "Should the company proceed with the $60 billion share repurchase authorization?",
+  "decisionDate": "2024-09-16",
+  "decisionQuestion": "Should the company proceed with the authorized $60 billion share repurchase program?",
   "situation": "The board of directors has approved a new share repurchase program.",
   "objectives": [
     "Return value to shareholders.",
@@ -12,63 +12,64 @@
     "Optimize capital structure."
   ],
   "conditions": [
-    "The board has approved the authorization.",
-    "The program allows for up to $60 billion in repurchases.",
-    "The decision is being made on September 14, 2021."
+    "The authorization limit is set at $60 billion.",
+    "The decision is being made on September 16, 2024.",
+    "The board has already approved the program."
   ],
   "constraints": [
     "The total repurchase amount cannot exceed $60 billion.",
     "The decision must align with shareholder return goals.",
-    "The action must be formally authorized by the board."
+    "The program must be formally initiated."
   ],
   "options": [
     {
       "id": "option-buyback-full",
       "description": "Execute the full $60 billion share repurchase authorization.",
       "expectedBenefit": "Maximize shareholder return and signal strong confidence.",
-      "principalRisk": "Potential overvaluation or market timing risk.",
+      "principalRisk": "Potential market overvaluation or economic downturn.",
       "selected": true
     },
     {
       "id": "option-buyback-partial",
       "description": "Execute a partial repurchase, utilizing less than $60 billion.",
-      "expectedBenefit": "Maintain flexibility and mitigate risk of overspending.",
-      "principalRisk": "Weakened signal of confidence to the market.",
+      "expectedBenefit": "Maintain flexibility to react to market changes.",
+      "principalRisk": "Signal weaker confidence or less commitment to shareholders.",
       "selected": false
     }
   ],
   "chosenAction": "Execute the full $60 billion share repurchase authorization.",
-  "rejectedBenefit": "Maintaining flexibility to adjust to market conditions.",
+  "rejectedBenefit": "Maintaining flexibility to react to market changes.",
   "observations": [
     "The board approved a new share repurchase program.",
-    "The authorization allows for up to $60 billion in share repurchases."
+    "The authorization limit is up to $60 billion.",
+    "The decision date is September 16, 2024."
   ],
   "inferences": [
-    "Proceeding with the full authorization strongly signals management's belief in the company's intrinsic value.",
-    "A partial repurchase would allow the company to retain capital for other strategic uses."
+    "Proceeding with the full authorization maximizes the immediate return signal to shareholders.",
+    "A partial repurchase suggests the company anticipates market volatility or internal headwinds."
   ],
   "directAmyEvidenceIds": [],
   "amyPolicyEvidenceIds": [],
   "contextEvidenceIds": [
-    "span-325495c0e7890c53"
+    "span-7435da31f4b4af3c"
   ],
   "postOutcomeEvidenceIds": [],
   "sourceIds": [
-    "source-d25d732db767b7c0"
+    "source-9199eb9f217ec336"
   ],
   "documentFamilyIds": [
-    "source:source-d25d732db767b7c0"
+    "source:source-9199eb9f217ec336"
   ],
   "evidenceSpans": [
     {
-      "id": "span-325495c0e7890c53",
-      "sourceId": "source-d25d732db767b7c0",
-      "eventCandidateId": "candidate-buyback-2021",
+      "id": "span-7435da31f4b4af3c",
+      "sourceId": "source-9199eb9f217ec336",
+      "eventCandidateId": "candidate-buyback-2024",
       "role": "decision_context",
       "exactQuote": "The board of directors also approved a new share repurchase program authorizing up to $60 billion in share repurchases.",
-      "startChar": 399,
-      "endChar": 518,
-      "publishedAt": "2021-09-14",
+      "startChar": 400,
+      "endChar": 519,
+      "publishedAt": "2024-09-16",
       "speaker": null
     }
   ],
@@ -79,5 +80,5 @@
   ],
   "reviewer": null,
   "reviewedAt": null,
-  "updatedAt": "2026-07-20T08:17:49.989Z"
+  "updatedAt": "2026-07-20T08:18:06.618Z"
 }

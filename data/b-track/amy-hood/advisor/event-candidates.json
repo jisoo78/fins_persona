@@ -2658,7 +2658,7 @@
         "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3",
         "role": "direct_amy",
         "sourceType": "earnings_call",
-        "documentFamilyId": "earnings-call-2023",
+        "documentFamilyId": "source:source-fbb900eb7e249591",
         "publishedAt": "2023-04-25",
         "temporalRelation": "decision_time",
         "relevanceClaim": "The official earnings transcript contains a bounded Amy Hood statement about this resource-allocation decision.",
@@ -2717,6 +2717,32 @@
       "sourceUrls": [
         "https://www.microsoft.com/en-us/investor/events/fy-2024/earnings-fy-2024-q2"
       ],
+      "aliases": [
+        {
+          "kind": "named_entity",
+          "canonicalValue": "cloud and AI investment",
+          "value": "scaled capex investments",
+          "sourceUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3",
+          "reviewStatus": "reviewed",
+          "reviewerNote": "Codex verified the earlier transcript uses this phrase for the same cloud and AI capital-allocation object."
+        },
+        {
+          "kind": "decision_action",
+          "canonicalValue": "scaling",
+          "value": "impact",
+          "sourceUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3",
+          "reviewStatus": "reviewed",
+          "reviewerNote": "Codex verified this verb expresses the cost consequence of scaling the same capital program."
+        },
+        {
+          "kind": "event_specific",
+          "canonicalValue": "disciplined cost management",
+          "value": "disciplined profitability",
+          "sourceUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3",
+          "reviewStatus": "reviewed",
+          "reviewerNote": "Codex verified this earlier phrase is the explicit profitability boundary for the later cost-management decision."
+        }
+      ],
       "reviewStatus": "reviewed",
       "reviewerNote": "Codex matched all fingerprint fields to the bounded direct Amy Hood passage."
     },
@@ -2754,6 +2780,40 @@
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Codex verified the exact quote, offsets, speaker ownership, and publication date."
+      },
+      {
+        "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3",
+        "role": "counterevidence",
+        "sourceType": "earnings_call",
+        "documentFamilyId": "source:source-fbb900eb7e249591",
+        "publishedAt": "2023-04-25",
+        "temporalRelation": "pre_decision",
+        "relevanceClaim": "The earlier official earnings transcript states the cost-discipline boundary governing later cloud and AI infrastructure scaling.",
+        "evidenceLocator": {
+          "exactQuote": "As always, we remain committed to aligning costs and revenue growth to deliver disciplined profitability. Therefore, while the scaled capex investments will impact COGS growth, we expect FY24 operating expense growth to remain low.",
+          "exactRelevancePassage": "As always, we remain committed to aligning costs and revenue growth to deliver disciplined profitability. Therefore, while the scaled capex investments will impact COGS growth, we expect FY24 operating expense growth to remain low.",
+          "anchorTerms": [
+            "scaled capex investments",
+            "disciplined profitability"
+          ],
+          "eventDiscriminators": [
+            {
+              "value": "scaled capex investments",
+              "kind": "named_entity"
+            },
+            {
+              "value": "impact",
+              "kind": "decision_action"
+            },
+            {
+              "value": "disciplined profitability",
+              "kind": "event_specific"
+            }
+          ],
+          "speaker": "Amy Hood"
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Codex verified this pre-decision policy statement and its exact immutable source offsets for cross-event policy induction."
       }
     ],
     "directEvidenceGap": null,

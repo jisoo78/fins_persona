@@ -1,63 +1,63 @@
 {
   "id": "event-nuance-acquisition-2021",
   "candidateId": "candidate-nuance-acquisition-2021",
-  "title": "Nuance healthcare cloud acquisition for $19.7 billion",
+  "title": "Nuance healthcare cloud acquisition for 19.7 billion dollars",
   "domain": "m_and_a",
   "decisionDate": "2021-04-12",
-  "decisionQuestion": "Should Microsoft proceed with the all-cash acquisition of Nuance at $56.00 per share?",
-  "situation": "Microsoft announced plans to acquire Nuance for $19.7 billion, paying a 23% premium over the April 9 closing price. The deal doubles Microsoft's healthcare provider TAM to nearly $500 billion and is projected to be minimally dilutive in fiscal 2022 and accretive in fiscal 2023.",
+  "decisionQuestion": "Should Microsoft proceed with the acquisition of Nuance for $19.7 billion?",
+  "situation": "Microsoft has entered a definitive agreement to acquire Nuance in an all-cash transaction.",
   "objectives": [
-    "Expand healthcare TAM to $500 billion",
-    "Achieve non-GAAP EPS accretion by fiscal 2023"
+    "Acquire Nuance for $19.7 billion in an all-cash transaction.",
+    "Successfully integrate Nuance's operations and technology into Microsoft."
   ],
   "conditions": [
-    "Close the all-cash transaction",
-    "Integrate Nuance operations and technology successfully"
+    "The merger agreement must be adopted by Nuance stockholders.",
+    "Necessary governmental and regulatory approvals must be received."
   ],
   "constraints": [
-    "Transaction valued at $19.7 billion inclusive of net debt",
-    "Expected minimal dilution (<1%) in fiscal 2022"
+    "The transaction must be valued at $19.7 billion, inclusive of Nuance's net debt.",
+    "The decision must account for potential termination events."
   ],
   "options": [
     {
-      "id": "proceed",
-      "description": "Acquire Nuance at $56.00 per share",
-      "expectedBenefit": "Doubles healthcare provider TAM to nearly $500 billion; accretive to non-GAAP EPS in fiscal 2023",
-      "principalRisk": "Integration of Nuance operations, product lines, and technology",
+      "id": "opt-1",
+      "description": "Proceed with the acquisition as agreed.",
+      "expectedBenefit": "Realize growth and innovation opportunities through Nuance's integration.",
+      "principalRisk": "Disruption to Nuance's current plans or difficulties in employee retention.",
       "selected": true
     },
     {
-      "id": "reject",
-      "description": "Do not acquire Nuance",
-      "expectedBenefit": "Avoid $19.7 billion cash outlay and integration risk",
-      "principalRisk": "Forgo $500 billion healthcare TAM and future growth opportunities",
+      "id": "opt-2",
+      "description": "Re-evaluate the acquisition terms or halt the process.",
+      "expectedBenefit": "Mitigate risks related to management attention diversion or legal proceedings.",
+      "principalRisk": "Missing out on the strategic value of Nuance's assets.",
       "selected": false
     }
   ],
-  "chosenAction": "proceed",
-  "rejectedBenefit": "Avoidance of $19.7 billion cash outlay and integration risk",
+  "chosenAction": "Proceed with the acquisition as agreed.",
+  "rejectedBenefit": "Mitigating risks related to management attention diversion or legal proceedings.",
   "observations": [
-    "Acquisition price is $56.00 per share, a 23% premium over April 9 closing",
-    "Healthcare TAM expected to reach nearly $500 billion post-acquisition",
-    "Non-GAAP EPS expected to be accretive in fiscal 2023"
+    "The transaction is an all-cash deal valued at $19.7 billion.",
+    "The agreement is subject to various risks, including integration ability and employee retention.",
+    "The merger agreement requires stockholder adoption and regulatory approvals."
   ],
   "inferences": [
-    "The premium reflects the strategic value of Nuance's healthcare position",
-    "Success depends on operational integration rather than just financial projections"
+    "Proceeding allows Microsoft to capitalize on growth opportunities while managing integration risks.",
+    "Halting the deal avoids immediate operational disruption but forfeits potential strategic gains."
   ],
   "directAmyEvidenceIds": [],
   "amyPolicyEvidenceIds": [],
   "contextEvidenceIds": [
-    "span-fa215e8a178d02dc",
-    "span-bfff05635892a01c",
-    "span-4de02813c30e2e5d",
+    "span-24e684f4bca0c620",
+    "span-34b94d3c6a25db54",
+    "span-11b90f83bbbfd54c",
+    "span-9e5cf448af8021e1",
+    "span-b42203f8c7dffa63",
+    "span-f5e143ed1507753b",
     "span-409293939b72edd6",
     "span-15e336cc5b6773ad",
-    "span-5311695e5d56b14b",
-    "span-ea5989742107a3a5",
-    "span-d100058f05386c50",
-    "span-7418090863abcd7f",
-    "span-7d9ccae75cd5ca32"
+    "span-38eee29ba0530baa",
+    "span-2ba38fc9d21ea2ef"
   ],
   "postOutcomeEvidenceIds": [],
   "sourceIds": [
@@ -69,35 +69,68 @@
   ],
   "evidenceSpans": [
     {
-      "id": "span-fa215e8a178d02dc",
+      "id": "span-24e684f4bca0c620",
       "sourceId": "source-fac8ed15fa324bf8",
       "eventCandidateId": "candidate-nuance-acquisition-2021",
       "role": "decision_context",
-      "exactQuote": "Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9, in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.",
-      "startChar": 337,
+      "exactQuote": "in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.",
+      "startChar": 463,
       "endChar": 546,
       "publishedAt": "2021-04-12",
       "speaker": null
     },
     {
-      "id": "span-bfff05635892a01c",
+      "id": "span-34b94d3c6a25db54",
       "sourceId": "source-fac8ed15fa324bf8",
       "eventCandidateId": "candidate-nuance-acquisition-2021",
       "role": "decision_context",
-      "exactQuote": "The acquisition will double Microsoft’s total addressable market (TAM) in the healthcare provider space, bringing the company’s TAM in healthcare to nearly $500 billion.",
-      "startChar": 2616,
-      "endChar": 2785,
+      "exactQuote": "the occurrence of any event, change or other circumstance that could give rise to the termination of the merger agreement",
+      "startChar": 11601,
+      "endChar": 11722,
       "publishedAt": "2021-04-12",
       "speaker": null
     },
     {
-      "id": "span-4de02813c30e2e5d",
+      "id": "span-11b90f83bbbfd54c",
       "sourceId": "source-fac8ed15fa324bf8",
       "eventCandidateId": "candidate-nuance-acquisition-2021",
       "role": "decision_context",
-      "exactQuote": "Microsoft expects the acquisition to be minimally dilutive (less than 1 percent) in fiscal year 2022 and to be accretive in fiscal year 2023 to non-GAAP earnings per share, based on the expected close timeframe.",
-      "startChar": 5123,
-      "endChar": 5334,
+      "exactQuote": "the effect of the announcement or pendency of the transaction on Nuance’s business relationships, operating results, and business generally",
+      "startChar": 11729,
+      "endChar": 11868,
+      "publishedAt": "2021-04-12",
+      "speaker": null
+    },
+    {
+      "id": "span-9e5cf448af8021e1",
+      "sourceId": "source-fac8ed15fa324bf8",
+      "eventCandidateId": "candidate-nuance-acquisition-2021",
+      "role": "decision_context",
+      "exactQuote": "risks that the proposed transaction disrupts current plans and operations of Nuance or Microsoft and potential difficulties in Nuance employee retention as a result of the transaction",
+      "startChar": 11874,
+      "endChar": 12057,
+      "publishedAt": "2021-04-12",
+      "speaker": null
+    },
+    {
+      "id": "span-b42203f8c7dffa63",
+      "sourceId": "source-fac8ed15fa324bf8",
+      "eventCandidateId": "candidate-nuance-acquisition-2021",
+      "role": "decision_context",
+      "exactQuote": "risks related to diverting management’s attention from Nuance’s ongoing business operations",
+      "startChar": 12064,
+      "endChar": 12155,
+      "publishedAt": "2021-04-12",
+      "speaker": null
+    },
+    {
+      "id": "span-f5e143ed1507753b",
+      "sourceId": "source-fac8ed15fa324bf8",
+      "eventCandidateId": "candidate-nuance-acquisition-2021",
+      "role": "decision_context",
+      "exactQuote": "the outcome of any legal proceedings that may be instituted against us or against Nuance related to the merger agreement or the transaction",
+      "startChar": 12163,
+      "endChar": 12302,
       "publishedAt": "2021-04-12",
       "speaker": null
     },
@@ -124,57 +157,24 @@
       "speaker": null
     },
     {
-      "id": "span-5311695e5d56b14b",
+      "id": "span-38eee29ba0530baa",
       "sourceId": "source-f7fd232d93262a85",
       "eventCandidateId": "candidate-nuance-acquisition-2021",
       "role": "decision_context",
-      "exactQuote": "Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9, in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.",
-      "startChar": 485,
+      "exactQuote": "Microsoft Corp (Nasdaq: MSFT) and Nuance Communications, Inc. (Nasdaq: NUAN) today announced they have entered into a definitive agreement under which Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9, in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.",
+      "startChar": 334,
       "endChar": 694,
       "publishedAt": "2021-04-12",
       "speaker": null
     },
     {
-      "id": "span-ea5989742107a3a5",
+      "id": "span-2ba38fc9d21ea2ef",
       "sourceId": "source-f7fd232d93262a85",
       "eventCandidateId": "candidate-nuance-acquisition-2021",
       "role": "decision_context",
-      "exactQuote": "The acquisition will double Microsoft’s total addressable market (TAM) in the healthcare provider space, bringing the company’s TAM in healthcare to nearly $500 billion.",
-      "startChar": 2764,
-      "endChar": 2933,
-      "publishedAt": "2021-04-12",
-      "speaker": null
-    },
-    {
-      "id": "span-d100058f05386c50",
-      "sourceId": "source-f7fd232d93262a85",
-      "eventCandidateId": "candidate-nuance-acquisition-2021",
-      "role": "decision_context",
-      "exactQuote": "Microsoft expects the acquisition to be minimally dilutive (less than 1 percent) in fiscal year 2022 and to be accretive in fiscal year 2023 to non-GAAP earnings per share, based on the expected close timeframe.",
-      "startChar": 5270,
-      "endChar": 5481,
-      "publishedAt": "2021-04-12",
-      "speaker": null
-    },
-    {
-      "id": "span-7418090863abcd7f",
-      "sourceId": "source-f7fd232d93262a85",
-      "eventCandidateId": "candidate-nuance-acquisition-2021",
-      "role": "decision_context",
-      "exactQuote": "the ability of Microsoft to successfully integrate Nuance’s operations, product lines, and technology",
-      "startChar": 12461,
-      "endChar": 12562,
-      "publishedAt": "2021-04-12",
-      "speaker": null
-    },
-    {
-      "id": "span-7d9ccae75cd5ca32",
-      "sourceId": "source-f7fd232d93262a85",
-      "eventCandidateId": "candidate-nuance-acquisition-2021",
-      "role": "decision_context",
-      "exactQuote": "the ability of Microsoft to implement its plans, forecasts, and other expectations with respect to Nuance’s business after the completion of the proposed merger and realize additional opportunities for growth and innovation",
-      "startChar": 12573,
-      "endChar": 12796,
+      "exactQuote": "n stock of Nuance, (ii) the failure to satisfy the conditions to the consummation of the transaction, including the adoption of the merger agreement by the stockholders of Nuance and the receipt of certain governmental and regulatory approvals, (iii) the occurrence of any event, change or other circumstance that could give rise to the termination of the merger agreement, (iv) the effect of the announcement or pendency of the transaction on Nuance’s business relationships, operating results, and business generally, (v) risks that the proposed transaction disrupts current plans and operations of Nuance or Microsoft and potential difficulties in Nuance employee retention as a result of the transaction, (vi) risks related to diverting management’s attention from Nuance’s ongoing business operations, (vii) the outcome of any legal proceedings that may be instituted against us or against Nuance related to the merger agreement or the transaction, (viii) the ability of Microsoft to successfully integrate Nuance’s operations, product lines, and technology, and (ix) the ability of Microsoft to implement its plans, forecasts, and other expectations with respect to Nuance’s business after the completion of the proposed merger and realize additional opportunities for growth and innovation.",
+      "startChar": 11500,
+      "endChar": 12797,
       "publishedAt": "2021-04-12",
       "speaker": null
     }
@@ -186,5 +186,5 @@
   ],
   "reviewer": null,
   "reviewedAt": null,
-  "updatedAt": "2026-07-15T06:40:08.833Z"
+  "updatedAt": "2026-07-20T08:15:52.113Z"
 }

@@ -1,0 +1,105 @@
+{
+  "id": "event-phone-restructure-2015",
+  "candidateId": "candidate-phone-restructure-2015",
+  "title": "Phone hardware impairment and 7800 position restructuring",
+  "domain": "cost_efficiency",
+  "decisionDate": "2015-07-08",
+  "decisionQuestion": "Should Microsoft proceed with the asset impairment and position reduction in the Phone Hardware segment?",
+  "situation": "Microsoft is addressing issues within its Phone Hardware segment, requiring an impairment charge and workforce reduction.",
+  "objectives": [
+    "Reduce workforce by up to 7,800 positions.",
+    "Record a charge for asset and goodwill impairment."
+  ],
+  "conditions": [
+    "An impairment adjustment of approximately $7.6 billion is required for the Phone Hardware segment.",
+    "The impairment relates specifically to the NDS business within the Phone Hardware segment."
+  ],
+  "constraints": [
+    "The charge must be recorded in the fourth quarter of fiscal 2015.",
+    "The reduction must primarily affect the phone business."
+  ],
+  "options": [
+    {
+      "id": "option-A",
+      "description": "Execute the full impairment adjustment and proceed with the 7,800 position reduction.",
+      "expectedBenefit": "Achieve cost efficiency through asset write-down and workforce reduction.",
+      "principalRisk": "Potential negative market reaction to the large impairment charge.",
+      "selected": true
+    },
+    {
+      "id": "option-B",
+      "description": "Implement only the position reduction without recording the full asset impairment charge.",
+      "expectedBenefit": "Avoid the immediate recording of the $7.6 billion impairment charge.",
+      "principalRisk": "Failure to fully reflect the segment's true financial health.",
+      "selected": false
+    }
+  ],
+  "chosenAction": "Execute the full impairment adjustment and proceed with the 7,800 position reduction.",
+  "rejectedBenefit": "Avoiding the immediate recording of the $7.6 billion impairment charge.",
+  "observations": [
+    "Microsoft announced the reduction of up to 7,800 positions in the phone business.",
+    "A charge for asset and goodwill impairment in the Phone Hardware segment is required.",
+    "The required impairment adjustment is approximately $7.6 billion."
+  ],
+  "inferences": [
+    "The impairment adjustment is necessary because the Phone Hardware segment's assets and goodwill are overstated.",
+    "The decision to reduce positions is a direct response to the financial strain indicated by the impairment."
+  ],
+  "directAmyEvidenceIds": [],
+  "amyPolicyEvidenceIds": [],
+  "contextEvidenceIds": [
+    "span-faf5ba3b775145e5",
+    "span-4be0043d1ce26aa1",
+    "span-5d7786d409d86083"
+  ],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": [
+    "source-b8e6cfa26d7292ac"
+  ],
+  "documentFamilyIds": [
+    "source:source-b8e6cfa26d7292ac"
+  ],
+  "evidenceSpans": [
+    {
+      "id": "span-faf5ba3b775145e5",
+      "sourceId": "source-b8e6cfa26d7292ac",
+      "eventCandidateId": "candidate-phone-restructure-2015",
+      "role": "decision_context",
+      "exactQuote": "Microsoft also announced the reduction of up to 7,800 positions, primarily in the phone business.",
+      "startChar": 145,
+      "endChar": 242,
+      "publishedAt": "2015-07-08",
+      "speaker": null
+    },
+    {
+      "id": "span-4be0043d1ce26aa1",
+      "sourceId": "source-b8e6cfa26d7292ac",
+      "eventCandidateId": "candidate-phone-restructure-2015",
+      "role": "decision_context",
+      "exactQuote": "Microsoft will record a charge in the fourth quarter of fiscal 2015 for the impairment of assets and goodwill in its Phone Hardware segment, related to the NDS business.",
+      "startChar": 1334,
+      "endChar": 1503,
+      "publishedAt": "2015-07-08",
+      "speaker": null
+    },
+    {
+      "id": "span-5d7786d409d86083",
+      "sourceId": "source-b8e6cfa26d7292ac",
+      "eventCandidateId": "candidate-phone-restructure-2015",
+      "role": "decision_context",
+      "exactQuote": "Accordingly, the company concluded that an impairment adjustment of its Phone Hardware segment assets and goodwill of approximately $7.6 billion is required.",
+      "startChar": 1714,
+      "endChar": 1871,
+      "publishedAt": "2015-07-08",
+      "speaker": null
+    }
+  ],
+  "status": "incomplete",
+  "gaps": [
+    "missing_amy_judgment",
+    "single_document_family"
+  ],
+  "reviewer": null,
+  "reviewedAt": null,
+  "updatedAt": "2026-07-20T08:17:01.314Z"
+}

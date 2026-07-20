@@ -47,14 +47,14 @@ const qualifiedContrast = {
   decisionAxis: {
     decisionObject: 'strategic_resource_allocation',
     decisionQuestion: 'When should resources be expanded versus reduced or reallocated?',
-    choiceSet: ['expand', 'reduce_or_reallocate'],
+    choiceSet: ['scale_infrastructure_constrain_opex', 'reduce_or_reallocate'],
     gatingVariables: ['observable_growth_opportunity', 'resource_productivity'],
   },
   supportPattern: {
-    eventIds: ['event-openai-expansion-2023'],
+    eventIds: ['event-ai-capacity-sourcing-2024'],
     conditions: ['Substantial opportunity and growth remain observable.'],
-    action: 'expand focused investment',
-    evidenceIds: ['span-7a8c1662a2c8a94e'],
+    action: 'scale_infrastructure_constrain_opex',
+    evidenceIds: ['span-capacity-2024-demand-discipline'],
   },
   contrastPattern: {
     eventIds: ['event-workforce-reset-2023'],
@@ -102,7 +102,7 @@ const reflectionResponse = JSON.stringify({
     decisionAxis: {
       decisionObject: 'strategic_transaction_structure',
       decisionQuestion: 'When should strategic reach use acquisition rather than partnership?',
-      choiceSet: ['acquire', 'partner'],
+      choiceSet: ['acquire', 'scale_infrastructure_constrain_opex'],
       gatingVariables: ['control_requirement', 'lower_commitment_access'],
     },
     supportPattern: {
@@ -115,22 +115,22 @@ const reflectionResponse = JSON.stringify({
       evidenceIds: ['span-0b8c7fcb7c5c77af', 'span-807ee90aa032f320'],
     },
     contrastPattern: {
-      eventIds: ['event-openai-expansion-2023'],
-      conditions: ['Independent commercialization remains inside a long-term collaboration.'],
-      action: 'partner',
-      evidenceIds: ['span-d7a1fe8155e1f9ca'],
+      eventIds: ['event-ai-capacity-sourcing-2024'],
+      conditions: ['A staged infrastructure commitment can preserve operational flexibility.'],
+      action: 'scale_infrastructure_constrain_opex',
+      evidenceIds: ['span-capacity-2024-demand-discipline'],
     },
-    conditionDelta: 'Complete transaction ownership versus independent commercialization in collaboration.',
-    actionDelta: 'Acquire the company versus deepen a strategic partnership.',
+    conditionDelta: 'Complete transaction ownership versus staged infrastructure scaling.',
+    actionDelta: 'Acquire the company versus scale infrastructure within operating-cost constraints.',
     supportingEventIds: [
       'event-linkedin-acquisition-2016',
       'event-activision-acquisition-2022',
     ],
-    contrastingEventIds: ['event-openai-expansion-2023'],
+    contrastingEventIds: ['event-ai-capacity-sourcing-2024'],
     evidenceIds: [
       'span-0b8c7fcb7c5c77af',
       'span-807ee90aa032f320',
-      'span-d7a1fe8155e1f9ca',
+      'span-capacity-2024-demand-discipline',
     ],
   }],
 });
@@ -185,11 +185,11 @@ const repeatedEventPolicyResponse = (reflectionId: string) => JSON.stringify({
       'event-linkedin-acquisition-2016',
       'event-activision-acquisition-2022',
     ],
-    contrastingEventIds: ['event-openai-expansion-2023'],
+    contrastingEventIds: ['event-ai-capacity-sourcing-2024'],
     evidenceIds: [
       'span-0b8c7fcb7c5c77af',
       'span-807ee90aa032f320',
-      'span-d7a1fe8155e1f9ca',
+      'span-capacity-2024-demand-discipline',
     ],
     directPolicyEvidenceIds: [],
   }],
@@ -205,7 +205,6 @@ test('happy: input graph selects only approved non-holdout decision evidence', a
     'event-cloud-capacity-scale-2022',
     'event-copilot-price-2023',
     'event-linkedin-acquisition-2016',
-    'event-openai-expansion-2023',
     'event-workforce-reset-2023',
   ]);
   assert.equal(graph.events.every(({ status }) => status === 'approved'), true);
@@ -386,11 +385,11 @@ test('edge: a material contrast narrows the reflection boundary', async () => {
     { now: '2026-07-20T09:00:00.000Z' },
   );
 
-  assert.deepEqual(result.artifacts[0].contrastingEventIds, ['event-openai-expansion-2023']);
+  assert.deepEqual(result.artifacts[0].contrastingEventIds, ['event-ai-capacity-sourcing-2024']);
   assert.match(result.artifacts[0].boundaryConditions[0], /lower-commitment structure/);
   assert.equal(validateReflectionMemory(result.artifacts[0], graph).passed, true);
   assert.equal(result.artifacts[0].supportPattern.action, 'acquire');
-  assert.equal(result.artifacts[0].contrastPattern.action, 'partner');
+  assert.equal(result.artifacts[0].contrastPattern.action, 'scale_infrastructure_constrain_opex');
 
   const approvedReflection = approveReflectionForFixture(result.artifacts[0]);
   const policy = (await buildPolicyProposals(
@@ -439,7 +438,7 @@ test('edge: direct Amy principle plus independent confirmation qualifies as medi
       supportingEventIds: ['event-workforce-reset-2023'],
       contrastingEventIds: ['event-copilot-price-2023'],
       evidenceIds: ['span-7f9dde341a496596', 'span-1baf5181c9f9b527'],
-      directPolicyEvidenceIds: ['policy-openai-investment-consistency-2022'],
+      directPolicyEvidenceIds: ['policy-ai-capex-cost-discipline-2023'],
     }],
   });
 
@@ -599,10 +598,10 @@ test('failure: holdout and post-outcome inputs fail before model work', async (c
     'data/b-track/amy-hood/advisor/events/pilot/pilot-manifest.json',
   );
   const holdoutPilot = JSON.parse(await readFile(holdoutPilotPath, 'utf8'));
-  holdoutPilot.targets[5] = {
+  holdoutPilot.targets[2] = {
     candidateId: 'candidate-github-acquisition-2018',
     domain: 'm_and_a',
-    priority: 6,
+    priority: 3,
     replacementReason: 'Deliberately restore a sealed holdout to prove policy-build leakage rejection.',
   };
   await writeFile(holdoutPilotPath, `${JSON.stringify(holdoutPilot, null, 2)}\n`);
@@ -654,7 +653,7 @@ test('failure: invalid or unsupported reflections never validate as memory', asy
     ...qualifiedContrast,
   };
   const sameAction = structuredClone(crossDomain);
-  sameAction.contrastPattern.action = 'increase investment';
+  sameAction.contrastPattern.action = 'scale_infrastructure_constrain_opex';
   assert.match(
     validateReflectionMemory(sameAction, graph).errors.join('\n'),
     /support and contrast actions must differ/,
@@ -756,10 +755,24 @@ test('failure: unsupported or unbounded policies remain nondeployable', async ()
     invariant: 'Require another decision context and document family.',
     boundaryConditions: ['The confirming event must use evidence from a distinct document family.'],
     unresolvedConflicts: [],
-    ...investmentContrast('span-f031de15863e849e'),
-    supportingEventIds: ['event-workforce-reset-2023'],
-    contrastingEventIds: ['event-copilot-price-2023'],
-    evidenceIds: ['span-f031de15863e849e', 'span-1baf5181c9f9b527'],
+    ...investmentContrast('span-1baf5181c9f9b527'),
+    supportPattern: {
+      eventIds: ['event-ai-capacity-opex-pivot-2023'],
+      conditions: ['Scaled capital investment must remain bounded by operating-expense discipline.'],
+      action: 'scale_infrastructure_constrain_opex',
+      evidenceIds: ['span-capacity-2023-opex'],
+    },
+    contrastPattern: {
+      eventIds: ['event-workforce-reset-2023'],
+      conditions: ['Resources are not aligned to the highest-priority work.'],
+      action: 'reduce_or_reallocate',
+      evidenceIds: ['span-f031de15863e849e'],
+    },
+    conditionDelta: 'Scaled infrastructure investment versus lower-priority resource allocation.',
+    actionDelta: 'Scale infrastructure within cost constraints versus reduce or reallocate resources.',
+    supportingEventIds: ['event-ai-capacity-opex-pivot-2023'],
+    contrastingEventIds: ['event-workforce-reset-2023'],
+    evidenceIds: ['span-capacity-2023-opex', 'span-f031de15863e849e'],
     confidence: 'low',
     status: 'review_required',
     review: null,
@@ -774,10 +787,10 @@ test('failure: unsupported or unbounded policies remain nondeployable', async ()
     exceptions: ['Pause when demand is unverified.'],
     reversalSignals: ['Sustained demand deterioration.'],
     reflectionIds: [sameDocumentReflection.id],
-    supportingEventIds: ['event-workforce-reset-2023'],
-    contrastingEventIds: ['event-copilot-price-2023'],
-    evidenceIds: ['span-f031de15863e849e', 'span-1baf5181c9f9b527'],
-    directPolicyEvidenceIds: ['policy-openai-investment-consistency-2022'],
+    supportingEventIds: ['event-ai-capacity-opex-pivot-2023'],
+    contrastingEventIds: ['event-workforce-reset-2023'],
+    evidenceIds: ['span-capacity-2023-opex', 'span-f031de15863e849e'],
+    directPolicyEvidenceIds: ['policy-ai-capex-cost-discipline-2023'],
     confidence: 'medium',
     policyKind: 'deployable_policy',
     status: 'review_required',

@@ -1,49 +1,54 @@
 {
   "id": "event-m365-price-2021",
   "candidateId": "candidate-m365-price-2021",
-  "title": "Microsoft 365 commercial price increase",
+  "title": "Microsoft 365 precios comerciales price increase",
   "domain": "pricing_monetization",
   "decisionDate": "2021-08-19",
-  "decisionQuestion": "Should Microsoft raise commercial M365 and Office 365 list prices globally after ten years of flat pricing?",
-  "situation": "Microsoft announces its first substantial commercial price adjustment in a decade, citing ten years of offered value.",
+  "decisionQuestion": "¿Debemos proceder con el ajuste de precios de Microsoft 365?",
+  "situation": "Se anunciaron cambios en los precios comerciales de Microsoft 365, el primer ajuste sustancial en una década.",
   "objectives": [
-    "Capture value from a decade of product improvements"
+    "Implementar el ajuste de precios anunciado.",
+    "Asegurar la transición fluida a las nuevas tarifas."
   ],
   "conditions": [
-    "New prices take effect March 1, 2022"
+    "Los precios de lista se actualizarán el 1 de marzo de 2022.",
+    "Los productos afectados incluyen M365 Business Basic, Premium, y varias versiones de Office 365."
   ],
   "constraints": [
-    "Apply increases globally with regional local market adjustments"
+    "El ajuste es el primer cambio de precios sustancial desde el lanzamiento de Office 365 hace diez años.",
+    "Los nuevos precios varían desde $6 hasta $38 por usuario."
   ],
   "options": [
     {
-      "id": "raise_prices",
-      "description": "Increase list prices for Business Basic, Business Premium, E1, E3, E5, and M365 E3",
-      "expectedBenefit": "Monetize ten years of added value and product improvements",
-      "principalRisk": "Customer pushback on the first substantial increase in a decade",
+      "id": "option-a",
+      "description": "Implementar el ajuste de precios tal como se anunció.",
+      "expectedBenefit": "Aumentar los ingresos por suscripción de los clientes comerciales.",
+      "principalRisk": "Posible resistencia o impacto negativo en la retención de clientes.",
       "selected": true
     },
     {
-      "id": "maintain_prices",
-      "description": "Keep existing list prices unchanged",
-      "expectedBenefit": "Customer retention and goodwill from stable pricing",
-      "principalRisk": "Uncaptured value from ten years of product development",
+      "id": "option-b",
+      "description": "Implementar el ajuste de precios con una fase de transición más larga.",
+      "expectedBenefit": "Mitigar la fricción del cambio de precio inicial.",
+      "principalRisk": "Perder ingresos potenciales durante el periodo extendido de transición.",
       "selected": false
     }
   ],
-  "chosenAction": "raise_prices",
-  "rejectedBenefit": "Customer goodwill from continued flat pricing",
+  "chosenAction": "Implementar el ajuste de precios tal como se anunció.",
+  "rejectedBenefit": "Mitigar la fricción del cambio de precio inicial.",
   "observations": [
-    "Business Basic rises $5 to $6; E5 rises $35 to $38"
+    "El ajuste de precios se aplicará a varios productos comerciales.",
+    "Microsoft 365 Business Basic subirá de USD $5 a $6 por usuario."
   ],
   "inferences": [
-    "Ten years of flat pricing suggests Microsoft deferred capturing value from product evolution"
+    "La decisión de implementar el ajuste de precios busca capitalizar el valor percibido de la oferta.",
+    "Dado que es el primer ajuste sustancial, se infiere una necesidad estratégica de monetización."
   ],
   "directAmyEvidenceIds": [],
   "amyPolicyEvidenceIds": [],
   "contextEvidenceIds": [
-    "span-1da6c275337bdf80",
-    "span-722f0c820210903d"
+    "span-51e21e433fd1039b",
+    "span-f7e24fe5b23b79dd"
   ],
   "postOutcomeEvidenceIds": [],
   "sourceIds": [
@@ -54,24 +59,24 @@
   ],
   "evidenceSpans": [
     {
-      "id": "span-1da6c275337bdf80",
+      "id": "span-51e21e433fd1039b",
       "sourceId": "source-19bc03d4ebf333f9",
       "eventCandidateId": "candidate-m365-price-2021",
       "role": "decision_context",
-      "exactQuote": "El día de hoy anunciamos cambios a los precios comerciales de Microsoft 365 —el primer ajuste de precios sustancial desde que lanzamos Office 365 hace una década—. Esta actualización de precios refleja el gran valor que hemos ofrecido a nuestros clientes a lo largo de los últimos diez años.",
+      "exactQuote": "El día de hoy anunciamos cambios a los precios comerciales de Microsoft 365 —el primer ajuste de precios sustancial desde que lanzamos Office 365 hace una década—.",
       "startChar": 86,
-      "endChar": 377,
+      "endChar": 249,
       "publishedAt": "2021-08-19",
       "speaker": null
     },
     {
-      "id": "span-722f0c820210903d",
+      "id": "span-f7e24fe5b23b79dd",
       "sourceId": "source-19bc03d4ebf333f9",
       "eventCandidateId": "candidate-m365-price-2021",
       "role": "decision_context",
-      "exactQuote": "Los ajustes de precio que anunciamos hoy entrarán en vigor dentro de seis meses. El 1 de marzo de 2022 actualizaremos nuestros precios de lista para los siguientes productos comerciales: Microsoft 365 Business Basic (de USD $5 a $6 por usuario), Microsoft 365 Business Premium (de USD $20 a $22), Office 365 E1 (de USD $8 a $10), Office 365 E3 (de USD $20 a $23), Office 365 E5 (de USD $35 a $38) y Microsoft 365 E3 (de USD $32 a $36). Estos aumentos se aplicarán a nivel mundial con ajustes para los mercados locales de algunas regiones.",
-      "startChar": 5897,
-      "endChar": 6435,
+      "exactQuote": "El 1 de marzo de 2022 actualizaremos nuestros precios de lista para los siguientes productos comerciales: Microsoft 365 Business Basic (de USD $5 a $6 por usuario), Microsoft 365 Business Premium (de USD $20 a $22), Office 365 E1 (de USD $8 a $10), Office 365 E3 (de USD $20 a $23), Office 365 E5 (de USD $35 a $38) y Microsoft 365 E3 (de USD $32 a $36).",
+      "startChar": 5978,
+      "endChar": 6332,
       "publishedAt": "2021-08-19",
       "speaker": null
     }
@@ -83,5 +88,5 @@
   ],
   "reviewer": null,
   "reviewedAt": null,
-  "updatedAt": "2026-07-15T06:43:04.012Z"
+  "updatedAt": "2026-07-20T08:16:10.400Z"
 }

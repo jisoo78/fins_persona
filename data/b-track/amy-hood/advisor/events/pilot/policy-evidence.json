@@ -1,18 +1,18 @@
 [
   {
-    "id": "policy-openai-investment-consistency-2022",
-    "candidateId": "candidate-openai-expansion-2023",
-    "sourceId": "source-ad9a23176d9cf21d-25fb51a81eef",
-    "exactQuote": "I think it’s important in terms of how we think about investment and continuing to invest where we’re seeing substantial opportunity and growth.",
-    "startChar": 46930,
-    "endChar": 47074,
-    "publishedAt": "2022-10-25",
+    "id": "policy-ai-capex-cost-discipline-2023",
+    "candidateId": "candidate-ai-capacity-sourcing-2024",
+    "sourceId": "source-fbb900eb7e249591",
+    "exactQuote": "As always, we remain committed to aligning costs and revenue growth to deliver disciplined profitability. Therefore, while the scaled capex investments will impact COGS growth, we expect FY24 operating expense growth to remain low.",
+    "startChar": 33082,
+    "endChar": 33313,
+    "publishedAt": "2023-04-25",
     "speaker": "Amy Hood",
     "policyTags": [
       "investment_consistency",
-      "platform_shift_commitment"
+      "cost_revenue_alignment"
     ],
-    "eventLinkRationale": "This pre-decision capital-allocation rule links continued investment to substantial opportunity and growth, the governing policy tested by the later OpenAI partnership expansion.",
+    "eventLinkRationale": "This pre-decision capital-allocation statement couples scaled AI infrastructure investment with explicit operating-expense restraint and disciplined profitability before the 2024 sourcing decision.",
     "reviewer": "Codex evidence review",
     "reviewedAt": "2026-07-15T06:21:32.000Z"
   },

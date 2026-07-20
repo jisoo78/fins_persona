@@ -1,0 +1,10 @@
+{
+  "candidateId": "candidate-transformation-2026",
+  "sourceId": "source-582ec6ef346f7100",
+  "chunkIndex": 0,
+  "attempt": 1,
+  "requestHash": "001fe542942f4cc084dfc6f143e9be9db2a6076f834304f62e203976a3f99613",
+  "response": "```json\n{\n  \"spans\": [\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"Today we are eliminating around 4,800 roles, about 2.1% of our global workforce, as we focus our people, investments, and energy on the priorities that will keep Microsoft positioned to deliver for customers in a fast-changing industry.\",\n      \"startChar\": 114,\n      \"endChar\": 343,\n      \"speaker\": null\n    },\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"Today’s changes mostly fall within our Commercial and XBOX organizations.\",\n      \"startChar\": 1037,\n      \"endChar\": 1065,\n      \"speaker\": null\n    }\n  ]\n}\n```",
+  "elapsedMs": 6395,
+  "success": true
+}

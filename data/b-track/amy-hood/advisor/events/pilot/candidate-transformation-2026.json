@@ -1,0 +1,92 @@
+{
+  "id": "event-transformation-2026",
+  "candidateId": "candidate-transformation-2026",
+  "title": "Microsoft eliminating 4800 roles in Commercial and Xbox transformation",
+  "domain": "cost_efficiency",
+  "decisionDate": "2026-07-06",
+  "decisionQuestion": "Should Microsoft proceed with eliminating approximately 4,800 roles?",
+  "situation": "Microsoft is focusing its resources on key priorities within a fast-changing industry.",
+  "objectives": [
+    "Keep Microsoft positioned to deliver for customers.",
+    "Focus people, investments, and energy on strategic priorities."
+  ],
+  "conditions": [
+    "The changes primarily affect the Commercial and XBOX organizations.",
+    "The elimination involves about 2.1% of the global workforce."
+  ],
+  "constraints": [
+    "The decision must align with the focus on customer delivery.",
+    "The changes are specifically concentrated within Commercial and XBOX."
+  ],
+  "options": [
+    {
+      "id": "option-1",
+      "description": "Proceed with eliminating the 4,800 roles as announced.",
+      "expectedBenefit": "Better positioning to deliver for customers in a fast-changing industry.",
+      "principalRisk": "Potential disruption or morale impact from workforce reduction.",
+      "selected": true
+    },
+    {
+      "id": "option-2",
+      "description": "Delay the elimination and reassess the scope of the 4,800 roles.",
+      "expectedBenefit": "Allows for a more granular review of the workforce impact.",
+      "principalRisk": "Missing immediate opportunities to focus on key priorities.",
+      "selected": false
+    }
+  ],
+  "chosenAction": "Proceed with eliminating the 4,800 roles as announced.",
+  "rejectedBenefit": "Allows for a more granular review of the workforce impact.",
+  "observations": [
+    "Around 4,800 roles, or 2.1% of the global workforce, are being eliminated.",
+    "The changes mostly fall within the Commercial and XBOX organizations."
+  ],
+  "inferences": [
+    "The elimination is a strategic move to align the workforce with current business needs.",
+    "The decision implies that the current structure is not optimally positioned for future customer delivery."
+  ],
+  "directAmyEvidenceIds": [],
+  "amyPolicyEvidenceIds": [],
+  "contextEvidenceIds": [
+    "span-b8456cb1c1f3a756",
+    "span-b9c11f84cf769975"
+  ],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": [
+    "source-582ec6ef346f7100"
+  ],
+  "documentFamilyIds": [
+    "source:source-582ec6ef346f7100"
+  ],
+  "evidenceSpans": [
+    {
+      "id": "span-b8456cb1c1f3a756",
+      "sourceId": "source-582ec6ef346f7100",
+      "eventCandidateId": "candidate-transformation-2026",
+      "role": "decision_context",
+      "exactQuote": "Today we are eliminating around 4,800 roles, about 2.1% of our global workforce, as we focus our people, investments, and energy on the priorities that will keep Microsoft positioned to deliver for customers in a fast-changing industry.",
+      "startChar": 220,
+      "endChar": 456,
+      "publishedAt": "2026-07-06",
+      "speaker": null
+    },
+    {
+      "id": "span-b9c11f84cf769975",
+      "sourceId": "source-582ec6ef346f7100",
+      "eventCandidateId": "candidate-transformation-2026",
+      "role": "decision_context",
+      "exactQuote": "Today’s changes mostly fall within our Commercial and XBOX organizations.",
+      "startChar": 3119,
+      "endChar": 3192,
+      "publishedAt": "2026-07-06",
+      "speaker": null
+    }
+  ],
+  "status": "incomplete",
+  "gaps": [
+    "missing_amy_judgment",
+    "single_document_family"
+  ],
+  "reviewer": null,
+  "reviewedAt": null,
+  "updatedAt": "2026-07-20T08:17:19.656Z"
+}

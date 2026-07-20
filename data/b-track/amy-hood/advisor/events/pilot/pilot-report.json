@@ -1,15 +1,15 @@
 {
   "counts": {
-    "approved": 5,
-    "incomplete": 5,
-    "total": 10
+    "approved": 7,
+    "incomplete": 8,
+    "total": 15
   },
   "domainCounts": {
-    "m_and_a": 4,
-    "ai_cloud_capex": 2,
-    "pricing_monetization": 2,
-    "cost_efficiency": 1,
-    "shareholder_return_risk": 1
+    "m_and_a": 3,
+    "ai_cloud_capex": 3,
+    "pricing_monetization": 3,
+    "cost_efficiency": 3,
+    "shareholder_return_risk": 3
   },
   "rows": [
     {
@@ -38,18 +38,78 @@
     },
     {
       "priority": 3,
-      "candidateId": "candidate-openai-expansion-2023",
-      "domain": "ai_cloud_capex",
-      "status": "approved",
-      "decisionQuestion": "Should Microsoft deepen its multiyear investment in OpenAI's supercomputing and research?",
-      "chosenAction": "deepen_partnership",
+      "candidateId": "candidate-nuance-acquisition-2021",
+      "domain": "m_and_a",
+      "status": "incomplete",
+      "decisionQuestion": "Should Microsoft proceed with the acquisition of Nuance for $19.7 billion?",
+      "chosenAction": "Proceed with the acquisition as agreed.",
       "directQuote": "없음",
-      "policyQuote": "I think it’s important in terms of how we think about investment and continuing to invest where we’re seeing substantial opportunity and growth.",
-      "contextQuote": "Today, we are announcing the third phase of our long-term partnership with OpenAI through a multiyear, multibillion dollar investment to accelerate AI breakthroughs to ensure these benefits are broadly shared with the world.",
-      "gaps": []
+      "policyQuote": "없음",
+      "contextQuote": "in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.",
+      "gaps": [
+        "missing_amy_judgment",
+        "single_document_family"
+      ]
     },
     {
       "priority": 4,
+      "candidateId": "candidate-cloud-capacity-scale-2022",
+      "domain": "ai_cloud_capex",
+      "status": "approved",
+      "decisionQuestion": "How should Microsoft scale infrastructure and operating resources as demand and profitability constraints change?",
+      "chosenAction": "scale_infrastructure_and_people",
+      "directQuote": "Capital expenditures, we expect a sequential increase on a dollar basis as we continue to invest to meet growing global demand for our cloud services.",
+      "policyQuote": "없음",
+      "contextQuote": "At a total company level, headcount grew 20% year-over-year as we continue to invest in key areas such as cloud engineering, customer deployment, LinkedIn, and sales, and included approximately 4 points of growth from the addition of Nuance.",
+      "gaps": [
+        "single_document_family"
+      ]
+    },
+    {
+      "priority": 5,
+      "candidateId": "candidate-ai-capacity-opex-pivot-2023",
+      "domain": "ai_cloud_capex",
+      "status": "approved",
+      "decisionQuestion": "How should Microsoft scale infrastructure and operating resources as demand and profitability constraints change?",
+      "chosenAction": "scale_infrastructure_constrain_opex",
+      "directQuote": "As always, we remain committed to aligning costs and revenue growth to deliver disciplined profitability. Therefore, while the scaled capex investments will impact COGS growth, we expect FY24 operating expense growth to remain low.",
+      "policyQuote": "없음",
+      "contextQuote": "We expect capital expenditures to have a material sequential increase on a dollar basis driven by investments in Azure AI infrastructure.",
+      "gaps": [
+        "single_document_family"
+      ]
+    },
+    {
+      "priority": 6,
+      "candidateId": "candidate-ai-capacity-sourcing-2024",
+      "domain": "ai_cloud_capex",
+      "status": "approved",
+      "decisionQuestion": "How should Microsoft scale infrastructure and operating resources as demand and profitability constraints change?",
+      "chosenAction": "scale_infrastructure_constrain_opex",
+      "directQuote": "Our commitment to scaling our cloud and AI investment is guided by customer demand and the substantial market opportunity. As we scale these investments, we remain focused on driving efficiencies across every layer of our tech stack and disciplined cost management across every team.",
+      "policyQuote": "없음",
+      "contextQuote": "I feel like primarily, obviously, this is being built by us, but we’ve also used third-party capacity to help when we could have that help us, in terms of meeting customer demand. And I tend to think, looking forward, you’ll tend to see, and I guided toward it, accelerating capital expense to continue to be able to add capacity in the coming quarters, given what we see in terms of pipeline.",
+      "gaps": [
+        "single_document_family"
+      ]
+    },
+    {
+      "priority": 7,
+      "candidateId": "candidate-m365-price-2021",
+      "domain": "pricing_monetization",
+      "status": "incomplete",
+      "decisionQuestion": "¿Debemos proceder con el ajuste de precios de Microsoft 365?",
+      "chosenAction": "Implementar el ajuste de precios tal como se anunció.",
+      "directQuote": "없음",
+      "policyQuote": "없음",
+      "contextQuote": "El día de hoy anunciamos cambios a los precios comerciales de Microsoft 365 —el primer ajuste de precios sustancial desde que lanzamos Office 365 hace una década—.",
+      "gaps": [
+        "missing_amy_judgment",
+        "single_document_family"
+      ]
+    },
+    {
+      "priority": 8,
       "candidateId": "candidate-copilot-price-2023",
       "domain": "pricing_monetization",
       "status": "approved",
@@ -61,7 +121,21 @@
       "gaps": []
     },
     {
-      "priority": 5,
+      "priority": 9,
+      "candidateId": "candidate-teams-unbundle-2023",
+      "domain": "pricing_monetization",
+      "status": "incomplete",
+      "decisionQuestion": "사건 카드 생성 실패",
+      "chosenAction": "검증 가능한 증거가 더 필요함",
+      "directQuote": "없음",
+      "policyQuote": "없음",
+      "contextQuote": "없음",
+      "gaps": [
+        "model_response_invalid"
+      ]
+    },
+    {
+      "priority": 10,
       "candidateId": "candidate-workforce-reset-2023",
       "domain": "cost_efficiency",
       "status": "approved",
@@ -73,72 +147,72 @@
       "gaps": []
     },
     {
-      "priority": 6,
-      "candidateId": "candidate-github-acquisition-2018",
-      "domain": "m_and_a",
+      "priority": 11,
+      "candidateId": "candidate-phone-restructure-2015",
+      "domain": "cost_efficiency",
       "status": "incomplete",
-      "decisionQuestion": "Should Microsoft acquire GitHub for $7.5 billion in stock using existing share repurchase authorization?",
-      "chosenAction": "acquire_github",
+      "decisionQuestion": "Should Microsoft proceed with the asset impairment and position reduction in the Phone Hardware segment?",
+      "chosenAction": "Execute the full impairment adjustment and proceed with the 7,800 position reduction.",
       "directQuote": "없음",
       "policyQuote": "없음",
-      "contextQuote": "Microsoft will acquire GitHub for $7.5 billion in Microsoft stock.",
+      "contextQuote": "Microsoft also announced the reduction of up to 7,800 positions, primarily in the phone business.",
       "gaps": [
         "missing_amy_judgment",
         "single_document_family"
       ]
     },
     {
-      "priority": 7,
-      "candidateId": "candidate-nuance-acquisition-2021",
-      "domain": "m_and_a",
+      "priority": 12,
+      "candidateId": "candidate-transformation-2026",
+      "domain": "cost_efficiency",
       "status": "incomplete",
-      "decisionQuestion": "Should Microsoft proceed with the all-cash acquisition of Nuance at $56.00 per share?",
-      "chosenAction": "proceed",
+      "decisionQuestion": "Should Microsoft proceed with eliminating approximately 4,800 roles?",
+      "chosenAction": "Proceed with eliminating the 4,800 roles as announced.",
       "directQuote": "없음",
       "policyQuote": "없음",
-      "contextQuote": "Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9, in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.",
+      "contextQuote": "Today we are eliminating around 4,800 roles, about 2.1% of our global workforce, as we focus our people, investments, and energy on the priorities that will keep Microsoft positioned to deliver for customers in a fast-changing industry.",
       "gaps": [
         "missing_amy_judgment",
         "single_document_family"
       ]
     },
     {
-      "priority": 8,
-      "candidateId": "candidate-ai-datacenter-plan-2025",
-      "domain": "ai_cloud_capex",
+      "priority": 13,
+      "candidateId": "candidate-buyback-2013",
+      "domain": "shareholder_return_risk",
       "status": "incomplete",
-      "decisionQuestion": "How should Microsoft fund and deploy its $80 billion AI datacenter expansion in 2025?",
-      "chosenAction": "global_diversification",
+      "decisionQuestion": "Should the company proceed with the approved $40 billion share repurchase program?",
+      "chosenAction": "Execute the full $40 billion share repurchase authorization.",
       "directQuote": "없음",
       "policyQuote": "없음",
-      "contextQuote": "In FY 2025, Microsoft is on track to invest approximately $80 billion to build out AI-enabled datacenters to train AI models and deploy AI and cloud-based applications around the world. More than half of this total investment will be in the United States, reflecting our commitment to this country and our confidence in the American economy.",
+      "contextQuote": "The board of directors also approved a new share repurchase program authorizing up to $40 billion in share repurchases.",
       "gaps": [
         "missing_amy_judgment",
         "single_document_family"
       ]
     },
     {
-      "priority": 9,
-      "candidateId": "candidate-m365-price-2021",
-      "domain": "pricing_monetization",
-      "status": "incomplete",
-      "decisionQuestion": "Should Microsoft raise commercial M365 and Office 365 list prices globally after ten years of flat pricing?",
-      "chosenAction": "raise_prices",
-      "directQuote": "없음",
-      "policyQuote": "없음",
-      "contextQuote": "El día de hoy anunciamos cambios a los precios comerciales de Microsoft 365 —el primer ajuste de precios sustancial desde que lanzamos Office 365 hace una década—. Esta actualización de precios refleja el gran valor que hemos ofrecido a nuestros clientes a lo largo de los últimos diez años.",
-      "gaps": [
-        "missing_amy_judgment",
-        "single_document_family"
-      ]
-    },
-    {
-      "priority": 10,
+      "priority": 14,
       "candidateId": "candidate-buyback-2021",
       "domain": "shareholder_return_risk",
       "status": "incomplete",
-      "decisionQuestion": "Should the board authorize a $60 billion share repurchase program?",
-      "chosenAction": "authorize",
+      "decisionQuestion": "Should the company proceed with the $60 billion share repurchase authorization?",
+      "chosenAction": "Execute the full $60 billion share repurchase authorization.",
+      "directQuote": "없음",
+      "policyQuote": "없음",
+      "contextQuote": "The board of directors also approved a new share repurchase program authorizing up to $60 billion in share repurchases.",
+      "gaps": [
+        "missing_amy_judgment",
+        "single_document_family"
+      ]
+    },
+    {
+      "priority": 15,
+      "candidateId": "candidate-buyback-2024",
+      "domain": "shareholder_return_risk",
+      "status": "incomplete",
+      "decisionQuestion": "Should the company proceed with the authorized $60 billion share repurchase program?",
+      "chosenAction": "Execute the full $60 billion share repurchase authorization.",
       "directQuote": "없음",
       "policyQuote": "없음",
       "contextQuote": "The board of directors also approved a new share repurchase program authorizing up to $60 billion in share repurchases.",
