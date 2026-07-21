@@ -1,0 +1,54 @@
+{
+  "id": "policy-20d2c645ab6641c9",
+  "domain": "cost_efficiency",
+  "applicabilityConditions": [
+    "Current resource deployment is not aligned with the highest-priority work or productive use."
+  ],
+  "priorityOrder": [
+    "Strategic priority alignment",
+    "Workforce productivity",
+    "Cost and revenue alignment",
+    "Execution continuity"
+  ],
+  "recommendedAction": "Reduce or reallocate resources toward the highest-priority work while preserving focused investment.",
+  "nonApplicabilityConditions": [
+    "Current allocation remains aligned with priority work and productive use."
+  ],
+  "guardrails": [
+    "Preserve focused investment and execution continuity while changing headcount or cost structure."
+  ],
+  "exceptions": [
+    "Retain resources when removal would impair a verified high-priority opportunity."
+  ],
+  "reversalSignals": [
+    "Priority alignment improves, productivity recovers, or reductions begin to impair focused investment."
+  ],
+  "reflectionIds": [
+    "reflection-bd563b486d9d6f9b"
+  ],
+  "supportingEventIds": [
+    "event-transformation-2026",
+    "event-workforce-reset-2023"
+  ],
+  "contrastingEventIds": [],
+  "evidenceIds": [
+    "span-abaa0f62aa30208c",
+    "span-acc7150e73b95096",
+    "span-f031de15863e849e"
+  ],
+  "directPolicyEvidenceIds": [
+    "policy-workforce-resource-reallocation-2022"
+  ],
+  "contrastStatus": "documented_unavailable",
+  "schemaVersion": 2,
+  "confidence": "medium",
+  "policyKind": "deployable_policy",
+  "status": "approved",
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-07-21T01:25:00.364Z",
+    "decision": "approved",
+    "rationale": "Reviewed against approved same-axis reflections, source-linked Amy Hood principle evidence, holdout boundaries, explicit guardrails, reversal signals, and five-domain PoC coverage; approved at medium confidence.",
+    "validationHash": "c703571eb6c9e88b531f8f4d4d1c933e4f88d3f6644646cb62e63d1536506fad"
+  }
+}

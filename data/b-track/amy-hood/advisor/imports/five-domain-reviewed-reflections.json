@@ -1,0 +1,139 @@
+{
+  "reflections": [
+    {
+      "domain": "m_and_a",
+      "crossEventQuestion": "When should Microsoft commit to a major acquisition rather than preserve capital and optionality?",
+      "observation": "The reviewed Activision and Nuance events both commit capital to acquisitions while tying value creation to strategic reach and execution.",
+      "invariant": "Commit to acquisition only when strategic reach and execution requirements can support durable shareholder value.",
+      "boundaryConditions": ["Strategic reach, transaction economics, and integration execution must remain supportable."],
+      "unresolvedConflicts": ["The bounded public event set contains no reviewed Amy Hood event choosing not to acquire on this same decision axis."],
+      "decisionAxis": {
+        "decisionObject": "major_acquisition_commitment",
+        "decisionQuestion": "When should Microsoft commit to a major acquisition?",
+        "choiceSet": ["commit_to_bounded_acquisition", "defer_or_reject_acquisition"],
+        "gatingVariables": ["strategic_reach", "transaction_economics", "integration_execution"]
+      },
+      "supportPattern": {
+        "eventIds": ["event-activision-acquisition-2022", "event-nuance-acquisition-2021"],
+        "conditions": ["The target expands strategic reach and value creation remains execution-dependent."],
+        "action": "commit_to_bounded_acquisition",
+        "evidenceIds": ["span-807ee90aa032f320", "span-291b7db034000ea7"]
+      },
+      "contrastStatus": "documented_unavailable",
+      "contrastPattern": null,
+      "conditionDelta": "No reviewed opposite-condition acquisition event is available in the bounded public evidence set.",
+      "actionDelta": "Deferral or rejection remains a reversal path when strategic reach, economics, or execution support weakens.",
+      "supportingEventIds": ["event-activision-acquisition-2022", "event-nuance-acquisition-2021"],
+      "contrastingEventIds": [],
+      "evidenceIds": ["span-807ee90aa032f320", "span-291b7db034000ea7"]
+    },
+    {
+      "domain": "ai_cloud_capex",
+      "crossEventQuestion": "When should AI and cloud infrastructure scale while operating expense remains constrained?",
+      "observation": "The reviewed 2023 and 2024 events scale infrastructure against demand while preserving explicit cost discipline.",
+      "invariant": "Scale capacity when customer demand and urgency are observable, while constraining operating expense and monitoring infrastructure economics.",
+      "boundaryConditions": ["Demand, capacity urgency, and infrastructure economics must remain observable."],
+      "unresolvedConflicts": ["The bounded public event set contains no reviewed opposite action under the same AI capacity and cost conditions."],
+      "decisionAxis": {
+        "decisionObject": "ai_cloud_capacity_allocation",
+        "decisionQuestion": "When should capacity scale within operating-cost constraints?",
+        "choiceSet": ["scale_infrastructure_constrain_opex", "defer_or_reduce_capacity"],
+        "gatingVariables": ["customer_demand", "capacity_urgency", "infrastructure_economics"]
+      },
+      "supportPattern": {
+        "eventIds": ["event-ai-capacity-opex-pivot-2023", "event-ai-capacity-sourcing-2024"],
+        "conditions": ["Customer demand and material AI capacity requirements remain observable."],
+        "action": "scale_infrastructure_constrain_opex",
+        "evidenceIds": ["span-capacity-2023-opex", "span-capacity-2024-demand-discipline"]
+      },
+      "contrastStatus": "documented_unavailable",
+      "contrastPattern": null,
+      "conditionDelta": "No reviewed opposite-condition AI capacity event is available in the bounded public evidence set.",
+      "actionDelta": "Capacity deferral is retained as a reversal path if demand, urgency, or economics weaken.",
+      "supportingEventIds": ["event-ai-capacity-opex-pivot-2023", "event-ai-capacity-sourcing-2024"],
+      "contrastingEventIds": [],
+      "evidenceIds": ["span-capacity-2023-opex", "span-capacity-2024-demand-discipline"]
+    },
+    {
+      "domain": "pricing_monetization",
+      "crossEventQuestion": "When should product value be monetized through price or packaging changes?",
+      "observation": "The Copilot price and Teams unbundling events apply monetization or packaging changes only alongside an explicit customer-value rationale and concrete terms.",
+      "invariant": "Change price or packaging only when customer value is identifiable and the commercial terms remain explicit.",
+      "boundaryConditions": ["Customer value and concrete commercial terms must both be identifiable."],
+      "unresolvedConflicts": ["The bounded public event set contains no reviewed Amy Hood event withholding monetization on this same value-and-terms axis."],
+      "decisionAxis": {
+        "decisionObject": "value_monetization",
+        "decisionQuestion": "When should value support a price or packaging change?",
+        "choiceSet": ["monetize_or_repackage_verified_value", "defer_monetization_change"],
+        "gatingVariables": ["customer_value", "productivity_improvement", "commercial_terms"]
+      },
+      "supportPattern": {
+        "eventIds": ["event-copilot-price-2023", "event-teams-unbundle-2023"],
+        "conditions": ["Customer value is identifiable and the price or packaging terms are explicit."],
+        "action": "monetize_or_repackage_verified_value",
+        "evidenceIds": ["span-a932a8deb06fb1c6", "span-1baf5181c9f9b527", "span-3e0302dd56efc30e", "span-22b85b48be6cc0ff"]
+      },
+      "contrastStatus": "documented_unavailable",
+      "contrastPattern": null,
+      "conditionDelta": "No reviewed opposite-condition monetization event is available in the bounded public evidence set.",
+      "actionDelta": "Defer the price or packaging change when value or commercial terms are not supportable.",
+      "supportingEventIds": ["event-copilot-price-2023", "event-teams-unbundle-2023"],
+      "contrastingEventIds": [],
+      "evidenceIds": ["span-a932a8deb06fb1c6", "span-1baf5181c9f9b527", "span-3e0302dd56efc30e", "span-22b85b48be6cc0ff"]
+    },
+    {
+      "domain": "cost_efficiency",
+      "crossEventQuestion": "When should workforce resources be reduced or reallocated toward higher-priority work?",
+      "observation": "The 2023 reset and 2026 transformation align headcount and cost structure with focused priorities and productivity.",
+      "invariant": "Reduce or reallocate resources when current deployment is not aligned with the highest-priority work and productive use.",
+      "boundaryConditions": ["Priority alignment, productivity, and continued investment in focused areas must be reviewed together."],
+      "unresolvedConflicts": ["The bounded public event set contains no reviewed opposite action under the same resource-productivity conditions."],
+      "decisionAxis": {
+        "decisionObject": "workforce_resource_allocation",
+        "decisionQuestion": "When should workforce resources be reduced or reallocated?",
+        "choiceSet": ["reduce_or_reallocate_to_priorities", "retain_current_allocation"],
+        "gatingVariables": ["priority_alignment", "workforce_productivity", "cost_revenue_alignment"]
+      },
+      "supportPattern": {
+        "eventIds": ["event-workforce-reset-2023", "event-transformation-2026"],
+        "conditions": ["Resources must move toward the highest-priority and most productive uses."],
+        "action": "reduce_or_reallocate_to_priorities",
+        "evidenceIds": ["span-f031de15863e849e", "span-abaa0f62aa30208c", "span-acc7150e73b95096"]
+      },
+      "contrastStatus": "documented_unavailable",
+      "contrastPattern": null,
+      "conditionDelta": "No reviewed opposite-condition workforce event is available in the bounded public evidence set.",
+      "actionDelta": "Retain the current allocation only while priority alignment and productivity remain supportable.",
+      "supportingEventIds": ["event-workforce-reset-2023", "event-transformation-2026"],
+      "contrastingEventIds": [],
+      "evidenceIds": ["span-f031de15863e849e", "span-abaa0f62aa30208c", "span-acc7150e73b95096"]
+    },
+    {
+      "domain": "shareholder_return_risk",
+      "crossEventQuestion": "When should Microsoft authorize a major share repurchase while preserving capital flexibility?",
+      "observation": "The reviewed 2013 and 2024 events authorize bounded repurchase capacity as part of a continuing cash-return commitment.",
+      "invariant": "Authorize shareholder cash return within an explicit ceiling while retaining discretion over actual deployment.",
+      "boundaryConditions": ["The authorization ceiling and competing investment or liquidity needs must remain explicit."],
+      "unresolvedConflicts": ["The bounded public event set contains no reviewed Amy Hood event suspending repurchases on this same capital-return axis."],
+      "decisionAxis": {
+        "decisionObject": "shareholder_cash_return",
+        "decisionQuestion": "When should bounded repurchase capacity be authorized?",
+        "choiceSet": ["authorize_bounded_cash_return", "defer_or_reduce_cash_return"],
+        "gatingVariables": ["cash_return_commitment", "authorization_ceiling", "capital_flexibility"]
+      },
+      "supportPattern": {
+        "eventIds": ["event-buyback-2013", "event-buyback-2024"],
+        "conditions": ["A continuing cash-return commitment is paired with an explicit authorization ceiling."],
+        "action": "authorize_bounded_cash_return",
+        "evidenceIds": ["span-fdd09e9019051bf7", "span-4d34d5136c326275", "span-328e730e3d56a46c", "span-20e3349dbae4503b"]
+      },
+      "contrastStatus": "documented_unavailable",
+      "contrastPattern": null,
+      "conditionDelta": "No reviewed opposite-condition repurchase event is available in the bounded public evidence set.",
+      "actionDelta": "Defer or reduce cash return when capital flexibility or competing investment needs dominate.",
+      "supportingEventIds": ["event-buyback-2013", "event-buyback-2024"],
+      "contrastingEventIds": [],
+      "evidenceIds": ["span-fdd09e9019051bf7", "span-4d34d5136c326275", "span-328e730e3d56a46c", "span-20e3349dbae4503b"]
+    }
+  ]
+}

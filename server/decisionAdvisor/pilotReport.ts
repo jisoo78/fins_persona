@@ -20,7 +20,7 @@ import { readJsonFile, writeJsonAtomic } from './jsonStore';
 import { loadPilotManifest } from './pilotManifest';
 import { loadValidatedPilotPolicyEvidence } from './pilotPolicyEvidence';
 import { advisorPaths } from './paths';
-import { loadPilotSourceInputs } from './pilotSourceLoader';
+import { loadPilotSourceInputs, reviewedDecisionContextSpan } from './pilotSourceLoader';
 
 export type PilotBatchResult = {
   results: PilotDecisionEvent[];
@@ -95,6 +95,11 @@ export const buildPilotEvent = async (
   const spans = [];
   const extractionGaps: PilotEvidenceGap[] = [];
   for (const input of loaded.core) {
+    const reviewedContext = reviewedDecisionContextSpan(input);
+    if (reviewedContext) {
+      spans.push(reviewedContext);
+      continue;
+    }
     const result = await extractPilotEvidence({ root, ...input }, model);
     spans.push(...result.spans);
     extractionGaps.push(...result.gaps);

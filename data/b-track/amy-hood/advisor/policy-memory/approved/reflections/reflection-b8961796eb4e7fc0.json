@@ -1,0 +1,66 @@
+{
+  "id": "reflection-b8961796eb4e7fc0",
+  "domain": "pricing_monetization",
+  "crossEventQuestion": "When should product value be monetized through price or packaging changes?",
+  "observation": "The Copilot price and Teams unbundling events apply monetization or packaging changes only alongside an explicit customer-value rationale and concrete terms.",
+  "invariant": "Change price or packaging only when customer value is identifiable and the commercial terms remain explicit.",
+  "boundaryConditions": [
+    "Customer value and concrete commercial terms must both be identifiable."
+  ],
+  "unresolvedConflicts": [
+    "The bounded public event set contains no reviewed Amy Hood event withholding monetization on this same value-and-terms axis."
+  ],
+  "decisionAxis": {
+    "decisionObject": "value_monetization",
+    "decisionQuestion": "When should value support a price or packaging change?",
+    "choiceSet": [
+      "defer_monetization_change",
+      "monetize_or_repackage_verified_value"
+    ],
+    "gatingVariables": [
+      "commercial_terms",
+      "customer_value",
+      "productivity_improvement"
+    ]
+  },
+  "supportPattern": {
+    "eventIds": [
+      "event-copilot-price-2023",
+      "event-teams-unbundle-2023"
+    ],
+    "conditions": [
+      "Customer value is identifiable and the price or packaging terms are explicit."
+    ],
+    "action": "monetize_or_repackage_verified_value",
+    "evidenceIds": [
+      "span-1baf5181c9f9b527",
+      "span-22b85b48be6cc0ff",
+      "span-3e0302dd56efc30e",
+      "span-a932a8deb06fb1c6"
+    ]
+  },
+  "contrastStatus": "documented_unavailable",
+  "contrastPattern": null,
+  "conditionDelta": "No reviewed opposite-condition monetization event is available in the bounded public evidence set.",
+  "actionDelta": "Defer the price or packaging change when value or commercial terms are not supportable.",
+  "supportingEventIds": [
+    "event-copilot-price-2023",
+    "event-teams-unbundle-2023"
+  ],
+  "contrastingEventIds": [],
+  "evidenceIds": [
+    "span-1baf5181c9f9b527",
+    "span-22b85b48be6cc0ff",
+    "span-3e0302dd56efc30e",
+    "span-a932a8deb06fb1c6"
+  ],
+  "confidence": "medium",
+  "status": "approved",
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-07-21T01:21:10.044Z",
+    "decision": "approved",
+    "rationale": "Reviewed all five domain support events, exact evidence IDs, documented public-contrast gaps, decision axes, boundaries, and holdout exclusion.",
+    "validationHash": "915f70ee232394bf713cfa9a09802811902f47ca5b91db7724b22257d63304cf"
+  }
+}

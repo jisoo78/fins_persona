@@ -1545,7 +1545,8 @@
     "decisionWindowStart": "2023-08-31",
     "decisionWindowEnd": "2023-08-31",
     "discoveryUrls": [
-      "https://blogs.microsoft.com/eupolicy/2023/08/31/european-competition-teams-office-microsoft-365/"
+      "https://blogs.microsoft.com/eupolicy/2023/08/31/european-competition-teams-office-microsoft-365/",
+      "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3"
     ],
     "decisionWindowBasis": {
       "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
@@ -1587,6 +1588,18 @@
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      },
+      {
+        "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3",
+        "role": "counterevidence",
+        "sourceType": "earnings_call",
+        "documentFamilyId": "earnings-call-2023",
+        "publishedAt": "2023-04-25",
+        "temporalRelation": "pre_decision",
+        "relevanceClaim": "The earlier Amy Hood pricing principle supplies a domain-level value threshold for interpreting the later Teams packaging decision.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "Event linkage is reviewed separately in policy-evidence.json and is not presented as event-specific direct speech."
       }
     ],
     "directEvidenceGap": {
@@ -2105,7 +2118,8 @@
     "decisionWindowStart": "2026-07-06",
     "decisionWindowEnd": "2026-07-06",
     "discoveryUrls": [
-      "https://blogs.microsoft.com/blog/2026/07/06/the-latest-in-our-company-transformation/"
+      "https://blogs.microsoft.com/blog/2026/07/06/the-latest-in-our-company-transformation/",
+      "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q1"
     ],
     "decisionWindowBasis": {
       "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
@@ -2147,6 +2161,18 @@
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      },
+      {
+        "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q1",
+        "role": "counterevidence",
+        "sourceType": "earnings_call",
+        "documentFamilyId": "earnings-call-2022",
+        "publishedAt": "2022-10-25",
+        "temporalRelation": "pre_decision",
+        "relevanceClaim": "The earlier Amy Hood resource-allocation principle supplies the domain-level productivity rule for interpreting the later transformation decision.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "Event linkage is reviewed separately in policy-evidence.json and is not presented as event-specific direct speech."
       }
     ],
     "directEvidenceGap": {
@@ -2525,7 +2551,8 @@
     "decisionWindowStart": "2024-09-16",
     "decisionWindowEnd": "2024-09-16",
     "discoveryUrls": [
-      "https://news.microsoft.com/2024/09/16/microsoft-announces-quarterly-dividend-increase-and-new-share-repurchase-program-3/"
+      "https://news.microsoft.com/2024/09/16/microsoft-announces-quarterly-dividend-increase-and-new-share-repurchase-program-3/",
+      "https://news.microsoft.com/source/2013/09/17/microsoft-announces-quarterly-dividend-increase-and-share-repurchase-program-3/"
     ],
     "decisionWindowBasis": {
       "summary": "The one-day window is the public board authorization or company announcement date, not an earnings-quarter proxy.",
@@ -2567,6 +2594,18 @@
         },
         "reviewStatus": "reviewed",
         "reviewerNote": "Reviewed against the dated official page and event-specific quoted passage on 2026-07-14."
+      },
+      {
+        "canonicalUrl": "https://news.microsoft.com/source/2013/09/17/microsoft-announces-quarterly-dividend-increase-and-share-repurchase-program-3/",
+        "role": "counterevidence",
+        "sourceType": "official_announcement",
+        "documentFamilyId": "shareholder-return-2013",
+        "publishedAt": "2013-09-17",
+        "temporalRelation": "pre_decision",
+        "relevanceClaim": "Amy Hood's earlier cash-return principle supplies a domain-level capital-return policy for interpreting the later authorization.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "Event linkage is reviewed separately in policy-evidence.json and is not presented as event-specific direct speech."
       }
     ],
     "directEvidenceGap": {

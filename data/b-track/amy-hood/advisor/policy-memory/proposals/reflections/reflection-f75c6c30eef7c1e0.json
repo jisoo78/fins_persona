@@ -1,0 +1,56 @@
+{
+  "id": "reflection-f75c6c30eef7c1e0",
+  "domain": "ai_cloud_capex",
+  "crossEventQuestion": "When should AI and cloud infrastructure scale while operating expense remains constrained?",
+  "observation": "The reviewed 2023 and 2024 events scale infrastructure against demand while preserving explicit cost discipline.",
+  "invariant": "Scale capacity when customer demand and urgency are observable, while constraining operating expense and monitoring infrastructure economics.",
+  "boundaryConditions": [
+    "Demand, capacity urgency, and infrastructure economics must remain observable."
+  ],
+  "unresolvedConflicts": [
+    "The bounded public event set contains no reviewed opposite action under the same AI capacity and cost conditions."
+  ],
+  "decisionAxis": {
+    "decisionObject": "ai_cloud_capacity_allocation",
+    "decisionQuestion": "When should capacity scale within operating-cost constraints?",
+    "choiceSet": [
+      "defer_or_reduce_capacity",
+      "scale_infrastructure_constrain_opex"
+    ],
+    "gatingVariables": [
+      "capacity_urgency",
+      "customer_demand",
+      "infrastructure_economics"
+    ]
+  },
+  "supportPattern": {
+    "eventIds": [
+      "event-ai-capacity-opex-pivot-2023",
+      "event-ai-capacity-sourcing-2024"
+    ],
+    "conditions": [
+      "Customer demand and material AI capacity requirements remain observable."
+    ],
+    "action": "scale_infrastructure_constrain_opex",
+    "evidenceIds": [
+      "span-capacity-2023-opex",
+      "span-capacity-2024-demand-discipline"
+    ]
+  },
+  "contrastStatus": "documented_unavailable",
+  "contrastPattern": null,
+  "conditionDelta": "No reviewed opposite-condition AI capacity event is available in the bounded public evidence set.",
+  "actionDelta": "Capacity deferral is retained as a reversal path if demand, urgency, or economics weaken.",
+  "supportingEventIds": [
+    "event-ai-capacity-opex-pivot-2023",
+    "event-ai-capacity-sourcing-2024"
+  ],
+  "contrastingEventIds": [],
+  "evidenceIds": [
+    "span-capacity-2023-opex",
+    "span-capacity-2024-demand-discipline"
+  ],
+  "confidence": "medium",
+  "status": "review_required",
+  "review": null
+}

@@ -1,0 +1,363 @@
+[
+  {
+    "id": "event-activision-acquisition-2022",
+    "kind": "event",
+    "domain": "m_and_a",
+    "title": "Activision Blizzard acquisition for $68.7 billion",
+    "searchableText": "Activision Blizzard acquisition for $68.7 billion\nShould Microsoft acquire Activision Blizzard for $95 per share in an all-cash transaction?\nMicrosoft has agreed to acquire Activision Blizzard for $68.7 billion inclusive of net cash at $95 per share.\nExpand gaming portfolio and content library\nBoth boards of directors have approved the transaction\nAll-cash transaction structure\n{\"description\":\"Complete the $68.7 billion all-cash acquisition\",\"expectedBenefit\":\"Acquire Activision Blizzard's portfolio at $95 per share\",\"id\":\"proceed\",\"principalRisk\":\"Regulatory scrutiny of a large gaming merger\",\"selected\":true}\n{\"description\":\"Withdraw the acquisition offer\",\"expectedBenefit\":\"Avoid potential antitrust and regulatory challenges\",\"id\":\"reject\",\"principalRisk\":\"Loss of strategic content and portfolio growth\",\"selected\":false}\nproceed\nAvoidance of regulatory scrutiny\nShareholder and financial information, as well as today’s 6:00 a.m. Pacific time conference call with investors and analysts, is available at http://www.microsoft.com/en-us/investor.\nMicrosoft will acquire Activision Blizzard for $95.00 per share, in an all-cash transaction valued at $68.7 billion, inclusive of Activision Blizzard’s net cash.\nWe’ve agreed to acquire Activision Blizzard for $95 per share in an all-cash transaction valued at $68.7 billion, inclusive of Activision Blizzard’s net cash.\nThe transaction has been approved by the boards of directors of both Microsoft and Activision Blizzard.",
+    "policyId": "policy-ccd7e455daf31f5f",
+    "reflectionIds": [
+      "reflection-dad2d5919b582d9d"
+    ],
+    "supportingEventIds": [
+      "event-activision-acquisition-2022"
+    ],
+    "contrastingEventIds": [],
+    "evidenceIds": [
+      "span-095e8535c69c65e3",
+      "span-1abb63ac11f1075c",
+      "span-807ee90aa032f320",
+      "span-e32ab0f2fc36349e"
+    ],
+    "sourceIds": [
+      "source-3d87da3c9879cf67",
+      "source-fdb91c86f5bea78c"
+    ]
+  },
+  {
+    "id": "event-ai-capacity-opex-pivot-2023",
+    "kind": "event",
+    "domain": "ai_cloud_capex",
+    "title": "Scale Azure AI infrastructure while constraining operating expense",
+    "searchableText": "Scale Azure AI infrastructure while constraining operating expense\nHow should Microsoft scale infrastructure and operating resources as demand and profitability constraints change?\nAzure AI infrastructure required a material capacity increase while Microsoft was aligning costs with revenue growth and protecting profitability.\nLead the AI platform wave\nMaintain healthy profitability while scaling capacity\nAzure AI infrastructure required material sequential investment.\nScaled capital investment would increase COGS.\nFY24 operating-expense growth was expected to remain low.\nCapacity buildout timing varies by quarter.\n{\"description\":\"Scale AI infrastructure and operating resources together.\",\"expectedBenefit\":\"Maximizes organizational capacity around the platform shift.\",\"id\":\"scale_infrastructure_and_people\",\"principalRisk\":\"Weakens operating leverage while infrastructure COGS is rising.\",\"selected\":false}\n{\"description\":\"Increase Azure AI infrastructure capital while keeping operating-expense growth low.\",\"expectedBenefit\":\"Funds urgent capacity while preserving disciplined profitability.\",\"id\":\"scale_infrastructure_constrain_opex\",\"principalRisk\":\"Requires aggressive internal resource prioritization.\",\"selected\":true}\nscale_infrastructure_constrain_opex\nExpanding people with infrastructure could reduce execution bottlenecks.\nWe expect capital expenditures to have a material sequential increase on a dollar basis driven by investments in Azure AI infrastructure.\nAs always, we remain committed to aligning costs and revenue growth to deliver disciplined profitability. Therefore, while the scaled capex investments will impact COGS growth, we expect FY24 operating expense growth to remain low.",
+    "policyId": "policy-e7eafcda9e4dc2e3",
+    "reflectionIds": [
+      "reflection-f75c6c30eef7c1e0"
+    ],
+    "supportingEventIds": [
+      "event-ai-capacity-opex-pivot-2023"
+    ],
+    "contrastingEventIds": [],
+    "evidenceIds": [
+      "span-capacity-2023-ai-capex",
+      "span-capacity-2023-opex"
+    ],
+    "sourceIds": [
+      "source-fbb900eb7e249591"
+    ]
+  },
+  {
+    "id": "event-ai-capacity-sourcing-2024",
+    "kind": "event",
+    "domain": "ai_cloud_capex",
+    "title": "Accelerate demand-led AI capacity with disciplined cost and mixed supply",
+    "searchableText": "Accelerate demand-led AI capacity with disciplined cost and mixed supply\nHow should Microsoft scale infrastructure and operating resources as demand and profitability constraints change?\nCustomer demand and pipeline required faster cloud and AI capacity additions than owned buildout alone could always deliver.\nAdd capacity in time to serve visible customer demand\nPreserve operating-margin discipline while scaling AI investment\nCustomer demand guided cloud and AI investment.\nThird-party capacity supplemented owned capacity when lead time required it.\nAI capital investment increases COGS.\nEvery team remained subject to disciplined cost management.\n{\"description\":\"Scale owned infrastructure and operating headcount together.\",\"expectedBenefit\":\"Keeps execution resources under direct organizational control.\",\"id\":\"scale_infrastructure_and_people\",\"principalRisk\":\"Adds recurring operating cost while capital intensity is rising.\",\"selected\":false}\n{\"description\":\"Accelerate infrastructure, mix owned and third-party supply, and retain operating-cost discipline.\",\"expectedBenefit\":\"Responds faster to pipeline without matching CapEx growth with broad OpEx growth.\",\"id\":\"scale_infrastructure_constrain_opex\",\"principalRisk\":\"External capacity may have different economics or control characteristics.\",\"selected\":true}\nscale_infrastructure_constrain_opex\nScaling people alongside owned capacity could increase direct control and reduce external dependency.\nOur commitment to scaling our cloud and AI investment is guided by customer demand and the substantial market opportunity. As we scale these investments, we remain focused on driving efficiencies across every layer of our tech stack and disciplined cost management across every team.\nI feel like primarily, obviously, this is being built by us, but we’ve also used third-party capacity to help when we could have that help us, in terms of meeting customer demand. And I tend to think, looking forward, you’ll tend to see, and I guided toward it, accelerating capital expense to continue to be able to add capacity in the coming quarters, given what we see in terms of pipeline.",
+    "policyId": "policy-e7eafcda9e4dc2e3",
+    "reflectionIds": [
+      "reflection-f75c6c30eef7c1e0"
+    ],
+    "supportingEventIds": [
+      "event-ai-capacity-sourcing-2024"
+    ],
+    "contrastingEventIds": [],
+    "evidenceIds": [
+      "span-capacity-2024-demand-discipline",
+      "span-capacity-2024-external-supply"
+    ],
+    "sourceIds": [
+      "source-4f4085f8344669c4"
+    ]
+  },
+  {
+    "id": "event-buyback-2013",
+    "kind": "event",
+    "domain": "shareholder_return_risk",
+    "title": "2013 forty billion dollar share repurchase authorization",
+    "searchableText": "2013 forty billion dollar share repurchase authorization\nShould the company authorize a new share repurchase program up to $40 billion?\nThe board of directors is considering approving a new share repurchase program.\nReturn cash to shareholders.\nSignal commitment to shareholder value.\nThe board of directors must approve the program.\nThe authorization limit is set at $40 billion.\nThe action must reflect a continued commitment to shareholders.\nThe decision is being made on September 17, 2013.\n{\"description\":\"Authorize the new share repurchase program up to $40 billion.\",\"expectedBenefit\":\"Demonstrates commitment to returning cash to shareholders.\",\"id\":\"option-buyback-yes\",\"principalRisk\":\"Potential market reaction to the large capital deployment.\",\"selected\":true}\n{\"description\":\"Do not authorize the new share repurchase program.\",\"expectedBenefit\":\"Retain capital for other strategic uses.\",\"id\":\"option-buyback-no\",\"principalRisk\":\"Perception of reduced commitment to shareholder returns.\",\"selected\":false}\nAuthorize the new share repurchase program up to $40 billion.\nRetaining capital for alternative strategic investments.\nThe board of directors also approved a new share repurchase program authorizing up to $40 billion in share repurchases.\nThese actions reflect a continued commitment to returning cash to our shareholders",
+    "policyId": "policy-a7972af407a0bf69",
+    "reflectionIds": [
+      "reflection-7371bfa747efb778"
+    ],
+    "supportingEventIds": [
+      "event-buyback-2013"
+    ],
+    "contrastingEventIds": [],
+    "evidenceIds": [
+      "span-4d34d5136c326275",
+      "span-fdd09e9019051bf7"
+    ],
+    "sourceIds": [
+      "source-78333f25f047c289"
+    ]
+  },
+  {
+    "id": "event-buyback-2024",
+    "kind": "event",
+    "domain": "shareholder_return_risk",
+    "title": "2024 sixty billion dollar share repurchase authorization",
+    "searchableText": "2024 sixty billion dollar share repurchase authorization\nShould the company proceed with the new $60 billion share repurchase program?\nThe company has approved a new share repurchase program authorizing up to $60 billion.\nReturn cash to shareholders.\nSignal confidence in the company's future.\nEnhance shareholder value.\nThe new share repurchase program is authorized up to $60 billion.\nThe company has a commitment to returning cash to shareholders.\nThe total authorization limit is capped at $60 billion.\nThe action must reflect a continued commitment to shareholders.\n{\"description\":\"Proceed with the full $60 billion share repurchase authorization.\",\"expectedBenefit\":\"Maximize shareholder return and signal strong confidence.\",\"id\":\"option-A\",\"principalRisk\":\"Potential market perception of overvaluation if the market disagrees.\",\"selected\":true}\n{\"description\":\"Authorize a smaller, partial share repurchase program (e.g., $30 billion).\",\"expectedBenefit\":\"Maintain flexibility and manage market expectations more conservatively.\",\"id\":\"option-B\",\"principalRisk\":\"May signal less conviction in the company's near-term prospects.\",\"selected\":false}\nProceed with the full $60 billion share repurchase authorization.\nMaintaining flexibility to adjust to unforeseen market changes.\napproved a new share repurchase program authorizing up to $60 billion\nThese actions reflect a continued commitment to returning cash to our shareholders",
+    "policyId": "policy-a7972af407a0bf69",
+    "reflectionIds": [
+      "reflection-7371bfa747efb778"
+    ],
+    "supportingEventIds": [
+      "event-buyback-2024"
+    ],
+    "contrastingEventIds": [],
+    "evidenceIds": [
+      "span-20e3349dbae4503b",
+      "span-328e730e3d56a46c"
+    ],
+    "sourceIds": [
+      "source-78333f25f047c289",
+      "source-9199eb9f217ec336"
+    ]
+  },
+  {
+    "id": "event-copilot-price-2023",
+    "kind": "event",
+    "domain": "pricing_monetization",
+    "title": "Microsoft 365 Copilot pricing",
+    "searchableText": "Microsoft 365 Copilot pricing\nWhat list price to set for Copilot for Microsoft 365 commercial customers?\nCopilot is broadly available for E3, E5, Business Standard, and Business Premium customers; Amy Hood's policy is to list price products adding significant value.\nCapture value from productivity improvements\nBroad availability for commercial customers\nMust align with Amy's value-based list price policy\n{\"description\":\"USD30 per user per month for E3, E5, Business Standard, and Business Premium customers\",\"expectedBenefit\":\"Monetizes productivity improvements at a premium tier\",\"id\":\"30_per_user\",\"principalRisk\":\"Customers may resist the additional monthly cost\",\"selected\":true}\n{\"description\":\"Include Copilot at no extra cost with existing E3/E5 licenses\",\"expectedBenefit\":\"Increases retention and reduces churn\",\"id\":\"bundle_with_existing\",\"principalRisk\":\"Leaves significant value uncaptured from productivity gains\",\"selected\":false}\n30_per_user\nIncreased retention from bundling at no extra cost\nCopilot for Microsoft 365 will be available for commercial customers for USD30 per user per month for Microsoft 365 E3, E5, Business Standard, and Business Premium customers when broadly available\nwhen we believe we’re adding a lot of value, and frankly, that’s what the copilots are doing and some productivity improvement, you can expect that we will have a list price for those.",
+    "policyId": "policy-e0bfae61c424868c",
+    "reflectionIds": [
+      "reflection-b8961796eb4e7fc0"
+    ],
+    "supportingEventIds": [
+      "event-copilot-price-2023"
+    ],
+    "contrastingEventIds": [],
+    "evidenceIds": [
+      "span-1baf5181c9f9b527",
+      "span-a932a8deb06fb1c6"
+    ],
+    "sourceIds": [
+      "source-fbb900eb7e249591",
+      "source-ff1c981bc6aed7c2"
+    ]
+  },
+  {
+    "id": "event-nuance-acquisition-2021",
+    "kind": "event",
+    "domain": "m_and_a",
+    "title": "Nuance healthcare cloud acquisition for 19.7 billion dollars",
+    "searchableText": "Nuance healthcare cloud acquisition for 19.7 billion dollars\nShould Microsoft proceed with the acquisition of Nuance for $19.7 billion?\nMicrosoft announced a definitive agreement to acquire Nuance for $56.00 per share.\nAcquire Nuance for $19.7 billion.\nCreate value through terrific execution.\nThe merger agreement must be adopted by Nuance stockholders.\nCertain governmental and regulatory approvals must be received.\nThe transaction is an all-cash deal.\nThe acquisition is valued at $19.7 billion inclusive of net debt.\n{\"description\":\"Proceed with the acquisition as agreed.\",\"expectedBenefit\":\"Realize value creation through strong execution.\",\"id\":\"option-1\",\"principalRisk\":\"Failure to satisfy consummation conditions.\",\"selected\":true}\n{\"description\":\"Re-evaluate the acquisition terms or halt the deal.\",\"expectedBenefit\":\"Mitigate risks associated with integration or execution.\",\"id\":\"option-2\",\"principalRisk\":\"Missing the opportunity to acquire Nuance.\",\"selected\":false}\nProceed with the acquisition as agreed.\nMitigating risks associated with integration or execution.\nAnd with all acquisitions, value was ultimately only created with terrific execution, bind aligned team with a shared vision of the future.\nn stock of Nuance, (ii) the failure to satisfy the conditions to the consummation of the transaction, including the adoption of the merger agreement by the stockholders of Nuance and the receipt of certain governmental and regulatory approvals, (iii) the occurrence of any event, change or other circumstance that could give rise to the termination of the merger agreement, (iv) the effect of the announcement or pendency of the transaction on Nuance’s business relationships, operating results, and business generally, (v) risks that the proposed transaction disrupts current plans and operations of Nuance or Microsoft and potential difficulties in Nuance employee retention as a result of the transaction, (vi) risks related to diverting management’s attention from Nuance’s ongoing business operations, (vii) the outcome of any legal proceedings that may be instituted against us or against Nuance related to the merger agreement or the transaction, (viii) the ability of Microsoft to successfully integrate Nuance’s operations, product lines, and technology, and (ix) the ability of Microsoft to implement its plans, forecasts, and other expectations with respect to Nuance’s business after the completion of the proposed merger and realize additional opportunities for growth and innovation.\nthe occurrence of any event, change or other circumstance that could give rise to the termination of the merger agreement\nMicrosoft Corp (Nasdaq: MSFT) and Nuance Communications, Inc. (Nasdaq: NUAN) today announced they have entered into a definitive agreement under which Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9, in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.\nMicrosoft Corp (Nasdaq: MSFT) and Nuance Communications, Inc. (Nasdaq: NUAN) today announced they have entered into a definitive agreement under which Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9, in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.",
+    "policyId": "policy-ccd7e455daf31f5f",
+    "reflectionIds": [
+      "reflection-dad2d5919b582d9d"
+    ],
+    "supportingEventIds": [
+      "event-nuance-acquisition-2021"
+    ],
+    "contrastingEventIds": [],
+    "evidenceIds": [
+      "span-291b7db034000ea7",
+      "span-2ba38fc9d21ea2ef",
+      "span-34b94d3c6a25db54",
+      "span-38eee29ba0530baa",
+      "span-475376c4a1b0c7c2"
+    ],
+    "sourceIds": [
+      "source-82b26e92b9a5e28b",
+      "source-f7fd232d93262a85",
+      "source-fac8ed15fa324bf8"
+    ]
+  },
+  {
+    "id": "event-teams-unbundle-2023",
+    "kind": "event",
+    "domain": "pricing_monetization",
+    "title": "Teams unbundling and EEA suite price reduction",
+    "searchableText": "Teams unbundling and EEA suite price reduction\nShould the company unbundle Teams from M365/O365 suites in the EEA and Switzerland, offering them at a lower price?\nThe company is considering changes to its suite pricing structure in the EEA and Switzerland.\nOffer M365/O365 without Teams at a lower price.\nMaintain or enhance perceived value despite the unbundling.\nThe unbundling will occur in the EEA and Switzerland.\nThe lower price will be €2 less per month or €24 per year.\nThe offering must be a standalone suite without Teams.\nThe price reduction must be applied to the base suite.\n{\"description\":\"Unbundle Teams and sell the core suite at a reduced price (€2 less/month).\",\"expectedBenefit\":\"Attract price-sensitive customers to the core suite offering.\",\"id\":\"option-1\",\"principalRisk\":\"Customers may perceive the unbundled offering as less valuable.\",\"selected\":true}\n{\"description\":\"Unbundle Teams but maintain the current suite price.\",\"expectedBenefit\":\"Signal that Teams is a valuable add-on without immediate price cuts.\",\"id\":\"option-2\",\"principalRisk\":\"May fail to attract customers who prioritize lower base costs.\",\"selected\":false}\nUnbundle Teams and sell the core suite at a reduced price (€2 less/month).\nSignaling value through an unbundled offering without immediate price cuts.\nwe will unbundle Teams from our Microsoft 365 and Office 365 suites in the EEA and Switzerland. We will instead simply sell these offerings without Teams at a lower price (€2 less per month or €24 per year)\nwhen we believe we’re adding a lot of value, and frankly, that’s what the copilots are doing and some productivity improvement, you can expect that we will have a list price for those.",
+    "policyId": "policy-e0bfae61c424868c",
+    "reflectionIds": [
+      "reflection-b8961796eb4e7fc0"
+    ],
+    "supportingEventIds": [
+      "event-teams-unbundle-2023"
+    ],
+    "contrastingEventIds": [],
+    "evidenceIds": [
+      "span-22b85b48be6cc0ff",
+      "span-3e0302dd56efc30e"
+    ],
+    "sourceIds": [
+      "source-a726052ce2470e15",
+      "source-fbb900eb7e249591"
+    ]
+  },
+  {
+    "id": "event-transformation-2026",
+    "kind": "event",
+    "domain": "cost_efficiency",
+    "title": "Microsoft eliminating 4800 roles in Commercial and Xbox transformation",
+    "searchableText": "Microsoft eliminating 4800 roles in Commercial and Xbox transformation\nShould Microsoft proceed with eliminating approximately 4,800 roles to focus resources on key priorities?\nMicrosoft is eliminating around 4,800 roles, representing about 2.1% of its global workforce.\nFocus people, investments, and energy on key priorities.\nEnsure headcount is used in the most productive way possible.\nThe elimination is part of the Commercial and Xbox transformation.\nMicrosoft has added significant headcount over the past 12 months.\nThe action must align with investing in focused areas.\nThe reduction must be targeted to maximize productivity.\n{\"description\":\"Proceed with eliminating the 4,800 roles as planned.\",\"expectedBenefit\":\"Better alignment of resources to high-priority areas.\",\"id\":\"option-1\",\"principalRisk\":\"Potential disruption or morale impact from workforce reduction.\",\"selected\":true}\n{\"description\":\"Reduce the scope of elimination, targeting fewer than 4,800 roles.\",\"expectedBenefit\":\"Mitigate workforce disruption while still achieving focus.\",\"id\":\"option-2\",\"principalRisk\":\"Failing to achieve the necessary level of resource focus.\",\"selected\":false}\nProceed with eliminating the 4,800 roles as planned.\nMitigating workforce disruption by reducing the scope of elimination.\nIt’ll be about investing where we said we would invest, which is in focused areas. It’s about moving headcount to make sure, inside the company, we’ve got it on the highest and most important things. We’ve added a lot of headcount over the past 12 months, and we want to make sure we use those headcount in the most productive way possible.\nToday we are eliminating around 4,800 roles, about 2.1% of our global workforce, as we focus our people, investments, and energy on the priorities that will keep Microsoft positioned",
+    "policyId": "policy-20d2c645ab6641c9",
+    "reflectionIds": [
+      "reflection-bd563b486d9d6f9b"
+    ],
+    "supportingEventIds": [
+      "event-transformation-2026"
+    ],
+    "contrastingEventIds": [],
+    "evidenceIds": [
+      "span-abaa0f62aa30208c",
+      "span-acc7150e73b95096"
+    ],
+    "sourceIds": [
+      "source-582ec6ef346f7100",
+      "source-ad9a23176d9cf21d-25fb51a81eef"
+    ]
+  },
+  {
+    "id": "event-workforce-reset-2023",
+    "kind": "event",
+    "domain": "cost_efficiency",
+    "title": "Ten thousand role workforce and cost structure reset",
+    "searchableText": "Ten thousand role workforce and cost structure reset\nHow should we realign our cost structure and talent allocation in response to customers optimizing digital spend and the emergence of AI computing?\nCustomers are doing more with less and some regions face recession; simultaneously, AI is creating a new computing platform, requiring a shift in where capital and talent are deployed.\nAlign cost structure with revenue and customer demand\nReallocate talent to secular growth and long-term competitiveness areas\nDeliver ongoing results while investing in long-term opportunity\nSome parts of the world are in or anticipating recession\nThe next major computing wave is being born with advances in AI\nMust remain a consequential company in an unforgiving industry\nNeed to adapt to platform shifts throughout the company's history\n{\"description\":\"Reduce overall workforce by 10,000 roles through FY23 Q3 while continuing to hire in key strategic areas and investing in AI.\",\"expectedBenefit\":\"Aligns cost structure with revenue, moves headcount to highest-productivity areas, and positions the company for the AI computing wave.\",\"id\":\"reduce_and_reallocate\",\"principalRisk\":\"Severance and portfolio changes create a $1.2 billion charge in Q2; potential loss of institutional knowledge in eliminated roles.\",\"selected\":true}\n{\"description\":\"Maintain current workforce levels and expand hiring across all departments to capture every possible customer opportunity without role reductions.\",\"expectedBenefit\":\"Avoids severance costs and retains all existing talent and institutional knowledge.\",\"id\":\"maintain_and_expand\",\"principalRisk\":\"Cost structure becomes unaligned with revenue; talent is spread thin across low-growth areas instead of focused strategic areas.\",\"selected\":false}\nreduce_and_reallocate\nAvoidance of severance costs and retention of all institutional knowledge\nFirst, as we saw customers accelerate their digital spend during the pandemic, we’re now seeing them optimize their digital spend to do more with less. We’re also seeing organizations in every industry and geography exercise caution as some parts of the world are in a recession and other parts are anticipating one. At the same time, the next major wave of computing is being born with advances in AI, as we’re turning the world’s most advanced models into a new computing platform. This is the context in which we as a company must strive to deliver results on an ongoing basis, while investing in our long-term opportunity.\nSecond, we will continue to invest in strategic areas for our future, meaning we are allocating both our capital and talent to areas of secular growth and long-term competitiveness for the company, while divesting in other areas. These are the kinds of hard choices we have made throughout our 47-year history to remain a consequential company in this industry that is unforgiving to anyone who doesn’t adapt to platform shifts. As such, we are taking a $1.2 billion charge in Q2 related to severance costs, changes to our hardware portfolio, and the cost of lease consolidation as we create higher density across our workspaces.\nFirst, we will align our cost structure with our revenue and where we see customer demand. Today, we are making changes that will result in the reduction of our overall workforce by 10,000 jobs through the end of FY23 Q3. This represents less than 5 percent of our total employee base, with some notifications happening today. It’s important to note that while we are eliminating roles in some areas, we will continue to hire in key strategic areas.\nIt’ll be about investing where we said we would invest, which is in focused areas. It’s about moving headcount to make sure, inside the company, we’ve got it on the highest and most important things. We’ve added a lot of headcount over the past 12 months, and we want to make sure we use those headcount in the most productive way possible.",
+    "policyId": "policy-20d2c645ab6641c9",
+    "reflectionIds": [
+      "reflection-bd563b486d9d6f9b"
+    ],
+    "supportingEventIds": [
+      "event-workforce-reset-2023"
+    ],
+    "contrastingEventIds": [],
+    "evidenceIds": [
+      "span-2cbdcfdf837395b6",
+      "span-7f9dde341a496596",
+      "span-ad445ecf5ef4a0ac",
+      "span-f031de15863e849e"
+    ],
+    "sourceIds": [
+      "source-ad9a23176d9cf21d-25fb51a81eef",
+      "source-d55c44d7c6d97387"
+    ]
+  },
+  {
+    "id": "policy-20d2c645ab6641c9",
+    "kind": "policy",
+    "domain": "cost_efficiency",
+    "title": "cost_efficiency: Reduce or reallocate resources toward the highest-priority work while preserving focused investment.",
+    "searchableText": "cost_efficiency\nCurrent resource deployment is not aligned with the highest-priority work or productive use.\nStrategic priority alignment\nWorkforce productivity\nCost and revenue alignment\nExecution continuity\nReduce or reallocate resources toward the highest-priority work while preserving focused investment.\nCurrent allocation remains aligned with priority work and productive use.\nPreserve focused investment and execution continuity while changing headcount or cost structure.\nRetain resources when removal would impair a verified high-priority opportunity.\nPriority alignment improves, productivity recovers, or reductions begin to impair focused investment.\nWhen should workforce resources be reduced or reallocated toward higher-priority work?\nThe 2023 reset and 2026 transformation align headcount and cost structure with focused priorities and productivity.\nReduce or reallocate resources when current deployment is not aligned with the highest-priority work and productive use.\nPriority alignment, productivity, and continued investment in focused areas must be reviewed together.\n{\"choiceSet\":[\"reduce_or_reallocate_to_priorities\",\"retain_current_allocation\"],\"decisionObject\":\"workforce_resource_allocation\",\"decisionQuestion\":\"When should workforce resources be reduced or reallocated?\",\"gatingVariables\":[\"cost_revenue_alignment\",\"priority_alignment\",\"workforce_productivity\"]}\nNo reviewed opposite-condition workforce event is available in the bounded public evidence set.\nRetain the current allocation only while priority alignment and productivity remain supportable.\nIt’ll be about investing where we said we would invest, which is in focused areas. It’s about moving headcount to make sure, inside the company, we’ve got it on the highest and most important things. We’ve added a lot of headcount over the past 12 months, and we want to make sure we use those headcount in the most productive way possible.\nToday we are eliminating around 4,800 roles, about 2.1% of our global workforce, as we focus our people, investments, and energy on the priorities that will keep Microsoft positioned\nIt’ll be about investing where we said we would invest, which is in focused areas. It’s about moving headcount to make sure, inside the company, we’ve got it on the highest and most important things. We’ve added a lot of headcount over the past 12 months, and we want to make sure we use those headcount in the most productive way possible.",
+    "policyId": "policy-20d2c645ab6641c9",
+    "reflectionIds": [
+      "reflection-bd563b486d9d6f9b"
+    ],
+    "supportingEventIds": [
+      "event-transformation-2026",
+      "event-workforce-reset-2023"
+    ],
+    "contrastingEventIds": [],
+    "evidenceIds": [
+      "span-abaa0f62aa30208c",
+      "span-acc7150e73b95096",
+      "span-f031de15863e849e"
+    ],
+    "sourceIds": [
+      "source-582ec6ef346f7100",
+      "source-ad9a23176d9cf21d-25fb51a81eef"
+    ]
+  },
+  {
+    "id": "policy-a7972af407a0bf69",
+    "kind": "policy",
+    "domain": "shareholder_return_risk",
+    "title": "shareholder_return_risk: Authorize bounded repurchase capacity while retaining discretion over actual deployment.",
+    "searchableText": "shareholder_return_risk\nA continuing cash-return commitment is supportable within an explicit authorization ceiling and capital flexibility remains adequate.\nStrategic investment needs\nLiquidity and capital flexibility\nShareholder cash return\nAuthorization ceiling\nAuthorize bounded repurchase capacity while retaining discretion over actual deployment.\nCompeting investment or liquidity needs dominate the cash-return commitment.\nTreat the authorization as a ceiling rather than a requirement to deploy the full amount.\nDefer or reduce repurchases when capital flexibility or durable investment needs are more valuable.\nLiquidity tightens, higher-return investment needs emerge, or repurchase economics deteriorate.\nWhen should Microsoft authorize a major share repurchase while preserving capital flexibility?\nThe reviewed 2013 and 2024 events authorize bounded repurchase capacity as part of a continuing cash-return commitment.\nAuthorize shareholder cash return within an explicit ceiling while retaining discretion over actual deployment.\nThe authorization ceiling and competing investment or liquidity needs must remain explicit.\n{\"choiceSet\":[\"authorize_bounded_cash_return\",\"defer_or_reduce_cash_return\"],\"decisionObject\":\"shareholder_cash_return\",\"decisionQuestion\":\"When should bounded repurchase capacity be authorized?\",\"gatingVariables\":[\"authorization_ceiling\",\"capital_flexibility\",\"cash_return_commitment\"]}\nNo reviewed opposite-condition repurchase event is available in the bounded public evidence set.\nDefer or reduce cash return when capital flexibility or competing investment needs dominate.\napproved a new share repurchase program authorizing up to $60 billion\nThese actions reflect a continued commitment to returning cash to our shareholders\nThe board of directors also approved a new share repurchase program authorizing up to $40 billion in share repurchases.\nThese actions reflect a continued commitment to returning cash to our shareholders",
+    "policyId": "policy-a7972af407a0bf69",
+    "reflectionIds": [
+      "reflection-7371bfa747efb778"
+    ],
+    "supportingEventIds": [
+      "event-buyback-2013",
+      "event-buyback-2024"
+    ],
+    "contrastingEventIds": [],
+    "evidenceIds": [
+      "span-20e3349dbae4503b",
+      "span-328e730e3d56a46c",
+      "span-4d34d5136c326275",
+      "span-fdd09e9019051bf7"
+    ],
+    "sourceIds": [
+      "source-78333f25f047c289",
+      "source-9199eb9f217ec336"
+    ]
+  },
+  {
+    "id": "policy-ccd7e455daf31f5f",
+    "kind": "policy",
+    "domain": "m_and_a",
+    "title": "m_and_a: Commit to a bounded acquisition only after strategic reach, price discipline, and execution capacity are jointly supportable.",
+    "searchableText": "m_and_a\nThe target expands a high-growth addressable market, Microsoft adds unique value, and transaction economics support long-term shareholder value.\nStrategic market expansion\nUnique customer or community value\nTransaction price discipline\nIntegration execution\nCommit to a bounded acquisition only after strategic reach, price discipline, and execution capacity are jointly supportable.\nStrategic reach, transaction economics, or integration execution is not supportable.\nDo not treat transaction completion as value creation; retain explicit price and execution boundaries.\nDefer or reject when equivalent strategic reach is available with materially lower irreversible commitment.\nExpected strategic reach weakens, transaction economics deteriorate, or integration execution becomes unsupported.\nWhen should Microsoft commit to a major acquisition rather than preserve capital and optionality?\nThe reviewed Activision and Nuance events both commit capital to acquisitions while tying value creation to strategic reach and execution.\nCommit to acquisition only when strategic reach and execution requirements can support durable shareholder value.\nStrategic reach, transaction economics, and integration execution must remain supportable.\n{\"choiceSet\":[\"commit_to_bounded_acquisition\",\"defer_or_reject_acquisition\"],\"decisionObject\":\"major_acquisition_commitment\",\"decisionQuestion\":\"When should Microsoft commit to a major acquisition?\",\"gatingVariables\":[\"integration_execution\",\"strategic_reach\",\"transaction_economics\"]}\nNo reviewed opposite-condition acquisition event is available in the bounded public evidence set.\nDeferral or rejection remains a reversal path when strategic reach, economics, or execution support weakens.\nAnd with all acquisitions, value was ultimately only created with terrific execution, bind aligned team with a shared vision of the future.\nWe’ve agreed to acquire Activision Blizzard for $95 per share in an all-cash transaction valued at $68.7 billion, inclusive of Activision Blizzard’s net cash.",
+    "policyId": "policy-ccd7e455daf31f5f",
+    "reflectionIds": [
+      "reflection-dad2d5919b582d9d"
+    ],
+    "supportingEventIds": [
+      "event-activision-acquisition-2022",
+      "event-nuance-acquisition-2021"
+    ],
+    "contrastingEventIds": [],
+    "evidenceIds": [
+      "span-291b7db034000ea7",
+      "span-807ee90aa032f320"
+    ],
+    "sourceIds": [
+      "source-3d87da3c9879cf67",
+      "source-82b26e92b9a5e28b"
+    ]
+  },
+  {
+    "id": "policy-e0bfae61c424868c",
+    "kind": "policy",
+    "domain": "pricing_monetization",
+    "title": "pricing_monetization: Monetize or repackage verified value with explicit commercial terms and a bounded customer-impact rationale.",
+    "searchableText": "pricing_monetization\nCustomer value or productivity improvement is identifiable and concrete price or packaging terms can be stated.\nCustomer value\nProductivity improvement\nCommercial clarity\nAdoption friction\nMonetize or repackage verified value with explicit commercial terms and a bounded customer-impact rationale.\nCustomer value is unverified or commercial terms cannot be stated clearly.\nDo not infer value from price alone; retain concrete terms and customer-impact boundaries.\nDefer monetization when packaging friction overwhelms the identifiable customer value.\nMeasured customer value weakens, productivity improvement fails to materialize, or adoption friction rises materially.\nWhen should product value be monetized through price or packaging changes?\nThe Copilot price and Teams unbundling events apply monetization or packaging changes only alongside an explicit customer-value rationale and concrete terms.\nChange price or packaging only when customer value is identifiable and the commercial terms remain explicit.\nCustomer value and concrete commercial terms must both be identifiable.\n{\"choiceSet\":[\"defer_monetization_change\",\"monetize_or_repackage_verified_value\"],\"decisionObject\":\"value_monetization\",\"decisionQuestion\":\"When should value support a price or packaging change?\",\"gatingVariables\":[\"commercial_terms\",\"customer_value\",\"productivity_improvement\"]}\nNo reviewed opposite-condition monetization event is available in the bounded public evidence set.\nDefer the price or packaging change when value or commercial terms are not supportable.\nCopilot for Microsoft 365 will be available for commercial customers for USD30 per user per month for Microsoft 365 E3, E5, Business Standard, and Business Premium customers when broadly available\nwe will unbundle Teams from our Microsoft 365 and Office 365 suites in the EEA and Switzerland. We will instead simply sell these offerings without Teams at a lower price (€2 less per month or €24 per year)\nwhen we believe we’re adding a lot of value, and frankly, that’s what the copilots are doing and some productivity improvement, you can expect that we will have a list price for those.\nwhen we believe we’re adding a lot of value, and frankly, that’s what the copilots are doing and some productivity improvement, you can expect that we will have a list price for those.",
+    "policyId": "policy-e0bfae61c424868c",
+    "reflectionIds": [
+      "reflection-b8961796eb4e7fc0"
+    ],
+    "supportingEventIds": [
+      "event-copilot-price-2023",
+      "event-teams-unbundle-2023"
+    ],
+    "contrastingEventIds": [],
+    "evidenceIds": [
+      "span-1baf5181c9f9b527",
+      "span-22b85b48be6cc0ff",
+      "span-3e0302dd56efc30e",
+      "span-a932a8deb06fb1c6"
+    ],
+    "sourceIds": [
+      "source-a726052ce2470e15",
+      "source-fbb900eb7e249591",
+      "source-ff1c981bc6aed7c2"
+    ]
+  },
+  {
+    "id": "policy-e7eafcda9e4dc2e3",
+    "kind": "policy",
+    "domain": "ai_cloud_capex",
+    "title": "ai_cloud_capex: Scale infrastructure while constraining operating expense growth and monitoring infrastructure economics.",
+    "searchableText": "ai_cloud_capex\nCustomer demand and capacity urgency remain observable and infrastructure economics remain supportable.\nCustomer demand\nCapacity urgency\nProfitability and cost constraint\nSupply lead time\nScale infrastructure while constraining operating expense growth and monitoring infrastructure economics.\nDemand, capacity urgency, or infrastructure economics no longer supports expansion.\nKeep operating-expense growth and disciplined profitability explicit while capital capacity scales.\nUse staged or third-party capacity when it preserves flexibility without weakening service commitments.\nCustomer demand weakens, capacity urgency relaxes, or infrastructure economics materially deteriorates.\nWhen should AI and cloud infrastructure scale while operating expense remains constrained?\nThe reviewed 2023 and 2024 events scale infrastructure against demand while preserving explicit cost discipline.\nScale capacity when customer demand and urgency are observable, while constraining operating expense and monitoring infrastructure economics.\nDemand, capacity urgency, and infrastructure economics must remain observable.\n{\"choiceSet\":[\"defer_or_reduce_capacity\",\"scale_infrastructure_constrain_opex\"],\"decisionObject\":\"ai_cloud_capacity_allocation\",\"decisionQuestion\":\"When should capacity scale within operating-cost constraints?\",\"gatingVariables\":[\"capacity_urgency\",\"customer_demand\",\"infrastructure_economics\"]}\nNo reviewed opposite-condition AI capacity event is available in the bounded public evidence set.\nCapacity deferral is retained as a reversal path if demand, urgency, or economics weaken.\nAs always, we remain committed to aligning costs and revenue growth to deliver disciplined profitability. Therefore, while the scaled capex investments will impact COGS growth, we expect FY24 operating expense growth to remain low.\nOur commitment to scaling our cloud and AI investment is guided by customer demand and the substantial market opportunity. As we scale these investments, we remain focused on driving efficiencies across every layer of our tech stack and disciplined cost management across every team.",
+    "policyId": "policy-e7eafcda9e4dc2e3",
+    "reflectionIds": [
+      "reflection-f75c6c30eef7c1e0"
+    ],
+    "supportingEventIds": [
+      "event-ai-capacity-opex-pivot-2023",
+      "event-ai-capacity-sourcing-2024"
+    ],
+    "contrastingEventIds": [],
+    "evidenceIds": [
+      "span-capacity-2023-opex",
+      "span-capacity-2024-demand-discipline"
+    ],
+    "sourceIds": [
+      "source-4f4085f8344669c4",
+      "source-fbb900eb7e249591"
+    ]
+  }
+]

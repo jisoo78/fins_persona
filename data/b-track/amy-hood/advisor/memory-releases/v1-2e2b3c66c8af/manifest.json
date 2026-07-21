@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "v1-2e2b3c66c8af",
+  "version": "v1-2e2b3c66c8af",
+  "createdAt": "2026-07-21T01:25:08.779Z",
+  "sourceRegistryHash": "541c1cc646387821eec89bcb838940e8efab7956481d706f71f491f8c162be77",
+  "pilotManifestHash": "4abbd1ce65f206613df7191b5f65d05a518f2f933ddd0f6325bc5029f4294936",
+  "holdoutManifestHash": "e9421d0bd8846387bc4f81c6c98bf3c61a603c18d887e1a858c7181ec1e3ec4d",
+  "policySchemaVersion": 2,
+  "artifacts": [
+    {
+      "id": "event-activision-acquisition-2022",
+      "kind": "event",
+      "relativePath": "events/event-activision-acquisition-2022.json",
+      "sha256": "59addc85412dc4ae20bb2178296a64d941d6e55303f450970af927f99029ae21"
+    },
+    {
+      "id": "event-ai-capacity-opex-pivot-2023",
+      "kind": "event",
+      "relativePath": "events/event-ai-capacity-opex-pivot-2023.json",
+      "sha256": "e055fd3b73b45a2175899ed56e6e2aaa2a91ffbdb619d839b35368a48a62ff1e"
+    },
+    {
+      "id": "event-ai-capacity-sourcing-2024",
+      "kind": "event",
+      "relativePath": "events/event-ai-capacity-sourcing-2024.json",
+      "sha256": "160ea8804af7d941e40ff37168350fee3f92231e50b61ec3ff0aca6a9140732b"
+    },
+    {
+      "id": "event-buyback-2013",
+      "kind": "event",
+      "relativePath": "events/event-buyback-2013.json",
+      "sha256": "9ad8a6b882edc9983b69f31dccb876da00989d5cd9c1844e05b1b7c18373eca0"
+    },
+    {
+      "id": "event-buyback-2024",
+      "kind": "event",
+      "relativePath": "events/event-buyback-2024.json",
+      "sha256": "2d6415575811d98b521736d2b3fe5aece5f217857fae36856bbc9025c1197d8b"
+    },
+    {
+      "id": "event-copilot-price-2023",
+      "kind": "event",
+      "relativePath": "events/event-copilot-price-2023.json",
+      "sha256": "4c2151c6474eb9d169863a3b18e8203f80fc285a9ef11538cf71251a637974b3"
+    },
+    {
+      "id": "event-nuance-acquisition-2021",
+      "kind": "event",
+      "relativePath": "events/event-nuance-acquisition-2021.json",
+      "sha256": "eeb4e6c0c5618a8133f9a70a016a4a96433850f24841eef3971588fbf947087f"
+    },
+    {
+      "id": "event-teams-unbundle-2023",
+      "kind": "event",
+      "relativePath": "events/event-teams-unbundle-2023.json",
+      "sha256": "57cedfbfd7571f64abf00fb3d7a15352540a5b942da322f6de9bee00e726e105"
+    },
+    {
+      "id": "event-transformation-2026",
+      "kind": "event",
+      "relativePath": "events/event-transformation-2026.json",
+      "sha256": "466c74fe153b163eef81f5533db59b772a2d2b1210020994ea6c7acd41835020"
+    },
+    {
+      "id": "event-workforce-reset-2023",
+      "kind": "event",
+      "relativePath": "events/event-workforce-reset-2023.json",
+      "sha256": "69238f0ac6cfe3c82204443c377271e34c1b183a4c74eb204bdbce7da167596b"
+    },
+    {
+      "id": "policy-20d2c645ab6641c9",
+      "kind": "policy",
+      "relativePath": "policies/policy-20d2c645ab6641c9.json",
+      "sha256": "989075a927edf851c7b09528e1f5391a8a3154a0d4b0d93303516243b37fc449"
+    },
+    {
+      "id": "policy-a7972af407a0bf69",
+      "kind": "policy",
+      "relativePath": "policies/policy-a7972af407a0bf69.json",
+      "sha256": "75c74fe1a96a0f6d50b433113317a1545fb2d508de677073e2dd66013ae384ce"
+    },
+    {
+      "id": "policy-ccd7e455daf31f5f",
+      "kind": "policy",
+      "relativePath": "policies/policy-ccd7e455daf31f5f.json",
+      "sha256": "d4d87c1581a81a1752d3a524e94ab00f3ac8794a3aca680827d2eb257023b61d"
+    },
+    {
+      "id": "policy-e0bfae61c424868c",
+      "kind": "policy",
+      "relativePath": "policies/policy-e0bfae61c424868c.json",
+      "sha256": "9853f83da33696ecba2010bdc4ed83beb931dfa6f14eac216b6df0512ca24016"
+    },
+    {
+      "id": "policy-e7eafcda9e4dc2e3",
+      "kind": "policy",
+      "relativePath": "policies/policy-e7eafcda9e4dc2e3.json",
+      "sha256": "1f0b3d4a489b05a6cfde40e1d3db688738e35d8790e73c21237695fd01e30834"
+    },
+    {
+      "id": "reflection-7371bfa747efb778",
+      "kind": "reflection",
+      "relativePath": "reflections/reflection-7371bfa747efb778.json",
+      "sha256": "24ae52ace2ba38eec7bb885a0abc6022ef1babf4b42033960a0b0637f7d06c1d"
+    },
+    {
+      "id": "reflection-b8961796eb4e7fc0",
+      "kind": "reflection",
+      "relativePath": "reflections/reflection-b8961796eb4e7fc0.json",
+      "sha256": "fb5d4c70d7de5a9cb9bb33c28df0d7ced0f387ae4e531c754bef909a946b89cb"
+    },
+    {
+      "id": "reflection-bd563b486d9d6f9b",
+      "kind": "reflection",
+      "relativePath": "reflections/reflection-bd563b486d9d6f9b.json",
+      "sha256": "2a8ecf0d556eb68ec74a5a74a142d546ac1865d1f9bb7bc4938352ece8b3d25d"
+    },
+    {
+      "id": "reflection-dad2d5919b582d9d",
+      "kind": "reflection",
+      "relativePath": "reflections/reflection-dad2d5919b582d9d.json",
+      "sha256": "da6068e8d8022c32f10d6ebd33af79c393dc908171b47e26c6c8f89b5d29ec9c"
+    },
+    {
+      "id": "reflection-f75c6c30eef7c1e0",
+      "kind": "reflection",
+      "relativePath": "reflections/reflection-f75c6c30eef7c1e0.json",
+      "sha256": "4b8991037a477cf2edc290790f2b7cd02e89e6e25de7bc5b0202caf26f6beeb0"
+    }
+  ],
+  "evaluationContextPath": "evaluation-context.json",
+  "evaluationContextHash": "baa3a10c04734d613faa14915c31974b863a862d3b59f20eab1d635084b23370",
+  "reviewLedgerHash": "daef6b7e632ebc1473a48653568bf452ae99fcf01fd6e0615542c86ff4e7f762"
+}

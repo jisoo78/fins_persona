@@ -1,0 +1,49 @@
+{
+  "id": "policy-a7972af407a0bf69",
+  "domain": "shareholder_return_risk",
+  "applicabilityConditions": [
+    "A continuing cash-return commitment is supportable within an explicit authorization ceiling and capital flexibility remains adequate."
+  ],
+  "priorityOrder": [
+    "Strategic investment needs",
+    "Liquidity and capital flexibility",
+    "Shareholder cash return",
+    "Authorization ceiling"
+  ],
+  "recommendedAction": "Authorize bounded repurchase capacity while retaining discretion over actual deployment.",
+  "nonApplicabilityConditions": [
+    "Competing investment or liquidity needs dominate the cash-return commitment."
+  ],
+  "guardrails": [
+    "Treat the authorization as a ceiling rather than a requirement to deploy the full amount."
+  ],
+  "exceptions": [
+    "Defer or reduce repurchases when capital flexibility or durable investment needs are more valuable."
+  ],
+  "reversalSignals": [
+    "Liquidity tightens, higher-return investment needs emerge, or repurchase economics deteriorate."
+  ],
+  "reflectionIds": [
+    "reflection-7371bfa747efb778"
+  ],
+  "supportingEventIds": [
+    "event-buyback-2013",
+    "event-buyback-2024"
+  ],
+  "contrastingEventIds": [],
+  "evidenceIds": [
+    "span-20e3349dbae4503b",
+    "span-328e730e3d56a46c",
+    "span-4d34d5136c326275",
+    "span-fdd09e9019051bf7"
+  ],
+  "directPolicyEvidenceIds": [
+    "policy-buyback-cash-return-2013"
+  ],
+  "contrastStatus": "documented_unavailable",
+  "schemaVersion": 2,
+  "confidence": "medium",
+  "policyKind": "deployable_policy",
+  "status": "review_required",
+  "review": null
+}

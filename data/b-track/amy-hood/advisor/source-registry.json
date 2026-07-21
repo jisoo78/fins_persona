@@ -579,7 +579,8 @@
       "id": "source-78333f25f047c289",
       "canonicalUrl": "https://news.microsoft.com/source/2013/09/17/microsoft-announces-quarterly-dividend-increase-and-share-repurchase-program-3/",
       "eventCandidateIds": [
-        "candidate-buyback-2013"
+        "candidate-buyback-2013",
+        "candidate-buyback-2024"
       ],
       "tier": 1,
       "title": "2013 forty billion dollar repurchase authorization",
@@ -1414,7 +1415,8 @@
       "eventCandidateIds": [
         "candidate-github-acquisition-2018",
         "candidate-openai-expansion-2023",
-        "candidate-workforce-reset-2023"
+        "candidate-workforce-reset-2023",
+        "candidate-transformation-2026"
       ],
       "tier": 1,
       "title": "PDF discovery: GitHub acquisition",
@@ -1443,7 +1445,8 @@
       "eventCandidateIds": [
         "candidate-ai-capacity-opex-pivot-2023",
         "candidate-ai-capacity-sourcing-2024",
-        "candidate-copilot-price-2023"
+        "candidate-copilot-price-2023",
+        "candidate-teams-unbundle-2023"
       ],
       "tier": 1,
       "title": "Microsoft FY23 Q3 earnings conference call",
@@ -1493,6 +1496,33 @@
       "sha256": "1ab5b2cab5899c149a7ae68cd51514fb25ea3da4f786696b348038a7c2694e45",
       "capturedAt": "2026-07-21T00:00:00.000Z",
       "failureReason": null
+    },
+    {
+      "id": "source-a726052ce2470e15-02c96a47474d",
+      "canonicalUrl": "https://blogs.microsoft.com/eupolicy/2023/08/31/european-competition-teams-office-microsoft-365/",
+      "eventCandidateIds": [
+        "candidate-teams-unbundle-2023"
+      ],
+      "tier": 2,
+      "title": "Teams unbundling and EEA suite price reduction",
+      "publisher": "Microsoft",
+      "publishedAt": "2023-08-31",
+      "speaker": null,
+      "sourceType": "corporate_blog",
+      "collector": "public_html",
+      "temporalRole": "decision_time",
+      "rightsNote": "Public official Microsoft page; exact event passage reviewed and provenance retained.",
+      "approvedPublicHost": true,
+      "collectionStatus": "review_required",
+      "rawPath": "raw/source-a726052ce2470e15-02c96a47474d-02c96a47474d523f61f37852e318ce2b3e56b8ee8039210244cf5330c3b80357.json",
+      "normalizedPath": "normalized/source-a726052ce2470e15-02c96a47474d-02c96a47474d523f61f37852e318ce2b3e56b8ee8039210244cf5330c3b80357.txt",
+      "sha256": "02c96a47474d523f61f37852e318ce2b3e56b8ee8039210244cf5330c3b80357",
+      "capturedAt": "2026-07-21T01:07:22.365Z",
+      "failureReason": null,
+      "finalUrl": "https://blogs.microsoft.com/eupolicy/2023/08/31/european-competition-teams-office-microsoft-365/",
+      "redirectChain": [
+        "https://blogs.microsoft.com/eupolicy/2023/08/31/european-competition-teams-office-microsoft-365/"
+      ]
     }
   ]
 }

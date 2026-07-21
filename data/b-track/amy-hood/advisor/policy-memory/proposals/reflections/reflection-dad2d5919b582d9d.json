@@ -1,0 +1,56 @@
+{
+  "id": "reflection-dad2d5919b582d9d",
+  "domain": "m_and_a",
+  "crossEventQuestion": "When should Microsoft commit to a major acquisition rather than preserve capital and optionality?",
+  "observation": "The reviewed Activision and Nuance events both commit capital to acquisitions while tying value creation to strategic reach and execution.",
+  "invariant": "Commit to acquisition only when strategic reach and execution requirements can support durable shareholder value.",
+  "boundaryConditions": [
+    "Strategic reach, transaction economics, and integration execution must remain supportable."
+  ],
+  "unresolvedConflicts": [
+    "The bounded public event set contains no reviewed Amy Hood event choosing not to acquire on this same decision axis."
+  ],
+  "decisionAxis": {
+    "decisionObject": "major_acquisition_commitment",
+    "decisionQuestion": "When should Microsoft commit to a major acquisition?",
+    "choiceSet": [
+      "commit_to_bounded_acquisition",
+      "defer_or_reject_acquisition"
+    ],
+    "gatingVariables": [
+      "integration_execution",
+      "strategic_reach",
+      "transaction_economics"
+    ]
+  },
+  "supportPattern": {
+    "eventIds": [
+      "event-activision-acquisition-2022",
+      "event-nuance-acquisition-2021"
+    ],
+    "conditions": [
+      "The target expands strategic reach and value creation remains execution-dependent."
+    ],
+    "action": "commit_to_bounded_acquisition",
+    "evidenceIds": [
+      "span-291b7db034000ea7",
+      "span-807ee90aa032f320"
+    ]
+  },
+  "contrastStatus": "documented_unavailable",
+  "contrastPattern": null,
+  "conditionDelta": "No reviewed opposite-condition acquisition event is available in the bounded public evidence set.",
+  "actionDelta": "Deferral or rejection remains a reversal path when strategic reach, economics, or execution support weakens.",
+  "supportingEventIds": [
+    "event-activision-acquisition-2022",
+    "event-nuance-acquisition-2021"
+  ],
+  "contrastingEventIds": [],
+  "evidenceIds": [
+    "span-291b7db034000ea7",
+    "span-807ee90aa032f320"
+  ],
+  "confidence": "medium",
+  "status": "review_required",
+  "review": null
+}

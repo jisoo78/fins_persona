@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "v1-2e2b3c66c8af",
+  "releaseManifestHash": "4c62ccf2e146c96729f3ee12fda9626cdbaeea1e25182fe8f48110f8da53695e",
+  "holdoutManifestHash": "e9421d0bd8846387bc4f81c6c98bf3c61a603c18d887e1a858c7181ec1e3ec4d",
+  "embeddingModel": "bge-m3-Q8_0.gguf",
+  "embeddingDimension": 1024,
+  "builderVersion": "hybrid-v1",
+  "lexicalVersion": "bm25-v1",
+  "retrievalConfig": {
+    "vectorWeight": 0.7,
+    "lexicalWeight": 0.3,
+    "bm25K": 4,
+    "minimumScore": 0.55
+  },
+  "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+  "calibrationSetHash": "a7c172843267a56e7ae46c29065fd6b0a2ab58d606fe02d08384c6fd6305ad35",
+  "calibration": {
+    "probeCount": 7,
+    "positiveProbeCount": 5,
+    "noMatchProbeCount": 2,
+    "recallAt3": 1,
+    "noMatchFalsePositiveRate": 0
+  },
+  "recordHashes": [
+    "499329480f8477d96caca5d965f9161d1d41d41a8e7ee6a6db1a93a126fbb396",
+    "e581c4ba992da107e9eb49d6f82dbf169892ef987907a2fcdac2f93064a4e2d0",
+    "da11057c008138e16efb3d1100a3807eef760a04cf38ba0ef3599a2e61798b58",
+    "3663041fd291906c73e70f4b423f29072818083267bc94de05acef9643aae5d0",
+    "f1062d511c2e85bb6d7711a135cb9fd5e5027389367550b071d1c8ec8862e36f",
+    "dfa11b6321279570da4590dfb5a8edbab6a2757d0e9c87d772286c5a54f577fb",
+    "3434a6a63d450039395402af21d936c21092fc4796ff6b407dd165d1c49317ef",
+    "8deaa0ef2216b2bc5ff5694314b50fbe2c059661f978c952b1ffac3d8d57d4c5",
+    "d1f8730acd9e695947f051654ecad7f03ffded368cb6061ce0f466cc24a48d4e",
+    "7552d6175b5ec64ea39d57a3c550a31c22a75ce9c1235bb0acb9c7d3abd9a249",
+    "19a55a308a7bfb5836d5042856d5c69e270285726571fe66fa45934f71cbd27b",
+    "09b092e3e84859b7b6d35279c5a21ceebfad28be6e5e860a5701e1a41227efbb",
+    "b314602fb5f753789f802d2b326db81981122e1fe00a08a4bc297c5d54af8952",
+    "be196ecd7351a3baf97733e270cc3bf65c001336bffbff8208f61ead37b4a7c2",
+    "873d725a8349bd26ef092981b72ac21727655f2ab2fa08daacda5ca5ba585498"
+  ],
+  "evidenceHash": "5118dbcc97a48b8098b7423f2d3d1bafcba8c72c4cb75b9db92bafb49699c792",
+  "vectorsHash": "bf87129cb1746b14f57bbc5b26c779e8b80ec2b0ec9cd686cafc28f661cdae59",
+  "recordCount": 15,
+  "vectorsFile": "vectors.f32",
+  "indexHash": "30f92672eed070e3a9f81f9e387047e8d60435a7143067623d1dd183b50a7f35",
+  "createdAt": "2026-07-21T01:29:29.281Z"
+}

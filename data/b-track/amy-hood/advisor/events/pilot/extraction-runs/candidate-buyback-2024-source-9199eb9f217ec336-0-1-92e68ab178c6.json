@@ -4,7 +4,7 @@
   "chunkIndex": 0,
   "attempt": 1,
   "requestHash": "92e68ab178c6f7f9fc1a6fe9519b124038f76ffe2f19aebc096881215fc4cd07",
-  "response": "```json\n{\n  \"spans\": [\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"The board of directors also approved a new share repurchase program authorizing up to $60 billion in share repurchases.\",\n      \"startChar\": 344,\n      \"endChar\": 387,\n      \"speaker\": null\n    }\n  ]\n}\n```",
-  "elapsedMs": 3901,
+  "response": "```json\n{\n  \"spans\": [\n    {\n      \"role\": \"decision_context\",\n      \"exactQuote\": \"The board of directors also approved a new share repurchase program authorizing up to $60 billion in share repurchases.\",\n      \"startChar\": 331,\n      \"endChar\": 368,\n      \"speaker\": null\n    }\n  ]\n}\n```",
+  "elapsedMs": 2334,
   "success": true
 }

@@ -6,7 +6,7 @@
  * 2. Edge Cases:
  *    - a short source remains one chunk.
  *    - a boundary-crossing Amy statement is deduplicated into one span.
- *    - source-level Amy identity is accepted when speaker segments are absent.
+ *    - source-level Amy identity and explicit decision-time domain principles remain attributable.
  *
  * 3. Failure Path:
  *    - invalid manifests, malformed model JSON, invented quotes, missing Amy
@@ -38,8 +38,10 @@ import {
   validatePilotManifest,
 } from '../server/decisionAdvisor/pilotManifest';
 import {
+  policyEvidenceCandidateIds,
   validatePilotPolicyEvidenceRecord,
 } from '../server/decisionAdvisor/pilotPolicyEvidence';
+import { reviewedDecisionContextSpan } from '../server/decisionAdvisor/pilotSourceLoader';
 import { registrySourceHasEvidenceLink } from '../server/decisionAdvisor/sourceEvidenceLink';
 import {
   buildPilotBatch,
@@ -414,7 +416,7 @@ test('happy: reviewed pre-decision Amy policy evidence validates as a distinct r
   assert.equal(span.exactQuote, fixture.record.exactQuote);
 });
 
-test('edge: source-level Amy identity accepts policy evidence without speaker segments', async () => {
+test('edge: source-level identity and explicit decision-time principles remain attributable', async () => {
   const fixture = await policyEvidenceFixture();
   const source = { ...fixture.source, speaker: 'Amy Hood' };
 
@@ -425,6 +427,24 @@ test('edge: source-level Amy identity accepts policy evidence without speaker se
   });
 
   assert.equal(span.role, 'amy_policy');
+  assert.equal(span.directAmyEvidenceMode, 'domain_principle');
+
+  const publishedAt = fixture.candidate.decisionWindowStart;
+  const decisionTime = validatePilotPolicyEvidenceRecord({
+    ...fixture.record,
+    publishedAt,
+    temporalRelation: 'decision_time',
+  }, {
+    ...fixture,
+    source: { ...source, publishedAt },
+    speakerSegments: [],
+  });
+  assert.equal(decisionTime.publishedAt, publishedAt);
+  assert.equal(decisionTime.directAmyEvidenceMode, 'domain_principle');
+  assert.deepEqual(policyEvidenceCandidateIds({
+    ...fixture.record,
+    appliesToCandidateIds: ['candidate-teams-unbundle-2023'],
+  }), [fixture.record.candidateId, 'candidate-teams-unbundle-2023']);
 });
 
 test('failure: policy evidence rejects temporal, quote, tag, and speaker violations', async () => {
@@ -471,7 +491,7 @@ test('failure: policy evidence rejects temporal, quote, tag, and speaker violati
   );
 });
 
-test('happy: a Phase 3 policy source is linked without becoming Phase 2 event evidence', () => {
+test('happy: reviewed locators and policy sources retain their distinct evidence roles', async () => {
   assert.equal(registrySourceHasEvidenceLink(
     'https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3',
     'source-policy',
@@ -484,6 +504,44 @@ test('happy: a Phase 3 policy source is linked without becoming Phase 2 event ev
     new Set(),
     new Set(['source-policy']),
   ), false);
+
+  const candidate = (await loadRealCandidates()).find(
+    ({ id }) => id === 'candidate-teams-unbundle-2023',
+  )!;
+  const association = candidate.sourceAssociations.find(
+    ({ role }) => role === 'contemporaneous_context',
+  )!;
+  const passage = association.evidenceLocator!.exactRelevancePassage;
+  const normalizedText = `Reviewed preface. ${passage} Reviewed suffix.`;
+  const span = reviewedDecisionContextSpan({
+    candidate,
+    association,
+    normalizedText,
+    source: {
+      id: 'source-reviewed-context',
+      canonicalUrl: association.canonicalUrl,
+      eventCandidateIds: [candidate.id],
+      tier: 1,
+      title: 'Reviewed event source',
+      publisher: 'Microsoft',
+      publishedAt: association.publishedAt,
+      speaker: null,
+      sourceType: association.sourceType,
+      collector: 'public_html',
+      temporalRole: association.temporalRelation,
+      rightsNote: 'Reviewed public source fixture.',
+      approvedPublicHost: true,
+      collectionStatus: 'review_required',
+      rawPath: 'raw/reviewed.json',
+      normalizedPath: 'normalized/reviewed.txt',
+      sha256: 'c'.repeat(64),
+      capturedAt: '2026-07-21T00:00:00.000Z',
+      failureReason: null,
+    },
+  });
+  assert.equal(span?.role, 'decision_context');
+  assert.equal(span?.startChar, normalizedText.indexOf(passage));
+  assert.equal(span?.exactQuote, passage);
 });
 
 test('edge: a boundary-crossing Amy statement is deduplicated into one span', async () => {

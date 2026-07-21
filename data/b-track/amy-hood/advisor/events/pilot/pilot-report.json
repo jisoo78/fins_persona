@@ -1,7 +1,7 @@
 {
   "counts": {
-    "approved": 7,
-    "incomplete": 8,
+    "approved": 12,
+    "incomplete": 3,
     "total": 15
   },
   "domainCounts": {
@@ -40,16 +40,13 @@
       "priority": 3,
       "candidateId": "candidate-nuance-acquisition-2021",
       "domain": "m_and_a",
-      "status": "incomplete",
+      "status": "approved",
       "decisionQuestion": "Should Microsoft proceed with the acquisition of Nuance for $19.7 billion?",
       "chosenAction": "Proceed with the acquisition as agreed.",
-      "directQuote": "없음",
+      "directQuote": "And with all acquisitions, value was ultimately only created with terrific execution, bind aligned team with a shared vision of the future.",
       "policyQuote": "없음",
-      "contextQuote": "in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.",
-      "gaps": [
-        "missing_amy_judgment",
-        "single_document_family"
-      ]
+      "contextQuote": "Microsoft Corp (Nasdaq: MSFT) and Nuance Communications, Inc. (Nasdaq: NUAN) today announced they have entered into a definitive agreement under which Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9, in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.",
+      "gaps": []
     },
     {
       "priority": 4,
@@ -124,15 +121,13 @@
       "priority": 9,
       "candidateId": "candidate-teams-unbundle-2023",
       "domain": "pricing_monetization",
-      "status": "incomplete",
-      "decisionQuestion": "사건 카드 생성 실패",
-      "chosenAction": "검증 가능한 증거가 더 필요함",
+      "status": "approved",
+      "decisionQuestion": "Should the company unbundle Teams from M365/O365 suites in the EEA and Switzerland, offering them at a lower price?",
+      "chosenAction": "Unbundle Teams and sell the core suites at the reduced price (€2/month or €24/year).",
       "directQuote": "없음",
-      "policyQuote": "없음",
-      "contextQuote": "없음",
-      "gaps": [
-        "model_response_invalid"
-      ]
+      "policyQuote": "when we believe we’re adding a lot of value, and frankly, that’s what the copilots are doing and some productivity improvement, you can expect that we will have a list price for those.",
+      "contextQuote": "we will unbundle Teams from our Microsoft 365 and Office 365 suites in the EEA and Switzerland. We will instead simply sell these offerings without Teams at a lower price (€2 less per month or €24 per year)",
+      "gaps": []
     },
     {
       "priority": 10,
@@ -165,29 +160,25 @@
       "priority": 12,
       "candidateId": "candidate-transformation-2026",
       "domain": "cost_efficiency",
-      "status": "incomplete",
-      "decisionQuestion": "Should Microsoft proceed with eliminating approximately 4,800 roles?",
-      "chosenAction": "Proceed with eliminating the 4,800 roles as announced.",
+      "status": "approved",
+      "decisionQuestion": "Should Microsoft proceed with eliminating approximately 4,800 roles within the Commercial and Xbox organizations?",
+      "chosenAction": "Proceed with eliminating 4,800 roles across Commercial and Xbox.",
       "directQuote": "없음",
-      "policyQuote": "없음",
+      "policyQuote": "It’ll be about investing where we said we would invest, which is in focused areas. It’s about moving headcount to make sure, inside the company, we’ve got it on the highest and most important things. We’ve added a lot of headcount over the past 12 months, and we want to make sure we use those headcount in the most productive way possible.",
       "contextQuote": "Today we are eliminating around 4,800 roles, about 2.1% of our global workforce, as we focus our people, investments, and energy on the priorities that will keep Microsoft positioned to deliver for customers in a fast-changing industry.",
-      "gaps": [
-        "missing_amy_judgment",
-        "single_document_family"
-      ]
+      "gaps": []
     },
     {
       "priority": 13,
       "candidateId": "candidate-buyback-2013",
       "domain": "shareholder_return_risk",
-      "status": "incomplete",
-      "decisionQuestion": "Should the company proceed with the approved $40 billion share repurchase program?",
-      "chosenAction": "Execute the full $40 billion share repurchase authorization.",
+      "status": "approved",
+      "decisionQuestion": "Should the company authorize a new share repurchase program up to $40 billion?",
+      "chosenAction": "Authorize the new share repurchase program up to $40 billion.",
       "directQuote": "없음",
-      "policyQuote": "없음",
+      "policyQuote": "These actions reflect a continued commitment to returning cash to our shareholders",
       "contextQuote": "The board of directors also approved a new share repurchase program authorizing up to $40 billion in share repurchases.",
       "gaps": [
-        "missing_amy_judgment",
         "single_document_family"
       ]
     },
@@ -210,16 +201,13 @@
       "priority": 15,
       "candidateId": "candidate-buyback-2024",
       "domain": "shareholder_return_risk",
-      "status": "incomplete",
+      "status": "approved",
       "decisionQuestion": "Should the company proceed with the authorized $60 billion share repurchase program?",
       "chosenAction": "Execute the full $60 billion share repurchase authorization.",
       "directQuote": "없음",
-      "policyQuote": "없음",
+      "policyQuote": "These actions reflect a continued commitment to returning cash to our shareholders",
       "contextQuote": "The board of directors also approved a new share repurchase program authorizing up to $60 billion in share repurchases.",
-      "gaps": [
-        "missing_amy_judgment",
-        "single_document_family"
-      ]
+      "gaps": []
     }
   ]
 }

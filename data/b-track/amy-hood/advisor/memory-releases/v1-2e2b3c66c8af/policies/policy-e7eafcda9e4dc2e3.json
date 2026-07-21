@@ -1,0 +1,53 @@
+{
+  "id": "policy-e7eafcda9e4dc2e3",
+  "domain": "ai_cloud_capex",
+  "applicabilityConditions": [
+    "Customer demand and capacity urgency remain observable and infrastructure economics remain supportable."
+  ],
+  "priorityOrder": [
+    "Customer demand",
+    "Capacity urgency",
+    "Profitability and cost constraint",
+    "Supply lead time"
+  ],
+  "recommendedAction": "Scale infrastructure while constraining operating expense growth and monitoring infrastructure economics.",
+  "nonApplicabilityConditions": [
+    "Demand, capacity urgency, or infrastructure economics no longer supports expansion."
+  ],
+  "guardrails": [
+    "Keep operating-expense growth and disciplined profitability explicit while capital capacity scales."
+  ],
+  "exceptions": [
+    "Use staged or third-party capacity when it preserves flexibility without weakening service commitments."
+  ],
+  "reversalSignals": [
+    "Customer demand weakens, capacity urgency relaxes, or infrastructure economics materially deteriorates."
+  ],
+  "reflectionIds": [
+    "reflection-f75c6c30eef7c1e0"
+  ],
+  "supportingEventIds": [
+    "event-ai-capacity-opex-pivot-2023",
+    "event-ai-capacity-sourcing-2024"
+  ],
+  "contrastingEventIds": [],
+  "evidenceIds": [
+    "span-capacity-2023-opex",
+    "span-capacity-2024-demand-discipline"
+  ],
+  "directPolicyEvidenceIds": [
+    "policy-ai-capex-cost-discipline-2023"
+  ],
+  "contrastStatus": "documented_unavailable",
+  "schemaVersion": 2,
+  "confidence": "medium",
+  "policyKind": "deployable_policy",
+  "status": "approved",
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-07-21T01:25:00.408Z",
+    "decision": "approved",
+    "rationale": "Reviewed against approved same-axis reflections, source-linked Amy Hood principle evidence, holdout boundaries, explicit guardrails, reversal signals, and five-domain PoC coverage; approved at medium confidence.",
+    "validationHash": "87280d3d221deacb048ae76ecf113cd288d3dfe6f5fc725c8ad01dc25dd2e765"
+  }
+}

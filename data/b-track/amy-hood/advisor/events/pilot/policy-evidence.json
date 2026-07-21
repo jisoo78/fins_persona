@@ -1,5 +1,23 @@
 [
   {
+    "id": "policy-ma-tam-value-execution-2021",
+    "candidateId": "candidate-nuance-acquisition-2021",
+    "sourceId": "source-82b26e92b9a5e28b",
+    "exactQuote": "We focus on TAM-expansive opportunities in high-growth markets, where we can uniquely add value to the users or the community. And we execute those transactions at a price that supports long-term shareholder value creation.",
+    "startChar": 100,
+    "endChar": 323,
+    "publishedAt": "2021-04-12",
+    "temporalRelation": "decision_time",
+    "speaker": "Amy Hood",
+    "policyTags": [
+      "capital_allocation_return",
+      "risk_and_optionality"
+    ],
+    "eventLinkRationale": "Amy Hood states the transaction-selection principle in the reviewed Nuance decision call, linking TAM expansion, unique value, price discipline, and long-term shareholder value.",
+    "reviewer": "Codex evidence review",
+    "reviewedAt": "2026-07-21T01:22:00.000Z"
+  },
+  {
     "id": "policy-ai-capex-cost-discipline-2023",
     "candidateId": "candidate-ai-capacity-sourcing-2024",
     "sourceId": "source-fbb900eb7e249591",
@@ -19,6 +37,9 @@
   {
     "id": "policy-copilot-value-pricing-2023",
     "candidateId": "candidate-copilot-price-2023",
+    "appliesToCandidateIds": [
+      "candidate-teams-unbundle-2023"
+    ],
     "sourceId": "source-fbb900eb7e249591",
     "exactQuote": "when we believe we’re adding a lot of value, and frankly, that’s what the copilots are doing and some productivity improvement, you can expect that we will have a list price for those.",
     "startChar": 40339,
@@ -35,6 +56,9 @@
   {
     "id": "policy-workforce-resource-reallocation-2022",
     "candidateId": "candidate-workforce-reset-2023",
+    "appliesToCandidateIds": [
+      "candidate-transformation-2026"
+    ],
     "sourceId": "source-ad9a23176d9cf21d-25fb51a81eef",
     "exactQuote": "It’ll be about investing where we said we would invest, which is in focused areas. It’s about moving headcount to make sure, inside the company, we’ve got it on the highest and most important things. We’ve added a lot of headcount over the past 12 months, and we want to make sure we use those headcount in the most productive way possible.",
     "startChar": 48294,
@@ -48,5 +72,25 @@
     "eventLinkRationale": "This pre-decision statement defines focused investment, internal headcount movement, and productivity as the response to macro pressure before the workforce reset announcement.",
     "reviewer": "Codex evidence review",
     "reviewedAt": "2026-07-15T06:21:32.000Z"
+  },
+  {
+    "id": "policy-buyback-cash-return-2013",
+    "candidateId": "candidate-buyback-2013",
+    "appliesToCandidateIds": [
+      "candidate-buyback-2024"
+    ],
+    "sourceId": "source-78333f25f047c289",
+    "exactQuote": "These actions reflect a continued commitment to returning cash to our shareholders",
+    "startChar": 640,
+    "endChar": 722,
+    "publishedAt": "2013-09-17",
+    "temporalRelation": "decision_time",
+    "speaker": "Amy Hood",
+    "policyTags": [
+      "capital_allocation_return"
+    ],
+    "eventLinkRationale": "Amy Hood states the cash-return principle in the same reviewed announcement as the 2013 dividend increase and repurchase authorization; it is retained as a domain principle rather than event-specific transaction speech.",
+    "reviewer": "Codex evidence review",
+    "reviewedAt": "2026-07-21T01:05:00.000Z"
   }
 ]

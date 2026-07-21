@@ -1,0 +1,53 @@
+{
+  "id": "policy-ccd7e455daf31f5f",
+  "domain": "m_and_a",
+  "applicabilityConditions": [
+    "The target expands a high-growth addressable market, Microsoft adds unique value, and transaction economics support long-term shareholder value."
+  ],
+  "priorityOrder": [
+    "Strategic market expansion",
+    "Unique customer or community value",
+    "Transaction price discipline",
+    "Integration execution"
+  ],
+  "recommendedAction": "Commit to a bounded acquisition only after strategic reach, price discipline, and execution capacity are jointly supportable.",
+  "nonApplicabilityConditions": [
+    "Strategic reach, transaction economics, or integration execution is not supportable."
+  ],
+  "guardrails": [
+    "Do not treat transaction completion as value creation; retain explicit price and execution boundaries."
+  ],
+  "exceptions": [
+    "Defer or reject when equivalent strategic reach is available with materially lower irreversible commitment."
+  ],
+  "reversalSignals": [
+    "Expected strategic reach weakens, transaction economics deteriorate, or integration execution becomes unsupported."
+  ],
+  "reflectionIds": [
+    "reflection-dad2d5919b582d9d"
+  ],
+  "supportingEventIds": [
+    "event-activision-acquisition-2022",
+    "event-nuance-acquisition-2021"
+  ],
+  "contrastingEventIds": [],
+  "evidenceIds": [
+    "span-291b7db034000ea7",
+    "span-807ee90aa032f320"
+  ],
+  "directPolicyEvidenceIds": [
+    "policy-ma-tam-value-execution-2021"
+  ],
+  "contrastStatus": "documented_unavailable",
+  "schemaVersion": 2,
+  "confidence": "medium",
+  "policyKind": "deployable_policy",
+  "status": "approved",
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-07-21T01:25:00.388Z",
+    "decision": "approved",
+    "rationale": "Reviewed against approved same-axis reflections, source-linked Amy Hood principle evidence, holdout boundaries, explicit guardrails, reversal signals, and five-domain PoC coverage; approved at medium confidence.",
+    "validationHash": "4222171e4238acec708e534392557dd1a8520aabb9087f2a13011962a2d2ad0f"
+  }
+}

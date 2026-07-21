@@ -1,0 +1,112 @@
+[
+  {
+    "kind": "policy",
+    "id": "policy-20d2c645ab6641c9",
+    "review": {
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T01:25:00.364Z",
+      "decision": "approved",
+      "rationale": "Reviewed against approved same-axis reflections, source-linked Amy Hood principle evidence, holdout boundaries, explicit guardrails, reversal signals, and five-domain PoC coverage; approved at medium confidence.",
+      "validationHash": "c703571eb6c9e88b531f8f4d4d1c933e4f88d3f6644646cb62e63d1536506fad"
+    }
+  },
+  {
+    "kind": "policy",
+    "id": "policy-a7972af407a0bf69",
+    "review": {
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T01:25:00.376Z",
+      "decision": "approved",
+      "rationale": "Reviewed against approved same-axis reflections, source-linked Amy Hood principle evidence, holdout boundaries, explicit guardrails, reversal signals, and five-domain PoC coverage; approved at medium confidence.",
+      "validationHash": "f9005ddecc6a839f38acfba47c8a46e72546ddcde0ca9d33d33e087564bbaa29"
+    }
+  },
+  {
+    "kind": "policy",
+    "id": "policy-ccd7e455daf31f5f",
+    "review": {
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T01:25:00.388Z",
+      "decision": "approved",
+      "rationale": "Reviewed against approved same-axis reflections, source-linked Amy Hood principle evidence, holdout boundaries, explicit guardrails, reversal signals, and five-domain PoC coverage; approved at medium confidence.",
+      "validationHash": "4222171e4238acec708e534392557dd1a8520aabb9087f2a13011962a2d2ad0f"
+    }
+  },
+  {
+    "kind": "policy",
+    "id": "policy-e0bfae61c424868c",
+    "review": {
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T01:25:00.398Z",
+      "decision": "approved",
+      "rationale": "Reviewed against approved same-axis reflections, source-linked Amy Hood principle evidence, holdout boundaries, explicit guardrails, reversal signals, and five-domain PoC coverage; approved at medium confidence.",
+      "validationHash": "88a713fe26da07d439c73eb998e3d93ae7b98188fd1bd4ddda60098aedb43df5"
+    }
+  },
+  {
+    "kind": "policy",
+    "id": "policy-e7eafcda9e4dc2e3",
+    "review": {
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T01:25:00.408Z",
+      "decision": "approved",
+      "rationale": "Reviewed against approved same-axis reflections, source-linked Amy Hood principle evidence, holdout boundaries, explicit guardrails, reversal signals, and five-domain PoC coverage; approved at medium confidence.",
+      "validationHash": "87280d3d221deacb048ae76ecf113cd288d3dfe6f5fc725c8ad01dc25dd2e765"
+    }
+  },
+  {
+    "kind": "reflection",
+    "id": "reflection-7371bfa747efb778",
+    "review": {
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T01:21:10.033Z",
+      "decision": "approved",
+      "rationale": "Reviewed all five domain support events, exact evidence IDs, documented public-contrast gaps, decision axes, boundaries, and holdout exclusion.",
+      "validationHash": "d2904b94d57c085d275ffaba806d57ad9894ced890f24d232f97c963dde632b6"
+    }
+  },
+  {
+    "kind": "reflection",
+    "id": "reflection-b8961796eb4e7fc0",
+    "review": {
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T01:21:10.044Z",
+      "decision": "approved",
+      "rationale": "Reviewed all five domain support events, exact evidence IDs, documented public-contrast gaps, decision axes, boundaries, and holdout exclusion.",
+      "validationHash": "915f70ee232394bf713cfa9a09802811902f47ca5b91db7724b22257d63304cf"
+    }
+  },
+  {
+    "kind": "reflection",
+    "id": "reflection-bd563b486d9d6f9b",
+    "review": {
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T01:21:10.054Z",
+      "decision": "approved",
+      "rationale": "Reviewed all five domain support events, exact evidence IDs, documented public-contrast gaps, decision axes, boundaries, and holdout exclusion.",
+      "validationHash": "ebad18d3709f2a3f43657500bb141c9db0fd3404a4c7d64cdc4dccfdf87bf27d"
+    }
+  },
+  {
+    "kind": "reflection",
+    "id": "reflection-dad2d5919b582d9d",
+    "review": {
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T01:21:10.064Z",
+      "decision": "approved",
+      "rationale": "Reviewed all five domain support events, exact evidence IDs, documented public-contrast gaps, decision axes, boundaries, and holdout exclusion.",
+      "validationHash": "161a580853e139943e5dd5ab2e53b1baf02573f0de2c2ba8b0e177529d5f1203"
+    }
+  },
+  {
+    "kind": "reflection",
+    "id": "reflection-f75c6c30eef7c1e0",
+    "review": {
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T01:21:10.073Z",
+      "decision": "approved",
+      "rationale": "Reviewed all five domain support events, exact evidence IDs, documented public-contrast gaps, decision axes, boundaries, and holdout exclusion.",
+      "validationHash": "62212749e613db9bd4ee64300d4d0f26f48b06ed57a5962f38b53b1c1dc6b5bd"
+    }
+  }
+]

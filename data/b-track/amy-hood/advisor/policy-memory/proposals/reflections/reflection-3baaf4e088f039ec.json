@@ -1,0 +1,70 @@
+{
+  "id": "reflection-3baaf4e088f039ec",
+  "domain": "shareholder_return_risk",
+  "crossEventQuestion": "Should Microsoft authorize a large share repurchase program to signal commitment to shareholders?",
+  "observation": "Microsoft authorized a $60 billion share repurchase program in 2024, reflecting a continued commitment to shareholders. In contrast, the 2013 authorization was for $40 billion, also reflecting a continued commitment to shareholders.",
+  "invariant": "When the company has a commitment to returning cash to shareholders, authorizing a large share repurchase program is the chosen action.",
+  "boundaryConditions": [
+    "The action must reflect a continued commitment to shareholders.",
+    "The board of directors must approve the program."
+  ],
+  "unresolvedConflicts": [],
+  "decisionAxis": {
+    "decisionObject": "Share Repurchase Authorization Size",
+    "decisionQuestion": "How large should the share repurchase authorization be?",
+    "choiceSet": [
+      "authorize_the_new_share_repurchase_program_up_to_40_billion",
+      "authorize_the_new_share_repurchase_program_up_to_60_billion"
+    ],
+    "gatingVariables": [
+      "Board approval",
+      "Commitment to returning cash to shareholders"
+    ]
+  },
+  "supportPattern": {
+    "eventIds": [
+      "event-buyback-2024"
+    ],
+    "conditions": [
+      "The company has a commitment to returning cash to shareholders.",
+      "The new share repurchase program is authorized up to $60 billion."
+    ],
+    "evidenceIds": [
+      "span-20e3349dbae4503b",
+      "span-328e730e3d56a46c"
+    ],
+    "action": "proceed_with_the_full_60_billion_share_repurchase_authorization"
+  },
+  "contrastStatus": "reviewed",
+  "contrastPattern": {
+    "eventIds": [
+      "event-buyback-2013"
+    ],
+    "conditions": [
+      "The authorization limit is set at $40 billion.",
+      "The board of directors must approve the program."
+    ],
+    "evidenceIds": [
+      "span-4d34d5136c326275",
+      "span-fdd09e9019051bf7"
+    ],
+    "action": "authorize_the_new_share_repurchase_program_up_to_40_billion"
+  },
+  "conditionDelta": "The authorization limit increased from $40 billion (2013) to $60 billion (2024).",
+  "actionDelta": "Proceed with the full $60 billion share repurchase authorization (2024) vs. Authorize the new share repurchase program up to $40 billion (2013)",
+  "supportingEventIds": [
+    "event-buyback-2024"
+  ],
+  "contrastingEventIds": [
+    "event-buyback-2013"
+  ],
+  "evidenceIds": [
+    "span-20e3349dbae4503b",
+    "span-328e730e3d56a46c",
+    "span-4d34d5136c326275",
+    "span-fdd09e9019051bf7"
+  ],
+  "confidence": "low",
+  "status": "review_required",
+  "review": null
+}

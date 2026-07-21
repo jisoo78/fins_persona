@@ -36,7 +36,7 @@ export type AmyHoodRetrievalRequest = {
 export type AmyHoodIndexedEvidence = {
   id: string;
   exactQuote: string;
-  speaker: 'Amy Hood';
+  speaker: 'Amy Hood' | null;
   sourceId: string;
   sourceType: string;
   sourceTitle: string;

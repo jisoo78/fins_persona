@@ -1,30 +1,54 @@
 {
-  "generatedAt": "2026-07-20T04:08:54.529Z",
+  "generatedAt": "2026-07-21T01:25:12.405Z",
   "inputEventIds": [
     "event-activision-acquisition-2022",
     "event-ai-capacity-opex-pivot-2023",
     "event-ai-capacity-sourcing-2024",
+    "event-buyback-2013",
+    "event-buyback-2024",
     "event-cloud-capacity-scale-2022",
     "event-copilot-price-2023",
     "event-linkedin-acquisition-2016",
-    "event-openai-expansion-2023",
+    "event-nuance-acquisition-2021",
+    "event-teams-unbundle-2023",
+    "event-transformation-2026",
     "event-workforce-reset-2023"
   ],
   "passing": {
     "reflections": [
-      "reflection-4b5f7915d30581a4"
+      "reflection-4b5f7915d30581a4",
+      "reflection-7371bfa747efb778",
+      "reflection-b8961796eb4e7fc0",
+      "reflection-bd563b486d9d6f9b",
+      "reflection-dad2d5919b582d9d",
+      "reflection-f75c6c30eef7c1e0"
     ],
     "policies": [
-      "policy-c4203c075dbd61d3"
+      "policy-20d2c645ab6641c9",
+      "policy-a7972af407a0bf69",
+      "policy-c4203c075dbd61d3",
+      "policy-ccd7e455daf31f5f",
+      "policy-e0bfae61c424868c",
+      "policy-e7eafcda9e4dc2e3"
     ]
   },
   "reviewed": {
     "approved": {
       "reflections": [
-        "reflection-4b5f7915d30581a4"
+        "reflection-4b5f7915d30581a4",
+        "reflection-7371bfa747efb778",
+        "reflection-b8961796eb4e7fc0",
+        "reflection-bd563b486d9d6f9b",
+        "reflection-dad2d5919b582d9d",
+        "reflection-f75c6c30eef7c1e0"
       ],
       "policies": [
-        "policy-c4203c075dbd61d3"
+        "policy-20d2c645ab6641c9",
+        "policy-a7972af407a0bf69",
+        "policy-c4203c075dbd61d3",
+        "policy-ccd7e455daf31f5f",
+        "policy-e0bfae61c424868c",
+        "policy-e7eafcda9e4dc2e3"
       ]
     },
     "rejected": {
@@ -39,7 +63,7 @@
     }
   },
   "safeStop": null,
-  "activeReleaseVersion": "v1-262d69135ca0",
+  "activeReleaseVersion": "v1-2e2b3c66c8af",
   "reviewRequired": [
     {
       "kind": "policy",
@@ -54,34 +78,55 @@
       "kind": "reflection",
       "id": "reflection-20c9175bbee7effd",
       "errors": [
+        "contrast pattern requires conditions, action, events, and evidence",
         "reflection requires a valid decision axis",
         "support pattern requires conditions, action, events, and evidence",
-        "contrast pattern requires conditions, action, events, and evidence",
         "reflection requires condition delta",
-        "reflection requires action delta"
+        "reflection requires action delta",
+        "reflection references unknown event: event-openai-expansion-2023",
+        "reflection references unknown evidence: span-7a8c1662a2c8a94e"
+      ]
+    },
+    {
+      "kind": "reflection",
+      "id": "reflection-3baaf4e088f039ec",
+      "errors": [
+        "support action must belong to the decision-axis choice set"
       ]
     },
     {
       "kind": "reflection",
       "id": "reflection-7ca98b256d755235",
       "errors": [
+        "contrast pattern requires conditions, action, events, and evidence",
         "reflection requires a valid decision axis",
         "support pattern requires conditions, action, events, and evidence",
-        "contrast pattern requires conditions, action, events, and evidence",
         "reflection requires condition delta",
-        "reflection requires action delta"
+        "reflection requires action delta",
+        "reflection references unknown event: event-openai-expansion-2023",
+        "reflection references unknown evidence: span-d2da4ef04c3b6e0c",
+        "reflection references unknown evidence: span-d7a1fe8155e1f9ca"
       ]
     },
     {
       "kind": "reflection",
       "id": "reflection-84ac9877435917f5",
       "errors": [
+        "support action must belong to the decision-axis choice set",
         "support and contrast actions must belong to the decision-axis choice set"
       ]
     },
     {
       "kind": "reflection",
       "id": "reflection-a711fce93b3a894d",
+      "errors": [
+        "support action must belong to the decision-axis choice set",
+        "support and contrast actions must belong to the decision-axis choice set"
+      ]
+    },
+    {
+      "kind": "reflection",
+      "id": "reflection-c4449fbc8a0825b4",
       "errors": [
         "support and contrast actions must belong to the decision-axis choice set"
       ]
@@ -102,17 +147,27 @@
     },
     {
       "kind": "reflection",
+      "id": "reflection-e14e4111f34ee7da",
+      "errors": [
+        "support evidence does not belong to its event",
+        "reflection evidence is outside its support and contrast events: span-20e3349dbae4503b",
+        "reflection references unknown evidence: span-2349dbae4503b"
+      ]
+    },
+    {
+      "kind": "reflection",
       "id": "reflection-f11de0b94c27058e",
       "errors": [
+        "contrast pattern requires conditions, action, events, and evidence",
         "reflection requires a valid decision axis",
         "support pattern requires conditions, action, events, and evidence",
-        "contrast pattern requires conditions, action, events, and evidence",
         "reflection requires condition delta",
         "reflection requires action delta"
       ]
     }
   ],
   "blocked": [
+    "model-run-8cb5cd7f59439f8d",
     "model-run-c59fef7571760664",
     "review_rejected:policy-08f634a7d104cd73",
     "review_rejected:policy-378e62a676e4802a",

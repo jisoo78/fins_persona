@@ -1,8 +1,11 @@
+import { createHash } from 'node:crypto';
+
 import type {
   AdvisorSourceRecord,
   EventCandidate,
   EventSourceAssociation,
   PilotEvidenceGap,
+  PilotEvidenceSpan,
 } from '../../shared/amyHoodDecisionAdvisor';
 import { readAdvisorArtifactSecure } from './artifactStore';
 import { loadRegistry } from './sourceRegistry';
@@ -21,6 +24,37 @@ export type PilotSourceLoadResult = {
 };
 
 const unique = <T>(values: T[]) => [...new Set(values)];
+
+export const reviewedDecisionContextSpan = (
+  input: PilotSourceInput,
+): PilotEvidenceSpan | null => {
+  const { association, candidate, normalizedText, source } = input;
+  if (association.reviewStatus !== 'reviewed'
+    || association.role !== 'contemporaneous_context'
+    || !association.evidenceLocator
+    || !association.publishedAt) return null;
+  const exactQuote = association.evidenceLocator.exactRelevancePassage;
+  const startChar = normalizedText.indexOf(exactQuote);
+  if (startChar < 0 || startChar !== normalizedText.lastIndexOf(exactQuote)) {
+    throw new Error(`reviewed locator does not uniquely match immutable source: ${candidate.id}`);
+  }
+  const endChar = startChar + exactQuote.length;
+  const id = createHash('sha256')
+    .update([source.id, candidate.id, 'decision_context', startChar, endChar].join(':'))
+    .digest('hex')
+    .slice(0, 16);
+  return {
+    id: `span-${id}`,
+    sourceId: source.id,
+    eventCandidateId: candidate.id,
+    role: 'decision_context',
+    exactQuote,
+    startChar,
+    endChar,
+    publishedAt: association.publishedAt,
+    speaker: null,
+  };
+};
 
 export const loadPilotSourceInputs = async (
   root: string,

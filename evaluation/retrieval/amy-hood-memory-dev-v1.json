@@ -1,12 +1,48 @@
 {
   "dataset": "amy_hood_memory_retrieval_dev",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "probes": [
-    { "id": "capacity-demand-cost", "query": "생성형 AI 고객 사용량이 빠르게 늘 때 데이터센터 자본투자와 운영비 증가를 어떤 순서로 통제해야 하는가?", "expectedArtifactIds": ["policy-c4203c075dbd61d3"], "expectNoMatch": false },
-    { "id": "capacity-external-supply", "query": "자체 클라우드 설비의 구축 시간이 수요 증가를 따라가지 못하면 외부 용량을 함께 조달해야 하는가?", "expectedArtifactIds": ["policy-c4203c075dbd61d3"], "expectNoMatch": false },
-    { "id": "capacity-margin-pressure", "query": "AI 인프라 원가가 매출총이익률을 압박하는 상황에서 성장 투자를 유지하면서 비용 규율을 지키는 방법은 무엇인가?", "expectedArtifactIds": ["policy-c4203c075dbd61d3"], "expectNoMatch": false },
-    { "id": "capacity-platform-shift", "query": "새로운 컴퓨팅 플랫폼 전환기에 인프라는 확대하되 전 조직의 인력과 경비도 같은 속도로 늘려야 하는가?", "expectedArtifactIds": ["policy-c4203c075dbd61d3"], "expectNoMatch": false },
-    { "id": "no-match-acquisition", "query": "대형 소프트웨어 기업을 현금으로 인수할 때 부채와 주식 중 어떤 조달 수단을 선택해야 하는가?", "expectedArtifactIds": [], "expectNoMatch": true },
-    { "id": "no-match-buyback", "query": "자사주 매입 권한과 실제 분기별 집행 속도를 어떻게 구분해야 하는가?", "expectedArtifactIds": [], "expectNoMatch": true }
+    {
+      "id": "ma-strategic-reach-price-execution",
+      "query": "대형 인수에서 시장 확장성과 고객 가치를 보더라도 거래 가격과 통합 실행 역량이 불확실하면 어떤 순서로 판단해야 하는가?",
+      "expectedArtifactIds": ["policy-ccd7e455daf31f5f"],
+      "expectNoMatch": false
+    },
+    {
+      "id": "capacity-demand-cost",
+      "query": "생성형 AI 고객 수요가 빠르게 늘 때 데이터센터 자본투자를 확대하면서 운영비 증가와 인프라 경제성을 어떻게 통제해야 하는가?",
+      "expectedArtifactIds": ["policy-e7eafcda9e4dc2e3"],
+      "expectNoMatch": false
+    },
+    {
+      "id": "pricing-verified-value-customer-impact",
+      "query": "제품 가치가 검증됐지만 고객 영향이 우려될 때 가격 인상이나 패키지 분리를 어떤 조건과 경계 안에서 결정해야 하는가?",
+      "expectedArtifactIds": ["policy-e0bfae61c424868c"],
+      "expectNoMatch": false
+    },
+    {
+      "id": "cost-reallocate-priority-productivity",
+      "query": "현재 인력이 최우선 과제와 생산성에 맞지 않을 때 핵심 투자를 보존하면서 인력을 줄이거나 재배치하는 기준은 무엇인가?",
+      "expectedArtifactIds": ["policy-20d2c645ab6641c9"],
+      "expectNoMatch": false
+    },
+    {
+      "id": "buyback-authority-versus-deployment",
+      "query": "자사주 매입 한도를 승인하는 것과 실제 현금 집행을 구분하면서 재무 유연성을 유지하려면 어떻게 판단해야 하는가?",
+      "expectedArtifactIds": ["policy-a7972af407a0bf69"],
+      "expectNoMatch": false
+    },
+    {
+      "id": "no-match-transfer-pricing",
+      "query": "국가별 이전가격 과세 분쟁에서 정상가격 산출 방법과 상호합의절차 관할을 어떻게 선택해야 하는가?",
+      "expectedArtifactIds": [],
+      "expectNoMatch": true
+    },
+    {
+      "id": "no-match-pension-duration",
+      "query": "확정급여형 연금부채의 듀레이션을 맞추기 위한 장기채 포트폴리오와 금리 스왑 비중은 어떻게 정해야 하는가?",
+      "expectedArtifactIds": [],
+      "expectNoMatch": true
+    }
   ]
 }

@@ -47,12 +47,24 @@ const quoteIsInsideAmyBoundary = (
   && segment.startChar <= record.startChar
   && segment.endChar >= record.endChar);
 
+export const policyEvidenceCandidateIds = (
+  record: PilotPolicyEvidenceRecord,
+): string[] => {
+  const linked = record.appliesToCandidateIds ?? [];
+  if (linked.some((candidateId) => typeof candidateId !== 'string' || !candidateId.trim())
+    || new Set([record.candidateId, ...linked]).size !== linked.length + 1) {
+    throw new Error('policy evidence candidate links are invalid');
+  }
+  return [record.candidateId, ...linked];
+};
+
 export const validatePilotPolicyEvidenceRecord = (
   record: PilotPolicyEvidenceRecord,
   input: PolicyEvidenceValidationInput,
 ): PilotEvidenceSpan => {
+  const isOriginCandidate = record.candidateId === input.candidate.id;
   if (!/^policy-[a-z0-9-]+$/.test(record.id)
-    || record.candidateId !== input.candidate.id
+    || !policyEvidenceCandidateIds(record).includes(input.candidate.id)
     || record.sourceId !== input.source.id) {
     throw new Error('policy evidence identity is invalid');
   }
@@ -67,8 +79,15 @@ export const validatePilotPolicyEvidenceRecord = (
   if (record.publishedAt !== input.source.publishedAt) {
     throw new Error('policy evidence date does not match its source');
   }
-  if (record.publishedAt >= input.candidate.decisionWindowStart) {
+  const temporalRelation = record.temporalRelation ?? 'pre_decision';
+  if ((!isOriginCandidate || temporalRelation === 'pre_decision')
+    && record.publishedAt >= input.candidate.decisionWindowStart) {
     throw new Error('policy evidence must predate the decision window');
+  }
+  if (isOriginCandidate && temporalRelation === 'decision_time'
+    && (record.publishedAt < input.candidate.decisionWindowStart
+      || record.publishedAt > input.candidate.decisionWindowEnd)) {
+    throw new Error('decision-time policy evidence must fall inside the decision window');
   }
   if (record.speaker !== 'Amy Hood'
     || !quoteIsInsideAmyBoundary(record, input.source, input.speakerSegments)) {
@@ -85,15 +104,18 @@ export const validatePilotPolicyEvidenceRecord = (
     throw new Error('policy evidence review metadata is invalid');
   }
   return {
-    id: `span-${createHash('sha256').update(record.id).digest('hex').slice(0, 16)}`,
+    id: `span-${createHash('sha256')
+      .update(isOriginCandidate ? record.id : `${record.id}:${input.candidate.id}`)
+      .digest('hex').slice(0, 16)}`,
     sourceId: record.sourceId,
-    eventCandidateId: record.candidateId,
+    eventCandidateId: input.candidate.id,
     role: 'amy_policy',
     exactQuote: record.exactQuote,
     startChar: record.startChar,
     endChar: record.endChar,
     publishedAt: record.publishedAt,
     speaker: 'Amy Hood',
+    directAmyEvidenceMode: 'domain_principle',
   };
 };
 
@@ -133,33 +155,35 @@ export const loadValidatedPilotPolicyEvidenceGraph = async (
   for (const record of records) {
     if (recordIds.has(record.id)) throw new Error(`duplicate policy evidence ID: ${record.id}`);
     recordIds.add(record.id);
-    if (!targetIds.has(record.candidateId)) {
-      throw new Error(`policy evidence candidate is outside the pilot: ${record.candidateId}`);
+    for (const candidateId of policyEvidenceCandidateIds(record)) {
+      if (!targetIds.has(candidateId)) {
+        throw new Error(`policy evidence candidate is outside the pilot: ${candidateId}`);
+      }
+      const candidate = candidates.find(({ id }) => id === candidateId);
+      const source = registry.sources.find(({ id }) => id === record.sourceId);
+      if (!candidate || !source?.normalizedPath || !source.sha256) {
+        throw new Error(`policy evidence source is unavailable: ${record.id}`);
+      }
+      if (!source.eventCandidateIds.includes(candidate.id)) {
+        throw new Error(`policy evidence source is not linked to candidate: ${record.id}`);
+      }
+      const normalizedText = (
+        await readAdvisorArtifactSecure(root, source.normalizedPath)
+      ).toString('utf8');
+      const span = validatePilotPolicyEvidenceRecord(record, {
+        candidate,
+        source,
+        normalizedText,
+        speakerSegments: await loadSpeakerSegments(root, source),
+      });
+      const association = candidate.sourceAssociations.find(({ canonicalUrl }) =>
+        canonicalizeSourceUrl(canonicalUrl) === source.canonicalUrl);
+      result.push({
+        record,
+        span,
+        documentFamilyId: association?.documentFamilyId ?? `source:${source.id}`,
+      });
     }
-    const candidate = candidates.find(({ id }) => id === record.candidateId);
-    const source = registry.sources.find(({ id }) => id === record.sourceId);
-    if (!candidate || !source?.normalizedPath || !source.sha256) {
-      throw new Error(`policy evidence source is unavailable: ${record.id}`);
-    }
-    if (!source.eventCandidateIds.includes(candidate.id)) {
-      throw new Error(`policy evidence source is not linked to candidate: ${record.id}`);
-    }
-    const normalizedText = (
-      await readAdvisorArtifactSecure(root, source.normalizedPath)
-    ).toString('utf8');
-    const span = validatePilotPolicyEvidenceRecord(record, {
-      candidate,
-      source,
-      normalizedText,
-      speakerSegments: await loadSpeakerSegments(root, source),
-    });
-    const association = candidate.sourceAssociations.find(({ canonicalUrl }) =>
-      canonicalizeSourceUrl(canonicalUrl) === source.canonicalUrl);
-    result.push({
-      record,
-      span,
-      documentFamilyId: association?.documentFamilyId ?? `source:${source.id}`,
-    });
   }
 
   return result.sort((left, right) => left.record.id.localeCompare(right.record.id));
@@ -171,8 +195,11 @@ export const loadValidatedPilotPolicyEvidence = async (
 ): Promise<Map<string, PilotEvidenceSpan[]>> => {
   const graph = await loadValidatedPilotPolicyEvidenceGraph(root, candidates);
   const result = new Map<string, PilotEvidenceSpan[]>();
-  for (const { record, span } of graph) {
-    result.set(record.candidateId, [...(result.get(record.candidateId) ?? []), span]);
+  for (const { span } of graph) {
+    result.set(span.eventCandidateId, [
+      ...(result.get(span.eventCandidateId) ?? []),
+      span,
+    ]);
   }
   return result;
 };

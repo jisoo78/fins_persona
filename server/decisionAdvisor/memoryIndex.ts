@@ -129,15 +129,17 @@ const buildEvidence = (
     const postOutcome = new Set(event.postOutcomeEvidenceIds);
     for (const span of event.evidenceSpans) {
       if (postOutcome.has(span.id)) continue;
-      if (span.speaker !== 'Amy Hood' || !span.exactQuote.trim()) {
-        throw new Error(`reviewed Amy Hood evidence is required: ${span.id}`);
+      if (!span.exactQuote.trim()
+        || ((span.role === 'direct_amy' || span.role === 'amy_policy')
+          && span.speaker !== 'Amy Hood')) {
+        throw new Error(`reviewed evidence is required: ${span.id}`);
       }
       const source = sources.get(span.sourceId);
       if (!source) throw new Error(`source metadata is unresolved: ${span.sourceId}`);
       result.set(span.id, {
         id: span.id,
         exactQuote: span.exactQuote,
-        speaker: 'Amy Hood',
+        speaker: span.speaker,
         sourceId: span.sourceId,
         sourceType: source.sourceType,
         sourceTitle: source.title,
@@ -252,13 +254,17 @@ const assertNoHoldoutLeakage = async (
   const holdout = await loadEvaluationV3Holdout(root);
   const content = canonicalJson({ records, evidence }).toLocaleLowerCase('en-US');
   for (const event of holdout.events) {
-    const leaked = [
+    const leakedId = [
       event.eventId,
       event.candidateId,
-      ...event.aliases,
       ...event.sourceIds,
       ...event.evidenceIds,
-    ].map((value) => value.toLocaleLowerCase('en-US')).find((value) => content.includes(value));
+    ].map((value) => canonicalJson(value).toLocaleLowerCase('en-US'))
+      .find((value) => content.includes(value));
+    const leakedAlias = event.aliases
+      .map((value) => value.toLocaleLowerCase('en-US'))
+      .find((value) => content.includes(value));
+    const leaked = leakedId ?? leakedAlias;
     if (leaked) throw new Error(`memory index contains holdout text: ${leaked}`);
   }
   return sha256(await readFile(path.join(root, 'evaluation/v3/sealed/holdout-manifest.json')));

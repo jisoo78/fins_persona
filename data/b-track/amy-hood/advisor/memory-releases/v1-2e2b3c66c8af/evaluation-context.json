@@ -1,0 +1,299 @@
+{
+  "releaseId": "v1-2e2b3c66c8af",
+  "policy": [
+    "{\"applicabilityConditions\":[\"Current resource deployment is not aligned with the highest-priority work or productive use.\"],\"confidence\":\"medium\",\"contrastingEventIds\":[],\"contrastStatus\":\"documented_unavailable\",\"directPolicyEvidenceIds\":[\"policy-workforce-resource-reallocation-2022\"],\"domain\":\"cost_efficiency\",\"evidenceIds\":[\"span-abaa0f62aa30208c\",\"span-acc7150e73b95096\",\"span-f031de15863e849e\"],\"exceptions\":[\"Retain resources when removal would impair a verified high-priority opportunity.\"],\"guardrails\":[\"Preserve focused investment and execution continuity while changing headcount or cost structure.\"],\"id\":\"policy-20d2c645ab6641c9\",\"nonApplicabilityConditions\":[\"Current allocation remains aligned with priority work and productive use.\"],\"priorityOrder\":[\"Strategic priority alignment\",\"Workforce productivity\",\"Cost and revenue alignment\",\"Execution continuity\"],\"recommendedAction\":\"Reduce or reallocate resources toward the highest-priority work while preserving focused investment.\",\"reversalSignals\":[\"Priority alignment improves, productivity recovers, or reductions begin to impair focused investment.\"],\"schemaVersion\":2,\"supportingEventIds\":[\"event-transformation-2026\",\"event-workforce-reset-2023\"]}",
+    "{\"applicabilityConditions\":[\"A continuing cash-return commitment is supportable within an explicit authorization ceiling and capital flexibility remains adequate.\"],\"confidence\":\"medium\",\"contrastingEventIds\":[],\"contrastStatus\":\"documented_unavailable\",\"directPolicyEvidenceIds\":[\"policy-buyback-cash-return-2013\"],\"domain\":\"shareholder_return_risk\",\"evidenceIds\":[\"span-20e3349dbae4503b\",\"span-328e730e3d56a46c\",\"span-4d34d5136c326275\",\"span-fdd09e9019051bf7\"],\"exceptions\":[\"Defer or reduce repurchases when capital flexibility or durable investment needs are more valuable.\"],\"guardrails\":[\"Treat the authorization as a ceiling rather than a requirement to deploy the full amount.\"],\"id\":\"policy-a7972af407a0bf69\",\"nonApplicabilityConditions\":[\"Competing investment or liquidity needs dominate the cash-return commitment.\"],\"priorityOrder\":[\"Strategic investment needs\",\"Liquidity and capital flexibility\",\"Shareholder cash return\",\"Authorization ceiling\"],\"recommendedAction\":\"Authorize bounded repurchase capacity while retaining discretion over actual deployment.\",\"reversalSignals\":[\"Liquidity tightens, higher-return investment needs emerge, or repurchase economics deteriorate.\"],\"schemaVersion\":2,\"supportingEventIds\":[\"event-buyback-2013\",\"event-buyback-2024\"]}",
+    "{\"applicabilityConditions\":[\"The target expands a high-growth addressable market, Microsoft adds unique value, and transaction economics support long-term shareholder value.\"],\"confidence\":\"medium\",\"contrastingEventIds\":[],\"contrastStatus\":\"documented_unavailable\",\"directPolicyEvidenceIds\":[\"policy-ma-tam-value-execution-2021\"],\"domain\":\"m_and_a\",\"evidenceIds\":[\"span-291b7db034000ea7\",\"span-807ee90aa032f320\"],\"exceptions\":[\"Defer or reject when equivalent strategic reach is available with materially lower irreversible commitment.\"],\"guardrails\":[\"Do not treat transaction completion as value creation; retain explicit price and execution boundaries.\"],\"id\":\"policy-ccd7e455daf31f5f\",\"nonApplicabilityConditions\":[\"Strategic reach, transaction economics, or integration execution is not supportable.\"],\"priorityOrder\":[\"Strategic market expansion\",\"Unique customer or community value\",\"Transaction price discipline\",\"Integration execution\"],\"recommendedAction\":\"Commit to a bounded acquisition only after strategic reach, price discipline, and execution capacity are jointly supportable.\",\"reversalSignals\":[\"Expected strategic reach weakens, transaction economics deteriorate, or integration execution becomes unsupported.\"],\"schemaVersion\":2,\"supportingEventIds\":[\"event-activision-acquisition-2022\",\"event-nuance-acquisition-2021\"]}",
+    "{\"applicabilityConditions\":[\"Customer value or productivity improvement is identifiable and concrete price or packaging terms can be stated.\"],\"confidence\":\"medium\",\"contrastingEventIds\":[],\"contrastStatus\":\"documented_unavailable\",\"directPolicyEvidenceIds\":[\"policy-copilot-value-pricing-2023\"],\"domain\":\"pricing_monetization\",\"evidenceIds\":[\"span-1baf5181c9f9b527\",\"span-22b85b48be6cc0ff\",\"span-3e0302dd56efc30e\",\"span-a932a8deb06fb1c6\"],\"exceptions\":[\"Defer monetization when packaging friction overwhelms the identifiable customer value.\"],\"guardrails\":[\"Do not infer value from price alone; retain concrete terms and customer-impact boundaries.\"],\"id\":\"policy-e0bfae61c424868c\",\"nonApplicabilityConditions\":[\"Customer value is unverified or commercial terms cannot be stated clearly.\"],\"priorityOrder\":[\"Customer value\",\"Productivity improvement\",\"Commercial clarity\",\"Adoption friction\"],\"recommendedAction\":\"Monetize or repackage verified value with explicit commercial terms and a bounded customer-impact rationale.\",\"reversalSignals\":[\"Measured customer value weakens, productivity improvement fails to materialize, or adoption friction rises materially.\"],\"schemaVersion\":2,\"supportingEventIds\":[\"event-copilot-price-2023\",\"event-teams-unbundle-2023\"]}",
+    "{\"applicabilityConditions\":[\"Customer demand and capacity urgency remain observable and infrastructure economics remain supportable.\"],\"confidence\":\"medium\",\"contrastingEventIds\":[],\"contrastStatus\":\"documented_unavailable\",\"directPolicyEvidenceIds\":[\"policy-ai-capex-cost-discipline-2023\"],\"domain\":\"ai_cloud_capex\",\"evidenceIds\":[\"span-capacity-2023-opex\",\"span-capacity-2024-demand-discipline\"],\"exceptions\":[\"Use staged or third-party capacity when it preserves flexibility without weakening service commitments.\"],\"guardrails\":[\"Keep operating-expense growth and disciplined profitability explicit while capital capacity scales.\"],\"id\":\"policy-e7eafcda9e4dc2e3\",\"nonApplicabilityConditions\":[\"Demand, capacity urgency, or infrastructure economics no longer supports expansion.\"],\"priorityOrder\":[\"Customer demand\",\"Capacity urgency\",\"Profitability and cost constraint\",\"Supply lead time\"],\"recommendedAction\":\"Scale infrastructure while constraining operating expense growth and monitoring infrastructure economics.\",\"reversalSignals\":[\"Customer demand weakens, capacity urgency relaxes, or infrastructure economics materially deteriorates.\"],\"schemaVersion\":2,\"supportingEventIds\":[\"event-ai-capacity-opex-pivot-2023\",\"event-ai-capacity-sourcing-2024\"]}"
+  ],
+  "reflections": [
+    "{\"actionDelta\":\"Defer or reduce cash return when capital flexibility or competing investment needs dominate.\",\"boundaryConditions\":[\"The authorization ceiling and competing investment or liquidity needs must remain explicit.\"],\"conditionDelta\":\"No reviewed opposite-condition repurchase event is available in the bounded public evidence set.\",\"confidence\":\"medium\",\"contrastingEventIds\":[],\"contrastPattern\":null,\"contrastStatus\":\"documented_unavailable\",\"crossEventQuestion\":\"When should Microsoft authorize a major share repurchase while preserving capital flexibility?\",\"decisionAxis\":{\"choiceSet\":[\"authorize_bounded_cash_return\",\"defer_or_reduce_cash_return\"],\"decisionObject\":\"shareholder_cash_return\",\"decisionQuestion\":\"When should bounded repurchase capacity be authorized?\",\"gatingVariables\":[\"authorization_ceiling\",\"capital_flexibility\",\"cash_return_commitment\"]},\"domain\":\"shareholder_return_risk\",\"evidenceIds\":[\"span-20e3349dbae4503b\",\"span-328e730e3d56a46c\",\"span-4d34d5136c326275\",\"span-fdd09e9019051bf7\"],\"id\":\"reflection-7371bfa747efb778\",\"invariant\":\"Authorize shareholder cash return within an explicit ceiling while retaining discretion over actual deployment.\",\"observation\":\"The reviewed 2013 and 2024 events authorize bounded repurchase capacity as part of a continuing cash-return commitment.\",\"supportingEventIds\":[\"event-buyback-2013\",\"event-buyback-2024\"],\"supportPattern\":{\"action\":\"authorize_bounded_cash_return\",\"conditions\":[\"A continuing cash-return commitment is paired with an explicit authorization ceiling.\"],\"eventIds\":[\"event-buyback-2013\",\"event-buyback-2024\"],\"evidenceIds\":[\"span-20e3349dbae4503b\",\"span-328e730e3d56a46c\",\"span-4d34d5136c326275\",\"span-fdd09e9019051bf7\"]},\"unresolvedConflicts\":[\"The bounded public event set contains no reviewed Amy Hood event suspending repurchases on this same capital-return axis.\"]}",
+    "{\"actionDelta\":\"Defer the price or packaging change when value or commercial terms are not supportable.\",\"boundaryConditions\":[\"Customer value and concrete commercial terms must both be identifiable.\"],\"conditionDelta\":\"No reviewed opposite-condition monetization event is available in the bounded public evidence set.\",\"confidence\":\"medium\",\"contrastingEventIds\":[],\"contrastPattern\":null,\"contrastStatus\":\"documented_unavailable\",\"crossEventQuestion\":\"When should product value be monetized through price or packaging changes?\",\"decisionAxis\":{\"choiceSet\":[\"defer_monetization_change\",\"monetize_or_repackage_verified_value\"],\"decisionObject\":\"value_monetization\",\"decisionQuestion\":\"When should value support a price or packaging change?\",\"gatingVariables\":[\"commercial_terms\",\"customer_value\",\"productivity_improvement\"]},\"domain\":\"pricing_monetization\",\"evidenceIds\":[\"span-1baf5181c9f9b527\",\"span-22b85b48be6cc0ff\",\"span-3e0302dd56efc30e\",\"span-a932a8deb06fb1c6\"],\"id\":\"reflection-b8961796eb4e7fc0\",\"invariant\":\"Change price or packaging only when customer value is identifiable and the commercial terms remain explicit.\",\"observation\":\"The Copilot price and Teams unbundling events apply monetization or packaging changes only alongside an explicit customer-value rationale and concrete terms.\",\"supportingEventIds\":[\"event-copilot-price-2023\",\"event-teams-unbundle-2023\"],\"supportPattern\":{\"action\":\"monetize_or_repackage_verified_value\",\"conditions\":[\"Customer value is identifiable and the price or packaging terms are explicit.\"],\"eventIds\":[\"event-copilot-price-2023\",\"event-teams-unbundle-2023\"],\"evidenceIds\":[\"span-1baf5181c9f9b527\",\"span-22b85b48be6cc0ff\",\"span-3e0302dd56efc30e\",\"span-a932a8deb06fb1c6\"]},\"unresolvedConflicts\":[\"The bounded public event set contains no reviewed Amy Hood event withholding monetization on this same value-and-terms axis.\"]}",
+    "{\"actionDelta\":\"Retain the current allocation only while priority alignment and productivity remain supportable.\",\"boundaryConditions\":[\"Priority alignment, productivity, and continued investment in focused areas must be reviewed together.\"],\"conditionDelta\":\"No reviewed opposite-condition workforce event is available in the bounded public evidence set.\",\"confidence\":\"medium\",\"contrastingEventIds\":[],\"contrastPattern\":null,\"contrastStatus\":\"documented_unavailable\",\"crossEventQuestion\":\"When should workforce resources be reduced or reallocated toward higher-priority work?\",\"decisionAxis\":{\"choiceSet\":[\"reduce_or_reallocate_to_priorities\",\"retain_current_allocation\"],\"decisionObject\":\"workforce_resource_allocation\",\"decisionQuestion\":\"When should workforce resources be reduced or reallocated?\",\"gatingVariables\":[\"cost_revenue_alignment\",\"priority_alignment\",\"workforce_productivity\"]},\"domain\":\"cost_efficiency\",\"evidenceIds\":[\"span-abaa0f62aa30208c\",\"span-acc7150e73b95096\",\"span-f031de15863e849e\"],\"id\":\"reflection-bd563b486d9d6f9b\",\"invariant\":\"Reduce or reallocate resources when current deployment is not aligned with the highest-priority work and productive use.\",\"observation\":\"The 2023 reset and 2026 transformation align headcount and cost structure with focused priorities and productivity.\",\"supportingEventIds\":[\"event-transformation-2026\",\"event-workforce-reset-2023\"],\"supportPattern\":{\"action\":\"reduce_or_reallocate_to_priorities\",\"conditions\":[\"Resources must move toward the highest-priority and most productive uses.\"],\"eventIds\":[\"event-transformation-2026\",\"event-workforce-reset-2023\"],\"evidenceIds\":[\"span-abaa0f62aa30208c\",\"span-acc7150e73b95096\",\"span-f031de15863e849e\"]},\"unresolvedConflicts\":[\"The bounded public event set contains no reviewed opposite action under the same resource-productivity conditions.\"]}",
+    "{\"actionDelta\":\"Deferral or rejection remains a reversal path when strategic reach, economics, or execution support weakens.\",\"boundaryConditions\":[\"Strategic reach, transaction economics, and integration execution must remain supportable.\"],\"conditionDelta\":\"No reviewed opposite-condition acquisition event is available in the bounded public evidence set.\",\"confidence\":\"medium\",\"contrastingEventIds\":[],\"contrastPattern\":null,\"contrastStatus\":\"documented_unavailable\",\"crossEventQuestion\":\"When should Microsoft commit to a major acquisition rather than preserve capital and optionality?\",\"decisionAxis\":{\"choiceSet\":[\"commit_to_bounded_acquisition\",\"defer_or_reject_acquisition\"],\"decisionObject\":\"major_acquisition_commitment\",\"decisionQuestion\":\"When should Microsoft commit to a major acquisition?\",\"gatingVariables\":[\"integration_execution\",\"strategic_reach\",\"transaction_economics\"]},\"domain\":\"m_and_a\",\"evidenceIds\":[\"span-291b7db034000ea7\",\"span-807ee90aa032f320\"],\"id\":\"reflection-dad2d5919b582d9d\",\"invariant\":\"Commit to acquisition only when strategic reach and execution requirements can support durable shareholder value.\",\"observation\":\"The reviewed Activision and Nuance events both commit capital to acquisitions while tying value creation to strategic reach and execution.\",\"supportingEventIds\":[\"event-activision-acquisition-2022\",\"event-nuance-acquisition-2021\"],\"supportPattern\":{\"action\":\"commit_to_bounded_acquisition\",\"conditions\":[\"The target expands strategic reach and value creation remains execution-dependent.\"],\"eventIds\":[\"event-activision-acquisition-2022\",\"event-nuance-acquisition-2021\"],\"evidenceIds\":[\"span-291b7db034000ea7\",\"span-807ee90aa032f320\"]},\"unresolvedConflicts\":[\"The bounded public event set contains no reviewed Amy Hood event choosing not to acquire on this same decision axis.\"]}",
+    "{\"actionDelta\":\"Capacity deferral is retained as a reversal path if demand, urgency, or economics weaken.\",\"boundaryConditions\":[\"Demand, capacity urgency, and infrastructure economics must remain observable.\"],\"conditionDelta\":\"No reviewed opposite-condition AI capacity event is available in the bounded public evidence set.\",\"confidence\":\"medium\",\"contrastingEventIds\":[],\"contrastPattern\":null,\"contrastStatus\":\"documented_unavailable\",\"crossEventQuestion\":\"When should AI and cloud infrastructure scale while operating expense remains constrained?\",\"decisionAxis\":{\"choiceSet\":[\"defer_or_reduce_capacity\",\"scale_infrastructure_constrain_opex\"],\"decisionObject\":\"ai_cloud_capacity_allocation\",\"decisionQuestion\":\"When should capacity scale within operating-cost constraints?\",\"gatingVariables\":[\"capacity_urgency\",\"customer_demand\",\"infrastructure_economics\"]},\"domain\":\"ai_cloud_capex\",\"evidenceIds\":[\"span-capacity-2023-opex\",\"span-capacity-2024-demand-discipline\"],\"id\":\"reflection-f75c6c30eef7c1e0\",\"invariant\":\"Scale capacity when customer demand and urgency are observable, while constraining operating expense and monitoring infrastructure economics.\",\"observation\":\"The reviewed 2023 and 2024 events scale infrastructure against demand while preserving explicit cost discipline.\",\"supportingEventIds\":[\"event-ai-capacity-opex-pivot-2023\",\"event-ai-capacity-sourcing-2024\"],\"supportPattern\":{\"action\":\"scale_infrastructure_constrain_opex\",\"conditions\":[\"Customer demand and material AI capacity requirements remain observable.\"],\"eventIds\":[\"event-ai-capacity-opex-pivot-2023\",\"event-ai-capacity-sourcing-2024\"],\"evidenceIds\":[\"span-capacity-2023-opex\",\"span-capacity-2024-demand-discipline\"]},\"unresolvedConflicts\":[\"The bounded public event set contains no reviewed opposite action under the same AI capacity and cost conditions.\"]}"
+  ],
+  "events": [
+    "{\"candidateId\":\"candidate-activision-acquisition-2022\",\"chosenAction\":\"proceed\",\"conditions\":[\"Both boards of directors have approved the transaction\"],\"constraints\":[\"All-cash transaction structure\"],\"decisionDate\":\"2022-01-18\",\"domain\":\"m_and_a\",\"evidenceIds\":[\"span-095e8535c69c65e3\",\"span-1abb63ac11f1075c\",\"span-807ee90aa032f320\",\"span-e32ab0f2fc36349e\"],\"id\":\"event-activision-acquisition-2022\",\"objectives\":[\"Expand gaming portfolio and content library\"],\"rejectedBenefit\":\"Avoidance of regulatory scrutiny\",\"situation\":\"Microsoft has agreed to acquire Activision Blizzard for $68.7 billion inclusive of net cash at $95 per share.\",\"title\":\"Activision Blizzard acquisition for $68.7 billion\"}",
+    "{\"candidateId\":\"candidate-ai-capacity-opex-pivot-2023\",\"chosenAction\":\"scale_infrastructure_constrain_opex\",\"conditions\":[\"Azure AI infrastructure required material sequential investment.\",\"Scaled capital investment would increase COGS.\"],\"constraints\":[\"FY24 operating-expense growth was expected to remain low.\",\"Capacity buildout timing varies by quarter.\"],\"decisionDate\":\"2023-04-25\",\"domain\":\"ai_cloud_capex\",\"evidenceIds\":[\"span-capacity-2023-ai-capex\",\"span-capacity-2023-opex\"],\"id\":\"event-ai-capacity-opex-pivot-2023\",\"objectives\":[\"Lead the AI platform wave\",\"Maintain healthy profitability while scaling capacity\"],\"rejectedBenefit\":\"Expanding people with infrastructure could reduce execution bottlenecks.\",\"situation\":\"Azure AI infrastructure required a material capacity increase while Microsoft was aligning costs with revenue growth and protecting profitability.\",\"title\":\"Scale Azure AI infrastructure while constraining operating expense\"}",
+    "{\"candidateId\":\"candidate-ai-capacity-sourcing-2024\",\"chosenAction\":\"scale_infrastructure_constrain_opex\",\"conditions\":[\"Customer demand guided cloud and AI investment.\",\"Third-party capacity supplemented owned capacity when lead time required it.\"],\"constraints\":[\"AI capital investment increases COGS.\",\"Every team remained subject to disciplined cost management.\"],\"decisionDate\":\"2024-01-30\",\"domain\":\"ai_cloud_capex\",\"evidenceIds\":[\"span-capacity-2024-demand-discipline\",\"span-capacity-2024-external-supply\"],\"id\":\"event-ai-capacity-sourcing-2024\",\"objectives\":[\"Add capacity in time to serve visible customer demand\",\"Preserve operating-margin discipline while scaling AI investment\"],\"rejectedBenefit\":\"Scaling people alongside owned capacity could increase direct control and reduce external dependency.\",\"situation\":\"Customer demand and pipeline required faster cloud and AI capacity additions than owned buildout alone could always deliver.\",\"title\":\"Accelerate demand-led AI capacity with disciplined cost and mixed supply\"}",
+    "{\"candidateId\":\"candidate-buyback-2013\",\"chosenAction\":\"Authorize the new share repurchase program up to $40 billion.\",\"conditions\":[\"The board of directors must approve the program.\",\"The authorization limit is set at $40 billion.\"],\"constraints\":[\"The action must reflect a continued commitment to shareholders.\",\"The decision is being made on September 17, 2013.\"],\"decisionDate\":\"2013-09-17\",\"domain\":\"shareholder_return_risk\",\"evidenceIds\":[\"span-4d34d5136c326275\",\"span-fdd09e9019051bf7\"],\"id\":\"event-buyback-2013\",\"objectives\":[\"Return cash to shareholders.\",\"Signal commitment to shareholder value.\"],\"rejectedBenefit\":\"Retaining capital for alternative strategic investments.\",\"situation\":\"The board of directors is considering approving a new share repurchase program.\",\"title\":\"2013 forty billion dollar share repurchase authorization\"}",
+    "{\"candidateId\":\"candidate-buyback-2024\",\"chosenAction\":\"Proceed with the full $60 billion share repurchase authorization.\",\"conditions\":[\"The new share repurchase program is authorized up to $60 billion.\",\"The company has a commitment to returning cash to shareholders.\"],\"constraints\":[\"The total authorization limit is capped at $60 billion.\",\"The action must reflect a continued commitment to shareholders.\"],\"decisionDate\":\"2024-09-16\",\"domain\":\"shareholder_return_risk\",\"evidenceIds\":[\"span-20e3349dbae4503b\",\"span-328e730e3d56a46c\"],\"id\":\"event-buyback-2024\",\"objectives\":[\"Return cash to shareholders.\",\"Signal confidence in the company's future.\",\"Enhance shareholder value.\"],\"rejectedBenefit\":\"Maintaining flexibility to adjust to unforeseen market changes.\",\"situation\":\"The company has approved a new share repurchase program authorizing up to $60 billion.\",\"title\":\"2024 sixty billion dollar share repurchase authorization\"}",
+    "{\"candidateId\":\"candidate-copilot-price-2023\",\"chosenAction\":\"30_per_user\",\"conditions\":[\"Broad availability for commercial customers\"],\"constraints\":[\"Must align with Amy's value-based list price policy\"],\"decisionDate\":\"2023-07-18\",\"domain\":\"pricing_monetization\",\"evidenceIds\":[\"span-1baf5181c9f9b527\",\"span-a932a8deb06fb1c6\"],\"id\":\"event-copilot-price-2023\",\"objectives\":[\"Capture value from productivity improvements\"],\"rejectedBenefit\":\"Increased retention from bundling at no extra cost\",\"situation\":\"Copilot is broadly available for E3, E5, Business Standard, and Business Premium customers; Amy Hood's policy is to list price products adding significant value.\",\"title\":\"Microsoft 365 Copilot pricing\"}",
+    "{\"candidateId\":\"candidate-nuance-acquisition-2021\",\"chosenAction\":\"Proceed with the acquisition as agreed.\",\"conditions\":[\"The merger agreement must be adopted by Nuance stockholders.\",\"Certain governmental and regulatory approvals must be received.\"],\"constraints\":[\"The transaction is an all-cash deal.\",\"The acquisition is valued at $19.7 billion inclusive of net debt.\"],\"decisionDate\":\"2021-04-12\",\"domain\":\"m_and_a\",\"evidenceIds\":[\"span-291b7db034000ea7\",\"span-2ba38fc9d21ea2ef\",\"span-34b94d3c6a25db54\",\"span-38eee29ba0530baa\",\"span-475376c4a1b0c7c2\"],\"id\":\"event-nuance-acquisition-2021\",\"objectives\":[\"Acquire Nuance for $19.7 billion.\",\"Create value through terrific execution.\"],\"rejectedBenefit\":\"Mitigating risks associated with integration or execution.\",\"situation\":\"Microsoft announced a definitive agreement to acquire Nuance for $56.00 per share.\",\"title\":\"Nuance healthcare cloud acquisition for 19.7 billion dollars\"}",
+    "{\"candidateId\":\"candidate-teams-unbundle-2023\",\"chosenAction\":\"Unbundle Teams and sell the core suite at a reduced price (€2 less/month).\",\"conditions\":[\"The unbundling will occur in the EEA and Switzerland.\",\"The lower price will be €2 less per month or €24 per year.\"],\"constraints\":[\"The offering must be a standalone suite without Teams.\",\"The price reduction must be applied to the base suite.\"],\"decisionDate\":\"2023-08-31\",\"domain\":\"pricing_monetization\",\"evidenceIds\":[\"span-22b85b48be6cc0ff\",\"span-3e0302dd56efc30e\"],\"id\":\"event-teams-unbundle-2023\",\"objectives\":[\"Offer M365/O365 without Teams at a lower price.\",\"Maintain or enhance perceived value despite the unbundling.\"],\"rejectedBenefit\":\"Signaling value through an unbundled offering without immediate price cuts.\",\"situation\":\"The company is considering changes to its suite pricing structure in the EEA and Switzerland.\",\"title\":\"Teams unbundling and EEA suite price reduction\"}",
+    "{\"candidateId\":\"candidate-transformation-2026\",\"chosenAction\":\"Proceed with eliminating the 4,800 roles as planned.\",\"conditions\":[\"The elimination is part of the Commercial and Xbox transformation.\",\"Microsoft has added significant headcount over the past 12 months.\"],\"constraints\":[\"The action must align with investing in focused areas.\",\"The reduction must be targeted to maximize productivity.\"],\"decisionDate\":\"2026-07-06\",\"domain\":\"cost_efficiency\",\"evidenceIds\":[\"span-abaa0f62aa30208c\",\"span-acc7150e73b95096\"],\"id\":\"event-transformation-2026\",\"objectives\":[\"Focus people, investments, and energy on key priorities.\",\"Ensure headcount is used in the most productive way possible.\"],\"rejectedBenefit\":\"Mitigating workforce disruption by reducing the scope of elimination.\",\"situation\":\"Microsoft is eliminating around 4,800 roles, representing about 2.1% of its global workforce.\",\"title\":\"Microsoft eliminating 4800 roles in Commercial and Xbox transformation\"}",
+    "{\"candidateId\":\"candidate-workforce-reset-2023\",\"chosenAction\":\"reduce_and_reallocate\",\"conditions\":[\"Some parts of the world are in or anticipating recession\",\"The next major computing wave is being born with advances in AI\"],\"constraints\":[\"Must remain a consequential company in an unforgiving industry\",\"Need to adapt to platform shifts throughout the company's history\"],\"decisionDate\":\"2023-01-18\",\"domain\":\"cost_efficiency\",\"evidenceIds\":[\"span-2cbdcfdf837395b6\",\"span-7f9dde341a496596\",\"span-ad445ecf5ef4a0ac\",\"span-f031de15863e849e\"],\"id\":\"event-workforce-reset-2023\",\"objectives\":[\"Align cost structure with revenue and customer demand\",\"Reallocate talent to secular growth and long-term competitiveness areas\",\"Deliver ongoing results while investing in long-term opportunity\"],\"rejectedBenefit\":\"Avoidance of severance costs and retention of all institutional knowledge\",\"situation\":\"Customers are doing more with less and some regions face recession; simultaneously, AI is creating a new computing platform, requiring a shift in where capital and talent are deployed.\",\"title\":\"Ten thousand role workforce and cost structure reset\"}"
+  ],
+  "counterexamples": [],
+  "counterexampleStatus": "no_reviewed_counterexample",
+  "references": [
+    {
+      "artifactClass": "candidate",
+      "id": "candidate-activision-acquisition-2022"
+    },
+    {
+      "artifactClass": "candidate",
+      "id": "candidate-ai-capacity-opex-pivot-2023"
+    },
+    {
+      "artifactClass": "candidate",
+      "id": "candidate-ai-capacity-sourcing-2024"
+    },
+    {
+      "artifactClass": "candidate",
+      "id": "candidate-buyback-2013"
+    },
+    {
+      "artifactClass": "candidate",
+      "id": "candidate-buyback-2024"
+    },
+    {
+      "artifactClass": "candidate",
+      "id": "candidate-copilot-price-2023"
+    },
+    {
+      "artifactClass": "candidate",
+      "id": "candidate-nuance-acquisition-2021"
+    },
+    {
+      "artifactClass": "candidate",
+      "id": "candidate-teams-unbundle-2023"
+    },
+    {
+      "artifactClass": "candidate",
+      "id": "candidate-transformation-2026"
+    },
+    {
+      "artifactClass": "candidate",
+      "id": "candidate-workforce-reset-2023"
+    },
+    {
+      "artifactClass": "event",
+      "id": "event-activision-acquisition-2022"
+    },
+    {
+      "artifactClass": "event",
+      "id": "event-ai-capacity-opex-pivot-2023"
+    },
+    {
+      "artifactClass": "event",
+      "id": "event-ai-capacity-sourcing-2024"
+    },
+    {
+      "artifactClass": "event",
+      "id": "event-buyback-2013"
+    },
+    {
+      "artifactClass": "event",
+      "id": "event-buyback-2024"
+    },
+    {
+      "artifactClass": "event",
+      "id": "event-copilot-price-2023"
+    },
+    {
+      "artifactClass": "event",
+      "id": "event-nuance-acquisition-2021"
+    },
+    {
+      "artifactClass": "event",
+      "id": "event-teams-unbundle-2023"
+    },
+    {
+      "artifactClass": "event",
+      "id": "event-transformation-2026"
+    },
+    {
+      "artifactClass": "event",
+      "id": "event-workforce-reset-2023"
+    },
+    {
+      "artifactClass": "evidence",
+      "id": "policy-buyback-cash-return-2013",
+      "sourceId": "source-78333f25f047c289",
+      "candidateId": "candidate-buyback-2024"
+    },
+    {
+      "artifactClass": "evidence",
+      "id": "policy-buyback-cash-return-2013",
+      "sourceId": "source-78333f25f047c289",
+      "candidateId": "candidate-buyback-2013"
+    },
+    {
+      "artifactClass": "evidence",
+      "id": "policy-copilot-value-pricing-2023",
+      "sourceId": "source-fbb900eb7e249591",
+      "candidateId": "candidate-teams-unbundle-2023"
+    },
+    {
+      "artifactClass": "evidence",
+      "id": "policy-copilot-value-pricing-2023",
+      "sourceId": "source-fbb900eb7e249591",
+      "candidateId": "candidate-copilot-price-2023"
+    },
+    {
+      "artifactClass": "evidence",
+      "id": "policy-workforce-resource-reallocation-2022",
+      "sourceId": "source-ad9a23176d9cf21d-25fb51a81eef",
+      "candidateId": "candidate-transformation-2026"
+    },
+    {
+      "artifactClass": "evidence",
+      "id": "policy-workforce-resource-reallocation-2022",
+      "sourceId": "source-ad9a23176d9cf21d-25fb51a81eef",
+      "candidateId": "candidate-workforce-reset-2023"
+    },
+    {
+      "artifactClass": "evidence",
+      "id": "span-1baf5181c9f9b527",
+      "sourceId": "source-ff1c981bc6aed7c2",
+      "candidateId": "candidate-copilot-price-2023"
+    },
+    {
+      "artifactClass": "evidence",
+      "id": "span-20e3349dbae4503b",
+      "sourceId": "source-9199eb9f217ec336",
+      "candidateId": "candidate-buyback-2024"
+    },
+    {
+      "artifactClass": "evidence",
+      "id": "span-22b85b48be6cc0ff",
+      "sourceId": "source-a726052ce2470e15",
+      "candidateId": "candidate-teams-unbundle-2023"
+    },
+    {
+      "artifactClass": "evidence",
+      "id": "span-291b7db034000ea7",
+      "sourceId": "source-82b26e92b9a5e28b",
+      "candidateId": "candidate-nuance-acquisition-2021"
+    },
+    {
+      "artifactClass": "evidence",
+      "id": "span-4d34d5136c326275",
+      "sourceId": "source-78333f25f047c289",
+      "candidateId": "candidate-buyback-2013"
+    },
+    {
+      "artifactClass": "evidence",
+      "id": "span-807ee90aa032f320",
+      "sourceId": "source-3d87da3c9879cf67",
+      "candidateId": "candidate-activision-acquisition-2022"
+    },
+    {
+      "artifactClass": "evidence",
+      "id": "span-acc7150e73b95096",
+      "sourceId": "source-582ec6ef346f7100",
+      "candidateId": "candidate-transformation-2026"
+    },
+    {
+      "artifactClass": "evidence",
+      "id": "span-capacity-2023-opex",
+      "sourceId": "source-fbb900eb7e249591",
+      "candidateId": "candidate-ai-capacity-opex-pivot-2023"
+    },
+    {
+      "artifactClass": "evidence",
+      "id": "span-capacity-2024-demand-discipline",
+      "sourceId": "source-4f4085f8344669c4",
+      "candidateId": "candidate-ai-capacity-sourcing-2024"
+    },
+    {
+      "artifactClass": "raw_source",
+      "id": "source-3d87da3c9879cf67",
+      "candidateId": "candidate-activision-acquisition-2022"
+    },
+    {
+      "artifactClass": "raw_source",
+      "id": "source-4f4085f8344669c4",
+      "candidateId": "candidate-ai-capacity-sourcing-2024"
+    },
+    {
+      "artifactClass": "raw_source",
+      "id": "source-582ec6ef346f7100",
+      "candidateId": "candidate-transformation-2026"
+    },
+    {
+      "artifactClass": "raw_source",
+      "id": "source-78333f25f047c289",
+      "candidateId": "candidate-buyback-2024"
+    },
+    {
+      "artifactClass": "raw_source",
+      "id": "source-78333f25f047c289",
+      "candidateId": "candidate-buyback-2013"
+    },
+    {
+      "artifactClass": "raw_source",
+      "id": "source-82b26e92b9a5e28b",
+      "candidateId": "candidate-nuance-acquisition-2021"
+    },
+    {
+      "artifactClass": "raw_source",
+      "id": "source-9199eb9f217ec336",
+      "candidateId": "candidate-buyback-2024"
+    },
+    {
+      "artifactClass": "raw_source",
+      "id": "source-a726052ce2470e15",
+      "candidateId": "candidate-teams-unbundle-2023"
+    },
+    {
+      "artifactClass": "raw_source",
+      "id": "source-fbb900eb7e249591",
+      "candidateId": "candidate-teams-unbundle-2023"
+    },
+    {
+      "artifactClass": "raw_source",
+      "id": "source-fbb900eb7e249591",
+      "candidateId": "candidate-copilot-price-2023"
+    },
+    {
+      "artifactClass": "raw_source",
+      "id": "source-fbb900eb7e249591",
+      "candidateId": "candidate-ai-capacity-opex-pivot-2023"
+    },
+    {
+      "artifactClass": "raw_source",
+      "id": "source-ff1c981bc6aed7c2",
+      "candidateId": "candidate-copilot-price-2023"
+    },
+    {
+      "artifactClass": "source",
+      "id": "source-3d87da3c9879cf67"
+    },
+    {
+      "artifactClass": "source",
+      "id": "source-4f4085f8344669c4"
+    },
+    {
+      "artifactClass": "source",
+      "id": "source-582ec6ef346f7100"
+    },
+    {
+      "artifactClass": "source",
+      "id": "source-78333f25f047c289"
+    },
+    {
+      "artifactClass": "source",
+      "id": "source-82b26e92b9a5e28b"
+    },
+    {
+      "artifactClass": "source",
+      "id": "source-9199eb9f217ec336"
+    },
+    {
+      "artifactClass": "source",
+      "id": "source-a726052ce2470e15"
+    },
+    {
+      "artifactClass": "source",
+      "id": "source-fbb900eb7e249591"
+    },
+    {
+      "artifactClass": "source",
+      "id": "source-ff1c981bc6aed7c2"
+    }
+  ]
+}

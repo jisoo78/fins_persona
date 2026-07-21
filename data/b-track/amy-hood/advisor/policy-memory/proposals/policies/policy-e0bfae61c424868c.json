@@ -1,0 +1,49 @@
+{
+  "id": "policy-e0bfae61c424868c",
+  "domain": "pricing_monetization",
+  "applicabilityConditions": [
+    "Customer value or productivity improvement is identifiable and concrete price or packaging terms can be stated."
+  ],
+  "priorityOrder": [
+    "Customer value",
+    "Productivity improvement",
+    "Commercial clarity",
+    "Adoption friction"
+  ],
+  "recommendedAction": "Monetize or repackage verified value with explicit commercial terms and a bounded customer-impact rationale.",
+  "nonApplicabilityConditions": [
+    "Customer value is unverified or commercial terms cannot be stated clearly."
+  ],
+  "guardrails": [
+    "Do not infer value from price alone; retain concrete terms and customer-impact boundaries."
+  ],
+  "exceptions": [
+    "Defer monetization when packaging friction overwhelms the identifiable customer value."
+  ],
+  "reversalSignals": [
+    "Measured customer value weakens, productivity improvement fails to materialize, or adoption friction rises materially."
+  ],
+  "reflectionIds": [
+    "reflection-b8961796eb4e7fc0"
+  ],
+  "supportingEventIds": [
+    "event-copilot-price-2023",
+    "event-teams-unbundle-2023"
+  ],
+  "contrastingEventIds": [],
+  "evidenceIds": [
+    "span-1baf5181c9f9b527",
+    "span-22b85b48be6cc0ff",
+    "span-3e0302dd56efc30e",
+    "span-a932a8deb06fb1c6"
+  ],
+  "directPolicyEvidenceIds": [
+    "policy-copilot-value-pricing-2023"
+  ],
+  "contrastStatus": "documented_unavailable",
+  "schemaVersion": 2,
+  "confidence": "medium",
+  "policyKind": "deployable_policy",
+  "status": "review_required",
+  "review": null
+}

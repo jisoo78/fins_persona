@@ -181,11 +181,13 @@ export type PilotPolicyTag =
 export type PilotPolicyEvidenceRecord = {
   id: string;
   candidateId: string;
+  appliesToCandidateIds?: string[];
   sourceId: string;
   exactQuote: string;
   startChar: number;
   endChar: number;
   publishedAt: string;
+  temporalRelation?: 'pre_decision' | 'decision_time';
   speaker: 'Amy Hood';
   policyTags: PilotPolicyTag[];
   eventLinkRationale: string;

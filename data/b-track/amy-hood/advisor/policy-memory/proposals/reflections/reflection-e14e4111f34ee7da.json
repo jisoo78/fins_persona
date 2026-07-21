@@ -1,0 +1,78 @@
+{
+  "id": "reflection-e14e4111f34ee7da",
+  "domain": "ai_cloud_capex",
+  "crossEventQuestion": "Should Microsoft prioritize scaling infrastructure by increasing CapEx while constraining OpEx, given customer demand?",
+  "observation": "Microsoft chose to scale infrastructure while constraining OpEx for Azure AI in 2023, driven by the need for material capacity increase despite low expected OpEx growth. In 2024, the decision was again to scale infrastructure while constraining OpEx, explicitly guided by customer demand and the need to supplement owned capacity with third-party supply.",
+  "invariant": "When customer demand necessitates a material increase in AI infrastructure capacity, the preferred strategy is to scale CapEx while maintaining discipline over OpEx.",
+  "boundaryConditions": [
+    "Customer demand is the primary driver for capacity needs.",
+    "Material sequential investment in Azure AI infrastructure is required."
+  ],
+  "unresolvedConflicts": [],
+  "decisionAxis": {
+    "decisionObject": "Resource Allocation Strategy",
+    "decisionQuestion": "How should Microsoft manage resource allocation when scaling AI capacity?",
+    "choiceSet": [
+      "scale_infrastructure_and_people",
+      "scale_infrastructure_constrain_opex"
+    ],
+    "gatingVariables": [
+      "Customer demand guidance",
+      "Material capacity increase required"
+    ]
+  },
+  "supportPattern": {
+    "eventIds": [
+      "event-ai-capacity-opex-pivot-2023",
+      "event-ai-capacity-sourcing-2024"
+    ],
+    "conditions": [
+      "Azure AI infrastructure required material sequential investment.",
+      "Scaled capital investment would increase COGS."
+    ],
+    "evidenceIds": [
+      "span-20e3349dbae4503b",
+      "span-2349dbae4503b",
+      "span-capacity-2023-ai-capex",
+      "span-capacity-2024-demand-discipline",
+      "span-capacity-2024-external-supply"
+    ],
+    "action": "scale_infrastructure_constrain_opex"
+  },
+  "contrastStatus": "reviewed",
+  "contrastPattern": {
+    "eventIds": [
+      "event-cloud-capacity-scale-2022"
+    ],
+    "conditions": [
+      "Global cloud-services demand was growing.",
+      "Investment needs spanned infrastructure and multiple operating teams."
+    ],
+    "evidenceIds": [
+      "span-capacity-2022-capex",
+      "span-capacity-2022-headcount"
+    ],
+    "action": "scale_infrastructure_and_people"
+  },
+  "conditionDelta": "The focus shifts from broad, general cloud demand (2022) to specific, material AI infrastructure needs (2023/2024).",
+  "actionDelta": "Constraining OpEx (2023/2024) vs. Expanding People (2022)",
+  "supportingEventIds": [
+    "event-ai-capacity-opex-pivot-2023",
+    "event-ai-capacity-sourcing-2024"
+  ],
+  "contrastingEventIds": [
+    "event-cloud-capacity-scale-2022"
+  ],
+  "evidenceIds": [
+    "span-20e3349dbae4503b",
+    "span-2349dbae4503b",
+    "span-capacity-2022-capex",
+    "span-capacity-2022-headcount",
+    "span-capacity-2023-ai-capex",
+    "span-capacity-2024-demand-discipline",
+    "span-capacity-2024-external-supply"
+  ],
+  "confidence": "medium",
+  "status": "review_required",
+  "review": null
+}
