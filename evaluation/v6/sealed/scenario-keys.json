@@ -1,0 +1,1150 @@
+{
+  "identityKeys": [
+    {
+      "scenarioId": "AAS-V6-MA-01-A",
+      "policyId": "policy-ccd7e455daf31f5f",
+      "expectedAction": "Proceed only through a bounded acquisition whose strategic reach, valuation, financing capacity, and open integration model are jointly supportable.",
+      "amyPriorityOrder": [
+        "Strategic customer and platform reach",
+        "Transaction economics and financing capacity",
+        "Integration execution and ecosystem protection"
+      ],
+      "amyBoundaryConditions": [
+        "Preserve minimum liquidity and investment-grade capacity.",
+        "Keep integration accountable to the open partner model."
+      ],
+      "amyReversalRule": [
+        "Target growth or strategic fit weakens.",
+        "Financing or integration exceeds the approved downside boundary."
+      ],
+      "amySpecificRationale": "Amy's M&A policy treats strategic reach as necessary but not sufficient; economics and execution remain co-equal gates. The action remains conditional on Strategic market expansion, Unique customer or community value, Transaction price discipline.",
+      "acceptableVariants": [
+        "A staged or restructured transaction that preserves the same strategic and financial gates."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Strategic customer and platform reach."
+      },
+      "identityConflicts": [
+        "Approve solely for strategic narrative without price and financing discipline."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-291b7db034000ea7",
+        "span-807ee90aa032f320"
+      ],
+      "externalMotifEventId": "external-salesforce-slack-2020"
+    },
+    {
+      "scenarioId": "AAS-V6-MA-01-B",
+      "policyId": "policy-ccd7e455daf31f5f",
+      "expectedAction": "Preserve the acquisition direction only after resizing financing, tightening accretion gates, and staging integration commitments.",
+      "amyPriorityOrder": [
+        "Preserved strategic reach",
+        "Re-underwritten financing and accretion",
+        "Staged integration execution"
+      ],
+      "amyBoundaryConditions": [
+        "Do not breach the liquidity or credit boundary.",
+        "Suspend lower-priority cash deployment before weakening the strategic asset."
+      ],
+      "amyReversalRule": [
+        "Revised terms still fail the return threshold.",
+        "Target growth or ecosystem safeguards deteriorate."
+      ],
+      "amySpecificRationale": "The changed signal requires tighter structure, not a mechanical reversal, because strategic and core execution conditions remain intact. The action remains conditional on Strategic market expansion, Unique customer or community value, Transaction price discipline.",
+      "acceptableVariants": [
+        "Reduce upfront cash, alter consideration, or defer a tranche while preserving the same bounded thesis."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Preserved strategic reach."
+      },
+      "identityConflicts": [
+        "Proceed on the original terms or abandon solely because financing became less attractive."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-291b7db034000ea7",
+        "span-807ee90aa032f320"
+      ],
+      "externalMotifEventId": "external-salesforce-slack-2020"
+    },
+    {
+      "scenarioId": "AAS-V6-MA-02R-A",
+      "policyId": "policy-ccd7e455daf31f5f",
+      "expectedAction": "Proceed only with a smaller or remedied structure after re-underwriting strategic reach, reduced synergies, financing, and integration execution.",
+      "amyPriorityOrder": [
+        "Credibility of the approval path",
+        "Strategic reach after remedies",
+        "Transaction economics and execution capacity"
+      ],
+      "amyBoundaryConditions": [
+        "Do not preserve the original unrestricted structure.",
+        "Keep liquidity, price discipline, and integration accountability inside approved limits."
+      ],
+      "amyReversalRule": [
+        "Resize again if remedy economics deteriorate.",
+        "Withdraw only if strategic reach, economics, or execution become unsupported."
+      ],
+      "amySpecificRationale": "Amy's M&A policy requires strategic reach, transaction economics, and execution feasibility to remain jointly supportable. The action remains conditional on Strategic market expansion, Unique customer or community value, Transaction price discipline.",
+      "acceptableVariants": [
+        "Terminate now while remaining open to a newly underwritten future structure."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Credibility of the approval path."
+      },
+      "identityConflicts": [
+        "Continue because strategic merit alone should override feasibility."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-291b7db034000ea7",
+        "span-807ee90aa032f320"
+      ],
+      "externalMotifEventId": "external-adobe-figma-termination-2023"
+    },
+    {
+      "scenarioId": "AAS-V6-MA-02R-B",
+      "policyId": "policy-ccd7e455daf31f5f",
+      "expectedAction": "Resize consideration and stage integration to absorb the larger remedy cost while preserving only the strategically and financially supportable perimeter.",
+      "amyPriorityOrder": [
+        "Approval path credibility",
+        "Value retained after divestiture",
+        "Re-underwritten financing and integration execution"
+      ],
+      "amyBoundaryConditions": [
+        "Do not pay for synergies removed by the remedy.",
+        "Maintain liquidity and measurable integration gates."
+      ],
+      "amyReversalRule": [
+        "Reduce the perimeter when remedy cost rises.",
+        "Withdraw if the remaining reach no longer supports durable value."
+      ],
+      "amySpecificRationale": "The new approval path changes feasibility but does not erase the need to re-underwrite the smaller economics. The action remains conditional on Strategic market expansion, Unique customer or community value, Transaction price discipline.",
+      "acceptableVariants": [
+        "Redirect capital to a minority investment or commercial partnership if full acquisition economics no longer clear the gate."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Approval path credibility."
+      },
+      "identityConflicts": [
+        "Remain terminated without considering the material feasibility change or restore the original deal automatically."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-291b7db034000ea7",
+        "span-807ee90aa032f320"
+      ],
+      "externalMotifEventId": "external-adobe-figma-termination-2023"
+    },
+    {
+      "scenarioId": "AAS-V6-MA-03-A",
+      "policyId": "policy-ccd7e455daf31f5f",
+      "expectedAction": "Proceed conditionally with the open-platform acquisition while preserving target independence, credit discipline, and a measurable deleveraging and accretion path.",
+      "amyPriorityOrder": [
+        "Strategic open-platform reach",
+        "Free-cash-flow and financing economics",
+        "Independence, integration, and deleveraging execution"
+      ],
+      "amyBoundaryConditions": [
+        "Protect the target's open ecosystem and operating independence.",
+        "Suspend discretionary repurchases and maintain the approved credit profile."
+      ],
+      "amyReversalRule": [
+        "Target renewal or growth weakens materially.",
+        "Independence safeguards or the deleveraging plan become infeasible."
+      ],
+      "amySpecificRationale": "The policy supports large strategic reach only when financing and integration protect durable value. The action remains conditional on Strategic market expansion, Unique customer or community value, Transaction price discipline.",
+      "acceptableVariants": [
+        "A financed acquisition with explicit leverage reduction and integration boundaries."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Strategic open-platform reach."
+      },
+      "identityConflicts": [
+        "Treat near-term earnings dilution alone as disqualifying or ignore leverage and ecosystem conditions."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-291b7db034000ea7",
+        "span-807ee90aa032f320"
+      ],
+      "externalMotifEventId": "external-ibm-red-hat-2018"
+    },
+    {
+      "scenarioId": "AAS-V6-MA-03R-B",
+      "policyId": "policy-ccd7e455daf31f5f",
+      "expectedAction": "Preserve the acquisition direction only through enforceable ecosystem covenants, staged integration, and financing that remains within the approved credit boundary.",
+      "amyPriorityOrder": [
+        "Customer and ecosystem value",
+        "Enforceable operating safeguards",
+        "Transaction economics and financing capacity"
+      ],
+      "amyBoundaryConditions": [
+        "Do not accept unenforceable independence promises.",
+        "Stage integration until open-ecosystem behavior is measurable."
+      ],
+      "amyReversalRule": [
+        "Tighten or resize commitments when safeguards narrow.",
+        "Withdraw if ecosystem protection or financing becomes unsupported."
+      ],
+      "amySpecificRationale": "Two co-equal gates fail even though strategic growth remains attractive, requiring a real reversal. The action remains conditional on Strategic market expansion, Unique customer or community value, Transaction price discipline.",
+      "acceptableVariants": [
+        "Hold the strategic relationship through partnership while declining the current acquisition."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Customer and ecosystem value."
+      },
+      "identityConflicts": [
+        "Proceed because strong growth should override missing safeguards and leverage limits."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-291b7db034000ea7",
+        "span-807ee90aa032f320"
+      ],
+      "externalMotifEventId": "external-ibm-red-hat-2018"
+    },
+    {
+      "scenarioId": "AAS-V6-AI-01-A",
+      "policyId": "policy-e7eafcda9e4dc2e3",
+      "expectedAction": "Scale infrastructure in demand-linked tranches while constraining broad operating-expense growth and measuring workload economics.",
+      "amyPriorityOrder": [
+        "Verified customer and service demand",
+        "Capacity urgency and supply lead time",
+        "Profitability and operating-cost discipline"
+      ],
+      "amyBoundaryConditions": [
+        "Tie tranches to utilization and monetization milestones.",
+        "Do not pair infrastructure urgency with unbounded headcount growth."
+      ],
+      "amyReversalRule": [
+        "Demand or pipeline weakens.",
+        "Infrastructure economics or capacity urgency changes materially."
+      ],
+      "amySpecificRationale": "Amy's AI capital policy is demand-led and combines capacity scaling with explicit operating discipline. The action remains conditional on Customer demand and service adoption, Capacity urgency, Infrastructure economics.",
+      "acceptableVariants": [
+        "Accelerate bottleneck capacity while staging uncertain workloads and operating expense."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Verified customer and service demand."
+      },
+      "identityConflicts": [
+        "Wait for perfect certainty despite a verified capacity bottleneck or fund every workload uniformly."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-capacity-2023-opex",
+        "span-capacity-2024-demand-discipline",
+        "span-ai-project-pacing-policy-2024",
+        "span-ai-project-pacing-action-2025"
+      ],
+      "externalMotifEventId": "external-alphabet-ai-capex-2024"
+    },
+    {
+      "scenarioId": "AAS-V6-AI-01-B",
+      "policyId": "policy-e7eafcda9e4dc2e3",
+      "expectedAction": "Maintain demand-backed capacity expansion but stage equipment to power dates and gate experimental workloads and headcount behind economics milestones.",
+      "amyPriorityOrder": [
+        "Contracted demand that remains unmet",
+        "Usable power and capacity timing",
+        "Workload economics and operating expense"
+      ],
+      "amyBoundaryConditions": [
+        "Avoid paying depreciation on unusable capacity.",
+        "Keep experimental and headcount commitments cancellable."
+      ],
+      "amyReversalRule": [
+        "Contracted demand weakens.",
+        "Power or workload economics fail the revised milestones."
+      ],
+      "amySpecificRationale": "Strong demand preserves direction, while delivery and economics require a guardrail adjustment. The action remains conditional on Customer demand and service adoption, Capacity urgency, Infrastructure economics.",
+      "acceptableVariants": [
+        "Rephase rather than reduce the total long-term strategy while near-term usability is constrained."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Contracted demand that remains unmet."
+      },
+      "identityConflicts": [
+        "Continue the original schedule regardless of power or cancel the strategy despite intact demand."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-capacity-2023-opex",
+        "span-capacity-2024-demand-discipline",
+        "span-ai-project-pacing-policy-2024",
+        "span-ai-project-pacing-action-2025"
+      ],
+      "externalMotifEventId": "external-alphabet-ai-capex-2024"
+    },
+    {
+      "scenarioId": "AAS-V6-AI-02-A",
+      "policyId": "policy-e7eafcda9e4dc2e3",
+      "expectedAction": "Raise the infrastructure range in staged tranches while separating proven product demand from speculative workloads and constraining broad expense growth.",
+      "amyPriorityOrder": [
+        "Customer and product demand",
+        "Strategic capacity urgency",
+        "Workload return and cost discipline"
+      ],
+      "amyBoundaryConditions": [
+        "Measure utilization and monetization by workload cohort.",
+        "Retain the ability to redirect capacity and engineering."
+      ],
+      "amyReversalRule": [
+        "Engagement or committed demand weakens.",
+        "A workload repeatedly misses utilization and return milestones."
+      ],
+      "amySpecificRationale": "Amy's policy supports capacity ahead of revenue only when demand, urgency, and measured economics remain explicit. The action remains conditional on Customer demand and service adoption, Capacity urgency, Infrastructure economics.",
+      "acceptableVariants": [
+        "Fund the shared platform while applying different milestones to research and revenue-bearing workloads."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Customer and product demand."
+      },
+      "identityConflicts": [
+        "Require mature revenue from every strategic workload or approve all AI spending as one undifferentiated pool."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-capacity-2023-opex",
+        "span-capacity-2024-demand-discipline",
+        "span-ai-project-pacing-policy-2024",
+        "span-ai-project-pacing-action-2025"
+      ],
+      "externalMotifEventId": "external-meta-ai-capex-2024"
+    },
+    {
+      "scenarioId": "AAS-V6-AI-02-B",
+      "policyId": "policy-e7eafcda9e4dc2e3",
+      "expectedAction": "Reallocate capacity and talent toward demand-backed inference products and place the lagging training program behind explicit utilization milestones.",
+      "amyPriorityOrder": [
+        "Verified product demand",
+        "Marginal infrastructure economics",
+        "Strategic option value of the lagging program"
+      ],
+      "amyBoundaryConditions": [
+        "Keep the total funding envelope fixed.",
+        "Do not starve the shared platform or reward missed milestones automatically."
+      ],
+      "amyReversalRule": [
+        "The lagging program demonstrates new utilization and strategic evidence.",
+        "Mature product demand or margins weaken."
+      ],
+      "amySpecificRationale": "Unequal evidence calls for portfolio reallocation rather than a binary AI strategy decision. The action remains conditional on Customer demand and service adoption, Capacity urgency, Infrastructure economics.",
+      "acceptableVariants": [
+        "Retain a bounded research option while shifting the majority of incremental resources to proven workloads."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Verified product demand."
+      },
+      "identityConflicts": [
+        "Expand or cut every AI workload uniformly."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-capacity-2023-opex",
+        "span-capacity-2024-demand-discipline",
+        "span-ai-project-pacing-policy-2024",
+        "span-ai-project-pacing-action-2025"
+      ],
+      "externalMotifEventId": "external-meta-ai-capex-2024"
+    },
+    {
+      "scenarioId": "AAS-V6-AI-03-A",
+      "policyId": "policy-e7eafcda9e4dc2e3",
+      "expectedAction": "Materially expand cloud capacity in demand-linked tranches while tracking utilization, depreciation, operating income, and free-cash-flow returns.",
+      "amyPriorityOrder": [
+        "Larger and longer customer commitments",
+        "Capacity urgency",
+        "Long-run infrastructure economics"
+      ],
+      "amyBoundaryConditions": [
+        "Require clear monetization signals before each incremental tranche.",
+        "Maintain company-wide cost discipline despite capital expansion."
+      ],
+      "amyReversalRule": [
+        "Commitment duration or volume weakens.",
+        "Utilization or infrastructure economics fall below threshold."
+      ],
+      "amySpecificRationale": "The policy permits upfront infrastructure when contracted demand and durable cohort economics are observable. The action remains conditional on Customer demand and service adoption, Capacity urgency, Infrastructure economics.",
+      "acceptableVariants": [
+        "Advance supply-constrained capacity with cohort-level return accountability."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Larger and longer customer commitments."
+      },
+      "identityConflicts": [
+        "Reject all upfront capital because revenue follows later or expand without customer signals."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-capacity-2023-opex",
+        "span-capacity-2024-demand-discipline",
+        "span-ai-project-pacing-policy-2024",
+        "span-ai-project-pacing-action-2025"
+      ],
+      "externalMotifEventId": "external-amazon-ai-capex-2024"
+    },
+    {
+      "scenarioId": "AAS-V6-AI-03-B",
+      "policyId": "policy-e7eafcda9e4dc2e3",
+      "expectedAction": "Pause or reduce the cancellable tranche until contracted demand, utilization, and marginal hardware economics again support expansion.",
+      "amyPriorityOrder": [
+        "Changed customer commitments",
+        "Near-term capacity sufficiency",
+        "Option value and marginal infrastructure economics"
+      ],
+      "amyBoundaryConditions": [
+        "Protect already productive committed capacity.",
+        "Keep the paused tranche available for reactivation on verified signals."
+      ],
+      "amyReversalRule": [
+        "Contract volume and duration recover.",
+        "Projected utilization again exceeds the approved threshold."
+      ],
+      "amySpecificRationale": "Demand and economics are explicit reversal signals in the approved policy. The action remains conditional on Customer demand and service adoption, Capacity urgency, Infrastructure economics.",
+      "acceptableVariants": [
+        "Stage only the minimum long-lead items needed to preserve a low-cost option."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Changed customer commitments."
+      },
+      "identityConflicts": [
+        "Continue the original tranche because AI remains strategically important or cut healthy existing capacity."
+      ],
+      "evidenceClass": "contrast_observed",
+      "amyEvidenceIds": [
+        "span-capacity-2023-opex",
+        "span-capacity-2024-demand-discipline",
+        "span-ai-project-pacing-policy-2024",
+        "span-ai-project-pacing-action-2025"
+      ],
+      "externalMotifEventId": "external-amazon-ai-capex-2024"
+    },
+    {
+      "scenarioId": "AAS-V6-PM-01-A",
+      "policyId": "policy-e0bfae61c424868c",
+      "expectedAction": "Monetize verified account-sharing value first through a bounded rollout, then consider broader price action after observing customer response.",
+      "amyPriorityOrder": [
+        "Verified customer usage and value",
+        "Conversion and retention evidence",
+        "Bounded revenue and customer impact"
+      ],
+      "amyBoundaryConditions": [
+        "Use measured regional rollout and advance notice.",
+        "Do not combine paid sharing with an immediate broad price increase."
+      ],
+      "amyReversalRule": [
+        "Churn exceeds the approved range.",
+        "Verification or perceived service value weakens."
+      ],
+      "amySpecificRationale": "Amy's pricing policy monetizes verified value with explicit terms and bounded customer impact. The action remains conditional on Customer value, Productivity improvement, Commercial clarity.",
+      "acceptableVariants": [
+        "Segment price and timing while preserving the paid-sharing value exchange."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Verified customer usage and value."
+      },
+      "identityConflicts": [
+        "Maximize average revenue immediately without customer response evidence."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-1baf5181c9f9b527",
+        "span-22b85b48be6cc0ff",
+        "span-3e0302dd56efc30e",
+        "span-a932a8deb06fb1c6"
+      ],
+      "externalMotifEventId": "external-netflix-paid-sharing-2024"
+    },
+    {
+      "scenarioId": "AAS-V6-PM-01-B",
+      "policyId": "policy-e0bfae61c424868c",
+      "expectedAction": "Continue the program where conversion is supported while narrowing price, timing, and notice by segment to contain elevated churn.",
+      "amyPriorityOrder": [
+        "Segment-level conversion and churn",
+        "Preserved service value",
+        "Revenue quality after customer impact"
+      ],
+      "amyBoundaryConditions": [
+        "Pause segments that exceed the churn threshold.",
+        "Preserve advance notice and verification accuracy."
+      ],
+      "amyReversalRule": [
+        "High-engagement conversion also weakens.",
+        "Segmented terms fail to restore retention."
+      ],
+      "amySpecificRationale": "The policy changes rollout boundaries when customer response diverges without discarding value that remains verified. The action remains conditional on Customer value, Productivity improvement, Commercial clarity.",
+      "acceptableVariants": [
+        "Delay only sensitive markets while maintaining supported markets."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Segment-level conversion and churn."
+      },
+      "identityConflicts": [
+        "Apply one global rollout or abandon the verified monetization mechanism everywhere."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-1baf5181c9f9b527",
+        "span-22b85b48be6cc0ff",
+        "span-3e0302dd56efc30e",
+        "span-a932a8deb06fb1c6"
+      ],
+      "externalMotifEventId": "external-netflix-paid-sharing-2024"
+    },
+    {
+      "scenarioId": "AAS-V6-PM-02-A",
+      "policyId": "policy-e0bfae61c424868c",
+      "expectedAction": "Approve a bounded Premium price update where product value and engagement support willingness to pay, with notice and retention monitoring.",
+      "amyPriorityOrder": [
+        "Verified product and customer value",
+        "Market willingness to pay",
+        "Bounded customer impact and revenue quality"
+      ],
+      "amyBoundaryConditions": [
+        "Give advance notice and monitor conversion and churn.",
+        "Avoid using cost inflation alone as the value case."
+      ],
+      "amyReversalRule": [
+        "Engagement, conversion, or willingness to pay weakens.",
+        "Customer impact exceeds the approved range."
+      ],
+      "amySpecificRationale": "The pricing policy supports monetization after measured value with a bounded customer rationale. The action remains conditional on Customer value, Productivity improvement, Commercial clarity.",
+      "acceptableVariants": [
+        "Use market-specific price points under a common value framework."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Verified product and customer value."
+      },
+      "identityConflicts": [
+        "Raise price solely to meet a revenue target without verified value."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-1baf5181c9f9b527",
+        "span-22b85b48be6cc0ff",
+        "span-3e0302dd56efc30e",
+        "span-a932a8deb06fb1c6"
+      ],
+      "externalMotifEventId": "external-spotify-premium-price-2023"
+    },
+    {
+      "scenarioId": "AAS-V6-PM-02-B",
+      "policyId": "policy-e0bfae61c424868c",
+      "expectedAction": "Shift monetization toward supported mature-market pricing and growth-market packaging or timing instead of one uniform increase.",
+      "amyPriorityOrder": [
+        "Market-level willingness to pay",
+        "Customer value by package",
+        "Portfolio revenue quality"
+      ],
+      "amyBoundaryConditions": [
+        "Keep product and creator investment intact.",
+        "Do not force weak growth markets through the mature-market price point."
+      ],
+      "amyReversalRule": [
+        "Mature-market conversion weakens.",
+        "Growth-market value and willingness to pay recover."
+      ],
+      "amySpecificRationale": "Divergent customer evidence calls for monetization reallocation rather than uniform pricing. The action remains conditional on Customer value, Productivity improvement, Commercial clarity.",
+      "acceptableVariants": [
+        "Use family plans, bundles, or delayed increases where direct price evidence is weak."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Market-level willingness to pay."
+      },
+      "identityConflicts": [
+        "Apply a global price because aggregate revenue needs are unchanged."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-1baf5181c9f9b527",
+        "span-22b85b48be6cc0ff",
+        "span-3e0302dd56efc30e",
+        "span-a932a8deb06fb1c6"
+      ],
+      "externalMotifEventId": "external-spotify-premium-price-2023"
+    },
+    {
+      "scenarioId": "AAS-V6-PM-03-A",
+      "policyId": "policy-e0bfae61c424868c",
+      "expectedAction": "Implement a modest membership-fee increase only with stable loyalty, visible member value, and reinvestment that protects the customer proposition.",
+      "amyPriorityOrder": [
+        "Member value and loyalty",
+        "Willingness and capacity to pay",
+        "Sustainable monetization and reinvestment"
+      ],
+      "amyBoundaryConditions": [
+        "Continue selected price and wage investment.",
+        "Monitor renewal and discretionary spending after notice."
+      ],
+      "amyReversalRule": [
+        "Renewal intent or member spending weakens materially.",
+        "Inflation again impairs customer capacity."
+      ],
+      "amySpecificRationale": "The policy permits price action when customer value and bounded impact are verified. The action remains conditional on Customer value, Productivity improvement, Commercial clarity.",
+      "acceptableVariants": [
+        "Stage the effective date or segment terms while preserving member value."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Member value and loyalty."
+      },
+      "identityConflicts": [
+        "Increase fees only because the historical cycle is overdue."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-1baf5181c9f9b527",
+        "span-22b85b48be6cc0ff",
+        "span-3e0302dd56efc30e",
+        "span-a932a8deb06fb1c6"
+      ],
+      "externalMotifEventId": "external-costco-membership-fee-2024"
+    },
+    {
+      "scenarioId": "AAS-V6-PM-03R-B",
+      "policyId": "policy-e0bfae61c424868c",
+      "expectedAction": "Use a segmented or phased fee increase where loyalty and value remain verified, while delaying the most price-sensitive segments and preserving member reinvestment.",
+      "amyPriorityOrder": [
+        "Verified member value and loyalty",
+        "Segment-level customer capacity",
+        "Commercial clarity and durable monetization"
+      ],
+      "amyBoundaryConditions": [
+        "Do not impose a uniform increase across materially different customer-capacity conditions.",
+        "Keep timing and reinvestment terms explicit."
+      ],
+      "amyReversalRule": [
+        "Delay affected segments if renewal intent weakens.",
+        "Resume only when value, loyalty, and customer capacity support the terms."
+      ],
+      "amySpecificRationale": "Customer capacity and value evidence have become explicit non-applicability conditions. The action remains conditional on Customer value, Productivity improvement, Commercial clarity.",
+      "acceptableVariants": [
+        "Delay the broad increase while testing a limited segment with explicit protections."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Verified member value and loyalty."
+      },
+      "identityConflicts": [
+        "Proceed because fees have not changed for many years despite new customer strain."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-1baf5181c9f9b527",
+        "span-22b85b48be6cc0ff",
+        "span-3e0302dd56efc30e",
+        "span-a932a8deb06fb1c6"
+      ],
+      "externalMotifEventId": "external-costco-membership-fee-2024"
+    },
+    {
+      "scenarioId": "AAS-V6-CE-01-A",
+      "policyId": "policy-20d2c645ab6641c9",
+      "expectedAction": "Reduce operating and capital commitments misaligned with current demand while protecting the core transformation roadmap.",
+      "amyPriorityOrder": [
+        "Highest-priority strategic roadmap",
+        "Current demand and capacity utilization",
+        "Cost, margin, and balance-sheet efficiency"
+      ],
+      "amyBoundaryConditions": [
+        "Separate unused or duplicate capacity from critical milestones.",
+        "Measure savings and roadmap execution together."
+      ],
+      "amyReversalRule": [
+        "A reduction threatens a verified strategic bottleneck.",
+        "Demand or utilization recovers enough to justify capacity."
+      ],
+      "amySpecificRationale": "Amy's efficiency policy reallocates toward highest-priority work rather than treating savings as undifferentiated austerity. The action remains conditional on Strategic priority alignment, Customer-valued differentiation and growth, Workforce productivity.",
+      "acceptableVariants": [
+        "Use a portfolio cost reset that protects the few resources required for the transformation."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Highest-priority strategic roadmap."
+      },
+      "identityConflicts": [
+        "Apply an equal percentage cut to every function and capital program."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-abaa0f62aa30208c",
+        "span-acc7150e73b95096",
+        "span-f031de15863e849e",
+        "span-priority-reinvestment-policy-2021",
+        "span-priority-reinvestment-headcount-2021"
+      ],
+      "externalMotifEventId": "external-intel-cost-reduction-2024"
+    },
+    {
+      "scenarioId": "AAS-V6-CE-01-B",
+      "policyId": "policy-20d2c645ab6641c9",
+      "expectedAction": "Preserve the total savings objective but fund the verified roadmap bottleneck by cutting duplicate support work and unused legacy capacity more deeply.",
+      "amyPriorityOrder": [
+        "Verified core-roadmap bottleneck",
+        "Savings quality and resource reallocation",
+        "Total margin and balance-sheet target"
+      ],
+      "amyBoundaryConditions": [
+        "Keep the exception limited to milestone-critical resources.",
+        "Do not weaken the total cost and capital discipline."
+      ],
+      "amyReversalRule": [
+        "The bottleneck no longer affects the milestone.",
+        "Protected resources fail their execution gate."
+      ],
+      "amySpecificRationale": "A verified highest-priority bottleneck changes allocation boundaries without eliminating the reset. The action remains conditional on Strategic priority alignment, Customer-valued differentiation and growth, Workforce productivity.",
+      "acceptableVariants": [
+        "Add only the specialized people and equipment required while offsetting them elsewhere."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Verified core-roadmap bottleneck."
+      },
+      "identityConflicts": [
+        "Continue the original cut at the bottleneck or use it to reopen broad spending."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-abaa0f62aa30208c",
+        "span-acc7150e73b95096",
+        "span-f031de15863e849e",
+        "span-priority-reinvestment-policy-2021",
+        "span-priority-reinvestment-headcount-2021"
+      ],
+      "externalMotifEventId": "external-intel-cost-reduction-2024"
+    },
+    {
+      "scenarioId": "AAS-V6-CE-02-A",
+      "policyId": "policy-20d2c645ab6641c9",
+      "expectedAction": "Maintain the broad cost reset while allowing focused hiring and infrastructure investment only in verified priority bottlenecks.",
+      "amyPriorityOrder": [
+        "Highest-priority product outcomes",
+        "Measured productivity and bottlenecks",
+        "Total expense discipline"
+      ],
+      "amyBoundaryConditions": [
+        "Require role-level evidence for hiring.",
+        "Avoid recreating duplicate layers or broad operating expansion."
+      ],
+      "amyReversalRule": [
+        "Priority demand weakens.",
+        "Focused teams fail productivity or release milestones."
+      ],
+      "amySpecificRationale": "The policy supports focused resource movement when the current allocation no longer serves the highest priorities. The action remains conditional on Strategic priority alignment, Customer-valued differentiation and growth, Workforce productivity.",
+      "acceptableVariants": [
+        "Rehire selectively while keeping total headcount and expense within the reset."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Highest-priority product outcomes."
+      },
+      "identityConflicts": [
+        "Freeze every hire or resume broad hiring because cash generation is strong."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-abaa0f62aa30208c",
+        "span-acc7150e73b95096",
+        "span-f031de15863e849e",
+        "span-priority-reinvestment-policy-2021",
+        "span-priority-reinvestment-headcount-2021"
+      ],
+      "externalMotifEventId": "external-meta-efficiency-2023"
+    },
+    {
+      "scenarioId": "AAS-V6-CE-02-B",
+      "policyId": "policy-20d2c645ab6641c9",
+      "expectedAction": "Move people and budget from lower-priority projects to the measured revenue-bearing bottleneck without raising the total expense ceiling.",
+      "amyPriorityOrder": [
+        "Measured revenue bottleneck",
+        "Resource productivity and transfer feasibility",
+        "Total cost envelope"
+      ],
+      "amyBoundaryConditions": [
+        "Fund the move through named project reductions.",
+        "Track release throughput and revenue impact before further hiring."
+      ],
+      "amyReversalRule": [
+        "The bottleneck shifts or released work becomes strategically necessary.",
+        "The focused team fails the agreed milestones."
+      ],
+      "amySpecificRationale": "The changed evidence justifies resource reallocation, not net broad expansion. The action remains conditional on Strategic priority alignment, Customer-valued differentiation and growth, Workforce productivity.",
+      "acceptableVariants": [
+        "Use internal transfers plus a small number of specialized hires offset elsewhere."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Measured revenue bottleneck."
+      },
+      "identityConflicts": [
+        "Increase broad headcount or leave resources in lower-priority work."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-abaa0f62aa30208c",
+        "span-acc7150e73b95096",
+        "span-f031de15863e849e",
+        "span-priority-reinvestment-policy-2021",
+        "span-priority-reinvestment-headcount-2021"
+      ],
+      "externalMotifEventId": "external-meta-efficiency-2023"
+    },
+    {
+      "scenarioId": "AAS-V6-CE-03-A",
+      "policyId": "policy-20d2c645ab6641c9",
+      "expectedAction": "Execute a targeted content and overhead reset that removes low-return duplication while protecting differentiated franchises and customer value.",
+      "amyPriorityOrder": [
+        "Differentiated customer and franchise value",
+        "Recurring contribution and content economics",
+        "Duplicate overhead and execution efficiency"
+      ],
+      "amyBoundaryConditions": [
+        "Test content removals against engagement and contribution.",
+        "Separate strategic content from generic volume and administrative duplication."
+      ],
+      "amyReversalRule": [
+        "A removal destroys more contribution than it saves.",
+        "Customer churn or franchise value deteriorates."
+      ],
+      "amySpecificRationale": "Amy's cost policy protects priority growth capacity while removing duplicate and low-return expense. The action remains conditional on Strategic priority alignment, Customer-valued differentiation and growth, Workforce productivity.",
+      "acceptableVariants": [
+        "Reduce volume and overhead while preserving the few titles and capabilities that drive differentiation."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Differentiated customer and franchise value."
+      },
+      "identityConflicts": [
+        "Cut content and staff uniformly to meet the headline target."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-abaa0f62aa30208c",
+        "span-acc7150e73b95096",
+        "span-f031de15863e849e",
+        "span-priority-reinvestment-policy-2021",
+        "span-priority-reinvestment-headcount-2021"
+      ],
+      "externalMotifEventId": "external-disney-cost-reset-2023"
+    },
+    {
+      "scenarioId": "AAS-V6-CE-03-B",
+      "policyId": "policy-20d2c645ab6641c9",
+      "expectedAction": "Stop the value-destroying franchise removals and redirect the savings program to duplicate general content and administration.",
+      "amyPriorityOrder": [
+        "Changed churn and recurring contribution",
+        "Strategic franchise protection",
+        "Alternative verified savings"
+      ],
+      "amyBoundaryConditions": [
+        "Preserve most of the total savings through named alternatives.",
+        "Require contribution evidence before restoring any removed content."
+      ],
+      "amyReversalRule": [
+        "Franchise contribution no longer exceeds its cost.",
+        "Alternative savings fail to materialize."
+      ],
+      "amySpecificRationale": "The specific cut now violates the policy's priority protection, while the overall efficiency thesis remains valid. The action remains conditional on Strategic priority alignment, Customer-valued differentiation and growth, Workforce productivity.",
+      "acceptableVariants": [
+        "Pause the affected removals while continuing the remaining evidence-backed program."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Changed churn and recurring contribution."
+      },
+      "identityConflicts": [
+        "Continue every cut to preserve the headline target or cancel the entire efficiency program."
+      ],
+      "evidenceClass": "contrast_observed",
+      "amyEvidenceIds": [
+        "span-abaa0f62aa30208c",
+        "span-acc7150e73b95096",
+        "span-f031de15863e849e",
+        "span-priority-reinvestment-policy-2021",
+        "span-priority-reinvestment-headcount-2021"
+      ],
+      "externalMotifEventId": "external-disney-cost-reset-2023"
+    },
+    {
+      "scenarioId": "AAS-V6-SR-01-A",
+      "policyId": "policy-a7972af407a0bf69",
+      "expectedAction": "Authorize bounded repurchase capacity and a sustainable dividend while retaining discretion over deployment as investment and liquidity needs evolve.",
+      "amyPriorityOrder": [
+        "Strategic investment capacity",
+        "Liquidity and balance-sheet resilience",
+        "Flexible shareholder return"
+      ],
+      "amyBoundaryConditions": [
+        "Treat authorization as optional capacity.",
+        "Do not deploy below the strategic liquidity floor."
+      ],
+      "amyReversalRule": [
+        "Cash generation weakens.",
+        "Higher-return strategic investment or liquidity needs rise."
+      ],
+      "amySpecificRationale": "Amy's capital-return policy subordinates discretionary repurchases to investment and liquidity capacity. The action remains conditional on Strategic investment return, Liquidity and capital flexibility, Durable dividend commitment.",
+      "acceptableVariants": [
+        "Set a large authorization while pacing actual purchases against valuation and cash needs."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Strategic investment capacity."
+      },
+      "identityConflicts": [
+        "Treat authorization as a mandatory immediate deployment schedule."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-20e3349dbae4503b",
+        "span-328e730e3d56a46c",
+        "span-4d34d5136c326275",
+        "span-fdd09e9019051bf7",
+        "span-buyback-deployment-policy-2013",
+        "span-buyback-deployment-action-2023"
+      ],
+      "externalMotifEventId": "external-apple-buyback-2024"
+    },
+    {
+      "scenarioId": "AAS-V6-SR-01-B",
+      "policyId": "policy-a7972af407a0bf69",
+      "expectedAction": "Retain optional authorization but slow actual repurchases behind verified strategic investment and liquidity requirements.",
+      "amyPriorityOrder": [
+        "Verified strategic investment",
+        "Liquidity across the larger investment cycle",
+        "Residual repurchase deployment"
+      ],
+      "amyBoundaryConditions": [
+        "Protect the sustainable dividend and minimum liquidity.",
+        "Keep authorization unused where investment returns are superior."
+      ],
+      "amyReversalRule": [
+        "Strategic investment needs decline.",
+        "Free cash flow expands beyond the revised requirements."
+      ],
+      "amySpecificRationale": "The investment cycle changes deployment guardrails, not the optional authorization itself. The action remains conditional on Strategic investment return, Liquidity and capital flexibility, Durable dividend commitment.",
+      "acceptableVariants": [
+        "Pause selected quarters of repurchases while leaving authorization intact."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Verified strategic investment."
+      },
+      "identityConflicts": [
+        "Cancel all capital return despite durable cash flow or execute the old pace despite higher-priority investment."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-20e3349dbae4503b",
+        "span-328e730e3d56a46c",
+        "span-4d34d5136c326275",
+        "span-fdd09e9019051bf7",
+        "span-buyback-deployment-policy-2013",
+        "span-buyback-deployment-action-2023"
+      ],
+      "externalMotifEventId": "external-apple-buyback-2024"
+    },
+    {
+      "scenarioId": "AAS-V6-SR-02-A",
+      "policyId": "policy-a7972af407a0bf69",
+      "expectedAction": "Authorize a discretionary first repurchase program only after strategic investment and liquidity needs are covered.",
+      "amyPriorityOrder": [
+        "Durable growth investment",
+        "Liquidity and recurring cash generation",
+        "Valuation-aware shareholder return"
+      ],
+      "amyBoundaryConditions": [
+        "Keep actual deployment discretionary and valuation-aware.",
+        "Do not weaken growth or the balance sheet to meet a buyback target."
+      ],
+      "amyReversalRule": [
+        "A higher-return use of cash appears.",
+        "Cash generation or liquidity weakens."
+      ],
+      "amySpecificRationale": "The policy preserves investment and liquidity before discretionary shareholder return. The action remains conditional on Strategic investment return, Liquidity and capital flexibility, Durable dividend commitment.",
+      "acceptableVariants": [
+        "Approve capacity with no fixed deployment deadline."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Durable growth investment."
+      },
+      "identityConflicts": [
+        "Commit to a fixed buyback schedule as a signal of discipline."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-20e3349dbae4503b",
+        "span-328e730e3d56a46c",
+        "span-4d34d5136c326275",
+        "span-fdd09e9019051bf7",
+        "span-buyback-deployment-policy-2013",
+        "span-buyback-deployment-action-2023"
+      ],
+      "externalMotifEventId": "external-salesforce-buyback-2022"
+    },
+    {
+      "scenarioId": "AAS-V6-SR-02-B",
+      "policyId": "policy-a7972af407a0bf69",
+      "expectedAction": "Redirect near-term cash from repurchases to the verified higher-return strategic opportunity while retaining unused authorization.",
+      "amyPriorityOrder": [
+        "Higher-return strategic use",
+        "Liquidity after investment",
+        "Residual valuation-aware repurchases"
+      ],
+      "amyBoundaryConditions": [
+        "Require the strategic investment to stay within its verified return and execution gates.",
+        "Retain rather than cancel optional authorization."
+      ],
+      "amyReversalRule": [
+        "The strategic return thesis weakens.",
+        "Cash generation exceeds the combined investment and liquidity needs."
+      ],
+      "amySpecificRationale": "A superior verified use of cash changes the priority order while optional authorization preserves flexibility. The action remains conditional on Strategic investment return, Liquidity and capital flexibility, Durable dividend commitment.",
+      "acceptableVariants": [
+        "Reduce rather than eliminate near-term repurchases if both uses remain within capacity."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Higher-return strategic use."
+      },
+      "identityConflicts": [
+        "Deploy repurchases simply because authorization exists or cancel all future return capacity."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-20e3349dbae4503b",
+        "span-328e730e3d56a46c",
+        "span-4d34d5136c326275",
+        "span-fdd09e9019051bf7",
+        "span-buyback-deployment-policy-2013",
+        "span-buyback-deployment-action-2023"
+      ],
+      "externalMotifEventId": "external-salesforce-buyback-2022"
+    },
+    {
+      "scenarioId": "AAS-V6-SR-03-A",
+      "policyId": "policy-a7972af407a0bf69",
+      "expectedAction": "Increase the sustainable dividend and optional repurchase capacity while preserving investment and acquisition flexibility.",
+      "amyPriorityOrder": [
+        "Organic and strategic investment",
+        "Ongoing cash-flow resilience",
+        "Sustainable and discretionary shareholder return"
+      ],
+      "amyBoundaryConditions": [
+        "Keep the dividend within durable cash generation.",
+        "Use repurchase authorization without a fixed deployment deadline."
+      ],
+      "amyReversalRule": [
+        "Operating cash flow weakens.",
+        "Debt or strategic investment requirements rise."
+      ],
+      "amySpecificRationale": "Amy's policy permits shareholder return from excess capacity while retaining strategic and balance-sheet flexibility. The action remains conditional on Strategic investment return, Liquidity and capital flexibility, Durable dividend commitment.",
+      "acceptableVariants": [
+        "Raise the dividend modestly and pace repurchases against valuation and investment needs."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Organic and strategic investment."
+      },
+      "identityConflicts": [
+        "Maximize near-term return at the expense of innovation or liquidity."
+      ],
+      "evidenceClass": "bounded_policy_transfer",
+      "amyEvidenceIds": [
+        "span-20e3349dbae4503b",
+        "span-328e730e3d56a46c",
+        "span-4d34d5136c326275",
+        "span-fdd09e9019051bf7",
+        "span-buyback-deployment-policy-2013",
+        "span-buyback-deployment-action-2023"
+      ],
+      "externalMotifEventId": "external-cisco-capital-return-2022"
+    },
+    {
+      "scenarioId": "AAS-V6-SR-03-B",
+      "policyId": "policy-a7972af407a0bf69",
+      "expectedAction": "Pause repurchase deployment, retain unused authorization, protect the sustainable dividend, and prioritize liquidity plus the contracted-demand investment.",
+      "amyPriorityOrder": [
+        "Contracted-demand strategic investment",
+        "Liquidity and refinancing resilience",
+        "Sustainable dividend before repurchases"
+      ],
+      "amyBoundaryConditions": [
+        "Do not execute repurchases during the cash-flow and refinancing squeeze.",
+        "Do not cut a still-sustainable dividend without evidence it is required."
+      ],
+      "amyReversalRule": [
+        "Operating cash flow recovers and refinancing pressure eases.",
+        "The required investment completes within its return gate."
+      ],
+      "amySpecificRationale": "Weaker cash generation and higher strategic investment are explicit reversal signals for repurchase deployment. The action remains conditional on Strategic investment return, Liquidity and capital flexibility, Durable dividend commitment.",
+      "acceptableVariants": [
+        "Reduce repurchases to zero temporarily while retaining board authorization."
+      ],
+      "genericCfoFoil": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
+        "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Contracted-demand strategic investment."
+      },
+      "identityConflicts": [
+        "Continue repurchases mechanically or cut the dividend before using discretionary authorization flexibility."
+      ],
+      "evidenceClass": "contrast_observed",
+      "amyEvidenceIds": [
+        "span-20e3349dbae4503b",
+        "span-328e730e3d56a46c",
+        "span-4d34d5136c326275",
+        "span-fdd09e9019051bf7",
+        "span-buyback-deployment-policy-2013",
+        "span-buyback-deployment-action-2023"
+      ],
+      "externalMotifEventId": "external-cisco-capital-return-2022"
+    }
+  ]
+}

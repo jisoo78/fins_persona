@@ -1,1 +1,34 @@
-[]
+[
+  {
+    "targetType": "replacement",
+    "targetId": "AAS-V6-MA-02R-A",
+    "decision": "approved",
+    "reviewer": "Codex",
+    "reviewedAt": "2026-07-21T14:10:00.000Z",
+    "rationale": "The replacement removes an unsupported acquisition termination key and tests a bounded remedy structure under the reviewed M&A priority and execution gates."
+  },
+  {
+    "targetType": "replacement",
+    "targetId": "AAS-V6-MA-02R-B",
+    "decision": "approved",
+    "reviewer": "Codex",
+    "reviewedAt": "2026-07-21T14:10:00.000Z",
+    "rationale": "The changed scenario adjusts price and integration commitments without claiming an unobserved Amy stop decision."
+  },
+  {
+    "targetType": "replacement",
+    "targetId": "AAS-V6-MA-03R-B",
+    "decision": "approved",
+    "reviewer": "Codex",
+    "reviewedAt": "2026-07-21T14:10:00.000Z",
+    "rationale": "The replacement retains enforceable ecosystem protection and tests tighter guardrails instead of unsupported termination behavior."
+  },
+  {
+    "targetType": "replacement",
+    "targetId": "AAS-V6-PM-03R-B",
+    "decision": "approved",
+    "reviewer": "Codex",
+    "reviewedAt": "2026-07-21T14:10:00.000Z",
+    "rationale": "The replacement tests segmented pricing and explicit customer-impact boundaries without asserting an unobserved universal postponement rule."
+  }
+]

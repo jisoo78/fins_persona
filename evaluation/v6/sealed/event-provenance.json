@@ -1,0 +1,202 @@
+{
+  "provenance": [
+    {
+      "pairId": "AAS-V6-MA-01",
+      "externalMotifEventId": "external-salesforce-slack-2020",
+      "amyEvidenceIds": [
+        "span-291b7db034000ea7",
+        "span-807ee90aa032f320"
+      ],
+      "decisionCutoff": "2020-12-01",
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T14:00:00.000Z"
+    },
+    {
+      "pairId": "AAS-V6-MA-02",
+      "externalMotifEventId": "external-adobe-figma-termination-2023",
+      "amyEvidenceIds": [
+        "span-291b7db034000ea7",
+        "span-807ee90aa032f320"
+      ],
+      "decisionCutoff": "2023-12-18",
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T14:00:00.000Z"
+    },
+    {
+      "pairId": "AAS-V6-MA-03",
+      "externalMotifEventId": "external-ibm-red-hat-2018",
+      "amyEvidenceIds": [
+        "span-291b7db034000ea7",
+        "span-807ee90aa032f320"
+      ],
+      "decisionCutoff": "2019-07-09",
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T14:00:00.000Z"
+    },
+    {
+      "pairId": "AAS-V6-AI-01",
+      "externalMotifEventId": "external-alphabet-ai-capex-2024",
+      "amyEvidenceIds": [
+        "span-capacity-2023-opex",
+        "span-capacity-2024-demand-discipline",
+        "span-ai-project-pacing-policy-2024",
+        "span-ai-project-pacing-action-2025"
+      ],
+      "decisionCutoff": "2024-04-25",
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T14:00:00.000Z"
+    },
+    {
+      "pairId": "AAS-V6-AI-02",
+      "externalMotifEventId": "external-meta-ai-capex-2024",
+      "amyEvidenceIds": [
+        "span-capacity-2023-opex",
+        "span-capacity-2024-demand-discipline",
+        "span-ai-project-pacing-policy-2024",
+        "span-ai-project-pacing-action-2025"
+      ],
+      "decisionCutoff": "2024-04-24",
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T14:00:00.000Z"
+    },
+    {
+      "pairId": "AAS-V6-AI-03",
+      "externalMotifEventId": "external-amazon-ai-capex-2024",
+      "amyEvidenceIds": [
+        "span-capacity-2023-opex",
+        "span-capacity-2024-demand-discipline",
+        "span-ai-project-pacing-policy-2024",
+        "span-ai-project-pacing-action-2025"
+      ],
+      "decisionCutoff": "2024-04-30",
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T14:00:00.000Z"
+    },
+    {
+      "pairId": "AAS-V6-PM-01",
+      "externalMotifEventId": "external-netflix-paid-sharing-2024",
+      "amyEvidenceIds": [
+        "span-1baf5181c9f9b527",
+        "span-22b85b48be6cc0ff",
+        "span-3e0302dd56efc30e",
+        "span-a932a8deb06fb1c6"
+      ],
+      "decisionCutoff": "2024-01-23",
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T14:00:00.000Z"
+    },
+    {
+      "pairId": "AAS-V6-PM-02",
+      "externalMotifEventId": "external-spotify-premium-price-2023",
+      "amyEvidenceIds": [
+        "span-1baf5181c9f9b527",
+        "span-22b85b48be6cc0ff",
+        "span-3e0302dd56efc30e",
+        "span-a932a8deb06fb1c6"
+      ],
+      "decisionCutoff": "2023-07-24",
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T14:00:00.000Z"
+    },
+    {
+      "pairId": "AAS-V6-PM-03",
+      "externalMotifEventId": "external-costco-membership-fee-2024",
+      "amyEvidenceIds": [
+        "span-1baf5181c9f9b527",
+        "span-22b85b48be6cc0ff",
+        "span-3e0302dd56efc30e",
+        "span-a932a8deb06fb1c6"
+      ],
+      "decisionCutoff": "2024-07-10",
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T14:00:00.000Z"
+    },
+    {
+      "pairId": "AAS-V6-CE-01",
+      "externalMotifEventId": "external-intel-cost-reduction-2024",
+      "amyEvidenceIds": [
+        "span-abaa0f62aa30208c",
+        "span-acc7150e73b95096",
+        "span-f031de15863e849e",
+        "span-priority-reinvestment-policy-2021",
+        "span-priority-reinvestment-headcount-2021"
+      ],
+      "decisionCutoff": "2024-08-01",
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T14:00:00.000Z"
+    },
+    {
+      "pairId": "AAS-V6-CE-02",
+      "externalMotifEventId": "external-meta-efficiency-2023",
+      "amyEvidenceIds": [
+        "span-abaa0f62aa30208c",
+        "span-acc7150e73b95096",
+        "span-f031de15863e849e",
+        "span-priority-reinvestment-policy-2021",
+        "span-priority-reinvestment-headcount-2021"
+      ],
+      "decisionCutoff": "2024-02-01",
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T14:00:00.000Z"
+    },
+    {
+      "pairId": "AAS-V6-CE-03",
+      "externalMotifEventId": "external-disney-cost-reset-2023",
+      "amyEvidenceIds": [
+        "span-abaa0f62aa30208c",
+        "span-acc7150e73b95096",
+        "span-f031de15863e849e",
+        "span-priority-reinvestment-policy-2021",
+        "span-priority-reinvestment-headcount-2021"
+      ],
+      "decisionCutoff": "2023-05-10",
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T14:00:00.000Z"
+    },
+    {
+      "pairId": "AAS-V6-SR-01",
+      "externalMotifEventId": "external-apple-buyback-2024",
+      "amyEvidenceIds": [
+        "span-20e3349dbae4503b",
+        "span-328e730e3d56a46c",
+        "span-4d34d5136c326275",
+        "span-fdd09e9019051bf7",
+        "span-buyback-deployment-policy-2013",
+        "span-buyback-deployment-action-2023"
+      ],
+      "decisionCutoff": "2024-05-02",
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T14:00:00.000Z"
+    },
+    {
+      "pairId": "AAS-V6-SR-02",
+      "externalMotifEventId": "external-salesforce-buyback-2022",
+      "amyEvidenceIds": [
+        "span-20e3349dbae4503b",
+        "span-328e730e3d56a46c",
+        "span-4d34d5136c326275",
+        "span-fdd09e9019051bf7",
+        "span-buyback-deployment-policy-2013",
+        "span-buyback-deployment-action-2023"
+      ],
+      "decisionCutoff": "2022-08-24",
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T14:00:00.000Z"
+    },
+    {
+      "pairId": "AAS-V6-SR-03",
+      "externalMotifEventId": "external-cisco-capital-return-2022",
+      "amyEvidenceIds": [
+        "span-20e3349dbae4503b",
+        "span-328e730e3d56a46c",
+        "span-4d34d5136c326275",
+        "span-fdd09e9019051bf7",
+        "span-buyback-deployment-policy-2013",
+        "span-buyback-deployment-action-2023"
+      ],
+      "decisionCutoff": "2022-02-16",
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T14:00:00.000Z"
+    }
+  ]
+}

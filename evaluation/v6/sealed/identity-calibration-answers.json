@@ -1,0 +1,2224 @@
+{
+  "calibrationAnswers": [
+    {
+      "scenarioId": "AAS-V6-MA-01-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-MA-01-A-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "strategic customer and"
+      ],
+      "candidateResponse": {
+        "action": "Proceed only through a bounded acquisition whose strategic reach, valuation, financing capacity, and open integration model are jointly supportable.",
+        "priorities": [
+          "Strategic customer and platform reach",
+          "Transaction economics and financing capacity",
+          "Integration execution and ecosystem protection"
+        ],
+        "guardrails": [
+          "Preserve minimum liquidity and investment-grade capacity.",
+          "Keep integration accountable to the open partner model."
+        ],
+        "reversalSignals": [
+          "Target growth or strategic fit weakens.",
+          "Financing or integration exceeds the approved downside boundary."
+        ],
+        "rationale": "Amy's M&A policy treats strategic reach as necessary but not sufficient; economics and execution remain co-equal gates. The action remains conditional on Strategic market expansion, Unique customer or community value, Transaction price discipline."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-MA-01-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-MA-01-A-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-MA-01-A",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-MA-01-A-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "approve solely for"
+      ],
+      "candidateResponse": {
+        "action": "Approve solely for strategic narrative without price and financing discipline.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-MA-01-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-MA-01-B-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "preserved strategic reach"
+      ],
+      "candidateResponse": {
+        "action": "Preserve the acquisition direction only after resizing financing, tightening accretion gates, and staging integration commitments.",
+        "priorities": [
+          "Preserved strategic reach",
+          "Re-underwritten financing and accretion",
+          "Staged integration execution"
+        ],
+        "guardrails": [
+          "Do not breach the liquidity or credit boundary.",
+          "Suspend lower-priority cash deployment before weakening the strategic asset."
+        ],
+        "reversalSignals": [
+          "Revised terms still fail the return threshold.",
+          "Target growth or ecosystem safeguards deteriorate."
+        ],
+        "rationale": "The changed signal requires tighter structure, not a mechanical reversal, because strategic and core execution conditions remain intact. The action remains conditional on Strategic market expansion, Unique customer or community value, Transaction price discipline."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-MA-01-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-MA-01-B-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-MA-01-B",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-MA-01-B-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "proceed on the"
+      ],
+      "candidateResponse": {
+        "action": "Proceed on the original terms or abandon solely because financing became less attractive.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-MA-02R-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-MA-02R-A-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "credibility of the"
+      ],
+      "candidateResponse": {
+        "action": "Proceed only with a smaller or remedied structure after re-underwriting strategic reach, reduced synergies, financing, and integration execution.",
+        "priorities": [
+          "Credibility of the approval path",
+          "Strategic reach after remedies",
+          "Transaction economics and execution capacity"
+        ],
+        "guardrails": [
+          "Do not preserve the original unrestricted structure.",
+          "Keep liquidity, price discipline, and integration accountability inside approved limits."
+        ],
+        "reversalSignals": [
+          "Resize again if remedy economics deteriorate.",
+          "Withdraw only if strategic reach, economics, or execution become unsupported."
+        ],
+        "rationale": "Amy's M&A policy requires strategic reach, transaction economics, and execution feasibility to remain jointly supportable. The action remains conditional on Strategic market expansion, Unique customer or community value, Transaction price discipline."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-MA-02R-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-MA-02R-A-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-MA-02R-A",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-MA-02R-A-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "continue because strategic"
+      ],
+      "candidateResponse": {
+        "action": "Continue because strategic merit alone should override feasibility.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-MA-02R-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-MA-02R-B-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "approval path credibility"
+      ],
+      "candidateResponse": {
+        "action": "Resize consideration and stage integration to absorb the larger remedy cost while preserving only the strategically and financially supportable perimeter.",
+        "priorities": [
+          "Approval path credibility",
+          "Value retained after divestiture",
+          "Re-underwritten financing and integration execution"
+        ],
+        "guardrails": [
+          "Do not pay for synergies removed by the remedy.",
+          "Maintain liquidity and measurable integration gates."
+        ],
+        "reversalSignals": [
+          "Reduce the perimeter when remedy cost rises.",
+          "Withdraw if the remaining reach no longer supports durable value."
+        ],
+        "rationale": "The new approval path changes feasibility but does not erase the need to re-underwrite the smaller economics. The action remains conditional on Strategic market expansion, Unique customer or community value, Transaction price discipline."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-MA-02R-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-MA-02R-B-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-MA-02R-B",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-MA-02R-B-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "remain terminated without"
+      ],
+      "candidateResponse": {
+        "action": "Remain terminated without considering the material feasibility change or restore the original deal automatically.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-MA-03-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-MA-03-A-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "strategic open-platform reach"
+      ],
+      "candidateResponse": {
+        "action": "Proceed conditionally with the open-platform acquisition while preserving target independence, credit discipline, and a measurable deleveraging and accretion path.",
+        "priorities": [
+          "Strategic open-platform reach",
+          "Free-cash-flow and financing economics",
+          "Independence, integration, and deleveraging execution"
+        ],
+        "guardrails": [
+          "Protect the target's open ecosystem and operating independence.",
+          "Suspend discretionary repurchases and maintain the approved credit profile."
+        ],
+        "reversalSignals": [
+          "Target renewal or growth weakens materially.",
+          "Independence safeguards or the deleveraging plan become infeasible."
+        ],
+        "rationale": "The policy supports large strategic reach only when financing and integration protect durable value. The action remains conditional on Strategic market expansion, Unique customer or community value, Transaction price discipline."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-MA-03-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-MA-03-A-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-MA-03-A",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-MA-03-A-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "treat near-term earnings"
+      ],
+      "candidateResponse": {
+        "action": "Treat near-term earnings dilution alone as disqualifying or ignore leverage and ecosystem conditions.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-MA-03R-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-MA-03R-B-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "customer and ecosystem"
+      ],
+      "candidateResponse": {
+        "action": "Preserve the acquisition direction only through enforceable ecosystem covenants, staged integration, and financing that remains within the approved credit boundary.",
+        "priorities": [
+          "Customer and ecosystem value",
+          "Enforceable operating safeguards",
+          "Transaction economics and financing capacity"
+        ],
+        "guardrails": [
+          "Do not accept unenforceable independence promises.",
+          "Stage integration until open-ecosystem behavior is measurable."
+        ],
+        "reversalSignals": [
+          "Tighten or resize commitments when safeguards narrow.",
+          "Withdraw if ecosystem protection or financing becomes unsupported."
+        ],
+        "rationale": "Two co-equal gates fail even though strategic growth remains attractive, requiring a real reversal. The action remains conditional on Strategic market expansion, Unique customer or community value, Transaction price discipline."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-MA-03R-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-MA-03R-B-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-MA-03R-B",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-MA-03R-B-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "proceed because strong"
+      ],
+      "candidateResponse": {
+        "action": "Proceed because strong growth should override missing safeguards and leverage limits.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-AI-01-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-AI-01-A-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "verified customer and"
+      ],
+      "candidateResponse": {
+        "action": "Scale infrastructure in demand-linked tranches while constraining broad operating-expense growth and measuring workload economics.",
+        "priorities": [
+          "Verified customer and service demand",
+          "Capacity urgency and supply lead time",
+          "Profitability and operating-cost discipline"
+        ],
+        "guardrails": [
+          "Tie tranches to utilization and monetization milestones.",
+          "Do not pair infrastructure urgency with unbounded headcount growth."
+        ],
+        "reversalSignals": [
+          "Demand or pipeline weakens.",
+          "Infrastructure economics or capacity urgency changes materially."
+        ],
+        "rationale": "Amy's AI capital policy is demand-led and combines capacity scaling with explicit operating discipline. The action remains conditional on Customer demand and service adoption, Capacity urgency, Infrastructure economics."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-AI-01-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-AI-01-A-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-AI-01-A",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-AI-01-A-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "wait for perfect"
+      ],
+      "candidateResponse": {
+        "action": "Wait for perfect certainty despite a verified capacity bottleneck or fund every workload uniformly.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-AI-01-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-AI-01-B-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "contracted demand that"
+      ],
+      "candidateResponse": {
+        "action": "Maintain demand-backed capacity expansion but stage equipment to power dates and gate experimental workloads and headcount behind economics milestones.",
+        "priorities": [
+          "Contracted demand that remains unmet",
+          "Usable power and capacity timing",
+          "Workload economics and operating expense"
+        ],
+        "guardrails": [
+          "Avoid paying depreciation on unusable capacity.",
+          "Keep experimental and headcount commitments cancellable."
+        ],
+        "reversalSignals": [
+          "Contracted demand weakens.",
+          "Power or workload economics fail the revised milestones."
+        ],
+        "rationale": "Strong demand preserves direction, while delivery and economics require a guardrail adjustment. The action remains conditional on Customer demand and service adoption, Capacity urgency, Infrastructure economics."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-AI-01-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-AI-01-B-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-AI-01-B",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-AI-01-B-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "continue the original"
+      ],
+      "candidateResponse": {
+        "action": "Continue the original schedule regardless of power or cancel the strategy despite intact demand.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-AI-02-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-AI-02-A-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "customer and product"
+      ],
+      "candidateResponse": {
+        "action": "Raise the infrastructure range in staged tranches while separating proven product demand from speculative workloads and constraining broad expense growth.",
+        "priorities": [
+          "Customer and product demand",
+          "Strategic capacity urgency",
+          "Workload return and cost discipline"
+        ],
+        "guardrails": [
+          "Measure utilization and monetization by workload cohort.",
+          "Retain the ability to redirect capacity and engineering."
+        ],
+        "reversalSignals": [
+          "Engagement or committed demand weakens.",
+          "A workload repeatedly misses utilization and return milestones."
+        ],
+        "rationale": "Amy's policy supports capacity ahead of revenue only when demand, urgency, and measured economics remain explicit. The action remains conditional on Customer demand and service adoption, Capacity urgency, Infrastructure economics."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-AI-02-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-AI-02-A-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-AI-02-A",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-AI-02-A-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "require mature revenue"
+      ],
+      "candidateResponse": {
+        "action": "Require mature revenue from every strategic workload or approve all AI spending as one undifferentiated pool.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-AI-02-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-AI-02-B-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "verified product demand"
+      ],
+      "candidateResponse": {
+        "action": "Reallocate capacity and talent toward demand-backed inference products and place the lagging training program behind explicit utilization milestones.",
+        "priorities": [
+          "Verified product demand",
+          "Marginal infrastructure economics",
+          "Strategic option value of the lagging program"
+        ],
+        "guardrails": [
+          "Keep the total funding envelope fixed.",
+          "Do not starve the shared platform or reward missed milestones automatically."
+        ],
+        "reversalSignals": [
+          "The lagging program demonstrates new utilization and strategic evidence.",
+          "Mature product demand or margins weaken."
+        ],
+        "rationale": "Unequal evidence calls for portfolio reallocation rather than a binary AI strategy decision. The action remains conditional on Customer demand and service adoption, Capacity urgency, Infrastructure economics."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-AI-02-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-AI-02-B-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-AI-02-B",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-AI-02-B-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "expand or cut"
+      ],
+      "candidateResponse": {
+        "action": "Expand or cut every AI workload uniformly.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-AI-03-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-AI-03-A-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "larger and longer"
+      ],
+      "candidateResponse": {
+        "action": "Materially expand cloud capacity in demand-linked tranches while tracking utilization, depreciation, operating income, and free-cash-flow returns.",
+        "priorities": [
+          "Larger and longer customer commitments",
+          "Capacity urgency",
+          "Long-run infrastructure economics"
+        ],
+        "guardrails": [
+          "Require clear monetization signals before each incremental tranche.",
+          "Maintain company-wide cost discipline despite capital expansion."
+        ],
+        "reversalSignals": [
+          "Commitment duration or volume weakens.",
+          "Utilization or infrastructure economics fall below threshold."
+        ],
+        "rationale": "The policy permits upfront infrastructure when contracted demand and durable cohort economics are observable. The action remains conditional on Customer demand and service adoption, Capacity urgency, Infrastructure economics."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-AI-03-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-AI-03-A-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-AI-03-A",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-AI-03-A-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "reject all upfront"
+      ],
+      "candidateResponse": {
+        "action": "Reject all upfront capital because revenue follows later or expand without customer signals.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-AI-03-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-AI-03-B-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "changed customer commitments"
+      ],
+      "candidateResponse": {
+        "action": "Pause or reduce the cancellable tranche until contracted demand, utilization, and marginal hardware economics again support expansion.",
+        "priorities": [
+          "Changed customer commitments",
+          "Near-term capacity sufficiency",
+          "Option value and marginal infrastructure economics"
+        ],
+        "guardrails": [
+          "Protect already productive committed capacity.",
+          "Keep the paused tranche available for reactivation on verified signals."
+        ],
+        "reversalSignals": [
+          "Contract volume and duration recover.",
+          "Projected utilization again exceeds the approved threshold."
+        ],
+        "rationale": "Demand and economics are explicit reversal signals in the approved policy. The action remains conditional on Customer demand and service adoption, Capacity urgency, Infrastructure economics."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-AI-03-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-AI-03-B-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-AI-03-B",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-AI-03-B-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "continue the original"
+      ],
+      "candidateResponse": {
+        "action": "Continue the original tranche because AI remains strategically important or cut healthy existing capacity.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-PM-01-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-PM-01-A-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "verified customer usage"
+      ],
+      "candidateResponse": {
+        "action": "Monetize verified account-sharing value first through a bounded rollout, then consider broader price action after observing customer response.",
+        "priorities": [
+          "Verified customer usage and value",
+          "Conversion and retention evidence",
+          "Bounded revenue and customer impact"
+        ],
+        "guardrails": [
+          "Use measured regional rollout and advance notice.",
+          "Do not combine paid sharing with an immediate broad price increase."
+        ],
+        "reversalSignals": [
+          "Churn exceeds the approved range.",
+          "Verification or perceived service value weakens."
+        ],
+        "rationale": "Amy's pricing policy monetizes verified value with explicit terms and bounded customer impact. The action remains conditional on Customer value, Productivity improvement, Commercial clarity."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-PM-01-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-PM-01-A-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-PM-01-A",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-PM-01-A-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "maximize average revenue"
+      ],
+      "candidateResponse": {
+        "action": "Maximize average revenue immediately without customer response evidence.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-PM-01-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-PM-01-B-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "segment-level conversion and"
+      ],
+      "candidateResponse": {
+        "action": "Continue the program where conversion is supported while narrowing price, timing, and notice by segment to contain elevated churn.",
+        "priorities": [
+          "Segment-level conversion and churn",
+          "Preserved service value",
+          "Revenue quality after customer impact"
+        ],
+        "guardrails": [
+          "Pause segments that exceed the churn threshold.",
+          "Preserve advance notice and verification accuracy."
+        ],
+        "reversalSignals": [
+          "High-engagement conversion also weakens.",
+          "Segmented terms fail to restore retention."
+        ],
+        "rationale": "The policy changes rollout boundaries when customer response diverges without discarding value that remains verified. The action remains conditional on Customer value, Productivity improvement, Commercial clarity."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-PM-01-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-PM-01-B-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-PM-01-B",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-PM-01-B-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "apply one global"
+      ],
+      "candidateResponse": {
+        "action": "Apply one global rollout or abandon the verified monetization mechanism everywhere.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-PM-02-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-PM-02-A-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "verified product and"
+      ],
+      "candidateResponse": {
+        "action": "Approve a bounded Premium price update where product value and engagement support willingness to pay, with notice and retention monitoring.",
+        "priorities": [
+          "Verified product and customer value",
+          "Market willingness to pay",
+          "Bounded customer impact and revenue quality"
+        ],
+        "guardrails": [
+          "Give advance notice and monitor conversion and churn.",
+          "Avoid using cost inflation alone as the value case."
+        ],
+        "reversalSignals": [
+          "Engagement, conversion, or willingness to pay weakens.",
+          "Customer impact exceeds the approved range."
+        ],
+        "rationale": "The pricing policy supports monetization after measured value with a bounded customer rationale. The action remains conditional on Customer value, Productivity improvement, Commercial clarity."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-PM-02-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-PM-02-A-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-PM-02-A",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-PM-02-A-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "raise price solely"
+      ],
+      "candidateResponse": {
+        "action": "Raise price solely to meet a revenue target without verified value.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-PM-02-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-PM-02-B-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "market-level willingness to"
+      ],
+      "candidateResponse": {
+        "action": "Shift monetization toward supported mature-market pricing and growth-market packaging or timing instead of one uniform increase.",
+        "priorities": [
+          "Market-level willingness to pay",
+          "Customer value by package",
+          "Portfolio revenue quality"
+        ],
+        "guardrails": [
+          "Keep product and creator investment intact.",
+          "Do not force weak growth markets through the mature-market price point."
+        ],
+        "reversalSignals": [
+          "Mature-market conversion weakens.",
+          "Growth-market value and willingness to pay recover."
+        ],
+        "rationale": "Divergent customer evidence calls for monetization reallocation rather than uniform pricing. The action remains conditional on Customer value, Productivity improvement, Commercial clarity."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-PM-02-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-PM-02-B-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-PM-02-B",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-PM-02-B-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "apply a global"
+      ],
+      "candidateResponse": {
+        "action": "Apply a global price because aggregate revenue needs are unchanged.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-PM-03-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-PM-03-A-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "member value and"
+      ],
+      "candidateResponse": {
+        "action": "Implement a modest membership-fee increase only with stable loyalty, visible member value, and reinvestment that protects the customer proposition.",
+        "priorities": [
+          "Member value and loyalty",
+          "Willingness and capacity to pay",
+          "Sustainable monetization and reinvestment"
+        ],
+        "guardrails": [
+          "Continue selected price and wage investment.",
+          "Monitor renewal and discretionary spending after notice."
+        ],
+        "reversalSignals": [
+          "Renewal intent or member spending weakens materially.",
+          "Inflation again impairs customer capacity."
+        ],
+        "rationale": "The policy permits price action when customer value and bounded impact are verified. The action remains conditional on Customer value, Productivity improvement, Commercial clarity."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-PM-03-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-PM-03-A-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-PM-03-A",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-PM-03-A-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "increase fees only"
+      ],
+      "candidateResponse": {
+        "action": "Increase fees only because the historical cycle is overdue.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-PM-03R-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-PM-03R-B-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "verified member value"
+      ],
+      "candidateResponse": {
+        "action": "Use a segmented or phased fee increase where loyalty and value remain verified, while delaying the most price-sensitive segments and preserving member reinvestment.",
+        "priorities": [
+          "Verified member value and loyalty",
+          "Segment-level customer capacity",
+          "Commercial clarity and durable monetization"
+        ],
+        "guardrails": [
+          "Do not impose a uniform increase across materially different customer-capacity conditions.",
+          "Keep timing and reinvestment terms explicit."
+        ],
+        "reversalSignals": [
+          "Delay affected segments if renewal intent weakens.",
+          "Resume only when value, loyalty, and customer capacity support the terms."
+        ],
+        "rationale": "Customer capacity and value evidence have become explicit non-applicability conditions. The action remains conditional on Customer value, Productivity improvement, Commercial clarity."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-PM-03R-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-PM-03R-B-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-PM-03R-B",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-PM-03R-B-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "proceed because fees"
+      ],
+      "candidateResponse": {
+        "action": "Proceed because fees have not changed for many years despite new customer strain.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-CE-01-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-CE-01-A-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "highest-priority strategic roadmap"
+      ],
+      "candidateResponse": {
+        "action": "Reduce operating and capital commitments misaligned with current demand while protecting the core transformation roadmap.",
+        "priorities": [
+          "Highest-priority strategic roadmap",
+          "Current demand and capacity utilization",
+          "Cost, margin, and balance-sheet efficiency"
+        ],
+        "guardrails": [
+          "Separate unused or duplicate capacity from critical milestones.",
+          "Measure savings and roadmap execution together."
+        ],
+        "reversalSignals": [
+          "A reduction threatens a verified strategic bottleneck.",
+          "Demand or utilization recovers enough to justify capacity."
+        ],
+        "rationale": "Amy's efficiency policy reallocates toward highest-priority work rather than treating savings as undifferentiated austerity. The action remains conditional on Strategic priority alignment, Customer-valued differentiation and growth, Workforce productivity."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-CE-01-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-CE-01-A-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-CE-01-A",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-CE-01-A-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "apply an equal"
+      ],
+      "candidateResponse": {
+        "action": "Apply an equal percentage cut to every function and capital program.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-CE-01-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-CE-01-B-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "verified core-roadmap bottleneck"
+      ],
+      "candidateResponse": {
+        "action": "Preserve the total savings objective but fund the verified roadmap bottleneck by cutting duplicate support work and unused legacy capacity more deeply.",
+        "priorities": [
+          "Verified core-roadmap bottleneck",
+          "Savings quality and resource reallocation",
+          "Total margin and balance-sheet target"
+        ],
+        "guardrails": [
+          "Keep the exception limited to milestone-critical resources.",
+          "Do not weaken the total cost and capital discipline."
+        ],
+        "reversalSignals": [
+          "The bottleneck no longer affects the milestone.",
+          "Protected resources fail their execution gate."
+        ],
+        "rationale": "A verified highest-priority bottleneck changes allocation boundaries without eliminating the reset. The action remains conditional on Strategic priority alignment, Customer-valued differentiation and growth, Workforce productivity."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-CE-01-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-CE-01-B-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-CE-01-B",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-CE-01-B-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "continue the original"
+      ],
+      "candidateResponse": {
+        "action": "Continue the original cut at the bottleneck or use it to reopen broad spending.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-CE-02-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-CE-02-A-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "highest-priority product outcomes"
+      ],
+      "candidateResponse": {
+        "action": "Maintain the broad cost reset while allowing focused hiring and infrastructure investment only in verified priority bottlenecks.",
+        "priorities": [
+          "Highest-priority product outcomes",
+          "Measured productivity and bottlenecks",
+          "Total expense discipline"
+        ],
+        "guardrails": [
+          "Require role-level evidence for hiring.",
+          "Avoid recreating duplicate layers or broad operating expansion."
+        ],
+        "reversalSignals": [
+          "Priority demand weakens.",
+          "Focused teams fail productivity or release milestones."
+        ],
+        "rationale": "The policy supports focused resource movement when the current allocation no longer serves the highest priorities. The action remains conditional on Strategic priority alignment, Customer-valued differentiation and growth, Workforce productivity."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-CE-02-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-CE-02-A-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-CE-02-A",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-CE-02-A-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "freeze every hire"
+      ],
+      "candidateResponse": {
+        "action": "Freeze every hire or resume broad hiring because cash generation is strong.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-CE-02-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-CE-02-B-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "measured revenue bottleneck"
+      ],
+      "candidateResponse": {
+        "action": "Move people and budget from lower-priority projects to the measured revenue-bearing bottleneck without raising the total expense ceiling.",
+        "priorities": [
+          "Measured revenue bottleneck",
+          "Resource productivity and transfer feasibility",
+          "Total cost envelope"
+        ],
+        "guardrails": [
+          "Fund the move through named project reductions.",
+          "Track release throughput and revenue impact before further hiring."
+        ],
+        "reversalSignals": [
+          "The bottleneck shifts or released work becomes strategically necessary.",
+          "The focused team fails the agreed milestones."
+        ],
+        "rationale": "The changed evidence justifies resource reallocation, not net broad expansion. The action remains conditional on Strategic priority alignment, Customer-valued differentiation and growth, Workforce productivity."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-CE-02-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-CE-02-B-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-CE-02-B",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-CE-02-B-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "increase broad headcount"
+      ],
+      "candidateResponse": {
+        "action": "Increase broad headcount or leave resources in lower-priority work.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-CE-03-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-CE-03-A-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "differentiated customer and"
+      ],
+      "candidateResponse": {
+        "action": "Execute a targeted content and overhead reset that removes low-return duplication while protecting differentiated franchises and customer value.",
+        "priorities": [
+          "Differentiated customer and franchise value",
+          "Recurring contribution and content economics",
+          "Duplicate overhead and execution efficiency"
+        ],
+        "guardrails": [
+          "Test content removals against engagement and contribution.",
+          "Separate strategic content from generic volume and administrative duplication."
+        ],
+        "reversalSignals": [
+          "A removal destroys more contribution than it saves.",
+          "Customer churn or franchise value deteriorates."
+        ],
+        "rationale": "Amy's cost policy protects priority growth capacity while removing duplicate and low-return expense. The action remains conditional on Strategic priority alignment, Customer-valued differentiation and growth, Workforce productivity."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-CE-03-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-CE-03-A-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-CE-03-A",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-CE-03-A-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "cut content and"
+      ],
+      "candidateResponse": {
+        "action": "Cut content and staff uniformly to meet the headline target.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-CE-03-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-CE-03-B-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "changed churn and"
+      ],
+      "candidateResponse": {
+        "action": "Stop the value-destroying franchise removals and redirect the savings program to duplicate general content and administration.",
+        "priorities": [
+          "Changed churn and recurring contribution",
+          "Strategic franchise protection",
+          "Alternative verified savings"
+        ],
+        "guardrails": [
+          "Preserve most of the total savings through named alternatives.",
+          "Require contribution evidence before restoring any removed content."
+        ],
+        "reversalSignals": [
+          "Franchise contribution no longer exceeds its cost.",
+          "Alternative savings fail to materialize."
+        ],
+        "rationale": "The specific cut now violates the policy's priority protection, while the overall efficiency thesis remains valid. The action remains conditional on Strategic priority alignment, Customer-valued differentiation and growth, Workforce productivity."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-CE-03-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-CE-03-B-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-CE-03-B",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-CE-03-B-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "continue every cut"
+      ],
+      "candidateResponse": {
+        "action": "Continue every cut to preserve the headline target or cancel the entire efficiency program.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-SR-01-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-SR-01-A-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "strategic investment capacity"
+      ],
+      "candidateResponse": {
+        "action": "Authorize bounded repurchase capacity and a sustainable dividend while retaining discretion over deployment as investment and liquidity needs evolve.",
+        "priorities": [
+          "Strategic investment capacity",
+          "Liquidity and balance-sheet resilience",
+          "Flexible shareholder return"
+        ],
+        "guardrails": [
+          "Treat authorization as optional capacity.",
+          "Do not deploy below the strategic liquidity floor."
+        ],
+        "reversalSignals": [
+          "Cash generation weakens.",
+          "Higher-return strategic investment or liquidity needs rise."
+        ],
+        "rationale": "Amy's capital-return policy subordinates discretionary repurchases to investment and liquidity capacity. The action remains conditional on Strategic investment return, Liquidity and capital flexibility, Durable dividend commitment."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-SR-01-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-SR-01-A-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-SR-01-A",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-SR-01-A-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "treat authorization as"
+      ],
+      "candidateResponse": {
+        "action": "Treat authorization as a mandatory immediate deployment schedule.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-SR-01-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-SR-01-B-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "verified strategic investment"
+      ],
+      "candidateResponse": {
+        "action": "Retain optional authorization but slow actual repurchases behind verified strategic investment and liquidity requirements.",
+        "priorities": [
+          "Verified strategic investment",
+          "Liquidity across the larger investment cycle",
+          "Residual repurchase deployment"
+        ],
+        "guardrails": [
+          "Protect the sustainable dividend and minimum liquidity.",
+          "Keep authorization unused where investment returns are superior."
+        ],
+        "reversalSignals": [
+          "Strategic investment needs decline.",
+          "Free cash flow expands beyond the revised requirements."
+        ],
+        "rationale": "The investment cycle changes deployment guardrails, not the optional authorization itself. The action remains conditional on Strategic investment return, Liquidity and capital flexibility, Durable dividend commitment."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-SR-01-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-SR-01-B-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-SR-01-B",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-SR-01-B-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "cancel all capital"
+      ],
+      "candidateResponse": {
+        "action": "Cancel all capital return despite durable cash flow or execute the old pace despite higher-priority investment.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-SR-02-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-SR-02-A-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "durable growth investment"
+      ],
+      "candidateResponse": {
+        "action": "Authorize a discretionary first repurchase program only after strategic investment and liquidity needs are covered.",
+        "priorities": [
+          "Durable growth investment",
+          "Liquidity and recurring cash generation",
+          "Valuation-aware shareholder return"
+        ],
+        "guardrails": [
+          "Keep actual deployment discretionary and valuation-aware.",
+          "Do not weaken growth or the balance sheet to meet a buyback target."
+        ],
+        "reversalSignals": [
+          "A higher-return use of cash appears.",
+          "Cash generation or liquidity weakens."
+        ],
+        "rationale": "The policy preserves investment and liquidity before discretionary shareholder return. The action remains conditional on Strategic investment return, Liquidity and capital flexibility, Durable dividend commitment."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-SR-02-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-SR-02-A-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-SR-02-A",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-SR-02-A-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "commit to a"
+      ],
+      "candidateResponse": {
+        "action": "Commit to a fixed buyback schedule as a signal of discipline.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-SR-02-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-SR-02-B-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "higher-return strategic use"
+      ],
+      "candidateResponse": {
+        "action": "Redirect near-term cash from repurchases to the verified higher-return strategic opportunity while retaining unused authorization.",
+        "priorities": [
+          "Higher-return strategic use",
+          "Liquidity after investment",
+          "Residual valuation-aware repurchases"
+        ],
+        "guardrails": [
+          "Require the strategic investment to stay within its verified return and execution gates.",
+          "Retain rather than cancel optional authorization."
+        ],
+        "reversalSignals": [
+          "The strategic return thesis weakens.",
+          "Cash generation exceeds the combined investment and liquidity needs."
+        ],
+        "rationale": "A superior verified use of cash changes the priority order while optional authorization preserves flexibility. The action remains conditional on Strategic investment return, Liquidity and capital flexibility, Durable dividend commitment."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-SR-02-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-SR-02-B-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-SR-02-B",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-SR-02-B-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "deploy repurchases simply"
+      ],
+      "candidateResponse": {
+        "action": "Deploy repurchases simply because authorization exists or cancel all future return capacity.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-SR-03-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-SR-03-A-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "organic and strategic"
+      ],
+      "candidateResponse": {
+        "action": "Increase the sustainable dividend and optional repurchase capacity while preserving investment and acquisition flexibility.",
+        "priorities": [
+          "Organic and strategic investment",
+          "Ongoing cash-flow resilience",
+          "Sustainable and discretionary shareholder return"
+        ],
+        "guardrails": [
+          "Keep the dividend within durable cash generation.",
+          "Use repurchase authorization without a fixed deployment deadline."
+        ],
+        "reversalSignals": [
+          "Operating cash flow weakens.",
+          "Debt or strategic investment requirements rise."
+        ],
+        "rationale": "Amy's policy permits shareholder return from excess capacity while retaining strategic and balance-sheet flexibility. The action remains conditional on Strategic investment return, Liquidity and capital flexibility, Durable dividend commitment."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-SR-03-A",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-SR-03-A-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-SR-03-A",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-SR-03-A-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "maximize near-term return"
+      ],
+      "candidateResponse": {
+        "action": "Maximize near-term return at the expense of innovation or liquidity.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-SR-03-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-SR-03-B-aligned",
+      "answerType": "amy_aligned",
+      "expectedAnchorTerms": [
+        "contracted-demand strategic investment"
+      ],
+      "candidateResponse": {
+        "action": "Pause repurchase deployment, retain unused authorization, protect the sustainable dividend, and prioritize liquidity plus the contracted-demand investment.",
+        "priorities": [
+          "Contracted-demand strategic investment",
+          "Liquidity and refinancing resilience",
+          "Sustainable dividend before repurchases"
+        ],
+        "guardrails": [
+          "Do not execute repurchases during the cash-flow and refinancing squeeze.",
+          "Do not cut a still-sustainable dividend without evidence it is required."
+        ],
+        "reversalSignals": [
+          "Operating cash flow recovers and refinancing pressure eases.",
+          "The required investment completes within its return gate."
+        ],
+        "rationale": "Weaker cash generation and higher strategic investment are explicit reversal signals for repurchase deployment. The action remains conditional on Strategic investment return, Liquidity and capital flexibility, Durable dividend commitment."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-SR-03-B",
+      "expectedAnchor": "priority_order",
+      "calibrationId": "cal-AAS-V6-SR-03-B-generic",
+      "answerType": "generic_cfo",
+      "expectedAnchorTerms": [
+        "generic flexibility"
+      ],
+      "candidateResponse": {
+        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "priorities": [
+          "Protect liquidity",
+          "Preserve generic flexibility",
+          "Benchmark risk-adjusted returns"
+        ],
+        "guardrails": [
+          "Stay within the board risk appetite."
+        ],
+        "reversalSignals": [
+          "Change course if generic returns weaken."
+        ],
+        "rationale": "This is prudent conventional CFO advice under uncertainty."
+      }
+    },
+    {
+      "scenarioId": "AAS-V6-SR-03-B",
+      "expectedAnchor": "identity_conflict",
+      "calibrationId": "cal-AAS-V6-SR-03-B-conflict",
+      "answerType": "amy_conflict",
+      "expectedAnchorTerms": [
+        "continue repurchases mechanically"
+      ],
+      "candidateResponse": {
+        "action": "Continue repurchases mechanically or cut the dividend before using discretionary authorization flexibility.",
+        "priorities": [
+          "Speed",
+          "Strategic narrative",
+          "Market signaling"
+        ],
+        "guardrails": [
+          "Proceed without the Amy-specific boundary."
+        ],
+        "reversalSignals": [
+          "Reverse only after material loss."
+        ],
+        "rationale": "This deliberately contradicts the frozen Amy identity key."
+      }
+    }
+  ]
+}

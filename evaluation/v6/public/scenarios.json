@@ -1,0 +1,308 @@
+{
+  "dataset": "amy_hood_identity_action_alignment_scenarios",
+  "version": "6.0.0",
+  "stage": "benchmark",
+  "frozenAt": "2026-07-21T14:00:00.000Z",
+  "scenarios": [
+    {
+      "id": "AAS-V6-MA-01-A",
+      "pairId": "AAS-V6-MA-01",
+      "domain": "m_and_a",
+      "phase": "initial",
+      "title": "Enterprise collaboration platform acquisition",
+      "situation": "A mature enterprise-software company can acquire a rapidly growing collaboration platform for roughly one year of the buyer's revenue. The target could become a common interface across the portfolio, but the valuation assumes sustained growth and the integration must preserve an open partner ecosystem. The cash portion requires balance-sheet cash and new debt, while current liquidity remains above the board's floor.",
+      "decisionQuestion": "What transaction recommendation should the CFO make, and which strategic, valuation, financing, and integration conditions should govern it?",
+      "predecessorScenarioId": "AAS-V5-MA-01-A"
+    },
+    {
+      "id": "AAS-V6-MA-01-B",
+      "pairId": "AAS-V6-MA-01",
+      "domain": "m_and_a",
+      "phase": "changed",
+      "title": "Collaboration acquisition after financing costs rise",
+      "situation": "The same strategic fit and target growth remain intact, and the target still accepts an open integration model. Credit spreads have widened enough to reduce expected accretion, but the buyer can preserve its minimum liquidity and investment-grade profile by reducing the upfront cash portion, staging integration commitments, and suspending discretionary repurchases.",
+      "decisionQuestion": "Should the CFO preserve, resize, restructure, or abandon the transaction, and which financing and execution boundaries should change?",
+      "predecessorScenarioId": "AAS-V5-MA-01-B"
+    },
+    {
+      "id": "AAS-V6-MA-02R-A",
+      "pairId": "AAS-V6-MA-02",
+      "domain": "m_and_a",
+      "phase": "initial",
+      "title": "Design-platform acquisition with a credible bounded remedy path",
+      "situation": "A software buyer is considering a design-platform acquisition whose strategic reach and community value remain attractive. Regulators have provided a written and time-bounded remedy path before commitment, but the remedies reduce synergies and require a smaller transaction perimeter. Liquidity and investment-grade capacity remain above approved floors.",
+      "decisionQuestion": "What bounded transaction structure should the CFO recommend, and how should strategic reach, remedy economics, financing, and integration gates be ordered?",
+      "predecessorScenarioId": "AAS-V5-MA-02-A"
+    },
+    {
+      "id": "AAS-V6-MA-02R-B",
+      "pairId": "AAS-V6-MA-02",
+      "domain": "m_and_a",
+      "phase": "changed",
+      "title": "Design-platform remedy becomes more costly but remains executable",
+      "situation": "The same transaction still has a credible approval path, but the required divestiture becomes larger and expected synergies decline. The strategic market reach remains intact, and the buyer can resize consideration, stage integration, or preserve capital for alternatives without breaching liquidity floors.",
+      "decisionQuestion": "How should the CFO resize or restructure the transaction while preserving Amy-specific value and execution boundaries?",
+      "predecessorScenarioId": "AAS-V5-MA-02-B"
+    },
+    {
+      "id": "AAS-V6-MA-03-A",
+      "pairId": "AAS-V6-MA-03",
+      "domain": "m_and_a",
+      "phase": "initial",
+      "title": "Open hybrid-platform acquisition",
+      "situation": "A large technology company can acquire a high-growth subscription infrastructure provider for a material share of annual revenue. The target has double-digit growth, strong renewal economics, and a differentiated open ecosystem. The all-cash deal requires new debt, temporary earnings dilution, suspended repurchases, and a multi-year deleveraging plan, but is expected to improve free cash flow and margins after closing.",
+      "decisionQuestion": "What recommendation should the CFO make, and how should strategic reach, target independence, financing capacity, and the accretion timeline be sequenced?",
+      "predecessorScenarioId": "AAS-V5-MA-03-A"
+    },
+    {
+      "id": "AAS-V6-MA-03R-B",
+      "pairId": "AAS-V6-MA-03",
+      "domain": "m_and_a",
+      "phase": "changed",
+      "title": "Open-platform acquisition with narrower but enforceable safeguards",
+      "situation": "The target narrows its proposed independence safeguards, but an enforceable open-ecosystem covenant and staged integration remain available. Strategic reach and free-cash-flow support remain intact, while financing is still inside the approved credit boundary.",
+      "decisionQuestion": "Should the CFO preserve the acquisition direction, and which contractual, financing, and integration gates must be tightened?",
+      "predecessorScenarioId": "AAS-V5-MA-03-B"
+    },
+    {
+      "id": "AAS-V6-AI-01-A",
+      "pairId": "AAS-V6-AI-01",
+      "domain": "ai_cloud_capex",
+      "phase": "initial",
+      "title": "Compute capacity for a portfolio-wide AI shift",
+      "situation": "Demand for a new AI stack is appearing across enterprise cloud customers and several consumer services. Current compute capacity constrains deployment, while new data centers and accelerators create long-lived depreciation and different return profiles by workload. Operating teams also request broad headcount expansion.",
+      "decisionQuestion": "How should the CFO size and sequence infrastructure and operating-resource investment while preserving accountability for returns?",
+      "predecessorScenarioId": "AAS-V5-AI-01-A"
+    },
+    {
+      "id": "AAS-V6-AI-01-B",
+      "pairId": "AAS-V6-AI-01",
+      "domain": "ai_cloud_capex",
+      "phase": "changed",
+      "title": "AI demand remains strong while power delivery slips",
+      "situation": "Customer demand and contracted workload volume remain strong, but utility interconnection dates have slipped and a subset of experimental workloads has not demonstrated stable unit economics. Equipment orders can be divided into cancellable tranches, while operating teams still request broad headcount growth.",
+      "decisionQuestion": "Should the CFO maintain, accelerate, or resize the investment, and which staging and operating-expense guardrails should change?",
+      "predecessorScenarioId": "AAS-V5-AI-01-B"
+    },
+    {
+      "id": "AAS-V6-AI-02-A",
+      "pairId": "AAS-V6-AI-02",
+      "domain": "ai_cloud_capex",
+      "phase": "initial",
+      "title": "Accelerated infrastructure range for an AI roadmap",
+      "situation": "A digital-platform company sees rapid growth in AI-assisted engagement and expects several products to require more training and inference capacity. Management proposes raising the capital-expenditure range before every product has a mature revenue model, while core advertising cash flow can fund the program.",
+      "decisionQuestion": "What capital recommendation should the CFO make, and how should demand, strategic urgency, workload economics, and operating discipline be ordered?",
+      "predecessorScenarioId": "AAS-V5-AI-02-A"
+    },
+    {
+      "id": "AAS-V6-AI-02-B",
+      "pairId": "AAS-V6-AI-02",
+      "domain": "ai_cloud_capex",
+      "phase": "changed",
+      "title": "AI portfolio develops unequal monetization evidence",
+      "situation": "Aggregate engagement remains strong and total funding capacity is unchanged, but two mature inference products now show contracted demand and improving margins while a frontier training program repeatedly misses utilization milestones. Capacity and engineering resources can be redirected without abandoning the broader AI roadmap.",
+      "decisionQuestion": "How should the CFO reallocate capital and operating resources across the portfolio, and what evidence should govern continued funding?",
+      "predecessorScenarioId": "AAS-V5-AI-02-B"
+    },
+    {
+      "id": "AAS-V6-AI-03-A",
+      "pairId": "AAS-V6-AI-03",
+      "domain": "ai_cloud_capex",
+      "phase": "initial",
+      "title": "Cloud capacity backed by longer customer commitments",
+      "situation": "A cloud provider receives stronger demand signals, larger customer commitments, and longer contract terms for conventional and generative-AI workloads. Capacity must be purchased before revenue is recognized, raising depreciation, but historical infrastructure cohorts have produced durable operating income and free cash flow as utilization matured.",
+      "decisionQuestion": "Should the CFO materially increase infrastructure capital expenditure, and which monetization, utilization, and cash-flow controls should accompany the decision?",
+      "predecessorScenarioId": "AAS-V5-AI-03-A"
+    },
+    {
+      "id": "AAS-V6-AI-03-B",
+      "pairId": "AAS-V6-AI-03",
+      "domain": "ai_cloud_capex",
+      "phase": "changed",
+      "title": "Cloud commitments weaken before capacity is locked",
+      "situation": "Before the cancellable infrastructure tranche is committed, new contract duration and committed workload volumes fall materially, projected utilization drops below the approved threshold, and improved accelerator economics make waiting less costly. Existing services remain healthy and already committed capacity is sufficient for near-term demand.",
+      "decisionQuestion": "Should the CFO continue, stage, reduce, or pause the next capital tranche, and which changed signals justify the action?",
+      "predecessorScenarioId": "AAS-V5-AI-03-B"
+    },
+    {
+      "id": "AAS-V6-PM-01-A",
+      "pairId": "AAS-V6-PM-01",
+      "domain": "pricing_monetization",
+      "phase": "initial",
+      "title": "Monetizing verified account sharing",
+      "situation": "A subscription service has improved its offering and can verify that substantial usage occurs outside paying households. Management can introduce a paid-sharing option with advance notice and measured regional rollout instead of applying an immediate broad price increase. Retention and engagement remain healthy.",
+      "decisionQuestion": "What monetization sequence should the CFO recommend, and which customer-value and churn boundaries should govern it?",
+      "predecessorScenarioId": "AAS-V5-PM-01-A"
+    },
+    {
+      "id": "AAS-V6-PM-01-B",
+      "pairId": "AAS-V6-PM-01",
+      "domain": "pricing_monetization",
+      "phase": "changed",
+      "title": "Paid-sharing rollout meets regional sensitivity",
+      "situation": "Verification accuracy and service value remain strong, but early rollout data show acceptable conversion in high-engagement markets and materially higher churn in price-sensitive markets. The company can preserve the program while varying timing, price points, and notice periods by segment.",
+      "decisionQuestion": "Should the CFO continue, narrow, or delay the rollout, and which segment-specific guardrails should change?",
+      "predecessorScenarioId": "AAS-V5-PM-01-B"
+    },
+    {
+      "id": "AAS-V6-PM-02-A",
+      "pairId": "AAS-V6-PM-02",
+      "domain": "pricing_monetization",
+      "phase": "initial",
+      "title": "Premium subscription price update",
+      "situation": "A global audio service has expanded product features and creator investment while input and operating costs rise. Customer engagement is stable across multiple markets, and management proposes a modest Premium price increase with advance notice rather than changing the free tier.",
+      "decisionQuestion": "Should the CFO support the price action, and how should verified value, regional willingness to pay, customer impact, and revenue quality be evaluated?",
+      "predecessorScenarioId": "AAS-V5-PM-02-A"
+    },
+    {
+      "id": "AAS-V6-PM-02-B",
+      "pairId": "AAS-V6-PM-02",
+      "domain": "pricing_monetization",
+      "phase": "changed",
+      "title": "Premium willingness to pay diverges by market",
+      "situation": "Product investment and total revenue needs remain unchanged, but willingness-to-pay tests now show strong headroom in mature markets and weak conversion in several growth markets. Packaging, family plans, and regional price timing can be changed without reducing creator investment.",
+      "decisionQuestion": "How should the CFO reallocate the monetization plan across markets and packages, and what customer evidence should determine each action?",
+      "predecessorScenarioId": "AAS-V5-PM-02-B"
+    },
+    {
+      "id": "AAS-V6-PM-03-A",
+      "pairId": "AAS-V6-PM-03",
+      "domain": "pricing_monetization",
+      "phase": "initial",
+      "title": "Membership fee after a prolonged delay",
+      "situation": "A membership retailer has not raised annual fees for longer than its usual cycle because members faced pandemic and inflation pressure. Inflation is easing, renewal and loyalty remain strong, nonessential spending is recovering, and the company continues lowering selected merchandise prices and investing in wages and member experience.",
+      "decisionQuestion": "Should the CFO recommend a bounded membership-fee increase now, and which value, loyalty, and reinvestment conditions should govern it?",
+      "predecessorScenarioId": "AAS-V5-PM-03-A"
+    },
+    {
+      "id": "AAS-V6-PM-03R-B",
+      "pairId": "AAS-V6-PM-03",
+      "domain": "pricing_monetization",
+      "phase": "changed",
+      "title": "Membership fee with uneven customer capacity but stable loyalty",
+      "situation": "Renewal intent and member value remain stable overall, but customer capacity has weakened in several price-sensitive segments. The company can phase timing, segment the increase, and preserve reinvestment in the member proposition rather than impose one uniform change.",
+      "decisionQuestion": "How should the CFO adapt the monetization rollout while preserving customer value, commercial clarity, and bounded customer impact?",
+      "predecessorScenarioId": "AAS-V5-PM-03-B"
+    },
+    {
+      "id": "AAS-V6-CE-01-A",
+      "pairId": "AAS-V6-CE-01",
+      "domain": "cost_efficiency",
+      "phase": "initial",
+      "title": "Cost reset under margin and unused-capacity pressure",
+      "situation": "A semiconductor manufacturer faces gross-margin pressure, demand below installed capacity, and a cost structure built for faster growth. Management proposes a major operating-cost plan and a material reduction in projected capital expenditure while continuing a multi-year technology transformation.",
+      "decisionQuestion": "What cost and capital actions should the CFO recommend, and how should current demand, balance-sheet resilience, and the core roadmap be protected?",
+      "predecessorScenarioId": "AAS-V5-CE-01-A"
+    },
+    {
+      "id": "AAS-V6-CE-01-B",
+      "pairId": "AAS-V6-CE-01",
+      "domain": "cost_efficiency",
+      "phase": "changed",
+      "title": "Cost reset reaches a verified roadmap bottleneck",
+      "situation": "Demand, margin pressure, and the total savings target remain unchanged, but one manufacturing milestone now lacks a small group of specialized engineers and test equipment required to keep the core roadmap on schedule. The shortfall can be funded by deeper cuts to duplicate support work and unused legacy capacity.",
+      "decisionQuestion": "Should the CFO preserve the total cost reset while changing its boundaries, and which work should be protected or reduced?",
+      "predecessorScenarioId": "AAS-V5-CE-01-B"
+    },
+    {
+      "id": "AAS-V6-CE-02-A",
+      "pairId": "AAS-V6-CE-02",
+      "domain": "cost_efficiency",
+      "phase": "initial",
+      "title": "Efficiency program with selective rehiring",
+      "situation": "A digital company has reduced total headcount and duplicate management layers while maintaining strong cash generation. Product priorities now require targeted AI infrastructure and selected technical hiring, but broad operating expansion would recreate the prior cost base.",
+      "decisionQuestion": "How should the CFO balance continued expense discipline with selective investment and hiring?",
+      "predecessorScenarioId": "AAS-V5-CE-02-A"
+    },
+    {
+      "id": "AAS-V6-CE-02-B",
+      "pairId": "AAS-V6-CE-02",
+      "domain": "cost_efficiency",
+      "phase": "changed",
+      "title": "Verified technical bottleneck after an efficiency program",
+      "situation": "The broader cost base and product priorities remain unchanged, but measured deployment data now show that a specific infrastructure and reliability team is the binding constraint on revenue-bearing AI releases. Several lower-priority internal projects can release budget and personnel without changing the total expense ceiling.",
+      "decisionQuestion": "How should the CFO reallocate people and operating expense, and which productivity evidence should control the transfer?",
+      "predecessorScenarioId": "AAS-V5-CE-02-B"
+    },
+    {
+      "id": "AAS-V6-CE-03-A",
+      "pairId": "AAS-V6-CE-03",
+      "domain": "cost_efficiency",
+      "phase": "initial",
+      "title": "Content and overhead restructuring",
+      "situation": "A media company faces declining legacy-network economics and streaming losses. Management targets a large company-wide efficiency program using lower content volume, removal of low-engagement titles, reduced duplication, technology consolidation, and selected workforce actions while protecting differentiated franchises.",
+      "decisionQuestion": "What cost program should the CFO support, and how should savings, impairment risk, customer value, and strategic content be separated?",
+      "predecessorScenarioId": "AAS-V5-CE-03-A"
+    },
+    {
+      "id": "AAS-V6-CE-03-B",
+      "pairId": "AAS-V6-CE-03",
+      "domain": "cost_efficiency",
+      "phase": "changed",
+      "title": "Content cuts begin damaging differentiated value",
+      "situation": "The overhead target and legacy decline remain unchanged, but churn and engagement data now show that planned removals in two differentiated franchises would erase more recurring contribution than they save. Duplicate general content and administrative layers still offer enough verified savings to preserve most of the program.",
+      "decisionQuestion": "Should the CFO continue, redirect, or pause parts of the cost program, and which changed customer and contribution signals justify the action?",
+      "predecessorScenarioId": "AAS-V5-CE-03-B"
+    },
+    {
+      "id": "AAS-V6-SR-01-A",
+      "pairId": "AAS-V6-SR-01",
+      "domain": "shareholder_return_risk",
+      "phase": "initial",
+      "title": "Large optional repurchase authorization",
+      "situation": "A global technology company generates substantial free cash flow, holds liquidity above operating and strategic needs, maintains a sustainable dividend, and sees long-term value in its shares. The board can authorize a large additional repurchase capacity without requiring immediate deployment.",
+      "decisionQuestion": "What capital-return recommendation should the CFO make, and how should actual deployment remain subordinate to investment, liquidity, and valuation conditions?",
+      "predecessorScenarioId": "AAS-V5-SR-01-A"
+    },
+    {
+      "id": "AAS-V6-SR-01-B",
+      "pairId": "AAS-V6-SR-01",
+      "domain": "shareholder_return_risk",
+      "phase": "changed",
+      "title": "Repurchase capacity alongside a larger investment cycle",
+      "situation": "Free cash flow and the dividend remain durable, but verified AI infrastructure and supply-chain investments increase the next two years' strategic cash requirements. Liquidity stays above the minimum floor, and unused repurchase authorization does not expire.",
+      "decisionQuestion": "Should the CFO preserve the authorization while changing repurchase pace or guardrails, and which uses of cash should take priority?",
+      "predecessorScenarioId": "AAS-V5-SR-01-B"
+    },
+    {
+      "id": "AAS-V6-SR-02-A",
+      "pairId": "AAS-V6-SR-02",
+      "domain": "shareholder_return_risk",
+      "phase": "initial",
+      "title": "First repurchase program during profitable growth",
+      "situation": "A subscription-software company has improving operating discipline, recurring cash generation, and no existing repurchase program. The board considers an authorization that adds a shareholder-return option while leaving management discretion over timing and deployment.",
+      "decisionQuestion": "Should the CFO recommend the authorization, and which growth, liquidity, valuation, and deployment conditions should govern it?",
+      "predecessorScenarioId": "AAS-V5-SR-02-A"
+    },
+    {
+      "id": "AAS-V6-SR-02-B",
+      "pairId": "AAS-V6-SR-02",
+      "domain": "shareholder_return_risk",
+      "phase": "changed",
+      "title": "Repurchase plan meets a higher-return strategic use",
+      "situation": "Operating discipline and recurring cash generation remain strong, but a newly available strategic investment has verified customer demand and a higher risk-adjusted return than near-term repurchases. The existing authorization can remain unused without penalty, and the investment fits the approved liquidity floor.",
+      "decisionQuestion": "How should the CFO reallocate near-term cash deployment between repurchases and the strategic opportunity while preserving shareholder discipline?",
+      "predecessorScenarioId": "AAS-V5-SR-02-B"
+    },
+    {
+      "id": "AAS-V6-SR-03-A",
+      "pairId": "AAS-V6-SR-03",
+      "domain": "shareholder_return_risk",
+      "phase": "initial",
+      "title": "Dividend and repurchase increase with stable cash flow",
+      "situation": "A networking company has stable ongoing cash flow, an established dividend, and a moderate repurchase authorization while continuing organic innovation and selected acquisitions. Management proposes a modest dividend increase and additional repurchase capacity with no fixed deployment deadline.",
+      "decisionQuestion": "What shareholder-return recommendation should the CFO make, and how should confidence, investment capacity, and actual deployment be bounded?",
+      "predecessorScenarioId": "AAS-V5-SR-03-A"
+    },
+    {
+      "id": "AAS-V6-SR-03-B",
+      "pairId": "AAS-V6-SR-03",
+      "domain": "shareholder_return_risk",
+      "phase": "changed",
+      "title": "Capital returns after cash flow weakens",
+      "situation": "The strategic roadmap and sustainable dividend remain intact, but operating cash flow falls materially, debt refinancing becomes more expensive, and a time-sensitive infrastructure investment is required to meet contracted customer demand. Unused repurchase authorization can be retained without execution.",
+      "decisionQuestion": "Should the CFO continue, reduce, or pause capital-return deployment, and which changed liquidity and investment signals are decisive?",
+      "predecessorScenarioId": "AAS-V5-SR-03-B"
+    }
+  ]
+}

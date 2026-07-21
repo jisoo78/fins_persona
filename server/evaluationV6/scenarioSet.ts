@@ -6,6 +6,7 @@ import type {
 import { EVALUATION_V6_DOMAINS, EVALUATION_V6_EVIDENCE_CLASSES } from '../../shared/amyHoodEvaluationV6';
 import { canonicalJson, sha256 } from '../decisionAdvisor/canonicalJson';
 import { readJsonFile, writeJsonAtomic } from '../decisionAdvisor/jsonStore';
+import { loadEvaluationV5Bundle } from '../evaluationV5/scenarioSet';
 import { assertEvaluationV6AuditReady, validateEvaluationV6Audit } from './audit';
 import { evaluationV6Paths } from './paths';
 
@@ -281,6 +282,9 @@ export const loadEvaluationV6CandidateInput = async (root: string): Promise<Eval
     readJsonFile<EvaluationV6FrozenManifest | null>(paths.manifest, null),
   ]);
   if (!scenarioFile) throw new Error('Evaluation v6 scenarios are missing');
+  const predecessorV5BundleHash = manifest?.predecessorV5BundleHash
+    ?? (await loadEvaluationV5Bundle(root)).manifest?.bundleHash
+    ?? '';
   return {
     scenarioFile,
     reviews: reviewFile.reviews,
@@ -290,7 +294,7 @@ export const loadEvaluationV6CandidateInput = async (root: string): Promise<Eval
     identityKeys: keyFile.identityKeys,
     pairKeys: pairFile.pairKeys,
     calibrationAnswers: calibrationFile.calibrationAnswers,
-    predecessorV5BundleHash: manifest?.predecessorV5BundleHash ?? '',
+    predecessorV5BundleHash,
     manifest,
   };
 };
