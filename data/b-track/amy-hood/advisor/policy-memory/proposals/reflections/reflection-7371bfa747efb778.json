@@ -1,25 +1,28 @@
 {
   "id": "reflection-7371bfa747efb778",
   "domain": "shareholder_return_risk",
-  "crossEventQuestion": "When should Microsoft authorize a major share repurchase while preserving capital flexibility?",
-  "observation": "The reviewed 2013 and 2024 events authorize bounded repurchase capacity as part of a continuing cash-return commitment.",
-  "invariant": "Authorize shareholder cash return within an explicit ceiling while retaining discretion over actual deployment.",
+  "crossEventQuestion": "When should Microsoft authorize and deploy shareholder cash return, and when should it reduce actual buyback deployment?",
+  "observation": "The 2013 and 2024 events preserve bounded repurchase capacity and a shareholder-return commitment, while FY2023 shows materially lower actual deployment despite available authorization.",
+  "invariant": "Preserve the long-term shareholder-return commitment while treating buyback deployment as an opportunistic and reversible capital-allocation lever.",
   "boundaryConditions": [
-    "The authorization ceiling and competing investment or liquidity needs must remain explicit."
+    "Authorize and deploy when capital flexibility is adequate and repurchase economics remain attractive.",
+    "Reduce deployment when higher-return investment, liquidity, or flexibility needs dominate."
   ],
   "unresolvedConflicts": [
-    "The bounded public event set contains no reviewed Amy Hood event suspending repurchases on this same capital-return axis."
+    "No contemporaneous Amy Hood causal explanation links the FY2023 deployment reduction to a specific competing investment; the filing establishes the action and earlier Amy Hood evidence establishes the return commitment."
   ],
   "decisionAxis": {
     "decisionObject": "shareholder_cash_return",
-    "decisionQuestion": "When should bounded repurchase capacity be authorized?",
+    "decisionQuestion": "Should Microsoft deploy authorized repurchase capital or reduce deployment to preserve flexibility?",
     "choiceSet": [
       "authorize_bounded_cash_return",
-      "defer_or_reduce_cash_return"
+      "reduce_buyback_deployment_preserve_flexibility"
     ],
     "gatingVariables": [
-      "authorization_ceiling",
       "capital_flexibility",
+      "strategic_investment_return",
+      "liquidity_need",
+      "repurchase_economics",
       "cash_return_commitment"
     ]
   },
@@ -39,22 +42,34 @@
       "span-fdd09e9019051bf7"
     ]
   },
-  "contrastStatus": "documented_unavailable",
-  "contrastPattern": null,
-  "conditionDelta": "No reviewed opposite-condition repurchase event is available in the bounded public evidence set.",
-  "actionDelta": "Defer or reduce cash return when capital flexibility or competing investment needs dominate.",
+  "contrastStatus": "reviewed",
+  "contrastPattern": {
+    "eventIds": ["event-buyback-deployment-slowdown-fy2023"],
+    "conditions": [
+      "Authorization remains available, but competing investment or capital-flexibility needs have greater marginal value than immediate repurchase deployment."
+    ],
+    "action": "reduce_buyback_deployment_preserve_flexibility",
+    "evidenceIds": [
+      "span-buyback-deployment-policy-2013",
+      "span-buyback-deployment-action-2023"
+    ]
+  },
+  "conditionDelta": "Adequate flexibility and attractive return economics support bounded cash return; stronger investment or liquidity needs support slower deployment.",
+  "actionDelta": "Move from authorizing bounded cash return to reducing actual buyback deployment while preserving authorization and the broader return commitment.",
   "supportingEventIds": [
     "event-buyback-2013",
     "event-buyback-2024"
   ],
-  "contrastingEventIds": [],
+  "contrastingEventIds": ["event-buyback-deployment-slowdown-fy2023"],
   "evidenceIds": [
     "span-20e3349dbae4503b",
     "span-328e730e3d56a46c",
     "span-4d34d5136c326275",
-    "span-fdd09e9019051bf7"
+    "span-fdd09e9019051bf7",
+    "span-buyback-deployment-policy-2013",
+    "span-buyback-deployment-action-2023"
   ],
-  "confidence": "medium",
+  "confidence": "high",
   "status": "review_required",
   "review": null
 }

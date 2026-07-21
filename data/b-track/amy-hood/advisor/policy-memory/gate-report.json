@@ -1,15 +1,18 @@
 {
-  "generatedAt": "2026-07-21T01:25:12.405Z",
+  "generatedAt": "2026-07-21T08:08:39.053Z",
   "inputEventIds": [
     "event-activision-acquisition-2022",
     "event-ai-capacity-opex-pivot-2023",
     "event-ai-capacity-sourcing-2024",
+    "event-ai-datacenter-project-pacing-2025",
     "event-buyback-2013",
     "event-buyback-2024",
+    "event-buyback-deployment-slowdown-fy2023",
     "event-cloud-capacity-scale-2022",
     "event-copilot-price-2023",
     "event-linkedin-acquisition-2016",
     "event-nuance-acquisition-2021",
+    "event-priority-reinvestment-fy2022",
     "event-teams-unbundle-2023",
     "event-transformation-2026",
     "event-workforce-reset-2023"

@@ -5,23 +5,26 @@
     "Customer demand and capacity urgency remain observable and infrastructure economics remain supportable."
   ],
   "priorityOrder": [
-    "Customer demand",
+    "Customer demand and service adoption",
     "Capacity urgency",
-    "Profitability and cost constraint",
-    "Supply lead time"
+    "Infrastructure economics",
+    "Asset reversibility",
+    "Profitability and operating-cost constraint"
   ],
   "recommendedAction": "Scale infrastructure while constraining operating expense growth and monitoring infrastructure economics.",
   "nonApplicabilityConditions": [
-    "Demand, capacity urgency, or infrastructure economics no longer supports expansion."
+    "Project-specific demand, adoption, timing, location, or infrastructure economics no longer supports the original commitment."
   ],
   "guardrails": [
-    "Keep operating-expense growth and disciplined profitability explicit while capital capacity scales."
+    "Keep operating-expense growth and disciplined profitability explicit while capital capacity scales.",
+    "Adjust reversible early-stage assets before abandoning the broader AI infrastructure strategy."
   ],
   "exceptions": [
+    "Slow or pause selected early-stage projects when updated demand, adoption, or business-priority signals weaken the original timing or location.",
     "Use staged or third-party capacity when it preserves flexibility without weakening service commitments."
   ],
   "reversalSignals": [
-    "Customer demand weakens, capacity urgency relaxes, or infrastructure economics materially deteriorates."
+    "Customer demand weakens, service adoption trails plan, capacity urgency relaxes, project location becomes suboptimal, or infrastructure economics materially deteriorates."
   ],
   "reflectionIds": [
     "reflection-f75c6c30eef7c1e0"
@@ -30,24 +33,28 @@
     "event-ai-capacity-opex-pivot-2023",
     "event-ai-capacity-sourcing-2024"
   ],
-  "contrastingEventIds": [],
+  "contrastingEventIds": [
+    "event-ai-datacenter-project-pacing-2025"
+  ],
   "evidenceIds": [
     "span-capacity-2023-opex",
-    "span-capacity-2024-demand-discipline"
+    "span-capacity-2024-demand-discipline",
+    "span-ai-project-pacing-policy-2024",
+    "span-ai-project-pacing-action-2025"
   ],
   "directPolicyEvidenceIds": [
     "policy-ai-capex-cost-discipline-2023"
   ],
-  "contrastStatus": "documented_unavailable",
+  "contrastStatus": "reviewed",
   "schemaVersion": 2,
   "confidence": "medium",
   "policyKind": "deployable_policy",
   "status": "approved",
   "review": {
     "reviewer": "Codex",
-    "reviewedAt": "2026-07-21T01:25:00.408Z",
+    "reviewedAt": "2026-07-21T08:08:07.651Z",
     "decision": "approved",
-    "rationale": "Reviewed against approved same-axis reflections, source-linked Amy Hood principle evidence, holdout boundaries, explicit guardrails, reversal signals, and five-domain PoC coverage; approved at medium confidence.",
-    "validationHash": "87280d3d221deacb048ae76ecf113cd288d3dfe6f5fc725c8ad01dc25dd2e765"
+    "rationale": "Policy synchronized to the approved AI-capacity contrast with early-stage project pacing as the explicit reversal action and source limitation preserved.",
+    "validationHash": "480fdbc5321c02f69ba252117f8dc1aab0118b2439dcae1aeb6b67f5d1e18582"
   }
 }

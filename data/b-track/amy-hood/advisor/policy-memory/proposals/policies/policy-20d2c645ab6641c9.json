@@ -6,40 +6,40 @@
   ],
   "priorityOrder": [
     "Strategic priority alignment",
+    "Customer-valued differentiation and growth",
     "Workforce productivity",
     "Cost and revenue alignment",
     "Execution continuity"
   ],
   "recommendedAction": "Reduce or reallocate resources toward the highest-priority work while preserving focused investment.",
   "nonApplicabilityConditions": [
-    "Current allocation remains aligned with priority work and productive use."
+    "A verified high-growth opportunity has customer-valued differentiation and prior execution supports additional investment."
   ],
   "guardrails": [
-    "Preserve focused investment and execution continuity while changing headcount or cost structure."
+    "Judge cost discipline by resource placement and return evidence rather than imposing uniform cuts.",
+    "Preserve execution continuity while changing headcount or cost structure."
   ],
   "exceptions": [
-    "Retain resources when removal would impair a verified high-priority opportunity."
+    "Expand operating expense and headcount selectively when growth, differentiation, and execution evidence jointly support the investment."
   ],
   "reversalSignals": [
-    "Priority alignment improves, productivity recovers, or reductions begin to impair focused investment."
+    "Priority alignment improves, reductions impair a verified growth opportunity, or customer-valued differentiation and execution evidence justify renewed expansion."
   ],
-  "reflectionIds": [
-    "reflection-bd563b486d9d6f9b"
-  ],
+  "reflectionIds": ["reflection-bd563b486d9d6f9b"],
   "supportingEventIds": [
     "event-transformation-2026",
     "event-workforce-reset-2023"
   ],
-  "contrastingEventIds": [],
+  "contrastingEventIds": ["event-priority-reinvestment-fy2022"],
   "evidenceIds": [
     "span-abaa0f62aa30208c",
     "span-acc7150e73b95096",
-    "span-f031de15863e849e"
+    "span-f031de15863e849e",
+    "span-priority-reinvestment-policy-2021",
+    "span-priority-reinvestment-headcount-2021"
   ],
-  "directPolicyEvidenceIds": [
-    "policy-workforce-resource-reallocation-2022"
-  ],
-  "contrastStatus": "documented_unavailable",
+  "directPolicyEvidenceIds": ["policy-workforce-resource-reallocation-2022"],
+  "contrastStatus": "reviewed",
   "schemaVersion": 2,
   "confidence": "medium",
   "policyKind": "deployable_policy",

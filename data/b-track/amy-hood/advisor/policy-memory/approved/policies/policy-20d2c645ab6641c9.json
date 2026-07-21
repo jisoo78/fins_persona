@@ -6,22 +6,24 @@
   ],
   "priorityOrder": [
     "Strategic priority alignment",
+    "Customer-valued differentiation and growth",
     "Workforce productivity",
     "Cost and revenue alignment",
     "Execution continuity"
   ],
   "recommendedAction": "Reduce or reallocate resources toward the highest-priority work while preserving focused investment.",
   "nonApplicabilityConditions": [
-    "Current allocation remains aligned with priority work and productive use."
+    "A verified high-growth opportunity has customer-valued differentiation and prior execution supports additional investment."
   ],
   "guardrails": [
-    "Preserve focused investment and execution continuity while changing headcount or cost structure."
+    "Judge cost discipline by resource placement and return evidence rather than imposing uniform cuts.",
+    "Preserve execution continuity while changing headcount or cost structure."
   ],
   "exceptions": [
-    "Retain resources when removal would impair a verified high-priority opportunity."
+    "Expand operating expense and headcount selectively when growth, differentiation, and execution evidence jointly support the investment."
   ],
   "reversalSignals": [
-    "Priority alignment improves, productivity recovers, or reductions begin to impair focused investment."
+    "Priority alignment improves, reductions impair a verified growth opportunity, or customer-valued differentiation and execution evidence justify renewed expansion."
   ],
   "reflectionIds": [
     "reflection-bd563b486d9d6f9b"
@@ -30,25 +32,29 @@
     "event-transformation-2026",
     "event-workforce-reset-2023"
   ],
-  "contrastingEventIds": [],
+  "contrastingEventIds": [
+    "event-priority-reinvestment-fy2022"
+  ],
   "evidenceIds": [
     "span-abaa0f62aa30208c",
     "span-acc7150e73b95096",
-    "span-f031de15863e849e"
+    "span-f031de15863e849e",
+    "span-priority-reinvestment-policy-2021",
+    "span-priority-reinvestment-headcount-2021"
   ],
   "directPolicyEvidenceIds": [
     "policy-workforce-resource-reallocation-2022"
   ],
-  "contrastStatus": "documented_unavailable",
+  "contrastStatus": "reviewed",
   "schemaVersion": 2,
   "confidence": "medium",
   "policyKind": "deployable_policy",
   "status": "approved",
   "review": {
     "reviewer": "Codex",
-    "reviewedAt": "2026-07-21T01:25:00.364Z",
+    "reviewedAt": "2026-07-21T08:08:05.752Z",
     "decision": "approved",
-    "rationale": "Reviewed against approved same-axis reflections, source-linked Amy Hood principle evidence, holdout boundaries, explicit guardrails, reversal signals, and five-domain PoC coverage; approved at medium confidence.",
-    "validationHash": "c703571eb6c9e88b531f8f4d4d1c933e4f88d3f6644646cb62e63d1536506fad"
+    "rationale": "Policy synchronized to the approved cost-efficiency contrast with explicit selective reinvestment action and observable reversal signals.",
+    "validationHash": "f89fa6f6fb181d8c5de86ad8fd50bb4760f0648c0303be1910aabaa4e8e9326e"
   }
 }

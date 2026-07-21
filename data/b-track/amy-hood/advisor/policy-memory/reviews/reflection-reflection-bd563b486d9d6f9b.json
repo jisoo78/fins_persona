@@ -1,7 +1,7 @@
 {
   "reviewer": "Codex",
-  "reviewedAt": "2026-07-21T01:21:10.054Z",
+  "reviewedAt": "2026-07-21T08:06:56.238Z",
   "decision": "approved",
-  "rationale": "Reviewed all five domain support events, exact evidence IDs, documented public-contrast gaps, decision axes, boundaries, and holdout exclusion.",
-  "validationHash": "ebad18d3709f2a3f43657500bb141c9db0fd3404a4c7d64cdc4dccfdf87bf27d"
+  "rationale": "User-approved PoC opposite event reviewed against the same resource-allocation axis; supporting events are preserved and source limitations remain explicit.",
+  "validationHash": "252f9421252ec23c599954d740a794a1903aaa84ada1104b0559d1b506aea118"
 }

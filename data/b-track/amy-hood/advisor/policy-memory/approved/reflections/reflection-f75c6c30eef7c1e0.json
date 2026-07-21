@@ -1,26 +1,29 @@
 {
   "id": "reflection-f75c6c30eef7c1e0",
   "domain": "ai_cloud_capex",
-  "crossEventQuestion": "When should AI and cloud infrastructure scale while operating expense remains constrained?",
-  "observation": "The reviewed 2023 and 2024 events scale infrastructure against demand while preserving explicit cost discipline.",
-  "invariant": "Scale capacity when customer demand and urgency are observable, while constraining operating expense and monitoring infrastructure economics.",
+  "crossEventQuestion": "When should AI infrastructure scale, and when should selected early-stage capacity projects be slowed or paused?",
+  "observation": "The 2023 and 2024 events scale infrastructure under visible demand and capacity urgency, while the 2025 event slows or pauses selected early-stage projects when updated demand, adoption, and business-priority signals change the required timing or location.",
+  "invariant": "Keep the AI capacity strategy demand-led and preserve flexibility by changing the most reversible asset commitments first.",
   "boundaryConditions": [
-    "Demand, capacity urgency, and infrastructure economics must remain observable."
+    "Scale when customer demand, capacity urgency, and infrastructure economics remain supportable.",
+    "Pace or pause early-stage projects when location, timing, adoption, or business-priority signals weaken."
   ],
   "unresolvedConflicts": [
-    "The bounded public event set contains no reviewed opposite action under the same AI capacity and cost conditions."
+    "No event-specific Amy Hood statement explains the 2025 pause; the action is attributed to Noelle Walsh and linked to Amy Hood's earlier demand-management policy."
   ],
   "decisionAxis": {
     "decisionObject": "ai_cloud_capacity_allocation",
-    "decisionQuestion": "When should capacity scale within operating-cost constraints?",
+    "decisionQuestion": "Should infrastructure scale within operating-cost constraints or should selected early-stage projects be paced?",
     "choiceSet": [
-      "defer_or_reduce_capacity",
-      "scale_infrastructure_constrain_opex"
+      "scale_infrastructure_constrain_opex",
+      "slow_or_pause_early_stage_projects"
     ],
     "gatingVariables": [
-      "capacity_urgency",
       "customer_demand",
-      "infrastructure_economics"
+      "capacity_urgency",
+      "service_adoption",
+      "infrastructure_economics",
+      "asset_reversibility"
     ]
   },
   "supportPattern": {
@@ -37,26 +40,42 @@
       "span-capacity-2024-demand-discipline"
     ]
   },
-  "contrastStatus": "documented_unavailable",
-  "contrastPattern": null,
-  "conditionDelta": "No reviewed opposite-condition AI capacity event is available in the bounded public evidence set.",
-  "actionDelta": "Capacity deferral is retained as a reversal path if demand, urgency, or economics weaken.",
+  "contrastStatus": "reviewed",
+  "contrastPattern": {
+    "eventIds": [
+      "event-ai-datacenter-project-pacing-2025"
+    ],
+    "conditions": [
+      "Early-stage assets remain reversible and updated demand, adoption, or business-priority signals no longer support the original timing or location."
+    ],
+    "action": "slow_or_pause_early_stage_projects",
+    "evidenceIds": [
+      "span-ai-project-pacing-policy-2024",
+      "span-ai-project-pacing-action-2025"
+    ]
+  },
+  "conditionDelta": "Visible demand and urgent capacity needs justify scaling; weaker project-specific timing or location signals justify selective early-stage pacing.",
+  "actionDelta": "Move from scaling capacity under cost discipline to slowing or pausing reversible early-stage projects while retaining the broader AI strategy.",
   "supportingEventIds": [
     "event-ai-capacity-opex-pivot-2023",
     "event-ai-capacity-sourcing-2024"
   ],
-  "contrastingEventIds": [],
+  "contrastingEventIds": [
+    "event-ai-datacenter-project-pacing-2025"
+  ],
   "evidenceIds": [
     "span-capacity-2023-opex",
-    "span-capacity-2024-demand-discipline"
+    "span-capacity-2024-demand-discipline",
+    "span-ai-project-pacing-policy-2024",
+    "span-ai-project-pacing-action-2025"
   ],
   "confidence": "medium",
   "status": "approved",
   "review": {
     "reviewer": "Codex",
-    "reviewedAt": "2026-07-21T01:21:10.073Z",
+    "reviewedAt": "2026-07-21T08:07:08.003Z",
     "decision": "approved",
-    "rationale": "Reviewed all five domain support events, exact evidence IDs, documented public-contrast gaps, decision axes, boundaries, and holdout exclusion.",
-    "validationHash": "62212749e613db9bd4ee64300d4d0f26f48b06ed57a5962f38b53b1c1dc6b5bd"
+    "rationale": "User-approved PoC opposite event reviewed on the AI-capacity axis; Noelle Walsh event authorship and absence of an event-specific Amy Hood explanation remain explicit.",
+    "validationHash": "9869153b1a9ca08cb53283631095bb88c47a388e5cb00c4774d18663df1a206d"
   }
 }

@@ -1,7 +1,7 @@
 {
   "reviewer": "Codex",
-  "reviewedAt": "2026-07-21T01:21:10.033Z",
+  "reviewedAt": "2026-07-21T08:07:09.903Z",
   "decision": "approved",
-  "rationale": "Reviewed all five domain support events, exact evidence IDs, documented public-contrast gaps, decision axes, boundaries, and holdout exclusion.",
-  "validationHash": "d2904b94d57c085d275ffaba806d57ad9894ced890f24d232f97c963dde632b6"
+  "rationale": "User-approved PoC opposite event reviewed on the shareholder-return axis; the filing establishes deployment while the lack of contemporaneous Amy Hood causal explanation remains explicit.",
+  "validationHash": "54666b634dd29dca3f4d2aacd64d4590f878510ba25bef4557d70542bcda1870"
 }

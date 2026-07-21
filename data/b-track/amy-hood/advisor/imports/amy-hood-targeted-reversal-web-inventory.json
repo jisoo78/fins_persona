@@ -1,0 +1,174 @@
+{
+  "dataset": "amy_hood_targeted_reversal_web_inventory",
+  "version": "1.0.0",
+  "researchedAt": "2026-07-21T15:30:00+09:00",
+  "scope": {
+    "purpose": "기존 승인 정책에서 비어 있는 반대 사건을 최소 범위로 보강",
+    "targetDomains": [
+      "ai_cloud_capex",
+      "cost_efficiency",
+      "shareholder_return_risk"
+    ],
+    "excludedDomains": {
+      "m_and_a": "기존 인벤토리의 Nokia 감액·구조조정 후보를 별도 승격 검토 가능",
+      "pricing_monetization": "기존 인벤토리의 Teams 분리·가격 조정 후보를 별도 승격 검토 가능"
+    },
+    "mergePolicy": "source-registry.json 및 event-candidates.json에는 자동 병합하지 않는다"
+  },
+  "statusDefinitions": {
+    "qualified": "Amy Hood의 사건 관련 직접 발언과 공식 행동 근거가 모두 존재",
+    "provisional": "공식 행동 또는 정책 근거는 충분하지만 Amy Hood의 동시점 사건 직접 발언이 부족",
+    "research_only": "가설 형성에는 유용하지만 정책·성찰 승인 근거로는 부족"
+  },
+  "candidates": [
+    {
+      "candidateId": "candidate-priority-reinvestment-fy2022",
+      "domain": "cost_efficiency",
+      "decisionDate": "2021-07-27",
+      "workingTitle": "비용 절감분을 고성장 차별화 영역에 재투자하고 인력을 확대",
+      "overallStatus": "qualified",
+      "contrastType": "conditional_counterexample",
+      "decisionSummary": {
+        "decisionQuestion": "운영 레버리지를 위해 절감분을 유지할 것인가, 성장 기회가 검증된 영역에 비용과 인력을 다시 투입할 것인가",
+        "chosenAction": "FY22에 12%를 넘는 인력 증가를 허용하고 클라우드 엔지니어링 등 고성장·차별화 영역에 운영비를 재투자",
+        "defaultPolicyContrasted": "수익성 방어를 위해 운영비와 인력 증가를 억제",
+        "reversalCondition": "고성장 시장이며 고객이 중요하게 여기는 차별성이 있고, 과거 투자 실행이 성장과 마진 신뢰로 이어졌을 때",
+        "guardrail": "총비용 자체보다 비용의 배치와 실행 결과를 우선 점검"
+      },
+      "directAmyEvidence": [
+        {
+          "canonicalUrl": "https://news.microsoft.com/wp-content/uploads/prod/2021/07/TranscriptFY21Q4.pdf",
+          "publisher": "Microsoft",
+          "sourceType": "official_earnings_transcript",
+          "publishedAt": "2021-07-27",
+          "speaker": "Amy Hood",
+          "exactQuote": "are we continuing to invest it in the highest growth places?",
+          "locator": "Amy Hood FY22 operating-margin answer; anchors: highest growth places, differentiation, 12 percent plus",
+          "evidenceRole": "decision_time_rationale"
+        }
+      ],
+      "supportingEvidence": [
+        {
+          "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/789019/000156459022026876/msft-10k_20220630.htm",
+          "publisher": "U.S. Securities and Exchange Commission",
+          "sourceType": "form_10_k",
+          "publishedAt": "2022-07-28",
+          "fact": "FY2022 연구개발비가 18% 증가했으며 공시는 클라우드 엔지니어링, Gaming, LinkedIn 투자를 증가 원인으로 제시한다.",
+          "evidenceRole": "action_outcome_crosscheck"
+        }
+      ],
+      "approvalRecommendation": "approve_for_contrastive_reflection",
+      "remainingGaps": [
+        "공개 발언은 전체 회사의 개별 채용 승인 목록이 아니라 FY22 운영계획 원칙을 설명한다.",
+        "원문 정규화·SHA-256·화자 오프셋은 정식 수집 단계에서 생성해야 한다."
+      ]
+    },
+    {
+      "candidateId": "candidate-ai-datacenter-project-pacing-2025",
+      "domain": "ai_cloud_capex",
+      "decisionDate": "2025-04-09",
+      "workingTitle": "AI 데이터센터 초기 단계 프로젝트의 선택적 보류·감속",
+      "overallStatus": "provisional",
+      "contrastType": "actual_action_with_policy_link",
+      "decisionSummary": {
+        "decisionQuestion": "예상 수요를 기준으로 계획한 모든 데이터센터를 계속 진행할 것인가, 수요와 사업 우선순위 변화에 맞춰 초기 단계 프로젝트 일부를 보류할 것인가",
+        "chosenAction": "Ohio를 포함한 일부 초기 단계 데이터센터 프로젝트를 늦추거나 중단하면서 전체 글로벌 인프라 확장은 유지",
+        "defaultPolicyContrasted": "수요가 공급을 초과하므로 AI·클라우드 용량을 공격적으로 확대",
+        "reversalCondition": "지역별 수요 신호, 고객 채택, 사업 우선순위 또는 장기 자산 배치가 기존 계획과 달라질 때",
+        "guardrail": "전체 AI 전략을 철회하지 않고 초기 단계·장기 자산부터 선택적으로 조정"
+      },
+      "eventEvidence": [
+        {
+          "canonicalUrl": "https://www.linkedin.com/posts/jamesthorn_noelle-has-stated-this-better-than-i-ever-activity-7315549305656823808-0Fe0",
+          "publisher": "LinkedIn repost of Noelle Walsh statement",
+          "sourceType": "executive_social_post_repost",
+          "publishedAt": "2025-04-09",
+          "speaker": "Noelle Walsh",
+          "exactQuote": "we are slowing or pausing some early-stage projects",
+          "evidenceRole": "event_action_confirmation"
+        },
+        {
+          "canonicalUrl": "https://apnews.com/article/4d987fe8446fc9e6cda31d919f938911",
+          "publisher": "Associated Press",
+          "sourceType": "news_report",
+          "publishedAt": "2025-04-09",
+          "fact": "Microsoft가 Ohio의 10억 달러 규모 계획을 포함한 일부 초기 단계 프로젝트 보류를 확인했다고 보도한다.",
+          "evidenceRole": "independent_action_crosscheck"
+        }
+      ],
+      "amyPolicyEvidence": [
+        {
+          "canonicalUrl": "https://www.microsoft.com/en-us/Investor/events/FY-2024/earnings-fy-2024-q4.aspx",
+          "publisher": "Microsoft Investor Relations",
+          "sourceType": "official_earnings_transcript",
+          "publishedAt": "2024-07-30",
+          "speaker": "Amy Hood",
+          "fact": "자본 지출은 수요 신호와 채택에 의존하며 연중 조정된다고 설명한다.",
+          "evidenceRole": "prior_policy_link"
+        }
+      ],
+      "approvalRecommendation": "hold_until_amy_event_specific_evidence",
+      "remainingGaps": [
+        "보류 결정 자체를 설명한 Amy Hood의 직접 발언을 찾지 못했다.",
+        "LinkedIn 원 게시물의 안정적인 canonical URL을 추가 확인해야 한다.",
+        "프로젝트별 재무 규모와 실제 취소·연기 범위가 완전히 공개되지 않았다."
+      ]
+    },
+    {
+      "candidateId": "candidate-buyback-deployment-slowdown-fy2023",
+      "domain": "shareholder_return_risk",
+      "decisionDate": "2023-06-30",
+      "workingTitle": "배당을 유지하면서 자사주 매입 집행 속도를 낮춘 자본배분",
+      "overallStatus": "provisional",
+      "contrastType": "observed_allocation_change_with_later_policy_explanation",
+      "decisionSummary": {
+        "decisionQuestion": "승인된 자사주 매입 여력을 빠르게 집행할 것인가, 배당 약속은 유지하되 자사주 매입을 더 유연하게 운용할 것인가",
+        "chosenAction": "FY2023 자사주 매입액을 FY2022 대비 낮추면서 배당과 전략적 투자 여력을 함께 유지",
+        "defaultPolicyContrasted": "강한 현금흐름을 즉시 대규모 자사주 매입으로 환원",
+        "reversalCondition": "내부 장기 성장 투자의 기대수익이 더 높거나 대규모 전략 투자·인수로 자본 수요가 커질 때",
+        "guardrail": "배당은 장기 약속으로 우선 유지하고 자사주 매입을 기회적·유연한 수단으로 사용"
+      },
+      "actionEvidence": [
+        {
+          "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/789019/000095017023035122/msft-20230630.htm",
+          "publisher": "U.S. Securities and Exchange Commission",
+          "sourceType": "form_10_k",
+          "publishedAt": "2023-07-27",
+          "fact": "Microsoft의 자사주 매입액은 FY2022 280억 달러에서 FY2023 184억 달러로 감소했다.",
+          "evidenceRole": "observed_action"
+        }
+      ],
+      "amyPolicyEvidence": [
+        {
+          "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2026/2025-annual-shareholder-meeting",
+          "publisher": "Microsoft Investor Relations",
+          "sourceType": "official_shareholder_meeting_transcript",
+          "publishedAt": "2025-12-05",
+          "speaker": "Amy Hood",
+          "exactQuote": "the first thing is long-term growth",
+          "fact": "자본배분 순서를 내부 장기 성장 투자, 배당, 기회적 자사주 매입으로 설명한다.",
+          "evidenceRole": "later_policy_explanation"
+        }
+      ],
+      "approvalRecommendation": "hold_until_contemporaneous_causal_evidence",
+      "remainingGaps": [
+        "FY2023 매입 감소를 특정 전략 투자나 유동성 우선순위와 직접 연결한 동시점 Amy Hood 발언을 찾지 못했다.",
+        "2025년 발언을 2023년 결정의 직접 원인으로 소급 적용할 수 없다.",
+        "매입액 감소에는 주가와 시장 조건 등 공개되지 않은 요인이 포함될 수 있다."
+      ]
+    }
+  ],
+  "summary": {
+    "candidateCount": 3,
+    "qualifiedCount": 1,
+    "provisionalCount": 2,
+    "recommendedImmediateUse": [
+      "candidate-priority-reinvestment-fy2022"
+    ],
+    "recommendedResearchQueue": [
+      "candidate-ai-datacenter-project-pacing-2025",
+      "candidate-buyback-deployment-slowdown-fy2023"
+    ],
+    "conclusion": "세 영역 모두 반대 행동 후보는 확보했으나, 정식 대조 정책 승인에 바로 사용할 수 있는 것은 비용 효율 영역 1건이다."
+  }
+}
