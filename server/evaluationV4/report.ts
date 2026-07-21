@@ -4,7 +4,7 @@ import type {
   EvaluationV4Grade,
   EvaluationV4Run,
 } from '../../shared/amyHoodEvaluationV4';
-import { EVALUATION_V4_ARMS } from '../../shared/amyHoodEvaluationV4';
+import { EVALUATION_V4_ARMS, EVALUATION_V4_DOMAINS } from '../../shared/amyHoodEvaluationV4';
 import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { writeJsonAtomic } from '../decisionAdvisor/jsonStore';
@@ -133,18 +133,27 @@ export const writeEvaluationV4HtmlReport = async (
   experimentGroupId: string,
   outputPath: string,
 ) => {
-  const report = await buildEvaluationV4CalibrationReport(root, experimentGroupId);
+  const [report, bundle] = await Promise.all([
+    buildEvaluationV4CalibrationReport(root, experimentGroupId),
+    loadEvaluationV4Bundle(root, 'calibration'),
+  ]);
   const arms = EVALUATION_V4_ARMS.map((arm) => `<tr><td>${escapeHtml(arm)}</td><td>${escapeHtml(report.armMeans[arm]?.toFixed(2) ?? 'N/A')}</td><td>${escapeHtml(arm === 'generic_cfo' ? 'baseline' : report.pairedLift[arm as keyof typeof report.pairedLift]?.toFixed(2) ?? 'N/A')}</td></tr>`).join('');
+  const domains = EVALUATION_V4_DOMAINS.map((domain) => `<tr><td>${escapeHtml(domain)}</td>${EVALUATION_V4_ARMS.map((arm) => `<td>${escapeHtml(report.domainMeans[arm][domain]?.toFixed(2) ?? 'N/A')}</td>`).join('')}</tr>`).join('');
+  const secondaryPresent = bundle.externalEvents.filter(({ secondarySourceStatus }) => secondarySourceStatus === 'present').length;
+  const secondaryUnavailable = bundle.externalEvents.filter(({ secondarySourceStatus }) => secondarySourceStatus === 'documented_unavailable').length;
+  const outcomeEvidenceCount = new Set(bundle.externalEvents.flatMap(({ outcomeEvidenceIds }) => outcomeEvidenceIds)).size;
   const html = `<!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Amy Hood Evaluation V4 Calibration</title>
 <style>body{font-family:system-ui,-apple-system,sans-serif;max-width:1080px;margin:40px auto;padding:0 24px;color:#172033;background:#f7f8fb}h1,h2{color:#0c326f}.card{background:#fff;border:1px solid #dce2ec;border-radius:12px;padding:20px;margin:16px 0}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px;border-bottom:1px solid #e5e9f0}.go{font-size:1.4rem;font-weight:700;color:${report.benchmarkGoNoGo === 'go' ? '#08783e' : '#b42318'}}code{word-break:break-all}</style></head>
 <body><h1>Amy Hood Decision Advisor — Evaluation V4 Calibration</h1>
-<div class="card"><p class="go">30문항 벤치마크: ${escapeHtml(report.benchmarkGoNoGo.toUpperCase())}</p><p>이 평가는 Prompt/RAG가 답변 행동에 유의미한 차이를 만드는지 보는 행동 교정 실험이며, Amy Hood 본인의 의사결정을 복제했다는 증명이 아닙니다.</p></div>
-<div class="card"><h2>정량 결과</h2><table><thead><tr><th>실험군</th><th>평균 AAS</th><th>비교 리프트</th></tr></thead><tbody>${arms}</tbody></table></div>
+<div class="card"><p class="go">30문항 벤치마크 진행 판정: ${escapeHtml(report.benchmarkGoNoGo.toUpperCase())}</p><p>이 1회 교정 실험은 Prompt/RAG가 답변 행동에 유의미한 차이를 만드는지 보는 행동 교정 실험이며, Amy Hood 본인의 의사결정을 복제했다는 증명이 아닙니다.</p></div>
+<div class="card"><h2>Before vs After 정량 결과</h2><table><thead><tr><th>실험군</th><th>평균 AAS</th><th>비교 리프트</th></tr></thead><tbody>${arms}</tbody></table><p>Amy Prompt는 일반 CFO 대비, 두 RAG 실험군은 Amy Prompt 대비 리프트입니다.</p></div>
+<div class="card"><h2>영역별 AAS</h2><table><thead><tr><th>영역</th>${EVALUATION_V4_ARMS.map((arm) => `<th>${escapeHtml(arm)}</th>`).join('')}</tr></thead><tbody>${domains}</tbody></table></div>
 <div class="card"><h2>검색 및 행동 진단</h2><ul><li>의도 정책 검색률: ${(report.retrieval.mappedPolicyRate * 100).toFixed(1)}%</li><li>잘못된 영역 검색률: ${(report.retrieval.wrongDomainRate * 100).toFixed(1)}%</li><li>캐시 일치율: ${(report.retrieval.cacheAgreementRate * 100).toFixed(1)}%</li><li>행동/우선순위 변화 시나리오: ${report.behaviorChangeCount}/10</li></ul></div>
+<div class="card"><h2>근거 완전성</h2><ul><li>가상 사건에 연결된 공식 1차 자료: ${bundle.externalEvents.length}개 사건 / ${new Set(bundle.externalEvents.map(({ primarySourceId }) => primarySourceId)).size}개 고유 자료</li><li>독립 2차 자료 확보: ${secondaryPresent}개 사건</li><li>2차 자료 부재 사유 기록: ${secondaryUnavailable}개 사건</li><li>사후 결과 근거(판단 시점 입력과 분리): ${outcomeEvidenceCount}개</li><li>RAG 응답의 근거 첨부율: ${(report.retrieval.evidenceAttachmentRate * 100).toFixed(1)}%</li></ul></div>
 <div class="card"><h2>가설과 판정 논리</h2><p>양의 방향 신호는 의도 정책 검색률 80% 이상, 행동 또는 우선순위 변화 3개 이상, 최상 RAG군의 Amy Prompt 대비 AAS +0.5 이상을 동시에 만족할 때만 인정합니다.</p><p>현재 판정: <strong>${report.positiveDirectionalSignal ? '충족' : '미충족'}</strong></p></div>
-<div class="card"><h2>제약</h2><p>공개자료의 완전성, 단일 채점자, 1회 반복, 10개 교정 문항 때문에 일반화 오차와 채점자 편향을 추정할 수 없습니다. GO는 30문항·5회 반복으로 확대할 실험적 근거일 뿐 배포 승인이 아닙니다.</p><p>실험 그룹: <code>${escapeHtml(experimentGroupId)}</code></p></div></body></html>`;
+<div class="card"><h2>최종 요약과 제약</h2><p>공개자료의 완전성, 단일 채점자, 1회 반복, 10개 교정 문항 때문에 일반화 오차와 채점자 편향을 추정할 수 없습니다. 신뢰도 검증: ${report.reliability.passed ? '통과' : '미수행'}, 반복 안정성: ${report.stability.passed ? '통과' : '미수행'}입니다. GO는 30문항·5회 반복으로 확대할 실험적 근거일 뿐 배포 승인이 아닙니다.</p><p>실험 그룹: <code>${escapeHtml(experimentGroupId)}</code></p></div></body></html>`;
   await import('node:fs/promises').then(({ mkdir }) => mkdir(path.dirname(outputPath), { recursive: true }));
   await writeFile(outputPath, html, 'utf8');
   return { report, outputPath };

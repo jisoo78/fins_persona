@@ -294,10 +294,14 @@ test('happy: input graph selects only approved non-holdout decision evidence', a
     'event-activision-acquisition-2022',
     'event-ai-capacity-opex-pivot-2023',
     'event-ai-capacity-sourcing-2024',
+    'event-buyback-2013',
+    'event-buyback-2024',
     'event-cloud-capacity-scale-2022',
     'event-copilot-price-2023',
     'event-linkedin-acquisition-2016',
     'event-nuance-acquisition-2021',
+    'event-teams-unbundle-2023',
+    'event-transformation-2026',
     'event-workforce-reset-2023',
   ]);
   assert.equal(graph.events.every(({ status }) => status === 'approved'), true);
@@ -691,10 +695,10 @@ test('failure: holdout and post-outcome inputs fail before model work', async (c
     'data/b-track/amy-hood/advisor/events/pilot/pilot-manifest.json',
   );
   const holdoutPilot = JSON.parse(await readFile(holdoutPilotPath, 'utf8'));
-  holdoutPilot.targets[2] = {
+  holdoutPilot.targets[0] = {
     candidateId: 'candidate-github-acquisition-2018',
     domain: 'm_and_a',
-    priority: 3,
+    priority: 1,
     replacementReason: 'Deliberately restore a sealed holdout to prove policy-build leakage rejection.',
   };
   await writeFile(holdoutPilotPath, `${JSON.stringify(holdoutPilot, null, 2)}\n`);

@@ -19,7 +19,7 @@ test('happy: retrieves the approved capacity policy', async () => {
   const built = await buildTestAmyHoodMemoryIndex(root);
   const retriever = await createAmyHoodHybridRetriever({ root, embeddingClient: fakeEmbeddingClient() });
   const result = await retriever.retrieve({ query: 'customer demand capacity urgency profitability', indexHash: built.manifest.indexHash });
-  assert.equal(result.matches[0].id, 'policy-c4203c075dbd61d3');
+  assert.equal(result.matches[0].id, 'policy-e7eafcda9e4dc2e3');
 });
 
 test('edge: unrelated query returns no-match', async () => {

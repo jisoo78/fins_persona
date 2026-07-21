@@ -30,12 +30,12 @@ test('happy: renders actual evidence text', async () => {
     systemPrompt: 'Amy Hood system prompt',
     userPrompt: 'AI 인프라와 운영비를 어떤 순서로 관리합니까?',
   });
-  assert.match(context.text, /Recommended action: scale_infrastructure_constrain_opex/);
-  assert.match(context.text, /We expect capital expenditures to have a material sequential increase/);
+  assert.match(context.text, /Recommended action: Scale infrastructure while constraining operating expense growth/);
+  assert.match(context.text, /we expect FY24 operating expense growth to remain low/);
   assert.match(context.text, /Published: 2023-04-25/);
   assert.match(context.text, /Decision axis:/);
   assert.match(context.text, /Condition delta:/);
-  assert.match(context.text, /event-cloud-capacity-scale-2022/);
+  assert.match(context.text, /event-ai-capacity-opex-pivot-2023/);
   assert.ok(context.trace.requestTokens <= 12_000);
 });
 

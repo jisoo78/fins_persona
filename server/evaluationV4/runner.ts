@@ -61,8 +61,17 @@ const invoke = async (model: ModelClient, input: ReturnType<typeof buildEvaluati
   const first = await model.invoke(input);
   try {
     return { result: first, response: parseEvaluationV4CandidateResponse(first.text) };
-  } catch {
-    const second = await model.invoke(input);
+  } catch (error) {
+    const repairInput = {
+      ...input,
+      user: [
+        input.user,
+        'Your previous response failed validation.',
+        `Validation error: ${error instanceof Error ? error.message : 'invalid JSON response'}`,
+        'Return corrected JSON only. Use exactly 3 priorities, at least 1 guardrail, at least 1 reversal signal, and no additional fields.',
+      ].join('\n\n'),
+    };
+    const second = await model.invoke(repairInput);
     const result: ModelResult = {
       ...second,
       elapsedMs: first.elapsedMs + second.elapsedMs,

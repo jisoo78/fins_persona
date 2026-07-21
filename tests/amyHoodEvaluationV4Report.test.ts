@@ -10,10 +10,12 @@
  *    - Reject incomplete runs and missing active grades.
  */
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import path from 'node:path';
 import test from 'node:test';
 
 import { exportEvaluationV4JudgePackets, importEvaluationV4Grades } from '../server/evaluationV4/judge';
-import { buildEvaluationV4CalibrationReport } from '../server/evaluationV4/report';
+import { buildEvaluationV4CalibrationReport, writeEvaluationV4HtmlReport } from '../server/evaluationV4/report';
 import { writeEvaluationV4Run } from '../server/evaluationV4/runStore';
 import { gradesForPackets, installEvaluationV4GradingFixture } from './helpers/evaluationV4GradingFixture';
 
@@ -26,6 +28,13 @@ test('happy: builds complete arm means and behavior diagnostics', async () => {
   assert.equal(report.diagnostics.completeAnswers, 40);
   assert.equal(report.armMeans.generic_cfo, 8);
   assert.equal(report.behaviorChangeCount > 0, true);
+  const outputPath = path.join(fixture.root, 'report.html');
+  await writeEvaluationV4HtmlReport(fixture.root, fixture.groupId, outputPath);
+  const html = await readFile(outputPath, 'utf8');
+  assert.match(html, /근거 완전성/);
+  assert.match(html, /공식 1차 자료.*10/);
+  assert.match(html, /영역별 AAS/);
+  assert.match(html, /1회 교정 실험/);
 });
 
 test('edge: tied grades remain tied', async () => {

@@ -34,6 +34,7 @@ const install = async (options: { failRetrieval?: boolean; failModelOnce?: boole
   const root = await mkdtemp(path.join(os.tmpdir(), 'amy-v4-runner-'));
   const bundle = evaluationV4BundleFixture();
   const retrievalInvocations: string[] = [];
+  const modelInputs: Array<{ system: string; user: string }> = [];
   let modelCalls = 0;
   let failedOnce = false;
   const runner = createEvaluationV4Runner({
@@ -42,7 +43,9 @@ const install = async (options: { failRetrieval?: boolean; failModelOnce?: boole
       provider: 'local',
       model: 'e4b-test',
       cacheKey: 'e4b-test-settings',
-      invoke: async () => {
+      invoke: async (input) => {
+        if (typeof input === 'string') throw new Error('expected structured Evaluation v4 model input');
+        modelInputs.push(input);
         modelCalls += 1;
         if (options.failModelOnce && !failedOnce) {
           failedOnce = true;
@@ -92,7 +95,7 @@ const install = async (options: { failRetrieval?: boolean; failModelOnce?: boole
     }),
     now: () => '2026-07-21T03:00:00.000Z',
   });
-  return { root, runner, retrievalInvocations, get modelCalls() { return modelCalls; } };
+  return { root, runner, retrievalInvocations, modelInputs, get modelCalls() { return modelCalls; } };
 };
 
 test('happy: executes one four-arm calibration', async () => {
@@ -109,6 +112,8 @@ test('edge: candidate response parser retry completes the answer', async () => {
   const fixture = await install({ malformedOnce: true });
   const launch = await fixture.runner.createExperiment({ stage: 'calibration' });
   assert.equal((await fixture.runner.executeRun(launch.runs[0].runId)).status, 'complete');
+  assert.match(fixture.modelInputs[1].user, /previous response failed validation/i);
+  assert.match(fixture.modelInputs[1].user, /exactly 3 priorities/i);
 });
 
 test('edge: both RAG arms share retrieval cache entries', async () => {

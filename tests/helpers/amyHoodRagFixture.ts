@@ -46,9 +46,13 @@ export const fakeEmbeddingClient = (fail = false): EmbeddingClient => ({
   preflight: async () => ({ model: 'bge-m3-Q8_0.gguf', dimension: 1024 }),
   embed: async (input) => {
     if (fail) throw new Error('injected embedding failure');
-    return input.map((text, row) => {
+    return input.map((text) => {
       const vector = Array.from({ length: 1024 }, () => 0);
-      vector[row % 1024] = text.length || 1;
+      for (const token of text.toLowerCase().match(/[\p{L}\p{N}_]+/gu) ?? []) {
+        let hash = 2166136261;
+        for (const character of token) hash = Math.imul(hash ^ character.codePointAt(0)!, 16777619);
+        vector[(hash >>> 0) % vector.length] += 1;
+      }
       return vector;
     });
   },
