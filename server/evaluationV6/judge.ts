@@ -241,6 +241,24 @@ export const importEvaluationV6Grades = (
   input: EvaluationV6Grade[] | { grades: EvaluationV6Grade[] },
 ) => importGrades(root, experimentGroupId, input, 'individual-packets.json', evaluationV6Paths(root).grades);
 
+export const activateEvaluationV6FormalIndividualGrades = async (
+  root: string,
+  experimentGroupId: string,
+  repetitionGrades: Array<{ repetition: 1 | 2 | 3 | 4 | 5; grades: EvaluationV6Grade[] }>,
+) => {
+  const repetitions = repetitionGrades.map(({ repetition }) => repetition);
+  if (repetitionGrades.length !== 5 || new Set(repetitions).size !== 5
+    || [1, 2, 3, 4, 5].some((repetition) => !repetitions.includes(repetition as 1 | 2 | 3 | 4 | 5))
+    || repetitionGrades.some(({ grades }) => grades.length !== 90)) {
+    throw new Error('Evaluation v6 formal grade activation requires five complete 90-grade repetitions');
+  }
+  const grades = repetitionGrades.flatMap(({ grades: values }) => values);
+  if (grades.length !== 450 || new Set(grades.map(({ packetId }) => packetId)).size !== 450) {
+    throw new Error('Evaluation v6 formal grade activation requires 450 unique grades');
+  }
+  return importEvaluationV6Grades(root, experimentGroupId, grades);
+};
+
 export const importEvaluationV6PairGrades = (
   root: string,
   experimentGroupId: string,

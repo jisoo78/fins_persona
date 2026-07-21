@@ -13,6 +13,7 @@ import { readJsonFile, writeJsonAtomic } from '../decisionAdvisor/jsonStore';
 import { activateEvaluationV6Calibration, validateEvaluationV6Calibration } from './calibration';
 import {
   assertEvaluationV6JudgePacketsBlind,
+  activateEvaluationV6FormalIndividualGrades,
   buildEvaluationV6JudgePacket,
   exportEvaluationV6JudgePackets,
   exportEvaluationV6PairJudgePackets,
@@ -20,6 +21,7 @@ import {
   importEvaluationV6PairGrades,
 } from './judge';
 import { evaluationV6Paths } from './paths';
+import { listEvaluationV6Runs } from './runStore';
 import { EVALUATION_V6_SCORING_CONFIG, computeEvaluationV6IdentityScore } from './scoring';
 import { buildEvaluationV6CandidateHash, loadEvaluationV6CandidateBundle } from './scenarioSet';
 
@@ -310,8 +312,36 @@ export const runEvaluationV6LocalJudge = async (options: {
     judgeModel,
     fetchImpl,
   });
-  const imported = await importEvaluationV6Grades(options.root, options.experimentGroupId, result.grades);
-  return { ...result, judgeModel, meanAas: result.grades.reduce((sum, grade) => sum + grade.score, 0) / result.grades.length, batchHash: imported.batchHash };
+  const runCount = (await listEvaluationV6Runs(options.root))
+    .filter(({ experimentGroupId }) => experimentGroupId === options.experimentGroupId).length;
+  if (![3, 15].includes(runCount)) throw new Error('Evaluation v6 local Judge group must contain three or fifteen runs');
+  const imported = runCount === 3
+    ? await importEvaluationV6Grades(options.root, options.experimentGroupId, result.grades)
+    : null;
+  return {
+    ...result,
+    judgeModel,
+    meanAas: result.grades.reduce((sum, grade) => sum + grade.score, 0) / result.grades.length,
+    batchHash: imported?.batchHash ?? null,
+    formalActivationPending: runCount === 15,
+  };
+};
+
+export const activateEvaluationV6FormalLocalGrades = async (root: string, experimentGroupId: string) => {
+  await exportEvaluationV6JudgePackets(root, experimentGroupId);
+  const repetitionGrades = await Promise.all(([1, 2, 3, 4, 5] as const).map(async (repetition) => {
+    const draft = await readJsonFile<LocalDraft | null>(draftPath({
+      root,
+      experimentGroupId,
+      batchKind: 'individual',
+      checkpointScope: `repetition-${repetition}`,
+    }), null);
+    if (!draft || draft.grades.length !== 90 || draft.failures.length) {
+      throw new Error(`Evaluation v6 repetition ${repetition} local Judge draft is incomplete`);
+    }
+    return { repetition, grades: draft.grades };
+  }));
+  return activateEvaluationV6FormalIndividualGrades(root, experimentGroupId, repetitionGrades);
 };
 
 export const runEvaluationV6LocalCalibration = async (options: {

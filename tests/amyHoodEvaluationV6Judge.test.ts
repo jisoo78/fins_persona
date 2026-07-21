@@ -18,6 +18,7 @@ import test from 'node:test';
 import type { EvaluationV6Grade } from '../shared/amyHoodEvaluationV6';
 import {
   assertEvaluationV6JudgePacketsBlind,
+  activateEvaluationV6FormalIndividualGrades,
   buildEvaluationV6JudgePacket,
   importEvaluationV6Grades,
 } from '../server/evaluationV6/judge';
@@ -54,15 +55,26 @@ const twoPackets = () => {
   ));
 };
 
+const formalPackets = () => Array.from({ length: 450 }, (_, index) => {
+  const base = twoPackets()[index % 2];
+  const packetId = `packet-formal-${String(index).padStart(3, '0')}`;
+  const packetHash = `${index.toString(16).padStart(64, '0')}`;
+  return { ...base, packetId, packetHash };
+});
+
 test('happy: activates a complete reproducible blind grade batch', async () => {
   const root = await mkdtemp(path.join(os.tmpdir(), 'evaluation-v6-judge-'));
-  const packets = twoPackets();
+  const packets = formalPackets();
   const directory = path.join(root, 'evaluation/v6/judge/packets/group-1');
   await writeJsonAtomic(path.join(directory, 'individual-packets.json'), {
     experimentGroupId: 'group-1', batchHash: 'c'.repeat(64), packets,
   });
-  const result = await importEvaluationV6Grades(root, 'group-1', packets.map(makeGrade));
-  assert.equal(result.grades.length, 2);
+  const repetitionGrades = [1, 2, 3, 4, 5].reverse().map((repetition) => ({
+    repetition: repetition as 1 | 2 | 3 | 4 | 5,
+    grades: packets.slice((repetition - 1) * 90, repetition * 90).map(makeGrade).reverse(),
+  }));
+  const result = await activateEvaluationV6FormalIndividualGrades(root, 'group-1', repetitionGrades);
+  assert.equal(result.grades.length, 450);
   const active = JSON.parse(await readFile(
     path.join(root, 'evaluation/v6/judge/grades/group-1/active.json'), 'utf8',
   )) as { batchHash: string };
@@ -102,5 +114,22 @@ test('failure: stale or partial batches do not activate', async () => {
   const stale = makeGrade(packets[0]);
   stale.packetHash = 'f'.repeat(64);
   await assert.rejects(() => importEvaluationV6Grades(root, 'group-3', [stale, makeGrade(packets[1])]), /stale/i);
+  await assert.rejects(readFile(path.join(root, 'evaluation/v6/judge/grades/group-3/active.json')), /ENOENT/);
+
+  const formal = formalPackets();
+  await writeJsonAtomic(path.join(directory, 'individual-packets.json'), {
+    experimentGroupId: 'group-3', batchHash: 'f'.repeat(64), packets: formal,
+  });
+  const incomplete = [1, 2, 3, 4].map((repetition) => ({
+    repetition: repetition as 1 | 2 | 3 | 4,
+    grades: formal.slice((repetition - 1) * 90, repetition * 90).map(makeGrade),
+  }));
+  await assert.rejects(() => activateEvaluationV6FormalIndividualGrades(root, 'group-3', incomplete), /five|450/i);
+  const duplicated = [1, 2, 3, 4, 5].map((repetition) => ({
+    repetition: repetition as 1 | 2 | 3 | 4 | 5,
+    grades: formal.slice((repetition - 1) * 90, repetition * 90).map(makeGrade),
+  }));
+  duplicated[4].grades[0] = duplicated[0].grades[0];
+  await assert.rejects(() => activateEvaluationV6FormalIndividualGrades(root, 'group-3', duplicated), /duplicate|450/i);
   await assert.rejects(readFile(path.join(root, 'evaluation/v6/judge/grades/group-3/active.json')), /ENOENT/);
 });
