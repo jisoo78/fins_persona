@@ -48,6 +48,10 @@ const nonemptyStrings = (value: unknown): value is string[] =>
   && value.length > 0
   && value.every((item) => typeof item === 'string' && item.trim().length > 0);
 
+const stringArray = (value: unknown): value is string[] =>
+  Array.isArray(value)
+  && value.every((item) => typeof item === 'string' && item.trim().length > 0);
+
 const nonemptyString = (value: unknown): value is string =>
   typeof value === 'string' && value.trim().length > 0;
 
@@ -82,6 +86,7 @@ const parseReflectionResponse = (text: string): ReflectionProposal[] => {
       throw new Error(`reflection ${index} must be an object`);
     }
     const item = value as Partial<ReflectionProposal>;
+    const contrastStatus = item.contrastStatus ?? 'reviewed';
     if (!decisionDomains.has(item.domain as DecisionDomain)
       || typeof item.crossEventQuestion !== 'string' || !item.crossEventQuestion.trim()
       || typeof item.observation !== 'string' || !item.observation.trim()
@@ -91,12 +96,16 @@ const parseReflectionResponse = (text: string): ReflectionProposal[] => {
       || item.unresolvedConflicts.some((entry) => typeof entry !== 'string' || !entry.trim())
       || !validAxis(item.decisionAxis)
       || !validPattern(item.supportPattern)
-      || !validPattern(item.contrastPattern)
       || !nonemptyString(item.conditionDelta)
       || !nonemptyString(item.actionDelta)
       || !nonemptyStrings(item.supportingEventIds)
-      || !nonemptyStrings(item.contrastingEventIds)
-      || !nonemptyStrings(item.evidenceIds)) {
+      || !stringArray(item.contrastingEventIds)
+      || !nonemptyStrings(item.evidenceIds)
+      || !['reviewed', 'documented_unavailable'].includes(contrastStatus)
+      || (contrastStatus === 'reviewed'
+        && (!validPattern(item.contrastPattern) || !nonemptyStrings(item.contrastingEventIds)))
+      || (contrastStatus === 'documented_unavailable'
+        && (item.contrastPattern !== null || item.contrastingEventIds.length !== 0))) {
       throw new Error(`reflection ${index} has an invalid schema`);
     }
     return item as ReflectionProposal;
@@ -166,8 +175,25 @@ export const validateReflectionMemory = (
   const warnings: string[] = [];
   const support = new Set(reflection.supportingEventIds);
   const contrast = new Set(reflection.contrastingEventIds);
+  const contrastStatus = reflection.contrastStatus ?? 'reviewed';
   if (support.size === 0) errors.push('reflection requires supporting events');
-  if (contrast.size === 0) errors.push('reflection requires a contrasting event');
+  if (!['reviewed', 'documented_unavailable'].includes(contrastStatus)) {
+    errors.push('reflection has an invalid contrast status');
+  } else if (contrastStatus === 'reviewed') {
+    if (contrast.size === 0) errors.push('reflection requires a contrasting event');
+    if (!validPattern(reflection.contrastPattern)) {
+      errors.push('contrast pattern requires conditions, action, events, and evidence');
+    }
+  } else {
+    if (contrast.size > 0 || reflection.contrastPattern !== null) {
+      errors.push('documented unavailable contrast must not reference an event');
+    }
+    if (support.size < 2
+      || !reflection.unresolvedConflicts.some((item) => item.trim().length >= 40)) {
+      errors.push('documented unavailable contrast requires two supports and a reviewed evidence gap');
+    }
+    warnings.push('public contrast is documented unavailable; confidence is capped at medium');
+  }
   if ([...support].some((id) => contrast.has(id))) {
     errors.push('reflection support and contrast must be disjoint');
   }
@@ -180,38 +206,41 @@ export const validateReflectionMemory = (
   if (!validPattern(reflection.supportPattern)) {
     errors.push('support pattern requires conditions, action, events, and evidence');
   }
-  if (!validPattern(reflection.contrastPattern)) {
-    errors.push('contrast pattern requires conditions, action, events, and evidence');
-  }
   if (validPattern(reflection.supportPattern)
     && !sameSet(reflection.supportPattern.eventIds, reflection.supportingEventIds)) {
     errors.push('support pattern events must equal supporting events');
   }
-  if (validPattern(reflection.contrastPattern)
+  if (contrastStatus === 'reviewed'
+    && validPattern(reflection.contrastPattern)
     && !sameSet(reflection.contrastPattern.eventIds, reflection.contrastingEventIds)) {
     errors.push('contrast pattern events must equal contrasting events');
   }
   if (validAxis(reflection.decisionAxis)
-    && validPattern(reflection.supportPattern)
-    && validPattern(reflection.contrastPattern)) {
+    && validPattern(reflection.supportPattern)) {
     const supportAction = normalizeDecisionAction(reflection.supportPattern.action);
-    const contrastAction = normalizeDecisionAction(reflection.contrastPattern.action);
     const choices = new Set(reflection.decisionAxis.choiceSet.map(normalizeDecisionAction));
-    if (!choices.has(supportAction) || !choices.has(contrastAction)) {
-      errors.push('support and contrast actions must belong to the decision-axis choice set');
-    }
-    if (supportAction === contrastAction) {
-      errors.push('support and contrast actions must differ');
-    }
+    if (!choices.has(supportAction)) errors.push('support action must belong to the decision-axis choice set');
     if (!patternEvidenceBelongsToEvents(reflection.supportPattern, graph)) {
       errors.push('support evidence does not belong to its event');
     }
-    if (!patternEvidenceBelongsToEvents(reflection.contrastPattern, graph)) {
-      errors.push('contrast evidence does not belong to its event');
+    const contrastPattern = contrastStatus === 'reviewed' && validPattern(reflection.contrastPattern)
+      ? reflection.contrastPattern
+      : null;
+    if (contrastPattern) {
+      const contrastAction = normalizeDecisionAction(contrastPattern.action);
+      if (!choices.has(contrastAction)) {
+        errors.push('support and contrast actions must belong to the decision-axis choice set');
+      }
+      if (supportAction === contrastAction) {
+        errors.push('support and contrast actions must differ');
+      }
+      if (!patternEvidenceBelongsToEvents(contrastPattern, graph)) {
+        errors.push('contrast evidence does not belong to its event');
+      }
     }
     const patternEvidence = [
       ...reflection.supportPattern.evidenceIds,
-      ...reflection.contrastPattern.evidenceIds,
+      ...(contrastPattern?.evidenceIds ?? []),
     ];
     if (!sameSet(patternEvidence, reflection.evidenceIds)) {
       errors.push('pattern evidence must equal reflection evidence');
@@ -266,7 +295,9 @@ export const validateReflectionMemory = (
   } catch (error) {
     errors.push(error instanceof Error ? error.message : 'reflection contains holdout evidence');
   }
-  const computedConfidence = support.size >= 3 ? 'high' : support.size >= 2 ? 'medium' : 'low';
+  const computedConfidence = contrastStatus === 'documented_unavailable'
+    ? support.size >= 2 ? 'medium' : 'low'
+    : support.size >= 3 ? 'high' : support.size >= 2 ? 'medium' : 'low';
   if (computedConfidence === 'low') warnings.push('reflection has only one supporting event');
   return {
     passed: errors.length === 0,
@@ -295,13 +326,14 @@ const toReflectionMemory = (
       conditions: [...new Set(proposal.supportPattern.conditions)].sort(),
       evidenceIds: [...new Set(proposal.supportPattern.evidenceIds)].sort(),
     },
-    contrastPattern: {
+    contrastStatus: proposal.contrastStatus ?? 'reviewed',
+    contrastPattern: proposal.contrastPattern ? {
       ...proposal.contrastPattern,
       action: normalizeDecisionAction(proposal.contrastPattern.action),
       eventIds: [...new Set(proposal.contrastPattern.eventIds)].sort(),
       conditions: [...new Set(proposal.contrastPattern.conditions)].sort(),
       evidenceIds: [...new Set(proposal.contrastPattern.evidenceIds)].sort(),
-    },
+    } : null,
     boundaryConditions: [...new Set(proposal.boundaryConditions)].sort(),
     unresolvedConflicts: [...new Set(proposal.unresolvedConflicts)].sort(),
     supportingEventIds: [...new Set(proposal.supportingEventIds)].sort(),

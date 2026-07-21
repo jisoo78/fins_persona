@@ -47,8 +47,14 @@ export const evaluatePolicyCoverage = ({
     if (new Set(policy.supportingEventIds).size < 2) {
       errors.push(`${prefix} requires two supporting events`);
     }
-    if (new Set(policy.contrastingEventIds).size < 1) {
+    const contrastStatus = policy.contrastStatus ?? 'reviewed';
+    if (contrastStatus === 'reviewed' && new Set(policy.contrastingEventIds).size < 1) {
       errors.push(`${prefix} requires a contrasting event`);
+    } else if (contrastStatus === 'documented_unavailable'
+      && policy.contrastingEventIds.length > 0) {
+      errors.push(`${prefix} documented unavailable contrast must not reference an event`);
+    } else if (!['reviewed', 'documented_unavailable'].includes(contrastStatus)) {
+      errors.push(`${prefix} has an invalid contrast status`);
     }
 
     const eventIds = [...new Set([
@@ -59,12 +65,25 @@ export const evaluatePolicyCoverage = ({
       const event = eventById.get(eventId);
       if (!event) {
         errors.push(`${prefix} has unresolved event ${eventId}`);
-      } else if (event.status !== 'approved' || event.directAmyEvidenceIds.length === 0) {
-        errors.push(`${prefix} event ${eventId} requires direct Amy evidence`);
+      } else if (event.status !== 'approved'
+        || event.directAmyEvidenceIds.length
+          + event.amyPolicyEvidenceIds.length
+          + event.contextEvidenceIds.length === 0) {
+        errors.push(`${prefix} event ${eventId} requires reviewed decision context`);
       } else if (event.postOutcomeEvidenceIds.some((evidenceId) =>
         policy.evidenceIds.includes(evidenceId))) {
         errors.push(`${prefix} contains post-outcome evidence ${eventId}`);
       }
+    }
+
+    const hasDirectAmyIdentity = policy.directPolicyEvidenceIds.length > 0
+      || eventIds.some((eventId) => {
+        const event = eventById.get(eventId);
+        return Boolean(event
+          && event.directAmyEvidenceIds.length + event.amyPolicyEvidenceIds.length > 0);
+      });
+    if (!hasDirectAmyIdentity) {
+      errors.push(`${prefix} requires direct Amy identity evidence`);
     }
 
     if (!errors.some((error) => error.startsWith(prefix))) {

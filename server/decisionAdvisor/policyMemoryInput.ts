@@ -67,15 +67,25 @@ const documentFamilyMap = (
   sources: AdvisorSourceRecord[],
   policyEvidence: ValidatedPilotPolicyEvidence[],
 ) => {
-  const result: Record<string, string> = Object.fromEntries(
-    policyEvidence.map(({ record, documentFamilyId }) => [record.sourceId, documentFamilyId]),
-  );
+  const result: Record<string, string> = {};
   for (const source of sources) {
-    if (result[source.id]) continue;
-    const family = candidates.flatMap(({ sourceAssociations }) => sourceAssociations)
-      .find(({ canonicalUrl }) =>
-        canonicalizeSourceUrl(canonicalUrl) === source.canonicalUrl)?.documentFamilyId;
-    result[source.id] = family ?? `source:${source.id}`;
+    const associatedFamilies = new Set(candidates
+      .flatMap(({ sourceAssociations }) => sourceAssociations)
+      .filter(({ canonicalUrl }) => canonicalizeSourceUrl(canonicalUrl) === source.canonicalUrl)
+      .map(({ documentFamilyId }) => documentFamilyId)
+      .filter((family): family is string => Boolean(family)));
+    if (associatedFamilies.size > 1) {
+      throw new Error(`advisor source has conflicting document families: ${source.id}`);
+    }
+    const policyFamilies = new Set(policyEvidence
+      .filter(({ record }) => record.sourceId === source.id)
+      .map(({ documentFamilyId }) => documentFamilyId));
+    if (associatedFamilies.size === 0 && policyFamilies.size > 1) {
+      throw new Error(`policy evidence source has conflicting document families: ${source.id}`);
+    }
+    result[source.id] = [...associatedFamilies][0]
+      ?? [...policyFamilies][0]
+      ?? `source:${source.id}`;
   }
   return result;
 };

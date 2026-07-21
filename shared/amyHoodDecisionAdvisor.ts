@@ -268,6 +268,7 @@ export type PilotManifest = {
 
 export type PolicyMemoryStatus = 'review_required' | 'approved' | 'rejected';
 export type PolicyMemoryConfidence = 'high' | 'medium' | 'low';
+export type ContrastStatus = 'reviewed' | 'documented_unavailable';
 
 export type ArtifactReview = {
   reviewer: 'Codex';
@@ -301,7 +302,8 @@ export type ReflectionMemory = {
   unresolvedConflicts: string[];
   decisionAxis: DecisionAxis;
   supportPattern: ReflectionEvidencePattern;
-  contrastPattern: ReflectionEvidencePattern;
+  contrastPattern: ReflectionEvidencePattern | null;
+  contrastStatus?: ContrastStatus;
   conditionDelta: string;
   actionDelta: string;
   supportingEventIds: string[];
@@ -328,6 +330,7 @@ export type PolicyMemory = {
   contrastingEventIds: string[];
   evidenceIds: string[];
   directPolicyEvidenceIds: string[];
+  contrastStatus?: ContrastStatus;
   confidence: PolicyMemoryConfidence;
   policyKind: 'deployable_policy' | 'event_specific_hypothesis';
   status: PolicyMemoryStatus;

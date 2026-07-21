@@ -63,6 +63,7 @@ const parsePolicyResponse = (text: string): PolicyProposal[] => {
       throw new Error(`policy ${index} must be an object`);
     }
     const item = value as Partial<PolicyProposal>;
+    const contrastStatus = item.contrastStatus ?? 'reviewed';
     if (!decisionDomains.has(item.domain as DecisionDomain)
       || !nonemptyStrings(item.applicabilityConditions)
       || !nonemptyStrings(item.priorityOrder)
@@ -73,9 +74,12 @@ const parsePolicyResponse = (text: string): PolicyProposal[] => {
       || !nonemptyStrings(item.reversalSignals)
       || !nonemptyStrings(item.reflectionIds)
       || !nonemptyStrings(item.supportingEventIds)
-      || !nonemptyStrings(item.contrastingEventIds)
+      || !optionalStrings(item.contrastingEventIds)
       || !nonemptyStrings(item.evidenceIds)
-      || !optionalStrings(item.directPolicyEvidenceIds)) {
+      || !optionalStrings(item.directPolicyEvidenceIds)
+      || !['reviewed', 'documented_unavailable'].includes(contrastStatus)
+      || (contrastStatus === 'reviewed' && !nonemptyStrings(item.contrastingEventIds))
+      || (contrastStatus === 'documented_unavailable' && item.contrastingEventIds.length !== 0)) {
       throw new Error(`policy ${index} has an invalid schema`);
     }
     return item as PolicyProposal;
@@ -134,7 +138,8 @@ const directPrincipleHasIndependentConfirmation = (
     const span = graph.evidenceSpans.find(({ id }) => id === evidenceId);
     return Boolean(span
       && confirmingCandidateIds.has(span.eventCandidateId)
-      && graph.documentFamilyBySourceId[span.sourceId] !== direct.documentFamilyId);
+      && graph.documentFamilyBySourceId[span.sourceId]
+        !== graph.documentFamilyBySourceId[direct.record.sourceId]);
   });
 });
 
@@ -147,7 +152,8 @@ const policyEvidenceFamilies = (
     .filter((span): span is PilotEvidenceSpan => Boolean(span))
     .map((span) => graph.documentFamilyBySourceId[span.sourceId]),
   ...policy.directPolicyEvidenceIds
-    .map((id) => graph.policyEvidence.find(({ record }) => record.id === id)?.documentFamilyId)
+    .map((id) => graph.policyEvidence.find(({ record }) => record.id === id)?.record.sourceId)
+    .map((sourceId) => sourceId ? graph.documentFamilyBySourceId[sourceId] : undefined)
     .filter((family): family is string => Boolean(family)),
 ]);
 
@@ -155,10 +161,12 @@ const computePolicyConfidence = (
   policy: PolicyMemory,
   graph: PolicyMemoryInputGraph,
 ): PolicyMemoryConfidence => {
+  const contrastStatus = policy.contrastStatus ?? 'reviewed';
   const supportCount = new Set(policy.supportingEventIds).size;
   const repeatedEventPath = supportCount >= 2;
   const directPrinciplePath = directPrincipleHasIndependentConfirmation(policy, graph);
-  if (supportCount >= 3
+  if (contrastStatus === 'reviewed'
+    && supportCount >= 3
     && policy.directPolicyEvidenceIds.length > 0
     && policyEvidenceFamilies(policy, graph).size > 1
     && policy.contrastingEventIds.length > 0) return 'high';
@@ -175,6 +183,7 @@ export const validatePolicyMemory = (
   const warnings: string[] = [];
   const support = new Set(policy.supportingEventIds);
   const contrast = new Set(policy.contrastingEventIds);
+  const contrastStatus = policy.contrastStatus ?? 'reviewed';
   if (!nonemptyStrings(policy.applicabilityConditions)) {
     errors.push('policy requires applicability conditions');
   }
@@ -188,7 +197,22 @@ export const validatePolicyMemory = (
   }
   if (!nonemptyStrings(policy.reversalSignals)) errors.push('policy requires a reversal signal');
   if (support.size === 0) errors.push('policy requires supporting events');
-  if (contrast.size === 0) errors.push('policy requires a reviewed contrast');
+  if (!['reviewed', 'documented_unavailable'].includes(contrastStatus)) {
+    errors.push('policy has an invalid contrast status');
+  } else if (contrastStatus === 'reviewed') {
+    if (contrast.size === 0) errors.push('policy requires a reviewed contrast');
+  } else {
+    if (contrast.size > 0) {
+      errors.push('documented unavailable contrast must not reference an event');
+    }
+    if (support.size < 2) {
+      errors.push('documented unavailable contrast requires two supporting events');
+    }
+    if (!nonemptyStrings(policy.directPolicyEvidenceIds)) {
+      errors.push('documented unavailable contrast requires direct policy evidence');
+    }
+    warnings.push('public contrast is documented unavailable; confidence is capped at medium');
+  }
   if ([...support].some((id) => contrast.has(id))) {
     errors.push('policy support and contrast must be disjoint');
   }
@@ -205,6 +229,10 @@ export const validatePolicyMemory = (
   if (referencedReflections.some((reflection) =>
     reflection && reflection.domain !== policy.domain)) {
     errors.push('policy and reflection domains must match');
+  }
+  if (referencedReflections.some((reflection) =>
+    reflection && (reflection.contrastStatus ?? 'reviewed') !== contrastStatus)) {
+    errors.push('policy contrast status must match its approved reflections');
   }
   const reflectedSupport = new Set(
     referencedReflections.flatMap((reflection) => reflection?.supportingEventIds ?? []),
@@ -291,6 +319,7 @@ const toPolicyMemory = (
   const canonical = {
     ...proposal,
     schemaVersion: 2 as const,
+    contrastStatus: proposal.contrastStatus ?? 'reviewed',
     applicabilityConditions: [...new Set(proposal.applicabilityConditions)],
     priorityOrder: [...new Set(proposal.priorityOrder)],
     nonApplicabilityConditions: [...new Set(proposal.nonApplicabilityConditions)],
@@ -333,6 +362,12 @@ const inputPayload = (
     invariant: reflection.invariant,
     boundaryConditions: reflection.boundaryConditions,
     unresolvedConflicts: reflection.unresolvedConflicts,
+    decisionAxis: reflection.decisionAxis,
+    supportPattern: reflection.supportPattern,
+    contrastPattern: reflection.contrastPattern,
+    contrastStatus: reflection.contrastStatus ?? 'reviewed',
+    conditionDelta: reflection.conditionDelta,
+    actionDelta: reflection.actionDelta,
     supportingEventIds: reflection.supportingEventIds,
     contrastingEventIds: reflection.contrastingEventIds,
     evidenceIds: reflection.evidenceIds,

@@ -16,7 +16,8 @@ Every policy must express this sequence:
 
 - Cite only supplied reflection, event, evidence, and direct-policy-evidence IDs.
 - A general policy needs two supporting events, or one direct Amy principle confirmed by another event and document family.
-- Preserve the contrasting event as a boundary, exception, or reversal signal.
+- Preserve a reviewed contrasting event as a boundary, exception, or reversal signal.
+- When the approved reflection marks `contrastStatus` as `documented_unavailable`, copy that status, cite no contrasting event, require at least two support events plus one direct Amy policy-evidence ID, and express the unobserved opposite action only as an observable reversal signal. Never invent a contrast.
 - Write `recommendedAction` using only the cited support action and an explicitly cited execution tactic. Do not promote uncited narrative language from an observation or invariant into the recommendation.
 - Every action in `recommendedAction` must map to the approved `supportPattern.action` or to an execution tactic explicitly stated by a cited support evidence span. Do not introduce talent reallocation, organizational redesign, or another execution action unless an exact support evidence span explicitly states that action.
 - Write `nonApplicabilityConditions` as positive conditions copied from the approved reflection's `contrastPattern`; do not negate or invert a contrast condition.
@@ -43,3 +44,4 @@ Every policy must contain:
 - `contrastingEventIds`
 - `evidenceIds`
 - `directPolicyEvidenceIds`
+- `contrastStatus`

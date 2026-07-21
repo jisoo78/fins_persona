@@ -11,7 +11,9 @@ Do not label complementary actions as contrast. Reducing low-priority resources 
 # Rules
 
 - Use only supplied event and evidence IDs.
-- Every reflection requires at least two support events in the reflection's `domain` and at least one materially contrasting event. A contrast may cross domains only when it uses the same explicit decision axis and comparable choices.
+- Every reflection requires at least two support events in the reflection's `domain`.
+- Prefer a materially contrasting event. A contrast may cross domains only when it uses the same explicit decision axis and comparable choices.
+- If the supplied graph contains no reviewed opposite action on that axis, set `contrastStatus` to `documented_unavailable`, set `contrastPattern` to `null`, set `contrastingEventIds` to `[]`, and describe the bounded public-evidence search gap in `unresolvedConflicts`. Never invent a contrast.
 - All support events in one `supportPattern` must share the same canonical action; events with different selected actions belong on opposite sides of the contrast.
 - Copy each pattern `action` exactly from the corresponding event `chosenAction`. Do not summarize, combine, or invent an action label.
 - Put both canonical actions in `decisionAxis.choiceSet`.
@@ -20,7 +22,7 @@ Do not label complementary actions as contrast. Reducing low-priority resources 
 - `conditionDelta` must state the observable change; `actionDelta` must state the resulting action change.
 - Separate observations from inferences.
 - Do not use post-outcome success, private motives, personality adjectives, or universal claims.
-- If the supplied evidence contains no qualified contrast, return `{"reflections":[]}`.
+- A documented-unavailable reflection is a medium-confidence fallback, not proof that no counterexample exists. Keep an observable opposite action in the choice set and express it only as a reversal path.
 - Return JSON only. Do not wrap JSON in Markdown.
 
 # Output
@@ -35,9 +37,10 @@ Return one object with a `reflections` JSON array. Every item must contain exact
 - `unresolvedConflicts`: JSON array of strings; it may be empty
 - `decisionAxis`: object with string `decisionObject`, string `decisionQuestion`, nonempty string-array `choiceSet`, and nonempty string-array `gatingVariables`
 - `supportPattern`: object with nonempty string-arrays `eventIds`, `conditions`, and `evidenceIds`, plus string `action`
-- `contrastPattern`: object with nonempty string-arrays `eventIds`, `conditions`, and `evidenceIds`, plus string `action`
+- `contrastStatus`: `"reviewed"` or `"documented_unavailable"`
+- `contrastPattern`: a qualified contrast object with nonempty string-arrays `eventIds`, `conditions`, and `evidenceIds`, plus string `action`; otherwise `null`
 - `conditionDelta`: string
 - `actionDelta`: string
 - `supportingEventIds`: nonempty JSON array of strings, identical to `supportPattern.eventIds`
-- `contrastingEventIds`: nonempty JSON array of strings, identical to `contrastPattern.eventIds`
+- `contrastingEventIds`: JSON array identical to `contrastPattern.eventIds`, or empty when contrast is documented unavailable
 - `evidenceIds`: unique JSON array equal to the union of support and contrast evidence IDs

@@ -4,7 +4,7 @@
  *    - Accept one reviewed deployable policy per domain with two support events, one contrast, and direct Amy evidence on every event.
  * 2. Edge Cases:
  *    - Accept more than one passing policy in a domain while counting the domain once.
- *    - Accept multiple direct Amy evidence spans on one reviewed event.
+ *    - Accept context-only support when a direct Amy policy principle anchors identity.
  *    - Report every missing domain in deterministic order.
  * 3. Failure Path:
  *    - Reject a release with missing direct Amy evidence without activating anything.
@@ -36,9 +36,15 @@ test('counts duplicate passing policies once', () => {
   assert.equal(evaluatePolicyCoverage(input).coveredDomains.length, 5);
 });
 
-test('accepts multiple direct evidence spans on one event', () => {
+test('accepts context-only support and a documented unavailable contrast when policy identity is anchored', () => {
   const input = fiveDomainPolicyFixture();
-  input.events[0].directAmyEvidenceIds = ['quote-1', 'quote-2'];
+  const policy = input.policies[0];
+  policy.contrastStatus = 'documented_unavailable';
+  policy.contrastingEventIds = [];
+  policy.evidenceIds = policy.evidenceIds.filter((id) => !id.includes('contrast-1'));
+  const support = input.events.find(({ id }) => id === policy.supportingEventIds[0])!;
+  support.contextEvidenceIds = [...support.directAmyEvidenceIds];
+  support.directAmyEvidenceIds = [];
   assert.equal(evaluatePolicyCoverage(input).passed, true);
 });
 
@@ -55,7 +61,15 @@ test('reports missing domains in canonical order', () => {
 
 test('fails closed on unsupported release content', () => {
   const input = fiveDomainPolicyFixture();
-  input.events[0].directAmyEvidenceIds = [];
+  const policy = input.policies[0];
+  policy.directPolicyEvidenceIds = [];
+  for (const event of input.events.filter(({ id }) => [
+    ...policy.supportingEventIds,
+    ...policy.contrastingEventIds,
+  ].includes(id))) {
+    event.directAmyEvidenceIds = [];
+    event.amyPolicyEvidenceIds = [];
+  }
   const report = evaluatePolicyCoverage(input);
-  assert.throws(() => assertEvaluationV4PolicyCoverage(report), /direct Amy evidence/);
+  assert.throws(() => assertEvaluationV4PolicyCoverage(report), /direct Amy identity/);
 });

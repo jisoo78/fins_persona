@@ -39,7 +39,7 @@ type EvaluationContextSnapshot = {
   reflections: string[];
   events: string[];
   counterexamples: string[];
-  counterexampleStatus: 'reviewed';
+  counterexampleStatus: 'reviewed' | 'no_reviewed_counterexample';
   references: EvaluationV3ArtifactReference[];
 };
 
@@ -103,6 +103,7 @@ const policyProjection = (policy: PolicyMemory) => canonicalJson({
   contrastingEventIds: policy.contrastingEventIds,
   evidenceIds: policy.evidenceIds,
   directPolicyEvidenceIds: policy.directPolicyEvidenceIds,
+  contrastStatus: policy.contrastStatus ?? 'reviewed',
 });
 
 const reflectionProjection = (reflection: ReflectionMemory) => canonicalJson({
@@ -116,6 +117,7 @@ const reflectionProjection = (reflection: ReflectionMemory) => canonicalJson({
   decisionAxis: reflection.decisionAxis,
   supportPattern: reflection.supportPattern,
   contrastPattern: reflection.contrastPattern,
+  contrastStatus: reflection.contrastStatus ?? 'reviewed',
   conditionDelta: reflection.conditionDelta,
   actionDelta: reflection.actionDelta,
   confidence: reflection.confidence,
@@ -273,7 +275,9 @@ const buildContext = (
     reflections: memory.reflections.map(reflectionProjection),
     events: memory.events.filter(({ id }) => supportingIds.has(id)).map(eventProjection),
     counterexamples: memory.events.filter(({ id }) => contrastIds.has(id)).map(eventProjection),
-    counterexampleStatus: 'reviewed',
+    counterexampleStatus: contrastIds.size > 0
+      ? 'reviewed'
+      : 'no_reviewed_counterexample',
     references: releaseReferences(
       graph,
       memory.events,
@@ -367,11 +371,13 @@ const verifyReleaseDirectory = async (
   }
   const snapshot = JSON.parse(contextText) as EvaluationContextSnapshot;
   if (snapshot.releaseId !== manifest.releaseId
-    || snapshot.counterexampleStatus !== 'reviewed'
+    || !['reviewed', 'no_reviewed_counterexample'].includes(snapshot.counterexampleStatus)
     || snapshot.policy.length === 0
     || snapshot.reflections.length === 0
     || snapshot.events.length === 0
-    || snapshot.counterexamples.length === 0
+    || (snapshot.counterexampleStatus === 'reviewed' && snapshot.counterexamples.length === 0)
+    || (snapshot.counterexampleStatus === 'no_reviewed_counterexample'
+      && snapshot.counterexamples.length > 0)
     || snapshot.references.length === 0) {
     throw new Error('memory release evaluation context is invalid');
   }

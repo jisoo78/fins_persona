@@ -5,7 +5,7 @@
  * 2. Edge Cases:
  *    - direct Amy policy evidence plus confirmation in another event and document family qualifies as medium confidence.
  *    - a materially contrasting event narrows policy boundaries and supplies an observable reversal signal.
- *    - rebuilding identical approved content returns the same content-addressed release.
+ *    - a reviewed public-contrast gap permits only a bounded medium-confidence policy.
  * 3. Failure Path:
  *    - holdout/post-outcome leakage, unsupported policies, invalid model JSON, stale evidence, tampered hashes, and failed activation preserve the last valid state.
  */
@@ -195,6 +195,98 @@ const repeatedEventPolicyResponse = (reflectionId: string) => JSON.stringify({
   }],
 });
 
+const noPublicContrastFixture = async () => {
+  const graph = await loadPolicyMemoryInput(process.cwd());
+  const reflection: ReflectionMemory = approveReflectionForFixture({
+    id: 'reflection-ai-capacity-no-public-contrast',
+    domain: 'ai_cloud_capex',
+    crossEventQuestion: 'When should infrastructure capacity expand while operating costs remain constrained?',
+    observation: 'Two reviewed events apply the same bounded scaling action under observable demand and cost discipline.',
+    invariant: 'Scale capacity only when demand is visible and preserve explicit operating-cost discipline.',
+    boundaryConditions: ['Demand, capacity urgency, and infrastructure economics must remain observable.'],
+    unresolvedConflicts: [
+      'A reviewed search of the available public event set found no comparable opposite action on this decision axis.',
+    ],
+    decisionAxis: {
+      decisionObject: 'ai_capacity_allocation',
+      decisionQuestion: 'When should capacity expand within operating-cost constraints?',
+      choiceSet: ['scale_infrastructure_constrain_opex', 'defer_or_reduce_capacity'],
+      gatingVariables: ['customer_demand', 'capacity_urgency', 'infrastructure_economics'],
+    },
+    supportPattern: {
+      eventIds: ['event-ai-capacity-opex-pivot-2023', 'event-ai-capacity-sourcing-2024'],
+      conditions: ['Customer demand and capacity urgency remain observable.'],
+      action: 'scale_infrastructure_constrain_opex',
+      evidenceIds: ['span-capacity-2023-opex', 'span-capacity-2024-demand-discipline'],
+    },
+    contrastPattern: null,
+    contrastStatus: 'documented_unavailable',
+    conditionDelta: 'No reviewed opposite-condition event is available in the bounded public evidence set.',
+    actionDelta: 'The opposite action remains an explicit reversal path rather than an observed Amy Hood event.',
+    supportingEventIds: ['event-ai-capacity-opex-pivot-2023', 'event-ai-capacity-sourcing-2024'],
+    contrastingEventIds: [],
+    evidenceIds: ['span-capacity-2023-opex', 'span-capacity-2024-demand-discipline'],
+    confidence: 'medium',
+    status: 'review_required',
+    review: null,
+  });
+  const policy: PolicyMemory = {
+    schemaVersion: 2,
+    id: 'policy-ai-capacity-no-public-contrast',
+    domain: 'ai_cloud_capex',
+    applicabilityConditions: ['Customer demand and capacity urgency remain observable.'],
+    priorityOrder: ['Customer demand', 'Capacity urgency', 'Infrastructure economics'],
+    recommendedAction: 'Scale infrastructure while constraining operating expense growth.',
+    nonApplicabilityConditions: ['Demand or capacity urgency is no longer observable.'],
+    guardrails: ['Keep operating-expense growth bounded while capital capacity scales.'],
+    exceptions: ['Defer capacity when infrastructure economics materially deteriorate.'],
+    reversalSignals: ['Customer demand weakens or capacity urgency relaxes.'],
+    reflectionIds: [reflection.id],
+    supportingEventIds: [...reflection.supportingEventIds],
+    contrastingEventIds: [],
+    evidenceIds: [...reflection.evidenceIds],
+    directPolicyEvidenceIds: ['policy-ai-capex-cost-discipline-2023'],
+    contrastStatus: 'documented_unavailable',
+    confidence: 'medium',
+    policyKind: 'deployable_policy',
+    status: 'review_required',
+    review: null,
+  };
+  return { graph, reflection, policy };
+};
+
+test('edge: reviewed unavailable contrast yields a bounded medium-confidence policy', async () => {
+  const { graph, reflection, policy } = await noPublicContrastFixture();
+  assert.equal(validateReflectionMemory(reflection, graph).passed, true);
+  const validation = validatePolicyMemory(policy, [reflection], graph);
+  assert.equal(validation.passed, true, validation.errors.join('\n'));
+  assert.equal(validation.computedConfidence, 'medium');
+});
+
+test('failure: unavailable contrast cannot hide weak support or omit a reversal path', async () => {
+  const { graph, reflection, policy } = await noPublicContrastFixture();
+  const inventedContrast = {
+    ...reflection,
+    contrastingEventIds: ['event-workforce-reset-2023'],
+  };
+  assert.match(
+    validateReflectionMemory(inventedContrast, graph).errors.join('\n'),
+    /documented unavailable contrast/i,
+  );
+  const missingGap = { ...reflection, unresolvedConflicts: ['No contrast.'] };
+  assert.match(
+    validateReflectionMemory(missingGap, graph).errors.join('\n'),
+    /reviewed evidence gap/i,
+  );
+  const noDirectPrinciple = { ...policy, directPolicyEvidenceIds: [] };
+  assert.match(
+    validatePolicyMemory(noDirectPrinciple, [reflection], graph).errors.join('\n'),
+    /direct policy evidence/i,
+  );
+  const noReversal = { ...policy, reversalSignals: [] };
+  assert.equal(validatePolicyMemory(noReversal, [reflection], graph).passed, false);
+});
+
 test('happy: input graph selects only approved non-holdout decision evidence', async (context) => {
   const graph = await loadPolicyMemoryInput(process.cwd());
 
@@ -205,6 +297,7 @@ test('happy: input graph selects only approved non-holdout decision evidence', a
     'event-cloud-capacity-scale-2022',
     'event-copilot-price-2023',
     'event-linkedin-acquisition-2016',
+    'event-nuance-acquisition-2021',
     'event-workforce-reset-2023',
   ]);
   assert.equal(graph.events.every(({ status }) => status === 'approved'), true);
