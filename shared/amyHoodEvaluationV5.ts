@@ -261,6 +261,70 @@ export type EvaluationV5PairGrade = EvaluationV5JudgeProvenance & {
   invariantFinding: EvaluationV5PairFinding;
 };
 
+export type EvaluationV5ConfidenceInterval = {
+  meanDifference: number;
+  lower95: number;
+  upper95: number;
+  sampleSize: number;
+  inference: 'positive_supported' | 'directional_only' | 'no_positive_signal';
+};
+
+export type EvaluationV5TransitionMetrics = {
+  pairAccuracy: number;
+  signalCitationRate: number;
+  invariantPreservationRate: number;
+};
+
+export type EvaluationV5ExperimentReport = {
+  experimentGroupId: string;
+  scenarioSetHash: string;
+  promptHash: string;
+  memoryReleaseHash: string;
+  repetitions: 5;
+  armMeans: Record<EvaluationV5Arm, number>;
+  pairedLift: Record<'amy_policy_rag' | 'amy_full_rag', number>;
+  confidenceIntervals: Record<'amy_policy_rag' | 'amy_full_rag', EvaluationV5ConfidenceInterval>;
+  domainMeans: Record<EvaluationV5Arm, Partial<Record<DecisionDomain, number>>>;
+  changeTypeAccuracy: Record<EvaluationV5Arm, Record<EvaluationV5ChangeType, number>>;
+  transition: Record<EvaluationV5Arm, EvaluationV5TransitionMetrics>;
+  retrieval: {
+    mappedPolicyRate: number;
+    noMatchRate: number;
+    wrongDomainRate: number;
+    cacheAgreementRate: number;
+    evidenceAttachmentRate: number;
+    contextWithinBudgetRate: number;
+    meanContextTokens: number;
+  };
+  stability: {
+    armMeanStdDev: number;
+    byArm: Record<EvaluationV5Arm, number>;
+  };
+  diagnostics: {
+    expectedAnswers: 450;
+    completeAnswers: number;
+    failedAnswers: number;
+    validIndividualGrades: number;
+    expectedPairs: 225;
+    completePairs: number;
+    validPairGrades: number;
+    completionRate: number;
+  };
+  formalGate: {
+    passed: boolean;
+    bestRagArm: 'amy_policy_rag' | 'amy_full_rag';
+    checks: {
+      ragMean: boolean;
+      ragLift: boolean;
+      transitionAccuracy: boolean;
+      signalCitation: boolean;
+      retrievalPrecision: boolean;
+      completion: boolean;
+      stability: boolean;
+    };
+  };
+};
+
 const unwrapJson = (text: string) => {
   const trimmed = text.trim();
   const fenced = trimmed.match(/^```(?:json)?\s*([\s\S]*?)\s*```$/i);

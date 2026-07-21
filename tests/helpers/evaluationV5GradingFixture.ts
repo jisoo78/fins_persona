@@ -29,6 +29,11 @@ export const installEvaluationV5GradingFixture = async () => {
     path.join(root, 'evaluation/v5/sealed/manifest.json'),
     'utf8',
   )) as { bundleHash: string };
+  const alignmentKeys = (JSON.parse(await readFile(
+    path.join(root, 'evaluation/v5/sealed/scenario-keys.json'),
+    'utf8',
+  )) as { alignmentKeys: Array<{ scenarioId: string; policyId: string }> }).alignmentKeys;
+  const policyByScenario = new Map(alignmentKeys.map(({ scenarioId, policyId }) => [scenarioId, policyId]));
   const groupId = 'grade-v5-fixture-group';
   const runs: EvaluationV5Run[] = [];
   let runNumber = 0;
@@ -75,13 +80,13 @@ export const installEvaluationV5GradingFixture = async () => {
               retrievalConfigHash: 'c'.repeat(64),
               cacheKey: `${scenarioIndex + 1}`.padStart(64, '0'),
               selectedArtifacts: [{
-                id: 'placeholder-policy',
+                id: policyByScenario.get(scenario.id)!,
                 kind: 'policy' as const,
                 vectorScore: 0.9,
                 lexicalScore: 0.8,
                 fusedScore: 0.87,
               }],
-              expandedArtifactIds: ['placeholder-policy'],
+              expandedArtifactIds: [policyByScenario.get(scenario.id)!],
               evidenceIds: ['evidence'],
               sourceIds: ['source'],
               noMatch: false,
