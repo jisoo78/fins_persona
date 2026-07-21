@@ -8,7 +8,9 @@
     "id": "source-78333f25f047c289",
     "canonicalUrl": "https://news.microsoft.com/source/2013/09/17/microsoft-announces-quarterly-dividend-increase-and-share-repurchase-program-3/",
     "eventCandidateIds": [
-      "candidate-buyback-2013"
+      "candidate-buyback-2013",
+      "candidate-buyback-2024",
+      "candidate-buyback-deployment-slowdown-fy2023"
     ],
     "tier": 1,
     "title": "2013 forty billion dollar repurchase authorization",

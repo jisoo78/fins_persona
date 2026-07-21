@@ -1,6 +1,6 @@
 {
   "dataset": "amy_hood_phase_3_pilot",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "targets": [
     { "candidateId": "candidate-linkedin-acquisition-2016", "domain": "m_and_a", "priority": 1 },
     { "candidateId": "candidate-activision-acquisition-2022", "domain": "m_and_a", "priority": 2 },
@@ -16,6 +16,9 @@
     { "candidateId": "candidate-transformation-2026", "domain": "cost_efficiency", "priority": 12 },
     { "candidateId": "candidate-buyback-2013", "domain": "shareholder_return_risk", "priority": 13 },
     { "candidateId": "candidate-buyback-2021", "domain": "shareholder_return_risk", "priority": 14 },
-    { "candidateId": "candidate-buyback-2024", "domain": "shareholder_return_risk", "priority": 15 }
+    { "candidateId": "candidate-buyback-2024", "domain": "shareholder_return_risk", "priority": 15 },
+    { "candidateId": "candidate-priority-reinvestment-fy2022", "domain": "cost_efficiency", "priority": 16 },
+    { "candidateId": "candidate-ai-datacenter-project-pacing-2025", "domain": "ai_cloud_capex", "priority": 17 },
+    { "candidateId": "candidate-buyback-deployment-slowdown-fy2023", "domain": "shareholder_return_risk", "priority": 18 }
   ]
 }

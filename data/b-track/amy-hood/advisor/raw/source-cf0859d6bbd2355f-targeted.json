@@ -1,0 +1,29 @@
+{
+  "sourceId": "source-cf0859d6bbd2355f",
+  "requestedCanonicalUrl": "https://www.microsoft.com/en-us/Investor/events/FY-2024/earnings-fy-2024-q4.aspx",
+  "canonicalUrl": "https://www.microsoft.com/en-us/Investor/events/FY-2024/earnings-fy-2024-q4.aspx",
+  "finalUrl": "https://www.microsoft.com/en-us/Investor/events/FY-2024/earnings-fy-2024-q4.aspx",
+  "redirectChain": ["https://www.microsoft.com/en-us/Investor/events/FY-2024/earnings-fy-2024-q4.aspx"],
+  "title": "Microsoft FY24 Q4 earnings transcript — demand-led CapEx policy excerpt",
+  "mediaType": "text/plain",
+  "bodyBase64": "TWljcm9zb2Z0IEZZMjQgRm91cnRoIFF1YXJ0ZXIgRWFybmluZ3MgQ29uZmVyZW5jZSBDYWxsLCBKdWx5IDMwLCAyMDI0LiBBbXkgSG9vZCBkZXNjcmliZWQgdGhlIGNvbnRyb2wgcnVsZSBmb3IgdGhlIG5leHQgZmlzY2FsIHllYXIncyBpbmZyYXN0cnVjdHVyZSBwcm9ncmFtLiBBTVkgSE9PRDogVG8gbWVldCB0aGUgZ3Jvd2luZyBkZW1hbmQgc2lnbmFsIGZvciBvdXIgQUkgYW5kIGNsb3VkIHByb2R1Y3RzLCB3ZSB3aWxsIHNjYWxlIG91ciBpbmZyYXN0cnVjdHVyZSBpbnZlc3RtZW50cyB3aXRoIEZZMjUgY2FwaXRhbCBleHBlbmRpdHVyZXMgZXhwZWN0ZWQgdG8gYmUgaGlnaGVyIHRoYW4gRlkyNC4gQXMgYSByZW1pbmRlciwgdGhlc2UgZXhwZW5kaXR1cmVzIGFyZSBkZXBlbmRlbnQgb24gZGVtYW5kIHNpZ25hbHMgYW5kIGFkb3B0aW9uIG9mIG91ciBzZXJ2aWNlcyB0aGF0IHdpbGwgYmUgbWFuYWdlZCB0aHJvdWdoIHRoZSB5ZWFyLiBTaGUgcGFpcmVkIHRoZSBjYXBpdGFsIHBsYW4gd2l0aCBjb250aW51ZWQgb3BlcmF0aW5nLWV4cGVuc2UgZGlzY2lwbGluZSBhbmQgZXhwbGFpbmVkIHRoYXQgdGhlIG1peCBhbmQgdGltaW5nIG9mIGFzc2V0cyBwcmVzZXJ2ZSBzb21lIGFiaWxpdHkgdG8gYWRqdXN0IHN1cHBseS4K",
+  "speakerSegments": [],
+  "metadata": {
+    "id": "source-cf0859d6bbd2355f",
+    "canonicalUrl": "https://www.microsoft.com/en-us/Investor/events/FY-2024/earnings-fy-2024-q4.aspx",
+    "eventCandidateIds": ["candidate-ai-datacenter-project-pacing-2025"],
+    "tier": 1,
+    "title": "Microsoft FY24 Q4 earnings transcript — demand-led CapEx policy excerpt",
+    "publisher": "Microsoft Investor Relations",
+    "publishedAt": "2024-07-30",
+    "speaker": "Amy Hood",
+    "sourceType": "official_earnings_transcript",
+    "collector": "manual_import",
+    "temporalRole": "pre_decision",
+    "rightsNote": "Official public Microsoft transcript; bounded Amy Hood policy passage retained for reviewed PoC evidence.",
+    "approvedPublicHost": true,
+    "collectionStatus": "approved",
+    "sha256": "681ef3ba217cbefcb0b7c3522e7f00ea01e0d44740ba5a22880b706c9031d873",
+    "capturedAt": "2026-07-21T06:30:00.000Z"
+  }
+}

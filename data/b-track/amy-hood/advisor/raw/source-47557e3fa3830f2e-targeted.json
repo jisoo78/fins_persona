@@ -1,0 +1,29 @@
+{
+  "sourceId": "source-47557e3fa3830f2e",
+  "requestedCanonicalUrl": "https://www.linkedin.com/posts/jamesthorn_noelle-has-stated-this-better-than-i-ever-activity-7315549305656823808-0Fe0",
+  "canonicalUrl": "https://www.linkedin.com/posts/jamesthorn_noelle-has-stated-this-better-than-i-ever-activity-7315549305656823808-0Fe0",
+  "finalUrl": "https://www.linkedin.com/posts/jamesthorn_noelle-has-stated-this-better-than-i-ever-activity-7315549305656823808-0Fe0",
+  "redirectChain": ["https://www.linkedin.com/posts/jamesthorn_noelle-has-stated-this-better-than-i-ever-activity-7315549305656823808-0Fe0"],
+  "title": "Noelle Walsh datacenter project pacing statement — reviewed excerpt",
+  "mediaType": "text/plain",
+  "bodyBase64": "Tm9lbGxlIFdhbHNoLCBQcmVzaWRlbnQgb2YgTWljcm9zb2Z0IENsb3VkIE9wZXJhdGlvbnMgYW5kIElubm92YXRpb24sIGV4cGxhaW5lZCBjaGFuZ2VzIHRvIHRoZSAyMDI1IGRhdGFjZW50ZXIgYnVpbGQgcGxhbi4gU2hlIHdyb3RlIHRoYXQgcGxhbm5pbmcgaXMgbXVsdGkteWVhciBhbmQgY2FwaXRhbCBpbnRlbnNpdmUgYW5kIHJlcXVpcmVzIGFnaWxpdHkgYXMgTWljcm9zb2Z0IGxlYXJucyB3aXRoIGN1c3RvbWVycy4gTk9FTExFIFdBTFNIOiBXaGF0IHRoaXMgbWVhbnMgaXMgdGhhdCB3ZSBhcmUgc2xvd2luZyBvciBwYXVzaW5nIHNvbWUgZWFybHktc3RhZ2UgcHJvamVjdHMuIFNoZSBhZGRlZCB0aGF0IE1pY3Jvc29mdCB3b3VsZCBzdHJhdGVnaWNhbGx5IHBhY2UgcGxhbnMgd2hpbGUgY29udGludWluZyB0byBncm93IGFuZCBhbGlnbiBpbnZlc3RtZW50cyB3aXRoIGJ1c2luZXNzIHByaW9yaXRpZXMgYW5kIGN1c3RvbWVyIGRlbWFuZC4gVGhpcyBleGVjdXRpdmUgc3RhdGVtZW50IGNvbmZpcm1zIGEgc2VsZWN0aXZlIHRpbWluZyBhbmQgbG9jYXRpb24gYWRqdXN0bWVudCByYXRoZXIgdGhhbiBhYmFuZG9ubWVudCBvZiB0aGUgYnJvYWRlciBBSSBpbmZyYXN0cnVjdHVyZSBzdHJhdGVneS4K",
+  "speakerSegments": [],
+  "metadata": {
+    "id": "source-47557e3fa3830f2e",
+    "canonicalUrl": "https://www.linkedin.com/posts/jamesthorn_noelle-has-stated-this-better-than-i-ever-activity-7315549305656823808-0Fe0",
+    "eventCandidateIds": ["candidate-ai-datacenter-project-pacing-2025"],
+    "tier": 3,
+    "title": "Noelle Walsh datacenter project pacing statement — reviewed excerpt",
+    "publisher": "LinkedIn",
+    "publishedAt": "2025-04-09",
+    "speaker": "Noelle Walsh",
+    "sourceType": "executive_social_post_repost",
+    "collector": "manual_import",
+    "temporalRole": "decision_time",
+    "rightsNote": "Public executive statement repost; bounded action passage retained with explicit non-Amy provenance limitation.",
+    "approvedPublicHost": false,
+    "collectionStatus": "approved",
+    "sha256": "a0593e15b842b29ad7bf17a508b92a9b17726b3e97c8889a60804aef2288ab21",
+    "capturedAt": "2026-07-21T06:30:00.000Z"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "sourceId": "source-05e8711dbdcc2c3e",
+  "requestedCanonicalUrl": "https://news.microsoft.com/wp-content/uploads/prod/2021/07/TranscriptFY21Q4.pdf",
+  "canonicalUrl": "https://news.microsoft.com/wp-content/uploads/prod/2021/07/TranscriptFY21Q4.pdf",
+  "finalUrl": "https://news.microsoft.com/wp-content/uploads/prod/2021/07/TranscriptFY21Q4.pdf",
+  "redirectChain": ["https://news.microsoft.com/wp-content/uploads/prod/2021/07/TranscriptFY21Q4.pdf"],
+  "title": "Microsoft FY21 Q4 earnings transcript — reviewed Amy Hood investment excerpt",
+  "mediaType": "text/plain",
+  "bodyBase64": "TWljcm9zb2Z0IEZZMjEgRm91cnRoIFF1YXJ0ZXIgRWFybmluZ3MgQ29uZmVyZW5jZSBDYWxsLCBKdWx5IDI3LCAyMDIxLiBBbXkgSG9vZCBkaXNjdXNzZWQgdGhlIEZZMjIgb3BlcmF0aW5nIHBsYW4gYW5kIHRoZSBhbGxvY2F0aW9uIG9mIG9wZXJhdGluZyBleHBlbnNlLiBBTVkgSE9PRDogVGhlIHF1ZXN0aW9uIHdlIGFzayBmb3IgZXZlcnkgb3BlcmF0aW5nIGV4cGVuc2UgZG9sbGFyIHdlIGludmVzdCBpcywgYXJlIHdlIGNvbnRpbnVpbmcgdG8gaW52ZXN0IGl0IGluIHRoZSBoaWdoZXN0IGdyb3d0aCBwbGFjZXM/IElmIHlvdSBjb250aW51ZSB0byBpbnZlc3QgaW4gaGlnaCBncm93dGggcGxhY2VzIHdpdGggZGlmZmVyZW50aWF0aW9uIHRoYXQgY3VzdG9tZXJzIGNhcmUgYWJvdXQsIHRoZSBvdmVyYWxsIGFtb3VudCBzaG91bGQgZ3JvdyBiYXNlZCBvbiB0aGUgb3Bwb3J0dW5pdHkuIEFteSBIb29kIGFsc28gc3RhdGVkIHRoYXQgaGVhZGNvdW50IGdyb3d0aCB3b3VsZCBiZSAxMiBwZXJjZW50IHBsdXMgYW5kIHRoYXQgdGhlIG9wcG9ydHVuaXR5IGFuZCBwcmlvciBleGVjdXRpb24gc3VwcG9ydGVkIGNvbmZpZGVuY2UgaW4gdGhhdCBpbnZlc3RtZW50IGxldmVsLgo=",
+  "speakerSegments": [
+    { "speaker": "Amy Hood", "startChar": 166, "endChar": 515 }
+  ],
+  "metadata": {
+    "id": "source-05e8711dbdcc2c3e",
+    "canonicalUrl": "https://news.microsoft.com/wp-content/uploads/prod/2021/07/TranscriptFY21Q4.pdf",
+    "eventCandidateIds": ["candidate-priority-reinvestment-fy2022"],
+    "tier": 1,
+    "title": "Microsoft FY21 Q4 earnings transcript — reviewed Amy Hood investment excerpt",
+    "publisher": "Microsoft",
+    "publishedAt": "2021-07-27",
+    "speaker": "Amy Hood",
+    "sourceType": "official_earnings_transcript",
+    "collector": "manual_import",
+    "temporalRole": "decision_time",
+    "rightsNote": "Official public Microsoft transcript; bounded Amy Hood passages retained for reviewed PoC evidence.",
+    "approvedPublicHost": true,
+    "collectionStatus": "approved",
+    "sha256": "0674aa0c6a23d04e0ceaccd7a24b7ec11d6d155bd3480e4ec4bec682d66b253a",
+    "capturedAt": "2026-07-21T06:30:00.000Z"
+  }
+}

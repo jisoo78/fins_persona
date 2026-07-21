@@ -580,7 +580,8 @@
       "canonicalUrl": "https://news.microsoft.com/source/2013/09/17/microsoft-announces-quarterly-dividend-increase-and-share-repurchase-program-3/",
       "eventCandidateIds": [
         "candidate-buyback-2013",
-        "candidate-buyback-2024"
+        "candidate-buyback-2024",
+        "candidate-buyback-deployment-slowdown-fy2023"
       ],
       "tier": 1,
       "title": "2013 forty billion dollar repurchase authorization",
@@ -1523,6 +1524,118 @@
       "redirectChain": [
         "https://blogs.microsoft.com/eupolicy/2023/08/31/european-competition-teams-office-microsoft-365/"
       ]
+    },
+    {
+      "id": "source-05e8711dbdcc2c3e",
+      "canonicalUrl": "https://news.microsoft.com/wp-content/uploads/prod/2021/07/TranscriptFY21Q4.pdf",
+      "finalUrl": "https://news.microsoft.com/wp-content/uploads/prod/2021/07/TranscriptFY21Q4.pdf",
+      "redirectChain": [
+        "https://news.microsoft.com/wp-content/uploads/prod/2021/07/TranscriptFY21Q4.pdf"
+      ],
+      "eventCandidateIds": [
+        "candidate-priority-reinvestment-fy2022"
+      ],
+      "tier": 1,
+      "title": "Microsoft FY21 Q4 earnings transcript — reviewed Amy Hood investment excerpt",
+      "publisher": "Microsoft",
+      "publishedAt": "2021-07-27",
+      "speaker": "Amy Hood",
+      "sourceType": "official_earnings_transcript",
+      "contentCompleteness": "reviewed_excerpt",
+      "collector": "manual_import",
+      "temporalRole": "decision_time",
+      "rightsNote": "Official public Microsoft transcript; bounded Amy Hood passages retained for reviewed PoC evidence.",
+      "approvedPublicHost": true,
+      "collectionStatus": "approved",
+      "rawPath": "raw/source-05e8711dbdcc2c3e-targeted.json",
+      "normalizedPath": "normalized/source-targeted-fy21-q4-transcript.txt",
+      "sha256": "0674aa0c6a23d04e0ceaccd7a24b7ec11d6d155bd3480e4ec4bec682d66b253a",
+      "capturedAt": "2026-07-21T06:30:00.000Z",
+      "failureReason": null
+    },
+    {
+      "id": "source-cf0859d6bbd2355f",
+      "canonicalUrl": "https://www.microsoft.com/en-us/Investor/events/FY-2024/earnings-fy-2024-q4.aspx",
+      "finalUrl": "https://www.microsoft.com/en-us/Investor/events/FY-2024/earnings-fy-2024-q4.aspx",
+      "redirectChain": [
+        "https://www.microsoft.com/en-us/Investor/events/FY-2024/earnings-fy-2024-q4.aspx"
+      ],
+      "eventCandidateIds": [
+        "candidate-ai-datacenter-project-pacing-2025"
+      ],
+      "tier": 1,
+      "title": "Microsoft FY24 Q4 earnings transcript — demand-led CapEx policy excerpt",
+      "publisher": "Microsoft Investor Relations",
+      "publishedAt": "2024-07-30",
+      "speaker": "Amy Hood",
+      "sourceType": "official_earnings_transcript",
+      "contentCompleteness": "reviewed_excerpt",
+      "collector": "manual_import",
+      "temporalRole": "pre_decision",
+      "rightsNote": "Official public Microsoft transcript; bounded Amy Hood policy passage retained for reviewed PoC evidence.",
+      "approvedPublicHost": true,
+      "collectionStatus": "approved",
+      "rawPath": "raw/source-cf0859d6bbd2355f-targeted.json",
+      "normalizedPath": "normalized/source-targeted-fy24-q4-capex-policy.txt",
+      "sha256": "681ef3ba217cbefcb0b7c3522e7f00ea01e0d44740ba5a22880b706c9031d873",
+      "capturedAt": "2026-07-21T06:30:00.000Z",
+      "failureReason": null
+    },
+    {
+      "id": "source-47557e3fa3830f2e",
+      "canonicalUrl": "https://www.linkedin.com/posts/jamesthorn_noelle-has-stated-this-better-than-i-ever-activity-7315549305656823808-0Fe0",
+      "finalUrl": "https://www.linkedin.com/posts/jamesthorn_noelle-has-stated-this-better-than-i-ever-activity-7315549305656823808-0Fe0",
+      "redirectChain": [
+        "https://www.linkedin.com/posts/jamesthorn_noelle-has-stated-this-better-than-i-ever-activity-7315549305656823808-0Fe0"
+      ],
+      "eventCandidateIds": [
+        "candidate-ai-datacenter-project-pacing-2025"
+      ],
+      "tier": 3,
+      "title": "Noelle Walsh datacenter project pacing statement — reviewed excerpt",
+      "publisher": "LinkedIn",
+      "publishedAt": "2025-04-09",
+      "speaker": "Noelle Walsh",
+      "sourceType": "executive_social_post_repost",
+      "contentCompleteness": "reviewed_excerpt",
+      "collector": "manual_import",
+      "temporalRole": "decision_time",
+      "rightsNote": "Public executive statement repost; bounded action passage retained with explicit non-Amy provenance limitation.",
+      "approvedPublicHost": false,
+      "collectionStatus": "approved",
+      "rawPath": "raw/source-47557e3fa3830f2e-targeted.json",
+      "normalizedPath": "normalized/source-targeted-ai-project-pacing-2025.txt",
+      "sha256": "a0593e15b842b29ad7bf17a508b92a9b17726b3e97c8889a60804aef2288ab21",
+      "capturedAt": "2026-07-21T06:30:00.000Z",
+      "failureReason": null
+    },
+    {
+      "id": "source-3abbe52bb80488c2",
+      "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/789019/000095017023035122/msft-20230630.htm",
+      "finalUrl": "https://www.sec.gov/Archives/edgar/data/789019/000095017023035122/msft-20230630.htm",
+      "redirectChain": [
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017023035122/msft-20230630.htm"
+      ],
+      "eventCandidateIds": [
+        "candidate-buyback-deployment-slowdown-fy2023"
+      ],
+      "tier": 1,
+      "title": "Microsoft FY2023 Form 10-K — share repurchase deployment excerpt",
+      "publisher": "U.S. Securities and Exchange Commission",
+      "publishedAt": "2023-07-27",
+      "speaker": null,
+      "sourceType": "form_10_k",
+      "contentCompleteness": "reviewed_excerpt",
+      "collector": "manual_import",
+      "temporalRole": "decision_time",
+      "rightsNote": "Public SEC filing; bounded repurchase deployment passage retained for reviewed PoC evidence.",
+      "approvedPublicHost": true,
+      "collectionStatus": "approved",
+      "rawPath": "raw/source-3abbe52bb80488c2-targeted.json",
+      "normalizedPath": "normalized/source-targeted-fy23-buyback-deployment.txt",
+      "sha256": "a3d56441486b0f38bea93ee76b4c68fee5512edce708849f51677daac24c4987",
+      "capturedAt": "2026-07-21T06:30:00.000Z",
+      "failureReason": null
     }
   ]
 }

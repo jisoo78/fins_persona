@@ -2887,5 +2887,188 @@
     "phase3Status": "eligible",
     "notes": "Raw-derived capacity-resource event with exact Amy Hood transcript evidence.",
     "status": "approved_for_collection"
+  },
+  {
+    "id": "candidate-priority-reinvestment-fy2022",
+    "workingTitle": "FY2022 high growth places differentiated operating investment decision",
+    "domain": "cost_efficiency",
+    "decisionWindowStart": "2021-07-27",
+    "decisionWindowEnd": "2021-07-27",
+    "discoveryUrls": ["https://news.microsoft.com/wp-content/uploads/prod/2021/07/TranscriptFY21Q4.pdf"],
+    "decisionWindowBasis": {
+      "summary": "The official FY21 Q4 earnings-call date defines the public disclosure of the FY22 operating investment plan.",
+      "sourceUrls": ["https://news.microsoft.com/wp-content/uploads/prod/2021/07/TranscriptFY21Q4.pdf"],
+      "reviewerNote": "Codex reviewed the bounded Amy Hood operating-investment and headcount passages on 2026-07-21."
+    },
+    "sourceAssociations": [{
+      "canonicalUrl": "https://news.microsoft.com/wp-content/uploads/prod/2021/07/TranscriptFY21Q4.pdf",
+      "role": "direct_amy",
+      "sourceType": "official_earnings_transcript",
+      "documentFamilyId": "earnings-call-2021",
+      "publishedAt": "2021-07-27",
+      "temporalRelation": "decision_time",
+      "relevanceClaim": "Amy Hood states the allocation rule and planned headcount expansion for high-growth differentiated opportunities.",
+      "evidenceLocator": {
+        "exactQuote": "are we continuing to invest it in the highest growth places?",
+        "exactRelevancePassage": "are we continuing to invest it in the highest growth places? If you continue to invest in high growth places with differentiation that customers care about, the overall amount should grow based on the opportunity. Amy Hood also stated that headcount growth would be 12 percent plus",
+        "anchorTerms": ["highest growth places", "12 percent plus"],
+        "eventDiscriminators": [
+          { "value": "high growth places", "kind": "named_entity" },
+          { "value": "invest", "kind": "decision_action" },
+          { "value": "12 percent plus", "kind": "event_specific" }
+        ],
+        "speaker": "Amy Hood"
+      },
+      "reviewStatus": "reviewed",
+      "reviewerNote": "Codex verified the speaker, bounded passage, date, and offsets in the reviewed excerpt."
+    }],
+    "directEvidenceGap": null,
+    "phase3Status": "eligible",
+    "notes": "User-approved opposite-action event for the cost-efficiency decision axis.",
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "high growth places",
+      "decisionAction": "invest",
+      "eventSpecificIdentifier": "12 percent plus",
+      "sourceUrls": ["https://news.microsoft.com/wp-content/uploads/prod/2021/07/TranscriptFY21Q4.pdf"],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "Codex matched the controlled fields to the bounded Amy Hood FY22 operating-plan passage."
+    }
+  },
+  {
+    "id": "candidate-ai-datacenter-project-pacing-2025",
+    "workingTitle": "2025 datacenter early-stage project pacing decision",
+    "domain": "ai_cloud_capex",
+    "decisionWindowStart": "2025-04-09",
+    "decisionWindowEnd": "2025-04-09",
+    "discoveryUrls": [
+      "https://www.linkedin.com/posts/jamesthorn_noelle-has-stated-this-better-than-i-ever-activity-7315549305656823808-0Fe0",
+      "https://www.microsoft.com/en-us/Investor/events/FY-2024/earnings-fy-2024-q4.aspx"
+    ],
+    "decisionWindowBasis": {
+      "summary": "The dated Microsoft executive statement defines the public disclosure window for slowing or pausing early-stage projects.",
+      "sourceUrls": ["https://www.linkedin.com/posts/jamesthorn_noelle-has-stated-this-better-than-i-ever-activity-7315549305656823808-0Fe0"],
+      "reviewerNote": "Codex reviewed the bounded Noelle Walsh action statement and pre-decision Amy Hood demand-control policy."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://www.linkedin.com/posts/jamesthorn_noelle-has-stated-this-better-than-i-ever-activity-7315549305656823808-0Fe0",
+        "role": "contemporaneous_context",
+        "sourceType": "executive_social_post_repost",
+        "documentFamilyId": "executive-statement-2025",
+        "publishedAt": "2025-04-09",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The Microsoft infrastructure executive confirms selective slowing or pausing of early-stage projects.",
+        "evidenceLocator": {
+          "exactQuote": "What this means is that we are slowing or pausing some early-stage projects.",
+          "exactRelevancePassage": "the 2025 datacenter build plan. She wrote that planning is multi-year and capital intensive and requires agility as Microsoft learns with customers. NOELLE WALSH: What this means is that we are slowing or pausing some early-stage projects.",
+          "anchorTerms": ["slowing or pausing", "early-stage projects"],
+          "eventDiscriminators": [
+            { "value": "datacenter", "kind": "named_entity" },
+            { "value": "slowing or pausing", "kind": "decision_action" },
+            { "value": "early-stage projects", "kind": "event_specific" }
+          ],
+          "speaker": "Noelle Walsh"
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "User approved this non-Amy event-action evidence for PoC contrast use; provenance limitation remains explicit."
+      },
+      {
+        "canonicalUrl": "https://www.microsoft.com/en-us/Investor/events/FY-2024/earnings-fy-2024-q4.aspx",
+        "role": "counterevidence",
+        "sourceType": "official_earnings_transcript",
+        "documentFamilyId": "earnings-call-2024",
+        "publishedAt": "2024-07-30",
+        "temporalRelation": "pre_decision",
+        "relevanceClaim": "Amy Hood states that infrastructure expenditure is managed through the year using demand and adoption signals.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "The event card retains this bounded Amy policy span, but the candidate association is not treated as event-specific direct evidence."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "The event action is stated by Noelle Walsh; no event-specific Amy Hood statement was found.",
+      "reviewerNote": "User explicitly approved PoC contrast use on 2026-07-21 while retaining this limitation."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "User-approved opposite-action event with Amy policy evidence and non-Amy event-action evidence.",
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "datacenter",
+      "decisionAction": "slowing or pausing",
+      "eventSpecificIdentifier": "early-stage projects",
+      "sourceUrls": ["https://www.linkedin.com/posts/jamesthorn_noelle-has-stated-this-better-than-i-ever-activity-7315549305656823808-0Fe0"],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "Codex matched the controlled fields to the bounded Microsoft executive statement."
+    }
+  },
+  {
+    "id": "candidate-buyback-deployment-slowdown-fy2023",
+    "workingTitle": "FY2023 share repurchase deployment slowdown disclosure",
+    "domain": "shareholder_return_risk",
+    "decisionWindowStart": "2023-07-27",
+    "decisionWindowEnd": "2023-07-27",
+    "discoveryUrls": [
+      "https://www.sec.gov/Archives/edgar/data/789019/000095017023035122/msft-20230630.htm",
+      "https://news.microsoft.com/source/2013/09/17/microsoft-announces-quarterly-dividend-increase-and-share-repurchase-program-3/"
+    ],
+    "decisionWindowBasis": {
+      "summary": "The FY2023 Form 10-K filing date defines the public disclosure window for the observed repurchase deployment reduction.",
+      "sourceUrls": ["https://www.sec.gov/Archives/edgar/data/789019/000095017023035122/msft-20230630.htm"],
+      "reviewerNote": "Codex reviewed the bounded SEC deployment comparison and the earlier Amy Hood shareholder-return principle."
+    },
+    "sourceAssociations": [
+      {
+        "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/789019/000095017023035122/msft-20230630.htm",
+        "role": "contemporaneous_context",
+        "sourceType": "form_10_k",
+        "documentFamilyId": "sec-filing-2023",
+        "publishedAt": "2023-07-27",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "The filing reports a material reduction in actual repurchase deployment while authorization remained available.",
+        "evidenceLocator": {
+          "exactQuote": "During fiscal years 2023 and 2022, we repurchased 69 million shares and 95 million shares of our common stock for $18.4 billion and $28.0 billion, respectively, through our share repurchase programs.",
+          "exactRelevancePassage": "During fiscal years 2023 and 2022, we repurchased 69 million shares and 95 million shares of our common stock for $18.4 billion and $28.0 billion, respectively, through our share repurchase programs.",
+          "anchorTerms": ["share repurchase", "$18.4 billion"],
+          "eventDiscriminators": [
+            { "value": "share repurchase", "kind": "named_entity" },
+            { "value": "repurchased", "kind": "decision_action" },
+            { "value": "$18.4 billion", "kind": "event_specific" }
+          ],
+          "speaker": null
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Codex verified the public filing passage and exact reviewed-excerpt offsets."
+      },
+      {
+        "canonicalUrl": "https://news.microsoft.com/source/2013/09/17/microsoft-announces-quarterly-dividend-increase-and-share-repurchase-program-3/",
+        "role": "counterevidence",
+        "sourceType": "official_announcement",
+        "documentFamilyId": "shareholder-return-2013",
+        "publishedAt": "2013-09-17",
+        "temporalRelation": "pre_decision",
+        "relevanceClaim": "Amy Hood states the continuing shareholder cash-return commitment that the later flexible deployment is compared against.",
+        "evidenceLocator": null,
+        "reviewStatus": "unreviewed",
+        "reviewerNote": "The event card retains this bounded Amy policy span, but the association is not treated as contemporaneous causal evidence."
+      }
+    ],
+    "directEvidenceGap": {
+      "reviewStatus": "reviewed",
+      "reason": "The filing confirms deployment but contains no contemporaneous Amy Hood explanation of the causal allocation decision.",
+      "reviewerNote": "User explicitly approved PoC contrast use on 2026-07-21 while retaining this limitation."
+    },
+    "phase3Status": "evidence_gap",
+    "notes": "User-approved opposite-action event for flexible repurchase deployment.",
+    "status": "approved_for_collection",
+    "eventFingerprint": {
+      "primaryEntity": "share repurchase",
+      "decisionAction": "repurchased",
+      "eventSpecificIdentifier": "$18.4 billion",
+      "sourceUrls": ["https://www.sec.gov/Archives/edgar/data/789019/000095017023035122/msft-20230630.htm"],
+      "reviewStatus": "reviewed",
+      "reviewerNote": "Codex matched the controlled fields to the bounded FY2023 Form 10-K comparison."
+    }
   }
 ]

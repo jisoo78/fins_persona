@@ -1,0 +1,82 @@
+{
+  "id": "event-priority-reinvestment-fy2022",
+  "candidateId": "candidate-priority-reinvestment-fy2022",
+  "title": "Expand operating resources in high-growth differentiated areas",
+  "domain": "cost_efficiency",
+  "decisionDate": "2021-07-27",
+  "decisionQuestion": "When should Microsoft expand operating expense and headcount instead of retaining savings or constraining resources?",
+  "situation": "Microsoft entered FY2022 with strong growth opportunities and operating savings, requiring a choice between preserving cost restraint and reinvesting in differentiated growth areas.",
+  "objectives": [
+    "Fund high-growth opportunities customers value",
+    "Preserve confidence in long-term margin execution"
+  ],
+  "conditions": [
+    "The target area has observable high growth.",
+    "Microsoft offers differentiation customers care about.",
+    "Prior investment execution supports confidence in returns."
+  ],
+  "constraints": [
+    "Operating investment must remain concentrated rather than uniform.",
+    "Growth in expense and headcount must be justified by opportunity and execution."
+  ],
+  "options": [
+    {
+      "id": "retain_savings_and_constrain_resources",
+      "description": "Retain operating savings and constrain headcount growth across the portfolio.",
+      "expectedBenefit": "Maximizes near-term operating leverage and lowers execution risk.",
+      "principalRisk": "Underfunds differentiated high-growth opportunities.",
+      "selected": false
+    },
+    {
+      "id": "expand_high_growth_differentiated_investment",
+      "description": "Expand operating expense and headcount selectively in high-growth differentiated areas.",
+      "expectedBenefit": "Captures growth where customer value and Microsoft differentiation are strongest.",
+      "principalRisk": "Higher cost growth if opportunity or execution weakens.",
+      "selected": true
+    }
+  ],
+  "chosenAction": "expand_high_growth_differentiated_investment",
+  "rejectedBenefit": "Retaining savings would improve near-term operating leverage.",
+  "observations": [
+    "Amy Hood made allocation to the highest-growth places the operating-expense test.",
+    "The FY2022 plan contemplated headcount growth above 12 percent."
+  ],
+  "inferences": [
+    "Cost discipline is conditional allocation discipline, not a permanent preference for absolute cuts."
+  ],
+  "directAmyEvidenceIds": ["span-priority-reinvestment-policy-2021"],
+  "amyPolicyEvidenceIds": [],
+  "contextEvidenceIds": ["span-priority-reinvestment-headcount-2021"],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": ["source-05e8711dbdcc2c3e"],
+  "documentFamilyIds": ["earnings-call-2021"],
+  "evidenceSpans": [
+    {
+      "id": "span-priority-reinvestment-policy-2021",
+      "sourceId": "source-05e8711dbdcc2c3e",
+      "eventCandidateId": "candidate-priority-reinvestment-fy2022",
+      "role": "direct_amy",
+      "exactQuote": "are we continuing to invest it in the highest growth places?",
+      "startChar": 234,
+      "endChar": 294,
+      "publishedAt": "2021-07-27",
+      "speaker": "Amy Hood"
+    },
+    {
+      "id": "span-priority-reinvestment-headcount-2021",
+      "sourceId": "source-05e8711dbdcc2c3e",
+      "eventCandidateId": "candidate-priority-reinvestment-fy2022",
+      "role": "decision_context",
+      "exactQuote": "headcount growth would be 12 percent plus",
+      "startChar": 474,
+      "endChar": 515,
+      "publishedAt": "2021-07-27",
+      "speaker": "Amy Hood"
+    }
+  ],
+  "status": "approved",
+  "gaps": ["single_document_family"],
+  "reviewer": "Codex with explicit user approval",
+  "reviewedAt": "2026-07-21T06:40:00.000Z",
+  "updatedAt": "2026-07-21T06:40:00.000Z"
+}

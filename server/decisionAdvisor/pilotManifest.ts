@@ -22,10 +22,14 @@ export const validatePilotManifest = (
   }
   const manifest = value as PilotManifest;
   if (manifest.dataset !== 'amy_hood_phase_3_pilot'
-    || (manifest.version !== '1.0.0' && manifest.version !== '2.0.0')) {
+    || !['1.0.0', '2.0.0', '3.0.0'].includes(manifest.version)) {
     throw new Error('pilot manifest identity is invalid');
   }
-  const expectedCount = manifest.version === '1.0.0' ? 10 : 15;
+  const expectedCount = manifest.version === '1.0.0'
+    ? 10
+    : manifest.version === '2.0.0'
+      ? 15
+      : 18;
   if (!Array.isArray(manifest.targets) || manifest.targets.length !== expectedCount) {
     throw new Error(
       `pilot manifest ${manifest.version} requires exactly ${expectedCount} targets; found ${manifest.targets?.length ?? 0}`,
@@ -70,6 +74,13 @@ export const validatePilotManifest = (
     for (const domain of domains) {
       if (manifest.targets.filter((target) => target.domain === domain).length !== 3) {
         throw new Error(`pilot manifest v2 requires exactly three targets for ${domain}`);
+      }
+    }
+  }
+  if (manifest.version === '3.0.0') {
+    for (const domain of domains) {
+      if (manifest.targets.filter((target) => target.domain === domain).length < 3) {
+        throw new Error(`pilot manifest v3 requires at least three targets for ${domain}`);
       }
     }
   }

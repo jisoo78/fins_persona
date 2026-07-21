@@ -1,0 +1,29 @@
+{
+  "sourceId": "source-3abbe52bb80488c2",
+  "requestedCanonicalUrl": "https://www.sec.gov/Archives/edgar/data/789019/000095017023035122/msft-20230630.htm",
+  "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/789019/000095017023035122/msft-20230630.htm",
+  "finalUrl": "https://www.sec.gov/Archives/edgar/data/789019/000095017023035122/msft-20230630.htm",
+  "redirectChain": ["https://www.sec.gov/Archives/edgar/data/789019/000095017023035122/msft-20230630.htm"],
+  "title": "Microsoft FY2023 Form 10-K — share repurchase deployment excerpt",
+  "mediaType": "text/plain",
+  "bodyBase64": "TWljcm9zb2Z0IENvcnBvcmF0aW9uIEZvcm0gMTAtSyBmb3IgdGhlIGZpc2NhbCB5ZWFyIGVuZGVkIEp1bmUgMzAsIDIwMjMsIGZpbGVkIEp1bHkgMjcsIDIwMjMuIFRoZSBmaWxpbmcgcmVwb3J0cyBhY3R1YWwgZGVwbG95bWVudCB1bmRlciB0aGUgY29tcGFueSdzIGF1dGhvcml6ZWQgc2hhcmUgcmVwdXJjaGFzZSBwcm9ncmFtcy4gRHVyaW5nIGZpc2NhbCB5ZWFycyAyMDIzIGFuZCAyMDIyLCB3ZSByZXB1cmNoYXNlZCA2OSBtaWxsaW9uIHNoYXJlcyBhbmQgOTUgbWlsbGlvbiBzaGFyZXMgb2Ygb3VyIGNvbW1vbiBzdG9jayBmb3IgJDE4LjQgYmlsbGlvbiBhbmQgJDI4LjAgYmlsbGlvbiwgcmVzcGVjdGl2ZWx5LCB0aHJvdWdoIG91ciBzaGFyZSByZXB1cmNoYXNlIHByb2dyYW1zLiBUaGUgYXV0aG9yaXphdGlvbiByZW1haW5lZCBhdmFpbGFibGUsIHdoaWxlIHRoZSBhbW91bnQgZGVwbG95ZWQgaW4gZmlzY2FsIDIwMjMgd2FzIG1hdGVyaWFsbHkgbG93ZXIgdGhhbiBpbiBmaXNjYWwgMjAyMi4gVGhpcyByZWNvcmQgZXN0YWJsaXNoZXMgdGhlIG9ic2VydmVkIGFsbG9jYXRpb24gY2hhbmdlIGJ1dCBkb2VzIG5vdCBieSBpdHNlbGYgZGlzY2xvc2UgbWFuYWdlbWVudCdzIGNvbXBsZXRlIGNhdXNhbCBleHBsYW5hdGlvbi4K",
+  "speakerSegments": [],
+  "metadata": {
+    "id": "source-3abbe52bb80488c2",
+    "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/789019/000095017023035122/msft-20230630.htm",
+    "eventCandidateIds": ["candidate-buyback-deployment-slowdown-fy2023"],
+    "tier": 1,
+    "title": "Microsoft FY2023 Form 10-K — share repurchase deployment excerpt",
+    "publisher": "U.S. Securities and Exchange Commission",
+    "publishedAt": "2023-07-27",
+    "speaker": null,
+    "sourceType": "form_10_k",
+    "collector": "manual_import",
+    "temporalRole": "decision_time",
+    "rightsNote": "Public SEC filing; bounded repurchase deployment passage retained for reviewed PoC evidence.",
+    "approvedPublicHost": true,
+    "collectionStatus": "approved",
+    "sha256": "a3d56441486b0f38bea93ee76b4c68fee5512edce708849f51677daac24c4987",
+    "capturedAt": "2026-07-21T06:30:00.000Z"
+  }
+}

@@ -264,7 +264,7 @@ export type PilotManifestTarget = {
 
 export type PilotManifest = {
   dataset: 'amy_hood_phase_3_pilot';
-  version: '1.0.0' | '2.0.0';
+  version: '1.0.0' | '2.0.0' | '3.0.0';
   targets: PilotManifestTarget[];
 };
 
