@@ -1,0 +1,93 @@
+{
+  "id": "event-teams-unbundle-2023",
+  "candidateId": "candidate-teams-unbundle-2023",
+  "title": "Teams unbundling and EEA suite price reduction",
+  "domain": "pricing_monetization",
+  "decisionDate": "2023-08-31",
+  "decisionQuestion": "Should the company unbundle Teams from M365/O365 suites in the EEA and Switzerland, offering them at a lower price?",
+  "situation": "The company is considering changes to its suite pricing structure in the EEA and Switzerland.",
+  "objectives": [
+    "Offer M365/O365 without Teams at a lower price.",
+    "Maintain or enhance perceived value despite the unbundling."
+  ],
+  "conditions": [
+    "The unbundling will occur in the EEA and Switzerland.",
+    "The lower price will be €2 less per month or €24 per year."
+  ],
+  "constraints": [
+    "The offering must be a standalone suite without Teams.",
+    "The price reduction must be applied to the base suite."
+  ],
+  "options": [
+    {
+      "id": "option-1",
+      "description": "Unbundle Teams and sell the core suite at a reduced price (€2 less/month).",
+      "expectedBenefit": "Attract price-sensitive customers to the core suite offering.",
+      "principalRisk": "Customers may perceive the unbundled offering as less valuable.",
+      "selected": true
+    },
+    {
+      "id": "option-2",
+      "description": "Unbundle Teams but maintain the current suite price.",
+      "expectedBenefit": "Signal that Teams is a valuable add-on without immediate price cuts.",
+      "principalRisk": "May fail to attract customers who prioritize lower base costs.",
+      "selected": false
+    }
+  ],
+  "chosenAction": "Unbundle Teams and sell the core suite at a reduced price (€2 less/month).",
+  "rejectedBenefit": "Signaling value through an unbundled offering without immediate price cuts.",
+  "observations": [
+    "Teams will be unbundled from M365 and O365 suites in the EEA and Switzerland.",
+    "The unbundled offerings will be sold at a lower price (€2 less per month or €24 per year)."
+  ],
+  "inferences": [
+    "The company believes the value added by features like copilots justifies a list price structure.",
+    "The price reduction is a strategic move to compete or appeal to a broader market segment."
+  ],
+  "directAmyEvidenceIds": [],
+  "amyPolicyEvidenceIds": [
+    "span-3e0302dd56efc30e"
+  ],
+  "contextEvidenceIds": [
+    "span-22b85b48be6cc0ff"
+  ],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": [
+    "source-a726052ce2470e15",
+    "source-fbb900eb7e249591"
+  ],
+  "documentFamilyIds": [
+    "source:source-a726052ce2470e15",
+    "source:source-fbb900eb7e249591"
+  ],
+  "evidenceSpans": [
+    {
+      "id": "span-22b85b48be6cc0ff",
+      "sourceId": "source-a726052ce2470e15",
+      "eventCandidateId": "candidate-teams-unbundle-2023",
+      "role": "decision_context",
+      "exactQuote": "we will unbundle Teams from our Microsoft 365 and Office 365 suites in the EEA and Switzerland. We will instead simply sell these offerings without Teams at a lower price (€2 less per month or €24 per year)",
+      "startChar": 2295,
+      "endChar": 2501,
+      "publishedAt": "2023-08-31",
+      "speaker": null
+    },
+    {
+      "id": "span-3e0302dd56efc30e",
+      "sourceId": "source-fbb900eb7e249591",
+      "eventCandidateId": "candidate-teams-unbundle-2023",
+      "role": "amy_policy",
+      "exactQuote": "when we believe we’re adding a lot of value, and frankly, that’s what the copilots are doing and some productivity improvement, you can expect that we will have a list price for those.",
+      "startChar": 40339,
+      "endChar": 40523,
+      "publishedAt": "2023-04-25",
+      "speaker": "Amy Hood",
+      "directAmyEvidenceMode": "domain_principle"
+    }
+  ],
+  "status": "approved",
+  "gaps": [],
+  "reviewer": "Codex",
+  "reviewedAt": "2026-07-21T01:16:11.481Z",
+  "updatedAt": "2026-07-21T01:16:11.481Z"
+}

@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "v1-f5179455237d",
+  "version": "v1-f5179455237d",
+  "createdAt": "2026-07-21T08:09:19.142Z",
+  "sourceRegistryHash": "4d28c738db9422b64a950311ba106f470b9ddb3334b17a4105166fcfc3e4f646",
+  "pilotManifestHash": "e0f62d00aa9c769e53dbcf292b84ff2e6f08c0ab86b36d2c97746b1bdafdf276",
+  "holdoutManifestHash": "e9421d0bd8846387bc4f81c6c98bf3c61a603c18d887e1a858c7181ec1e3ec4d",
+  "policySchemaVersion": 2,
+  "artifacts": [
+    {
+      "id": "event-activision-acquisition-2022",
+      "kind": "event",
+      "relativePath": "events/event-activision-acquisition-2022.json",
+      "sha256": "59addc85412dc4ae20bb2178296a64d941d6e55303f450970af927f99029ae21"
+    },
+    {
+      "id": "event-ai-capacity-opex-pivot-2023",
+      "kind": "event",
+      "relativePath": "events/event-ai-capacity-opex-pivot-2023.json",
+      "sha256": "e055fd3b73b45a2175899ed56e6e2aaa2a91ffbdb619d839b35368a48a62ff1e"
+    },
+    {
+      "id": "event-ai-capacity-sourcing-2024",
+      "kind": "event",
+      "relativePath": "events/event-ai-capacity-sourcing-2024.json",
+      "sha256": "160ea8804af7d941e40ff37168350fee3f92231e50b61ec3ff0aca6a9140732b"
+    },
+    {
+      "id": "event-ai-datacenter-project-pacing-2025",
+      "kind": "event",
+      "relativePath": "events/event-ai-datacenter-project-pacing-2025.json",
+      "sha256": "44b97eae196ccadf4f1871730e77463196cf840ef437e77fbcf614288b674dcb"
+    },
+    {
+      "id": "event-buyback-2013",
+      "kind": "event",
+      "relativePath": "events/event-buyback-2013.json",
+      "sha256": "9ad8a6b882edc9983b69f31dccb876da00989d5cd9c1844e05b1b7c18373eca0"
+    },
+    {
+      "id": "event-buyback-2024",
+      "kind": "event",
+      "relativePath": "events/event-buyback-2024.json",
+      "sha256": "2d6415575811d98b521736d2b3fe5aece5f217857fae36856bbc9025c1197d8b"
+    },
+    {
+      "id": "event-buyback-deployment-slowdown-fy2023",
+      "kind": "event",
+      "relativePath": "events/event-buyback-deployment-slowdown-fy2023.json",
+      "sha256": "93527675fa43da8323f3c62553d13239e451f65c239db6a81699e9a341f67bcd"
+    },
+    {
+      "id": "event-copilot-price-2023",
+      "kind": "event",
+      "relativePath": "events/event-copilot-price-2023.json",
+      "sha256": "4c2151c6474eb9d169863a3b18e8203f80fc285a9ef11538cf71251a637974b3"
+    },
+    {
+      "id": "event-nuance-acquisition-2021",
+      "kind": "event",
+      "relativePath": "events/event-nuance-acquisition-2021.json",
+      "sha256": "eeb4e6c0c5618a8133f9a70a016a4a96433850f24841eef3971588fbf947087f"
+    },
+    {
+      "id": "event-priority-reinvestment-fy2022",
+      "kind": "event",
+      "relativePath": "events/event-priority-reinvestment-fy2022.json",
+      "sha256": "d8d8a384417d160122307eef3c9b04325dc2efc258fce2f6da1e1a79bfadbe82"
+    },
+    {
+      "id": "event-teams-unbundle-2023",
+      "kind": "event",
+      "relativePath": "events/event-teams-unbundle-2023.json",
+      "sha256": "57cedfbfd7571f64abf00fb3d7a15352540a5b942da322f6de9bee00e726e105"
+    },
+    {
+      "id": "event-transformation-2026",
+      "kind": "event",
+      "relativePath": "events/event-transformation-2026.json",
+      "sha256": "466c74fe153b163eef81f5533db59b772a2d2b1210020994ea6c7acd41835020"
+    },
+    {
+      "id": "event-workforce-reset-2023",
+      "kind": "event",
+      "relativePath": "events/event-workforce-reset-2023.json",
+      "sha256": "69238f0ac6cfe3c82204443c377271e34c1b183a4c74eb204bdbce7da167596b"
+    },
+    {
+      "id": "policy-20d2c645ab6641c9",
+      "kind": "policy",
+      "relativePath": "policies/policy-20d2c645ab6641c9.json",
+      "sha256": "06a2fd6e33694eb8b8d5294051cfe1fe61d9149eb0a93f5c972a37d849600f76"
+    },
+    {
+      "id": "policy-a7972af407a0bf69",
+      "kind": "policy",
+      "relativePath": "policies/policy-a7972af407a0bf69.json",
+      "sha256": "ebc225ce522481fd8f225e2554cb290b4c30b47265c3bba86f74a1ca0bb424c3"
+    },
+    {
+      "id": "policy-ccd7e455daf31f5f",
+      "kind": "policy",
+      "relativePath": "policies/policy-ccd7e455daf31f5f.json",
+      "sha256": "d4d87c1581a81a1752d3a524e94ab00f3ac8794a3aca680827d2eb257023b61d"
+    },
+    {
+      "id": "policy-e0bfae61c424868c",
+      "kind": "policy",
+      "relativePath": "policies/policy-e0bfae61c424868c.json",
+      "sha256": "9853f83da33696ecba2010bdc4ed83beb931dfa6f14eac216b6df0512ca24016"
+    },
+    {
+      "id": "policy-e7eafcda9e4dc2e3",
+      "kind": "policy",
+      "relativePath": "policies/policy-e7eafcda9e4dc2e3.json",
+      "sha256": "7ce105d8f0bb7955581b67ac404ed76a8cf0889841923644081128daa1aec151"
+    },
+    {
+      "id": "reflection-7371bfa747efb778",
+      "kind": "reflection",
+      "relativePath": "reflections/reflection-7371bfa747efb778.json",
+      "sha256": "bb463a0fbed7155c883b6828646e6d5191811d48fc35beddcd27454a5fd39188"
+    },
+    {
+      "id": "reflection-b8961796eb4e7fc0",
+      "kind": "reflection",
+      "relativePath": "reflections/reflection-b8961796eb4e7fc0.json",
+      "sha256": "fb5d4c70d7de5a9cb9bb33c28df0d7ced0f387ae4e531c754bef909a946b89cb"
+    },
+    {
+      "id": "reflection-bd563b486d9d6f9b",
+      "kind": "reflection",
+      "relativePath": "reflections/reflection-bd563b486d9d6f9b.json",
+      "sha256": "e0c811a156281328ab6b2b525c6325ad7dc8e015e18ff2129d760070e11a5ce1"
+    },
+    {
+      "id": "reflection-dad2d5919b582d9d",
+      "kind": "reflection",
+      "relativePath": "reflections/reflection-dad2d5919b582d9d.json",
+      "sha256": "da6068e8d8022c32f10d6ebd33af79c393dc908171b47e26c6c8f89b5d29ec9c"
+    },
+    {
+      "id": "reflection-f75c6c30eef7c1e0",
+      "kind": "reflection",
+      "relativePath": "reflections/reflection-f75c6c30eef7c1e0.json",
+      "sha256": "751a214095476699e63fd177819a716b95344b4de2854d546f9be074e1613f47"
+    }
+  ],
+  "evaluationContextPath": "evaluation-context.json",
+  "evaluationContextHash": "cef4124890e516a9edb3ebdb8d9c776a18508ea56b8daf18e3a3aa8453506600",
+  "reviewLedgerHash": "3128ffe9cb910230529dd0fbdf52dd10d9bdbece5f2438217aab4682c99fa44c"
+}

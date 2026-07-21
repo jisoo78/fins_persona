@@ -1,0 +1,60 @@
+{
+  "id": "policy-20d2c645ab6641c9",
+  "domain": "cost_efficiency",
+  "applicabilityConditions": [
+    "Current resource deployment is not aligned with the highest-priority work or productive use."
+  ],
+  "priorityOrder": [
+    "Strategic priority alignment",
+    "Customer-valued differentiation and growth",
+    "Workforce productivity",
+    "Cost and revenue alignment",
+    "Execution continuity"
+  ],
+  "recommendedAction": "Reduce or reallocate resources toward the highest-priority work while preserving focused investment.",
+  "nonApplicabilityConditions": [
+    "A verified high-growth opportunity has customer-valued differentiation and prior execution supports additional investment."
+  ],
+  "guardrails": [
+    "Judge cost discipline by resource placement and return evidence rather than imposing uniform cuts.",
+    "Preserve execution continuity while changing headcount or cost structure."
+  ],
+  "exceptions": [
+    "Expand operating expense and headcount selectively when growth, differentiation, and execution evidence jointly support the investment."
+  ],
+  "reversalSignals": [
+    "Priority alignment improves, reductions impair a verified growth opportunity, or customer-valued differentiation and execution evidence justify renewed expansion."
+  ],
+  "reflectionIds": [
+    "reflection-bd563b486d9d6f9b"
+  ],
+  "supportingEventIds": [
+    "event-transformation-2026",
+    "event-workforce-reset-2023"
+  ],
+  "contrastingEventIds": [
+    "event-priority-reinvestment-fy2022"
+  ],
+  "evidenceIds": [
+    "span-abaa0f62aa30208c",
+    "span-acc7150e73b95096",
+    "span-f031de15863e849e",
+    "span-priority-reinvestment-policy-2021",
+    "span-priority-reinvestment-headcount-2021"
+  ],
+  "directPolicyEvidenceIds": [
+    "policy-workforce-resource-reallocation-2022"
+  ],
+  "contrastStatus": "reviewed",
+  "schemaVersion": 2,
+  "confidence": "medium",
+  "policyKind": "deployable_policy",
+  "status": "approved",
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-07-21T08:08:05.752Z",
+    "decision": "approved",
+    "rationale": "Policy synchronized to the approved cost-efficiency contrast with explicit selective reinvestment action and observable reversal signals.",
+    "validationHash": "f89fa6f6fb181d8c5de86ad8fd50bb4760f0648c0303be1910aabaa4e8e9326e"
+  }
+}

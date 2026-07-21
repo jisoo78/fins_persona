@@ -1,0 +1,129 @@
+{
+  "id": "event-nuance-acquisition-2021",
+  "candidateId": "candidate-nuance-acquisition-2021",
+  "title": "Nuance healthcare cloud acquisition for 19.7 billion dollars",
+  "domain": "m_and_a",
+  "decisionDate": "2021-04-12",
+  "decisionQuestion": "Should Microsoft proceed with the acquisition of Nuance for $19.7 billion?",
+  "situation": "Microsoft announced a definitive agreement to acquire Nuance for $56.00 per share.",
+  "objectives": [
+    "Acquire Nuance for $19.7 billion.",
+    "Create value through terrific execution."
+  ],
+  "conditions": [
+    "The merger agreement must be adopted by Nuance stockholders.",
+    "Certain governmental and regulatory approvals must be received."
+  ],
+  "constraints": [
+    "The transaction is an all-cash deal.",
+    "The acquisition is valued at $19.7 billion inclusive of net debt."
+  ],
+  "options": [
+    {
+      "id": "option-1",
+      "description": "Proceed with the acquisition as agreed.",
+      "expectedBenefit": "Realize value creation through strong execution.",
+      "principalRisk": "Failure to satisfy consummation conditions.",
+      "selected": true
+    },
+    {
+      "id": "option-2",
+      "description": "Re-evaluate the acquisition terms or halt the deal.",
+      "expectedBenefit": "Mitigate risks associated with integration or execution.",
+      "principalRisk": "Missing the opportunity to acquire Nuance.",
+      "selected": false
+    }
+  ],
+  "chosenAction": "Proceed with the acquisition as agreed.",
+  "rejectedBenefit": "Mitigating risks associated with integration or execution.",
+  "observations": [
+    "The deal is an all-cash transaction valued at $19.7 billion.",
+    "The agreement implies a 23% premium to Nuance's April 9 closing price."
+  ],
+  "inferences": [
+    "Value creation is dependent on terrific execution post-acquisition.",
+    "The transaction is subject to various termination and performance risks."
+  ],
+  "directAmyEvidenceIds": [
+    "span-291b7db034000ea7"
+  ],
+  "amyPolicyEvidenceIds": [],
+  "contextEvidenceIds": [
+    "span-475376c4a1b0c7c2",
+    "span-34b94d3c6a25db54",
+    "span-38eee29ba0530baa",
+    "span-2ba38fc9d21ea2ef"
+  ],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": [
+    "source-fac8ed15fa324bf8",
+    "source-82b26e92b9a5e28b",
+    "source-f7fd232d93262a85"
+  ],
+  "documentFamilyIds": [
+    "microsoft-nuance-announcement-2021",
+    "nuance-acquisition-call-transcript-2021"
+  ],
+  "evidenceSpans": [
+    {
+      "id": "span-475376c4a1b0c7c2",
+      "sourceId": "source-fac8ed15fa324bf8",
+      "eventCandidateId": "candidate-nuance-acquisition-2021",
+      "role": "decision_context",
+      "exactQuote": "Microsoft Corp (Nasdaq: MSFT) and Nuance Communications, Inc. (Nasdaq: NUAN) today announced they have entered into a definitive agreement under which Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9, in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.",
+      "startChar": 186,
+      "endChar": 546,
+      "publishedAt": "2021-04-12",
+      "speaker": null
+    },
+    {
+      "id": "span-34b94d3c6a25db54",
+      "sourceId": "source-fac8ed15fa324bf8",
+      "eventCandidateId": "candidate-nuance-acquisition-2021",
+      "role": "decision_context",
+      "exactQuote": "the occurrence of any event, change or other circumstance that could give rise to the termination of the merger agreement",
+      "startChar": 11601,
+      "endChar": 11722,
+      "publishedAt": "2021-04-12",
+      "speaker": null
+    },
+    {
+      "id": "span-291b7db034000ea7",
+      "sourceId": "source-82b26e92b9a5e28b",
+      "eventCandidateId": "candidate-nuance-acquisition-2021",
+      "role": "direct_amy",
+      "exactQuote": "And with all acquisitions, value was ultimately only created with terrific execution, bind aligned team with a shared vision of the future.",
+      "startChar": 389,
+      "endChar": 528,
+      "publishedAt": "2021-04-12",
+      "speaker": "Amy Hood"
+    },
+    {
+      "id": "span-38eee29ba0530baa",
+      "sourceId": "source-f7fd232d93262a85",
+      "eventCandidateId": "candidate-nuance-acquisition-2021",
+      "role": "decision_context",
+      "exactQuote": "Microsoft Corp (Nasdaq: MSFT) and Nuance Communications, Inc. (Nasdaq: NUAN) today announced they have entered into a definitive agreement under which Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9, in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.",
+      "startChar": 334,
+      "endChar": 694,
+      "publishedAt": "2021-04-12",
+      "speaker": null
+    },
+    {
+      "id": "span-2ba38fc9d21ea2ef",
+      "sourceId": "source-f7fd232d93262a85",
+      "eventCandidateId": "candidate-nuance-acquisition-2021",
+      "role": "decision_context",
+      "exactQuote": "n stock of Nuance, (ii) the failure to satisfy the conditions to the consummation of the transaction, including the adoption of the merger agreement by the stockholders of Nuance and the receipt of certain governmental and regulatory approvals, (iii) the occurrence of any event, change or other circumstance that could give rise to the termination of the merger agreement, (iv) the effect of the announcement or pendency of the transaction on Nuance’s business relationships, operating results, and business generally, (v) risks that the proposed transaction disrupts current plans and operations of Nuance or Microsoft and potential difficulties in Nuance employee retention as a result of the transaction, (vi) risks related to diverting management’s attention from Nuance’s ongoing business operations, (vii) the outcome of any legal proceedings that may be instituted against us or against Nuance related to the merger agreement or the transaction, (viii) the ability of Microsoft to successfully integrate Nuance’s operations, product lines, and technology, and (ix) the ability of Microsoft to implement its plans, forecasts, and other expectations with respect to Nuance’s business after the completion of the proposed merger and realize additional opportunities for growth and innovation.",
+      "startChar": 11500,
+      "endChar": 12797,
+      "publishedAt": "2021-04-12",
+      "speaker": null
+    }
+  ],
+  "status": "approved",
+  "gaps": [],
+  "reviewer": "Codex",
+  "reviewedAt": "2026-07-21T00:51:21.629Z",
+  "updatedAt": "2026-07-21T00:51:21.629Z"
+}

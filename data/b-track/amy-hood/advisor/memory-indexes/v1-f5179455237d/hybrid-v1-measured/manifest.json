@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "v1-f5179455237d",
+  "releaseManifestHash": "da5cfea5e1f9fc0ae23ea58281e9c59fdc77d64e17cd104b406c1155aa4eb436",
+  "holdoutManifestHash": "e9421d0bd8846387bc4f81c6c98bf3c61a603c18d887e1a858c7181ec1e3ec4d",
+  "embeddingModel": "bge-m3-Q8_0.gguf",
+  "embeddingDimension": 1024,
+  "builderVersion": "hybrid-v1",
+  "lexicalVersion": "bm25-v1",
+  "retrievalConfig": {
+    "vectorWeight": 0.7,
+    "lexicalWeight": 0.3,
+    "bm25K": 4,
+    "minimumScore": 0.55
+  },
+  "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+  "calibrationSetHash": "a7c172843267a56e7ae46c29065fd6b0a2ab58d606fe02d08384c6fd6305ad35",
+  "calibration": {
+    "probeCount": 7,
+    "positiveProbeCount": 5,
+    "noMatchProbeCount": 2,
+    "recallAt3": 1,
+    "noMatchFalsePositiveRate": 0
+  },
+  "recordHashes": [
+    "499329480f8477d96caca5d965f9161d1d41d41a8e7ee6a6db1a93a126fbb396",
+    "e581c4ba992da107e9eb49d6f82dbf169892ef987907a2fcdac2f93064a4e2d0",
+    "da11057c008138e16efb3d1100a3807eef760a04cf38ba0ef3599a2e61798b58",
+    "272433c7561d3ccd4ad2ff5d74923eb6bfd328acf9f475b9e7edb5e29f2d5b08",
+    "3663041fd291906c73e70f4b423f29072818083267bc94de05acef9643aae5d0",
+    "f1062d511c2e85bb6d7711a135cb9fd5e5027389367550b071d1c8ec8862e36f",
+    "72aadc73257153da69043702c8c27ffb7111fe3e7fbc65964f0669fa2941a453",
+    "dfa11b6321279570da4590dfb5a8edbab6a2757d0e9c87d772286c5a54f577fb",
+    "3434a6a63d450039395402af21d936c21092fc4796ff6b407dd165d1c49317ef",
+    "60bd974bbb55e006f885839694bc9dcbfdf12ff588b5c4dffd49dd30fff2b238",
+    "8deaa0ef2216b2bc5ff5694314b50fbe2c059661f978c952b1ffac3d8d57d4c5",
+    "d1f8730acd9e695947f051654ecad7f03ffded368cb6061ce0f466cc24a48d4e",
+    "7552d6175b5ec64ea39d57a3c550a31c22a75ce9c1235bb0acb9c7d3abd9a249",
+    "7abccb97b2f7dfa117dce39b8804d048975802569f253256f9699a36d3eadfe1",
+    "e960ee59b851ae09fa3fe400cef5482a93c274e17a473b56c3614af8ace791fc",
+    "b314602fb5f753789f802d2b326db81981122e1fe00a08a4bc297c5d54af8952",
+    "be196ecd7351a3baf97733e270cc3bf65c001336bffbff8208f61ead37b4a7c2",
+    "4713dc8456d5e435f8ef87edaf421f9c88aa640b124fd00d82ed351f0b4b4ef5"
+  ],
+  "evidenceHash": "250510d6fe9a686301bf829aa23a80fdbbd51c1664d3403192e61b48f6854f58",
+  "vectorsHash": "eb5b4e16ad9501e110b44e41f0e7bfe25690fa2364729d819a74217c7d76a8cf",
+  "recordCount": 18,
+  "vectorsFile": "vectors.f32",
+  "indexHash": "cb624065bfb174cc420d1cefd980dd7b9774733305353021a52b4ec64b209b6a",
+  "createdAt": "2026-07-21T08:09:34.344Z"
+}

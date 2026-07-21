@@ -1,0 +1,94 @@
+{
+  "id": "event-buyback-2024",
+  "candidateId": "candidate-buyback-2024",
+  "title": "2024 sixty billion dollar share repurchase authorization",
+  "domain": "shareholder_return_risk",
+  "decisionDate": "2024-09-16",
+  "decisionQuestion": "Should the company proceed with the new $60 billion share repurchase program?",
+  "situation": "The company has approved a new share repurchase program authorizing up to $60 billion.",
+  "objectives": [
+    "Return cash to shareholders.",
+    "Signal confidence in the company's future.",
+    "Enhance shareholder value."
+  ],
+  "conditions": [
+    "The new share repurchase program is authorized up to $60 billion.",
+    "The company has a commitment to returning cash to shareholders."
+  ],
+  "constraints": [
+    "The total authorization limit is capped at $60 billion.",
+    "The action must reflect a continued commitment to shareholders."
+  ],
+  "options": [
+    {
+      "id": "option-A",
+      "description": "Proceed with the full $60 billion share repurchase authorization.",
+      "expectedBenefit": "Maximize shareholder return and signal strong confidence.",
+      "principalRisk": "Potential market perception of overvaluation if the market disagrees.",
+      "selected": true
+    },
+    {
+      "id": "option-B",
+      "description": "Authorize a smaller, partial share repurchase program (e.g., $30 billion).",
+      "expectedBenefit": "Maintain flexibility and manage market expectations more conservatively.",
+      "principalRisk": "May signal less conviction in the company's near-term prospects.",
+      "selected": false
+    }
+  ],
+  "chosenAction": "Proceed with the full $60 billion share repurchase authorization.",
+  "rejectedBenefit": "Maintaining flexibility to adjust to unforeseen market changes.",
+  "observations": [
+    "The company approved a new share repurchase program authorizing up to $60 billion.",
+    "Amy Hood stated these actions reflect a continued commitment to returning cash to shareholders."
+  ],
+  "inferences": [
+    "Proceeding with the full authorization strongly aligns with the stated commitment to shareholder returns.",
+    "A smaller authorization might be safer but could dilute the positive signal of confidence."
+  ],
+  "directAmyEvidenceIds": [],
+  "amyPolicyEvidenceIds": [
+    "span-328e730e3d56a46c"
+  ],
+  "contextEvidenceIds": [
+    "span-20e3349dbae4503b"
+  ],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": [
+    "source-9199eb9f217ec336",
+    "source-78333f25f047c289"
+  ],
+  "documentFamilyIds": [
+    "source:source-9199eb9f217ec336",
+    "source:source-78333f25f047c289"
+  ],
+  "evidenceSpans": [
+    {
+      "id": "span-20e3349dbae4503b",
+      "sourceId": "source-9199eb9f217ec336",
+      "eventCandidateId": "candidate-buyback-2024",
+      "role": "decision_context",
+      "exactQuote": "approved a new share repurchase program authorizing up to $60 billion",
+      "startChar": 428,
+      "endChar": 497,
+      "publishedAt": "2024-09-16",
+      "speaker": null
+    },
+    {
+      "id": "span-328e730e3d56a46c",
+      "sourceId": "source-78333f25f047c289",
+      "eventCandidateId": "candidate-buyback-2024",
+      "role": "amy_policy",
+      "exactQuote": "These actions reflect a continued commitment to returning cash to our shareholders",
+      "startChar": 640,
+      "endChar": 722,
+      "publishedAt": "2013-09-17",
+      "speaker": "Amy Hood",
+      "directAmyEvidenceMode": "domain_principle"
+    }
+  ],
+  "status": "approved",
+  "gaps": [],
+  "reviewer": "Codex",
+  "reviewedAt": "2026-07-21T01:16:41.473Z",
+  "updatedAt": "2026-07-21T01:16:41.473Z"
+}

@@ -1,0 +1,113 @@
+{
+  "id": "event-activision-acquisition-2022",
+  "candidateId": "candidate-activision-acquisition-2022",
+  "title": "Activision Blizzard acquisition for $68.7 billion",
+  "domain": "m_and_a",
+  "decisionDate": "2022-01-18",
+  "decisionQuestion": "Should Microsoft acquire Activision Blizzard for $95 per share in an all-cash transaction?",
+  "situation": "Microsoft has agreed to acquire Activision Blizzard for $68.7 billion inclusive of net cash at $95 per share.",
+  "objectives": [
+    "Expand gaming portfolio and content library"
+  ],
+  "conditions": [
+    "Both boards of directors have approved the transaction"
+  ],
+  "constraints": [
+    "All-cash transaction structure"
+  ],
+  "options": [
+    {
+      "id": "proceed",
+      "description": "Complete the $68.7 billion all-cash acquisition",
+      "expectedBenefit": "Acquire Activision Blizzard's portfolio at $95 per share",
+      "principalRisk": "Regulatory scrutiny of a large gaming merger",
+      "selected": true
+    },
+    {
+      "id": "reject",
+      "description": "Withdraw the acquisition offer",
+      "expectedBenefit": "Avoid potential antitrust and regulatory challenges",
+      "principalRisk": "Loss of strategic content and portfolio growth",
+      "selected": false
+    }
+  ],
+  "chosenAction": "proceed",
+  "rejectedBenefit": "Avoidance of regulatory scrutiny",
+  "observations": [
+    "The transaction is valued at $68.7 billion inclusive of net cash",
+    "Both boards of directors have already approved the deal"
+  ],
+  "inferences": [
+    "Board approval suggests internal due diligence is complete",
+    "All-cash structure simplifies closing but concentrates financial outlay"
+  ],
+  "directAmyEvidenceIds": [
+    "span-807ee90aa032f320"
+  ],
+  "amyPolicyEvidenceIds": [],
+  "contextEvidenceIds": [
+    "span-1abb63ac11f1075c",
+    "span-e32ab0f2fc36349e",
+    "span-095e8535c69c65e3"
+  ],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": [
+    "source-fdb91c86f5bea78c",
+    "source-3d87da3c9879cf67"
+  ],
+  "documentFamilyIds": [
+    "source:source-fdb91c86f5bea78c",
+    "source:source-3d87da3c9879cf67"
+  ],
+  "evidenceSpans": [
+    {
+      "id": "span-1abb63ac11f1075c",
+      "sourceId": "source-fdb91c86f5bea78c",
+      "eventCandidateId": "candidate-activision-acquisition-2022",
+      "role": "decision_context",
+      "exactQuote": "Microsoft will acquire Activision Blizzard for $95.00 per share, in an all-cash transaction valued at $68.7 billion, inclusive of Activision Blizzard’s net cash.",
+      "startChar": 777,
+      "endChar": 938,
+      "publishedAt": "2022-01-18",
+      "speaker": null
+    },
+    {
+      "id": "span-e32ab0f2fc36349e",
+      "sourceId": "source-fdb91c86f5bea78c",
+      "eventCandidateId": "candidate-activision-acquisition-2022",
+      "role": "decision_context",
+      "exactQuote": "The transaction has been approved by the boards of directors of both Microsoft and Activision Blizzard.",
+      "startChar": 4124,
+      "endChar": 4227,
+      "publishedAt": "2022-01-18",
+      "speaker": null
+    },
+    {
+      "id": "span-095e8535c69c65e3",
+      "sourceId": "source-fdb91c86f5bea78c",
+      "eventCandidateId": "candidate-activision-acquisition-2022",
+      "role": "decision_context",
+      "exactQuote": "Shareholder and financial information, as well as today’s 6:00 a.m. Pacific time conference call with investors and analysts, is available at http://www.microsoft.com/en-us/investor.",
+      "startChar": 13814,
+      "endChar": 13996,
+      "publishedAt": "2022-01-18",
+      "speaker": null
+    },
+    {
+      "id": "span-807ee90aa032f320",
+      "sourceId": "source-3d87da3c9879cf67",
+      "eventCandidateId": "candidate-activision-acquisition-2022",
+      "role": "direct_amy",
+      "exactQuote": "We’ve agreed to acquire Activision Blizzard for $95 per share in an all-cash transaction valued at $68.7 billion, inclusive of Activision Blizzard’s net cash.",
+      "startChar": 20757,
+      "endChar": 20915,
+      "publishedAt": "2022-01-18",
+      "speaker": "Amy Hood"
+    }
+  ],
+  "status": "approved",
+  "gaps": [],
+  "reviewer": "Codex evidence review",
+  "reviewedAt": "2026-07-15T06:49:26.755Z",
+  "updatedAt": "2026-07-15T06:49:26.755Z"
+}

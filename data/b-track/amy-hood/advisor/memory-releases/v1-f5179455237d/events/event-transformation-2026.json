@@ -1,0 +1,93 @@
+{
+  "id": "event-transformation-2026",
+  "candidateId": "candidate-transformation-2026",
+  "title": "Microsoft eliminating 4800 roles in Commercial and Xbox transformation",
+  "domain": "cost_efficiency",
+  "decisionDate": "2026-07-06",
+  "decisionQuestion": "Should Microsoft proceed with eliminating approximately 4,800 roles to focus resources on key priorities?",
+  "situation": "Microsoft is eliminating around 4,800 roles, representing about 2.1% of its global workforce.",
+  "objectives": [
+    "Focus people, investments, and energy on key priorities.",
+    "Ensure headcount is used in the most productive way possible."
+  ],
+  "conditions": [
+    "The elimination is part of the Commercial and Xbox transformation.",
+    "Microsoft has added significant headcount over the past 12 months."
+  ],
+  "constraints": [
+    "The action must align with investing in focused areas.",
+    "The reduction must be targeted to maximize productivity."
+  ],
+  "options": [
+    {
+      "id": "option-1",
+      "description": "Proceed with eliminating the 4,800 roles as planned.",
+      "expectedBenefit": "Better alignment of resources to high-priority areas.",
+      "principalRisk": "Potential disruption or morale impact from workforce reduction.",
+      "selected": true
+    },
+    {
+      "id": "option-2",
+      "description": "Reduce the scope of elimination, targeting fewer than 4,800 roles.",
+      "expectedBenefit": "Mitigate workforce disruption while still achieving focus.",
+      "principalRisk": "Failing to achieve the necessary level of resource focus.",
+      "selected": false
+    }
+  ],
+  "chosenAction": "Proceed with eliminating the 4,800 roles as planned.",
+  "rejectedBenefit": "Mitigating workforce disruption by reducing the scope of elimination.",
+  "observations": [
+    "Around 4,800 roles, or 2.1% of the global workforce, are being eliminated.",
+    "The elimination is focused on the Commercial and Xbox transformation."
+  ],
+  "inferences": [
+    "The decision implies a strategic shift to concentrate efforts where Microsoft deems most valuable.",
+    "The elimination is necessary to ensure the recently added headcount is utilized productively."
+  ],
+  "directAmyEvidenceIds": [],
+  "amyPolicyEvidenceIds": [
+    "span-abaa0f62aa30208c"
+  ],
+  "contextEvidenceIds": [
+    "span-acc7150e73b95096"
+  ],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": [
+    "source-582ec6ef346f7100",
+    "source-ad9a23176d9cf21d-25fb51a81eef"
+  ],
+  "documentFamilyIds": [
+    "source:source-582ec6ef346f7100",
+    "source:source-ad9a23176d9cf21d-25fb51a81eef"
+  ],
+  "evidenceSpans": [
+    {
+      "id": "span-acc7150e73b95096",
+      "sourceId": "source-582ec6ef346f7100",
+      "eventCandidateId": "candidate-transformation-2026",
+      "role": "decision_context",
+      "exactQuote": "Today we are eliminating around 4,800 roles, about 2.1% of our global workforce, as we focus our people, investments, and energy on the priorities that will keep Microsoft positioned",
+      "startChar": 220,
+      "endChar": 402,
+      "publishedAt": "2026-07-06",
+      "speaker": null
+    },
+    {
+      "id": "span-abaa0f62aa30208c",
+      "sourceId": "source-ad9a23176d9cf21d-25fb51a81eef",
+      "eventCandidateId": "candidate-transformation-2026",
+      "role": "amy_policy",
+      "exactQuote": "It’ll be about investing where we said we would invest, which is in focused areas. It’s about moving headcount to make sure, inside the company, we’ve got it on the highest and most important things. We’ve added a lot of headcount over the past 12 months, and we want to make sure we use those headcount in the most productive way possible.",
+      "startChar": 48294,
+      "endChar": 48634,
+      "publishedAt": "2022-10-25",
+      "speaker": "Amy Hood",
+      "directAmyEvidenceMode": "domain_principle"
+    }
+  ],
+  "status": "approved",
+  "gaps": [],
+  "reviewer": "Codex",
+  "reviewedAt": "2026-07-21T01:16:26.696Z",
+  "updatedAt": "2026-07-21T01:16:26.696Z"
+}

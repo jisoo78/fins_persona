@@ -1,0 +1,92 @@
+{
+  "id": "event-buyback-deployment-slowdown-fy2023",
+  "candidateId": "candidate-buyback-deployment-slowdown-fy2023",
+  "title": "Reduce actual buyback deployment while preserving authorization flexibility",
+  "domain": "shareholder_return_risk",
+  "decisionDate": "2023-07-27",
+  "decisionQuestion": "When should Microsoft reduce actual share-repurchase deployment despite continuing shareholder-return commitments and available authorization?",
+  "situation": "Microsoft retained authorization capacity and a shareholder-return commitment while facing competing strategic investment and capital-flexibility needs.",
+  "objectives": [
+    "Preserve a credible shareholder cash-return commitment",
+    "Retain flexibility for higher-return internal investment and liquidity needs"
+  ],
+  "conditions": [
+    "The authorization is a ceiling rather than a required deployment amount.",
+    "Competing strategic investment or flexibility has higher marginal value than immediate repurchases."
+  ],
+  "constraints": [
+    "The dividend and long-term shareholder-return commitment remain intact.",
+    "Observed deployment data does not disclose the full contemporaneous causal explanation."
+  ],
+  "options": [
+    {
+      "id": "deploy_buyback_at_prior_pace",
+      "description": "Continue deploying repurchase capital at the prior fiscal year's pace.",
+      "expectedBenefit": "Maximizes immediate cash return and market signaling.",
+      "principalRisk": "Reduces flexibility for strategic investment or changing market conditions.",
+      "selected": false
+    },
+    {
+      "id": "reduce_buyback_deployment_preserve_flexibility",
+      "description": "Reduce actual repurchase deployment while preserving authorization and the broader return commitment.",
+      "expectedBenefit": "Retains capital flexibility without eliminating the repurchase option.",
+      "principalRisk": "May be interpreted as weaker confidence or lower shareholder-return priority.",
+      "selected": true
+    }
+  ],
+  "chosenAction": "reduce_buyback_deployment_preserve_flexibility",
+  "rejectedBenefit": "Maintaining the prior deployment pace would maximize immediate shareholder cash return.",
+  "observations": [
+    "FY2023 repurchase deployment was $18.4 billion versus $28.0 billion in FY2022.",
+    "Amy Hood's earlier public principle described a continuing commitment to returning cash to shareholders."
+  ],
+  "inferences": [
+    "Actual buyback deployment is a flexible capital-allocation lever rather than a fixed obligation."
+  ],
+  "directAmyEvidenceIds": [],
+  "amyPolicyEvidenceIds": [
+    "span-buyback-deployment-policy-2013"
+  ],
+  "contextEvidenceIds": [
+    "span-buyback-deployment-action-2023"
+  ],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": [
+    "source-78333f25f047c289",
+    "source-3abbe52bb80488c2"
+  ],
+  "documentFamilyIds": [
+    "shareholder-return-2013",
+    "sec-filing-2023"
+  ],
+  "evidenceSpans": [
+    {
+      "id": "span-buyback-deployment-policy-2013",
+      "sourceId": "source-78333f25f047c289",
+      "eventCandidateId": "candidate-buyback-deployment-slowdown-fy2023",
+      "role": "amy_policy",
+      "exactQuote": "These actions reflect a continued commitment to returning cash to our shareholders",
+      "startChar": 640,
+      "endChar": 722,
+      "publishedAt": "2013-09-17",
+      "speaker": "Amy Hood",
+      "directAmyEvidenceMode": "domain_principle"
+    },
+    {
+      "id": "span-buyback-deployment-action-2023",
+      "sourceId": "source-3abbe52bb80488c2",
+      "eventCandidateId": "candidate-buyback-deployment-slowdown-fy2023",
+      "role": "decision_context",
+      "exactQuote": "During fiscal years 2023 and 2022, we repurchased 69 million shares and 95 million shares of our common stock for $18.4 billion and $28.0 billion, respectively, through our share repurchase programs.",
+      "startChar": 189,
+      "endChar": 388,
+      "publishedAt": "2023-07-27",
+      "speaker": null
+    }
+  ],
+  "status": "approved",
+  "gaps": [],
+  "reviewer": "Codex with explicit user approval",
+  "reviewedAt": "2026-07-21T06:40:00.000Z",
+  "updatedAt": "2026-07-21T06:40:00.000Z"
+}

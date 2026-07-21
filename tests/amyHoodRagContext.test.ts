@@ -54,6 +54,7 @@ test('edge: evidence is deduplicated and whole-block budgeted', async () => {
   assert.equal(new Set(context.trace.evidenceIds).size, context.trace.evidenceIds.length);
   assert.ok(context.trace.contextTokens <= 250);
   assert.doesNotMatch(context.text, /\.\.\.$/);
+  assert.match(context.text, /No approved memory fit the context budget/);
 });
 
 test('edge: policy and full projections preserve one retrieval cache key', async () => {

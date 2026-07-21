@@ -1,0 +1,112 @@
+[
+  {
+    "kind": "policy",
+    "id": "policy-20d2c645ab6641c9",
+    "review": {
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T08:08:05.752Z",
+      "decision": "approved",
+      "rationale": "Policy synchronized to the approved cost-efficiency contrast with explicit selective reinvestment action and observable reversal signals.",
+      "validationHash": "f89fa6f6fb181d8c5de86ad8fd50bb4760f0648c0303be1910aabaa4e8e9326e"
+    }
+  },
+  {
+    "kind": "policy",
+    "id": "policy-a7972af407a0bf69",
+    "review": {
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T08:08:09.571Z",
+      "decision": "approved",
+      "rationale": "Policy synchronized to the approved shareholder-return contrast with flexible buyback deployment as the explicit reversal action and causal limitation preserved.",
+      "validationHash": "0c5f7c9efc2dce0bff21b9c657359cc8a4d1385bb0b9f215d6d0d1caa91976c2"
+    }
+  },
+  {
+    "kind": "policy",
+    "id": "policy-ccd7e455daf31f5f",
+    "review": {
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T01:25:00.388Z",
+      "decision": "approved",
+      "rationale": "Reviewed against approved same-axis reflections, source-linked Amy Hood principle evidence, holdout boundaries, explicit guardrails, reversal signals, and five-domain PoC coverage; approved at medium confidence.",
+      "validationHash": "4222171e4238acec708e534392557dd1a8520aabb9087f2a13011962a2d2ad0f"
+    }
+  },
+  {
+    "kind": "policy",
+    "id": "policy-e0bfae61c424868c",
+    "review": {
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T01:25:00.398Z",
+      "decision": "approved",
+      "rationale": "Reviewed against approved same-axis reflections, source-linked Amy Hood principle evidence, holdout boundaries, explicit guardrails, reversal signals, and five-domain PoC coverage; approved at medium confidence.",
+      "validationHash": "88a713fe26da07d439c73eb998e3d93ae7b98188fd1bd4ddda60098aedb43df5"
+    }
+  },
+  {
+    "kind": "policy",
+    "id": "policy-e7eafcda9e4dc2e3",
+    "review": {
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T08:08:07.651Z",
+      "decision": "approved",
+      "rationale": "Policy synchronized to the approved AI-capacity contrast with early-stage project pacing as the explicit reversal action and source limitation preserved.",
+      "validationHash": "480fdbc5321c02f69ba252117f8dc1aab0118b2439dcae1aeb6b67f5d1e18582"
+    }
+  },
+  {
+    "kind": "reflection",
+    "id": "reflection-7371bfa747efb778",
+    "review": {
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T08:07:09.903Z",
+      "decision": "approved",
+      "rationale": "User-approved PoC opposite event reviewed on the shareholder-return axis; the filing establishes deployment while the lack of contemporaneous Amy Hood causal explanation remains explicit.",
+      "validationHash": "54666b634dd29dca3f4d2aacd64d4590f878510ba25bef4557d70542bcda1870"
+    }
+  },
+  {
+    "kind": "reflection",
+    "id": "reflection-b8961796eb4e7fc0",
+    "review": {
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T01:21:10.044Z",
+      "decision": "approved",
+      "rationale": "Reviewed all five domain support events, exact evidence IDs, documented public-contrast gaps, decision axes, boundaries, and holdout exclusion.",
+      "validationHash": "915f70ee232394bf713cfa9a09802811902f47ca5b91db7724b22257d63304cf"
+    }
+  },
+  {
+    "kind": "reflection",
+    "id": "reflection-bd563b486d9d6f9b",
+    "review": {
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T08:06:56.238Z",
+      "decision": "approved",
+      "rationale": "User-approved PoC opposite event reviewed against the same resource-allocation axis; supporting events are preserved and source limitations remain explicit.",
+      "validationHash": "252f9421252ec23c599954d740a794a1903aaa84ada1104b0559d1b506aea118"
+    }
+  },
+  {
+    "kind": "reflection",
+    "id": "reflection-dad2d5919b582d9d",
+    "review": {
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T01:21:10.064Z",
+      "decision": "approved",
+      "rationale": "Reviewed all five domain support events, exact evidence IDs, documented public-contrast gaps, decision axes, boundaries, and holdout exclusion.",
+      "validationHash": "161a580853e139943e5dd5ab2e53b1baf02573f0de2c2ba8b0e177529d5f1203"
+    }
+  },
+  {
+    "kind": "reflection",
+    "id": "reflection-f75c6c30eef7c1e0",
+    "review": {
+      "reviewer": "Codex",
+      "reviewedAt": "2026-07-21T08:07:08.003Z",
+      "decision": "approved",
+      "rationale": "User-approved PoC opposite event reviewed on the AI-capacity axis; Noelle Walsh event authorship and absence of an event-specific Amy Hood explanation remain explicit.",
+      "validationHash": "9869153b1a9ca08cb53283631095bb88c47a388e5cb00c4774d18663df1a206d"
+    }
+  }
+]

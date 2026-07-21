@@ -1,0 +1,93 @@
+{
+  "id": "event-buyback-2013",
+  "candidateId": "candidate-buyback-2013",
+  "title": "2013 forty billion dollar share repurchase authorization",
+  "domain": "shareholder_return_risk",
+  "decisionDate": "2013-09-17",
+  "decisionQuestion": "Should the company authorize a new share repurchase program up to $40 billion?",
+  "situation": "The board of directors is considering approving a new share repurchase program.",
+  "objectives": [
+    "Return cash to shareholders.",
+    "Signal commitment to shareholder value."
+  ],
+  "conditions": [
+    "The board of directors must approve the program.",
+    "The authorization limit is set at $40 billion."
+  ],
+  "constraints": [
+    "The action must reflect a continued commitment to shareholders.",
+    "The decision is being made on September 17, 2013."
+  ],
+  "options": [
+    {
+      "id": "option-buyback-yes",
+      "description": "Authorize the new share repurchase program up to $40 billion.",
+      "expectedBenefit": "Demonstrates commitment to returning cash to shareholders.",
+      "principalRisk": "Potential market reaction to the large capital deployment.",
+      "selected": true
+    },
+    {
+      "id": "option-buyback-no",
+      "description": "Do not authorize the new share repurchase program.",
+      "expectedBenefit": "Retain capital for other strategic uses.",
+      "principalRisk": "Perception of reduced commitment to shareholder returns.",
+      "selected": false
+    }
+  ],
+  "chosenAction": "Authorize the new share repurchase program up to $40 billion.",
+  "rejectedBenefit": "Retaining capital for alternative strategic investments.",
+  "observations": [
+    "The board approved a new share repurchase program authorizing up to $40 billion.",
+    "Amy Hood stated these actions reflect a continued commitment to returning cash to shareholders."
+  ],
+  "inferences": [
+    "Authorizing the buyback strongly signals the company's dedication to shareholder returns.",
+    "Not authorizing the buyback might suggest a shift away from prioritizing shareholder cash returns."
+  ],
+  "directAmyEvidenceIds": [],
+  "amyPolicyEvidenceIds": [
+    "span-fdd09e9019051bf7"
+  ],
+  "contextEvidenceIds": [
+    "span-4d34d5136c326275"
+  ],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": [
+    "source-78333f25f047c289"
+  ],
+  "documentFamilyIds": [
+    "source:source-78333f25f047c289"
+  ],
+  "evidenceSpans": [
+    {
+      "id": "span-4d34d5136c326275",
+      "sourceId": "source-78333f25f047c289",
+      "eventCandidateId": "candidate-buyback-2013",
+      "role": "decision_context",
+      "exactQuote": "The board of directors also approved a new share repurchase program authorizing up to $40 billion in share repurchases.",
+      "startChar": 357,
+      "endChar": 476,
+      "publishedAt": "2013-09-17",
+      "speaker": null
+    },
+    {
+      "id": "span-fdd09e9019051bf7",
+      "sourceId": "source-78333f25f047c289",
+      "eventCandidateId": "candidate-buyback-2013",
+      "role": "amy_policy",
+      "exactQuote": "These actions reflect a continued commitment to returning cash to our shareholders",
+      "startChar": 640,
+      "endChar": 722,
+      "publishedAt": "2013-09-17",
+      "speaker": "Amy Hood",
+      "directAmyEvidenceMode": "domain_principle"
+    }
+  ],
+  "status": "approved",
+  "gaps": [
+    "single_document_family"
+  ],
+  "reviewer": "Codex",
+  "reviewedAt": "2026-07-21T01:10:56.545Z",
+  "updatedAt": "2026-07-21T01:10:56.545Z"
+}

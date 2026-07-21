@@ -1,0 +1,83 @@
+{
+  "id": "reflection-bd563b486d9d6f9b",
+  "domain": "cost_efficiency",
+  "crossEventQuestion": "When should Microsoft reduce or reallocate resources, and when should it expand operating investment instead?",
+  "observation": "The 2023 and 2026 events reduce or reallocate resources when deployment is misaligned with priorities, while the FY2022 plan expands headcount and operating investment where growth and customer-valued differentiation are verified.",
+  "invariant": "Allocate resources toward the highest-priority productive opportunity; cost discipline governs placement and return evidence rather than imposing uniform cuts.",
+  "boundaryConditions": [
+    "Reduce or reallocate when current deployment is below strategic priority or productivity thresholds.",
+    "Expand selectively when growth, customer-valued differentiation, and prior execution support the investment."
+  ],
+  "unresolvedConflicts": [
+    "The FY2022 contrast is supported by one official earnings-transcript family and does not expose the internal project-level hurdle rates."
+  ],
+  "decisionAxis": {
+    "decisionObject": "workforce_resource_allocation",
+    "decisionQuestion": "Should resources be reduced or reallocated, or selectively expanded in verified growth areas?",
+    "choiceSet": [
+      "reduce_or_reallocate_to_priorities",
+      "expand_high_growth_differentiated_investment"
+    ],
+    "gatingVariables": [
+      "priority_alignment",
+      "workforce_productivity",
+      "observable_growth_opportunity",
+      "customer_valued_differentiation",
+      "prior_execution_results"
+    ]
+  },
+  "supportPattern": {
+    "eventIds": [
+      "event-transformation-2026",
+      "event-workforce-reset-2023"
+    ],
+    "conditions": [
+      "Current resources are not aligned with the highest-priority and most productive uses."
+    ],
+    "action": "reduce_or_reallocate_to_priorities",
+    "evidenceIds": [
+      "span-abaa0f62aa30208c",
+      "span-acc7150e73b95096",
+      "span-f031de15863e849e"
+    ]
+  },
+  "contrastStatus": "reviewed",
+  "contrastPattern": {
+    "eventIds": [
+      "event-priority-reinvestment-fy2022"
+    ],
+    "conditions": [
+      "High growth and customer-valued differentiation are observable, and prior execution supports confidence in returns."
+    ],
+    "action": "expand_high_growth_differentiated_investment",
+    "evidenceIds": [
+      "span-priority-reinvestment-policy-2021",
+      "span-priority-reinvestment-headcount-2021"
+    ]
+  },
+  "conditionDelta": "Resource misalignment and weak productivity justify reduction; verified growth, differentiation, and execution justify selective expansion.",
+  "actionDelta": "Move from reducing or reallocating low-priority resources to expanding operating expense and headcount in verified differentiated growth areas.",
+  "supportingEventIds": [
+    "event-transformation-2026",
+    "event-workforce-reset-2023"
+  ],
+  "contrastingEventIds": [
+    "event-priority-reinvestment-fy2022"
+  ],
+  "evidenceIds": [
+    "span-abaa0f62aa30208c",
+    "span-acc7150e73b95096",
+    "span-f031de15863e849e",
+    "span-priority-reinvestment-policy-2021",
+    "span-priority-reinvestment-headcount-2021"
+  ],
+  "confidence": "medium",
+  "status": "approved",
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-07-21T08:06:56.238Z",
+    "decision": "approved",
+    "rationale": "User-approved PoC opposite event reviewed against the same resource-allocation axis; supporting events are preserved and source limitations remain explicit.",
+    "validationHash": "252f9421252ec23c599954d740a794a1903aaa84ada1104b0559d1b506aea118"
+  }
+}

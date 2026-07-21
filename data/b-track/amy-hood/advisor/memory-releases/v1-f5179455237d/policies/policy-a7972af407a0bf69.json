@@ -1,0 +1,61 @@
+{
+  "id": "policy-a7972af407a0bf69",
+  "domain": "shareholder_return_risk",
+  "applicabilityConditions": [
+    "A continuing cash-return commitment is supportable within an explicit authorization ceiling and capital flexibility remains adequate."
+  ],
+  "priorityOrder": [
+    "Strategic investment return",
+    "Liquidity and capital flexibility",
+    "Durable dividend commitment",
+    "Opportunistic share repurchase",
+    "Authorization ceiling"
+  ],
+  "recommendedAction": "Authorize bounded repurchase capacity while retaining discretion over actual deployment.",
+  "nonApplicabilityConditions": [
+    "Higher-return strategic investment, liquidity needs, or unattractive repurchase economics dominate immediate buyback deployment."
+  ],
+  "guardrails": [
+    "Treat the authorization as a ceiling rather than a requirement to deploy the full amount.",
+    "Preserve the long-term shareholder-return commitment while varying the more flexible buyback lever."
+  ],
+  "exceptions": [
+    "Reduce actual buyback deployment while preserving authorization when strategic investment or capital flexibility has higher marginal value."
+  ],
+  "reversalSignals": [
+    "Liquidity tightens, higher-return investment needs emerge, repurchase economics deteriorate, or authorization deployment would constrain strategic flexibility."
+  ],
+  "reflectionIds": [
+    "reflection-7371bfa747efb778"
+  ],
+  "supportingEventIds": [
+    "event-buyback-2013",
+    "event-buyback-2024"
+  ],
+  "contrastingEventIds": [
+    "event-buyback-deployment-slowdown-fy2023"
+  ],
+  "evidenceIds": [
+    "span-20e3349dbae4503b",
+    "span-328e730e3d56a46c",
+    "span-4d34d5136c326275",
+    "span-fdd09e9019051bf7",
+    "span-buyback-deployment-policy-2013",
+    "span-buyback-deployment-action-2023"
+  ],
+  "directPolicyEvidenceIds": [
+    "policy-buyback-cash-return-2013"
+  ],
+  "contrastStatus": "reviewed",
+  "schemaVersion": 2,
+  "confidence": "medium",
+  "policyKind": "deployable_policy",
+  "status": "approved",
+  "review": {
+    "reviewer": "Codex",
+    "reviewedAt": "2026-07-21T08:08:09.571Z",
+    "decision": "approved",
+    "rationale": "Policy synchronized to the approved shareholder-return contrast with flexible buyback deployment as the explicit reversal action and causal limitation preserved.",
+    "validationHash": "0c5f7c9efc2dce0bff21b9c657359cc8a4d1385bb0b9f215d6d0d1caa91976c2"
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "id": "event-ai-datacenter-project-pacing-2025",
+  "candidateId": "candidate-ai-datacenter-project-pacing-2025",
+  "title": "Slow or pause selected early-stage datacenter projects",
+  "domain": "ai_cloud_capex",
+  "decisionDate": "2025-04-09",
+  "decisionQuestion": "When should Microsoft pace or pause early-stage AI datacenter projects while retaining the broader infrastructure strategy?",
+  "situation": "A multi-year capital program had created projects across locations before final customer demand, adoption, and business-priority signals were fully observable.",
+  "objectives": [
+    "Align infrastructure timing and location with customer demand",
+    "Preserve the strategic AI capacity program without committing every early-stage project"
+  ],
+  "conditions": [
+    "Some projects remain early-stage and comparatively reversible.",
+    "Updated demand, adoption, or business-priority signals no longer support the original timing or location."
+  ],
+  "constraints": [
+    "Microsoft must continue serving growing cloud and AI demand.",
+    "The adjustment must not be treated as abandonment of the global AI strategy."
+  ],
+  "options": [
+    {
+      "id": "continue_all_planned_projects",
+      "description": "Continue every previously planned datacenter project on its original schedule.",
+      "expectedBenefit": "Maximizes nominal future capacity and avoids schedule disruption.",
+      "principalRisk": "Locks capital into locations or timing no longer justified by demand.",
+      "selected": false
+    },
+    {
+      "id": "slow_or_pause_early_stage_projects",
+      "description": "Slow or pause selected early-stage projects while continuing the core global capacity program.",
+      "expectedBenefit": "Preserves flexibility and aligns irreversible capital with current demand signals.",
+      "principalRisk": "Capacity may arrive late if demand accelerates unexpectedly.",
+      "selected": true
+    }
+  ],
+  "chosenAction": "slow_or_pause_early_stage_projects",
+  "rejectedBenefit": "Continuing every project would maximize planned capacity and schedule certainty.",
+  "observations": [
+    "Noelle Walsh confirmed that some early-stage projects were being slowed or paused.",
+    "Amy Hood had previously stated that infrastructure expenditures are managed through the year using demand and adoption signals."
+  ],
+  "inferences": [
+    "The reversal boundary operates first on reversible early-stage assets rather than the entire AI investment thesis."
+  ],
+  "directAmyEvidenceIds": [],
+  "amyPolicyEvidenceIds": [
+    "span-ai-project-pacing-policy-2024"
+  ],
+  "contextEvidenceIds": [
+    "span-ai-project-pacing-action-2025"
+  ],
+  "postOutcomeEvidenceIds": [],
+  "sourceIds": [
+    "source-cf0859d6bbd2355f",
+    "source-47557e3fa3830f2e"
+  ],
+  "documentFamilyIds": [
+    "earnings-call-2024",
+    "executive-statement-2025"
+  ],
+  "evidenceSpans": [
+    {
+      "id": "span-ai-project-pacing-policy-2024",
+      "sourceId": "source-cf0859d6bbd2355f",
+      "eventCandidateId": "candidate-ai-datacenter-project-pacing-2025",
+      "role": "amy_policy",
+      "exactQuote": "these expenditures are dependent on demand signals and adoption of our services that will be managed through the year",
+      "startChar": 357,
+      "endChar": 474,
+      "publishedAt": "2024-07-30",
+      "speaker": "Amy Hood",
+      "directAmyEvidenceMode": "domain_principle"
+    },
+    {
+      "id": "span-ai-project-pacing-action-2025",
+      "sourceId": "source-47557e3fa3830f2e",
+      "eventCandidateId": "candidate-ai-datacenter-project-pacing-2025",
+      "role": "decision_context",
+      "exactQuote": "What this means is that we are slowing or pausing some early-stage projects.",
+      "startChar": 254,
+      "endChar": 330,
+      "publishedAt": "2025-04-09",
+      "speaker": "Noelle Walsh"
+    }
+  ],
+  "status": "approved",
+  "gaps": [],
+  "reviewer": "Codex with explicit user approval",
+  "reviewedAt": "2026-07-21T06:40:00.000Z",
+  "updatedAt": "2026-07-21T06:40:00.000Z"
+}

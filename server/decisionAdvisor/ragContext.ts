@@ -73,7 +73,11 @@ export const buildAmyHoodRagContext = async ({
           header.push(await renderEvent(eventId, 'Contrasting event'));
         }
       }
-      blocks.push(header.join('\n'));
+      const policyBlock = header.join('\n');
+      if (conservativeTokenEstimate([...blocks, policyBlock].join('\n\n')) > maxContextTokens) {
+        continue;
+      }
+      blocks.push(policyBlock);
       expandedArtifactIds.push(policy.id, ...policy.reflectionIds, ...policy.supportingEventIds, ...policy.contrastingEventIds);
       for (const evidenceId of [...new Set(policy.evidenceIds)]) {
         const evidence = index.evidence.find(({ id }) => id === evidenceId);
@@ -92,6 +96,9 @@ export const buildAmyHoodRagContext = async ({
         evidenceIds.push(evidence.id);
         sourceIds.push(evidence.sourceId);
       }
+    }
+    if (blocks.length === 0) {
+      blocks.push('[Memory Retrieval]\nNo approved memory fit the context budget.');
     }
   }
   while (blocks.length > 1 && conservativeTokenEstimate(blocks.join('\n\n')) > maxContextTokens) blocks.pop();
