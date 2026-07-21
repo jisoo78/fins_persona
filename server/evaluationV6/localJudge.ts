@@ -52,6 +52,7 @@ type LocalBatchOptions = {
   packets: EvaluationV6JudgePacket[];
   baseUrl: string;
   judgeModel: string;
+  checkpointScope?: string;
   fetchImpl?: typeof fetch;
   now?: () => string;
 };
@@ -198,9 +199,15 @@ const assessPacket = async (options: {
   };
 };
 
-const draftPath = (options: Pick<LocalBatchOptions, 'root' | 'experimentGroupId' | 'batchKind'>) => {
+const draftPath = (options: Pick<LocalBatchOptions, 'root' | 'experimentGroupId' | 'batchKind' | 'checkpointScope'>) => {
   if (!/^[a-zA-Z0-9-]+$/.test(options.experimentGroupId)) throw new Error('invalid Evaluation v6 group ID');
-  return path.join(evaluationV6Paths(options.root).localJudgeDrafts, options.experimentGroupId, `${options.batchKind}.json`);
+  if (options.checkpointScope && !/^[a-zA-Z0-9-]+$/.test(options.checkpointScope)) {
+    throw new Error('invalid Evaluation v6 Judge checkpoint scope');
+  }
+  const name = options.checkpointScope
+    ? `${options.batchKind}-${options.checkpointScope}`
+    : options.batchKind;
+  return path.join(evaluationV6Paths(options.root).localJudgeDrafts, options.experimentGroupId, `${name}.json`);
 };
 
 export const runEvaluationV6LocalPacketBatch = async (options: LocalBatchOptions) => {
@@ -299,6 +306,7 @@ export const runEvaluationV6LocalJudge = async (options: {
     batchKind: 'individual',
     batchHash: exported.batchHash,
     packets: exported.packets,
+    checkpointScope: `repetition-${options.repetition}`,
     judgeModel,
     fetchImpl,
   });

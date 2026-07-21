@@ -4,7 +4,7 @@
  *    - Judge a blind packet with rationale-first calls and deterministic host scoring.
  * 2. Edge Cases:
  *    - Accept fenced assessment JSON.
- *    - Resume a matching checkpoint without issuing duplicate model calls.
+ *    - Resume a matching checkpoint without duplicate calls while isolating another repetition checkpoint.
  *    - Repair one malformed assessment response exactly once.
  * 3. Failure Path:
  *    - Preserve only the draft and reject empty, HTTP-failed, stale, or twice-invalid responses.
@@ -87,6 +87,19 @@ test('edge: resumes a matching checkpoint without duplicate calls', async () => 
   }) as typeof fetch });
   assert.equal(resumed.resumedCount, 1);
   assert.equal(resumed.gradedCount, 0);
+
+  let secondRepetitionCalls = 0;
+  const isolated = await runEvaluationV6LocalPacketBatch({
+    ...configured,
+    batchHash: 'b'.repeat(64),
+    checkpointScope: 'repetition-2',
+    fetchImpl: (async () => {
+      secondRepetitionCalls += 1;
+      return response(secondRepetitionCalls === 1 ? '고객 수요와 반전 경계를 구분한 판단이다.' : assessment);
+    }) as typeof fetch,
+  } as Parameters<typeof runEvaluationV6LocalPacketBatch>[0] & { checkpointScope: string });
+  assert.equal(isolated.gradedCount, 1);
+  assert.equal(secondRepetitionCalls, 2);
 });
 
 test('edge: repairs malformed assessment exactly once', async () => {
