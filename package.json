@@ -31,6 +31,8 @@
     "advisor:memory:approve": "tsx server/runAmyHoodDecisionAdvisor.ts memory:approve",
     "evaluation:v4:test": "tsx --test tests/amyHoodEvaluationV4*.test.ts",
     "evaluation:v4:run": "tsx server/runAmyHoodEvaluationV4.ts",
+    "evaluation:v5:test": "tsx --test tests/amyHoodEvaluationV5*.test.ts",
+    "evaluation:v5:run": "tsx server/runAmyHoodEvaluationV5.ts",
     "advisor:memory:release": "tsx server/runAmyHoodDecisionAdvisor.ts memory:release",
     "advisor:memory:activate": "tsx server/runAmyHoodDecisionAdvisor.ts memory:activate",
     "advisor:index:test": "tsx --test tests/amyHoodRagContracts.test.ts tests/amyHoodEmbeddingClient.test.ts tests/amyHoodMemoryIndex.test.ts tests/amyHoodHybridRetriever.test.ts tests/amyHoodRagContext.test.ts",

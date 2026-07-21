@@ -6,6 +6,7 @@
  *    - Accept one JSON response wrapped in a markdown fence.
  *    - Normalize surrounding whitespace without changing priority order.
  *    - Preserve multiple non-empty guardrails and reversal signals.
+ *    - Reject unsupported CLI commands while exposing the fixed formal workflow.
  * 3. Failure Path:
  *    - Reject malformed JSON, unknown fields, empty arrays, and the removed generic CFO arm.
  */
@@ -16,6 +17,7 @@ import {
   EVALUATION_V5_ARMS,
   parseEvaluationV5CandidateResponse,
 } from '../shared/amyHoodEvaluationV5';
+import { runAmyHoodEvaluationV5Command } from '../server/runAmyHoodEvaluationV5';
 
 const valid = {
   action: 'Proceed in bounded stages.',
@@ -56,6 +58,13 @@ test('edge: preserves multiple guardrails and reversal signals', () => {
   }));
   assert.deepEqual(parsed.guardrails, ['Liquidity floor', 'Return threshold']);
   assert.deepEqual(parsed.reversalSignals, ['Demand weakens', 'Unit economics deteriorate']);
+});
+
+test('edge: V5 CLI rejects unsupported commands and exposes the formal workflow', async () => {
+  await assert.rejects(
+    runAmyHoodEvaluationV5Command(['unknown'], process.cwd()),
+    /expected freeze, check, create, execute, resume, export-judge, import-grades, export-pair-judge, import-pair-grades, or report/i,
+  );
 });
 
 test('failure: rejects malformed and expanded response contracts', () => {
