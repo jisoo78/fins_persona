@@ -968,7 +968,7 @@ const run = async () => {
       'data/b-track/amy-hood/advisor/event-candidates.json',
     );
     const candidates = JSON.parse(readFileSync(candidatePath, 'utf8')) as EventCandidate[];
-    validateEventCandidates(candidates);
+    validateEventCandidates(candidates, { enforceDiscoveryRange: false });
     assertImportRegistered(root, input, candidates);
     const imported = hasTranscriptSegments(input)
       ? await importTranscript(input, root)

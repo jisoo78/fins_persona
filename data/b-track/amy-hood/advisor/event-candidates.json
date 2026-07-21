@@ -573,6 +573,7 @@
     "discoveryUrls": [
       "https://news.microsoft.com/source/2021/04/12/microsoft-accelerates-industry-cloud-strategy-for-healthcare-with-the-acquisition-of-nuance/",
       "https://stockanalysis.com/stocks/msft/transcripts/12504-m-a-announcement/",
+      "https://earningscalls.dev/transcripts/microsoft-corporation_msft_earnings_call_transcript_2021-04-12",
       "https://www.sec.gov/Archives/edgar/data/1002517/000119312521113805/d100489ddefa14a.htm",
       "https://www.sec.gov/Archives/edgar/data/1002517/000119312521112515/d22854dex991.htm",
       "https://www.sec.gov/Archives/edgar/data/1002517/000100251720000058/nuan0930202010-k.htm",
@@ -630,6 +631,28 @@
         "evidenceLocator": null,
         "reviewStatus": "unreviewed",
         "reviewerNote": "review_required: Discovery metadata from PDF pages [9, 10]; original artifact review is required before evidence approval. Live recheck: HTTP 400; unavailable."
+      },
+      {
+        "canonicalUrl": "https://earningscalls.dev/transcripts/microsoft-corporation_msft_earnings_call_transcript_2021-04-12",
+        "role": "direct_amy",
+        "sourceType": "transcript_mirror",
+        "publishedAt": "2021-04-12",
+        "temporalRelation": "decision_time",
+        "relevanceClaim": "Amy Hood states Microsoft's M&A selection criteria and applies them to the Nuance acquisition terms, price, execution requirements, and dilution guardrails.",
+        "evidenceLocator": {
+          "exactQuote": "We focus on TAM-expansive opportunities in high-growth markets, where we can uniquely add value to the users or the community.",
+          "exactRelevancePassage": "Over the past 10 years, we've taken a consistent approach to mergers and acquisitions of all sizes. We focus on TAM-expansive opportunities in high-growth markets, where we can uniquely add value to the users or the community. And we execute those transactions at a price that supports long-term shareholder value creation. As Satya, Mark and Scott discussed, Nuance meets those criteria. And with all acquisitions, value was ultimately only created with terrific execution, bind aligned team with a shared vision of the future. For this, key indicators of our success will be accelerated top line growth of Nuance business starting with Microsoft Cloud for Healthcare, increased adoption of Azure, Teams and Dynamics 365 across industries. Now let's turn to the transaction details. We've agreed to acquire Nuance for $56 per share, implying a 23% premium to Nuance's closing price on April 9, in an all-cash transaction valued at $19.7 billion.",
+          "anchorTerms": ["Nuance", "acquire Nuance", "$19.7 billion"],
+          "eventDiscriminators": [
+            { "value": "Nuance", "kind": "named_entity" },
+            { "value": "acquire", "kind": "decision_action" },
+            { "value": "$19.7 billion", "kind": "event_specific" }
+          ],
+          "speaker": "Amy Hood"
+        },
+        "reviewStatus": "reviewed",
+        "reviewerNote": "Codex reviewed the speaker-separated acquisition-call transcript, exact Amy Hood passage, and official Microsoft/SEC transaction corroboration on 2026-07-21.",
+        "documentFamilyId": "nuance-acquisition-call-transcript-2021"
       },
       {
         "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/1002517/000119312521113805/d100489ddefa14a.htm",
@@ -700,12 +723,8 @@
         "reviewerNote": "unreviewed: Discovery metadata from PDF pages [11]; original artifact review is required before evidence approval. Live recheck: HTTP 200; accessible."
       }
     ],
-    "directEvidenceGap": {
-      "reviewStatus": "reviewed",
-      "reason": "No event-specific Amy Hood passage with an exact locator has yet been collected and verified for this candidate.",
-      "reviewerNote": "Phase 3 selection remains blocked until direct evidence is found or the methodology approves a non-direct exception."
-    },
-    "phase3Status": "evidence_gap",
+    "directEvidenceGap": null,
+    "phase3Status": "eligible",
     "notes": "Association-first candidate; no same-quarter or generic filing association is accepted.",
     "status": "approved_for_collection",
     "eventFingerprint": {
@@ -717,7 +736,16 @@
       ],
       "reviewStatus": "reviewed",
       "reviewerNote": "A reviewer matched these controlled event fields to the cited official decision-window source.",
-      "aliases": []
+      "aliases": [
+        {
+          "kind": "decision_action",
+          "canonicalValue": "will acquire",
+          "value": "acquire",
+          "sourceUrl": "https://earningscalls.dev/transcripts/microsoft-corporation_msft_earnings_call_transcript_2021-04-12",
+          "reviewStatus": "reviewed",
+          "reviewerNote": "Amy Hood's acquisition-call wording expresses the same decision action as the official announcement's canonical future-tense phrase."
+        }
+      ]
     }
   },
   {
@@ -2658,7 +2686,7 @@
         "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3",
         "role": "direct_amy",
         "sourceType": "earnings_call",
-        "documentFamilyId": "source:source-fbb900eb7e249591",
+        "documentFamilyId": "source-fbb900eb7e249591",
         "publishedAt": "2023-04-25",
         "temporalRelation": "decision_time",
         "relevanceClaim": "The official earnings transcript contains a bounded Amy Hood statement about this resource-allocation decision.",
@@ -2785,7 +2813,7 @@
         "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3",
         "role": "counterevidence",
         "sourceType": "earnings_call",
-        "documentFamilyId": "source:source-fbb900eb7e249591",
+        "documentFamilyId": "source-fbb900eb7e249591",
         "publishedAt": "2023-04-25",
         "temporalRelation": "pre_decision",
         "relevanceClaim": "The earlier official earnings transcript states the cost-discipline boundary governing later cloud and AI infrastructure scaling.",

@@ -1,0 +1,788 @@
+{
+  "dataset": "amy_hood_v4_decision_evidence_web_inventory",
+  "version": "1.0.0",
+  "researchedAt": "2026-07-20T18:00:49+09:00",
+  "researcher": "Web Search Agent",
+  "events": [
+    {
+      "candidateId": "candidate-nuance-acquisition-2021",
+      "domain": "m_and_a",
+      "decisionDate": "2021-04-12",
+      "workingTitle": "Microsoft의 Nuance 197억 달러 인수",
+      "overallStatus": "qualified",
+      "decisionSummary": {
+        "decisionQuestion": "기존 전략적 제휴를 넘어 Nuance를 완전 인수해 의료·산업 AI 시장을 확대할 것인가",
+        "chosenAction": "Nuance를 주당 56달러, 순부채 포함 197억 달러의 전액 현금 거래로 인수",
+        "rejectedAlternative": "공개 원문에 명시된 공식 기각안은 없음. 비교 가능한 대안은 기존 제휴 유지와 유기적 제품 확장",
+        "financialMagnitude": "주당 56달러, 23% 프리미엄, 순부채 포함 197억 달러",
+        "conditions": [
+          "총주소시장(TAM)을 확대하는 고성장 시장일 것",
+          "Microsoft가 사용자 또는 생태계에 고유한 가치를 더할 수 있을 것",
+          "가격이 장기 주주가치 창출을 지지할 것",
+          "Nuance 매출 성장과 Azure·Teams·Dynamics 365 채택 확대로 실행 성과를 확인할 수 있을 것"
+        ],
+        "constraints": [
+          "Nuance 주주 승인",
+          "규제 승인과 통상적 종결 조건",
+          "FY22 비GAAP EPS 희석을 1% 미만으로 제한하고 FY23에는 증가 기여",
+          "기존 자사주 매입 계획에 영향을 주지 않음"
+        ],
+        "risks": [
+          "통합 실행 실패",
+          "공동 비전과 조직 정렬 실패",
+          "규제 승인 지연",
+          "예상한 교차판매·클라우드 채택이 실현되지 않을 위험"
+        ]
+      },
+      "directAmyEvidence": [
+        {
+          "canonicalUrl": "https://earningscalls.dev/transcripts/microsoft-corporation_msft_earnings_call_transcript_2021-04-12",
+          "alternateUrls": [],
+          "title": "Microsoft Corporation (MSFT) April 12, 2021 Acquisition Call Transcript",
+          "publisher": "EarningsCalls.dev",
+          "sourceType": "transcript",
+          "publishedAt": "2021-04-12",
+          "speaker": "Amy Hood",
+          "exactQuote": "We focus on TAM-expansive opportunities in high-growth markets, where we can uniquely add value to the users or the community.",
+          "contextBefore": "Scott Guthrie가 의료 제공자 역량 강화와 산업 전반의 AI 리더십 확대 기회를 설명한 뒤 Amy Hood에게 거래 재무 논리를 넘긴다.",
+          "contextAfter": "Amy Hood는 Nuance가 해당 기준을 충족한다고 밝히고, 장기 주주가치를 지지하는 가격·실행 지표·희석 및 종결 조건을 설명한다.",
+          "locator": {
+            "section": "Amy Hood speaker segment #5, line 80",
+            "anchorTerms": [
+              "TAM-expansive opportunities",
+              "high-growth markets",
+              "uniquely add value",
+              "Nuance meets those criteria"
+            ]
+          },
+          "decisionRelevance": "Amy Hood가 Microsoft의 M&A 선별 기준을 제시한 뒤 Nuance가 그 기준을 충족한다고 사건에 직접 적용한다.",
+          "judgmentSignals": {
+            "priorities": [
+              "TAM 확대",
+              "고성장 시장",
+              "사용자·생태계에 대한 고유 가치",
+              "장기 주주가치"
+            ],
+            "conditions": [
+              "Microsoft가 차별적 가치를 더할 수 있음",
+              "Nuance가 동일한 M&A 기준을 충족함"
+            ],
+            "guardrails": [
+              "장기 주주가치를 지지하는 거래 가격",
+              "FY22 희석 1% 미만",
+              "FY23 증가 기여",
+              "기존 자사주 매입 유지"
+            ],
+            "reversalSignals": [
+              "통합 후 매출 가속 또는 Microsoft Cloud 채택이 나타나지 않음",
+              "규제·주주 승인 실패"
+            ]
+          },
+          "temporalRelation": "decision_time",
+          "access": {
+            "status": "accessible",
+            "fullTextAvailable": true,
+            "downloadable": true,
+            "mediaType": "text/html"
+          },
+          "verification": {
+            "speakerExplicit": true,
+            "exactQuoteVerified": true,
+            "publishedDateVerified": true,
+            "eventSpecific": true,
+            "postOutcomeExcluded": true
+          }
+        }
+      ],
+      "supportingEvidence": [
+        {
+          "canonicalUrl": "https://news.microsoft.com/source/2021/04/12/microsoft-accelerates-industry-cloud-strategy-for-healthcare-with-the-acquisition-of-nuance/",
+          "title": "Microsoft accelerates industry cloud strategy for healthcare with the acquisition of Nuance",
+          "publisher": "Microsoft Source",
+          "publishedAt": "2021-04-12",
+          "sourceType": "official_announcement",
+          "evidenceRole": "decision_context",
+          "exactPassage": "Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9.",
+          "relevance": "거래 가격, 프리미엄, 전액 현금 인수와 전략적 목적을 확인한다."
+        },
+        {
+          "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312521112687/d171120d8k.htm",
+          "title": "Microsoft Form 8-K regarding Nuance acquisition",
+          "publisher": "U.S. Securities and Exchange Commission",
+          "publishedAt": "2021-04-12",
+          "sourceType": "filing",
+          "evidenceRole": "decision_context",
+          "exactPassage": "The transaction was unanimously approved by the Boards of Directors of both Nuance and Microsoft.",
+          "relevance": "이사회 승인과 법적 거래 공시를 확인한다."
+        }
+      ],
+      "policyOnlyEvidence": [],
+      "postOutcomeEvidence": [],
+      "inaccessibleUrls": [
+        {
+          "url": "https://aka.ms/MS-Investor-Call",
+          "reason": "transcript_missing"
+        }
+      ],
+      "queriesAttempted": [
+        "site:microsoft.com Nuance acquisition Amy Hood transcript April 12 2021",
+        "\"Nuance meets those criteria\" Amy Hood",
+        "Microsoft Nuance acquisition call Amy Hood TAM expansive"
+      ],
+      "remainingGaps": [
+        "Microsoft 공식 Investor Relations 원본 전사 URL은 현재 검색에서 복구되지 않아, 화자 구분 전체 전사본을 canonical direct source로 사용함",
+        "공개 문서에는 명시적인 기각 대안이 기록되지 않음"
+      ]
+    },
+    {
+      "candidateId": "candidate-m365-price-2021",
+      "domain": "pricing_monetization",
+      "decisionDate": "2021-08-19",
+      "workingTitle": "Microsoft 365 상업용 가격 인상",
+      "overallStatus": "partial",
+      "decisionSummary": {
+        "decisionQuestion": "10년간 누적된 제품 가치와 기능 확장을 상업용 Microsoft 365 가격에 반영할 것인가",
+        "chosenAction": "2022년 3월 1일부터 주요 상업용 SKU 가격을 사용자당 월 1~3달러 인상",
+        "rejectedAlternative": "기존 가격 유지. 공식 문서에 별도의 검토·기각 과정은 공개되지 않음",
+        "financialMagnitude": "Business Basic 5→6달러, Business Premium 20→22달러, Office 365 E1 8→10달러, E3 20→23달러, E5 35→38달러, Microsoft 365 E3 32→36달러",
+        "conditions": [
+          "Office 365 출시 후 10년간 제공 가치가 실질적으로 증가",
+          "통신·협업, 보안·컴플라이언스, AI·자동화 기능 확대",
+          "상업용 유료 좌석이 3억 개 이상으로 성장"
+        ],
+        "constraints": [
+          "발표와 시행 사이 약 6개월의 고객 준비 기간",
+          "국가별 시장 조정",
+          "교육용·소비자용 가격은 변경하지 않음"
+        ],
+        "risks": [
+          "가격 민감 고객의 이탈·다운셀",
+          "가치 증가에 대한 고객 수용 부족",
+          "지역별 환율·시장 차이"
+        ]
+      },
+      "directAmyEvidence": [],
+      "supportingEvidence": [
+        {
+          "canonicalUrl": "https://www.microsoft.com/en-us/microsoft-365/blog/2021/08/19/new-pricing-for-microsoft-365/",
+          "title": "New pricing for Microsoft 365",
+          "publisher": "Microsoft 365 Blog",
+          "publishedAt": "2021-08-19",
+          "sourceType": "official_announcement",
+          "evidenceRole": "decision_context",
+          "exactPassage": "This updated pricing reflects the increased value we have delivered to our customers over the past 10 years.",
+          "relevance": "가격 인상의 공식 가치 논리, 적용 SKU, 시행일과 예외 범위를 확인한다."
+        }
+      ],
+      "policyOnlyEvidence": [],
+      "postOutcomeEvidence": [],
+      "inaccessibleUrls": [],
+      "queriesAttempted": [
+        "site:microsoft.com Amy Hood Microsoft 365 price increase August 19 2021",
+        "site:microsoft.com/en-us/investor FY21 Amy Hood Office 365 pricing value",
+        "\"Amy Hood\" \"new pricing for Microsoft 365\""
+      ],
+      "remainingGaps": [
+        "결정일 이전 또는 당일에 가격 인상 자체를 설명한 Amy Hood 직접 발언을 찾지 못함",
+        "공식 발표 화자는 Jared Spataro이며 Amy Hood가 아님",
+        "검토한 대안과 가격 탄력성 기준이 공개되지 않음"
+      ]
+    },
+    {
+      "candidateId": "candidate-copilot-price-2023",
+      "domain": "pricing_monetization",
+      "decisionDate": "2023-07-18",
+      "workingTitle": "Microsoft 365 Copilot 월 30달러 가격 결정",
+      "overallStatus": "partial",
+      "decisionSummary": {
+        "decisionQuestion": "Microsoft 365 Copilot의 상업용 가격을 어느 수준으로 설정해 AI 가치와 인프라 비용을 수익화할 것인가",
+        "chosenAction": "Microsoft 365 E3·E5·Business Standard·Business Premium 고객에게 사용자당 월 30달러로 가격 제시",
+        "rejectedAlternative": "기본 Microsoft 365 가격에 포함하거나 더 낮은 애드온 가격을 적용하는 대안은 공식 원문에서 명시되지 않음",
+        "financialMagnitude": "사용자당 월 30달러",
+        "conditions": [
+          "상업 고객이 일반 출시 전 예산을 계획할 수 있도록 가격을 선공개",
+          "Microsoft Graph와 Microsoft 365 앱 전반의 생성형 AI 결합",
+          "AI가 새로운 플랫폼·비즈니스 모델 전환으로 이어질 것이라는 기대"
+        ],
+        "constraints": [
+          "발표 당시 일반 출시일은 미정",
+          "E3·E5·Business Standard·Business Premium 고객으로 대상 제한",
+          "데이터 보안·개인정보·규정 준수 요구"
+        ],
+        "risks": [
+          "높은 애드온 가격에 따른 채택 지연",
+          "AI 인프라 비용과 수익화 속도 불일치",
+          "제품 일반 출시 지연과 초기 품질 위험"
+        ]
+      },
+      "directAmyEvidence": [],
+      "supportingEvidence": [
+        {
+          "canonicalUrl": "https://www.microsoft.com/en-us/microsoft-365/blog/2023/07/18/introducing-bing-chat-enterprise-microsoft-365-copilot-pricing-and-microsoft-sales-copilot/",
+          "title": "Introducing Bing Chat Enterprise, Microsoft 365 Copilot pricing, and Microsoft Sales Copilot",
+          "publisher": "Microsoft 365 Blog",
+          "publishedAt": "2023-07-18",
+          "sourceType": "official_announcement",
+          "evidenceRole": "decision_context",
+          "exactPassage": "Copilot for Microsoft 365 will be priced at USD30 per user, per month.",
+          "relevance": "공식 가격, 대상 고객과 일반 출시 전 계획 목적을 확인한다."
+        }
+      ],
+      "policyOnlyEvidence": [
+        {
+          "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/ai-discussion-with-amy-hood-evp-and-cfo-and-kevin-scott-evp-of-ai-and-cto",
+          "publishedAt": "2023-06-12",
+          "exactQuote": "technical transformation, platform transformation, and business model innovation.",
+          "reasonNotDirect": "AI의 수익화·비즈니스 모델 전환 원칙은 설명하지만 월 30달러 가격 또는 대상 SKU를 직접 설명하지 않음"
+        }
+      ],
+      "postOutcomeEvidence": [
+        {
+          "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q4",
+          "publishedAt": "2023-07-25",
+          "reasonSeparated": "가격 발표 7일 뒤 Amy Hood가 Copilot 수익 기여가 FY24 하반기에 집중될 것이라고 설명한 자료이므로 결정 당시 직접 근거에서 격리"
+        }
+      ],
+      "inaccessibleUrls": [],
+      "queriesAttempted": [
+        "site:microsoft.com Amy Hood Copilot $30 pricing July 18 2023",
+        "site:microsoft.com/en-us/investor Amy Hood Copilot monetization before July 18 2023",
+        "\"Amy Hood\" \"30 per user\" Copilot"
+      ],
+      "remainingGaps": [
+        "월 30달러라는 숫자의 산식·비교 대안·수요 탄력성을 Amy Hood가 설명한 사전 발언을 찾지 못함",
+        "직접 가격 발표의 저자와 화자는 Amy Hood가 아님"
+      ]
+    },
+    {
+      "candidateId": "candidate-teams-unbundle-2023",
+      "domain": "pricing_monetization",
+      "decisionDate": "2023-08-31",
+      "workingTitle": "EEA 지역 Teams 분리 판매와 가격 조정",
+      "overallStatus": "partial",
+      "decisionSummary": {
+        "decisionQuestion": "EU 경쟁 우려에 대응해 Teams와 Microsoft 365·Office 365의 묶음 판매 구조를 변경할 것인가",
+        "chosenAction": "2023년 10월 1일부터 EEA·스위스에서 Teams 없는 엔터프라이즈 제품군을 월 2유로 낮게 판매하고 Teams를 월 5유로에 별도 판매",
+        "rejectedAlternative": "조사가 끝날 때까지 기존 번들을 유지하는 선택을 포기하고 선제 변경. 다만 공식 문서는 내부 대안 비교를 공개하지 않음",
+        "financialMagnitude": "Teams 없는 제품군 월 2유로 또는 연 24유로 할인, Teams 단품 월 5유로 또는 연 60유로",
+        "conditions": [
+          "EU 집행위원회의 공식 반독점 조사 개시",
+          "고객 선택권과 경쟁 제품의 상호운용성 우려",
+          "조사 종결 전에도 시장에 즉각적 변화를 줄 필요"
+        ],
+        "constraints": [
+          "EEA와 스위스에 우선 한정",
+          "기존 고객에게 현행 번들 유지 또는 비Teams 제품군 전환 선택권 제공",
+          "소기업·현장직 제품군에는 번들과 비Teams 옵션을 병행"
+        ],
+        "risks": [
+          "EU 조사와 제재가 계속될 위험",
+          "Teams 단품 경쟁력 약화",
+          "제품·계약·채널 복잡성 증가",
+          "가격 차이가 경쟁 우려를 충분히 해소하지 못할 위험"
+        ]
+      },
+      "directAmyEvidence": [],
+      "supportingEvidence": [
+        {
+          "canonicalUrl": "https://blogs.microsoft.com/eupolicy/2023/08/31/european-competition-teams-office-microsoft-365/",
+          "title": "Microsoft announces changes to Microsoft 365 and Office 365 to address European competition concerns",
+          "publisher": "Microsoft EU Policy Blog",
+          "publishedAt": "2023-08-31",
+          "sourceType": "official_announcement",
+          "evidenceRole": "decision_context",
+          "exactPassage": "Beginning October 1, 2023, we will unbundle Teams from our Microsoft 365 and Office 365 suites in the EEA and Switzerland.",
+          "relevance": "분리 판매 범위, 시행일, 가격 차이와 고객 선택권을 확인한다."
+        },
+        {
+          "canonicalUrl": "https://ec.europa.eu/competition/antitrust/cases1/202330/AT_40721_9314556_2360_3.pdf",
+          "title": "Opening of Proceedings — AT.40721 Microsoft Teams",
+          "publisher": "European Commission",
+          "publishedAt": "2023-07-27",
+          "sourceType": "filing",
+          "evidenceRole": "decision_context",
+          "exactPassage": "The Commission intends to investigate, in particular, the potential tying or bundling of Microsoft Teams.",
+          "relevance": "결정 이전의 규제 압력과 조사 범위를 확인한다."
+        }
+      ],
+      "policyOnlyEvidence": [],
+      "postOutcomeEvidence": [
+        {
+          "canonicalUrl": "https://ec.europa.eu/commission/presscorner/detail/en/ip_24_3446",
+          "publishedAt": "2024-06-25",
+          "reasonSeparated": "결정 이후 EU 집행위원회의 예비 판단 자료로, 당시 의사결정 입력이 아니라 후속 규제 결과이므로 격리"
+        }
+      ],
+      "inaccessibleUrls": [],
+      "queriesAttempted": [
+        "site:microsoft.com Amy Hood Teams unbundle EEA August 31 2023",
+        "site:microsoft.com/en-us/investor Amy Hood Teams Europe competition pricing",
+        "\"Amy Hood\" Teams unbundle"
+      ],
+      "remainingGaps": [
+        "분리 판매·가격 조정을 Amy Hood가 직접 설명한 결정일 이전 또는 당일 발언을 찾지 못함",
+        "공식 발표 화자는 Nanna-Louise Linde이며 Amy Hood가 아님",
+        "내부 가격 산식과 규제 대안 비교가 공개되지 않음"
+      ]
+    },
+    {
+      "candidateId": "candidate-workforce-reset-2023",
+      "domain": "cost_efficiency",
+      "decisionDate": "2023-01-18",
+      "workingTitle": "Microsoft 1만 명 감원과 비용 구조 재조정",
+      "overallStatus": "partial",
+      "decisionSummary": {
+        "decisionQuestion": "수요 둔화와 고객 최적화 국면에서 인력·하드웨어·부동산 비용을 얼마나 빠르게 재조정할 것인가",
+        "chosenAction": "FY23 Q3 말까지 약 1만 명 감원, 하드웨어 포트폴리오 변경과 임대 사무실 통합",
+        "rejectedAlternative": "고용·비용 구조를 유지하는 대신 성장 분야에는 선택적으로 계속 채용·투자",
+        "financialMagnitude": "약 1만 명, 12억 달러 비용, 주당순이익 약 0.12달러 영향",
+        "conditions": [
+          "팬데믹 시기 디지털 지출 확대 이후 고객이 비용 최적화",
+          "지역·산업별 경기 침체 주의",
+          "AI라는 차세대 플랫폼 전환에 대한 투자 필요"
+        ],
+        "constraints": [
+          "전략적 성장 분야에는 채용과 투자를 지속",
+          "FY23 Q3 말까지 실행",
+          "직원 지원과 지역별 노동법 준수"
+        ],
+        "risks": [
+          "핵심 인재와 조직 지식 손실",
+          "직원 사기·생산성 저하",
+          "수요가 회복될 경우 인력 부족",
+          "구조조정 비용과 실행 지연"
+        ]
+      },
+      "directAmyEvidence": [],
+      "supportingEvidence": [
+        {
+          "canonicalUrl": "https://blogs.microsoft.com/blog/2023/01/18/subject-focusing-on-our-short-and-long-term-opportunity/",
+          "title": "Subject: Focusing on our short- and long-term opportunity",
+          "publisher": "Official Microsoft Blog",
+          "publishedAt": "2023-01-18",
+          "sourceType": "official_announcement",
+          "evidenceRole": "decision_context",
+          "exactPassage": "We will align our cost structure with our revenue and where we see customer demand.",
+          "relevance": "선택한 감원 규모, 수요 연동 비용 원칙과 성장 분야 재투자를 확인한다."
+        },
+        {
+          "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312523009934/d447690d8k.htm",
+          "title": "Microsoft Form 8-K — workforce reduction and cost actions",
+          "publisher": "U.S. Securities and Exchange Commission",
+          "publishedAt": "2023-01-18",
+          "sourceType": "filing",
+          "evidenceRole": "decision_context",
+          "exactPassage": "Microsoft expects to complete the actions by the end of its third fiscal quarter of 2023.",
+          "relevance": "법적 공시 기준 실행 기간, 비용과 조치 범위를 확인한다."
+        }
+      ],
+      "policyOnlyEvidence": [],
+      "postOutcomeEvidence": [
+        {
+          "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q2",
+          "publishedAt": "2023-01-24",
+          "reasonSeparated": "결정 6일 뒤 Amy Hood가 비용 구조를 매출에 맞춘 결정이라고 설명했으므로 사건 관련성은 높지만 사후 발언으로 격리"
+        }
+      ],
+      "inaccessibleUrls": [],
+      "queriesAttempted": [
+        "site:microsoft.com Amy Hood layoffs January 18 2023 cost structure",
+        "site:microsoft.com/en-us/investor Amy Hood 10000 jobs January 2023",
+        "\"Amy Hood\" \"cost structure\" \"January 18, 2023\""
+      ],
+      "remainingGaps": [
+        "결정일 이전 또는 당일의 Amy Hood 직접 발언은 찾지 못함",
+        "가장 직접적인 Amy Hood 설명은 2023-01-24로 결정 후 6일이어서 postOutcomeEvidence로 격리",
+        "부문별 감축 기준과 대안별 비용 비교가 공개되지 않음"
+      ]
+    },
+    {
+      "candidateId": "candidate-phone-restructure-2015",
+      "domain": "cost_efficiency",
+      "decisionDate": "2015-07-08",
+      "workingTitle": "Phone Hardware 손상차손과 7,800명 구조조정",
+      "overallStatus": "partial",
+      "decisionSummary": {
+        "decisionQuestion": "Nokia Devices and Services 인수 자산의 가치 하락을 인정하고 전화 하드웨어 사업 규모를 축소할 것인가",
+        "chosenAction": "전화 사업 중심 최대 7,800명 감원, 약 76억 달러 손상차손과 7.5억~8.5억 달러 구조조정 비용 인식",
+        "rejectedAlternative": "기존 전화 하드웨어 규모와 자산 장부가를 유지하는 선택을 포기",
+        "financialMagnitude": "최대 7,800명, 손상차손 약 76억 달러, 구조조정 비용 약 7.5억~8.5억 달러",
+        "conditions": [
+          "Phone Hardware의 판매량·매출 목표 미달",
+          "낮은 마진 제품 조합",
+          "경쟁 환경 변화와 회사 우선순위 전환",
+          "미래 매출·수익성 전망 하향"
+        ],
+        "constraints": [
+          "핵심 모바일 경험과 Windows 생태계 전략은 유지",
+          "손상검사와 회계 기준에 따른 일괄 비용 인식",
+          "구조조정 실행과 직원 지원"
+        ],
+        "risks": [
+          "모바일 시장 영향력 약화",
+          "Nokia 인수 시너지 훼손",
+          "개발자·파트너 생태계 위축",
+          "추가 손상 또는 사업 철수 비용"
+        ]
+      },
+      "directAmyEvidence": [],
+      "supportingEvidence": [
+        {
+          "canonicalUrl": "https://news.microsoft.com/source/2015/07/08/microsoft-announces-restructuring-of-phone-hardware-business/",
+          "title": "Microsoft announces restructuring of phone hardware business",
+          "publisher": "Microsoft Source",
+          "publishedAt": "2015-07-08",
+          "sourceType": "official_announcement",
+          "evidenceRole": "decision_context",
+          "exactPassage": "Microsoft also announced the reduction of up to 7,800 positions, primarily in the phone business.",
+          "relevance": "감원 규모, 손상차손과 구조조정 비용을 확인한다."
+        },
+        {
+          "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312515247530/d54167d8k.htm",
+          "title": "Microsoft Form 8-K — Phone Hardware restructuring",
+          "publisher": "U.S. Securities and Exchange Commission",
+          "publishedAt": "2015-07-08",
+          "sourceType": "filing",
+          "evidenceRole": "decision_context",
+          "exactPassage": "The Company expects to complete the restructuring by the end of fiscal year 2016.",
+          "relevance": "법적 공시 기준 비용·일정과 조치 범위를 확인한다."
+        }
+      ],
+      "policyOnlyEvidence": [],
+      "postOutcomeEvidence": [
+        {
+          "canonicalUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312515272806/d918813d10k.htm",
+          "publishedAt": "2015-07-31",
+          "reasonSeparated": "연차보고서가 판매 목표 미달·낮은 마진 조합·전망 하향을 상세화하지만 결정 이후 문서이므로 직접 학습 근거에서 격리"
+        }
+      ],
+      "inaccessibleUrls": [],
+      "queriesAttempted": [
+        "site:microsoft.com Amy Hood phone hardware restructuring July 8 2015",
+        "site:microsoft.com/investor Amy Hood Nokia impairment 2015 transcript",
+        "\"Amy Hood\" \"7,800\" Microsoft"
+      ],
+      "remainingGaps": [
+        "결정일 이전 또는 당일에 Amy Hood가 손상차손·감원 판단을 설명한 원문을 찾지 못함",
+        "공식 발표의 직접 인용 화자는 Satya Nadella이며 Amy Hood가 아님",
+        "사업 유지·축소·철수 대안의 정량 비교가 공개되지 않음"
+      ]
+    },
+    {
+      "candidateId": "candidate-transformation-2026",
+      "domain": "cost_efficiency",
+      "decisionDate": "2026-07-06",
+      "workingTitle": "Commercial 및 Xbox 조직 중심 약 4,800개 역할 감축",
+      "overallStatus": "partial",
+      "decisionSummary": {
+        "decisionQuestion": "AI·고객 배포 모델 변화와 Xbox의 낮은 수익성에 맞춰 조직·인력·스튜디오 포트폴리오를 재편할 것인가",
+        "chosenAction": "전사 약 4,800개 역할 감축, Xbox는 FY27 중 약 3,200개 감축(당일 약 1,600개)과 스튜디오 분리·매각 추진",
+        "rejectedAlternative": "기존 조직 계층·상업 영업 모델·Xbox 스튜디오 포트폴리오를 그대로 유지하는 선택을 포기",
+        "financialMagnitude": "전사 약 4,800개 역할(약 2.1%), Xbox 약 3,200개 역할(FY27), 당일 Xbox 약 1,600개",
+        "conditions": [
+          "Commercial 고객의 AI 도입·배포 방식 변화",
+          "Xbox 마진이 비교 가능한 플랫폼·퍼블리싱 사업보다 현저히 낮음",
+          "Game Pass·멀티플랫폼·콘텐츠 확대가 기대 속도로 성장하지 않음",
+          "대규모 AI 인프라 투자에 따른 수익·비용 규율 압력"
+        ],
+        "constraints": [
+          "감축 역할을 AI로 직접 대체하는 조치가 아니라는 회사 설명",
+          "일부 인력을 다른 역할로 재배치하고 자발적 퇴직 프로그램 활용",
+          "Xbox 감축을 FY27에 걸쳐 단계적으로 실행"
+        ],
+        "risks": [
+          "대규모 조직 충격과 핵심 인재 유출",
+          "스튜디오 분리 과정의 IP·프로젝트 연속성 위험",
+          "상업 고객 대응력 저하",
+          "AI 투자 수익화가 비용 증가를 따라가지 못할 위험"
+        ]
+      },
+      "directAmyEvidence": [],
+      "supportingEvidence": [
+        {
+          "canonicalUrl": "https://news.xbox.com/en-us/2026/07/06/resetting-xbox/",
+          "title": "Resetting XBOX",
+          "publisher": "Xbox Wire",
+          "publishedAt": "2026-07-06",
+          "sourceType": "official_announcement",
+          "evidenceRole": "decision_context",
+          "exactPassage": "We are beginning the most significant restructure in XBOX history.",
+          "relevance": "Xbox 감축 규모, 사업 건강성, 마진·성장 실패와 포트폴리오 조정을 확인한다."
+        },
+        {
+          "canonicalUrl": "https://www.reuters.com/business/world-at-work/microsoft-joins-ai-driven-tech-layoff-wave-with-4800-job-cuts-2026-07-06/",
+          "title": "Microsoft to cut 4,800 jobs, overhaul Xbox unit",
+          "publisher": "Reuters",
+          "publishedAt": "2026-07-06",
+          "sourceType": "contemporaneous_report",
+          "evidenceRole": "decision_context",
+          "exactPassage": "Microsoft said it would cut 4,800 jobs, or about 2.1% of its global workforce.",
+          "relevance": "전사 감축 규모와 Commercial·Xbox 범위를 확인한다."
+        }
+      ],
+      "policyOnlyEvidence": [],
+      "postOutcomeEvidence": [],
+      "inaccessibleUrls": [],
+      "queriesAttempted": [
+        "site:microsoft.com July 6 2026 Microsoft 4800 roles commercial Xbox restructuring",
+        "Reuters July 6 2026 Microsoft 4800 jobs commercial Xbox",
+        "\"Amy Hood\" Microsoft layoffs July 6 2026"
+      ],
+      "remainingGaps": [
+        "Amy Coleman(Chief People Officer)의 발언은 Amy Hood 발언이 아니므로 직접 증거에서 제외",
+        "전사 4,800명 조치의 Microsoft 공식 공개 원문 전체를 찾지 못해 Reuters를 보조 자료로 사용",
+        "결정일 이전 또는 당일의 Amy Hood 직접 발언을 찾지 못함"
+      ]
+    },
+    {
+      "candidateId": "candidate-buyback-2013",
+      "domain": "shareholder_return_risk",
+      "decisionDate": "2013-09-17",
+      "workingTitle": "400억 달러 자사주 매입 승인",
+      "overallStatus": "qualified",
+      "decisionSummary": {
+        "decisionQuestion": "만료 예정인 기존 자사주 매입 프로그램을 대체하고 배당과 함께 주주환원을 확대할 것인가",
+        "chosenAction": "만료일 없는 최대 400억 달러 신규 자사주 매입 승인과 분기 배당 22% 인상",
+        "rejectedAlternative": "기존 400억 달러 프로그램을 2013년 9월 30일 만료시키고 새 승인을 하지 않는 선택",
+        "financialMagnitude": "자사주 매입 최대 400억 달러, 분기 배당 주당 0.28달러(22% 인상)",
+        "conditions": [
+          "주주에게 현금을 지속 환원한다는 정책 의지",
+          "기존 프로그램 만료 직전의 승인 갱신",
+          "배당과 자사주 매입을 병행"
+        ],
+        "constraints": [
+          "프로그램에 만료일이 없음",
+          "실제 매입 속도는 재량적",
+          "향후 투자·유동성 수요와 병행해야 함"
+        ],
+        "risks": [
+          "현금 유연성 감소",
+          "고평가 시점 매입 위험",
+          "성장 투자·M&A와의 자본 배분 기회비용"
+        ]
+      },
+      "directAmyEvidence": [
+        {
+          "canonicalUrl": "https://news.microsoft.com/source/2013/09/17/microsoft-announces-quarterly-dividend-increase-and-share-repurchase-program-3/",
+          "alternateUrls": [],
+          "title": "Microsoft announces quarterly dividend increase and share repurchase program",
+          "publisher": "Microsoft Source",
+          "sourceType": "official_announcement",
+          "publishedAt": "2013-09-17",
+          "speaker": "Amy Hood",
+          "exactQuote": "These actions reflect a continued commitment to returning cash to our shareholders.",
+          "contextBefore": "공식 발표는 배당 22% 인상과 만료 예정 기존 프로그램을 대체하는 최대 400억 달러 신규 승인을 설명한다.",
+          "contextAfter": "인용 직후에는 회사 일반 소개와 투자자 연락처가 이어진다.",
+          "locator": {
+            "section": "Paragraph following the repurchase authorization, line 19",
+            "anchorTerms": [
+              "continued commitment",
+              "returning cash",
+              "shareholders"
+            ]
+          },
+          "decisionRelevance": "Amy Hood가 동일 발표에서 배당 인상과 자사주 매입을 묶어 지속적 현금 환원 정책으로 직접 규정한다.",
+          "judgmentSignals": {
+            "priorities": [
+              "지속적인 주주 현금 환원",
+              "배당과 자사주 매입의 병행"
+            ],
+            "conditions": [
+              "기존 프로그램 만료에 맞춘 갱신"
+            ],
+            "guardrails": [
+              "최대 400억 달러 한도",
+              "만료일 없음"
+            ],
+            "reversalSignals": [
+              "투자·유동성 필요가 현금 환원보다 우선해지는 경우(추론)"
+            ]
+          },
+          "temporalRelation": "decision_time",
+          "access": {
+            "status": "accessible",
+            "fullTextAvailable": true,
+            "downloadable": true,
+            "mediaType": "text/html"
+          },
+          "verification": {
+            "speakerExplicit": true,
+            "exactQuoteVerified": true,
+            "publishedDateVerified": true,
+            "eventSpecific": true,
+            "postOutcomeExcluded": true
+          }
+        }
+      ],
+      "supportingEvidence": [],
+      "policyOnlyEvidence": [],
+      "postOutcomeEvidence": [
+        {
+          "canonicalUrl": "https://www.microsoft.com/investor/reports/ar14/",
+          "publishedAt": "2014-07-31",
+          "reasonSeparated": "후속 연차보고서가 실제 사용액과 잔여 한도를 보여주지만 결정 이후 실행 결과이므로 격리"
+        }
+      ],
+      "inaccessibleUrls": [],
+      "queriesAttempted": [
+        "site:microsoft.com Amy Hood 40 billion share repurchase September 17 2013",
+        "\"continued commitment to returning cash\" Amy Hood",
+        "Microsoft 2013 buyback Amy Hood quote"
+      ],
+      "remainingGaps": [
+        "공식 발표에는 실제 매입 시점·주가 기준·현금 보유 최소치가 공개되지 않음",
+        "발표일은 9월 17일이며 후속 연차보고서는 이사회 승인일을 9월 16일로 기록해 날짜 정의를 구분할 필요가 있음"
+      ]
+    },
+    {
+      "candidateId": "candidate-buyback-2021",
+      "domain": "shareholder_return_risk",
+      "decisionDate": "2021-09-14",
+      "workingTitle": "600억 달러 자사주 매입 승인",
+      "overallStatus": "partial",
+      "decisionSummary": {
+        "decisionQuestion": "기존 자사주 매입 여력을 보충하면서 배당을 늘려 주주환원 규모를 유지할 것인가",
+        "chosenAction": "만료일 없는 최대 600억 달러 신규 자사주 매입 승인과 분기 배당 11% 인상",
+        "rejectedAlternative": "기존 프로그램 완료 후 추가 승인을 하지 않거나 배당만 확대하는 대안은 공식 문서에서 명시되지 않음",
+        "financialMagnitude": "자사주 매입 최대 600억 달러, 분기 배당 주당 0.62달러(11% 인상)",
+        "conditions": [
+          "기존 2019년 프로그램 완료가 가까워짐",
+          "강한 현금흐름과 지속적인 주주환원",
+          "배당과 자사주 매입의 병행"
+        ],
+        "constraints": [
+          "만료일 없음",
+          "언제든 종료 가능",
+          "기존 프로그램 완료 후 2021년 11월부터 개시"
+        ],
+        "risks": [
+          "현금 유연성 감소",
+          "고평가 시 매입 위험",
+          "클라우드·AI·M&A 투자와의 기회비용"
+        ]
+      },
+      "directAmyEvidence": [],
+      "supportingEvidence": [
+        {
+          "canonicalUrl": "https://news.microsoft.com/source/2021/09/14/microsoft-announces-quarterly-dividend-increase-and-new-share-repurchase-program-2/",
+          "title": "Microsoft announces quarterly dividend increase and new share repurchase program",
+          "publisher": "Microsoft Source",
+          "publishedAt": "2021-09-14",
+          "sourceType": "official_announcement",
+          "evidenceRole": "decision_context",
+          "exactPassage": "The board of directors also approved a new share repurchase program authorizing up to $60 billion in share repurchases.",
+          "relevance": "승인 규모, 만료일 없음, 종료 가능성과 배당 인상을 확인한다."
+        }
+      ],
+      "policyOnlyEvidence": [],
+      "postOutcomeEvidence": [
+        {
+          "canonicalUrl": "https://www.microsoft.com/investor/reports/ar22/",
+          "publishedAt": "2022-07-28",
+          "reasonSeparated": "후속 연차보고서가 기존 프로그램 완료와 2021년 프로그램 개시를 확인하지만 사후 실행 자료이므로 격리"
+        }
+      ],
+      "inaccessibleUrls": [],
+      "queriesAttempted": [
+        "site:microsoft.com Amy Hood 60 billion share repurchase September 14 2021",
+        "site:microsoft.com/en-us/investor Amy Hood capital allocation buyback 2021",
+        "\"Amy Hood\" \"share repurchase program\" 2021"
+      ],
+      "remainingGaps": [
+        "공식 발표에 Amy Hood 이름은 주주총회 호스트로만 등장하며 거래 판단 발언은 없음",
+        "결정일 이전 또는 당일에 600억 달러 승인 자체를 설명한 Amy Hood 직접 발언을 찾지 못함",
+        "한도 산정·주가 기준·투자 대비 우선순위의 정량 기준이 공개되지 않음"
+      ]
+    },
+    {
+      "candidateId": "candidate-buyback-2024",
+      "domain": "shareholder_return_risk",
+      "decisionDate": "2024-09-16",
+      "workingTitle": "600억 달러 자사주 매입 승인",
+      "overallStatus": "partial",
+      "decisionSummary": {
+        "decisionQuestion": "AI 인프라 투자를 확대하는 동시에 소진 중인 기존 자사주 매입 여력을 600억 달러로 재보충할 것인가",
+        "chosenAction": "만료일 없는 최대 600억 달러 신규 자사주 매입 승인과 분기 배당 10% 인상",
+        "rejectedAlternative": "2021년 프로그램의 잔여 한도만 사용하거나 신규 승인을 미루는 대안은 공식 문서에서 명시되지 않음",
+        "financialMagnitude": "자사주 매입 최대 600억 달러, 분기 배당 주당 0.83달러(10% 인상)",
+        "conditions": [
+          "2024년 6월 말 기존 프로그램 잔여 한도가 103억 달러",
+          "강한 영업현금흐름",
+          "AI·클라우드 투자 확대와 주주환원을 병행"
+        ],
+        "constraints": [
+          "만료일 없음",
+          "언제든 종료 가능",
+          "AI·클라우드 자본지출 증가와 현금흐름 부담"
+        ],
+        "risks": [
+          "AI 투자와 주주환원의 자본 경쟁",
+          "현금흐름 압박",
+          "고평가 시점 매입 위험",
+          "수요 신호보다 인프라 투자가 앞설 위험"
+        ]
+      },
+      "directAmyEvidence": [],
+      "supportingEvidence": [
+        {
+          "canonicalUrl": "https://news.microsoft.com/source/2024/09/16/microsoft-announces-quarterly-dividend-increase-and-new-share-repurchase-program-3/",
+          "title": "Microsoft announces quarterly dividend increase and new share repurchase program",
+          "publisher": "Microsoft Source",
+          "publishedAt": "2024-09-16",
+          "sourceType": "official_announcement",
+          "evidenceRole": "decision_context",
+          "exactPassage": "The board of directors also approved a new share repurchase program authorizing up to $60 billion in share repurchases.",
+          "relevance": "승인 규모, 만료일 없음, 종료 가능성과 배당 인상을 확인한다."
+        },
+        {
+          "canonicalUrl": "https://www.microsoft.com/investor/reports/ar24/",
+          "title": "Microsoft 2024 Annual Report",
+          "publisher": "Microsoft Investor Relations",
+          "publishedAt": "2024-07-30",
+          "sourceType": "filing",
+          "evidenceRole": "decision_context",
+          "exactPassage": "As of June 30, 2024, $10.3 billion remained of this $60.0 billion share repurchase program.",
+          "relevance": "결정 직전 기존 2021년 프로그램의 잔여 여력을 확인한다."
+        }
+      ],
+      "policyOnlyEvidence": [
+        {
+          "canonicalUrl": "https://www.microsoft.com/en-us/investor/events/fy-2024/earnings-fy-2024-q4",
+          "publishedAt": "2024-07-30",
+          "exactQuote": "We returned $8.4 billion to shareholders through dividends and share repurchases.",
+          "reasonNotDirect": "직전 분기의 현금 환원 실행은 확인되지만 2024년 9월 신규 600억 달러 승인 논리는 직접 설명하지 않음"
+        }
+      ],
+      "postOutcomeEvidence": [],
+      "inaccessibleUrls": [],
+      "queriesAttempted": [
+        "site:microsoft.com Amy Hood 60 billion buyback September 16 2024",
+        "site:microsoft.com/en-us/investor Amy Hood capital allocation July 2024 buybacks",
+        "\"Amy Hood\" \"new share repurchase program\" 2024"
+      ],
+      "remainingGaps": [
+        "공식 발표에 Amy Hood 이름은 주주총회 호스트로만 등장하며 직접 판단 발언은 없음",
+        "신규 600억 달러와 AI 자본지출 사이의 최소 현금·수익률 기준이 공개되지 않음",
+        "결정일 이전 또는 당일의 사건특정 Amy Hood 직접 발언을 찾지 못함"
+      ]
+    }
+  ],
+  "replacementCandidates": [],
+  "summary": {
+    "targetEvents": 10,
+    "qualifiedEvents": 2,
+    "partialEvents": 8,
+    "notFoundEvents": 0,
+    "qualifiedCandidateIds": [
+      "candidate-nuance-acquisition-2021",
+      "candidate-buyback-2013"
+    ],
+    "replacementCandidateCount": 0,
+    "domainCoverage": {
+      "m_and_a": 1,
+      "pricing_monetization": 0,
+      "cost_efficiency": 0,
+      "shareholder_return_risk": 1
+    }
+  }
+}

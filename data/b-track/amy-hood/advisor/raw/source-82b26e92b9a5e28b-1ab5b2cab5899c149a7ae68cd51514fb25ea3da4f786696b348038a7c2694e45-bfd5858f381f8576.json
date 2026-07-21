@@ -1,0 +1,49 @@
+{
+  "sourceId": "source-82b26e92b9a5e28b",
+  "canonicalUrl": "https://earningscalls.dev/transcripts/microsoft-corporation_msft_earnings_call_transcript_2021-04-12",
+  "requestedCanonicalUrl": "https://earningscalls.dev/transcripts/microsoft-corporation_msft_earnings_call_transcript_2021-04-12",
+  "finalUrl": "https://earningscalls.dev/transcripts/microsoft-corporation_msft_earnings_call_transcript_2021-04-12",
+  "redirectChain": [
+    "https://earningscalls.dev/transcripts/microsoft-corporation_msft_earnings_call_transcript_2021-04-12"
+  ],
+  "title": "Microsoft Nuance acquisition call transcript — reviewed Amy Hood excerpt",
+  "mediaType": "text/plain; charset=utf-8",
+  "bodyBase64": "T3ZlciB0aGUgcGFzdCAxMCB5ZWFycywgd2UndmUgdGFrZW4gYSBjb25zaXN0ZW50IGFwcHJvYWNoIHRvIG1lcmdlcnMgYW5kIGFjcXVpc2l0aW9ucyBvZiBhbGwgc2l6ZXMuIFdlIGZvY3VzIG9uIFRBTS1leHBhbnNpdmUgb3Bwb3J0dW5pdGllcyBpbiBoaWdoLWdyb3d0aCBtYXJrZXRzLCB3aGVyZSB3ZSBjYW4gdW5pcXVlbHkgYWRkIHZhbHVlIHRvIHRoZSB1c2VycyBvciB0aGUgY29tbXVuaXR5LiBBbmQgd2UgZXhlY3V0ZSB0aG9zZSB0cmFuc2FjdGlvbnMgYXQgYSBwcmljZSB0aGF0IHN1cHBvcnRzIGxvbmctdGVybSBzaGFyZWhvbGRlciB2YWx1ZSBjcmVhdGlvbi4gQXMgU2F0eWEsIE1hcmsgYW5kIFNjb3R0IGRpc2N1c3NlZCwgTnVhbmNlIG1lZXRzIHRob3NlIGNyaXRlcmlhLiBBbmQgd2l0aCBhbGwgYWNxdWlzaXRpb25zLCB2YWx1ZSB3YXMgdWx0aW1hdGVseSBvbmx5IGNyZWF0ZWQgd2l0aCB0ZXJyaWZpYyBleGVjdXRpb24sIGJpbmQgYWxpZ25lZCB0ZWFtIHdpdGggYSBzaGFyZWQgdmlzaW9uIG9mIHRoZSBmdXR1cmUuIEZvciB0aGlzLCBrZXkgaW5kaWNhdG9ycyBvZiBvdXIgc3VjY2VzcyB3aWxsIGJlIGFjY2VsZXJhdGVkIHRvcCBsaW5lIGdyb3d0aCBvZiBOdWFuY2UgYnVzaW5lc3Mgc3RhcnRpbmcgd2l0aCBNaWNyb3NvZnQgQ2xvdWQgZm9yIEhlYWx0aGNhcmUsIGluY3JlYXNlZCBhZG9wdGlvbiBvZiBBenVyZSwgVGVhbXMgYW5kIER5bmFtaWNzIDM2NSBhY3Jvc3MgaW5kdXN0cmllcy4gTm93IGxldCdzIHR1cm4gdG8gdGhlIHRyYW5zYWN0aW9uIGRldGFpbHMuIFdlJ3ZlIGFncmVlZCB0byBhY3F1aXJlIE51YW5jZSBmb3IgJDU2IHBlciBzaGFyZSwgaW1wbHlpbmcgYSAyMyUgcHJlbWl1bSB0byBOdWFuY2UncyBjbG9zaW5nIHByaWNlIG9uIEFwcmlsIDksIGluIGFuIGFsbC1jYXNoIHRyYW5zYWN0aW9uIHZhbHVlZCBhdCAkMTkuNyBiaWxsaW9uLg==",
+  "speakerSegments": [
+    {
+      "speaker": "Amy Hood",
+      "startChar": 0,
+      "endChar": 946
+    }
+  ],
+  "reviewer": "Codex",
+  "reviewedAt": "2026-07-21T00:00:00.000Z",
+  "supersedesRawPath": null,
+  "supersedesNormalizedPath": null,
+  "invalidatedRawPath": null,
+  "metadata": {
+    "id": "source-82b26e92b9a5e28b",
+    "canonicalUrl": "https://earningscalls.dev/transcripts/microsoft-corporation_msft_earnings_call_transcript_2021-04-12",
+    "finalUrl": "https://earningscalls.dev/transcripts/microsoft-corporation_msft_earnings_call_transcript_2021-04-12",
+    "redirectChain": [
+      "https://earningscalls.dev/transcripts/microsoft-corporation_msft_earnings_call_transcript_2021-04-12"
+    ],
+    "eventCandidateIds": [
+      "candidate-nuance-acquisition-2021"
+    ],
+    "tier": 3,
+    "title": "Microsoft Nuance acquisition call transcript — reviewed Amy Hood excerpt",
+    "publisher": "EarningsCalls.dev",
+    "publishedAt": "2021-04-12",
+    "speaker": "Amy Hood",
+    "sourceType": "transcript_mirror",
+    "contentCompleteness": "reviewed_excerpt",
+    "collector": "transcript_import",
+    "temporalRole": "decision_time",
+    "rightsNote": "Public speaker-separated transcript mirror; this reviewed excerpt is retained with official Microsoft and SEC transaction sources as corroboration.",
+    "approvedPublicHost": false,
+    "collectionStatus": "collected",
+    "sha256": "1ab5b2cab5899c149a7ae68cd51514fb25ea3da4f786696b348038a7c2694e45",
+    "capturedAt": "2026-07-21T00:00:00.000Z"
+  }
+}

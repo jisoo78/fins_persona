@@ -5,76 +5,73 @@
   "domain": "m_and_a",
   "decisionDate": "2021-04-12",
   "decisionQuestion": "Should Microsoft proceed with the acquisition of Nuance for $19.7 billion?",
-  "situation": "Microsoft has entered a definitive agreement to acquire Nuance in an all-cash transaction.",
+  "situation": "Microsoft announced a definitive agreement to acquire Nuance for $56.00 per share.",
   "objectives": [
-    "Acquire Nuance for $19.7 billion in an all-cash transaction.",
-    "Successfully integrate Nuance's operations and technology into Microsoft."
+    "Acquire Nuance for $19.7 billion.",
+    "Create value through terrific execution."
   ],
   "conditions": [
     "The merger agreement must be adopted by Nuance stockholders.",
-    "Necessary governmental and regulatory approvals must be received."
+    "Certain governmental and regulatory approvals must be received."
   ],
   "constraints": [
-    "The transaction must be valued at $19.7 billion, inclusive of Nuance's net debt.",
-    "The decision must account for potential termination events."
+    "The transaction is an all-cash deal.",
+    "The acquisition is valued at $19.7 billion inclusive of net debt."
   ],
   "options": [
     {
-      "id": "opt-1",
+      "id": "option-1",
       "description": "Proceed with the acquisition as agreed.",
-      "expectedBenefit": "Realize growth and innovation opportunities through Nuance's integration.",
-      "principalRisk": "Disruption to Nuance's current plans or difficulties in employee retention.",
+      "expectedBenefit": "Realize value creation through strong execution.",
+      "principalRisk": "Failure to satisfy consummation conditions.",
       "selected": true
     },
     {
-      "id": "opt-2",
-      "description": "Re-evaluate the acquisition terms or halt the process.",
-      "expectedBenefit": "Mitigate risks related to management attention diversion or legal proceedings.",
-      "principalRisk": "Missing out on the strategic value of Nuance's assets.",
+      "id": "option-2",
+      "description": "Re-evaluate the acquisition terms or halt the deal.",
+      "expectedBenefit": "Mitigate risks associated with integration or execution.",
+      "principalRisk": "Missing the opportunity to acquire Nuance.",
       "selected": false
     }
   ],
   "chosenAction": "Proceed with the acquisition as agreed.",
-  "rejectedBenefit": "Mitigating risks related to management attention diversion or legal proceedings.",
+  "rejectedBenefit": "Mitigating risks associated with integration or execution.",
   "observations": [
-    "The transaction is an all-cash deal valued at $19.7 billion.",
-    "The agreement is subject to various risks, including integration ability and employee retention.",
-    "The merger agreement requires stockholder adoption and regulatory approvals."
+    "The deal is an all-cash transaction valued at $19.7 billion.",
+    "The agreement implies a 23% premium to Nuance's April 9 closing price."
   ],
   "inferences": [
-    "Proceeding allows Microsoft to capitalize on growth opportunities while managing integration risks.",
-    "Halting the deal avoids immediate operational disruption but forfeits potential strategic gains."
+    "Value creation is dependent on terrific execution post-acquisition.",
+    "The transaction is subject to various termination and performance risks."
   ],
-  "directAmyEvidenceIds": [],
+  "directAmyEvidenceIds": [
+    "span-291b7db034000ea7"
+  ],
   "amyPolicyEvidenceIds": [],
   "contextEvidenceIds": [
-    "span-24e684f4bca0c620",
+    "span-475376c4a1b0c7c2",
     "span-34b94d3c6a25db54",
-    "span-11b90f83bbbfd54c",
-    "span-9e5cf448af8021e1",
-    "span-b42203f8c7dffa63",
-    "span-f5e143ed1507753b",
-    "span-409293939b72edd6",
-    "span-15e336cc5b6773ad",
     "span-38eee29ba0530baa",
     "span-2ba38fc9d21ea2ef"
   ],
   "postOutcomeEvidenceIds": [],
   "sourceIds": [
     "source-fac8ed15fa324bf8",
+    "source-82b26e92b9a5e28b",
     "source-f7fd232d93262a85"
   ],
   "documentFamilyIds": [
-    "microsoft-nuance-announcement-2021"
+    "microsoft-nuance-announcement-2021",
+    "nuance-acquisition-call-transcript-2021"
   ],
   "evidenceSpans": [
     {
-      "id": "span-24e684f4bca0c620",
+      "id": "span-475376c4a1b0c7c2",
       "sourceId": "source-fac8ed15fa324bf8",
       "eventCandidateId": "candidate-nuance-acquisition-2021",
       "role": "decision_context",
-      "exactQuote": "in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.",
-      "startChar": 463,
+      "exactQuote": "Microsoft Corp (Nasdaq: MSFT) and Nuance Communications, Inc. (Nasdaq: NUAN) today announced they have entered into a definitive agreement under which Microsoft will acquire Nuance for $56.00 per share, implying a 23% premium to the closing price of Nuance on Friday, April 9, in an all-cash transaction valued at $19.7 billion, inclusive of Nuance’s net debt.",
+      "startChar": 186,
       "endChar": 546,
       "publishedAt": "2021-04-12",
       "speaker": null
@@ -91,70 +88,15 @@
       "speaker": null
     },
     {
-      "id": "span-11b90f83bbbfd54c",
-      "sourceId": "source-fac8ed15fa324bf8",
+      "id": "span-291b7db034000ea7",
+      "sourceId": "source-82b26e92b9a5e28b",
       "eventCandidateId": "candidate-nuance-acquisition-2021",
-      "role": "decision_context",
-      "exactQuote": "the effect of the announcement or pendency of the transaction on Nuance’s business relationships, operating results, and business generally",
-      "startChar": 11729,
-      "endChar": 11868,
+      "role": "direct_amy",
+      "exactQuote": "And with all acquisitions, value was ultimately only created with terrific execution, bind aligned team with a shared vision of the future.",
+      "startChar": 389,
+      "endChar": 528,
       "publishedAt": "2021-04-12",
-      "speaker": null
-    },
-    {
-      "id": "span-9e5cf448af8021e1",
-      "sourceId": "source-fac8ed15fa324bf8",
-      "eventCandidateId": "candidate-nuance-acquisition-2021",
-      "role": "decision_context",
-      "exactQuote": "risks that the proposed transaction disrupts current plans and operations of Nuance or Microsoft and potential difficulties in Nuance employee retention as a result of the transaction",
-      "startChar": 11874,
-      "endChar": 12057,
-      "publishedAt": "2021-04-12",
-      "speaker": null
-    },
-    {
-      "id": "span-b42203f8c7dffa63",
-      "sourceId": "source-fac8ed15fa324bf8",
-      "eventCandidateId": "candidate-nuance-acquisition-2021",
-      "role": "decision_context",
-      "exactQuote": "risks related to diverting management’s attention from Nuance’s ongoing business operations",
-      "startChar": 12064,
-      "endChar": 12155,
-      "publishedAt": "2021-04-12",
-      "speaker": null
-    },
-    {
-      "id": "span-f5e143ed1507753b",
-      "sourceId": "source-fac8ed15fa324bf8",
-      "eventCandidateId": "candidate-nuance-acquisition-2021",
-      "role": "decision_context",
-      "exactQuote": "the outcome of any legal proceedings that may be instituted against us or against Nuance related to the merger agreement or the transaction",
-      "startChar": 12163,
-      "endChar": 12302,
-      "publishedAt": "2021-04-12",
-      "speaker": null
-    },
-    {
-      "id": "span-409293939b72edd6",
-      "sourceId": "source-fac8ed15fa324bf8",
-      "eventCandidateId": "candidate-nuance-acquisition-2021",
-      "role": "decision_context",
-      "exactQuote": "the ability of Microsoft to successfully integrate Nuance’s operations, product lines, and technology",
-      "startChar": 12311,
-      "endChar": 12412,
-      "publishedAt": "2021-04-12",
-      "speaker": null
-    },
-    {
-      "id": "span-15e336cc5b6773ad",
-      "sourceId": "source-fac8ed15fa324bf8",
-      "eventCandidateId": "candidate-nuance-acquisition-2021",
-      "role": "decision_context",
-      "exactQuote": "the ability of Microsoft to implement its plans, forecasts, and other expectations with respect to Nuance’s business after the completion of the proposed merger and realize additional opportunities for growth and innovation",
-      "startChar": 12423,
-      "endChar": 12646,
-      "publishedAt": "2021-04-12",
-      "speaker": null
+      "speaker": "Amy Hood"
     },
     {
       "id": "span-38eee29ba0530baa",
@@ -179,12 +121,9 @@
       "speaker": null
     }
   ],
-  "status": "incomplete",
-  "gaps": [
-    "missing_amy_judgment",
-    "single_document_family"
-  ],
-  "reviewer": null,
-  "reviewedAt": null,
-  "updatedAt": "2026-07-20T08:15:52.113Z"
+  "status": "approved",
+  "gaps": [],
+  "reviewer": "Codex",
+  "reviewedAt": "2026-07-21T00:51:21.629Z",
+  "updatedAt": "2026-07-21T00:51:21.629Z"
 }

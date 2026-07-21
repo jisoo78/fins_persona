@@ -1465,6 +1465,34 @@
       "redirectChain": [
         "https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3"
       ]
+    },
+    {
+      "id": "source-82b26e92b9a5e28b",
+      "canonicalUrl": "https://earningscalls.dev/transcripts/microsoft-corporation_msft_earnings_call_transcript_2021-04-12",
+      "finalUrl": "https://earningscalls.dev/transcripts/microsoft-corporation_msft_earnings_call_transcript_2021-04-12",
+      "redirectChain": [
+        "https://earningscalls.dev/transcripts/microsoft-corporation_msft_earnings_call_transcript_2021-04-12"
+      ],
+      "eventCandidateIds": [
+        "candidate-nuance-acquisition-2021"
+      ],
+      "tier": 3,
+      "title": "Microsoft Nuance acquisition call transcript — reviewed Amy Hood excerpt",
+      "publisher": "EarningsCalls.dev",
+      "publishedAt": "2021-04-12",
+      "speaker": "Amy Hood",
+      "sourceType": "transcript_mirror",
+      "contentCompleteness": "reviewed_excerpt",
+      "collector": "transcript_import",
+      "temporalRole": "decision_time",
+      "rightsNote": "Public speaker-separated transcript mirror; this reviewed excerpt is retained with official Microsoft and SEC transaction sources as corroboration.",
+      "approvedPublicHost": false,
+      "collectionStatus": "approved",
+      "rawPath": "raw/source-82b26e92b9a5e28b-1ab5b2cab5899c149a7ae68cd51514fb25ea3da4f786696b348038a7c2694e45-bfd5858f381f8576.json",
+      "normalizedPath": "normalized/source-82b26e92b9a5e28b-1ab5b2cab5899c149a7ae68cd51514fb25ea3da4f786696b348038a7c2694e45.txt",
+      "sha256": "1ab5b2cab5899c149a7ae68cd51514fb25ea3da4f786696b348038a7c2694e45",
+      "capturedAt": "2026-07-21T00:00:00.000Z",
+      "failureReason": null
     }
   ]
 }

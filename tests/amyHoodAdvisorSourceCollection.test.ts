@@ -2971,6 +2971,46 @@ test('failure: a casual GitHub mention beside an unrelated acquisition is not ev
   }
 });
 
+test('edge: source import accepts a structurally valid focused inventory below the discovery target', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-focused-import-'));
+  const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');
+  const importPath = path.join(directory, 'reviewed-import.json');
+  const candidates = validCandidateMatrix().map((candidate) => ({
+    ...candidate,
+    discoveryUrls: [candidate.discoveryUrls[0]],
+    sourceAssociations: [candidate.sourceAssociations[0]],
+  }));
+  const association = candidates[0].sourceAssociations[0];
+  const text = `${association.evidenceLocator!.exactRelevancePassage}. ${'Reviewed public decision context. '.repeat(12)}`;
+
+  try {
+    await mkdir(path.dirname(candidatePath), { recursive: true });
+    await writeFile(candidatePath, `${JSON.stringify(candidates, null, 2)}\n`);
+    await writeRegistryFixture(directory, { discoveries: 30, validDocuments: 0 }, candidates);
+    await writeFile(importPath, JSON.stringify({
+      canonicalUrl: association.canonicalUrl,
+      title: 'Reviewed focused-pilot source',
+      publisher: 'Microsoft',
+      publishedAt: association.publishedAt,
+      speaker: 'Amy Hood',
+      eventCandidateIds: [candidates[0].id],
+      tier: 1,
+      rightsNote: 'Public source reviewed for the focused canonical pilot.',
+      text,
+      speakerSegments: [{ speaker: 'Amy Hood', startChar: 0, endChar: text.length }],
+      expectedSha256: createHash('sha256').update(text).digest('hex'),
+      reviewer: 'Test Reviewer',
+      reviewedAt: '2026-07-21T00:00:00.000Z',
+    }));
+
+    const result = runAdvisorCli(directory, 'source:import', '--file', importPath);
+    assert.equal(result.status, 0, result.stderr);
+    assert.match(result.stdout, /review_required/i);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
 test('failure: source CLI reports exact deficits and rejects unsafe command inputs', async () => {
   const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-sources-failure-'));
   const candidatePath = path.join(directory, 'data/b-track/amy-hood/advisor/event-candidates.json');

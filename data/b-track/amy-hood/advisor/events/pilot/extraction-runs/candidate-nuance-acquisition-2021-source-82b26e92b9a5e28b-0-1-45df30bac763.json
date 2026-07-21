@@ -1,0 +1,10 @@
+{
+  "candidateId": "candidate-nuance-acquisition-2021",
+  "sourceId": "source-82b26e92b9a5e28b",
+  "chunkIndex": 0,
+  "attempt": 1,
+  "requestHash": "45df30bac763a7f5a3a97f9e128b0a744fb1badc6c200472e25e6600b95c05f6",
+  "response": "```json\n{\n  \"spans\": [\n    {\n      \"role\": \"direct_amy\",\n      \"exactQuote\": \"And with all acquisitions, value was ultimately only created with terrific execution, bind aligned team with a shared vision of the future.\",\n      \"startChar\": 143,\n      \"endChar\": 239,\n      \"speaker\": \"Amy Hood\"\n    }\n  ]\n}\n```",
+  "elapsedMs": 2853,
+  "success": true
+}
