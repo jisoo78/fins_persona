@@ -197,6 +197,70 @@ export type EvaluationV5ExperimentLaunch = {
   runs: EvaluationV5Run[];
 };
 
+export type EvaluationV5JudgeScenario = Pick<
+  EvaluationV5Scenario,
+  'title' | 'situation' | 'decisionQuestion'
+>;
+
+export type EvaluationV5JudgeAlignmentKey = Omit<EvaluationV5AlignmentKey, 'scenarioId' | 'phase'>;
+
+export type EvaluationV5JudgePacket = {
+  packetId: string;
+  packetHash: string;
+  scenario: EvaluationV5JudgeScenario;
+  candidateResponse: EvaluationV5CandidateResponse;
+  alignmentKey: EvaluationV5JudgeAlignmentKey;
+  anchorChecklist: ['action', 'priority', 'guardrails', 'reversal'];
+};
+
+export type EvaluationV5PairJudgeKey = Omit<
+  EvaluationV5PairKey,
+  'pairId' | 'initialScenarioId' | 'changedScenarioId'
+>;
+
+export type EvaluationV5PairJudgePacket = {
+  packetId: string;
+  packetHash: string;
+  initialScenario: EvaluationV5JudgeScenario;
+  changedScenario: EvaluationV5JudgeScenario;
+  initialCandidateResponse: EvaluationV5CandidateResponse;
+  changedCandidateResponse: EvaluationV5CandidateResponse;
+  pairKey: EvaluationV5PairJudgeKey;
+  anchorChecklist: ['expected_response', 'changed_signal', 'invariant'];
+};
+
+export type EvaluationV5AnchorFinding = 'aligned' | 'partial' | 'missing' | 'conflict';
+export type EvaluationV5PairFinding = 'aligned' | 'partial' | 'conflict';
+
+export type EvaluationV5JudgeProvenance = {
+  judgeProvider: 'codex' | 'openai';
+  judgeModel: string;
+  rationalePromptHash: string;
+  scorePromptHash: string;
+  gradedAt: string;
+};
+
+export type EvaluationV5Grade = EvaluationV5JudgeProvenance & {
+  packetId: string;
+  packetHash: string;
+  rationale: string;
+  anchorFindings: Record<
+    'action' | 'priority' | 'guardrails' | 'reversal',
+    EvaluationV5AnchorFinding
+  >;
+  score: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+};
+
+export type EvaluationV5PairGrade = EvaluationV5JudgeProvenance & {
+  packetId: string;
+  packetHash: string;
+  rationale: string;
+  aligned: boolean;
+  expectedResponseFinding: EvaluationV5PairFinding;
+  changedSignalFinding: EvaluationV5PairFinding;
+  invariantFinding: EvaluationV5PairFinding;
+};
+
 const unwrapJson = (text: string) => {
   const trimmed = text.trim();
   const fenced = trimmed.match(/^```(?:json)?\s*([\s\S]*?)\s*```$/i);
