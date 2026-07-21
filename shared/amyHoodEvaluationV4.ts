@@ -143,6 +143,8 @@ export type EvaluationV4RunAnswer = {
 export type EvaluationV4Run = {
   runId: string;
   version: '4.0.0';
+  stage: EvaluationV4Stage;
+  scenarioSetVersion: '4.0.0';
   experimentGroupId: string;
   repetition: 1 | 2 | 3 | 4 | 5;
   orderSeed: string;
