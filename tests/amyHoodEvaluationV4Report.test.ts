@@ -35,6 +35,15 @@ test('happy: builds complete arm means and behavior diagnostics', async () => {
   assert.match(html, /공식 1차 자료.*10/);
   assert.match(html, /영역별 AAS/);
   assert.match(html, /1회 교정 실험/);
+  assert.match(html, /1\. 실험 목적/);
+  assert.match(html, /2\. 평가 방법/);
+  assert.match(html, /3\. 평가 지표/);
+  assert.match(html, /행동 정합성 점수\(Action Alignment Score, AAS\)/);
+  assert.match(html, /블라인드 채점\(Blind Judging\)/);
+  assert.match(html, /검색 증강 생성\(Retrieval-Augmented Generation, RAG\)/);
+  assert.match(html, /일반 CFO 조언자\(Generic CFO Advisor\)/);
+  assert.match(html, /다음 확대 실험 진행 판정/);
+  assert.match(html, /재현 정보/);
 });
 
 test('edge: tied grades remain tied', async () => {
