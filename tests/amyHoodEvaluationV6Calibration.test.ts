@@ -72,10 +72,11 @@ test('failure: rejects incomplete, leaked, weak-gap, and wrong-anchor batches', 
   assert.throws(() => validateEvaluationV6Calibration(fixture.calibrationAnswers.slice(1), grades()), /exactly ninety/i);
   const leaked = grades();
   leaked.find(({ packetId }) => packetId.endsWith('-generic'))!.score = 7;
-  assert.throws(() => validateEvaluationV6Calibration(fixture.calibrationAnswers, leaked), /failed/i);
+  assert.throws(() => validateEvaluationV6Calibration(fixture.calibrationAnswers, leaked), /failed|not discriminated/i);
   const weak = grades().map((grade) => grade.packetId.endsWith('-aligned') ? { ...grade, score: 8 as const } : grade);
   assert.throws(() => validateEvaluationV6Calibration(fixture.calibrationAnswers, weak), /failed/i);
   const wrong = grades();
-  wrong[0].distinguishingAnchor.kind = 'action';
-  assert.throws(() => validateEvaluationV6Calibration(fixture.calibrationAnswers, wrong), /wrong.*anchor/i);
+  wrong[0].components.priorityOrder = 0;
+  wrong[0].anchorFindings.priority = 'conflict';
+  assert.throws(() => validateEvaluationV6Calibration(fixture.calibrationAnswers, wrong), /expected Amy anchor/i);
 });

@@ -67,6 +67,7 @@ test('happy: makes rationale-first deterministic calls and host-scores the resul
   const assessmentMessages = bodies[1].messages as Array<{ role: string; content: string }>;
   assert.match(assessmentMessages[0].content, /"anchorFindings":\{"action":"aligned\|partial\|missing\|conflict"/);
   assert.match(assessmentMessages[0].content, /"distinguishingAnchor":\{"kind":/);
+  assert.match(assessmentMessages[0].content, /Do not rewrite, repair, or improve the candidate response/i);
 });
 
 test('edge: accepts fenced assessment JSON', () => {

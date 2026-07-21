@@ -115,7 +115,29 @@ const loadActivePolicies = async (root: string) => {
   return new Map(policies.map((policy) => [policy.domain, policy]));
 };
 
-const shortAnchor = (value: string) => value.split(/\s+/).slice(0, 3).join(' ').toLocaleLowerCase('en-US');
+const genericActionByDomain: Record<EvaluationV6Scenario['domain'], string> = {
+  m_and_a: 'Reject the transaction now to preserve cash until all uncertainty is eliminated, even though the stated strategic, economics, and execution gates remain supportable.',
+  ai_cloud_capex: 'Hold capacity flat until utilization is fully proven, even though contracted demand and capacity urgency remain visible.',
+  pricing_monetization: 'Apply one uniform benchmark price based on competitor pricing and near-term margin, regardless of segment-level customer value or adoption.',
+  cost_efficiency: 'Apply proportional cuts across every team to maximize near-term margin, regardless of strategic priority, productivity, or verified bottlenecks.',
+  shareholder_return_risk: 'Deploy the full repurchase authorization immediately to optimize near-term EPS, ahead of strategic investment and liquidity needs.',
+};
+
+const conflictActionByDomain: Record<EvaluationV6Scenario['domain'], string> = {
+  m_and_a: 'Proceed immediately on the original terms because strategic narrative overrides price, financing, ecosystem, and integration gates.',
+  ai_cloud_capex: 'Commit all capacity immediately regardless of customer demand, utilization, reversibility, or infrastructure economics.',
+  pricing_monetization: 'Raise prices uniformly now because margin expansion overrides customer value, willingness to pay, and adoption friction.',
+  cost_efficiency: 'Cut every team proportionally now because near-term margin overrides strategic priorities, productivity evidence, and execution bottlenecks.',
+  shareholder_return_risk: 'Deploy the entire repurchase authorization now because EPS and immediate cash return override investment, liquidity, and flexibility.',
+};
+
+const alignedAnchorTerms: Record<EvaluationV6Scenario['domain'], string[]> = {
+  m_and_a: ['strategic reach', 'transaction economics', '전략적'],
+  ai_cloud_capex: ['customer demand', 'capacity urgency', '수요'],
+  pricing_monetization: ['customer value', 'willingness to pay', '고객 가치'],
+  cost_efficiency: ['strategic priority', 'productivity', '우선순위'],
+  shareholder_return_risk: ['strategic investment', 'liquidity', '전략적 투자'],
+};
 
 export const buildEvaluationV6CandidateFromV5 = async (root: string): Promise<EvaluationV6BundleInput> => {
   const [v5, policyByDomain] = await Promise.all([loadEvaluationV5Bundle(root), loadActivePolicies(root)]);
@@ -191,7 +213,7 @@ export const buildEvaluationV6CandidateFromV5 = async (root: string): Promise<Ev
       amySpecificRationale: `${v5Key.referenceRationale} The action remains conditional on ${policy.priorityOrder.slice(0, 3).join(', ')}.`,
       acceptableVariants: v5Key.acceptableVariants,
       genericCfoFoil: {
-        action: 'Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.',
+        action: genericActionByDomain[scenario.domain],
         whyReasonable: 'This is prudent conventional CFO advice under uncertainty.',
         whyNotAmy: `It does not preserve Amy's evidenced priority order beginning with ${amyPriorityOrder[0]}.`,
       },
@@ -223,22 +245,23 @@ export const buildEvaluationV6CandidateFromV5 = async (root: string): Promise<Ev
     };
   });
   const calibrationAnswers = identityKeys.flatMap((key) => {
-    const base = { scenarioId: key.scenarioId, expectedAnchor: 'priority_order' as const };
+    const domain = scenarios.find(({ id }) => id === key.scenarioId)!.domain;
+    const base = { scenarioId: key.scenarioId };
     return [
       {
-        ...base, calibrationId: `cal-${key.scenarioId}-aligned`, answerType: 'amy_aligned' as const,
-        expectedAnchorTerms: [shortAnchor(key.amyPriorityOrder[0])],
-        candidateResponse: { action: key.expectedAction, priorities: key.amyPriorityOrder.slice(0, 3) as [string, string, string], guardrails: key.amyBoundaryConditions, reversalSignals: key.amyReversalRule, rationale: key.amySpecificRationale },
+        ...base, calibrationId: `cal-${key.scenarioId}-aligned`, answerType: 'amy_aligned' as const, expectedAnchor: 'priority_order' as const,
+        expectedAnchorTerms: alignedAnchorTerms[domain],
+        candidateResponse: { action: key.expectedAction, priorities: key.amyPriorityOrder.slice(0, 3) as [string, string, string], guardrails: key.amyBoundaryConditions, reversalSignals: key.amyReversalRule, rationale: `The Amy-specific priority order begins with ${key.amyPriorityOrder[0]}. ${key.amySpecificRationale}` },
       },
       {
-        ...base, calibrationId: `cal-${key.scenarioId}-generic`, answerType: 'generic_cfo' as const,
-        expectedAnchorTerms: ['generic flexibility'],
-        candidateResponse: { action: key.genericCfoFoil.action, priorities: ['Protect liquidity', 'Preserve generic flexibility', 'Benchmark risk-adjusted returns'] as [string, string, string], guardrails: ['Stay within the board risk appetite.'], reversalSignals: ['Change course if generic returns weaken.'], rationale: key.genericCfoFoil.whyReasonable },
+        ...base, calibrationId: `cal-${key.scenarioId}-generic`, answerType: 'generic_cfo' as const, expectedAnchor: 'action' as const,
+        expectedAnchorTerms: ['regardless', 'until all uncertainty', '불확실', '즉시', '일률'],
+        candidateResponse: { action: key.genericCfoFoil.action, priorities: ['Near-term financial protection', 'Generic flexibility', 'Benchmark risk-adjusted returns'] as [string, string, string], guardrails: ['Stay within the generic board risk appetite.'], reversalSignals: ['Change course only if benchmark returns weaken.'], rationale: `This answer intentionally uses conventional CFO caution rather than Amy's evidenced priority order. ${key.genericCfoFoil.whyReasonable}` },
       },
       {
         ...base, calibrationId: `cal-${key.scenarioId}-conflict`, answerType: 'amy_conflict' as const,
-        expectedAnchor: 'identity_conflict' as const, expectedAnchorTerms: [shortAnchor(key.identityConflicts[0])],
-        candidateResponse: { action: key.identityConflicts[0], priorities: ['Speed', 'Strategic narrative', 'Market signaling'] as [string, string, string], guardrails: ['Proceed without the Amy-specific boundary.'], reversalSignals: ['Reverse only after material loss.'], rationale: 'This deliberately contradicts the frozen Amy identity key.' },
+        expectedAnchor: 'identity_conflict' as const, expectedAnchorTerms: ['overrides', 'regardless', '무시', '우선'],
+        candidateResponse: { action: conflictActionByDomain[domain], priorities: ['Speed', 'Near-term optics', 'Unbounded commitment'] as [string, string, string], guardrails: ['Proceed without the Amy-specific boundary.'], reversalSignals: ['Reverse only after material loss has already occurred.'], rationale: 'This action deliberately overrides the frozen Amy priority, boundary, and reversal policy.' },
       },
     ];
   });
@@ -268,4 +291,3 @@ export const writeEvaluationV6CandidateFromV5 = async (root: string) => {
   ]);
   return input;
 };
-

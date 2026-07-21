@@ -1,0 +1,13 @@
+{
+  "batchHash": "67623f806602db1e462c20bc450e6ee071f35f8d839cdbfb4d89dad2b986b1e4",
+  "candidateBundleHash": "1f852af5dcb24b546ba5a77509b9afa3cc5799baab93eab1df9cb45470445395",
+  "metrics": {
+    "genericLeakageRate": 0,
+    "conflictLeakageRate": 0,
+    "amyPassRate": 1,
+    "meanIdentityGap": 8.966666666666667,
+    "schemaValidRate": 1
+  },
+  "passed": true,
+  "activatedAt": "2026-07-21T14:30:06.246Z"
+}

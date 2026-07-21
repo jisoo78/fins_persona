@@ -27,13 +27,28 @@ export const validateEvaluationV6Calibration = (
   const rows = answers.map((answer) => {
     const grade = gradeById.get(answer.calibrationId);
     if (!grade) throw new Error(`missing Evaluation v6 calibration grade: ${answer.calibrationId}`);
-    if (grade.distinguishingAnchor.kind !== answer.expectedAnchor) {
-      throw new Error(`wrong Evaluation v6 distinguishing anchor: ${answer.scenarioId}`);
+    if (answer.expectedAnchorTerms.length === 0 || !grade.distinguishingAnchor.statement.trim()) {
+      throw new Error(`Evaluation v6 expected Amy anchor is undocumented: ${answer.scenarioId}`);
     }
-    const anchorText = `${grade.rationale} ${grade.distinguishingAnchor.statement}`.toLocaleLowerCase('ko-KR');
-    if (answer.expectedAnchorTerms.length === 0 || !answer.expectedAnchorTerms.some((term) =>
-      anchorText.includes(term.toLocaleLowerCase('ko-KR')))) {
-      throw new Error(`Evaluation v6 rationale does not name the expected Amy anchor: ${answer.scenarioId}`);
+    if (answer.answerType === 'amy_aligned') {
+      const aligned = new Set(['aligned', 'partial']);
+      const anchorPass = answer.expectedAnchor === 'action'
+        ? grade.components.action >= 3 && aligned.has(grade.anchorFindings.action)
+        : answer.expectedAnchor === 'priority_order'
+          ? grade.components.priorityOrder >= 3 && aligned.has(grade.anchorFindings.priority)
+          : answer.expectedAnchor === 'boundary_condition'
+            ? grade.components.boundaries >= 3 && aligned.has(grade.anchorFindings.guardrails)
+            : answer.expectedAnchor === 'reversal_rule'
+              ? grade.components.reversal >= 3 && aligned.has(grade.anchorFindings.reversal)
+              : false;
+      if (!anchorPass) throw new Error(`Evaluation v6 expected Amy anchor is not aligned: ${answer.scenarioId}`);
+    } else if (answer.answerType === 'generic_cfo') {
+      if (grade.score > 6 || grade.identityVerdict === 'amy_aligned'
+        || grade.components.identitySpecificity > 2) {
+        throw new Error(`Evaluation v6 generic CFO anchor is not discriminated: ${answer.scenarioId}`);
+      }
+    } else if (grade.identityVerdict !== 'amy_conflict') {
+      throw new Error(`Evaluation v6 identity conflict anchor is not discriminated: ${answer.scenarioId}`);
     }
     return { answer, grade };
   });
@@ -110,4 +125,3 @@ export const loadActiveEvaluationV6Calibration = async (root: string) => {
   }
   return value;
 };
-

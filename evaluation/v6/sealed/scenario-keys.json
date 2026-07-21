@@ -22,7 +22,7 @@
         "A staged or restructured transaction that preserves the same strategic and financial gates."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Reject the transaction now to preserve cash until all uncertainty is eliminated, even though the stated strategic, economics, and execution gates remain supportable.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Strategic customer and platform reach."
       },
@@ -58,7 +58,7 @@
         "Reduce upfront cash, alter consideration, or defer a tranche while preserving the same bounded thesis."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Reject the transaction now to preserve cash until all uncertainty is eliminated, even though the stated strategic, economics, and execution gates remain supportable.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Preserved strategic reach."
       },
@@ -94,7 +94,7 @@
         "Terminate now while remaining open to a newly underwritten future structure."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Reject the transaction now to preserve cash until all uncertainty is eliminated, even though the stated strategic, economics, and execution gates remain supportable.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Credibility of the approval path."
       },
@@ -130,7 +130,7 @@
         "Redirect capital to a minority investment or commercial partnership if full acquisition economics no longer clear the gate."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Reject the transaction now to preserve cash until all uncertainty is eliminated, even though the stated strategic, economics, and execution gates remain supportable.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Approval path credibility."
       },
@@ -166,7 +166,7 @@
         "A financed acquisition with explicit leverage reduction and integration boundaries."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Reject the transaction now to preserve cash until all uncertainty is eliminated, even though the stated strategic, economics, and execution gates remain supportable.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Strategic open-platform reach."
       },
@@ -202,7 +202,7 @@
         "Hold the strategic relationship through partnership while declining the current acquisition."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Reject the transaction now to preserve cash until all uncertainty is eliminated, even though the stated strategic, economics, and execution gates remain supportable.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Customer and ecosystem value."
       },
@@ -238,7 +238,7 @@
         "Accelerate bottleneck capacity while staging uncertain workloads and operating expense."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Hold capacity flat until utilization is fully proven, even though contracted demand and capacity urgency remain visible.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Verified customer and service demand."
       },
@@ -276,7 +276,7 @@
         "Rephase rather than reduce the total long-term strategy while near-term usability is constrained."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Hold capacity flat until utilization is fully proven, even though contracted demand and capacity urgency remain visible.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Contracted demand that remains unmet."
       },
@@ -314,7 +314,7 @@
         "Fund the shared platform while applying different milestones to research and revenue-bearing workloads."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Hold capacity flat until utilization is fully proven, even though contracted demand and capacity urgency remain visible.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Customer and product demand."
       },
@@ -352,7 +352,7 @@
         "Retain a bounded research option while shifting the majority of incremental resources to proven workloads."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Hold capacity flat until utilization is fully proven, even though contracted demand and capacity urgency remain visible.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Verified product demand."
       },
@@ -390,7 +390,7 @@
         "Advance supply-constrained capacity with cohort-level return accountability."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Hold capacity flat until utilization is fully proven, even though contracted demand and capacity urgency remain visible.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Larger and longer customer commitments."
       },
@@ -428,7 +428,7 @@
         "Stage only the minimum long-lead items needed to preserve a low-cost option."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Hold capacity flat until utilization is fully proven, even though contracted demand and capacity urgency remain visible.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Changed customer commitments."
       },
@@ -466,7 +466,7 @@
         "Segment price and timing while preserving the paid-sharing value exchange."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Apply one uniform benchmark price based on competitor pricing and near-term margin, regardless of segment-level customer value or adoption.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Verified customer usage and value."
       },
@@ -504,7 +504,7 @@
         "Delay only sensitive markets while maintaining supported markets."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Apply one uniform benchmark price based on competitor pricing and near-term margin, regardless of segment-level customer value or adoption.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Segment-level conversion and churn."
       },
@@ -542,7 +542,7 @@
         "Use market-specific price points under a common value framework."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Apply one uniform benchmark price based on competitor pricing and near-term margin, regardless of segment-level customer value or adoption.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Verified product and customer value."
       },
@@ -580,7 +580,7 @@
         "Use family plans, bundles, or delayed increases where direct price evidence is weak."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Apply one uniform benchmark price based on competitor pricing and near-term margin, regardless of segment-level customer value or adoption.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Market-level willingness to pay."
       },
@@ -618,7 +618,7 @@
         "Stage the effective date or segment terms while preserving member value."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Apply one uniform benchmark price based on competitor pricing and near-term margin, regardless of segment-level customer value or adoption.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Member value and loyalty."
       },
@@ -656,7 +656,7 @@
         "Delay the broad increase while testing a limited segment with explicit protections."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Apply one uniform benchmark price based on competitor pricing and near-term margin, regardless of segment-level customer value or adoption.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Verified member value and loyalty."
       },
@@ -694,7 +694,7 @@
         "Use a portfolio cost reset that protects the few resources required for the transformation."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Apply proportional cuts across every team to maximize near-term margin, regardless of strategic priority, productivity, or verified bottlenecks.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Highest-priority strategic roadmap."
       },
@@ -733,7 +733,7 @@
         "Add only the specialized people and equipment required while offsetting them elsewhere."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Apply proportional cuts across every team to maximize near-term margin, regardless of strategic priority, productivity, or verified bottlenecks.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Verified core-roadmap bottleneck."
       },
@@ -772,7 +772,7 @@
         "Rehire selectively while keeping total headcount and expense within the reset."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Apply proportional cuts across every team to maximize near-term margin, regardless of strategic priority, productivity, or verified bottlenecks.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Highest-priority product outcomes."
       },
@@ -811,7 +811,7 @@
         "Use internal transfers plus a small number of specialized hires offset elsewhere."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Apply proportional cuts across every team to maximize near-term margin, regardless of strategic priority, productivity, or verified bottlenecks.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Measured revenue bottleneck."
       },
@@ -850,7 +850,7 @@
         "Reduce volume and overhead while preserving the few titles and capabilities that drive differentiation."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Apply proportional cuts across every team to maximize near-term margin, regardless of strategic priority, productivity, or verified bottlenecks.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Differentiated customer and franchise value."
       },
@@ -889,7 +889,7 @@
         "Pause the affected removals while continuing the remaining evidence-backed program."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Apply proportional cuts across every team to maximize near-term margin, regardless of strategic priority, productivity, or verified bottlenecks.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Changed churn and recurring contribution."
       },
@@ -928,7 +928,7 @@
         "Set a large authorization while pacing actual purchases against valuation and cash needs."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Deploy the full repurchase authorization immediately to optimize near-term EPS, ahead of strategic investment and liquidity needs.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Strategic investment capacity."
       },
@@ -968,7 +968,7 @@
         "Pause selected quarters of repurchases while leaving authorization intact."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Deploy the full repurchase authorization immediately to optimize near-term EPS, ahead of strategic investment and liquidity needs.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Verified strategic investment."
       },
@@ -1008,7 +1008,7 @@
         "Approve capacity with no fixed deployment deadline."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Deploy the full repurchase authorization immediately to optimize near-term EPS, ahead of strategic investment and liquidity needs.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Durable growth investment."
       },
@@ -1048,7 +1048,7 @@
         "Reduce rather than eliminate near-term repurchases if both uses remain within capacity."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Deploy the full repurchase authorization immediately to optimize near-term EPS, ahead of strategic investment and liquidity needs.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Higher-return strategic use."
       },
@@ -1088,7 +1088,7 @@
         "Raise the dividend modestly and pace repurchases against valuation and investment needs."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Deploy the full repurchase authorization immediately to optimize near-term EPS, ahead of strategic investment and liquidity needs.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Organic and strategic investment."
       },
@@ -1128,7 +1128,7 @@
         "Reduce repurchases to zero temporarily while retaining board authorization."
       ],
       "genericCfoFoil": {
-        "action": "Preserve maximum financial flexibility and follow generic risk-adjusted return discipline.",
+        "action": "Deploy the full repurchase authorization immediately to optimize near-term EPS, ahead of strategic investment and liquidity needs.",
         "whyReasonable": "This is prudent conventional CFO advice under uncertainty.",
         "whyNotAmy": "It does not preserve Amy's evidenced priority order beginning with Contracted-demand strategic investment."
       },

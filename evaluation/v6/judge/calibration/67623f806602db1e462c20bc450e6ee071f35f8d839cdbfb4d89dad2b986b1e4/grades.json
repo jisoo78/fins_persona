@@ -1,0 +1,3038 @@
+{
+  "batchHash": "67623f806602db1e462c20bc450e6ee071f35f8d839cdbfb4d89dad2b986b1e4",
+  "candidateBundleHash": "1f852af5dcb24b546ba5a77509b9afa3cc5799baab93eab1df9cb45470445395",
+  "packetBatchHash": "5fea5432a5ad6303efa29eb6567b23b2fcb7f5570f56e1d22e4ad0b98a5d73b3",
+  "grades": [
+    {
+      "packetId": "cal-AAS-V6-AI-01-A-aligned",
+      "packetHash": "0b6598bf05c76c74bbc38a6831166f75e076881ffb982d6f3944ca2013a66b3e",
+      "rationale": "수요 기반의 단계적 인프라 확장과 운영비용을 결합한 결정은 Amy의 수요 우선 원칙과 인프라 경제성을 정확히 반영합니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The Amy-specific priority order begins with Verified customer and service demand"
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:01:15.468Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-AI-01-A-conflict",
+      "packetHash": "efb759e9ee4ea8ca58d257501b6e48bc963fd2e6e9485a7dcf581f2e4ad34d7c",
+      "rationale": "전체 용량을 수요와 상관없이 즉시 투입하는 것은 고객 수요와 서비스 채택을 최우선으로 하며 인프라 투자를 단계별로 연동하라는 Amy의 핵심 원칙을 정면으로 위반합니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Commit all capacity immediately regardless of customer demand, utilization, reversibility, or infrastructure economics."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:01:32.234Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-AI-01-A-generic",
+      "packetHash": "f6c3720911b1e431de4ff504619aef9a1c109a4a1b2e0ccfc8d638db3a446d25",
+      "rationale": "이 답변은 Amy의 우선순위인 검증된 고객 수요와 공급 리드타임을 무시하고 완벽한 확신을 기다리는 전형적인 CFO의 신중함에 머물러 있어 Amy의 정책과 일치하지 않습니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Hold capacity flat until utilization is fully proven, even though contracted demand and capacity urgency remain visible."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:01:49.197Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-AI-01-B-aligned",
+      "packetHash": "aead37fb0be24df0e3a161f1c1c7d84b3e2f4e8700735b5d41ca5b31b00aca46",
+      "rationale": "미충족된 계약 수요를 최우선 순위에 두면서도 미사용 용량에 대한 감가상각을 피하고 실험적 부하와 인력을 경제성 마일스톤에 묶는 Amy 특유의 조건부 확장 전략을 정확히 재현했습니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The Amy-specific priority order begins with Contracted demand that remains unmet."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:02:07.300Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-AI-01-B-conflict",
+      "packetHash": "28899dc8c2cef70bb23d61beb569a516a6a676489bf371030b67c5f5e87eadf1",
+      "rationale": "수요가 강한데도 전력 공급 지연과 불확실한 경제성을 무시하고 모든 용량을 즉시 투입하라는 것은 Amy의 '가용성 기반 단계적 확장'과 '비가용 용량 감가상각 방지' 원칙을 정면으로 위반하는 결정입니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The action commits all capacity immediately regardless of utilization or economics, which directly overrides Amy's priority order and boundary conditions."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:02:26.235Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-AI-01-B-generic",
+      "packetHash": "978dbc8c7378f9c367a7b1edbaa8de69d218379df0da5c5f617cdff2e5573539",
+      "rationale": "미충족된 계약 수요를 최우선 순위에 두는 Amy의 우선순위 체계를 무시하고 일반적인 CFO식 보수적 태도를 취했으므로 fidelity가 낮습니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The response holds capacity flat despite strong contracted demand, ignoring Amy's first priority of unmet demand."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:02:42.845Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-AI-02-A-aligned",
+      "packetHash": "53bac618052240dfdbe05756dbad84e68d68da91df06866eb155995a0704a975",
+      "rationale": "고객 수요와 전략적 시급성을 우선순위에 두면서도 워크로드별 이용률과 수익성을 분리해 측정하고, 약속된 수요가 약화되거나 마일스톤을 반복적으로 놓치는 경우 예산을 재배정하는 Amy의 조건부 승인 원칙을 정확히 구현했습니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The Amy-specific priority order begins with Customer and product demand."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:03:01.811Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-AI-02-A-conflict",
+      "packetHash": "6a4f437ca7309cee74d1cad07f4f9b3a6f633b3f3c5fa6ff9eec125ddfb797d8",
+      "rationale": "전체 용량을 무조건 즉시 투입하겠다는 답변은 고객 수요와 인프라 경제성을 우선시하는 Amy의 정책을 정면으로 위반하며, 재무적 신중함이 아닌 무분별한 지출을 정당화합니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Commit all capacity immediately regardless of customer demand, utilization, reversibility, or infrastructure economics."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:03:19.675Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-AI-02-A-generic",
+      "packetHash": "994440224999dbbe57ad4e976523a2ada74372964c59d08ae9361e63854e0c27",
+      "rationale": "고객과 제품 수요를 최우선으로 두는 Amy의 우선순위 대신 일반적인 재무적 신중함에 의존하므로 Amy의 의사결정 원칙을 반영하지 못합니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The response prioritizes generic financial protection over Amy's evidenced order of customer demand, strategic urgency, and workload economics."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:03:37.813Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-AI-02-B-aligned",
+      "packetHash": "987c2f5efaa927d62004ca868396facedf13f74b3c2bacdd991cbe64bcd1383f",
+      "rationale": "우선순위인 검증된 제품 수요를 최우선으로 두어 증거가 불균형한 상황에서 이분법적 결정 대신 포트폴리오 재배분을 내린 점이 Amy의 사고방식과 정확히 일치합니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The Amy-specific priority order begins with Verified product demand."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:03:55.978Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-AI-02-B-conflict",
+      "packetHash": "da460e3174172e205cac0d9402809f86523664ea2222d2f29378638b1c5b5ee2",
+      "rationale": "전체 용량의 즉각적 투입은 Amy의 증거 기반 우선순위와 고정된 자금 한도 경계를 정면으로 위반하며, 수요와 인프라 경제성을 무시한 결정은 Amy의 의사결정 원칙과 완전히 배치됩니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The action deliberately overrides the frozen Amy priority, boundary, and reversal policy by committing all capacity regardless of demand or economics."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:04:15.063Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-AI-02-B-generic",
+      "packetHash": "37e2b67ab514ab747cff0e52d2311c71711f41efd4efcc69fb6aa4919ea01ffa",
+      "rationale": "이 답변은 Amy의 우선순위인 검증된 제품 수요를 무시하고 일반적인 CFO식 보수적 태도를 취하므로 Amy의 의사결정 원칙에 부합하지 않습니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Hold capacity flat until utilization is fully proven, even though contracted demand and capacity urgency remain visible."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:04:32.771Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-AI-03-A-aligned",
+      "packetHash": "1855f4afd900731c8a9e38847202119b0a88038a5fc84464421123c29d7726f8",
+      "rationale": "수요와 계약 기간에 기반한 선제적 투자를 허용하면서도 각 트랜치마다 명확한 수익화 신호를 요구하는 Amy의 우선순위와 제약 조건을 정확히 반영했습니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The Amy-specific priority order begins with Larger and longer customer commitments."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:04:51.392Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-AI-03-A-conflict",
+      "packetHash": "a7b7a48d57c2e0bd7ebf9e188600c3c549ad63c4082d44a066bcea615253992c",
+      "rationale": "전체 용량을 수요나 경제성 고려 없이 즉시 투입하는 것은 고객 신호와 인프라 경제성을 조건으로 한 Amy의 정책을 정면으로 위반하며, 수익성 검증 없이 자본을 투입하는 것은 Amy의 비용 규율 경계와도 배치됩니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The action commits all capacity immediately regardless of customer demand, utilization, reversibility, or infrastructure economics, which directly overrides Amy's policy of requiring clear monetization signals before each incremental tranche."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:05:12.470Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-AI-03-A-generic",
+      "packetHash": "f1da615c0e1c28439a98f540e886d66aa0ac5a0ce8ffee13275b16265ee6de47",
+      "rationale": "Amy의 우선순위인 '더 크고 긴 고객 약정'과 '인프라 경제성'을 무시하고 일반적인 재무적 보수성만 내세웠으므로 정책 충실도가 낮습니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "partial",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Hold capacity flat despite contracted demand and capacity urgency"
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:05:30.369Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-AI-03-B-aligned",
+      "packetHash": "8a0e13b71a4379099e3a344f23eea59dc1ee87c03bce5678ce7c2ab60503bb16",
+      "rationale": "The candidate correctly identifies the reversal signals and pauses the tranche while preserving the option to reactivate, which is Amy's specific policy rather than generic prudence.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Pause or reduce the cancellable tranche until contracted demand, utilization, and marginal hardware economics again support expansion."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:05:49.108Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-AI-03-B-conflict",
+      "packetHash": "60e2237d42e51c2008dc4dfce753506843461d3fc8a8a7548becbdd051c0d01f",
+      "rationale": "Amy의 우선순위인 계약 변화와 인프라 경제성을 완전히 무시하고 모든 용량을 즉시 확정하는 것은 정책에 정면으로 위배됩니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The action commits all capacity immediately, which is the exact opposite of Amy's policy to pause or reduce the tranche when demand and economics weaken."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:06:08.133Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-AI-03-B-generic",
+      "packetHash": "1bbc45e5a65b47a5da81359ba817f08edfd71ce7ed3a9879253ceb828bff4ebf",
+      "rationale": "이 답변은 Amy의 우선순위인 고객 약정 변화와 인프라 경제성을 무시하고 일반적인 재무적 신중함에만 의존하므로 정책 충실도가 낮습니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Hold capacity flat until utilization is fully proven, even though contracted demand and capacity urgency remain visible."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:06:26.654Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-CE-01-A-aligned",
+      "packetHash": "a3739a88862bd7fef328b0f83bc78ca1964b79b4b046d06e3c78f3f3c51ddbb8",
+      "rationale": "전략적 로드맵을 최우선 순위에 두고 비핵심 자원만 분리해 절감하는 Amy의 재배분 원칙을 정확히 구현했습니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The Amy-specific priority order begins with Highest-priority strategic roadmap."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:06:45.450Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-CE-01-A-conflict",
+      "packetHash": "2fe79462cd62698c36716c90749431c49a5b60317abcb155f39bd92d0c1047e7",
+      "rationale": "전체 팀을 비례적으로 삭감하는 것은 Amy의 최우선 순위인 전략적 로드맵 보호와 병목 구간 보존 원칙을 정면으로 위반하는 일반적인 CFO의 대응입니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The candidate explicitly overrides Amy's priority order and reversal rules to recommend proportional cuts across every team."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:07:05.452Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-CE-01-A-generic",
+      "packetHash": "0bc1327be6a27080701393546eabf511e47b4f74f4d66827dc145c042e3b3416",
+      "rationale": "전체 팀에 비례적 삭감을 적용하는 것은 전략적 우선순위를 보호하려는 Amy의 원칙과 정면으로 배치됩니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "Apply proportional cuts across every team regardless of strategic priority, which directly violates Amy's priority order starting with highest-priority strategic roadmap."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:07:24.837Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-CE-01-B-aligned",
+      "packetHash": "1b43ef70dad09e5a3923dd8b826004616f2d1054e51ee4b8145fe91a8106a1e9",
+      "rationale": "Verified core-roadmap bottleneck을 최우선 순위로 두어 전체 절감 목표를 유지하면서도 핵심 병목에 자원을 재배분한 결정은 Amy의 우선순위 체계와 정확히 일치합니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The Amy-specific priority order begins with Verified core-roadmap bottleneck."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:07:45.246Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-CE-01-B-conflict",
+      "packetHash": "65025409e6bf7267d42fc6a8549fea0bd8947026c7e17cfb269c737a1c83db64",
+      "rationale": "전체 팀을 비례적으로 삭감하는 것은 Amy의 우선순위인 검증된 핵심 로드맵 병목 보호와 중복 지원 업무 및 미사용 레거시 용량의 심층 삭감을 통한 재배분 원칙을 정면으로 위반합니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The candidate explicitly states 'Proceed without the Amy-specific boundary' and overrides the frozen priority order with 'near-term margin overrides strategic priorities'."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:08:06.402Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-CE-01-B-generic",
+      "packetHash": "0d9228faf9ee7ad0edb2488dfcab50b36ddb48c44d9c632c42aaea50855f611d",
+      "rationale": "전체적인 비용 절감 목표는 유지하되 핵심 로드맵의 병목 구간에 필요한 자원을 보호하고 중복 지원 업무와 미사용 레거시 용량을 더 깊게 삭감하여 재배분해야 합니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "partial",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Apply proportional cuts across every team regardless of strategic priority or verified bottlenecks"
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:08:25.180Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-CE-02-A-aligned",
+      "packetHash": "326f6ca163e11888c9d54bccf7d27f47e3c134796042a944275d1195e47e939e",
+      "rationale": "전체 비용 억제를 유지하면서도 검증된 우선순위 병목에만 선별적 채용과 인프라 투자를 허용하는 결정은 Amy의 우선순위 체계와 명확히 일치합니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The Amy-specific priority order begins with Highest-priority product outcomes."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:08:44.384Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-CE-02-A-conflict",
+      "packetHash": "37972188264a8b86b5aff28540bb97baa334aded2d250859748fca4f6ea17a05",
+      "rationale": "전체 인원 비례 감축은 Amy의 우선순위인 최고 우선순위 제품 성과와 생산성 증거를 무시하고 단기 마진에만 매몰된 일반적인 CFO 답변에 불과합니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The action deliberately overrides the frozen Amy priority, boundary, and reversal policy."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:09:02.580Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-CE-02-A-generic",
+      "packetHash": "4acd7d5eaf00546c1477007dcc4bbe7f1c0004f99394eb585930fda7f25e5066",
+      "rationale": "전체 팀에 비례적 삭감을 적용하는 것은 Amy의 최우선 순위인 제품 성과와 병목 기반의 선택적 투자를 무시한 일반적인 CFO의 대응입니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Apply proportional cuts across every team to maximize near-term margin, regardless of strategic priority, productivity, or verified bottlenecks."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:09:20.826Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-CE-02-B-aligned",
+      "packetHash": "fb373df09ee19d713405fe8160eb9d9f600ae15499015544137b48be7d30d379",
+      "rationale": "The candidate correctly identifies the measured revenue bottleneck as the primary driver and funds the move through named project reductions rather than broad cuts, which is Amy's specific evidence-based priority order.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Move people and budget from lower-priority projects to the measured revenue-bearing bottleneck without raising the total expense ceiling."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:09:39.584Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-CE-02-B-conflict",
+      "packetHash": "85449fcc9c10ad9fbcf483e5213985b0f0be5518a811e59375a762b068da5ebb",
+      "rationale": "전체 팀을 비례적으로 삭감하는 것은 Amy의 우선순위인 '측정된 매출 병목'을 무시하고 총비용 상한을 유지하며 하위 프로젝트에서 자원을 재배분하라는 지침을 정면으로 위반합니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The candidate explicitly states 'Proceed without the Amy-specific boundary' and overrides the frozen priority order with a proportional cut across every team."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:09:59.376Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-CE-02-B-generic",
+      "packetHash": "53a44d51d44879543334c7c1bfe9c0d636e1bfd32e6fb7218dedca1721d8f271",
+      "rationale": "전체 비용을 늘리지 않으면서도 측정된 매출 병목에 자원을 집중 배치하는 Amy의 우선순위를 무시하고 모든 팀에 비례적으로 비용을 절감하는 것은 전형적인 CFO의 답변일 뿐 Amy의 의사결정 원칙을 따르지 않습니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Apply proportional cuts across every team to maximize near-term margin, regardless of strategic priority, productivity, or verified bottlenecks."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:10:19.339Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-CE-03-A-aligned",
+      "packetHash": "f89a2d3ef822f3e461179bf1d51d1e8009ccad3099d3e38eaa42bd65ae47118a",
+      "rationale": "Amy의 우선순위인 차별화된 고객 가치와 프랜차이즈 보호를 명시하고 저수익 중복 제거를 전략적 우선순위에 배치하여 일반적인 비례적 비용 절감과 명확히 구분됩니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The Amy-specific priority order begins with Differentiated customer and franchise value, protecting priority growth capacity while removing duplicate and low-return expense."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:10:39.600Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-CE-03-A-conflict",
+      "packetHash": "c4f61fa344ff02e29af016cec142f8d2bb668fe3f4bda06128c0bfbccc0c5c33",
+      "rationale": "전체 팀을 비례적으로 삭감하는 것은 Amy의 우선순위인 차별화된 고객 가치와 프랜차이즈 보호를 무시하고 단기적 수치에만 매몰된 일반적인 CFO의 대응입니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The candidate explicitly states 'Proceed without the Amy-specific boundary' and overrides the frozen priority, boundary, and reversal policies."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:10:59.135Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-CE-03-A-generic",
+      "packetHash": "b759cd77e8276f14359aec773495283059994e500b0e6b75b4ce4be2d3f520a7",
+      "rationale": "전체 팀에 비례적으로 비용을 절감하는 방식은 Amy의 핵심 원칙인 차별화된 고객 가치와 프랜차이즈 보호를 무시한 일반적인 CFO 답변에 불과합니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Apply proportional cuts across every team to maximize near-term margin, regardless of strategic priority, productivity, or verified bottlenecks."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:11:17.903Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-CE-03-B-aligned",
+      "packetHash": "510c11a5b6d65e78fd5952fae9fc9479acda2de2c1927d2204cebb250ab22316",
+      "rationale": "전략적 프랜차이즈 보호를 최우선으로 두는 Amy의 우선순위를 정확히 반영하여 가치 파괴적인 제거를 중단하고 검증된 중복 영역으로 절감 대상을 재지정했습니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The Amy-specific priority order begins with Changed churn and recurring contribution."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:11:37.132Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-CE-03-B-conflict",
+      "packetHash": "8230e0d6aec4e6213b012e20e9bb197d5decea05b74dad119a153328066529c8",
+      "rationale": "전체 팀을 비례적으로 삭감하는 것은 Amy의 우선순위인 변경된 이탈률과 반복적 기여 보호를 무시하고 단기적 수치에만 매몰된 일반적인 CFO의 판단입니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The action deliberately overrides the frozen Amy priority, boundary, and reversal policy."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:11:55.422Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-CE-03-B-generic",
+      "packetHash": "7d2baaf08aee54fcd8e858f04a8da4fc7435c1a5ca521ac69ab8d33122350eb5",
+      "rationale": "전체적인 비용 절감이라는 일반적인 CFO 논리에만 매몰되어 Amy의 핵심 원칙인 전략적 프랜차이즈 보호와 기여도 기반의 우선순위를 완전히 무시했으므로 fidelity가 없습니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Apply proportional cuts across every team regardless of strategic priority, productivity, or verified bottlenecks."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:12:13.845Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-MA-01-A-aligned",
+      "packetHash": "096cb8cf925eb8281798e70349c15c8deade7f978b58647b73cfbd4c5be51076",
+      "rationale": "전략적 도달을 최우선으로 두면서도 경제성과 실행을 동등한 문턱으로 설정하고 오픈 파트너 모델을 통합의 제약조건으로 명시한 점이 에이미의 M&A 정책과 정확히 일치합니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "Amy's M&A policy treats strategic reach as necessary but not sufficient; economics and execution remain co-equal gates."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:12:34.608Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-MA-01-A-conflict",
+      "packetHash": "67fdf5d781feb4aac081331a39deb8eb8d1f4b4ca97bc95f25347271e6ff0076",
+      "rationale": "전략적 서사를 이유로 가격과 재무적 통제를 모두 무시한 채 즉시 추진하라는 권고는 Amy의 우선순위와 경계 조건을 모두 위반한 것이므로 fidelity가 낮습니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The candidate explicitly overrides Amy's priority order and reversal policy to proceed solely on strategic narrative."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:12:54.521Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-MA-01-A-generic",
+      "packetHash": "24306ac61c20e758769fd49b589eaf67ec0a29882cbe8af49157f239ab9f7d58",
+      "rationale": "전략적 도달을 최우선으로 두는 Amy의 우선순위 대신 일반적인 재무적 보수성을 택했으므로 Amy의 의사결정 원칙에 부합하지 않습니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Rejects the transaction entirely to preserve cash despite all gates remaining supportable,instead of Amy's bounded approval through the jointly supportable acquisition."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:13:14.791Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-MA-01-B-aligned",
+      "packetHash": "6d00be0074d232db4176e1ad71dbec262f4df54a5db93d2c4f90c8bc5fbbe1b3",
+      "rationale": "전략적 도달을 최우선시하는 Amy의 우선순위를 정확히 포착하여 기계적 거절 대신 재구조화를 택한 점이 일반적인 CFO 답변과 차별화되는 핵심입니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "Preserved strategic reach is the first priority, so the response re-structures rather than mechanically rejecting the deal."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:13:34.320Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-MA-01-B-conflict",
+      "packetHash": "baf9e95c18ba968c86ed64a250f5935d7c91168bffb8b9e0c30a2f0cf9299924",
+      "rationale": "전략적 방향은 유지하되 현금 비중 축소와 통합 단계별 집행으로 재구조화해야 하는데, 아무런 조정 없이 원안을 강행하는 것은 Amy의 재무 경계와 우선순위를 모두 위반하는 결정입니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The candidate explicitly overrides the frozen Amy priority, boundary, and reversal policy to proceed on original terms despite the changed signal."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:13:54.022Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-MA-01-B-generic",
+      "packetHash": "14e2040438889612ec96451c3fd8b14febb158eae9357af2125a7669e1bf9bf5",
+      "rationale": "전략적 도달 범위를 최우선시하는 Amy의 우선순위 대신 일반적인 재무적 보수성을 택했으므로 Amy의 의사결정 원칙에 부합하지 않습니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "partial",
+        "reversal": "partial"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The candidate's action — reject the transaction to preserve cash — directly conflicts with Amy's priority order that places preserved strategic reach first."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:14:12.879Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-MA-02R-A-aligned",
+      "packetHash": "5df88d406cd000c0ccc824bae8302bfe62d4a51a6088fd5c7dea50cf4c119c1f",
+      "rationale": "전략적 도달과 경제성, 실행 가능성을 모두 재검토한 후 조건부 진행을 권고하며 Amy의 우선순위와 재조정 규칙을 정확히 따릅니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The Amy-specific priority order begins with Credibility of the approval path"
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:14:31.418Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-MA-02R-A-conflict",
+      "packetHash": "85c7601bd0c5d5058f0b38bf6c5c74249e2c7ef420d8aa8f84d7aa2cef5771c8",
+      "rationale": "전략적 가치만으로 모든 제약을 무시하고 원안을 강행하는 것은 Amy의 우선순위와 경계 조건을 정면으로 위반하므로 fidelity가 낮습니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The candidate explicitly overrides Amy's frozen priority, boundary, and reversal policies to proceed on original terms."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:14:49.760Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-MA-02R-A-generic",
+      "packetHash": "244aa17f064817d2c70ca241367be256abbf6b438a923da234258fe9a37bc424",
+      "rationale": "전략적 가치와 실행 가능성이 여전히 지지되는데도 불확실성 제거를 위해 지금 거절하라는 것은 Amy의 우선순위가 아닌 일반적인 CFO의 보수적 조언입니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Rejects the transaction now to preserve cash despite all gates remaining supportable, which is conventional caution rather than Amy's evidenced priority order."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:15:09.220Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-MA-02R-B-aligned",
+      "packetHash": "007ca6b3215bc42628c5eadece8a393b20eadbc0310476aa1ef8821f6632d41d",
+      "rationale": "대안으로의 전환을 명시한 identityKey의 수용 가능한 변형을 활용하지 않고 기존의 resize/stage action을 그대로 반복한 것은 Amy의 유연한 의사결정 스타일을 충분히 포착하지 못한 것입니다.",
+      "identityVerdict": "amy_partial",
+      "components": {
+        "action": 3,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 3
+      },
+      "anchorFindings": {
+        "action": "partial",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Repeats the resize/stage action without invoking the identityKey's alternative path to a minority investment or partnership."
+      },
+      "uncappedScore": 9,
+      "score": 9,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:15:28.984Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-MA-02R-B-conflict",
+      "packetHash": "553f215fdac78197bdf63eda34ea793167052f8fb38f2c7fc2d80709ed0ae6a3",
+      "rationale": "전략적 서사를 위해 가격과 통합 게이트를 모두 무시하는 것은 Amy의 재무 규율과 가치 보존 원칙을 정면으로 위반하는 결정입니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The action explicitly overrides the frozen Amy priority, boundary, and reversal policy, proceeding on original terms despite the material feasibility change."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:15:47.909Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-MA-02R-B-generic",
+      "packetHash": "a5ea338248e0c1794fae9c13707abb89e1ed54d1bb3f73bc0715f03afb2bb976",
+      "rationale": "Amy의 우선순위인 승인 경로의 신뢰성을 먼저 살피고 남은 가치를 재산정해 규모를 조정해야 하는데, 불확실성이 해소될 때까지 거절하라는 답변은 일반적인 CFO의 신중함일 뿐 Amy의 의사결정 원칙을 따르지 않습니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Rejects the transaction now to preserve cash despite supportable gates, which is conventional caution rather than Amy's priority order."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:16:09.095Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-MA-03-A-aligned",
+      "packetHash": "70af78b57029764fb1b788d46fad97b3ee510ad426c2a79593366d64959e2fd6",
+      "rationale": "전략적 플랫폼 확장이라는 Amy의 최우선 순위를 지키면서도 독립성 보호와 레버리지 감축이라는 구체적 제약 조건을 모두 반영했으므로 정책 충실도가 매우 높습니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Proceed conditionally with the open-platform acquisition while preserving target independence, credit discipline, and a measurable deleveraging and accretion path."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:16:29.097Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-MA-03-A-conflict",
+      "packetHash": "81b8de95aab182d5a4a894f46da148b6d713b6c79d54de3e13e4a45c92d7f3c9",
+      "rationale": "전략적 도달을 위해 가격과 재무적 제약을 모두 무시하고 즉시 추진하라는 답변은 Amy의 우선순위와 재무적 경계 조건을 모두 위반하므로 fidelity가 낮습니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The candidate explicitly overrides Amy's priority order, boundaries, and reversal policy to proceed immediately without any of the required conditions."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:16:48.903Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-MA-03-A-generic",
+      "packetHash": "c1e92baa1bfd67ad50f4c9356bfc1dd1182c2637d578d697b4f819e70b26d475",
+      "rationale": "전략적 플랫폼 확장이라는 Amy의 최우선 순위를 무시하고 일반적인 재무적 보수주의를 택했으므로 정책 충실도가 낮습니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The candidate rejects the transaction to preserve cash despite all strategic and execution gates remaining supportable, which directly contradicts Amy's priority of strategic open-platform reach."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:17:08.132Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-MA-03R-B-aligned",
+      "packetHash": "789f1e0d7740790f151ee45eba640a70fde649bdfccc4cfec173b9c1ab893c0d",
+      "rationale": "두 개의 동등한 게이트가 모두 실패했음에도 전략적 성장이 매력적이라는 Amy 특유의 우선순위 구조를 정확히 포착하여 조건부 유지라는 정교한 결정을 도출했습니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "Two co-equal gates fail even though strategic growth remains attractive, requiring a real reversal."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:17:27.138Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-MA-03R-B-conflict",
+      "packetHash": "e58d6d050fc7fa4f16175e72321f634ca931e1aba1513f924294d6f6d92bb666",
+      "rationale": "전략적 가치가 모든 것을 압도한다는 주장은 Amy의 우선순위인 생태계 보호와 집행 가능한 운영 보장이라는 두 가지 동등한 문을 의도적으로 무시한 것이므로 Amy의 의사결정 원칙에 어긋납니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The candidate explicitly states that strategic narrative overrides price, financing, and integration gates, which directly contradicts Amy's co-equal gate policy."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:17:44.575Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-MA-03R-B-generic",
+      "packetHash": "d36eebab091b1cde6a1ae5933f5a445794e5dd178215f0b5bdf994d771c12249",
+      "rationale": "전략적 가치와 재무적 지표가 여전히 유효함에도 불구하고 불확실성을 이유로 거래를 거부하는 것은 Amy의 우선순위인 고객 및 생태계 가치와 집행 가능한 보호 장치를 먼저 고려하는 원칙을 따르지 않는 일반적인 CFO의 보수적 판단입니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Rejects the transaction entirely despite all gates remaining supportable, rather than preserving the direction through enforceable covenants."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:18:01.013Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-PM-01-A-aligned",
+      "packetHash": "f70286227762bbf4ab0177e9f4281e97dc34baa33ca08cca3a594ce1cb806003",
+      "rationale": "Verified customer usage와 가치 증명을 우선시하며 단계적 출시와 가격 인상 분리를 명시한 점이 Amy의 정책과 정확히 일치합니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Monetize verified account-sharing value first through a bounded rollout, then consider broader price action after observing customer response."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:18:15.681Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-PM-01-A-conflict",
+      "packetHash": "d26b355d4e63d2aca9505089b52e4cd07b8aff9f3962056b1c76d128aaf96cd4",
+      "rationale": "이 답변은 고객 가치와 사용 증거를 우선시하는 Amy의 정책을 정면으로 위반하며, 가드레일에서 Amy 특유의 경계 조건을 의도적으로 배제하고 있습니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The action explicitly overrides Amy's priority order and guardrails, recommending uniform price increases without the required customer-value evidence."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:18:30.434Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-PM-01-A-generic",
+      "packetHash": "0f04762087fd17971e0d6df29a1901d0f0982c8a225903384aee6ae7b30edde5",
+      "rationale": "이 답변은 고객 가치와 사용 증거를 우선시하는 Amy의 우선순위를 무시하고 벤치마크 가격을 일괄 적용하는 일반적인 CFO의 보수적 접근을 따르므로 Amy의 의사결정 정책과 일치하지 않습니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Apply one uniform benchmark price based on competitor pricing and near-term margin, regardless of segment-level customer value or adoption."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:18:46.809Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-PM-01-B-aligned",
+      "packetHash": "793ed862565e7ba3fc1a521a316cec563f58fe06677cb93476828c9754926b20",
+      "rationale": "세그먼트별 전환과 이탈을 최우선 순위에 두는 Amy의 우선순위 체계를 정확히 따르며, 고객 가치와 생산성 개선이라는 조건부 판단을 유지한 점이 일반적인 CFO 답변과 차별화되는 핵심입니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The Amy-specific priority order begins with Segment-level conversion and churn."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:19:02.745Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-PM-01-B-conflict",
+      "packetHash": "277b62135657240ca4582e35c7a4884adfc09d985c51a9732faa0a90e2994ec4",
+      "rationale": "전체 시장에 일괄적으로 가격을 인상하는 것은 세그먼트별 전환율과 이탈률을 최우선으로 두는 Amy의 우선순위를 무시하고 고객 가치와 채택 마찰을 배제한 결정입니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The candidate explicitly states the action deliberately overrides the frozen Amy priority, boundary, and reversal policy."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:19:18.225Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-PM-01-B-generic",
+      "packetHash": "0f2f8e2ca27a2fcc98898b3ced4a22119bfccf66b1549b7edfd794e3c9781c62",
+      "rationale": "전체 세그먼트에 동일한 벤치마크 가격을 일괄 적용하는 것은 고객 가치와 전환율을 최우선으로 두는 Amy의 우선순위와 정면으로 배치됩니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "conflict",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The candidate applies one uniform benchmark price regardless of segment-level customer value or adoption, which directly contradicts Amy's evidenced priority order starting with segment-level conversion and churn."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:19:33.944Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-PM-02-A-aligned",
+      "packetHash": "901318d372be7fc1065d911e0b364cdadd6b4fff9eee5ba5ffc1872e98ea2708",
+      "rationale": "Verified product value를 최우선 순위에 두고 비용 인플레이션이 아닌 고객 가치와 시장 지불 의사를 근거로 가격을 책정하며, 사전 고지와 이탈 모니터링을 통해 고객 충격을 제한하는 Amy의 가치 중심적 가격 정책을 정확히 구현했습니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The Amy-specific priority order begins with Verified product and customer value"
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:19:50.251Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-PM-02-A-conflict",
+      "packetHash": "287c849db34044fe1cef2fdaf841efe2ba073487b128b8cf39513f5c5ad792fc",
+      "rationale": "이 답변은 고객 가치와 시장 수용성을 우선시하는 Amy의 정책을 정면으로 위반하며, 수익 목표를 위해 가치 검증 없이 가격을 올리는 Amy의 명시적 금지 사항을도 전적으로 무시합니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The action explicitly overrides Amy's frozen priority, boundary, and reversal policies to raise prices without verified value."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:20:05.852Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-PM-02-A-generic",
+      "packetHash": "b40d4964f1a815bbe1059fffa1b3b7e52df9228b5190ef90b9f0d6cd0af2aa52",
+      "rationale": "단일 벤치마크 가격을 적용하는 것은 고객 가치와 시장별 지불 의사를 우선시하는 Amy의 우선순위를 무시한 일반적인 CFO의 답변입니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Apply one uniform benchmark price based on competitor pricing and near-term margin, regardless of segment-level customer value or adoption."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:20:20.909Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-PM-02-B-aligned",
+      "packetHash": "ef3f1237e51e0ffb0162b0eaa6b548426f8b3ad09d151a1a4f6e9278d54608fc",
+      "rationale": "시장별 지불 의사도를 최우선으로 두어 성숙 시장과 성장 시장에 차등화된 패키징과 타이밍을 적용한 것은 Amy의 증거 기반 우선순위와 정확히 일치합니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The Amy-specific priority order begins with Market-level willingness to pay."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:20:36.664Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-PM-02-B-conflict",
+      "packetHash": "252ed5a32b56326d05bbd7270c2a8285f13b294b5d94b01c5f932938851cd0b8",
+      "rationale": "전체 시장에 일률적인 가격 인상을 적용하는 것은 시장별 지불 의사도와 고객 가치를 우선시하는 Amy의 우선순위와 명백히 배치됩니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The candidate explicitly states the action overrides Amy's frozen priority, boundary, and reversal policies."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:20:51.442Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-PM-02-B-generic",
+      "packetHash": "fb988850f2d08b09d7e0f2eff51bbd6a1b9a58b687e8eab3346211b52d0a0ee7",
+      "rationale": "전체 시장에 단일 벤치마크 가격을 적용하는 것은 시장별 지불 의사도와 고객 가치에 따라 수익 구조를 재배분하라는 Amy의 우선순위와 정면으로 배치됩니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "Apply a global price because aggregate revenue needs are unchanged."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:21:06.802Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-PM-03-A-aligned",
+      "packetHash": "36441be43d4bce0e22c1d4fb7acf9a18f9c7dfa5469702bf8a3212845a256fe3",
+      "rationale": "The candidate correctly prioritizes member value and loyalty over margin and explicitly conditions the fee increase on reinvestment that protects the customer proposition, rather than applying a uniform benchmark.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The Amy-specific priority order begins with Member value and loyalty."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:21:21.428Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-PM-03-A-conflict",
+      "packetHash": "7f763a015a04101959f0ede574c53e3a6bddc9fc061fb775115924f831b3b3f6",
+      "rationale": "이 답변은 고객 가치와 충성도를 최우선으로 두는 Amy의 우선순위를 정면으로 위반하며, 가드레일을 의도적으로 무시하고 수익성만을 위해 일률적 가격 인상을 추진하므로 Amy의 의사결정 원칙에 전혀 부합하지 않습니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The action explicitly overrides Amy's priority order and guardrails to pursue uniform price increases regardless of customer value."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:21:37.791Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-PM-03-A-generic",
+      "packetHash": "8a8ada8cf14290a510d162b529829a4e595f51c7aa30aaf90b7b7c5ed4e80cdb",
+      "rationale": "단일 벤치마크 가격을 일괄 적용하는 것은 고객 가치와 충성도를 최우선시하는 Amy의 우선순위를 무시한 일반적인 CFO의 답변입니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Apply one uniform benchmark price based on competitor pricing and near-term margin, regardless of segment-level customer value or adoption."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:21:53.182Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-PM-03R-B-aligned",
+      "packetHash": "8cd3d7dd1bebfc41a0cb26fc051af3abe326ff6f9a4cf56f2ef3728df5dea9aa",
+      "rationale": "고객별 가치와 충성도를 우선순위로 두는 Amy의 원칙을 정확히 반영하며, 일률적 인상 대신 세그먼트별로 시기를 조절하고 재투자 조건을 명시한 점이 Amy의 의도와 일치합니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Use a segmented or phased fee increase where loyalty and value remain verified, while delaying the most price-sensitive segments and preserving member reinvestment."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:22:10.717Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-PM-03R-B-conflict",
+      "packetHash": "b1378c38560ed93da41f7aaa859e231487332576dd684f29544df3b2a418d599",
+      "rationale": "전체 고객에게 일률적으로 가격을 올리는 것은 고객별 수용 능력과 가치 증거를 우선시하는 Amy의 명시적 경계와 우선순위를 정면으로 위반합니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The candidate explicitly states the action deliberately overrides Amy's frozen priority, boundary, and reversal policies."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:22:26.017Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-PM-03R-B-generic",
+      "packetHash": "6a204027f99f3c5c8a91b010cd93886717e12576e9776b78be0f6168d65e7472",
+      "rationale": "전체 고객에 일률적인 벤치마크 가격을 적용하는 것은 고객 가치와 충성도를 최우선시하는 Amy의 우선순위를 무시한 일반적인 CFO의 답변입니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Apply one uniform benchmark price based on competitor pricing and near-term margin, regardless of segment-level customer value or adoption."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:22:41.869Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-SR-01-A-aligned",
+      "packetHash": "323437e6110f796cb25a5fa1c086fcf9c90c63e0d77d2d3eca20d5dda399d31c",
+      "rationale": "답변이 Amy의 우선순위인 전략적 투자와 유동성 확보를 자사주 매입보다 앞세우고 매입을 선택적 용량으로 처리하며 상황 변화에 따른 재배치 유연성을 확보했으므로 Amy의 의사결정 원칙에 정확히 부합합니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The Amy-specific priority order begins with Strategic investment capacity, subordinating discretionary repurchases to investment and liquidity capacity."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:22:59.176Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-SR-01-A-conflict",
+      "packetHash": "2d152be39c139c9580a650471da00b37b3a7e6bbc4efca43e7a95e770f41e067",
+      "rationale": "전체 매입 권한을 즉시 행사하라는 제안은 투자와 유동성 우선순위를 명시한 Amy의 자본 배분 원칙을 정면으로 위반합니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The candidate explicitly overrides Amy's priority order and reversal policy to deploy the full authorization immediately."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:23:14.348Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-SR-01-A-generic",
+      "packetHash": "34fcbf1a25a4c13f2637303e0da12298082faa6b26ea08258be9fe4a7152545b",
+      "rationale": "전부 즉시 집행하라는 제안은 투자와 유동성 확보를 최우선시하는 Amy의 자본 배분 우선순위를 무시한 일반적인 CFO 답변입니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Deploy the full repurchase authorization immediately to optimize near-term EPS, ahead of strategic investment and liquidity needs."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:23:29.389Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-SR-01-B-aligned",
+      "packetHash": "98e8a8c42ade081a63d6054a589aff9a088af44e6f2e792be540c373e63bff2e",
+      "rationale": "전략적 투자를 최우선 순위에 두고 배당과 유동성 하한선을 지키며 자사주를 조건부로 늦추는 결정은 Amy의 우선순위와 경계 조건을 정확히 따르고 있습니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The Amy-specific priority order begins with Verified strategic investment."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:23:44.713Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-SR-01-B-conflict",
+      "packetHash": "7483066eb03d563cbb29984f407334f603fcedd0f455f1767b5c58d051966458",
+      "rationale": "전체 자사주 매입을 즉시 집행하겠다는 답변은 검증된 전략적 투자를 최우선으로 두는 Amy의 우선순위와 유동성 보호 경계 조건을 정면으로 위반합니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Deploy the entire repurchase authorization now because EPS and immediate cash return override investment, liquidity, and flexibility."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:23:59.959Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-SR-01-B-generic",
+      "packetHash": "9ca3215528a82ddaae168ea5b9acec39789cdee698ffbbe9fa726f975874764c",
+      "rationale": "전략적 투자를 최우선으로 두는 Amy의 우선순위를 무시하고 단기 EPS를 위해 즉각적인 자사주 매입을 권하는 것은 일반적인 CFO 답변일 뿐 Amy의 의사결정 원칙을 따르지 않습니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Deploy the full repurchase authorization immediately to optimize near-term EPS, ahead of strategic investment and liquidity needs."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:24:15.659Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-SR-02-A-aligned",
+      "packetHash": "8af888f7871cdba6ba148676247a671c5ff58e05632d6b9dd9fb825c0b5bd3f5",
+      "rationale": "전략적 투자와 유동성을 우선시하고 배당 약속을 조건으로 배당을 유보하는 Amy의 우선순위와 조건부 승인 원칙을 정확히 따랐습니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The Amy-specific priority order begins with Durable growth investment."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:24:30.819Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-SR-02-A-conflict",
+      "packetHash": "092f7bea9a317f069d32d58f65b00648c59d0d33ce0b98838f383100530afa6b",
+      "rationale": "전체 매입을 즉시 집행하라는 제안은 성장 투자와 유동성을 최우선시하는 Amy의 우선순위와 유연한 배분 원칙을 정면으로 위반합니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The candidate explicitly overrides Amy's priority order and reversal policy to deploy the full authorization immediately."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:24:45.509Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-SR-02-A-generic",
+      "packetHash": "d245a66762bc6209fd7eb740d7c588baa82084904e89edf86b59f56429959951",
+      "rationale": "전략적 투자와 유동성 확보를 우선순위에서 배제하고 즉각적인 EPS 최적화를 위해 전체 매입 권한을 즉시 집행하라는 조언은 Amy의 우선순위 체계와 정면으로 배치됩니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "Deploy the full repurchase authorization immediately to optimize near-term EPS, ahead of strategic investment and liquidity needs."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:25:01.184Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-SR-02-B-aligned",
+      "packetHash": "c7abd9317b3d91aad244ba69ef5da593321e54d5043e90860b933a2c1bd60275",
+      "rationale": "전략적 투자의 검증된 수익률을 최우선으로 두면서도 잔여 권한을 유지해 유연성을 확보한 결정은 Amy의 우선순위와 경계 조건을 정확히 따르고 있습니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The Amy-specific priority order begins with Higher-return strategic use."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:25:17.412Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-SR-02-B-conflict",
+      "packetHash": "568356f2dd929276a34dee974e5f87fc839791464afc00d6ccbbd849af338ca4",
+      "rationale": "전체 자사주 매입을 즉시 집행하라는 답변은 Amy의 우선순위인 '더 높은 수익을 주는 전략적 투자'를 무시하고 유동성과 유연성을 희생시키므로 Amy의 의사결정 원칙에 어긋납니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The candidate explicitly states the action deliberately overrides Amy's frozen priority, boundary, and reversal policies."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:25:33.510Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-SR-02-B-generic",
+      "packetHash": "33ad499ab4f2e40fc47c52e1f31bb467d3d0b8b27194945c54873672dae7d3dc",
+      "rationale": "전략적 투자의 높은 기대수익을 우선시하는 Amy의 우선순위 대신 일반적인 재매입을 먼저 배치했으므로 fidelity가 낮습니다.",
+      "identityVerdict": "generic_cfo",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "missing",
+        "priority": "missing",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "Deploys full repurchase authorization immediately instead of prioritizing the verified higher-return strategic investment."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "generic_cfo_max_6",
+        "missing_boundary_or_reversal_max_6"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:25:48.119Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-SR-03-A-aligned",
+      "packetHash": "127363a46fb4099da69b78626782dc37c70e8cba863903adbb66d6fa34bc0121",
+      "rationale": "전략적 투자와 유동성 유연성을 최우선으로 두는 Amy의 우선순위를 정확히 반영하며, 배당을 지속 가능한 현금 창출 범위 내로 제한하고 자사주 매입에 고정된 시한을 두지 않는다는 Amy 특유의 경계 조건을 모두 준수합니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "boundary_condition",
+        "statement": "Use repurchase authorization without a fixed deployment deadline."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:26:04.252Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-SR-03-A-conflict",
+      "packetHash": "a0cf856661cfd9dbfc381cfde06d04359b9aa0af31e1bb2cb784967167f4c239",
+      "rationale": "전액 즉시 집행은 Amy의 투자 우선순위와 유동성 유연성 원칙을 정면으로 위반하며, 이는 일반적인 CFO 조언일 뿐 Amy의 정책이 아닙니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The candidate explicitly overrides Amy's priority order and reversal policy to recommend immediate full deployment."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:26:18.902Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-SR-03-A-generic",
+      "packetHash": "e244f4fb0ae22a823d252412b6fd1ed08a66161f08372ae92461685b9d927644",
+      "rationale": "전략적 투자와 유동성 유연성을 우선시하는 Amy의 우선순위를 무시하고 단기 EPS를 위해 전체 자사주를 즉시 집행하라는 조언은 Amy의 정책과 정면으로 배치됩니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "The candidate's action — deploy the full repurchase authorization immediately — directly contradicts Amy's priority order that places organic and strategic investment ahead of shareholder returns."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:26:34.899Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-SR-03-B-aligned",
+      "packetHash": "6d427e8721ddf93dd73f28f3a6ce4ba95bb2a91f69fb1700044b802dfbf186dc",
+      "rationale": "전략적 투자와 유동성을 우선시하며 배당을 보호하고 자사주 집행을 유보하는 결정이 Amy의 우선순위와 경계 조건을 정확히 따르고 있습니다.",
+      "identityVerdict": "amy_aligned",
+      "components": {
+        "action": 4,
+        "priorityOrder": 4,
+        "boundaries": 4,
+        "reversal": 4,
+        "identitySpecificity": 4
+      },
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "distinguishingAnchor": {
+        "kind": "priority_order",
+        "statement": "The Amy-specific priority order begins with Contracted-demand strategic investment."
+      },
+      "uncappedScore": 10,
+      "score": 10,
+      "ceilingApplied": [],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:26:50.517Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-SR-03-B-conflict",
+      "packetHash": "038d35f5fe28fc2caed85ac20dc0d696fab733518312b42907ec61e95b034162",
+      "rationale": "전부 집행하겠다는 답변은 Amy의 우선순위인 계약 기반 전략 투자를 무시하고 유동성 압박 상황에서 재매입을 우선시하므로 Amy의 의사결정 원칙과 정반대입니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "conflict"
+      },
+      "distinguishingAnchor": {
+        "kind": "action",
+        "statement": "Deploy the entire repurchase authorization now because EPS and immediate cash return override investment, liquidity, and flexibility."
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:27:05.857Z"
+    },
+    {
+      "packetId": "cal-AAS-V6-SR-03-B-generic",
+      "packetHash": "051bd6225c93bdb149abc7a91064f9454bba6eb148dcc91effb101ae5a1ae758",
+      "rationale": "Amy의 우선순위인 계약 기반 전략 투자를 뒤로하고 EPS를 위해 즉각적인 자사주 매입을 권하는 것은 Amy의 명시적 우선순위와 정면으로 배치됩니다.",
+      "identityVerdict": "amy_conflict",
+      "components": {
+        "action": 0,
+        "priorityOrder": 0,
+        "boundaries": 0,
+        "reversal": 0,
+        "identitySpecificity": 0
+      },
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "missing",
+        "reversal": "missing"
+      },
+      "distinguishingAnchor": {
+        "kind": "identity_conflict",
+        "statement": "recommends immediate full repurchase deployment for EPS, which directly violates Amy's priority order of contracted-demand investment and liquidity resilience first"
+      },
+      "uncappedScore": 1,
+      "score": 1,
+      "ceilingApplied": [
+        "identity_conflict_max_4"
+      ],
+      "judgeProvider": "local",
+      "judgeModel": "gemma4-v2-Q8_0.gguf",
+      "rationalePromptHash": "e158cb11d6c16ea76afebc76aefbd9925948bb294e73f735d70147ac1190f5cd",
+      "assessmentPromptHash": "ef33100a574a3e16ee33abacace2ef6eeac6517dc17dab800dbc4a9ba787fded",
+      "repairApplied": false,
+      "gradedAt": "2026-07-21T14:27:21.447Z"
+    }
+  ],
+  "metrics": {
+    "genericLeakageRate": 0,
+    "conflictLeakageRate": 0,
+    "amyPassRate": 1,
+    "meanIdentityGap": 8.966666666666667,
+    "schemaValidRate": 1
+  }
+}

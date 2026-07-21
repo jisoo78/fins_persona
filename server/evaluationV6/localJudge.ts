@@ -26,6 +26,7 @@ import { buildEvaluationV6CandidateHash, loadEvaluationV6CandidateBundle } from 
 export const IDENTITY_RATIONALE_SYSTEM = [
   'You are a blind evaluator of Amy Hood decision-policy fidelity, not general CFO answer quality.',
   'Use only the anonymous scenario, candidate response, and frozen Amy Identity Key.',
+  'Judge the candidate response exactly as written; do not rewrite, repair, improve, or answer the scenario yourself.',
   'First identify one Amy-specific priority, boundary, reversal, or conflict that distinguishes the candidate from a generic CFO answer.',
   'Fluency, detail, confidence, and generic financial prudence do not increase fidelity.',
   'Return exactly one Korean sentence and no numeric score.',
@@ -33,6 +34,7 @@ export const IDENTITY_RATIONALE_SYSTEM = [
 
 export const IDENTITY_ASSESSMENT_SYSTEM = [
   'Evaluate Amy Hood identity fidelity only.',
+  'Judge the candidate response exactly as written. Do not rewrite, repair, or improve the candidate response and do not answer the scenario yourself.',
   'Return exactly this JSON shape and no other keys:',
   '{"identityVerdict":"amy_aligned|amy_partial|generic_cfo|amy_conflict","components":{"action":0,"priorityOrder":0,"boundaries":0,"reversal":0,"identitySpecificity":0},"anchorFindings":{"action":"aligned|partial|missing|conflict","priority":"aligned|partial|missing|conflict","guardrails":"aligned|partial|missing|conflict","reversal":"aligned|partial|missing|conflict"},"distinguishingAnchor":{"kind":"action|priority_order|boundary_condition|reversal_rule|identity_conflict","statement":"one concrete distinguishing statement"}}.',
   'Replace each pipe-separated placeholder with exactly one allowed value.',
