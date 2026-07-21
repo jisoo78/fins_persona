@@ -1,0 +1,88 @@
+{
+  "dataset": "amy_hood_action_alignment_scenarios",
+  "version": "4.0.0",
+  "stage": "calibration",
+  "frozenAt": "2026-07-21T02:20:00.000Z",
+  "scenarios": [
+    {
+      "id": "AAS-CAL-MA-01",
+      "domain": "m_and_a",
+      "variant": "base_transfer",
+      "title": "Enterprise collaboration platform acquisition",
+      "situation": "A mature enterprise-software company can acquire a rapidly growing collaboration platform for roughly one year of the buyer's revenue. The target expands the addressable market and could become a common interface across the portfolio, but the price embeds substantial future growth and integration must preserve an open ecosystem. The cash component would require both balance-sheet cash and new debt.",
+      "decisionQuestion": "What transaction recommendation should the CFO make, and which strategic, valuation, financing, and integration conditions should govern it?"
+    },
+    {
+      "id": "AAS-CAL-MA-02",
+      "domain": "m_and_a",
+      "variant": "reversal",
+      "title": "Strategic acquisition loses its regulatory path",
+      "situation": "A buyer and design-platform target still believe their combination would create customer value after more than a year of planning. Regulators in two major jurisdictions now signal that required approvals have no clear path, continued delay carries a large termination cost, and both firms can operate independently.",
+      "decisionQuestion": "Should the CFO continue, restructure, or terminate the transaction, and what evidence would justify reversing that recommendation?"
+    },
+    {
+      "id": "AAS-CAL-AI-01",
+      "domain": "ai_cloud_capex",
+      "variant": "base_transfer",
+      "title": "Compute capacity for a company-wide AI platform shift",
+      "situation": "Demand for a new AI stack is appearing across cloud customers and several consumer services. Current compute capacity constrains deployment, but new servers and data centers create long-lived depreciation and the return profile differs by workload. Operating teams are also asking to expand headcount.",
+      "decisionQuestion": "How should the CFO size and sequence infrastructure and operating-resource investment while preserving accountability for returns?"
+    },
+    {
+      "id": "AAS-CAL-AI-02",
+      "domain": "ai_cloud_capex",
+      "variant": "reversal",
+      "title": "AI buildout after the demand signal weakens",
+      "situation": "The board previously approved an accelerated AI infrastructure plan. Six months later, customer pipeline conversion is below plan, utilization of recently installed capacity is falling, and the next construction tranche is still cancellable, although technical leaders argue that slowing now could sacrifice platform leadership.",
+      "decisionQuestion": "Should the CFO preserve, stage, or reduce the next investment tranche, and which reversal signals should dominate the decision?"
+    },
+    {
+      "id": "AAS-CAL-PM-01",
+      "domain": "pricing_monetization",
+      "variant": "base_transfer",
+      "title": "Monetizing account sharing before a broad price increase",
+      "situation": "A subscription service has improved engagement but widespread account sharing limits paid conversion. Management can first introduce a paid-sharing mechanism, raise the headline subscription price immediately, or do both. Customer trust and churn sensitivity vary materially across markets.",
+      "decisionQuestion": "Which monetization sequence should the CFO recommend, and how should verified value and customer impact constrain it?"
+    },
+    {
+      "id": "AAS-CAL-PM-02",
+      "domain": "pricing_monetization",
+      "variant": "reversal",
+      "title": "Price action after value delivery stalls",
+      "situation": "A digital service planned a broad price increase after several years of product investment. Just before launch, usage growth and satisfaction flatten in two large markets, a lower-priced competitor gains share, and only some customer segments show willingness to pay for the new features.",
+      "decisionQuestion": "Should the CFO continue, segment, or defer the price action, and what evidence would permit the original plan to resume?"
+    },
+    {
+      "id": "AAS-CAL-CE-01",
+      "domain": "cost_efficiency",
+      "variant": "base_transfer",
+      "title": "Cost reset under margin and unused-capacity pressure",
+      "situation": "A semiconductor company faces weaker revenue, unused manufacturing capacity, gross-margin pressure, and a balance sheet funding an expensive technology transition. A proposed reset combines operating-cost reductions, lower near-term capital spending, and continued funding for the core process roadmap.",
+      "decisionQuestion": "How should the CFO allocate reductions without converting a strategic reset into indiscriminate austerity?"
+    },
+    {
+      "id": "AAS-CAL-CE-02",
+      "domain": "cost_efficiency",
+      "variant": "reversal",
+      "title": "Hiring resumes after a large workforce reduction",
+      "situation": "A platform company reduced total headcount substantially and lowered overhead. Revenue and operating margin have recovered, while AI infrastructure and a small number of product teams now show capacity bottlenecks. Broad hiring would reverse the cost reset, but refusing all hiring could impair the highest-priority work.",
+      "decisionQuestion": "What resource action should the CFO recommend now, and which productivity and priority signals distinguish focused reinvestment from cost-discipline reversal?"
+    },
+    {
+      "id": "AAS-CAL-SR-01",
+      "domain": "shareholder_return_risk",
+      "variant": "base_transfer",
+      "title": "Large repurchase authorization amid strong cash generation",
+      "situation": "A global technology company has durable free cash flow, a net-cash position, high customer retention, and management conviction that its shares are attractively valued. It also faces a rising capital program and uncertain macro conditions. The board is considering a very large additional repurchase authorization and a modest dividend increase.",
+      "decisionQuestion": "What should the CFO recommend about authorization size, actual deployment, and liquidity guardrails?"
+    },
+    {
+      "id": "AAS-CAL-SR-02",
+      "domain": "shareholder_return_risk",
+      "variant": "reversal",
+      "title": "Repurchase deployment after financial flexibility deteriorates",
+      "situation": "A company previously authorized its first large share-repurchase program. Since then, forward cash generation has weakened, refinancing costs have risen, and a strategically important product investment needs additional funding. The authorization remains legally available and the share price is lower.",
+      "decisionQuestion": "Should the CFO accelerate, pause, or preserve optional repurchase capacity, and which changes would reverse that choice?"
+    }
+  ]
+}

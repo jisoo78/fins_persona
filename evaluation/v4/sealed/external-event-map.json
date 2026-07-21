@@ -1,0 +1,15 @@
+{
+  "scenarioSetVersion": "4.0.0",
+  "mappings": [
+    {"scenarioId":"AAS-CAL-MA-01","externalEventId":"external-salesforce-slack-2020","sourceIds":["ext-salesforce-slack-2020"],"decisionCutoff":"2020-12-01","actualHistoricalAction":"Proceed with a $27.7 billion mixed cash-and-stock acquisition funded partly with new debt.","outcomeEvidenceIds":[]},
+    {"scenarioId":"AAS-CAL-MA-02","externalEventId":"external-adobe-figma-termination-2023","sourceIds":["ext-adobe-figma-termination-2023"],"decisionCutoff":"2023-12-18","actualHistoricalAction":"Terminate the acquisition after concluding there was no clear path to required regulatory approvals.","outcomeEvidenceIds":[]},
+    {"scenarioId":"AAS-CAL-AI-01","externalEventId":"external-alphabet-ai-capex-2024","sourceIds":["ext-alphabet-ai-capex-2024"],"decisionCutoff":"2024-04-25","actualHistoricalAction":"Increase technical-infrastructure capital expenditure to secure compute capacity across AI, Cloud, and services.","outcomeEvidenceIds":[]},
+    {"scenarioId":"AAS-CAL-AI-02","externalEventId":"external-meta-ai-capex-2024","sourceIds":["ext-meta-ai-capex-2024"],"decisionCutoff":"2024-04-24","actualHistoricalAction":"Raise the capital-expenditure range and signal further increases to accelerate the AI roadmap.","outcomeEvidenceIds":[]},
+    {"scenarioId":"AAS-CAL-PM-01","externalEventId":"external-netflix-paid-sharing-2024","sourceIds":["ext-netflix-paid-sharing-2024"],"decisionCutoff":"2024-01-23","actualHistoricalAction":"Prioritize paid sharing and defer broad price increases until additional service value was established.","outcomeEvidenceIds":[]},
+    {"scenarioId":"AAS-CAL-PM-02","externalEventId":"external-spotify-premium-price-2023","sourceIds":["ext-spotify-premium-price-2023"],"decisionCutoff":"2023-07-24","actualHistoricalAction":"Increase Premium prices across multiple markets with advance customer notice.","outcomeEvidenceIds":[]},
+    {"scenarioId":"AAS-CAL-CE-01","externalEventId":"external-intel-cost-reduction-2024","sourceIds":["ext-intel-cost-reduction-2024"],"decisionCutoff":"2024-08-01","actualHistoricalAction":"Launch a $10 billion cost plan and reduce projected gross capital expenditure by more than 20 percent.","outcomeEvidenceIds":[]},
+    {"scenarioId":"AAS-CAL-CE-02","externalEventId":"external-meta-efficiency-2023","sourceIds":["ext-meta-efficiency-2023"],"decisionCutoff":"2024-02-01","actualHistoricalAction":"Reduce total headcount materially while resuming focused hiring and increasing infrastructure investment.","outcomeEvidenceIds":[]},
+    {"scenarioId":"AAS-CAL-SR-01","externalEventId":"external-apple-buyback-2024","sourceIds":["ext-apple-buyback-2024"],"decisionCutoff":"2024-05-02","actualHistoricalAction":"Authorize an additional $110 billion repurchase capacity and raise the quarterly dividend.","outcomeEvidenceIds":[]},
+    {"scenarioId":"AAS-CAL-SR-02","externalEventId":"external-salesforce-buyback-2022","sourceIds":["ext-salesforce-buyback-2022"],"decisionCutoff":"2022-08-24","actualHistoricalAction":"Authorize the company's first share-repurchase program while retaining deployment discretion.","outcomeEvidenceIds":[]}
+  ]
+}

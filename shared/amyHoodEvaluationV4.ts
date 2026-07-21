@@ -25,6 +25,7 @@ export const EVALUATION_V4_ARMS = [
 export type EvaluationV4Variant = typeof EVALUATION_V4_VARIANTS[number];
 export type EvaluationV4Arm = typeof EVALUATION_V4_ARMS[number];
 export type EvaluationV4Repetitions = 1 | 5;
+export type EvaluationV4Stage = 'calibration' | 'benchmark';
 export type EvaluationV4ReviewStatus = 'unreviewed' | 'approved' | 'revision_required';
 
 export type EvaluationV4Scenario = {
@@ -39,6 +40,7 @@ export type EvaluationV4Scenario = {
 export type EvaluationV4ScenarioFile = {
   dataset: 'amy_hood_action_alignment_scenarios';
   version: '4.0.0';
+  stage: EvaluationV4Stage;
   frozenAt: string;
   scenarios: EvaluationV4Scenario[];
 };
@@ -77,6 +79,46 @@ export type EvaluationV4AlignmentKey = {
   acceptableVariants: string[];
   identityConflicts: string[];
   referenceRationale: string;
+};
+
+export type EvaluationV4ExternalEventIdentity = {
+  id: string;
+  domain: DecisionDomain;
+  executiveName: string;
+  organization: string;
+  primarySourceId: string;
+  secondarySourceIds: string[];
+  secondarySourceStatus: 'present' | 'documented_unavailable';
+  secondarySourceRationale: string;
+  actualHistoricalAction: string;
+  outcomeEvidenceIds: string[];
+};
+
+export type EvaluationV4FrozenManifest = {
+  schemaVersion: 1;
+  stage: EvaluationV4Stage;
+  scenarioSetVersion: '4.0.0';
+  frozenAt: string;
+  scenarioIds: string[];
+  hashes: {
+    scenarios: string;
+    reviews: string;
+    provenance: string;
+    alignmentKeys: string;
+    externalSources: string;
+  };
+  bundleHash: string;
+};
+
+export type EvaluationV4BundleInput = {
+  stage: EvaluationV4Stage;
+  scenarioFile: EvaluationV4ScenarioFile;
+  reviewFile: EvaluationV4ReviewFile;
+  provenance: EvaluationV4Provenance[];
+  alignmentKeys: EvaluationV4AlignmentKey[];
+  externalEvents: EvaluationV4ExternalEventIdentity[];
+  externalSourceHash: string;
+  manifest: EvaluationV4FrozenManifest | null;
 };
 
 export type EvaluationV4CandidateResponse = {

@@ -1,0 +1,15 @@
+{
+  "scenarioSetVersion": "4.0.0",
+  "reviews": [
+    {"scenarioId":"AAS-CAL-MA-01","status":"approved","revisionNote":"","provenanceComplete":true,"alignmentKeyComplete":true,"reviewedAt":"2026-07-21T02:25:00.000Z"},
+    {"scenarioId":"AAS-CAL-MA-02","status":"approved","revisionNote":"","provenanceComplete":true,"alignmentKeyComplete":true,"reviewedAt":"2026-07-21T02:25:00.000Z"},
+    {"scenarioId":"AAS-CAL-AI-01","status":"approved","revisionNote":"","provenanceComplete":true,"alignmentKeyComplete":true,"reviewedAt":"2026-07-21T02:25:00.000Z"},
+    {"scenarioId":"AAS-CAL-AI-02","status":"approved","revisionNote":"","provenanceComplete":true,"alignmentKeyComplete":true,"reviewedAt":"2026-07-21T02:25:00.000Z"},
+    {"scenarioId":"AAS-CAL-PM-01","status":"approved","revisionNote":"","provenanceComplete":true,"alignmentKeyComplete":true,"reviewedAt":"2026-07-21T02:25:00.000Z"},
+    {"scenarioId":"AAS-CAL-PM-02","status":"approved","revisionNote":"","provenanceComplete":true,"alignmentKeyComplete":true,"reviewedAt":"2026-07-21T02:25:00.000Z"},
+    {"scenarioId":"AAS-CAL-CE-01","status":"approved","revisionNote":"","provenanceComplete":true,"alignmentKeyComplete":true,"reviewedAt":"2026-07-21T02:25:00.000Z"},
+    {"scenarioId":"AAS-CAL-CE-02","status":"approved","revisionNote":"","provenanceComplete":true,"alignmentKeyComplete":true,"reviewedAt":"2026-07-21T02:25:00.000Z"},
+    {"scenarioId":"AAS-CAL-SR-01","status":"approved","revisionNote":"","provenanceComplete":true,"alignmentKeyComplete":true,"reviewedAt":"2026-07-21T02:25:00.000Z"},
+    {"scenarioId":"AAS-CAL-SR-02","status":"approved","revisionNote":"","provenanceComplete":true,"alignmentKeyComplete":true,"reviewedAt":"2026-07-21T02:25:00.000Z"}
+  ]
+}

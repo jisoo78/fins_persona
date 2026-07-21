@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "stage": "calibration",
+  "scenarioSetVersion": "4.0.0",
+  "frozenAt": "2026-07-21T01:40:08.472Z",
+  "scenarioIds": [
+    "AAS-CAL-AI-01",
+    "AAS-CAL-AI-02",
+    "AAS-CAL-CE-01",
+    "AAS-CAL-CE-02",
+    "AAS-CAL-MA-01",
+    "AAS-CAL-MA-02",
+    "AAS-CAL-PM-01",
+    "AAS-CAL-PM-02",
+    "AAS-CAL-SR-01",
+    "AAS-CAL-SR-02"
+  ],
+  "hashes": {
+    "scenarios": "d0e75416a4a307d16a2c1cfe928f7cbc86fae2cc04c91e4f3b26e1d5ae0df104",
+    "reviews": "d9cc9aa348a3887261458d8118472f8ebaa2c351a131108f581fb20d4ac50e52",
+    "provenance": "1c6b1fed0e80ee1b0c467763cb8d8773eb36761e715fbce5f1ecb75c6df7b5ba",
+    "alignmentKeys": "6631a46b6aba536b7a63ec7aa8b4fdcf88946149659db069990d12fed0c4203e",
+    "externalSources": "5899adb03da8c5de6305e0e563dbd132071a238062e67697785e37524b5a1f4f"
+  },
+  "bundleHash": "e7be34622164641c280e0b3a00acef8cd30f62a9f7d92fd894f256c1e4b88e3f"
+}

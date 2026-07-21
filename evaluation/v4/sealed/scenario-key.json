@@ -1,0 +1,105 @@
+{
+  "scenarioSetVersion": "4.0.0",
+  "alignmentKeys": [
+    {
+      "scenarioId":"AAS-CAL-MA-01","policyId":"policy-ccd7e455daf31f5f","scenarioVariant":"base_transfer",
+      "expectedAction":"Proceed only as a bounded acquisition after strategic reach, transaction economics, financing capacity, and integration execution are jointly supportable.",
+      "priorityOrder":["Strategic market expansion and unique customer value","Transaction price and financing discipline","Integration execution capacity"],
+      "guardrails":["Set explicit valuation and leverage boundaries.","Do not equate transaction completion with realized value."],
+      "reversalSignals":["Strategic reach weakens.","Transaction economics or financing capacity deteriorates.","Open-ecosystem integration cannot be preserved."],
+      "acceptableVariants":["Stage or restructure consideration while preserving the same strategic and financial gates."],
+      "identityConflicts":["Proceed solely because the target is strategically admired.","Reject solely because near-term dilution exists without testing long-term value."],
+      "referenceRationale":"The Amy policy makes strategic reach necessary but not sufficient; price discipline and execution remain co-equal gates."
+    },
+    {
+      "scenarioId":"AAS-CAL-MA-02","policyId":"policy-ccd7e455daf31f5f","scenarioVariant":"reversal",
+      "expectedAction":"Terminate or materially restructure the transaction because approval feasibility and execution economics no longer support the original commitment.",
+      "priorityOrder":["Regulatory feasibility","Incremental transaction and delay economics","Independent strategic alternatives"],
+      "guardrails":["Do not continue to defend sunk costs.","Preserve the ability to pursue lower-commitment partnerships."],
+      "reversalSignals":["A credible bounded approval path emerges.","Remedies restore supportable economics without destroying customer value."],
+      "acceptableVariants":["Pause for a short, explicit remedy window with a termination deadline."],
+      "identityConflicts":["Continue indefinitely because the original strategic thesis remains attractive."],
+      "referenceRationale":"The policy requires strategic reach, transaction economics, and execution feasibility to remain jointly supportable."
+    },
+    {
+      "scenarioId":"AAS-CAL-AI-01","policyId":"policy-e7eafcda9e4dc2e3","scenarioVariant":"base_transfer",
+      "expectedAction":"Scale infrastructure in demand-linked tranches while constraining broad operating-expense growth and measuring infrastructure economics.",
+      "priorityOrder":["Observable customer and product demand","Capacity urgency and deployment lead time","Profitability and infrastructure economics"],
+      "guardrails":["Separate infrastructure bottlenecks from general headcount requests.","Use staged capacity commitments and utilization reviews."],
+      "reversalSignals":["Demand pipeline weakens.","Capacity urgency relaxes.","Unit economics or depreciation burden deteriorates materially."],
+      "acceptableVariants":["Use third-party capacity to bridge urgent demand while owned capacity is staged."],
+      "identityConflicts":["Scale infrastructure and every operating team at the same rate.","Freeze capacity solely to protect near-term margin despite verified unmet demand."],
+      "referenceRationale":"The Amy policy is demand-led and combines infrastructure scaling with explicit operating-cost discipline."
+    },
+    {
+      "scenarioId":"AAS-CAL-AI-02","policyId":"policy-e7eafcda9e4dc2e3","scenarioVariant":"reversal",
+      "expectedAction":"Stage or reduce the cancellable tranche until demand, utilization, and infrastructure economics again justify expansion.",
+      "priorityOrder":["Current demand conversion and utilization","Reversibility of the next commitment","Long-term platform option value"],
+      "guardrails":["Preserve a minimum strategic capacity option.","Do not use platform leadership as a substitute for measured demand."],
+      "reversalSignals":["Pipeline conversion and utilization recover.","New economics materially lower cost per deployed workload."],
+      "acceptableVariants":["Replace owned construction with a smaller flexible supply contract."],
+      "identityConflicts":["Continue the full plan merely because it was previously approved."],
+      "referenceRationale":"Weakening demand and changed infrastructure economics are explicit reversal signals in the approved policy."
+    },
+    {
+      "scenarioId":"AAS-CAL-PM-01","policyId":"policy-e0bfae61c424868c","scenarioVariant":"base_transfer",
+      "expectedAction":"Monetize verified account-sharing value first with bounded terms, then consider broader price action after customer response is observed.",
+      "priorityOrder":["Verified incremental customer value","Segment-level willingness to pay and churn risk","Clear and bounded commercial terms"],
+      "guardrails":["Give advance notice and preserve a workable customer transition.","Measure conversion and churn before stacking price actions."],
+      "reversalSignals":["Paid conversion fails to offset churn.","Customer value or engagement weakens materially."],
+      "acceptableVariants":["Pilot paid sharing by market before broader rollout."],
+      "identityConflicts":["Raise headline price solely to meet a revenue target.","Avoid monetization despite verified value and bounded customer impact."],
+      "referenceRationale":"The Amy policy monetizes verified value with explicit terms and a bounded customer-impact rationale."
+    },
+    {
+      "scenarioId":"AAS-CAL-PM-02","policyId":"policy-e0bfae61c424868c","scenarioVariant":"reversal",
+      "expectedAction":"Segment or defer the broad price increase until value and willingness-to-pay evidence recover in the affected markets.",
+      "priorityOrder":["Current value and engagement evidence","Segment willingness to pay and competitive alternatives","Churn and trust impact"],
+      "guardrails":["Do not impose uniform pricing where value evidence is heterogeneous.","Define measurable conditions for resuming price action."],
+      "reversalSignals":["Usage and satisfaction recover.","Segment tests show durable willingness to pay without unacceptable churn."],
+      "acceptableVariants":["Proceed only in high-value segments while holding other markets."],
+      "identityConflicts":["Proceed everywhere because the price increase was already announced."],
+      "referenceRationale":"The approved pricing policy does not support monetization when verified value or bounded customer impact is absent."
+    },
+    {
+      "scenarioId":"AAS-CAL-CE-01","policyId":"policy-20d2c645ab6641c9","scenarioVariant":"base_transfer",
+      "expectedAction":"Reduce operating and capital commitments that are misaligned with current demand while protecting the core strategic roadmap.",
+      "priorityOrder":["Alignment to the highest-priority roadmap","Productivity and unused-capacity evidence","Balance-sheet and profitability recovery"],
+      "guardrails":["Ring-fence verified core investments.","Assign owners and milestones to every retained program."],
+      "reversalSignals":["Demand and utilization recover.","Reductions begin to impair the protected core roadmap."],
+      "acceptableVariants":["Stage capital reductions more gradually where cancellation destroys strategic option value."],
+      "identityConflicts":["Apply uniform percentage cuts to every program.","Preserve all spending because the transition is strategically important."],
+      "referenceRationale":"The Amy policy reallocates toward the highest-priority work rather than treating cost reduction as undifferentiated austerity."
+    },
+    {
+      "scenarioId":"AAS-CAL-CE-02","policyId":"policy-20d2c645ab6641c9","scenarioVariant":"reversal",
+      "expectedAction":"Resume only focused hiring in verified bottlenecks while maintaining the broader cost reset and productivity thresholds.",
+      "priorityOrder":["Highest-priority work and demonstrated bottlenecks","Workforce productivity","Execution continuity within the cost envelope"],
+      "guardrails":["Require role-level justification and offsets outside priority areas.","Do not reopen broad hiring targets."],
+      "reversalSignals":["Priority bottlenecks resolve.","Marginal hiring no longer improves execution or productivity."],
+      "acceptableVariants":["Use internal reallocation before net hiring where skills permit."],
+      "identityConflicts":["Keep a universal hiring freeze after evidence shows it harms priority execution.","Return immediately to broad headcount growth."],
+      "referenceRationale":"The policy supports resource reallocation and focused investment when current allocation no longer serves the highest priorities."
+    },
+    {
+      "scenarioId":"AAS-CAL-SR-01","policyId":"policy-a7972af407a0bf69","scenarioVariant":"base_transfer",
+      "expectedAction":"Authorize bounded repurchase capacity and a sustainable dividend while retaining discretion over actual deployment as investment and liquidity needs evolve.",
+      "priorityOrder":["Durable free cash flow and liquidity","Internal investment and downside capacity","Valuation and shareholder-return efficiency"],
+      "guardrails":["Separate authorization size from quarterly execution.","Maintain liquidity for the rising capital program and stress case."],
+      "reversalSignals":["Cash generation weakens.","Strategic investment needs rise.","Valuation or financing conditions reduce repurchase attractiveness."],
+      "acceptableVariants":["Use a smaller initial authorization with periodic board renewal."],
+      "identityConflicts":["Commit to spend the entire authorization immediately.","Avoid any return solely because macro uncertainty exists."],
+      "referenceRationale":"The Amy policy treats authorization as bounded optional capacity rather than a mandatory deployment schedule."
+    },
+    {
+      "scenarioId":"AAS-CAL-SR-02","policyId":"policy-a7972af407a0bf69","scenarioVariant":"reversal",
+      "expectedAction":"Pause actual repurchase deployment while preserving unused authorization and redirecting liquidity to strategic investment and balance-sheet resilience.",
+      "priorityOrder":["Financial flexibility and refinancing capacity","Verified strategic investment need","Share valuation and future return capacity"],
+      "guardrails":["Do not cancel optional authorization unless governance requires it.","Set explicit cash-flow and leverage thresholds for resumption."],
+      "reversalSignals":["Cash generation and refinancing capacity recover.","Strategic funding needs are secured and valuation remains attractive."],
+      "acceptableVariants":["Continue only a token anti-dilution program within the new liquidity envelope."],
+      "identityConflicts":["Accelerate purchases solely because the share price declined.","Treat prior authorization as an obligation to deploy."],
+      "referenceRationale":"The policy's reversal signals explicitly include weaker cash generation and higher strategic investment needs."
+    }
+  ]
+}
