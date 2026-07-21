@@ -35,6 +35,7 @@
     "evaluation:v5:run": "tsx server/runAmyHoodEvaluationV5.ts",
     "evaluation:v6:test": "tsx --test tests/amyHoodEvaluationV6*.test.ts",
     "evaluation:v6:run": "tsx server/runAmyHoodEvaluationV6.ts",
+    "evaluation:v6:formal": "tsx server/runAmyHoodEvaluationV6.ts formal-run",
     "advisor:memory:release": "tsx server/runAmyHoodDecisionAdvisor.ts memory:release",
     "advisor:memory:activate": "tsx server/runAmyHoodDecisionAdvisor.ts memory:activate",
     "advisor:index:test": "tsx --test tests/amyHoodRagContracts.test.ts tests/amyHoodEmbeddingClient.test.ts tests/amyHoodMemoryIndex.test.ts tests/amyHoodHybridRetriever.test.ts tests/amyHoodRagContext.test.ts",

@@ -4,6 +4,7 @@ import type { EvaluationV6BundleInput } from '../shared/amyHoodEvaluationV6';
 import { checkEvaluationV6Audit, initializeEvaluationV6Audit } from './evaluationV6/audit';
 import { loadActiveEvaluationV6Calibration } from './evaluationV6/calibration';
 import { runEvaluationV6LocalCalibration, runEvaluationV6LocalJudge, runEvaluationV6LocalPairJudge } from './evaluationV6/localJudge';
+import { runEvaluationV6Formal } from './evaluationV6/formalRun';
 import { writeEvaluationV6HtmlReport } from './evaluationV6/report';
 import { createEvaluationV6Runner } from './evaluationV6/runner';
 import {
@@ -70,6 +71,23 @@ export const runAmyHoodEvaluationV6Command = async (args: string[], root = proce
       baseUrl: requiredOption(args, '--base-url').replace(/\/+$/, ''),
     });
   }
+  if (command === 'formal-run') {
+    const candidateBaseUrl = option(args, '--candidate-base-url');
+    const embeddingBaseUrl = option(args, '--embedding-base-url');
+    const judgeBaseUrl = option(args, '--judge-base-url');
+    const htmlPath = option(args, '--html');
+    if (!candidateBaseUrl || !embeddingBaseUrl || !judgeBaseUrl || !htmlPath) {
+      throw new Error('formal-run requires --candidate-base-url, --embedding-base-url, --judge-base-url, and --html');
+    }
+    return runEvaluationV6Formal({
+      root,
+      candidateBaseUrl,
+      embeddingBaseUrl,
+      judgeBaseUrl,
+      htmlPath,
+      ...(option(args, '--group') ? { experimentGroupId: option(args, '--group') } : {}),
+    });
+  }
   const runner = createEvaluationV6Runner({
     root,
     createModel: () => createModelClient('local', { maxTokens: 900 }),
@@ -80,7 +98,7 @@ export const runAmyHoodEvaluationV6Command = async (args: string[], root = proce
   if (command === 'report') {
     return writeEvaluationV6HtmlReport(root, requiredOption(args, '--group'), requiredOption(args, '--html'));
   }
-  throw new Error('expected audit-init, audit-check, candidate-check, calibrate-local, freeze, check, create, execute, resume, judge-local, judge-pairs-local, or report');
+  throw new Error('expected audit-init, audit-check, candidate-check, calibrate-local, freeze, check, create, execute, resume, judge-local, judge-pairs-local, formal-run, or report');
 };
 
 if (fileURLToPath(import.meta.url) === process.argv[1]) {
@@ -91,4 +109,3 @@ if (fileURLToPath(import.meta.url) === process.argv[1]) {
     process.exitCode = 1;
   });
 }
-

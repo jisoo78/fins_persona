@@ -22,5 +22,6 @@ export const evaluationV6Paths = (root: string) => {
     runs: path.join(base, 'runs'),
     retrievalCache: path.join(base, 'retrieval-cache'),
     reports: path.join(base, 'reports'),
+    formalRunCheckpoint: path.join(base, 'formal-run/active.json'),
   };
 };

@@ -31,6 +31,8 @@ export interface ModelClient {
 
 export type ModelClientOptions = {
   maxTokens?: number;
+  baseUrl?: string;
+  model?: string;
 };
 
 export const modelRequestSettings = (
@@ -38,9 +40,12 @@ export const modelRequestSettings = (
   options: ModelClientOptions = {},
 ) => ({
   model:
-    provider === 'local'
+    options.model ?? (provider === 'local'
       ? process.env.LOCAL_LLM_MODEL || 'local-model'
-      : process.env.OPENAI_MODEL || 'gpt-5-mini',
+      : process.env.OPENAI_MODEL || 'gpt-5-mini'),
+  baseUrl: provider === 'local'
+    ? (options.baseUrl ?? process.env.LOCAL_LLM_BASE_URL ?? 'http://127.0.0.1:8080/v1').replace(/\/+$/, '')
+    : undefined,
   maxTokens: options.maxTokens ?? LOCAL_MAX_OUTPUT_TOKENS,
   modelKwargs:
     provider === 'local'
@@ -91,7 +96,7 @@ export const createModelClient = (
   if (provider === 'openai' && !process.env.OPENAI_API_KEY) {
     throw new Error('OPENAI_API_KEY is required for the openai provider');
   }
-  const { model, maxTokens, modelKwargs } = modelRequestSettings(provider, options);
+  const { model, maxTokens, modelKwargs, baseUrl } = modelRequestSettings(provider, options);
   const chat = new ChatOpenAI({
     apiKey:
       provider === 'local'
@@ -104,7 +109,7 @@ export const createModelClient = (
       ? {
           temperature: 0.2,
           configuration: {
-            baseURL: process.env.LOCAL_LLM_BASE_URL || 'http://127.0.0.1:8080/v1',
+            baseURL: baseUrl,
           },
         }
       : {}),

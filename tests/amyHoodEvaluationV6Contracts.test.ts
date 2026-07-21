@@ -48,5 +48,6 @@ test('failure: rejects unknown evidence, invalid ratings, and unsafe CLI request
   await assert.rejects(runAmyHoodEvaluationV6Command(['calibrate-local']), /--base-url/i);
   await assert.rejects(runAmyHoodEvaluationV6Command(['create', '--repetitions', '2']), /1 or 5/i);
   await assert.rejects(runAmyHoodEvaluationV6Command(['judge-local', '--group', 'g']), /--repetition.*--base-url/i);
+  await assert.rejects(runAmyHoodEvaluationV6Command(['formal-run']), /--candidate-base-url.*--embedding-base-url.*--judge-base-url.*--html/i);
   await assert.rejects(runAmyHoodEvaluationV6Command(['unknown']), /audit-init.*report/i);
 });
