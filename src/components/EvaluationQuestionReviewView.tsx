@@ -130,7 +130,7 @@ export const EvaluationQuestionReviewView: React.FC = () => {
             평가 문항 검토
           </div>
           <h1 className="text-2xl font-bold tracking-tight text-slate-950 dark:text-white">
-            Amy Hood 블라인드 평가 질문 15개
+            Amy Hood 블라인드 평가 질문 60개
           </h1>
           <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
             원문은 직접 편집하지 않습니다. 승인 또는 수정 필요 상태와 Codex에 전달할 수정 지시만 저장합니다.

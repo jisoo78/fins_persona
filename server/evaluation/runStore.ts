@@ -50,10 +50,13 @@ export const listRuns = async (root: string) => {
   const directory = resolve(root, 'evaluation', 'runs');
   await mkdir(directory, { recursive: true });
   const names = (await readdir(directory))
-    .filter((name) => name.endsWith('.json'))
-    .sort()
-    .reverse();
-  return Promise.all(
+    .filter((name) => name.endsWith('.json'));
+  const runs = await Promise.all(
     names.map((name) => readRun(root, basename(name, '.json'))),
+  );
+  return runs.sort(
+    (left, right) =>
+      new Date(right.startedAt).getTime() - new Date(left.startedAt).getTime() ||
+      right.runId.localeCompare(left.runId),
   );
 };

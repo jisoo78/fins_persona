@@ -2,6 +2,7 @@ import React from 'react';
 import { AlertTriangle, RotateCcw } from 'lucide-react';
 
 import type { EvaluationQuestion, EvaluationRun } from '../../../shared/amyHoodEvaluation';
+import { EVALUATION_KPI_MAX_SCORES } from '../../../shared/amyHoodEvaluation';
 import { CopyRunIdButton } from './CopyRunIdButton';
 import { buildSingleRunReport } from './evaluationReportViewModel';
 
@@ -35,9 +36,9 @@ export const SingleRunReport: React.FC<Props> = ({ run, questions, onResume }) =
         </div>
         <div className="mt-5 grid gap-3 sm:grid-cols-3">
           {[
-            ['과거 복원', `${report.scores.pastMemory}/7`],
-            ['GitHub 홀드아웃', `${report.scores.githubHoldout}/5`],
-            ['가상 시나리오', report.scores.subjective === null ? '채점 대기' : `${report.scores.subjective}/24`],
+            ['과거 복원', `${report.scores.pastMemory}/${EVALUATION_KPI_MAX_SCORES.pastMemory}`],
+            ['M&A 판단', `${report.scores.githubHoldout}/${EVALUATION_KPI_MAX_SCORES.githubHoldout}`],
+            ['가상 시나리오', report.scores.subjective === null ? '채점 대기' : `${report.scores.subjective}/${EVALUATION_KPI_MAX_SCORES.subjective}`],
           ].map(([label, value]) => (
             <div key={label} className="rounded-xl bg-slate-50 p-4 dark:bg-slate-950/60">
               <p className="text-xs text-slate-500">{label}</p>

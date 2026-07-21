@@ -1,0 +1,37 @@
+[
+  {
+    "id": "gemma4-12b-local",
+    "label": "Gemma 4 12B (local)",
+    "provider": "local",
+    "model": "yuxinlu1/gemma-4-12B-agentic-fable5-composer2.5-v2-3.5x-tau2-GGUF:Q4_K_M",
+    "note": "현재 기준 로컬 평가 모델입니다. llama-server에서 같은 모델명으로 실행되어야 합니다."
+  },
+  {
+    "id": "gemma4-e4b-local",
+    "label": "Gemma 4 E4B (local)",
+    "provider": "local",
+    "model": "google/gemma-4-E4B-it",
+    "note": "비교 평가용 경량 후보입니다. OpenAI 호환 로컬 서버가 이 모델명으로 떠 있어야 합니다."
+  },
+  {
+    "id": "phi-4-mini-local",
+    "label": "Phi-4-mini (local)",
+    "provider": "local",
+    "model": "microsoft/Phi-4-mini-instruct",
+    "note": "비교 평가용 소형 후보입니다. OpenAI 호환 로컬 서버가 이 모델명으로 떠 있어야 합니다."
+  },
+  {
+    "id": "llama-3.1-8b-local",
+    "label": "Llama 3.1 8B (local)",
+    "provider": "local",
+    "model": "meta-llama/Llama-3.1-8B",
+    "note": "저성능 비교용 후보입니다. Hugging Face 접근 권한이 필요하며, OpenAI 호환 로컬 서버가 이 모델명으로 떠 있어야 합니다. 영어 평가셋 사용을 권장합니다."
+  },
+  {
+    "id": "gpt-5-mini-openai",
+    "label": "GPT-5-mini (OpenAI)",
+    "provider": "openai",
+    "model": "gpt-5-mini",
+    "note": "유료 API 비교 평가용입니다."
+  }
+]

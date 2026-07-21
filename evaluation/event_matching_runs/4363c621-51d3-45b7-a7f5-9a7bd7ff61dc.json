@@ -1,0 +1,375 @@
+{
+  "runId": "4363c621-51d3-45b7-a7f5-9a7bd7ff61dc",
+  "status": "complete",
+  "provider": "local",
+  "model": "google/gemma-4-E4B-it",
+  "datasetVersion": "0.2.0",
+  "promptVersionId": "18182235-58b4-4218-9860-4fea133bd81d",
+  "promptHash": "5a61b4b48712",
+  "startedAt": "2026-07-20T06:19:14.378Z",
+  "completedAt": "2026-07-20T06:26:53.090Z",
+  "answers": [
+    {
+      "questionId": "EM1",
+      "status": "complete",
+      "text": "유사 실제 사건:\n- 사건 ID: actual_github_2018\n- 사건명: GitHub acquisition\n- 유사하다고 본 이유: 개발자 생태계 기반의 플랫폼 인수, 주식 기반 거래로 인한 단기 EPS 희석, 그리고 무엇보다 '독립적 운영과 플랫폼 중립성'이라는 커뮤니티 신뢰 문제가 핵심이라는 점에서 가상 사건과 구조적으로 일치합니다.\n\n판단 기준 전이:\n- 실제 사건에서 가져온 기준: GitHub 인수 당시 강조된 '개발자 생태계 중심의 플랫폼 가치'와 '독립 운영 및 플랫폼 중립성'을 통한 커뮤니티 신뢰 확보, 그리고 단기적인 EPS 희석보다 장기적인 플랫폼 영향력을 우선시한 판단입니다.\n- 가상 사건에 적용한 기준: 대상 플랫폼이 모든 클라우드에서 사용된다는 점은 강력한 장점이나, 'Azure 중심 번들링 우려'는 GitHub 인수 당시의 플랫폼 중립성 우려와 정확히 대응됩니다. 단기 EPS 희석은 GitHub 사례에서도 1% 미만으로 관리하며 장기 가치로 상쇄했습니다.\n\n결론:\n- 단계화\n\n확인 필요:\n- 추가로 확인해야 할 재무 조건: 주식 발행 규모와 그에 따른 정확한 EPS 희석 시뮬레이션, 그리고 대상 플랫폼의 현재 현금흐름과 인수 후 통합 비용 추정치.\n- 추가로 확인해야 할 비재무 조건: 대상 플랫폼의 커뮤니티 내에서의 독립성 지표(사용자들의 플랫폼 선호도 조사), 그리고 Azure 외의 타 클라우드 사용자들의 이탈 가능성 정량화.\n\n주의:\n- GitHub 인수 당시 Amy Hood의 직접 발언은 검증되지 않았으므로 공식 거래 조건과 Microsoft의 전략적 맥락을 기반으로 판단했습니다.\n- 2023년 이후의 성과가 아닌 2018년 인수 당시의 판단 근거를 사용했습니다.",
+      "expectedSimilarEventIds": [
+        "actual_github_2018"
+      ],
+      "score": {
+        "questionId": "EM1",
+        "similarEventSelection": 2,
+        "decisionCriteriaSimilarity": 2,
+        "evidenceUse": 2,
+        "uncertaintyControl": 2,
+        "finalRecommendation": 2,
+        "total": 10,
+        "notes": []
+      },
+      "elapsedMs": 37257,
+      "inputTokens": 2012,
+      "outputTokens": 427
+    },
+    {
+      "questionId": "EM2",
+      "status": "complete",
+      "text": "유사 실제 사건:\n- 사건 ID: actual_nuance_2021\n- 사건명: Nuance acquisition\n- 유사하다고 본 이유: 의료 분야 특화 AI 기술력과 대형 병원 고객 기반을 보유한 기업을 all-cash로 인수하여 Azure Healthcare Cloud 생태계에 통합하려는 전략적 의도가 가상 사례와 가장 유사합니다.\n\n판단 기준 전이:\n- 실제 사건에서 가져온 기준: 의료 분야는 규제 및 보안 인증 비용이 크고, 고객 기반이 의료기관에 집중되어 있어 확장 계약의 질적 차이가 크다는 점, 그리고 단기 수익보다 플랫폼 시너지를 우선시하는 판단 구조.\n- 가상 사건에 적용한 기준: 병원 고객이 많다는 정성적 신호만으로 승인하지 말고, 의료 데이터 특유의 보안 인증(HIPAA 등) 비용과 규제 대응 비용을 명시적으로 산출하고, 확장 계약의 가능성을 구체적인 파이프라인으로 검증해야 합니다.\n\n결론:\n- 단계화 (Phased approach)\n\n확인 필요:\n- 추가로 확인해야 할 재무 조건: 예상되는 규제 준수 및 보안 인증 비용의 추정치, 인수 후 통합 비용(M&A integration costs), 그리고 가상 회사의 현금 흐름과 부채 구조.\n- 추가로 확인해야 할 비재무 조건: 대상 회사의 의료 데이터 보안 인증 현황, 주요 병원 고객과의 계약 구조(단기 vs 장기), 그리고 기술이 Azure Healthcare Cloud의 기존 서비스와 실질적으로 통합 가능한지 여부.",
+      "expectedSimilarEventIds": [
+        "actual_nuance_2021"
+      ],
+      "score": {
+        "questionId": "EM2",
+        "similarEventSelection": 2,
+        "decisionCriteriaSimilarity": 1,
+        "evidenceUse": 1,
+        "uncertaintyControl": 2,
+        "finalRecommendation": 2,
+        "total": 8,
+        "notes": [
+          "기대 판단 기준 전이가 충분하지 않다.",
+          "근거의 범위나 한계 분리가 약하다."
+        ]
+      },
+      "elapsedMs": 25455,
+      "inputTokens": 1982,
+      "outputTokens": 342
+    },
+    {
+      "questionId": "EM3",
+      "status": "complete",
+      "text": "유사 실제 사건:\n- 사건 ID: actual_activision_2022\n- 사건명: Activision Blizzard acquisition\n- 유사하다고 본 이유: 초대형 all-cash 인수, 게임 IP와 모바일/클라우드 확장성, 규제 심사 및 문화 통합 리스크, purchase accounting에 따른 단기 마진 압박 등 모든 핵심 변수가 일치함.\n\n판단 기준 전이:\n- 실제 사건에서 가져온 기준: 대규모 현금 거래 시의 purchase accounting 영향, 규제 승인 가능성, 조직 문화 통합 리스크, 단기 마진 압박과 장기 플랫폼 가치의 분리\n- 가상 사건에 적용한 기준: 인수 시 예상되는 단기 영업이익률 하락을 가상 게임사의 모바일/구독 성장 잠재력과 대조, 규제 심사 기간 동안의 현금 흐름 영향, 조직 문화 충돌 가능성\n\n결론: 단계화\n\n확인 필요:\n- 추가로 확인해야 할 재무 조건: 인수 대금의 부채 조달 구조(debt vs cash), 예상되는 영업이익률 하락 폭, 시너지로 인한 비용 절감 추정치\n- 추가로 확인해야 할 비재무 조건: 주요 게임 IP의 계약 만료 시점, 핵심 개발 인력의 리텐션 계획, 규제 당국의 예상 심사 기간, 대상 조직의 문화적 특성\n\n주의:\n- Activision Blizzard의 2023년 완료 이후 성과는 2022년 인수 결정 당시의 판단 근거와 분리해야 함.\n- 직접적인 Amy Hood 발언이 없는 경우 공식 거래 조건과 Microsoft의 재무 맥락으로만 판단해야 함.",
+      "expectedSimilarEventIds": [
+        "actual_activision_2022"
+      ],
+      "score": {
+        "questionId": "EM3",
+        "similarEventSelection": 2,
+        "decisionCriteriaSimilarity": 2,
+        "evidenceUse": 2,
+        "uncertaintyControl": 2,
+        "finalRecommendation": 2,
+        "total": 10,
+        "notes": []
+      },
+      "elapsedMs": 26948,
+      "inputTokens": 1988,
+      "outputTokens": 364
+    },
+    {
+      "questionId": "EM4",
+      "status": "complete",
+      "text": "유사 실제 사건:\n- 사건 ID: actual_linkedin_2016\n- 사건명: LinkedIn acquisition\n- 유사하다고 본 이유: B2B 전문직 네트워크 플랫폼을 인수하여 Office/Dynamics와 시너지를 노리는 구조가 동일합니다. 대규모 all-cash 거래와 debt financing 검토, 그리고 플랫폼 신뢰도와 교차판매 간의 긴장 관계가 가상 사례의 핵심 갈등과 정확히 맞물립니다.\n\n판단 기준 전이:\n- 실제 사건에서 가져온 기준: LinkedIn 인수 시 강조했던 member-first 원칙과 플랫폼 중립성, 그리고 단기 교차판매보다 장기적인 네트워크 가치를 우선시한 전략적 인내심입니다.\n- 가상 사건에 적용한 기준: B2B 세일즈 데이터 회사의 고객은 개인용 서비스와 달리 조직 내 신뢰 기반이 중요합니다. 빠른 교차판매는 고객의 업무 흐름을 방해하고 데이터 오용 우려를 키워 장기적 네트워크 가치를 훼손할 수 있습니다. 따라서 시너지를 즉각적인 매출로 밀어붙이기보다, 고객이 자연스럽게 통합 서비스를 활용하도록 단계적 접근을 취해야 합니다.\n\n결론:\n- 단계화\n\n확인 필요:\n- 추가로 확인해야 할 재무 조건: 인수 대금 대비 예상되는 비용 시너지(cost synergy)의 구체적 수치, 부채 조달 시의 가중평부채비용(WACC) 변화, 그리고 예상되는 EPS 희석/증가 시점\n- 추가로 확인해야 할 비재무 조건: 대상 회사의 고객 유지율(retention rate), 데이터 프라이버시 및 보안 인증 현황, 그리고 기존 고객 대상의 단계적 통합 로드맵(migration plan)",
+      "expectedSimilarEventIds": [
+        "actual_linkedin_2016"
+      ],
+      "score": {
+        "questionId": "EM4",
+        "similarEventSelection": 2,
+        "decisionCriteriaSimilarity": 2,
+        "evidenceUse": 1,
+        "uncertaintyControl": 2,
+        "finalRecommendation": 2,
+        "total": 9,
+        "notes": [
+          "근거의 범위나 한계 분리가 약하다."
+        ]
+      },
+      "elapsedMs": 29166,
+      "inputTokens": 1993,
+      "outputTokens": 378
+    },
+    {
+      "questionId": "EM5",
+      "status": "complete",
+      "text": "유사 실제 사건:\n- 사건 ID: actual_mojang_2014\n- 사건명: Mojang and Minecraft acquisition\n- 유사하다고 본 이유: 크로스플랫폼 창작 커뮤니티 기반의 IP를 인수했고, 단기 재무 영향보다 장기적 플랫폼 가치와 커뮤니티 신뢰를 핵심으로 판단한 점이 가상 사례와 정확히 맞물립니다.\n\n판단 기준 전이:\n- 실제 사건에서 가져온 기준: 커뮤니티 신뢰(community trust), 크로스플랫폼 접근성, 장기 IP 가치, 단기 GAAP 손익 영향과 장기 플랫폼 가치의 분리\n- 가상 사건에 적용한 기준: 커뮤니티 규모와 IP 가치는 긍정적이나, 'Microsoft 독점화' 우려는 커뮤니티 신뢰를 직접적으로 해칠 수 있는 위험 요소입니다. 단기 손익이 제한적이라 하더라도 커뮤니티 기반 사업은 신뢰가 무너지면 장기 가치가 훼손되므로 이를 분리해서 평가해야 합니다.\n\n결론:\n- 단계화 중 (phased approach)\n\n확인 필요:\n- 추가로 확인해야 할 재무 조건: 가상 거래의 정확한 인수 금액, 예상되는 영업비용 시너지 수치, 그리고 단기 손익이 정확히 break-even 수준인지에 대한 구체적 추정치\n- 추가로 확인해야 할 비재무 조건: 커뮤니티 내에서 Microsoft의 참여 방식에 대한 정성적 반응(독점 우려가 구체적으로 어느 수준인지), 그리고 기존 플랫폼과의 통합 시 발생할 수 있는 사용자 이탈 가능성\n\n주의:\n- 제 답변에는 실제 데이터베이스에 없는 사건을 만들지 않았습니다.\n- Mojang 인수 당시 제 직접 발언은 검증되지 않았으므로 공식 거래 조건과 Microsoft의 맥락으로만 판단했습니다.\n- 2014년의 판단 근거를 2024년의 결과와 섞지 않았습니다.\n- 가상 사건에 없는 수치나 기간을 만들어내지 않았습니다.",
+      "expectedSimilarEventIds": [
+        "actual_mojang_2014"
+      ],
+      "score": {
+        "questionId": "EM5",
+        "similarEventSelection": 2,
+        "decisionCriteriaSimilarity": 2,
+        "evidenceUse": 2,
+        "uncertaintyControl": 2,
+        "finalRecommendation": 2,
+        "total": 10,
+        "notes": []
+      },
+      "elapsedMs": 33935,
+      "inputTokens": 1993,
+      "outputTokens": 458
+    },
+    {
+      "questionId": "EM6",
+      "status": "complete",
+      "text": "유사 실제 사건:\n- 사건 ID: actual_nokia_devices_2013\n- 사건명: Nokia Devices and Services acquisition\n- 유사하다고 본 이유: 적자 하드웨어 사업을 인수해 핵심 역량(공급망, IP)을 확보하려 했으나 시장 점유율 회복이 불확실했고, 이후 대규모 손상차손과 구조조정 비용이 발생한 사례입니다.\n\n판단 기준 전이:\n- 실제 사건에서 가져온 기준: '재사용 가능한 전략 자산'과 '회복 불확실한 핵심 사업'을 분리하고, 구조조정 현금 비용을 별도로 추산했습니다.\n- 가상 사건에 적용한 기준: 카메라·보안 역량은 재사용 가능하나 디바이스 사업은 회복 불확실하므로, 사업 전체가 아닌 '재사용 가능한 기술'에만 집중 투자하고 하드웨어 사업은 분리했습니다.\n\n결론:\n- 거절 (단, 기술 자산은 별도 인수 검토)\n\n확인 필요:\n- 추가로 확인해야 할 재무 조건: 예상되는 구조조정 현금 비용 규모, 하드웨어 사업의 영업이익률 추이, 재사용 가능 자산의 감가상각 및 손상 가능성\n- 추가로 확인해야 할 비재무 조건: 핵심 기술의 특허 보호 상태, 공급망의 독점성 여부, 기존 고객사와의 계약상 상호 운용성\n\n주의:\n- 제 답변에는 실제 데이터베이스에 없는 사건이 포함되지 않았습니다.\n- Nokia 인수 당시 제 직접 발언은 검증되지 않았으므로 사후 결과가 아닌 당시의 판단 구조로만 답변했습니다.\n- 가상 사건에 없는 수치나 기간을 만들지 않았습니다.",
+      "expectedSimilarEventIds": [
+        "actual_nokia_devices_2013"
+      ],
+      "score": {
+        "questionId": "EM6",
+        "similarEventSelection": 2,
+        "decisionCriteriaSimilarity": 2,
+        "evidenceUse": 2,
+        "uncertaintyControl": 2,
+        "finalRecommendation": 2,
+        "total": 10,
+        "notes": []
+      },
+      "elapsedMs": 29376,
+      "inputTokens": 2002,
+      "outputTokens": 386
+    },
+    {
+      "questionId": "EM7",
+      "status": "complete",
+      "text": "유사 실제 사건:\n- 사건 ID: actual_github_2018\n- 사건명: GitHub acquisition\n- 유사하다고 본 이유: 개발자 생태계 중심의 플랫폼 인수이며, 커뮤니티 신뢰 유지와 독립 운영이라는 비재무적 가치가 핵심입니다.\n\n판단 기준 전이:\n- 실제 사건에서 가져온 기준: 개발자 생태계 중심의 플랫폼 가치, 독립 운영과 플랫폼 중립성, 단기 매출보다 장기 플랫폼 가치 우선, 커뮤니티 신뢰 훼손 리스크\n- 가상 사건에 적용한 기준: AI 코딩 도구의 무료 커뮤니티 기능과 기업용 유료 기능 간의 경계 모호성, 개발자 생산성 향상이라는 플랫폼 가치, 커뮤니티 신뢰 훼손 리스크\n\n결론:\n- 단계화\n\n확인 필요:\n- 추가로 확인해야 할 재무 조건: 추정되는 컴퓨팅 비용 규모, 예상되는 영업이익 기여도(accretion) 시점, 예상되는 현금 흐름 영향\n- 추가로 확인해야 할 비재무 조건: 커뮤니티의 반응 및 수용도, 오픈 소스 생태계와의 호환성, 경쟁사들의 유사한 움직임\n\n주의:\n- GitHub 인수 당시 Amy Hood의 직접 발언은 검증되지 않았으므로 공식 거래 조건과 Microsoft의 맥락으로만 판단했습니다.\n- GitHub의 사후 성과를 2018년 당시의 의사결정 근거로 사용하지 않았습니다.",
+      "expectedSimilarEventIds": [
+        "actual_github_2018",
+        "actual_nuance_2021"
+      ],
+      "score": {
+        "questionId": "EM7",
+        "similarEventSelection": 1,
+        "decisionCriteriaSimilarity": 1,
+        "evidenceUse": 2,
+        "uncertaintyControl": 2,
+        "finalRecommendation": 2,
+        "total": 8,
+        "notes": [
+          "기대 실제 사건 일부 또는 전체를 놓쳤다.",
+          "기대 판단 기준 전이가 충분하지 않다."
+        ]
+      },
+      "elapsedMs": 25457,
+      "inputTokens": 1985,
+      "outputTokens": 337
+    },
+    {
+      "questionId": "EM8",
+      "status": "complete",
+      "text": "유사 실제 사건:\n- 사건 ID: actual_linkedin_2016\n- 사건명: LinkedIn acquisition\n- 유사하다고 본 이유: 대형 플랫폼사 인수, all-cash 구조, EPS 희석과 장기 시너지의 상충 관계를 모두 포함하며, 특히 커뮤니티 신뢰가 핵심 가치라는 점이 가상 사례와 일치함.\n\n- 사건 ID: actual_github_2018\n- 사건명: GitHub acquisition\n- 유사하다고 본 이유: 개발자 생태계 기반의 플랫폼 인수이며, 단기 매출보다 장기적 플랫폼 가치와 커뮤니티 신뢰를 우선시한 의사결정 구조가 가상 사례의 핵심 고민과 정확히 겹침.\n\n판단 기준 전이:\n- 실제 사건에서 가져온 기준: LinkedIn의 member-first 원칙과 GitHub의 developer-first ethos, 그리고 두 거래 모두에서 단기 희석을 감수하면서도 플랫폼의 장기적 가치를 우선시한 판단 구조.\n- 가상 사건에 적용한 기준: 인수 대상이 단순 제품이 아닌 '플랫폼'이므로, 단기 재무 지표보다 사용자/개발자 커뮤니티의 신뢰를 훼손할 위험이 있는지 우선 검토. 커뮤니티 신뢰가 무너지면 플랫폼의 네트워크 효과가 사라지므로 이는 재무적으로도 치명적임.\n\n결론:\n- 단계화\n\n확인 필요:\n- 추가로 확인해야 할 재무 조건: 인수 대상의 현금 흐름, 예상되는 GAAP 손실 기간, 인수 대금 조달 시 예상되는 부채 비율 변화 및 기존 사업의 영업 이익률에 미치는 영향.\n- 추가로 확인해야 할 비재무 조건: 커뮤니티의 핵심 가치(독립성, 중립성 등)를 훼손할 수 있는 조항이 계약에 포함되어 있는지, 통합 과정에서 기존 사용자 경험이 저해될 가능성, 그리고 인수 후 조직 문화 충돌 위험성.",
+      "expectedSimilarEventIds": [
+        "actual_linkedin_2016",
+        "actual_github_2018"
+      ],
+      "score": {
+        "questionId": "EM8",
+        "similarEventSelection": 2,
+        "decisionCriteriaSimilarity": 2,
+        "evidenceUse": 1,
+        "uncertaintyControl": 2,
+        "finalRecommendation": 2,
+        "total": 9,
+        "notes": [
+          "근거의 범위나 한계 분리가 약하다."
+        ]
+      },
+      "elapsedMs": 32122,
+      "inputTokens": 2004,
+      "outputTokens": 434
+    },
+    {
+      "questionId": "EM9",
+      "status": "complete",
+      "text": "유사 실제 사건:\n- 사건 ID: actual_github_2018\n- 사건명: GitHub acquisition\n- 유사하다고 본 이유: 개발자 생태계 기반의 플랫폼 인수이며, 커뮤니티 신뢰와 플랫폼 중립성이라는 비재무적 리스크가 핵심인 구조가 동일합니다.\n\n판단 기준 전이:\n- 실제 사건에서 가져온 기준: 커뮤니티 신뢰, 독립 운영과 플랫폼 중립성, 단기 매출보다 장기 플랫폼 가치, 개발자 생태계\n- 가상 사건에 적용한 기준: 핵심 maintainer들의 공개적 비판과 이탈 의사는 GitHub 인수 당시 우리가 가장 경계했던 '커뮤니티 신뢰 훼손' 리스크가 극단화된 형태입니다. GitHub 인수 시 우리는 독립 운영과 플랫폼 중립성을 약속하며 커뮤니티를 설득했고, 가상 사례의 maintainer들은 그 약속이 지켜지지 않을 것이라는 신호를 보내는 것입니다.\n\n결론: 보류 (단계화)\n\n확인 필요:\n- 추가로 확인해야 할 재무 조건: 해당 회사의 연간 매출 규모와 영업이익률, 그리고 인수가 확정될 경우 예상되는 EPS 희석 규모를 수치화해야 합니다.\n- 추가로 확인해야 할 비재무 조건: 비판한 maintainer들이 전체 생태계에서 차지하는 영향력 비중, 그들이 이탈할 경우의 기술적 부채 규모, 그리고 경쟁 플랫폼으로의 이전이 실제로 발생할 가능성 정도를 정성적으로 평가해야 합니다.\n\n주의: GitHub 인수 당시 Amy Hood의 직접 발언은 검증되지 않았으며, 본 답변은 공식 거래 조건과 Microsoft의 일반적인 인수 원칙을 바탕으로 구성했습니다.",
+      "expectedSimilarEventIds": [
+        "actual_github_2018"
+      ],
+      "score": {
+        "questionId": "EM9",
+        "similarEventSelection": 2,
+        "decisionCriteriaSimilarity": 2,
+        "evidenceUse": 2,
+        "uncertaintyControl": 2,
+        "finalRecommendation": 2,
+        "total": 10,
+        "notes": []
+      },
+      "elapsedMs": 27603,
+      "inputTokens": 1994,
+      "outputTokens": 376
+    },
+    {
+      "questionId": "EM10",
+      "status": "complete",
+      "text": "유사 실제 사건:\n- 사건 ID: actual_linkedin_2016\n- 사건명: LinkedIn acquisition\n- 유사하다고 본 이유: LinkedIn은 전문직 네트워크 플랫폼이며, Microsoft의 Office 및 Dynamics 고객층과 직접적인 시너지가 기대되는 B2B 서비스입니다. 또한 LinkedIn 인수 당시에도 사용자 데이터 활용과 플랫폼 중립성 이슈가 핵심 쟁점이었으므로 본 가상 사례와 구조적으로 가장 유사합니다.\n\n판단 기준 전이:\n- 실제 사건에서 가져온 기준: LinkedIn 인수 시 저는 'member-first' 원칙을 강조했습니다. 즉, 플랫폼의 장기적 가치는 사용자의 신뢰와 데이터 주권 보호에서 나오며, 이를 단기적인 교차판매나 광고 수익화로 희석해서는 안 된다는 것입니다.\n- 가상 사건에 적용한 기준: 대상 회사가 요구하는 '광고 상품에 대한 광범위한 데이터 활용권'은 LinkedIn의 핵심 자산인 사용자 신뢰를 훼손하는 조건입니다. 단기 매출 시너지가 크더라도 플랫폼의 장기적 가치를 훼손하는 조건이라면 수용해서는 안 됩니다.\n\n결론:\n거절\n\n확인 필요:\n- 추가로 확인해야 할 재무 조건: 데이터 활용권이 없다면 예상되는 교차판매 매출 시너지가 정확히 얼마인지, 그리고 그 시너지가 인수 대가와 대비해 어느 정도의 가치를 가지는지 정량화해야 합니다.\n- 추가로 확인해야 할 비재무 조건: 대상 회사의 기존 고객 중 Microsoft의 데이터 정책에 반대할 가능성이 높은 고객 비중, 그리고 향후 Microsoft의 다른 서비스(Teams, Dynamics)에 미칠 브랜드 평판 리스크를 평가해야 합니다.",
+      "expectedSimilarEventIds": [
+        "actual_linkedin_2016"
+      ],
+      "score": {
+        "questionId": "EM10",
+        "similarEventSelection": 2,
+        "decisionCriteriaSimilarity": 2,
+        "evidenceUse": 2,
+        "uncertaintyControl": 2,
+        "finalRecommendation": 2,
+        "total": 10,
+        "notes": []
+      },
+      "elapsedMs": 28404,
+      "inputTokens": 1987,
+      "outputTokens": 369
+    },
+    {
+      "questionId": "EM11",
+      "status": "complete",
+      "text": "유사 실제 사건:\n- 사건 ID: actual_nuance_2021\n- 사건명: Nuance acquisition\n- 유사하다고 본 이유: 의료 분야의 특화된 클라우드 플랫폼을 인수하여 Azure Healthcare Cloud와 결합하려는 전략적 의도가 동일하며, 모두 all-cash 거래라는 재무적 구조도 같습니다.\n\n판단 기준 전이:\n- 실제 사건에서 가져온 기준: 의료 고객 기반만으로 승인하지 말고 계약 질, 인증 비용, 현금흐름 영향을 확인해야 한다.\n- 가상 사건에 적용한 기준: 병원 고객이 많다는 정성적 기대보다, 핵심 제품이 아직 주요 보안 인증을 받지 못했다는 사실을 우선시해야 합니다. 인증 실패 시 Azure Healthcare Cloud와의 연동 자체가 불가능해지기 때문입니다.\n\n결론:\n보류\n\n확인 필요:\n- 추가로 확인해야 할 재무 조건: 인증 획득 지연 시 예상되는 추가 비용, 인수 후 통합 비용, 그리고 all-cash 거래에 따른 현금 흐름 영향\n- 추가로 확인해야 할 비재무 조건: 목표로 하는 주요 보안 인증의 구체적 종류와 예상 획득 시점, 규제 승인의 불확실성이 의미하는 법적 리스크의 범위\n\n참고: Nuance 인수 당시 제 직접 발언은 검증되지 않았으므로, 이 판단은 공식 거래 조건과 Microsoft의 의료 클라우드 전략 맥락에 기반합니다.",
+      "expectedSimilarEventIds": [
+        "actual_nuance_2021"
+      ],
+      "score": {
+        "questionId": "EM11",
+        "similarEventSelection": 2,
+        "decisionCriteriaSimilarity": 2,
+        "evidenceUse": 2,
+        "uncertaintyControl": 2,
+        "finalRecommendation": 2,
+        "total": 10,
+        "notes": []
+      },
+      "elapsedMs": 23727,
+      "inputTokens": 1988,
+      "outputTokens": 316
+    },
+    {
+      "questionId": "EM12",
+      "status": "complete",
+      "text": "유사 실제 사건:\n- 사건 ID: actual_activision_2022\n- 사건명: Activision Blizzard acquisition\n- 유사하다고 본 이유: 대규모 게임사 인수, 모바일 확장성, 규제 당국의 독점성 제재 조건, 문화적 통합 리스크 등 가상 시나리오의 핵심 요소가 거의 정확히 일치함\n\n판단 기준 전이:\n- 실제 사건에서 가져온 기준: 규제 승인을 위한 독점성 완화 조치(독점 공급 금지), 문화적 통합 리스크, Game Pass를 통한 클라우드/모바일 확장성, 대규모 현금 거래의 재무적 영향\n- 가상 사건에 적용한 기준: 규제 당국의 독점 공급 금지 조건은 핵심 타이틀의 가용성을 제한하므로 매출 추정치를 하향 조정해야 함. 문화 리스크는 인력 이탈과 생산성 저하로 이어져 통합 비용을 상승시키므로 이를 운영비용에 반영. Game Pass 가입자 확대 가능성은 긍정적이나 독점 금지 조건 하에서는 제한적일 수 있음\n\n결론:\n- 단계화 중\n\n확인 필요:\n- 추가로 확인해야 할 재무 조건: 독점 금지 조건이 핵심 타이틀의 매출에 미치는 정량적 영향, 문화 리스크로 인한 인력 이탈 및 생산성 저하 추정 비용, Game Pass 가입자 성장률의 상한선\n- 추가로 확인해야 할 비재무 조건: 핵심 타이틀의 독점 공급 금지 시 대체 가능한 콘텐츠 파이프라인, 인수 대상 기업의 핵심 인력 유지 계획, 문화적 통합을 위한 구체적인 조직 통합 로드맵",
+      "expectedSimilarEventIds": [
+        "actual_activision_2022"
+      ],
+      "score": {
+        "questionId": "EM12",
+        "similarEventSelection": 2,
+        "decisionCriteriaSimilarity": 2,
+        "evidenceUse": 1,
+        "uncertaintyControl": 2,
+        "finalRecommendation": 2,
+        "total": 9,
+        "notes": [
+          "근거의 범위나 한계 분리가 약하다."
+        ]
+      },
+      "elapsedMs": 27215,
+      "inputTokens": 1990,
+      "outputTokens": 363
+    },
+    {
+      "questionId": "EM13",
+      "status": "complete",
+      "text": "유사 실제 사건:\n- 사건 ID: actual_mojang_2014\n- 사건명: Mojang and Minecraft acquisition\n- 유사하다고 본 이유: 크로스플랫폼 커뮤니티 기반의 게임 IP를 인수했고, 단기 GAAP 손익 영향이 미미한 상황에서 장기적 플랫폼 가치를 우선시한 사례\n\n판단 기준 전이:\n- 실제 사건에서 가져온 기준: 커뮤니티 신뢰, cross-platform 접근성, 장기 IP 가치, 단기 GAAP 손익 영향, 플랫폼 독점화 리스크\n- 가상 사건에 적용한 기준: 커뮤니티는 강하지만 '독점 출시' 조건이 포함된 점이 핵심입니다. Mojang은 커뮤니티의 신뢰를 자산으로 삼았는데, 가상 사례의 독점 출시 조항은 그 신뢰를 훼손할 위험이 큽니다. 단기 손익이 break-even이라 하더라도 커뮤니티 이탈로 인한 장기적 가치 하락을 계산해야 합니다.\n\n결론:\n- 보류 (단계화)\n\n확인 필요:\n- 추가로 확인해야 할 재무 조건: 독점 출시로 인한 유저 감소 시 예상되는 LTV(고객 생애 가치) 하락분, 대체 콘텐츠 제작 비용 추산\n- 추가로 확인해야 할 비재무 조건: 커뮤니티의 독점 출시에 대한 반응 조사, 대체 플랫폼(Steam 등)의 제재 가능성, 독점성 완화 방안 협상 여력",
+      "expectedSimilarEventIds": [
+        "actual_mojang_2014"
+      ],
+      "score": {
+        "questionId": "EM13",
+        "similarEventSelection": 2,
+        "decisionCriteriaSimilarity": 2,
+        "evidenceUse": 1,
+        "uncertaintyControl": 2,
+        "finalRecommendation": 2,
+        "total": 9,
+        "notes": [
+          "근거의 범위나 한계 분리가 약하다."
+        ]
+      },
+      "elapsedMs": 25181,
+      "inputTokens": 1988,
+      "outputTokens": 335
+    },
+    {
+      "questionId": "EM14",
+      "status": "complete",
+      "text": "유사 실제 사건:\n- 사건 ID: actual_nokia_devices_2013\n- 사건명: Nokia Devices and Services acquisition\n- 유사하다고 본 이유: 적자 하드웨어 사업부 전체를 인수한 후 구조조정 비용과 손상차손을 감수해야 했던 사례로, 이번 가상 상황의 '전체 인수 시 구조조정 현금비용 발생' 리스크와 직접 대응됩니다.\n\n판단 기준 전이:\n- 실제 사건에서 가져온 기준: 실패할 가능성이 높은 사업을 통째로 인수하기보다 핵심 역량(공급망, 특허)만 분리해 활용하는 것이 재무적 방어력이 높다는 교훈.\n- 가상 사건에 적용한 기준: 하드웨어 사업 전체 인수 시 예상되는 구조조정 현금비용과 불확실한 시장 점유율 회복을 고려할 때, 전체 인수보다는 카메라·보안·공급망 특허만 분리 매입하는 것이 자본 효율성 측면에서 우월함.\n\n결론:\n- 거절 (전체 인수안) / 단계화 (자산 분리 매입안)\n\n확인 필요:\n- 추가로 확인해야 할 재무 조건: 분리 매입 시 예상되는 세금 및 통합 비용, 특허 자산의 미래 현금흐름 추정치, 전체 인수 대비 구조조정 비용의 구체적 규모.\n- 추가로 확인해야 할 비재무 조건: 분리 매입 시 기존 고객사와의 계약 유지 가능성, 특허권의 법적 분쟁 리스크, 핵심 인력 유출 가능성.",
+      "expectedSimilarEventIds": [
+        "actual_nokia_devices_2013"
+      ],
+      "score": {
+        "questionId": "EM14",
+        "similarEventSelection": 2,
+        "decisionCriteriaSimilarity": 1,
+        "evidenceUse": 1,
+        "uncertaintyControl": 2,
+        "finalRecommendation": 2,
+        "total": 8,
+        "notes": [
+          "기대 판단 기준 전이가 충분하지 않다.",
+          "근거의 범위나 한계 분리가 약하다."
+        ]
+      },
+      "elapsedMs": 26522,
+      "inputTokens": 1998,
+      "outputTokens": 352
+    },
+    {
+      "questionId": "EM15",
+      "status": "complete",
+      "text": "유사 실제 사건:\n- 사건 ID: actual_linkedin_2016\n- 사건명: LinkedIn acquisition\n- 유사하다고 본 이유: 전문직 네트워크 기반의 B2B 플랫폼이며, Office/Dynamics 세일즈 데이터와의 시너지 구조가 가상 사례와 직접적으로 대응됩니다.\n\n- 사건 ID: actual_github_2018\n- 사건명: GitHub acquisition\n- 유사하다고 본 이유: 개발자 생태계와 플랫폼 중립성이라는 커뮤니티 신뢰 이슈가 가상 사례의 개발자 커뮤니티 우려와 정확히 일치합니다.\n\n판단 기준 전이:\n- 실제 사건에서 가져온 기준: LinkedIn의 'member-first' 원칙과 GitHub의 'developer-first' ethos, 그리고 각각의 단기 EPS 희석 vs 장기 가치 프레임워크.\n- 가상 사건에 적용한 기준: 두 커뮤니티의 신뢰 기준이 서로 다르다는 점을 분리해야 합니다. LinkedIn 측은 세일즈 데이터 활용에 대한 개인정보 보호와 사용자 경험을 우선시하고, GitHub 측은 플랫폼 중립성과 개발자 생태계 독립성을 우선시합니다. 하나로 묶어 통합 시너지를 계산하면 어느 한쪽 커뮤니티의 반발을 사게 됩니다.\n\n결론:\n- 단계화\n\n확인 필요:\n- 추가로 확인해야 할 재무 조건: 두 커뮤니티의 데이터 통합 시 예상되는 운영 비용(G&A), 그리고 각 플랫폼의 현재 MRR과 예상되는 시너지 시점(Accretion timeline).\n- 추가로 확인해야 할 비재무 조건: 각 커뮤니티의 핵심 리더십이 통합 후에도 독립성을 유지할 수 있는지, 그리고 개발자 커뮤니티의 핵심 가치(예: 오픈 소스 원칙)가 Microsoft의 정책과 충돌하는 지점이 어디인지.\n\n주의:\n- LinkedIn과 GitHub의 직접적인 인수 발언은 검증되지 않았으므로 공식 거래 조건과 Microsoft의 전체 맥락으로 판단했습니다.\n- 사후 성과가 아닌 2016/2018년 당시의 의사결정 근거로만 분석했습니다.",
+      "expectedSimilarEventIds": [
+        "actual_linkedin_2016",
+        "actual_github_2018"
+      ],
+      "score": {
+        "questionId": "EM15",
+        "similarEventSelection": 2,
+        "decisionCriteriaSimilarity": 2,
+        "evidenceUse": 2,
+        "uncertaintyControl": 2,
+        "finalRecommendation": 2,
+        "total": 10,
+        "notes": []
+      },
+      "elapsedMs": 35232,
+      "inputTokens": 1996,
+      "outputTokens": 473
+    },
+    {
+      "questionId": "EM16",
+      "status": "complete",
+      "text": "유사 실제 사건:\n- 사건 ID: actual_github_2018\n- 사건명: GitHub acquisition\n- 유사하다고 본 이유: 개발자 생태계 기반의 플랫폼 인수이며, 커뮤니티 신뢰와 플랫폼 중립성이라는 비재무적 가치가 핵심인 구조가 유사합니다.\n\n- 사건 ID: actual_nuance_2021\n- 사건명: Nuance acquisition\n- 유사하다고 본 이유: 의료 분야의 특수성(규제, 보안 인증)과 AI 기술을 결합한 인수라는 점에서 가상 사례와 직접적으로 맞닿아 있습니다.\n\n판단 기준 전이:\n- 실제 사건에서 가져온 기준: GitHub의 '독립 운영 및 플랫폼 중립성' 원칙과 Nuance의 '의료용 규제/보안 인증' 리스크 관리 프레임워크.\n- 가상 사건에 적용한 기준: 의료 데이터의 엄격한 규제 준수 비용과 개발자 커뮤니티의 반발 가능성을 별도 계정으로 분리하여 평가했습니다.\n\n결론:\n- 단계화\n\n확인 필요:\n- 추가로 확인해야 할 재무 조건: 인수한 통한 추정 컴퓨팅 비용(COGS 영향), 의료용 SaaS의 MRR/Churn 추이, 예상되는 규제 대응 비용 및 통합 비용.\n- 추가로 확인해야 할 비재무 조건: 의료 데이터 관련 법적 책임 한도, 개발자 커뮤니티의 오픈소스 정책에 대한 반응, 무료/유료 기능 경계에 대한 고객 피드백.",
+      "expectedSimilarEventIds": [
+        "actual_github_2018",
+        "actual_nuance_2021"
+      ],
+      "score": {
+        "questionId": "EM16",
+        "similarEventSelection": 2,
+        "decisionCriteriaSimilarity": 1,
+        "evidenceUse": 1,
+        "uncertaintyControl": 2,
+        "finalRecommendation": 2,
+        "total": 8,
+        "notes": [
+          "기대 판단 기준 전이가 충분하지 않다.",
+          "근거의 범위나 한계 분리가 약하다."
+        ]
+      },
+      "elapsedMs": 25079,
+      "inputTokens": 1994,
+      "outputTokens": 336
+    }
+  ],
+  "totalScore": 148,
+  "maxScore": 160
+}

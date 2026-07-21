@@ -1,11 +1,47 @@
 {
-  "activeVersionId": "18182235-58b4-4218-9860-4fea133bd81d",
+  "activeVersionId": "llama31-8b-minimal-guardrails-v5",
   "versions": [
     {
       "versionId": "18182235-58b4-4218-9860-4fea133bd81d",
       "createdAt": "2026-07-14T02:43:48.328Z",
       "sha256": "5a61b4b487126b5d0775705e84c3bdaae904a916740fb1747d1ec68bee042b2f",
       "basedOnVersionId": null
+    },
+    {
+      "versionId": "llama31-8b-action-alignment-tuned-v1",
+      "createdAt": "2026-07-21T02:20:00.000Z",
+      "sha256": "1fd60d035bce7ce7db6a0aefaa82e0a9018547476a4d59259cfbcd3d07351446",
+      "basedOnVersionId": "18182235-58b4-4218-9860-4fea133bd81d"
+    },
+    {
+      "versionId": "llama31-8b-action-alignment-tuned-v2",
+      "createdAt": "2026-07-21T04:30:00.000Z",
+      "sha256": "5e848a80aa9e9b6d5d2addbe7e019a53b888de8763658da013894cd35fab3b32",
+      "basedOnVersionId": "llama31-8b-action-alignment-tuned-v1"
+    },
+    {
+      "versionId": "llama31-8b-generalizable-tuned-v3",
+      "createdAt": "2026-07-21T05:10:00.000Z",
+      "sha256": "90334445bda5535d67c9ec1c251132611b27dee54f9be61f0c029b34be768c0d",
+      "basedOnVersionId": "llama31-8b-action-alignment-tuned-v2"
+    },
+    {
+      "versionId": "llama31-8b-baseline-plus-v4",
+      "createdAt": "2026-07-21T05:35:00.000Z",
+      "sha256": "3d631a8a0571ce98083fc01ca7767e1532d10a7d62a8f3895c0d3d6c6a30766e",
+      "basedOnVersionId": "18182235-58b4-4218-9860-4fea133bd81d"
+    },
+    {
+      "versionId": "llama31-8b-minimal-guardrails-v5",
+      "createdAt": "2026-07-21T06:20:00.000Z",
+      "sha256": "cba52ad99fa40d2cfc733e685da0d161ea321192e3f91078e1d5cdee3b0b3fd3",
+      "basedOnVersionId": "18182235-58b4-4218-9860-4fea133bd81d"
+    },
+    {
+      "versionId": "llama31-8b-source-grounded-policy-v6",
+      "createdAt": "2026-07-21T07:10:00.000Z",
+      "sha256": "0940222291cd681648110831badae83843e3280162e9ce1f77959979324b75d6",
+      "basedOnVersionId": "18182235-58b4-4218-9860-4fea133bd81d"
     }
   ]
 }

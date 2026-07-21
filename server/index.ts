@@ -24,6 +24,7 @@ import {
   createPromptVersionRouteDependencies,
   createPromptVersionRouter,
 } from './promptVersions/routes';
+import snsDiscoveryConfig from '../config/sns-discovery.json';
 
 const execFileAsync = promisify(execFile);
 
@@ -192,10 +193,19 @@ const port = Number(process.env.API_PORT ?? 4000);
 const sherlockCliTimeoutSeconds = Number(process.env.SHERLOCK_SITE_TIMEOUT_SECONDS ?? 5);
 const sherlockProcessTimeoutMs = Number(process.env.SHERLOCK_PROCESS_TIMEOUT_MS ?? 20000);
 
-const referenceTargetPlatformLabels = ['LinkedIn', 'X', 'Threads', 'Naver Blog', 'Tistory'];
-const sherlockSupportedTargetSites = ['LinkedIn', 'Twitter', 'threads', 'Naver'];
+const envList = (value: string | undefined, fallback: string[]) =>
+  value?.split(',').map((item) => item.trim()).filter(Boolean) ?? fallback;
+
+const referenceTargetPlatformLabels = envList(
+  process.env.SNS_REFERENCE_TARGETS,
+  snsDiscoveryConfig.referenceTargetPlatformLabels,
+);
+const sherlockSupportedTargetSites = envList(
+  process.env.SHERLOCK_TARGET_SITES,
+  snsDiscoveryConfig.sherlockSupportedTargetSites,
+);
 const sherlockTargetArgs = sherlockSupportedTargetSites.flatMap((site) => ['--site', site]);
-const fallbackSherlockCommand = '/Users/choijisoo/.local/bin/sherlock';
+const fallbackSherlockCommand = 'sherlock';
 
 const normalizeSnsId = (value: string) => value.trim().replace(/^@+/, '');
 const isDatabaseUuid = (value?: string) =>
@@ -2009,14 +2019,16 @@ app.post('/api/reference-personas/amy-hood', async (_, res) => {
 
 app.post('/api/reference-personas/amy-hood-rag', async (_, res) => {
   try {
-    const query = [
-      'Amy Hood CFO financial decision making',
+    const subjectName = process.env.REFERENCE_PERSONA_SUBJECT ?? 'Amy Hood';
+    const query = process.env.REFERENCE_PERSONA_RAG_QUERY ?? [
+      `${subjectName} CFO financial decision making`,
       'capital allocation CapEx AI infrastructure Azure capacity',
       'operating margin gross margin free cash flow RPO bookings demand signals risk',
       'communication style investor earnings call guidance constraints',
     ].join(' ');
-    const vectorRetrieval = await retrieveVectorArchiveEvidence(query, 16);
-    const retrieval = vectorRetrieval ?? retrieveArchiveEvidence(query, 16);
+    const evidenceLimit = Number(process.env.REFERENCE_PERSONA_EVIDENCE_LIMIT ?? 16);
+    const vectorRetrieval = await retrieveVectorArchiveEvidence(query, evidenceLimit);
+    const retrieval = vectorRetrieval ?? retrieveArchiveEvidence(query, evidenceLimit);
 
     if (!retrieval.selectedChunks.length) {
       res.status(404).json({
@@ -2026,14 +2038,14 @@ app.post('/api/reference-personas/amy-hood-rag', async (_, res) => {
       return;
     }
 
-    const generated = await generateReferencePersonaFromRagEvidence('Amy Hood', retrieval.evidenceText);
+    const generated = await generateReferencePersonaFromRagEvidence(subjectName, retrieval.evidenceText);
     const now = new Date().toLocaleDateString('ko-KR').replace(/\.\s*/g, '.').replace(/\.$/, '');
 
     res.json({
       ok: true,
       source: {
         mode: vectorRetrieval ? 'general-vector-rag-bge-m3' : 'general-keyword-rag-fallback',
-        subjectName: 'Amy Hood',
+        subjectName,
         documentCount: retrieval.documents.length,
         chunkCount: retrieval.chunks.length,
         evidenceCount: retrieval.selectedChunks.length,

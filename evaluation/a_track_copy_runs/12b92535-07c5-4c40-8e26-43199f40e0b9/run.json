@@ -1,0 +1,17 @@
+{
+  "runId": "12b92535-07c5-4c40-8e26-43199f40e0b9",
+  "status": "running",
+  "model": "meta-llama/Llama-3.1-8B",
+  "sourcePromptVersionId": "llama31-8b-action-alignment-tuned-v1",
+  "sourcePromptHash": "1fd60d035bce",
+  "startedAt": "2026-07-21T02:45:10.580Z",
+  "completedAt": null,
+  "preInterviewAnswers": [],
+  "deepQuestions": [],
+  "deepAnswers": [],
+  "copyPromptPath": "evaluation/a_track_copy_runs/12b92535-07c5-4c40-8e26-43199f40e0b9/amy_hood_copy_a_prompt.md",
+  "finalOutputPath": "evaluation/a_track_copy_runs/12b92535-07c5-4c40-8e26-43199f40e0b9/final_output.json",
+  "actionAlignmentRunId": null,
+  "actionAlignmentAverageScore": null,
+  "reportPath": "docs/a_track_copy_experiment_12b92535.md"
+}

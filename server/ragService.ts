@@ -44,6 +44,9 @@ export interface RagChunk extends RagDocument {
 }
 
 const archiveDir = resolve(process.cwd(), process.env.RAG_ARCHIVE_DIR ?? 'archive');
+const archiveChunkSize = Number(process.env.RAG_CHUNK_SIZE ?? 1600);
+const archiveChunkOverlap = Number(process.env.RAG_CHUNK_OVERLAP ?? 220);
+const archiveRetrievalLimit = Number(process.env.RAG_RETRIEVAL_LIMIT ?? 14);
 
 const safeJsonParse = <T>(text: string): T | null => {
   try {
@@ -92,7 +95,11 @@ const parseSingleColumnCsv = (csvText: string) => {
 
 const normalizeText = (value: string) => value.replace(/\s+/g, ' ').trim();
 
-export const chunkArchiveDocument = (document: RagDocument, chunkSize = 1600, overlap = 220): RagChunk[] => {
+export const chunkArchiveDocument = (
+  document: RagDocument,
+  chunkSize = archiveChunkSize,
+  overlap = archiveChunkOverlap,
+): RagChunk[] => {
   const text = normalizeText(document.text);
   if (!text) return [];
 
@@ -161,7 +168,16 @@ const scoreChunk = (chunk: RagChunk, queryTokens: string[]) => {
   });
 
   if (/amy hood/i.test(chunk.speaker ?? '')) score += 4;
-  if (/capex|capital expenditures|free cash flow|operating margin|gross margin|rpo|azure|ai|capacity/i.test(chunk.text)) {
+  if (
+    /capex|capital expenditures|free cash flow|operating margin|gross margin|rpo|azure|ai|capacity/i.test(chunk.text)
+  ) {
+    score += 2;
+  }
+  if (
+    /acquisition|m&a|merger|linkedin|github|activision|nuance|nokia|mojang|minecraft|synergy|dilutive|accretive/i.test(
+      `${chunk.title} ${chunk.section ?? ''} ${chunk.text}`,
+    )
+  ) {
     score += 2;
   }
 
@@ -229,7 +245,7 @@ export const loadArchiveDocuments = (): RagDocument[] => {
   return documents;
 };
 
-export const retrieveArchiveEvidence = (query: string, limit = 14) => {
+export const retrieveArchiveEvidence = (query: string, limit = archiveRetrievalLimit) => {
   const documents = loadArchiveDocuments();
   const chunks = documents.flatMap((document) => chunkArchiveDocument(document));
   const queryTokens = tokenize(query);

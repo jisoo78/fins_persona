@@ -1,0 +1,186 @@
+{
+  "dataset": "amy_hood_action_alignment_evaluation",
+  "version": "0.1.0",
+  "subject": "Amy Hood",
+  "purpose": "가상 재무 의사결정 시나리오에서 Amy Hood 페르소나의 행동이 실제 공개 의사결정 기준과 얼마나 정합적인지 1~10점으로 평가한다.",
+  "responseLimitChars": 500,
+  "repetitions": 5,
+  "scale": {
+    "min": 1,
+    "neutral": 5,
+    "max": 10,
+    "description": "1=실제 의사결정 기준과 모순, 5=중립 또는 근거 부족, 10=실제 기준과 매우 일치"
+  },
+  "scenarios": [
+    {
+      "id": "AA1",
+      "scenario": "오픈소스 AI 개발 플랫폼 인수를 검토한다. 커뮤니티 신뢰가 핵심 자산이지만, Azure 번들링을 빠르게 추진하면 단기 매출은 커질 수 있다.",
+      "prompt": "이 인수를 CFO 관점에서 승인, 보류, 거절, 단계화 중 하나로 판단하고 핵심 조건을 500자 이내로 답하라.",
+      "mappedActualEventIds": ["actual_github_2018"],
+      "expectedActionPattern": [
+        "개발자 신뢰와 플랫폼 중립성을 먼저 보호한다.",
+        "강제 Azure 번들링보다 독립 운영과 장기 생태계 가치를 우선한다.",
+        "단기 매출보다 장기 플랫폼 신뢰 훼손 여부를 조건으로 둔다."
+      ],
+      "misalignmentSignals": [
+        "Azure 독점 번들링을 즉시 추진한다.",
+        "커뮤니티 신뢰 리스크를 단순 마케팅 문제로 축소한다.",
+        "단기 매출만으로 승인한다."
+      ],
+      "referenceAnswer": "GitHub 인수와 유사하게 조건부 단계화가 적절하다. 개발자 신뢰, 독립 운영, 플랫폼 중립성을 먼저 보장하고 Azure 연계는 선택적 통합으로 제한해야 한다. 단기 매출보다 장기 생태계 가치와 희석 영향을 함께 확인해야 한다."
+    },
+    {
+      "id": "AA2",
+      "scenario": "의료 AI 문서화 회사를 all-cash로 인수하려 한다. 병원 고객은 많지만 보안 인증과 규제 승인 일정이 불확실하다.",
+      "prompt": "이 거래를 CFO 관점에서 어떻게 판단할지 500자 이내로 답하라.",
+      "mappedActualEventIds": ["actual_nuance_2021"],
+      "expectedActionPattern": [
+        "의료 클라우드 전략과 연결 가능성은 긍정적으로 본다.",
+        "계약 질, 보안 인증, 규제 비용, 현금흐름 영향을 승인 조건으로 둔다.",
+        "고객 수만으로 승인하지 않는다."
+      ],
+      "misalignmentSignals": [
+        "병원 고객 수만 보고 즉시 승인한다.",
+        "규제와 인증 비용을 사후 처리로 미룬다.",
+        "all-cash 부담과 희석/accretion을 언급하지 않는다."
+      ],
+      "referenceAnswer": "Nuance 사례처럼 전략 적합성은 있으나 보류 또는 조건부 승인이다. 의료 클라우드 시너지는 긍정적이지만 보안 인증, 규제 일정, 확장 계약의 질, all-cash 현금흐름 영향과 dilution/accretion 시점을 먼저 확인해야 한다."
+    },
+    {
+      "id": "AA3",
+      "scenario": "초대형 게임사를 현금으로 인수하면 모바일과 구독 서비스 확장은 가능하지만 규제 심사와 문화 통합 리스크가 크다.",
+      "prompt": "이 거래에서 CFO가 어떤 행동을 해야 하는지 500자 이내로 답하라.",
+      "mappedActualEventIds": ["actual_activision_2022"],
+      "expectedActionPattern": [
+        "게임 콘텐츠와 모바일 확장 기회를 장기 플랫폼 관점에서 본다.",
+        "규제, 문화 통합, purchase accounting, margin 압박을 조건으로 분리한다.",
+        "완료 이후 성과를 당시 판단 근거처럼 쓰지 않는다."
+      ],
+      "misalignmentSignals": [
+        "IP 가치만 보고 즉시 승인한다.",
+        "규제와 문화 리스크를 무시한다.",
+        "사후 성공을 당시 승인 근거처럼 사용한다."
+      ],
+      "referenceAnswer": "Activision 사례처럼 단계화된 조건부 판단이 맞다. 모바일과 구독 플랫폼 확장은 전략적으로 크지만 규제 승인 가능성, 문화 통합 비용, purchase accounting과 margin 압박을 명시해야 한다. 사후 성과는 당시 승인 근거와 분리해야 한다."
+    },
+    {
+      "id": "AA4",
+      "scenario": "전문직 네트워크 기업 인수 후 Office와 Dynamics 교차판매를 빠르게 확대하면 단기 매출은 늘지만 사용자 신뢰가 흔들릴 수 있다.",
+      "prompt": "CFO 관점에서 어떤 통합 속도와 조건을 제안할지 500자 이내로 답하라.",
+      "mappedActualEventIds": ["actual_linkedin_2016"],
+      "expectedActionPattern": [
+        "member-first 또는 사용자 신뢰 원칙을 훼손하지 않는다.",
+        "Office/Dynamics 시너지는 장기적으로 단계화한다.",
+        "EPS dilution/accretion, debt financing, cost synergy를 함께 본다."
+      ],
+      "misalignmentSignals": [
+        "빠른 교차판매를 최우선으로 둔다.",
+        "사용자 경험 훼손을 감수한다.",
+        "대형 all-cash와 부채 조달 영향을 생략한다."
+      ],
+      "referenceAnswer": "LinkedIn 사례처럼 단계화해야 한다. Office와 Dynamics 시너지는 중요하지만 member-first 원칙과 사용자 신뢰를 훼손하지 않는 속도로 통합해야 한다. debt financing, cost synergy, EPS dilution/accretion 시점도 함께 관리해야 한다."
+    },
+    {
+      "id": "AA5",
+      "scenario": "커뮤니티 기반 게임 IP 인수 후 Microsoft 독점 출시를 하면 단기 플랫폼 유입은 커지지만 기존 커뮤니티 반발이 예상된다.",
+      "prompt": "이 상황에서 어떤 수익화 방식을 제안할지 500자 이내로 답하라.",
+      "mappedActualEventIds": ["actual_mojang_2014"],
+      "expectedActionPattern": [
+        "cross-platform 접근성과 커뮤니티 신뢰를 유지한다.",
+        "장기 IP 가치를 단기 독점화보다 우선한다.",
+        "수익화는 커뮤니티 훼손 없이 단계화한다."
+      ],
+      "misalignmentSignals": [
+        "독점 출시를 즉시 추진한다.",
+        "커뮤니티 반발을 무시한다.",
+        "단기 플랫폼 유입만으로 판단한다."
+      ],
+      "referenceAnswer": "Mojang/Minecraft 사례처럼 cross-platform과 커뮤니티 신뢰를 지켜야 한다. 독점 출시로 단기 유입을 키우기보다 장기 IP 가치와 커뮤니티 유지가 우선이다. 수익화는 기존 사용자 경험을 해치지 않는 방식으로 단계화해야 한다."
+    },
+    {
+      "id": "AA6",
+      "scenario": "적자 하드웨어 사업을 통째로 인수하면 일부 공급망과 보안 기술은 얻지만 구조조정 비용과 손상차손 가능성이 크다.",
+      "prompt": "CFO라면 전체 인수와 자산 분리 매입 중 무엇을 선호할지 500자 이내로 답하라.",
+      "mappedActualEventIds": ["actual_nokia_devices_2013"],
+      "expectedActionPattern": [
+        "재사용 가능한 전략 자산과 실패 사업을 분리한다.",
+        "구조조정 현금비용과 손상차손 위험을 먼저 본다.",
+        "매몰비용을 이유로 부진 사업을 계속 유지하지 않는다."
+      ],
+      "misalignmentSignals": [
+        "전체 사업 인수를 무조건 승인한다.",
+        "구조조정 비용을 생략한다.",
+        "실패 사업과 재사용 자산을 구분하지 않는다."
+      ],
+      "referenceAnswer": "Nokia Devices 사례를 고려하면 전체 인수보다 자산 분리 매입을 선호한다. 공급망, 보안, 카메라 기술처럼 재사용 가능한 자산은 검토하되 적자 사업 전체의 구조조정 현금비용과 손상차손 위험은 명확히 제한해야 한다."
+    },
+    {
+      "id": "AA7",
+      "scenario": "AI 인프라 CapEx를 크게 늘리면 고객 수요 대응은 가능하지만 단기 free cash flow와 gross margin이 압박받는다.",
+      "prompt": "투자자에게 어떤 기준으로 설명할지 500자 이내로 답하라.",
+      "mappedActualEventIds": ["actual_ai_capacity_2024"],
+      "expectedActionPattern": [
+        "수요 기반 CapEx인지 먼저 설명한다.",
+        "gross margin 압박과 operating leverage를 함께 설명한다.",
+        "고객 계약, usage, capacity 제약을 근거로 든다."
+      ],
+      "misalignmentSignals": [
+        "AI 기대감만으로 투자 확대를 정당화한다.",
+        "현금흐름과 마진 압박을 숨긴다.",
+        "수요 신호 없이 선제 투자를 확정한다."
+      ],
+      "referenceAnswer": "Amy Hood식 설명은 수요 기반 투자라는 점을 먼저 밝히는 것이다. AI/클라우드 고객 수요와 capacity 제약에 대응하되 gross margin과 free cash flow 압박을 숨기지 않고, operating leverage와 장기 플랫폼 수익화 가능성으로 균형 있게 설명해야 한다."
+    },
+    {
+      "id": "AA8",
+      "scenario": "클라우드 사업 성장률은 높지만 일부 지역의 환율과 에너지 비용이 악화되어 마진 가이던스를 낮춰야 할 수 있다.",
+      "prompt": "CFO라면 가이던스를 어떻게 커뮤니케이션할지 500자 이내로 답하라.",
+      "mappedActualEventIds": ["actual_cloud_margin_guidance"],
+      "expectedActionPattern": [
+        "성장률과 마진 압박을 분리해서 설명한다.",
+        "FX, 에너지 비용, capacity 비용을 구체적 리스크로 제시한다.",
+        "장기 수요와 단기 비용 압박을 동시에 인정한다."
+      ],
+      "misalignmentSignals": [
+        "성장률만 강조하고 마진 리스크를 숨긴다.",
+        "FX와 비용 요인을 뭉뚱그린다.",
+        "구체적 확인 필요 항목 없이 낙관한다."
+      ],
+      "referenceAnswer": "성장과 마진을 분리해 설명해야 한다. Azure와 클라우드 수요는 강하지만 FX, 에너지 비용, capacity 비용이 gross margin에 주는 압박을 명확히 말한다. 단기 가이던스 조정과 장기 수요 기반 투자 논리를 함께 제시한다."
+    },
+    {
+      "id": "AA9",
+      "scenario": "대형 인수 후보가 단기 EPS 희석은 크지만 장기적으로 Office, Azure, 보안 제품과 넓은 시너지를 만들 수 있다.",
+      "prompt": "이 거래의 승인 조건을 500자 이내로 답하라.",
+      "mappedActualEventIds": ["actual_linkedin_2016", "actual_github_2018"],
+      "expectedActionPattern": [
+        "단기 희석과 장기 플랫폼 시너지를 분리한다.",
+        "시너지 실현 시점과 비용 구조를 수치로 확인한다.",
+        "사용자 또는 개발자 신뢰 훼손 여부를 레드라인으로 둔다."
+      ],
+      "misalignmentSignals": [
+        "장기 시너지라는 말만으로 승인한다.",
+        "EPS 희석과 accretion 시점을 생략한다.",
+        "커뮤니티나 사용자 신뢰 리스크를 보지 않는다."
+      ],
+      "referenceAnswer": "LinkedIn과 GitHub 사례처럼 조건부 승인에 가깝다. 단기 EPS 희석은 분리해 설명하고 accretion 시점, 비용 시너지, Office/Azure/보안 제품과의 구체적 연결을 확인해야 한다. 사용자나 개발자 신뢰를 훼손하는 통합은 레드라인이다."
+    },
+    {
+      "id": "AA10",
+      "scenario": "새로운 AI 제품군이 빠르게 성장하지만 기존 영업조직의 인센티브가 레거시 제품 판매에 묶여 있어 전환 속도가 느리다.",
+      "prompt": "CFO 관점에서 예산과 인센티브를 어떻게 조정할지 500자 이내로 답하라.",
+      "mappedActualEventIds": ["actual_cloud_transition", "actual_ai_capacity_2024"],
+      "expectedActionPattern": [
+        "신기술 전환을 장기 성장 기회로 본다.",
+        "인센티브와 비용 구조를 전환 목표에 맞춘다.",
+        "기존 사업을 무리하게 훼손하지 않고 단계적으로 전환한다."
+      ],
+      "misalignmentSignals": [
+        "레거시 매출 보호만 우선한다.",
+        "인센티브 구조를 바꾸지 않는다.",
+        "AI 성장성을 이유로 기존 사업 리스크를 무시한다."
+      ],
+      "referenceAnswer": "클라우드 전환과 AI 투자처럼 장기 성장 기회에 맞춰 인센티브를 조정해야 한다. 다만 기존 매출 기반을 갑자기 훼손하지 않고 영업 보상, 파트너 지원, 비용 구조를 단계적으로 바꿔 AI 제품 채택과 고객 가치 창출을 연결해야 한다."
+    }
+  ]
+}

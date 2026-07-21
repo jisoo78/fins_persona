@@ -1,0 +1,26 @@
+{
+  "runId": "4b023ece-9644-4095-be6a-5a0a919e5088",
+  "status": "incomplete",
+  "gradingStatus": "pending",
+  "provider": "local",
+  "model": "yuxinlu1/gemma-4-12B-agentic-fable5-composer2.5-v2-3.5x-tau2-GGUF:Q4_K_M",
+  "promptVersionId": "18182235-58b4-4218-9860-4fea133bd81d",
+  "promptHash": "5a61b4b487126b5d0775705e84c3bdaae904a916740fb1747d1ec68bee042b2f",
+  "ragSnapshotId": "ad44c3bbc249f8b445e44bf4a9667d311358d55ece131b9870b881f3656be068",
+  "questionSetVersion": "1.0.0",
+  "answers": [
+    {
+      "questionId": "P1",
+      "status": "failed",
+      "elapsedMs": 0,
+      "error": "404 <!doctype html><html lang=\"en\"><head><title>HTTP Status 404 – Not Found</title><style type=\"text/css\">body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;background-color:#525D76;} h1 {font-size:22px;} h2 {font-size:16px;} h3 {font-size:14px;} p {font-size:12px;} a {color:black;} .line {height:1px;background-color:#525D76;border:none;}</style></head><body><h1>HTTP Status 404 – Not Found</h1></body></html>\n\nTroubleshooting URL: https://docs.langchain.com/oss/javascript/langchain/errors/MODEL_NOT_FOUND/\n"
+    }
+  ],
+  "scores": {
+    "pastMemory": 0,
+    "githubHoldout": 0,
+    "subjective": 0
+  },
+  "startedAt": "2026-07-14T05:31:07.277Z",
+  "completedAt": null
+}

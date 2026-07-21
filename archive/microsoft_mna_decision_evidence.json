@@ -1,0 +1,65 @@
+{
+  "call": {
+    "call_id": "microsoft_mna_decision_evidence",
+    "title": "Microsoft M&A decision evidence for Amy Hood CFO Advisor",
+    "source_url": "compiled from Microsoft official announcements and SEC transaction filings",
+    "fiscal_year": 2026,
+    "fiscal_quarter": 4
+  },
+  "speaker_turns": [
+    {
+      "turn_index": 1,
+      "speaker": "Microsoft official source",
+      "section": "Nokia Devices and Services acquisition 2013",
+      "text": "Microsoft announced the Nokia Devices and Services acquisition on September 3, 2013. The deal was structured as EUR 3.79 billion for substantially all of Nokia's Devices and Services business and EUR 1.65 billion for patent licenses, for a total transaction price of EUR 5.44 billion in cash. The official rationale emphasized accelerating Windows Phone momentum, strengthening first-party device capability, and creating a family of devices and services. This is valid context evidence, but no Amy Hood direct acquisition statement was verified for this event."
+    },
+    {
+      "turn_index": 2,
+      "speaker": "Microsoft official source",
+      "section": "Mojang acquisition 2014",
+      "text": "Microsoft announced the Mojang and Minecraft acquisition on September 15, 2014 for USD 2.5 billion. The official announcement framed Minecraft as a large cross-platform community and stated Microsoft expected the acquisition to be break-even in fiscal year 2015 on a GAAP basis. The decision signal is community scale, cross-platform reach, and measured near-term earnings impact. No Amy Hood direct acquisition statement was verified for this event."
+    },
+    {
+      "turn_index": 3,
+      "speaker": "Amy Hood",
+      "section": "LinkedIn acquisition 2016 investor call",
+      "text": "Amy Hood described the LinkedIn acquisition as an all-cash transaction at USD 196 per share, approximately USD 26 billion inclusive of LinkedIn net cash. She said Microsoft would primarily finance the transaction with new debt raised opportunistically during favorable market windows. Her financial logic connected long-term top-line growth across LinkedIn, Office 365, and Dynamics with at least USD 150 million in annual cost synergies, about 1 percent non-GAAP EPS dilution in FY17 and FY18, and expected non-GAAP EPS accretion by FY19. She also framed capital allocation as balancing high-priority long-term growth investments with the commitment to return cash to shareholders."
+    },
+    {
+      "turn_index": 4,
+      "speaker": "SEC proxy context",
+      "section": "LinkedIn acquisition 2016 transaction background",
+      "text": "LinkedIn's SEC proxy records that on June 10, 2016, LinkedIn CFO Steve Sordello sent Amy Hood an analysis of potential cost synergies from the Microsoft and LinkedIn combination, and that Sordello and Hood discussed those potential cost synergies later that day. This is not a public Amy Hood quote, but it is verified evidence that Amy Hood was involved in reviewing cost synergy assumptions during the transaction negotiation."
+    },
+    {
+      "turn_index": 5,
+      "speaker": "Microsoft official source",
+      "section": "GitHub acquisition 2018",
+      "text": "Microsoft announced the GitHub acquisition on June 4, 2018 for USD 7.5 billion in Microsoft stock. The official announcement stated GitHub would retain its developer-first ethos, operate independently, and remain an open platform for all developers. Microsoft said the transaction would be reported in Intelligent Cloud, was expected to be accretive to operating income in fiscal year 2020, and would be less than 1 percent dilutive to non-GAAP EPS in fiscal years 2019 and 2020. No Amy Hood direct acquisition statement was verified for this event."
+    },
+    {
+      "turn_index": 6,
+      "speaker": "Microsoft official source",
+      "section": "Nuance acquisition 2021",
+      "text": "Microsoft announced the Nuance acquisition on April 12, 2021 for USD 56 per share, implying a USD 19.7 billion all-cash transaction inclusive of Nuance net debt. The official rationale emphasized healthcare cloud strategy, conversational AI, and Nuance's footprint with physicians, radiologists, and hospitals. Microsoft said the transaction was expected to be minimally dilutive in fiscal year 2022 and accretive in fiscal year 2023. Amy Hood was listed as a participant in the related investor webcast, but a direct Amy Hood transcript for this acquisition has not been verified."
+    },
+    {
+      "turn_index": 7,
+      "speaker": "Amy Hood",
+      "section": "Activision Blizzard acquisition 2022 investor call",
+      "text": "Amy Hood participated in the January 18, 2022 Microsoft and Activision Blizzard investor call. The transaction was announced as USD 95 per share in an all-cash deal valued at USD 68.7 billion. The official decision logic emphasized expanding Microsoft Gaming across mobile, PC, console, cloud, and future platform opportunities, while also noting expected non-GAAP EPS accretion after close. This is verified direct-speaker evidence that Amy Hood was part of the investor-facing transaction explanation, although the main strategic framing was shared across Microsoft leadership."
+    },
+    {
+      "turn_index": 8,
+      "speaker": "Microsoft official source",
+      "section": "Activision Blizzard acquisition 2023 completion",
+      "text": "Microsoft completed the Activision Blizzard acquisition on October 13, 2023. Completion and post-close performance should be stored as post-outcome evidence rather than used as if it were available at the January 2022 decision point. For evaluation, the model should separate announcement-date assumptions from post-close results such as Game Pass, integration, purchase accounting, and later regulatory outcomes."
+    },
+    {
+      "turn_index": 9,
+      "speaker": "Evidence handling rule",
+      "section": "M&A evidence policy",
+      "text": "For M&A reasoning, the Amy Hood CFO Advisor should distinguish verified direct Amy Hood statements from official Microsoft context, SEC transaction background, and post-outcome evidence. If a direct Amy Hood statement is missing, the answer should not invent one. It should instead state that direct Amy evidence is missing and reason from the available official transaction facts, financing terms, dilution or accretion guidance, synergy assumptions, customer or ecosystem strategy, and risk disclosures."
+    }
+  ]
+}

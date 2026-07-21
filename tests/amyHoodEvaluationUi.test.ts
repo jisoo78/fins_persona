@@ -1,10 +1,10 @@
 /**
  * Test Plan:
  * 1. Happy Path:
- *    - 질문·정답·검토 응답을 KPI별 검토 카드와 15문항 요약으로 변환한다.
+ *    - 질문·정답·검토 응답을 KPI별 검토 카드와 60문항 요약으로 변환한다.
  *
  * 2. Edge Cases:
- *    - 필터가 없는 경우 15문항을 유지한다.
+ *    - 필터가 없는 경우 60문항을 유지한다.
  *    - 승인 메모가 비어 있어도 승인 상태를 표시한다.
  *    - 한국어 수정 메모를 API 요청에서 보존한다.
  *    - 미완료 실행은 생성된 점수를 유지하되 비교 가능 상태가 되지 않는다.
@@ -36,9 +36,9 @@ import type {
 
 const questionResponseFixture = (): EvaluationQuestionsResponse => {
   const ids = [
-    'P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7',
-    'H1', 'H2', 'H3', 'H4', 'H5',
-    'S1', 'S2', 'S3',
+    ...Array.from({ length: 20 }, (_, index) => `P${index + 1}`),
+    ...Array.from({ length: 20 }, (_, index) => `H${index + 1}`),
+    ...Array.from({ length: 20 }, (_, index) => `S${index + 1}`),
   ];
   return {
     ok: true,
@@ -104,9 +104,9 @@ const runFixture = (
   status: EvaluationRun['status'] = 'complete',
 ): EvaluationRun => {
   const ids = [
-    'P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7',
-    'H1', 'H2', 'H3', 'H4', 'H5',
-    'S1', 'S2', 'S3',
+    ...Array.from({ length: 20 }, (_, index) => `P${index + 1}`),
+    ...Array.from({ length: 20 }, (_, index) => `H${index + 1}`),
+    ...Array.from({ length: 20 }, (_, index) => `S${index + 1}`),
   ];
   return {
     runId: `${model}-run`,
@@ -117,7 +117,7 @@ const runFixture = (
     promptHash: 'prompt-hash',
     ragSnapshotId: 'rag-hash',
     questionSetVersion: '1.0.0',
-    answers: ids.slice(0, status === 'incomplete' ? 3 : 15).map((questionId) => ({
+    answers: ids.slice(0, status === 'incomplete' ? 3 : 60).map((questionId) => ({
       questionId,
       status: 'complete',
       ...(questionId.startsWith('S')
@@ -126,8 +126,8 @@ const runFixture = (
       elapsedMs: 1,
     })),
     scores: {
-      pastMemory: status === 'incomplete' ? 3 : 7,
-      githubHoldout: status === 'incomplete' ? 0 : 5,
+      pastMemory: status === 'incomplete' ? 3 : 20,
+      githubHoldout: status === 'incomplete' ? 0 : 20,
       subjective: null,
     },
     startedAt: '2026-07-14T00:00:00.000Z',
@@ -156,15 +156,15 @@ test('happy: prompt versions keep active marker and newest-first ordering', () =
   assert.deepEqual(options.map((item) => [item.versionId, item.active]), [['v2', false], ['v1', true]]);
 });
 
-test('happy: summarizes the 7/5/3 review queue', () => {
+test('happy: summarizes the 20/20/20 review queue', () => {
   const cards = buildQuestionCards(questionResponseFixture());
   const summary = summarizeQuestionReviews(cards);
   assert.deepEqual(summary.kpis, {
-    past_memory_restoration: 7,
-    github_holdout: 5,
-    hypothetical_scenario: 3,
+    past_memory_restoration: 20,
+    github_holdout: 20,
+    hypothetical_scenario: 20,
   });
-  assert.equal(summary.total, 15);
+  assert.equal(summary.total, 60);
   assert.equal(summary.statuses.approved, 1);
 });
 
@@ -172,7 +172,7 @@ test('edge: no filters keeps every question', () => {
   const cards = buildQuestionCards(questionResponseFixture());
   assert.equal(
     filterQuestionCards(cards, { kpi: 'all', status: 'all' }).length,
-    15,
+    60,
   );
 });
 
@@ -248,7 +248,7 @@ test('happy: compares two complete runs and keeps model metadata visible to the 
     runFixture('gemma-4'),
     runFixture('gpt-5-mini'),
   );
-  assert.equal(rows.length, 15);
+  assert.equal(rows.length, 60);
   assert.equal(rows[0].left.model, 'gemma-4');
   assert.equal(rows[0].right.model, 'gpt-5-mini');
 });

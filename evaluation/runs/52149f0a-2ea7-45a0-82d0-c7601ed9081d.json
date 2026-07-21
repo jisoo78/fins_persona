@@ -1,0 +1,203 @@
+{
+  "runId": "52149f0a-2ea7-45a0-82d0-c7601ed9081d",
+  "status": "complete",
+  "gradingStatus": "complete",
+  "provider": "local",
+  "model": "yuxinlu1/gemma-4-12B-agentic-fable5-composer2.5-v2-3.5x-tau2-GGUF:Q4_K_M",
+  "promptVersionId": "18182235-58b4-4218-9860-4fea133bd81d",
+  "promptHash": "5a61b4b487126b5d0775705e84c3bdaae904a916740fb1747d1ec68bee042b2f",
+  "ragSnapshotId": "ad44c3bbc249f8b445e44bf4a9667d311358d55ece131b9870b881f3656be068",
+  "questionSetVersion": "1.1.0",
+  "answers": [
+    {
+      "questionId": "P1",
+      "status": "complete",
+      "choice": 3,
+      "reason": "단기 재무지표(revenue, EPS)와 장기 성장 신호(bookings, unearned revenue, seat growth)를 분리해 봐야 한다. 다년 할인 계약은 단기 billings을 부풀릴 수 있고, 좌석 확장률 둔화는 기저효과일 수 있으므로 둘을 섞어 판단해서는 안 된다.",
+      "correct": true,
+      "objectiveScore": 1,
+      "elapsedMs": 43595,
+      "inputTokens": 10710,
+      "outputTokens": 91
+    },
+    {
+      "questionId": "P2",
+      "status": "complete",
+      "choice": 3,
+      "reason": "손상차손은 비현금 비용이나 재고 정리와 구조조정 현금 유출은 실질적 비용이므로 투명하게 소통해야 하며, 재사용 가능한 역량만 핵심 플랫폼으로 재배치하는 것이 전략적입니다.",
+      "correct": true,
+      "objectiveScore": 1,
+      "elapsedMs": 41123,
+      "inputTokens": 10590,
+      "outputTokens": 68
+    },
+    {
+      "questionId": "P3",
+      "status": "complete",
+      "choice": 1,
+      "reason": "1. member-first 원칙을 유지하되, 참여도·매출 성장·통합비용·희석 영향을 동시에 추적하고 통합 속도를 회원 신뢰를 훼손하지 않는 범위로 제한한다.",
+      "correct": true,
+      "objectiveScore": 1,
+      "elapsedMs": 41641,
+      "inputTokens": 10847,
+      "outputTokens": 62
+    },
+    {
+      "questionId": "P4",
+      "status": "complete",
+      "choice": 2,
+      "reason": "단순 연율화는 무료/저가 사용량과 SMB·광고 약화를 무시하므로 부적절하며, 4번은 장기 성장을 위한 클라우드 투자를 줄이는 것이므로 제 원칙에 어긋난다.",
+      "correct": true,
+      "objectiveScore": 1,
+      "elapsedMs": 42067,
+      "inputTokens": 10813,
+      "outputTokens": 68
+    },
+    {
+      "questionId": "P5",
+      "status": "complete",
+      "choice": 3,
+      "reason": "전략적 성장 영역(AI·보안)은 보호하되, 수익화 경로가 불분명한 영역과 중복·저생산성 조직에 비용 절감을 집중하는 것이 내 방식이다.",
+      "correct": true,
+      "objectiveScore": 1,
+      "elapsedMs": 42128,
+      "inputTokens": 10829,
+      "outputTokens": 59
+    },
+    {
+      "questionId": "P6",
+      "status": "complete",
+      "choice": 2,
+      "reason": "단순히 가입자 수로 판단하지 않고 콘텐츠 참여도, 구독 확대, 독립 판매 변화, 구매회계·통합비용, 현금창출을 모두 포함해 포트폴리오 수준의 자본수익을 단계별로 평가해야 합니다.",
+      "correct": true,
+      "objectiveScore": 1,
+      "elapsedMs": 42981,
+      "inputTokens": 10826,
+      "outputTokens": 71
+    },
+    {
+      "questionId": "P7",
+      "status": "complete",
+      "choice": 3,
+      "reason": "GPU와 데이터센터는 내용연수·감가상각·매출 전환 시점이 다르므로 이를 분리해 관리하며, 확인된 계약과 사용량에 맞춰 단계적으로 투자하는 것이 CFO의 원칙입니다.",
+      "correct": true,
+      "objectiveScore": 1,
+      "elapsedMs": 40491,
+      "inputTokens": 10530,
+      "outputTokens": 61
+    },
+    {
+      "questionId": "H1",
+      "status": "complete",
+      "choice": 2,
+      "reason": "단기 수익성보다 개발자 생태계라는 전략적 자산의 가치를 우선하되, 독립성 보호와 단계적 검증을 통해 커뮤니티 반발과 재무적 희석 위험을 동시에 관리하는 균형 잡힌 접근입니다.",
+      "correct": true,
+      "objectiveScore": 1,
+      "elapsedMs": 8099,
+      "inputTokens": 879,
+      "outputTokens": 70
+    },
+    {
+      "questionId": "H2",
+      "status": "complete",
+      "choice": 3,
+      "reason": "개발자 신뢰는 GitHub의 핵심 자산이며, 클라우드 중립성을 훼손하는 강제적 번들링은 장기적 플랫폼 가치를 훼손합니다. 대신 모든 고객이 활용 가능한 Enterprise 기능 중심의 가치 제안을 통해 신뢰를 유지하며 수익을 확대해야 합니다.",
+      "correct": true,
+      "objectiveScore": 1,
+      "elapsedMs": 8670,
+      "inputTokens": 872,
+      "outputTokens": 81
+    },
+    {
+      "questionId": "H3",
+      "status": "complete",
+      "choice": 3,
+      "reason": "전량 매입은 CapEx 여력을 훼손하고, 무시는 것은 주주 가치를 훼손합니다. 정보 비대칭을 고려해 발표 후 현금흐름과 전략 투자를 해치지 않는 속도로 분산 상쇄하는 것이 균형 잡힌 접근입니다.",
+      "correct": true,
+      "objectiveScore": 1,
+      "elapsedMs": 8492,
+      "inputTokens": 880,
+      "outputTokens": 77
+    },
+    {
+      "questionId": "H4",
+      "status": "complete",
+      "choice": 2,
+      "reason": "불확실한 비용을 확정값처럼 제시하면 신뢰를 잃습니다. 범위로 반영하고 가정이 변할 때마다 투명하게 업데이트하는 것이 시장에 정직한 방식입니다.",
+      "correct": true,
+      "objectiveScore": 1,
+      "elapsedMs": 6698,
+      "inputTokens": 871,
+      "outputTokens": 57
+    },
+    {
+      "questionId": "H5",
+      "status": "complete",
+      "choice": 2,
+      "reason": "단기 ARPU 하락은 플랫폼 확장 비용으로 이해하고, 유료 전환율과 Azure/VS 등 생태계 기여를 함께 보며 비용과 마진을 관리해야 합니다.",
+      "correct": true,
+      "objectiveScore": 1,
+      "elapsedMs": 6467,
+      "inputTokens": 869,
+      "outputTokens": 55
+    },
+    {
+      "questionId": "S1",
+      "status": "complete",
+      "text": "승인하되 두 자산의 성격에 따라 집행 방식을 완전히 분리해야 합니다. GPU 45%는 내용연수가 짧고 기술이 빨리 변하니 12~18개월 단위로 모듈화해서 집행하고, 사용량 추적을 통해 성능이 안 나오는 노드는 즉시 재배치하거나 매각할 수 있게 설계하십시오. 반면 데이터센터 55%는 장기 인프라이니 한꺼번에 쏟아붓지 말고 고객 계약 확정분과 연동해 단계적으로 건설하십시오. 12개월 마진 2.1%p 하락은 플랫폼 리더십을 위한 비용으로 감수하되, 사용량이 예상의 80%를 넘어서는 시점까지는 추가 투자를 동결하는 가드레일을 두십시오. 만약 12개월 후 사용량이 70% 미만이라면 GPU 투자를 즉시 재검토하고 인프라 효율화에 집중하십시오. 핵심은 GPU의 유연성과 데이터센터의 고정성을 구분해서 재무적 노출을 분산시키는 것입니다.",
+      "elapsedMs": 19753,
+      "inputTokens": 837,
+      "outputTokens": 237,
+      "grade": {
+        "questionId": "S1",
+        "decision": 2,
+        "reasoning": 1,
+        "tradeoff": 2,
+        "personaConsistency": 1,
+        "score": 6,
+        "summary": "GPU와 데이터센터를 구분하고 2.1%p 마진, 70% 사용량 하방 등 핵심 조건을 활용했지만, 80% 가드레일처럼 문제에 없는 기준을 새로 만들었고 비구속 LOI의 불확실성 설명이 약해 감점."
+      }
+    },
+    {
+      "questionId": "S2",
+      "status": "complete",
+      "text": "승인하되, '독립 운영'과 '중립성 보호'를 명문화격으로 걸어야 합니다. 4천만 개발자 중 35% 유료 전환은 공격적인 가정이므로, 인수 후 18개월 내 ARPU 25% 달성을 핵심 검증 지표로 잡고 미달 시 시너지 재평가에 들어갑니다. 70% 주식 결제는 우리 주주 가치를 희석시키므로, 인수 후 24개월 내 영업 레버리지로 EPS 1.5%를 완전히 회수하는 것을 재무적 조건으로 겁니다. 가장 중요한 건 오픈소스 커뮤니티의 이탈을 막기 위해 핵심 프로젝트는 Microsoft 브랜드가 아닌 독립된 브랜드로 운영하고, Copilot 통합 시에도 개발자용 API는 중립적 인터페이스를 유지하는 기술적 분리를 보장해야 합니다. 만약 주요 오픈소스 재단이 공식적으로 반대하거나 핵심 프로젝트가 포크(fork)될 조짐이 보이면 즉시 통합을 중단하는 클로즈아웃 조항을 계약서에 넣습니다. 플랫폼은 고객의 신뢰 위에서만 지속 가능하므로, 단기적 시너지보다 장기적인 생태계 중립성을 지키는 것이 우리 사업의 본질입니다.",
+      "elapsedMs": 23343,
+      "inputTokens": 833,
+      "outputTokens": 280,
+      "grade": {
+        "questionId": "S2",
+        "decision": 2,
+        "reasoning": 1,
+        "tradeoff": 2,
+        "personaConsistency": 1,
+        "score": 6,
+        "summary": "승인 조건, 독립 운영, 중립성, 희석, 오픈소스 이탈 리스크를 다뤘지만 ARPU 25%, 24개월 EPS 회수 같은 근거 없는 수치 목표를 새로 만들어 감점."
+      }
+    },
+    {
+      "questionId": "S3",
+      "status": "complete",
+      "text": "운영비 8% 감축은 고통스럽지만 명확한 원칙을 세우면 됩니다. **보호할 것:** 핵심 클라우드 reliability와 보안 R&D는 절대 건드리지 않습니다. 인프라 안정성은 고객 신뢰의 기반이며, 보안 사고 한 번이면 수조 원의 가치가 증발합니다. **줄일 것:** 성숙 제품 마케팅 예산 40% 삭감, 저성과 지역 영업 조직 통폐합, 중복 관리직 20% 감축, 그리고 아직 비즈니스 모델이 검증되지 않은 실험적 AI 앱 예산 동결입니다. **투자자 커뮤니케이션:** 확정 사실(성숙 제품의 낮은 성장률, 중복 조직의 수치)과 가동 가정(인프라 투자가 장기적 운영 레버리지를 높일 것이라는 점), 그리고 확인이 필요한 항목(AI 추론 수요의 지속성)을 명확히 구분해 설명하십시오. 단기 마진 방어와 장기 플랫폼 리더십을 분리해서 말해야 합니다.",
+      "elapsedMs": 19893,
+      "inputTokens": 822,
+      "outputTokens": 234,
+      "grade": {
+        "questionId": "S3",
+        "decision": 2,
+        "reasoning": 1,
+        "tradeoff": 2,
+        "personaConsistency": 1,
+        "score": 6,
+        "summary": "보호/감축 우선순위와 투자자 커뮤니케이션 구분은 적절하지만 40% 삭감, 20% 감축, 수조 원 손실 등 근거 없는 수치를 만들었고 Azure 둔화와 AI inference 집중 수요 반영이 제한적이라 감점."
+      }
+    }
+  ],
+  "scores": {
+    "pastMemory": 7,
+    "githubHoldout": 5,
+    "subjective": 18
+  },
+  "startedAt": "2026-07-14T06:03:48.109Z",
+  "completedAt": "2026-07-14T06:13:41.660Z"
+}

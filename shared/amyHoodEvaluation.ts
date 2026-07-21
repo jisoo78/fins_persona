@@ -1,7 +1,16 @@
+import evaluationModelOptions from '../config/evaluation-model-options.json';
+
 export type EvaluationKpi =
   | 'past_memory_restoration'
   | 'github_holdout'
   | 'hypothetical_scenario';
+
+export const EVALUATION_KPI_MAX_SCORES = {
+  pastMemory: 20,
+  githubHoldout: 20,
+  subjective: 20,
+  totalQuestions: 60,
+} as const;
 
 export type EvaluationQuestion = {
   id: string;
@@ -54,6 +63,21 @@ export type QuestionReviewFile = {
 };
 
 export type EvaluationProvider = 'local' | 'openai';
+
+export type EvaluationModelOption = {
+  id: string;
+  label: string;
+  provider: EvaluationProvider;
+  model: string;
+  note: string;
+};
+
+export const EVALUATION_MODEL_OPTIONS = evaluationModelOptions as EvaluationModelOption[];
+
+export type EvaluationRunInput = {
+  provider: EvaluationProvider;
+  model?: string;
+};
 
 export type EvaluationBundle = {
   questions: EvaluationQuestionFile;

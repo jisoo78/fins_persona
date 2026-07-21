@@ -34,9 +34,9 @@ const atomicWrite = async (path: string, text: string) => {
 };
 
 const expectedKpiCounts: Record<EvaluationKpi, number> = {
-  past_memory_restoration: 7,
-  github_holdout: 5,
-  hypothetical_scenario: 3,
+  past_memory_restoration: 20,
+  github_holdout: 20,
+  hypothetical_scenario: 20,
 };
 
 const assertUnique = (ids: string[], label: string) => {
@@ -58,8 +58,8 @@ export const assertEvaluationBundle = (
   if (questions.version !== answerKey.version) {
     throw new Error('question and answer-key versions must match');
   }
-  if (questions.questions.length !== 15) {
-    throw new Error(`expected 15 evaluation questions, got ${questions.questions.length}`);
+  if (questions.questions.length !== 60) {
+    throw new Error(`expected 60 evaluation questions, got ${questions.questions.length}`);
   }
 
   const questionIds = questions.questions.map((question) => question.id);

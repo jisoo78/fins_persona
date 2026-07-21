@@ -6,6 +6,7 @@ import type {
   EvaluationRunAnswer,
   QuestionReview,
 } from '../../../shared/amyHoodEvaluation';
+import { EVALUATION_KPI_MAX_SCORES } from '../../../shared/amyHoodEvaluation';
 import type { EvaluationQuestionsResponse } from '../../services/evaluationApi';
 
 export type EvaluationQuestionCard = {
@@ -118,8 +119,11 @@ export const compareEvaluationRuns = (
       right: { provider: right.provider, model: right.model, answer: other },
     };
   });
-  if (rows.length !== 15 || right.answers.length !== 15) {
-    throw new Error('complete comparison runs must contain 15 answers');
+  if (
+    rows.length !== EVALUATION_KPI_MAX_SCORES.totalQuestions ||
+    right.answers.length !== EVALUATION_KPI_MAX_SCORES.totalQuestions
+  ) {
+    throw new Error(`complete comparison runs must contain ${EVALUATION_KPI_MAX_SCORES.totalQuestions} answers`);
   }
   return rows;
 };

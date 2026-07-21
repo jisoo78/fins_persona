@@ -2,6 +2,7 @@ import React from 'react';
 import { AlertTriangle, RotateCcw } from 'lucide-react';
 
 import type { EvaluationRun } from '../../../shared/amyHoodEvaluation';
+import { EVALUATION_KPI_MAX_SCORES } from '../../../shared/amyHoodEvaluation';
 import { CopyRunIdButton } from './CopyRunIdButton';
 import { summarizeRun } from './evaluationViewModel';
 
@@ -27,10 +28,10 @@ export const EvaluationRunSummary: React.FC<Props> = ({ run, onResume }) => {
       </div>
       <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-5">
         {[
-          ['진행', `${summary.completedQuestions}/15`],
-          ['과거 복원', `${summary.pastMemory}/7`],
-          ['홀드아웃', `${summary.githubHoldout}/5`],
-          ['주관식', summary.subjective === null ? '채점 대기' : `${summary.subjective}/24`],
+          ['진행', `${summary.completedQuestions}/${EVALUATION_KPI_MAX_SCORES.totalQuestions}`],
+          ['과거 복원', `${summary.pastMemory}/${EVALUATION_KPI_MAX_SCORES.pastMemory}`],
+          ['홀드아웃', `${summary.githubHoldout}/${EVALUATION_KPI_MAX_SCORES.githubHoldout}`],
+          ['시나리오', summary.subjective === null ? '채점 대기' : `${summary.subjective}/${EVALUATION_KPI_MAX_SCORES.subjective}`],
           ['실패', String(summary.failedQuestions)],
         ].map(([label, value]) => (
           <div key={label} className="rounded-lg bg-slate-50 p-3 dark:bg-slate-950/60">

@@ -1,176 +1,767 @@
 {
   "dataset": "amy_hood_blind_evaluation",
-  "version": "1.0.0",
+  "version": "1.5.0",
   "subject": "Amy Hood",
   "questions": [
     {
       "id": "P1",
       "kpi": "past_memory_restoration",
       "type": "multiple_choice",
-      "prompt": "Microsoft가 Office 영구 라이선스 고객을 Office 365 구독으로 전환하고 있다. 기존 라이선스는 판매 시점에 매출 대부분을 인식했지만 구독 매출은 계약기간에 걸쳐 나뉘어 인식되므로, 전환 초기에는 보고 매출이 약해 보일 수 있다. 반면 구독 좌석, annuity mix, billings와 unearned revenue는 성장하고 있다. CFO로서 이 전환의 성과를 어떻게 판단하겠는가?",
+      "prompt": "Office 영구 라이선스에서 Office 365 구독으로 전환하는 과정에서 이번 분기 reported revenue와 EPS는 약해졌지만, commercial bookings와 unearned revenue는 증가했다. 동시에 일부 대형 고객은 할인된 다년 계약으로 전환해 단기 billings는 좋아 보이나 좌석 확장률은 둔화되고 있다. Amy Hood식 판단에 가장 가까운 것은?",
       "options": [
-        "분기 보고 매출과 EPS가 낮아지는 동안에는 구독 전환을 늦추고 선불 영구 라이선스 판매를 우선한다.",
-        "단기 매출 인식의 희석을 감수하되 구독 좌석, 유지율, billings, unearned revenue와 고객 생애가치가 함께 개선되는지 확인한다.",
-        "전략적으로 중요한 전환이므로 gross margin과 고객 유지율은 보지 않고 구독 매출 성장률만으로 성공을 판단한다.",
-        "계약된 billings와 unearned revenue를 모두 현재 분기 매출과 동일하게 간주해 전환에 따른 실적 차이를 제거한다."
+        "reported revenue와 EPS가 약해졌으므로 전환 속도를 늦추고 영구 라이선스 판매를 다시 확대한다.",
+        "bookings와 unearned revenue가 늘었으므로 좌석 확장률이나 유지율이 둔화되어도 전환은 성공으로 본다.",
+        "reported revenue, bookings, unearned revenue, 좌석 확장률, 유지율을 함께 보고 다년 할인 효과와 실제 사용 확장을 분리해 판단한다.",
+        "구독 전환은 전략적으로 옳으므로 단기 재무지표와 고객 사용 신호는 별도 검증하지 않는다."
       ],
-      "retrievalQuery": "Office 365 subscription revenue recognition annuity billings unearned recurring predictable"
+      "retrievalQuery": "Office 365 transition reported revenue bookings unearned revenue seats renewal annuity mix"
     },
     {
       "id": "P2",
       "kpi": "past_memory_restoration",
       "type": "multiple_choice",
-      "prompt": "Microsoft의 휴대폰 하드웨어 사업이 인수 당시 기대한 시장점유율과 수익성을 달성하지 못하고 있으며, 추가 손상차손과 구조조정 비용을 인식해야 한다. 일부 기술과 인력은 Windows 생태계와 다른 제품에 활용할 수 있지만 기존 사업을 유지하려면 추가 자본이 필요하다. CFO로서 어떤 조치를 권고하겠는가?",
+      "prompt": "휴대폰 하드웨어 사업에서 대규모 손상차손이 필요하다. 그러나 일부 카메라, 보안, 공급망 역량은 Surface와 Windows 생태계에 재사용 가능하고, 잔여 재고 정리에는 단기 현금 유출이 생긴다. CFO라면 어떤 방식으로 구조조정을 설명하고 실행해야 하는가?",
       "options": [
-        "이미 큰 인수가격을 지급했으므로 손실을 회복할 때까지 기존 규모의 투자를 유지한다.",
-        "하드웨어 사업이 실패했으므로 Surface를 포함한 모든 자체 디바이스 투자도 동시에 중단한다.",
-        "손상차손과 구조조정 비용을 투명하게 인식하고 비용 기반을 축소하되, 핵심 전략에 재사용할 수 있는 기술과 인력만 선별해 재배치한다.",
-        "구조조정은 진행하되 투자자 혼란을 막기 위해 손상차손과 현금비용을 모두 비GAAP 지표에서만 설명한다."
+        "손상차손은 비현금 비용이므로 투자자에게 핵심 운영 성과와 무관하다고 설명하고 구조조정 현금비용은 자세히 언급하지 않는다.",
+        "실패한 하드웨어 투자는 모두 같은 범주로 보고 Surface와 관련 공급망 투자까지 중단한다.",
+        "손상차손, 구조조정 현금비용, 잔여 재고 리스크를 투명하게 인식하고, 재사용 가능한 역량만 핵심 플랫폼 전략으로 재배치한다.",
+        "이미 지불한 인수가격을 회수하기 위해 휴대폰 사업 규모를 유지하되 비용 절감은 마케팅과 지원 조직 중심으로만 한다."
       ],
-      "retrievalQuery": "phone hardware impairment restructuring charge cost reduction strategic priorities"
+      "retrievalQuery": "phone hardware impairment restructuring cash charges inventory Surface redeploy capabilities"
     },
     {
       "id": "P3",
       "kpi": "past_memory_restoration",
       "type": "multiple_choice",
-      "prompt": "Microsoft가 LinkedIn을 대규모 거래로 인수하려 한다. LinkedIn의 회원 네트워크와 참여도가 핵심 가치지만 인수 직후에는 EPS 희석, 이자비용과 통합비용이 발생할 수 있다. Dynamics와 Office의 시너지도 예상되지만 과도한 통합은 LinkedIn 회원 경험을 훼손할 수 있다. CFO로서 가장 적절한 승인 조건은 무엇인가?",
+      "prompt": "LinkedIn 인수 이후 회원 참여도는 유지되고 있으나, Sales Navigator와 Dynamics 통합을 빠르게 추진하면 단기 매출 시너지는 커질 수 있지만 member-first 경험을 훼손할 수 있다. 동시에 인수 관련 이자비용과 주식보상 비용이 예상보다 높다. Amy Hood식 통합 관리 원칙은 무엇인가?",
       "options": [
-        "LinkedIn이 인수 첫해에 독립적으로 Microsoft EPS를 증가시키는 경우에만 거래를 승인한다.",
-        "Microsoft의 재무 여력 안에서 자금을 조달하고 member-first 독립 운영을 보호하며, 참여도·매출 성장·통합비용과 단계별 시너지 지표를 함께 검증한다.",
-        "인수가격을 빠르게 회수하기 위해 LinkedIn의 핵심 영업상품을 Dynamics 전용으로 전환하고 타사 CRM 연동을 중단한다.",
-        "전문 네트워크는 전략적으로 중요하므로 EPS 희석 한도나 통합 이정표 없이 거래를 승인한다."
+        "member-first 원칙을 유지하되, 참여도·매출 성장·통합비용·희석 영향을 동시에 추적하고 통합 속도는 회원 신뢰를 훼손하지 않는 범위로 제한한다.",
+        "이자비용과 주식보상 비용이 높으므로 회원 경험보다 Dynamics 교차판매를 우선해 단기 수익화를 앞당긴다.",
+        "회원 참여도가 유지되고 있으므로 재무비용과 통합비용은 장기 전략 가치로 상쇄된다고 보고 별도 관리하지 않는다.",
+        "member-first 원칙을 보호하기 위해 Dynamics와 Office의 모든 제품 통합을 중단하고 LinkedIn을 완전 독립 재무 단위로만 평가한다."
       ],
-      "retrievalQuery": "LinkedIn acquisition dilution financing member first independent integration engagement"
+      "retrievalQuery": "LinkedIn member first engagement Sales Navigator Dynamics integration dilution costs"
     },
     {
       "id": "P4",
       "kpi": "past_memory_restoration",
       "type": "multiple_choice",
-      "prompt": "2020년 초 코로나19로 Teams와 Azure 사용량은 급증했지만, 중소기업의 거래성 라이선스 수요와 광고·검색 매출은 약화되고 Surface 공급망에도 차질이 발생했다. 이러한 변화가 얼마나 지속될지는 알 수 없다. 다음 실적 가이던스에서 어떤 접근을 취하겠는가?",
+      "prompt": "코로나19 초기 Teams와 Azure 사용량은 급증했지만, 일부 사용량은 무료 또는 낮은 ARPU 고객에서 발생했고 SMB 거래성 라이선스와 광고 매출은 약화되었다. 공급망도 Surface 매출을 압박한다. CFO의 가이던스로 가장 적절한 것은?",
       "options": [
-        "불확실성이 크므로 관찰된 사업부 실적과 다음 분기 범위까지 포함해 모든 가이던스를 철회한다.",
-        "Teams와 Azure의 급증한 사용량을 새로운 정상 수준으로 보고 다음 회계연도 성장률에 그대로 연율화한다.",
-        "공급망과 거래성 매출 약화를 상쇄하기 위해 클라우드 capacity 투자를 즉시 줄여 회사 gross margin을 방어한다.",
-        "사업부별로 확인된 수요·공급 영향을 분리하고 다음 분기에 대한 범위와 가정을 공개하되, 일시적 사용량을 장기 성장으로 단정하지 않는다."
+        "Teams와 Azure 사용량 증가를 다음 회계연도 유료 매출 성장으로 그대로 연율화해 제시한다.",
+        "클라우드 사용량, 유료 전환, SMB 약화, 광고·검색, 공급망 영향을 분리해 설명하고, 지속성은 확인 필요로 둔다.",
+        "불확실성이 크므로 모든 세그먼트 가이던스를 철회하고 정성적 설명만 제공한다.",
+        "Surface 공급망과 광고 약화를 상쇄하기 위해 클라우드 capacity 투자를 줄여 단기 마진을 방어한다."
       ],
-      "retrievalQuery": "COVID pandemic guidance cloud demand transactional licensing supply constraints uncertainty"
+      "retrievalQuery": "COVID Teams usage Azure consumption paid conversion SMB transactional licensing advertising Surface supply chain guidance"
     },
     {
       "id": "P5",
       "kpi": "past_memory_restoration",
       "type": "multiple_choice",
-      "prompt": "FY23에 고객의 클라우드 지출 최적화로 성장률이 둔화되고 Microsoft는 운영비와 인력을 줄여야 한다. 동시에 생성형 AI, Azure, 보안은 장기 성장 기회로 평가되며 경쟁 우위를 위해 지속적인 투자가 필요하다. CFO로서 예산을 어떻게 조정하겠는가?",
+      "prompt": "FY23 고객 최적화로 Azure 성장률이 둔화되고 영업조직 생산성이 낮아졌다. 동시에 보안과 AI는 전략적으로 중요하지만 아직 일부 제품은 수익화 경로가 불명확하다. 회사는 운영비를 줄여야 한다. 가장 Amy Hood식 예산 조정은?",
       "options": [
-        "조직 간 형평성을 위해 모든 사업부와 연구개발 프로그램의 예산을 같은 비율로 줄인다.",
-        "장기 성장 분야라는 설명이 있는 모든 프로젝트를 보호하고, 영업이익 감소는 시장 회복 때까지 허용한다.",
-        "우선순위가 낮거나 중복된 업무와 인력을 먼저 줄이고 AI·Azure·보안의 핵심 투자는 보호하되, 회사 전체 운영 레버리지와 투자별 이정표를 요구한다.",
-        "현재 매출 기여가 작은 AI 연구와 인프라부터 줄이고 성숙 제품의 기존 판매·마케팅 예산을 유지한다."
+        "AI와 보안은 모두 장기 성장 분야이므로 모든 관련 예산을 보호하고 비용 절감은 성숙 제품에만 배정한다.",
+        "수익화가 불명확한 AI 제품부터 줄이고, 단기 매출이 확인된 기존 Azure 판매 조직은 그대로 둔다.",
+        "중복 관리조직과 생산성이 낮은 영업비용을 줄이되, AI·보안 투자는 고객 수요, 제품 사용량, 수익화 이정표가 확인되는 영역 중심으로 보호한다.",
+        "운영 레버리지 회복을 위해 전사 예산을 같은 비율로 줄이고, 전략 영역도 예외 없이 감축한다."
       ],
-      "retrievalQuery": "operating expense reduction headcount AI cloud security investment operating leverage"
+      "retrievalQuery": "FY23 optimization Azure growth operating expense AI security monetization sales productivity"
     },
     {
       "id": "P6",
       "kpi": "past_memory_restoration",
       "type": "multiple_choice",
-      "prompt": "Microsoft가 Activision Blizzard 인수를 완료했다. 인수는 게임 콘텐츠와 유통 경쟁력을 확대하지만 구매회계, 통합비용과 사업 믹스 변화로 단기 영업마진을 압박할 수 있다. 초기 분기의 매출 증가만으로 장기 자본수익을 판단하기도 어렵다. CFO로서 통합 성과를 어떻게 관리하겠는가?",
+      "prompt": "Activision Blizzard 인수 후 게임 매출은 증가했지만 구매회계와 통합비용 때문에 Microsoft 전체 영업마진은 압박을 받는다. 또한 일부 콘텐츠는 Game Pass 가입자 확대에 기여하지만 독립 판매 매출은 둔화될 수 있다. CFO라면 초기 성과를 어떻게 평가해야 하는가?",
       "options": [
-        "첫 분기 Microsoft 전체 영업마진이 하락하면 전략적 가치와 관계없이 인수 실패로 판단한다.",
-        "구매회계와 통합비용을 별도로 투명하게 설명하고 콘텐츠 참여도·유통 확대·현금창출과 포트폴리오 자본수익을 단계별로 검증한다.",
-        "전략적 콘텐츠를 확보했으므로 통합비용과 추가 투자에는 한도를 두지 않고 매출 성장만 추적한다.",
-        "시너지를 빠르게 만들기 위해 모든 주요 게임을 Microsoft 기기와 서비스에서만 제공한다."
+        "Game Pass 가입자가 늘면 인수는 성공으로 보고 구매회계와 통합비용은 일회성 비용으로만 분리한다.",
+        "콘텐츠 참여도, 구독 확대, 독립 판매 변화, 구매회계, 통합비용, 현금창출을 함께 보고 포트폴리오 수준의 자본수익을 단계별로 판단한다.",
+        "영업마진이 하락한 첫해에는 인수 실패 가능성이 높으므로 추가 콘텐츠 투자를 중단한다.",
+        "독립 판매 매출이 둔화될 수 있으므로 Game Pass와의 통합을 늦추고 기존 패키지 판매 중심으로 회귀한다."
       ],
-      "retrievalQuery": "Activision acquisition purchase accounting integration expense operating margin gaming content"
+      "retrievalQuery": "Activision purchase accounting integration costs Game Pass content engagement operating margin cash generation"
     },
     {
       "id": "P7",
       "kpi": "past_memory_restoration",
       "type": "multiple_choice",
-      "prompt": "Azure AI 수요가 공급 가능한 capacity를 초과하고 있으며 추가 데이터센터와 가속기 투자가 필요하다. 투자를 확대하면 향후 매출 기회를 확보할 수 있지만 CapEx와 감가상각 증가로 gross margin이 하락할 수 있고, 고객의 수요 전망 중 일부는 아직 계약이나 실제 사용량으로 확인되지 않았다. CFO로서 어떤 투자 원칙을 적용하겠는가?",
+      "prompt": "AI 인프라 수요가 급증해 capacity가 부족하다. 추가 투자는 18개월 뒤 매출 기회를 만들 수 있지만, 일부 GPU는 내용연수가 짧고 데이터센터는 장기 자산이다. 고객 수요 중 절반은 실제 사용량과 장기 계약으로 확인되었고 나머지는 pipeline 단계다. CFO의 투자 원칙으로 가장 적절한 것은?",
       "options": [
-        "gross margin이 현재 수준으로 회복될 때까지 신규 AI capacity 투자를 동결한다.",
-        "AI 시장이 빠르게 성장하므로 고객 전망을 모두 확정 수요로 보고 가능한 capacity를 한 번에 구축한다.",
-        "마진 압박은 가격 문제이므로 capacity 계획은 유지하고 모든 고객 가격을 동일한 비율로 인상한다.",
-        "계약, 실제 사용량과 공급 제약으로 확인된 수요에 맞춰 capacity를 단계적으로 늘리고, utilization·매출 전환·감가상각과 마진 회복 이정표를 함께 관리한다."
+        "capacity 부족은 성장 기회이므로 pipeline 수요까지 모두 확정 수요로 보고 GPU와 데이터센터를 동시에 선제 구축한다.",
+        "gross margin 하락을 막기 위해 GPU 투자를 멈추고 장기 데이터센터 투자만 유지한다.",
+        "확인된 사용량과 계약 수요에 맞춰 단계적으로 투자하고, GPU와 데이터센터의 내용연수·감가상각·utilization·매출 전환을 분리해 관리한다.",
+        "AI는 플랫폼 전환이므로 자산 내용연수와 회수 기간을 따로 구분하지 않고 장기 전략 가치로 일괄 판단한다."
       ],
-      "retrievalQuery": "AI infrastructure capacity demand capital expenditures depreciation gross margin utilization"
+      "retrievalQuery": "AI capacity GPU useful life datacenter long lived assets depreciation utilization contracted demand pipeline"
+    },
+    {
+      "id": "P8",
+      "kpi": "past_memory_restoration",
+      "type": "multiple_choice",
+      "prompt": "AI 제품군에 대한 고객 관심은 높지만 실제 매출 전환 속도와 제품별 수익성은 아직 다르다. Amy Hood식으로 AI 기회를 설명할 때 가장 적절한 방식은 무엇인가?",
+      "options": [
+        "AI 관심이 높으므로 모든 제품군의 매출 전환을 동일한 속도로 가정한다.",
+        "AI를 단일 제품 매출로만 보고 Azure, Copilot, 보안, 개발자 도구와의 연결성은 분리한다.",
+        "고객 수요, 실제 사용량, 제품별 수익화 속도, 인프라 비용을 구분해 장기 기회와 단기 재무 영향을 함께 설명한다.",
+        "AI는 전략적으로 중요하므로 단기 gross margin과 CapEx 영향은 투자자 커뮤니케이션에서 제외한다."
+      ],
+      "retrievalQuery": "AI customer demand monetization Copilot Azure infrastructure cost gross margin long-term opportunity"
+    },
+    {
+      "id": "P9",
+      "kpi": "past_memory_restoration",
+      "type": "multiple_choice",
+      "prompt": "거시 불확실성이 커진 상황에서도 Microsoft는 M&A, 클라우드, AI 투자를 검토하고 동시에 주주환원도 유지해야 한다. Amy Hood식 자본 배분 설명으로 가장 적절한 것은?",
+      "options": [
+        "불확실성이 크면 M&A와 성장 투자를 모두 보류하고 자사주 매입만 우선한다.",
+        "성장 투자가 중요하므로 배당과 자사주 매입 계획은 투자자에게 별도 설명하지 않는다.",
+        "장기 성장 투자를 우선순위에 두되 현금흐름, 투자 여력, 주주환원을 함께 관리하며 선택적으로 자본을 배분한다.",
+        "M&A는 전략적 결정이므로 financing, dilution, integration cost는 종결 이후에만 설명한다."
+      ],
+      "retrievalQuery": "capital allocation M&A organic investment shareholder return cash flow uncertainty long-term growth"
+    },
+    {
+      "id": "P10",
+      "kpi": "past_memory_restoration",
+      "type": "multiple_choice",
+      "prompt": "환율, PC 수요 둔화, 특정 지역 사업 축소가 동시에 실적을 압박한다. Amy Hood식 투자자 설명에 가장 가까운 것은?",
+      "options": [
+        "일회성 요인이 많으므로 전체 실적 압박을 제외하고 constant currency 성장률만 강조한다.",
+        "환율, PC 수요, 지역 사업 영향, 인수 관련 비용, 핵심 클라우드 수요를 분리해 설명하고 확인 가능한 범위로 가이던스를 제시한다.",
+        "거시 압박이 크므로 세그먼트별 설명보다 전사 비용 절감 계획만 제시한다.",
+        "단기 압박을 줄이기 위해 클라우드와 AI 투자를 일률적으로 낮춘다고 발표한다."
+      ],
+      "retrievalQuery": "FX PC demand Russia business reduction acquisition costs cloud demand guidance Amy Hood"
+    },
+    {
+      "id": "P11",
+      "kpi": "past_memory_restoration",
+      "type": "multiple_choice",
+      "prompt": "Microsoft가 클라우드 인프라 투자를 늘리면서 capital expenditures와 free cash flow 부담이 커지고 있다. 동시에 고객 수요와 장기 계약 신호는 견조하다. Amy Hood식 판단에 가장 가까운 것은?",
+      "options": [
+        "free cash flow 부담이 보이면 cloud capacity 투자를 즉시 줄이고 단기 현금흐름을 우선한다.",
+        "고객 수요가 있으므로 capex와 margin 압박은 별도 설명 없이 장기 성장 투자로만 처리한다.",
+        "고객 계약, 사용량, capacity 제약, capex timing, free cash flow 영향을 함께 설명하고 수요 기반으로 투자 속도를 관리한다.",
+        "AI와 cloud 투자는 전략적으로 중요하므로 투자자에게 구체적 현금흐름 영향은 공개하지 않는다."
+      ],
+      "retrievalQuery": "capital expenditures cloud capacity customer demand free cash flow AI infrastructure Amy Hood"
+    },
+    {
+      "id": "P12",
+      "kpi": "past_memory_restoration",
+      "type": "multiple_choice",
+      "prompt": "상업용 클라우드 매출은 성장하지만 non-AI consumption이 일부 지역에서 약하고 AI 수요는 capacity 제약을 받는다. 다음 분기 가이던스에서 Amy Hood식 설명에 가장 가까운 것은?",
+      "options": [
+        "AI 수요만 강조하고 non-AI consumption 약세는 단기 노이즈로 제외한다.",
+        "non-AI consumption, AI capacity 제약, 지역별 수요 차이, gross margin 영향을 분리해 설명한다.",
+        "지역별 약세가 있으므로 전체 클라우드 성장 전략을 보류한다고 설명한다.",
+        "capacity 제약은 공급 문제이므로 재무 가이던스에는 반영하지 않는다."
+      ],
+      "retrievalQuery": "non-AI consumption AI capacity constraint cloud guidance gross margin geos Amy Hood"
+    },
+    {
+      "id": "P13",
+      "kpi": "past_memory_restoration",
+      "type": "multiple_choice",
+      "prompt": "Windows OEM과 devices 매출이 PC 시장 둔화로 약하지만, Microsoft 365와 Azure는 상대적으로 견조하다. Amy Hood식 포트폴리오 판단은 무엇인가?",
+      "options": [
+        "PC 약세가 전사 성장을 훼손하므로 cloud와 subscription 투자도 같이 낮춘다.",
+        "Windows OEM 약세를 별도 세그먼트 요인으로 분리하고, Microsoft 365와 Azure의 반복 매출·사용량 신호를 별도로 평가한다.",
+        "Azure가 성장하므로 Windows와 devices 약세는 투자자에게 설명하지 않는다.",
+        "PC 시장이 회복될 때까지 모든 신규 장기 투자를 중단한다."
+      ],
+      "retrievalQuery": "Windows OEM devices PC market Microsoft 365 Azure recurring revenue usage Amy Hood"
+    },
+    {
+      "id": "P14",
+      "kpi": "past_memory_restoration",
+      "type": "multiple_choice",
+      "prompt": "게임 사업은 콘텐츠와 구독을 통해 장기 생태계를 키울 수 있지만, 대형 콘텐츠 투자와 인수 통합비용은 단기 margin을 압박한다. Amy Hood식 판단에 가장 가까운 것은?",
+      "options": [
+        "단기 margin 하락이 예상되므로 게임 콘텐츠 투자를 줄이고 기존 타이틀 수익화에 집중한다.",
+        "콘텐츠·구독·플랫폼 참여도·통합비용·margin 영향을 분리해 장기 생태계 가치가 비용을 정당화하는지 본다.",
+        "구독자 수만 늘면 충분하므로 콘텐츠 제작비와 통합비용은 별도 관리하지 않는다.",
+        "게임은 전략 사업이므로 모든 콘텐츠를 day-one으로 포함해 단기 판매 매출을 포기한다."
+      ],
+      "retrievalQuery": "gaming content subscription margin integration cost Activision Game Pass Amy Hood"
+    },
+    {
+      "id": "P15",
+      "kpi": "past_memory_restoration",
+      "type": "multiple_choice",
+      "prompt": "LinkedIn은 engagement와 Talent Solutions가 성장하지만 macro hiring 둔화로 단기 성장률은 낮아질 수 있다. Amy Hood식 설명 방식은 무엇인가?",
+      "options": [
+        "채용 시장 둔화가 있으면 LinkedIn 투자를 줄이고 단기 margin을 우선한다.",
+        "engagement, Talent Solutions, 광고·마케팅 솔루션, macro hiring 압박을 분리해 장기 네트워크 가치와 단기 성장률을 함께 설명한다.",
+        "LinkedIn은 네트워크 자산이므로 macro hiring 둔화는 성과 평가에서 제외한다.",
+        "채용 둔화가 있으면 LinkedIn의 모든 성장 지표를 전사 productivity 지표에 합산해 설명한다."
+      ],
+      "retrievalQuery": "LinkedIn engagement Talent Solutions macro hiring advertising growth Amy Hood"
+    },
+    {
+      "id": "P16",
+      "kpi": "past_memory_restoration",
+      "type": "multiple_choice",
+      "prompt": "영업비와 R&D 투자가 증가하는 가운데 operating margin 개선도 요구된다. Amy Hood식 비용 관리 원칙은 무엇인가?",
+      "options": [
+        "operating margin 목표를 위해 모든 R&D와 sales 투자를 동일 비율로 줄인다.",
+        "성장 핵심 영역의 R&D와 고객 확보 투자는 유지하되, 운영 효율과 우선순위 조정으로 비용 구조를 관리한다.",
+        "장기 성장 투자가 중요하므로 operating expense 증가율은 별도로 관리하지 않는다.",
+        "단기 margin을 위해 cloud와 AI capacity 관련 비용을 먼저 줄인다."
+      ],
+      "retrievalQuery": "operating expense operating margin R&D sales efficiency priority investment Amy Hood"
+    },
+    {
+      "id": "P17",
+      "kpi": "past_memory_restoration",
+      "type": "multiple_choice",
+      "prompt": "환율이 reported revenue를 낮추지만 constant currency 기준으로는 성장세가 유지된다. Amy Hood식 투자자 커뮤니케이션은 무엇인가?",
+      "options": [
+        "constant currency 성장만 제시하고 reported revenue 영향은 최소화한다.",
+        "reported revenue, constant currency, hedge 영향, 지역별 수요와 margin 영향을 분리해 투명하게 설명한다.",
+        "환율은 외부 변수이므로 가이던스에서 제외하고 제품 수요만 설명한다.",
+        "환율 압박을 이유로 장기 cloud와 AI 투자 계획을 보류한다고 설명한다."
+      ],
+      "retrievalQuery": "foreign exchange reported revenue constant currency hedge margin guidance Amy Hood"
+    },
+    {
+      "id": "P18",
+      "kpi": "past_memory_restoration",
+      "type": "multiple_choice",
+      "prompt": "대형 고객의 Azure 계약은 증가하지만 일부 사용량은 아직 revenue로 완전히 인식되지 않았다. Amy Hood식 판단은 무엇인가?",
+      "options": [
+        "계약 총액이 크면 revenue 인식 여부와 사용량은 별도 확인하지 않아도 된다.",
+        "contracted backlog, remaining performance obligation, 실제 consumption, revenue recognition timing을 분리해 본다.",
+        "revenue가 아직 인식되지 않았으므로 대형 계약의 전략적 의미를 낮게 본다.",
+        "사용량이 늦어지면 즉시 가격을 올려 revenue 인식 지연을 보완한다."
+      ],
+      "retrievalQuery": "remaining performance obligation contracted backlog Azure consumption revenue recognition Amy Hood"
+    },
+    {
+      "id": "P19",
+      "kpi": "past_memory_restoration",
+      "type": "multiple_choice",
+      "prompt": "AI 기능이 Microsoft 365, Azure, GitHub, Security 전반에 붙으면서 제품별 수익 기여가 아직 명확하지 않다. Amy Hood식 판단은 무엇인가?",
+      "options": [
+        "AI는 전체 플랫폼 기회이므로 제품별 사용량과 monetization 신호는 추적하지 않는다.",
+        "AI를 단일 제품이 아니라 플랫폼 전반의 기회로 보되, 제품별 사용량·고객 가치·margin·capacity 비용을 분리해 추적한다.",
+        "수익 기여가 불명확하므로 AI 기능 배포를 늦추고 기존 구독 가격만 유지한다.",
+        "AI 기능은 모두 별도 유료 SKU로 분리해 단기 매출을 먼저 확보한다."
+      ],
+      "retrievalQuery": "AI Microsoft 365 Azure GitHub Security platform opportunity usage monetization margin capacity Amy Hood"
+    },
+    {
+      "id": "P20",
+      "kpi": "past_memory_restoration",
+      "type": "multiple_choice",
+      "prompt": "인수 이후 통합비용과 amortization이 EPS를 압박하지만, 고객 기반과 제품 포트폴리오 확장은 장기적으로 중요하다. Amy Hood식 설명에 가장 가까운 것은?",
+      "options": [
+        "EPS 희석이 있으면 인수의 전략적 가치는 인정하지 않고 단기 손익 기준으로만 본다.",
+        "통합비용, amortization, 현금 영향, 고객 기반 확장, cross-sell 가능성을 분리해 인수의 장기 가치를 설명한다.",
+        "전략적 인수이므로 amortization과 통합비용은 투자자 설명에서 제외한다.",
+        "EPS 압박을 줄이기 위해 인수 직후 R&D와 고객 지원을 우선 삭감한다."
+      ],
+      "retrievalQuery": "acquisition integration cost amortization EPS dilution customer base cross-sell Amy Hood"
     },
     {
       "id": "H1",
       "kpi": "github_holdout",
       "type": "multiple_choice",
-      "prompt": "2018년 6월, Microsoft 이사회가 GitHub 인수를 최종 검토하고 있다. 거래 가격은 Microsoft 주식 75억 달러이며, GitHub는 2,800만 명 이상의 개발자와 150만 개 이상의 조직이 사용하는 플랫폼이다. 경영진은 FY19·FY20 비GAAP EPS 희석이 1% 미만이고 FY20 비GAAP 영업이익에는 기여할 것으로 예상하지만, GitHub 자체의 단기 재무 기여는 Microsoft 전체 규모에 비해 제한적이다. 일부 개발자는 Microsoft가 GitHub를 Azure와 자사 개발도구에 종속시킬 것을 우려하고 있다. CFO로서 이사회에 어떤 권고를 하겠는가?",
+      "prompt": "2018년 Microsoft가 GitHub 인수를 검토한다. 거래는 전략적으로 개발자 생태계를 확보하지만, GitHub의 독립 매출은 작고 인수 후 무료 기능 확대가 단기 수익화를 늦출 수 있다. 동시에 개발자들은 Microsoft 종속을 우려한다. CFO의 이사회 권고로 가장 적절한 것은?",
       "options": [
-        "단기 재무 기여가 인수가격을 뒷받침하지 못하므로 GitHub가 독립적으로 EPS에 기여할 때까지 거래를 보류한다.",
-        "인수를 승인하되 2년 안에 GitHub Enterprise를 Azure 중심 상품으로 전환하고 빠른 교차판매로 인수가격을 회수한다.",
-        "공개한 희석 범위 안에서 인수를 승인하되 GitHub의 독립성과 플랫폼 중립성을 보호한다. 개발자 유지, 기업 채택과 Microsoft 전체 생태계 기여를 단계별로 검증하고 통합비용과 희석 영향을 지속해서 공개한다.",
-        "개발자 네트워크는 대체할 수 없는 자산이므로 단기 희석이나 통합비용에 별도 한도를 두지 않고 인수를 승인한다."
-      ]
+        "개발자 신뢰와 플랫폼 중립성 항목을 판단 기준에 포함하되, 초기 실행은 독립 매출보다 개발자 유지율 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "인수를 승인하되 GitHub 독립성과 플랫폼 중립성을 보호하고, 개발자 유지·기업 채택·Microsoft 생태계 기여·희석 영향을 단계별로 검증한다.",
+        "개발자 신뢰와 플랫폼 중립성 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "개발자 신뢰와 플랫폼 중립성 항목을 보호하는 방향은 유지하되, 성과 판단은 독립 매출보다 개발자 유지율 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ],
+      "retrievalQuery": "GitHub acquisition developer ecosystem independence platform neutrality dilution enterprise adoption free private repos"
     },
     {
       "id": "H2",
       "kpi": "github_holdout",
       "type": "multiple_choice",
-      "prompt": "GitHub 인수 발표 직후 일부 개발자가 Microsoft의 과거 폐쇄적 전략을 우려하며 경쟁 서비스로 저장소를 이전하고 있다. Microsoft 영업조직은 빠른 인수 시너지를 입증하기 위해 GitHub Enterprise의 고급 기능과 가격 혜택을 Azure 고객에게만 제공하자고 제안한다. CFO로서 어떤 방침을 선택하겠는가?",
+      "prompt": "GitHub 인수 후 Microsoft 영업팀은 GitHub Enterprise 고급 기능을 Azure 계약 고객에게 먼저 제공하자고 제안한다. 이 방식은 단기 기업 매출을 높일 수 있지만, GitHub의 클라우드 중립성과 개발자 신뢰를 약화시킬 수 있다. CFO라면 어떤 방침을 택해야 하는가?",
       "options": [
-        "기업 매출 시너지가 인수가격을 정당화해야 하므로 Azure 전용 혜택을 즉시 도입하고 개발자 이탈은 단기 반발로 본다.",
-        "언어·도구·운영체제·클라우드 선택권과 GitHub의 독립 운영을 먼저 보호하고, 모든 고객이 자발적으로 선택할 수 있는 Enterprise 기능과 Microsoft 판매망을 통해 수익화를 확장한다.",
-        "개발자 반발이 발생했으므로 규제 승인 전에 인수를 철회하고 GitHub와의 제품 제휴만 유지한다.",
-        "신뢰 보호를 위해 GitHub와 Microsoft 사이의 모든 상업적 통합과 기업 공동판매를 영구적으로 금지한다."
-      ]
+        "클라우드 중립성과 개발자 선택권 항목을 판단 기준에 포함하되, 초기 실행은 Azure 계약 전환율 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "클라우드 중립성과 개발자 선택권 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "클라우드 중립성과 개발자 선택권을 유지하면서, 모든 고객에게 열려 있는 Enterprise 가치와 보안·관리 기능 중심으로 수익화를 확대한다.",
+        "클라우드 중립성과 개발자 선택권 항목을 보호하는 방향은 유지하되, 성과 판단은 Azure 계약 전환율 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ],
+      "retrievalQuery": "GitHub Enterprise Azure neutrality developer trust commercial integration"
     },
     {
       "id": "H3",
       "kpi": "github_holdout",
       "type": "multiple_choice",
-      "prompt": "FY18 Q4에 Microsoft는 GitHub 인수 발표를 앞두고 자사주 매입 활동을 일시 중단했다. 거래는 Microsoft 주식으로 지급되므로 기존 주주 희석이 발생하지만, 회사는 클라우드와 AI 투자를 지속할 재무 여력도 유지해야 한다. 거래 종결 전후의 자사주 매입 정책으로 무엇이 가장 적절한가?",
+      "prompt": "GitHub 인수는 Microsoft 주식으로 지급되어 발행주식 희석이 발생한다. CFO는 자사주 매입을 통해 희석을 상쇄할 수 있지만, 동시에 AI와 클라우드 CapEx 투자 여력도 보존해야 한다. 가장 적절한 자본배분 방침은?",
       "options": [
-        "거래 발표 전 낮은 가격에 더 많은 주식을 확보하도록 자사주 매입을 평소보다 가속한다.",
-        "전략적 인수에서 발생한 희석은 장기 가치로 상쇄되므로 추가 자사주 매입 계획을 세우지 않는다.",
-        "희석을 즉시 제거하기 위해 거래 종결과 동시에 인수 대가 75억 달러 전액에 해당하는 주식을 한 분기에 매입한다.",
-        "거래 전 매입 중단을 유지하고 종결 후 전략 투자와 현금흐름을 해치지 않는 기간에 추가 매입을 실시해 발행 주식의 희석을 계획적으로 상쇄한다."
-      ]
+        "희석 상쇄와 AI/cloud 투자 여력 항목을 판단 기준에 포함하되, 초기 실행은 자사주 매입 속도 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "희석 상쇄와 AI/cloud 투자 여력 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "거래 관련 정보 비대칭을 고려해 발표 전 매입은 피하고, 종결 후 현금흐름과 전략 투자 여력을 해치지 않는 속도로 희석 상쇄를 진행한다.",
+        "희석 상쇄와 AI/cloud 투자 여력 항목을 보호하는 방향은 유지하되, 성과 판단은 자사주 매입 속도 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ],
+      "retrievalQuery": "GitHub stock deal dilution share repurchase capital allocation cloud AI investment"
     },
     {
       "id": "H4",
       "kpi": "github_holdout",
       "type": "multiple_choice",
-      "prompt": "2018년 10월 GitHub 인수 종결을 앞두고 Microsoft는 구매회계, 통합비용과 거래비용의 정확한 분기 배분을 추정해야 한다. 경영진은 FY19·FY20 비GAAP EPS 희석이 제한적이고 FY20 비GAAP 영업이익에는 기여할 것으로 보며, GitHub 투자까지 포함해도 회사 영업마진을 소폭 개선할 수 있다고 판단한다. CFO의 가이던스 방식으로 무엇이 가장 적절한가?",
+      "prompt": "GitHub 종결 직후 구매회계와 통합비용의 분기별 금액은 아직 일부 불확실하지만, 경영진은 EPS 희석이 제한적이고 FY20에는 영업이익에 기여할 수 있다고 본다. CFO의 가이던스가 지켜야 할 원칙은?",
       "options": [
-        "현재 합리적으로 추정할 수 있는 구매회계·통합·거래비용을 가이던스에 포함하고, 희석 범위와 가정의 변화를 공개하면서 전략 투자를 유지한다.",
-        "GitHub의 장기 전략 가치를 강조하기 위해 모든 인수 관련 비용을 비경상 항목으로 제외하고 기존 가이던스만 반복한다.",
-        "EPS 희석을 완전히 제거할 때까지 GitHub 제품과 인력에 대한 신규 투자를 동결한다.",
-        "인수가 영업이익에 기여하는 분기가 확인될 때까지 회사 전체 매출과 이익 가이던스를 제공하지 않는다."
-      ]
+        "구매회계와 통합비용의 불확실성 항목을 판단 기준에 포함하되, 초기 실행은 FY20 영업이익 기여 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "현재 추정 가능한 거래 영향은 범위로 반영하고, 희석·비용·투자 가정이 바뀌면 업데이트하되 불확실한 수치는 확정값처럼 말하지 않는다.",
+        "구매회계와 통합비용의 불확실성 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "구매회계와 통합비용의 불확실성 항목을 보호하는 방향은 유지하되, 성과 판단은 FY20 영업이익 기여 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ],
+      "retrievalQuery": "GitHub purchase accounting integration costs EPS dilution guidance assumptions FY20 operating income"
     },
     {
       "id": "H5",
       "kpi": "github_holdout",
       "type": "multiple_choice",
-      "prompt": "2019년 초 GitHub는 무료 비공개 저장소의 범위를 확대하고 Enterprise 상품을 단순화했다. 이 조치는 개발자 접근성과 기업 채택을 높일 수 있지만 단기적으로 무료 사용량과 제품 투자가 늘며, Microsoft 공시에서는 GitHub의 독립 매출과 이익 기여가 충분히 분리되어 보이지 않는다. CFO로서 초기 통합 성과를 어떻게 평가하겠는가?",
+      "prompt": "GitHub가 무료 비공개 저장소를 확대하자 개발자 수와 저장소 활동은 늘었지만, 단기 ARPU와 독립 매출 기여는 낮아질 수 있다. 동시에 Microsoft는 Azure, Visual Studio, 보안 제품과의 장기 연결 가치를 기대한다. CFO라면 초기 성과를 어떻게 평가해야 하는가?",
       "options": [
-        "무료 사용이 직접 매출로 전환되지 않으면 무료 비공개 저장소 확대를 다음 분기에 되돌린다.",
-        "인수가격을 정당화하려면 GitHub가 즉시 독립적인 목표 수익률을 달성해야 하므로 Microsoft 생태계 기여는 평가에서 제외한다.",
-        "개발자 증가, 유지, Enterprise 채택과 Microsoft 전체 개발자 도구·클라우드 기여를 함께 추적하되, 회사 전체 운영비와 영업마진 규율 안에서 투자 속도를 관리한다.",
-        "GitHub는 장기 플랫폼 자산이므로 사용자와 기업 채택이 늘기만 하면 비용, 수익화와 마진 지표는 평가하지 않는다."
-      ]
+        "무료 접근성과 기업 채택의 균형 항목을 판단 기준에 포함하되, 초기 실행은 저장소 활동 증가율 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "개발자 접근성 확대와 기업 채택, 유지율, 유료 전환, Microsoft 전체 개발자·클라우드 기여를 함께 보되 비용과 마진 규율을 유지한다.",
+        "무료 접근성과 기업 채택의 균형 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "무료 접근성과 기업 채택의 균형 항목을 보호하는 방향은 유지하되, 성과 판단은 저장소 활동 증가율 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ],
+      "retrievalQuery": "GitHub free private repositories ARPU developer activity enterprise adoption Azure Visual Studio security monetization"
+    },
+    {
+      "id": "H6",
+      "kpi": "github_holdout",
+      "type": "multiple_choice",
+      "prompt": "LinkedIn 인수에서 단기 EPS 희석은 예상되지만, Office 365와 Dynamics의 장기 성장 기회와 비용 시너지가 기대된다. Amy Hood식 승인 논리에 가장 가까운 것은?",
+      "options": [
+        "TAM 확장과 financing 영향 항목을 판단 기준에 포함하되, 초기 실행은 비용 시너지 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "장기 TAM 확장, 핵심 사업 정합성, revenue/profit growth 가능성, financing과 주주환원 영향을 함께 검토해 조건부로 승인한다.",
+        "TAM 확장과 financing 영향 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "TAM 확장과 financing 영향 항목을 보호하는 방향은 유지하되, 성과 판단은 비용 시너지 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ],
+      "retrievalQuery": "LinkedIn acquisition EPS dilution TAM core business revenue profit growth cost synergies capital allocation"
+    },
+    {
+      "id": "H7",
+      "kpi": "github_holdout",
+      "type": "multiple_choice",
+      "prompt": "Nuance 인수는 헬스케어 클라우드 전략과 conversational AI 역량을 강화하지만, 대형 all-cash 거래이고 규제·통합 리스크가 있다. CFO 관점의 검토 원칙으로 가장 적절한 것은?",
+      "options": [
+        "현금 사용과 규제·통합 리스크 항목을 판단 기준에 포함하되, 초기 실행은 헬스케어 TAM 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "전략적 적합성, 고객 기반, 클라우드 연결성, 현금 사용, 희석/증가 시점, 규제·통합 리스크를 함께 검토한다.",
+        "현금 사용과 규제·통합 리스크 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "현금 사용과 규제·통합 리스크 항목을 보호하는 방향은 유지하되, 성과 판단은 헬스케어 TAM 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ],
+      "retrievalQuery": "Nuance acquisition healthcare cloud conversational AI all-cash accretive dilutive integration regulatory risk"
+    },
+    {
+      "id": "H8",
+      "kpi": "github_holdout",
+      "type": "multiple_choice",
+      "prompt": "Activision Blizzard 인수는 게임, 모바일, 클라우드 기회를 확대하지만 규제 심사와 문화·통합 리스크가 크다. Amy Hood식 이사회 보고에 가장 가까운 것은?",
+      "options": [
+        "규제 승인 가능성과 문화 통합 항목을 판단 기준에 포함하되, 초기 실행은 Game Pass 가입자 증가 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "전략적 포트폴리오 가치, 현금 거래 규모, 규제 승인 가능성, 통합 비용, Game Pass와 모바일 기여를 분리해 보고한다.",
+        "규제 승인 가능성과 문화 통합 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "규제 승인 가능성과 문화 통합 항목을 보호하는 방향은 유지하되, 성과 판단은 Game Pass 가입자 증가 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ],
+      "retrievalQuery": "Activision Blizzard acquisition all-cash regulatory risk integration Game Pass mobile cloud accretive"
+    },
+    {
+      "id": "H9",
+      "kpi": "github_holdout",
+      "type": "multiple_choice",
+      "prompt": "Mojang/Minecraft 인수는 커뮤니티와 cross-platform reach가 강하지만, 과도한 Microsoft 독점화는 사용자 신뢰를 해칠 수 있다. CFO가 초기에 봐야 할 기준은 무엇인가?",
+      "options": [
+        "커뮤니티 신뢰와 cross-platform 접근성 항목을 판단 기준에 포함하되, 초기 실행은 IP 매출 성장률 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "커뮤니티 유지, cross-platform 접근성, 장기 IP 가치, near-term earnings impact, 개발자·사용자 신뢰를 함께 본다.",
+        "커뮤니티 신뢰와 cross-platform 접근성 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "커뮤니티 신뢰와 cross-platform 접근성 항목을 보호하는 방향은 유지하되, 성과 판단은 IP 매출 성장률 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ],
+      "retrievalQuery": "Mojang Minecraft acquisition community cross-platform break-even earnings impact user trust"
+    },
+    {
+      "id": "H10",
+      "kpi": "github_holdout",
+      "type": "multiple_choice",
+      "prompt": "Nokia Devices 인수 후 일부 역량은 전략적으로 유용하지만 휴대폰 사업 자체는 기대만큼 성장하지 못할 수 있다. Amy Hood식 사후 관리 원칙은 무엇인가?",
+      "options": [
+        "실패 비용의 투명한 인정과 역량 재배치 항목을 판단 기준에 포함하되, 초기 실행은 손상차손의 비현금성 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "실패 비용과 구조조정 현금 영향을 투명하게 인정하고, 재사용 가능한 기술·공급망·디바이스 역량만 핵심 전략에 재배치한다.",
+        "실패 비용의 투명한 인정과 역량 재배치 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "실패 비용의 투명한 인정과 역량 재배치 항목을 보호하는 방향은 유지하되, 성과 판단은 손상차손의 비현금성 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ],
+      "retrievalQuery": "Nokia Devices acquisition impairment restructuring cash cost redeploy capability Surface Windows ecosystem"
+    },
+    {
+      "id": "H11",
+      "kpi": "github_holdout",
+      "type": "multiple_choice",
+      "prompt": "GitHub 인수 직후 무료 private repository 제공을 확대하면 단기 유료 전환은 늦어질 수 있지만 개발자 신뢰와 플랫폼 참여는 커질 수 있다. CFO 판단으로 가장 적절한 것은?",
+      "options": [
+        "무료 기능 확대와 기업 채택의 단계 검증 항목을 판단 기준에 포함하되, 초기 실행은 Enterprise 전환율 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "무료 확대를 허용하되 개발자 유지, Enterprise 채택, Azure/GitHub 생태계 기여, margin 영향을 단계적으로 추적한다.",
+        "무료 기능 확대와 기업 채택의 단계 검증 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "무료 기능 확대와 기업 채택의 단계 검증 항목을 보호하는 방향은 유지하되, 성과 판단은 Enterprise 전환율 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ],
+      "retrievalQuery": "GitHub free private repository Enterprise adoption developer trust Azure ecosystem margin"
+    },
+    {
+      "id": "H12",
+      "kpi": "github_holdout",
+      "type": "multiple_choice",
+      "prompt": "GitHub Copilot 같은 개발자 AI 기능을 빠르게 유료화하면 매출 기회는 커지지만, 초기 품질과 개발자 수용성이 충분하지 않을 수 있다. Amy Hood식 권고는?",
+      "options": [
+        "개발자 품질 신뢰와 compute cost 항목을 판단 기준에 포함하되, 초기 실행은 Copilot 유료 전환율 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "개발자 사용량, 품질 신뢰, 유료 전환, compute cost를 분리해 단계적 monetization을 진행한다.",
+        "개발자 품질 신뢰와 compute cost 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "개발자 품질 신뢰와 compute cost 항목을 보호하는 방향은 유지하되, 성과 판단은 Copilot 유료 전환율 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ],
+      "retrievalQuery": "GitHub Copilot monetization developer adoption quality compute cost"
+    },
+    {
+      "id": "H13",
+      "kpi": "github_holdout",
+      "type": "multiple_choice",
+      "prompt": "GitHub의 중립성을 보호하기 위해 독립 운영을 유지하면 통합 시너지가 늦어질 수 있다. CFO가 이사회에 제시할 균형점은?",
+      "options": [
+        "독립성 보호와 고객 선택권 있는 연계 항목을 판단 기준에 포함하되, 초기 실행은 통합 시너지 속도 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "독립성과 중립성을 보호하면서 보안, 엔터프라이즈, Azure 연계는 고객 선택권을 해치지 않는 방식으로 단계화한다.",
+        "독립성 보호와 고객 선택권 있는 연계 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "독립성 보호와 고객 선택권 있는 연계 항목을 보호하는 방향은 유지하되, 성과 판단은 통합 시너지 속도 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ],
+      "retrievalQuery": "GitHub independence neutrality integration synergy Azure enterprise security governance"
+    },
+    {
+      "id": "H14",
+      "kpi": "github_holdout",
+      "type": "multiple_choice",
+      "prompt": "GitHub 인수 가격이 독립 매출 대비 높아 보이지만 개발자 생태계와 Microsoft Cloud 연결 가치는 크다. 가장 적절한 CFO 논리는?",
+      "options": [
+        "개발자 네트워크와 cloud 기여의 장기 가치 항목을 판단 기준에 포함하되, 초기 실행은 독립 매출 배수 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "독립 매출, 개발자 네트워크, enterprise 확장, Azure·Security·DevOps 기여를 분리해 장기 플랫폼 가치로 평가한다.",
+        "개발자 네트워크와 cloud 기여의 장기 가치 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "개발자 네트워크와 cloud 기여의 장기 가치 항목을 보호하는 방향은 유지하되, 성과 판단은 독립 매출 배수 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ],
+      "retrievalQuery": "GitHub valuation developer network enterprise Azure Security DevOps platform value"
+    },
+    {
+      "id": "H15",
+      "kpi": "github_holdout",
+      "type": "multiple_choice",
+      "prompt": "GitHub 인수 후 오픈소스 커뮤니티 일부가 Microsoft의 데이터 사용과 제품 번들링을 우려한다. Amy Hood식 대응은?",
+      "options": [
+        "데이터 사용 원칙과 커뮤니티 governance 항목을 판단 기준에 포함하되, 초기 실행은 enterprise 번들 매출 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "데이터 사용 원칙, 제품 중립성, 커뮤니티 governance, enterprise packaging 기준을 명확히 분리해 신뢰를 먼저 확보한다.",
+        "데이터 사용 원칙과 커뮤니티 governance 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "데이터 사용 원칙과 커뮤니티 governance 항목을 보호하는 방향은 유지하되, 성과 판단은 enterprise 번들 매출 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ],
+      "retrievalQuery": "GitHub open source community trust data use bundling enterprise packaging governance"
+    },
+    {
+      "id": "H16",
+      "kpi": "github_holdout",
+      "type": "multiple_choice",
+      "prompt": "GitHub Enterprise와 Azure DevOps가 일부 기능에서 겹친다. 인수 후 제품 포트폴리오 정리 원칙으로 가장 적절한 것은?",
+      "options": [
+        "마이그레이션 리스크와 개발자 워크플로 항목을 판단 기준에 포함하되, 초기 실행은 운영비 절감 효과 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "고객군, 개발자 워크플로, revenue retention, migration risk를 분리해 강제 통합보다 선택권 중심으로 정리한다.",
+        "마이그레이션 리스크와 개발자 워크플로 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "마이그레이션 리스크와 개발자 워크플로 항목을 보호하는 방향은 유지하되, 성과 판단은 운영비 절감 효과 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ],
+      "retrievalQuery": "GitHub Enterprise Azure DevOps overlap migration customer choice retention"
+    },
+    {
+      "id": "H17",
+      "kpi": "github_holdout",
+      "type": "multiple_choice",
+      "prompt": "GitHub 인수 후 보안 기능을 강화하면 enterprise 매출 기회는 커지지만 오픈소스 무료 사용자의 체감 가치는 낮아질 수 있다. CFO 권고는?",
+      "options": [
+        "무료 커뮤니티 신뢰와 enterprise 보안 수익화 항목을 판단 기준에 포함하되, 초기 실행은 보안 기능 매출 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "무료 커뮤니티 신뢰를 훼손하지 않는 기본 보안은 유지하고, enterprise-grade 보안은 별도 가치와 비용 근거로 수익화한다.",
+        "무료 커뮤니티 신뢰와 enterprise 보안 수익화 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "무료 커뮤니티 신뢰와 enterprise 보안 수익화 항목을 보호하는 방향은 유지하되, 성과 판단은 보안 기능 매출 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ],
+      "retrievalQuery": "GitHub security features enterprise monetization open source free users trust margin"
+    },
+    {
+      "id": "H18",
+      "kpi": "github_holdout",
+      "type": "multiple_choice",
+      "prompt": "GitHub 인수 성과를 첫해에 평가해야 한다. Amy Hood식 성과 지표 조합은 무엇인가?",
+      "options": [
+        "커뮤니티·재무·통합 지표의 조합 항목을 판단 기준에 포함하되, 초기 실행은 첫해 매출 성장률 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "개발자 유지, repository activity, enterprise adoption, cross-sell, gross margin, integration cost를 함께 본다.",
+        "커뮤니티·재무·통합 지표의 조합 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "커뮤니티·재무·통합 지표의 조합 항목을 보호하는 방향은 유지하되, 성과 판단은 첫해 매출 성장률 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ],
+      "retrievalQuery": "GitHub acquisition first year metrics developer retention repository activity enterprise adoption integration cost"
+    },
+    {
+      "id": "H19",
+      "kpi": "github_holdout",
+      "type": "multiple_choice",
+      "prompt": "GitHub 인수 후 주요 maintainer 일부가 경쟁 플랫폼으로 이동할 가능성이 있다. CFO 관점의 중단/완화 조건은?",
+      "options": [
+        "maintainer 이탈 선행지표와 통합 속도 항목을 판단 기준에 포함하되, 초기 실행은 enterprise renewal 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "핵심 프로젝트 유지, contributor activity, enterprise renewal, 커뮤니티 sentiment를 선행 지표로 삼아 통합 속도와 수익화 강도를 조정한다.",
+        "maintainer 이탈 선행지표와 통합 속도 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "maintainer 이탈 선행지표와 통합 속도 항목을 보호하는 방향은 유지하되, 성과 판단은 enterprise renewal 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ],
+      "retrievalQuery": "GitHub maintainers contributor activity enterprise renewal community sentiment integration speed"
+    },
+    {
+      "id": "H20",
+      "kpi": "github_holdout",
+      "type": "multiple_choice",
+      "prompt": "GitHub 인수 후 단기 EPS 희석을 줄이기 위해 인력과 R&D를 줄이라는 요구가 있다. Amy Hood식 판단은?",
+      "options": [
+        "핵심 R&D 보호와 중복 비용 단계 조정 항목을 판단 기준에 포함하되, 초기 실행은 EPS 희석 축소 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "핵심 제품·커뮤니티 신뢰·보안 투자는 보호하고, 중복 비용은 고객 영향과 개발자 유지 지표를 확인하며 단계적으로 조정한다.",
+        "핵심 R&D 보호와 중복 비용 단계 조정 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "핵심 R&D 보호와 중복 비용 단계 조정 항목을 보호하는 방향은 유지하되, 성과 판단은 EPS 희석 축소 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ],
+      "retrievalQuery": "GitHub EPS dilution R&D headcount community support security investment cost synergy"
     },
     {
       "id": "S1",
       "kpi": "hypothetical_scenario",
-      "type": "subjective",
-      "prompt": "Azure AI 수요가 공급을 초과하고 있다. 추가 데이터센터 투자로 향후 12개월의 공급능력을 25% 늘릴 수 있지만, 선행 CapEx와 감가상각 때문에 회사 gross margin이 약 1.5%p 하락할 전망이다. 현재 수요의 60%는 장기 계약 또는 실제 사용량으로 확인되지만 나머지는 고객의 수요 전망에 의존한다. 투자를 승인·축소·단계화할지 결정하고, 그 이유와 승인 조건, 이후 확인할 지표를 설명하라."
+      "type": "multiple_choice",
+      "prompt": "Azure AI capacity 부족으로 대형 고객 3곳이 24개월 약정 의향서를 냈지만 법적 구속력은 아직 없다. 추가 투자는 총 90억 달러이며 GPU 45%, 장기 데이터센터 55%다. 첫 12개월 gross margin은 2.1%p 낮아질 수 있고, 사용량이 예상의 70% 이하이면 free cash flow가 2년간 압박된다. CFO 판단으로 가장 적절한 것은?",
+      "options": [
+        "법적 구속력 있는 수요와 자산별 회수 논리 항목을 판단 기준에 포함하되, 초기 실행은 AI capacity 선점 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "법적 구속력 있는 수요와 자산별 회수 논리 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "투자를 단계화한다. GPU는 수요 확정과 사용량 신호에 맞춰 집행하고, 데이터센터는 장기 자산으로 별도 관리하되 법적 구속력과 FCF 하방을 확인 필요로 둔다.",
+        "법적 구속력 있는 수요와 자산별 회수 논리 항목을 보호하는 방향은 유지하되, 성과 판단은 AI capacity 선점 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ]
     },
     {
       "id": "S2",
       "kpi": "hypothetical_scenario",
-      "type": "subjective",
-      "prompt": "Microsoft가 빠르게 성장하는 개발자 AI 플랫폼을 120억 달러에 인수할 기회를 얻었다. 현재 매출과 영업이익은 인수가격에 비해 작지만 개발자 네트워크와 데이터 자산의 전략적 가치는 높다. Microsoft 제품에 빠르게 통합하면 단기 매출 시너지가 예상되지만, 플랫폼 중립성을 잃으면 개발자 이탈 가능성이 있다. 거래는 주식과 현금을 함께 사용하며 첫 2년간 EPS를 약 1.5% 희석할 전망이다. 인수 여부와 거래 조건, 독립 운영 범위, 재무적 레드라인을 제시하라."
+      "type": "multiple_choice",
+      "prompt": "120억 달러 규모의 개발자 플랫폼 인수안이 있다. 대상은 4,000만 개발자를 보유했고, 무료 사용자의 유료 전환이 매출 가정의 큰 부분을 차지한다. 거래는 주식 70%, 현금 30%이며 2년간 EPS 1.5% 희석이 예상된다. 보안, Copilot, Azure 시너지가 있으나 중립성 훼손 시 오픈소스 프로젝트 이탈 위험이 있다. 가장 적절한 CFO 권고는?",
+      "options": [
+        "인수를 승인하되 개발자 중립성, 유료 전환 가정, EPS 희석, 시너지 실현을 단계별 KPI로 검증하고 독립 운영 원칙을 계약 조건에 반영한다.",
+        "중립성 보호와 유료 전환 가정 검증 항목을 판단 기준에 포함하되, 초기 실행은 EPS 희석 회수 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "중립성 보호와 유료 전환 가정 검증 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "중립성 보호와 유료 전환 가정 검증 항목을 보호하는 방향은 유지하되, 성과 판단은 EPS 희석 회수 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ]
     },
     {
       "id": "S3",
       "kpi": "hypothetical_scenario",
-      "type": "subjective",
-      "prompt": "기업 IT 지출 둔화로 신규 계약과 사용량 증가율이 동시에 낮아지고 있다. 경영진은 다음 회계연도 운영비를 8% 줄여야 한다. AI 인프라, 보안, 핵심 클라우드 연구개발은 장기 성장에 중요하지만 현재 비용이 빠르게 늘고 있다. 성숙 제품의 마케팅, 중복 관리조직, 저성과 지역 영업조직에도 비용이 배정되어 있다. 어떤 비용을 먼저 줄이고 어떤 투자를 보호할지 결정하라. 투자자 가이던스에서 확정된 사실과 불확실한 가정을 어떻게 구분할지도 설명하라."
+      "type": "multiple_choice",
+      "prompt": "기업 IT 지출 둔화로 Azure 사용량 증가율이 낮아졌고, AI 추론 수요는 일부 대형 고객에 집중된다. 다음 회계연도 운영비 8% 감축이 필요하며 감축 후보는 성숙 제품 마케팅, 중복 관리조직, 저성과 지역 영업, 실험적 AI 앱, 보안 R&D, 핵심 클라우드 reliability 투자다. 가장 적절한 CFO 판단은?",
+      "options": [
+        "전략 R&D 보호와 저생산성 비용 감축 항목을 판단 기준에 포함하되, 초기 실행은 8% 일률 감축 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "보안 R&D와 핵심 클라우드 reliability는 보호하고, 성숙 제품 마케팅·중복 조직·저성과 영업·검증 낮은 AI 앱을 우선순위별로 조정한다.",
+        "전략 R&D 보호와 저생산성 비용 감축 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "전략 R&D 보호와 저생산성 비용 감축 항목을 보호하는 방향은 유지하되, 성과 판단은 8% 일률 감축 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ]
+    },
+    {
+      "id": "S4",
+      "kpi": "hypothetical_scenario",
+      "type": "multiple_choice",
+      "prompt": "Nuance형 의료 AI 자산 인수 기회가 있다. 인수가는 80억 달러 all-cash이고 현재 대형 병원 30곳을 고객으로 보유한다. 매출 상당 부분은 향후 확장 계약에 의존하며, 첫해 통합 비용과 보안 인증 비용이 크다는 정성 정보만 있다. 가장 적절한 CFO 판단은?",
+      "options": [
+        "확장 계약 확정성과 인증 비용 실사 항목을 판단 기준에 포함하되, 초기 실행은 대형 병원 고객 수 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "확장 계약 확정성과 인증 비용 실사 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "보류하고 실사를 요구한다. 현재 ARR, 확장 계약의 확정성, 통합·보안 인증 비용, 현금흐름 영향을 확인한 뒤 가치와 구조를 재평가한다.",
+        "확장 계약 확정성과 인증 비용 실사 항목을 보호하는 방향은 유지하되, 성과 판단은 대형 병원 고객 수 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ]
+    },
+    {
+      "id": "S5",
+      "kpi": "hypothetical_scenario",
+      "type": "multiple_choice",
+      "prompt": "대형 콘텐츠 제작비는 이미 확정되었다. 이를 구독 서비스에 day-one 포함하면 신규 가입 전환 가능성은 있으나 독립 판매 매출과 gross margin이 압박될 수 있다. 신규 가입 전환율과 구독 유지율은 아직 검증되지 않았다. 가장 적절한 CFO 판단은?",
+      "options": [
+        "구독 LTV와 독립 판매 기회비용 검증 항목을 판단 기준에 포함하되, 초기 실행은 가입자 전환 가능성 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "구독 LTV와 독립 판매 기회비용 검증 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "단계화한다. 독립 판매 기회비용, 전환율, 유지율, LTV를 검증하면서 제한적 포함 또는 하이브리드 출시로 데이터를 확보한다.",
+        "구독 LTV와 독립 판매 기회비용 검증 항목을 보호하는 방향은 유지하되, 성과 판단은 가입자 전환 가능성 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ]
+    },
+    {
+      "id": "S6",
+      "kpi": "hypothetical_scenario",
+      "type": "multiple_choice",
+      "prompt": "Copilot 가격 인상은 단기 매출과 gross margin을 개선할 수 있지만 일부 고객은 사용량이 충분하지 않다고 느낀다. AI 인프라 비용은 계속 증가 중이다. 가격 인상, 번들 유지, 단계적 가격 실험 중 가장 적절한 판단은?",
+      "options": [
+        "가치 체감과 가격 실험의 단계화 항목을 판단 기준에 포함하되, 초기 실행은 AI 인프라 비용 회수 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "가치 체감과 가격 실험의 단계화 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "사용량과 가치 체감이 높은 고객군부터 단계적 가격 실험을 하고, ROI 증명 도구와 인프라 효율화를 함께 추진한다.",
+        "가치 체감과 가격 실험의 단계화 항목을 보호하는 방향은 유지하되, 성과 판단은 AI 인프라 비용 회수 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ]
+    },
+    {
+      "id": "S7",
+      "kpi": "hypothetical_scenario",
+      "type": "multiple_choice",
+      "prompt": "대형 고객이 Azure AI capacity 선점을 위해 선불 계약을 제안했다. 선불 현금흐름은 좋아지지만 특정 고객에 capacity가 고정되면 다른 전략 고객의 수요 대응이 어려워질 수 있다. 가장 적절한 계약 판단은?",
+      "options": [
+        "capacity 유연성과 revenue recognition 항목을 판단 기준에 포함하되, 초기 실행은 선불 현금흐름 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "capacity 유연성과 revenue recognition 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "수정 수락한다. 최소 사용 의무, 재배분 권한, revenue recognition, 다른 전략 고객 수요를 확인해 capacity 유연성을 보존하는 구조로 바꾼다.",
+        "capacity 유연성과 revenue recognition 항목을 보호하는 방향은 유지하되, 성과 판단은 선불 현금흐름 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ]
+    },
+    {
+      "id": "S8",
+      "kpi": "hypothetical_scenario",
+      "type": "multiple_choice",
+      "prompt": "보안 제품군은 장기 전략상 중요하지만 이번 분기 신규 고객 증가가 둔화되었다. 영업팀은 할인 확대를 요구하고, 제품팀은 R&D 유지가 필요하다고 주장한다. 가장 적절한 CFO 판단은?",
+      "options": [
+        "보안 R&D 보호와 영업 생산성 점검 항목을 판단 기준에 포함하되, 초기 실행은 할인 확대 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "보안 R&D 보호와 영업 생산성 점검 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "R&D 핵심 투자는 유지하되 할인은 제한적으로 관리하고, 영업 생산성·가치 기반 세일즈·고객 세그먼트별 원인을 함께 점검한다.",
+        "보안 R&D 보호와 영업 생산성 점검 항목을 보호하는 방향은 유지하되, 성과 판단은 할인 확대 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ]
+    },
+    {
+      "id": "S9",
+      "kpi": "hypothetical_scenario",
+      "type": "multiple_choice",
+      "prompt": "환율이 악화되고 특정 지역 매출 회수가 지연되고 있다. 동시에 클라우드 장기 계약은 늘었지만 일부 계약은 큰 할인 조건을 포함한다. 다음 분기 가이던스에서 가장 적절한 설명 방식은?",
+      "options": [
+        "환율·할인·cash conversion 분리 항목을 판단 기준에 포함하되, 초기 실행은 constant currency 성장 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "환율, 회수 지연, 할인 계약, 장기 계약 증가, cash conversion 영향을 확정 사실·가정·확인 필요로 분리해 설명한다.",
+        "환율·할인·cash conversion 분리 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "환율·할인·cash conversion 분리 항목을 보호하는 방향은 유지하되, 성과 판단은 constant currency 성장 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ]
+    },
+    {
+      "id": "S10",
+      "kpi": "hypothetical_scenario",
+      "type": "multiple_choice",
+      "prompt": "오픈소스 개발자 플랫폼 인수 후 커뮤니티는 독립 운영을 요구하고, Microsoft 영업조직은 빠른 기업 패키지화를 요구한다. 단기 매출 시너지와 장기 개발자 신뢰가 충돌한다. 가장 적절한 통합 원칙은?",
+      "options": [
+        "커뮤니티 독립성과 enterprise 수익화 분리 항목을 판단 기준에 포함하되, 초기 실행은 빠른 기업 패키지화 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "커뮤니티 독립성과 enterprise 수익화 분리 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "커뮤니티 독립성과 무료 접근성은 보호하고, 기업용 보안·관리 기능은 별도 유료 계층으로 분리해 단계적으로 수익화한다.",
+        "커뮤니티 독립성과 enterprise 수익화 분리 항목을 보호하는 방향은 유지하되, 성과 판단은 빠른 기업 패키지화 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ]
+    },
+    {
+      "id": "S11",
+      "kpi": "hypothetical_scenario",
+      "type": "multiple_choice",
+      "prompt": "AI 서버 공급 부족 상황에서 두 고객이 우선 배정을 요구한다. 고객 A는 장기 전략 고객이고 고객 B는 더 높은 단가를 제시한다. 단기 매출, 장기 관계, capacity 공정성을 고려한 가장 적절한 판단은?",
+      "options": [
+        "계약 의무·사용량·장기 관계의 균형 항목을 판단 기준에 포함하되, 초기 실행은 높은 단가 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "계약 의무·사용량·장기 관계의 균형 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "두 고객의 계약 의무, 예상 사용량, 장기 가치, 단가 프리미엄을 비교해 부분 배정과 향후 공급 계획을 투명하게 제시한다.",
+        "계약 의무·사용량·장기 관계의 균형 항목을 보호하는 방향은 유지하되, 성과 판단은 높은 단가 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ]
+    },
+    {
+      "id": "S12",
+      "kpi": "hypothetical_scenario",
+      "type": "multiple_choice",
+      "prompt": "Microsoft 365 Copilot 사용량은 빠르게 늘지만 일부 고객은 ROI 측정이 어렵다고 말한다. 가격 유지, 가격 인상, 번들 재설계 중 가장 적절한 방향은?",
+      "options": [
+        "ROI 측정과 세그먼트별 가격 변경 항목을 판단 기준에 포함하되, 초기 실행은 사용량 증가 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "ROI 측정과 세그먼트별 가격 변경 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "ROI 측정 프레임워크와 고객별 사용량 데이터를 먼저 제공하고, 가치가 입증된 세그먼트부터 번들/가격 변경을 단계적으로 검토한다.",
+        "ROI 측정과 세그먼트별 가격 변경 항목을 보호하는 방향은 유지하되, 성과 판단은 사용량 증가 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ]
+    },
+    {
+      "id": "S13",
+      "kpi": "hypothetical_scenario",
+      "type": "multiple_choice",
+      "prompt": "보안 사고 대응을 위해 보안 R&D와 고객 지원을 늘리면 단기 operating margin이 낮아진다. 하지만 enterprise 신뢰 회복은 중요하다. 가장 적절한 CFO 판단은?",
+      "options": [
+        "투자를 확대한다. 신뢰 회복은 enterprise 사업의 기반이므로 margin 하락은 장기 고객 유지 투자로 설명한다.",
+        "enterprise 신뢰 회복과 margin tradeoff 항목을 판단 기준에 포함하되, 초기 실행은 단기 operating margin 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "enterprise 신뢰 회복과 margin tradeoff 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "enterprise 신뢰 회복과 margin tradeoff 항목을 보호하는 방향은 유지하되, 성과 판단은 단기 operating margin 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ]
+    },
+    {
+      "id": "S14",
+      "kpi": "hypothetical_scenario",
+      "type": "multiple_choice",
+      "prompt": "게임 구독 서비스에 대형 타이틀을 day-one으로 넣으면 가입자 증가 가능성은 있지만 독립 판매 매출이 줄 수 있다. 가장 적절한 판단은?",
+      "options": [
+        "독립 판매 기회비용과 구독 LTV 비교 항목을 판단 기준에 포함하되, 초기 실행은 구독 플랫폼 성장 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "독립 판매 기회비용과 구독 LTV 비교 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "독립 판매 기회비용과 구독 LTV, 유지율, 신규 가입 전환을 비교해 포함·보류·하이브리드 출시를 단계적으로 결정한다.",
+        "독립 판매 기회비용과 구독 LTV 비교 항목을 보호하는 방향은 유지하되, 성과 판단은 구독 플랫폼 성장 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ]
+    },
+    {
+      "id": "S15",
+      "kpi": "hypothetical_scenario",
+      "type": "multiple_choice",
+      "prompt": "LinkedIn 광고 사업은 macro 약세로 둔화되지만 engagement는 유지되고 있다. 비용 절감, 제품 투자 유지, 영업 재배치 중 가장 적절한 조합은?",
+      "options": [
+        "engagement와 광고주 예산 압박 분리 항목을 판단 기준에 포함하되, 초기 실행은 광고 매출 둔화 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "engagement와 광고주 예산 압박 분리 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "제품 투자는 유지하되 영업 재배치와 운영 효율화를 병행한다. engagement 유지와 광고주 예산 압박을 분리해 대응한다.",
+        "engagement와 광고주 예산 압박 분리 항목을 보호하는 방향은 유지하되, 성과 판단은 광고 매출 둔화 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ]
+    },
+    {
+      "id": "S16",
+      "kpi": "hypothetical_scenario",
+      "type": "multiple_choice",
+      "prompt": "Nuance형 의료 AI 자산을 추가 인수할 기회가 있다. 고객 기반은 좋지만 규제·보안 인증 비용과 통합 난도가 높다. 가장 적절한 CFO 판단은?",
+      "options": [
+        "고객 계약의 질과 규제·보안 비용 실사 항목을 판단 기준에 포함하되, 초기 실행은 좋은 고객 기반 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "고객 계약의 질과 규제·보안 비용 실사 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "보류하고 실사한다. 고객 계약의 질, 규제·보안 인증 상태, 통합 비용, Azure와의 기술 호환성, 현금흐름 영향을 확인한다.",
+        "고객 계약의 질과 규제·보안 비용 실사 항목을 보호하는 방향은 유지하되, 성과 판단은 좋은 고객 기반 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ]
+    },
+    {
+      "id": "S17",
+      "kpi": "hypothetical_scenario",
+      "type": "multiple_choice",
+      "prompt": "환율 악화와 특정 지역 회수 지연 때문에 reported revenue와 cash conversion이 흔들린다. 그러나 cloud backlog는 늘고 있다. 가이던스에서 가장 적절한 구분은?",
+      "options": [
+        "reported revenue·cash conversion·backlog 질 분리 항목을 판단 기준에 포함하되, 초기 실행은 cloud backlog 증가 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "reported revenue 압박, cash conversion 지연, backlog 질, 환율 영향, 회수 원인을 확정 사실·가정·확인 필요로 나눠 설명한다.",
+        "reported revenue·cash conversion·backlog 질 분리 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "reported revenue·cash conversion·backlog 질 분리 항목을 보호하는 방향은 유지하되, 성과 판단은 cloud backlog 증가 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ]
+    },
+    {
+      "id": "S18",
+      "kpi": "hypothetical_scenario",
+      "type": "multiple_choice",
+      "prompt": "대형 고객이 AI capacity 장기 예약을 요구하지만 계약에는 사용량 하한이 없다. 현금흐름은 좋아질 수 있으나 capacity가 묶일 수 있다. 가장 적절한 계약 구조는?",
+      "options": [
+        "사용량 하한과 미사용 capacity 재배분 항목을 판단 기준에 포함하되, 초기 실행은 장기 예약 현금흐름 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "사용량 하한과 미사용 capacity 재배분 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "사용량 하한, 단계적 할당, 미사용 capacity 재배분, revenue recognition을 계약에 반영해 현금흐름과 유연성을 함께 관리한다.",
+        "사용량 하한과 미사용 capacity 재배분 항목을 보호하는 방향은 유지하되, 성과 판단은 장기 예약 현금흐름 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ]
+    },
+    {
+      "id": "S19",
+      "kpi": "hypothetical_scenario",
+      "type": "multiple_choice",
+      "prompt": "신규 AI 기능의 compute cost가 예상보다 높아 gross margin을 압박한다. 제품팀은 빠른 확산을 원하고 재무팀은 사용량 제한을 원한다. 가장 적절한 판단은?",
+      "options": [
+        "확산·가격·비용 최적화의 단계 조정 항목을 판단 기준에 포함하되, 초기 실행은 compute cost 방어 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "확산·가격·비용 최적화의 단계 조정 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "확산은 유지하되 사용량·고객군·비용 최적화 상태에 따라 단계적 제한과 가격/패키징 조정을 병행한다.",
+        "확산·가격·비용 최적화의 단계 조정 항목을 보호하는 방향은 유지하되, 성과 판단은 compute cost 방어 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ]
+    },
+    {
+      "id": "S20",
+      "kpi": "hypothetical_scenario",
+      "type": "multiple_choice",
+      "prompt": "오픈소스 플랫폼 인수 후 enterprise 고객은 보안·관리 기능을 요구하지만 커뮤니티는 독립성과 무료 접근성을 우려한다. 가장 적절한 수익화 방식은?",
+      "options": [
+        "무료/오픈 접근성과 enterprise 계층 분리 항목을 판단 기준에 포함하되, 초기 실행은 enterprise 보안 수요 지표를 더 빨리 확인하는 방향으로 단기 수익화 또는 비용 방어를 우선한다.",
+        "무료/오픈 접근성과 enterprise 계층 분리 항목을 원칙으로 제시하지만, 희석·현금흐름·통합비용 같은 재무 영향은 종결 후 사후 관리 지표로 넘긴다.",
+        "커뮤니티용 무료/오픈 버전은 유지하고, enterprise용 보안·관리 기능은 별도 유료 계층으로 분리해 투명하게 커뮤니케이션한다.",
+        "무료/오픈 접근성과 enterprise 계층 분리 항목을 보호하는 방향은 유지하되, 성과 판단은 enterprise 보안 수요 지표 중심으로 단순화하고 다른 리스크는 다음 분기 리뷰에서 보완한다."
+      ]
     }
   ]
 }

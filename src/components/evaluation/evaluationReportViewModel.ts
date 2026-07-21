@@ -3,6 +3,7 @@ import type {
   EvaluationRun,
   EvaluationRunAnswer,
 } from '../../../shared/amyHoodEvaluation';
+import { EVALUATION_KPI_MAX_SCORES } from '../../../shared/amyHoodEvaluation';
 
 export type SingleRunReportModel = {
   runId: string;
@@ -65,8 +66,11 @@ export const buildComparisonReport = (
   if (leftRun.questionSetVersion !== rightRun.questionSetVersion) {
     throw new Error('comparison requires the same question-set version');
   }
-  if (leftRun.answers.length !== 15 || rightRun.answers.length !== 15) {
-    throw new Error('comparison requires 15 answers in each run');
+  if (
+    leftRun.answers.length !== EVALUATION_KPI_MAX_SCORES.totalQuestions ||
+    rightRun.answers.length !== EVALUATION_KPI_MAX_SCORES.totalQuestions
+  ) {
+    throw new Error(`comparison requires ${EVALUATION_KPI_MAX_SCORES.totalQuestions} answers in each run`);
   }
 
   const left = buildSingleRunReport(leftRun, questions);

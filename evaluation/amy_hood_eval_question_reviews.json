@@ -1,5 +1,5 @@
 {
-  "questionSetVersion": "1.0.0",
+  "questionSetVersion": "1.5.0",
   "reviews": [
     {
       "questionId": "P1",
@@ -44,52 +44,322 @@
       "reviewedAt": "2026-07-14T01:32:17.155Z"
     },
     {
-      "questionId": "H1",
+      "questionId": "P8",
       "status": "approved",
       "revisionNote": "",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "P9",
+      "status": "approved",
+      "revisionNote": "",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "P10",
+      "status": "approved",
+      "revisionNote": "",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "P11",
+      "status": "approved",
+      "revisionNote": "",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "P12",
+      "status": "approved",
+      "revisionNote": "",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "P13",
+      "status": "approved",
+      "revisionNote": "",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "P14",
+      "status": "approved",
+      "revisionNote": "",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "P15",
+      "status": "approved",
+      "revisionNote": "",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "P16",
+      "status": "approved",
+      "revisionNote": "",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "P17",
+      "status": "approved",
+      "revisionNote": "",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "P18",
+      "status": "approved",
+      "revisionNote": "",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "P19",
+      "status": "approved",
+      "revisionNote": "",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "P20",
+      "status": "approved",
+      "revisionNote": "",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "H1",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
       "reviewedAt": "2026-07-14T01:32:19.694Z"
     },
     {
       "questionId": "H2",
       "status": "approved",
-      "revisionNote": "",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
       "reviewedAt": "2026-07-14T01:33:30.921Z"
     },
     {
       "questionId": "H3",
       "status": "approved",
-      "revisionNote": "",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
       "reviewedAt": "2026-07-14T01:32:09.718Z"
     },
     {
       "questionId": "H4",
       "status": "approved",
-      "revisionNote": "",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
       "reviewedAt": "2026-07-14T01:32:07.077Z"
     },
     {
       "questionId": "H5",
       "status": "approved",
-      "revisionNote": "",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
       "reviewedAt": "2026-07-14T01:32:04.537Z"
+    },
+    {
+      "questionId": "H6",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "H7",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "H8",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "H9",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "H10",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "H11",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "H12",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "H13",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "H14",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "H15",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "H16",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "H17",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "H18",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "H19",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "H20",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
     },
     {
       "questionId": "S1",
       "status": "approved",
-      "revisionNote": "",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
       "reviewedAt": "2026-07-14T01:32:01.627Z"
     },
     {
       "questionId": "S2",
       "status": "approved",
-      "revisionNote": "",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
       "reviewedAt": "2026-07-14T01:31:59.381Z"
     },
     {
       "questionId": "S3",
       "status": "approved",
-      "revisionNote": "",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
       "reviewedAt": "2026-07-14T01:31:55.956Z"
+    },
+    {
+      "questionId": "S4",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "S5",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "S6",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "S7",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "S8",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "S9",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "S10",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "S11",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "S12",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "S13",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "S14",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "S15",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "S16",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "S17",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "S18",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "S19",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
+    },
+    {
+      "questionId": "S20",
+      "status": "approved",
+      "revisionNote": "1.5.0 난이도 강화: 부분적으로 맞지만 핵심 판단 기준 하나가 빠진 함정 선택지로 수정",
+      "reviewedAt": "2026-07-15T00:00:00.000Z"
     }
   ]
 }

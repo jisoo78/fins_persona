@@ -1,7 +1,7 @@
 /**
  * Test Plan:
  * 1. Happy Path:
- *    - 승인된 7/5/3 질문과 활성 Main Prompt 버전을 고정한 평가 실행을 완료한다.
+ *    - 승인된 20/20/20 질문과 활성 Main Prompt 버전을 고정한 평가 실행을 완료한다.
  *
  * 2. Edge Cases:
  *    - 객관식 이유가 설명 문장과 함께 와도 선택 번호와 이유를 보존한다.
@@ -176,7 +176,7 @@ const validModelResult = (prompt: string): ModelResult => ({
 });
 
 const validGrades = (): SubjectiveGrade[] =>
-  ['S1', 'S2', 'S3'].map((questionId) => ({
+  Array.from({ length: 20 }, (_, index) => `S${index + 1}`).map((questionId) => ({
     questionId,
     decision: 2,
     reasoning: 2,
@@ -194,35 +194,39 @@ const mcQuestion: EvaluationQuestion = {
   options: ['첫 번째', '두 번째', '세 번째', '네 번째'],
 };
 
-test('happy: loads one versioned 7/5/3 evaluation bundle without exposing answers', async () => {
+const expectedQuestionIds = [
+  ...Array.from({ length: 20 }, (_, index) => `P${index + 1}`),
+  ...Array.from({ length: 20 }, (_, index) => `H${index + 1}`),
+  ...Array.from({ length: 20 }, (_, index) => `S${index + 1}`),
+];
+
+test('happy: loads one versioned 20/20/20 evaluation bundle without exposing answers', async () => {
   const bundle = await loadEvaluationBundle(process.cwd());
-  assert.equal(bundle.questions.version, '1.0.0');
+  assert.equal(bundle.questions.version, '1.5.0');
   assert.equal(
     bundle.questions.questions.filter(
       (question) => question.kpi === 'past_memory_restoration',
     ).length,
-    7,
+    20,
   );
   assert.equal(
     bundle.questions.questions.filter(
       (question) => question.kpi === 'github_holdout',
     ).length,
-    5,
+    20,
   );
   assert.equal(
     bundle.questions.questions.filter(
       (question) => question.kpi === 'hypothetical_scenario',
     ).length,
-    3,
+    20,
   );
   assert.equal(
     bundle.questions.questions.some((question) => 'correctChoice' in question),
     false,
   );
-  assert.deepEqual(
-    bundle.questions.questions.map((question) => question.id),
-    bundle.answerKey.answers.map((answer) => answer.questionId),
-  );
+  assert.deepEqual(bundle.questions.questions.map((question) => question.id), expectedQuestionIds);
+  assert.deepEqual(bundle.answerKey.answers.map((answer) => answer.questionId), expectedQuestionIds);
 });
 
 test('edge: approved review accepts an empty note', async () => {
@@ -305,6 +309,17 @@ test('failure: holdout and scenario prompts contain no RAG evidence', async () =
   }
 });
 
+test('happy: scenario questions are multiple-choice and still hide the answer key', async () => {
+  const bundle = await loadEvaluationBundle(process.cwd());
+  const question = bundle.questions.questions.find((item) => item.id === 'S1');
+  assert.ok(question);
+  assert.equal(question.type, 'multiple_choice');
+  const prompt = buildEvaluationPrompt('PERSONA', question, []);
+  assert.match(prompt, /"choice"/);
+  assert.match(prompt, /1~2문장/);
+  assert.doesNotMatch(prompt, /정답:/);
+});
+
 test('happy: sequential run calls the model once for each question in order', async () => {
   const root = await createRunnerFixture();
   const prompts: string[] = [];
@@ -321,12 +336,9 @@ test('happy: sequential run calls the model once for each question in order', as
   const completed = await runner.executeEvaluationRun(queued.runId);
 
   assert.equal(completed.status, 'complete');
-  assert.equal(completed.answers.length, 15);
-  assert.equal(prompts.length, 15);
-  assert.deepEqual(
-    completed.answers.map((answer) => answer.questionId),
-    ['P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'H1', 'H2', 'H3', 'H4', 'H5', 'S1', 'S2', 'S3'],
-  );
+  assert.equal(completed.answers.length, 60);
+  assert.equal(prompts.length, 60);
+  assert.deepEqual(completed.answers.map((answer) => answer.questionId), expectedQuestionIds);
 });
 
 test('happy: evaluation pins the active prompt version and executes immutable content', async () => {
@@ -384,7 +396,7 @@ test('failure: malformed MC response is retried exactly once', async () => {
   const queued = await runner.createEvaluationRun({ provider: 'local' });
   const completed = await runner.executeEvaluationRun(queued.runId);
   assert.equal(completed.status, 'complete');
-  assert.equal(calls, 16);
+  assert.equal(calls, 61);
 });
 
 test('edge: resume preserves complete answers and starts at the failed question', async () => {
@@ -428,7 +440,7 @@ test('failure: unapproved question set cannot create a run', async () => {
   );
 });
 
-test('failure: external grades require exact totals and blind keys', async () => {
+test('failure: all-MC scenario set rejects external subjective grading', async () => {
   const root = await createRunnerFixture();
   const runner = createEvaluationRunner({
     root,
@@ -436,21 +448,10 @@ test('failure: external grades require exact totals and blind keys', async () =>
   });
   const queued = await runner.createEvaluationRun({ provider: 'local' });
   await runner.executeEvaluationRun(queued.runId);
-  const mismatched = validGrades();
-  mismatched[0] = { ...mismatched[0], score: 8 };
   await assert.rejects(
-    runner.applySubjectiveGrades(queued.runId, mismatched),
-    /grade total does not match dimensions/,
+    runner.applySubjectiveGrades(queued.runId, validGrades()),
+    /no subjective questions/,
   );
-  const leaked = validGrades() as Array<SubjectiveGrade & { provider?: string }>;
-  leaked[0].provider = 'gemma-4';
-  await assert.rejects(
-    runner.applySubjectiveGrades(queued.runId, leaked),
-    /unknown subjective grade field: provider/,
-  );
-  const graded = await runner.applySubjectiveGrades(queued.runId, validGrades());
-  assert.equal(graded.gradingStatus, 'complete');
-  assert.equal(graded.scores.subjective, 18);
 });
 
 test('happy: router exposes question review and all run operations', async () => {
@@ -502,7 +503,7 @@ test('happy: router exposes question review and all run operations', async () =>
     assert.equal(
       ((await questionsResponse.json()) as { questions: { questions: unknown[] } })
         .questions.questions.length,
-      15,
+      60,
     );
     assert.equal(
       (await fetch(`${baseUrl}/questions/P1/review`, {

@@ -1,0 +1,26 @@
+{
+  "runId": "a00977eb-3b8e-43b6-b357-1b03939d2acb",
+  "status": "incomplete",
+  "gradingStatus": "pending",
+  "provider": "local",
+  "model": "yuxinlu1/gemma-4-12B-agentic-fable5-composer2.5-v2-3.5x-tau2-GGUF:Q4_K_M",
+  "promptVersionId": "18182235-58b4-4218-9860-4fea133bd81d",
+  "promptHash": "5a61b4b487126b5d0775705e84c3bdaae904a916740fb1747d1ec68bee042b2f",
+  "ragSnapshotId": "ad44c3bbc249f8b445e44bf4a9667d311358d55ece131b9870b881f3656be068",
+  "questionSetVersion": "1.1.0",
+  "answers": [
+    {
+      "questionId": "P1",
+      "status": "failed",
+      "elapsedMs": 0,
+      "error": "400 request (10710 tokens) exceeds the available context size (8192 tokens), try increasing it"
+    }
+  ],
+  "scores": {
+    "pastMemory": 0,
+    "githubHoldout": 0,
+    "subjective": 0
+  },
+  "startedAt": "2026-07-14T06:19:00.180Z",
+  "completedAt": null
+}

@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 
 import type { EvaluationQuestion, EvaluationRun } from '../../../shared/amyHoodEvaluation';
+import { EVALUATION_KPI_MAX_SCORES } from '../../../shared/amyHoodEvaluation';
 import { CopyRunIdButton } from './CopyRunIdButton';
 import { buildComparisonReport } from './evaluationReportViewModel';
 
@@ -14,7 +15,10 @@ const answerText = (answer: EvaluationRun['answers'][number]) => answer.status =
   : answer.text ?? `${answer.choice ?? '-'}번 · ${answer.reason ?? '선택 이유 없음'}`;
 
 export const ComparisonRunReport: React.FC<Props> = ({ runs, questions }) => {
-  const comparable = useMemo(() => runs.filter((run) => run.status === 'complete' && run.answers.length === 15), [runs]);
+  const comparable = useMemo(
+    () => runs.filter((run) => run.status === 'complete' && run.answers.length === EVALUATION_KPI_MAX_SCORES.totalQuestions),
+    [runs],
+  );
   const [leftId, setLeftId] = useState(() => comparable[0]?.runId ?? '');
   const [rightId, setRightId] = useState(() => comparable[1]?.runId ?? '');
   const left = comparable.find((run) => run.runId === leftId);
@@ -56,9 +60,9 @@ export const ComparisonRunReport: React.FC<Props> = ({ runs, questions }) => {
         <>
           <section className="grid gap-3 sm:grid-cols-3">
             {[
-              ['과거 복원', report.scoreDeltas.pastMemory, 7],
-              ['GitHub 홀드아웃', report.scoreDeltas.githubHoldout, 5],
-              ['가상 시나리오', report.scoreDeltas.subjective, 24],
+              ['과거 복원', report.scoreDeltas.pastMemory, EVALUATION_KPI_MAX_SCORES.pastMemory],
+              ['M&A 판단', report.scoreDeltas.githubHoldout, EVALUATION_KPI_MAX_SCORES.githubHoldout],
+              ['가상 시나리오', report.scoreDeltas.subjective, EVALUATION_KPI_MAX_SCORES.subjective],
             ].map(([label, delta, max]) => (
               <div key={String(label)} className="rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
                 <p className="text-xs text-slate-500">{label} · 오른쪽-왼쪽</p>

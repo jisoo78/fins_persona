@@ -1,12 +1,17 @@
 import type {
   EvaluationAnswerKeyFile,
-  EvaluationProvider,
   EvaluationQuestionFile,
   EvaluationRun,
+  EvaluationRunInput,
   QuestionReview,
   QuestionReviewFile,
   SubjectiveGrade,
 } from '../../shared/amyHoodEvaluation';
+import type {
+  AmyHoodEventMatchingEvaluationFile,
+  AmyHoodEventMatchingRun,
+} from '../../shared/amyHoodEventMatchingEvaluation';
+import type { AmyHoodATrackCopyExperimentRun } from '../../shared/amyHoodATrackCopyExperiment';
 
 export type EvaluationQuestionsResponse = {
   ok: true;
@@ -73,6 +78,55 @@ export const listEvaluationRuns = (fetchImpl: typeof fetch = fetch) =>
     fetchImpl,
   );
 
+export const fetchEventMatchingEvaluation = (fetchImpl: typeof fetch = fetch) =>
+  request<{ ok: true; evaluation: AmyHoodEventMatchingEvaluationFile }>(
+    '/api/evaluation/event-matching/questions',
+    {},
+    fetchImpl,
+  );
+
+export const listEventMatchingRuns = (fetchImpl: typeof fetch = fetch) =>
+  request<{ ok: true; runs: AmyHoodEventMatchingRun[] }>(
+    '/api/evaluation/event-matching/runs',
+    {},
+    fetchImpl,
+  );
+
+export const createEventMatchingRun = (
+  input: EvaluationRunInput,
+  fetchImpl: typeof fetch = fetch,
+) =>
+  request<{ ok: true; runId: string }>(
+    '/api/evaluation/event-matching/runs',
+    {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(input),
+    },
+    fetchImpl,
+  );
+
+export const listATrackCopyExperimentRuns = (fetchImpl: typeof fetch = fetch) =>
+  request<{ ok: true; runs: AmyHoodATrackCopyExperimentRun[] }>(
+    '/api/evaluation/a-track-copy/runs',
+    {},
+    fetchImpl,
+  );
+
+export const createATrackCopyExperimentRun = (
+  input: EvaluationRunInput & { repetitions?: number; skipEvaluation?: boolean },
+  fetchImpl: typeof fetch = fetch,
+) =>
+  request<{ ok: true; runId: string }>(
+    '/api/evaluation/a-track-copy/runs',
+    {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(input),
+    },
+    fetchImpl,
+  );
+
 export const getEvaluationRun = (
   runId: string,
   fetchImpl: typeof fetch = fetch,
@@ -84,7 +138,7 @@ export const getEvaluationRun = (
   );
 
 export const createEvaluationRun = (
-  provider: EvaluationProvider,
+  input: EvaluationRunInput,
   fetchImpl: typeof fetch = fetch,
 ) =>
   request<{ ok: true; run: EvaluationRun }>(
@@ -92,7 +146,7 @@ export const createEvaluationRun = (
     {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ provider }),
+      body: JSON.stringify(input),
     },
     fetchImpl,
   );

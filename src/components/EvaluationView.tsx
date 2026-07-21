@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { AlertCircle, Scale } from 'lucide-react';
 
 import type {
-  EvaluationProvider,
   EvaluationQuestion,
   EvaluationRun,
+  EvaluationRunInput,
   SubjectiveGrade,
 } from '../../shared/amyHoodEvaluation';
 import {
@@ -18,19 +18,25 @@ import {
 import { EvaluationRunForm } from './evaluation/EvaluationRunForm';
 import { EvaluationRunHistory } from './evaluation/EvaluationRunHistory';
 import { EvaluationRunSummary } from './evaluation/EvaluationRunSummary';
+import { EventMatchingEvaluationPanel } from './evaluation/EventMatchingEvaluationPanel';
+import { ATrackCopyExperimentPanel } from './evaluation/ATrackCopyExperimentPanel';
 
 export const EvaluationView: React.FC = () => {
   const [runs, setRuns] = useState<EvaluationRun[]>([]);
   const [questions, setQuestions] = useState<EvaluationQuestion[]>([]);
+  const [questionSetVersion, setQuestionSetVersion] = useState('');
   const [active, setActive] = useState<EvaluationRun | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const refreshRuns = useCallback(async () => {
+  const refreshRuns = useCallback(async (version = questionSetVersion) => {
     const response = await listEvaluationRuns();
-    setRuns(response.runs);
-    return response.runs;
-  }, []);
+    const nextRuns = version
+      ? response.runs.filter((run) => run.questionSetVersion === version)
+      : response.runs;
+    setRuns(nextRuns);
+    return nextRuns;
+  }, [questionSetVersion]);
 
   useEffect(() => {
     let cancelled = false;
@@ -38,7 +44,10 @@ export const EvaluationView: React.FC = () => {
       .then(([nextRuns, questionResponse]) => {
         if (cancelled) return;
         setQuestions(questionResponse.questions.questions);
-        setActive(nextRuns[0] ?? null);
+        setQuestionSetVersion(questionResponse.questions.version);
+        const currentRuns = nextRuns.filter((run) => run.questionSetVersion === questionResponse.questions.version);
+        setRuns(currentRuns);
+        setActive(currentRuns[0] ?? null);
       })
       .catch((caught) => {
         if (!cancelled) setError(caught instanceof Error ? caught.message : '평가 정보를 불러오지 못했습니다.');
@@ -71,11 +80,11 @@ export const EvaluationView: React.FC = () => {
     };
   }, [active?.runId, active?.status, refreshRuns]);
 
-  const start = async (provider: EvaluationProvider) => {
+  const start = async (input: EvaluationRunInput) => {
     setBusy(true);
     setError(null);
     try {
-      const response = await createEvaluationRun(provider);
+      const response = await createEvaluationRun(input);
       setActive(response.run);
       setRuns((current) => [response.run, ...current]);
     } catch (caught) {
@@ -112,12 +121,14 @@ export const EvaluationView: React.FC = () => {
         <header>
           <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-indigo-600 dark:text-indigo-400"><Scale className="h-4 w-4" /> 평가 실행</div>
           <h1 className="text-2xl font-bold tracking-tight text-slate-950 dark:text-white">Amy Hood 블라인드 평가 실행과 채점</h1>
-          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">과거 복원 7점, GitHub 홀드아웃 5점, 가상 시나리오 24점의 실행 기록을 만들고 주관식을 채점합니다. 상세 비교는 평가 리포트에서 확인합니다.</p>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">과거 복원 20점, M&A 판단 20점, 가상 시나리오 20점의 객관식 실행 기록을 만듭니다. 상세 비교는 평가 리포트에서 확인합니다.</p>
         </header>
         {error && <div className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900 dark:bg-red-950/40 dark:text-red-300"><AlertCircle className="h-4 w-4" />{error}</div>}
         <EvaluationRunForm disabled={busy || Boolean(active && ['queued', 'running'].includes(active.status))} onStart={start} />
         {active && <EvaluationRunSummary run={active} onResume={resume} />}
         <EvaluationRunHistory runs={runs} questions={questions} onGrade={grade} />
+        <ATrackCopyExperimentPanel />
+        <EventMatchingEvaluationPanel />
       </div>
     </div>
   );

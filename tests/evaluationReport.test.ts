@@ -15,10 +15,10 @@ import test from 'node:test';
 import { buildComparisonReport, buildSingleRunReport } from '../src/components/evaluation/evaluationReportViewModel';
 import type { EvaluationQuestion, EvaluationRun } from '../shared/amyHoodEvaluation';
 
-const questions: EvaluationQuestion[] = Array.from({ length: 15 }, (_, index) => ({
-  id: index < 7 ? `P${index + 1}` : index < 12 ? `H${index - 6}` : `S${index - 11}`,
-  kpi: index < 7 ? 'past_memory_restoration' : index < 12 ? 'github_holdout' : 'hypothetical_scenario',
-  type: index < 12 ? 'multiple_choice' : 'subjective',
+const questions: EvaluationQuestion[] = Array.from({ length: 60 }, (_, index) => ({
+  id: index < 20 ? `P${index + 1}` : index < 40 ? `H${index - 19}` : `S${index - 39}`,
+  kpi: index < 20 ? 'past_memory_restoration' : index < 40 ? 'github_holdout' : 'hypothetical_scenario',
+  type: index < 40 ? 'multiple_choice' : 'subjective',
   prompt: `Question ${index + 1}`,
 }));
 
@@ -43,15 +43,15 @@ const gradedRun = (
     objectiveScore: question.type === 'multiple_choice' ? 1 : undefined,
     elapsedMs: 1,
   })),
-  scores: { pastMemory: 7, githubHoldout: 5, subjective: 21, ...scoreOverrides },
+  scores: { pastMemory: 20, githubHoldout: 20, subjective: 120, ...scoreOverrides },
   startedAt: '2026-07-14T00:00:00.000Z',
   completedAt: '2026-07-14T00:01:00.000Z',
 });
 
 test('happy: builds single and comparison reports with score deltas', () => {
   const single = buildSingleRunReport(gradedRun('left'), questions);
-  const comparison = buildComparisonReport(gradedRun('left'), gradedRun('right', { pastMemory: 6 }), questions);
-  assert.equal(single.rows.length, 15);
+  const comparison = buildComparisonReport(gradedRun('left'), gradedRun('right', { pastMemory: 19 }), questions);
+  assert.equal(single.rows.length, 60);
   assert.equal(comparison.scoreDeltas.pastMemory, -1);
 });
 
@@ -85,5 +85,5 @@ test('failure: invalid comparisons explain exact contract violation', () => {
   assert.throws(() => buildComparisonReport(left, otherVersion, questions), /same question-set version/);
   const missing = gradedRun('missing');
   missing.answers.pop();
-  assert.throws(() => buildComparisonReport(left, missing, questions), /15 answers/);
+  assert.throws(() => buildComparisonReport(left, missing, questions), /60 answers/);
 });

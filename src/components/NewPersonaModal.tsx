@@ -18,9 +18,9 @@ export const NewPersonaModal: React.FC<NewPersonaModalProps> = ({
   const [badge, setBadge] = useState('');
   const [description, setDescription] = useState('');
   const [decisionStyle, setDecisionStyle] = useState('');
-  const [coreValues, setCoreValues] = useState('고객 경험 혁신, 압도적 속도, 원천 기술 사수');
-  const [strengths, setStrengths] = useState('빠른 의사결정 추진, 부서 간 얼라인먼트');
-  const [weaknesses, setWeaknesses] = useState('초기 마진율 저해 리스크');
+  const [coreValues, setCoreValues] = useState('');
+  const [strengths, setStrengths] = useState('');
+  const [weaknesses, setWeaknesses] = useState('');
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState('');
 
@@ -47,14 +47,12 @@ export const NewPersonaModal: React.FC<NewPersonaModalProps> = ({
       status: 'active',
       createdAt: new Date().toLocaleDateString('ko-KR').replace(/\.\s*/g, '.').slice(0, -1),
       updatedAt: '방금 전',
-      decisionStyle: decisionStyle || '데이터 기반의 빠른 실행 및 유연한 피벗 원칙',
+      decisionStyle: decisionStyle || '확인 필요',
       coreValues: valuesList,
       strengths: strList,
       weaknesses: wkList,
-      communicationStyle: '결론을 먼저 간결하게 제시하며 정량적 가이드라인을 동반합니다.',
-      sampleConversations: [
-        { question: '해당 아젠다에 대한 핵심 쟁점이 무엇인가요?', answer: '가장 큰 리스크는 타이밍 지연입니다. 1주 이내에 파일럿 테스트를 선행해야 합니다.' }
-      ],
+      communicationStyle: '확인 필요',
+      sampleConversations: [],
       colorClass: 'text-violet-600 dark:text-violet-400',
       bgClass: 'bg-violet-50 dark:bg-violet-950/40 border-violet-200 dark:border-violet-800'
     };

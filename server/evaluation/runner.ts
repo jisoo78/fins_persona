@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import type {
   EvaluationAnswerKeyFile,
   EvaluationProvider,
+  EvaluationRunInput,
   EvaluationQuestion,
   EvaluationRun,
   EvaluationRunAnswer,
@@ -22,7 +23,7 @@ import { readRun, writeRun } from './runStore';
 
 type RunnerOptions = {
   root: string;
-  createModel: (provider: EvaluationProvider) => ModelClient;
+  createModel: (provider: EvaluationProvider, model?: string) => ModelClient;
 };
 
 const scoreRun = (
@@ -30,6 +31,13 @@ const scoreRun = (
   questions: EvaluationQuestion[],
 ) => {
   const kpiById = new Map(questions.map((question) => [question.id, question.kpi]));
+  const typeById = new Map(questions.map((question) => [question.id, question.type]));
+  const scenarioAnswers = run.answers.filter(
+    (answer) => kpiById.get(answer.questionId) === 'hypothetical_scenario',
+  );
+  const subjectiveScenarioAnswers = scenarioAnswers.filter(
+    (answer) => typeById.get(answer.questionId) === 'subjective',
+  );
   return {
     pastMemory: run.answers
       .filter((answer) => kpiById.get(answer.questionId) === 'past_memory_restoration')
@@ -37,11 +45,11 @@ const scoreRun = (
     githubHoldout: run.answers
       .filter((answer) => kpiById.get(answer.questionId) === 'github_holdout')
       .reduce((sum, answer) => sum + (answer.objectiveScore ?? 0), 0),
-    subjective:
-      run.answers.filter((answer) => kpiById.get(answer.questionId) === 'hypothetical_scenario')
-        .every((answer) => answer.grade)
-        ? run.answers.reduce((sum, answer) => sum + (answer.grade?.score ?? 0), 0)
-        : null,
+    subjective: subjectiveScenarioAnswers.length > 0
+      ? subjectiveScenarioAnswers.every((answer) => answer.grade)
+        ? subjectiveScenarioAnswers.reduce((sum, answer) => sum + (answer.grade?.score ?? 0), 0)
+        : null
+      : scenarioAnswers.reduce((sum, answer) => sum + (answer.objectiveScore ?? 0), 0),
   };
 };
 
@@ -113,7 +121,7 @@ const readRunPersona = async (root: string, run: EvaluationRun) => {
 };
 
 export const createEvaluationRunner = (options: RunnerOptions) => {
-  const createEvaluationRun = async (input: { provider: EvaluationProvider }) => {
+  const createEvaluationRun = async (input: EvaluationRunInput) => {
     const [bundle, review, corpus, activePrompt] = await Promise.all([
       loadEvaluationBundle(options.root),
       loadQuestionReview(options.root),
@@ -127,7 +135,7 @@ export const createEvaluationRunner = (options: RunnerOptions) => {
       const gate = await checkGemmaGate(options.root);
       if (!gate.passed) throw new Error(`Gemma gate failed: ${gate.failures.join('; ')}`);
     }
-    const model = options.createModel(input.provider);
+    const model = options.createModel(input.provider, input.model);
     if (model.provider !== input.provider) {
       throw new Error('model provider does not match evaluation provider');
     }
@@ -163,7 +171,7 @@ export const createEvaluationRunner = (options: RunnerOptions) => {
     if (run.ragSnapshotId !== corpus.snapshotId) {
       throw new Error('run RAG snapshot is stale');
     }
-    const model = options.createModel(run.provider);
+    const model = options.createModel(run.provider, run.model);
     if (model.model !== run.model || model.provider !== run.provider) {
       throw new Error('run model configuration is stale');
     }
@@ -227,6 +235,9 @@ export const createEvaluationRunner = (options: RunnerOptions) => {
     run = {
       ...run,
       status: 'complete',
+      gradingStatus: bundle.questions.questions.some((question) => question.type === 'subjective')
+        ? run.gradingStatus
+        : 'complete',
       completedAt: new Date().toISOString(),
     };
     run.scores = scoreRun(run, bundle.questions.questions);
@@ -252,14 +263,15 @@ export const createEvaluationRunner = (options: RunnerOptions) => {
     ]);
     if (run.status !== 'complete') throw new Error('only complete runs can be graded');
     const subjectiveIds = bundle.questions.questions
-      .filter((question) => question.kpi === 'hypothetical_scenario')
+      .filter((question) => question.type === 'subjective')
       .map((question) => question.id);
+    if (!subjectiveIds.length) throw new Error('this question set has no subjective questions to grade');
     if (
       grades.length !== subjectiveIds.length ||
       new Set(grades.map((grade) => grade.questionId)).size !== grades.length ||
       grades.some((grade) => !subjectiveIds.includes(grade.questionId))
     ) {
-      throw new Error('subjective grades must match S1-S3 exactly');
+      throw new Error('subjective grades must match every subjective question exactly');
     }
     grades.forEach(assertGrade);
     const gradeById = new Map(grades.map((grade) => [grade.questionId, grade]));
