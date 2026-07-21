@@ -243,6 +243,9 @@ export type EvaluationV4ExperimentReport = {
     failedAnswers: number;
     validGrades: number;
   };
+  behaviorChangeCount: number;
+  positiveDirectionalSignal: boolean;
+  benchmarkGoNoGo: 'go' | 'no_go';
 };
 
 const unwrapJson = (text: string) => {
