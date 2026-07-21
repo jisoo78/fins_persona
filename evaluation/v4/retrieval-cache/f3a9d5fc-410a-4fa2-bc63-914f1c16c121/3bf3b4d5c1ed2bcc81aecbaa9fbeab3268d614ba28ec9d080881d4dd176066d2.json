@@ -1,0 +1,49 @@
+{
+  "query": "Enterprise collaboration platform acquisition A mature enterprise-software company can acquire a rapidly growing collaboration platform for roughly one year of the buyer's revenue. The target expands the addressable market and could become a common interface across the portfolio, but the price embeds substantial future growth and integration must preserve an open ecosystem. The cash component would require both balance-sheet cash and new debt. What transaction recommendation should the CFO make, and which strategic, valuation, financing, and integration conditions should govern it?",
+  "queryHash": "3bf3b4d5c1ed2bcc81aecbaa9fbeab3268d614ba28ec9d080881d4dd176066d2",
+  "indexHash": "30f92672eed070e3a9f81f9e387047e8d60435a7143067623d1dd183b50a7f35",
+  "result": {
+    "query": "Enterprise collaboration platform acquisition A mature enterprise-software company can acquire a rapidly growing collaboration platform for roughly one year of the buyer's revenue. The target expands the addressable market and could become a common interface across the portfolio, but the price embeds substantial future growth and integration must preserve an open ecosystem. The cash component would require both balance-sheet cash and new debt. What transaction recommendation should the CFO make, and which strategic, valuation, financing, and integration conditions should govern it?",
+    "matches": [
+      {
+        "id": "policy-ccd7e455daf31f5f",
+        "kind": "policy",
+        "vectorScore": 0.8325057192326129,
+        "lexicalScore": 0.8940405594375124,
+        "fusedScore": 0.8509661712940826
+      },
+      {
+        "id": "policy-20d2c645ab6641c9",
+        "kind": "policy",
+        "vectorScore": 0.8006431012054389,
+        "lexicalScore": 0.8678552638610413,
+        "fusedScore": 0.8208067500021197
+      }
+    ],
+    "trace": {
+      "queryHash": "3bf3b4d5c1ed2bcc81aecbaa9fbeab3268d614ba28ec9d080881d4dd176066d2",
+      "indexHash": "30f92672eed070e3a9f81f9e387047e8d60435a7143067623d1dd183b50a7f35",
+      "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+      "cacheKey": "8cfeb9b1a52dd4a12614026bc619bfe557ea29e64bae243c59c4f125d18a5f35",
+      "selectedArtifacts": [
+        {
+          "id": "policy-ccd7e455daf31f5f",
+          "kind": "policy",
+          "vectorScore": 0.8325057192326129,
+          "lexicalScore": 0.8940405594375124,
+          "fusedScore": 0.8509661712940826
+        },
+        {
+          "id": "policy-20d2c645ab6641c9",
+          "kind": "policy",
+          "vectorScore": 0.8006431012054389,
+          "lexicalScore": 0.8678552638610413,
+          "fusedScore": 0.8208067500021197
+        }
+      ],
+      "noMatch": false,
+      "noMatchReason": null
+    }
+  },
+  "payloadHash": "5a2701bb7e5c689314f52437d8fd4144cca892e6c5b68b37c355e6f5aea0b064"
+}

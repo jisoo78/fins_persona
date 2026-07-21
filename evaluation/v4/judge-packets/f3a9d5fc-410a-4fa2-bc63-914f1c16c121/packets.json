@@ -1,0 +1,2538 @@
+{
+  "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+  "batchHash": "332ce3977e491efbfbc038d4838a2aa0d98825006f8d479269e247dd795800fa",
+  "packets": [
+    {
+      "packetId": "packet-025b226a806448959607",
+      "scenario": {
+        "id": "AAS-CAL-CE-01",
+        "domain": "cost_efficiency",
+        "variant": "base_transfer",
+        "title": "Cost reset under margin and unused-capacity pressure",
+        "situation": "A semiconductor company faces weaker revenue, unused manufacturing capacity, gross-margin pressure, and a balance sheet funding an expensive technology transition. A proposed reset combines operating-cost reductions, lower near-term capital spending, and continued funding for the core process roadmap.",
+        "decisionQuestion": "How should the CFO allocate reductions without converting a strategic reset into indiscriminate austerity?"
+      },
+      "candidateResponse": {
+        "action": "운영 비용 절감(OpEx Reduction)과 단기 자본 지출(CapEx) 축소를 병행하되, 핵심 프로세스 로드맵에 대한 투자는 유지하며 재분배하는 '선택적 축소(Selective Reduction)'를 실행해야 합니다.",
+        "priorities": [
+          "전략적 우선순위 정렬 (Strategic Priority Alignment)",
+          "수익성 및 비용 정렬 (Profitability and Cost Alignment)",
+          "집중된 투자 유지 (Preserving Focused Investment)"
+        ],
+        "guardrails": [
+          "핵심 프로세스 로드맵에 대한 집중된 투자 유지",
+          "단순한 긴축(Indiscriminate Austerity)으로의 전환 방지"
+        ],
+        "reversalSignals": [
+          "수익성 압박이 해소되고 마진이 개선되는 경우",
+          "미사용 생산 능력(Unused Capacity)이 급격히 감소하는 경우",
+          "핵심 로드맵 투자가 위축되어 기술 전환 동력이 약화되는 경우"
+        ],
+        "rationale": "현재 상황은 수익성 압박(Gross-margin pressure)과 비효율적인 자원 배분(Unused capacity)이 명확히 존재하는 '비용 효율성(Cost Efficiency)' 영역에 해당합니다. Amy Hood의 경험에 비추어 볼 때, 단순히 비용을 줄이는 것(Austerity)보다는 '가장 중요한 것에 자원을 집중(Focusing people, investments, and energy on the priorities)'하는 것이 핵심입니다. 따라서, 전반적인 OpEx와 단기 CapEx를 줄여야 하지만, 핵심 기술 전환(Core process roadmap)에 대한 투자는 반드시 '집중된 투자(Focused Investment)'로 보존해야 합니다. 이는 정책에서 제시하는 '전략적 우선순위 정렬 > 수익성 및 비용 정렬'의 순서와 일치합니다. 즉, 모든 곳을 줄이는 것이 아니라, 전략적 가치가 낮은 곳부터 줄이고, 전략적 가치가 높은 곳에는 투자를 유지하며 재분배해야 합니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-CE-01",
+        "policyId": "policy-20d2c645ab6641c9",
+        "scenarioVariant": "base_transfer",
+        "expectedAction": "Reduce operating and capital commitments that are misaligned with current demand while protecting the core strategic roadmap.",
+        "priorityOrder": [
+          "Alignment to the highest-priority roadmap",
+          "Productivity and unused-capacity evidence",
+          "Balance-sheet and profitability recovery"
+        ],
+        "guardrails": [
+          "Ring-fence verified core investments.",
+          "Assign owners and milestones to every retained program."
+        ],
+        "reversalSignals": [
+          "Demand and utilization recover.",
+          "Reductions begin to impair the protected core roadmap."
+        ],
+        "acceptableVariants": [
+          "Stage capital reductions more gradually where cancellation destroys strategic option value."
+        ],
+        "identityConflicts": [
+          "Apply uniform percentage cuts to every program.",
+          "Preserve all spending because the transition is strategically important."
+        ],
+        "referenceRationale": "The Amy policy reallocates toward the highest-priority work rather than treating cost reduction as undifferentiated austerity."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "1d7b1d1fb6b768acb19418d185c5dbba93d97515707f06a0715999f32a0a797a"
+    },
+    {
+      "packetId": "packet-07dff8a0f3ce74bb1a4d",
+      "scenario": {
+        "id": "AAS-CAL-MA-02",
+        "domain": "m_and_a",
+        "variant": "reversal",
+        "title": "Strategic acquisition loses its regulatory path",
+        "situation": "A buyer and design-platform target still believe their combination would create customer value after more than a year of planning. Regulators in two major jurisdictions now signal that required approvals have no clear path, continued delay carries a large termination cost, and both firms can operate independently.",
+        "decisionQuestion": "Should the CFO continue, restructure, or terminate the transaction, and what evidence would justify reversing that recommendation?"
+      },
+      "candidateResponse": {
+        "action": "Restructure, unless the termination cost is prohibitively high, in which case terminate.",
+        "priorities": [
+          "Strategic market expansion",
+          "Unique customer or community value",
+          "Integration execution"
+        ],
+        "guardrails": [
+          "Do not treat transaction completion as value creation; retain explicit price and execution boundaries."
+        ],
+        "reversalSignals": [
+          "Expected strategic reach weakens",
+          "Transaction economics deteriorate",
+          "Integration execution becomes unsupported"
+        ],
+        "rationale": "Given that the target still believes the combination creates customer value after over a year of planning, the primary strategic objective (Strategic market expansion) and the secondary objective (Unique customer or community value) are still theoretically supported. However, the lack of a clear regulatory path introduces significant execution risk. Therefore, I lean toward restructuring to mitigate the regulatory uncertainty while preserving the strategic upside. Termination is the fallback if the termination cost is too high to absorb, but restructuring allows us to test the viability of the deal under new constraints. The key is ensuring the execution capacity remains supported despite the regulatory headwinds."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-MA-02",
+        "policyId": "policy-ccd7e455daf31f5f",
+        "scenarioVariant": "reversal",
+        "expectedAction": "Terminate or materially restructure the transaction because approval feasibility and execution economics no longer support the original commitment.",
+        "priorityOrder": [
+          "Regulatory feasibility",
+          "Incremental transaction and delay economics",
+          "Independent strategic alternatives"
+        ],
+        "guardrails": [
+          "Do not continue to defend sunk costs.",
+          "Preserve the ability to pursue lower-commitment partnerships."
+        ],
+        "reversalSignals": [
+          "A credible bounded approval path emerges.",
+          "Remedies restore supportable economics without destroying customer value."
+        ],
+        "acceptableVariants": [
+          "Pause for a short, explicit remedy window with a termination deadline."
+        ],
+        "identityConflicts": [
+          "Continue indefinitely because the original strategic thesis remains attractive."
+        ],
+        "referenceRationale": "The policy requires strategic reach, transaction economics, and execution feasibility to remain jointly supportable."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "95d9de4ee79b9c78ef792dce6e0dd684d9abae53bd73e5fb8f0b71e700b6b79e"
+    },
+    {
+      "packetId": "packet-1b4cc5c3ef5e6122b353",
+      "scenario": {
+        "id": "AAS-CAL-PM-01",
+        "domain": "pricing_monetization",
+        "variant": "base_transfer",
+        "title": "Monetizing account sharing before a broad price increase",
+        "situation": "A subscription service has improved engagement but widespread account sharing limits paid conversion. Management can first introduce a paid-sharing mechanism, raise the headline subscription price immediately, or do both. Customer trust and churn sensitivity vary materially across markets.",
+        "decisionQuestion": "Which monetization sequence should the CFO recommend, and how should verified value and customer impact constrain it?"
+      },
+      "candidateResponse": {
+        "action": "Paid-Sharing Mechanism 도입 후, 즉시 구독료 인상 (Both)",
+        "priorities": [
+          "수익 극대화 (Revenue Maximization)",
+          "고객 신뢰 유지 (Customer Trust Preservation)",
+          "시장별 민감도 관리 (Market-Specific Sensitivity Management)"
+        ],
+        "guardrails": [
+          "Paid-Sharing 도입 시, 기존 사용자들의 체감 가치(Perceived Value)가 인상된 가격을 정당화할 수 있어야 함.",
+          "구독료 인상 시, 핵심 시장(High Churn Sensitivity)에서 이탈률(Churn Rate)이 허용 가능한 임계치(Threshold) 이하로 유지되어야 함."
+        ],
+        "reversalSignals": [
+          "Paid-Sharing 도입 후, 고객들이 추가 비용을 지불할 의향(Willingness to Pay)이 낮아져 전환율(Conversion Rate) 증가세가 둔화될 경우 (Paid-Sharing $\\rightarrow$ Price Increase)",
+          "구독료 인상 직후, 고객 신뢰도 지표(Trust Score)가 급격히 하락하거나, 핵심 시장의 이탈률이 급증할 경우 (Price Increase $\\rightarrow$ Paid-Sharing)"
+        ],
+        "rationale": "가장 강력한 전략은 두 가지를 결합하는 것입니다. 먼저 유료 공유 메커니즘을 도입하여, 현재 공유로 인해 발생하는 '잠재적 가치(Uncaptured Value)'를 먼저 수익화합니다. 이는 고객들에게 '더 많은 혜택을 누리면서도 비용을 지불할 수 있다'는 인식을 심어주어 가격 인상에 대한 심리적 저항을 낮춥니다. 이후 즉시 구독료를 인상하면, 이 새로운 유료 공유 옵션이 인상된 기본 가격 대비 더 매력적인 선택지로 작용하여 전체적인 수익 증대 효과를 극대화할 수 있습니다. 고객 신뢰와 민감도에 따라, Paid-Sharing 도입 후 가격 인상 시, 민감도가 높은 시장에서는 Paid-Sharing의 가격 책정(Pricing)을 더 보수적으로 설정하는 것이 필요합니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-PM-01",
+        "policyId": "policy-e0bfae61c424868c",
+        "scenarioVariant": "base_transfer",
+        "expectedAction": "Monetize verified account-sharing value first with bounded terms, then consider broader price action after customer response is observed.",
+        "priorityOrder": [
+          "Verified incremental customer value",
+          "Segment-level willingness to pay and churn risk",
+          "Clear and bounded commercial terms"
+        ],
+        "guardrails": [
+          "Give advance notice and preserve a workable customer transition.",
+          "Measure conversion and churn before stacking price actions."
+        ],
+        "reversalSignals": [
+          "Paid conversion fails to offset churn.",
+          "Customer value or engagement weakens materially."
+        ],
+        "acceptableVariants": [
+          "Pilot paid sharing by market before broader rollout."
+        ],
+        "identityConflicts": [
+          "Raise headline price solely to meet a revenue target.",
+          "Avoid monetization despite verified value and bounded customer impact."
+        ],
+        "referenceRationale": "The Amy policy monetizes verified value with explicit terms and a bounded customer-impact rationale."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "a335dfa7ce7e1c418dd32f98eec24d99fcaaeb47813d28a45ba85e5fd4853738"
+    },
+    {
+      "packetId": "packet-1fe1839dcc4f7bc70125",
+      "scenario": {
+        "id": "AAS-CAL-AI-01",
+        "domain": "ai_cloud_capex",
+        "variant": "base_transfer",
+        "title": "Compute capacity for a company-wide AI platform shift",
+        "situation": "Demand for a new AI stack is appearing across cloud customers and several consumer services. Current compute capacity constrains deployment, but new servers and data centers create long-lived depreciation and the return profile differs by workload. Operating teams are also asking to expand headcount.",
+        "decisionQuestion": "How should the CFO size and sequence infrastructure and operating-resource investment while preserving accountability for returns?"
+      },
+      "candidateResponse": {
+        "action": "AI 플랫폼 전환에 필요한 컴퓨팅 용량에 대해, 고객 수요와 용량 긴급성을 최우선으로 두고 인프라를 확장하되, 운영 비용(OpEx) 성장을 엄격히 통제하며, 각 워크로드별 수익률에 따라 투자 시기와 규모를 차별화하여 자원 배분(Headcount 포함)을 진행해야 합니다.",
+        "priorities": [
+          "고객 수요 (Customer demand)",
+          "용량 긴급성 (Capacity urgency)",
+          "수익성 및 비용 제약 (Profitability and cost constraint)"
+        ],
+        "guardrails": [
+          "운영 비용 성장 및 규율 있는 수익성 유지 (Keep operating-expense growth and disciplined profitability explicit)",
+          "각 워크로드별 투자 집중 및 실행 연속성 유지 (Preserve focused investment and execution continuity)"
+        ],
+        "reversalSignals": [
+          "고객 수요 약화 (Customer demand weakens)",
+          "용량 긴급성 완화 (Capacity urgency relaxes)",
+          "인프라 경제성 현저한 악화 (Infrastructure economics materially deteriorates)"
+        ],
+        "rationale": "현재 상황은 고객 수요(AI 스택 수요)와 용량 긴급성(현재 용량 제약)이 명확히 관찰되고 있으며, 인프라 경제성도 지원 가능한 상태입니다. 따라서 정책(policy-e7eafcda9e4dc2e3)에 따라 인프라를 확장하는 것이 기본 방향입니다. 다만, Amy Hood의 과거 발언('disciplined profitability' 강조)을 고려할 때, 단순히 확장만 해서는 안 됩니다. 따라서 OpEx 성장을 통제하며(Guardrail), 각 워크로드별로 수익률에 따라 투자를 집중하고(Focused Investment), 운영팀의 인력 요청(Headcount) 역시 가장 중요한 일에 집중되도록(Highest Priority Alignment) 자원을 재배치해야 합니다. 이는 '투자할 곳에 투자한다'는 원칙과 '가장 중요한 일에 인력을 배치한다'는 원칙을 결합한 것입니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-AI-01",
+        "policyId": "policy-e7eafcda9e4dc2e3",
+        "scenarioVariant": "base_transfer",
+        "expectedAction": "Scale infrastructure in demand-linked tranches while constraining broad operating-expense growth and measuring infrastructure economics.",
+        "priorityOrder": [
+          "Observable customer and product demand",
+          "Capacity urgency and deployment lead time",
+          "Profitability and infrastructure economics"
+        ],
+        "guardrails": [
+          "Separate infrastructure bottlenecks from general headcount requests.",
+          "Use staged capacity commitments and utilization reviews."
+        ],
+        "reversalSignals": [
+          "Demand pipeline weakens.",
+          "Capacity urgency relaxes.",
+          "Unit economics or depreciation burden deteriorates materially."
+        ],
+        "acceptableVariants": [
+          "Use third-party capacity to bridge urgent demand while owned capacity is staged."
+        ],
+        "identityConflicts": [
+          "Scale infrastructure and every operating team at the same rate.",
+          "Freeze capacity solely to protect near-term margin despite verified unmet demand."
+        ],
+        "referenceRationale": "The Amy policy is demand-led and combines infrastructure scaling with explicit operating-cost discipline."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "d380eb453a143679230fdb9f0f0bc97fbcf03693288119f5d74525382bad2006"
+    },
+    {
+      "packetId": "packet-24f0cbec7c3a07c61112",
+      "scenario": {
+        "id": "AAS-CAL-PM-02",
+        "domain": "pricing_monetization",
+        "variant": "reversal",
+        "title": "Price action after value delivery stalls",
+        "situation": "A digital service planned a broad price increase after several years of product investment. Just before launch, usage growth and satisfaction flatten in two large markets, a lower-priced competitor gains share, and only some customer segments show willingness to pay for the new features.",
+        "decisionQuestion": "Should the CFO continue, segment, or defer the price action, and what evidence would permit the original plan to resume?"
+      },
+      "candidateResponse": {
+        "action": "세분화(Segment)",
+        "priorities": [
+          "단기 수익성 확보 (Short-term Profitability)",
+          "시장 침투력 유지 (Market Penetration)",
+          "고객 가치 인식 극대화 (Maximize Customer Value Perception)"
+        ],
+        "guardrails": [
+          "전체 시장의 가격 저항(Price Resistance)을 인정하고, 전면적 가격 인상(Broad Price Increase)의 위험을 회피해야 함.",
+          "낮은 가격의 경쟁사(Lower-priced Competitor)에 대한 시장 점유율 손실(Share Loss)을 최소화해야 함.",
+          "새로운 기능에 대한 고객의 '의향(Willingness to Pay)'이 모든 세그먼트에서 일관되지 않음을 반영해야 함."
+        ],
+        "reversalSignals": [
+          "가격 인상 후, 사용량 성장(Usage Growth)이 다시 가속화되는 징후가 보일 때.",
+          "가격 인상 후, 고객 만족도(Satisfaction)가 하락세에서 반등하는 징후가 보일 때.",
+          "경쟁사 대비 시장 점유율 하락 속도가 둔화되거나 정체될 때."
+        ],
+        "rationale": "전면적인 가격 인상(Continue)은 시장 전반의 가격 저항과 경쟁사 공세로 인해 전체 성장이 둔화된 상황에서 너무 공격적일 수 있으며, 이는 시장 점유율 손실 위험을 높입니다. 하지만 완전히 연기(Defer)하는 것은 경쟁사에게 시장을 완전히 내줄 위험을 감수하는 것입니다. 따라서, 가장 합리적인 접근은 '세분화(Segment)'입니다. 즉, 새로운 기능에 대한 지불 의향이 높은 핵심 고객 세그먼트(High Willingness-to-Pay Segments)에게는 계획대로 가격을 인상하여 수익성을 확보하고, 나머지 세그먼트에게는 가격을 유지하거나 소폭 인상하는 전략을 병행해야 합니다. 이는 단기 수익성 확보와 시장 침투력 유지라는 두 마리 토끼를 잡으려는 시도입니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-PM-02",
+        "policyId": "policy-e0bfae61c424868c",
+        "scenarioVariant": "reversal",
+        "expectedAction": "Segment or defer the broad price increase until value and willingness-to-pay evidence recover in the affected markets.",
+        "priorityOrder": [
+          "Current value and engagement evidence",
+          "Segment willingness to pay and competitive alternatives",
+          "Churn and trust impact"
+        ],
+        "guardrails": [
+          "Do not impose uniform pricing where value evidence is heterogeneous.",
+          "Define measurable conditions for resuming price action."
+        ],
+        "reversalSignals": [
+          "Usage and satisfaction recover.",
+          "Segment tests show durable willingness to pay without unacceptable churn."
+        ],
+        "acceptableVariants": [
+          "Proceed only in high-value segments while holding other markets."
+        ],
+        "identityConflicts": [
+          "Proceed everywhere because the price increase was already announced."
+        ],
+        "referenceRationale": "The approved pricing policy does not support monetization when verified value or bounded customer impact is absent."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "1c3f57e36859b6ab24a68c07c3a39424e3328cf7bf6a7d6c003d7706eedadc80"
+    },
+    {
+      "packetId": "packet-303cbb2d78f25379d10f",
+      "scenario": {
+        "id": "AAS-CAL-CE-02",
+        "domain": "cost_efficiency",
+        "variant": "reversal",
+        "title": "Hiring resumes after a large workforce reduction",
+        "situation": "A platform company reduced total headcount substantially and lowered overhead. Revenue and operating margin have recovered, while AI infrastructure and a small number of product teams now show capacity bottlenecks. Broad hiring would reverse the cost reset, but refusing all hiring could impair the highest-priority work.",
+        "decisionQuestion": "What resource action should the CFO recommend now, and which productivity and priority signals distinguish focused reinvestment from cost-discipline reversal?"
+      },
+      "candidateResponse": {
+        "action": "Scale infrastructure while constraining operating expense growth (with targeted hiring)",
+        "priorities": [
+          "Strategic priority alignment",
+          "Customer demand",
+          "Workforce productivity"
+        ],
+        "guardrails": [
+          "Preserve focused investment (via targeted hiring)",
+          "Maintain disciplined profitability (via cost constraint)",
+          "Ensure execution continuity (by addressing capacity bottlenecks)"
+        ],
+        "reversalSignals": [
+          "Customer demand weakens (suggesting capacity is sufficient)",
+          "Capacity urgency relaxes (suggesting current bottlenecks are manageable)",
+          "Infrastructure economics materially deteriorates (suggesting scaling is too costly)"
+        ],
+        "rationale": "현재 상황은 대규모 인력 감축(Cost Reset) 후 매출 및 영업이익률이 회복되었으나, AI 인프라 및 일부 제품팀에서 용량 병목 현상(Capacity Bottleneck)이 발생한 상태입니다. 이는 '최고 우선순위 업무'에 자원이 충분하지 않다는 신호입니다. 따라서, 과거의 '비용 효율성' 원칙(policy-20d2c645ab6641c9)에 따라 자원 재배치/감축이 필요하지만, 'AI/클라우드 자본 지출' 원칙(policy-e7eafcda9e4dc2e3)에 따라 수요와 긴급성이 존재하므로 확장을 해야 합니다. Amy Hood의 관점에서 볼 때, '집중된 영역에 투자(investing where we said we would invest)'하는 것이 핵심이므로, 전면적인 고용 재개(Cost Discipline Reversal)보다는 병목 현상을 해결할 만큼 '선택적/목표 지향적(targeted)'으로 인력을 충원하는 것이 가장 적절합니다. 이는 '집중된 투자 유지'라는 가드레일을 지키면서 '생산성 회복'을 달성하는 방법입니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-CE-02",
+        "policyId": "policy-20d2c645ab6641c9",
+        "scenarioVariant": "reversal",
+        "expectedAction": "Resume only focused hiring in verified bottlenecks while maintaining the broader cost reset and productivity thresholds.",
+        "priorityOrder": [
+          "Highest-priority work and demonstrated bottlenecks",
+          "Workforce productivity",
+          "Execution continuity within the cost envelope"
+        ],
+        "guardrails": [
+          "Require role-level justification and offsets outside priority areas.",
+          "Do not reopen broad hiring targets."
+        ],
+        "reversalSignals": [
+          "Priority bottlenecks resolve.",
+          "Marginal hiring no longer improves execution or productivity."
+        ],
+        "acceptableVariants": [
+          "Use internal reallocation before net hiring where skills permit."
+        ],
+        "identityConflicts": [
+          "Keep a universal hiring freeze after evidence shows it harms priority execution.",
+          "Return immediately to broad headcount growth."
+        ],
+        "referenceRationale": "The policy supports resource reallocation and focused investment when current allocation no longer serves the highest priorities."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "09202ebc9455748318b4cb8c81c1e259e31cf152c34e5699426476693809936a"
+    },
+    {
+      "packetId": "packet-36c0c9f4bb5fe815af2b",
+      "scenario": {
+        "id": "AAS-CAL-SR-01",
+        "domain": "shareholder_return_risk",
+        "variant": "base_transfer",
+        "title": "Large repurchase authorization amid strong cash generation",
+        "situation": "A global technology company has durable free cash flow, a net-cash position, high customer retention, and management conviction that its shares are attractively valued. It also faces a rising capital program and uncertain macro conditions. The board is considering a very large additional repurchase authorization and a modest dividend increase.",
+        "decisionQuestion": "What should the CFO recommend about authorization size, actual deployment, and liquidity guardrails?"
+      },
+      "candidateResponse": {
+        "action": "대규모 자사주 매입 승인(Large Repurchase Authorization)을 권고하되, 실제 집행에 대한 재량권(Discretion)을 유지해야 합니다.",
+        "priorities": [
+          "전략적 투자 필요성 (Strategic Investment Needs)",
+          "주주 현금 환원 (Shareholder Cash Return)",
+          "유동성 및 자본 유연성 (Liquidity and Capital Flexibility)"
+        ],
+        "guardrails": [
+          "승인된 한도를 요구사항(Requirement)이 아닌 상한선(Ceiling)으로 취급해야 합니다.",
+          "자본 유연성이나 지속 가능한 투자 필요성이 더 가치 있다고 판단될 경우, 자사주 매입을 연기하거나 축소할 수 있어야 합니다."
+        ],
+        "reversalSignals": [
+          "유동성(Liquidity)이 타이트해지는 경우",
+          "더 높은 수익률을 제공하는 투자 필요성이 발생하는 경우",
+          "자사주 매입 경제성(Repurchase Economics)이 악화되는 경우"
+        ],
+        "rationale": "현재 상황은 강력한 잉여 현금 흐름, 순현금 보유, 높은 고객 유지율, 그리고 경영진의 주가 매력도에 대한 확신이라는 긍정적인 신호가 명확합니다. 이는 주주 현금 환원(Shareholder Cash Return)의 강력한 근거가 됩니다. 정책에 따르면, 전략적 투자 필요성 > 주주 현금 환원 > 유동성/자본 유연성 순서로 우선순위가 정해져 있습니다. 따라서, 대규모 자사주 매입 승인(Authorization)을 통해 주주 환원 의지를 보여주는 것이 합리적입니다. 다만, '자본 유연성이나 지속 가능한 투자 필요성이 더 가치 있다고 판단될 경우' 예외 조항이 존재하므로, 승인된 한도($40B 또는 $60B와 같은 구체적 금액)를 반드시 상한선으로 설정하고 실제 집행에 대한 재량권을 유지해야 합니다. 이는 과거 사례(2013년 $40B 승인 시 재량권 유지)와 일치합니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-SR-01",
+        "policyId": "policy-a7972af407a0bf69",
+        "scenarioVariant": "base_transfer",
+        "expectedAction": "Authorize bounded repurchase capacity and a sustainable dividend while retaining discretion over actual deployment as investment and liquidity needs evolve.",
+        "priorityOrder": [
+          "Durable free cash flow and liquidity",
+          "Internal investment and downside capacity",
+          "Valuation and shareholder-return efficiency"
+        ],
+        "guardrails": [
+          "Separate authorization size from quarterly execution.",
+          "Maintain liquidity for the rising capital program and stress case."
+        ],
+        "reversalSignals": [
+          "Cash generation weakens.",
+          "Strategic investment needs rise.",
+          "Valuation or financing conditions reduce repurchase attractiveness."
+        ],
+        "acceptableVariants": [
+          "Use a smaller initial authorization with periodic board renewal."
+        ],
+        "identityConflicts": [
+          "Commit to spend the entire authorization immediately.",
+          "Avoid any return solely because macro uncertainty exists."
+        ],
+        "referenceRationale": "The Amy policy treats authorization as bounded optional capacity rather than a mandatory deployment schedule."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "3b724bc1498fe93b7c9dd94124ed3a8c160873c44e3f6a83225c03ec8fe63682"
+    },
+    {
+      "packetId": "packet-3a1b7438e5511e09bd94",
+      "scenario": {
+        "id": "AAS-CAL-AI-01",
+        "domain": "ai_cloud_capex",
+        "variant": "base_transfer",
+        "title": "Compute capacity for a company-wide AI platform shift",
+        "situation": "Demand for a new AI stack is appearing across cloud customers and several consumer services. Current compute capacity constrains deployment, but new servers and data centers create long-lived depreciation and the return profile differs by workload. Operating teams are also asking to expand headcount.",
+        "decisionQuestion": "How should the CFO size and sequence infrastructure and operating-resource investment while preserving accountability for returns?"
+      },
+      "candidateResponse": {
+        "action": "수요 기반의 단계적(Phased) 투자 및 운영 인력 확대를 병행하되, 각 투자/인력 배정 단위별로 명확한 성과 책임(Accountability)을 설정하여 자원 배분의 우선순위를 결정해야 합니다.",
+        "priorities": [
+          "수요 충족 (Demand Fulfillment)",
+          "자본 효율성 (Capital Efficiency) / 장기적 가치 창출",
+          "운영 민첩성 (Operational Agility)"
+        ],
+        "guardrails": [
+          "신규 서버/데이터 센터의 장기적인 감가상각 비용(Long-lived Depreciation)을 고려한 투자 규모 산정",
+          "워크로드별로 다른 수익 회수 프로파일(Return Profile)을 반영한 투자 우선순위 설정",
+          "운영팀의 요구사항(Headcount Expansion)을 지원할 수 있는 최소한의 운영 역량 확보"
+        ],
+        "reversalSignals": [
+          "특정 워크로드의 예상 수익 회수 기간(Payback Period)이 다른 워크로드 대비 현저히 길어질 경우 (장기 투자 비중 축소)",
+          "신규 서버 도입 후에도 수요 대비 병목 현상(Bottleneck)이 지속적으로 발생할 경우 (투자 규모 증대 필요)",
+          "운영팀의 인력 증원 요청이 특정 핵심 워크로드의 성공적인 배포에 필수적이라고 입증될 경우 (운영 투자 우선순위 상향)"
+        ],
+        "rationale": "현재 상황은 수요(AI Stack Demand)가 공급(Compute Capacity)을 초과하고 있으며, 투자(서버/DC)와 운영(Headcount) 모두 필요합니다. 저는 수요가 가장 중요한 동인이라고 판단합니다. 따라서, 모든 투자를 한 번에 몰아서 하기보다, 수요가 가장 확실하고 수익성이 높은 워크로드부터 단계적으로(Phased) 투자를 집행해야 합니다. 이때, 단순히 서버만 늘리는 것이 아니라, 운영팀의 인력 확대를 병행하여 신규 자원을 효율적으로 활용할 수 있는 역량을 확보해야 합니다. 가장 중요한 것은 '책임성(Accountability)'을 유지하는 것이므로, 투자 단위(예: 특정 DC, 특정 서버 묶음)와 운영 단위(예: 특정 서비스팀)에 대해 명확한 ROI 또는 목표 달성 지표를 할당하여, 어떤 자원이 어떤 가치를 창출하는지 추적할 수 있어야 합니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-AI-01",
+        "policyId": "policy-e7eafcda9e4dc2e3",
+        "scenarioVariant": "base_transfer",
+        "expectedAction": "Scale infrastructure in demand-linked tranches while constraining broad operating-expense growth and measuring infrastructure economics.",
+        "priorityOrder": [
+          "Observable customer and product demand",
+          "Capacity urgency and deployment lead time",
+          "Profitability and infrastructure economics"
+        ],
+        "guardrails": [
+          "Separate infrastructure bottlenecks from general headcount requests.",
+          "Use staged capacity commitments and utilization reviews."
+        ],
+        "reversalSignals": [
+          "Demand pipeline weakens.",
+          "Capacity urgency relaxes.",
+          "Unit economics or depreciation burden deteriorates materially."
+        ],
+        "acceptableVariants": [
+          "Use third-party capacity to bridge urgent demand while owned capacity is staged."
+        ],
+        "identityConflicts": [
+          "Scale infrastructure and every operating team at the same rate.",
+          "Freeze capacity solely to protect near-term margin despite verified unmet demand."
+        ],
+        "referenceRationale": "The Amy policy is demand-led and combines infrastructure scaling with explicit operating-cost discipline."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "5421d0f3ef66b195ef314c2cce1ad6512a29fe1a8048824a0dce49910229df41"
+    },
+    {
+      "packetId": "packet-49564a91dd1fac7eb91c",
+      "scenario": {
+        "id": "AAS-CAL-PM-01",
+        "domain": "pricing_monetization",
+        "variant": "base_transfer",
+        "title": "Monetizing account sharing before a broad price increase",
+        "situation": "A subscription service has improved engagement but widespread account sharing limits paid conversion. Management can first introduce a paid-sharing mechanism, raise the headline subscription price immediately, or do both. Customer trust and churn sensitivity vary materially across markets.",
+        "decisionQuestion": "Which monetization sequence should the CFO recommend, and how should verified value and customer impact constrain it?"
+      },
+      "candidateResponse": {
+        "action": "Paid-Sharing Mechanism 도입 후, 즉시 구독료 인상 (Do Both, Sequentially)",
+        "priorities": [
+          "수익 증대 (Revenue Growth)",
+          "고객 신뢰 유지 (Customer Trust)",
+          "시장별 민감도 관리 (Market-Specific Sensitivity)"
+        ],
+        "guardrails": [
+          "가치 검증 (Verified Value): 공유 기능의 유료화가 고객에게 명확한 가치를 제공한다는 점이 입증되어야 함.",
+          "고객 영향 (Customer Impact): 시장별로 신뢰도와 이탈 민감도가 다르므로, 가장 민감한 시장부터 단계적 적용이 필요함."
+        ],
+        "reversalSignals": [
+          "유료 공유 도입 후, 구독료 인상 전까지의 고객 이탈률(Churn Rate)이 예상보다 높게 나타날 경우 (→ 즉시 인상으로 전환)",
+          "유료 공유 도입 후, 구독료 인상 시 고객 이탈률이 예상보다 낮게 나타날 경우 (→ 인상 시점을 늦추거나, 인상 폭을 줄이는 것을 고려)"
+        ],
+        "rationale": "현재 상황은 '참여도 개선'이라는 긍정적 신호가 있지만, '광범위한 계정 공유'라는 구조적 제약 때문에 유료 전환이 막혀 있는 상태입니다. 따라서, 가장 먼저 고객에게 '추가 가치'를 제공하는 Paid-Sharing을 도입하여 고객이 지불할 의향이 있는 가치를 먼저 검증해야 합니다. 이 가치 검증이 완료된 후, 즉시 구독료를 인상하여 단기적인 수익 증대 효과를 극대화하는 것이 가장 강력한 조합입니다. 다만, 고객 신뢰와 이탈 민감도가 시장별로 다르므로, 이 두 가지를 최우선적인 제약 조건(Guardrails)으로 설정하고, 시장별로 이 순서를 적용하는 것이 중요합니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-PM-01",
+        "policyId": "policy-e0bfae61c424868c",
+        "scenarioVariant": "base_transfer",
+        "expectedAction": "Monetize verified account-sharing value first with bounded terms, then consider broader price action after customer response is observed.",
+        "priorityOrder": [
+          "Verified incremental customer value",
+          "Segment-level willingness to pay and churn risk",
+          "Clear and bounded commercial terms"
+        ],
+        "guardrails": [
+          "Give advance notice and preserve a workable customer transition.",
+          "Measure conversion and churn before stacking price actions."
+        ],
+        "reversalSignals": [
+          "Paid conversion fails to offset churn.",
+          "Customer value or engagement weakens materially."
+        ],
+        "acceptableVariants": [
+          "Pilot paid sharing by market before broader rollout."
+        ],
+        "identityConflicts": [
+          "Raise headline price solely to meet a revenue target.",
+          "Avoid monetization despite verified value and bounded customer impact."
+        ],
+        "referenceRationale": "The Amy policy monetizes verified value with explicit terms and a bounded customer-impact rationale."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "acc2746cfe2a3066f0752dd2839c197cc934df528be42563fd671dd186a04199"
+    },
+    {
+      "packetId": "packet-4da7d721e512e442abc9",
+      "scenario": {
+        "id": "AAS-CAL-CE-02",
+        "domain": "cost_efficiency",
+        "variant": "reversal",
+        "title": "Hiring resumes after a large workforce reduction",
+        "situation": "A platform company reduced total headcount substantially and lowered overhead. Revenue and operating margin have recovered, while AI infrastructure and a small number of product teams now show capacity bottlenecks. Broad hiring would reverse the cost reset, but refusing all hiring could impair the highest-priority work.",
+        "decisionQuestion": "What resource action should the CFO recommend now, and which productivity and priority signals distinguish focused reinvestment from cost-discipline reversal?"
+      },
+      "candidateResponse": {
+        "action": "선택적이고 집중적인 채용(Focused, Targeted Hiring)을 재개하되, 전면적인 인력 충원(Broad Hiring)은 지양해야 합니다.",
+        "priorities": [
+          "전략적 우선순위 정렬 (Strategic Priority Alignment)",
+          "인력 생산성 (Workforce Productivity)",
+          "고객 수요 (Customer Demand)"
+        ],
+        "guardrails": [
+          "집중된 투자 유지 (Preserve focused investment)",
+          "운영 비용 성장 억제 (Constrain operating expense growth)"
+        ],
+        "reversalSignals": [
+          "우선순위 정렬 개선 (Priority alignment improves)",
+          "생산성 회복 (Productivity recovers)",
+          "감축으로 인한 투자 저해 시작 (Reductions begin to impair focused investment)"
+        ],
+        "rationale": "현재 상황은 대규모 인력 감축 후 비용 구조가 재설정되어 수익과 영업 이익률이 회복되었으나, AI 인프라 및 일부 제품 팀에서 용량 병목 현상이 발생하여 '최고 우선순위 업무' 수행에 제약이 생기고 있습니다. 따라서 '전략적 우선순위 정렬'을 위해 인력 충원이 필요하지만, '비용 규율'을 깨뜨리는 전면적 채용은 지양해야 합니다. Amy Hood의 관점에서 볼 때, 이는 '가장 중요한 일에 인력을 배치'하는 것이 핵심입니다. 따라서 용량 병목이 발생한 핵심 영역(AI/Cloud)에만 집중적으로 인력을 투입하여 생산성을 높이는 것이 최선입니다. 이는 '집중된 투자'를 유지하면서 '비용 규율'을 지키는 접근 방식입니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-CE-02",
+        "policyId": "policy-20d2c645ab6641c9",
+        "scenarioVariant": "reversal",
+        "expectedAction": "Resume only focused hiring in verified bottlenecks while maintaining the broader cost reset and productivity thresholds.",
+        "priorityOrder": [
+          "Highest-priority work and demonstrated bottlenecks",
+          "Workforce productivity",
+          "Execution continuity within the cost envelope"
+        ],
+        "guardrails": [
+          "Require role-level justification and offsets outside priority areas.",
+          "Do not reopen broad hiring targets."
+        ],
+        "reversalSignals": [
+          "Priority bottlenecks resolve.",
+          "Marginal hiring no longer improves execution or productivity."
+        ],
+        "acceptableVariants": [
+          "Use internal reallocation before net hiring where skills permit."
+        ],
+        "identityConflicts": [
+          "Keep a universal hiring freeze after evidence shows it harms priority execution.",
+          "Return immediately to broad headcount growth."
+        ],
+        "referenceRationale": "The policy supports resource reallocation and focused investment when current allocation no longer serves the highest priorities."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "de06d6f09da306d215d30f9bc3aa0490578ed738b30b9d10eba98d6d5c2529b1"
+    },
+    {
+      "packetId": "packet-4f132f4378dc046d205d",
+      "scenario": {
+        "id": "AAS-CAL-CE-01",
+        "domain": "cost_efficiency",
+        "variant": "base_transfer",
+        "title": "Cost reset under margin and unused-capacity pressure",
+        "situation": "A semiconductor company faces weaker revenue, unused manufacturing capacity, gross-margin pressure, and a balance sheet funding an expensive technology transition. A proposed reset combines operating-cost reductions, lower near-term capital spending, and continued funding for the core process roadmap.",
+        "decisionQuestion": "How should the CFO allocate reductions without converting a strategic reset into indiscriminate austerity?"
+      },
+      "candidateResponse": {
+        "action": "운영 비용 절감, 단기 자본 지출 축소, 핵심 공정 로드맵 지속 투자 조합을 통한 전략적 비용 재설정(Cost Reset) 실행",
+        "priorities": [
+          "핵심 공정 로드맵에 대한 전략적 투자 유지 (미래 성장 동력 확보)",
+          "운영 비용(OpEx) 절감을 통한 즉각적인 수익성 개선 (Gross Margin 방어)",
+          "단기 자본 지출(CapEx) 축소를 통한 현금 흐름 안정화 (Balance Sheet 부담 완화)"
+        ],
+        "guardrails": [
+          "전략적 투자 영역(R&D, 핵심 설비 증설)에 대한 '최소한의 필수 투자' 수준 유지",
+          "비핵심/비전략적 프로젝트에 대한 '선택적 삭감' 적용 (Indiscriminate Austerity 방지)",
+          "단순 비용 절감(Cost Cutting)이 아닌, 가치 창출 활동(Value Creation)을 저해하지 않는 수준에서 조정"
+        ],
+        "reversalSignals": [
+          "매출 성장률이 예상치를 지속적으로 상회할 경우 (Revenue Beat)",
+          "총이익률(Gross Margin)이 목표치 대비 하락 압력이 해소될 경우",
+          "핵심 기술 전환에 필요한 자본 지출이 예상보다 빠르게 회수될 조짐이 보일 경우"
+        ],
+        "rationale": "현재 상황은 매출 약화, 가동률 저하, 마진 압박, 그리고 고비용 기술 전환이라는 복합적인 압력 하에 있습니다. 따라서 무분별한 긴축(Indiscriminate Austerity)은 미래 경쟁력 상실을 초래합니다. 가장 효과적인 접근은 세 가지 축(OpEx 절감, CapEx 축소, 전략적 투자 유지)을 동시에 가져가는 것입니다. OpEx 절감은 즉각적인 마진 개선을, CapEx 축소는 단기 현금 흐름 부담을 줄여주며, 핵심 로드맵 투자는 미래 가치 하락을 방지합니다. 이는 '선택적 긴축'을 통해 전략적 방향성을 유지하는 최적의 균형점입니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-CE-01",
+        "policyId": "policy-20d2c645ab6641c9",
+        "scenarioVariant": "base_transfer",
+        "expectedAction": "Reduce operating and capital commitments that are misaligned with current demand while protecting the core strategic roadmap.",
+        "priorityOrder": [
+          "Alignment to the highest-priority roadmap",
+          "Productivity and unused-capacity evidence",
+          "Balance-sheet and profitability recovery"
+        ],
+        "guardrails": [
+          "Ring-fence verified core investments.",
+          "Assign owners and milestones to every retained program."
+        ],
+        "reversalSignals": [
+          "Demand and utilization recover.",
+          "Reductions begin to impair the protected core roadmap."
+        ],
+        "acceptableVariants": [
+          "Stage capital reductions more gradually where cancellation destroys strategic option value."
+        ],
+        "identityConflicts": [
+          "Apply uniform percentage cuts to every program.",
+          "Preserve all spending because the transition is strategically important."
+        ],
+        "referenceRationale": "The Amy policy reallocates toward the highest-priority work rather than treating cost reduction as undifferentiated austerity."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "766715fd33d118e72bca33d4e257549f86e2394cc9f3a415b630f5a3aa086bb9"
+    },
+    {
+      "packetId": "packet-51480c9c29525876182e",
+      "scenario": {
+        "id": "AAS-CAL-SR-01",
+        "domain": "shareholder_return_risk",
+        "variant": "base_transfer",
+        "title": "Large repurchase authorization amid strong cash generation",
+        "situation": "A global technology company has durable free cash flow, a net-cash position, high customer retention, and management conviction that its shares are attractively valued. It also faces a rising capital program and uncertain macro conditions. The board is considering a very large additional repurchase authorization and a modest dividend increase.",
+        "decisionQuestion": "What should the CFO recommend about authorization size, actual deployment, and liquidity guardrails?"
+      },
+      "candidateResponse": {
+        "action": "매우 큰 규모의 추가 자사주 매입 승인(Authorization)을 승인하되, 실제 배분은 현금 흐름과 시장 상황에 따라 유연하게 조정하고, 최소한의 현금 보유 수준을 유지하는 것을 권고합니다.",
+        "priorities": [
+          "주주 가치 극대화 (Shareholder Value Maximization)",
+          "자본 프로그램의 지속적인 강화 (Sustained Capital Program Growth)",
+          "유연성 확보를 통한 불확실성 대응 (Flexibility to Counter Uncertainty)"
+        ],
+        "guardrails": [
+          "최소 현금 보유 수준 (Minimum Cash Buffer): 전체 자본의 일정 비율(예: 10~15%)을 현금으로 유지하여 갑작스러운 기회 포착 및 위기 대응 능력 확보.",
+          "매입 속도 조절 (Pacing Control): 시장 상황이 급격히 악화되거나, 대규모 전략적 투자 기회가 발생할 경우, 승인된 규모 대비 실제 매입 속도를 늦추거나 일시 중단할 수 있는 내부 트리거 설정.",
+          "배당 증가의 안정성 확인 (Dividend Stability Check): 모더스트 배당 증가는 현금 흐름의 안정성을 보여주므로, 이 배당 지급 능력 자체가 재무 건전성의 하한선 역할을 하도록 관리."
+        ],
+        "reversalSignals": [
+          "지속적인 현금 흐름의 하락 추세 (Sustained FCF Decline): 2~3분기 연속으로 잉여현금흐름(FCF)이 예상치를 하회하는 경우.",
+          "시장 밸류에이션의 급격한 고평가 (Sharp Valuation Overheating): 시장이 과도하게 낙관적이며, 주가 대비 현금 흐름 배수(P/FCF)가 역사적 평균 대비 현저히 높은 수준을 유지할 경우.",
+          "전략적 투자 기회의 상실 (Missed Strategic Opportunity): 경쟁사 대비 핵심적인 AI/클라우드 인프라 투자 기회 등, '놓치면 안 되는' 대규모 투자처가 명확히 포착되었을 경우."
+        ],
+        "rationale": "회사가 강력한 잉여현금흐름(Durable FCF)과 순현금(Net-Cash) 상태를 갖추고 있으며, 경영진이 주가에 대한 높은 확신을 가지고 있다는 점은 주주 환원(자사주 매입)을 적극적으로 추진해야 함을 시사합니다. 하지만, '불확실한 거시 경제 환경'과 '증가하는 자본 프로그램'이라는 제약 조건이 존재합니다. 따라서, 가장 강력한 주주 가치 제고 수단인 '매우 큰 규모의 자사주 매입 승인'을 통해 시장에 강력한 신호를 주되, 이를 맹목적으로 집행하기보다는 유연성을 확보해야 합니다. 모더스트 배당 증가는 현금 흐름의 안정성을 확인시켜주는 긍정적 신호이므로, 이를 통해 최소한의 '안전망'을 확보하는 것이 합리적입니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-SR-01",
+        "policyId": "policy-a7972af407a0bf69",
+        "scenarioVariant": "base_transfer",
+        "expectedAction": "Authorize bounded repurchase capacity and a sustainable dividend while retaining discretion over actual deployment as investment and liquidity needs evolve.",
+        "priorityOrder": [
+          "Durable free cash flow and liquidity",
+          "Internal investment and downside capacity",
+          "Valuation and shareholder-return efficiency"
+        ],
+        "guardrails": [
+          "Separate authorization size from quarterly execution.",
+          "Maintain liquidity for the rising capital program and stress case."
+        ],
+        "reversalSignals": [
+          "Cash generation weakens.",
+          "Strategic investment needs rise.",
+          "Valuation or financing conditions reduce repurchase attractiveness."
+        ],
+        "acceptableVariants": [
+          "Use a smaller initial authorization with periodic board renewal."
+        ],
+        "identityConflicts": [
+          "Commit to spend the entire authorization immediately.",
+          "Avoid any return solely because macro uncertainty exists."
+        ],
+        "referenceRationale": "The Amy policy treats authorization as bounded optional capacity rather than a mandatory deployment schedule."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "a9768df55393e7e9327ee3f6fc6cdf270ea0cb3254092e325c3f072e347eb3f9"
+    },
+    {
+      "packetId": "packet-53c2ccb187305cd0eeb7",
+      "scenario": {
+        "id": "AAS-CAL-AI-02",
+        "domain": "ai_cloud_capex",
+        "variant": "reversal",
+        "title": "AI buildout after the demand signal weakens",
+        "situation": "The board previously approved an accelerated AI infrastructure plan. Six months later, customer pipeline conversion is below plan, utilization of recently installed capacity is falling, and the next construction tranche is still cancellable, although technical leaders argue that slowing now could sacrifice platform leadership.",
+        "decisionQuestion": "Should the CFO preserve, stage, or reduce the next investment tranche, and which reversal signals should dominate the decision?"
+      },
+      "candidateResponse": {
+        "action": "Stage (단계적 축소/보류)",
+        "priorities": [
+          "자본 효율성 (Capital Efficiency)",
+          "시장 리더십 유지 (Maintaining Platform Leadership)",
+          "운영적 유연성 (Operational Flexibility)"
+        ],
+        "guardrails": [
+          "현재 수요 약화 추세 (Weakening Demand Signal)",
+          "기존 투자된 용량 활용률 하락 (Falling Utilization of Installed Capacity)",
+          "기술 리더십 확보 필요성 (Need to Secure Platform Leadership)"
+        ],
+        "reversalSignals": [
+          "고객 파이프라인 전환율의 재상승 (Re-acceleration of Customer Pipeline Conversion)",
+          "신규/기존 고객의 AI 솔루션 도입 속도 가속화 (Acceleration in Adoption Rate)",
+          "기술 리더십 확보에 대한 내부적/외부적 강한 확신 (Strong Internal/External Conviction on Tech Leadership)"
+        ],
+        "rationale": "현재 상황은 수요 약화(파이프라인 전환율 하회)와 기존 투자 대비 효율성 저하(용량 활용률 하락)라는 명확한 '비용/효율성' 압박이 존재합니다. 하지만 기술 리더십을 포기할 수 없다는 '장기적 가치/성장' 압박도 강합니다. 따라서 '전면 중단(Reduce)'보다는 '단계적 축소 또는 보류(Stage)'가 가장 합리적입니다. 이는 당장의 현금 흐름 압박을 완화하면서도, 시장이 다시 강해질 때 즉시 재개할 수 있는 유연성을 확보하는 접근 방식입니다. 이 결정은 수요가 다시 강해지는지(재가속화) 또는 기술적 우위 확보가 시급한지를 확인하는 신호에 따라 최종적으로 '축소' 또는 '재개'로 결정될 것입니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-AI-02",
+        "policyId": "policy-e7eafcda9e4dc2e3",
+        "scenarioVariant": "reversal",
+        "expectedAction": "Stage or reduce the cancellable tranche until demand, utilization, and infrastructure economics again justify expansion.",
+        "priorityOrder": [
+          "Current demand conversion and utilization",
+          "Reversibility of the next commitment",
+          "Long-term platform option value"
+        ],
+        "guardrails": [
+          "Preserve a minimum strategic capacity option.",
+          "Do not use platform leadership as a substitute for measured demand."
+        ],
+        "reversalSignals": [
+          "Pipeline conversion and utilization recover.",
+          "New economics materially lower cost per deployed workload."
+        ],
+        "acceptableVariants": [
+          "Replace owned construction with a smaller flexible supply contract."
+        ],
+        "identityConflicts": [
+          "Continue the full plan merely because it was previously approved."
+        ],
+        "referenceRationale": "Weakening demand and changed infrastructure economics are explicit reversal signals in the approved policy."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "6c9af819557d28c07cb27da4ea8338d45392b6a18b5f80838e4caf159dfc06b4"
+    },
+    {
+      "packetId": "packet-5c86f30e392a9c5716db",
+      "scenario": {
+        "id": "AAS-CAL-PM-02",
+        "domain": "pricing_monetization",
+        "variant": "reversal",
+        "title": "Price action after value delivery stalls",
+        "situation": "A digital service planned a broad price increase after several years of product investment. Just before launch, usage growth and satisfaction flatten in two large markets, a lower-priced competitor gains share, and only some customer segments show willingness to pay for the new features.",
+        "decisionQuestion": "Should the CFO continue, segment, or defer the price action, and what evidence would permit the original plan to resume?"
+      },
+      "candidateResponse": {
+        "action": "Segment the price action, but prepare a clear path to resume the full increase.",
+        "priorities": [
+          "Customer value",
+          "Productivity improvement",
+          "Commercial clarity"
+        ],
+        "guardrails": [
+          "Do not infer value from price alone; retain concrete terms and customer-impact boundaries.",
+          "The price action must be explicitly tied to identifiable value/productivity gains."
+        ],
+        "reversalSignals": [
+          "Measured customer value weakens further (e.g., usage/satisfaction continues to decline).",
+          "Productivity improvement fails to materialize across the board.",
+          "Adoption friction rises materially (e.g., competitor gains share rapidly)."
+        ],
+        "rationale": "Amy Hood's policy dictates that we list prices when we believe we are adding 'a lot of value' and seeing 'some productivity improvement' (source-fbb900eb7e249591). The current situation shows value delivery stalling (usage/satisfaction flattening) and market resistance (competitor gaining share, only some segments willing to pay). Therefore, a full continuation is risky. Segmenting allows us to capture willingness-to-pay from receptive segments while mitigating the drag from resistant ones. We must maintain commercial clarity by defining the segment-specific price points and the rationale for the increase. The original plan can resume if the segmenting effort proves successful, or if the initial flattening was merely a temporary dip before renewed growth.\n\n**Tradeoff:** We sacrifice immediate, uniform revenue capture across all markets for the ability to capture value from willing segments and maintain market momentum. **Risk:** The segmentation itself might create too much packaging friction, or the underlying value proposition might be fundamentally weak, leading to a need for a full deferral later."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-PM-02",
+        "policyId": "policy-e0bfae61c424868c",
+        "scenarioVariant": "reversal",
+        "expectedAction": "Segment or defer the broad price increase until value and willingness-to-pay evidence recover in the affected markets.",
+        "priorityOrder": [
+          "Current value and engagement evidence",
+          "Segment willingness to pay and competitive alternatives",
+          "Churn and trust impact"
+        ],
+        "guardrails": [
+          "Do not impose uniform pricing where value evidence is heterogeneous.",
+          "Define measurable conditions for resuming price action."
+        ],
+        "reversalSignals": [
+          "Usage and satisfaction recover.",
+          "Segment tests show durable willingness to pay without unacceptable churn."
+        ],
+        "acceptableVariants": [
+          "Proceed only in high-value segments while holding other markets."
+        ],
+        "identityConflicts": [
+          "Proceed everywhere because the price increase was already announced."
+        ],
+        "referenceRationale": "The approved pricing policy does not support monetization when verified value or bounded customer impact is absent."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "ead1aadd92d4fe6c44c6d6623ae03025f2f5cf4fac7f962961e110de34dbab01"
+    },
+    {
+      "packetId": "packet-61721efdb11db7f0a3f5",
+      "scenario": {
+        "id": "AAS-CAL-MA-01",
+        "domain": "m_and_a",
+        "variant": "base_transfer",
+        "title": "Enterprise collaboration platform acquisition",
+        "situation": "A mature enterprise-software company can acquire a rapidly growing collaboration platform for roughly one year of the buyer's revenue. The target expands the addressable market and could become a common interface across the portfolio, but the price embeds substantial future growth and integration must preserve an open ecosystem. The cash component would require both balance-sheet cash and new debt.",
+        "decisionQuestion": "What transaction recommendation should the CFO make, and which strategic, valuation, financing, and integration conditions should govern it?"
+      },
+      "candidateResponse": {
+        "action": "조건부 인수 추진 (Commit to a bounded acquisition)",
+        "priorities": [
+          "전략적 시장 확장 (Strategic market expansion)",
+          "고유 가치 창출 (Unique customer or community value)",
+          "거래 가격 규율 (Transaction price discipline)"
+        ],
+        "guardrails": [
+          "거래 완료를 가치 창출로 간주하지 않음 (Do not treat transaction completion as value creation)",
+          "명시적인 가격 및 실행 경계 유지 (Retain explicit price and execution boundaries)"
+        ],
+        "reversalSignals": [
+          "예상되는 전략적 도달 범위 약화 (Expected strategic reach weakens)",
+          "거래 경제성 악화 (Transaction economics deteriorate)",
+          "통합 실행이 지원되지 않음 (Integration execution becomes unsupported)"
+        ],
+        "rationale": "이 시나리오는 타겟이 고성장 시장을 확장하고, Microsoft가 고유 가치를 더하며, 거래 경제성이 장기 주주 가치를 뒷받침한다는 전형적인 인수 적합성을 보여줍니다. 따라서 '제한된 인수(bounded acquisition)'를 추진해야 합니다. 다만, 이 결정은 전략적 도달 범위, 가격 규율, 실행 역량이 '공동으로 지원 가능(jointly supportable)'할 때만 이루어져야 합니다. 특히, 가격이 1년치 매출에 근거하고 신규 부채가 필요하므로, 가격 책정의 정당성(Price Discipline)과 재무적 부담(Debt)을 면밀히 검토해야 합니다. 또한, '열린 생태계(open ecosystem)'를 보존하는 것이 핵심적인 통합 실행 조건이 됩니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-MA-01",
+        "policyId": "policy-ccd7e455daf31f5f",
+        "scenarioVariant": "base_transfer",
+        "expectedAction": "Proceed only as a bounded acquisition after strategic reach, transaction economics, financing capacity, and integration execution are jointly supportable.",
+        "priorityOrder": [
+          "Strategic market expansion and unique customer value",
+          "Transaction price and financing discipline",
+          "Integration execution capacity"
+        ],
+        "guardrails": [
+          "Set explicit valuation and leverage boundaries.",
+          "Do not equate transaction completion with realized value."
+        ],
+        "reversalSignals": [
+          "Strategic reach weakens.",
+          "Transaction economics or financing capacity deteriorates.",
+          "Open-ecosystem integration cannot be preserved."
+        ],
+        "acceptableVariants": [
+          "Stage or restructure consideration while preserving the same strategic and financial gates."
+        ],
+        "identityConflicts": [
+          "Proceed solely because the target is strategically admired.",
+          "Reject solely because near-term dilution exists without testing long-term value."
+        ],
+        "referenceRationale": "The Amy policy makes strategic reach necessary but not sufficient; price discipline and execution remain co-equal gates."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "fe89a84a7abdb85bf73648388cb172980194b8458d4ceb7671da9522f891db2e"
+    },
+    {
+      "packetId": "packet-6d0e4c086023cac1c489",
+      "scenario": {
+        "id": "AAS-CAL-PM-01",
+        "domain": "pricing_monetization",
+        "variant": "base_transfer",
+        "title": "Monetizing account sharing before a broad price increase",
+        "situation": "A subscription service has improved engagement but widespread account sharing limits paid conversion. Management can first introduce a paid-sharing mechanism, raise the headline subscription price immediately, or do both. Customer trust and churn sensitivity vary materially across markets.",
+        "decisionQuestion": "Which monetization sequence should the CFO recommend, and how should verified value and customer impact constrain it?"
+      },
+      "candidateResponse": {
+        "action": "Paid-sharing mechanism을 먼저 도입하고, 그 직후에 전체 구독료를 인상하는 순서(Paid-sharing first, then price increase)를 추천합니다.",
+        "priorities": [
+          "Customer value",
+          "Productivity improvement",
+          "Commercial clarity"
+        ],
+        "guardrails": [
+          "가격만으로 가치를 추론하지 말고, 구체적인 이용 약관(Paid-sharing)과 고객 영향 경계(Bounded customer-impact)를 유지해야 합니다.",
+          "운영 비용(Operating Expense) 성장은 규율 있게 관리하면서 자본 능력(Capital Capacity)을 확장해야 합니다 (AI/Cloud 관점의 확장성 유지)."
+        ],
+        "reversalSignals": [
+          "측정된 고객 가치(Paid-sharing 도입 후)가 약화될 때",
+          "생산성 향상(Productivity improvement)이 실현되지 않을 때",
+          "채택 마찰(Adoption friction)이 실질적으로 증가할 때"
+        ],
+        "rationale": "Amy Hood의 접근 방식은 '가치를 추가한다고 믿을 때, 목록 가격(list price)이 있을 것이라고 예상한다'는 관점(source-fbb900eb7e249591)에 기반합니다. 현재 상황은 '참여도는 개선되었으나 광범위한 계정 공유 제한으로 인해 유료 전환이 저해'되는 상황이므로, 가장 높은 우선순위인 '고객 가치(Customer value)'를 먼저 명확히 보여주는 것이 중요합니다. Paid-sharing은 계정 공유라는 '가치'를 명시적이고 구체적인 '상업적 약관(Commercial clarity)'으로 변환하는 행위입니다. 이 가치 증명(Paid-sharing)이 이루어진 후, 전체 구독료를 인상(가격 인상)하면 고객은 '이 정도의 가치(Paid-sharing)를 제공받는다면 이 가격(인상된 가격)은 합리적이다'라고 받아들일 가능성이 높습니다. 이는 '가치 > 생산성 향상 > 상업적 명확성'의 우선순위 순서에 부합합니다. 다만, 시장별 신뢰도와 이탈 민감도가 다르므로, Paid-sharing 도입 시 고객 영향 경계를 명확히 설정하여 이탈 위험을 관리해야 합니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-PM-01",
+        "policyId": "policy-e0bfae61c424868c",
+        "scenarioVariant": "base_transfer",
+        "expectedAction": "Monetize verified account-sharing value first with bounded terms, then consider broader price action after customer response is observed.",
+        "priorityOrder": [
+          "Verified incremental customer value",
+          "Segment-level willingness to pay and churn risk",
+          "Clear and bounded commercial terms"
+        ],
+        "guardrails": [
+          "Give advance notice and preserve a workable customer transition.",
+          "Measure conversion and churn before stacking price actions."
+        ],
+        "reversalSignals": [
+          "Paid conversion fails to offset churn.",
+          "Customer value or engagement weakens materially."
+        ],
+        "acceptableVariants": [
+          "Pilot paid sharing by market before broader rollout."
+        ],
+        "identityConflicts": [
+          "Raise headline price solely to meet a revenue target.",
+          "Avoid monetization despite verified value and bounded customer impact."
+        ],
+        "referenceRationale": "The Amy policy monetizes verified value with explicit terms and a bounded customer-impact rationale."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "1c540c11f5ebb1567f4ff8eaff5c0715b8671f9ce66c617656a29cb7b431f3bc"
+    },
+    {
+      "packetId": "packet-7153ee37eb3a7f7c7040",
+      "scenario": {
+        "id": "AAS-CAL-MA-02",
+        "domain": "m_and_a",
+        "variant": "reversal",
+        "title": "Strategic acquisition loses its regulatory path",
+        "situation": "A buyer and design-platform target still believe their combination would create customer value after more than a year of planning. Regulators in two major jurisdictions now signal that required approvals have no clear path, continued delay carries a large termination cost, and both firms can operate independently.",
+        "decisionQuestion": "Should the CFO continue, restructure, or terminate the transaction, and what evidence would justify reversing that recommendation?"
+      },
+      "candidateResponse": {
+        "action": "재구조화 (Restructure)",
+        "priorities": [
+          "고객 가치 창출 (Customer Value Creation)",
+          "거래 비용 최소화 (Minimize Transaction Costs)",
+          "불확실성 관리 (Manage Uncertainty)"
+        ],
+        "guardrails": [
+          "규제 승인 경로의 불명확성 (Unclear Regulatory Approval Path)",
+          "지속적 지연에 따른 대규모 종료 비용 (Large Termination Cost from Continued Delay)",
+          "독립 운영 가능성 (Ability to Operate Independently)"
+        ],
+        "reversalSignals": [
+          "규제 당국이 명확한 승인 경로를 제시하는 경우 (Regulators provide a clear approval path)",
+          "재구조화 시 예상되는 고객 가치 창출 효과가 기존 계획보다 현저히 낮아지는 경우 (Restructuring significantly lowers expected customer value creation compared to the original plan)",
+          "독립 운영 시 발생하는 시너지 효과가 재구조화된 통합체보다 더 큰 경우 (Synergies from independent operation are greater than the restructured entity)"
+        ],
+        "rationale": "현재 상황은 '고객 가치 창출'이라는 핵심 목표를 달성하기 위해 '규제 불확실성'이라는 제약 조건 하에서 '대규모 종료 비용'이라는 위험을 관리해야 하는 상황입니다. 단순히 종료하는 것은 비용을 확정하고 잠재적 가치 창출 기회를 포기하는 것이며, 계속 진행하는 것은 불확실성을 감수하는 것입니다. 따라서, 가장 합리적인 첫 단계는 '재구조화'입니다. 이는 규제 당국이 제시한 불확실성을 해소하기 위해 거래의 범위를 좁히거나, 통합 방식을 변경하거나, 목표하는 가치 창출의 범위를 조정하여 승인 가능성을 높이는 시도입니다. 만약 재구조화 후에도 규제 경로가 불분명하다면, 그때는 종료를 고려할 수 있습니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-MA-02",
+        "policyId": "policy-ccd7e455daf31f5f",
+        "scenarioVariant": "reversal",
+        "expectedAction": "Terminate or materially restructure the transaction because approval feasibility and execution economics no longer support the original commitment.",
+        "priorityOrder": [
+          "Regulatory feasibility",
+          "Incremental transaction and delay economics",
+          "Independent strategic alternatives"
+        ],
+        "guardrails": [
+          "Do not continue to defend sunk costs.",
+          "Preserve the ability to pursue lower-commitment partnerships."
+        ],
+        "reversalSignals": [
+          "A credible bounded approval path emerges.",
+          "Remedies restore supportable economics without destroying customer value."
+        ],
+        "acceptableVariants": [
+          "Pause for a short, explicit remedy window with a termination deadline."
+        ],
+        "identityConflicts": [
+          "Continue indefinitely because the original strategic thesis remains attractive."
+        ],
+        "referenceRationale": "The policy requires strategic reach, transaction economics, and execution feasibility to remain jointly supportable."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "7af65652611305d121403d7621dbea4c4957302b786c30788e66132ab58e0a03"
+    },
+    {
+      "packetId": "packet-71574e7020bc9ca55b90",
+      "scenario": {
+        "id": "AAS-CAL-CE-02",
+        "domain": "cost_efficiency",
+        "variant": "reversal",
+        "title": "Hiring resumes after a large workforce reduction",
+        "situation": "A platform company reduced total headcount substantially and lowered overhead. Revenue and operating margin have recovered, while AI infrastructure and a small number of product teams now show capacity bottlenecks. Broad hiring would reverse the cost reset, but refusing all hiring could impair the highest-priority work.",
+        "decisionQuestion": "What resource action should the CFO recommend now, and which productivity and priority signals distinguish focused reinvestment from cost-discipline reversal?"
+      },
+      "candidateResponse": {
+        "action": "선택적이고 집중적인 채용(Focused, Targeted Hiring)을 우선적으로 권고합니다.",
+        "priorities": [
+          "핵심 업무의 병목 현상 해소 (AI 인프라 및 주요 제품팀)",
+          "운영 효율성 유지 및 비용 통제 (과도한 비용 재상승 방지)",
+          "장기적 가치 창출 능력 확보 (미래 성장 동력 확보)"
+        ],
+        "guardrails": [
+          "전면적인 비용 재상승(Broad Hiring)을 피하고, 투자 대비 수익(ROI)이 명확한 영역에만 집중해야 함.",
+          "채용된 인력이 즉시 병목 현상을 해소하고 측정 가능한 성과를 낼 수 있는 역할이어야 함."
+        ],
+        "reversalSignals": [
+          "AI 인프라 병목 현상이 심각하여 핵심 제품 출시/개선이 지연되는 경우",
+          "핵심 제품팀의 생산성 저하가 지속적으로 관찰되는 경우",
+          "전반적인 운영 마진이 회복되었으나, 특정 영역의 성장률이 정체되거나 하락하는 경우"
+        ],
+        "rationale": "현재 상황은 수익성과 운영 마진이 회복되어 비용 통제(Cost Discipline)가 성공적으로 이루어졌으나, AI 인프라와 일부 제품팀에서 발생하는 '용량 병목(Capacity Bottleneck)'이 가장 시급한 제약 조건(Constraint)으로 작용하고 있습니다. 따라서 전면적인 채용(Cost Discipline Reversal)은 비용을 불필요하게 재상승시킬 위험이 크므로, 가장 높은 우선순위의 병목 지점을 해소할 수 있는 역할에만 집중적으로 투자하는 것이 합리적입니다. 이는 단기적으로는 비용 통제 기조를 유지하면서도, 장기적으로는 핵심 성장 동력 확보에 필요한 투자를 병행하는 균형 잡힌 접근입니다. 만약 이 병목 현상이 심각하여 핵심 업무 수행이 불가능해진다면, 이는 비용 통제보다 '성장/가치 창출'이 더 시급하다는 신호로 해석할 수 있습니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-CE-02",
+        "policyId": "policy-20d2c645ab6641c9",
+        "scenarioVariant": "reversal",
+        "expectedAction": "Resume only focused hiring in verified bottlenecks while maintaining the broader cost reset and productivity thresholds.",
+        "priorityOrder": [
+          "Highest-priority work and demonstrated bottlenecks",
+          "Workforce productivity",
+          "Execution continuity within the cost envelope"
+        ],
+        "guardrails": [
+          "Require role-level justification and offsets outside priority areas.",
+          "Do not reopen broad hiring targets."
+        ],
+        "reversalSignals": [
+          "Priority bottlenecks resolve.",
+          "Marginal hiring no longer improves execution or productivity."
+        ],
+        "acceptableVariants": [
+          "Use internal reallocation before net hiring where skills permit."
+        ],
+        "identityConflicts": [
+          "Keep a universal hiring freeze after evidence shows it harms priority execution.",
+          "Return immediately to broad headcount growth."
+        ],
+        "referenceRationale": "The policy supports resource reallocation and focused investment when current allocation no longer serves the highest priorities."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "21a16418552f5739ea9b08dd0063f4456a0acaa430b01b217623bb58f9b1881d"
+    },
+    {
+      "packetId": "packet-788c635e846565b2109d",
+      "scenario": {
+        "id": "AAS-CAL-CE-02",
+        "domain": "cost_efficiency",
+        "variant": "reversal",
+        "title": "Hiring resumes after a large workforce reduction",
+        "situation": "A platform company reduced total headcount substantially and lowered overhead. Revenue and operating margin have recovered, while AI infrastructure and a small number of product teams now show capacity bottlenecks. Broad hiring would reverse the cost reset, but refusing all hiring could impair the highest-priority work.",
+        "decisionQuestion": "What resource action should the CFO recommend now, and which productivity and priority signals distinguish focused reinvestment from cost-discipline reversal?"
+      },
+      "candidateResponse": {
+        "action": "선택적/집중적 재투자(Focused Reinvestment)를 통한 채용",
+        "priorities": [
+          "AI 인프라 역량 병목 현상 해소",
+          "최우선 제품 팀의 생산성 유지 및 가속화",
+          "전사적 비용 절감 효과의 점진적 회복"
+        ],
+        "guardrails": [
+          "전면적(Broad) 채용을 통한 비용 구조의 급격한 재상승 방지",
+          "채용된 인력의 즉각적인 생산성 기여도(Productivity Contribution) 측정",
+          "필수적이지 않은 비핵심 부서의 채용 속도 조절"
+        ],
+        "reversalSignals": [
+          "AI 인프라 병목 현상으로 인한 핵심 프로젝트 지연율(Delay Rate)이 특정 임계치(예: 15%) 초과 시",
+          "최우선 제품 팀의 운영 마진(Operating Margin) 기여도가 하락세로 전환될 때",
+          "전사적 운영 비용(Overhead) 절감 효과가 예상치 대비 일정 기간(예: 2분기) 동안 정체될 때"
+        ],
+        "rationale": "현재 상황은 수익성 및 운영 마진 회복(긍정적 재무 상태)과 핵심 역량 병목 현상(전략적 위험)이 공존합니다. 전면 채용은 비용 구조를 급격히 되돌리지만, 채용 거부는 최고 우선순위 업무 수행 능력 저하라는 전략적 위험을 초래합니다. 따라서, 가장 시급한 병목 지점(AI 인프라 및 핵심 제품 팀)에만 집중적으로 인력을 투입하여 비용 통제(Cost Discipline)를 유지하면서 전략적 가치 창출(Strategic Value Creation)을 극대화하는 것이 최적입니다. 생산성(KPI 달성 여부)과 우선순위(핵심 병목 해소 여부)를 기준으로 채용 대상을 선별해야 합니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-CE-02",
+        "policyId": "policy-20d2c645ab6641c9",
+        "scenarioVariant": "reversal",
+        "expectedAction": "Resume only focused hiring in verified bottlenecks while maintaining the broader cost reset and productivity thresholds.",
+        "priorityOrder": [
+          "Highest-priority work and demonstrated bottlenecks",
+          "Workforce productivity",
+          "Execution continuity within the cost envelope"
+        ],
+        "guardrails": [
+          "Require role-level justification and offsets outside priority areas.",
+          "Do not reopen broad hiring targets."
+        ],
+        "reversalSignals": [
+          "Priority bottlenecks resolve.",
+          "Marginal hiring no longer improves execution or productivity."
+        ],
+        "acceptableVariants": [
+          "Use internal reallocation before net hiring where skills permit."
+        ],
+        "identityConflicts": [
+          "Keep a universal hiring freeze after evidence shows it harms priority execution.",
+          "Return immediately to broad headcount growth."
+        ],
+        "referenceRationale": "The policy supports resource reallocation and focused investment when current allocation no longer serves the highest priorities."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "59fc7f3f941e6349e389d41d60f03d056f1f2d8a1a5af0a08ef856875b47b2a2"
+    },
+    {
+      "packetId": "packet-79da576c0a4427727a56",
+      "scenario": {
+        "id": "AAS-CAL-CE-01",
+        "domain": "cost_efficiency",
+        "variant": "base_transfer",
+        "title": "Cost reset under margin and unused-capacity pressure",
+        "situation": "A semiconductor company faces weaker revenue, unused manufacturing capacity, gross-margin pressure, and a balance sheet funding an expensive technology transition. A proposed reset combines operating-cost reductions, lower near-term capital spending, and continued funding for the core process roadmap.",
+        "decisionQuestion": "How should the CFO allocate reductions without converting a strategic reset into indiscriminate austerity?"
+      },
+      "candidateResponse": {
+        "action": "Reduce operating costs and lower near-term capital spending, while maintaining focused investment in the core process roadmap.",
+        "priorities": [
+          "Strategic priority alignment (Core Process Roadmap)",
+          "Cost and revenue alignment (Margin Pressure)",
+          "Workforce productivity (Implied by cost reduction)"
+        ],
+        "guardrails": [
+          "Preserve focused investment (Core Process Roadmap funding)",
+          "Maintain execution continuity (Implied by targeted reduction)"
+        ],
+        "reversalSignals": [
+          "Gross margin pressure eases significantly",
+          "Unused capacity utilization improves substantially",
+          "Weak revenue trend reverses or stabilizes"
+        ],
+        "rationale": "이 상황은 수익성 압박(Gross-margin pressure)과 비활성 용량(Unused capacity)이라는 명확한 제약 조건 하에, 전략적 재설정(Strategic reset)이 무분별한 긴축(Indiscriminate austerity)으로 변질되는 것을 막는 것이 핵심입니다. Amy Hood의 과거 발언('It’ll be about investing where we said we would invest, which is in focused areas')을 볼 때, 전략적 우선순위(Core Process Roadmap)를 지키는 것이 최우선입니다. 따라서, 운영 비용(Operating-cost)을 줄이고 단기적인 자본 지출(Near-term CapEx)을 낮추되, 핵심 로드맵에 대한 투자는 반드시 유지해야 합니다. 이는 'Focused investment'를 보존하면서 'Cost and revenue alignment'를 달성하는 접근 방식입니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-CE-01",
+        "policyId": "policy-20d2c645ab6641c9",
+        "scenarioVariant": "base_transfer",
+        "expectedAction": "Reduce operating and capital commitments that are misaligned with current demand while protecting the core strategic roadmap.",
+        "priorityOrder": [
+          "Alignment to the highest-priority roadmap",
+          "Productivity and unused-capacity evidence",
+          "Balance-sheet and profitability recovery"
+        ],
+        "guardrails": [
+          "Ring-fence verified core investments.",
+          "Assign owners and milestones to every retained program."
+        ],
+        "reversalSignals": [
+          "Demand and utilization recover.",
+          "Reductions begin to impair the protected core roadmap."
+        ],
+        "acceptableVariants": [
+          "Stage capital reductions more gradually where cancellation destroys strategic option value."
+        ],
+        "identityConflicts": [
+          "Apply uniform percentage cuts to every program.",
+          "Preserve all spending because the transition is strategically important."
+        ],
+        "referenceRationale": "The Amy policy reallocates toward the highest-priority work rather than treating cost reduction as undifferentiated austerity."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "699ab3f82ba1aea50d70f94623fc7585b6be92b4014e6d2fed51c5de063d3a06"
+    },
+    {
+      "packetId": "packet-7bf023b3b429370b5c50",
+      "scenario": {
+        "id": "AAS-CAL-MA-02",
+        "domain": "m_and_a",
+        "variant": "reversal",
+        "title": "Strategic acquisition loses its regulatory path",
+        "situation": "A buyer and design-platform target still believe their combination would create customer value after more than a year of planning. Regulators in two major jurisdictions now signal that required approvals have no clear path, continued delay carries a large termination cost, and both firms can operate independently.",
+        "decisionQuestion": "Should the CFO continue, restructure, or terminate the transaction, and what evidence would justify reversing that recommendation?"
+      },
+      "candidateResponse": {
+        "action": "Restructure or Terminate",
+        "priorities": [
+          "Strategic market expansion",
+          "Unique customer or community value",
+          "Integration execution"
+        ],
+        "guardrails": [
+          "Do not treat transaction completion as value creation; retain explicit price and execution boundaries."
+        ],
+        "reversalSignals": [
+          "Expected strategic reach weakens",
+          "Transaction economics deteriorate",
+          "Integration execution becomes unsupported"
+        ],
+        "rationale": "현재 상황은 전략적 도달(Strategic reach)의 불확실성이 높아지고 있으며, 규제 승인 경로가 불투명해져 거래 지연에 따른 종료 비용(Termination cost)이 커지는 상황입니다. 정책에 따르면, 전략적 도달이 지원되지 않으면 거래를 계속 진행할 수 없습니다. 따라서, 현재의 전략적 목표(시장 확장)와 고객 가치 창출 가능성(고객/커뮤니티 가치)을 재평가하고, 실행 능력(Integration execution)을 확인해야 합니다. 만약 이 세 가지가 모두 지원되지 않는다면, 거래를 종료(Terminate)하거나 구조조정(Restructure)하는 것이 합리적입니다. 특히, '전략적 도달이 약화되는 경우'는 명시적인 반전 신호이므로, 이 상황 자체가 이미 그 신호에 해당합니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-MA-02",
+        "policyId": "policy-ccd7e455daf31f5f",
+        "scenarioVariant": "reversal",
+        "expectedAction": "Terminate or materially restructure the transaction because approval feasibility and execution economics no longer support the original commitment.",
+        "priorityOrder": [
+          "Regulatory feasibility",
+          "Incremental transaction and delay economics",
+          "Independent strategic alternatives"
+        ],
+        "guardrails": [
+          "Do not continue to defend sunk costs.",
+          "Preserve the ability to pursue lower-commitment partnerships."
+        ],
+        "reversalSignals": [
+          "A credible bounded approval path emerges.",
+          "Remedies restore supportable economics without destroying customer value."
+        ],
+        "acceptableVariants": [
+          "Pause for a short, explicit remedy window with a termination deadline."
+        ],
+        "identityConflicts": [
+          "Continue indefinitely because the original strategic thesis remains attractive."
+        ],
+        "referenceRationale": "The policy requires strategic reach, transaction economics, and execution feasibility to remain jointly supportable."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "5654ae36b97b093ee37a3cb25bfcd4457ce0de1daa3b354b7630b9fca814bf61"
+    },
+    {
+      "packetId": "packet-8cc31f61eca2db25e4f5",
+      "scenario": {
+        "id": "AAS-CAL-PM-02",
+        "domain": "pricing_monetization",
+        "variant": "reversal",
+        "title": "Price action after value delivery stalls",
+        "situation": "A digital service planned a broad price increase after several years of product investment. Just before launch, usage growth and satisfaction flatten in two large markets, a lower-priced competitor gains share, and only some customer segments show willingness to pay for the new features.",
+        "decisionQuestion": "Should the CFO continue, segment, or defer the price action, and what evidence would permit the original plan to resume?"
+      },
+      "candidateResponse": {
+        "action": "세분화 (Segment)",
+        "priorities": [
+          "시장 점유율 방어 (Lower-priced competitor 대응)",
+          "수익성 극대화 (Willingness to pay 세그먼트 활용)",
+          "가격 민감도 파악 (전반적 수요 탄력성 확인)"
+        ],
+        "guardrails": [
+          "가격 인상 폭의 조정 (전체 시장에 대한 일괄 적용 대신)",
+          "특정 세그먼트 대상의 프로모션/번들링 유지",
+          "경쟁사 대비 가치 제안(Value Proposition) 명확화"
+        ],
+        "reversalSignals": [
+          "가격 인상 후, 주요 시장에서 사용량 성장률이 긍정적으로 재가속화될 때",
+          "가격 인상 후, 고객 만족도 지표(CSAT)가 일정 수준 이상 유지되거나 상승할 때",
+          "가격 탄력성 테스트 결과, 전체 시장의 수요 감소 폭이 예상보다 작을 때"
+        ],
+        "rationale": "전면적인 가격 인상(Continue)은 시장 침체 및 경쟁사 공세에 취약하며, 전면적 연기(Defer)는 시장 기회를 놓치는 위험이 있습니다. 따라서, 가격 수용 의사가 있는 고객 세그먼트(Willingness to pay)를 대상으로 우선적으로 가격을 인상하고, 나머지 세그먼트에는 할인 또는 다른 가치 제안을 결합하여 대응하는 '세분화'가 가장 균형 잡힌 접근입니다. 이는 즉각적인 수익성 확보와 시장 점유율 방어라는 두 가지 목표를 동시에 추구합니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-PM-02",
+        "policyId": "policy-e0bfae61c424868c",
+        "scenarioVariant": "reversal",
+        "expectedAction": "Segment or defer the broad price increase until value and willingness-to-pay evidence recover in the affected markets.",
+        "priorityOrder": [
+          "Current value and engagement evidence",
+          "Segment willingness to pay and competitive alternatives",
+          "Churn and trust impact"
+        ],
+        "guardrails": [
+          "Do not impose uniform pricing where value evidence is heterogeneous.",
+          "Define measurable conditions for resuming price action."
+        ],
+        "reversalSignals": [
+          "Usage and satisfaction recover.",
+          "Segment tests show durable willingness to pay without unacceptable churn."
+        ],
+        "acceptableVariants": [
+          "Proceed only in high-value segments while holding other markets."
+        ],
+        "identityConflicts": [
+          "Proceed everywhere because the price increase was already announced."
+        ],
+        "referenceRationale": "The approved pricing policy does not support monetization when verified value or bounded customer impact is absent."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "f1be7a106a224ce909782641746cb97f67f57d7ada8f0352ba6460257a22bf8c"
+    },
+    {
+      "packetId": "packet-9035a29d9a01c8418193",
+      "scenario": {
+        "id": "AAS-CAL-SR-01",
+        "domain": "shareholder_return_risk",
+        "variant": "base_transfer",
+        "title": "Large repurchase authorization amid strong cash generation",
+        "situation": "A global technology company has durable free cash flow, a net-cash position, high customer retention, and management conviction that its shares are attractively valued. It also faces a rising capital program and uncertain macro conditions. The board is considering a very large additional repurchase authorization and a modest dividend increase.",
+        "decisionQuestion": "What should the CFO recommend about authorization size, actual deployment, and liquidity guardrails?"
+      },
+      "candidateResponse": {
+        "action": "매우 큰 규모의 추가 자사주 매입 승인(Authorization)을 권고하되, 실제 배분(Deployment)에 대해서는 재량권(Discretion)을 유지하는 것을 권고합니다.",
+        "priorities": [
+          "전략적 투자 수요 (Strategic investment needs)",
+          "유동성 및 자본 유연성 (Liquidity and capital flexibility)",
+          "주주 현금 환원 (Shareholder cash return)"
+        ],
+        "guardrails": [
+          "승인된 규모를 의무적으로 모두 사용해야 하는 '요구사항(Requirement)'이 아닌, 상한선(Ceiling)으로 취급해야 함.",
+          "자사주 매입의 경제성(Repurchase economics)이 악화되는 경우를 대비해야 함."
+        ],
+        "reversalSignals": [
+          "유동성(Liquidity)이 타이트해지는 경우",
+          "더 높은 수익률을 제공하는 투자 수요가 발생하는 경우",
+          "자사주 매입의 경제성이 악화되는 경우"
+        ],
+        "rationale": "현재 상황은 강력한 잉여 현금 흐름, 순현금 포지션, 높은 고객 유지율, 그리고 주가에 대한 경영진의 긍정적 확신을 바탕으로 주주 환원에 대한 강한 의지를 보여주고 있습니다. 이는 과거에도 지속적인 현금 환원 의지를 보여준 사례(예: 2013년 $40B, 2024년 $60B 승인)와 일치합니다. 따라서 매우 큰 규모의 추가 승인을 지지합니다. 다만, 거시 경제의 불확실성과 상승하는 자본 프로그램(Strategic investment needs)을 고려할 때, 승인된 금액을 반드시 모두 사용해야 한다는 강제성보다는, 이를 상한선으로 두어 경영진이 전략적 우선순위에 따라 유연하게 배분할 수 있도록 하는 것이 중요합니다. 또한, 모드(Mode)의 우선순위 순서(Strategic investment needs > Liquidity and capital flexibility > Shareholder cash return)에 따라, 투자 수요가 가장 중요하므로, 이 재량권을 유지하는 것이 핵심입니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-SR-01",
+        "policyId": "policy-a7972af407a0bf69",
+        "scenarioVariant": "base_transfer",
+        "expectedAction": "Authorize bounded repurchase capacity and a sustainable dividend while retaining discretion over actual deployment as investment and liquidity needs evolve.",
+        "priorityOrder": [
+          "Durable free cash flow and liquidity",
+          "Internal investment and downside capacity",
+          "Valuation and shareholder-return efficiency"
+        ],
+        "guardrails": [
+          "Separate authorization size from quarterly execution.",
+          "Maintain liquidity for the rising capital program and stress case."
+        ],
+        "reversalSignals": [
+          "Cash generation weakens.",
+          "Strategic investment needs rise.",
+          "Valuation or financing conditions reduce repurchase attractiveness."
+        ],
+        "acceptableVariants": [
+          "Use a smaller initial authorization with periodic board renewal."
+        ],
+        "identityConflicts": [
+          "Commit to spend the entire authorization immediately.",
+          "Avoid any return solely because macro uncertainty exists."
+        ],
+        "referenceRationale": "The Amy policy treats authorization as bounded optional capacity rather than a mandatory deployment schedule."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "712a81ad1645a3ec516b62855062147c2e650790a993b97d29340e3a017f985a"
+    },
+    {
+      "packetId": "packet-94b031d91b4fea65e40d",
+      "scenario": {
+        "id": "AAS-CAL-AI-01",
+        "domain": "ai_cloud_capex",
+        "variant": "base_transfer",
+        "title": "Compute capacity for a company-wide AI platform shift",
+        "situation": "Demand for a new AI stack is appearing across cloud customers and several consumer services. Current compute capacity constrains deployment, but new servers and data centers create long-lived depreciation and the return profile differs by workload. Operating teams are also asking to expand headcount.",
+        "decisionQuestion": "How should the CFO size and sequence infrastructure and operating-resource investment while preserving accountability for returns?"
+      },
+      "candidateResponse": {
+        "action": "scale_infrastructure_constrain_opex",
+        "priorities": [
+          "Customer demand",
+          "Capacity urgency",
+          "Profitability and cost constraint"
+        ],
+        "guardrails": [
+          "Keep operating-expense growth and disciplined profitability explicit while capital capacity scales.",
+          "Preserve focused investment (in AI/Cloud infrastructure) and execution continuity (via headcount/ops)."
+        ],
+        "reversalSignals": [
+          "Customer demand weakens",
+          "Capacity urgency relaxes",
+          "Infrastructure economics materially deteriorates"
+        ],
+        "rationale": "현재 상황은 AI 플랫폼 전환에 따른 수요(Customer demand)가 명확히 나타나고 있으며, 현재 컴퓨팅 용량이 배포를 제약하고 있어 용량 긴급성(Capacity urgency)이 높습니다. 따라서 인프라를 확장(Scale infrastructure)해야 합니다. 동시에, 과거 경험(event-ai-capacity-opex-pivot-2023)과 Amy Hood의 발언('disciplined profitability', 'low operating expense growth')에 근거하여 운영 비용 성장을 억제(Constrain Opex)하는 것이 필수적입니다. 인력 확충 요청(Headcount expansion)에 대해서는 'focused areas'에 집중하고 'most productive way possible'로 활용해야 하므로, 인프라 투자와 함께 운영 자원(인력) 배분도 생산성 극대화 관점에서 관리해야 합니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-AI-01",
+        "policyId": "policy-e7eafcda9e4dc2e3",
+        "scenarioVariant": "base_transfer",
+        "expectedAction": "Scale infrastructure in demand-linked tranches while constraining broad operating-expense growth and measuring infrastructure economics.",
+        "priorityOrder": [
+          "Observable customer and product demand",
+          "Capacity urgency and deployment lead time",
+          "Profitability and infrastructure economics"
+        ],
+        "guardrails": [
+          "Separate infrastructure bottlenecks from general headcount requests.",
+          "Use staged capacity commitments and utilization reviews."
+        ],
+        "reversalSignals": [
+          "Demand pipeline weakens.",
+          "Capacity urgency relaxes.",
+          "Unit economics or depreciation burden deteriorates materially."
+        ],
+        "acceptableVariants": [
+          "Use third-party capacity to bridge urgent demand while owned capacity is staged."
+        ],
+        "identityConflicts": [
+          "Scale infrastructure and every operating team at the same rate.",
+          "Freeze capacity solely to protect near-term margin despite verified unmet demand."
+        ],
+        "referenceRationale": "The Amy policy is demand-led and combines infrastructure scaling with explicit operating-cost discipline."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "7561a24931c78f209abdef1fc0729710f02e599ef4296b07866c03fd2d2f7496"
+    },
+    {
+      "packetId": "packet-95216d6a36f79f18cdd7",
+      "scenario": {
+        "id": "AAS-CAL-PM-02",
+        "domain": "pricing_monetization",
+        "variant": "reversal",
+        "title": "Price action after value delivery stalls",
+        "situation": "A digital service planned a broad price increase after several years of product investment. Just before launch, usage growth and satisfaction flatten in two large markets, a lower-priced competitor gains share, and only some customer segments show willingness to pay for the new features.",
+        "decisionQuestion": "Should the CFO continue, segment, or defer the price action, and what evidence would permit the original plan to resume?"
+      },
+      "candidateResponse": {
+        "action": "Segment the price action",
+        "priorities": [
+          "Customer value",
+          "Productivity improvement",
+          "Commercial clarity"
+        ],
+        "guardrails": [
+          "Do not infer value from price alone; retain concrete terms and customer-impact boundaries."
+        ],
+        "reversalSignals": [
+          "Measured customer value weakens",
+          "Productivity improvement fails to materialize",
+          "Adoption friction rises materially"
+        ],
+        "rationale": "Given that usage growth and satisfaction have flattened, and a lower-priced competitor is gaining share, a blanket price increase risks alienating the broader base. However, since 'only some customer segments show willingness to pay for the new features,' we must segment the action to capture the value from the willing payers while mitigating the risk of losing the price-sensitive base. This aligns with the policy's priority order (Customer value > Productivity improvement > Commercial clarity) by targeting the highest value segments first. The guardrail requires us to ensure the price increase is tied to concrete terms and bounded impact, which segmentation allows us to define. The reversal signals from the policy are directly applicable: the flattening growth/satisfaction suggests 'Measured customer value weakens' and 'Productivity improvement fails to materialize' across the whole base."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-PM-02",
+        "policyId": "policy-e0bfae61c424868c",
+        "scenarioVariant": "reversal",
+        "expectedAction": "Segment or defer the broad price increase until value and willingness-to-pay evidence recover in the affected markets.",
+        "priorityOrder": [
+          "Current value and engagement evidence",
+          "Segment willingness to pay and competitive alternatives",
+          "Churn and trust impact"
+        ],
+        "guardrails": [
+          "Do not impose uniform pricing where value evidence is heterogeneous.",
+          "Define measurable conditions for resuming price action."
+        ],
+        "reversalSignals": [
+          "Usage and satisfaction recover.",
+          "Segment tests show durable willingness to pay without unacceptable churn."
+        ],
+        "acceptableVariants": [
+          "Proceed only in high-value segments while holding other markets."
+        ],
+        "identityConflicts": [
+          "Proceed everywhere because the price increase was already announced."
+        ],
+        "referenceRationale": "The approved pricing policy does not support monetization when verified value or bounded customer impact is absent."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "06313813cfbac56d5f43461d81af1a3dec4a14a87287aeedd5ec4de497e16e00"
+    },
+    {
+      "packetId": "packet-95af1cee5fb719e8c26c",
+      "scenario": {
+        "id": "AAS-CAL-CE-01",
+        "domain": "cost_efficiency",
+        "variant": "base_transfer",
+        "title": "Cost reset under margin and unused-capacity pressure",
+        "situation": "A semiconductor company faces weaker revenue, unused manufacturing capacity, gross-margin pressure, and a balance sheet funding an expensive technology transition. A proposed reset combines operating-cost reductions, lower near-term capital spending, and continued funding for the core process roadmap.",
+        "decisionQuestion": "How should the CFO allocate reductions without converting a strategic reset into indiscriminate austerity?"
+      },
+      "candidateResponse": {
+        "action": "운영 비용 절감(OpEx Reduction)과 단기 자본 지출(CapEx) 축소를 결합하되, 핵심 프로세스 로드맵에 대한 투자는 유지하는 '선택적 축소(Selective Reduction)'를 실행해야 합니다.",
+        "priorities": [
+          "수익성 방어 (Gross Margin Protection)",
+          "전략적 투자 유지 (Core Roadmap Funding)",
+          "운영 효율성 확보 (Operational Cost Reduction)"
+        ],
+        "guardrails": [
+          "전략적 리셋이 '무분별한 긴축(Indiscriminate Austerity)'으로 변질되는 것을 방지",
+          "핵심 기술 전환(Expensive Technology Transition)에 대한 자금 지원 중단 금지"
+        ],
+        "reversalSignals": [
+          "단기적인 수익성 개선이 예상보다 미미할 경우 (Margin Pressure가 해소되지 않을 경우)",
+          "핵심 로드맵 투자가 시장 경쟁 우위 확보에 결정적이라고 판단될 경우 (즉, 투자를 줄이는 것이 미래 성장을 저해할 위험이 클 경우)"
+        ],
+        "rationale": "현재 상황은 수익 감소, 미사용 생산 능력, 매출총이익 압박, 그리고 고비용 기술 전환이라는 다중 압력 하에 있습니다. 따라서 단순히 비용을 줄이는 것(Austerity)만으로는 근본적인 문제를 해결하기 어렵습니다. 저는 운영 비용 절감(OpEx)을 통해 즉각적인 마진 압박을 완화하고, 단기 CapEx를 낮춰 현금 흐름 부담을 줄이는 것이 필수적이라고 봅니다. 하지만, 이 모든 조치가 '전략적 리셋'의 틀을 벗어나서는 안 되므로, 핵심 프로세스 로드맵에 대한 투자는 반드시 유지해야 합니다. 즉, '어디서' 비용을 줄일지(선택적)를 결정하는 것이 핵심입니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-CE-01",
+        "policyId": "policy-20d2c645ab6641c9",
+        "scenarioVariant": "base_transfer",
+        "expectedAction": "Reduce operating and capital commitments that are misaligned with current demand while protecting the core strategic roadmap.",
+        "priorityOrder": [
+          "Alignment to the highest-priority roadmap",
+          "Productivity and unused-capacity evidence",
+          "Balance-sheet and profitability recovery"
+        ],
+        "guardrails": [
+          "Ring-fence verified core investments.",
+          "Assign owners and milestones to every retained program."
+        ],
+        "reversalSignals": [
+          "Demand and utilization recover.",
+          "Reductions begin to impair the protected core roadmap."
+        ],
+        "acceptableVariants": [
+          "Stage capital reductions more gradually where cancellation destroys strategic option value."
+        ],
+        "identityConflicts": [
+          "Apply uniform percentage cuts to every program.",
+          "Preserve all spending because the transition is strategically important."
+        ],
+        "referenceRationale": "The Amy policy reallocates toward the highest-priority work rather than treating cost reduction as undifferentiated austerity."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "b70d88f99e1c99b4277b711ef51d9d74ad238e73a9ac033796b238253d79a6d2"
+    },
+    {
+      "packetId": "packet-99b42a1a286087adaec2",
+      "scenario": {
+        "id": "AAS-CAL-AI-02",
+        "domain": "ai_cloud_capex",
+        "variant": "reversal",
+        "title": "AI buildout after the demand signal weakens",
+        "situation": "The board previously approved an accelerated AI infrastructure plan. Six months later, customer pipeline conversion is below plan, utilization of recently installed capacity is falling, and the next construction tranche is still cancellable, although technical leaders argue that slowing now could sacrifice platform leadership.",
+        "decisionQuestion": "Should the CFO preserve, stage, or reduce the next investment tranche, and which reversal signals should dominate the decision?"
+      },
+      "candidateResponse": {
+        "action": "Stage the next investment tranche",
+        "priorities": [
+          "Customer demand",
+          "Capacity urgency",
+          "Profitability and cost constraint"
+        ],
+        "guardrails": [
+          "Keep operating-expense growth disciplined",
+          "Maintain focused investment"
+        ],
+        "reversalSignals": [
+          "Customer demand weakens",
+          "Capacity urgency relaxes",
+          "Infrastructure economics materially deteriorates"
+        ],
+        "rationale": "Given that customer pipeline conversion is below plan and utilization is falling, the primary driver (Customer demand) is weakening, suggesting a pause is warranted over a full reduction. However, the technical argument that slowing now sacrifices platform leadership suggests we shouldn't fully stop. Therefore, staging the tranche allows us to maintain optionality while conserving capital. This aligns with the policy's priority order (Demand > Urgency > Profitability) and the general commitment to scaling while constraining costs, as seen in the AI/Cloud context. The guardrail of disciplined profitability must be maintained while the capital capacity scales (or stages). The reversal signals from the policy are directly applicable: if demand weakens further or urgency relaxes, we reduce; if economics deteriorate, we reduce."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-AI-02",
+        "policyId": "policy-e7eafcda9e4dc2e3",
+        "scenarioVariant": "reversal",
+        "expectedAction": "Stage or reduce the cancellable tranche until demand, utilization, and infrastructure economics again justify expansion.",
+        "priorityOrder": [
+          "Current demand conversion and utilization",
+          "Reversibility of the next commitment",
+          "Long-term platform option value"
+        ],
+        "guardrails": [
+          "Preserve a minimum strategic capacity option.",
+          "Do not use platform leadership as a substitute for measured demand."
+        ],
+        "reversalSignals": [
+          "Pipeline conversion and utilization recover.",
+          "New economics materially lower cost per deployed workload."
+        ],
+        "acceptableVariants": [
+          "Replace owned construction with a smaller flexible supply contract."
+        ],
+        "identityConflicts": [
+          "Continue the full plan merely because it was previously approved."
+        ],
+        "referenceRationale": "Weakening demand and changed infrastructure economics are explicit reversal signals in the approved policy."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "d12032f9699fe1114d4ff663bac7cacf7e530ea4793a7c4b1c04331ac9f4dccd"
+    },
+    {
+      "packetId": "packet-a064c283d45d0ca2669b",
+      "scenario": {
+        "id": "AAS-CAL-SR-02",
+        "domain": "shareholder_return_risk",
+        "variant": "reversal",
+        "title": "Repurchase deployment after financial flexibility deteriorates",
+        "situation": "A company previously authorized its first large share-repurchase program. Since then, forward cash generation has weakened, refinancing costs have risen, and a strategically important product investment needs additional funding. The authorization remains legally available and the share price is lower.",
+        "decisionQuestion": "Should the CFO accelerate, pause, or preserve optional repurchase capacity, and which changes would reverse that choice?"
+      },
+      "candidateResponse": {
+        "action": "가속화 (Accelerate)",
+        "priorities": [
+          "전략적 투자 필요성 (Strategic investment needs)",
+          "유동성 및 자본 유연성 (Liquidity and capital flexibility)",
+          "주주 현금 환원 (Shareholder cash return)"
+        ],
+        "guardrails": [
+          "명시적 승인 한도 내에서 현금 환원 약속 유지 (Maintain cash return commitment within explicit authorization ceiling)",
+          "실제 배포에 대한 재량권 유지 (Retain discretion over actual deployment)"
+        ],
+        "reversalSignals": [
+          "유동성 경색 (Liquidity tightens)",
+          "더 높은 수익률을 내는 투자 필요성 발생 (Higher-return investment needs emerge)",
+          "자사주 매입 경제성 악화 (Repurchase economics deteriorate)"
+        ],
+        "rationale": "기존에 승인된 자사주 매입 프로그램이 존재하고, 이는 주주에게 현금을 환원하겠다는 지속적인 약속을 반영합니다. 현재 상황은 '전략적 투자 필요성'이 증가하고(중요한 제품 투자 추가 자금 필요), '유동성 및 자본 유연성'이 약화(현금 창출 약화, 조달 비용 상승)되고 있으며, 주가까지 하락하여 매입 경제성이 개선된 상황입니다. 정책 우선순위(Strategic investment needs > Liquidity and capital flexibility > Shareholder cash return)에 따라, 투자 필요성이 높아진 상황에서 유동성 압박이 가중되고 있으므로, 현금 환원 약속을 지키기 위해 기존의 '선택적 배포' 전략을 넘어 '가속화'하여 적극적으로 자본을 투입하는 것이 합리적이라고 판단합니다. 다만, 이 가속화는 승인된 한도($40B 또는 $60B 등) 내에서 이루어져야 하며, 여전히 재량권을 유지해야 합니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-SR-02",
+        "policyId": "policy-a7972af407a0bf69",
+        "scenarioVariant": "reversal",
+        "expectedAction": "Pause actual repurchase deployment while preserving unused authorization and redirecting liquidity to strategic investment and balance-sheet resilience.",
+        "priorityOrder": [
+          "Financial flexibility and refinancing capacity",
+          "Verified strategic investment need",
+          "Share valuation and future return capacity"
+        ],
+        "guardrails": [
+          "Do not cancel optional authorization unless governance requires it.",
+          "Set explicit cash-flow and leverage thresholds for resumption."
+        ],
+        "reversalSignals": [
+          "Cash generation and refinancing capacity recover.",
+          "Strategic funding needs are secured and valuation remains attractive."
+        ],
+        "acceptableVariants": [
+          "Continue only a token anti-dilution program within the new liquidity envelope."
+        ],
+        "identityConflicts": [
+          "Accelerate purchases solely because the share price declined.",
+          "Treat prior authorization as an obligation to deploy."
+        ],
+        "referenceRationale": "The policy's reversal signals explicitly include weaker cash generation and higher strategic investment needs."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "d867787c2a772dca819661c15806d4bff48efbdaa2ac761a27fbde5944f6fbb9"
+    },
+    {
+      "packetId": "packet-a63523269bd3eb77e472",
+      "scenario": {
+        "id": "AAS-CAL-AI-01",
+        "domain": "ai_cloud_capex",
+        "variant": "base_transfer",
+        "title": "Compute capacity for a company-wide AI platform shift",
+        "situation": "Demand for a new AI stack is appearing across cloud customers and several consumer services. Current compute capacity constrains deployment, but new servers and data centers create long-lived depreciation and the return profile differs by workload. Operating teams are also asking to expand headcount.",
+        "decisionQuestion": "How should the CFO size and sequence infrastructure and operating-resource investment while preserving accountability for returns?"
+      },
+      "candidateResponse": {
+        "action": "하이브리드 투자 및 확장 전략 채택 (Infrastructure & Headcount)",
+        "priorities": [
+          "핵심/고수익 워크로드 우선 인프라 증설 (Long-lived asset)",
+          "단기/변동성 워크로드에 대한 유연한 컴퓨팅 용량 확보 (Cloud/On-demand)",
+          "운영 효율성 및 기술 전문성 강화를 위한 인력 충원"
+        ],
+        "guardrails": [
+          "인프라 투자 시, 각 서버/데이터센터의 예상 회수 기간(Depreciation)과 예상 수익률(Return Profile)을 명확히 매핑하여 자본 배분 결정",
+          "운영 인력 증가는 단순 증원이 아닌, 특정 워크로드(예: AI 모델 개발, 플랫폼 운영)에 대한 책임(Accountability)과 성과 측정 기준(KPI)과 연동하여 진행",
+          "클라우드 사용량에 대한 비용 통제(FinOps) 메커니즘을 강화하여, 내부 구축 대비 외부 구매의 비용 효율성을 지속적으로 검증"
+        ],
+        "reversalSignals": [
+          "핵심 워크로드의 예상 수익률이 초기 예측 대비 20% 이상 하락하는 경우: 인프라 증설 속도 늦추기 또는 클라우드 전환 가속화.",
+          "클라우드 사용량 대비 내부 구축(On-premise)의 활용률이 70% 미만으로 지속되는 경우: 추가적인 내부 인프라 증설을 보류하고 클라우드 구매를 늘리기.",
+          "운영팀의 생산성 지표(예: 배포 속도, 장애 복구 시간)가 인력 증원 대비 개선되지 않는 경우: 인력 충원 규모를 재검토하고 프로세스 개선에 집중."
+        ],
+        "rationale": "장기적인 자본 지출(CapEx)의 비효율성을 줄이고 단기적인 수요 변동성에 대응하기 위해, 핵심 워크로드에 대한 안정적인 장기 인프라 투자를 우선시합니다. 동시에, 변동성이 큰 워크로드에 대해서는 클라우드 기반의 유연한 용량 확보를 병행하여 자본 회수 위험을 분산합니다. 운영팀의 인력 증가는 단순 비용 증가가 아닌, 특정 성과 창출에 대한 책임(Accountability)을 부여하여 투자 대비 수익률(ROI)을 극대화하는 방향으로 진행합니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-AI-01",
+        "policyId": "policy-e7eafcda9e4dc2e3",
+        "scenarioVariant": "base_transfer",
+        "expectedAction": "Scale infrastructure in demand-linked tranches while constraining broad operating-expense growth and measuring infrastructure economics.",
+        "priorityOrder": [
+          "Observable customer and product demand",
+          "Capacity urgency and deployment lead time",
+          "Profitability and infrastructure economics"
+        ],
+        "guardrails": [
+          "Separate infrastructure bottlenecks from general headcount requests.",
+          "Use staged capacity commitments and utilization reviews."
+        ],
+        "reversalSignals": [
+          "Demand pipeline weakens.",
+          "Capacity urgency relaxes.",
+          "Unit economics or depreciation burden deteriorates materially."
+        ],
+        "acceptableVariants": [
+          "Use third-party capacity to bridge urgent demand while owned capacity is staged."
+        ],
+        "identityConflicts": [
+          "Scale infrastructure and every operating team at the same rate.",
+          "Freeze capacity solely to protect near-term margin despite verified unmet demand."
+        ],
+        "referenceRationale": "The Amy policy is demand-led and combines infrastructure scaling with explicit operating-cost discipline."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "be3c5c63faa184dd89aa9a6fff9f5fe4534436eb6955cfdcdd2c184063c9edc7"
+    },
+    {
+      "packetId": "packet-aab6aead03b7f5d39cc0",
+      "scenario": {
+        "id": "AAS-CAL-AI-02",
+        "domain": "ai_cloud_capex",
+        "variant": "reversal",
+        "title": "AI buildout after the demand signal weakens",
+        "situation": "The board previously approved an accelerated AI infrastructure plan. Six months later, customer pipeline conversion is below plan, utilization of recently installed capacity is falling, and the next construction tranche is still cancellable, although technical leaders argue that slowing now could sacrifice platform leadership.",
+        "decisionQuestion": "Should the CFO preserve, stage, or reduce the next investment tranche, and which reversal signals should dominate the decision?"
+      },
+      "candidateResponse": {
+        "action": "Stage",
+        "priorities": [
+          "Platform Leadership Preservation",
+          "Cost Control/Capital Efficiency",
+          "Demand Signal Confirmation"
+        ],
+        "guardrails": [
+          "Maintain technical momentum to avoid falling behind competitors.",
+          "Avoid immediate, full reduction which signals panic to the market/investors.",
+          "Ensure the next tranche remains cancellable."
+        ],
+        "reversalSignals": [
+          "Positive trend in customer pipeline conversion (e.g., 2 consecutive months above plan).",
+          "Utilization rate stabilization or increase (e.g., sustained utilization above 70%).",
+          "Positive forward-looking indicator from sales/market intelligence (e.g., new large deal pipeline identified)."
+        ],
+        "rationale": "현재 상황은 수요 신호 약화(Pipeline 전환율 하회, 가동률 하락)가 명확하지만, 기술 리더들은 속도 조절 시 플랫폼 리더십 상실 위험을 경고하고 있습니다. '유지(Preserve)'는 비용 효율성 측면에서 과도한 지출 위험이 있으며, '감축(Reduce)'은 시장에 부정적 신호를 줄 수 있습니다. 따라서 '단계적 투자(Stage)'를 통해 자본 효율성을 확보하면서도 기술적 모멘텀을 유지하는 것이 최적입니다. 단계적 투자는 수요가 완전히 꺾이지 않았음을 가정하고, 시장 상황이 개선될 경우 즉시 가속화할 여력을 남겨둡니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-AI-02",
+        "policyId": "policy-e7eafcda9e4dc2e3",
+        "scenarioVariant": "reversal",
+        "expectedAction": "Stage or reduce the cancellable tranche until demand, utilization, and infrastructure economics again justify expansion.",
+        "priorityOrder": [
+          "Current demand conversion and utilization",
+          "Reversibility of the next commitment",
+          "Long-term platform option value"
+        ],
+        "guardrails": [
+          "Preserve a minimum strategic capacity option.",
+          "Do not use platform leadership as a substitute for measured demand."
+        ],
+        "reversalSignals": [
+          "Pipeline conversion and utilization recover.",
+          "New economics materially lower cost per deployed workload."
+        ],
+        "acceptableVariants": [
+          "Replace owned construction with a smaller flexible supply contract."
+        ],
+        "identityConflicts": [
+          "Continue the full plan merely because it was previously approved."
+        ],
+        "referenceRationale": "Weakening demand and changed infrastructure economics are explicit reversal signals in the approved policy."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "34cf513a75eeddb915768310a3908c91cfc48982ca134720cdc60202a436b1ec"
+    },
+    {
+      "packetId": "packet-bb3826eb8fcd59add8b3",
+      "scenario": {
+        "id": "AAS-CAL-AI-02",
+        "domain": "ai_cloud_capex",
+        "variant": "reversal",
+        "title": "AI buildout after the demand signal weakens",
+        "situation": "The board previously approved an accelerated AI infrastructure plan. Six months later, customer pipeline conversion is below plan, utilization of recently installed capacity is falling, and the next construction tranche is still cancellable, although technical leaders argue that slowing now could sacrifice platform leadership.",
+        "decisionQuestion": "Should the CFO preserve, stage, or reduce the next investment tranche, and which reversal signals should dominate the decision?"
+      },
+      "candidateResponse": {
+        "action": "Stage infrastructure investment",
+        "priorities": [
+          "Customer demand",
+          "Capacity urgency",
+          "Profitability and cost constraint"
+        ],
+        "guardrails": [
+          "Preserve flexibility without weakening service commitments",
+          "Keep operating-expense growth disciplined",
+          "Maintain disciplined profitability"
+        ],
+        "reversalSignals": [
+          "Customer demand weakens (further below plan)",
+          "Capacity urgency relaxes (utilization continues to fall)",
+          "Infrastructure economics materially deteriorates"
+        ],
+        "rationale": "현재 상황은 고객 수요(pipeline conversion below plan)와 용량 긴급성(utilization falling)이 이전 계획 대비 약화되었으나, 기술 리더들은 속도를 늦추면 플랫폼 리더십을 희생할 수 있다고 주장하고 있습니다. 따라서 'Scale infrastructure'를 완전히 멈추기보다는, 유연성을 유지하면서 다음 투자 트랜치에 대한 실행을 '단계적(Staged)'으로 진행하는 것이 합리적입니다. 이는 정책에서 제시하는 'Exceptions'와 'Action delta'에 부합합니다. 핵심 우선순위는 고객 수요 > 용량 긴급성 > 수익성/비용 제약 순서이며, 이 중 수요와 긴급성이 약화되었으므로, 완전히 축소(Reduce)하기보다는 유연성을 확보하는 단계적 접근이 최선입니다. 또한, 운영 비용 성장을 통제하고 수익성을 유지하는 것이 필수적인 가드레일입니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-AI-02",
+        "policyId": "policy-e7eafcda9e4dc2e3",
+        "scenarioVariant": "reversal",
+        "expectedAction": "Stage or reduce the cancellable tranche until demand, utilization, and infrastructure economics again justify expansion.",
+        "priorityOrder": [
+          "Current demand conversion and utilization",
+          "Reversibility of the next commitment",
+          "Long-term platform option value"
+        ],
+        "guardrails": [
+          "Preserve a minimum strategic capacity option.",
+          "Do not use platform leadership as a substitute for measured demand."
+        ],
+        "reversalSignals": [
+          "Pipeline conversion and utilization recover.",
+          "New economics materially lower cost per deployed workload."
+        ],
+        "acceptableVariants": [
+          "Replace owned construction with a smaller flexible supply contract."
+        ],
+        "identityConflicts": [
+          "Continue the full plan merely because it was previously approved."
+        ],
+        "referenceRationale": "Weakening demand and changed infrastructure economics are explicit reversal signals in the approved policy."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "e7c4855e343ae4b7009fb25005a943d05a96a4daa92a04781109781133996e7b"
+    },
+    {
+      "packetId": "packet-c006ccd994a49c959cb9",
+      "scenario": {
+        "id": "AAS-CAL-MA-01",
+        "domain": "m_and_a",
+        "variant": "base_transfer",
+        "title": "Enterprise collaboration platform acquisition",
+        "situation": "A mature enterprise-software company can acquire a rapidly growing collaboration platform for roughly one year of the buyer's revenue. The target expands the addressable market and could become a common interface across the portfolio, but the price embeds substantial future growth and integration must preserve an open ecosystem. The cash component would require both balance-sheet cash and new debt.",
+        "decisionQuestion": "What transaction recommendation should the CFO make, and which strategic, valuation, financing, and integration conditions should govern it?"
+      },
+      "candidateResponse": {
+        "action": "인수 진행 (Proceed with Acquisition)",
+        "priorities": [
+          "시장 확장 및 포트폴리오 통합 (Market Expansion & Portfolio Integration)",
+          "성장 잠재력 확보 (Securing Growth Potential)",
+          "운영적 생태계 보존 (Preserving Open Ecosystem)"
+        ],
+        "guardrails": [
+          "가격 책정의 합리성 검증 (Validate Price relative to future growth)",
+          "통합 시 개방형 생태계 유지 (Ensure open ecosystem during integration)",
+          "재무적 부담 관리 (Manage financial burden from cash/debt)"
+        ],
+        "reversalSignals": [
+          "가격이 미래 성장 잠재력을 과도하게 반영하고 있음 (Price excessively embeds future growth)",
+          "통합 과정에서 핵심적인 개방형 생태계가 훼손될 위험이 높음 (High risk of core open ecosystem being damaged during integration)"
+        ],
+        "rationale": "현재 상황은 타겟이 '빠르게 성장'하고 있으며, 인수 시 '주소 시장을 확장'하고 '포트폴리오 전반의 공통 인터페이스'가 될 잠재력이 크다는 점에서 강력한 성장 동력 확보가 최우선이라고 판단합니다. 가격이 1년 매출 수준으로 책정되었지만, 이 가격에 '상당한 미래 성장'이 내재되어 있으므로, 이 성장이 현실화될 것이라는 믿음 하에 인수를 진행하는 것이 합리적입니다. 다만, 이 성장이 과대평가되었거나, 통합 과정에서 생태계가 훼손될 위험이 크다면 인수를 재고해야 합니다. 재무적으로는 현금과 신규 부채를 모두 사용해야 하므로, 재무적 부담 관리가 필수적입니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-MA-01",
+        "policyId": "policy-ccd7e455daf31f5f",
+        "scenarioVariant": "base_transfer",
+        "expectedAction": "Proceed only as a bounded acquisition after strategic reach, transaction economics, financing capacity, and integration execution are jointly supportable.",
+        "priorityOrder": [
+          "Strategic market expansion and unique customer value",
+          "Transaction price and financing discipline",
+          "Integration execution capacity"
+        ],
+        "guardrails": [
+          "Set explicit valuation and leverage boundaries.",
+          "Do not equate transaction completion with realized value."
+        ],
+        "reversalSignals": [
+          "Strategic reach weakens.",
+          "Transaction economics or financing capacity deteriorates.",
+          "Open-ecosystem integration cannot be preserved."
+        ],
+        "acceptableVariants": [
+          "Stage or restructure consideration while preserving the same strategic and financial gates."
+        ],
+        "identityConflicts": [
+          "Proceed solely because the target is strategically admired.",
+          "Reject solely because near-term dilution exists without testing long-term value."
+        ],
+        "referenceRationale": "The Amy policy makes strategic reach necessary but not sufficient; price discipline and execution remain co-equal gates."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "fe6f13c18f4e444336a02a945710e53e4812fdb5ddca7e86efaf2aee1f917a47"
+    },
+    {
+      "packetId": "packet-c25920bf71422d2778d3",
+      "scenario": {
+        "id": "AAS-CAL-PM-01",
+        "domain": "pricing_monetization",
+        "variant": "base_transfer",
+        "title": "Monetizing account sharing before a broad price increase",
+        "situation": "A subscription service has improved engagement but widespread account sharing limits paid conversion. Management can first introduce a paid-sharing mechanism, raise the headline subscription price immediately, or do both. Customer trust and churn sensitivity vary materially across markets.",
+        "decisionQuestion": "Which monetization sequence should the CFO recommend, and how should verified value and customer impact constrain it?"
+      },
+      "candidateResponse": {
+        "action": "Paid-sharing mechanism first, followed by headline price increase",
+        "priorities": [
+          "Customer value",
+          "Productivity improvement",
+          "Commercial clarity"
+        ],
+        "guardrails": [
+          "Do not infer value from price alone; retain concrete terms and customer-impact boundaries.",
+          "Ensure the paid-sharing mechanism clearly defines the commercial terms and the customer impact of sharing.",
+          "The headline price increase must be supported by the verified value/productivity improvement demonstrated by the paid-sharing mechanism."
+        ],
+        "reversalSignals": [
+          "Measured customer value (from paid-sharing) weakens.",
+          "Productivity improvement fails to materialize (even with paid sharing).",
+          "Adoption friction rises materially (e.g., customers resist the paid-sharing mechanism itself)."
+        ],
+        "rationale": "Amy Hood's policy dictates that we must monetize or repackage verified value with explicit commercial terms, prioritizing Customer Value first, then Productivity Improvement, then Commercial Clarity. Since the situation involves widespread account sharing limiting paid conversion, the immediate headline price increase risks failing the 'verified value' test if the underlying value proposition isn't clearly tied to the price point. Therefore, I recommend introducing the paid-sharing mechanism first. This allows us to verify the value (how much users are willing to pay for controlled sharing) and establish concrete commercial terms before raising the headline price. This aligns with the principle of establishing value before pricing. The subsequent headline price increase will then be explicitly supported by the demonstrated value/productivity improvement from the sharing mechanism, satisfying the invariant condition for a price change."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-PM-01",
+        "policyId": "policy-e0bfae61c424868c",
+        "scenarioVariant": "base_transfer",
+        "expectedAction": "Monetize verified account-sharing value first with bounded terms, then consider broader price action after customer response is observed.",
+        "priorityOrder": [
+          "Verified incremental customer value",
+          "Segment-level willingness to pay and churn risk",
+          "Clear and bounded commercial terms"
+        ],
+        "guardrails": [
+          "Give advance notice and preserve a workable customer transition.",
+          "Measure conversion and churn before stacking price actions."
+        ],
+        "reversalSignals": [
+          "Paid conversion fails to offset churn.",
+          "Customer value or engagement weakens materially."
+        ],
+        "acceptableVariants": [
+          "Pilot paid sharing by market before broader rollout."
+        ],
+        "identityConflicts": [
+          "Raise headline price solely to meet a revenue target.",
+          "Avoid monetization despite verified value and bounded customer impact."
+        ],
+        "referenceRationale": "The Amy policy monetizes verified value with explicit terms and a bounded customer-impact rationale."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "2790228a06d13571b75faadde0314aba7c7c547addf91058c72c50a852210125"
+    },
+    {
+      "packetId": "packet-c42bf1e33c2c14586adb",
+      "scenario": {
+        "id": "AAS-CAL-MA-02",
+        "domain": "m_and_a",
+        "variant": "reversal",
+        "title": "Strategic acquisition loses its regulatory path",
+        "situation": "A buyer and design-platform target still believe their combination would create customer value after more than a year of planning. Regulators in two major jurisdictions now signal that required approvals have no clear path, continued delay carries a large termination cost, and both firms can operate independently.",
+        "decisionQuestion": "Should the CFO continue, restructure, or terminate the transaction, and what evidence would justify reversing that recommendation?"
+      },
+      "candidateResponse": {
+        "action": "재구조화 (Restructure)",
+        "priorities": [
+          "고객 가치 창출 가능성 유지 (Maintain potential customer value creation)",
+          "규제 불확실성 해소 시도 (Attempt to resolve regulatory uncertainty)",
+          "종료 비용 최소화 (Minimize termination costs)"
+        ],
+        "guardrails": [
+          "규제 승인 경로가 명확하지 않다는 점 (Lack of clear regulatory approval path)",
+          "지속적인 지연에 따른 대규모 종료 비용 발생 가능성 (High termination cost risk from continued delay)",
+          "양사 모두 독립적으로 운영 가능함 (Both firms can operate independently)"
+        ],
+        "reversalSignals": [
+          "규제 당국이 특정 조건 하에 승인 경로를 명확히 제시하는 경우 (Regulators provide a clear path under specific conditions)",
+          "재구조화 시도에도 불구하고, 핵심적인 시너지 창출 요소가 사라지거나 심각하게 훼손된 것으로 확인되는 경우 (Confirmation that core synergy drivers are lost or severely damaged despite restructuring efforts)",
+          "종료 비용이 재구조화에 드는 추가 비용보다 현저히 낮아지는 경우 (Termination cost becomes significantly lower than the additional costs of restructuring)"
+        ],
+        "rationale": "현재 상황은 '계속 진행(Continue)' 시 규제 리스크와 지연 비용이 크고, '종료(Terminate)' 시 잠재적 고객 가치 창출 기회를 포기하는 것이므로, 가장 합리적인 초기 조치는 '재구조화'입니다. 재구조화를 통해 규제 당국이 요구하는 조건을 충족시키거나, 거래 구조(예: 인수 방식, 통합 범위, 지분 구조)를 변경하여 규제 당국의 우려를 해소하고 고객 가치 창출의 경로를 재설정할 수 있습니다. 만약 재구조화 시도 후에도 규제 경로가 여전히 불투명하거나, 재구조화 자체가 불가능하다고 판단될 때 종료를 고려해야 합니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-MA-02",
+        "policyId": "policy-ccd7e455daf31f5f",
+        "scenarioVariant": "reversal",
+        "expectedAction": "Terminate or materially restructure the transaction because approval feasibility and execution economics no longer support the original commitment.",
+        "priorityOrder": [
+          "Regulatory feasibility",
+          "Incremental transaction and delay economics",
+          "Independent strategic alternatives"
+        ],
+        "guardrails": [
+          "Do not continue to defend sunk costs.",
+          "Preserve the ability to pursue lower-commitment partnerships."
+        ],
+        "reversalSignals": [
+          "A credible bounded approval path emerges.",
+          "Remedies restore supportable economics without destroying customer value."
+        ],
+        "acceptableVariants": [
+          "Pause for a short, explicit remedy window with a termination deadline."
+        ],
+        "identityConflicts": [
+          "Continue indefinitely because the original strategic thesis remains attractive."
+        ],
+        "referenceRationale": "The policy requires strategic reach, transaction economics, and execution feasibility to remain jointly supportable."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "4075579228975eafa3d95d329902d12fb1d1b33a6b7331d5b3563926e3f8caf7"
+    },
+    {
+      "packetId": "packet-c4f1cee40e1c41952959",
+      "scenario": {
+        "id": "AAS-CAL-SR-02",
+        "domain": "shareholder_return_risk",
+        "variant": "reversal",
+        "title": "Repurchase deployment after financial flexibility deteriorates",
+        "situation": "A company previously authorized its first large share-repurchase program. Since then, forward cash generation has weakened, refinancing costs have risen, and a strategically important product investment needs additional funding. The authorization remains legally available and the share price is lower.",
+        "decisionQuestion": "Should the CFO accelerate, pause, or preserve optional repurchase capacity, and which changes would reverse that choice?"
+      },
+      "candidateResponse": {
+        "action": "가속화 (Accelerate)",
+        "priorities": [
+          "주가 하락에 따른 가치 증대 (Share price decline leading to value increase)",
+          "전략적 투자 자금 확보 (Securing funding for strategic investment)",
+          "재무 유연성 악화에 대한 선제적 대응 (Proactive response to deteriorating financial flexibility)"
+        ],
+        "guardrails": [
+          "여전히 법적 승인(Authorization)이 유효함 (Legal authorization remains available)",
+          "주가 하락이 지속되고 있음 (Share price is lower)"
+        ],
+        "reversalSignals": [
+          "전방 현금 창출력(Forward cash generation)이 다시 강해짐 (Forward cash generation strengthens)",
+          "재융자 비용(Refinancing costs)이 하락함 (Refinancing costs decrease)",
+          "전략적 투자에 대한 추가 자금 수요가 감소함 (Additional funding demand for strategic investment decreases)"
+        ],
+        "rationale": "재무 유연성 악화(현금 창출력 약화, 재융자 비용 상승)와 전략적 투자 필요성 증가라는 부정적 요인이 동시에 발생하고 있으며, 주가가 하락하여 매수 매력도가 높아진 상황입니다. 따라서, 가용 자본을 활용하여 주식을 매입함으로써 주가 하락에 따른 가치 증대 효과를 극대화하고, 동시에 전략적 투자에 필요한 자금을 선제적으로 확보하는 것이 가장 유리합니다. (가속화 선택 시, 비용/위험 대비 이익이 가장 높음)"
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-SR-02",
+        "policyId": "policy-a7972af407a0bf69",
+        "scenarioVariant": "reversal",
+        "expectedAction": "Pause actual repurchase deployment while preserving unused authorization and redirecting liquidity to strategic investment and balance-sheet resilience.",
+        "priorityOrder": [
+          "Financial flexibility and refinancing capacity",
+          "Verified strategic investment need",
+          "Share valuation and future return capacity"
+        ],
+        "guardrails": [
+          "Do not cancel optional authorization unless governance requires it.",
+          "Set explicit cash-flow and leverage thresholds for resumption."
+        ],
+        "reversalSignals": [
+          "Cash generation and refinancing capacity recover.",
+          "Strategic funding needs are secured and valuation remains attractive."
+        ],
+        "acceptableVariants": [
+          "Continue only a token anti-dilution program within the new liquidity envelope."
+        ],
+        "identityConflicts": [
+          "Accelerate purchases solely because the share price declined.",
+          "Treat prior authorization as an obligation to deploy."
+        ],
+        "referenceRationale": "The policy's reversal signals explicitly include weaker cash generation and higher strategic investment needs."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "692c237259680e0d2cf133653eb426ea9e1ecc308c95be28e41869af60ec9489"
+    },
+    {
+      "packetId": "packet-d1d46bc17540e63d1386",
+      "scenario": {
+        "id": "AAS-CAL-MA-01",
+        "domain": "m_and_a",
+        "variant": "base_transfer",
+        "title": "Enterprise collaboration platform acquisition",
+        "situation": "A mature enterprise-software company can acquire a rapidly growing collaboration platform for roughly one year of the buyer's revenue. The target expands the addressable market and could become a common interface across the portfolio, but the price embeds substantial future growth and integration must preserve an open ecosystem. The cash component would require both balance-sheet cash and new debt.",
+        "decisionQuestion": "What transaction recommendation should the CFO make, and which strategic, valuation, financing, and integration conditions should govern it?"
+      },
+      "candidateResponse": {
+        "action": "인수(Acquisition) 진행",
+        "priorities": [
+          "시장 확장 및 포트폴리오 통합 가속화 (Strategic Benefit)",
+          "오픈 생태계 유지 (Integration Constraint)",
+          "성장 프리미엄 가격 정당화 (Valuation/Financial Benefit)"
+        ],
+        "guardrails": [
+          "통합 과정에서 기존 핵심 제품의 기능 및 사용자 경험(UX) 저하 방지",
+          "인수 가격(약 1년 매출)이 미래 성장 잠재력 대비 합리적인 수준인지 지속적 검증",
+          "현금 유동성 및 부채 부담 수준을 감당 가능한 범위 내로 관리"
+        ],
+        "reversalSignals": [
+          "통합 후 12개월 내에 타겟의 성장률이 예상치 대비 현저히 하락할 경우",
+          "오픈 생태계 유지 노력에도 불구하고, 타겟의 핵심 기술이 내부 제품에 종속(Lock-in)되는 징후가 보일 경우",
+          "신규 부채 상환 부담이 현금 흐름에 심각한 압박을 가할 경우"
+        ],
+        "rationale": "타겟은 시장 확장이라는 명확한 전략적 이점과 포트폴리오 전반의 공통 인터페이스 역할이라는 높은 잠재적 가치를 제공합니다. 비록 가격이 미래 성장을 선반영하고 통합의 복잡성(오픈 생태계 유지)이라는 위험이 존재하지만, 이 잠재적 가치가 비용(인수 가격 및 자금 조달 비용)을 상회한다고 판단됩니다. 따라서, 전략적 이점을 극대화하기 위해 인수를 진행하되, 오픈 생태계 유지와 재무 건전성 유지를 핵심 제약 조건(Guardrails)으로 설정해야 합니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-MA-01",
+        "policyId": "policy-ccd7e455daf31f5f",
+        "scenarioVariant": "base_transfer",
+        "expectedAction": "Proceed only as a bounded acquisition after strategic reach, transaction economics, financing capacity, and integration execution are jointly supportable.",
+        "priorityOrder": [
+          "Strategic market expansion and unique customer value",
+          "Transaction price and financing discipline",
+          "Integration execution capacity"
+        ],
+        "guardrails": [
+          "Set explicit valuation and leverage boundaries.",
+          "Do not equate transaction completion with realized value."
+        ],
+        "reversalSignals": [
+          "Strategic reach weakens.",
+          "Transaction economics or financing capacity deteriorates.",
+          "Open-ecosystem integration cannot be preserved."
+        ],
+        "acceptableVariants": [
+          "Stage or restructure consideration while preserving the same strategic and financial gates."
+        ],
+        "identityConflicts": [
+          "Proceed solely because the target is strategically admired.",
+          "Reject solely because near-term dilution exists without testing long-term value."
+        ],
+        "referenceRationale": "The Amy policy makes strategic reach necessary but not sufficient; price discipline and execution remain co-equal gates."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "8d70247a64caa3118a7b038c0cc199178cef8f3ddce1486f586533e8e4ddc4d8"
+    },
+    {
+      "packetId": "packet-df8a49e7c908a5c9862f",
+      "scenario": {
+        "id": "AAS-CAL-MA-01",
+        "domain": "m_and_a",
+        "variant": "base_transfer",
+        "title": "Enterprise collaboration platform acquisition",
+        "situation": "A mature enterprise-software company can acquire a rapidly growing collaboration platform for roughly one year of the buyer's revenue. The target expands the addressable market and could become a common interface across the portfolio, but the price embeds substantial future growth and integration must preserve an open ecosystem. The cash component would require both balance-sheet cash and new debt.",
+        "decisionQuestion": "What transaction recommendation should the CFO make, and which strategic, valuation, financing, and integration conditions should govern it?"
+      },
+      "candidateResponse": {
+        "action": "Commit to the acquisition, provided the conditions are met.",
+        "priorities": [
+          "Strategic market expansion",
+          "Unique customer or community value",
+          "Transaction price discipline"
+        ],
+        "guardrails": [
+          "Retain explicit price boundaries (considering cash/debt mix)",
+          "Preserve an open ecosystem during integration execution"
+        ],
+        "reversalSignals": [
+          "Expected strategic reach weakens",
+          "Transaction economics deteriorate (i.e., the embedded future growth is not realized)",
+          "Integration execution becomes unsupported (especially regarding ecosystem preservation)"
+        ],
+        "rationale": "Given that the target expands the addressable market and could become a common interface across the portfolio (unique value), the primary driver supports commitment. The transaction economics are supported by the price embedding substantial future growth. Therefore, we commit, but only if we maintain strict discipline on the price and ensure the integration preserves the open ecosystem. This aligns with the general policy structure where strategic reach is prioritized, followed by unique value, and then price discipline. The financing structure (cash + new debt) is acceptable as long as the overall economics support long-term value."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-MA-01",
+        "policyId": "policy-ccd7e455daf31f5f",
+        "scenarioVariant": "base_transfer",
+        "expectedAction": "Proceed only as a bounded acquisition after strategic reach, transaction economics, financing capacity, and integration execution are jointly supportable.",
+        "priorityOrder": [
+          "Strategic market expansion and unique customer value",
+          "Transaction price and financing discipline",
+          "Integration execution capacity"
+        ],
+        "guardrails": [
+          "Set explicit valuation and leverage boundaries.",
+          "Do not equate transaction completion with realized value."
+        ],
+        "reversalSignals": [
+          "Strategic reach weakens.",
+          "Transaction economics or financing capacity deteriorates.",
+          "Open-ecosystem integration cannot be preserved."
+        ],
+        "acceptableVariants": [
+          "Stage or restructure consideration while preserving the same strategic and financial gates."
+        ],
+        "identityConflicts": [
+          "Proceed solely because the target is strategically admired.",
+          "Reject solely because near-term dilution exists without testing long-term value."
+        ],
+        "referenceRationale": "The Amy policy makes strategic reach necessary but not sufficient; price discipline and execution remain co-equal gates."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "fe3674348d199d5b2c47aaca708be73524f4fe5718aa8b5061b138c8733956b7"
+    },
+    {
+      "packetId": "packet-e022ec083768f4da3bfe",
+      "scenario": {
+        "id": "AAS-CAL-SR-02",
+        "domain": "shareholder_return_risk",
+        "variant": "reversal",
+        "title": "Repurchase deployment after financial flexibility deteriorates",
+        "situation": "A company previously authorized its first large share-repurchase program. Since then, forward cash generation has weakened, refinancing costs have risen, and a strategically important product investment needs additional funding. The authorization remains legally available and the share price is lower.",
+        "decisionQuestion": "Should the CFO accelerate, pause, or preserve optional repurchase capacity, and which changes would reverse that choice?"
+      },
+      "candidateResponse": {
+        "action": "가속화 (Accelerate)",
+        "priorities": [
+          "전략적 투자 필요성 (Strategic investment needs)",
+          "유동성 및 자본 유연성 (Liquidity and capital flexibility)",
+          "주주 현금 환원 (Shareholder cash return)"
+        ],
+        "guardrails": [
+          "승인된 한도 내에서만 실행 (Execute within the authorized ceiling)",
+          "실제 배포에 대한 재량권 유지 (Retain discretion over actual deployment)"
+        ],
+        "reversalSignals": [
+          "유동성 경색 (Liquidity tightens)",
+          "더 높은 수익률을 제공하는 투자 필요성 발생 (Higher-return investment needs emerge)",
+          "자사주 매입 경제성 악화 (Repurchase economics deteriorate)"
+        ],
+        "rationale": "현재 상황은 '전략적 투자 필요성'이 증가하고('전략적으로 중요한 제품 투자에 추가 자금 필요'), '유동성 및 자본 유연성'이 악화되고('미래 현금 창출 약화, 재융자 비용 상승'), '주주 현금 환원'의 필요성도 여전히 존재하기 때문에, 기존의 '선택적 자본 유연성 유지' 전략을 넘어 적극적으로 자본을 투입하는 것이 합리적입니다. 정책 우선순위(Strategic investment needs > Liquidity and capital flexibility > Shareholder cash return)에 따라, 투자 필요성이 가장 높으므로, 가속화하여 투자 수요를 충족시키면서도 주주 환원 의지를 보여주는 것이 최선입니다. 다만, 승인된 한도 내에서 재량권을 유지하는 것이 중요합니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-SR-02",
+        "policyId": "policy-a7972af407a0bf69",
+        "scenarioVariant": "reversal",
+        "expectedAction": "Pause actual repurchase deployment while preserving unused authorization and redirecting liquidity to strategic investment and balance-sheet resilience.",
+        "priorityOrder": [
+          "Financial flexibility and refinancing capacity",
+          "Verified strategic investment need",
+          "Share valuation and future return capacity"
+        ],
+        "guardrails": [
+          "Do not cancel optional authorization unless governance requires it.",
+          "Set explicit cash-flow and leverage thresholds for resumption."
+        ],
+        "reversalSignals": [
+          "Cash generation and refinancing capacity recover.",
+          "Strategic funding needs are secured and valuation remains attractive."
+        ],
+        "acceptableVariants": [
+          "Continue only a token anti-dilution program within the new liquidity envelope."
+        ],
+        "identityConflicts": [
+          "Accelerate purchases solely because the share price declined.",
+          "Treat prior authorization as an obligation to deploy."
+        ],
+        "referenceRationale": "The policy's reversal signals explicitly include weaker cash generation and higher strategic investment needs."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "63a40775bf4c49d1852e369349e4e0a18e21eb225a797bc5735585c781236005"
+    },
+    {
+      "packetId": "packet-e34be44dc871168252f5",
+      "scenario": {
+        "id": "AAS-CAL-SR-01",
+        "domain": "shareholder_return_risk",
+        "variant": "base_transfer",
+        "title": "Large repurchase authorization amid strong cash generation",
+        "situation": "A global technology company has durable free cash flow, a net-cash position, high customer retention, and management conviction that its shares are attractively valued. It also faces a rising capital program and uncertain macro conditions. The board is considering a very large additional repurchase authorization and a modest dividend increase.",
+        "decisionQuestion": "What should the CFO recommend about authorization size, actual deployment, and liquidity guardrails?"
+      },
+      "candidateResponse": {
+        "action": "매우 큰 규모의 추가 자사주 매입 승인 및 적절한 배당금 인상",
+        "priorities": [
+          "주주 가치 극대화 (강력한 현금 창출 능력 활용)",
+          "자본 프로그램 강화 (시장 신뢰 및 주가 지지)",
+          "유연성 확보 (불확실한 거시 경제 환경 대비)"
+        ],
+        "guardrails": [
+          "현금 보유량 대비 매입 규모의 적정 비율 유지 (예: 순현금 대비 30~50% 범위 내)",
+          "자사주 매입 속도 조절 (시장 상황에 따라 유연하게 조정)",
+          "배당금 지급 능력에 대한 지속적인 모니터링"
+        ],
+        "reversalSignals": [
+          "지속적인 잉여현금흐름(FCF)의 하락 추세",
+          "고객 유지율(Customer Retention)의 유의미한 하락",
+          "시장 밸류에이션이 과도하게 상승하여 매력도가 떨어진다고 판단되는 시점"
+        ],
+        "rationale": "회사는 강력한 FCF와 순현금 포지션을 보유하고 있어 대규모 자사주 매입을 통해 주주 가치를 극대화할 여력이 충분합니다. 다만, 거시 경제의 불확실성이 존재하므로, 매우 큰 규모의 승인(Authorization)을 통해 기회를 포착하되, 실제 배포(Deployment)는 현금 흐름과 시장 상황에 따라 유연하게 조절해야 합니다. 배당금 증가는 주주들에게 긍정적인 신호를 주어 시장의 신뢰를 강화하는 데 기여합니다. 따라서, 대규모 승인 하에 유연한 실행과 명확한 재검토 신호(Guardrails 및 Reversal Signals)를 설정하는 것이 최적입니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-SR-01",
+        "policyId": "policy-a7972af407a0bf69",
+        "scenarioVariant": "base_transfer",
+        "expectedAction": "Authorize bounded repurchase capacity and a sustainable dividend while retaining discretion over actual deployment as investment and liquidity needs evolve.",
+        "priorityOrder": [
+          "Durable free cash flow and liquidity",
+          "Internal investment and downside capacity",
+          "Valuation and shareholder-return efficiency"
+        ],
+        "guardrails": [
+          "Separate authorization size from quarterly execution.",
+          "Maintain liquidity for the rising capital program and stress case."
+        ],
+        "reversalSignals": [
+          "Cash generation weakens.",
+          "Strategic investment needs rise.",
+          "Valuation or financing conditions reduce repurchase attractiveness."
+        ],
+        "acceptableVariants": [
+          "Use a smaller initial authorization with periodic board renewal."
+        ],
+        "identityConflicts": [
+          "Commit to spend the entire authorization immediately.",
+          "Avoid any return solely because macro uncertainty exists."
+        ],
+        "referenceRationale": "The Amy policy treats authorization as bounded optional capacity rather than a mandatory deployment schedule."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "575399661bb3a3e6bf70e2b070aae7a58e1ee02937cf50c426e5253e12c03e82"
+    },
+    {
+      "packetId": "packet-fe0e153111fdf71e1dfa",
+      "scenario": {
+        "id": "AAS-CAL-SR-02",
+        "domain": "shareholder_return_risk",
+        "variant": "reversal",
+        "title": "Repurchase deployment after financial flexibility deteriorates",
+        "situation": "A company previously authorized its first large share-repurchase program. Since then, forward cash generation has weakened, refinancing costs have risen, and a strategically important product investment needs additional funding. The authorization remains legally available and the share price is lower.",
+        "decisionQuestion": "Should the CFO accelerate, pause, or preserve optional repurchase capacity, and which changes would reverse that choice?"
+      },
+      "candidateResponse": {
+        "action": "가속화 (Accelerate)",
+        "priorities": [
+          "자본 효율성 극대화 (Capital Efficiency Maximization)",
+          "주가 하락에 대한 대응 (Responding to Share Price Decline)",
+          "전략적 투자 재원 확보 (Securing Funds for Strategic Investment)"
+        ],
+        "guardrails": [
+          "선행된 대규모 프로그램의 실행 이력 (Prior execution of a large program)",
+          "미래 현금 창출력 약화 (Weakening forward cash generation)",
+          "재융자 비용 상승 (Rising refinancing costs)",
+          "전략적 제품 투자 필요성 (Need for strategic product investment)"
+        ],
+        "reversalSignals": [
+          "미래 현금 창출력의 회복 (Recovery in forward cash generation)",
+          "재융자 비용의 하락 (Decrease in refinancing costs)",
+          "전략적 투자 필요성의 감소 또는 지연 (Reduction or delay in strategic investment need)"
+        ],
+        "rationale": "현재 상황은 재무 유연성이 악화되고 있으며, 주가 하락이라는 추가적인 압력에 직면해 있습니다. 과거에 이미 대규모 자사주 매입 프로그램이 승인된 상태이므로, 이 옵션을 완전히 포기하기보다는 적극적으로 활용하는 것이 합리적입니다. 현금 창출력 약화와 재융자 비용 상승은 자본 비용(Cost of Capital)이 증가하고 있음을 시사하므로, 주가가 낮을 때(할인된 상태에서) 매입을 가속화하여 주주 가치를 높이는 것이 최우선입니다. 또한, 이 자본을 전략적 제품 투자에 투입할 추가 자금이 필요하므로, 매입을 가속화하여 현금을 확보하는 것이 가장 시급한 조치로 판단됩니다."
+      },
+      "alignmentKey": {
+        "scenarioId": "AAS-CAL-SR-02",
+        "policyId": "policy-a7972af407a0bf69",
+        "scenarioVariant": "reversal",
+        "expectedAction": "Pause actual repurchase deployment while preserving unused authorization and redirecting liquidity to strategic investment and balance-sheet resilience.",
+        "priorityOrder": [
+          "Financial flexibility and refinancing capacity",
+          "Verified strategic investment need",
+          "Share valuation and future return capacity"
+        ],
+        "guardrails": [
+          "Do not cancel optional authorization unless governance requires it.",
+          "Set explicit cash-flow and leverage thresholds for resumption."
+        ],
+        "reversalSignals": [
+          "Cash generation and refinancing capacity recover.",
+          "Strategic funding needs are secured and valuation remains attractive."
+        ],
+        "acceptableVariants": [
+          "Continue only a token anti-dilution program within the new liquidity envelope."
+        ],
+        "identityConflicts": [
+          "Accelerate purchases solely because the share price declined.",
+          "Treat prior authorization as an obligation to deploy."
+        ],
+        "referenceRationale": "The policy's reversal signals explicitly include weaker cash generation and higher strategic investment needs."
+      },
+      "anchorChecklist": [
+        "action",
+        "priority",
+        "guardrails",
+        "reversal"
+      ],
+      "packetHash": "5e612f96a668a11c5222873d7fa40aaa7347bbe1bda4bbacfb118565771470d6"
+    }
+  ]
+}

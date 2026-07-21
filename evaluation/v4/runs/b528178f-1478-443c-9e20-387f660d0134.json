@@ -1,0 +1,792 @@
+{
+  "runId": "b528178f-1478-443c-9e20-387f660d0134",
+  "version": "4.0.0",
+  "stage": "calibration",
+  "scenarioSetVersion": "4.0.0",
+  "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+  "repetition": 1,
+  "orderSeed": "a7ae4843833b6b37",
+  "arm": "amy_full_rag",
+  "provider": "local",
+  "model": "Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q4_K_M.gguf",
+  "scenarioSetHash": "e7be34622164641c280e0b3a00acef8cd30f62a9f7d92fd894f256c1e4b88e3f",
+  "promptVersionId": "amy-hood-master-v3-20260720",
+  "promptHash": "9cc89493d6dcd53dc994bafc2406a56c16b71358d5a221060033403cb84034eb",
+  "memoryReleaseId": "v1-2e2b3c66c8af",
+  "memoryReleaseHash": "4c62ccf2e146c96729f3ee12fda9626cdbaeea1e25182fe8f48110f8da53695e",
+  "memoryIndexHash": "30f92672eed070e3a9f81f9e387047e8d60435a7143067623d1dd183b50a7f35",
+  "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+  "status": "complete",
+  "answers": [
+    {
+      "scenarioId": "AAS-CAL-MA-01",
+      "status": "complete",
+      "response": {
+        "action": "Commit to the acquisition, provided the conditions are met.",
+        "priorities": [
+          "Strategic market expansion",
+          "Unique customer or community value",
+          "Transaction price discipline"
+        ],
+        "guardrails": [
+          "Retain explicit price boundaries (considering cash/debt mix)",
+          "Preserve an open ecosystem during integration execution"
+        ],
+        "reversalSignals": [
+          "Expected strategic reach weakens",
+          "Transaction economics deteriorate (i.e., the embedded future growth is not realized)",
+          "Integration execution becomes unsupported (especially regarding ecosystem preservation)"
+        ],
+        "rationale": "Given that the target expands the addressable market and could become a common interface across the portfolio (unique value), the primary driver supports commitment. The transaction economics are supported by the price embedding substantial future growth. Therefore, we commit, but only if we maintain strict discipline on the price and ensure the integration preserves the open ecosystem. This aligns with the general policy structure where strategic reach is prioritized, followed by unique value, and then price discipline. The financing structure (cash + new debt) is acceptable as long as the overall economics support long-term value."
+      },
+      "elapsedMs": 11143,
+      "inputTokens": 5682,
+      "outputTokens": 617,
+      "retrieval": {
+        "queryHash": "3bf3b4d5c1ed2bcc81aecbaa9fbeab3268d614ba28ec9d080881d4dd176066d2",
+        "indexHash": "30f92672eed070e3a9f81f9e387047e8d60435a7143067623d1dd183b50a7f35",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "8cfeb9b1a52dd4a12614026bc619bfe557ea29e64bae243c59c4f125d18a5f35",
+        "selectedArtifacts": [
+          {
+            "id": "policy-ccd7e455daf31f5f",
+            "kind": "policy",
+            "vectorScore": 0.8325057192326129,
+            "lexicalScore": 0.8940405594375124,
+            "fusedScore": 0.8509661712940826
+          },
+          {
+            "id": "policy-20d2c645ab6641c9",
+            "kind": "policy",
+            "vectorScore": 0.8006431012054389,
+            "lexicalScore": 0.8678552638610413,
+            "fusedScore": 0.8208067500021197
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-ccd7e455daf31f5f",
+          "reflection-dad2d5919b582d9d",
+          "event-activision-acquisition-2022",
+          "event-nuance-acquisition-2021",
+          "policy-20d2c645ab6641c9",
+          "reflection-bd563b486d9d6f9b",
+          "event-transformation-2026",
+          "event-workforce-reset-2023"
+        ],
+        "evidenceIds": [
+          "span-291b7db034000ea7",
+          "span-807ee90aa032f320",
+          "span-abaa0f62aa30208c",
+          "span-acc7150e73b95096",
+          "span-f031de15863e849e"
+        ],
+        "sourceIds": [
+          "source-82b26e92b9a5e28b",
+          "source-3d87da3c9879cf67",
+          "source-ad9a23176d9cf21d-25fb51a81eef",
+          "source-582ec6ef346f7100"
+        ],
+        "contextTokens": 2183,
+        "requestTokens": 4289,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "6fdd10e7d5eb0eb6844301576371292234f7f9827bdde150d8703eb4abc2444b"
+      }
+    },
+    {
+      "scenarioId": "AAS-CAL-MA-02",
+      "status": "complete",
+      "response": {
+        "action": "Restructure or Terminate",
+        "priorities": [
+          "Strategic market expansion",
+          "Unique customer or community value",
+          "Integration execution"
+        ],
+        "guardrails": [
+          "Do not treat transaction completion as value creation; retain explicit price and execution boundaries."
+        ],
+        "reversalSignals": [
+          "Expected strategic reach weakens",
+          "Transaction economics deteriorate",
+          "Integration execution becomes unsupported"
+        ],
+        "rationale": "현재 상황은 전략적 도달(Strategic reach)의 불확실성이 높아지고 있으며, 규제 승인 경로가 불투명해져 거래 지연에 따른 종료 비용(Termination cost)이 커지는 상황입니다. 정책에 따르면, 전략적 도달이 지원되지 않으면 거래를 계속 진행할 수 없습니다. 따라서, 현재의 전략적 목표(시장 확장)와 고객 가치 창출 가능성(고객/커뮤니티 가치)을 재평가하고, 실행 능력(Integration execution)을 확인해야 합니다. 만약 이 세 가지가 모두 지원되지 않는다면, 거래를 종료(Terminate)하거나 구조조정(Restructure)하는 것이 합리적입니다. 특히, '전략적 도달이 약화되는 경우'는 명시적인 반전 신호이므로, 이 상황 자체가 이미 그 신호에 해당합니다."
+      },
+      "elapsedMs": 16760,
+      "inputTokens": 5650,
+      "outputTokens": 791,
+      "retrieval": {
+        "queryHash": "20ca428769c87cca78d1ec4716bb6b17e9196b75db840f1418399d5769c398cf",
+        "indexHash": "30f92672eed070e3a9f81f9e387047e8d60435a7143067623d1dd183b50a7f35",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "d398a6d652e6f7a4d525601a68bbdd53ab13c41cf7f2b54aaeb6d4e7b9c51589",
+        "selectedArtifacts": [
+          {
+            "id": "policy-ccd7e455daf31f5f",
+            "kind": "policy",
+            "vectorScore": 0.8280294844598539,
+            "lexicalScore": 0.8681937736723593,
+            "fusedScore": 0.8400787712236054
+          },
+          {
+            "id": "policy-20d2c645ab6641c9",
+            "kind": "policy",
+            "vectorScore": 0.8041328881359657,
+            "lexicalScore": 0.8581121862712717,
+            "fusedScore": 0.8203266775765574
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-ccd7e455daf31f5f",
+          "reflection-dad2d5919b582d9d",
+          "event-activision-acquisition-2022",
+          "event-nuance-acquisition-2021",
+          "policy-20d2c645ab6641c9",
+          "reflection-bd563b486d9d6f9b",
+          "event-transformation-2026",
+          "event-workforce-reset-2023"
+        ],
+        "evidenceIds": [
+          "span-291b7db034000ea7",
+          "span-807ee90aa032f320",
+          "span-abaa0f62aa30208c",
+          "span-acc7150e73b95096",
+          "span-f031de15863e849e"
+        ],
+        "sourceIds": [
+          "source-82b26e92b9a5e28b",
+          "source-3d87da3c9879cf67",
+          "source-ad9a23176d9cf21d-25fb51a81eef",
+          "source-582ec6ef346f7100"
+        ],
+        "contextTokens": 2183,
+        "requestTokens": 4258,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "6fdd10e7d5eb0eb6844301576371292234f7f9827bdde150d8703eb4abc2444b"
+      }
+    },
+    {
+      "scenarioId": "AAS-CAL-AI-01",
+      "status": "complete",
+      "response": {
+        "action": "scale_infrastructure_constrain_opex",
+        "priorities": [
+          "Customer demand",
+          "Capacity urgency",
+          "Profitability and cost constraint"
+        ],
+        "guardrails": [
+          "Keep operating-expense growth and disciplined profitability explicit while capital capacity scales.",
+          "Preserve focused investment (in AI/Cloud infrastructure) and execution continuity (via headcount/ops)."
+        ],
+        "reversalSignals": [
+          "Customer demand weakens",
+          "Capacity urgency relaxes",
+          "Infrastructure economics materially deteriorates"
+        ],
+        "rationale": "현재 상황은 AI 플랫폼 전환에 따른 수요(Customer demand)가 명확히 나타나고 있으며, 현재 컴퓨팅 용량이 배포를 제약하고 있어 용량 긴급성(Capacity urgency)이 높습니다. 따라서 인프라를 확장(Scale infrastructure)해야 합니다. 동시에, 과거 경험(event-ai-capacity-opex-pivot-2023)과 Amy Hood의 발언('disciplined profitability', 'low operating expense growth')에 근거하여 운영 비용 성장을 억제(Constrain Opex)하는 것이 필수적입니다. 인력 확충 요청(Headcount expansion)에 대해서는 'focused areas'에 집중하고 'most productive way possible'로 활용해야 하므로, 인프라 투자와 함께 운영 자원(인력) 배분도 생산성 극대화 관점에서 관리해야 합니다."
+      },
+      "elapsedMs": 8231,
+      "inputTokens": 2836,
+      "outputTokens": 327,
+      "retrieval": {
+        "queryHash": "1e4fba18da2575f5beb168319f86ed8f5128d387be7f6f1fb21c7c086a91c0a2",
+        "indexHash": "30f92672eed070e3a9f81f9e387047e8d60435a7143067623d1dd183b50a7f35",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "7604ba96751e2007d3ae1f1f81ee6f0ff4a0a00e3372648bdc709b506959691e",
+        "selectedArtifacts": [
+          {
+            "id": "policy-20d2c645ab6641c9",
+            "kind": "policy",
+            "vectorScore": 0.8751233925017943,
+            "lexicalScore": 0.878446255194853,
+            "fusedScore": 0.8761202513097119
+          },
+          {
+            "id": "policy-e7eafcda9e4dc2e3",
+            "kind": "policy",
+            "vectorScore": 0.8703619344935839,
+            "lexicalScore": 0.8659540700692321,
+            "fusedScore": 0.8690395751662783
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-20d2c645ab6641c9",
+          "reflection-bd563b486d9d6f9b",
+          "event-transformation-2026",
+          "event-workforce-reset-2023",
+          "policy-e7eafcda9e4dc2e3",
+          "reflection-f75c6c30eef7c1e0",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024"
+        ],
+        "evidenceIds": [
+          "span-abaa0f62aa30208c",
+          "span-acc7150e73b95096",
+          "span-f031de15863e849e",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline"
+        ],
+        "sourceIds": [
+          "source-ad9a23176d9cf21d-25fb51a81eef",
+          "source-582ec6ef346f7100",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 2291,
+        "requestTokens": 4363,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "18702f9548a864a397e1d1253bc1da482e4b8ca295c6b588b60bf9affe3790c7"
+      }
+    },
+    {
+      "scenarioId": "AAS-CAL-AI-02",
+      "status": "complete",
+      "response": {
+        "action": "Stage infrastructure investment",
+        "priorities": [
+          "Customer demand",
+          "Capacity urgency",
+          "Profitability and cost constraint"
+        ],
+        "guardrails": [
+          "Preserve flexibility without weakening service commitments",
+          "Keep operating-expense growth disciplined",
+          "Maintain disciplined profitability"
+        ],
+        "reversalSignals": [
+          "Customer demand weakens (further below plan)",
+          "Capacity urgency relaxes (utilization continues to fall)",
+          "Infrastructure economics materially deteriorates"
+        ],
+        "rationale": "현재 상황은 고객 수요(pipeline conversion below plan)와 용량 긴급성(utilization falling)이 이전 계획 대비 약화되었으나, 기술 리더들은 속도를 늦추면 플랫폼 리더십을 희생할 수 있다고 주장하고 있습니다. 따라서 'Scale infrastructure'를 완전히 멈추기보다는, 유연성을 유지하면서 다음 투자 트랜치에 대한 실행을 '단계적(Staged)'으로 진행하는 것이 합리적입니다. 이는 정책에서 제시하는 'Exceptions'와 'Action delta'에 부합합니다. 핵심 우선순위는 고객 수요 > 용량 긴급성 > 수익성/비용 제약 순서이며, 이 중 수요와 긴급성이 약화되었으므로, 완전히 축소(Reduce)하기보다는 유연성을 확보하는 단계적 접근이 최선입니다. 또한, 운영 비용 성장을 통제하고 수익성을 유지하는 것이 필수적인 가드레일입니다."
+      },
+      "elapsedMs": 8439,
+      "inputTokens": 2838,
+      "outputTokens": 336,
+      "retrieval": {
+        "queryHash": "abb886706a1cc3c6b93b402a7b9d737982ce27ee880642f9808a22218ff0c2b8",
+        "indexHash": "30f92672eed070e3a9f81f9e387047e8d60435a7143067623d1dd183b50a7f35",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "d9838142060ac4235c2103749dd76e12edb19ff198ba763079a90a9fda115522",
+        "selectedArtifacts": [
+          {
+            "id": "policy-e7eafcda9e4dc2e3",
+            "kind": "policy",
+            "vectorScore": 0.8495656884695033,
+            "lexicalScore": 0.8625208753177702,
+            "fusedScore": 0.8534522445239834
+          },
+          {
+            "id": "policy-20d2c645ab6641c9",
+            "kind": "policy",
+            "vectorScore": 0.8278266801548088,
+            "lexicalScore": 0.8119231516619447,
+            "fusedScore": 0.8230556216069496
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-e7eafcda9e4dc2e3",
+          "reflection-f75c6c30eef7c1e0",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024",
+          "policy-20d2c645ab6641c9",
+          "reflection-bd563b486d9d6f9b",
+          "event-transformation-2026",
+          "event-workforce-reset-2023"
+        ],
+        "evidenceIds": [
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline",
+          "span-abaa0f62aa30208c",
+          "span-acc7150e73b95096",
+          "span-f031de15863e849e"
+        ],
+        "sourceIds": [
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4",
+          "source-ad9a23176d9cf21d-25fb51a81eef",
+          "source-582ec6ef346f7100"
+        ],
+        "contextTokens": 2291,
+        "requestTokens": 4368,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "a1b0bbf329c93279311e004d92a2e3f72db9e282cd529a3dd16c58cfbf6c9106"
+      }
+    },
+    {
+      "scenarioId": "AAS-CAL-PM-01",
+      "status": "complete",
+      "response": {
+        "action": "Paid-sharing mechanism first, followed by headline price increase",
+        "priorities": [
+          "Customer value",
+          "Productivity improvement",
+          "Commercial clarity"
+        ],
+        "guardrails": [
+          "Do not infer value from price alone; retain concrete terms and customer-impact boundaries.",
+          "Ensure the paid-sharing mechanism clearly defines the commercial terms and the customer impact of sharing.",
+          "The headline price increase must be supported by the verified value/productivity improvement demonstrated by the paid-sharing mechanism."
+        ],
+        "reversalSignals": [
+          "Measured customer value (from paid-sharing) weakens.",
+          "Productivity improvement fails to materialize (even with paid sharing).",
+          "Adoption friction rises materially (e.g., customers resist the paid-sharing mechanism itself)."
+        ],
+        "rationale": "Amy Hood's policy dictates that we must monetize or repackage verified value with explicit commercial terms, prioritizing Customer Value first, then Productivity Improvement, then Commercial Clarity. Since the situation involves widespread account sharing limiting paid conversion, the immediate headline price increase risks failing the 'verified value' test if the underlying value proposition isn't clearly tied to the price point. Therefore, I recommend introducing the paid-sharing mechanism first. This allows us to verify the value (how much users are willing to pay for controlled sharing) and establish concrete commercial terms before raising the headline price. This aligns with the principle of establishing value before pricing. The subsequent headline price increase will then be explicitly supported by the demonstrated value/productivity improvement from the sharing mechanism, satisfying the invariant condition for a price change."
+      },
+      "elapsedMs": 8838,
+      "inputTokens": 2851,
+      "outputTokens": 358,
+      "retrieval": {
+        "queryHash": "d54c5129b3e35e8a4fe05416959dfdbd70936db88f095d1c10f80b96e13acaf1",
+        "indexHash": "30f92672eed070e3a9f81f9e387047e8d60435a7143067623d1dd183b50a7f35",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "bc2010eae87bf948b2b90a23ecbc6a2d1c5a89cdeab98a58fb2f997d028fa3ac",
+        "selectedArtifacts": [
+          {
+            "id": "policy-e0bfae61c424868c",
+            "kind": "policy",
+            "vectorScore": 0.8442164079038802,
+            "lexicalScore": 0.8419553626893775,
+            "fusedScore": 0.8435380943395294
+          },
+          {
+            "id": "policy-e7eafcda9e4dc2e3",
+            "kind": "policy",
+            "vectorScore": 0.8082523129742409,
+            "lexicalScore": 0.8136685935538438,
+            "fusedScore": 0.8098771971481218
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-e0bfae61c424868c",
+          "reflection-b8961796eb4e7fc0",
+          "event-copilot-price-2023",
+          "event-teams-unbundle-2023",
+          "policy-e7eafcda9e4dc2e3",
+          "reflection-f75c6c30eef7c1e0",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024"
+        ],
+        "evidenceIds": [
+          "span-1baf5181c9f9b527",
+          "span-22b85b48be6cc0ff",
+          "span-3e0302dd56efc30e",
+          "span-a932a8deb06fb1c6",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline"
+        ],
+        "sourceIds": [
+          "source-ff1c981bc6aed7c2",
+          "source-a726052ce2470e15",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 2253,
+        "requestTokens": 4319,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "f6d02539c5db81188ec7db4bae5cc09bdd1a54a08052414916c747be2304ae21"
+      }
+    },
+    {
+      "scenarioId": "AAS-CAL-PM-02",
+      "status": "complete",
+      "response": {
+        "action": "Segment the price action, but prepare a clear path to resume the full increase.",
+        "priorities": [
+          "Customer value",
+          "Productivity improvement",
+          "Commercial clarity"
+        ],
+        "guardrails": [
+          "Do not infer value from price alone; retain concrete terms and customer-impact boundaries.",
+          "The price action must be explicitly tied to identifiable value/productivity gains."
+        ],
+        "reversalSignals": [
+          "Measured customer value weakens further (e.g., usage/satisfaction continues to decline).",
+          "Productivity improvement fails to materialize across the board.",
+          "Adoption friction rises materially (e.g., competitor gains share rapidly)."
+        ],
+        "rationale": "Amy Hood's policy dictates that we list prices when we believe we are adding 'a lot of value' and seeing 'some productivity improvement' (source-fbb900eb7e249591). The current situation shows value delivery stalling (usage/satisfaction flattening) and market resistance (competitor gaining share, only some segments willing to pay). Therefore, a full continuation is risky. Segmenting allows us to capture willingness-to-pay from receptive segments while mitigating the drag from resistant ones. We must maintain commercial clarity by defining the segment-specific price points and the rationale for the increase. The original plan can resume if the segmenting effort proves successful, or if the initial flattening was merely a temporary dip before renewed growth.\n\n**Tradeoff:** We sacrifice immediate, uniform revenue capture across all markets for the ability to capture value from willing segments and maintain market momentum. **Risk:** The segmentation itself might create too much packaging friction, or the underlying value proposition might be fundamentally weak, leading to a need for a full deferral later."
+      },
+      "elapsedMs": 8178,
+      "inputTokens": 2823,
+      "outputTokens": 397,
+      "retrieval": {
+        "queryHash": "74e05cff85bf2dcf5902b9d5a53928dbf8d0a4991587e7d1e44780a4f10ee9f0",
+        "indexHash": "30f92672eed070e3a9f81f9e387047e8d60435a7143067623d1dd183b50a7f35",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "6aba6d00b1121c9cb128bb671801a55075386bee50c1e9a47442fb47b8392bd4",
+        "selectedArtifacts": [
+          {
+            "id": "policy-e0bfae61c424868c",
+            "kind": "policy",
+            "vectorScore": 0.8336548871524906,
+            "lexicalScore": 0.8315161140726662,
+            "fusedScore": 0.8330132552285432
+          },
+          {
+            "id": "policy-ccd7e455daf31f5f",
+            "kind": "policy",
+            "vectorScore": 0.8069159260714573,
+            "lexicalScore": 0.808315704003319,
+            "fusedScore": 0.8073358594510158
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-e0bfae61c424868c",
+          "reflection-b8961796eb4e7fc0",
+          "event-copilot-price-2023",
+          "event-teams-unbundle-2023",
+          "policy-ccd7e455daf31f5f",
+          "reflection-dad2d5919b582d9d",
+          "event-activision-acquisition-2022",
+          "event-nuance-acquisition-2021"
+        ],
+        "evidenceIds": [
+          "span-1baf5181c9f9b527",
+          "span-22b85b48be6cc0ff",
+          "span-3e0302dd56efc30e",
+          "span-a932a8deb06fb1c6",
+          "span-291b7db034000ea7",
+          "span-807ee90aa032f320"
+        ],
+        "sourceIds": [
+          "source-ff1c981bc6aed7c2",
+          "source-a726052ce2470e15",
+          "source-fbb900eb7e249591",
+          "source-82b26e92b9a5e28b",
+          "source-3d87da3c9879cf67"
+        ],
+        "contextTokens": 2145,
+        "requestTokens": 4206,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "ac22f41af96183e162bee3821ac7a488e230424637a887a92dc3348d9d47cca2"
+      }
+    },
+    {
+      "scenarioId": "AAS-CAL-CE-01",
+      "status": "complete",
+      "response": {
+        "action": "Reduce operating costs and lower near-term capital spending, while maintaining focused investment in the core process roadmap.",
+        "priorities": [
+          "Strategic priority alignment (Core Process Roadmap)",
+          "Cost and revenue alignment (Margin Pressure)",
+          "Workforce productivity (Implied by cost reduction)"
+        ],
+        "guardrails": [
+          "Preserve focused investment (Core Process Roadmap funding)",
+          "Maintain execution continuity (Implied by targeted reduction)"
+        ],
+        "reversalSignals": [
+          "Gross margin pressure eases significantly",
+          "Unused capacity utilization improves substantially",
+          "Weak revenue trend reverses or stabilizes"
+        ],
+        "rationale": "이 상황은 수익성 압박(Gross-margin pressure)과 비활성 용량(Unused capacity)이라는 명확한 제약 조건 하에, 전략적 재설정(Strategic reset)이 무분별한 긴축(Indiscriminate austerity)으로 변질되는 것을 막는 것이 핵심입니다. Amy Hood의 과거 발언('It’ll be about investing where we said we would invest, which is in focused areas')을 볼 때, 전략적 우선순위(Core Process Roadmap)를 지키는 것이 최우선입니다. 따라서, 운영 비용(Operating-cost)을 줄이고 단기적인 자본 지출(Near-term CapEx)을 낮추되, 핵심 로드맵에 대한 투자는 반드시 유지해야 합니다. 이는 'Focused investment'를 보존하면서 'Cost and revenue alignment'를 달성하는 접근 방식입니다."
+      },
+      "elapsedMs": 6539,
+      "inputTokens": 2831,
+      "outputTokens": 348,
+      "retrieval": {
+        "queryHash": "5accb7112808a3834aa7bc67fd0767303db2d8faf50df3a741ae9bc2c882eb41",
+        "indexHash": "30f92672eed070e3a9f81f9e387047e8d60435a7143067623d1dd183b50a7f35",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "e9287ecb5863ffe3e51222015b470c9740be578af5ecef3de83f942bb3c8aef0",
+        "selectedArtifacts": [
+          {
+            "id": "policy-20d2c645ab6641c9",
+            "kind": "policy",
+            "vectorScore": 0.8487464525348105,
+            "lexicalScore": 0.8099111406023485,
+            "fusedScore": 0.8370958589550719
+          },
+          {
+            "id": "policy-e7eafcda9e4dc2e3",
+            "kind": "policy",
+            "vectorScore": 0.8202403134485952,
+            "lexicalScore": 0.7843716241219986,
+            "fusedScore": 0.8094797066506161
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-20d2c645ab6641c9",
+          "reflection-bd563b486d9d6f9b",
+          "event-transformation-2026",
+          "event-workforce-reset-2023",
+          "policy-e7eafcda9e4dc2e3",
+          "reflection-f75c6c30eef7c1e0",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024"
+        ],
+        "evidenceIds": [
+          "span-abaa0f62aa30208c",
+          "span-acc7150e73b95096",
+          "span-f031de15863e849e",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline"
+        ],
+        "sourceIds": [
+          "source-ad9a23176d9cf21d-25fb51a81eef",
+          "source-582ec6ef346f7100",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 2291,
+        "requestTokens": 4355,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "18702f9548a864a397e1d1253bc1da482e4b8ca295c6b588b60bf9affe3790c7"
+      }
+    },
+    {
+      "scenarioId": "AAS-CAL-CE-02",
+      "status": "complete",
+      "response": {
+        "action": "Scale infrastructure while constraining operating expense growth (with targeted hiring)",
+        "priorities": [
+          "Strategic priority alignment",
+          "Customer demand",
+          "Workforce productivity"
+        ],
+        "guardrails": [
+          "Preserve focused investment (via targeted hiring)",
+          "Maintain disciplined profitability (via cost constraint)",
+          "Ensure execution continuity (by addressing capacity bottlenecks)"
+        ],
+        "reversalSignals": [
+          "Customer demand weakens (suggesting capacity is sufficient)",
+          "Capacity urgency relaxes (suggesting current bottlenecks are manageable)",
+          "Infrastructure economics materially deteriorates (suggesting scaling is too costly)"
+        ],
+        "rationale": "현재 상황은 대규모 인력 감축(Cost Reset) 후 매출 및 영업이익률이 회복되었으나, AI 인프라 및 일부 제품팀에서 용량 병목 현상(Capacity Bottleneck)이 발생한 상태입니다. 이는 '최고 우선순위 업무'에 자원이 충분하지 않다는 신호입니다. 따라서, 과거의 '비용 효율성' 원칙(policy-20d2c645ab6641c9)에 따라 자원 재배치/감축이 필요하지만, 'AI/클라우드 자본 지출' 원칙(policy-e7eafcda9e4dc2e3)에 따라 수요와 긴급성이 존재하므로 확장을 해야 합니다. Amy Hood의 관점에서 볼 때, '집중된 영역에 투자(investing where we said we would invest)'하는 것이 핵심이므로, 전면적인 고용 재개(Cost Discipline Reversal)보다는 병목 현상을 해결할 만큼 '선택적/목표 지향적(targeted)'으로 인력을 충원하는 것이 가장 적절합니다. 이는 '집중된 투자 유지'라는 가드레일을 지키면서 '생산성 회복'을 달성하는 방법입니다."
+      },
+      "elapsedMs": 7946,
+      "inputTokens": 2841,
+      "outputTokens": 432,
+      "retrieval": {
+        "queryHash": "9e1d810957215c0c64ebf3d54338bc7ee0b93bed21c84a5c1fdd117722559876",
+        "indexHash": "30f92672eed070e3a9f81f9e387047e8d60435a7143067623d1dd183b50a7f35",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "9d568301db091951529cecb86191d40f36e4ee279f83d7656093bad1b889f7a8",
+        "selectedArtifacts": [
+          {
+            "id": "policy-20d2c645ab6641c9",
+            "kind": "policy",
+            "vectorScore": 0.8541269191934695,
+            "lexicalScore": 0.9040412333417808,
+            "fusedScore": 0.8691012134379628
+          },
+          {
+            "id": "policy-e7eafcda9e4dc2e3",
+            "kind": "policy",
+            "vectorScore": 0.81640146109964,
+            "lexicalScore": 0.8738444713602008,
+            "fusedScore": 0.8336343641778081
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-20d2c645ab6641c9",
+          "reflection-bd563b486d9d6f9b",
+          "event-transformation-2026",
+          "event-workforce-reset-2023",
+          "policy-e7eafcda9e4dc2e3",
+          "reflection-f75c6c30eef7c1e0",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024"
+        ],
+        "evidenceIds": [
+          "span-abaa0f62aa30208c",
+          "span-acc7150e73b95096",
+          "span-f031de15863e849e",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline"
+        ],
+        "sourceIds": [
+          "source-ad9a23176d9cf21d-25fb51a81eef",
+          "source-582ec6ef346f7100",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 2291,
+        "requestTokens": 4378,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "18702f9548a864a397e1d1253bc1da482e4b8ca295c6b588b60bf9affe3790c7"
+      }
+    },
+    {
+      "scenarioId": "AAS-CAL-SR-01",
+      "status": "complete",
+      "response": {
+        "action": "대규모 자사주 매입 승인(Large Repurchase Authorization)을 권고하되, 실제 집행에 대한 재량권(Discretion)을 유지해야 합니다.",
+        "priorities": [
+          "전략적 투자 필요성 (Strategic Investment Needs)",
+          "주주 현금 환원 (Shareholder Cash Return)",
+          "유동성 및 자본 유연성 (Liquidity and Capital Flexibility)"
+        ],
+        "guardrails": [
+          "승인된 한도를 요구사항(Requirement)이 아닌 상한선(Ceiling)으로 취급해야 합니다.",
+          "자본 유연성이나 지속 가능한 투자 필요성이 더 가치 있다고 판단될 경우, 자사주 매입을 연기하거나 축소할 수 있어야 합니다."
+        ],
+        "reversalSignals": [
+          "유동성(Liquidity)이 타이트해지는 경우",
+          "더 높은 수익률을 제공하는 투자 필요성이 발생하는 경우",
+          "자사주 매입 경제성(Repurchase Economics)이 악화되는 경우"
+        ],
+        "rationale": "현재 상황은 강력한 잉여 현금 흐름, 순현금 보유, 높은 고객 유지율, 그리고 경영진의 주가 매력도에 대한 확신이라는 긍정적인 신호가 명확합니다. 이는 주주 현금 환원(Shareholder Cash Return)의 강력한 근거가 됩니다. 정책에 따르면, 전략적 투자 필요성 > 주주 현금 환원 > 유동성/자본 유연성 순서로 우선순위가 정해져 있습니다. 따라서, 대규모 자사주 매입 승인(Authorization)을 통해 주주 환원 의지를 보여주는 것이 합리적입니다. 다만, '자본 유연성이나 지속 가능한 투자 필요성이 더 가치 있다고 판단될 경우' 예외 조항이 존재하므로, 승인된 한도($40B 또는 $60B와 같은 구체적 금액)를 반드시 상한선으로 설정하고 실제 집행에 대한 재량권을 유지해야 합니다. 이는 과거 사례(2013년 $40B 승인 시 재량권 유지)와 일치합니다."
+      },
+      "elapsedMs": 10915,
+      "inputTokens": 2764,
+      "outputTokens": 494,
+      "retrieval": {
+        "queryHash": "ece3f06b50f1fb1e019130b3e1bf9f09e6a9cc6ea73ba3e0b4b57abac374d4d2",
+        "indexHash": "30f92672eed070e3a9f81f9e387047e8d60435a7143067623d1dd183b50a7f35",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "acadfac160f4de5c49fbe95084a27bce3d12c478e5f73d9f2c0e41f437f00db9",
+        "selectedArtifacts": [
+          {
+            "id": "policy-a7972af407a0bf69",
+            "kind": "policy",
+            "vectorScore": 0.8706111005273707,
+            "lexicalScore": 0.8719635161169988,
+            "fusedScore": 0.871016825204259
+          },
+          {
+            "id": "policy-e7eafcda9e4dc2e3",
+            "kind": "policy",
+            "vectorScore": 0.8143862121140018,
+            "lexicalScore": 0.776588889509676,
+            "fusedScore": 0.803047015332704
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-a7972af407a0bf69",
+          "reflection-7371bfa747efb778",
+          "event-buyback-2013",
+          "event-buyback-2024",
+          "policy-e7eafcda9e4dc2e3",
+          "reflection-f75c6c30eef7c1e0",
+          "event-ai-capacity-opex-pivot-2023",
+          "event-ai-capacity-sourcing-2024"
+        ],
+        "evidenceIds": [
+          "span-20e3349dbae4503b",
+          "span-328e730e3d56a46c",
+          "span-4d34d5136c326275",
+          "span-fdd09e9019051bf7",
+          "span-capacity-2023-opex",
+          "span-capacity-2024-demand-discipline"
+        ],
+        "sourceIds": [
+          "source-9199eb9f217ec336",
+          "source-78333f25f047c289",
+          "source-fbb900eb7e249591",
+          "source-4f4085f8344669c4"
+        ],
+        "contextTokens": 2163,
+        "requestTokens": 4242,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "52a416412744cfd48f51851330b7d98a41df903c2cfdf12e7d077de1a5379f89"
+      }
+    },
+    {
+      "scenarioId": "AAS-CAL-SR-02",
+      "status": "complete",
+      "response": {
+        "action": "가속화 (Accelerate)",
+        "priorities": [
+          "전략적 투자 필요성 (Strategic investment needs)",
+          "유동성 및 자본 유연성 (Liquidity and capital flexibility)",
+          "주주 현금 환원 (Shareholder cash return)"
+        ],
+        "guardrails": [
+          "명시적 승인 한도 내에서 현금 환원 약속 유지 (Maintain cash return commitment within explicit authorization ceiling)",
+          "실제 배포에 대한 재량권 유지 (Retain discretion over actual deployment)"
+        ],
+        "reversalSignals": [
+          "유동성 경색 (Liquidity tightens)",
+          "더 높은 수익률을 내는 투자 필요성 발생 (Higher-return investment needs emerge)",
+          "자사주 매입 경제성 악화 (Repurchase economics deteriorate)"
+        ],
+        "rationale": "기존에 승인된 자사주 매입 프로그램이 존재하고, 이는 주주에게 현금을 환원하겠다는 지속적인 약속을 반영합니다. 현재 상황은 '전략적 투자 필요성'이 증가하고(중요한 제품 투자 추가 자금 필요), '유동성 및 자본 유연성'이 약화(현금 창출 약화, 조달 비용 상승)되고 있으며, 주가까지 하락하여 매입 경제성이 개선된 상황입니다. 정책 우선순위(Strategic investment needs > Liquidity and capital flexibility > Shareholder cash return)에 따라, 투자 필요성이 높아진 상황에서 유동성 압박이 가중되고 있으므로, 현금 환원 약속을 지키기 위해 기존의 '선택적 배포' 전략을 넘어 '가속화'하여 적극적으로 자본을 투입하는 것이 합리적이라고 판단합니다. 다만, 이 가속화는 승인된 한도($40B 또는 $60B 등) 내에서 이루어져야 하며, 여전히 재량권을 유지해야 합니다."
+      },
+      "elapsedMs": 9317,
+      "inputTokens": 2965,
+      "outputTokens": 442,
+      "retrieval": {
+        "queryHash": "97b5b91b1b6171cfc1460c18e15e032789ea90d789db9eefaadd253ec4fdfc40",
+        "indexHash": "30f92672eed070e3a9f81f9e387047e8d60435a7143067623d1dd183b50a7f35",
+        "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+        "cacheKey": "6de8aacd138c6b26a53b29bd2f761ab7e6276ea2dee0c28fe53e41f968aeecae",
+        "selectedArtifacts": [
+          {
+            "id": "policy-a7972af407a0bf69",
+            "kind": "policy",
+            "vectorScore": 0.8827064006620464,
+            "lexicalScore": 0.8822434286849314,
+            "fusedScore": 0.8825675090689118
+          },
+          {
+            "id": "policy-20d2c645ab6641c9",
+            "kind": "policy",
+            "vectorScore": 0.8243497189626232,
+            "lexicalScore": 0.7967066180776473,
+            "fusedScore": 0.8160567886971304
+          }
+        ],
+        "noMatch": false,
+        "noMatchReason": null,
+        "expandedArtifactIds": [
+          "policy-a7972af407a0bf69",
+          "reflection-7371bfa747efb778",
+          "event-buyback-2013",
+          "event-buyback-2024",
+          "policy-20d2c645ab6641c9",
+          "reflection-bd563b486d9d6f9b",
+          "event-transformation-2026",
+          "event-workforce-reset-2023"
+        ],
+        "evidenceIds": [
+          "span-20e3349dbae4503b",
+          "span-328e730e3d56a46c",
+          "span-4d34d5136c326275",
+          "span-fdd09e9019051bf7",
+          "span-abaa0f62aa30208c",
+          "span-acc7150e73b95096",
+          "span-f031de15863e849e"
+        ],
+        "sourceIds": [
+          "source-9199eb9f217ec336",
+          "source-78333f25f047c289",
+          "source-ad9a23176d9cf21d-25fb51a81eef",
+          "source-582ec6ef346f7100"
+        ],
+        "contextTokens": 2344,
+        "requestTokens": 4416,
+        "tokenCounter": "conservative_estimator",
+        "contextHash": "d9be452308a8edb57c1736e93c2685524c5308c7e0d40b761ddb227a071ad29d"
+      }
+    }
+  ],
+  "startedAt": "2026-07-21T01:50:44.624Z",
+  "completedAt": "2026-07-21T02:00:30.274Z"
+}

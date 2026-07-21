@@ -1,0 +1,49 @@
+{
+  "query": "Price action after value delivery stalls A digital service planned a broad price increase after several years of product investment. Just before launch, usage growth and satisfaction flatten in two large markets, a lower-priced competitor gains share, and only some customer segments show willingness to pay for the new features. Should the CFO continue, segment, or defer the price action, and what evidence would permit the original plan to resume?",
+  "queryHash": "74e05cff85bf2dcf5902b9d5a53928dbf8d0a4991587e7d1e44780a4f10ee9f0",
+  "indexHash": "30f92672eed070e3a9f81f9e387047e8d60435a7143067623d1dd183b50a7f35",
+  "result": {
+    "query": "Price action after value delivery stalls A digital service planned a broad price increase after several years of product investment. Just before launch, usage growth and satisfaction flatten in two large markets, a lower-priced competitor gains share, and only some customer segments show willingness to pay for the new features. Should the CFO continue, segment, or defer the price action, and what evidence would permit the original plan to resume?",
+    "matches": [
+      {
+        "id": "policy-e0bfae61c424868c",
+        "kind": "policy",
+        "vectorScore": 0.8336548871524906,
+        "lexicalScore": 0.8315161140726662,
+        "fusedScore": 0.8330132552285432
+      },
+      {
+        "id": "policy-ccd7e455daf31f5f",
+        "kind": "policy",
+        "vectorScore": 0.8069159260714573,
+        "lexicalScore": 0.808315704003319,
+        "fusedScore": 0.8073358594510158
+      }
+    ],
+    "trace": {
+      "queryHash": "74e05cff85bf2dcf5902b9d5a53928dbf8d0a4991587e7d1e44780a4f10ee9f0",
+      "indexHash": "30f92672eed070e3a9f81f9e387047e8d60435a7143067623d1dd183b50a7f35",
+      "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+      "cacheKey": "6aba6d00b1121c9cb128bb671801a55075386bee50c1e9a47442fb47b8392bd4",
+      "selectedArtifacts": [
+        {
+          "id": "policy-e0bfae61c424868c",
+          "kind": "policy",
+          "vectorScore": 0.8336548871524906,
+          "lexicalScore": 0.8315161140726662,
+          "fusedScore": 0.8330132552285432
+        },
+        {
+          "id": "policy-ccd7e455daf31f5f",
+          "kind": "policy",
+          "vectorScore": 0.8069159260714573,
+          "lexicalScore": 0.808315704003319,
+          "fusedScore": 0.8073358594510158
+        }
+      ],
+      "noMatch": false,
+      "noMatchReason": null
+    }
+  },
+  "payloadHash": "717b4e1cadc47f2beac8a678e512f72d7bcd4228eafc7575a17f26d56ec6e90c"
+}

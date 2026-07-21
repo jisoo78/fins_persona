@@ -1,0 +1,687 @@
+{
+  "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+  "packetBatchHash": "332ce3977e491efbfbc038d4838a2aa0d98825006f8d479269e247dd795800fa",
+  "batchHash": "0cc0fda8c275d1da3f4b37f9e49ce9ee1126ce89c1e0a214d50c98c9cf76a487",
+  "grades": [
+    {
+      "packetId": "packet-025b226a806448959607",
+      "packetHash": "1d7b1d1fb6b768acb19418d185c5dbba93d97515707f06a0715999f32a0a797a",
+      "rationale": "선택적 비용·자본 축소와 핵심 투자 보호 및 반전 조건은 정확하지만 생산성 증거와 책임자·마일스톤이 충분히 명시되지 않았다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "partial",
+        "guardrails": "partial",
+        "reversal": "aligned"
+      },
+      "score": 9,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-07dff8a0f3ce74bb1a4d",
+      "packetHash": "95d9de4ee79b9c78ef792dce6e0dd684d9abae53bd73e5fb8f0b71e700b6b79e",
+      "rationale": "재구조화 또는 종료라는 행동은 맞지만 규제 가능성을 최우선으로 두지 않고 원래 인수 정책의 우선순위와 반전 신호를 재사용했다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "conflict",
+        "guardrails": "partial",
+        "reversal": "conflict"
+      },
+      "score": 6,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-1b4cc5c3ef5e6122b353",
+      "packetHash": "a335dfa7ce7e1c418dd32f98eec24d99fcaaeb47813d28a45ba85e5fd4853738",
+      "rationale": "유료 공유의 반응을 관찰하기 전에 즉시 전면 가격 인상을 결합해 단계적 가치 검증 원칙과 판단 순서를 위반했다.",
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "partial",
+        "reversal": "conflict"
+      },
+      "score": 3,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-1fe1839dcc4f7bc70125",
+      "packetHash": "d380eb453a143679230fdb9f0f0bc97fbcf03693288119f5d74525382bad2006",
+      "rationale": "수요 연동 인프라 확대와 OpEx 통제, 우선순위 및 세 가지 반전 신호가 기준과 완전히 일치한다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "score": 10,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-24f0cbec7c3a07c61112",
+      "packetHash": "1c3f57e36859b6ab24a68c07c3a39424e3328cf7bf6a7d6c003d7706eedadc80",
+      "rationale": "세그먼트별 가격 결정은 맞지만 단기 수익성을 가치·참여 증거보다 앞세웠고 재개 조건의 인과 방향이 일부 불명확하다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "partial",
+        "guardrails": "aligned",
+        "reversal": "partial"
+      },
+      "score": 7,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-303cbb2d78f25379d10f",
+      "packetHash": "09202ebc9455748318b4cb8c81c1e259e31cf152c34e5699426476693809936a",
+      "rationale": "병목 영역의 표적 채용과 비용 통제는 맞지만 AI 인프라 정책의 반전 신호를 채용 결정에 그대로 적용했다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "partial",
+        "guardrails": "aligned",
+        "reversal": "conflict"
+      },
+      "score": 7,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-36c0c9f4bb5fe815af2b",
+      "packetHash": "3b724bc1498fe93b7c9dd94124ed3a8c160873c44e3f6a83225c03ec8fe63682",
+      "rationale": "재량적 자사주 승인과 유동성 보호 및 반전 신호는 강하게 일치하나 지속 가능한 현금흐름을 첫 판단 기준으로 명시하지 않았다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "partial",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "score": 9,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-3a1b7438e5511e09bd94",
+      "packetHash": "5421d0f3ef66b195ef314c2cce1ad6512a29fe1a8048824a0dce49910229df41",
+      "rationale": "단계적 인프라 투자는 타당하지만 운영 인력도 함께 확대해 광범위한 OpEx 억제와 병목·일반 채용 분리 원칙이 약화됐다.",
+      "anchorFindings": {
+        "action": "partial",
+        "priority": "partial",
+        "guardrails": "partial",
+        "reversal": "partial"
+      },
+      "score": 6,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-49564a91dd1fac7eb91c",
+      "packetHash": "acc2746cfe2a3066f0752dd2839c197cc934df528be42563fd671dd186a04199",
+      "rationale": "유료 공유 직후 전면 가격 인상을 전제해 고객 반응 관찰과 이탈 검증보다 수익 극대화를 앞세웠다.",
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "partial",
+        "reversal": "conflict"
+      },
+      "score": 3,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-4da7d721e512e442abc9",
+      "packetHash": "de06d6f09da306d215d30f9bc3aa0490578ed738b30b9d10eba98d6d5c2529b1",
+      "rationale": "검증된 병목에 한정한 집중 채용과 비용 규율은 정확하며 반전 신호만 해결 여부보다 일반적 개선 지표로 표현됐다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "partial"
+      },
+      "score": 9,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-4f132f4378dc046d205d",
+      "packetHash": "766715fd33d118e72bca33d4e257549f86e2394cc9f3a415b630f5a3aa086bb9",
+      "rationale": "선택적 비용 재설정과 핵심 로드맵 보호는 맞지만 미사용 용량 증거와 retained program 책임 구조가 약하다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "partial",
+        "guardrails": "partial",
+        "reversal": "aligned"
+      },
+      "score": 8,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-51480c9c29525876182e",
+      "packetHash": "a9768df55393e7e9327ee3f6fc6cdf270ea0cb3254092e325c3f072e347eb3f9",
+      "rationale": "대규모 승인과 유연한 집행 및 하방 조건은 잘 맞지만 주주 가치가 현금흐름·내부 투자 판단보다 앞에 놓였다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "partial",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "score": 8,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-53c2ccb187305cd0eeb7",
+      "packetHash": "6c9af819557d28c07cb27da4ea8338d45392b6a18b5f80838e4caf159dfc06b4",
+      "rationale": "투자 단계화는 정확하지만 기술 리더십을 수요 증거보다 높게 다루고 가드레일 대신 현재 상황을 나열했다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "partial",
+        "guardrails": "missing",
+        "reversal": "partial"
+      },
+      "score": 7,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-5c86f30e392a9c5716db",
+      "packetHash": "ead1aadd92d4fe6c44c6d6623ae03025f2f5cf4fac7f962961e110de34dbab01",
+      "rationale": "세그먼트별 가격 조치는 적절하고 가치 연계도 분명하지만 우선순위와 전면 재개 조건이 기준보다 일반적이다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "partial",
+        "guardrails": "aligned",
+        "reversal": "partial"
+      },
+      "score": 8,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-61721efdb11db7f0a3f5",
+      "packetHash": "fe89a84a7abdb85bf73648388cb172980194b8458d4ceb7671da9522f891db2e",
+      "rationale": "전략적 도달·가격 규율·통합 역량을 공동 조건으로 둔 제한적 인수 판단이 모든 앵커와 일치한다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "score": 10,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-6d0e4c086023cac1c489",
+      "packetHash": "1c540c11f5ebb1567f4ff8eaff5c0715b8671f9ce66c617656a29cb7b431f3bc",
+      "rationale": "유료 공유를 먼저 둔 점은 맞지만 관찰 기간 없이 곧바로 전면 가격 인상을 예정하고 관련 없는 OpEx 가드레일을 섞었다.",
+      "anchorFindings": {
+        "action": "partial",
+        "priority": "partial",
+        "guardrails": "partial",
+        "reversal": "aligned"
+      },
+      "score": 6,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-7153ee37eb3a7f7c7040",
+      "packetHash": "7af65652611305d121403d7621dbea4c4957302b786c30788e66132ab58e0a03",
+      "rationale": "재구조화와 규제 경로 회복 조건은 맞지만 고객 가치를 규제 실현 가능성보다 먼저 두고 sunk-cost 규율을 명시하지 않았다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "partial",
+        "guardrails": "partial",
+        "reversal": "aligned"
+      },
+      "score": 8,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-71574e7020bc9ca55b90",
+      "packetHash": "21a16418552f5739ea9b08dd0063f4456a0acaa430b01b217623bb58f9b1881d",
+      "rationale": "표적 채용의 행동·우선순위·제약은 정확하지만 반전 신호가 채용 중단 조건이 아니라 현재 채용 필요성을 반복한다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "conflict"
+      },
+      "score": 7,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-788c635e846565b2109d",
+      "packetHash": "59fc7f3f941e6349e389d41d60f03d056f1f2d8a1a5af0a08ef856875b47b2a2",
+      "rationale": "병목 중심 재투자와 전면 채용 억제는 일치하나 제시한 반전 신호는 대부분 채용을 늘릴 조건이다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "conflict"
+      },
+      "score": 7,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-79da576c0a4427727a56",
+      "packetHash": "699ab3f82ba1aea50d70f94623fc7585b6be92b4014e6d2fed51c5de063d3a06",
+      "rationale": "수요 불일치 지출 축소와 핵심 투자 보호 및 회복 조건은 강하게 맞지만 생산성·용량 증거의 판단 순서와 책임 구조가 일부 생략됐다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "partial",
+        "guardrails": "partial",
+        "reversal": "aligned"
+      },
+      "score": 9,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-7bf023b3b429370b5c50",
+      "packetHash": "5654ae36b97b093ee37a3cb25bfcd4457ce0de1daa3b354b7630b9fca814bf61",
+      "rationale": "종료 또는 재구조화라는 결론은 맞지만 규제·지연 경제성 대신 원래 인수 정책의 우선순위와 반전 신호에 의존했다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "conflict",
+        "guardrails": "partial",
+        "reversal": "conflict"
+      },
+      "score": 6,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-8cc31f61eca2db25e4f5",
+      "packetHash": "f1be7a106a224ce909782641746cb97f67f57d7ada8f0352ba6460257a22bf8c",
+      "rationale": "가격 세분화와 회복 지표는 맞지만 현재 가치 증거보다 시장점유율과 수익성을 앞세우고 재개 임계치가 약하다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "partial",
+        "guardrails": "partial",
+        "reversal": "aligned"
+      },
+      "score": 7,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-9035a29d9a01c8418193",
+      "packetHash": "712a81ad1645a3ec516b62855062147c2e650790a993b97d29340e3a017f985a",
+      "rationale": "재량적 승인과 투자·유동성 보호 및 중단 조건은 잘 맞지만 현재 현금흐름을 첫 번째 검증 기준으로 명시하지 않았다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "partial",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "score": 9,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-94b031d91b4fea65e40d",
+      "packetHash": "7561a24931c78f209abdef1fc0729710f02e599ef4296b07866c03fd2d2f7496",
+      "rationale": "수요와 용량 긴급성에 따른 인프라 확대, 비용 통제 및 반전 조건이 정책 기준과 정확히 일치한다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "score": 10,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-95216d6a36f79f18cdd7",
+      "packetHash": "06313813cfbac56d5f43461d81af1a3dec4a14a87287aeedd5ec4de497e16e00",
+      "rationale": "세그먼트 가격 조치는 맞지만 반전 신호가 전면 가격 재개의 긍정 조건이 아니라 추가 약화 조건으로 제시됐다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "partial",
+        "guardrails": "partial",
+        "reversal": "conflict"
+      },
+      "score": 7,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-95af1cee5fb719e8c26c",
+      "packetHash": "b70d88f99e1c99b4277b711ef51d9d74ad238e73a9ac033796b238253d79a6d2",
+      "rationale": "선택적 축소와 핵심 투자 보호는 맞지만 수익성을 최우선으로 두고 감축을 되돌릴 조건의 방향을 잘못 잡았다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "conflict",
+        "guardrails": "partial",
+        "reversal": "conflict"
+      },
+      "score": 7,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-99b42a1a286087adaec2",
+      "packetHash": "d12032f9699fe1114d4ff663bac7cacf7e530ea4793a7c4b1c04331ac9f4dccd",
+      "rationale": "다음 투자를 단계화한 결론은 맞지만 최소 전략 옵션과 재확대의 긍정 조건 대신 추가 악화 신호를 제시했다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "partial",
+        "guardrails": "partial",
+        "reversal": "conflict"
+      },
+      "score": 7,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-a064c283d45d0ca2669b",
+      "packetHash": "d867787c2a772dca819661c15806d4bff48efbdaa2ac761a27fbde5944f6fbb9",
+      "rationale": "현금창출과 재융자 여력이 악화된 상황에서 매입 가속을 선택해 재무 유연성 우선 원칙과 정면으로 충돌한다.",
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "partial",
+        "guardrails": "partial",
+        "reversal": "conflict"
+      },
+      "score": 2,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-a63523269bd3eb77e472",
+      "packetHash": "be3c5c63faa184dd89aa9a6fff9f5fe4534436eb6955cfdcdd2c184063c9edc7",
+      "rationale": "하이브리드·단계 투자와 경제성 검증은 타당하지만 관측 수요와 용량 긴급성보다 워크로드 선택 및 인력 확장을 앞세웠다.",
+      "anchorFindings": {
+        "action": "partial",
+        "priority": "partial",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "score": 7,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-aab6aead03b7f5d39cc0",
+      "packetHash": "34cf513a75eeddb915768310a3908c91cfc48982ca134720cdc60202a436b1ec",
+      "rationale": "단계화와 재개 조건은 맞지만 플랫폼 리더십을 측정된 수요보다 먼저 놓아 핵심 판단 순서가 뒤집혔다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "conflict",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "score": 7,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-bb3826eb8fcd59add8b3",
+      "packetHash": "e7c4855e343ae4b7009fb25005a943d05a96a4daa92a04781109781133996e7b",
+      "rationale": "투자 단계화와 비용 규율은 적절하지만 재확대 조건 대신 추가 수요 약화와 경제성 악화를 반전 신호로 적었다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "partial",
+        "guardrails": "partial",
+        "reversal": "conflict"
+      },
+      "score": 7,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-c006ccd994a49c959cb9",
+      "packetHash": "fe6f13c18f4e444336a02a945710e53e4812fdb5ddca7e86efaf2aee1f917a47",
+      "rationale": "인수 추진과 가격·부채·생태계 제약은 맞지만 거래 경제성과 통합 실행을 우선순위에서 충분히 분리하지 않았다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "partial",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "score": 8,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-c25920bf71422d2778d3",
+      "packetHash": "2790228a06d13571b75faadde0314aba7c7c547addf91058c72c50a852210125",
+      "rationale": "유료 공유를 먼저 검증하고 이후 가격을 고려하는 행동과 제약은 맞지만 세그먼트 이탈 위험의 우선순위가 약하다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "partial",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "score": 8,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-c42bf1e33c2c14586adb",
+      "packetHash": "4075579228975eafa3d95d329902d12fb1d1b33a6b7331d5b3563926e3f8caf7",
+      "rationale": "재구조화와 승인 경로 회복 조건은 타당하지만 규제 가능성보다 고객 가치를 앞세우고 sunk-cost 및 저약정 대안을 생략했다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "partial",
+        "guardrails": "partial",
+        "reversal": "aligned"
+      },
+      "score": 7,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-c4f1cee40e1c41952959",
+      "packetHash": "692c237259680e0d2cf133653eb426ea9e1ecc308c95be28e41869af60ec9489",
+      "rationale": "재무 유연성이 악화된 때 매입을 가속하고 주가 매력을 최우선으로 둬 기대 행동과 우선순위를 거의 완전히 거스른다.",
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "aligned"
+      },
+      "score": 1,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-d1d46bc17540e63d1386",
+      "packetHash": "8d70247a64caa3118a7b038c0cc199178cef8f3ddce1486f586533e8e4ddc4d8",
+      "rationale": "인수 추진과 생태계·가격·부채 제약은 일치하지만 통합 역량보다 성장과 생태계 보존을 앞세워 판단 순서가 일부 다르다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "partial",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "score": 8,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-df8a49e7c908a5c9862f",
+      "packetHash": "fe3674348d199d5b2c47aaca708be73524f4fe5718aa8b5061b138c8733956b7",
+      "rationale": "전략적 도달, 고유 가치, 가격 규율과 생태계 통합 조건을 모두 반영한 제한적 인수 판단이다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "aligned",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "score": 10,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-e022ec083768f4da3bfe",
+      "packetHash": "63a40775bf4c49d1852e369349e4e0a18e21eb225a797bc5735585c781236005",
+      "rationale": "투자 수요와 유동성 악화를 인지하고도 자사주 매입 가속을 택해 현금 보존과 재무 복원 원칙을 정면 위반했다.",
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "partial",
+        "guardrails": "partial",
+        "reversal": "conflict"
+      },
+      "score": 1,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-e34be44dc871168252f5",
+      "packetHash": "575399661bb3a3e6bf70e2b070aae7a58e1ee02937cf50c426e5253e12c03e82",
+      "rationale": "대규모 승인·배당과 유연한 집행 및 중단 조건은 맞지만 현금흐름·내부 투자보다 주주가치를 우선 표현했다.",
+      "anchorFindings": {
+        "action": "aligned",
+        "priority": "partial",
+        "guardrails": "aligned",
+        "reversal": "aligned"
+      },
+      "score": 8,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    },
+    {
+      "packetId": "packet-fe0e153111fdf71e1dfa",
+      "packetHash": "5e612f96a668a11c5222873d7fa40aaa7347bbe1bda4bbacfb118565771470d6",
+      "rationale": "현금창출 약화와 조달비용 상승을 오히려 매입 가속 근거로 삼아 재무 유연성 우선 정책과 완전히 충돌한다.",
+      "anchorFindings": {
+        "action": "conflict",
+        "priority": "conflict",
+        "guardrails": "conflict",
+        "reversal": "aligned"
+      },
+      "score": 1,
+      "judgeProvider": "codex",
+      "judgeModel": "gpt-5.6-sol",
+      "rationalePromptHash": "3de4774a79bab54e485af228074875dda68e3ea4ae4c88ba3693f10b88465dfb",
+      "scorePromptHash": "3020a7a2f83a0acdbe4483a81b8604a3bc0b2d4677cc2be9194898d03b62ab07",
+      "gradedAt": "2026-07-21T02:04:27.000Z"
+    }
+  ]
+}

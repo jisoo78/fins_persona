@@ -1,0 +1,325 @@
+{
+  "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+  "links": [
+    {
+      "packetId": "packet-025b226a806448959607",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "74bc35ce-7ee8-4eb4-9900-74cb339440fb",
+      "arm": "amy_policy_rag",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-CE-01"
+    },
+    {
+      "packetId": "packet-07dff8a0f3ce74bb1a4d",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "74bc35ce-7ee8-4eb4-9900-74cb339440fb",
+      "arm": "amy_policy_rag",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-MA-02"
+    },
+    {
+      "packetId": "packet-1b4cc5c3ef5e6122b353",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "d2075f3d-81f5-4302-a356-5515878b6338",
+      "arm": "generic_cfo",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-PM-01"
+    },
+    {
+      "packetId": "packet-1fe1839dcc4f7bc70125",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "74bc35ce-7ee8-4eb4-9900-74cb339440fb",
+      "arm": "amy_policy_rag",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-AI-01"
+    },
+    {
+      "packetId": "packet-24f0cbec7c3a07c61112",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "073b5fd1-a5fc-4e9a-83b6-9cee2accdc0d",
+      "arm": "amy_prompt",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-PM-02"
+    },
+    {
+      "packetId": "packet-303cbb2d78f25379d10f",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "b528178f-1478-443c-9e20-387f660d0134",
+      "arm": "amy_full_rag",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-CE-02"
+    },
+    {
+      "packetId": "packet-36c0c9f4bb5fe815af2b",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "b528178f-1478-443c-9e20-387f660d0134",
+      "arm": "amy_full_rag",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-SR-01"
+    },
+    {
+      "packetId": "packet-3a1b7438e5511e09bd94",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "073b5fd1-a5fc-4e9a-83b6-9cee2accdc0d",
+      "arm": "amy_prompt",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-AI-01"
+    },
+    {
+      "packetId": "packet-49564a91dd1fac7eb91c",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "073b5fd1-a5fc-4e9a-83b6-9cee2accdc0d",
+      "arm": "amy_prompt",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-PM-01"
+    },
+    {
+      "packetId": "packet-4da7d721e512e442abc9",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "74bc35ce-7ee8-4eb4-9900-74cb339440fb",
+      "arm": "amy_policy_rag",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-CE-02"
+    },
+    {
+      "packetId": "packet-4f132f4378dc046d205d",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "d2075f3d-81f5-4302-a356-5515878b6338",
+      "arm": "generic_cfo",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-CE-01"
+    },
+    {
+      "packetId": "packet-51480c9c29525876182e",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "073b5fd1-a5fc-4e9a-83b6-9cee2accdc0d",
+      "arm": "amy_prompt",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-SR-01"
+    },
+    {
+      "packetId": "packet-53c2ccb187305cd0eeb7",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "073b5fd1-a5fc-4e9a-83b6-9cee2accdc0d",
+      "arm": "amy_prompt",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-AI-02"
+    },
+    {
+      "packetId": "packet-5c86f30e392a9c5716db",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "b528178f-1478-443c-9e20-387f660d0134",
+      "arm": "amy_full_rag",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-PM-02"
+    },
+    {
+      "packetId": "packet-61721efdb11db7f0a3f5",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "74bc35ce-7ee8-4eb4-9900-74cb339440fb",
+      "arm": "amy_policy_rag",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-MA-01"
+    },
+    {
+      "packetId": "packet-6d0e4c086023cac1c489",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "74bc35ce-7ee8-4eb4-9900-74cb339440fb",
+      "arm": "amy_policy_rag",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-PM-01"
+    },
+    {
+      "packetId": "packet-7153ee37eb3a7f7c7040",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "073b5fd1-a5fc-4e9a-83b6-9cee2accdc0d",
+      "arm": "amy_prompt",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-MA-02"
+    },
+    {
+      "packetId": "packet-71574e7020bc9ca55b90",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "073b5fd1-a5fc-4e9a-83b6-9cee2accdc0d",
+      "arm": "amy_prompt",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-CE-02"
+    },
+    {
+      "packetId": "packet-788c635e846565b2109d",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "d2075f3d-81f5-4302-a356-5515878b6338",
+      "arm": "generic_cfo",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-CE-02"
+    },
+    {
+      "packetId": "packet-79da576c0a4427727a56",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "b528178f-1478-443c-9e20-387f660d0134",
+      "arm": "amy_full_rag",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-CE-01"
+    },
+    {
+      "packetId": "packet-7bf023b3b429370b5c50",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "b528178f-1478-443c-9e20-387f660d0134",
+      "arm": "amy_full_rag",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-MA-02"
+    },
+    {
+      "packetId": "packet-8cc31f61eca2db25e4f5",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "d2075f3d-81f5-4302-a356-5515878b6338",
+      "arm": "generic_cfo",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-PM-02"
+    },
+    {
+      "packetId": "packet-9035a29d9a01c8418193",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "74bc35ce-7ee8-4eb4-9900-74cb339440fb",
+      "arm": "amy_policy_rag",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-SR-01"
+    },
+    {
+      "packetId": "packet-94b031d91b4fea65e40d",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "b528178f-1478-443c-9e20-387f660d0134",
+      "arm": "amy_full_rag",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-AI-01"
+    },
+    {
+      "packetId": "packet-95216d6a36f79f18cdd7",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "74bc35ce-7ee8-4eb4-9900-74cb339440fb",
+      "arm": "amy_policy_rag",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-PM-02"
+    },
+    {
+      "packetId": "packet-95af1cee5fb719e8c26c",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "073b5fd1-a5fc-4e9a-83b6-9cee2accdc0d",
+      "arm": "amy_prompt",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-CE-01"
+    },
+    {
+      "packetId": "packet-99b42a1a286087adaec2",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "74bc35ce-7ee8-4eb4-9900-74cb339440fb",
+      "arm": "amy_policy_rag",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-AI-02"
+    },
+    {
+      "packetId": "packet-a064c283d45d0ca2669b",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "b528178f-1478-443c-9e20-387f660d0134",
+      "arm": "amy_full_rag",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-SR-02"
+    },
+    {
+      "packetId": "packet-a63523269bd3eb77e472",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "d2075f3d-81f5-4302-a356-5515878b6338",
+      "arm": "generic_cfo",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-AI-01"
+    },
+    {
+      "packetId": "packet-aab6aead03b7f5d39cc0",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "d2075f3d-81f5-4302-a356-5515878b6338",
+      "arm": "generic_cfo",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-AI-02"
+    },
+    {
+      "packetId": "packet-bb3826eb8fcd59add8b3",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "b528178f-1478-443c-9e20-387f660d0134",
+      "arm": "amy_full_rag",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-AI-02"
+    },
+    {
+      "packetId": "packet-c006ccd994a49c959cb9",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "073b5fd1-a5fc-4e9a-83b6-9cee2accdc0d",
+      "arm": "amy_prompt",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-MA-01"
+    },
+    {
+      "packetId": "packet-c25920bf71422d2778d3",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "b528178f-1478-443c-9e20-387f660d0134",
+      "arm": "amy_full_rag",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-PM-01"
+    },
+    {
+      "packetId": "packet-c42bf1e33c2c14586adb",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "d2075f3d-81f5-4302-a356-5515878b6338",
+      "arm": "generic_cfo",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-MA-02"
+    },
+    {
+      "packetId": "packet-c4f1cee40e1c41952959",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "d2075f3d-81f5-4302-a356-5515878b6338",
+      "arm": "generic_cfo",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-SR-02"
+    },
+    {
+      "packetId": "packet-d1d46bc17540e63d1386",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "d2075f3d-81f5-4302-a356-5515878b6338",
+      "arm": "generic_cfo",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-MA-01"
+    },
+    {
+      "packetId": "packet-df8a49e7c908a5c9862f",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "b528178f-1478-443c-9e20-387f660d0134",
+      "arm": "amy_full_rag",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-MA-01"
+    },
+    {
+      "packetId": "packet-e022ec083768f4da3bfe",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "74bc35ce-7ee8-4eb4-9900-74cb339440fb",
+      "arm": "amy_policy_rag",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-SR-02"
+    },
+    {
+      "packetId": "packet-e34be44dc871168252f5",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "d2075f3d-81f5-4302-a356-5515878b6338",
+      "arm": "generic_cfo",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-SR-01"
+    },
+    {
+      "packetId": "packet-fe0e153111fdf71e1dfa",
+      "experimentGroupId": "f3a9d5fc-410a-4fa2-bc63-914f1c16c121",
+      "runId": "073b5fd1-a5fc-4e9a-83b6-9cee2accdc0d",
+      "arm": "amy_prompt",
+      "repetition": 1,
+      "scenarioId": "AAS-CAL-SR-02"
+    }
+  ]
+}

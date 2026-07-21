@@ -1,0 +1,49 @@
+{
+  "query": "Cost reset under margin and unused-capacity pressure A semiconductor company faces weaker revenue, unused manufacturing capacity, gross-margin pressure, and a balance sheet funding an expensive technology transition. A proposed reset combines operating-cost reductions, lower near-term capital spending, and continued funding for the core process roadmap. How should the CFO allocate reductions without converting a strategic reset into indiscriminate austerity?",
+  "queryHash": "5accb7112808a3834aa7bc67fd0767303db2d8faf50df3a741ae9bc2c882eb41",
+  "indexHash": "30f92672eed070e3a9f81f9e387047e8d60435a7143067623d1dd183b50a7f35",
+  "result": {
+    "query": "Cost reset under margin and unused-capacity pressure A semiconductor company faces weaker revenue, unused manufacturing capacity, gross-margin pressure, and a balance sheet funding an expensive technology transition. A proposed reset combines operating-cost reductions, lower near-term capital spending, and continued funding for the core process roadmap. How should the CFO allocate reductions without converting a strategic reset into indiscriminate austerity?",
+    "matches": [
+      {
+        "id": "policy-20d2c645ab6641c9",
+        "kind": "policy",
+        "vectorScore": 0.8487464525348105,
+        "lexicalScore": 0.8099111406023485,
+        "fusedScore": 0.8370958589550719
+      },
+      {
+        "id": "policy-e7eafcda9e4dc2e3",
+        "kind": "policy",
+        "vectorScore": 0.8202403134485952,
+        "lexicalScore": 0.7843716241219986,
+        "fusedScore": 0.8094797066506161
+      }
+    ],
+    "trace": {
+      "queryHash": "5accb7112808a3834aa7bc67fd0767303db2d8faf50df3a741ae9bc2c882eb41",
+      "indexHash": "30f92672eed070e3a9f81f9e387047e8d60435a7143067623d1dd183b50a7f35",
+      "retrievalConfigHash": "1a312d2a1dc5c489bbf7d206ab579b555564a43082155dc37938f935399105a3",
+      "cacheKey": "e9287ecb5863ffe3e51222015b470c9740be578af5ecef3de83f942bb3c8aef0",
+      "selectedArtifacts": [
+        {
+          "id": "policy-20d2c645ab6641c9",
+          "kind": "policy",
+          "vectorScore": 0.8487464525348105,
+          "lexicalScore": 0.8099111406023485,
+          "fusedScore": 0.8370958589550719
+        },
+        {
+          "id": "policy-e7eafcda9e4dc2e3",
+          "kind": "policy",
+          "vectorScore": 0.8202403134485952,
+          "lexicalScore": 0.7843716241219986,
+          "fusedScore": 0.8094797066506161
+        }
+      ],
+      "noMatch": false,
+      "noMatchReason": null
+    }
+  },
+  "payloadHash": "009cbe799d309add01a436c9dff1dfa234c02af8ba3e1e6c0cbe5264d970d214"
+}
