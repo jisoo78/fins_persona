@@ -48,6 +48,10 @@ type PairExport = {
   packets: EvaluationV5PairJudgePacket[];
 };
 
+type JudgeExportOptions = {
+  repetition?: 1 | 2 | 3 | 4 | 5;
+};
+
 const packetDirectory = (root: string, groupId: string) => {
   if (!/^[a-zA-Z0-9-]+$/.test(groupId)) throw new Error('invalid Evaluation v5 group ID');
   return path.join(evaluationV5Paths(root).judgePackets, groupId);
@@ -106,25 +110,34 @@ const judgePairKey = ({
   changedScenarioId: string;
 } & EvaluationV5PairJudgeKey): EvaluationV5PairJudgeKey => key;
 
-const loadCompleteRuns = async (root: string, experimentGroupId: string) => {
-  const runs = (await listEvaluationV5Runs(root))
+const loadCompleteRuns = async (
+  root: string,
+  experimentGroupId: string,
+  options: JudgeExportOptions = {},
+) => {
+  const matching = (await listEvaluationV5Runs(root))
     .filter((run) => run.experimentGroupId === experimentGroupId);
-  if (runs.length !== 15
+  const runs = options.repetition === undefined
+    ? matching
+    : matching.filter(({ repetition }) => repetition === options.repetition);
+  const expectedRuns = options.repetition === undefined ? 15 : 3;
+  if (runs.length !== expectedRuns
     || runs.some(({ status, answers }) => status !== 'complete' || answers.length !== 30)) {
-    throw new Error('Evaluation v5 judge export requires fifteen complete runs');
+    throw new Error(`Evaluation v5 judge export requires ${expectedRuns} complete runs`);
   }
   const cells = new Set(runs.map(({ repetition, arm }) => `${repetition}:${arm}`));
-  if (cells.size !== 15) throw new Error('Evaluation v5 judge export contains duplicate experiment cells');
+  if (cells.size !== expectedRuns) throw new Error('Evaluation v5 judge export contains duplicate experiment cells');
   return runs.sort((left, right) => left.runId.localeCompare(right.runId));
 };
 
 export const exportEvaluationV5JudgePackets = async (
   root: string,
   experimentGroupId: string,
+  options: JudgeExportOptions = {},
 ): Promise<IndividualExport> => {
   const [bundle, runs] = await Promise.all([
     loadEvaluationV5Bundle(root),
-    loadCompleteRuns(root, experimentGroupId),
+    loadCompleteRuns(root, experimentGroupId, options),
   ]);
   const scenarioById = new Map(bundle.scenarios.map((scenario) => [scenario.id, scenario]));
   const keyById = new Map(bundle.alignmentKeys.map((key) => [key.scenarioId, key]));
@@ -242,7 +255,7 @@ const validateProvenance = (grade: {
   scorePromptHash: string;
   gradedAt: string;
 }) => {
-  if (!['codex', 'openai'].includes(grade.judgeProvider) || !grade.judgeModel.trim()
+  if (!['codex', 'openai', 'local'].includes(grade.judgeProvider) || !grade.judgeModel.trim()
     || !/^[a-f0-9]{64}$/.test(grade.rationalePromptHash)
     || !/^[a-f0-9]{64}$/.test(grade.scorePromptHash)
     || Number.isNaN(new Date(grade.gradedAt).valueOf())
@@ -298,15 +311,16 @@ const importGrades = async <TGrade extends { packetId: string }, TPacket extends
     validate(grade: TGrade, packet: TPacket): void;
   },
 ) => {
-  if (!Array.isArray(options.grades) || options.grades.length !== options.expectedCount) {
-    throw new Error(`Evaluation v5 grade import requires exactly ${options.expectedCount} grades`);
-  }
   const exported = JSON.parse(await readFile(
     path.join(packetDirectory(root, experimentGroupId), options.packetFile),
     'utf8',
   )) as { batchHash: string; packets: TPacket[] };
+  const expectedCount = exported.packets.length;
+  if (!Array.isArray(options.grades) || options.grades.length !== expectedCount) {
+    throw new Error(`Evaluation v5 grade import requires exactly ${expectedCount} grades`);
+  }
   const packetById = new Map(exported.packets.map((packet) => [packet.packetId, packet]));
-  if (new Set(options.grades.map(({ packetId }) => packetId)).size !== options.expectedCount) {
+  if (new Set(options.grades.map(({ packetId }) => packetId)).size !== expectedCount) {
     throw new Error('Evaluation v5 grades must have unique packet IDs');
   }
   for (const grade of options.grades) {

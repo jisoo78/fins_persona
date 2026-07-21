@@ -233,7 +233,7 @@ export type EvaluationV5AnchorFinding = 'aligned' | 'partial' | 'missing' | 'con
 export type EvaluationV5PairFinding = 'aligned' | 'partial' | 'conflict';
 
 export type EvaluationV5JudgeProvenance = {
-  judgeProvider: 'codex' | 'openai';
+  judgeProvider: 'codex' | 'openai' | 'local';
   judgeModel: string;
   rationalePromptHash: string;
   scorePromptHash: string;

@@ -16,6 +16,7 @@ export const evaluationV5Paths = (root: string) => {
     runs: path.join(base, 'runs'),
     retrievalCache: path.join(base, 'retrieval-cache'),
     judgePackets: path.join(base, 'judge/packets'),
+    localJudgeDrafts: path.join(base, 'judge/local-drafts'),
     grades: path.join(base, 'judge/grades'),
     pairGrades: path.join(base, 'judge/pair-grades'),
     reports: path.join(base, 'reports'),
