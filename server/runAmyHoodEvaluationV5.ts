@@ -14,6 +14,7 @@ import {
   importEvaluationV5Grades,
   importEvaluationV5PairGrades,
 } from './evaluationV5/judge';
+import { runEvaluationV5LocalJudge } from './evaluationV5/localJudge';
 import { evaluationV5Paths } from './evaluationV5/paths';
 import { buildEvaluationV5Report, writeEvaluationV5HtmlReport } from './evaluationV5/report';
 import { listEvaluationV5Runs } from './evaluationV5/runStore';
@@ -58,7 +59,14 @@ const loadUnfrozenInput = async (root: string): Promise<EvaluationV5BundleInput>
 export const runAmyHoodEvaluationV5Command = async (
   args: string[],
   root = process.cwd(),
+  injectedDependencies: Partial<{
+    runLocalJudge: typeof runEvaluationV5LocalJudge;
+  }> = {},
 ) => {
+  const dependencies = {
+    runLocalJudge: runEvaluationV5LocalJudge,
+    ...injectedDependencies,
+  };
   const command = args[0];
   if (command === 'freeze') {
     const output = await freezeEvaluationV5Bundle(root, await loadUnfrozenInput(root));
@@ -85,6 +93,26 @@ export const runAmyHoodEvaluationV5Command = async (
       changeTypeCounts: bundle.changeTypeCounts,
       policyCoverage: coverage,
     };
+    console.log(JSON.stringify(output, null, 2));
+    return output;
+  }
+  if (command === 'judge-local') {
+    const group = option(args, '--group');
+    const repetitionValue = option(args, '--repetition');
+    const baseUrlValue = option(args, '--base-url');
+    if (!group || !repetitionValue || !baseUrlValue) {
+      throw new Error('judge-local requires --group, --repetition, and --base-url');
+    }
+    const repetition = Number(repetitionValue);
+    if (!Number.isInteger(repetition) || repetition < 1 || repetition > 5) {
+      throw new Error('judge-local repetition must be 1 through 5');
+    }
+    const output = await dependencies.runLocalJudge({
+      root,
+      experimentGroupId: group,
+      repetition: repetition as 1 | 2 | 3 | 4 | 5,
+      baseUrl: baseUrlValue.replace(/\/+$/, ''),
+    });
     console.log(JSON.stringify(output, null, 2));
     return output;
   }
@@ -157,7 +185,7 @@ export const runAmyHoodEvaluationV5Command = async (
     return output;
   }
   throw new Error(
-    'expected freeze, check, create, execute, resume, export-judge, import-grades, export-pair-judge, import-pair-grades, or report',
+    'expected freeze, check, create, execute, resume, export-judge, import-grades, export-pair-judge, import-pair-grades, judge-local, or report',
   );
 };
 

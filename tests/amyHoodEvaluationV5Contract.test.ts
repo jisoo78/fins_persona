@@ -61,9 +61,37 @@ test('edge: preserves multiple guardrails and reversal signals', () => {
 });
 
 test('edge: V5 CLI rejects unsupported commands and exposes the formal workflow', async () => {
+  const received: unknown[] = [];
+  const output = await runAmyHoodEvaluationV5Command([
+    'judge-local',
+    '--group',
+    'group-1',
+    '--repetition',
+    '1',
+    '--base-url',
+    'http://127.0.0.1:8082/v1/',
+  ], process.cwd(), {
+    runLocalJudge: async (options) => {
+      received.push(options);
+      return { packetCount: 90 } as never;
+    },
+  });
+  assert.deepEqual(output, { packetCount: 90 });
+  assert.deepEqual(received, [{
+    root: process.cwd(),
+    experimentGroupId: 'group-1',
+    repetition: 1,
+    baseUrl: 'http://127.0.0.1:8082/v1',
+  }]);
+  await assert.rejects(
+    runAmyHoodEvaluationV5Command([
+      'judge-local', '--group', 'group-1', '--repetition', '0', '--base-url', 'http://127.0.0.1:8082/v1',
+    ], process.cwd()),
+    /repetition must be 1 through 5/i,
+  );
   await assert.rejects(
     runAmyHoodEvaluationV5Command(['unknown'], process.cwd()),
-    /expected freeze, check, create, execute, resume, export-judge, import-grades, export-pair-judge, import-pair-grades, or report/i,
+    /judge-local/i,
   );
 });
 
