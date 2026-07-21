@@ -60,6 +60,7 @@ const validCollectors = new Set([
 ]);
 const validTiers = new Set([1, 2, 3, 'discovery_only']);
 const validTemporalRoles = new Set(['pre_decision', 'decision_time', 'post_outcome']);
+const validContentCompleteness = new Set(['full_text', 'reviewed_excerpt']);
 const validFailureReasons = new Set([
   'access_denied',
   'paywalled',
@@ -167,6 +168,8 @@ const validateRecord = (value: unknown, root: string): AdvisorSourceRecord => {
     || typeof record.title !== 'string'
     || typeof record.publisher !== 'string'
     || typeof record.sourceType !== 'string'
+    || (record.contentCompleteness !== undefined
+      && !validContentCompleteness.has(record.contentCompleteness))
     || typeof record.rightsNote !== 'string'
     || !nullableString(record.publishedAt)
     || !nullableString(record.speaker)

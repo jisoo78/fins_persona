@@ -93,6 +93,10 @@ import {
   extractSpeakerSegments,
 } from '../server/decisionAdvisor/officialSourceCollector';
 import { importReviewedSource as importReviewedSourceReal } from '../server/decisionAdvisor/manualSourceImporter';
+import {
+  importReviewedExcerpt,
+  type ReviewedExcerptImport,
+} from '../server/decisionAdvisor/reviewedExcerptImporter';
 import { importTranscript as importTranscriptReal } from '../server/decisionAdvisor/transcriptImporter';
 import type {
   AdvisorSourceRecord,
@@ -252,6 +256,40 @@ const importTranscript: typeof importTranscriptReal = async (input, root, depend
   await registerReviewedImport(input, root);
   return importTranscriptReal(input, root, dependencies);
 };
+
+const reviewedExcerptText = [
+  'The company announced a bounded capital allocation decision after reviewing durable demand,',
+  'liquidity, strategic investment requirements, and long-term shareholder value.',
+  'Amy Hood: These actions reflect a continued commitment to returning cash to our shareholders.',
+  'The authorization remains subject to the stated financial guardrails and execution conditions.',
+].join(' ');
+
+const reviewedExcerptInput = (
+  overrides: Partial<ReviewedExcerptImport> = {},
+): ReviewedExcerptImport => ({
+  canonicalUrl: 'https://example.com/public/reviewed-amy-excerpt',
+  title: 'Reviewed Amy Hood capital allocation excerpt',
+  publisher: 'Example Business Review',
+  publishedAt: '2013-09-17',
+  speaker: 'Amy Hood',
+  eventCandidateIds: ['candidate-buyback-2013'],
+  tier: 3,
+  rightsNote: 'Public source excerpt captured and manually reviewed with attribution.',
+  excerptText: reviewedExcerptText,
+  exactQuote: 'These actions reflect a continued commitment to returning cash to our shareholders.',
+  evidenceUse: 'direct_amy',
+  sourceType: 'official_announcement',
+  reviewer: 'Codex',
+  reviewedAt: '2026-07-21T00:00:00.000Z',
+  ...overrides,
+});
+
+const registerExcerptImport = async (input: ReviewedExcerptImport, root: string) =>
+  registerReviewedImport({
+    ...input,
+    text: input.excerptText,
+    expectedSha256: '0'.repeat(64),
+  }, root);
 
 const substantialHtml = (suffix = 'stable') => Buffer.from(`<!doctype html>
 <html><head><title>FY25 Q4 earnings materials</title>
@@ -1524,6 +1562,121 @@ const transcriptImport = (overrides: Record<string, unknown> = {}) => {
     ...overrides,
   };
 };
+
+/**
+ * Test Plan (canonical reviewed excerpts):
+ * 1. Happy Path:
+ *    - import one reviewed Amy excerpt with a computed hash and exact speaker offsets.
+ * 2. Edge Cases:
+ *    - preserve existing reviewed source imports as full_text.
+ *    - re-import the same excerpt idempotently.
+ *    - import decision context without an Amy speaker segment.
+ * 3. Failure Path:
+ *    - reject absent or repeated quotes and direct evidence without Amy attribution before writes.
+ */
+test('happy: reviewed excerpt import computes integrity and Amy speaker offsets', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-reviewed-excerpt-'));
+  try {
+    const input = reviewedExcerptInput();
+    await registerExcerptImport(input, directory);
+    const source = await importReviewedExcerpt(input, directory);
+    assert.equal(source.contentCompleteness, 'reviewed_excerpt');
+    assert.match(source.sha256!, /^[a-f0-9]{64}$/);
+    const raw = JSON.parse(await readFile(
+      path.resolve(advisorPaths(directory).root, source.rawPath!),
+      'utf8',
+    ));
+    const start = input.excerptText.indexOf(input.exactQuote);
+    assert.deepEqual(raw.speakerSegments, [{
+      speaker: 'Amy Hood',
+      startChar: start,
+      endChar: start + input.exactQuote.length,
+    }]);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('edge: existing reviewed source imports default to full text', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-full-text-default-'));
+  try {
+    const source = await importReviewedSource(transcriptImport({
+      canonicalUrl: 'https://example.com/public/full-text-default',
+    }), directory);
+    assert.equal(source.contentCompleteness, 'full_text');
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('edge: identical reviewed excerpt import is idempotent', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-excerpt-idempotent-'));
+  try {
+    const input = reviewedExcerptInput();
+    await registerExcerptImport(input, directory);
+    const first = await importReviewedExcerpt(input, directory);
+    const second = await importReviewedExcerpt(input, directory);
+    assert.equal(second.id, first.id);
+    assert.equal(second.rawPath, first.rawPath);
+    assert.equal(loadRegistry(directory).sources.length, 1);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('edge: reviewed context excerpt does not invent a speaker segment', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-context-excerpt-'));
+  try {
+    const input = reviewedExcerptInput({
+      canonicalUrl: 'https://example.com/public/context-excerpt',
+      speaker: null,
+      evidenceUse: 'decision_context',
+    });
+    await registerExcerptImport(input, directory);
+    const source = await importReviewedExcerpt(input, directory);
+    const raw = JSON.parse(await readFile(
+      path.resolve(advisorPaths(directory).root, source.rawPath!),
+      'utf8',
+    ));
+    assert.deepEqual(raw.speakerSegments, []);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('failure: invalid reviewed excerpts leave no canonical write', async (t) => {
+  const cases: Array<{ name: string; input: ReviewedExcerptImport; error: RegExp }> = [
+    {
+      name: 'quote absent',
+      input: reviewedExcerptInput({ exactQuote: 'This quote is not in the captured excerpt.' }),
+      error: /one exact quote occurrence/,
+    },
+    {
+      name: 'quote repeated',
+      input: reviewedExcerptInput({
+        excerptText: `${reviewedExcerptText} ${reviewedExcerptInput().exactQuote}`,
+      }),
+      error: /one exact quote occurrence/,
+    },
+    {
+      name: 'direct evidence without Amy attribution',
+      input: reviewedExcerptInput({ speaker: null }),
+      error: /requires Amy Hood/,
+    },
+  ];
+  for (const item of cases) {
+    await t.test(item.name, async () => {
+      const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-invalid-excerpt-'));
+      try {
+        await registerExcerptImport(item.input, directory);
+        await assert.rejects(() => importReviewedExcerpt(item.input, directory), item.error);
+        assert.equal(loadRegistry(directory).sources[0].rawPath, null);
+      } finally {
+        await rm(directory, { recursive: true, force: true });
+      }
+    });
+  }
+});
 
 test('happy: reviewed transcript import preserves exact text and addressable Amy Hood segments', async () => {
   const directory = await mkdtemp(path.join(os.tmpdir(), 'advisor-transcript-import-'));

@@ -18,6 +18,10 @@ export * from './amyHoodEvaluationV3';
 
 export type SourceTier = 1 | 2 | 3 | 'discovery_only';
 
+export type SourceContentCompleteness = 'full_text' | 'reviewed_excerpt';
+
+export type DirectAmyEvidenceMode = 'event_specific' | 'domain_principle';
+
 export type CollectionStatus =
   | 'discovered'
   | 'queued'
@@ -118,6 +122,7 @@ export type AdvisorSourceRecord = {
   publishedAt: string | null;
   speaker: string | null;
   sourceType: string;
+  contentCompleteness?: SourceContentCompleteness;
   collector:
     | 'microsoft_ir'
     | 'microsoft_source'
@@ -198,6 +203,7 @@ export type PilotEvidenceSpan = {
   endChar: number;
   publishedAt: string;
   speaker: 'Amy Hood' | null;
+  directAmyEvidenceMode?: DirectAmyEvidenceMode;
 };
 
 export type PilotDecisionOption = {

@@ -5,6 +5,7 @@ import path from 'node:path';
 import type {
   AdvisorSourceRecord,
   CollectionFailureReason,
+  SourceContentCompleteness,
 } from '../../shared/amyHoodDecisionAdvisor';
 import {
   removeAdvisorArtifact,
@@ -37,6 +38,8 @@ export type ReviewedSourceImport = {
   eventCandidateIds: string[];
   tier: 1 | 2 | 3;
   rightsNote: string;
+  contentCompleteness?: SourceContentCompleteness;
+  sourceType?: string;
   text: string;
   speakerSegments?: SpeakerSegment[];
   expectedSha256: string;
@@ -198,12 +201,14 @@ const reviewMatches = (
     && JSON.stringify(artifact.speakerSegments ?? [])
       === JSON.stringify(input.speakerSegments ?? [])
     && artifact.metadata?.collector === options.collector
-    && artifact.metadata?.sourceType === options.sourceType
     && artifact.metadata?.publisher === input.publisher
     && artifact.metadata?.publishedAt === input.publishedAt
     && artifact.metadata?.speaker === input.speaker
     && artifact.metadata?.tier === input.tier
     && artifact.metadata?.rightsNote === input.rightsNote
+    && (artifact.metadata?.contentCompleteness ?? 'full_text')
+      === (input.contentCompleteness ?? 'full_text')
+    && artifact.metadata?.sourceType === (input.sourceType ?? options.sourceType)
     && JSON.stringify(artifact.metadata?.eventCandidateIds ?? [])
       === JSON.stringify(input.eventCandidateIds);
 };
@@ -448,7 +453,8 @@ const importReviewedSourceInternal = async (
       publisher: input.publisher,
       publishedAt: input.publishedAt,
       speaker: input.speaker,
-      sourceType: options.sourceType,
+      sourceType: input.sourceType ?? options.sourceType,
+      contentCompleteness: input.contentCompleteness ?? 'full_text',
       collector: options.collector,
       temporalRole: 'decision_time',
       rightsNote: input.rightsNote,
