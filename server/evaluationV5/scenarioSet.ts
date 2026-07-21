@@ -14,6 +14,12 @@ import { loadEvaluationV5ExternalSources } from './sourceSet';
 
 const sha256 = (value: string) => createHash('sha256').update(value).digest('hex');
 const unique = (values: string[]) => new Set(values).size === values.length;
+const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const containsSealedIdentifier = (publicText: string, value: string) => {
+  const escaped = escapeRegExp(value.trim().toLocaleLowerCase('en-US'));
+  return escaped.length >= 4
+    && new RegExp(`(?:^|[^a-z0-9])${escaped}(?:$|[^a-z0-9])`, 'u').test(publicText);
+};
 const iso = (value: string) => {
   const date = new Date(value);
   return !Number.isNaN(date.valueOf()) && date.toISOString() === value;
@@ -138,8 +144,7 @@ export const validateEvaluationV5ScenarioBundle = (
     event.id, event.executiveName, event.organization, event.actualHistoricalAction,
     event.primarySourceId, ...event.secondarySourceIds, ...event.outcomeEvidenceIds,
   ]).concat(input.alignmentKeys.flatMap((key) => [key.policyId, key.expectedAction]));
-  const leaked = forbidden.filter((value) => value.trim().length >= 4)
-    .find((value) => publicText.includes(value.toLocaleLowerCase('en-US')));
+  const leaked = forbidden.find((value) => containsSealedIdentifier(publicText, value));
   if (leaked) throw new Error(`Evaluation v5 public scenario leakage: ${leaked}`);
   if (!/^[a-f0-9]{64}$/.test(input.externalSourceHash)) {
     throw new Error('Evaluation v5 external source hash is invalid');

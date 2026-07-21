@@ -14,15 +14,20 @@ import test from 'node:test';
 
 import {
   buildEvaluationV5FrozenManifest,
+  loadEvaluationV5Bundle,
   validateEvaluationV5ScenarioBundle,
 } from '../server/evaluationV5/scenarioSet';
 import { evaluationV5BundleFixture } from './helpers/evaluationV5Fixture';
 
-test('happy: accepts thirty scenarios in fifteen pairs', () => {
+test('happy: accepts fixture and repository bundles with thirty scenarios in fifteen pairs', async () => {
   const result = validateEvaluationV5ScenarioBundle(evaluationV5BundleFixture());
   assert.equal(result.scenarios.length, 30);
   assert.equal(result.pairs.length, 15);
   assert.deepEqual(Object.values(result.domainCounts), [6, 6, 6, 6, 6]);
+  const repository = await loadEvaluationV5Bundle(process.cwd());
+  assert.equal(repository.scenarios.length, 30);
+  assert.equal(repository.pairs.length, 15);
+  assert.match(repository.manifest?.bundleHash ?? '', /^[a-f0-9]{64}$/);
 });
 
 test('edge: accepts shuffled public and sealed records', () => {
@@ -44,9 +49,10 @@ test('edge: accepts exactly five pairs per changed-response type', () => {
   });
 });
 
-test('edge: accepts anonymized materiality-preserving ratios', () => {
+test('edge: accepts anonymized ratios and identity substrings inside ordinary words', () => {
   const fixture = evaluationV5BundleFixture();
-  fixture.scenarioFile.scenarios[0].situation = 'The proposed transaction equals a material share of annual revenue and uses both available cash and new debt.';
+  fixture.externalEvents[0].organization = 'Meta';
+  fixture.scenarioFile.scenarios[0].situation = 'The proposed transaction equals a material share of annual revenue and uses both available cash and new debt under a bounded timetable.';
   assert.equal(validateEvaluationV5ScenarioBundle(fixture).scenarios.length, 30);
 });
 

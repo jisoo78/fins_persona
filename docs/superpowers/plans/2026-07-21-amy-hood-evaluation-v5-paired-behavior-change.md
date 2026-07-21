@@ -192,7 +192,7 @@ git commit -m "feat: add evaluation v5 bundle contracts"
 - Create: `evaluation/v5/sealed/manifest.json`
 - Create: `evaluation/v5/sources/registry.json`
 - Create: `evaluation/v5/sources/raw/ext-salesforce-slack-2020.json`, `ext-adobe-figma-termination-2023.json`, `ext-alphabet-ai-capex-2024.json`, `ext-meta-ai-capex-2024.json`, `ext-netflix-paid-sharing-2024.json`, `ext-spotify-premium-price-2023.json`, `ext-intel-cost-reduction-2024.json`, `ext-meta-efficiency-2023.json`, `ext-apple-buyback-2024.json`, and `ext-salesforce-buyback-2022.json`
-- Create: `evaluation/v5/sources/raw/ext-ibm-red-hat-2018.json`, `ext-amazon-ai-capex-2024.json`, `ext-costco-membership-fee-2024.json`, `ext-costco-membership-fee-cfo-2024.json`, `ext-disney-cost-reset-2023.json`, and `ext-cisco-capital-return-2022.json`
+- Create: `evaluation/v5/sources/raw/ext-ibm-red-hat-2018.json`, `ext-amazon-ai-capex-2024.json`, `ext-costco-membership-fee-2024.json`, `ext-costco-membership-fee-cfo-2023.json`, `ext-disney-cost-reset-2023.json`, and `ext-cisco-capital-return-2022.json`
 - Create: the matching 16 `.txt` files under `evaluation/v5/sources/normalized/`
 - Test: `tests/amyHoodEvaluationV5ScenarioSet.test.ts`
 - Test: `tests/amyHoodEvaluationV5SourceSet.test.ts`

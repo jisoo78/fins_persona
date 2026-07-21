@@ -1,0 +1,4 @@
+IBM Acquisition of Red Hat
+Decision announced: 2018-10-28; completed: 2019-07-09
+
+IBM agreed to acquire Red Hat for approximately $34 billion in cash to accelerate an open hybrid-cloud strategy. The transaction used cash and new debt, targeted free-cash-flow and margin accretion, preserved Red Hat's independence and ecosystem neutrality, and required IBM to suspend repurchases while reducing leverage. IBM later reported that disciplined free-cash-flow management supported significant deleveraging after closing.
