@@ -4,6 +4,8 @@ import type {
   EvaluationV6Grade,
   EvaluationV6JudgeAssessment,
   EvaluationV6JudgePacket,
+  EvaluationV6PairGrade,
+  EvaluationV6PairJudgePacket,
 } from '../../shared/amyHoodEvaluationV6';
 import { EVALUATION_V6_COMPONENTS, assertEvaluationV6ComponentRating } from '../../shared/amyHoodEvaluationV6';
 import { canonicalJson, sha256 } from '../decisionAdvisor/canonicalJson';
@@ -13,7 +15,9 @@ import {
   assertEvaluationV6JudgePacketsBlind,
   buildEvaluationV6JudgePacket,
   exportEvaluationV6JudgePackets,
+  exportEvaluationV6PairJudgePackets,
   importEvaluationV6Grades,
+  importEvaluationV6PairGrades,
 } from './judge';
 import { evaluationV6Paths } from './paths';
 import { EVALUATION_V6_SCORING_CONFIG, computeEvaluationV6IdentityScore } from './scoring';
@@ -321,3 +325,103 @@ export const runEvaluationV6LocalCalibration = async (options: {
   return { ...result, judgeModel, batchHash, candidateBundleHash, metrics: validated.metrics };
 };
 
+export const IDENTITY_PAIR_ASSESSMENT_SYSTEM = [
+  IDENTITY_ASSESSMENT_SYSTEM,
+  'Compare the initial and changed answers against both Amy Identity Keys and the frozen pair transition key.',
+  'Also return aligned, expectedResponseFinding, changedSignalFinding, and invariantFinding.',
+  'A fluent transition that crosses an unsupported Amy reversal boundary is amy_conflict.',
+].join(' ');
+
+const parsePairAssessment = (text: string) => {
+  const cleaned = text.trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '');
+  const value = JSON.parse(cleaned) as Record<string, unknown>;
+  const base = Object.fromEntries(['identityVerdict', 'components', 'anchorFindings', 'distinguishingAnchor']
+    .map((key) => [key, value[key]]));
+  const assessment = parseEvaluationV6JudgeAssessment(JSON.stringify(base));
+  const findings = new Set(['aligned', 'partial', 'conflict']);
+  if (typeof value.aligned !== 'boolean'
+    || !findings.has(String(value.expectedResponseFinding))
+    || !findings.has(String(value.changedSignalFinding))
+    || !findings.has(String(value.invariantFinding))) {
+    throw new Error('Evaluation v6 pair Judge assessment is invalid');
+  }
+  return {
+    assessment,
+    aligned: value.aligned,
+    expectedResponseFinding: String(value.expectedResponseFinding) as 'aligned' | 'partial' | 'conflict',
+    changedSignalFinding: String(value.changedSignalFinding) as 'aligned' | 'partial' | 'conflict',
+    invariantFinding: String(value.invariantFinding) as 'aligned' | 'partial' | 'conflict',
+  } as const;
+};
+
+export const runEvaluationV6LocalPairJudge = async (options: {
+  root: string;
+  experimentGroupId: string;
+  baseUrl: string;
+  fetchImpl?: typeof fetch;
+  now?: () => string;
+}) => {
+  const fetchImpl = options.fetchImpl ?? fetch;
+  const now = options.now ?? (() => new Date().toISOString());
+  const baseUrl = normalizeBaseUrl(options.baseUrl);
+  const [exported, judgeModel] = await Promise.all([
+    exportEvaluationV6PairJudgePackets(options.root, options.experimentGroupId),
+    discoverModel(baseUrl, fetchImpl),
+  ]);
+  if (exported.packets.length !== 225) throw new Error('Evaluation v6 pair Judge requires exactly 225 packets');
+  const location = path.join(evaluationV6Paths(options.root).localJudgeDrafts, options.experimentGroupId, 'pair.json');
+  const identity = {
+    schemaVersion: 1 as const,
+    experimentGroupId: options.experimentGroupId,
+    packetBatchHash: exported.batchHash,
+    judgeModel,
+    baseUrl,
+    rationalePromptHash: sha256(IDENTITY_RATIONALE_SYSTEM),
+    assessmentPromptHash: sha256(IDENTITY_PAIR_ASSESSMENT_SYSTEM),
+    scoringConfigHash: sha256(canonicalJson(EVALUATION_V6_SCORING_CONFIG)),
+  };
+  const existing = await readJsonFile<({ grades: EvaluationV6PairGrade[] } & typeof identity) | null>(location, null);
+  if (existing && Object.keys(identity).some((key) => existing[key as keyof typeof identity] !== identity[key as keyof typeof identity])) {
+    throw new Error('Evaluation v6 pair Judge draft is stale');
+  }
+  const grades = existing?.grades ?? [];
+  const completed = new Set(grades.map(({ packetId }) => packetId));
+  const resumedCount = completed.size;
+  for (const packet of exported.packets) {
+    if (completed.has(packet.packetId)) continue;
+    const rationale = assertIdentityRationale(await invoke({
+      baseUrl, fetchImpl, model: judgeModel, system: IDENTITY_RATIONALE_SYSTEM, userPayload: packet, maxTokens: 300,
+    }));
+    const payload = { packet, rationale };
+    let text = await invoke({ baseUrl, fetchImpl, model: judgeModel, system: IDENTITY_PAIR_ASSESSMENT_SYSTEM, userPayload: payload, maxTokens: 520 });
+    let parsed: ReturnType<typeof parsePairAssessment>;
+    let repairApplied = false;
+    try {
+      parsed = parsePairAssessment(text);
+    } catch (firstError) {
+      text = await invoke({
+        baseUrl, fetchImpl, model: judgeModel,
+        system: `${IDENTITY_PAIR_ASSESSMENT_SYSTEM} The previous response failed validation. Return corrected JSON only.`,
+        userPayload: { ...payload, invalidResponse: text }, maxTokens: 520,
+      });
+      try { parsed = parsePairAssessment(text); repairApplied = true; } catch { throw firstError; }
+    }
+    const complete: EvaluationV6JudgeAssessment = { rationale, ...parsed.assessment };
+    grades.push({
+      packetId: packet.packetId, packetHash: packet.packetHash, ...complete,
+      ...computeEvaluationV6IdentityScore(complete),
+      aligned: parsed.aligned,
+      expectedResponseFinding: parsed.expectedResponseFinding,
+      changedSignalFinding: parsed.changedSignalFinding,
+      invariantFinding: parsed.invariantFinding,
+      judgeProvider: 'local', judgeModel,
+      rationalePromptHash: identity.rationalePromptHash,
+      assessmentPromptHash: identity.assessmentPromptHash,
+      repairApplied, gradedAt: now(),
+    });
+    grades.sort((left, right) => left.packetId.localeCompare(right.packetId));
+    await writeJsonAtomic(location, { ...identity, grades });
+  }
+  const imported = await importEvaluationV6PairGrades(options.root, options.experimentGroupId, grades);
+  return { judgeModel, packetCount: exported.packets.length, resumedCount, gradedCount: grades.length - resumedCount, batchHash: imported.batchHash };
+};

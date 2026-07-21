@@ -20,6 +20,7 @@ import {
   assertEvaluationV6EvidenceClass,
 } from '../shared/amyHoodEvaluationV6';
 import { evaluationV6Paths } from '../server/evaluationV6/paths';
+import { runAmyHoodEvaluationV6Command } from '../server/runAmyHoodEvaluationV6';
 
 test('happy: exposes the isolated v6 contract', () => {
   assert.equal(EVALUATION_V6_EVIDENCE_CLASSES.length, 6);
@@ -40,8 +41,12 @@ test('edge: resolves a root containing spaces', () => {
   assert.match(evaluationV6Paths('/tmp/Amy Hood').root, /Amy Hood\/evaluation\/v6$/);
 });
 
-test('failure: rejects unknown evidence and invalid ratings', () => {
+test('failure: rejects unknown evidence, invalid ratings, and unsafe CLI requests', async () => {
   assert.throws(() => assertEvaluationV6EvidenceClass('reasonable_cfo'), /evidence class/i);
   assert.throws(() => assertEvaluationV6ComponentRating(5), /component rating/i);
   assert.throws(() => assertEvaluationV6ComponentRating(1.5), /component rating/i);
+  await assert.rejects(runAmyHoodEvaluationV6Command(['calibrate-local']), /--base-url/i);
+  await assert.rejects(runAmyHoodEvaluationV6Command(['create', '--repetitions', '2']), /1 or 5/i);
+  await assert.rejects(runAmyHoodEvaluationV6Command(['judge-local', '--group', 'g']), /--repetition.*--base-url/i);
+  await assert.rejects(runAmyHoodEvaluationV6Command(['unknown']), /audit-init.*report/i);
 });
