@@ -253,3 +253,39 @@ export const importEvaluationV6PairGrades = (
   }
 });
 
+const loadActiveGrades = async <TGrade>(directory: string, missingMessage: string) => {
+  let active: { batchHash: string };
+  try {
+    active = JSON.parse(await readFile(path.join(directory, 'active.json'), 'utf8')) as { batchHash: string };
+  } catch {
+    throw new Error(missingMessage);
+  }
+  return JSON.parse(await readFile(path.join(directory, active.batchHash, 'grades.json'), 'utf8')) as {
+    experimentGroupId: string;
+    packetBatchHash: string;
+    batchHash: string;
+    grades: TGrade[];
+  };
+};
+
+export const loadActiveEvaluationV6Grades = (root: string, experimentGroupId: string) =>
+  loadActiveGrades<EvaluationV6Grade>(
+    path.join(evaluationV6Paths(root).grades, experimentGroupId),
+    'Evaluation v6 active individual grades are required',
+  );
+
+export const loadActiveEvaluationV6PairGrades = (root: string, experimentGroupId: string) =>
+  loadActiveGrades<EvaluationV6PairGrade>(
+    path.join(evaluationV6Paths(root).pairGrades, experimentGroupId),
+    'Evaluation v6 active pair grades are required',
+  );
+
+export const loadEvaluationV6JudgeLinks = async (root: string, experimentGroupId: string) =>
+  JSON.parse(await readFile(
+    path.join(packetDirectory(root, experimentGroupId), 'individual-private-links.json'), 'utf8',
+  )) as { experimentGroupId: string; links: Array<{ packetId: string; runId: string; arm: string; repetition: number; scenarioId: string }> };
+
+export const loadEvaluationV6PairJudgeLinks = async (root: string, experimentGroupId: string) =>
+  JSON.parse(await readFile(
+    path.join(packetDirectory(root, experimentGroupId), 'pair-private-links.json'), 'utf8',
+  )) as { experimentGroupId: string; links: Array<{ packetId: string; runId: string; arm: string; repetition: number; pairId: string }> };
