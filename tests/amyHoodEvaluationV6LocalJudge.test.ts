@@ -10,7 +10,7 @@
  *    - Preserve only the draft and reject empty, HTTP-failed, stale, or twice-invalid responses.
  */
 import assert from 'node:assert/strict';
-import { mkdtemp } from 'node:fs/promises';
+import { mkdtemp, readFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
@@ -64,6 +64,9 @@ test('happy: makes rationale-first deterministic calls and host-scores the resul
   assert.equal(bodies.length, 2);
   assert.ok(bodies.every((body) => body.temperature === 0 && body.stream === false));
   assert.ok(bodies.every((body) => (body.chat_template_kwargs as { enable_thinking: boolean }).enable_thinking === false));
+  const assessmentMessages = bodies[1].messages as Array<{ role: string; content: string }>;
+  assert.match(assessmentMessages[0].content, /"anchorFindings":\{"action":"aligned\|partial\|missing\|conflict"/);
+  assert.match(assessmentMessages[0].content, /"distinguishingAnchor":\{"kind":/);
 });
 
 test('edge: accepts fenced assessment JSON', () => {
@@ -102,5 +105,12 @@ test('failure: rejects dependency and repeated schema failures without a complet
   const values = ['고객 수요를 구분한 판단이다.', '{bad', '{still-bad'];
   let calls = 0;
   const invalid = (async () => response(values[calls++])) as typeof fetch;
-  await assert.rejects(() => options(invalid).then(runEvaluationV6LocalPacketBatch), /JSON|Unexpected token|property/i);
+  const invalidOptions = await options(invalid);
+  await assert.rejects(() => runEvaluationV6LocalPacketBatch(invalidOptions), /JSON|Unexpected token|property/i);
+  const draft = JSON.parse(await readFile(path.join(
+    invalidOptions.root,
+    'evaluation/v6/judge/local-drafts/calibration-1/calibration.json',
+  ), 'utf8')) as { grades: unknown[]; failures: Array<{ packetId: string }> };
+  assert.equal(draft.grades.length, 0);
+  assert.equal(draft.failures[0].packetId, 'packet-calibration-1');
 });

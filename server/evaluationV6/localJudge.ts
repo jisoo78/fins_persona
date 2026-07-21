@@ -33,9 +33,12 @@ export const IDENTITY_RATIONALE_SYSTEM = [
 
 export const IDENTITY_ASSESSMENT_SYSTEM = [
   'Evaluate Amy Hood identity fidelity only.',
-  'Return JSON with identityVerdict, components, anchorFindings, and distinguishingAnchor.',
-  'Each component action, priorityOrder, boundaries, reversal, identitySpecificity is an integer 0 through 4.',
-  'identityVerdict is amy_aligned, amy_partial, generic_cfo, or amy_conflict.',
+  'Return exactly this JSON shape and no other keys:',
+  '{"identityVerdict":"amy_aligned|amy_partial|generic_cfo|amy_conflict","components":{"action":0,"priorityOrder":0,"boundaries":0,"reversal":0,"identitySpecificity":0},"anchorFindings":{"action":"aligned|partial|missing|conflict","priority":"aligned|partial|missing|conflict","guardrails":"aligned|partial|missing|conflict","reversal":"aligned|partial|missing|conflict"},"distinguishingAnchor":{"kind":"action|priority_order|boundary_condition|reversal_rule|identity_conflict","statement":"one concrete distinguishing statement"}}.',
+  'Replace each pipe-separated placeholder with exactly one allowed value.',
+  'Each component value is one integer from 0 through 4.',
+  'anchorFindings must use exactly action, priority, guardrails, and reversal; do not invent descriptive keys.',
+  'distinguishingAnchor must be an object with exactly kind and statement.',
   'Do not return score, uncappedScore, or ceilingApplied; the host calculates them.',
 ].join(' ');
 
@@ -62,6 +65,7 @@ type LocalDraft = {
   assessmentPromptHash: string;
   scoringConfigHash: string;
   grades: EvaluationV6Grade[];
+  failures: Array<{ packetId: string; packetHash: string; error: string; failedAt: string }>;
 };
 
 const normalizeBaseUrl = (value: string) => value.replace(/\/+$/, '');
@@ -205,7 +209,7 @@ export const runEvaluationV6LocalPacketBatch = async (options: LocalBatchOptions
     throw new Error('Evaluation v6 local Judge configuration is invalid');
   }
   assertEvaluationV6JudgePacketsBlind(options.packets);
-  const identity: Omit<LocalDraft, 'grades'> = {
+  const identity: Omit<LocalDraft, 'grades' | 'failures'> = {
     schemaVersion: 1,
     experimentGroupId: options.experimentGroupId,
     batchKind: options.batchKind,
@@ -224,6 +228,7 @@ export const runEvaluationV6LocalPacketBatch = async (options: LocalBatchOptions
     }
   }
   const grades = existing?.grades ?? [];
+  let failures = existing?.failures ?? [];
   const packetById = new Map(options.packets.map((packet) => [packet.packetId, packet]));
   if (packetById.size !== options.packets.length) throw new Error('Evaluation v6 local Judge packets contain duplicates');
   for (const grade of grades) {
@@ -235,17 +240,32 @@ export const runEvaluationV6LocalPacketBatch = async (options: LocalBatchOptions
   const resumedCount = completed.size;
   for (const packet of options.packets) {
     if (completed.has(packet.packetId)) continue;
-    grades.push(await assessPacket({
-      packet,
-      baseUrl,
-      fetchImpl,
-      model: options.judgeModel,
-      now,
-      rationalePromptHash: identity.rationalePromptHash,
-      assessmentPromptHash: identity.assessmentPromptHash,
-    }));
+    try {
+      grades.push(await assessPacket({
+        packet,
+        baseUrl,
+        fetchImpl,
+        model: options.judgeModel,
+        now,
+        rationalePromptHash: identity.rationalePromptHash,
+        assessmentPromptHash: identity.assessmentPromptHash,
+      }));
+      failures = failures.filter(({ packetId }) => packetId !== packet.packetId);
+    } catch (error) {
+      failures = [
+        ...failures.filter(({ packetId }) => packetId !== packet.packetId),
+        {
+          packetId: packet.packetId,
+          packetHash: packet.packetHash,
+          error: error instanceof Error ? error.message : 'unknown Evaluation v6 Judge error',
+          failedAt: now(),
+        },
+      ];
+      await writeJsonAtomic(location, { ...identity, grades, failures } satisfies LocalDraft);
+      throw error;
+    }
     grades.sort((left, right) => left.packetId.localeCompare(right.packetId));
-    await writeJsonAtomic(location, { ...identity, grades } satisfies LocalDraft);
+    await writeJsonAtomic(location, { ...identity, grades, failures } satisfies LocalDraft);
   }
   return { grades, packetCount: options.packets.length, resumedCount, gradedCount: grades.length - resumedCount };
 };
