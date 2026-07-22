@@ -1,5 +1,5 @@
 {
-  "activeVersionId": "amy-hood-master-v3-20260720",
+  "activeVersionId": "amy-hood-core-v4-20260721",
   "versions": [
     {
       "versionId": "18182235-58b4-4218-9860-4fea133bd81d",
@@ -18,6 +18,12 @@
       "createdAt": "2026-07-20T03:27:59.049Z",
       "sha256": "9cc89493d6dcd53dc994bafc2406a56c16b71358d5a221060033403cb84034eb",
       "basedOnVersionId": "0503f475-50a3-45ad-a5e8-f5a2d5575861"
+    },
+    {
+      "versionId": "amy-hood-core-v4-20260721",
+      "createdAt": "2026-07-21T06:39:31.722Z",
+      "sha256": "49c2b1902adf7457bdab9788dbba1dd1fc4d4c4fcde579486b268778dd0420e5",
+      "basedOnVersionId": "amy-hood-master-v3-20260720"
     }
   ]
 }
