@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amy Hood Evaluation v5 — 90답변 빠른 비교</title>
+  <style>
+    :root { color-scheme: light; --ink:#18212f; --muted:#5c6878; --line:#dbe2ea; --bg:#f5f7fa; --card:#fff; --blue:#315efb; --green:#13795b; --amber:#9a6700; --red:#b42318; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    main { max-width:1040px; margin:0 auto; padding:40px 20px 64px; }
+    h1 { margin:0 0 8px; font-size:30px; line-height:1.25; }
+    h2 { margin:0 0 14px; font-size:21px; }
+    p { margin:8px 0; }
+    .sub { color:var(--muted); }
+    .card { margin-top:20px; padding:22px; background:var(--card); border:1px solid var(--line); border-radius:14px; }
+    .summary { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px; }
+    .metric { padding:16px; border:1px solid var(--line); border-radius:12px; }
+    .metric strong { display:block; margin-top:3px; font-size:27px; }
+    .rank1 { border-color:#8bc6b3; background:#f0fbf7; }
+    table { width:100%; border-collapse:collapse; margin-top:12px; }
+    th,td { padding:10px 12px; text-align:left; border-bottom:1px solid var(--line); }
+    th { background:#f8fafc; }
+    td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+    .good { color:var(--green); font-weight:700; }
+    .warn { color:var(--amber); font-weight:700; }
+    .bad { color:var(--red); font-weight:700; }
+    code { padding:2px 5px; background:#eef2f6; border-radius:5px; overflow-wrap:anywhere; }
+    ul { margin:8px 0 0; padding-left:22px; }
+    .note { padding:14px 16px; border-left:4px solid var(--amber); background:#fff9e8; }
+    footer { margin-top:22px; color:var(--muted); font-size:13px; }
+    @media (max-width:720px) { .summary { grid-template-columns:1fr; } table { font-size:13px; } th,td { padding:8px; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Amy Hood Evaluation v5 — 90답변 빠른 비교</h1>
+    <p class="sub">Main Prompt v4 적용 후 1회 반복 방향성 점검 · 2026-07-21</p>
+  </header>
+
+  <section class="card">
+    <h2>1. 실험 개요</h2>
+    <p>30개 경영 시나리오에 대해 세 조건을 한 번씩 실행해 총 90개 답변을 비교했다. 모든 답변은 같은 E4B 로컬 모델과 같은 시나리오 순서를 사용했다.</p>
+    <table>
+      <tbody>
+        <tr><th>실험 그룹 ID</th><td><code>03659e5a-b6e5-4e5f-b0c0-e1028b3d8d41</code></td></tr>
+        <tr><th>프롬프트</th><td><code>amy-hood-core-v4-20260721</code></td></tr>
+        <tr><th>완료 상태</th><td>90/90 완료, 생성 실패 0건</td></tr>
+        <tr><th>비교 조건</th><td>Main Prompt only / Policy RAG / Full RAG</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>2. 채점 방법</h2>
+    <p>별도 채점기나 API를 만들지 않고 Codex가 동결된 v5 정답 키와 답변을 직접 대조했다. 실험 조건은 답변 검토 후 결합했다.</p>
+    <ul>
+      <li>행동 선택(Action alignment): 40%</li>
+      <li>우선순위(Priority order): 25%</li>
+      <li>가드레일(Guardrails): 20%</li>
+      <li>반전 신호(Reversal signals): 15%</li>
+      <li>최종 점수: 응답별 1~10점</li>
+    </ul>
+    <p class="sub">8점 이상은 핵심 행동과 조건이 대체로 일치, 4점 이하는 행동 충돌 또는 중대한 정책 오적용으로 해석했다.</p>
+  </section>
+
+  <section class="card">
+    <h2>3. 결과 요약</h2>
+    <div class="summary">
+      <div class="metric rank1"><span>Main Prompt only</span><strong>8.07 / 10</strong><span class="good">1위 · 고정합 25/30</span></div>
+      <div class="metric"><span>Policy RAG</span><strong>7.67 / 10</strong><span class="warn">2위 · 고정합 21/30</span></div>
+      <div class="metric"><span>Full RAG</span><strong>6.63 / 10</strong><span class="bad">3위 · 고정합 13/30</span></div>
+    </div>
+    <table>
+      <thead><tr><th>영역</th><th class="num">Prompt</th><th class="num">Policy RAG</th><th class="num">Full RAG</th></tr></thead>
+      <tbody>
+        <tr><td>M&amp;A</td><td class="num">8.17</td><td class="num">7.67</td><td class="num">6.00</td></tr>
+        <tr><td>AI·Cloud CapEx</td><td class="num">8.17</td><td class="num">6.83</td><td class="num">7.67</td></tr>
+        <tr><td>가격·수익화</td><td class="num">7.50</td><td class="num">7.17</td><td class="num">6.83</td></tr>
+        <tr><td>비용 효율</td><td class="num">8.50</td><td class="num">8.33</td><td class="num">5.17</td></tr>
+        <tr><td>주주환원·위험</td><td class="num">8.00</td><td class="num">8.33</td><td class="num">7.50</td></tr>
+      </tbody>
+    </table>
+    <p>행동 변화 15쌍을 별도로 보면 Prompt only는 13쌍, Policy RAG는 10쌍, Full RAG는 8쌍에서 기대 방향과 명확히 일치했다. 이는 1회 관측치이며 통계적 우월성을 뜻하지 않는다.</p>
+  </section>
+
+  <section class="card">
+    <h2>4. 무엇이 달랐는가</h2>
+    <ul>
+      <li><strong>Main Prompt v4:</strong> 상황 자체의 조건을 비교적 충실히 읽어 행동을 바꿨다. 다만 근거에 없는 10%, 15%, 20%, 80% 같은 임계치를 만들어내는 문제가 남았다.</li>
+      <li><strong>Policy RAG:</strong> 주주환원과 비용 효율 영역에서는 안정적이었지만, 일부 가격 시나리오에 AI·Cloud 정책 문구를 섞거나 AI 포트폴리오의 자원 이동 방향을 반대로 읽었다.</li>
+      <li><strong>Full RAG:</strong> 과거 사건의 구체 표현이 현재 시나리오보다 강하게 작동했다. 관련 없는 콘텐츠 효율화 문항에 “4,800개 역할 감축”을 반복 적용하는 등 사건 기억의 과잉 전이가 확인됐다.</li>
+      <li><strong>공통 실패:</strong> 회원 갱신 의향 하락과 고객 부담 증가가 동시에 나타난 가격 시나리오에서 세 조건 모두 “연기”보다 “진행 또는 세분화”를 선택했다. 현재 페르소나의 가격 인상 반전 경계가 약하다는 뜻이다.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>5. 해석과 다음 조치</h2>
+    <p class="note"><strong>냉정한 결론:</strong> 이번 1회 테스트에서는 RAG가 답변을 개선하지 않았다. Main Prompt v4만 사용한 조건이 가장 안정적이었고, 특히 Full RAG는 검색된 사건 세부사항이 판단을 오염시키는 경향을 보였다.</p>
+    <ul>
+      <li>Full RAG 사건 메모리는 현재 질문과 행동 조건이 모두 일치할 때만 주입하도록 검색 기준을 강화한다.</li>
+      <li>정책 RAG는 영역 일치뿐 아니라 적용 조건과 반전 조건의 일치를 재랭킹 기준에 포함한다.</li>
+      <li><code>contracted demand</code>처럼 “계약된 수요”와 “수축한 수요”로 모두 읽힐 수 있는 문구는 <code>customer-committed demand</code>처럼 명확하게 고친다.</li>
+      <li>프롬프트가 근거 없는 숫자 임계치를 생성하지 않는지 별도 점검한다.</li>
+      <li>수정 후 동일한 1회 90답변으로 재검증하고, 개선 방향이 확인된 뒤에만 5회 정식 평가를 수행한다.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>6. 한계</h2>
+    <p>이번 결과는 빠른 의사결정을 위한 수동 1회 평가다. 반복 간 변동, 채점자 간 일치도, 신뢰구간을 계산하지 않았으므로 점수 차이를 확정적인 성능 차이로 해석하면 안 된다. 정식 결론은 5회 반복과 독립 재채점 이후 내려야 한다.</p>
+  </section>
+
+  <footer>Codex manual review · No dedicated grader was created · Source runs remain unchanged</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Gemini Flash 3.6, Claude Sonnet 5, Gemma E4B Evaluation v6 탐색적 교차 비교 보고서">
+  <title>Amy Hood Evaluation v6 — 탐색적 교차 모델 비교</title>
+  <style>
+    :root {
+      --ink:#172033; --muted:#667085; --line:#d8dee9; --panel:#f7f9fc;
+      --blue:#2859d8; --blue-soft:#edf3ff; --green:#137447; --green-soft:#e9f7ef;
+      --amber:#9a5a00; --amber-soft:#fff4df; --red:#b42318; --red-soft:#fff0ee;
+      --violet:#6842b8; --violet-soft:#f2edff; --shadow:0 22px 58px rgba(24,40,72,.11);
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;color:var(--ink);background:#edf1f7;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;line-height:1.65}
+    main{width:min(1180px,calc(100% - 36px));margin:30px auto 54px;overflow:hidden;border:1px solid var(--line);border-radius:20px;background:#fff;box-shadow:var(--shadow)}
+    header{padding:58px 62px 50px;color:#fff;background:radial-gradient(circle at 87% 14%,rgba(110,142,255,.45),transparent 30%),linear-gradient(135deg,#101a31 0%,#203c7b 62%,#315ed1 100%)}
+    .eyebrow{margin:0 0 10px;color:#b9d0ff;font-size:12px;font-weight:850;letter-spacing:.13em;text-transform:uppercase}
+    h1{max-width:940px;margin:0;font-size:clamp(31px,5vw,50px);line-height:1.14;letter-spacing:-.045em}
+    header>p:not(.eyebrow){max-width:900px;margin:15px 0 0;color:#dce7ff;font-size:17px}
+    .meta-grid,.metric-grid,.card-grid,.decision-grid{display:grid;gap:14px}
+    .meta-grid{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:30px}
+    .meta-card{min-width:0;padding:16px;border:1px solid rgba(255,255,255,.22);border-radius:12px;background:rgba(255,255,255,.09)}
+    .meta-card span{display:block;color:#bcd0ff;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .meta-card strong{display:block;margin-top:6px;font-size:13px;overflow-wrap:anywhere}
+    nav{position:sticky;top:0;z-index:5;display:flex;gap:8px;overflow-x:auto;padding:12px 18px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.96);backdrop-filter:blur(12px)}
+    nav a{flex:0 0 auto;padding:7px 10px;border-radius:8px;color:#46546d;font-size:12px;font-weight:760;text-decoration:none}
+    nav a:hover{color:var(--blue);background:var(--blue-soft)}
+    section{padding:42px 62px;border-bottom:1px solid var(--line)} section:last-of-type{border-bottom:0}
+    h2{margin:0 0 18px;font-size:26px;line-height:1.25;letter-spacing:-.03em} h3{margin:0 0 9px;font-size:17px;line-height:1.35} p{margin:9px 0}
+    code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace} code{padding:2px 6px;border-radius:5px;background:#edf1f6;font-size:.88em;overflow-wrap:anywhere}
+    .section-kicker{margin-bottom:5px;color:var(--blue);font-size:12px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}
+    .lead{max-width:930px;color:#40506a;font-size:16px}
+    .verdict{padding:22px 24px;border-left:5px solid var(--amber);border-radius:12px;background:var(--amber-soft);font-size:17px}.verdict strong{color:#774300}
+    .metric-grid{grid-template-columns:repeat(5,minmax(0,1fr));margin-top:20px}
+    .metric{padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+    .metric .label{color:var(--muted);font-size:12px;font-weight:760}.metric .value{margin-top:4px;font-size:28px;font-weight:900;letter-spacing:-.035em}.metric .detail{margin-top:4px;color:var(--muted);font-size:12px}
+    .generic .value{color:var(--violet)} .persona .value{color:var(--blue)} .rag .value{color:var(--green)}
+    .card-grid{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:20px}.card{padding:20px;border:1px solid var(--line);border-radius:14px;background:#fff}.card p{color:#4b5870;font-size:14px}
+    .tag{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;border-radius:999px;font-size:11px;font-weight:850;white-space:nowrap}.tag.pass{color:var(--green);background:var(--green-soft)}.tag.hold{color:var(--amber);background:var(--amber-soft)}.tag.fail{color:var(--red);background:var(--red-soft)}.tag.info{color:var(--blue);background:var(--blue-soft)}
+    .table-wrap{width:100%;overflow-x:auto;margin-top:18px;border:1px solid var(--line);border-radius:12px} table{width:100%;min-width:800px;border-collapse:collapse;font-size:14px} th,td{padding:13px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top} th{color:#43516a;background:#f0f3f8;font-size:12px;letter-spacing:.02em} tbody tr:last-child td{border-bottom:0} tbody tr:hover td{background:#fbfcfe}.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}.best{color:var(--green);font-weight:850}
+    .callout{margin-top:18px;padding:16px 18px;border-radius:11px;color:#254584;background:var(--blue-soft)}.callout.warning{color:#7d4900;background:var(--amber-soft)}.callout.danger{color:#822b35;background:var(--red-soft)}
+    .bar-group{display:grid;gap:14px;margin-top:20px}.bar-row{display:grid;grid-template-columns:220px 1fr 72px;gap:13px;align-items:center}.bar-label{font-size:13px;font-weight:760}.bar-track{height:13px;overflow:hidden;border-radius:999px;background:#e9edf3}.bar-fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,#6842b8,#9f7de2)}.bar-fill.blue{background:linear-gradient(90deg,#315ed1,#6f8ef0)}.bar-fill.green{background:linear-gradient(90deg,#14815a,#51b489)}.bar-value{text-align:right;font-size:13px;font-weight:850}
+    .decision-grid{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:20px}.decision{padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}.decision strong{display:block;margin:8px 0 5px;font-size:19px}.decision p{color:#4b5870;font-size:14px}
+    ul,ol{padding-left:22px} li+li{margin-top:7px}.footnote{margin-top:13px;color:var(--muted);font-size:12px}
+    footer{padding:28px 62px 38px;color:var(--muted);background:#f8fafc;font-size:12px}
+    @media(max-width:1000px){.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:900px){header,section,footer{padding-left:28px;padding-right:28px}.meta-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card-grid,.decision-grid{grid-template-columns:1fr}}
+    @media(max-width:620px){main{width:100%;margin:0;border:0;border-radius:0}header,section,footer{padding-left:20px;padding-right:20px}.meta-grid,.metric-grid{grid-template-columns:1fr}.bar-row{grid-template-columns:1fr 55px}.bar-track{grid-column:1/-1;grid-row:2}nav{position:static}}
+    @media print{body{background:#fff}main{width:100%;margin:0;border:0;border-radius:0;box-shadow:none}nav{display:none}header{print-color-adjust:exact;-webkit-print-color-adjust:exact}section{break-inside:avoid;padding-top:26px;padding-bottom:26px}.table-wrap{overflow:visible}table{min-width:0;font-size:10px}th,td{padding:7px}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">B Track · Exploratory Cross-Evaluation</p>
+    <h1>Amy Hood Evaluation v6<br>탐색적 교차 모델 비교 보고서</h1>
+    <p>Gemini Flash 3.6과 Claude Sonnet 5의 일반 CFO 답변을 Gemma E4B의 Amy Prompt·Policy RAG·Full RAG 조건과 교차 비교해, 일반 LLM 난이도와 페르소나 메모리의 증분 효과를 분리해 해석합니다.</p>
+    <div class="meta-grid">
+      <div class="meta-card"><span>Report Type</span><strong>Exploratory · 정식 모델 순위 아님</strong></div>
+      <div class="meta-card"><span>Question Set</span><strong>Evaluation v6 · 30 scenarios · 15 pairs</strong></div>
+      <div class="meta-card"><span>External Sample</span><strong>Gemini n=1 · Sonnet n=1</strong></div>
+      <div class="meta-card"><span>Formal Baseline</span><strong>Gemma E4B · 3 arms · n=5</strong></div>
+    </div>
+  </header>
+
+  <nav>
+    <a href="#summary">요약</a><a href="#contract">비교 계약</a><a href="#overall">전체 점수</a><a href="#domains">영역</a>
+    <a href="#behavior">행동 변화</a><a href="#patterns">판단 패턴</a><a href="#hypotheses">가설</a><a href="#validity">유효성</a>
+    <a href="#decision">판정</a><a href="#next">다음 단계</a><a href="#appendix">부록</a>
+  </nav>
+
+  <section id="summary">
+    <p class="section-kicker">01 · Executive Summary / 핵심 요약</p>
+    <h2>Gemma의 Amy/RAG 조건이 가장 높았지만 “Gemma 모델 승리”로 해석할 수는 없습니다</h2>
+    <div class="verdict"><strong>최종 요약:</strong> 관측 평균은 Gemini Flash 3.6 <strong>8.20</strong>, Claude Sonnet 5 <strong>8.70</strong>, Gemma E4B Amy Prompt <strong>9.52</strong>, Policy RAG <strong>9.83</strong>, Full RAG <strong>9.95</strong> 순이었습니다. 일반 모델도 별도 Amy 정보 없이 높은 점수를 냈으므로 v6 문항에는 상당한 CFO 판단 단서가 있습니다. 동시에 동일 Gemma 모델 안에서는 Policy RAG가 +0.31, Full RAG가 +0.43 개선되어 메모리의 방향성 효과가 관측됐습니다. 다만 외부 모델과 Gemma는 반복 수·프롬프트·채점자가 달라 <strong>모델 자체 우열을 증명하지 않습니다.</strong></div>
+    <div class="metric-grid">
+      <div class="metric generic"><div class="label">Gemini Flash 3.6</div><div class="value">8.20</div><div class="detail">일반 CFO · Codex · n=1</div></div>
+      <div class="metric generic"><div class="label">Claude Sonnet 5</div><div class="value">8.70</div><div class="detail">일반 CFO · Codex · n=1</div></div>
+      <div class="metric persona"><div class="label">Gemma Amy Prompt</div><div class="value">9.52</div><div class="detail">Gemma Judge · n=5</div></div>
+      <div class="metric rag"><div class="label">Gemma Policy RAG</div><div class="value">9.83</div><div class="detail">Gemma Judge · n=5</div></div>
+      <div class="metric rag"><div class="label">Gemma Full RAG</div><div class="value">9.95</div><div class="detail">Gemma Judge · n=5</div></div>
+    </div>
+    <div class="decision-grid">
+      <div class="decision"><span class="tag pass">SUPPORTED</span><strong>일반 LLM도 고득점</strong><p>외부 일반 CFO 모델이 8.20·8.70을 기록해 현재 문항의 기본 난도가 충분히 높지 않음을 확인했습니다.</p></div>
+      <div class="decision"><span class="tag pass">DIRECTIONAL</span><strong>RAG 증분 효과</strong><p>동일 Gemma 안에서 Prompt→Policy→Full로 평균과 안정성이 개선됐습니다.</p></div>
+      <div class="decision"><span class="tag fail">NOT PROVEN</span><strong>모델 우위·복제 성공</strong><p>서로 다른 채점자와 반복 조건 때문에 Gemma의 모델 우위나 Amy Hood 복제 완료는 입증되지 않았습니다.</p></div>
+    </div>
+  </section>
+
+  <section id="contract">
+    <p class="section-kicker">02 · Comparison Contract / 비교 계약</p>
+    <h2>같은 문항을 사용했지만 실험 조건은 동일하지 않습니다</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>조건</th><th>후보 모델</th><th>입력</th><th class="num">반복</th><th class="num">답변</th><th>채점</th></tr></thead>
+      <tbody>
+        <tr><td>Gemini generic</td><td>Gemini Flash 3.6</td><td>일반 CFO Prompt · Amy/RAG 없음</td><td class="num">1</td><td class="num">30</td><td>Codex 동일 루브릭 수동 채점</td></tr>
+        <tr><td>Sonnet generic</td><td>Claude Sonnet 5</td><td>일반 CFO Prompt · Amy/RAG 없음</td><td class="num">1</td><td class="num">30</td><td>Codex 동일 루브릭 수동 채점</td></tr>
+        <tr><td>Amy Prompt</td><td>Gemma 4 E4B</td><td>Amy Main Prompt · RAG 없음</td><td class="num">5</td><td class="num">150</td><td>Gemma 4 v2 calibrated Judge</td></tr>
+        <tr><td>Policy RAG</td><td>Gemma 4 E4B</td><td>Main Prompt + 검색 정책·근거</td><td class="num">5</td><td class="num">150</td><td>Gemma 4 v2 calibrated Judge</td></tr>
+        <tr><td>Full RAG</td><td>Gemma 4 E4B</td><td>Main Prompt + 정책·성찰·사건·근거</td><td class="num">5</td><td class="num">150</td><td>Gemma 4 v2 calibrated Judge</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout warning"><strong>허용되는 해석:</strong> 일반 고성능 LLM도 v6에서 높은 점수를 얻는지, Amy/RAG 조건에서 어떤 판단 순서 차이가 관측되는지, 동일 Gemma 내부에서 RAG가 증분을 만드는지 확인할 수 있습니다.</div>
+    <div class="callout danger"><strong>금지되는 해석:</strong> 이 결과로 Gemma E4B가 Gemini 또는 Sonnet보다 우수하다고 결론 내리거나, 점수 차이를 순수한 모델 효과로 해석할 수 없습니다.</div>
+  </section>
+
+  <section id="overall">
+    <p class="section-kicker">03 · Overall Results / 전체 결과</p>
+    <h2>관측 최고점은 Full RAG, 외부 일반 모델 평균은 8.45점입니다</h2>
+    <div class="bar-group">
+      <div class="bar-row"><div class="bar-label">Gemini Flash 3.6</div><div class="bar-track"><div class="bar-fill" style="width:82%"></div></div><div class="bar-value">8.20</div></div>
+      <div class="bar-row"><div class="bar-label">Claude Sonnet 5</div><div class="bar-track"><div class="bar-fill" style="width:87%"></div></div><div class="bar-value">8.70</div></div>
+      <div class="bar-row"><div class="bar-label">Gemma · Amy Prompt</div><div class="bar-track"><div class="bar-fill blue" style="width:95.2%"></div></div><div class="bar-value">9.52</div></div>
+      <div class="bar-row"><div class="bar-label">Gemma · Policy RAG</div><div class="bar-track"><div class="bar-fill green" style="width:98.33%"></div></div><div class="bar-value">9.83</div></div>
+      <div class="bar-row"><div class="bar-label">Gemma · Full RAG</div><div class="bar-track"><div class="bar-fill green" style="width:99.53%"></div></div><div class="bar-value">9.95</div></div>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>비교</th><th class="num">관측 차이</th><th>해석 가능 범위</th></tr></thead>
+      <tbody>
+        <tr><td>Sonnet − Gemini</td><td class="num">+0.50</td><td>외부 일반 모델 1회 관측 차이. 반복성 미측정.</td></tr>
+        <tr><td>Amy Prompt − Sonnet</td><td class="num">+0.82</td><td>입력·채점자·반복이 달라 모델 또는 Prompt 효과로 분리 불가.</td></tr>
+        <tr><td>Amy Prompt − Gemini</td><td class="num">+1.32</td><td>탐색적 차이만 표시. 인과 추론 금지.</td></tr>
+        <tr><td>Policy RAG − Amy Prompt</td><td class="num best">+0.31</td><td>동일 후보·Judge·반복 조건의 통제된 RAG 증분.</td></tr>
+        <tr><td>Full RAG − Amy Prompt</td><td class="num best">+0.43</td><td>동일 후보·Judge·반복 조건의 통제된 전체 메모리 증분.</td></tr>
+        <tr><td>Full RAG − Policy RAG</td><td class="num">+0.12</td><td>추가 사건·성찰 컨텍스트의 작은 관측 증분.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="footnote">외부 일반 모델 2개의 단순 관측 평균은 8.45점이며 Full RAG와의 차이는 1.50점입니다. 이는 통계적 효과가 아니라 서로 다른 조건에서 얻은 기술 통계입니다.</p>
+  </section>
+
+  <section id="domains">
+    <p class="section-kicker">04 · Domain Comparison / 영역별 비교</p>
+    <h2>외부 모델은 가격·비용에서 강했고, Amy/RAG의 차이는 M&amp;A·AI 투자에서 컸습니다</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>영역 / Domain</th><th class="num">Gemini</th><th class="num">Sonnet</th><th class="num">Amy Prompt</th><th class="num">Policy RAG</th><th class="num">Full RAG</th></tr></thead>
+      <tbody>
+        <tr><td>M&amp;A / 인수합병</td><td class="num">7.33</td><td class="num">7.83</td><td class="num">8.90</td><td class="num best">9.93</td><td class="num">9.77</td></tr>
+        <tr><td>AI &amp; Cloud CapEx</td><td class="num">8.17</td><td class="num">7.83</td><td class="num">9.23</td><td class="num">9.53</td><td class="num best">10.00</td></tr>
+        <tr><td>Pricing &amp; Monetization</td><td class="num">9.00</td><td class="num">9.50</td><td class="num">9.77</td><td class="num best">10.00</td><td class="num best">10.00</td></tr>
+        <tr><td>Cost Efficiency</td><td class="num">8.50</td><td class="num">9.50</td><td class="num best">10.00</td><td class="num best">10.00</td><td class="num best">10.00</td></tr>
+        <tr><td>Shareholder Return &amp; Risk</td><td class="num">8.00</td><td class="num">8.83</td><td class="num">9.70</td><td class="num">9.70</td><td class="num best">10.00</td></tr>
+      </tbody>
+    </table></div>
+    <div class="card-grid">
+      <div class="card"><span class="tag info">M&amp;A</span><h3>가장 큰 정체성 차이</h3><p>외부 모델은 유동성·신용·계약 보호를 먼저 두는 경향이 강했습니다. Amy 키는 전략적 고객·플랫폼 도달을 먼저 확인한 뒤 가격·금융·실행을 공동 게이트로 둡니다.</p></div>
+      <div class="card"><span class="tag info">AI CapEx</span><h3>수요 우선순위 차이</h3><p>외부 모델은 ROI, 자금원, 전력 공급을 먼저 제시하는 경우가 있었습니다. Amy 키는 확인된 고객 수요와 용량 시급성을 먼저 보고 경제성을 후속 통제로 둡니다.</p></div>
+      <div class="card"><span class="tag hold">Pricing &amp; Cost</span><h3>문항 단서가 강함</h3><p>이탈률, 지불 의사, 매출 병목, 기여도 손실 등 명확한 신호만으로도 일반 모델이 거의 정답 정책을 복원했습니다.</p></div>
+    </div>
+  </section>
+
+  <section id="behavior">
+    <p class="section-kicker">05 · Behavior Transition / 행동 변화 정합성</p>
+    <h2>모든 조건이 100% — 성공 지표이면서 동시에 판별 실패입니다</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>조건</th><th class="num">평가 쌍</th><th class="num">행동 변화 정합</th><th>판정</th></tr></thead>
+      <tbody>
+        <tr><td>Gemini Flash 3.6</td><td class="num">15</td><td class="num best">100%</td><td>일반 CFO Prompt만으로 모두 통과</td></tr>
+        <tr><td>Claude Sonnet 5</td><td class="num">15</td><td class="num best">100%</td><td>일반 CFO Prompt만으로 모두 통과</td></tr>
+        <tr><td>Gemma Amy Prompt</td><td class="num">75</td><td class="num best">100%</td><td>5회 반복 모두 통과</td></tr>
+        <tr><td>Gemma Policy RAG</td><td class="num">75</td><td class="num best">100%</td><td>5회 반복 모두 통과</td></tr>
+        <tr><td>Gemma Full RAG</td><td class="num">75</td><td class="num best">100%</td><td>5회 반복 모두 통과</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout danger"><strong>판별력 0:</strong> “수요가 약해졌다”, “이탈률이 높아졌다”, “더 높은 수익의 투자처가 생겼다”처럼 행동 변화 방향이 문장에 직접 드러납니다. 따라서 전환 정합률은 모델·Prompt·RAG의 차이를 측정하지 못했습니다.</div>
+  </section>
+
+  <section id="patterns">
+    <p class="section-kicker">06 · Decision-Order Patterns / 판단 순서 패턴</p>
+    <h2>최종 행동보다 “무엇을 먼저 보았는가”에서 차이가 났습니다</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>영역</th><th>Gemini Flash 3.6</th><th>Claude Sonnet 5</th><th>Amy 정책 키</th></tr></thead>
+      <tbody>
+        <tr><td>M&amp;A</td><td>유동성·신용·규제 경제성을 먼저 보는 경향</td><td>생태계 계약·금융 경계를 먼저 보는 경향</td><td>전략적 고객·플랫폼 가치 → 가격·금융 → 실행 보호</td></tr>
+        <tr><td>AI CapEx</td><td>ROI·자금원·전력 일정 선행</td><td>워크로드 수익률·선택권 선행</td><td>확인 수요 → 용량 시급성 → 인프라 경제성</td></tr>
+        <tr><td>비용 효율</td><td>비용 한도와 구조조정 실행 선행</td><td>핵심 로드맵 보호를 상대적으로 잘 반영</td><td>최우선 전략 결과 → 측정 병목 → 총비용 규율</td></tr>
+        <tr><td>주주환원</td><td>현금흐름·배당·신용 선행 사례</td><td>전략 투자 우선은 강하지만 일부 배당 순서 혼합</td><td>전략 투자 → 유동성 → 지속 배당 → 선택적 자사주 매입</td></tr>
+      </tbody>
+    </table></div>
+    <p class="lead">두 외부 모델 모두 행동 자체는 매우 합리적이었습니다. 감점은 대부분 일반 CFO라면 자연스러운 순서와 Amy Hood 공개 근거에서 추출한 순서가 미묘하게 달랐기 때문에 발생했습니다.</p>
+  </section>
+
+  <section id="hypotheses">
+    <p class="section-kicker">07 · Hypothesis Review / 가설 판정</p>
+    <h2>RAG 방향성은 지지됐고, 모델 순위와 행동 전환 판별력은 입증되지 않았습니다</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>가설</th><th class="num">관측</th><th>판정</th><th>근거</th></tr></thead>
+      <tbody>
+        <tr><td>H1. 일반 고성능 LLM도 높은 점수를 기록한다</td><td class="num">8.20 / 8.70</td><td><span class="tag pass">지지</span></td><td>Amy 정보 없이 두 모델 모두 8점 이상.</td></tr>
+        <tr><td>H2. Amy/RAG 조건은 일반 CFO 답변보다 높다</td><td class="num">+0.82~+1.75</td><td><span class="tag hold">기술적 관측</span></td><td>점수는 높지만 Judge·반복·Prompt가 달라 인과 효과로 확정 불가.</td></tr>
+        <tr><td>H3. Policy RAG는 Amy Prompt를 개선한다</td><td class="num">+0.31</td><td><span class="tag pass">방향성 지지</span></td><td>동일 Gemma·Judge·5회 조건의 통제 비교.</td></tr>
+        <tr><td>H4. Full RAG는 Policy RAG를 실질적으로 개선한다</td><td class="num">+0.12</td><td><span class="tag hold">약한 지지</span></td><td>추가 입력 비용 대비 효과가 작고 M&amp;A에서는 Policy가 더 높음.</td></tr>
+        <tr><td>H5. 행동 변화 정합률이 페르소나를 판별한다</td><td class="num">모두 100%</td><td><span class="tag fail">기각</span></td><td>일반 외부 모델도 전부 통과해 조건 간 판별력이 없음.</td></tr>
+        <tr><td>H6. Gemma 모델 자체가 외부 모델보다 우수하다</td><td class="num">측정 불가</td><td><span class="tag fail">입증 불가</span></td><td>모델 외 조건이 통제되지 않음.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="validity">
+    <p class="section-kicker">08 · Validity &amp; Limitations / 유효성 한계</p>
+    <h2>이 보고서의 가장 중요한 표는 점수가 아니라 비교 불가능성의 경계입니다</h2>
+    <ol>
+      <li><strong>Judge 불일치:</strong> 외부 모델은 Codex가 채점했고 Gemma v6는 로컬 Gemma 4 v2 Judge가 채점했습니다. 동일 점수 척도를 사용했지만 채점자 성향은 통제되지 않았습니다.</li>
+      <li><strong>반복 수 불일치:</strong> 외부 모델은 각 1회, Gemma는 각 조건 5회입니다. 외부 모델의 평균·분산·선택 안정성은 알 수 없습니다.</li>
+      <li><strong>입력 조건 불일치:</strong> 외부 모델에는 일반 CFO Prompt, Gemma에는 Amy Prompt와 선택적 RAG가 들어갔습니다. 점수 차이는 모델·Prompt·메모리 효과가 섞인 결과입니다.</li>
+      <li><strong>웹 런타임 통제 부족:</strong> Gemini·Sonnet의 정확한 샘플링 설정, 숨은 시스템 지침, reasoning budget은 기록되지 않았습니다.</li>
+      <li><strong>천장 효과:</strong> 외부 모델도 8점 이상이고 Gemma 조건은 9.5점 이상입니다. 문항이 어려운 판단 충돌보다 정답 방향 단서를 많이 제공합니다.</li>
+      <li><strong>쌍 노출 위험:</strong> A/B 문항의 변화 신호가 명확해, 모델이 Amy 정책 없이도 변화 방향을 쉽게 추론할 수 있습니다.</li>
+      <li><strong>모델 명칭:</strong> Gemini Flash 3.6과 Claude Sonnet 5 표기는 사용자 제공 실행 정보이며 이 보고서에서 외부적으로 검증하지 않았습니다.</li>
+    </ol>
+  </section>
+
+  <section id="decision">
+    <p class="section-kicker">09 · Final Decision / 최종 판정</p>
+    <h2>페르소나 메모리 연구는 계속, 모델 우위 주장은 중단합니다</h2>
+    <div class="decision-grid">
+      <div class="decision"><span class="tag pass">GO</span><strong>Prompt/RAG 행동 효과 연구</strong><p>동일 Gemma 내부에서 RAG 증분과 낮은 이상치가 관측됐으므로 B Track의 후속 검증 가치는 충분합니다.</p></div>
+      <div class="decision"><span class="tag hold">RETEST</span><strong>v6 문항 판별력</strong><p>외부 모델도 고득점하고 행동 전환이 모두 100%이므로 고난도 판단 충돌 문항으로 재설계해야 합니다.</p></div>
+      <div class="decision"><span class="tag fail">NO-GO</span><strong>Gemma 우위·Amy 복제 선언</strong><p>현재 데이터는 시스템 조건 비교이지 공정한 모델 대결이 아니며 실제 인물 복제를 입증하지 않습니다.</p></div>
+    </div>
+    <div class="callout"><strong>가장 정확한 결론:</strong> “Gemma E4B + Amy Full RAG가 현재 실험에서 가장 높은 관측 점수를 기록했다. 일반 고성능 LLM도 8점 이상을 기록했으며, 통제된 결과는 동일 Gemma 내부의 RAG 증분에 한정된다.”</div>
+  </section>
+
+  <section id="next">
+    <p class="section-kicker">10 · Recommendation / 다음 단계</p>
+    <h2>정식 교차 평가는 같은 Judge·반복·입력 경계로 다시 실행해야 합니다</h2>
+    <ol>
+      <li>Gemini와 Sonnet을 각각 최소 3회, 가능하면 Gemma와 동일한 5회로 반복합니다.</li>
+      <li>모든 1,050개 후보 답변을 동일한 독립 Judge 하나로 다시 채점합니다.</li>
+      <li>일부 표본을 인간 2명 이상이 채점해 LLM Judge와의 일치도를 측정합니다.</li>
+      <li>A/B 문항을 분리·무작위화하고, 한 대화에서 짝 문항을 함께 노출하지 않습니다.</li>
+      <li>정답 방향이 명시된 단어를 줄이고, 두 선택 모두 재무적으로 타당하지만 Amy 우선순위만 다른 시나리오를 추가합니다.</li>
+      <li>M&amp;A·AI CapEx·주주환원에 “무엇을 포기하고 무엇을 끝까지 보호하는가”를 묻는 경계 문항을 집중 배치합니다.</li>
+      <li>외부 모델에는 일반 CFO와 Amy Prompt 두 조건을 모두 적용해 모델 효과와 Prompt 효과를 분리합니다.</li>
+    </ol>
+  </section>
+
+  <section id="appendix">
+    <p class="section-kicker">11 · Appendix / 재현 부록</p>
+    <h2>원본 실행과 점수 출처</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>항목</th><th>값</th></tr></thead>
+      <tbody>
+        <tr><td>v6 Experiment Group</td><td><code>37b55f38-82e1-4bfd-a061-24369d0463b1</code></td></tr>
+        <tr><td>Gemma candidate</td><td><code>Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q4_K_M.gguf</code></td></tr>
+        <tr><td>Gemma judge</td><td><code>gemma4-v2-Q8_0.gguf</code></td></tr>
+        <tr><td>Scenario bundle</td><td><code>6c5b868ddd3ed6f7aff7740690431262205ce3e71a8d0b746686d2a5d5f94102</code></td></tr>
+        <tr><td>v6 formal report</td><td><code>docs/reports/2026-07-22-amy-hood-evaluation-v6-formal.html</code></td></tr>
+        <tr><td>Sonnet source response</td><td><code>/Users/hestory/.codex/attachments/61d01abc-d3e9-4c77-8a7a-1b6c47c425c4/pasted-text.txt</code></td></tr>
+        <tr><td>Gemini source response</td><td><code>/Users/hestory/.codex/attachments/c0611ffd-9327-4d14-87ee-5088b8b5f437/pasted-text.txt</code></td></tr>
+        <tr><td>External grading</td><td>Codex · v6 five-component identity rubric · one pass per model</td></tr>
+        <tr><td>Generated</td><td>2026-07-22 · Asia/Seoul</td></tr>
+      </tbody>
+    </table></div>
+    <p class="footnote">Gemini 응답에는 scenarioId가 없었으나 30개 배열 순서와 답변 내용이 공개 시나리오 순서와 일치해 위치 기준으로 매핑했습니다. Sonnet 응답은 30개 scenarioId가 모두 포함됐습니다.</p>
+  </section>
+
+  <footer>공개 자료를 바탕으로 구성된 비공식 AI 시뮬레이션이며, Amy Hood 본인이나 Microsoft의 공식 입장이 아닙니다. 이 문서는 탐색적 교차 평가이며 정식 모델 성능 순위를 나타내지 않습니다.</footer>
+</main>
+</body>
+</html>

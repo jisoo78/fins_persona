@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Amy Hood Decision Advisor Evaluation v6 정식 5회 반복 평가 보고서">
+  <title>Amy Hood Decision Advisor — Evaluation v6 정식 실험 보고서</title>
+  <style>
+    :root {
+      --ink:#172033; --muted:#667085; --line:#d8dee9; --panel:#f7f9fc;
+      --navy:#101a31; --blue:#2859d8; --blue-soft:#edf3ff;
+      --green:#137447; --green-soft:#e9f7ef; --amber:#9a5a00;
+      --amber-soft:#fff4df; --red:#b42318; --red-soft:#fff0ee;
+      --violet:#6842b8; --violet-soft:#f2edff; --shadow:0 22px 58px rgba(24,40,72,.11);
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:#edf1f7; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif; line-height:1.65; }
+    main { width:min(1180px,calc(100% - 36px)); margin:30px auto 54px; overflow:hidden; border:1px solid var(--line); border-radius:20px; background:#fff; box-shadow:var(--shadow); }
+    header { padding:58px 62px 50px; color:#fff; background:radial-gradient(circle at 86% 14%,rgba(101,137,255,.45),transparent 30%),linear-gradient(135deg,#101a31 0%,#203c7b 62%,#315ed1 100%); }
+    .eyebrow { margin:0 0 10px; color:#b9d0ff; font-size:12px; font-weight:850; letter-spacing:.13em; text-transform:uppercase; }
+    h1 { max-width:920px; margin:0; font-size:clamp(31px,5vw,51px); line-height:1.14; letter-spacing:-.045em; }
+    header>p:not(.eyebrow) { max-width:900px; margin:15px 0 0; color:#dce7ff; font-size:17px; }
+    .meta-grid,.metric-grid,.card-grid,.flow-grid,.decision-grid { display:grid; gap:14px; }
+    .meta-grid { grid-template-columns:repeat(4,minmax(0,1fr)); margin-top:30px; }
+    .meta-card { min-width:0; padding:16px; border:1px solid rgba(255,255,255,.22); border-radius:12px; background:rgba(255,255,255,.09); }
+    .meta-card span { display:block; color:#bcd0ff; font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+    .meta-card strong { display:block; margin-top:6px; font-size:13px; overflow-wrap:anywhere; }
+    nav { position:sticky; top:0; z-index:5; display:flex; gap:8px; overflow-x:auto; padding:12px 18px; border-bottom:1px solid var(--line); background:rgba(255,255,255,.96); backdrop-filter:blur(12px); }
+    nav a { flex:0 0 auto; padding:7px 10px; border-radius:8px; color:#46546d; font-size:12px; font-weight:760; text-decoration:none; }
+    nav a:hover { color:var(--blue); background:var(--blue-soft); }
+    section { padding:42px 62px; border-bottom:1px solid var(--line); }
+    section:last-of-type { border-bottom:0; }
+    h2 { margin:0 0 18px; font-size:26px; line-height:1.25; letter-spacing:-.03em; }
+    h3 { margin:0 0 9px; font-size:17px; line-height:1.35; }
+    p { margin:9px 0; }
+    code,.mono { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+    code { padding:2px 6px; border-radius:5px; background:#edf1f6; font-size:.88em; overflow-wrap:anywhere; }
+    .section-kicker { margin-bottom:5px; color:var(--blue); font-size:12px; font-weight:850; letter-spacing:.08em; text-transform:uppercase; }
+    .lead { max-width:930px; color:#40506a; font-size:16px; }
+    .verdict { padding:22px 24px; border-left:5px solid var(--amber); border-radius:12px; background:var(--amber-soft); font-size:17px; }
+    .verdict strong { color:#774300; }
+    .metric-grid { grid-template-columns:repeat(4,minmax(0,1fr)); margin-top:20px; }
+    .metric { padding:18px; border:1px solid var(--line); border-radius:14px; background:var(--panel); }
+    .metric .label { color:var(--muted); font-size:12px; font-weight:760; }
+    .metric .value { margin-top:4px; font-size:28px; font-weight:900; letter-spacing:-.035em; }
+    .metric .detail { margin-top:4px; color:var(--muted); font-size:12px; }
+    .positive .value { color:var(--green); } .warning .value { color:var(--amber); } .neutral .value { color:var(--violet); }
+    .card-grid { grid-template-columns:repeat(3,minmax(0,1fr)); margin-top:20px; }
+    .card { padding:20px; border:1px solid var(--line); border-radius:14px; background:#fff; }
+    .card p { color:#4b5870; font-size:14px; }
+    .tag { display:inline-flex; align-items:center; gap:5px; padding:4px 9px; border-radius:999px; font-size:11px; font-weight:850; white-space:nowrap; }
+    .tag.pass { color:var(--green); background:var(--green-soft); }
+    .tag.hold { color:var(--amber); background:var(--amber-soft); }
+    .tag.fail { color:var(--red); background:var(--red-soft); }
+    .tag.info { color:var(--blue); background:var(--blue-soft); }
+    .table-wrap { width:100%; overflow-x:auto; margin-top:18px; border:1px solid var(--line); border-radius:12px; }
+    table { width:100%; min-width:760px; border-collapse:collapse; font-size:14px; }
+    th,td { padding:13px 14px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+    th { color:#43516a; background:#f0f3f8; font-size:12px; letter-spacing:.02em; }
+    tbody tr:last-child td { border-bottom:0; }
+    tbody tr:hover td { background:#fbfcfe; }
+    .num { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+    .best { color:var(--green); font-weight:850; }
+    .callout { margin-top:18px; padding:16px 18px; border-radius:11px; color:#254584; background:var(--blue-soft); }
+    .callout.warning { color:#7d4900; background:var(--amber-soft); }
+    .callout.danger { color:#822b35; background:var(--red-soft); }
+    .flow-grid { grid-template-columns:repeat(4,minmax(0,1fr)); margin-top:20px; }
+    .flow-node { position:relative; min-height:140px; padding:18px; border:1px solid #b9c8e7; border-radius:13px; background:var(--blue-soft); }
+    .flow-node:not(:last-child)::after { content:"→"; position:absolute; top:44%; right:-21px; z-index:2; color:var(--blue); font-size:24px; font-weight:900; }
+    .flow-node small { color:var(--blue); font-weight:900; }
+    .bar-group { display:grid; gap:14px; margin-top:20px; }
+    .bar-row { display:grid; grid-template-columns:210px 1fr 70px; gap:13px; align-items:center; }
+    .bar-label { font-size:13px; font-weight:760; }
+    .bar-track { height:13px; overflow:hidden; border-radius:999px; background:#e9edf3; }
+    .bar-fill { height:100%; border-radius:inherit; background:linear-gradient(90deg,#315ed1,#6f8ef0); }
+    .bar-fill.green { background:linear-gradient(90deg,#14815a,#51b489); }
+    .bar-fill.violet { background:linear-gradient(90deg,#6842b8,#9f7de2); }
+    .bar-value { text-align:right; font-size:13px; font-weight:850; }
+    .decision-grid { grid-template-columns:repeat(3,minmax(0,1fr)); margin-top:20px; }
+    .decision { padding:20px; border:1px solid var(--line); border-radius:14px; background:var(--panel); }
+    .decision strong { display:block; margin:8px 0 5px; font-size:19px; }
+    .decision p { color:#4b5870; font-size:14px; }
+    ul,ol { padding-left:22px; }
+    li+li { margin-top:7px; }
+    pre { margin:18px 0 0; overflow-x:auto; padding:20px; border-radius:13px; color:#dce7ff; background:#121c31; font-size:12px; line-height:1.65; white-space:pre-wrap; overflow-wrap:anywhere; }
+    .footnote { margin-top:13px; color:var(--muted); font-size:12px; }
+    footer { padding:28px 62px 38px; color:var(--muted); background:#f8fafc; font-size:12px; }
+    @media(max-width:900px){ header,section,footer{padding-left:28px;padding-right:28px}.meta-grid,.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card-grid,.decision-grid{grid-template-columns:1fr}.flow-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.flow-node::after{display:none} }
+    @media(max-width:620px){ main{width:100%;margin:0;border:0;border-radius:0}header,section,footer{padding-left:20px;padding-right:20px}.meta-grid,.metric-grid,.flow-grid{grid-template-columns:1fr}.bar-row{grid-template-columns:1fr 55px}.bar-track{grid-column:1/-1;grid-row:2}nav{position:static} }
+    @media print{ body{background:#fff}main{width:100%;margin:0;border:0;border-radius:0;box-shadow:none}nav{display:none}header{print-color-adjust:exact;-webkit-print-color-adjust:exact}section{break-inside:avoid;padding-top:26px;padding-bottom:26px}.table-wrap{overflow:visible}table{min-width:0;font-size:10px}th,td{padding:7px} }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">B Track · Formal Evaluation Report</p>
+    <h1>Amy Hood Decision Advisor<br>Evaluation v6 정식 실험 보고서</h1>
+    <p>공개 근거로 추출한 Amy Hood의 판단 순서·경계·반전 규칙이 Main Prompt와 동적 RAG를 통해 실제 답변 행동에 반영되는지, 450개 답변과 225개 변화 쌍으로 검증한 의사결정자·검증자 혼합형 보고서입니다.</p>
+    <div class="meta-grid">
+      <div class="meta-card"><span>Experiment Group</span><strong>37b55f38-82e1-4bfd-a061-24369d0463b1</strong></div>
+      <div class="meta-card"><span>Evaluation</span><strong>v6.0.0 · Formal · 5 repetitions</strong></div>
+      <div class="meta-card"><span>Sample</span><strong>30 scenarios · 3 arms · 450 answers</strong></div>
+      <div class="meta-card"><span>Completed</span><strong>2026-07-22 · Asia/Seoul</strong></div>
+    </div>
+  </header>
+
+  <nav>
+    <a href="#summary">요약</a><a href="#purpose">목적</a><a href="#method">방법</a><a href="#scoring">채점</a>
+    <a href="#results">결과</a><a href="#stability">반복성</a><a href="#domains">영역</a><a href="#transition">행동 변화</a>
+    <a href="#rag">RAG</a><a href="#integrity">무결성</a><a href="#limits">한계</a><a href="#decision">판정</a><a href="#appendix">부록</a>
+  </nav>
+
+  <section id="summary">
+    <p class="section-kicker">01 · Executive Summary / 핵심 요약</p>
+    <h2>RAG는 점수를 높였지만, 높은 점수 자체가 복제 성공을 뜻하지는 않습니다</h2>
+    <div class="verdict"><strong>최종 판단:</strong> v6 정식 파이프라인은 450/450 답변과 225/225 전환 채점을 완결했고, Main Prompt 대비 Policy RAG는 <strong>+0.31점</strong>, Full RAG는 <strong>+0.43점</strong>의 행동 정합성 향상을 보였습니다. 그러나 모든 실험군 평균이 9.5점 이상이고 전환 정합률도 모두 100%이므로, 현재 벤치마크에는 심한 천장 효과가 있습니다. 따라서 <strong>“RAG가 답변을 Amy 정책에 더 가깝게 만든다는 방향성”은 지지</strong>하지만, <strong>“Amy Hood의 의사결정을 완벽하게 복제했다”는 주장은 보류</strong>합니다.</div>
+    <div class="metric-grid">
+      <div class="metric positive"><div class="label">최고 평균 / Best Mean</div><div class="value">9.95</div><div class="detail">Amy + Full RAG · 10점 만점</div></div>
+      <div class="metric positive"><div class="label">Full RAG Lift</div><div class="value">+0.43</div><div class="detail">Amy Prompt 9.52 대비</div></div>
+      <div class="metric neutral"><div class="label">실행 완결성</div><div class="value">450/450</div><div class="detail">15 runs · 실패 답변 0</div></div>
+      <div class="metric warning"><div class="label">전환 정합률</div><div class="value">100%</div><div class="detail">세 조건 동일 · 판별력 경고</div></div>
+    </div>
+    <div class="decision-grid">
+      <div class="decision"><span class="tag pass">PASS</span><strong>평가 파이프라인</strong><p>응답 생성, 재개, 블라인드 패킷, 개별·쌍 채점, 해시 고정까지 정상 완료했습니다.</p></div>
+      <div class="decision"><span class="tag pass">DIRECTIONAL GO</span><strong>동적 RAG 효과</strong><p>Policy와 Full RAG 모두 Prompt 단독보다 높은 평균과 낮은 점수 분산을 보였습니다.</p></div>
+      <div class="decision"><span class="tag hold">HOLD</span><strong>페르소나 복제 주장</strong><p>통제군 부재와 천장 효과 때문에 Amy Hood 고유성 및 실제 의사결정 복제는 입증되지 않았습니다.</p></div>
+    </div>
+  </section>
+
+  <section id="purpose">
+    <p class="section-kicker">02 · Purpose / 실험 목적</p>
+    <h2>“좋은 CFO 답변”이 아니라 “Amy Hood식 판단 행동”을 측정합니다</h2>
+    <p class="lead">v6는 문장 스타일이나 인물 말투를 평가하지 않습니다. 동일한 경영 사건에서 상황이 바뀔 때 Amy Hood의 공개 근거로 추출한 우선순위, 재무적 경계, 실행 조건, 중단·전환 신호가 답변의 행동으로 나타나는지를 측정합니다.</p>
+    <div class="card-grid">
+      <div class="card"><span class="tag info">Question 1</span><h3>행동 선택</h3><p>권고한 실행이 공개 근거에서 정의한 Amy Hood의 정책 방향과 일치하는가?</p></div>
+      <div class="card"><span class="tag info">Question 2</span><h3>판단 순서</h3><p>고객 수요, 전략적 시급성, 경제성, 유동성, 실행 제약을 Amy Hood식 순서로 다루는가?</p></div>
+      <div class="card"><span class="tag info">Question 3</span><h3>조건 변화 대응</h3><p>핵심 신호가 바뀌면 행동을 유지·조정·반전하고, 유지되어야 할 원칙은 보존하는가?</p></div>
+    </div>
+    <div class="callout warning"><strong>중요:</strong> 이 평가는 Amy Hood 본인의 미공개 의사결정을 예측하는 시험이 아닙니다. 공개 자료에서 추출하고 검토한 판단 정책과의 정합성을 측정하는 비공식 AI 시뮬레이션입니다.</div>
+  </section>
+
+  <section id="method">
+    <p class="section-kicker">03 · Method / 평가 방법</p>
+    <h2>15개 사건을 초기·변화 조건으로 구성해 5회 반복했습니다</h2>
+    <div class="flow-grid">
+      <div class="flow-node"><small>01 · Dataset</small><h3>30개 시나리오</h3><p>15개 사건 쌍. 각 쌍은 초기 상황 A와 핵심 조건이 변한 상황 B로 구성됩니다.</p></div>
+      <div class="flow-node"><small>02 · Candidate</small><h3>3개 실험군</h3><p>동일 Gemma E4B에 Main Prompt, Policy RAG, Full RAG 조건만 바꿉니다.</p></div>
+      <div class="flow-node"><small>03 · Repeat</small><h3>5회 반복</h3><p>조건별 150답변, 전체 450답변을 생성하고 중단 시 완료 지점부터 재개합니다.</p></div>
+      <div class="flow-node"><small>04 · Blind Judge</small><h3>개별·쌍 채점</h3><p>실험군 정보를 숨긴 450개 개별 패킷과 225개 전환 패킷을 채점합니다.</p></div>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>실험군 / Arm</th><th>입력 구성</th><th>검증하려는 효과</th><th class="num">답변 수</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Amy Prompt</strong></td><td>Amy Main Prompt만 사용</td><td>얇은 정책 제어기 자체의 기준선</td><td class="num">150</td></tr>
+        <tr><td><strong>Amy + Policy RAG</strong></td><td>Main Prompt + 질문별 검색 정책·직접 근거</td><td>조건부 판단 정책의 증분 효과</td><td class="num">150</td></tr>
+        <tr><td><strong>Amy + Full RAG</strong></td><td>Main Prompt + 정책·성찰·사건·근거 확장</td><td>연결 기억 전체가 주는 추가 효과와 간섭</td><td class="num">150</td></tr>
+      </tbody>
+    </table></div>
+    <p class="footnote">v6는 이전 요청에 따라 일반 CFO 조건을 제외했습니다. 따라서 세 조건은 “Amy 구성 내부의 절제 비교”이며, Amy 고유성과 일반 CFO 능력을 직접 비교하는 실험은 아닙니다.</p>
+  </section>
+
+  <section id="scoring">
+    <p class="section-kicker">04 · Scoring / 평가 지표</p>
+    <h2>Action Alignment Score(행동 정합성 점수)는 다섯 요소를 합산합니다</h2>
+    <p class="lead">채점 모델은 먼저 한 문장 근거를 생성한 뒤, 각 요소를 0~4점으로 평가합니다. 요소별 가중치를 적용해 1~10점으로 환산하고, Amy 고유성이 부족하거나 경계·반전 조건이 빠지면 상한을 적용합니다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>요소</th><th>의미</th><th class="num">가중치</th></tr></thead>
+      <tbody>
+        <tr><td>Action / 행동</td><td>최종 권고와 실행 방향이 정답 정책에 맞는가</td><td class="num">20%</td></tr>
+        <tr><td>Priority Order / 판단 순서</td><td>무엇을 먼저 보고 무엇을 나중에 판단하는가</td><td class="num">25%</td></tr>
+        <tr><td>Boundaries / 경계 조건</td><td>유동성, 신용, 고객 신뢰, 수익성 등 넘지 말아야 할 선을 지키는가</td><td class="num">20%</td></tr>
+        <tr><td>Reversal / 반전 신호</td><td>어떤 조건에서 기존 결정을 중단·축소·재개할지 제시하는가</td><td class="num">20%</td></tr>
+        <tr><td>Identity Specificity / 정체성 구체성</td><td>일반 CFO 상식이 아니라 Amy Hood 공개 근거의 구체적 특징을 담는가</td><td class="num">15%</td></tr>
+      </tbody>
+    </table></div>
+    <div class="card-grid">
+      <div class="card"><span class="tag hold">MAX 7</span><h3>판단 순서 불일치</h3><p>행동이 비슷해도 핵심 판단 순서가 틀리면 고득점을 제한합니다.</p></div>
+      <div class="card"><span class="tag hold">MAX 6</span><h3>경계·반전 누락</h3><p>실행 조건이나 중단 신호가 없으면 “그럴듯한 조언” 이상으로 평가하지 않습니다.</p></div>
+      <div class="card"><span class="tag fail">MAX 4</span><h3>Amy 정책과 충돌</h3><p>명시된 공개 근거의 판단 정책과 정면으로 충돌하면 점수 상한을 강제합니다.</p></div>
+    </div>
+  </section>
+
+  <section id="results">
+    <p class="section-kicker">05 · Results / 핵심 결과</p>
+    <h2>Full RAG가 가장 높았지만 Policy RAG와의 차이는 0.12점입니다</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>실험군</th><th class="num">평균 /10</th><th class="num">Prompt 대비</th><th class="num">Amy 정합 판정</th><th>해석</th></tr></thead>
+      <tbody>
+        <tr><td>Amy Prompt</td><td class="num">9.52</td><td class="num">기준</td><td class="num">92.0%</td><td>프롬프트만으로도 높은 기준선. 일부 M&amp;A·AI CapEx 상황에서 정책 경계가 흔들림.</td></tr>
+        <tr><td>Amy + Policy RAG</td><td class="num">9.83</td><td class="num best">+0.31</td><td class="num">97.3%</td><td>정책 검색이 M&amp;A와 가격·수익화 영역을 보강. 저점 이상 사례는 3건으로 감소.</td></tr>
+        <tr><td><strong>Amy + Full RAG</strong></td><td class="num best">9.95</td><td class="num best">+0.43</td><td class="num best">99.3%</td><td>가장 높은 평균과 가장 낮은 분산. Policy RAG 대비 추가 이득은 +0.12로 작음.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="bar-group">
+      <div class="bar-row"><div class="bar-label">Amy Prompt</div><div class="bar-track"><div class="bar-fill" style="width:95.2%"></div></div><div class="bar-value">9.52</div></div>
+      <div class="bar-row"><div class="bar-label">Policy RAG</div><div class="bar-track"><div class="bar-fill green" style="width:98.33%"></div></div><div class="bar-value">9.83</div></div>
+      <div class="bar-row"><div class="bar-label">Full RAG</div><div class="bar-track"><div class="bar-fill violet" style="width:99.53%"></div></div><div class="bar-value">9.95</div></div>
+    </div>
+    <div class="callout warning"><strong>천장 효과:</strong> Prompt 단독도 9.52점이고, 전체 450개 채점 중 434개가 10점입니다. 따라서 +0.31과 +0.43은 방향성 신호로는 의미가 있지만 효과 크기를 강하게 주장하기에는 평가 여유가 부족합니다.</div>
+  </section>
+
+  <section id="stability">
+    <p class="section-kicker">06 · Repetition &amp; Distribution / 반복성과 분포</p>
+    <h2>RAG 조건은 평균뿐 아니라 반복 안정성도 개선했습니다</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>실험군</th><th class="num">1회</th><th class="num">2회</th><th class="num">3회</th><th class="num">4회</th><th class="num">5회</th><th class="num">개별 점수 표준편차</th></tr></thead>
+      <tbody>
+        <tr><td>Amy Prompt</td><td class="num">9.60</td><td class="num">9.63</td><td class="num">9.47</td><td class="num">9.23</td><td class="num">9.67</td><td class="num">1.85</td></tr>
+        <tr><td>Policy RAG</td><td class="num">10.00</td><td class="num">9.47</td><td class="num">9.77</td><td class="num">9.93</td><td class="num">10.00</td><td class="num">1.09</td></tr>
+        <tr><td>Full RAG</td><td class="num best">10.00</td><td class="num best">10.00</td><td class="num best">10.00</td><td class="num best">10.00</td><td class="num">9.77</td><td class="num best">0.57</td></tr>
+      </tbody>
+    </table></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>실험군</th><th class="num">10점</th><th class="num">8~9점</th><th class="num">6~7점</th><th class="num">1~3점</th><th class="num">상한 적용</th></tr></thead>
+      <tbody>
+        <tr><td>Amy Prompt</td><td class="num">139</td><td class="num">1</td><td class="num">2</td><td class="num">8</td><td class="num">10</td></tr>
+        <tr><td>Policy RAG</td><td class="num">146</td><td class="num">1</td><td class="num">0</td><td class="num">3</td><td class="num">3</td></tr>
+        <tr><td>Full RAG</td><td class="num best">149</td><td class="num">0</td><td class="num">0</td><td class="num">1</td><td class="num">1</td></tr>
+      </tbody>
+    </table></div>
+    <p class="lead">Prompt 단독의 반복 평균 범위는 9.23~9.67이었고 Full RAG는 네 번의 10.00과 한 번의 9.77을 기록했습니다. 다만 대부분이 10점인 분포에서는 낮은 표준편차가 실제 일반화 성능보다 채점 포화를 반영할 수 있습니다.</p>
+  </section>
+
+  <section id="domains">
+    <p class="section-kicker">07 · Domain &amp; Component Analysis / 영역·요소 분석</p>
+    <h2>가장 큰 개선은 M&amp;A와 AI·클라우드 CapEx에서 나타났습니다</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>영역 / Domain</th><th class="num">Prompt</th><th class="num">Policy RAG</th><th class="num">Full RAG</th><th class="num">Full − Prompt</th></tr></thead>
+      <tbody>
+        <tr><td>M&amp;A / 인수합병</td><td class="num">8.90</td><td class="num best">9.93</td><td class="num">9.77</td><td class="num best">+0.87</td></tr>
+        <tr><td>AI &amp; Cloud CapEx / AI·클라우드 투자</td><td class="num">9.23</td><td class="num">9.53</td><td class="num best">10.00</td><td class="num best">+0.77</td></tr>
+        <tr><td>Pricing &amp; Monetization / 가격·수익화</td><td class="num">9.77</td><td class="num best">10.00</td><td class="num best">10.00</td><td class="num">+0.23</td></tr>
+        <tr><td>Cost Efficiency / 비용 효율</td><td class="num best">10.00</td><td class="num best">10.00</td><td class="num best">10.00</td><td class="num">0.00</td></tr>
+        <tr><td>Shareholder Return &amp; Risk / 주주환원·리스크</td><td class="num">9.70</td><td class="num">9.70</td><td class="num best">10.00</td><td class="num">+0.30</td></tr>
+      </tbody>
+    </table></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>채점 요소 / 4점</th><th class="num">Prompt</th><th class="num">Policy RAG</th><th class="num">Full RAG</th></tr></thead>
+      <tbody>
+        <tr><td>Action / 행동</td><td class="num">3.80</td><td class="num">3.93</td><td class="num best">3.98</td></tr>
+        <tr><td>Priority Order / 판단 순서</td><td class="num">3.79</td><td class="num">3.93</td><td class="num best">3.98</td></tr>
+        <tr><td>Boundaries / 경계 조건</td><td class="num">3.77</td><td class="num">3.92</td><td class="num best">3.98</td></tr>
+        <tr><td>Reversal / 반전 신호</td><td class="num">3.79</td><td class="num">3.93</td><td class="num best">3.98</td></tr>
+        <tr><td>Identity Specificity / 정체성 구체성</td><td class="num">3.78</td><td class="num">3.93</td><td class="num best">3.98</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout"><strong>관찰:</strong> Policy RAG는 M&amp;A에서 Full RAG보다 0.16점 높았고, Full RAG는 AI CapEx와 주주환원에서 만점을 기록했습니다. “Full이 모든 영역에서 항상 우월하다”기보다, 질문 영역에 따라 정책만 검색하는 편이 더 선명할 수 있음을 보여줍니다.</div>
+  </section>
+
+  <section id="transition">
+    <p class="section-kicker">08 · Transition Alignment / 행동 변화 정합성</p>
+    <h2>조건 변화 대응은 모두 통과했지만 실험군을 구분하지 못했습니다</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>실험군</th><th class="num">사건 쌍</th><th class="num">행동 변화 정합</th><th class="num">변화 신호 인용</th><th class="num">불변 원칙 보존</th></tr></thead>
+      <tbody>
+        <tr><td>Amy Prompt</td><td class="num">75</td><td class="num best">100%</td><td class="num best">100%</td><td class="num best">100%</td></tr>
+        <tr><td>Policy RAG</td><td class="num">75</td><td class="num best">100%</td><td class="num best">100%</td><td class="num best">100%</td></tr>
+        <tr><td>Full RAG</td><td class="num">75</td><td class="num best">100%</td><td class="num best">100%</td><td class="num best">100%</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout warning"><strong>해석 주의:</strong> 225개 쌍이 모두 정합 판정을 받은 것은 파이프라인 성공이지만, Prompt·Policy·Full 조건의 차이를 측정하지 못했다는 뜻이기도 합니다. 또한 일부 개별 답변은 1~3점을 받았는데 같은 사건 쌍은 정합으로 판정됐습니다. 다음 버전에서는 “두 답변이 함께 변했다”와 “각 답변이 올바르게 변했다”를 더 엄격히 결합해야 합니다.</div>
+  </section>
+
+  <section id="rag">
+    <p class="section-kicker">09 · Dynamic RAG / 실제 RAG 동작</p>
+    <h2>v6의 RAG는 릴리스 ID만 전달하지 않고 질문별 근거 본문을 주입합니다</h2>
+    <p class="lead">BGE-M3가 질문과 관련된 정책을 검색하고, Policy RAG는 선택 정책과 직접 근거를, Full RAG는 연결된 성찰·사건·반례·근거까지 확장해 Gemma 4 입력에 포함합니다. 메모리 접근 Tool Calling은 사용하지 않습니다.</p>
+    <pre>사용자 시나리오
+ 질문 기반 검색 질의
+ [Retrieved Policy / 검색 정책]
+ Priority order / 판단 우선순위
+ Recommended action / 권고 행동
+ Guardrails &amp; reversal signals / 경계·반전 신호
+ Amy Hood evidence quote / 직접 근거 인용
+ Source and retrieval metadata / 출처·검색 메타데이터
+ (Full RAG only) connected reflections, events and counterexamples
+ 답변 JSON 계약</pre>
+    <div class="table-wrap"><table>
+      <thead><tr><th>지표</th><th class="num">Prompt</th><th class="num">Policy RAG</th><th class="num">Full RAG</th></tr></thead>
+      <tbody>
+        <tr><td>총 입력 토큰</td><td class="num">199,377</td><td class="num">443,654</td><td class="num">588,586</td></tr>
+        <tr><td>Prompt 대비 입력량</td><td class="num">1.00×</td><td class="num">2.23×</td><td class="num">2.95×</td></tr>
+        <tr><td>평균 RAG 컨텍스트</td><td class="num">—</td><td class="num">1,619 tokens</td><td class="num">3,190 tokens</td></tr>
+        <tr><td>증거 첨부율</td><td class="num">—</td><td class="num best">100%</td><td class="num best">100%</td></tr>
+        <tr><td>컨텍스트 예산 준수</td><td class="num">—</td><td class="num best">100%</td><td class="num best">100%</td></tr>
+        <tr><td>No-match / 검색 실패</td><td class="num">—</td><td class="num">0</td><td class="num">0</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout warning"><strong>효율성 판단:</strong> Full RAG는 Policy RAG보다 입력 토큰이 32.7% 많지만 평균 점수 증가는 0.12점입니다. PoC 품질 신호는 긍정적이나, 운영 기본값으로 채택하려면 비용 대비 증분을 더 어려운 평가에서 재확인해야 합니다.</div>
+  </section>
+
+  <section id="integrity">
+    <p class="section-kicker">10 · Integrity &amp; Runtime / 무결성과 실행 비용</p>
+    <h2>실행·채점 산출물은 완결됐고 고정 해시로 연결됩니다</h2>
+    <div class="metric-grid">
+      <div class="metric positive"><div class="label">Candidate Answers</div><div class="value">450</div><div class="detail">완료 450 · 실패 0</div></div>
+      <div class="metric positive"><div class="label">Individual Grades</div><div class="value">450</div><div class="detail">고유 패킷 450</div></div>
+      <div class="metric positive"><div class="label">Pair Grades</div><div class="value">225</div><div class="detail">15 pairs × 3 arms × 5회</div></div>
+      <div class="metric positive"><div class="label">Judge Repair</div><div class="value">0</div><div class="detail">구조 복구 적용 0건</div></div>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>실험군</th><th class="num">입력 토큰</th><th class="num">출력 토큰</th><th class="num">응답시간 합계</th><th class="num">평균 응답시간</th></tr></thead>
+      <tbody>
+        <tr><td>Amy Prompt</td><td class="num">199,377</td><td class="num">76,711</td><td class="num">1,592.5초</td><td class="num">10.62초</td></tr>
+        <tr><td>Policy RAG</td><td class="num">443,654</td><td class="num">87,925</td><td class="num">2,040.8초</td><td class="num">13.61초</td></tr>
+        <tr><td>Full RAG</td><td class="num">588,586</td><td class="num">75,693</td><td class="num">1,972.3초</td><td class="num">13.15초</td></tr>
+        <tr><td><strong>합계</strong></td><td class="num"><strong>1,231,617</strong></td><td class="num"><strong>240,329</strong></td><td class="num"><strong>5,605.7초</strong></td><td class="num">—</td></tr>
+      </tbody>
+    </table></div>
+    <h3 style="margin-top:24px">Judge Calibration / 채점 모델 사전 보정</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>보정 지표</th><th class="num">결과</th><th>의미</th></tr></thead>
+      <tbody>
+        <tr><td>Generic leakage rate / 일반 CFO 오판율</td><td class="num best">0%</td><td>보정 표본에서 일반 답변을 Amy 정합으로 잘못 통과시키지 않음</td></tr>
+        <tr><td>Conflict leakage rate / 충돌 답변 오판율</td><td class="num best">0%</td><td>Amy 정책 충돌 답변을 통과시키지 않음</td></tr>
+        <tr><td>Amy pass rate / Amy 정합 통과율</td><td class="num best">100%</td><td>보정용 Amy 정합 답변을 모두 식별</td></tr>
+        <tr><td>Mean identity gap / 평균 정체성 간격</td><td class="num">8.97</td><td>보정 표본의 Amy 정합과 비정합 점수 차이</td></tr>
+        <tr><td>Schema valid rate / 스키마 유효율</td><td class="num best">100%</td><td>구조화 채점 출력 계약 준수</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="hypotheses">
+    <p class="section-kicker">11 · Hypothesis Review / 가설 판정</p>
+    <h2>기능 가설은 통과했지만 성능 가설은 방향성 수준입니다</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>가설</th><th class="num">관측</th><th>판정</th><th>근거 논리</th></tr></thead>
+      <tbody>
+        <tr><td>H1. Policy RAG &gt; Amy Prompt</td><td class="num">+0.31</td><td><span class="tag pass">방향성 지지</span></td><td>평균과 분산 모두 개선됐지만 점수 포화로 효과 크기 해석은 제한됨.</td></tr>
+        <tr><td>H2. Full RAG &gt; Policy RAG</td><td class="num">+0.12</td><td><span class="tag hold">약한 지지</span></td><td>평균은 높지만 추가 토큰 32.7% 대비 증분이 작고 M&amp;A에서는 Policy가 더 높음.</td></tr>
+        <tr><td>H3. RAG는 반복 안정성을 높인다</td><td class="num">SD 1.85 → 1.09 → 0.57</td><td><span class="tag pass">관측 지지</span></td><td>저점 이상과 개별 점수 분산이 단계적으로 감소. 다만 천장 효과가 일부 설명할 수 있음.</td></tr>
+        <tr><td>H4. 질문 의존형 RAG가 실제 동작한다</td><td class="num">300/300</td><td><span class="tag pass">지지</span></td><td>모든 RAG 답변에 검색 trace와 evidence가 있고 예산을 준수함.</td></tr>
+        <tr><td>H5. 행동 전환 문항이 조건을 판별한다</td><td class="num">모두 100%</td><td><span class="tag fail">미지지</span></td><td>전환 자체는 수행했지만 세 실험군을 구분하지 못해 판별 지표로 포화됨.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="failure">
+    <p class="section-kicker">12 · Outlier Analysis / 저점 이상 분석</p>
+    <h2>RAG가 반복 오류를 대부분 제거했지만 완전히 없애지는 못했습니다</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>관찰 사건</th><th>Prompt</th><th>Policy RAG</th><th>Full RAG</th><th>해석</th></tr></thead>
+      <tbody>
+        <tr><td><code>AAS-V6-AI-02-A</code></td><td>5회 중 3회 저점</td><td>1회 저점</td><td class="best">저점 없음</td><td>워크로드 성숙도, 확인 수요, 경제성의 순서를 Full RAG가 가장 안정적으로 보강.</td></tr>
+        <tr><td>M&amp;A 시나리오군</td><td>복수 저점</td><td>평균 9.93</td><td>평균 9.77</td><td>정책 검색이 개방 생태계, 신용 프로필, 가격 재산정 경계를 선명하게 제공.</td></tr>
+        <tr><td><code>AAS-V6-SR-03-B</code></td><td>정상 범위</td><td>2회차 1점</td><td class="best">저점 없음</td><td>Policy 조건에서도 단일 반복의 주주환원 반전 실패가 남음.</td></tr>
+        <tr><td><code>AAS-V6-MA-03R-B</code></td><td>3회차 3점</td><td>정상 범위</td><td>5회차 3점</td><td>독립성 약화 상황의 행동·경계 해석이 Full에서도 한 차례 흔들림.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="footnote">저점은 개별 Action Alignment Score 7점 미만을 중심으로 검토했습니다. 전체 저점 건수는 Prompt 10건, Policy RAG 3건, Full RAG 1건입니다.</p>
+  </section>
+
+  <section id="limits">
+    <p class="section-kicker">13 · Limitations &amp; Risks / 한계와 리스크</p>
+    <h2>v6의 높은 점수보다 더 중요한 것은 아직 남아 있는 검증 공백입니다</h2>
+    <ol>
+      <li><strong>일반 CFO 통제군 부재:</strong> v6는 요청에 따라 일반 CFO 조건을 제외했습니다. 따라서 RAG가 Amy Hood 고유 판단을 만든 것인지, 일반적인 고품질 CFO 조언을 강화한 것인지 분리할 수 없습니다.</li>
+      <li><strong>천장 효과:</strong> Prompt 단독이 9.52이고 450개 중 434개가 10점입니다. 더 어려운 경계·반례 시나리오가 없으면 조건 간 차이가 압축됩니다.</li>
+      <li><strong>채점 모델 계열 편향:</strong> 후보는 Gemma 4 E4B, 채점자는 Gemma 4 v2입니다. 서로 다른 체크포인트이지만 같은 모델 계열의 표현 선호가 점수에 영향을 줄 수 있습니다.</li>
+      <li><strong>LLM Judge 단독 채점:</strong> 사전 보정은 통과했지만 인간 다중 채점자 또는 다른 계열 모델과의 채점 일치도는 측정하지 않았습니다.</li>
+      <li><strong>전환 점수 포화:</strong> 개별 답변에 저점이 존재하는데도 쌍 채점은 225/225 정합입니다. 쌍 기준이 행동 방향 변화만 포착하고 절대적 정확성을 충분히 벌점화하지 못했을 수 있습니다.</li>
+      <li><strong>직접 반례 부족:</strong> 30개 정체성 키 중 직접 관찰된 대조 근거는 3개이고, 나머지 27개는 제한된 정책 전이입니다. Amy Hood가 실제로 신념을 뒤집은 직접 사건 근거가 여전히 부족합니다.</li>
+      <li><strong>실세계 유효성:</strong> 공개 자료 기반 시뮬레이션이며 Amy Hood 본인 또는 Microsoft가 결과를 검증하지 않았습니다.</li>
+    </ol>
+  </section>
+
+  <section id="decision">
+    <p class="section-kicker">14 · Final Decision / 최종 판정</p>
+    <h2>PoC 기능은 Go, 성능 방향은 Go, “복제 완료” 주장은 No-Go입니다</h2>
+    <div class="decision-grid">
+      <div class="decision"><span class="tag pass">GO</span><strong>공용 동적 RAG 엔진</strong><p>질문별 검색, 근거 본문 주입, 컨텍스트 예산, trace와 재현 해시가 실제 평가 경로에서 동작합니다.</p></div>
+      <div class="decision"><span class="tag pass">GO WITH GATE</span><strong>Full RAG 후속 검증</strong><p>최고 평균과 안정성을 보였으므로 유지하되, Policy 대비 +0.12가 비용을 정당화하는지는 고난도 문항으로 재검증합니다.</p></div>
+      <div class="decision"><span class="tag fail">NO-GO</span><strong>Amy Hood 복제 선언</strong><p>일반 CFO 대비 우위와 외부 채점자 재현성이 없으므로 실제 인물의 의사결정 복제라고 선언할 근거는 부족합니다.</p></div>
+    </div>
+    <h3 style="margin-top:26px">다음 평가의 최소 조건</h3>
+    <ol>
+      <li>M&amp;A·AI CapEx·주주환원에 집중한 고난도 경계/반전 시나리오 10~15개를 추가합니다.</li>
+      <li>일반 CFO 통제군을 품질 순위가 아니라 <strong>Amy 고유성 판별용</strong>으로 제한적으로 복원합니다.</li>
+      <li>동일 450답변 일부를 Codex 또는 다른 모델 계열과 사람 검토자가 재채점해 일치도를 측정합니다.</li>
+      <li>개별 답변이 낮으면 쌍 정합 점수도 자동 제한하도록 전환 채점 계약을 강화합니다.</li>
+      <li>Full RAG가 Policy RAG보다 의미 있게 우수한 영역에만 사건·성찰 확장을 적용하는 선택적 검색을 검토합니다.</li>
+    </ol>
+  </section>
+
+  <section id="appendix">
+    <p class="section-kicker">15 · Reproducibility Appendix / 재현 부록</p>
+    <h2>실행 ID, 모델, 고정 해시와 산출물</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>항목</th><th>값</th></tr></thead>
+      <tbody>
+        <tr><td>Experiment Group ID</td><td><code>37b55f38-82e1-4bfd-a061-24369d0463b1</code></td></tr>
+        <tr><td>Candidate model</td><td><code>Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q4_K_M.gguf</code> · <code>127.0.0.1:8080/v1</code></td></tr>
+        <tr><td>Embedding model</td><td><code>bge-m3-Q8_0.gguf</code> · <code>127.0.0.1:8081/v1</code></td></tr>
+        <tr><td>Judge model</td><td><code>gemma4-v2-Q8_0.gguf</code> · <code>127.0.0.1:8082/v1</code></td></tr>
+        <tr><td>Scenario bundle hash</td><td><code>6c5b868ddd3ed6f7aff7740690431262205ce3e71a8d0b746686d2a5d5f94102</code></td></tr>
+        <tr><td>Individual grade batch</td><td><code>b46b3533a346225e70c7c4629fa7dc1e660dfd0e750bb1cac7eb17fbf59d1577</code></td></tr>
+        <tr><td>Pair grade batch</td><td><code>358be69e87f14e4c0dbd468428f07bd2db925f641ed6f195947b244af03ca580</code></td></tr>
+        <tr><td>Judge calibration batch</td><td><code>67623f806602db1e462c20bc450e6ee071f35f8d839cdbfb4d89dad2b986b1e4</code></td></tr>
+        <tr><td>Run checkpoint</td><td><code>evaluation/v6/formal-run/active.json</code> · stage <code>complete</code></td></tr>
+        <tr><td>Run artifacts</td><td><code>evaluation/v6/runs/*.json</code> · 15 files</td></tr>
+      </tbody>
+    </table></div>
+    <pre>npm run evaluation:v6:formal -- \
+  --candidate-base-url http://127.0.0.1:8080/v1 \
+  --embedding-base-url http://127.0.0.1:8081/v1 \
+  --judge-base-url http://127.0.0.1:8082/v1 \
+  --group 37b55f38-82e1-4bfd-a061-24369d0463b1 \
+  --html docs/reports/2026-07-22-amy-hood-evaluation-v6-formal.html</pre>
+    <p class="footnote">이 보고서는 활성 checkpoint, 15개 run JSON, 450개 개별 grade, 225개 pair grade, 봉인된 v6 manifest를 직접 집계해 작성했습니다. 표시값은 반올림될 수 있으며 원본 JSON이 최종 기준입니다.</p>
+  </section>
+
+  <footer>공개 자료를 바탕으로 구성된 비공식 AI 시뮬레이션이며, Amy Hood 본인이나 Microsoft의 공식 입장이 아닙니다. · Generated from Evaluation v6 formal artifacts · 2026-07-22</footer>
+</main>
+</body>
+</html>

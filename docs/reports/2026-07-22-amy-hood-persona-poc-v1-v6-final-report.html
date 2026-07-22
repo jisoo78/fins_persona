@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="FINS Persona B Track Amy Hood Decision Advisor Evaluation v1~v6 PoC 최종 보고서">
+  <title>FINS Persona PoC 최종 보고서 — Amy Hood Decision Advisor v1~v6</title>
+  <style>
+    :root{--ink:#182230;--muted:#667085;--line:#d8dee9;--panel:#f7f9fc;--blue:#2859d8;--blue-soft:#edf3ff;--green:#137447;--green-soft:#e9f7ef;--amber:#9a5a00;--amber-soft:#fff4df;--red:#b42318;--red-soft:#fff0ee;--navy:#101a31;--shadow:0 22px 58px rgba(24,40,72,.11)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:#edf1f7;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;line-height:1.62}
+    main{width:min(1180px,calc(100% - 36px));margin:30px auto 54px;overflow:hidden;border:1px solid var(--line);border-radius:20px;background:#fff;box-shadow:var(--shadow)}
+    header{padding:58px 62px 50px;color:#fff;background:radial-gradient(circle at 87% 14%,rgba(101,137,255,.45),transparent 31%),linear-gradient(135deg,#101a31 0%,#203c7b 62%,#315ed1 100%)}
+    .eyebrow{margin:0 0 10px;color:#b9d0ff;font-size:12px;font-weight:850;letter-spacing:.13em;text-transform:uppercase}h1{max-width:940px;margin:0;font-size:clamp(31px,5vw,51px);line-height:1.14;letter-spacing:-.045em}header>p:not(.eyebrow){max-width:900px;margin:15px 0 0;color:#dce7ff;font-size:17px}
+    .meta-grid,.metric-grid,.track-grid,.decision-grid,.flow-grid{display:grid;gap:14px}.meta-grid{grid-template-columns:repeat(5,minmax(0,1fr));margin-top:30px}.meta-card{min-width:0;padding:16px;border:1px solid rgba(255,255,255,.22);border-radius:12px;background:rgba(255,255,255,.09)}.meta-card span{display:block;color:#bcd0ff;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.meta-card strong{display:block;margin-top:6px;font-size:13px;overflow-wrap:anywhere}
+    nav{position:sticky;top:0;z-index:5;display:flex;gap:8px;overflow-x:auto;padding:12px 18px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.96);backdrop-filter:blur(12px)}nav a{flex:0 0 auto;padding:7px 10px;border-radius:8px;color:#46546d;font-size:12px;font-weight:760;text-decoration:none}nav a:hover{color:var(--blue);background:var(--blue-soft)}
+    section{padding:40px 62px;border-bottom:1px solid var(--line)}section:last-of-type{border-bottom:0}h2{margin:0 0 17px;font-size:26px;line-height:1.25;letter-spacing:-.03em}h3{margin:0 0 8px;font-size:17px;line-height:1.35}p{margin:8px 0}.section-kicker{margin-bottom:5px;color:var(--blue);font-size:12px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}.lead{max-width:930px;color:#40506a;font-size:16px}
+    .verdict{padding:22px 24px;border-left:5px solid var(--amber);border-radius:12px;background:var(--amber-soft);font-size:17px}.metric-grid{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:18px}.metric{padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}.metric .label{color:var(--muted);font-size:12px;font-weight:760}.metric .value{margin-top:4px;font-size:27px;font-weight:900;letter-spacing:-.035em}.metric .detail{margin-top:4px;color:var(--muted);font-size:12px}
+    .track-grid{grid-template-columns:1fr 2fr;margin-top:19px}.track{padding:22px;border:1px solid var(--line);border-radius:14px;background:#fff}.track.primary{border-color:#b8c8ed;background:var(--blue-soft)}.track p{color:#4b5870;font-size:14px}
+    .decision-grid{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:18px}.decision{padding:19px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}.decision strong{display:block;margin:8px 0 5px;font-size:18px}.decision p{color:#4b5870;font-size:14px}
+    .tag{display:inline-flex;padding:4px 9px;border-radius:999px;font-size:11px;font-weight:850;white-space:nowrap}.pass{color:var(--green);background:var(--green-soft)}.hold{color:var(--amber);background:var(--amber-soft)}.fail{color:var(--red);background:var(--red-soft)}.info{color:var(--blue);background:var(--blue-soft)}
+    .table-wrap{width:100%;overflow-x:auto;margin-top:17px;border:1px solid var(--line);border-radius:12px}table{width:100%;min-width:720px;border-collapse:collapse;font-size:14px}th,td{padding:12px 13px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:#43516a;background:#f0f3f8;font-size:12px}tbody tr:last-child td{border-bottom:0}tbody tr:hover td{background:#fbfcfe}.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}.good{color:var(--green);font-weight:850}.warn{color:var(--amber);font-weight:850}.bad{color:var(--red);font-weight:850}
+    .flow-grid{grid-template-columns:repeat(5,minmax(0,1fr));margin-top:18px}.flow-node{position:relative;min-height:125px;padding:16px;border:1px solid #b9c8e7;border-radius:13px;background:var(--blue-soft)}.flow-node:not(:last-child)::after{content:"→";position:absolute;top:42%;right:-20px;z-index:2;color:var(--blue);font-size:22px;font-weight:900}.flow-node small{color:var(--blue);font-weight:900}.flow-node p{color:#425477;font-size:13px}
+    .callout{margin-top:17px;padding:15px 17px;border-radius:11px;color:#254584;background:var(--blue-soft)}.callout.warning{color:#7d4900;background:var(--amber-soft)}.callout.danger{color:#822b35;background:var(--red-soft)}ul,ol{margin:13px 0 0;padding-left:22px}li+li{margin-top:7px}code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}code{padding:2px 6px;border-radius:5px;background:#edf1f6;font-size:.88em;overflow-wrap:anywhere}a{color:var(--blue)}.footnote{margin-top:12px;color:var(--muted);font-size:12px}footer{padding:27px 62px 37px;color:var(--muted);background:#f8fafc;font-size:12px}
+    @media(max-width:900px){header,section,footer{padding-left:28px;padding-right:28px}.meta-grid,.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.track-grid,.decision-grid{grid-template-columns:1fr}.flow-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.flow-node::after{display:none}}
+    @media(max-width:620px){main{width:100%;margin:0;border:0;border-radius:0}.meta-grid,.metric-grid,.flow-grid{grid-template-columns:1fr}nav{position:static}header,section,footer{padding-left:20px;padding-right:20px}}
+    @media print{body{background:#fff}main{width:100%;margin:0;border:0;border-radius:0;box-shadow:none}nav{display:none}header{print-color-adjust:exact;-webkit-print-color-adjust:exact}section{break-inside:avoid;padding-top:25px;padding-bottom:25px}.table-wrap{overflow:visible}table{min-width:0;font-size:10px}th,td{padding:7px}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">Proof of Concept · Final Report</p>
+    <h1>FINS Persona PoC 최종 보고서<br>Amy Hood Decision Advisor v1~v6</h1>
+    <p>B Track Amy Hood Decision Advisor를 중심으로 판단 정책·동적 RAG·행동 평가가 어디까지 검증되었는지 의사결정 관점에서 판정합니다.</p>
+    <div class="meta-grid">
+      <div class="meta-card"><span>Period</span><strong>2026-06-23 ~ 2026-07-22</strong></div>
+      <div class="meta-card"><span>Primary Track</span><strong>B Track · Amy Hood Decision Advisor</strong></div>
+      <div class="meta-card"><span>Evaluation</span><strong>v1~v6 · 최대 450답변·5회 반복</strong></div>
+      <div class="meta-card"><span>Participants</span><strong>2명 · 송 재혁 · 최 지수</strong></div>
+      <div class="meta-card"><span>Final Decision</span><strong>Platform Go · Replication No-Go</strong></div>
+    </div>
+  </header>
+
+  <nav>
+    <a href="#summary">개요</a><a href="#background">배경</a><a href="#success">성공 기준</a><a href="#scope">범위</a><a href="#architecture">아키텍처</a><a href="#execution">실행</a><a href="#results">결과</a><a href="#assessment">평가</a><a href="#limitations">한계</a><a href="#recommendation">권고</a>
+  </nav>
+
+  <section id="summary">
+    <p class="section-kicker">01 · Executive Summary / 개요</p>
+    <h2>로컬 RAG 플랫폼은 작동했지만, 인물 복제 가설은 입증되지 않았습니다</h2>
+    <div class="verdict"><strong>핵심 판정:</strong> 공개자료→판단 정책→동적 RAG→CFO 조언→행동 평가의 전체 경로는 구현됐습니다. 그러나 일반 모델도 8.20~8.70점과 행동 전환 100%를 기록했고, RAG 증분은 사전 기준 +0.5에 못 미친 +0.31~+0.43이었습니다. 따라서 플랫폼 기술은 Go, Amy Hood 고유 판단 연구는 재평가 조건부 Go, 현재 결과를 근거로 한 복제·제품화 주장은 No-Go입니다.</div>
+    <div class="decision-grid">
+      <div class="decision"><span class="tag pass">GO</span><strong>구현 완결성</strong><p>근거 수집→정책 메모리→검색→응답→채점이 실제로 동작합니다.</p></div>
+      <div class="decision"><span class="tag fail">FAIL</span><strong>RAG 증분 KPI</strong><p>목표 +0.5 대비 Policy +0.31, Full +0.43을 기록했습니다.</p></div>
+      <div class="decision"><span class="tag hold">RETEST</span><strong>평가 판별력</strong><p>재무·회계 전문가와 고난도 문항을 다시 설계해야 합니다.</p></div>
+    </div>
+  </section>
+
+  <section id="background">
+    <p class="section-kicker">02 · Background &amp; Problem Definition / 배경과 문제 정의</p>
+    <h2>말투가 아니라 판단 순서와 조건을 재현할 수 있는가</h2>
+    <ul>
+      <li>일반 페르소나는 인물의 문체를 흉내 내지만 실제 의사결정 우선순위와 예외를 검증하기 어렵습니다.</li>
+      <li>공개자료만으로 특정 CFO의 판단 정책을 도출하고 새로운 상황에 적용할 수 있는지가 핵심 기술 질문이었습니다.</li>
+      <li>외부 상용 API의 보안·통제·마진 의존을 줄이고, 향후 회사 내부에서 통제 가능한 로컬 LLM 서비스 구조를 검증했습니다.</li>
+    </ul>
+    <div class="callout">PoC 자원은 Amy Hood의 공개 발언과 사건에서 판단 정책을 추출하고, Main Prompt와 장기 기억 RAG로 CFO 조언을 생성하는 B Track 검증에 집중했습니다.</div>
+    <div class="callout">사용한 로컬 LLM 모델(Gemma 4 E4B·12B)은 회사 인프라에서 운영 가능한 자원 범위를 고려한 선택입니다. 적은 자원으로 상용 API 수준에 접근하는 것이 목표였지만, 이번 PoC가 성능 동등성이나 실제 비용 우위를 입증한 것은 아닙니다.</div>
+  </section>
+
+  <section id="success">
+    <p class="section-kicker">03 · Goals &amp; Success Criteria / 목표와 성공 기준</p>
+    <h2>기능·평가·안전의 세 기준으로 판단했습니다</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>구분</th><th>성공 기준</th><th>최종 상태</th></tr></thead>
+      <tbody>
+        <tr><td>기능</td><td>5개 재무 영역에서 Main Prompt와 질문 의존형 RAG로 조언</td><td><span class="tag pass">달성</span></td></tr>
+        <tr><td>데이터</td><td>공개 근거와 판단 정책·사건·반례를 연결하고 홀드아웃 차단</td><td><span class="tag hold">부분 달성</span></td></tr>
+        <tr><td>검색</td><td>잘못된 정책 검색률 5% 이하, 근거 첨부와 문맥 예산 준수</td><td><span class="tag pass">달성</span></td></tr>
+        <tr><td>행동 평가</td><td>전환 정합률 75% 이상, 답변 완료율 98% 이상, 반복 표준편차 1.0 이하</td><td><span class="tag fail">수치 달성·판별 실패</span></td></tr>
+        <tr><td>증분 효과</td><td>RAG가 Prompt 단독보다 AAS 0.5점 이상 향상</td><td><span class="tag fail">미달성 · +0.31~+0.43</span></td></tr>
+        <tr><td>고유성</td><td>일반 CFO보다 Amy Hood 고유 판단을 반복적으로 더 잘 재현</td><td><span class="tag fail">미달성</span></td></tr>
+        <tr><td>안전</td><td>비공식 시뮬레이션 고지, 미공개 정보 차단, 실행 권한 분리</td><td><span class="tag pass">달성</span></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="scope">
+    <p class="section-kicker">04 · Scope / 범위</p>
+    <h2>PoC는 판단 조언과 검증에 집중했습니다</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>In-scope / 포함</th><th>Out-of-scope / 제외</th></tr></thead>
+      <tbody><tr><td>B Track Amy Hood 공개자료·Main Prompt·RAG<br>Web UI와 Evaluation v1~v6<br>로컬 LLM 응답·검색·채점 파이프라인</td><td>A Track 개인 페르소나 — B Track 집중 후 폐기<br>Amy Hood 또는 Microsoft의 공식 인증·미공개 정보<br>파인튜닝·프로덕션 운영·실제 투자 및 조직 승인</td></tr></tbody>
+    </table></div>
+    <div class="callout warning">지원 영역은 M&amp;A, AI·클라우드 CapEx, 가격·수익화, 비용 효율, 주주환원·위험입니다. 사생활·정치·미공개 Microsoft 판단은 대상이 아닙니다.</div>
+  </section>
+
+  <section id="architecture">
+    <p class="section-kicker">05 · Approach &amp; Architecture / 접근 방법과 아키텍처</p>
+    <h2>얇은 Main Prompt와 검색 가능한 구조화 기억을 분리했습니다</h2>
+    <div class="flow-grid">
+      <div class="flow-node"><small>01</small><h3>공개자료</h3><p>인터뷰·발표·대담·어닝콜을 수집하고 홀드아웃을 분리합니다.</p></div>
+      <div class="flow-node"><small>02</small><h3>판단 구조</h3><p>직접 발언을 사건·성찰·조건부 정책으로 검토합니다.</p></div>
+      <div class="flow-node"><small>03</small><h3>메모리 릴리스</h3><p>승인된 정책과 근거를 불변 버전으로 활성화합니다.</p></div>
+      <div class="flow-node"><small>04</small><h3>동적 검색</h3><p>BGE-M3가 질문별 정책과 연결 근거를 검색합니다.</p></div>
+      <div class="flow-node"><small>05</small><h3>응답·채점</h3><p>Gemma 4가 조언하고 블라인드 Judge가 행동을 평가합니다.</p></div>
+    </div>
+    <h3 style="margin-top:28px">사용한 로컬 모델과 역할</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>구성</th><th>실제 모델·설정</th><th>PoC 역할</th><th>관측 결과</th></tr></thead>
+      <tbody>
+        <tr><td>응답 모델</td><td><code>Gemma-4-E4B-Q4_K_M.gguf</code><br>Q4_K_M · llama.cpp · context 16,384 · <code>:8080</code></td><td>v3~v6 조언 생성과 Prompt/RAG 비교</td><td>v6 Full RAG 9.95<br>동일 모델 Prompt 대비 +0.43</td></tr>
+        <tr><td>채점 모델</td><td><code>gemma4-v2-Q8_0.gguf</code><br>Fable 5 증류 계열 · <code>:8082</code></td><td>v6 AAS와 행동 전환 채점</td><td>같은 Gemma 계열 편향 가능성 존재</td></tr>
+        <tr><td>검색 모델</td><td>BGE-M3 embedding · <code>:8081</code></td><td>질문과 정책·사건·성찰의 의미 기반 검색</td><td>동적 RAG 공용 검색 경로 완성</td></tr>
+      </tbody>
+    </table></div>
+    <p class="footnote">Google Gemma 4 공식 문서의 추정 Q4 로딩 메모리는 E4B 약 4.5GB, 12B 약 6.7GB입니다. 실제 사용량은 GGUF 형식, context, KV cache와 런타임에 따라 달라집니다.</p>
+
+    <h3 style="margin-top:28px">Main Prompt는 인물 소개문이 아니라 판단 정책 제어기입니다</h3>
+    <p class="lead"><a href="https://github.com/ammonhaggerty/my-digital-twin">ammonhaggerty/my-digital-twin</a> OSS 프로젝트의 구조화 페르소나·장기 기억 발상을 참고했습니다. 고정 프롬프트에는 변하지 않는 판단 규칙만 두고, 사건별 지식은 버전이 고정된 RAG 메모리에서 질문에 따라 불러옵니다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>프롬프트 계층</th><th>통제 대상</th><th>목적</th></tr></thead>
+      <tbody>
+        <tr><td>Role + Identity</td><td>CFO 조언자의 임무·정체성·권한 경계</td><td>말투 모사가 아닌 판단 역할 고정</td></tr>
+        <tr><td>Decision Principles</td><td>문제 정의, 증거, 대안 비교, trade-off</td><td>결론보다 판단 순서를 먼저 적용</td></tr>
+        <tr><td>Cross-Dimension Rules</td><td>성장·마진, 장·단기, 투자·효율, 위험·기회</td><td>상충 가치에 고정 답을 적용하지 않음</td></tr>
+        <tr><td>Grounding + Red Lines</td><td>직접 근거, 추론 표시, 환각·사적 정보 금지</td><td>인물 귀속과 사실 주장의 안전 경계</td></tr>
+        <tr><td>Unknown Policy + Output Contract</td><td>근거 부족 처리와 5단계 권고 형식</td><td>불확실해도 제한된 실무 조언 제공</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 style="margin-top:28px">왜 사건 → 성찰 → 조건부 정책인가</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>판단 계층</th><th>프로젝트에서의 의미</th><th>채택 근거</th></tr></thead>
+      <tbody>
+        <tr><td>Event / 사건</td><td>당시 조건·선택·직접 발언을 보존한 관찰 단위</td><td>Case-Based Reasoning의 과거 사례 검색·재사용·수정·보존 원리</td></tr>
+        <tr><td>Reflection / 성찰</td><td>여러 사건의 공통 판단 축, 차이, 반례와 전환 신호</td><td>Generative Agents와 Reflexion의 경험→고차원 성찰→후속 행동 구조</td></tr>
+        <tr><td>Conditional Policy / 조건부 정책</td><td>우선순위·권고 행동·예외·반전 조건을 재사용 가능한 형태로 고정</td><td>CLIN의 단순 조언보다 전이 가능한 인과적 추상화가 유용하다는 결과</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout">이 분리는 한 번의 발언을 영구적인 신념으로 확대하지 않기 위한 장치입니다. 원 사건을 보존하고, 성찰에서 반례를 비교한 뒤, 적용 조건과 reversal signal이 포함된 정책만 승인된 메모리 릴리스로 배포합니다.</div>
+  </section>
+
+  <section id="execution">
+    <p class="section-kicker">06 · What Was Done / 실행 내용</p>
+    <h2>평가 실패를 발견할 때마다 데이터와 측정 방식을 함께 수정했습니다</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>주요 작업</th><th>핵심 산출물</th></tr></thead>
+      <tbody>
+        <tr><td>범위·프롬프트·초기 RAG와 v1~v2 평가</td><td>평가 포화와 일반 CFO 판별 문제 발견</td></tr>
+        <tr><td>자료 인벤토리·직접 근거·홀드아웃·v3 계약</td><td>감사 가능한 사건 데이터와 안전 경계</td></tr>
+        <tr><td>정책 메모리·BGE-M3 동적 RAG·v3 실평가</td><td>실제 검색 경로와 메모리 릴리스</td></tr>
+        <tr><td>v4 행동 평가, v5 전환 평가, v6 정식 반복</td><td>최대 450답변·225쌍의 재현 평가</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="results">
+    <p class="section-kicker">07 · Results / 결과</p>
+    <h2>평가는 높은 점수를 만드는 과정이 아니라 잘못된 확신을 줄이는 과정이었습니다</h2>
+    <h3>실험 조건 범례</h3>
+    <p class="lead">세 조건은 동일한 Gemma E4B를 사용하고, 모델에 제공하는 프롬프트와 검색 메모리의 범위만 다릅니다.</p>
+    <div class="decision-grid">
+      <div class="decision"><span class="tag info">PROMPT</span><strong>Main Prompt만</strong><p>Amy Hood의 역할·판단 원칙·근거 규칙·응답 형식만 제공합니다. 질문별 RAG 기억은 주입하지 않습니다.</p></div>
+      <div class="decision"><span class="tag info">POLICY</span><strong>Main Prompt + Policy RAG</strong><p>질문과 관련된 승인 조건부 정책, 판단 우선순위, 권고 행동, 반전 신호와 연결 근거를 검색해 제공합니다.</p></div>
+      <div class="decision"><span class="tag info">FULL</span><strong>Main Prompt + Full RAG</strong><p>Policy 내용에 연결된 사건, 성찰, 반례와 직접 발언 근거까지 확장해 제공합니다.</p></div>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>단계</th><th>무엇을 바꿨나</th><th>핵심 결과</th><th>의미</th></tr></thead>
+      <tbody>
+        <tr><td>Pre-v1</td><td>초기 9개 객관식+6개 주관식</td><td>정답지 친화적 기준선 100%</td><td>평가 자체의 타당성 문제 발견</td></tr>
+        <tr><td>v1 <span class="tag info">복원 기록</span></td><td>15문항 초기 세트</td><td>객관식 12/12 · 주관식 22/24</td><td>만점 포화로 난이도 강화 필요</td></tr>
+        <tr><td>v2 <span class="tag info">복원 기록</span></td><td>근접 함정과 3조건 절제</td><td>Amy+RAG 7/12 · 일반 CFO 12/12</td><td>Amy 고유성 판별 실패</td></tr>
+        <tr><td>v3</td><td>30문항·4조건·실제 동적 RAG</td><td>일반·Prompt·Policy 90% · Full 83.3%</td><td>검색은 작동, 벤치마크는 기각</td></tr>
+        <tr><td>v4</td><td>10개 가상 사건의 행동 정합성</td><td>6.30 → 6.20 → 7.40 → 7.60</td><td>RAG의 방향성 있는 행동 차이 확인</td></tr>
+        <tr><td>v5</td><td>15개 사건×2단계×5회</td><td>Policy 7.97 · 전환 68.0%→78.7%</td><td>행동 전환 개선, 정식 게이트 5/7</td></tr>
+        <tr><td>v6</td><td>근거 게이트·Judge 보정·450답변</td><td>Prompt 9.52 · Policy 9.83 · Full 9.95</td><td>동일 Gemma 내 소폭 상승, KPI 미달</td></tr>
+      </tbody>
+    </table></div>
+    <p class="footnote">v1~v3는 정확도 중심, v4~v6는 행동 정합성 중심입니다. 평가 계약과 채점자가 달라 버전 간 점수를 하나의 상승 곡선으로 해석하지 않습니다.</p>
+    <h3 style="margin-top:28px">교차 모델 관측</h3>
+    <p class="lead">Amy Prompt·RAG가 없는 일반 CFO 모델도 높은 점수를 기록했습니다. 모델별 조건이 달라 순위 비교에는 사용할 수 없지만, 경량 E4B와 구조화 RAG의 실용 가능성을 탐색하는 근거로 활용했습니다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>조건</th><th>평균 AAS</th><th>행동 전환 정합</th><th>해석 제한</th></tr></thead>
+      <tbody>
+        <tr><td>Gemini Flash 3.6 · 일반 CFO</td><td class="num">8.20</td><td class="num">15/15 · 100%</td><td>Codex Judge · 1회</td></tr>
+        <tr><td>Claude Sonnet 5 · 일반 CFO</td><td class="num">8.70</td><td class="num">15/15 · 100%</td><td>Codex Judge · 1회</td></tr>
+        <tr><td>Gemma E4B · Amy Prompt</td><td class="num">9.52</td><td class="num">75/75 · 100%</td><td>로컬 Gemma Judge · 5회</td></tr>
+        <tr><td>Gemma E4B · Policy RAG</td><td class="num">9.83</td><td class="num">75/75 · 100%</td><td>Prompt 대비 +0.31</td></tr>
+        <tr><td>Gemma E4B · Full RAG</td><td class="num">9.95</td><td class="num">75/75 · 100%</td><td>Prompt 대비 +0.43</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout"><strong>제품 가능성 신호:</strong> 적은 추론 파라미터와 로컬 자원을 사용하는 E4B + Full RAG가 상용 API 모델보다 높은 관측 점수를 기록한 사실은 중요합니다. 이는 구조화 프롬프트와 외부 기억이 경량 모델의 부족한 내부 지식을 보완해 경쟁적인 답변을 만들 수 있다는 실용 가설을 지지합니다. 다만 조건이 통제되지 않았으므로 성능 동등성이나 우월성의 증명으로 표현하지 않습니다.</div>
+    <p class="footnote">외부 일반 모델은 Codex Judge 1회, Gemma는 로컬 Gemma Judge 5회로 측정해 모델 간 점수를 인과적으로 비교하거나 순위를 매길 수 없습니다.</p>
+
+    <h3 style="margin-top:28px">천장 효과가 발생한 이유</h3>
+    <div class="decision-grid">
+      <div class="decision"><span class="tag fail">1</span><strong>낮은 실질 난이도</strong><p>문항에 행동 전환 신호와 정답 방향이 비교적 명시적으로 드러났습니다.</p></div>
+      <div class="decision"><span class="tag hold">2</span><strong>LLM의 평균 수렴</strong><p>모델은 불확실한 재무 상황에서 일반적이고 안정적인 CFO 답변으로 수렴했습니다.</p></div>
+      <div class="decision"><span class="tag hold">3</span><strong>전문가 검토 부재</strong><p>재무·회계 전문가가 만든 실제 난도의 경계 조건과 함정이 부족했습니다.</p></div>
+    </div>
+    <div class="callout warning">다음 평가는 재무·회계 전문가가 실제 의사결정에서 충돌하는 회계 처리, 자본 배분, 현금흐름, 계약 조건과 리스크를 설계하고 정답·오답 근거까지 사전 동결해야 합니다.</div>
+    <div class="callout warning">로컬 LLM 선택은 단순한 실험비 절감이 아니라 향후 보안·통제·마진을 회사 내부에 두기 위한 제품 전략입니다. 다만 실제 TCO, 동시 처리량, 응답 지연, GPU 요구량과 상용 API 대비 품질은 별도 실험이 필요합니다.</div>
+  </section>
+
+  <section id="assessment">
+    <p class="section-kicker">08 · Success Criteria Assessment / 성공 기준 대비 평가</p>
+    <h2>사전에 정한 KPI와 실제 수치를 그대로 비교했습니다</h2>
+    <div class="metric-grid">
+      <div class="metric"><div class="label">플랫폼</div><div class="value good">Go</div><div class="detail">검색·응답·평가 경로 작동</div></div>
+      <div class="metric"><div class="label">RAG 증분</div><div class="value bad">Fail</div><div class="detail">목표 +0.5 · 실제 +0.31~+0.43</div></div>
+      <div class="metric"><div class="label">평가 판별력</div><div class="value bad">Fail</div><div class="detail">모든 조건 전환 100%</div></div>
+      <div class="metric"><div class="label">운영 준비</div><div class="value warn">보류</div><div class="detail">TCO·처리량·외부 검증 부족</div></div>
+    </div>
+    <ul>
+      <li><strong>달성:</strong> 5개 재무 영역, 동적 RAG, 평가 재개와 안전 경계를 갖춘 로컬 파이프라인을 구현했습니다.</li>
+      <li><strong>미달성:</strong> RAG 증분은 최소 목표보다 0.07~0.19점 부족했고 행동 전환 지표는 조건을 구분하지 못했습니다.</li>
+      <li><strong>미측정:</strong> 실제 TCO, 동시 처리량, 사람 전문가 채점 일치도와 상용 API 동일 조건 비교는 수행하지 않았습니다.</li>
+    </ul>
+  </section>
+
+  <section id="limitations">
+    <p class="section-kicker">09 · Limitations &amp; Risks / 한계와 이슈</p>
+    <h2>다음 실험의 신뢰도를 제한하는 세 가지 문제입니다</h2>
+    <ul>
+      <li><strong>데이터:</strong> 공개자료만 사용했고 직접 관찰된 반례는 3개이며, GitHub 홀드아웃은 이전 노출 가능성이 있습니다.</li>
+      <li><strong>문항:</strong> 명시적 전환 단서와 일반 CFO 정답이 많아 모델별 판단 차이가 사라졌습니다.</li>
+      <li><strong>검증:</strong> 재무·회계 전문가와 독립된 인간 평가자가 문항·정답·채점을 검토하지 않았습니다.</li>
+    </ul>
+  </section>
+
+  <section id="recommendation">
+    <p class="section-kicker">10 · Recommendation / 결론 및 권고</p>
+    <h2>다음 단계는 평가 전문성과 비교 통제를 높이는 것입니다</h2>
+    <div class="decision-grid">
+      <div class="decision"><span class="tag fail">1 · REDESIGN</span><strong>전문가 공동 출제</strong><p>재무·회계 전문가가 실제 난도의 경계 조건, 함정 선택지와 정답 근거를 동결합니다.</p></div>
+      <div class="decision"><span class="tag hold">2 · CONTROL</span><strong>동일 조건 비교</strong><p>모든 모델에 같은 입력·Judge·반복·샘플링을 적용하고 사람 검토로 채점 일치도를 확인합니다.</p></div>
+      <div class="decision"><span class="tag pass">3 · MEASURE</span><strong>로컬 제품성</strong><p>E4B·12B의 TCO, 처리량, 지연, GPU 자원과 보안 운영성을 상용 API와 별도로 비교합니다.</p></div>
+    </div>
+  </section>
+
+  <section id="closing-note">
+    <p class="section-kicker">Closing Note / 프로젝트를 마치며</p>
+    <h2>높은 점수보다, 믿을 수 있는 판단 기준을 찾는 데 집중했습니다</h2>
+    <p class="lead">처음에는 공개자료를 모아 프롬프트와 RAG에 넣으면 의사결정 페르소나를 만들 수 있다고 생각했습니다. 그러나 실제 작업은 훨씬 더 집요한 검증의 연속이었습니다. 프롬프트를 고치고 로컬 모델을 다시 실행하며, 점수가 달라질 때마다 원인이 프롬프트인지, 검색된 기억인지, 모델 변동성인지, Judge의 흔들림인지 하나씩 분리했습니다. 만점에 가까운 결과가 나와도 평가가 쉬웠다면 성공으로 포장하지 않고 문항과 기준을 다시 만들었습니다.</p>
+    <h3 style="margin-top:24px">정답이 존재하는가를 의심하게 만든 Costco 시나리오</h3>
+    <p class="lead">Costco는 2024년 회원비 인상을 공식 발표했고, CFO는 코로나와 고물가를 고려해 통상적인 인상 시점보다 약 2년 늦췄다고 설명했습니다. 시행 초기에는 회원 반응과 갱신 추세에도 유의미한 변화가 없었습니다. 실제 Costco CFO는 상황이 회복됐다고 보고 미래 전략을 위해 리스크를 감수하고 인상을 실행했지만, 같은 사건에서 착안한 가상 시나리오의 Amy Hood 페르소나는 보류·추가 검토·리스크 완화 쪽으로 주저했습니다. </p>
+    <div class="callout warning"><strong>여기서 근본적인 회의가 생겼습니다.</strong> 실제 사건은 결과를 알고 있으므로 성공적인 결정이었다고 평가할 수 있지만, 가상 시나리오의 미래는 누구도 알 수 없습니다. 강행한 Costco CFO와 주저한 Amy Hood 페르소나 중 누가 정답이라고 말할 수 있는지, 사후 결과를 가상의 정답지로 사용하는 것이 타당한지 답하기 어려웠습니다. 결론이 다르다는 이유로 페르소나를 틀렸다고 하면 당시의 불확실성과 위험 선호를 지우고, 반대로 모든 결론을 성향 차이로 인정하면 평가 자체가 성립하지 않습니다. 이 모순은 유명인의 미래 의사결정을 객관식 정답처럼 채점하려는 PoC 접근의 근본적인 한계였습니다.</div>
+  </section>
+</main>
+</body>
+</html>

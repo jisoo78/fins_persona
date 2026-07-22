@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amy Hood Evaluation v5 — Gemma 4 12B 블라인드 채점 보고서</title>
+  <style>
+    :root{color-scheme:light;--ink:#18212f;--muted:#5c6878;--line:#dbe2ea;--bg:#f5f7fa;--card:#fff;--navy:#153e75;--blue:#315efb;--green:#13795b;--amber:#9a6700;--red:#b42318}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",sans-serif}main{max-width:1180px;margin:0 auto;padding:40px 20px 64px}h1{margin:0 0 8px;font-size:30px;line-height:1.25}h2{margin:0 0 14px;color:var(--navy);font-size:21px}p{margin:8px 0}.sub,.muted{color:var(--muted)}.card{margin-top:20px;padding:22px;background:var(--card);border:1px solid var(--line);border-radius:14px}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}.metric{padding:16px;border:1px solid var(--line);border-radius:12px}.metric strong{display:block;margin-top:3px;font-size:27px}.rank1{border-color:#8bc6b3;background:#f0fbf7}table{width:100%;border-collapse:collapse;margin-top:12px}th,td{padding:9px 11px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}th{background:#f8fafc}.num{text-align:right;font-variant-numeric:tabular-nums}.good{color:var(--green);font-weight:700}.warn{color:var(--amber);font-weight:700}.bad{color:var(--red);font-weight:700}code{padding:2px 5px;background:#eef2f6;border-radius:5px;overflow-wrap:anywhere}ul,ol{margin:8px 0 0;padding-left:22px}.note,.warning,.danger{padding:14px 16px;margin-top:14px;border-left:4px solid var(--blue);background:#eef4ff}.warning{border-left-color:var(--amber);background:#fff9e8}.danger{border-left-color:var(--red);background:#fff1f0}.table-wrap{overflow-x:auto}.detail-table{min-width:980px;font-size:13px}.score{font-weight:800;text-align:center}.footer{margin-top:22px;color:var(--muted);font-size:13px}@media(max-width:760px){.summary{grid-template-columns:1fr}table{font-size:13px}th,td{padding:8px}}@media print{body{background:#fff}.card{break-inside:avoid}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Amy Hood Evaluation v5 — Gemma 4 12B 블라인드 채점</h1>
+    <p class="sub">대조 메모리 90답변 · 독립 로컬 LLM Judge 방향성 평가 · 2026-07-21</p>
+  </header>
+
+  <section class="card">
+    <h2>1. 실험 목적(Experiment Purpose)</h2>
+    <p>동일한 30개 2단계 경영 시나리오에 대한 Main Prompt, Policy RAG, Full RAG의 90개 답변을 별도의 Gemma 4 12B 모델이 블라인드로 채점했다. 목적은 생성 조건명을 숨긴 상태에서도 Amy Hood 판단 정책과의 행동 정합성 차이가 관측되는지 확인하는 것이다.</p>
+    <table><tbody>
+      <tr><th>실험 그룹 ID</th><td><code>06dc1c70-9459-4a08-929c-03f88fcbd64d</code></td></tr>
+      <tr><th>채점 배치 Hash</th><td><code>be27a779bdb95c22f2a50ca04ea8faf2be563c71a6fc213e7af3b0d7bc87e9c4</code></td></tr>
+      <tr><th>답변 생성 조건</th><td>Main Prompt 30개 · Policy RAG 30개 · Full RAG 30개</td></tr>
+      <tr><th>채점 모델</th><td><code>gemma4-v2-Q8_0.gguf</code> · 약 12B · 로컬 8082</td></tr>
+      <tr><th>채점 상태</th><td>90/90 완전 재채점 · 재사용 0개 · 평균 AAS 9.08/10</td></tr>
+      <tr><th>구조화 메모리</th><td><code>v1-f5179455237d</code> · 사건 13개, Reflection 5개, Policy 5개</td></tr>
+    </tbody></table>
+  </section>
+
+  <section class="card">
+    <h2>2. 평가 방법(Evaluation Method)</h2>
+    <p>Judge에는 생성 조건명을 제외한 시나리오, 후보 답변, 동결된 Alignment Key만 제공했다. 각 답변은 두 단계로 평가했다.</p>
+    <ol>
+      <li><strong>근거 생성(Rationale Generation):</strong> 후보 행동이 정책과 일치하거나 충돌하는 이유를 한 문장으로 작성한다.</li>
+      <li><strong>점수 생성(Score Generation):</strong> 앞선 근거를 바탕으로 1~10점 AAS와 행동·우선순위·가드레일·반전 신호의 네 앵커 판정을 JSON으로 생성한다.</li>
+    </ol>
+    <ul>
+      <li><strong>고정합(High Alignment):</strong> 8~10점</li>
+      <li><strong>부분 정합(Partial Alignment):</strong> 5~7점</li>
+      <li><strong>충돌(Conflict):</strong> 1~4점</li>
+      <li><strong>엄격 쌍 정합(Strict Pair Alignment):</strong> 같은 사건의 A/B 두 단계가 모두 8점 이상</li>
+    </ul>
+    <p class="note"><strong>동일 조건 재채점:</strong> 90개 전체를 서버 <code>--reasoning off</code> 조건에서 처음부터 다시 채점했다. <code>resumedCount=0</code>, <code>gradedCount=90</code>이므로 이전 혼합 설정의 Grade는 이번 결과에 포함되지 않는다.</p>
+  </section>
+
+  <section class="card">
+    <h2>3. 최종 결과(Result Summary)</h2>
+    <div class="summary">
+      <div class="metric"><span>Main Prompt only</span><strong>9.03 / 10</strong><span>고정합 26/30 · 엄격 쌍 11/15</span></div>
+      <div class="metric"><span>Policy RAG</span><strong>9.00 / 10</strong><span>고정합 26/30 · 엄격 쌍 11/15</span></div>
+      <div class="metric rank1"><span>Full RAG</span><strong>9.20 / 10</strong><span class="good">평균 1위 · 고정합 27/30 · 엄격 쌍 12/15</span></div>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>영역(Domain)</th><th class="num">Prompt</th><th class="num">Policy RAG</th><th class="num">Full RAG</th></tr></thead>
+      <tbody>
+        <tr><td>M&amp;A</td><td class="num good">9.67</td><td class="num bad">7.67</td><td class="num bad">7.50</td></tr>
+        <tr><td>AI·Cloud CapEx</td><td class="num">8.83</td><td class="num">8.50</td><td class="num good">9.83</td></tr>
+        <tr><td>가격·수익화</td><td class="num">8.83</td><td class="num">9.00</td><td class="num">8.67</td></tr>
+        <tr><td>비용 효율</td><td class="num good">10.00</td><td class="num good">10.00</td><td class="num good">10.00</td></tr>
+        <tr><td>주주환원·위험</td><td class="num bad">7.83</td><td class="num good">9.83</td><td class="num good">10.00</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note"><strong>핵심 판정:</strong> Full RAG가 전체 평균은 가장 높았지만 영역별 효과는 정반대였다. RAG는 AI·Cloud와 주주환원 판단을 개선한 반면 M&amp;A의 중단 판단은 Prompt-only보다 크게 악화했다. Policy RAG 평균은 Prompt-only보다 0.03 낮아 전체적 우월성은 확인되지 않았다.</p>
+  </section>
+
+  <section class="card">
+    <h2>4. 조건 간 행동 차이(Arm-to-Arm Difference)</h2>
+    <table><thead><tr><th>비교</th><th class="num">승</th><th class="num">동점</th><th class="num">패</th><th class="num">평균 차이</th></tr></thead><tbody>
+      <tr><td>Policy RAG vs Prompt</td><td class="num">5</td><td class="num">21</td><td class="num">4</td><td class="num bad">-0.03</td></tr>
+      <tr><td>Full RAG vs Prompt</td><td class="num">5</td><td class="num">21</td><td class="num">4</td><td class="num good">+0.17</td></tr>
+      <tr><td>Full RAG vs Policy RAG</td><td class="num">3</td><td class="num">24</td><td class="num">3</td><td class="num good">+0.20</td></tr>
+    </tbody></table>
+    <p>대부분의 문항이 동점이며 평균 차이는 소수의 큰 성공·실패가 만들었다. 따라서 평균 9점대라는 사실보다 <strong>어떤 사건에서 행동이 뒤집혔는지</strong>가 더 중요한 결과다.</p>
+  </section>
+
+  <section class="card">
+    <h2>5. Codex 간이 채점과 비교(Judge Comparison)</h2>
+    <table><thead><tr><th>조건</th><th class="num">Codex 간이 채점</th><th class="num">Gemma 4 12B</th><th class="num">차이</th></tr></thead><tbody>
+      <tr><td>Main Prompt</td><td class="num">8.37</td><td class="num">9.03</td><td class="num">+0.66</td></tr>
+      <tr><td>Policy RAG</td><td class="num">8.73</td><td class="num">9.00</td><td class="num">+0.27</td></tr>
+      <tr><td>Full RAG</td><td class="num">8.50</td><td class="num">9.20</td><td class="num">+0.70</td></tr>
+    </tbody></table>
+    <p class="danger"><strong>채점자 불일치:</strong> Codex는 Policy RAG를 1위로, Gemma Judge는 Full RAG를 1위로 평가했다. Gemma의 90개 점수는 10점 74개, 9점 5개, 2~4점 11개이며 5~8점은 한 건도 없다. 이 강한 양극화와 천장효과 때문에 0.2점 내외의 평균 차이를 모델 우열로 해석하기 어렵다.</p>
+    <p>이전 혼합 설정 배치 평균 9.056에서 동일 설정 재채점 평균 9.078로 변화 폭은 +0.022였다. 설정 정합성은 확보됐지만 천장효과와 조건 순위는 그대로 유지됐다.</p>
+  </section>
+
+  <section class="card">
+    <h2>6. 시나리오별 채점(30 Scenarios × 3 Arms)</h2>
+    <div class="table-wrap"><table class="detail-table">
+      <thead><tr><th>문항</th><th class="score">Prompt</th><th class="score">Policy</th><th class="score">Full</th><th>대표 Judge 근거</th></tr></thead>
+      <tbody>
+        <tr><td>AI-01-A</td><td class="score">10</td><td class="score">10</td><td class="score">10</td><td>검증된 수요에 연동한 단계적 투자와 운영비 절제가 정책에 일치했다.</td></tr>
+        <tr><td>AI-01-B</td><td class="score">10</td><td class="score">10</td><td class="score">10</td><td>실험 워크로드와 인력 증가를 경제성·안정성 마일스톤에 연동했다.</td></tr>
+        <tr><td>AI-02-A</td><td class="score bad">3</td><td class="score bad">2</td><td class="score good">10</td><td>Prompt·Policy는 성숙도와 무관한 CapEx 상향으로 미분화 승인 금지 원칙과 충돌했다.</td></tr>
+        <tr><td>AI-02-B</td><td class="score">10</td><td class="score">10</td><td class="score">9</td><td>수요와 수익성 증거를 기준으로 자원을 재배치했다.</td></tr>
+        <tr><td>AI-03-A</td><td class="score">10</td><td class="score">10</td><td class="score">10</td><td>수요 기반 CapEx 확대와 감가상각·활용률 통제를 병행했다.</td></tr>
+        <tr><td>AI-03-B</td><td class="score">10</td><td class="score">9</td><td class="score">10</td><td>약화된 수요 신호에 맞춰 투자 속도를 가역적으로 조정했다.</td></tr>
+        <tr><td>CE-01-A</td><td class="score">10</td><td class="score">10</td><td class="score">10</td><td>수요 감소에 비용을 맞추면서 핵심 로드맵을 보호했다.</td></tr>
+        <tr><td>CE-01-B</td><td class="score">10</td><td class="score">10</td><td class="score">10</td><td>총 절감 목표를 유지하면서 핵심 병목으로 자원을 재배치했다.</td></tr>
+        <tr><td>CE-02-A</td><td class="score">10</td><td class="score">10</td><td class="score">10</td><td>광범위한 확장 대신 명확한 ROI가 있는 병목에 선별 투자했다.</td></tr>
+        <tr><td>CE-02-B</td><td class="score">10</td><td class="score">10</td><td class="score">10</td><td>전체 비용 상한 안에서 저우선순위 자원을 핵심 AI 팀으로 이동했다.</td></tr>
+        <tr><td>CE-03-A</td><td class="score">10</td><td class="score">10</td><td class="score">10</td><td>비용 절감과 차별화 프랜차이즈 보호를 함께 달성했다.</td></tr>
+        <tr><td>CE-03-B</td><td class="score">10</td><td class="score">10</td><td class="score">10</td><td>가치 훼손 제거를 멈추고 일반 콘텐츠·관리 중복으로 절감을 재지정했다.</td></tr>
+        <tr><td>MA-01-A</td><td class="score">9</td><td class="score">10</td><td class="score">10</td><td>전략적 도달과 가격 규율을 문턱으로 둔 제한적 인수를 선택했다.</td></tr>
+        <tr><td>MA-01-B</td><td class="score">10</td><td class="score">10</td><td class="score">10</td><td>전략적 가치를 보존하면서 현금·약정 구조를 재조정했다.</td></tr>
+        <tr><td>MA-02-A</td><td class="score good">10</td><td class="score bad">3</td><td class="score bad">2</td><td>규제 승인 경로가 무너졌는데 RAG 조건은 전략적 가치만으로 거래 진행을 고수했다.</td></tr>
+        <tr><td>MA-02-B</td><td class="score">9</td><td class="score">10</td><td class="score">10</td><td>승인 경로 회복 후 시너지 감소와 구제 조치를 반영해 재개했다.</td></tr>
+        <tr><td>MA-03-A</td><td class="score">10</td><td class="score">10</td><td class="score">10</td><td>전략적 확장과 투자등급·통합 위험 경계를 함께 관리했다.</td></tr>
+        <tr><td>MA-03-B</td><td class="score good">10</td><td class="score bad">3</td><td class="score bad">3</td><td>독립성과 투자등급 경계가 모두 훼손됐는데 RAG 조건은 성장세를 이유로 진행했다.</td></tr>
+        <tr><td>PM-01-A</td><td class="score">10</td><td class="score">10</td><td class="score">10</td><td>검증된 가치를 단계적으로 수익화하고 시장 반응을 관측했다.</td></tr>
+        <tr><td>PM-01-B</td><td class="score">10</td><td class="score">10</td><td class="score">10</td><td>시장별 가격·시점·고지 기간을 좁혀 이탈 위험에 대응했다.</td></tr>
+        <tr><td>PM-02-A</td><td class="score">10</td><td class="score">10</td><td class="score">10</td><td>가치 검증과 지역별 탄력성을 전제로 가격 인상을 지지했다.</td></tr>
+        <tr><td>PM-02-B</td><td class="score">10</td><td class="score">10</td><td class="score">10</td><td>성숙 시장 가격과 성장 시장 패키징을 분리했다.</td></tr>
+        <tr><td>PM-03-A</td><td class="score">10</td><td class="score">10</td><td class="score">10</td><td>회원 가치와 충성도 확인 후 제한적으로 수수료를 인상했다.</td></tr>
+        <tr><td>PM-03-B</td><td class="score bad">3</td><td class="score bad">4</td><td class="score bad">2</td><td>갱신 의향과 구매 여력이 악화됐는데 세 조건 모두 인상을 강행했다.</td></tr>
+        <tr><td>SR-01-A</td><td class="score">10</td><td class="score">10</td><td class="score">10</td><td>매입 승인을 의무가 아닌 선택권으로 두고 투자·유동성을 우선했다.</td></tr>
+        <tr><td>SR-01-B</td><td class="score">10</td><td class="score">10</td><td class="score">10</td><td>승인 한도를 유지하면서 전략 투자에 따라 실제 매입 속도를 조절했다.</td></tr>
+        <tr><td>SR-02-A</td><td class="score bad">3</td><td class="score good">10</td><td class="score good">10</td><td>Prompt는 매입을 적극 추천해 투자·유동성 선행 위계를 놓쳤지만 RAG는 재량권을 보존했다.</td></tr>
+        <tr><td>SR-02-B</td><td class="score">10</td><td class="score">10</td><td class="score">10</td><td>전략 투자를 우선하고 자사주 매입을 선택적 수단으로 유지했다.</td></tr>
+        <tr><td>SR-03-A</td><td class="score">10</td><td class="score">10</td><td class="score">10</td><td>지속 가능한 배당과 선택적 매입 여력을 투자 유연성 아래 배치했다.</td></tr>
+        <tr><td>SR-03-B</td><td class="score bad">4</td><td class="score">9</td><td class="score good">10</td><td>현금 흐름 악화에서 Prompt는 매입 중단 경계를 놓쳤지만 RAG는 유동성 우선순위를 반영했다.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="card">
+    <h2>7. 가설, 근거, 결론(Hypothesis, Evidence, Conclusion)</h2>
+    <table><thead><tr><th>가설</th><th>관측 근거</th><th>판정</th></tr></thead><tbody>
+      <tr><td>Policy RAG는 Prompt-only보다 전반적으로 높은 정합성을 만든다.</td><td>Policy 9.00, Prompt 9.03. 5승 21동점 4패.</td><td class="bad">기각</td></tr>
+      <tr><td>Full RAG는 일부 영역에서 행동을 유의미하게 바꾼다.</td><td>주주환원 10.00, AI·Cloud 9.83이지만 M&amp;A는 7.50.</td><td class="good">지지</td></tr>
+      <tr><td>RAG는 반전·중단 판단을 일관되게 강화한다.</td><td>SR-02-A·SR-03-B는 개선했지만 MA-02-A·MA-03-B는 악화했다.</td><td class="warn">영역 의존적</td></tr>
+      <tr><td>현재 Judge는 조건 간 작은 차이를 안정적으로 구분한다.</td><td>10점 73건, 5~8점 0건, Codex와 조건 순위 불일치.</td><td class="bad">기각</td></tr>
+    </tbody></table>
+    <p><strong>최종 요약:</strong> 이번 블라인드 채점은 RAG가 답변을 실제로 바꾼다는 사실을 다시 확인했다. 특히 주주환원에서는 정책 메모리가 선행 투자와 유동성 위계를 복원했다. 그러나 M&amp;A에서는 성공 사건과 전략적 가치가 종료 경계보다 강하게 작동해 오히려 판단이 악화됐다. 따라서 현재 결과는 Amy Hood Decision Advisor의 완성도가 높다는 증거가 아니라, <strong>정책 메모리의 이익과 위험이 영역별로 모두 관측되는 단계</strong>라는 증거다.</p>
+  </section>
+
+  <section class="card">
+    <h2>8. 다음 권고(Recommended Next Step)</h2>
+    <ol>
+      <li>M&amp;A 검색·정책 적용에서 규제 feasibility, 독립성, 투자등급 경계를 전략적 가치보다 우선하는 hard gate로 만든다.</li>
+      <li>PM-03-B의 가격 연기 정책이 세 조건 모두 실패한 원인을 답변 생성 단계에서 점검한다.</li>
+      <li>Judge 점수에 5~8점 중간 구간 앵커 예시를 추가해 10점/충돌점수 양극화를 완화한다.</li>
+      <li>수정 후 1회 90답변에서 먼저 판별력을 확인한 뒤 5회 450답변으로 확장한다.</li>
+    </ol>
+  </section>
+
+  <p class="footer">Gemma 4 12B local blind judge · Single repetition · 90 fresh individual grades · reasoning off 90/90 · Pair-transition judge 미포함</p>
+</main>
+</body>
+</html>
