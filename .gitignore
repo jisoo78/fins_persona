@@ -4,12 +4,13 @@ dist/
 coverage/
 .DS_Store
 *.log
+/*.txt
+/metadata.json
 .venv/
 __pycache__/
 *.pyc
 .env*
 !.env.example
-package-lock.json
 data/vector_index/
 archive_eval/
 data/b-track/amy-hood/.analysis-cache/
@@ -20,6 +21,7 @@ data/b-track/amy-hood/.analysis-cache/
 docs/superpowers/
 
 # Evaluation runtime checkpoints and reproducible caches
+evaluation/runs/
 evaluation/v*/formal-run/
 evaluation/v*/runs/
 evaluation/v*/reports/
