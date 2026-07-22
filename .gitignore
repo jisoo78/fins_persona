@@ -14,4 +14,18 @@ data/vector_index/
 archive_eval/
 data/b-track/amy-hood/.analysis-cache/
 .worktrees/
-.superpowers/sdd/
+# Local development-process archives and agent planning documents
+.legacy/
+.superpowers/
+docs/superpowers/
+
+# Evaluation runtime checkpoints and reproducible caches
+evaluation/v*/formal-run/
+evaluation/v*/runs/
+evaluation/v*/retrieval-cache/
+evaluation/v*/judge/local-drafts/
+evaluation/v*/judge/packets/
+evaluation/v*/judge/grades/
+evaluation/v*/judge/pair-grades/
+evaluation/v*/judge/drafts/
+evaluation/v*/judge/trial-grades/
