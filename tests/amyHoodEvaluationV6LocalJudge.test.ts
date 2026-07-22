@@ -2,6 +2,7 @@
  * Test Plan:
  * 1. Happy Path:
  *    - Judge a blind packet with rationale-first calls and deterministic host scoring.
+ *    - Declare one complete, non-contradictory JSON shape for pair assessments.
  * 2. Edge Cases:
  *    - Accept fenced assessment JSON.
  *    - Resume a matching checkpoint without duplicate calls while isolating another repetition checkpoint.
@@ -17,6 +18,7 @@ import test from 'node:test';
 
 import { buildEvaluationV6JudgePacket } from '../server/evaluationV6/judge';
 import {
+  IDENTITY_PAIR_ASSESSMENT_SYSTEM,
   parseEvaluationV6JudgeAssessment,
   runEvaluationV6LocalPacketBatch,
 } from '../server/evaluationV6/localJudge';
@@ -68,6 +70,15 @@ test('happy: makes rationale-first deterministic calls and host-scores the resul
   assert.match(assessmentMessages[0].content, /"anchorFindings":\{"action":"aligned\|partial\|missing\|conflict"/);
   assert.match(assessmentMessages[0].content, /"distinguishingAnchor":\{"kind":/);
   assert.match(assessmentMessages[0].content, /Do not rewrite, repair, or improve the candidate response/i);
+});
+
+test('happy: pair assessment prompt declares one complete JSON shape', () => {
+  assert.equal((IDENTITY_PAIR_ASSESSMENT_SYSTEM.match(/Return exactly this JSON shape/g) ?? []).length, 1);
+  assert.match(IDENTITY_PAIR_ASSESSMENT_SYSTEM, /"aligned":true/);
+  assert.match(IDENTITY_PAIR_ASSESSMENT_SYSTEM, /aligned must be a JSON boolean, true or false/i);
+  assert.match(IDENTITY_PAIR_ASSESSMENT_SYSTEM, /"expectedResponseFinding":"aligned\|partial\|conflict"/);
+  assert.match(IDENTITY_PAIR_ASSESSMENT_SYSTEM, /"changedSignalFinding":"aligned\|partial\|conflict"/);
+  assert.match(IDENTITY_PAIR_ASSESSMENT_SYSTEM, /"invariantFinding":"aligned\|partial\|conflict"/);
 });
 
 test('edge: accepts fenced assessment JSON', () => {

@@ -386,9 +386,17 @@ export const runEvaluationV6LocalCalibration = async (options: {
 };
 
 export const IDENTITY_PAIR_ASSESSMENT_SYSTEM = [
-  IDENTITY_ASSESSMENT_SYSTEM,
+  'Evaluate Amy Hood identity fidelity only.',
+  'Judge the initial and changed candidate responses exactly as written. Do not rewrite, repair, or improve either response and do not answer the scenarios yourself.',
   'Compare the initial and changed answers against both Amy Identity Keys and the frozen pair transition key.',
-  'Also return aligned, expectedResponseFinding, changedSignalFinding, and invariantFinding.',
+  'Return exactly this JSON shape and no other keys:',
+  '{"identityVerdict":"amy_aligned|amy_partial|generic_cfo|amy_conflict","components":{"action":0,"priorityOrder":0,"boundaries":0,"reversal":0,"identitySpecificity":0},"anchorFindings":{"action":"aligned|partial|missing|conflict","priority":"aligned|partial|missing|conflict","guardrails":"aligned|partial|missing|conflict","reversal":"aligned|partial|missing|conflict"},"distinguishingAnchor":{"kind":"action|priority_order|boundary_condition|reversal_rule|identity_conflict","statement":"one concrete distinguishing statement"},"aligned":true,"expectedResponseFinding":"aligned|partial|conflict","changedSignalFinding":"aligned|partial|conflict","invariantFinding":"aligned|partial|conflict"}.',
+  'Replace each pipe-separated placeholder with exactly one allowed value.',
+  'Each component value is one integer from 0 through 4.',
+  'aligned must be a JSON boolean, true or false.',
+  'anchorFindings must use exactly action, priority, guardrails, and reversal; do not invent descriptive keys.',
+  'distinguishingAnchor must be an object with exactly kind and statement.',
+  'Do not return score, uncappedScore, or ceilingApplied; the host calculates them.',
   'A fluent transition that crosses an unsupported Amy reversal boundary is amy_conflict.',
 ].join(' ');
 
