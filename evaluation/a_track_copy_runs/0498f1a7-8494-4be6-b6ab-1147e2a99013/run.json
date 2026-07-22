@@ -1,0 +1,17 @@
+{
+  "runId": "0498f1a7-8494-4be6-b6ab-1147e2a99013",
+  "status": "running",
+  "model": "meta-llama/Llama-3.1-8B",
+  "sourcePromptVersionId": "llama31-8b-minimal-guardrails-v5",
+  "sourcePromptHash": "cba52ad99fa4",
+  "startedAt": "2026-07-22T00:08:06.306Z",
+  "completedAt": null,
+  "preInterviewAnswers": [],
+  "deepQuestions": [],
+  "deepAnswers": [],
+  "copyPromptPath": "evaluation/a_track_copy_runs/0498f1a7-8494-4be6-b6ab-1147e2a99013/amy_hood_copy_a_prompt.md",
+  "finalOutputPath": "evaluation/a_track_copy_runs/0498f1a7-8494-4be6-b6ab-1147e2a99013/final_output.json",
+  "actionAlignmentRunId": null,
+  "actionAlignmentAverageScore": null,
+  "reportPath": "docs/a_track_copy_experiment_0498f1a7.md"
+}

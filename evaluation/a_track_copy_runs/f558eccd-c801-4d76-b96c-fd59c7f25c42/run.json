@@ -1,0 +1,17 @@
+{
+  "runId": "f558eccd-c801-4d76-b96c-fd59c7f25c42",
+  "status": "running",
+  "model": "yuxinlu1/gemma-4-12B-agentic-fable5-composer2.5-v2-3.5x-tau2-GGUF:Q4_K_M",
+  "sourcePromptVersionId": "llama31-8b-minimal-guardrails-v5-1",
+  "sourcePromptHash": "4f11d0f48b8f",
+  "startedAt": "2026-07-22T02:25:48.051Z",
+  "completedAt": null,
+  "preInterviewAnswers": [],
+  "deepQuestions": [],
+  "deepAnswers": [],
+  "copyPromptPath": "evaluation/a_track_copy_runs/f558eccd-c801-4d76-b96c-fd59c7f25c42/amy_hood_copy_a_prompt.md",
+  "finalOutputPath": "evaluation/a_track_copy_runs/f558eccd-c801-4d76-b96c-fd59c7f25c42/final_output.json",
+  "actionAlignmentRunId": null,
+  "actionAlignmentAverageScore": null,
+  "reportPath": "docs/a_track_copy_experiment_f558eccd.md"
+}

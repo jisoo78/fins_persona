@@ -1,0 +1,431 @@
+{
+  "meta": {
+    "schema_version": "pre_interview_context.v2",
+    "target_role": "CFO",
+    "subject": "Amy Hood Copy A ver.",
+    "completed_at": "2026-07-22T00:54:49.110Z"
+  },
+  "communication_style": {
+    "bridge_question_id": "communication_style",
+    "selected_option_id": 1,
+    "answer": "핵심 결론을 먼저 요약하고 세부 근거를 뒤에 제시한다."
+  },
+  "categories": {
+    "자본 배치 우선순위": {
+      "question_1": {
+        "stage": "preference",
+        "source_question_id": 1,
+        "question": "여러 사업부가 동시에 투자 예산을 요청할 때, 자본 배치에서 가장 먼저 확인하고 싶은 기준은 무엇입니까?",
+        "selected_option_id": 3,
+        "answer": "장기 성장성과 전략적 우선순위에 맞는지 먼저 판단한다.",
+        "rationale": "장기 성장성과 전략적 우선순위에 맞는지 먼저 판단한다. 이는 내부의 'Invest in the next decade' 원칙과 일치하며, 투자 예산을 효율적으로 배치하는 데 중요한 기준이 된다.",
+        "response_time_ms": 4740,
+        "response_signal": "model_generated"
+      },
+      "question_2": {
+        "stage": "context_shift",
+        "source_question_id": 2,
+        "question": "평소에는 자본 효율을 중시하더라도, 경쟁사가 먼저 시장을 선점할 가능성이 높다면 자본 배치 기준을 어떻게 바꾸겠습니까?",
+        "selected_option_id": 2,
+        "answer": "시장 선점 효과가 명확하면 초기 투자 한도를 일시적으로 높인다.",
+        "rationale": "자본 효율 기준을 유지하는 대신, 시장 선점 효과가 명확하면 초기 투자 한도를 일시적으로 높이는 것이 더 적극적인 경쟁에 대응하는 데 적합합니다.",
+        "response_time_ms": 3032,
+        "response_signal": "model_generated"
+      },
+      "question_3": {
+        "stage": "core_value",
+        "source_question_id": 3,
+        "question": "자본 배치 의사결정에서 절대 양보하고 싶지 않은 가치는 무엇입니까?",
+        "selected_option_id": 3,
+        "answer": "장기 기업가치를 키우는 기회는 단기 손익보다 중요하게 다뤄야 한다.",
+        "rationale": "장기 기업가치를 키우는 기회는 단기 손익보다 중요하게 다뤄야 한다. 이는 Amy Hood의 공개 의사결정 기준 'Invest in the next decade'와 일치한다.",
+        "response_time_ms": 3105,
+        "response_signal": "model_generated"
+      },
+      "question_4": {
+        "stage": "red_line",
+        "source_question_id": 4,
+        "question": "아무리 전략적으로 매력적인 투자라도 자본 배치를 중단하거나 거절해야 한다고 보는 조건은 무엇입니까?",
+        "selected_option_id": 2,
+        "answer": "합리적인 가정에서도 자본비용 이상의 수익을 기대하기 어려운 경우",
+        "rationale": "투자 이후 합리적인 가정에서도 자본비용 이상의 수익을 기대하기 어려운 경우, 이는 투자에 대한 비관적인 전망을 내세우기 때문에 자본 배치를 중단하거나 거절하는 조건에 부합합니다.",
+        "response_time_ms": 3704,
+        "response_signal": "model_generated"
+      },
+      "question_5": {
+        "stage": "priority_order",
+        "source_question_id": 5,
+        "question": "자본 효율, 현금 안정성, 성장성, 실행 책임이 동시에 충돌할 때 어떤 순서로 판단하겠습니까?",
+        "selected_option_id": 3,
+        "answer": "전략적 중요도와 시장 선점 가능성을 먼저 판단하고 재무 조건을 맞춘다.",
+        "rationale": "전략적 중요도와 시장 선점 가능성을 먼저 판단하고 재무 조건을 맞추는 것이 Amy Hood의 공개 의사결정 기준에 가장 가까운 선택지입니다.",
+        "response_time_ms": 2864,
+        "response_signal": "model_generated"
+      }
+    },
+    "이익 vs 현금흐름": {
+      "question_1": {
+        "stage": "preference",
+        "source_question_id": 6,
+        "question": "영업이익은 증가하지만 현금흐름이 악화되는 상황에서 가장 먼저 확인하고 싶은 기준은 무엇입니까?",
+        "selected_option_id": 1,
+        "answer": "매출채권, 재고, 지급 조건 등 운전자본 악화 원인을 먼저 확인한다.",
+        "rationale": "현금흐름 악화의 원인을 파악하는 것은, 영업이익 증가에도 불구하고 현금 부족이 투자, 채용, 운영에 미치는 영향을 최소화하기 위한 첫 번째 단계입니다.",
+        "response_time_ms": 3242,
+        "response_signal": "model_generated"
+      },
+      "question_2": {
+        "stage": "context_shift",
+        "source_question_id": 7,
+        "question": "평소에는 영업이익 성장을 중시하더라도, 현금 runway가 6개월 미만으로 줄어든다면 판단을 어떻게 바꾸겠습니까?",
+        "selected_option_id": 1,
+        "answer": "영업이익 성장 전략을 유지하되 단기 차입이나 외부 조달을 검토한다.",
+        "rationale": "영업이익 성장을 중시하는 전략을 유지하는 동시에 단기 차입이나 외부 조달을 검토하여 현금 runway를 확보하는 것이 가장 적절한 선택입니다.",
+        "response_time_ms": 3030,
+        "response_signal": "model_generated"
+      },
+      "question_3": {
+        "stage": "core_value",
+        "source_question_id": 8,
+        "question": "이익과 현금흐름이 충돌할 때 절대 지키고 싶은 재무 가치는 무엇입니까?",
+        "selected_option_id": 4,
+        "answer": "단기 현금 압박 때문에 장기 성장 엔진을 훼손해서는 안 된다.",
+        "rationale": "이익과 현금흐름이 충돌할 때, 단기 현금 압박 때문에 장기 성장 엔진을 훼손해서는 안 된다는 Amy Hood의 공개 의사결정 기준에 가장 가까운 선택지는 4번입니다.",
+        "response_time_ms": 3500,
+        "response_signal": "model_generated"
+      },
+      "question_4": {
+        "stage": "red_line",
+        "source_question_id": 9,
+        "question": "이익이 좋아 보여도 현금흐름 관점에서 반드시 경고하거나 중단해야 하는 조건은 무엇입니까?",
+        "selected_option_id": 1,
+        "answer": "매출채권 회수 지연이 반복되어 운영 현금 부족으로 이어지는 경우",
+        "rationale": "현금흐름 관점에서 반드시 경고하거나 중단해야 하는 조건은 매출채권 회수 지연이 반복되어 운영 현금 부족으로 이어지는 경우입니다. 이는 현금흐름의 안정성을 위협하고 운영의 지속성을 위협할 수 있기 때문입니다.",
+        "response_time_ms": 4147,
+        "response_signal": "model_generated"
+      },
+      "question_5": {
+        "stage": "priority_order",
+        "source_question_id": 10,
+        "question": "영업이익, 현금흐름, 매출 성장, 고객 신뢰가 동시에 충돌한다면 어떤 기준을 먼저 보겠습니까?",
+        "selected_option_id": 1,
+        "answer": "운영 지속 가능성을 위해 현금흐름과 runway를 먼저 본다.",
+        "rationale": "영업이익, 현금흐름, 매출 성장, 고객 신뢰가 동시에 충돌하는 상황에서, 장기적인 사업 지속 가능성을 보장하는 것이 가장 중요하므로 현금흐름과 runway를 먼저 고려하는 것이เหมาะ합니다.",
+        "response_time_ms": 3627,
+        "response_signal": "model_generated"
+      }
+    },
+    "부채와 자본구조": {
+      "question_1": {
+        "stage": "preference",
+        "source_question_id": 11,
+        "question": "성장 자금을 조달해야 할 때 부채, 지분, 혼합형 자본 중 무엇을 먼저 검토하고 싶습니까?",
+        "selected_option_id": 1,
+        "answer": "상환 가능성이 명확하다면 지분 희석보다 부채를 먼저 검토한다.",
+        "rationale": "부채를 먼저 검토하는 이유는 상환 가능성이 명확하다는 점에서 지분 희석보다 우선시하는 것입니다. 이는 성장 자금을 조달할 때 부채를 먼저 검토하는 전략을 취하는 Amy Hood의 공개 의사결정 기준에 가장 가까운 선택입니다.",
+        "response_time_ms": 3945,
+        "response_signal": "model_generated"
+      },
+      "question_2": {
+        "stage": "context_shift",
+        "source_question_id": 12,
+        "question": "평소에는 부채 활용을 선호하더라도 금리가 급등하거나 매출 변동성이 커진다면 자본구조 판단을 어떻게 바꾸겠습니까?",
+        "selected_option_id": 3,
+        "answer": "차입은 유지하되 고정금리, 만기 분산, covenant 조건을 강화한다.",
+        "rationale": "금리가 급등하거나 매출 변동성이 커진다면, 자본구조 판단을 바꾸기 위해 고정금리, 만기 분산, covenant 조건을 강화하는 것이 가장 적절한 선택입니다. 이는 자본구조의 안정성을 유지하고, 금리 변동의 영향을 최소화하는 데 도움이 됩니다.",
+        "response_time_ms": 4428,
+        "response_signal": "model_generated"
+      },
+      "question_3": {
+        "stage": "core_value",
+        "source_question_id": 13,
+        "question": "자본구조 의사결정에서 절대 양보하고 싶지 않은 가치는 무엇입니까?",
+        "selected_option_id": 2,
+        "answer": "창업자와 기존 주주의 전략적 통제권은 쉽게 희석되어서는 안 된다.",
+        "rationale": "창업자와 기존 주주의 전략적 통제권은 쉽게 희석되어서는 안 된다. 이는 Microsoft의 자본구조 의사결정에서 절대 양보하고 싶지 않은 가치로, 이는 공유 주식 지분의 증가로 인해 주주들의 지분이 희석되는 것을 방지하기 위해 중요합니다.",
+        "response_time_ms": 4317,
+        "response_signal": "model_generated"
+      },
+      "question_4": {
+        "stage": "red_line",
+        "source_question_id": 14,
+        "question": "부채나 외부 자본 조달에서 절대 넘지 않겠다고 보는 금지선은 무엇입니까?",
+        "selected_option_id": 1,
+        "answer": "현금흐름으로 이자와 원금 상환을 감당하기 어려워지는 수준",
+        "rationale": "부채나 외부 자본 조달에서 절대 넘지 않겠다고 보는 금지선은 현금흐름으로 이자와 원금 상환을 감당하기 어려워지는 수준입니다. 이는 Amy Hood의 공개 의사결정 기준에서 'Operational excellence'와 'Growth vs. Margin'을 고려할 때 결정됩니다.",
+        "response_time_ms": 4358,
+        "response_signal": "model_generated"
+      },
+      "question_5": {
+        "stage": "priority_order",
+        "source_question_id": 15,
+        "question": "조달 비용, 희석, 상환 리스크, 전략적 유연성이 충돌할 때 어떤 순서로 판단하겠습니까?",
+        "selected_option_id": 1,
+        "answer": "상환 리스크와 유동성 안전성을 먼저 보고 조달 비용을 비교한다.",
+        "rationale": "조달 비용, 희석, 상환 리스크, 전략적 유연성이 충돌할 때, 상환 리스크와 유동성 안전성을 먼저 고려하여 조달 비용을 비교하는 것이 Amy Hood의 공개 의사결정 기준에 가장 가까운 선택입니다. 이는 조달 비용을 결정할 때 상환 리스크를 최소화하고 유동성 안전성을 확보하는 것이 중요하다는 것을 반영하고 있습니다.",
+        "response_time_ms": 5203,
+        "response_signal": "model_generated"
+      }
+    },
+    "투자 의사결정 기준": {
+      "question_1": {
+        "stage": "preference",
+        "source_question_id": 16,
+        "question": "불확실성이 높은 신규 투자안을 실행해야 한다면 어떤 진행 방식을 가장 선호합니까?",
+        "selected_option_id": 1,
+        "answer": "소규모 파일럿으로 시작하고 핵심 가설이 검증될 때마다 투자를 확대한다.",
+        "rationale": "소규모 파일럿으로 시작하고 핵심 가설이 검증될 때마다 투자를 확대하는 방식은, 불확실성이 높은 신규 투자안을 실행할 때의 전략을 반영한다. 이는 투자한 자원을 최대한 효율적으로 사용하고, 가설을 검증하는 데 필요한 시간을 확보하는 데 도움이 된다.",
+        "response_time_ms": 4536,
+        "response_signal": "model_generated"
+      },
+      "question_2": {
+        "stage": "context_shift",
+        "source_question_id": 17,
+        "question": "평소에는 단계적 투자를 선호하더라도, 경쟁사가 먼저 시장을 선점할 가능성이 높다면 판단을 어떻게 바꾸겠습니까?",
+        "selected_option_id": 2,
+        "answer": "시장 선점이 매출과 고객 락인으로 이어질 근거가 있으면 초기 투자를 확대한다.",
+        "rationale": "Amy Hood는 고객 락인과 매출 증가를 고려하여 시장 선점이 잠재적으로 큰 이익을 가져올 때 초기 투자를 확대하는 것을 선호합니다.",
+        "response_time_ms": 2816,
+        "response_signal": "model_generated"
+      },
+      "question_3": {
+        "stage": "core_value",
+        "source_question_id": 18,
+        "question": "투자 의사결정에서 절대 지키고 싶은 가치는 무엇입니까?",
+        "selected_option_id": 3,
+        "answer": "미래 성장의 비대칭 기회를 놓치지 않는 것이 중요하다.",
+        "rationale": "투자 의사결정에서 절대 지키고 싶은 가치는 미래 성장의 비대칭 기회를 놓치지 않는 것이 중요하다. 이는 Amy Hood의 공개 의사결정 기준 'Invest in the next decade'와 일치한다.",
+        "response_time_ms": 3491,
+        "response_signal": "model_generated"
+      },
+      "question_4": {
+        "stage": "red_line",
+        "source_question_id": 19,
+        "question": "아무리 매력적인 투자라도 실행하지 않거나 중단해야 한다고 보는 레드라인은 무엇입니까?",
+        "selected_option_id": 3,
+        "answer": "핵심 사업의 자금, 인력, 고객 신뢰를 지속적으로 잠식하는 경우",
+        "rationale": "투자책임자는 투자에 대한 자금, 인력, 고객신뢰를 지속적으로 잠식하는 것을 중단해야한다는 레드라인이 가장 Amy Hood의 공개 의사결정 기준에 맞습니다.",
+        "response_time_ms": 3164,
+        "response_signal": "model_generated"
+      },
+      "question_5": {
+        "stage": "priority_order",
+        "source_question_id": 20,
+        "question": "투자 판단에서 시장 선점, 손실 한도, 검증 지표, 책임 구조가 충돌하면 무엇을 먼저 보겠습니까?",
+        "selected_option_id": 2,
+        "answer": "시장 선점 효과와 장기 기업가치 기여도를 먼저 판단한다.",
+        "rationale": "투자 판단에서 시장 선점 효과와 장기 기업가치 기여도가 우선하는 이유는, 장기적인 관점에서 고객 가치와 플랫폼 리더십을 우선하는 Amy Hood의 공개 의사결정 기준에 부합한다.",
+        "response_time_ms": 3592,
+        "response_signal": "model_generated"
+      }
+    },
+    "유동성과 현금 관리": {
+      "question_1": {
+        "stage": "preference",
+        "source_question_id": 21,
+        "question": "성장 투자와 현금 보유가 충돌할 때 현금 관리에서 가장 먼저 확인하고 싶은 기준은 무엇입니까?",
+        "selected_option_id": 1,
+        "answer": "최소 runway와 비상 현금 보유 기준을 먼저 확인한다.",
+        "rationale": "최소 runway와 비상 현금 보유 기준을 먼저 확인하는 것은, 성장 투자와 현금 보유가 충돌할 때, 현금 관리의 가장 기본적인 고려 사항이다. 이는 Microsoft의 CFO로, 장기적인 비전을 위해 투자하고, 단기적인 현금 관리를 우선하는 데 중요하다.",
+        "response_time_ms": 4196,
+        "response_signal": "model_generated"
+      },
+      "question_2": {
+        "stage": "context_shift",
+        "source_question_id": 22,
+        "question": "평소에는 여유 현금을 성장에 투입하고 싶더라도 매출 변동성이 커진다면 현금 관리 기준을 어떻게 바꾸겠습니까?",
+        "selected_option_id": 2,
+        "answer": "핵심 성장 투자는 유지하되 비핵심 현금 유출을 줄인다.",
+        "rationale": "현금 관리 기준을 높이고 비핵심 현금 유출을 줄이는 것은, 여유 현금을 성장에 투입하는 동시에 매출 변동성을 관리하는 데 적합한 선택입니다.",
+        "response_time_ms": 3158,
+        "response_signal": "model_generated"
+      },
+      "question_3": {
+        "stage": "core_value",
+        "source_question_id": 23,
+        "question": "유동성과 현금 관리에서 절대 양보하고 싶지 않은 가치는 무엇입니까?",
+        "selected_option_id": 4,
+        "answer": "단기 유동성 확보 때문에 장기 신뢰나 핵심 역량을 훼손해서는 안 된다.",
+        "rationale": "유동성과 현금 관리에서 절대 양보하고 싶지 않은 가치는 단기 유동성 확보 때문에 장기 신뢰나 핵심 역량을 훼손해서는 안 된다는 것입니다. 이는 Amy Hood의 공개 의사결정 기준에서 'Strategic patience'와 'Customer-first platform'의 중요성을 반영합니다.",
+        "response_time_ms": 4296,
+        "response_signal": "model_generated"
+      },
+      "question_4": {
+        "stage": "red_line",
+        "source_question_id": 24,
+        "question": "현금 관리에서 반드시 경고하거나 즉시 조정해야 하는 레드라인은 무엇입니까?",
+        "selected_option_id": 4,
+        "answer": "성장 투자 때문에 임금, 고객 약속, 필수 운영비 지급 안정성이 흔들리는 경우",
+        "rationale": "Amy Hood의 공개 의사결정 기준에 따르면, 성장 투자 때문에 임금, 고객 약속, 필수 운영비 지급 안정성이 흔들리는 경우를 레드라인으로 설정하는 것이 가장 적합합니다. 이는 'Operational excellence'와 'Invest in the next decade'라는 원칙에 부합하며, 현금 관리의 안정성을 유지하는 데 중요합니다.",
+        "response_time_ms": 4756,
+        "response_signal": "model_generated"
+      },
+      "question_5": {
+        "stage": "priority_order",
+        "source_question_id": 25,
+        "question": "현금 보유, 성장 투자, 조달 가능성, 운영 안정성이 충돌하면 어떤 순서로 판단하겠습니까?",
+        "selected_option_id": 1,
+        "answer": "운영 안정성과 최소 현금 기준을 먼저 확인한 뒤 투자 여력을 판단한다.",
+        "rationale": "운영 안정성과 최소 현금 기준을 먼저 확인한 뒤 투자 여력을 판단한다. 이는 내부 자원과 투자 우선순위를 결정하는 데 중요하며, 투자 기회를 판단하는 데 있어 현금 보유와 조달 가능성을 고려하는 데 도움이 된다.",
+        "response_time_ms": 4051,
+        "response_signal": "model_generated"
+      }
+    },
+    "비용·수익성 관리": {
+      "question_1": {
+        "stage": "preference",
+        "source_question_id": 26,
+        "question": "비용 절감과 성장 투자가 동시에 필요한 상황에서 수익성 관리는 어떤 방식으로 접근하고 싶습니까?",
+        "selected_option_id": 2,
+        "answer": "성장에 직접 연결되는 비용은 유지하고 나머지 비용을 선별적으로 줄인다.",
+        "rationale": "성장에 직접 연결되는 비용은 유지하고 나머지 비용을 선별적으로 줄이는 방식이 비용 절감과 성장 투자가 동시에 필요한 상황에서 수익성 관리를 우선하는 Amy Hood의 공개 의사결정 기준에 가장 가까운 선택지입니다.",
+        "response_time_ms": 3789,
+        "response_signal": "model_generated"
+      },
+      "question_2": {
+        "stage": "context_shift",
+        "source_question_id": 27,
+        "question": "평소에는 성장 비용을 유지하고 싶더라도 영업이익률이 목표보다 크게 낮아진다면 어떻게 대응하겠습니까?",
+        "selected_option_id": 4,
+        "answer": "마진 목표 회복 시점과 중간 지표를 정하고 단계적으로 조정한다.",
+        "rationale": "영업이익률 목표 회복 시점과 중간 지표를 정하고 단계적으로 조정하는 방식이, 성장 비용을 유지하고 싶은 Amy Hood의 공개 의사결정 기준에 가장 가까운 선택지입니다.",
+        "response_time_ms": 3416,
+        "response_signal": "model_generated"
+      },
+      "question_3": {
+        "stage": "core_value",
+        "source_question_id": 28,
+        "question": "비용과 수익성 관리에서 절대 지키고 싶은 가치는 무엇입니까?",
+        "selected_option_id": 2,
+        "answer": "미래 성장을 만드는 핵심 역량은 단기 비용 절감 대상으로 보면 안 된다.",
+        "rationale": "비용 조정은 단기적으로 비용을 절감하는 것보다 미래 성장을 만드는 핵심 역량을 보호하는 것이 중요합니다. 이는 Microsoft의 CFO로서, 나는 장기적인 성장과 고객 가치에 중점을 두는 것을 중요하게 여깁니다.",
+        "response_time_ms": 3812,
+        "response_signal": "model_generated"
+      },
+      "question_4": {
+        "stage": "red_line",
+        "source_question_id": 29,
+        "question": "비용 절감이나 수익성 개선 과정에서 절대 넘지 않아야 할 레드라인은 무엇입니까?",
+        "selected_option_id": 1,
+        "answer": "핵심 고객 경험이나 제품 품질을 훼손하는 비용 절감",
+        "rationale": "비용 절감이나 수익성 개선 과정에서 절대 넘지 않아야 할 레드라인은 고객 경험이나 제품 품질을 훼손하는 비용 절감이다. 이는 Amy Hood의 공개 의사결정 기준에서 'Customer-first platform'을 지지하는 것으로 보인다.",
+        "response_time_ms": 3939,
+        "response_signal": "model_generated"
+      },
+      "question_5": {
+        "stage": "priority_order",
+        "source_question_id": 30,
+        "question": "수익성, 성장 투자, 조직 신뢰, 고객 경험이 충돌할 때 어떤 기준을 먼저 보겠습니까?",
+        "selected_option_id": 3,
+        "answer": "고객 경험과 매출 유지에 미칠 영향을 먼저 본다.",
+        "rationale": "수익성, 성장 투자, 조직 신뢰, 고객 경험이 충돌할 때 고객 경험과 매출 유지에 미칠 영향을 먼저 본다. 이는 고객-first platform 전략의 핵심이기 때문이다.",
+        "response_time_ms": 3175,
+        "response_signal": "model_generated"
+      }
+    },
+    "리스크 관리": {
+      "question_1": {
+        "stage": "preference",
+        "source_question_id": 31,
+        "question": "불확실한 기회와 하방 위험이 동시에 존재할 때 리스크 관리는 어떤 방식으로 접근하고 싶습니까?",
+        "selected_option_id": 1,
+        "answer": "최대 손실과 치명적 위험을 먼저 제한한 뒤 기회를 검토한다.",
+        "rationale": "리스크 관리는 최대 손실과 치명적 위험을 먼저 제한한 뒤 기회를 검토하는 방식으로 접근하는 것이 Amy Hood의 공개 의사결정 기준에 가장 가까운 선택입니다.",
+        "response_time_ms": 3154,
+        "response_signal": "model_generated"
+      },
+      "question_2": {
+        "stage": "context_shift",
+        "source_question_id": 32,
+        "question": "평소에는 하방 위험을 먼저 제한하더라도, 시장 기회가 짧은 기간에만 열려 있다면 리스크 기준을 어떻게 바꾸겠습니까?",
+        "selected_option_id": 2,
+        "answer": "손실 한도와 복구 계획이 있으면 더 빠르게 실행한다.",
+        "rationale": "손실 한도와 복구 계획이 있으면 더 빠르게 실행한다. 이는 시장 기회가 짧은 기간에만 열려 있다면, 리스크를 관리하는 데 있어 시간을 절약하는 데 도움이 될 수 있다.",
+        "response_time_ms": 3355,
+        "response_signal": "model_generated"
+      },
+      "question_3": {
+        "stage": "core_value",
+        "source_question_id": 33,
+        "question": "리스크 관리에서 절대 지키고 싶은 가치는 무엇입니까?",
+        "selected_option_id": 2,
+        "answer": "리스크는 회피 대상이 아니라 한도와 보상 구조를 정해 감수할 수 있어야 한다.",
+        "rationale": "리스크 관리에서 회피 대신 한도와 보상 구조를 정해 감수할 수 있어야 한다는 Amy Hood의 공개 의사결정 기준을 반영합니다.",
+        "response_time_ms": 2740,
+        "response_signal": "model_generated"
+      },
+      "question_4": {
+        "stage": "red_line",
+        "source_question_id": 34,
+        "question": "어떤 상황에서는 기대수익이 커도 리스크를 감수하지 말아야 한다고 보십니까?",
+        "selected_option_id": 1,
+        "answer": "실패 시 회사의 생존, 평판, 법적 안정성이 훼손될 수 있는 경우",
+        "rationale": "리스크를 감수하지 않는다는 것은, 회사의 생존, 평판, 법적 안정성이 훼손될 수 있는 상황에서 기대수익을 우선하는 것을 의미합니다. 이는 Amy Hood의 공개 의사결정 기준에서 'Risk vs. Optimism' 부분과 일치합니다.",
+        "response_time_ms": 3937,
+        "response_signal": "model_generated"
+      },
+      "question_5": {
+        "stage": "priority_order",
+        "source_question_id": 35,
+        "question": "기대수익, 최대 손실, 평판 리스크, 실행 속도가 충돌할 때 어떤 기준을 먼저 보겠습니까?",
+        "selected_option_id": 1,
+        "answer": "최대 손실과 치명적 하방 위험을 먼저 제한한다.",
+        "rationale": "기대수익, 최대 손실, 평판 리스크, 실행 속도가 충돌할 때, 나는 최대 손실과 치명적 하방 위험을 먼저 제한하는 것을 중요하게 생각한다. 이는 내 공개 의사결정 기준 'Operational excellence'의 일환으로, 비즈니스에 대한 리스크를 관리하고, 비즈니스에 대한 신뢰를 유지하는 것이 중요하다는 것을 반영한다.",
+        "response_time_ms": 4982,
+        "response_signal": "model_generated"
+      }
+    },
+    "주주환원·거버넌스·보고": {
+      "question_1": {
+        "stage": "preference",
+        "source_question_id": 36,
+        "question": "주주환원, 재투자, 거버넌스, 보고 책임이 함께 있을 때 가장 먼저 확인하고 싶은 기준은 무엇입니까?",
+        "selected_option_id": 1,
+        "answer": "재투자가 장기 기업가치와 성장률을 더 높일 수 있는지 먼저 본다.",
+        "rationale": "재투자가 장기 기업가치와 성장률을 더 높일 수 있는지 먼저 본다는 기준은, 주주환원, 재투자, 거버넌스, 보고 책임이 함께 있는 상황에서, 장기적인 기업 가치와 성장률을 고려하는 것이 중요하다는 Amy Hood의 공개 의사결정 기준과 일치합니다.",
+        "response_time_ms": 4481,
+        "response_signal": "model_generated"
+      },
+      "question_2": {
+        "stage": "context_shift",
+        "source_question_id": 37,
+        "question": "평소에는 재투자를 우선하더라도, 주가가 크게 저평가되고 현금이 충분하다면 주주환원 기준을 어떻게 바꾸겠습니까?",
+        "selected_option_id": 3,
+        "answer": "저평가 정도, 투자 대안 수익률, 현금 여력을 비교해 일부 환원한다.",
+        "rationale": "저평가 정도, 투자 대안 수익률, 현금 여력을 비교해 일부 환원한다. 이는 주주환원 기준을 재투자 우선 원칙과 조화시키는 것이며, 현금을 효율적으로 사용하는 데 중점을 둔다.",
+        "response_time_ms": 3732,
+        "response_signal": "model_generated"
+      },
+      "question_3": {
+        "stage": "core_value",
+        "source_question_id": 38,
+        "question": "주주환원·거버넌스·보고에서 절대 양보하고 싶지 않은 가치는 무엇입니까?",
+        "selected_option_id": 2,
+        "answer": "단기 주가 방어보다 장기 기업가치와 재투자 원칙이 중요하다.",
+        "rationale": "장기 기업가치와 재투자 원칙이 중요하다는 Amy Hood의 공개 의사결정 기준에 따라 주주환원·거버넌스·보고에서 절대 양보하고 싶지 않은 가치는 단기 주가 방어보다 장기 기업가치와 재투자 원칙이 중요하다.",
+        "response_time_ms": 4158,
+        "response_signal": "model_generated"
+      },
+      "question_4": {
+        "stage": "red_line",
+        "source_question_id": 39,
+        "question": "주주환원이나 재무 보고에서 절대 넘지 않아야 할 레드라인은 무엇입니까?",
+        "selected_option_id": 3,
+        "answer": "나쁜 지표나 리스크를 축소하거나 늦게 보고하는 행위",
+        "rationale": "Amy Hood의 레드라인 중 하나는 '나쁜 지표나 리스크를 축소하거나 늦게 보고하는 행위'로, 주주환원이나 재무 보고에서 절대 넘지 않아야 할 레드라인은 나쁜 지표나 리스크를 숨기지 않는다는 것을 의미합니다.",
+        "response_time_ms": 4174,
+        "response_signal": "model_generated"
+      },
+      "question_5": {
+        "stage": "priority_order",
+        "source_question_id": 40,
+        "question": "주주환원, 재투자, 현금 안정성, 보고 투명성이 충돌할 때 어떤 기준을 먼저 보겠습니까?",
+        "selected_option_id": 2,
+        "answer": "재투자의 기대수익과 장기 기업가치 기여도를 먼저 판단한다.",
+        "rationale": "재투자의 기대수익과 장기 기업가치 기여도가 주주환원, 재투자, 현금 안정성, 보고 투명성과 충돌할 때 우선하는 기준입니다. 이는 주주환원과 재투자의 장기적인 관점에서 현금 안정성과 투명성을 고려하는 것을 반영합니다.",
+        "response_time_ms": 4399,
+        "response_signal": "model_generated"
+      }
+    }
+  }
+}

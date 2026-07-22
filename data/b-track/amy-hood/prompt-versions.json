@@ -1,5 +1,5 @@
 {
-  "activeVersionId": "llama31-8b-minimal-guardrails-v5",
+  "activeVersionId": "llama31-8b-minimal-guardrails-v5-1",
   "versions": [
     {
       "versionId": "18182235-58b4-4218-9860-4fea133bd81d",
@@ -42,6 +42,12 @@
       "createdAt": "2026-07-21T07:10:00.000Z",
       "sha256": "0940222291cd681648110831badae83843e3280162e9ce1f77959979324b75d6",
       "basedOnVersionId": "18182235-58b4-4218-9860-4fea133bd81d"
+    },
+    {
+      "versionId": "llama31-8b-minimal-guardrails-v5-1",
+      "createdAt": "2026-07-22T11:40:00.000Z",
+      "sha256": "4f11d0f48b8f24a9ac984cf4c391d0de0ec20eafcfebeabe1e69fb29fa40d2af",
+      "basedOnVersionId": "llama31-8b-minimal-guardrails-v5"
     }
   ]
 }
