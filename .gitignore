@@ -22,6 +22,7 @@ docs/superpowers/
 # Evaluation runtime checkpoints and reproducible caches
 evaluation/v*/formal-run/
 evaluation/v*/runs/
+evaluation/v*/reports/
 evaluation/v*/retrieval-cache/
 evaluation/v*/judge/local-drafts/
 evaluation/v*/judge/packets/
