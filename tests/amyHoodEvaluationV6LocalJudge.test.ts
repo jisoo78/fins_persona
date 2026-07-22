@@ -66,6 +66,8 @@ test('happy: makes rationale-first deterministic calls and host-scores the resul
   assert.equal(bodies.length, 2);
   assert.ok(bodies.every((body) => body.temperature === 0 && body.stream === false));
   assert.ok(bodies.every((body) => (body.chat_template_kwargs as { enable_thinking: boolean }).enable_thinking === false));
+  assert.equal(bodies[0].response_format, undefined);
+  assert.deepEqual(bodies[1].response_format, { type: 'json_object' });
   const assessmentMessages = bodies[1].messages as Array<{ role: string; content: string }>;
   assert.match(assessmentMessages[0].content, /"anchorFindings":\{"action":"aligned\|partial\|missing\|conflict"/);
   assert.match(assessmentMessages[0].content, /"distinguishingAnchor":\{"kind":/);

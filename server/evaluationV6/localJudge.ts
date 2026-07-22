@@ -90,6 +90,7 @@ const invoke = async (options: {
   system: string;
   userPayload: unknown;
   maxTokens: number;
+  jsonOnly?: boolean;
 }) => responseText(await options.fetchImpl(`${options.baseUrl}/chat/completions`, {
   method: 'POST',
   headers: { 'content-type': 'application/json' },
@@ -99,6 +100,7 @@ const invoke = async (options: {
     stream: false,
     max_tokens: options.maxTokens,
     chat_template_kwargs: { enable_thinking: false },
+    ...(options.jsonOnly ? { response_format: { type: 'json_object' } } : {}),
     messages: [
       { role: 'system', content: options.system },
       { role: 'user', content: canonicalJson(options.userPayload) },
@@ -165,7 +167,7 @@ const assessPacket = async (options: {
   }));
   const payload = { packet: options.packet, rationale };
   const firstText = await invoke({
-    ...options, system: IDENTITY_ASSESSMENT_SYSTEM, userPayload: payload, maxTokens: 420,
+    ...options, system: IDENTITY_ASSESSMENT_SYSTEM, userPayload: payload, maxTokens: 420, jsonOnly: true,
   });
   let assessment: Omit<EvaluationV6JudgeAssessment, 'rationale'>;
   let repairApplied = false;
@@ -177,6 +179,7 @@ const assessPacket = async (options: {
       system: `${IDENTITY_ASSESSMENT_SYSTEM} The previous response failed validation. Return corrected JSON only.`,
       userPayload: { ...payload, invalidResponse: firstText },
       maxTokens: 420,
+      jsonOnly: true,
     });
     try {
       assessment = parseEvaluationV6JudgeAssessment(repairedText);
@@ -461,7 +464,7 @@ export const runEvaluationV6LocalPairJudge = async (options: {
       baseUrl, fetchImpl, model: judgeModel, system: IDENTITY_RATIONALE_SYSTEM, userPayload: packet, maxTokens: 300,
     }));
     const payload = { packet, rationale };
-    let text = await invoke({ baseUrl, fetchImpl, model: judgeModel, system: IDENTITY_PAIR_ASSESSMENT_SYSTEM, userPayload: payload, maxTokens: 520 });
+    let text = await invoke({ baseUrl, fetchImpl, model: judgeModel, system: IDENTITY_PAIR_ASSESSMENT_SYSTEM, userPayload: payload, maxTokens: 520, jsonOnly: true });
     let parsed: ReturnType<typeof parsePairAssessment>;
     let repairApplied = false;
     try {
@@ -470,7 +473,7 @@ export const runEvaluationV6LocalPairJudge = async (options: {
       text = await invoke({
         baseUrl, fetchImpl, model: judgeModel,
         system: `${IDENTITY_PAIR_ASSESSMENT_SYSTEM} The previous response failed validation. Return corrected JSON only.`,
-        userPayload: { ...payload, invalidResponse: text }, maxTokens: 520,
+        userPayload: { ...payload, invalidResponse: text }, maxTokens: 520, jsonOnly: true,
       });
       try { parsed = parsePairAssessment(text); repairApplied = true; } catch { throw firstError; }
     }
