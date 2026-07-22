@@ -50,11 +50,13 @@ export const buildEvaluationV5Report = async (
   root: string,
   experimentGroupId: string,
 ): Promise<EvaluationV5ExperimentReport> => {
-  const [bundle, allRuns, individualBatch, pairBatch, individualLinks, pairLinks] = await Promise.all([
+  const [bundle, allRuns, individualBatch, pairBatch] = await Promise.all([
     loadEvaluationV5Bundle(root),
     listEvaluationV5Runs(root),
     loadActiveEvaluationV5Grades(root, experimentGroupId),
     loadActiveEvaluationV5PairGrades(root, experimentGroupId),
+  ]);
+  const [individualLinks, pairLinks] = await Promise.all([
     loadEvaluationV5JudgeLinks(root, experimentGroupId),
     loadEvaluationV5PairJudgeLinks(root, experimentGroupId),
   ]);
